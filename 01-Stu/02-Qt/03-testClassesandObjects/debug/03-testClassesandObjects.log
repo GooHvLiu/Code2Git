@@ -1,0 +1,7 @@
+﻿   Qt/MSBuild: 3.4.1.0
+  Reading Qt configuration (D:/Qt/6.10.1/msvc2022_64/bin/qmake)
+   Qt: 6.10.1
+  main.cpp
+  timeTest.cpp
+  trainInfoTest.cpp
+  03-testClassesandObjects.vcxproj -> C:\Users\Administrator\Desktop\Code\02-Qt\01-Study\03-testClassesandObjects\debug\03-testClassesandObjects.exe

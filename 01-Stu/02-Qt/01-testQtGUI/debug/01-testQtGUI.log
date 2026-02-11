@@ -1,0 +1,7 @@
+﻿  Generate moc_predefs.h
+   Qt/MSBuild: 3.4.1.0
+  Reading Qt configuration (D:/Qt/6.10.1/msvc2022_64/bin/qmake)
+   Qt: 6.10.1
+  main.cpp
+  timeTest.cpp
+  01-testQtGUI.vcxproj -> C:\Users\Administrator\Desktop\Code\02-Qt\01-Study\01-testQtGUI\debug\01-testQtGUI.exe
