@@ -12,7 +12,7 @@
 MdiChild::MdiChild(QWidget *parent)
     : QTextEdit{parent}
 {
-    //设置在子窗口关闭时，销毁这个类的对象
+    //设置在子窗口关闭时，销毁这个类的对象,当执行closeEvent函数时，只要Accept了，那就直接关闭窗口
     setAttribute(Qt::WA_DeleteOnClose);
 
     //初始isUntitled位true
@@ -41,7 +41,7 @@ void MdiChild::newFile()
 }
 
 /***************************************
- * 实现功能：documentWasModified()槽的定义
+ * 实现功能：documentWasModified()的定义
  * ***********************************/
 void MdiChild::documentWasModified()
 {
@@ -74,5 +74,157 @@ bool MdiChild::loadFile(const QString &fileName)
          * ***********************************************/
         QMessageBox::warning(this,tr("多文档编辑器"),tr("无法读取文件 %1:\n%2.").arg(fileName).arg(file.errorString()));
         return false;
+    }
+
+    //新建文本流对象
+    QTextStream in(&file);
+    //设置鼠标状态未等待状态
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    //读取文件的全部文本内容，并添加到编译器中
+    setPlainText(in.readAll());
+    //恢复鼠标状态
+    QApplication::restoreOverrideCursor();
+    //设置当前文件
+    setCurrentFile(fileName);
+    connect(document(),SIGNAL(contentsChanged()),this,SLOT(documentWasModified()));
+    return true;
+}
+
+/***************************************
+ * 实现功能：setCurrentFile()的定义
+ * ***********************************/
+void MdiChild::setCurrentFile(const QString &fileName)
+{
+    //canonicalFilePath()可以除去路径中的符号链接，“.”和“..”等符号
+    curFile=QFileInfo(fileName).canonicalFilePath();
+
+    //文件已经被保存过了
+    isUntitled=false;
+
+    //文件没有被更改过
+    document()->setModified(false);
+
+    //窗口不显示被更改标志
+    setWindowModified(false);
+
+    //设置窗口标题，userFriendlyCurrentFile()返回文件名
+    setWindowTitle(userFriendlyCurrentFile()+"[*]");
+}
+
+/***************************************
+ * 实现功能：userFriendlyCurrentFile()的定义
+ * ***********************************/
+QString MdiChild::userFriendlyCurrentFile()
+{
+    //从文件路径中提取文件名
+    return QFileInfo(curFile).fileName();
+}
+
+/***************************************
+ * 实现功能：save()的定义
+ * ***********************************/
+bool MdiChild::save()
+{
+    //如果文件未被保存过，则执行另存为操作，否则直接保存文件
+    if(isUntitled)
+    {
+        return saveAs();
+    }
+    else
+    {
+        return saveFile(curFile);
+    }
+}
+
+/***************************************
+ * 实现功能：saveAs()的定义
+ * ***********************************/
+bool MdiChild::saveAs()
+{
+    QString fileName=QFileDialog::getSaveFileName(this,tr("另存为："),curFile);
+
+    //获取文件路径，如果为空，则返回false，否则保存文件
+    if(fileName.isEmpty())
+    {
+        return false;
+    }
+    else
+    {
+        return saveFile(fileName);
+    }
+}
+
+/***************************************
+ * 实现功能：saveFile()的定义
+ * ***********************************/
+bool MdiChild::saveFile(const QString &fileName)
+{
+    QFile file(fileName);
+    if(!file.open(QFile::WriteOnly|QFile::Text))
+    {
+        QMessageBox::warning(this,tr("多文档编辑器"),tr("无法写入文件 %1:\n %2.").arg(fileName).arg(file.errorString()));
+        return false;
+    }
+    QTextStream out(&file);
+
+    //鼠标处于等待状态
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+
+    //以纯文本文件写入,toPlainText()：QTextEdit 的成员方法，获取控件中的纯文本内容（无富文本格式）；<<：QTextStream 的重载运算符，将纯文本内容写入关联的文件
+    out<<toPlainText();
+    QApplication::restoreOverrideCursor();
+    setCurrentFile(fileName);
+    return true;
+}
+
+/***************************************
+ * 实现功能：closeEvent()的定义
+ * ***********************************/
+void MdiChild::closeEvent(QCloseEvent *event)
+{
+    //如果maybeSave()函数返回true，则关闭窗口，否则忽略该事件
+    if(maybeSave())
+    {
+        event->accept();
+    }
+    else
+    {
+        event->ignore();
+    }
+}
+
+/***************************************
+ * 实现功能：maybeSave()的定义
+ * ***********************************/
+bool MdiChild::maybeSave()
+{
+    //如果文件被更改过
+    if(document()->isModified())
+    {
+        QMessageBox box;
+        box.setWindowTitle(tr("多文档编辑器"));
+        box.setText(tr("是否保存对“%1”的更改？").arg(userFriendlyCurrentFile()));
+        box.setIcon(QMessageBox::Warning);
+
+        //添加按钮，QMessageBox::YesRole可以表明这个按钮的行为
+        QPushButton *yesBtn=box.addButton(tr("是(&Y)"),QMessageBox::YesRole);
+        box.addButton(tr("否(&N)"),QMessageBox::NoRole);
+        QPushButton *cancelBtn=box.addButton(tr("取消"),QMessageBox::RejectRole);
+
+        //弹出对话框，让用户选择是否保存修改，或者取消关闭操作
+        box.exec();
+
+        //如果用户选择是，则返回保存操作的结果；如果选择取消，则返回false
+        if(box.clickedButton()==yesBtn)
+        {
+            return save();
+
+        }
+        else if(box.clickedButton()==cancelBtn)
+        {
+            return false;
+        }
+        //如果文档没有更改过，则直接返回true
+        return true;
     }
 }
