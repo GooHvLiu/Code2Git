@@ -129,6 +129,77 @@ app.all("/axio-fetch-json-server", (req, res) => {
   });
 });
 
+// 3.31 JSONP ALL
+app.all("/jsonp-server", (req, res) => {
+  //设置响应头 设置允许跨域
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  // 1.1 可以直接反馈js代码
+  // res.send('console.log("Hello Jsonp")');
+  // 1.21 可以将数据转为字符串返回
+  const data = {
+    name: "尚硅谷atguigu，我在server"
+  };
+  // 1.22 转为字符串
+  let str = JSON.stringify(data);
+  // 1.23 返回
+  res.end(`handle(${str})`);
+});
+
+// 3.32 JSONP ALL DEMO
+app.all("/jsonp-server-check-username", (req, res) => {
+  //设置响应头 设置允许跨域
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  // 1.1 可以直接反馈js代码
+  // res.send('console.log("Hello Jsonp")');
+  // 1.21 可以将数据转为字符串返回
+  const data = {
+    exist: 1,
+    msg: "用户名检测存在"
+  };
+  // 1.22 转为字符串
+  let str = JSON.stringify(data);
+  // 1.23 返回
+  res.end(`handle(${str})`);
+});
+
+// 3.33 JSONP ALL jQuery 2 jsonp
+app.all("/jQuery-jsonp-server", (req, res) => {
+  //设置响应头 设置允许跨域
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  // 1.1 可以直接反馈js代码
+  // res.send('console.log("Hello Jsonp")');
+  // 1.21 可以将数据转为字符串返回
+  const data = {
+    name: "尚硅谷",
+    city: ["上海", "北京", "深圳"]
+  };
+  // 1.22 转为字符串
+  let str = JSON.stringify(data);
+
+  // 1.23 接收callback参数
+  let cb = req.query.callback;
+
+  // 1.24 返回
+  res.end(`${cb}(${str})`);
+});
+
+// 3.4 cors-server
+app.all("/cors-server", (req, res) => {
+  //设置响应头 设置允许跨域
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  // 1.1 可以直接反馈js代码
+  // res.send('console.log("Hello Jsonp")');
+  // 1.21 可以将数据转为字符串返回
+  const data = {
+    name: "cors-server",
+    city: ["上海", "北京", "深圳"]
+  };
+  // 1.22 转为字符串
+  let str = JSON.stringify(data);
+
+  res.end(str);
+});
+
 // 4. 监听端口
 app.listen(8000, () => {
   console.log("我正在监听8000端口中...");

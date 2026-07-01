@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>原理演示</title>
+    <style>
+      #result {
+        width: 300px;
+        height: 100px;
+        border: solid 1px #78a;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="result"></div>
+    <script>
+      //处理数据
+      function handle(data) {
+        //获取 result 元素
+        const result = document.getElementById("result");
+        result.innerHTML = data.name;
+      }
+    </script>
+    <!-- 下面是为了说明script可以自身实现跨域
+            1. javascript实现跨域是通过自身属性实现的；
+            2. 这个方法是程序员自己研究出来的跨域方式
+    -->
+    <!-- <script src="http://127.0.0.1:5500/%E8%AF%BE%E5%A0%82/%E4%BB%A3%E7%A0%81/7-%E8%B7%A8%E5%9F%9F/2-JSONP/js/app.js"></script> -->
+    <!-- 通过script来实现和服务器的通讯，服务器端需要返回js代码(返回函数的调用内容) -->
+    <script src="http://127.0.0.1:8000/jsonp-server"></script>
+  </body>
+</html>
