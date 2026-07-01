@@ -1,0 +1,492 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/kotlin/kotlin_data_types.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Kotlin 数据类型</title>
+
+</head>
+
+<body class="serverscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Kotlin 教程</h2>
+<ul>
+<li><a href="index.html" title="Kotlin 教程">Kotlin 教程</a></li>
+<li><a href="kotlin_intro-2.html" title="Kotlin 简介">Kotlin 简介</a></li>
+<li><a href="kotlin_getstarted.html" title="Kotlin 入门">Kotlin 入门</a></li>
+<li><a href="kotlin_syntax.html" title="Kotlin 语法">Kotlin 语法</a></li>
+<li><a href="kotlin_output.html" title="Kotlin 输出">Kotlin 输出</a></li>
+<li><a href="kotlin_comments.html" title="Kotlin 注释">Kotlin 注释</a></li>
+<li><a href="kotlin_variables.html" title="Kotlin 变量">Kotlin 变量</a></li>
+<li class="currentLink"><a href="kotlin_data_types.html" title="Kotlin 数据类型">Kotlin 数据类型</a></li>
+<li><a href="kotlin_operators.html" title="Kotlin 运算符">Kotlin 运算符</a></li>
+<li><a href="kotlin_strings.html" title="Kotlin 字符串">Kotlin 字符串</a></li>
+<li><a href="kotlin_booleans.html" title="Kotlin 布尔值">Kotlin 布尔值</a></li>
+<li><a href="kotlin_conditions.html" title="Kotlin If...Else">Kotlin If...Else</a></li>
+<li><a href="kotlin_when.html" title="Kotlin When">Kotlin When</a></li>
+<li><a href="kotlin_while_loop.html" title="Kotlin While 循环">Kotlin While 循环</a></li>
+<li><a href="kotlin_break_continue.html" title="Kotlin Break 和 Continue">Kotlin Break/Continue</a></li>
+<li><a href="kotlin_arrays.html" title="Kotlin 数组">Kotlin 数组</a></li>
+<li><a href="kotlin_for_loop.html" title="Kotlin For 循环">Kotlin For 循环</a></li>
+<li><a href="kotlin_ranges.html" title="Kotlin 范围">Kotlin 范围</a></li>
+<li><a href="kotlin_functions.html" title="Kotlin 函数">Kotlin 函数</a></li>
+</ul>
+<h2>Kotlin 类</h2>
+<ul>
+<li><a href="kotlin_oop.html" title="Kotlin OOP">Kotlin OOP</a></li>
+<li><a href="kotlin_classes.html" title="Kotlin 类和对象">Kotlin 类/对象</a></li>
+<li><a href="kotlin_constructors.html" title="Kotlin 构造函数">Kotlin 构造函数</a></li>
+<li><a href="kotlin_class_functions.html" title="Kotlin 类函数">Kotlin 类函数</a></li>
+<li><a href="kotlin_inheritance.html" title="Kotlin 继承">Kotlin 继承</a></li>
+</ul>
+<h2>Kotlin 实例</h2>
+<ul>
+<li><a href="kotlin_examples.html" title="Kotlin 实例">Kotlin 实例</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Kotlin 数据类型</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="kotlin_variables.html" title="Kotlin 变量">Kotlin 变量</a></li>
+<li class="next"><a href="kotlin_operators.html" title="Kotlin 运算符">Kotlin 运算符</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>Kotlin 数据类型</h2>
+
+<p>在 Kotlin 中，变量的类型由它的值决定：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val myNum = 5             // Int
+val myDoubleNum = 5.99    // Double
+val myLetter = 'D'        // Char
+val myBoolean = true      // Boolean
+val myText = &quot;Hello&quot;      // String
+</pre>
+
+<p class="tiy"><a target="_blank" href="t1d92.html?f=kotlin_data_types_1">亲自试一试</a></p>
+
+<p>但是，您从上一章中了解到，如果需要，也可以指定类型：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val myNum: Int = 5                // Int
+val myDoubleNum: Double = 5.99    // Double
+val myLetter: Char = 'D'          // Char
+val myBoolean: Boolean = true     // Boolean
+val myText: String = &quot;Hello&quot;      // String
+</pre>
+
+<p class="tiy"><a target="_blank" href="tbe58.html?f=kotlin_data_types_2">亲自试一试</a></p>
+
+<p>有时您必须指定类型，但通常不需要。无论如何，了解不同类型所代表的含义是件好事。</p>
+
+<p>稍后你将了解<em>何时需要</em>指定类型。</p>
+
+<p>数据类型分为不同的组：</p>
+
+<ul>
+<li>数字</li>
+<li>字符</li>
+<li>布尔值</li>
+<li>字符串</li>
+<li>数组</li>
+</ul>
+</section>
+
+
+
+<section>
+<h2>数字</h2>
+
+<p>数字类型分为两组：</p>
+
+<p><em>整数类型</em>存储整数，正数或负数（例如 123 或 -456），不带小数。有效类型为 <code>Byte</code>、<code>Short</code>、<code>Int</code> 和 <code>Long</code>。</p>
+
+<p><em>浮点类型</em>表示带有小数部分的数字，包含一位或多位小数。有两种类型：<code>Float</code> 和 <code>Double</code>。</p>
+
+<p class="tip"><span>提示：</span>如果您没有指定数值变量的类型，则通常将整数返回为 <code>Int</code>，将浮点数返回为 <code>Double</code>。</p>
+</section>
+
+
+
+<section>
+<h2>整数类型</h2>
+
+<h3>Byte</h3>
+
+<p><code>Byte</code> 数据类型可以存储从 -128 到 127 的整数。当您确定该值在 -128 到 127 之间时，可以用它来代替 Int 或其他整数类型以节省内存：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val myNum: Byte = 100
+println(myNum)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t5fe5.html?f=kotlin_type_byte">亲自试一试</a></p>
+
+<h3>Short</h3>
+
+<p><code>Short</code> 数据类型可以存储从 -32768 到 32767 的整数：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val myNum: Short = 5000
+println(myNum)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t468e.html?f=kotlin_type_short">亲自试一试</a></p>
+
+<h3>Int</h3>
+
+<p><code>Int</code> 数据类型可以存储从 -2147483648 到 2147483647 的整数：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val myNum: Int = 100000
+println(myNum)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t0fda.html?f=kotlin_type_int">亲自试一试</a></p>
+
+<h3>Long</h3>
+
+<p><code>Long</code> 数据类型可以存储从 -9223372036854775807 到 9223372036854775807 的整数。当 <code>Int</code> 不够大以存储值时，会使用它。可选地，你可以在数值后面加上 &quot;L&quot;：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val myNum: Long = 15000000000L
+println(myNum)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t1dcd.html?f=kotlin_type_long">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>Int 和 Long 之间的区别</h2>
+
+<p>只要整数不超过 2147483647，它就是 <code>Int</code>。如果超过该值，则定义为 <code>Long</code>：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val myNum1 = 2147483647  // Int
+val myNum2 = 2147483648  // Long
+</pre>
+</section>
+
+
+
+<section>
+<h2>浮点类型</h2>
+
+<p>浮点类型表示带小数的数字，例如 9.99 或 3.14515。</p>
+
+<p><code>Float</code> 和 <code>Double</code> 数据类型可以存储小数：</p>
+
+<h3>Float Example</h3>
+
+<pre class="language-kotlin">
+val myNum: Float = 5.75F
+println(myNum)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t0531.html?f=kotlin_type_float">亲自试一试</a></p>
+
+<h3>Double Example</h3>
+
+<pre class="language-kotlin">
+val myNum: Double = 19.99
+println(myNum)
+</pre>
+
+<p class="tiy"><a target="_blank" href="ta698.html?f=kotlin_type_double">亲自试一试</a></p>
+
+<h3 class="tip">使用浮点型还是双精度型？</h3>
+
+<p>浮点值的<em>精度</em>指示值在小数点后可以有多少位数字。<code>Float</code> 的精度只有 6 到 7 位小数，而 <code>Double</code> 变量的精度约为 15 位。因此，对于大多数计算来说，使用 <code>Double</code> 更安全。</p>
+
+<p>还要注意，你应该以 <code>F</code> 结尾来表示 <code>Float</code> 类型的值。</p>
+
+<h3>科学计数法</h3>
+
+<p>浮点数也可以是带有 <code>e</code> 或 <code>E</code> 的科学计数法，表示 10 的幂：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val myNum1: Float = 35E3F
+val myNum2: Double = 12E4
+println(myNum1)
+println(myNum2)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t42f1.html?f=kotlin_type_scientific">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>布尔值</h2>
+
+<p>布尔数据类型并且只能取值 <code>true</code> 或 <code>false</code>：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val isKotlinFun: Boolean = true
+val isFishTasty: Boolean = false
+println(isKotlinFun)   // 输出 true
+println(isFishTasty)   // 输出 false 
+</pre>
+
+<p class="tiy"><a target="_blank" href="tf96a.html?f=kotlin_booleans">亲自试一试</a></p>
+
+<p>布尔值主要用于条件测试，您将在后面的章节中了解更多信息。</p>
+</section>
+
+
+
+<section>
+<h2>字符</h2>
+
+<p><code>Char</code> 数据类型用于存储<em>单个</em>字符。字符值必须用<em>单引号</em>括起来，例如 'A' 或 'c'：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val myGrade: Char = 'B'
+println(myGrade)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t2da9.html?f=kotlin_type_char">亲自试一试</a></p>
+
+<p>与 Java 不同，您不能使用 ASCII 值来显示某些字符。在 Java 中，值 66 会输出 &quot;B&quot;，但在 Kotlin 中会生成错误：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin err">
+val myLetter: Char = 66
+println(myLetter) // 错误
+</pre>
+</section>
+
+
+
+<section>
+<h2>字符串</h2>
+
+<p><code>String</code> 数据类型用于存储字符序列（文本）。字符串值必须用<em>双引号</em>括起来：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val myText: String = &quot;Hello World&quot;
+println(myText)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t2160.html?f=kotlin_type_string">亲自试一试</a></p>
+
+<p>您将在<a href="kotlin_strings.html" title="Kotlin 字符串">字符串</a>一章中了解有关字符串的更多信息。</p>
+</section>
+
+
+
+<section>
+<h2>数组</h2>
+
+<p>数组用于在单个变量中存储多个值，而不是为每个值声明单独的变量。</p>
+
+<p>您将在<a href="kotlin_arrays.html" title="Kotlin 数组">数组</a>一章中了解有关数组的更多信息。</p>
+</section>
+
+
+
+<section>
+<h2>类型转换</h2>
+
+<p>类型转换是指将一种数据类型的值转换为另一种类型。</p>
+
+<p>在 Kotlin 中，数值类型转换与 <a href="../java/index.html" title="Java 教程">Java</a> 不同。例如，无法使用以下代码将 <code>Int</code> 类型转换为 <code>Long</code> 类型：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin err">
+val x: Int = 5
+val y: Long = x
+println(y) // 错误：类型不匹配
+</pre>
+
+<p class="tiy"><a target="_blank" href="tedd5.html?f=kotlin_type_conv_1">亲自试一试</a></p>
+
+<p>要将一种数值数据类型转换为另一种类型，你必须使用以下函数之一：<code>toByte()</code>、<code>toShort()</code>、<code>toInt()</code>、<code>toLong()</code>、<code>toFloat()</code>、<code>toDouble()</code> 或 <code>toChar()</code>：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val x: Int = 5
+val y: Long = x.toLong()
+println(y)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t7c3c.html?f=kotlin_type_conv_2">亲自试一试</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="kotlin_variables.html" title="Kotlin 变量">Kotlin 变量</a></li>
+<li class="next"><a href="kotlin_operators.html" title="Kotlin 运算符">Kotlin 运算符</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_example"><a href="kotlin_examples.html">Kotlin 实例</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/kotlin/kotlin_data_types.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:21 GMT -->
+</html>

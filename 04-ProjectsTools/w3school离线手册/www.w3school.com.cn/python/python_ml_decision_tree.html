@@ -1,0 +1,772 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/python/python_ml_decision_tree.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:50:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>机器学习 - 决策树</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Python 教程</h2>
+<ul>
+<li><a href="index.html" title="Python 教程">Python 教程</a></li>
+<li><a href="python_intro.html" title="Python 简介">Python 简介</a></li>
+<li><a href="python_getstarted.html" title="Python 入门">Python 入门</a></li>
+<li><a href="python_syntax.html" title="Python 语法">Python 语法</a></li>
+<li><a href="python_comments.html" title="Python 注释">Python 注释</a></li>
+<li><a href="python_variables.html" title="Python 变量">Python 变量</a></li>
+<li><a href="python_datatypes.html" title="Python 数据类型">Python 数据类型</a></li>
+<li><a href="python_numbers.html" title="Python 简介">Python 数字</a></li>
+<li><a href="python_casting.html" title="Python Casting">Python Casting</a></li>
+<li><a href="python_strings.html" title="Python 字符串">Python 字符串</a></li>
+<li><a href="python_booleans.html" title="Python 布尔">Python 布尔</a></li>
+<li><a href="python_operators.html" title="Python 运算符">Python 运算符</a></li>
+<li><a href="python_lists.html" title="Python 列表">Python 列表</a></li>
+<li><a href="python_tuples.html" title="Python 元组">Python 元组</a></li>
+<li><a href="python_sets.html" title="Python 集合">Python 集合</a></li>
+<li><a href="python_dictionaries.html" title="Python 字典">Python 字典</a></li>
+<li><a href="python_conditions.html" title="Python If ... Else">Python If Else</a></li>
+<li><a href="python_while_loops.html" title="Python While 循环">Python While 循环</a></li>
+<li><a href="python_for_loops.html" title="Python For 循环">Python For 循环</a></li>
+<li><a href="python_functions.html" title="Python 函数">Python 函数</a></li>
+<li><a href="python_lambda.html" title="Python Lambda">Python Lambda</a></li>
+<li><a href="python_arrays.html" title="Python 数组">Python 数组</a></li>
+<li><a href="python_classes.html" title="Python 类和对象">Python 类/对象</a></li>
+<li><a href="python_inheritance.html" title="Python 继承">Python 继承</a></li>
+<li><a href="python_iterators.html" title="Python 迭代">Python 迭代</a></li>
+<li><a href="python_polymorphism.html" title="Python 多态">Python 多态</a></li>
+<li><a href="python_scope.html" title="Python 作用域">Python 作用域</a></li>
+<li><a href="python_modules.html" title="Python 模块">Python 模块</a></li>
+<li><a href="python_datetime.html" title="Python 日期">Python 日期</a></li>
+<li><a href="python_math.html" title="Python 数学">Python 数学</a></li>
+<li><a href="python_json.html" title="Python JSON">Python JSON</a></li>
+<li><a href="python_regex.html" title="Python RegEx">Python RegEx</a></li>
+<li><a href="python_pip.html" title="Python PIP">Python PIP</a></li>
+<li><a href="python_try_except.html" title="Python Try Except">Python Try Except</a></li>
+<li><a href="python_cmd_input.html" title="Python 命令行输入">Python 命令输入</a></li>
+<li><a href="python_string_formatting.html" title="Python 字符串格式化">Python 字符串格式化</a></li>
+</ul>
+<h2>Python 文件处理</h2>
+<ul>
+<li><a href="python_file_handling.html" title="Python 文件打开">Python 文件打开</a></li>
+<li><a href="python_file_open.html" title="Python 文件读取">Python 文件读取</a></li>
+<li><a href="python_file_write.html" title="Python 文件写入">Python 文件写入/创建</a></li>
+<li><a href="python_file_remove.html" title="Python 文件删除">Python 文件删除</a></li>
+</ul>
+<h2>Python 模块</h2>
+<ul>
+<li><a href="../numpy/index.html" title="NumPy 教程">NumPy 教程</a></li>
+<li><a href="../pandas/index.html" title="Pandas 教程">Pandas 教程</a></li>
+<li><a href="../scipy/index.html" title="SciPy 教程">SciPy 教程</a></li>
+</ul>
+<h2>Python Matplotlib</h2>
+<ul>
+<li><a href="matplotlib_intro.html" title="Matplotlib 简介">Matplotlib 简介</a></li>
+<li><a href="matplotlib_getting_started.html" title="Matplotlib 入门">Matplotlib 入门</a></li>
+<li><a href="matplotlib_pyplot.html" title="Matplotlib Pyplot">Matplotlib Pyplot</a></li>
+<li><a href="matplotlib_plotting.html" title="Matplotlib 绘图">Matplotlib 绘图</a></li>
+<li><a href="matplotlib_markers.html" title="Matplotlib 标记">Matplotlib 标记</a></li>
+<li><a href="matplotlib_line.html" title="Matplotlib 线条">Matplotlib 线条</a></li>
+<li><a href="matplotlib_labels.html" title="Matplotlib 标签">Matplotlib 标签</a></li>
+<li><a href="matplotlib_grid.html" title="Matplotlib 网格">Matplotlib 网格</a></li>
+<li><a href="matplotlib_subplot.html" title="Matplotlib 子图">Matplotlib 子图</a></li>
+<li><a href="matplotlib_scatter.html" title="Matplotlib 散点图">Matplotlib 散点图</a></li>
+<li><a href="matplotlib_bars.html" title="Matplotlib 条形图">Matplotlib 条形图</a></li>
+<li><a href="matplotlib_histograms.html" title="Matplotlib 直方图">Matplotlib 直方图</a></li>
+<li><a href="matplotlib_pie_charts.html" title="Matplotlib 饼图">Matplotlib 饼图</a></li>
+</ul>
+<h2>Python NumPy</h2>
+<ul>
+<li><a href="numpy_intro.html" title="NumPy 简介">NumPy 简介</a></li>
+<li><a href="numpy_getting_started.html" title="NumPy 入门">NumPy 入门</a></li>
+<li><a href="numpy_creating_arrays.html" title="NumPy 数组创建">NumPy 数组创建</a></li>
+<li><a href="numpy_array_indexing.html" title="NumPy 数组索引">NumPy 数组索引</a></li>
+<li><a href="numpy_array_slicing.html" title="NumPy 数组裁切">NumPy 数组裁切</a></li>
+<li><a href="numpy_data_types.html" title="NumPy 数据类型">NumPy 数据类型</a></li>
+<li><a href="numpy_copy_vs_view.html" title="NumPy 副本/视图">NumPy 副本/视图</a></li>
+<li><a href="numpy_array_shape.html" title="NumPy 数组形状">NumPy 数组形状</a></li>
+<li><a href="numpy_array_reshape.html" title="NumPy 数组重塑">NumPy 数组重塑</a></li>
+<li><a href="numpy_array_iterating.html" title="NumPy 数组迭代">NumPy 数组迭代</a></li>
+<li><a href="numpy_array_join.html" title="NumPy 数组连接">NumPy 数组连接</a></li>
+<li><a href="numpy_array_split.html" title="NumPy 数组拆分">NumPy 数组拆分</a></li>
+<li><a href="numpy_array_search.html" title="NumPy 数组搜索">NumPy 数组搜索</a></li>
+<li><a href="numpy_array_sort.html" title="NumPy 数组排序">NumPy 数组排序</a></li>
+<li><a href="numpy_array_filter.html" title="NumPy 数组过滤">NumPy 数组过滤</a></li>
+<li><a href="numpy_random.html" title="NumPy 随机">NumPy 随机</a></li>
+<li><a href="numpy_ufunc.html" title="NumPy ufuncs">NumPy ufuncs</a></li>
+</ul>
+<h2>Python 机器学习</h2>
+<ul>
+<li><a href="python_ml_getting_started.html" title="机器学习 - 入门">入门</a></li>
+<li><a href="python_ml_mean_median_mode.html" title="机器学习 - 平均中位数模式">平均中位数模式</a></li>
+<li><a href="python_ml_standard_deviation.html" title="机器学习 - 标准差">标准差</a></li>
+<li><a href="python_ml_percentile.html" title="机器学习 - 百分位数">百分位数</a></li>
+<li><a href="python_ml_data_distribution.html" title="机器学习 - 数据分布">数据分布</a></li>
+<li><a href="python_ml_normal_data_distribution.html" title="机器学习 - 正态数据分布">正态数据分布</a></li>
+<li><a href="python_ml_scatterplot.html" title="机器学习 - 散点图">散点图</a></li>
+<li><a href="python_ml_linear_regression.html" title="机器学习 - 线性回归">线性回归</a></li>
+<li><a href="python_ml_polynomial_regression.html" title="机器学习 - 多项式回归">多项式回归</a></li>
+<li><a href="python_ml_multiple_regression.html" title="机器学习 - 多元回归">多元回归</a></li>
+<li><a href="python_ml_scale.html" title="机器学习 - 缩放">缩放</a></li>
+<li><a href="python_ml_train_test.html" title="机器学习 - 训练/测试">训练/测试</a></li>
+<li class="currentLink"><a href="python_ml_decision_tree.html" title="机器学习 - 决策树">决策树</a></li>
+<li><a href="python_ml_confusion_matrix.html" title="机器学习 - 混淆矩阵">混淆矩阵</a></li>
+<li><a href="python_ml_hierarchial_clustering.html" title="机器学习 - 层次聚类">层次聚类</a></li>
+<li><a href="python_ml_logistic_regression.html" title="机器学习 - 逻辑回归">逻辑回归</a></li>
+<li><a href="python_ml_grid_search.html" title="机器学习 - 网格搜索">网格搜索</a></li>
+<li><a href="python_ml_preprocessing.html" title="机器学习 - 分类数据">分类数据</a></li>
+<li><a href="python_ml_k-means.html" title="机器学习 - K-means">K-means</a></li>
+<li><a href="python_ml_bagging.html" title="机器学习 - Bootstrap 聚合（Bagging）">Bootstrap 聚合</a></li>
+<li><a href="python_ml_cross_validation.html" title="机器学习 - 交叉验证">交叉验证</a></li>
+<li><a href="python_ml_auc_roc.html" title="机器学习 - AUC - ROC 曲线">AUC - ROC 曲线</a></li>
+<li><a href="python_ml_knn.html" title="机器学习 - K-最近邻算法（KNN）">K-最近邻算法</a></li>
+</ul>
+<h2>Python DSA</h2>
+<ul>
+<li><a href="python_dsa.html" title="Python MySQL">Python DSA</a></li>
+<li><a href="python_dsa_lists.html" title="Python 中的列表与数组">列表与数组</a></li>
+<li><a href="python_dsa_stacks.html" title="Python 中的栈">栈</a></li>
+<li><a href="python_dsa_queues.html" title="Python 中的队列">队列</a></li>
+<li><a href="python_dsa_linkedlists.html" title="Python 中的链表">链表</a></li>
+<li><a href="python_dsa_hashtables.html" title="Python 中的哈希表">哈希表</a></li>
+<li><a href="python_dsa_trees.html" title="Python 树">树</a></li>
+<li><a href="python_dsa_binarytrees.html" title="Python 二叉树">二叉树</a></li>
+<li><a href="python_dsa_binarysearchtrees.html" title="Python 二叉搜索树">二叉搜索树</a></li>
+<li><a href="python_dsa_avltrees.html" title="Python AVL 树">AVL 树</a></li>
+<li><a href="python_dsa_graphs.html" title="Python 图论">图</a></li>
+<li><a href="python_dsa_linearsearch.html" title="Python 实现的线性查找">线性查找</a></li>
+<li><a href="python_dsa_binarysearch.html" title="Python 实现的二分查找">二分查找</a></li>
+<li><a href="python_dsa_bubblesort.html" title="Python 实现的冒泡排序">冒泡排序</a></li>
+<li><a href="python_dsa_selectionsort.html" title="Python 实现的选择排序">选择排序</a></li>
+<li><a href="python_dsa_insertionsort.html" title="Python 实现的插入排序">插入排序</a></li>
+<li><a href="python_dsa_quicksort.html" title="Python 实现的 DSA 快速排序">快速排序</a></li>
+<li><a href="python_dsa_countingsort.html" title="Python 实现的 DSA 计数排序">计数排序</a></li>
+<li><a href="python_dsa_radixsort.html" title="Python 实现的 DSA 基数排序">基数排序</a></li>
+<li><a href="python_dsa_mergesort.html" title="Python 实现的 DSA 归并排序">归并排序</a></li>
+</ul>
+<h2>Python MySQL</h2>
+<ul>
+<li><a href="python_mysql_getstarted.html" title="Python MySQL 入门">MySQL 入门</a></li>
+<li><a href="python_mysql_create_db.html" title="Python MySQL Create Database">MySQL Create Database</a></li>
+<li><a href="python_mysql_create_table.html" title="Python MySQL Create Table">MySQL Create Table</a></li>
+<li><a href="python_mysql_insert.html" title="Python MySQL Insert Into Table">MySQL Insert</a></li>
+<li><a href="python_mysql_select.html" title="Python MySQL Select From">MySQL Select</a></li>
+<li><a href="python_mysql_where.html" title="Python MySQL Where">MySQL Where</a></li>
+<li><a href="python_mysql_orderby.html" title="Python MySQL Order By">MySQL Order By</a></li>
+<li><a href="python_mysql_delete.html" title="Python MySQL Delete From By">MySQL Delete</a></li>
+<li><a href="python_mysql_drop_table.html" title="Python MySQL Drop Table">MySQL Drop Table</a></li>
+<li><a href="python_mysql_update.html" title="Python MySQL 更新表">MySQL Update</a></li>
+<li><a href="python_mysql_limit.html" title="Python MySQL Limit">MySQL Limit</a></li>
+<li><a href="python_mysql_join.html" title="Python MySQL Join">MySQL Join</a></li>
+</ul>
+<h2>Python MongoDB</h2>
+<ul>
+<li><a href="python_mongodb_getstarted.html" title="Python 教程">MongoDB 入门</a></li>
+<li><a href="python_mongodb_create_db.html" title="Python 教程">MongoDB 创建数据库</a></li>
+<li><a href="python_mongodb_create_collection.html" title="Python 教程">MongoDB 创建集合</a></li>
+<li><a href="python_mongodb_insert.html" title="Python 教程">MongoDB Insert</a></li>
+<li><a href="python_mongodb_find.html" title="Python 教程">MongoDB Find</a></li>
+<li><a href="python_mongodb_query.html" title="Python 教程">MongoDB Query</a></li>
+<li><a href="python_mongodb_sort.html" title="Python 教程">MongoDB Sort</a></li>
+<li><a href="python_mongodb_delete.html" title="Python 教程">MongoDB Delete</a></li>
+<li><a href="python_mongodb_drop_collection.html" title="Python 教程">MongoDB 删除集合</a></li>
+<li><a href="python_mongodb_update.html" title="Python 教程">MongoDB Update</a></li>
+<li><a href="python_mongodb_limit.html" title="Python 教程">MongoDB Limit</a></li>
+</ul>
+<h2>Python 参考手册</h2>
+<ul>
+<li><a href="python_reference.html" title="Python 教程">Python 参考概览</a></li>
+<li><a href="python_ref_functions.html" title="Python 教程">Python 内建函数</a></li>
+<li><a href="python_ref_string.html" title="Python 教程">Python 字符串方法</a></li>
+<li><a href="python_ref_list.html" title="Python 教程">Python 列表方法</a></li>
+<li><a href="python_ref_dictionary.html" title="Python 教程">Python 字典方法</a></li>
+<li><a href="python_ref_tuple.html" title="Python 教程">Python 元组方法</a></li>
+<li><a href="python_ref_set.html" title="Python 教程">Python 集合方法</a></li>
+<li><a href="python_ref_file.html" title="Python 教程">Python 文件方法</a></li>
+<li><a href="python_ref_keywords.html" title="Python 教程">Python 关键字</a></li>
+<li><a href="python_ref_exceptions.html" title="Python 内建异常">Python 异常</a></li>
+<li><a href="python_ref_glossary.html" title="Python 术语表">Python 术语表</a></li>
+</ul>
+<h2>Python 模块参考手册</h2>
+<ul>
+<li><a href="module_random.html" title="Python 教程">随机模块</a></li>
+<li><a href="module_requests.html" title="Python 教程">请求模块</a></li>
+<li><a href="module_statistics.html" title="Python 统计模块">统计模块</a></li>
+<li><a href="module_math.html" title="Python 数学模块">数学模块</a></li>
+<li><a href="module_cmath.html" title="Python cmath 模块">复数数学模块</a></li>
+</ul>
+<h2>Python How To</h2>
+<ul>
+<li><a href="python_howto_remove_duplicates.html" title="Python 教程">删除列表重复项</a></li>
+<li><a href="python_howto_reverse_string.html" title="Python 教程">反转字符串</a></li>
+<li><a href="python_howto_add_two_numbers.html" title="如何在 Python 中加两个数字">两数相加</a></li>
+</ul>
+<h2>Python 实例</h2>
+<ul>
+<li><a href="python_examples.html" title="Python 实例">Python 实例</a></li>
+<li><a href="python_quiz.html" title="Python 测验">Python 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>机器学习 - 决策树</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="python_ml_train_test.html" title="机器学习 - 训练/测试">训练/测试</a></li>
+<li class="next"><a href="python_ml_confusion_matrix.html" title="机器学习 - 混淆矩阵">混淆矩阵</a></li>
+</ul>
+</div>
+
+
+<section style="text-align: center;">
+<img class="illustration" src="../i/python/img_ml_decision_tree.png" style="max-width:100%;"><br />
+</section>
+
+
+
+<section>
+<h2>决策树（Decision Tree）</h2>
+
+<p>在本章中，我们将向您展示如何制作“决策树”。决策树是一种流程图，可以帮助您根据以前的经验进行决策。</p>
+
+<p>在这个例子中，一个人将尝试决定他/她是否应该参加喜剧节目。</p>
+
+<p>幸运的是，我们的例中人物每次在镇上举办喜剧节目时都进行注册，并注册一些关于喜剧演员的信息，并且还登记了他/她是否去过。</p>
+
+<table class="dataintable">
+<tr>
+<th>Age</th>
+<th>Experience</th>
+<th>Rank</th>
+<th>Nationality</th>
+<th>Go</th>
+</tr>
+
+<tr>
+<td>36</td>
+<td>10</td>
+<td>9</td>
+<td>UK</td>
+<td>NO</td>
+</tr>
+
+<tr>
+<td>42</td>
+<td>12</td>
+<td>4</td>
+<td>USA</td>
+<td>NO</td>
+</tr>
+
+<tr>
+<td>23</td>
+<td>4</td>
+<td>6</td>
+<td>N</td>
+<td>NO</td>
+</tr>
+
+<tr>
+<td>52</td>
+<td>4</td>
+<td>4</td>
+<td>USA</td>
+<td>NO</td>
+</tr>
+
+<tr>
+<td>43</td>
+<td>21</td>
+<td>8</td>
+<td>USA</td>
+<td>YES</td>
+</tr>
+
+<tr>
+<td>44</td>
+<td>14</td>
+<td>5</td>
+<td>UK</td>
+<td>NO</td>
+</tr>
+
+<tr>
+<td>66</td>
+<td>3</td>
+<td>7</td>
+<td>N</td>
+<td>YES</td>
+</tr>
+
+<tr>
+<td>35</td>
+<td>14</td>
+<td>9</td>
+<td>UK</td>
+<td>YES</td>
+</tr>
+
+<tr>
+<td>52</td>
+<td>13</td>
+<td>7</td>
+<td>N</td>
+<td>YES</td>
+</tr>
+
+<tr>
+<td>35</td>
+<td>5</td>
+<td>9</td>
+<td>N</td>
+<td>YES</td>
+</tr>
+
+<tr>
+<td>24</td>
+<td>3</td>
+<td>5</td>
+<td>USA</td>
+<td>NO</td>
+</tr>
+
+<tr>
+<td>18</td>
+<td>3</td>
+<td>7</td>
+<td>UK</td>
+<td>YES</td>
+</tr>
+
+<tr>
+<td>45</td>
+<td>9</td>
+<td>9</td>
+<td>UK</td>
+<td>YES</td>
+</tr>
+</table>
+
+<p>现在，基于此数据集，Python 可以创建决策树，这个决策树可用于决定是否值得参加任何新的演出。</p>
+</section>
+
+
+
+<section>
+<h2>工作原理</h2>
+
+<p>首先，导入所需的模块，并使用 pandas 读取数据集：</p>
+
+<h3>实例</h3>
+
+<p>读取并打印数据集：</p>
+
+<pre class="language-python">
+import pandas
+
+df = pandas.read_csv(&quot;data.csv&quot;)
+
+print(df)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t12fe.html?f=ml_dtree_1">运行实例</a></p>
+
+<p>如需制作决策树，所有数据都必须是数字。</p>
+
+<p>我们必须将非数字列 “Nationality” 和 “Go” 转换为数值。</p>
+
+<p>Pandas 有一个 <code>map()</code> 方法，该方法接受字典，其中包含有关如何转换值的信息。</p>
+
+<p><code>{'UK': 0, 'USA': 1, 'N': 2}</code></p>
+
+<p>表示将值 'UK' 转换为 0，将 'USA' 转换为 1，将 'N' 转换为 2。</p>
+
+<h3>实例</h3>
+
+<p>将字符串值更改为数值：</p>
+
+<pre class="language-python">
+d = {'UK': 0, 'USA': 1, 'N': 2}
+df['Nationality'] = df['Nationality'].map(d)
+d = {'YES': 1, 'NO': 0}
+df['Go'] = df['Go'].map(d)
+
+print(df)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t2700.html?f=ml_dtree_2">运行实例</a></p>
+
+<p>然后，我们必须将特征列与目标列分开。</p>
+
+<p>特征列是我们尝试从中预测的列，目标列是具有我们尝试预测的值的列。</p>
+
+<h3>实例</h3>
+
+<p>X 是特征列，y 是目标列：</p>
+
+<pre class="language-python">
+features = ['Age', 'Experience', 'Rank', 'Nationality']
+
+X = df[features]
+y = df['Go']
+
+print(X)
+print(y)
+</pre>
+
+<p class="tiy"><a target="_blank" href="tdf54.html?f=ml_dtree_3">运行实例</a></p>
+
+<p>现在我们可以创建实际的决策树，并用我们的数据进行拟合。首先导入所需模块：</p>
+
+<h3>实例</h3>
+
+<p>创建并展示决策树：</p>
+
+<pre class="language-python">
+import pandas
+from sklearn import tree
+from sklearn.tree import DecisionTreeClassifier
+import matplotlib.pyplot as plt
+
+df = pandas.read_csv(&quot;data.csv&quot;)
+
+d = {'UK': 0, 'USA': 1, 'N': 2}
+df['Nationality'] = df['Nationality'].map(d)
+d = {'YES': 1, 'NO': 0}
+df['Go'] = df['Go'].map(d)
+
+features = ['Age', 'Experience', 'Rank', 'Nationality']
+
+X = df[features]
+y = df['Go']
+
+dtree = DecisionTreeClassifier()
+dtree = dtree.fit(X, y)
+
+tree.plot_tree(dtree, feature_names=features)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t8c6d.html?f=ml_dtree_4_mpl">运行实例</a></p>
+</section>
+
+
+
+<section>
+<h2>结果解释</h2>
+
+<p>决策树使用您先前的决策来计算您是否愿意去看喜剧演员的几率。</p>
+
+<p>让我们阅读决策树的不同方面：</p>
+
+<img class="illustration" src="../i/python/img_decisiontree_1.png" style="max-width:100%"><br />
+
+<h3>Rank</h3>
+
+<p><code>Rank &lt;= 6.5</code> 表示排名在 6.5 以下的喜剧演员将遵循 <code>True</code> 箭头（向左），其余的则遵循 <code>False</code> 箭头（向右）。</p>
+
+<p><code>gini = 0.497</code> 表示分割的质量，并且始终是 0.0 到 0.5 之间的数字，其中 0.0 表示所有样本均得到相同的结果，而 0.5 表示分割完全在中间进行。</p>
+
+<p><code>samples = 13</code> 表示在决策的这一点上还剩下 13 位喜剧演员，因为这是第一步，所以他们全部都是喜剧演员。</p>
+
+<p><code>value = [6, 7]</code> 表示在这 13 位喜剧演员中，有 6 位将获得 &quot;NO&quot;，而 7 位将获得 &quot;GO&quot;。</p>
+
+<h3>Gini</h3>
+
+<p>分割样本的方法有很多，我们在本教程中使用 GINI 方法。</p>
+
+<p>基尼方法使用以下公式：</p>
+
+<p><code>Gini = 1 - (x/n)2 - (y/n)2</code></p>
+
+<p>其中，x 是肯定答案的数量 (&quot;GO&quot;)，n 是样本数量，y 是否定答案的数量 (&quot;NO&quot;)，使用以下公式进行计算：</p>
+
+<p><code>1 - (7 / 13)2 - (6 / 13)2 = 0.497</code></p>
+
+<img class="illustration" src="../i/python/img_decisiontree_2.png" style="max-width:100%"><br />
+
+<p>下一步包含两个框，其中一个框用于喜剧演员，其 'Rank' 为 6.5 或更低，其余为一个框。</p>
+
+<h3>True - 5 名喜剧演员在这里结束：</h3>
+
+<p><code>gini = 0.0</code> 表示所有样本均得到相同的结果。</p>
+
+<p><code>samples = 5</code> 表示该分支中还剩下 5 位喜剧演员（5 位的等级为 6.5 或更低的喜剧演员）。</p>
+
+<p><code>value = [5, 0]</code> 表示 5 得到 &quot;NO&quot; 而 0 得到 &quot;GO&quot;。</p>
+
+<h3>False - 8 位戏剧演员继续：</h3>
+
+<h3>Nationality（国籍）</h3>
+
+<p><code>Nationality &lt;= 0.5</code> 表示国籍值小于 0.5 的喜剧演员将遵循左箭头（这表示来自英国的所有人），其余的将遵循右箭头。</p>
+
+<p><code>gini = 0.219</code> 意味着大约 22％ 的样本将朝一个方向移动。</p>
+
+<p><code>samples = 8</code> 表示该分支中还剩下 8 个喜剧演员（8 个喜剧演员的等级高于 6.5）。</p>
+
+<p><code>value = [1, 7]</code> 表示在这 8 位喜剧演员中，1 位将获得 &quot;NO&quot;，而 7 位将获得 &quot;GO&quot;。</p>
+</section>
+
+
+
+<section>
+<img class="illustration" src="../i/python/img_decisiontree_3.png" style="max-width:100%"><br />
+
+<h3>True - 4 名戏剧演员继续：</h3>
+
+<h3>Age（年龄）</h3>
+
+<p><code>Age &lt;= 35.5</code> 表示年龄在 35.5 岁或以下的喜剧演员将遵循左箭头，其余的将遵循右箭头。</p>
+
+<p><code>gini = 0.375</code> 意味着大约 37.5％ 的样本将朝一个方向移动。</p>
+
+<p><code>samples = 4</code> 表示该分支中还剩下 4 位喜剧演员（来自英国的 4 位喜剧演员）。</p>
+
+<p><code>value = [1, 3]</code> 表示在这 4 位喜剧演员中，1 位将获得 &quot;NO&quot;，而 3 位将获得 &quot;GO&quot;。</p>
+
+<h3>False - 4 名喜剧演员到这里结束：</h3>
+
+<p><code>gini = 0.0</code> 表示所有样本都得到相同的结果。</p>
+
+<p><code>samples = 4</code> 表示该分支中还剩下 4 位喜剧演员（来自英国的 4 位喜剧演员）。</p>
+
+<p><code>value = [0, 4]</code> 表示在这 4 位喜剧演员中，0 将获得 &quot;NO&quot;，而 4 将获得 &quot;GO&quot;。</p>
+</section>
+
+
+
+<section>
+<img class="illustration" src="../i/python/img_decisiontree_4.png" style="max-width:100%"><br />
+
+<h3>True - 2 名喜剧演员在这里结束：</h3>
+
+<p><code>gini = 0.0</code> 表示所有样本都得到相同的结果。</p>
+
+<p><code>samples = 2</code> 表示该分支中还剩下 2 名喜剧演员（2 名 35.5 岁或更年轻的喜剧演员）。</p>
+
+<p><code>value = [0, 2]</code> 表示在这 2 位喜剧演员中，0 将获得 &quot;NO&quot;，而 2 将获得 &quot;GO&quot;。</p>
+
+<h3>False - 2 名戏剧演员继续：</h3>
+
+<h3>Experience（经验）</h3>
+
+<p><code>Experience &lt;= 9.5</code> 表示具有 9.5 年或以上经验的喜剧演员将遵循左侧的箭头，其余的将遵循右侧的箭头。</p>
+
+<p><code>gini = 0.5</code> 表示 50％ 的样本将朝一个方向移动。</p>
+
+<p><code>samples = 2</code> 表示此分支中还剩下 2 个喜剧演员（2 个年龄超过 35.5 的喜剧演员）。</p>
+
+<p><code>value = [1, 1]</code> 表示这两个喜剧演员中，1 将获得 &quot;NO&quot;，而 1 将获得 &quot;GO&quot;。</p>
+</section>
+
+
+
+<section>
+<img class="illustration" src="../i/python/img_decisiontree_5.png" style="max-width:100%"><br />
+
+<h3>True - 1 名喜剧演员在这里结束：</h3>
+
+<p><code>gini = 0.0</code> 表示所有样本都得到相同的结果。</p>
+
+<p><code>samples = 1</code> 表示此分支中还剩下 1 名喜剧演员（1 名具有 9.5 年或以下经验的喜剧演员）。</p>
+
+<p><code>value = [0, 1]</code> 表示 0 表示 &quot;NO&quot;，1 表示 &quot;GO&quot;。</p>
+
+<h3>False - 1 名喜剧演员到这里为止：</h3>
+
+<p><code>gini = 0.0</code> 表示所有样本都得到相同的结果。</p>
+
+<p><code>samples = 1</code> 表示此分支中还剩下 1 位喜剧演员（其中 1 位具有超过 9.5 年经验的喜剧演员）。</p>
+
+<p><code>value = [1, 0]</code> 表示 1 表示 &quot;NO&quot;，0 表示 &quot;GO&quot;。</p>
+</section>
+
+
+
+<section>
+<h2>预测值</h2>
+
+<p>我们可以使用决策树来预测新值。</p>
+
+<p>例如：我是否应该去看一个由 40 岁的美国喜剧演员主演的节目，该喜剧演员有 10 年的经验，喜剧排名为 7？</p>
+
+<h3>实例</h3>
+
+<p>使用 <code>predict()</code> 方法来预测新值：</p>
+
+<pre class="language-python">
+print(dtree.predict([[40, 10, 7, 1]]))
+</pre>
+
+<p class="tiy"><a target="_blank" href="t9490.html?f=ml_dtree_predict_1">运行实例</a></p>
+
+<h3>实例</h3>
+
+<p>如果喜剧等级为 6，答案是什么？</p>
+
+<pre class="language-python">
+print(dtree.predict([[40, 10, 6, 1]]))
+</pre>
+
+<p class="tiy"><a target="_blank" href="tbd0f.html?f=ml_dtree_predict_2">运行实例</a></p>
+</section>
+
+
+
+<section>
+<h2>不同的结果</h2>
+
+<p>如果运行足够多次，即使您输入的数据相同，决策树也会为您提供不同的结果。</p>
+
+<p>这是因为决策树无法给我们 100％ 的肯定答案。它基于结果的可能性，答案会有所不同。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="python_ml_train_test.html" title="机器学习 - 训练/测试">训练/测试</a></li>
+<li class="next"><a href="python_ml_confusion_matrix.html" title="机器学习 - 混淆矩阵">混淆矩阵</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="python_reference.html">Python 参考手册</a></h5>
+<h5 id="tools_example"><a href="python_examples.html">Python 实例</a></h5>
+<h5 id="tools_quiz"><a href="python_quiz.html">Python 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/python/python_ml_decision_tree.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:50:48 GMT -->
+</html>

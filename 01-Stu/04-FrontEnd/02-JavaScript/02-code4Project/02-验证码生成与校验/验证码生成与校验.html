@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+    <title>验证码生成</title>
+    <style>
+        * {
+            font-family: Arial, sans-serif;
+            margin: 0px;
+            border: 0px;
+            /* background-color: white; */
+        }
+
+
+        .box {
+            background-color: white;
+            margin: 20px auto;
+            width: 225px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .oneline {
+            /* border: 2px solid black; */
+            display: flex;
+            align-items: center;
+            /* 垂直居中 (如果需要) */
+            margin: 5px 5px;
+        }
+
+        .twoline {
+            /* border: 2px solid red; */
+            margin: 5px 5px;
+            padding: 5px 5px;
+        }
+
+        .threeline {
+            /* border: 2px solid green; */
+            /* display: flex; */
+            /* justify-content:center; 左右两端对齐 */
+            margin: 5px 5px;
+        }
+
+        #verificationCode {
+            font-size: 24px;
+            letter-spacing: 5px;
+            /* 让验证码字符之间稍微分开，更易读 */
+            user-select: none;
+            /* 防止用户意外选中文字 */
+        }
+
+        .replace {
+            color: #007bff;
+            font-size: 10px;
+            margin-left: 10px;
+        }
+
+        .replace:hover {
+            cursor: pointer;
+
+        }
+
+        .textin {
+            padding: 5px 5px;
+            border: 1px solid #ff0000;
+            border-radius: 5px;
+            width: 120px;
+            letter-spacing: 3px;
+
+        }
+
+        button {
+            padding: 5px 10px;
+            margin: 5px 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <div class="oneline">
+            <span id="verificationCode"></span>
+            <span class="replace">看不清，换一张</span>
+        </div>
+        <div class="twoline">
+            <span>验证码：</span>
+            <span><input type="text" class="textin"></span>
+        </div>
+        <div class="threeline">
+            <button onclick="generateCode()">确定</button>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * 生成指定位数的随机字母和数字组合
+         * @param {number} length - 验证码长度，默认为6
+         * @returns {string} - 生成的验证码字符串
+         */
+        function generateCode(length = 6) {
+            // 定义所有可用的字符池
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+            let result = '';
+            const charactersLength = characters.length;
+
+            for (let i = 0; i < length; i++) {
+                // Math.random() 生成 0 到 1 之间的随机数
+                // 乘以字符池长度并向下取整，得到一个有效的索引
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+
+            return result;
+        }
+
+        // 重新生成验证码，并将输入框清空
+        function init() {
+            document.querySelector('.textin').value = ''; // 清空输入框
+            // 重新生成验证码并显示在页面上
+            const codeElement = document.getElementById('verificationCode');
+            codeElement.textContent = generateCode();
+        }
+
+        // 页面加载完成后，自动在按钮上绑定点击事件
+        // 也可以像上面那样在HTML中直接使用 onclick="generateCode()"
+        window.onload = function () {
+            // 获取显示验证码的元素
+            const codeElement = document.getElementById('verificationCode');
+
+            // 绑定看不清点击事件
+            document.querySelector('.replace').addEventListener('click', function () {
+                codeElement.textContent = generateCode(); // 生成并显示新的验证码
+            });
+
+
+            // 初始时也生成一个验证码
+            codeElement.textContent = generateCode();
+
+            //点击确定按钮，获取输入框的值，并进行比对后输出结果
+            document.querySelector('button').addEventListener('click', function () {
+                let inputvalue = document.querySelector('.textin').value;
+                // alert('你输入的验证码是：'+inputvalue);
+                if (inputvalue == codeElement.textContent) {
+                    alert('验证码正确');
+                    window.location.href = '../01-支付10秒倒计时/confirm.html';
+                }
+                else {
+                    alert('验证码错误');
+                    init();
+                }
+            })
+        };
+    </script>
+
+</body>
+
+</html>

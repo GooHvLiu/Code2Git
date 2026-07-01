@@ -1,0 +1,415 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/angular/angular_events.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:36:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>AngularJS 事件</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>教程</h2>
+<ul>
+<li><a href="index.html" title="AngularJS 教程">AngularJS 教程</a></li>
+<li><a href="angular_intro.html" title="AngularJS 简介">AngularJS 简介</a></li>
+<li><a href="angular_expressions.html" title="AngularJS 表达式">AngularJS 表达式</a></li>
+<li><a href="angular_modules.html" title="AngularJS 模块">AngularJS 模块</a></li>
+<li><a href="angular_directives.html" title="AngularJS 指令">AngularJS 指令</a></li>
+<li><a href="angular_model.html" title="AngularJS 模型">AngularJS 模型</a></li>
+<li><a href="angular_databinding.html" title="AngularJS 数据绑定">AngularJS 数据绑定</a></li>
+<li><a href="angular_controllers.html" title="AngularJS 控制器">AngularJS 控制器</a></li>
+<li><a href="angular_scopes.html" title="AngularJS 作用域">AngularJS 作用域</a></li>
+<li><a href="angular_filters.html" title="AngularJS 过滤器">AngularJS 过滤器</a></li>
+<li><a href="angular_services.html" title="AngularJS 服务">AngularJS 服务</a></li>
+<li><a href="angular_http.html" title="AngularJS Http">AngularJS Http</a></li>
+<li><a href="angular_tables.html" title="AngularJS 表格">AngularJS 表格</a></li>
+<li><a href="angular_select.html" title="AngularJS 选择">AngularJS 选择</a></li>
+<li><a href="angular_sql.html" title="AngularJS SQL">AngularJS SQL</a></li>
+<li><a href="angular_htmldom.html" title="AngularJS DOM">AngularJS DOM</a></li>
+<li class="currentLink"><a href="angular_events.html" title="AngularJS 事件">AngularJS 事件</a></li>
+<li><a href="angular_forms.html" title="AngularJS 表单">AngularJS 表单</a></li>
+<li><a href="angular_validation.html" title="AngularJS 验证">AngularJS 验证</a></li>
+<li><a href="angular_api.html" title="AngularJS API">AngularJS API</a></li>
+<li><a href="angular_includes.html" title="AngularJS 包含">AngularJS 包含</a></li>
+<li><a href="angular_animations.html" title="AngularJS 动画">AngularJS 动画</a></li>
+<li><a href="angular_routing.html" title="AngularJS 路由">AngularJS 路由</a></li>
+<li><a href="angular_application.html" title="AngularJS 应用程序">AngularJS 应用程序</a></li>
+</ul>
+<h2>实例</h2>
+<ul>
+<li><a href="angular_examples.html" title="AngularJS 实例">AngularJS 实例</a></li>
+</ul>
+<h2>参考手册</h2>
+<ul>
+<li><a href="angular_ref_directives.html" title="AngularJS 参考手册">AngularJS 参考手册</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>AngularJS 事件</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="angular_htmldom.html" title="AngularJS DOM">AngularJS DOM</a></li>
+<li class="next"><a href="angular_forms.html" title="AngularJS 表单">AngularJS 表单</a></li>
+</ul>
+</div>
+
+
+
+<section id="intro">
+<p>AngularJS 拥有自己的 HTML 事件指令。</p>
+</section>
+
+
+
+<section>
+<h2>AngularJS 事件</h2>
+
+<p>你可以通过使用以下一个或多个指令，将 AngularJS 事件监听器添加到你的 HTML 元素中：</p>
+
+<ul>
+<li><code>ng-blur</code></li>
+<li><code>ng-change</code></li>
+<li><code>ng-click</code></li>
+<li><code>ng-copy</code></li>
+<li><code>ng-cut</code></li>
+<li><code>ng-dblclick</code></li>
+<li><code>ng-focus</code></li>
+<li><code>ng-keydown</code></li>
+<li><code>ng-keypress</code></li>
+<li><code>ng-keyup</code></li>
+<li><code>ng-mousedown</code></li>
+<li><code>ng-mouseenter</code></li>
+<li><code>ng-mouseleave</code></li>
+<li><code>ng-mousemove</code></li>
+<li><code>ng-mouseover</code></li>
+<li><code>ng-mouseup</code></li>
+<li><code>ng-paste</code></li>
+</ul>
+
+<p>事件指令允许我们在某些用户事件上运行 AngularJS 函数。</p>
+
+<p>AngularJS 事件不会覆盖 HTML 事件，两个事件都会被执行。</p>
+</section>
+
+
+
+<section>
+<h2>鼠标事件</h2>
+
+<p>当光标移动到元素上时，将按照以下顺序发生鼠标事件：</p>
+
+<ul>
+<li>ng-mouseover</li>
+<li>ng-mouseenter</li>
+<li>ng-mousemove</li>
+<li>ng-mouseleave</li>
+</ul>
+
+<p>或者，当鼠标点击元素时，将按照以下顺序触发：</p>
+
+<ul>
+<li>ng-mousedown</li>
+<li>ng-mouseup</li>
+<li>ng-click</li>
+</ul>
+
+<p>您可以在任何 HTML 元素上添加鼠标事件。</p>
+
+<h3>实例</h3>
+
+<p>当鼠标移动到 H1 元素上时，增加 count 变量：</p>
+
+<pre class="language-html">
+&lt;div ng-app=&quot;myApp&quot; ng-controller=&quot;myCtrl&quot;&gt;  
+  
+&lt;h1 ng-mousemove=&quot;count = count + 1&quot;&gt;鼠标移到我上方！&lt;/h1&gt;  
+  
+&lt;h2&gt;{{ count }}&lt;/h2&gt;  
+  
+&lt;/div&gt;  
+&lt;script&gt;  
+var app = angular.module('myApp', []);  
+app.controller('myCtrl', function($scope) {  
+  $scope.count = 0;  
+});  
+&lt;/script&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t7ff5.html?f=angular_events_mousemove">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>ng-click 指令</h2>
+
+<p><code>ng-click</code> 指令定义了当元素被点击时将执行的 AngularJS 代码。</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div ng-app=&quot;myApp&quot; ng-controller=&quot;myCtrl&quot;&gt;
+
+&lt;button ng-click=&quot;count = count + 1&quot;&gt;Click me!&lt;/button&gt;
+
+&lt;p&gt;{{ count }}&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;script&gt;
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+  $scope.count = 0;
+});
+&lt;/script&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/te9be.html?f=angular_events_click">亲自试一试</a></p>
+
+<p>你也可以引用一个函数：</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div ng-app=&quot;myApp&quot; ng-controller=&quot;myCtrl&quot;&gt;
+
+&lt;button ng-click=&quot;myFunction()&quot;&gt;Click me!&lt;/button&gt;
+
+&lt;p&gt;{{ count }}&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;script&gt;
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+  $scope.count = 0;
+  $scope.myFunction = function() {
+    $scope.count++;
+  }
+});
+&lt;/script&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/td972.html?f=angular_events_function">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>切换，真/假</h2>
+
+<p>如果你想在点击按钮时显示一部分 HTML 代码，并在再次点击按钮时隐藏，就像下拉菜单一样，请使按钮表现得像切换开关一样：</p>
+
+点击我
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div ng-app=&quot;myApp&quot; ng-controller=&quot;myCtrl&quot;&gt;  
+  
+&lt;button ng-click=&quot;myFunc()&quot;&gt;点击我！&lt;/button&gt;  
+  
+&lt;div ng-show=&quot;showMe&quot;&gt;  
+  &lt;h1&gt;菜单：&lt;/h1&gt;  
+  &lt;div&gt;披萨&lt;/div&gt;  
+  &lt;div&gt;意大利面&lt;/div&gt;  
+  &lt;div&gt;海鲜&lt;/div&gt;  
+&lt;/div&gt;  
+  
+&lt;/div&gt;  
+&lt;script&gt;  
+var app = angular.module('myApp', []);  
+app.controller('myCtrl', function($scope) {  
+  $scope.showMe = false;  
+  $scope.myFunc = function() {  
+    $scope.showMe = !$scope.showMe;  
+  }  
+});  
+&lt;/script&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t7290.html?f=angular_events_toggle">亲自试一试</a></p>
+
+<p><code>showMe</code> 变量开始时为布尔值 <code>false</code>。</p>
+
+<p><code>myFunc</code> 函数通过使用 <code>!</code>（非）运算符，将 <code>showMe</code> 变量设置为与其当前值相反的值。</p>
+</section>
+
+
+
+<section>
+<h2>$event 对象</h2>
+
+<p>调用函数时可以将 <code>$event</code> 对象作为参数传递。</p>
+
+<p><code>$event</code> 对象包含浏览器的事件对象：</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div ng-app=&quot;myApp&quot; ng-controller=&quot;myCtrl&quot;&gt;
+
+&lt;h1 ng-mousemove=&quot;myFunc($event)&quot;&gt;鼠标移到我上方！&lt;/h1&gt;
+
+&lt;p&gt;Coordinates: {{x + ', ' + y}}&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;script&gt;
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+  $scope.myFunc = function(myE) {
+    $scope.x = myE.clientX;
+    $scope.y = myE.clientY;
+  }
+});
+&lt;/script&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tf8e4.html?f=angular_events_event">亲自试一试</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="angular_htmldom.html" title="AngularJS DOM">AngularJS DOM</a></li>
+<li class="next"><a href="angular_forms.html" title="AngularJS 表单">AngularJS 表单</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="angular_ref_directives.html">AngularJS 参考手册</a></h5>
+<h5 id="tools_example"><a href="angular_examples.html">AngularJS 实例</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/angular/angular_events.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:36:48 GMT -->
+</html>

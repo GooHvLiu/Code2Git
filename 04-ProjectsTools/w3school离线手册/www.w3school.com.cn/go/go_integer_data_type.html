@@ -1,0 +1,393 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/go/go_integer_data_type.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:01:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Go 整数数据类型</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Go 教程</h2>
+<ul>
+<li><a href="index.html" title="Go 教程">Go 教程</a></li>
+<li><a href="go_introduction.html" title="Go 简介">Go 简介</a></li>
+<li><a href="go_getting_started.html" title="Go 入门">Go 入门</a></li>
+<li><a href="go_syntax.html" title="Go 语法">Go 语法</a></li>
+<li><a href="go_comments.html" title="Go 注释">Go 注释</a></li>
+<li><a href="go_variables.html" title="Go 变量">Go 变量</a></li>
+<li><a href="go_variable_multi.html" title="Go 声明多变量">Go 声明多变量</a></li>
+<li><a href="go_variable_naming_rules.html" title="Go 变量命名规则">Go 变量命名规则</a></li>
+<li><a href="go_constants.html" title="Go 常量">Go 常量</a></li>
+<li><a href="go_output.html" title="Go 输出">Go 输出</a></li>
+<li><a href="go_formatting_verbs.html" title="Go 格式化动词">Go 格式化动词</a></li>
+<li><a href="go_data_types.html" title="Go 数据类型">Go 数据类型</a></li>
+<li><a href="go_boolean_data_type.html" title="Go 布尔数据类型">Go 布尔</a></li>
+<li class="currentLink"><a href="go_integer_data_type.html" title="Go 整数数据类型">Go 整数</a></li>
+<li><a href="go_float_data_type.html" title="Go 浮点数据类型">Go 浮点</a></li>
+<li><a href="go_string_data_type.html" title="Go 字符串数据类型">Go 字符串</a></li>
+<li><a href="go_arrays.html" title="Go 数组">Go 数组</a></li>
+<li><a href="go_slices.html" title="Go 创建切片">Go 创建切片</a></li>
+<li><a href="go_slices_modify.html" title="Go 修改切片">Go 修改切片</a></li>
+<li><a href="go_operators.html" title="Go 运算符">Go 运算符</a></li>
+<li><a href="go_conditions.html" title="Go 条件语句">Go 条件语句</a></li>
+<li><a href="go_if_statement.html" title="Go if 语句">Go if 语句</a></li>
+<li><a href="go_else_statement.html" title="Go if else 语句">Go if else 语句</a></li>
+<li><a href="go_elseif_statement.html" title="Go else if 语句">Go else if 语句</a></li>
+<li><a href="go_nested_if.html" title="Go 嵌套 if 语句">Go 嵌套 if 语句</a></li>
+<li><a href="go_switch.html" title="Go Switch 语句">Go Switch</a></li>
+<li><a href="go_loops.html" title="Go 循环">Go 循环</a></li>
+<li><a href="go_functions.html" title="Go 函数">Go 函数</a></li>
+<li><a href="go_function_parameters.html" title="Go 函数参数">Go 函数参数</a></li>
+<li><a href="go_function_returns.html" title="Go 函数返回">Go 函数返回</a></li>
+<li><a href="go_function_recursion.html" title="Go 递归函数">Go 递归函数</a></li>
+<li><a href="go_struct.html" title="Go 结构体">Go 结构体</a></li>
+<li><a href="go_maps.html" title="Go 映射">Go 映射</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Go 整数数据类型</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="go_boolean_data_type.html" title="Go 布尔数据类型">Go 布尔</a></li>
+<li class="next"><a href="go_float_data_type.html" title="Go 浮点数据类型">Go 浮点</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>Go 整数数据类型</h2>
+
+<p>整数数据类型用于存储没有小数的整数，如 35、-50 或 1345000。</p>
+
+<p>整数数据类型有两类：</p>
+
+<ul>
+<li><em>有符号整数</em> - 可以存储正值和负值</li>
+<li><em>无符号整数</em> - 只能存储非负值</li>
+</ul>
+
+<p class="tip"><span>提示：</span>整数的默认类型是 <code>int</code>。如果不指定类型，则类型将为 <code>int</code>。</p>
+</section>
+
+
+
+<section>
+<h2>有符号整数</h2>
+
+<p>使用 <code>int</code> 关键字之一声明的有符号整数可以存储正值和负值：</p>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var x int = 500
+  var y int = -4500
+  fmt.Printf(&quot;Type: %T, value: %v&quot;, x, x)
+  fmt.Printf(&quot;Type: %T, value: %v&quot;, y, y)
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="te334.html?f=go_data_types_integer_1">亲自试一试</a></p>
+
+<p>在 Go 中，有符号整数有五个关键字/类型：</p>
+
+<table class="ref">
+<tr>
+<th>类型</th>
+<th>大小</th>
+<th>范围</th>
+</tr>
+
+<tr>
+<td><code>int</code></td>
+<td>
+	<p>取决于平台：</p>
+
+	<ul>
+	<li>在 32 位系统中为 32 位</li>
+	<li>在 64 位系统中为 64 位</li>
+	</ul>
+</td>
+<td>
+	<ul>
+	<li>在 32 位系统中为 -2147483648 到 2147483647</li>
+	<li>在 64 位系统中为 -9223372036854775808 到 9223372036854775807</li>
+	</ul>
+</td>
+</tr>
+
+<tr>
+<td><code>int8</code></td>
+<td>8 位/1 字节</td>
+<td>-128 到 127</td>
+</tr>
+
+<tr>
+<td><code>int16</code></td>
+<td>16 位/2 字节</td>
+<td>-32768 到 32767</td>
+</tr>
+
+<tr>
+<td><code>int32</code></td>
+<td>32 位/4 字节</td>
+<td>-2147483648 到 2147483647</td>
+</tr>
+
+<tr>
+<td><code>int64</code></td>
+<td>64 位/8 字节</td>
+<td>-9223372036854775808 到 9223372036854775807</td>
+</tr>
+</table>
+</section>
+
+
+
+<section>
+<h2>无符号整数</h2>
+
+<p>无符号整数，使用其中一个 <code>uint</code> 关键字声明，只能存储非负数值：</p>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var x uint = 500
+  var y uint = 4500
+  fmt.Printf(&quot;Type: %T, value: %v&quot;, x, x)
+  fmt.Printf(&quot;Type: %T, value: %v&quot;, y, y)
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t4fc4.html?f=go_data_types_integer_2">亲自试一试</a></p>
+
+<p>Go 有五个关键字/类型的无符号整数：</p>
+
+<table class="ref">
+<tr>
+<th>类型</th>
+<th>大小</th>
+<th>范围</th>
+</tr>
+
+<tr>
+<td><code>uint</code></td>
+<td>
+	<p>在 32 位系统中为 32 位</p>
+	<p>在 64 位系统中为 64 位</p>
+</td>
+<td>
+	<p>在 32 位系统中为 0 到 4294967295</p>
+	<p>在 64 位系统中为 0 到 18446744073709551615</p>
+</td>
+</tr>
+
+<tr>
+<td><code>uint8</code></td>
+<td>8 位/1 字节</td>
+<td>0 到 255</td>
+</tr>
+
+<tr>
+<td><code>uint16</code></td>
+<td>16 位/2 字节</td>
+<td>0 到 65535</td>
+</tr>
+
+<tr>
+<td><pre class="language-go">uint32</pre></td>
+<td>32 位/4 字节</td>
+<td>0 到 4294967295</td>
+</tr>
+
+<tr>
+<td><pre class="language-go">uint64</pre></td>
+<td>64 位/8 字节</td>
+<td>0 到 18446744073709551615</td>
+</tr>
+</table>
+</section>
+
+
+
+<section>
+<h2>应该使用哪种整数类型？</h2>
+
+<p>选择哪种整数类型，取决于变量必须存储的值。</p>
+
+<h3>实例</h3>
+
+<p>此例将导致错误，因为 1000 超出了 int8 的范围（从 -128 到 127）：</p>
+
+<pre class="language-go err">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var x int8 = 1000
+  fmt.Printf(&quot;Type: %T, value: %v&quot;, x, x)
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+./prog.go:5:7: constant 1000 overflows int8
+</pre>
+
+<p class="tiy"><a target="_blank" href="tb918.html?f=go_data_types_integer_3">亲自试一试</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="go_boolean_data_type.html" title="Go 布尔数据类型">Go 布尔</a></li>
+<li class="next"><a href="go_float_data_type.html" title="Go 浮点数据类型">Go 浮点</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/go/go_integer_data_type.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:01:35 GMT -->
+</html>

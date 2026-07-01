@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+    <title>搜索数据展示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* 确保padding和border不会影响元素的总宽度 */
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+        }
+
+        #reseach {
+            margin: 20px 20px;
+            /* --- 使用 Flexbox 控制内部布局 --- */
+            display: flex;
+            /* 让子元素成为弹性项目 */
+            flex-direction: column;
+            /* 子元素垂直排列 */
+            align-items: flex-start;
+            /* 子元素左对齐，实现左边线重合 */
+            width: fit-content;
+            /* 宽度由内容撑开 */
+
+        }
+
+        /* 包裹输入框和按钮的容器 */
+        .search-controls {
+            display: flex;
+            /* 让输入框和按钮在同一行 */
+            gap: 5px;
+            /* 在输入框和按钮之间添加一点间距 */
+            margin-bottom: -1px;
+            /* 与下方的 #show div 保持距离 */
+        }
+
+        #reseach .inputword {
+            height: 25px;
+            width: 250px;
+            flex-shrink: 0;
+            /* 防止输入框被压缩 */
+        }
+
+        #reseach .inputword::placeholder {
+            color: #ccc;
+            font-size: 10px;
+            padding-left: 5px;
+        }
+
+        #reseach .inputword:focus {
+            outline: none;
+            /* 去除聚焦时的轮廓线 */
+            border: 2px solid #007bff;
+            /* 添加蓝色边框 */
+            border-radius: 6px;
+        }
+
+
+        #reseach .btn {
+            font-size: 12px;
+            letter-spacing: 3px;
+            flex-shrink: 0;
+            /* 防止按钮被压缩 */
+            border: 2px solid #007bff;
+            /* 蓝色边框 */
+            border-radius: 3px;
+        }
+
+        #show {
+            width: 250px;
+            /* 与输入框宽度保持一致 */
+            min-height: 20px;
+            /* 设置一个最小高度，方便查看 */
+            padding: 5px;
+            font-size: 15px;
+            /* 由于父容器是 flex-column 且 align-items: flex-start，
+               这个div会自动与上面的 .search-controls 左对齐 */
+            display: none;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="reseach">
+        <!-- 将输入框和按钮放在一个容器里 -->
+        <div class="search-controls">
+            <input type="text" class="inputword" placeholder="请输入内容">
+            <input type="submit" class="btn" value="搜索">
+        </div>
+        <!-- #show div 作为 #reseach 的第二个子元素 -->
+        <div id="show"></div>
+    </div>
+
+    <script>
+        // 首先模拟一个数据库，使用数组模拟数据库中的数据。
+        let data = ['web前端精英特训班 980元', 'HTML核心技术 199元', 'CSS核心技术 199元', 'JavaScript核心技术 199元', 'Vue核心技术 299元', 'React核心技术 299元', 'Node.js核心技术 299元', 'MongoDB核心技术 299元', 'MySQL核心技术 299元', 'Python核心技术 299元', 'Java核心技术 299元', 'C++核心技术 299元', 'C#核心技术 299元', 'PHP核心技术 299元', 'Swift', 'Kotlin核心技术 299元', 'Dart核心技术 299元', 'Flutter核心技术 299元', 'Rust核心技术 299元', 'Go核心技术 299元', 'Scala核心技术 299元', 'Haskell核心技术', 'R核心技术 299元', 'MATLAB核心技术 299元', 'Julia核心技术 299元', 'Perl核心技术 299元', 'Ruby核心技术 299元', 'Scala核心技术 299元']
+
+        let input = document.getElementsByClassName('inputword')[0];
+        let show = document.getElementById('show');
+
+        input.onkeyup = function () {
+            show.style.display = 'block';
+            let str = '';
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].indexOf(input.value) != -1) {
+                    str = str + '<p>' + data[i] + '</p>';
+                }
+            }
+            if (!input.value || !str || str == ' ') {
+                show.innerHTML = '<p>暂无数据</p>';
+
+            }
+            else {
+                show.innerHTML = str;
+            }
+
+        }
+
+        input.onblur = function () {
+            show.style.display = 'none';
+            input.value = '';
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from www.w3school.com.cn/demo/bs/bs_flex-align-items.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:10 GMT -->
+<head>
+  <title>Bootstrap 5 实例</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../../lib/bs/bootstrap.css" rel="stylesheet">
+  <script src="../../lib/bs/bootstrap.js"></script>
+  <link href="../../lib/css/w3.css" rel="stylesheet">
+	<style>
+	/* 设置 active 类和鼠标悬停按钮的样式 */
+	.wrapbtn, .alignbtn, .alignitbtn, .alignselfbtn {
+	  background-color:#E7E9EB!important;
+	}
+	.wrapbtnactive, .wrapbtn:hover,
+	.alignactive, .alignbtn:hover,
+	.alignitactive, .alignitbtn:hover,
+	.alignselfactive, .alignselfbtn:hover {
+		background-color: #666!important ;
+		color: white!important;
+	}
+	.w3-responsive .w3-btn {
+	  padding:2px 16px;
+	}
+	.topnav .w3-bar a[href^="/bootstrap/bootstrap_ver.asp"] {
+	  background-color: #04AA6D !important;
+	}
+	.btnsmall {
+	  text-decoration:none!important;
+	}
+	</style>
+</head>
+
+<body style="background-color: #FCFDF8;">
+
+<div id="alignitDiv" style="margin: 15px;">
+<button class="btn alignitbtn alignitactive" onclick="alignitStartFunc()">align-items-start</button>
+<button class="btn alignitbtn" onclick="alignitEndFunc()">align-items-end</button>
+<button class="btn alignitbtn" onclick="alignitCenterFunc()">align-items-center</button><br>
+<button class="btn alignitbtn" onclick="alignitBaseFunc()" style="margin-top: 10px">align-items-baseline</button>
+<button class="btn alignitbtn" onclick="alignitStretchFunc()" style="margin-top: 10px">align-items-stretch</button>
+</div>
+
+<script>
+// 将 active 类添加到当前按钮（突出显示）
+var header = document.getElementById("alignitDiv");
+var btns = header.getElementsByClassName("alignitbtn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("alignitactive");
+    current[0].className = current[0].className.replace(" alignitactive", "");
+    this.className += " alignitactive";
+  });
+}
+</script>
+<script>
+function alignitStartFunc() {
+document.getElementById("myAlignitDIV").className = "d-flex align-items-start bg-light mb-2 mt-2";
+}
+function alignitEndFunc() {
+document.getElementById("myAlignitDIV").className = "d-flex align-items-end bg-light mb-2 mt-2";
+}
+
+function alignitCenterFunc() {
+document.getElementById("myAlignitDIV").className = "d-flex align-items-center bg-light mb-2 mt-2";
+}
+function alignitBaseFunc() {
+document.getElementById("myAlignitDIV").className = "d-flex align-items-baseline bg-light mb-2 mt-2";
+}
+function alignitStretchFunc() {
+document.getElementById("myAlignitDIV").className = "d-flex align-items-stretch bg-light mb-2 mt-2";
+}
+</script>
+
+<div class="w3-white notranslate w3-padding xw3-hide-small">
+<div class="d-flex align-items-start mb-2 mt-2 bg-light" id="myAlignitDIV" style="height:150px">
+    <div class="p-2 border">Flex item 1</div>
+    <div class="p-2 border">Flex item 2</div>
+    <div class="p-2 border">Flex item 3</div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/demo/bs/bs_flex-align-items.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:10 GMT -->
+</html>

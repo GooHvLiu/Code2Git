@@ -1,0 +1,248 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/angular/ng_ng-focus.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:19:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>AngularJS ng-focus 指令</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>教程</h2>
+<ul>
+<li><a href="index.html" title="AngularJS 教程">AngularJS 教程</a></li>
+<li><a href="angular_intro.html" title="AngularJS 简介">AngularJS 简介</a></li>
+<li><a href="angular_expressions.html" title="AngularJS 表达式">AngularJS 表达式</a></li>
+<li><a href="angular_modules.html" title="AngularJS 模块">AngularJS 模块</a></li>
+<li><a href="angular_directives.html" title="AngularJS 指令">AngularJS 指令</a></li>
+<li><a href="angular_model.html" title="AngularJS 模型">AngularJS 模型</a></li>
+<li><a href="angular_databinding.html" title="AngularJS 数据绑定">AngularJS 数据绑定</a></li>
+<li><a href="angular_controllers.html" title="AngularJS 控制器">AngularJS 控制器</a></li>
+<li><a href="angular_scopes.html" title="AngularJS 作用域">AngularJS 作用域</a></li>
+<li><a href="angular_filters.html" title="AngularJS 过滤器">AngularJS 过滤器</a></li>
+<li><a href="angular_services.html" title="AngularJS 服务">AngularJS 服务</a></li>
+<li><a href="angular_http.html" title="AngularJS Http">AngularJS Http</a></li>
+<li><a href="angular_tables.html" title="AngularJS 表格">AngularJS 表格</a></li>
+<li><a href="angular_select.html" title="AngularJS 选择">AngularJS 选择</a></li>
+<li><a href="angular_sql.html" title="AngularJS SQL">AngularJS SQL</a></li>
+<li><a href="angular_htmldom.html" title="AngularJS DOM">AngularJS DOM</a></li>
+<li><a href="angular_events.html" title="AngularJS 事件">AngularJS 事件</a></li>
+<li><a href="angular_forms.html" title="AngularJS 表单">AngularJS 表单</a></li>
+<li><a href="angular_validation.html" title="AngularJS 验证">AngularJS 验证</a></li>
+<li><a href="angular_api.html" title="AngularJS API">AngularJS API</a></li>
+<li><a href="angular_includes.html" title="AngularJS 包含">AngularJS 包含</a></li>
+<li><a href="angular_animations.html" title="AngularJS 动画">AngularJS 动画</a></li>
+<li><a href="angular_routing.html" title="AngularJS 路由">AngularJS 路由</a></li>
+<li><a href="angular_application.html" title="AngularJS 应用程序">AngularJS 应用程序</a></li>
+</ul>
+<h2>实例</h2>
+<ul>
+<li><a href="angular_examples.html" title="AngularJS 实例">AngularJS 实例</a></li>
+</ul>
+<h2>参考手册</h2>
+<ul>
+<li><a href="angular_ref_directives.html" title="AngularJS 参考手册">AngularJS 参考手册</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>AngularJS ng-focus 指令</h1>
+
+<div class="backtoreference">
+<p><a href="angular_ref_directives.html">AngularJS 参考手册</a></p>
+</div>
+
+
+
+<section>
+<h2>定义和用法</h2>
+
+<p><code>ng-focus</code> 指令告诉 AngularJS 当 HTML 元素获得焦点时要做什么。</p>
+
+<p>AngularJS 的 <code>ng-focus</code> 指令不会覆盖元素的原始 onfocus 事件，两者都会被执行。</p>
+</section>
+
+
+
+<section>
+<h2>实例</h2>
+
+<p>当输入字段获得焦点时执行表达式：</p>
+
+<pre class="language-html">
+&lt;input ng-focus=&quot;count = count + 1&quot; ng-init=&quot;count=0&quot; /&gt;
+
+&lt;h1&gt;{{count}}&lt;/h1&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t1fa3.html?f=angular_ng-focus">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>语法</h2>
+
+<pre class="language-html">
+&lt;<i>element</i> ng-focus=&quot;<i>expression</i>&quot;&gt;&lt;/<i>element</i>&gt;
+</pre>
+
+<p>受 <code>&lt;a&gt;</code>、<code>&lt;input&gt;</code>、<code>&lt;select&gt;</code>、<code>&lt;textarea&gt;</code> 和 window 对象支持。</p>
+
+<h3>参数</h3>
+
+<table class="parameter">
+<tr>
+<th style="width: 25%;">参数</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><i>expression</i></td>
+<td>当元素获得焦点时执行的表达式。</td>
+</tr>
+</table>
+</section>
+
+
+
+<div class="backtoreference">
+<p><a href="angular_ref_directives.html">AngularJS 参考手册</a></p>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="angular_ref_directives.html">AngularJS 参考手册</a></h5>
+<h5 id="tools_example"><a href="angular_examples.html">AngularJS 实例</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/angular/ng_ng-focus.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:19:08 GMT -->
+</html>

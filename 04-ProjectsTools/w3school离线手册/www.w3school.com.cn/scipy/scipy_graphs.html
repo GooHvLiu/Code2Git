@@ -1,0 +1,423 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/scipy/scipy_graphs.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:55:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>SciPy 图</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>SciPy 教程</h2>
+<ul>
+<li><a href="index.html" title="SciPy 教程">SciPy 教程</a></li>
+<li><a href="scipy_intro.html" title="SciPy 介绍">SciPy 介绍</a></li>
+<li><a href="scipy_getting_started.html" title="SciPy 入门">SciPy 入门</a></li>
+<li><a href="scipy_constants.html" title="SciPy 常量">SciPy 常量</a></li>
+<li><a href="scipy_optimizers.html" title="SciPy 优化器">SciPy 优化器</a></li>
+<li><a href="scipy_sparse_data.html" title="SciPy 稀疏数据">SciPy 稀疏数据</a></li>
+<li class="currentLink"><a href="scipy_graphs.html" title="SciPy 图表">SciPy 图表</a></li>
+<li><a href="scipy_spatial_data.html" title="SciPy 空间数据">SciPy 空间数据</a></li>
+<li><a href="scipy_matlab_arrays.html" title="SciPy Matlab 数组">SciPy Matlab 数组</a></li>
+<li><a href="scipy_interpolation.html" title="SciPy 插值">SciPy 插值</a></li>
+<li><a href="scipy_statistical_significance_tests.html" title="SciPy 显著性检验">SciPy 显著性检验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>SciPy 图</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="scipy_sparse_data.html" title="SciPy 稀疏数据">SciPy 稀疏数据</a></li>
+<li class="next"><a href="scipy_spatial_data.html" title="SciPy 空间数据">SciPy 空间数据</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>使用图</h2>
+
+<p>图是基本的数据结构。</p>
+
+<p>SciPy 提供了 <code>scipy.sparse.csgraph</code> 模块来处理此类数据结构。</p>
+</section>
+
+
+
+<section>
+<h2>邻接矩阵</h2>
+
+<p>邻接矩阵是一个 <code>nxn</code> 矩阵，其中 n 是图中元素的数量。</p>
+
+<p>值表示元素之间的联系。</p>
+
+<h3>例如：</h3>
+
+<img src="../i/scipy/scipy_graph.png">
+
+<p>对于具有元素 A、B 和 C 的图，连接是：</p>
+
+<p>A 和 B 之间的权重为 1。</p>
+
+<p>A 和 C 之间的权重为 2。</p>
+
+<p>C 和 B 之间没有连接。</p>
+
+<p>邻接矩阵将如下所示：</p>
+
+<pre class="cmdline">
+  A B C
+A:[0 1 2]  
+B:[1 0 0]
+C:[2 0 0]
+</pre>
+
+<p>下面是使用邻接矩阵的一些最常用的方法。</p>
+</section>
+
+
+
+<section>
+<h2>连通分量</h2>
+
+<p>使用 <code>connected_components()</code> 方法查找所有连通分量。</p>
+
+<h3>实例</h3>
+
+<pre class="language-python">
+import numpy as np
+from scipy.sparse.csgraph import connected_components
+from scipy.sparse import csr_matrix
+
+arr = np.array([
+  [0, 1, 2],
+  [1, 0, 0],
+  [2, 0, 0]
+])
+
+newarr = csr_matrix(arr)
+
+print(connected_components(newarr))
+</pre>
+
+<p class="tiy"><a target="_blank" href="t4fb4.html?f=scipy_graphs_connected_components">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>Dijkstra</h2>
+
+<p>使用 <code>dijkstra</code> 方法在图中查找从一个元素到另一个元素的最短路径。</p>
+
+<p>它接受以下参数：</p>
+
+<ol>
+<li><em>return_predecessors</em>: 布尔值（如果为 True，则返回遍历的完整路径，否则为 False）。</li>
+<li><em>indices</em>: 仅返回从该元素的所有路径的索引。</li>
+<li><em>limit</em>: 路径的最大权重。</li>
+</ol>
+
+<h3>实例</h3>
+
+<p>求从元素 1 到元素 2 的最短路径：</p>
+
+<pre class="language-python">
+import numpy as np
+from scipy.sparse.csgraph import dijkstra
+from scipy.sparse import csr_matrix
+
+arr = np.array([
+  [0, 1, 2],
+  [1, 0, 0],
+  [2, 0, 0]
+])
+
+newarr = csr_matrix(arr)
+
+print(dijkstra(newarr, return_predecessors=True, indices=0))
+</pre>
+
+<p class="tiy"><a target="_blank" href="t4f6d.html?f=scipy_graphs_dijkstra">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>Floyd Warshall</h2>
+
+<p>使用 <code>floyd_warshall()</code> 方法查找所有元素对之间的最短路径。</p>
+
+<h3>实例</h3>
+
+<p>查找所有元素对之间的最短路径：</p>
+
+<pre class="language-python">
+import numpy as np
+from scipy.sparse.csgraph import floyd_warshall
+from scipy.sparse import csr_matrix
+
+arr = np.array([
+  [0, 1, 2],
+  [1, 0, 0],
+  [2, 0, 0]
+])
+
+newarr = csr_matrix(arr)
+
+print(floyd_warshall(newarr, return_predecessors=True))
+</pre>
+
+<p class="tiy"><a target="_blank" href="te08e.html?f=scipy_graphs_floyd_warshall">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>Bellman Ford</h2>
+
+<p><code>bellman_ford()</code> 方法也可以查找所有元素对之间的最短路径，但此方法也可以处理负权重。</p>
+
+<h3>实例</h3>
+
+<p>使用给定的负权重图查找从元素 1 到元素 2 的最短路径：</p>
+
+<pre class="language-python">
+import numpy as np
+from scipy.sparse.csgraph import bellman_ford
+from scipy.sparse import csr_matrix
+
+arr = np.array([
+  [0, -1, 2],
+  [1, 0, 0],
+  [2, 0, 0]
+])
+
+newarr = csr_matrix(arr)
+
+print(bellman_ford(newarr, return_predecessors=True, indices=0))
+</pre>
+
+<p class="tiy"><a target="_blank" href="t433c.html?f=scipy_graphs_bellman_ford">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>深度优先顺序（Depth First Order）</h2>
+
+<p><code>depth_first_order()</code> 方法返回节点的深度优先遍历。</p>
+
+<p>此函数接受以下参数：</p>
+
+<ol>
+<li>图。</li>
+<li>从哪个元素开始遍历图。</li>
+</ol>
+
+<h3>实例</h3>
+
+<p>对于给定的邻接矩阵，以深度优先方式遍历图：</p>
+
+<pre class="language-python">
+import numpy as np
+from scipy.sparse.csgraph import depth_first_order
+from scipy.sparse import csr_matrix
+
+arr = np.array([
+  [0, 1, 0, 1],
+  [1, 1, 1, 1],
+  [2, 1, 1, 0],
+  [0, 1, 0, 1]
+])
+
+newarr = csr_matrix(arr)
+
+print(depth_first_order(newarr, 1))
+</pre>
+
+<p class="tiy"><a target="_blank" href="taccf.html?f=scipy_graphs_depth_first_order">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>广度优先顺序（Breadth First Order）</h2>
+
+<p><code>breadth_first_order()</code> 方法返回一个节点的广度优先遍历。</p>
+
+<p>此函数接受以下参数：</p>
+
+<ol>
+<li>图。</li>
+<li>从哪个元素开始遍历图。</li>
+</ol>
+
+<h3>实例</h3>
+
+<p>对于给定的邻接矩阵，以广度优先方式遍历图：</p>
+
+<pre class="language-python">
+import numpy as np
+from scipy.sparse.csgraph import breadth_first_order
+from scipy.sparse import csr_matrix
+
+arr = np.array([
+  [0, 1, 0, 1],
+  [1, 1, 1, 1],
+  [2, 1, 1, 0],
+  [0, 1, 0, 1]
+])
+
+newarr = csr_matrix(arr)
+
+print(breadth_first_order(newarr, 1))
+</pre>
+
+<p class="tiy"><a target="_blank" href="t9063.html?f=scipy_graphs_breadth_first_order">亲自试一试</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="scipy_sparse_data.html" title="SciPy 稀疏数据">SciPy 稀疏数据</a></li>
+<li class="next"><a href="scipy_spatial_data.html" title="SciPy 空间数据">SciPy 空间数据</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/scipy/scipy_graphs.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:55:22 GMT -->
+</html>

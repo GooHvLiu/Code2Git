@@ -1,0 +1,428 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/go/go_variables.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:01:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Go 变量</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Go 教程</h2>
+<ul>
+<li><a href="index.html" title="Go 教程">Go 教程</a></li>
+<li><a href="go_introduction.html" title="Go 简介">Go 简介</a></li>
+<li><a href="go_getting_started.html" title="Go 入门">Go 入门</a></li>
+<li><a href="go_syntax.html" title="Go 语法">Go 语法</a></li>
+<li><a href="go_comments.html" title="Go 注释">Go 注释</a></li>
+<li class="currentLink"><a href="go_variables.html" title="Go 变量">Go 变量</a></li>
+<li><a href="go_variable_multi.html" title="Go 声明多变量">Go 声明多变量</a></li>
+<li><a href="go_variable_naming_rules.html" title="Go 变量命名规则">Go 变量命名规则</a></li>
+<li><a href="go_constants.html" title="Go 常量">Go 常量</a></li>
+<li><a href="go_output.html" title="Go 输出">Go 输出</a></li>
+<li><a href="go_formatting_verbs.html" title="Go 格式化动词">Go 格式化动词</a></li>
+<li><a href="go_data_types.html" title="Go 数据类型">Go 数据类型</a></li>
+<li><a href="go_boolean_data_type.html" title="Go 布尔数据类型">Go 布尔</a></li>
+<li><a href="go_integer_data_type.html" title="Go 整数数据类型">Go 整数</a></li>
+<li><a href="go_float_data_type.html" title="Go 浮点数据类型">Go 浮点</a></li>
+<li><a href="go_string_data_type.html" title="Go 字符串数据类型">Go 字符串</a></li>
+<li><a href="go_arrays.html" title="Go 数组">Go 数组</a></li>
+<li><a href="go_slices.html" title="Go 创建切片">Go 创建切片</a></li>
+<li><a href="go_slices_modify.html" title="Go 修改切片">Go 修改切片</a></li>
+<li><a href="go_operators.html" title="Go 运算符">Go 运算符</a></li>
+<li><a href="go_conditions.html" title="Go 条件语句">Go 条件语句</a></li>
+<li><a href="go_if_statement.html" title="Go if 语句">Go if 语句</a></li>
+<li><a href="go_else_statement.html" title="Go if else 语句">Go if else 语句</a></li>
+<li><a href="go_elseif_statement.html" title="Go else if 语句">Go else if 语句</a></li>
+<li><a href="go_nested_if.html" title="Go 嵌套 if 语句">Go 嵌套 if 语句</a></li>
+<li><a href="go_switch.html" title="Go Switch 语句">Go Switch</a></li>
+<li><a href="go_loops.html" title="Go 循环">Go 循环</a></li>
+<li><a href="go_functions.html" title="Go 函数">Go 函数</a></li>
+<li><a href="go_function_parameters.html" title="Go 函数参数">Go 函数参数</a></li>
+<li><a href="go_function_returns.html" title="Go 函数返回">Go 函数返回</a></li>
+<li><a href="go_function_recursion.html" title="Go 递归函数">Go 递归函数</a></li>
+<li><a href="go_struct.html" title="Go 结构体">Go 结构体</a></li>
+<li><a href="go_maps.html" title="Go 映射">Go 映射</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Go 变量</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="go_comments.html" title="Go 注释">Go 注释</a></li>
+<li class="next"><a href="go_variable_multi.html" title="Go 声明多变量">Go 声明多变量</a></li>
+</ul>
+</div>
+
+
+
+<section id="intro">
+<p>变量是存储数据值的容器。</p>
+</section>
+
+
+
+<section>
+<h2>Go 变量类型</h2>
+
+<p>在 Go 中，存在不同<em>类型</em>的变量，例如：</p>
+
+<ul>
+<li><code>int</code> - 存储整数（整数值），如 123 或 -123</li>
+<li><code>float32</code> - 存储带有小数的浮点数，如 19.99 或 -19.99</li>
+<li><code>string</code> - 存储文本，如 &quot;Hello World&quot;。字符串值被双引号包围</li>
+<li><code>bool</code> - 存储两个状态的值：true 或 false</li>
+</ul>
+
+<p>关于不同的变量类型，将在 <a href="go_data_types.html" title="Go 数据类型">Go 数据类型</a> 一章中为您解释。</p>
+</section>
+
+
+
+<section>
+<h2>声明（创建）变量</h2>
+
+<p>在 Go 中，有两种声明变量的方法：</p>
+
+<h3>1. 使用 var 关键字：</h3>
+
+<p>使用 <code>var</code> 关键字，后跟变量名称和类型：</p>
+
+<h4>语法</h4>
+
+<pre class="language-go">
+var <i>variablename</i> <i>type</i> = <i>value</i>
+</pre>
+
+<p class="note"><span>注意：</span>您必须始终指定类型或值（或两者都指定）。</p>
+
+<h3>2. 使用 := 符号：</h3>
+
+<p>使用 <code>:=</code> 符号，后跟变量值：</p>
+
+<h4>语法</h4>
+
+<pre class="language-go">
+<i>variablename</i> := <i>value</i>
+</pre>
+
+<p class="note"><span>注意：</span>在这种情况下，变量的类型从值中<em>推断</em>出来（这意味着编译器基于值来决定变量的类型）。</p>
+
+<p class="note"><span>注意：</span>不可能只使用 <code>:=</code> 声明变量而不为其分配值。</p>
+</section>
+
+
+
+<section>
+<h2>带有初始值的变量声明</h2>
+
+<p>如果从一开始就知道变量的值，您可以在一行中声明变量并为其分配值：</p>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var student1 string = &quot;Bill&quot; // 类型是字符串
+  var student2 = &quot;Jane&quot; // 类型可推断
+  x := 2 // 类型可推断
+
+  fmt.Println(student1)
+  fmt.Println(student2)
+  fmt.Println(x)
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t922f.html?f=go_variable_declaration_1">亲自试一试</a></p>
+
+<p class="note"><span>注意：</span><code>student2</code> 和 <code>x</code> 的变量类型可以从它们的值中<em>推断</em>出来。</p>
+</section>
+
+
+
+<section>
+<h2>没有初始值的变量声明</h2>
+
+<p>在 Go 中，所有变量都会被初始化。因此，如果您声明了一个没有初始值的变量，其值将被设置为其类型的默认值：</p>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var a string
+  var b int
+  var c bool
+
+  fmt.Println(a)
+  fmt.Println(b)
+  fmt.Println(c)
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t9654.html?f=go_variable_declaration_2">亲自试一试</a></p>
+
+<h3>例子解释</h3>
+
+<p>在这个例子中有 3 个变量：</p>
+
+<ul>
+<li><code>a</code></li>
+<li><code>b</code></li>
+<li><code>c</code></li>
+</ul>
+
+<p>这些变量已声明，但尚未分配初始值。</p>
+
+<p>通过运行代码，我们可以看到它们已经有了各自类型的默认值：</p>
+
+<ul>
+<li><code>a</code> 是 <code>&quot;&quot;</code></li>
+<li><code>b</code> 是 <code>0</code></li>
+<li><code>c</code> 是 <code>false</code></li>
+</ul>
+</section>
+
+
+
+<section>
+<h2>声明后赋值</h2>
+
+<p>可以在声明变量后为其分配值。这对于初始值未知的情况很有帮助。</p>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var student1 string
+  student1 = &quot;Bill&quot;
+  fmt.Println(student1)
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t3f45.html?f=go_variable_declaration_3">亲自试一试</a></p>
+
+<p class="note"><span>注意：</span>不可能只使用 <code>:=</code> 声明变量而不为其分配值。</p>
+</section>
+
+
+
+<section>
+<h2>var 和 := 之间的区别</h2>
+
+<p><code>var</code> 与 <code>:=</code> 之间有一些细微的差别：</p>
+
+<table class="ref">
+<tr>
+<th>var</th>
+<th>:=</th>
+</tr>
+
+<tr>
+<td>可以在函数<em>内部</em>和<em>外部</em>使用</td>
+<td>只能在函数<em>内部</em>使用</td>
+</tr>
+
+<tr>
+<td>变量声明和赋值<em>可以分开进行</em></td>
+<td>变量声明和赋值<em>不能分开进行</em>（必须在同一行完成）</td>
+</tr>
+</table>
+
+<h3>实例</h3>
+
+<p>此例展示了如何在函数外部使用 <code>var</code> 关键字声明变量：</p>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+var a int
+var b int = 2
+var c = 3
+
+func main() {
+  a = 1
+  fmt.Println(a)
+  fmt.Println(b)
+  fmt.Println(c)
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t0d04.html?f=go_variable_declaration_4">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p>由于 <code>:=</code> 在函数外部使用，因此运行程序会导致错误。</p>
+
+<pre class="language-go err">
+package main
+import (&quot;fmt&quot;)
+
+a := 1
+
+func main() {
+  fmt.Println(a)
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+./prog.go:5:1: 语法错误：非声明语句在函数体外部
+</pre>
+
+<p class="tiy"><a target="_blank" href="t06b5.html?f=go_variable_declaration_5">亲自试一试</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="go_comments.html" title="Go 注释">Go 注释</a></li>
+<li class="next"><a href="go_variable_multi.html" title="Go 声明多变量">Go 声明多变量</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/go/go_variables.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:01:26 GMT -->
+</html>

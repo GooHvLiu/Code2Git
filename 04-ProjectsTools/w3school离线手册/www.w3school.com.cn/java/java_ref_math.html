@@ -1,0 +1,588 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/java/java_ref_math.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:38:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Java Math 方法</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Java 教程</h2>
+<ul>
+<li><a href="index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="java_intro.html" title="Java 简介">Java 简介</a></li>
+<li><a href="java_getstarted.html" title="Java 入门">Java 入门</a></li>
+<li><a href="java_syntax.html" title="Java 语法">Java 语法</a></li>
+<li><a href="java_output.html" title="Java 输出 / 打印">Java 输出</a></li>
+<li><a href="java_comments.html" title="Java 注释">Java 注释</a></li>
+<li><a href="java_variables.html" title="Java 变量">Java 变量</a></li>
+<li><a href="java_data_types.html" title="Java 数据类型">Java 数据类型</a></li>
+<li><a href="java_type_casting.html" title="Java 类型转换">Java 类型转换</a></li>
+<li><a href="java_operators.html" title="Java 运算符">Java 运算符</a></li>
+<li><a href="java_strings.html" title="Java 字符串">Java 字符串</a></li>
+<li><a href="java_math.html" title="Java 数学">Java 数学</a></li>
+<li><a href="java_booleans.html" title="Java 布尔">Java 布尔</a></li>
+<li><a href="java_conditions.html" title="Java If...Else">Java If...Else</a></li>
+<li><a href="java_switch.html" title="Java Switch">Java Switch</a></li>
+<li><a href="java_while_loop.html" title="Java While 循环">Java While 循环</a></li>
+<li><a href="java_for_loop.html" title="Java For 循环">Java For 循环</a></li>
+<li><a href="java_break.html" title="Java Break 和 Continue">Java Break/Continue</a></li>
+<li><a href="java_arrays.html" title="Java 数组">Java 数组</a></li>
+</ul>
+<h2>Java 方法</h2>
+<ul>
+<li><a href="java_methods.html" title="Java 方法">Java 方法</a></li>
+<li><a href="java_methods_param.html" title="Java 方法参数">Java 方法参数</a></li>
+<li><a href="java_methods_overloading.html" title="Java 方法重载">Java 方法重载</a></li>
+<li><a href="java_scope.html" title="Java 作用域">Java 作用域</a></li>
+<li><a href="java_recursion.html" title="Java 递归">Java 递归</a></li>
+</ul>
+<h2>Java 类</h2>
+<ul>
+<li><a href="java_oop.html" title="Java OOP">Java OOP</a></li>
+<li><a href="java_classes.html" title="Java 类/对象">Java 类/对象</a></li>
+<li><a href="java_class_attributes.html" title="Java 类属性">Java 类属性</a></li>
+<li><a href="java_class_methods.html" title="Java 类方法">Java 类方法</a></li>
+<li><a href="java_constructors.html" title="Java 构造函数">Java 构造函数</a></li>
+<li><a href="java_modifiers.html" title="Java 修饰符">Java 修饰符</a></li>
+<li><a href="java_encapsulation.html" title="Java 封装">Java 封装</a></li>
+<li><a href="java_packages.html" title="Java 包">Java 包 / API</a></li>
+<li><a href="java_inheritance.html" title="Java 继承">Java 继承</a></li>
+<li><a href="java_polymorphism.html" title="Java 多态">Java 多态</a></li>
+<li><a href="java_inner_classes.html" title="Java 内部类">Java 内部类</a></li>
+<li><a href="java_abstract.html" title="Java 抽象">Java 抽象</a></li>
+<li><a href="java_interface.html" title="Java 接口">Java 接口</a></li>
+<li><a href="java_enums.html" title="Java 枚举">Java 枚举</a></li>
+<li><a href="java_user_input.html" title="Java 用户输入">Java 用户输入</a></li>
+<li><a href="java_date.html" title="Java 日期">Java 日期</a></li>
+</ul>
+<h2>Java 数据结构</h2>
+<ul>
+<li><a href="java_arraylist.html" title="Java ArrayList">Java ArrayList</a></li>
+<li><a href="java_linkedlist.html" title="Java LinkedList">Java LinkedList</a></li>
+<li><a href="java_sort_list.html" title="Java 列表排序">Java 列表排序</a></li>
+<li><a href="java_hashmap.html" title="Java HashMap">Java HashMap</a></li>
+<li><a href="java_hashset.html" title="Java HashSet">Java HashSet</a></li>
+<li><a href="java_iterator.html" title="Java 迭代器">Java 迭代器</a></li>
+<li><a href="java_wrapper_classes.html" title="Java 包装类">Java 包装类</a></li>
+</ul>
+<h2>Java 高级</h2>
+<ul>
+<li><a href="java_try_catch.html" title="Java 异常">Java 异常</a></li>
+<li><a href="java_regex.html" title="Java RegEx">Java RegEx</a></li>
+<li><a href="java_threads.html" title="Java 线程">Java 线程</a></li>
+<li><a href="java_lambda.html" title="Java Lambda">Java Lambda</a></li>
+<li><a href="java_advanced_sorting.html" title="Java 高级排序（Comparator 和 Comparable）">Java 高级排序</a></li>
+</ul>
+<h2>Java 文件处理</h2>
+<ul>
+<li><a href="java_files.html" title="Java 文件">Java 文件</a></li>
+<li><a href="java_files_create.html" title="Java 创建/写入文件">Java 创建/写入文件</a></li>
+<li><a href="java_files_read.html" title="Java 读取文件">Java 读取文件</a></li>
+<li><a href="java_files_delete.html" title="Java 删除文件">Java 删除文件</a></li>
+</ul>
+<h2>Java 案例</h2>
+<ul>
+<li><a href="java_howto_add_two_numbers.html" title="Java 如何对两个数字相加">两个数字相加</a></li>
+<li><a href="java_howto_count_words.html" title="Java 如何统计字数">统计字数</a></li>
+<li><a href="java_howto_reverse_string.html" title="Java 如何反转字符串">反转字符串</a></li>
+<li><a href="java_howto_sum_of_array_elements.html" title="Java 如何计算数组元素的和">计算数组元素的和</a></li>
+<li><a href="java_howto_string_to_array.html" title="Java 如何将字符串转换为数组">将字符串转换为数组</a></li>
+<li><a href="java_howto_sort_an_array.html" title="Java 如何排序数组">排序数组</a></li>
+<li><a href="java_howto_calculate_avg_array.html" title="Java 如何计算数组元素的平均值">计算数组元素的平均值</a></li>
+<li><a href="java_howto_find_smallest_array_el.html" title="Java 如何找到数组中的最小元素">找到数组中的最小元素</a></li>
+<li><a href="java_howto_loop_through_arraylist.html" title="Java 如何遍历 ArrayList">遍历 ArrayList</a></li>
+<li><a href="java_howto_loop_through_hashmap.html" title="Java 如何遍历 HashMap">遍历 HashMap</a></li>
+<li><a href="java_howto_loop_through_enum.html" title="Java 如何遍历枚举">遍历枚举</a></li>
+<li><a href="java_howto_area_of_rectangle.html" title="Java 如何计算矩形的面积">计算矩形的面积</a></li>
+<li><a href="java_howto_even_or_odd.html" title="Java 如何判断数字的奇偶性">判断数字的奇偶性</a></li>
+<li><a href="java_howto_pos_or_neg.html" title="Java 如何判断数字的正负">判断数字的正负</a></li>
+<li><a href="java_howto_find_square_root.html" title="Java 如何求一个数的平方根">求一个数的平方根</a></li>
+<li><a href="java_howto_random_number.html" title="Java 如何生成随机数">生成随机数</a></li>
+</ul>
+<h2>Java 参考手册</h2>
+<ul>
+<li><a href="java_reference.html" title="Java 参考手册">Java 参考手册</a></li>
+<li><a href="java_ref_keywords.html" title="Java 关键字">Java 关键字</a></li>
+<li><a href="java_ref_string.html" title="Java String 方法">Java String 方法</a></li>
+<li class="currentLink"><a href="java_ref_math.html" title="Java Math 方法">Java Math 方法</a></li>
+<li><a href="java_ref_output.html" title="Java Output 方法">Java Output 方法</a></li>
+<li><a href="java_ref_arrays.html" title="Java Arrays 方法">Java Arrays 方法</a></li>
+<li><a href="java_ref_arraylist.html" title="Java ArrayList 方法">Java ArrayList 方法</a></li>
+<li><a href="java_ref_linkedlist.html" title="Java LinkedList 方法">Java LinkedList 方法</a></li>
+<li><a href="java_ref_hashmap.html" title="Java HashMap 方法">Java HashMap 方法</a></li>
+<li><a href="java_ref_scanner.html" title="Java Scanner 方法">Java Scanner 方法</a></li>
+<li><a href="java_ref_iterators.html" title="Java Iterator 方法">Java Iterator 方法</a></li>
+<li><a href="java_ref_errors.html" title="Java 错误和异常类型">Java 错误和异常</a></li>
+</ul>
+<h2>Java 实例</h2>
+<ul>
+<li><a href="java_examples.html" title="Java 实例">Java 实例</a></li>
+<li><a href="java_quiz.html" title="Java 测验">Java 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Java Math 方法</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="java_ref_string.html" title="Java String 方法">Java String 方法</a></li>
+<li class="next"><a href="java_ref_output.html" title="Java Output 方法">Java Output 方法</a></li>
+</ul>
+</div>
+
+
+
+<div>
+<p>Java Math 类提供许多方法可以让您对数字执行数学任务。</p>
+</div>
+
+
+
+<div>
+<h2>所有数学方法</h2>
+
+<p>下表列出了所有数学方法：</p>
+
+<table class="definition-usage">
+<tr>
+<th style="width: 25%;">方法</th>
+<th>描述</th>
+<th>返回类型</th>
+</tr>
+
+<tr>
+<td><a href="ref_math_abs.html" title="Java Math abs() 方法">abs(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的绝对值。</td>
+<td>double|float|int|long</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_acos.html" title="Java Math acos() 方法">acos(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的反余弦值，以弧度为单位。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_addexact.html" title="Java Math addExact() 方法">addExact(<i>x</i>, <i>y</i>)</a></td>
+<td>返回 <i>x</i> 和 <i>y</i> 的和。</td>
+<td>int|long</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_asin.html" title="Java Math asin() 方法">asin(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的反正弦，以弧度为单位。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_atan.html" title="Java Math atan() 方法">atan(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的反正切值，以 -PI/2 和 PI/2 弧度之间的数值。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_atan2.html" title="Java Math atan2() 方法">atan2(<i>y</i>,<i>x</i>)</a></td>
+<td>返回从直角坐标 (<i>x</i>, <i>y</i>) 转换为极坐标 (r, theta) 的角度 theta。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_cbrt.html" title="Java Math cbrt() 方法">cbrt(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的立方根。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_ceil.html" title="Java Math ceil() 方法">ceil(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的值向上舍入到最接近的整数。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_copysign.html" title="Java Math copySign() 方法">copySign(<i>x</i>, <i>y</i>)</a></td>
+<td>返回第二个浮点 <i>y</i> 的符号和第一个浮点 <i>x</i>。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_cos.html" title="Java Math cos() 方法">cos(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的余弦值（<i>x</i> 以弧度为单位）。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_cosh.html" title="Java Math cosh() 方法">cosh(<i>x</i>)</a></td>
+<td>返回 double 值的双曲余弦值。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_decrementexact.html" title="Java Math decrementExact() 方法">decrementExact(<i>x</i>)</a></td>
+<td>返回 <i>x</i>-1。</td>
+<td>int|long</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_exp.html" title="Java Math exp() 方法">exp(<i>x</i>)</a></td>
+<td>返回 E<sup>x</sup> 的值。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_expm1.html" title="Java Math expm1() 方法">expm1(<i>x</i>)</a></td>
+<td>返回 e<sup>x</sup> -1。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_floor.html" title="Java Math floor() 方法">floor(<i>x</i>)</a></td>
+<td>返回向下舍入到最接近的整数的 <i>x</i> 的值。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_floordiv.html" title="Java Math floorDiv() 方法">floorDiv(<i>x</i>, <i>y</i>)</a></td>
+<td>返回 <i>x</i> 除以 <i>y</i> 向下取整的结果。</td>
+<td>int|long</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_floormod.html" title="Java Math floorMod() 方法">floorMod(<i>x</i>, <i>y</i>)</a></td>
+<td>返回 <i>x</i> 除以 <i>y</i> 的余数，其中除法结果已向下取整。</td>
+<td>int|long</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_getexponent.html" title="Java Math getExponent() 方法">getExponent(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 中使用的无偏指数（unbiased exponent）。</td>
+<td>int</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_hypot.html" title="Java Math hypot() 方法">hypot(<i>x</i>, <i>y</i>)</a></td>
+<td>返回没有中间溢出或下溢的 sqrt(<i>x</i><sup>2</sup> + <i>y</i><sup>2</sup>) 。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_ieeeremainder.html" title="Java Math IEEEremainder() 方法">IEEEremainder(<i>x</i>, <i>y</i>)</a></td>
+<td>规定计算 <i>x</i> 和 <i>y</i> 的余数运算，按照 IEEE 754 标准。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_incrementexact.html" title="Java Math incrementExact() 方法">incrementExact(<i>x</i>)</a></td>
+<td>返回 <i>x</i>+1</td>
+<td>int|double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_log.html" title="Java Math log() 方法">log(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的自然对数（以 E 为底）。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_log10.html" title="Java Math log10() 方法">log10(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的以 10 为底的对数。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_log1p.html" title="Java Math log1p() 方法">log1p(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 和 1 之和的自然对数（以 E 为底）。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_max.html" title="Java Math max() 方法">max(<i>x</i>, <i>y</i>)</a></td>
+<td>返回有最高值的数字。</td>
+<td>double|float|int|long</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_min.html" title="Java Math min() 方法">min(<i>x</i>, <i>y</i>)</a></td>
+<td>返回有最小值的数字。</td>
+<td>double|float|int|long</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_multiplyexact.html" title="Java Math multiplyExact() 方法">multiplyExact(<i>x</i>, <i>y</i>)</a></td>
+<td>返回 <i>x</i> 与 <i>y</i> 的乘积结果。</td>
+<td>int|long</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_negateexact.html" title="Java Math negateExact() 方法">negateExact(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的相反数。</td>
+<td>int|long</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_nextafter.html" title="Java Math nextAfter() 方法">nextAfter(<i>x</i>, <i>y</i>)</a></td>
+<td>返回 <i>y</i> 方向与 <i>x</i> 相邻的浮点数。</td>
+<td>double|float</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_nextdown.html" title="Java Math nextDown() 方法">nextDown(<i>x</i>)</a></td>
+<td>返回在负方向上与 <i>x</i> 相邻的浮点值。</td>
+<td>double|float</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_nextup.html" title="Java Math nextUp() 方法">nextUp(<i>x</i>)</a></td>
+<td>返回正无穷大方向上与 <i>x</i> 相邻的浮点值。</td>
+<td>double|float</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_pow.html" title="Java Math pow() 方法">pow(<i>x</i>, <i>y</i>)</a></td>
+<td>返回 <i>x</i> 的 <i>y</i> 次方的值。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_random.html" title="Java Math random() 方法">random()</a></td>
+<td>返回 0 到 1 之间的随机数。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_rint.html" title="Java Math rint() 方法">rint(<i>x</i>)</a></td>
+<td>返回最接近 <i>x</i> 且等于某个数学整数的双精度值。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_round.html" title="Java Math round() 方法">round(<i>x</i>)</a></td>
+<td>返回舍入到最接近整数的 <i>x</i> 的值。</td>
+<td>int</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_scalb.html" title="Java Math scalb() 方法">scalb(<i>x</i>, <i>y</i>)</a></td>
+<td>返回 <i>x</i> 乘以 2 的 <i>y</i> 次幂的结果。</td>
+<td>double|float</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_signum.html" title="Java Math signum() 方法">signum(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的符号。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_sin.html" title="Java Math sin() 方法">sin(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的正弦值（<i>x</i> 以弧度为单位）。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_sinh.html" title="Java Math sinh() 方法">sinh(<i>x</i>)</a></td>
+<td>返回双精度值的双曲正弦值。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_sqrt.html" title="Java Math sqrt() 方法">sqrt(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的平方根。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_subtractexact.html" title="Java Math subtractExact() 方法">subtractExact(<i>x</i>, <i>y</i>)</a></td>
+<td>返回 <i>x</i> 减去 <i>y</i> 的结果。</td>
+<td>int|long</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_tan.html" title="Java Math tan() 方法">tan(<i>x</i>)</a></td>
+<td>返回角度的正切。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_tanh.html" title="Java Math tanh() 方法">tanh(<i>x</i>)</a></td>
+<td>返回 double 值的双曲正切值。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_todegrees.html" title="Java Math toDegrees() 方法">toDegrees(<i>x</i>)</a></td>
+<td>将以弧度为单位的角度转换为近似值。以度为单位的等效角度。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_tointexact.html" title="Java Math toIntExact() 方法">toIntExact(<i>x</i>)</a></td>
+<td>将长整型值转换为整型。</td>
+<td>int</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_toradians.html" title="Java Math toRadians() 方法">toRadians(<i>x</i>)</a></td>
+<td>将以度为单位的角度转换为近似值。以弧度为单位的角度。</td>
+<td>double</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_ulp.html" title="Java Math ulp() 方法">ulp(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的最小精度单位 (ulp) 的大小。</td>
+<td>double|float</td>
+</tr>
+</table>
+
+<p class="note"><span>注意：</span>所有数学方法都是 <code>static</code>（静态的）。</p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="java_ref_string.html" title="Java String 方法">Java String 方法</a></li>
+<li class="next"><a href="java_ref_output.html" title="Java Output 方法">Java Output 方法</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="java_reference.html">Java 参考手册</a></h5>
+<h5 id="tools_example"><a href="java_examples.html">Java 实例</a></h5>
+<h5 id="tools_quiz"><a href="java_quiz.html">Java 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/java/java_ref_math.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:38:51 GMT -->
+</html>

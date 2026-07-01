@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  ;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #000;
+  color: #fff;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  background: url(../img/bg-01.jpg) no-repeat center center/cover;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  .annimated {
+    font-size: 2.3em;
+    background: url(../img/text-bg.jpg) no-repeat;
+    background-clip: text;
+    color: transparent;
+    animation: moveBy 10s linear infinite;
+  }
+}
+
+@keyframes moveBy {
+  0% {
+    background-position: 0% 10%;
+  }
+
+  0% {
+    background-position: 100% 100%;
+  }
+}

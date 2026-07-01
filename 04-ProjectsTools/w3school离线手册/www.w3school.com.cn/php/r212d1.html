@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from www.w3school.com.cn/php/r2.php?f=php_ajax_php by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 05:55:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<script>
+function showHint(str) {
+  if (str.length == 0) { 
+    document.getElementById("txtHint").innerHTML = "";
+    return;
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("txtHint").innerHTML = this.responseText;
+      }
+    }
+    xmlhttp.open("GET.html", "../demo/php/gethint03d2.html?q="+str, true);
+    xmlhttp.send();
+  }
+}
+</script>
+</head>
+<body>
+
+<p><b>在下面的输入框中开始输入名字：</b></p>
+<form action="#">
+  <label for="fname">名字：</label>
+  <input type="text" id="fname" name="fname" onkeyup="showHint(this.value)">
+</form> 
+<p>建议：<span id="txtHint"></span></p>
+
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/php/r2.php?f=php_ajax_php by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 05:55:32 GMT -->
+</html>

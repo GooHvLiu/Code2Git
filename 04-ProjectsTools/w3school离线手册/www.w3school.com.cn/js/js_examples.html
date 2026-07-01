@@ -1,0 +1,1156 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/js/js_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 01:52:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>JavaScript 实例</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>JS 教程</h2>
+<ul>
+<li><a href="index.html" title="JavaScript 教程">JS 教程</a></li>
+<li><a href="js_intro.html" title="JavaScript 简介">JS 简介</a></li>
+<li><a href="js_shiyong.html" title="JavaScript 使用">JS 使用</a></li>
+<li><a href="js_output.html" title="JavaScript 输出">JS 输出</a></li>
+<li><a href="js_statements.html" title="JavaScript 语句">JS 语句</a></li>
+<li><a href="js_syntax.html" title="JavaScript 语法">JS 语法</a></li>
+<li><a href="js_comments.html" title="JavaScript 注释">JS 注释</a></li>
+<li><a href="js_variables.html" title="JavaScript 变量">JS 变量</a></li>
+<li><a href="js_let.html" title="JavaScript Let">JS Let</a></li>
+<li><a href="js_const.html" title="JavaScript Const">JS Const</a></li>
+<li><a href="js_operators.html" title="JavaScript 运算符">JS 运算符</a></li>
+<li><a href="js_arithmetic.html" title="JavaScript 算术">JS 算数</a></li>
+<li><a href="js_assignment.html" title="JavaScript 赋值">JS 赋值</a></li>
+<li><a href="js_datatypes.html" title="JavaScript 数据类型">JS 数据类型</a></li>
+<li><a href="js_functions.html" title="JavaScript 函数">JS 函数</a></li>
+<li><a href="js_objects.html" title="JavaScript 对象">JS 对象</a></li>
+<li><a href="js_events.html" title="JavaScript 事件">JS 事件</a></li>
+<li><a href="js_strings.html" title="JavaScript 字符串">JS 字符串</a></li>
+<li><a href="js_string_methods.html" title="JavaScript 字符串方法">JS 字符串方法</a></li>
+<li><a href="js_string_search.html" title="JavaScript 字符串搜索">JS 字符串搜索</a></li>
+<li><a href="js_string_templates.html" title="JavaScript 模板文字">JS 字符串模板</a></li>
+<li><a href="js_numbers.html" title="JavaScript 数字">JS 数字</a></li>
+<li><a href="js_bigint.html" title="JavaScript BigInt">JS BigInt</a></li>
+<li><a href="js_number_methods.html" title="JavaScript 数字方法">JS 数字方法</a></li>
+<li><a href="js_number_properties.html" title="JavaScript 数字属性">JS 数字属性</a></li>
+<li><a href="js_arrays.html" title="JavaScript 数组">JS 数组</a></li>
+<li><a href="js_array_methods.html" title="JavaScript 数组方法">JS 数组方法</a></li>
+<li><a href="js_array_search.html" title="JavaScript 数组搜索">JS 数组搜索</a></li>
+<li><a href="js_array_sort.html" title="JavaScript 数组排序">JS 数组排序</a></li>
+<li><a href="js_array_iteration.html" title="JavaScript 数组迭代方法">JS 数组迭代</a></li>
+<li><a href="js_array_const.html" title="JavaScript 数组 Const">JS 数组 Const</a></li>
+<li><a href="js_dates.html" title="JavaScript 日期">JS 日期</a></li>
+<li><a href="js_date_formats.html" title="JavaScript 日期格式">JS 日期格式</a></li>
+<li><a href="js_date_methods.html" title="JavaScript 获取日期方法">JS 日期获取方法</a></li>
+<li><a href="js_date_methods_set.html" title="JavaScript 设置日期方法">JS 日期设置方法</a></li>
+<li><a href="js_math.html" title="JavaScript Math 对象">JS 数学</a></li>
+<li><a href="js_random.html" title="JavaScript 随机">JS 随机</a></li>
+<li><a href="js_booleans.html" title="JavaScript 逻辑">JS 逻辑</a></li>
+<li><a href="js_comparisons.html" title="JavaScript 比较和逻辑运算">JS 比较</a></li>
+<li><a href="js_if_else.html" title="JavaScript If...Else 语句">JS 条件</a></li>
+<li><a href="js_switch.html" title="JavaScript Switch 语句">JS Switch</a></li>
+<li><a href="js_loop_for.html" title="JavaScript For 循环">JS Loop For</a></li>
+<li><a href="js_loop_forin.html" title="JavaScript For In">JS Loop For In</a></li>
+<li><a href="js_loop_forof.html" title="JavaScript For Of">JS Loop For Of</a></li>
+<li><a href="js_loop_while.html" title="JavaScript While 循环">JS Loop While</a></li>
+<li><a href="js_break.html" title="JavaScript Break 和 Continue">JS Break</a></li>
+<li><a href="js_iterables.html" title="JavaScript 可迭代对象">JS 可迭代对象</a></li>
+<li><a href="js_sets.html" title="JavaScript Set">JS Set</a></li>
+<li><a href="js_set_methods.html" title="JavaScript Set 方法">JS Set 方法</a></li>
+<li><a href="js_maps.html" title="JavaScript Map">JS Map</a></li>
+<li><a href="js_map_methods.html" title="JavaScript Map 方法">JS Map 方法</a></li>
+<li><a href="js_typeof.html" title="JavaScript typeof">JS typeof</a></li>
+<li><a href="js_type_conversion.html" title="JavaScript 类型转换">JS 类型转换</a></li>
+<li><a href="js_destructuring.html" title="JavaScript 解构">JS 解构</a></li>
+<li><a href="js_bitwise.html" title="JavaScript 位运算符">JS 位运算</a></li>
+<li><a href="js_regexp.html" title="JavaScript 正则表达式">JS 正则表达式</a></li>
+<li><a href="js_precedence.html" title="JavaScript 运算符优先级">JS 运算符优先级</a></li>
+<li><a href="js_errors.html" title="JavaScript 错误 - Throw 和 Try to Catch">JS 异常</a></li>
+<li><a href="js_scope.html" title="JavaScript 作用域">JS 作用域</a></li>
+<li><a href="js_hoisting.html" title="JavaScript Hoisting">JS Hoisting</a></li>
+<li><a href="js_strict.html" title="JavaScript Use Strict">JS 严格模式</a></li>
+<li><a href="js_this.html" title="JavaScript this 关键词">JS this 关键词</a></li>
+<li><a href="js_arrow_function.html" title="JavaScript 箭头函数">JS 箭头函数</a></li>
+<li><a href="js_classes.html" title="JavaScript 类">JS 类</a></li>
+<li><a href="js_modules.html" title="JavaScript 模块">JS 模块</a></li>
+<li><a href="js_json.html" title="JavaScript JSON">JS JSON</a></li>
+<li><a href="js_debugging.html" title="JavaScript 调试">JS 调试</a></li>
+<li><a href="js_conventions.html" title="JavaScript 样式指南和代码约定">JS 样式指南</a></li>
+<li><a href="js_best_practices.html" title="JavaScript 最佳实践">JS 最佳实践</a></li>
+<li><a href="js_mistakes.html" title="JavaScript 常见错误">JS 错误</a></li>
+<li><a href="js_performance.html" title="JavaScript 性能">JS 性能</a></li>
+<li><a href="js_reserved.html" title="JavaScript 保留词">JS 保留词</a></li>
+</ul>
+<h2>JS 版本</h2>
+<ul>
+<li><a href="js_versions.html" title="JavaScript 版本">JS 版本</a></li>
+<li><a href="js_es5.html" title="JavaScript ES5">JS 2009 (ES5)</a></li>
+<li><a href="js_es6.html" title="Javascript ES6">JS 2015 (ES6)</a></li>
+<li><a href="js_2016.html" title="ECMAScript 2016">JS 2016</a></li>
+<li><a href="js_2017.html" title="ECMAScript 2017">JS 2017</a></li>
+<li><a href="js_2018.html" title="ECMAScript 2018">JS 2018</a></li>
+<li><a href="js_2019.html" title="ECMAScript 2019">JS 2019</a></li>
+<li><a href="js_2020.html" title="ECMAScript 2020">JS 2020</a></li>
+<li><a href="js_2021.html" title="ECMAScript 2021">JS 2021</a></li>
+<li><a href="js_2022.html" title="ECMAScript 2022">JS 2022</a></li>
+<li><a href="js_2023.html" title="ECMAScript 2023">JS 2023</a></li>
+<li><a href="js_2024.html" title="ECMAScript 2024">JS 2024</a></li>
+<li><a href="js_ie_edge.html" title="Internet Explorer / Edge">JS IE / Edge</a></li>
+<li><a href="js_history.html" title="JavaScript 历史">JS 历史</a></li>
+</ul>
+<h2>JS 对象</h2>
+<ul>
+<li><a href="js_object_definition.html" title="JavaScript 对象定义">JS 对象定义</a></li>
+<li><a href="js_object_properties.html" title="JavaScript 对象属性">JS 对象属性</a></li>
+<li><a href="js_object_methods.html" title="JavaScript 对象方法">JS 对象方法</a></li>
+<li><a href="js_object_display.html" title="JavaScript 显示对象">JS 对象显示</a></li>
+<li><a href="js_object_accessors.html" title="JavaScript 对象访问器">JS 对象访问器</a></li>
+<li><a href="js_object_constructors.html" title="JavaScript 对象构造器">JS 对象构造器</a></li>
+<li><a href="js_object_prototypes.html" title="JavaScript 对象原型">JS 对象原型</a></li>
+<li><a href="js_object_es5.html" title="JavaScript ES5 对象方法">JS 对象引用</a></li>
+</ul>
+<h2>JS 函数</h2>
+<ul>
+<li><a href="js_function_definition.html" title="JavaScript 函数定义">JS 函数定义</a></li>
+<li><a href="js_function_parameters.html" title="JavaScript 函数参数">JS 函数参数</a></li>
+<li><a href="js_function_invocation.html" title="JavaScript 函数调用">JS 函数调用</a></li>
+<li><a href="js_function_call.html" title="JavaScript 函数 Call">JS 函数 Call</a></li>
+<li><a href="js_function_apply.html" title="JavaScript 函数 Apply">JS 函数 Apply</a></li>
+<li><a href="js_function_bind.html" title="JavaScript 函数 bind()">JS 函数绑定</a></li>
+<li><a href="js_function_closures.html" title="JavaScript 闭包">JS 闭包</a></li>
+</ul>
+<h2>JS 类</h2>
+<ul>
+<li><a href="js_class_intro.html" title="JavaScript 类">JS 类简介</a></li>
+<li><a href="js_class_inheritance.html" title="JavaScript 类继承">JS 类继承</a></li>
+<li><a href="js_class_static.html" title="JavaScript Static 方法">JS Static</a></li>
+</ul>
+<h2>JS Async</h2>
+<ul>
+<li><a href="js_callback.html" title="JavaScript 回调">JS 回调</a></li>
+<li><a href="js_asynchronous.html" title="异步的 JavaScript">JS 异步</a></li>
+<li><a href="js_promise.html" title="JavaScript Promise">JS Promise</a></li>
+<li><a href="js_async.html" title="JavaScript Async/Await">JS Async</a></li>
+</ul>
+<h2>JS HTML DOM</h2>
+<ul>
+<li><a href="js_htmldom.html" title="JavaScript HTML DOM">DOM 简介</a></li>
+<li><a href="js_htmldom_methods.html" title="JavaScript - HTML DOM 方法">DOM 方法</a></li>
+<li><a href="js_htmldom_document.html" title="JavaScript HTML DOM 文档">DOM 文档</a></li>
+<li><a href="js_htmldom_elements.html" title="JavaScript HTML DOM 元素">DOM 元素</a></li>
+<li><a href="js_htmldom_html.html" title="JavaScript HTML DOM - 改变 HTML">DOM HTML</a></li>
+<li><a href="js_validation.html" title="JavaScript 表单">DOM 表单</a></li>
+<li><a href="js_htmldom_css.html" title="JavaScript HTML DOM - 改变 CSS">DOM CSS</a></li>
+<li><a href="js_htmldom_animate.html" title="JavaScript HTML DOM 动画">DOM 动画</a></li>
+<li><a href="js_htmldom_events.html" title="JavaScript HTML DOM 事件">DOM 事件</a></li>
+<li><a href="js_htmldom_eventlistener.html" title="JavaScript HTML DOM 事件监听程序">DOM 事件监听程序</a></li>
+<li><a href="js_htmldom_navigation.html" title="JavaScript HTML DOM 导航">DOM 导航</a></li>
+<li><a href="js_htmldom_nodes.html" title="JavaScript HTML DOM 元素（节点）">DOM 节点</a></li>
+<li><a href="js_htmldom_collections.html" title="JavaScript HTML DOM 集合">DOM 集合</a></li>
+<li><a href="js_htmldom_nodelist.html" title="JavaScript HTML DOM 节点列表">DOM 节点列表</a></li>
+</ul>
+<h2>JS Browser BOM</h2>
+<ul>
+<li><a href="js_window.html" title="JavaScript Window - 浏览器对象模型">JS Window</a></li>
+<li><a href="js_window_screen.html" title="JavaScript Window Screen">JS Screen</a></li>
+<li><a href="js_window_location.html" title="JavaScript Window Location">JS Location</a></li>
+<li><a href="js_window_history.html" title="JavaScript Window History">JS History</a></li>
+<li><a href="js_window_navigator.html" title="JavaScript Window Navigator">JS Navigator</a></li>
+<li><a href="js_popup.html" title="JavaScript 弹出框">JS 弹出框</a></li>
+<li><a href="js_timing.html" title="JavaScript Timing 事件">JS Timing</a></li>
+<li><a href="js_cookies.html" title="JavaScript Cookies">JS Cookies</a></li>
+</ul>
+<h2>JS Web API</h2>
+<ul>
+<li><a href="js_api_intro.html" title="Web APIs - 简介">Web API 简介</a></li>
+<li><a href="js_validation_api.html" title="JavaScript 验证 API">Web Form API</a></li>
+<li><a href="js_api_history.html" title="Web History API">Web History API</a></li>
+<li><a href="js_api_web_storage.html" title="Web Storage API">Web Storage API</a></li>
+<li><a href="js_api_web_workers.html" title="Web Worker API">Web Worker API</a></li>
+<li><a href="js_api_fetch.html" title="JavaScript Fetch API">Web Fetch API</a></li>
+<li><a href="js_api_geolocation.html" title="Web Geolocation API">Web Geolocation API</a></li>
+</ul>
+<h2>JS AJAX</h2>
+<ul>
+<li><a href="js_ajax_intro.html" title="AJAX 简介">AJAX 简介</a></li>
+<li><a href="js_ajax_http.html" title="AJAX - XMLHttpRequest 对象">AJAX XMLHttp</a></li>
+<li><a href="js_ajax_http_send.html" title="AJAX - XMLHttpRequest">AJAX 请求</a></li>
+<li><a href="js_ajax_http_response.html" title="AJAX - 服务器响应">AJAX 响应</a></li>
+<li><a href="js_ajax_xmlfile.html" title="AJAX XML 实例">AJAX XML 文件</a></li>
+<li><a href="js_ajax_php.html" title="AJAX PHP 实例">AJAX PHP</a></li>
+<li><a href="js_ajax_asp.html" title="AJAX ASP 实例">AJAX ASP</a></li>
+<li><a href="js_ajax_database.html" title="AJAX Database 实例">AJAX 数据库</a></li>
+<li><a href="js_ajax_applications.html" title="XML 应用程序">AJAX 应用程序</a></li>
+<li><a href="js_ajax_examples.html" title="AJAX 实例">AJAX 实例</a></li>
+</ul>
+<h2>JS JSON</h2>
+<ul>
+<li><a href="js_json_intro.html" title="JSON 简介">JSON 简介</a></li>
+<li><a href="js_json_syntax.html" title="JSON 语法">JSON 语法</a></li>
+<li><a href="js_json_xml.html" title="JSON vs XML">JSON vs XML</a></li>
+<li><a href="js_json_datatypes.html" title="JSON 数据类型">JSON 数据类型</a></li>
+<li><a href="js_json_parse.html" title="JSON.parse()">JSON 解析</a></li>
+<li><a href="js_json_stringify.html" title="JSON.stringify()">JSON 字符串化</a></li>
+<li><a href="js_json_objects.html" title="JSON 对象">JSON 对象</a></li>
+<li><a href="js_json_arrays.html" title="JSON 数组">JSON 数组</a></li>
+<li><a href="js_json_server.html" title="JSON 服务器">JSON 服务器</a></li>
+<li><a href="js_json_php.html" title="JSON PHP">JSON PHP</a></li>
+<li><a href="js_json_html.html" title="JSON HTML">JSON HTML</a></li>
+<li><a href="js_json_jsonp.html" title="JSONP">JSON JSONP</a></li>
+</ul>
+<h2>JS vs jQuery</h2>
+<ul>
+<li><a href="js_jquery_selectors.html" title="JavaScript / jQuery DOM 选择器">jQuery 选择器</a></li>
+<li><a href="js_jquery_elements.html" title="JavaScript / jQuery HTML 元素">jQuery HTML</a></li>
+<li><a href="js_jquery_css.html" title="JavaScript / jQuery CSS 样式">jQuery CSS</a></li>
+<li><a href="js_jquery_dom.html" title="JavaScript / jQuery HTML DOM">jQuery DOM</a></li>
+</ul>
+<h2>JS 图形</h2>
+<ul>
+<li><a href="js_graphics.html" title="JavaScript 图形">JS 图形</a></li>
+<li><a href="js_graphics_canvas.html" title="HTML Canvas">JS Canvas</a></li>
+<li><a href="js_graphics_plotly.html" title="Plotly.js">JS Plotly.js</a></li>
+<li><a href="js_graphics_chartjs.html" title="Chart.js">JS Chart</a></li>
+<li><a href="js_graphics_google_chart.html" title="谷歌图表">JS 谷歌图表</a></li>
+<li><a href="js_graphics_d3js.html" title="D3.js">JS D3.js</a></li>
+</ul>
+<h2>JS 实例</h2>
+<ul>
+<li class="currentLink"><a href="js_examples.html" title="JavaScript 实例">JS 实例</a></li>
+<li><a href="js_examples_dom.html" title="JavaScript HTML DOM 实例">JS HTML DOM</a></li>
+<li><a href="js_examples_input.html" title="JavaScript HTML 输入实例">JS HTML 输入</a></li>
+<li><a href="js_examples_html.html" title="JavaScript HTML 对象实例">JS HTML 对象</a></li>
+<li><a href="js_examples_events.html" title="JavaScript HTML 事件实例">JS HTML 事件</a></li>
+<li><a href="js_examples_browser.html" title="JavaScript Browser 对象实例">JS Browser</a></li>
+<li><a href="js_quiz.html" title="JavaScript 测验">JS 测验</a></li>
+</ul>
+<h2>JS 参考手册</h2>
+<ul>
+<li><a href="../jsref/index.html" title="JavaScript 和 HTML DOM 参考手册">JavaScript 对象</a></li>
+<li><a href="../jsref/index.html" title="JavaScript 和 HTML DOM 参考手册">HTML DOM 对象</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>JavaScript 实例</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="js_graphics_d3js.html" title="D3.js">JS D3.js</a></li>
+<li class="next"><a href="js_examples_dom.html" title="JavaScript HTML DOM 实例">JS HTML DOM</a></li>
+</ul>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 能做什么？</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t0b55.html?f=eg_js_intro_inner_html">JavaScript 能够改变 HTML 内容</a></dt>
+<dt><a target="_blank" href="../tiy/t05e6.html?f=eg_js_intro_lightbulb">JavaScript 能够改变 HTML 属性</a></dt>
+<dt><a target="_blank" href="../tiy/t10b6.html?f=eg_js_intro_style">JavaScript 能够改变 CSS 样式</a></dt>
+<dt><a target="_blank" href="../tiy/t9351.html?f=eg_js_intro_hide">JavaScript 能够隐藏 HTML 元素</a></dt>
+<dt><a target="_blank" href="../tiy/tf2c1.html?f=eg_js_intro_show">JavaScript 能够显示隐藏的 HTML 元素</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_intro.html" title="JavaScript 简介">例子解释：JavaScript 简介</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>在何处插入 JavaScript</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t9bd9.html?f=eg_js_use_head">&lt;head&gt; 中的 JavaScript</a></dt>
+<dt><a target="_blank" href="../tiy/t8e6f.html?f=eg_js_use_body">&lt;body&gt; 中的 JavaScript</a></dt>
+<dt><a target="_blank" href="../tiy/tf56c.html?f=eg_js_use_external">外部文件中的 JavaScript</a></dt>
+<dt><a target="_blank" href="../tiy/t9c70.html?f=eg_js_use_url">外部 url 中的 JavaScript</a></dt>
+<dt><a target="_blank" href="../tiy/t2bea.html?f=eg_js_use_url_relative">外部文件夹中的 JavaScript</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_shiyong.html" title="JavaScript 使用">例子解释：使用 JavaScript</a></p>
+</div>
+
+
+
+
+<div class="example">
+<h2>JavaScript 输出</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/tb756.html?f=eg_js_output_write">写入 HTML 输出</a></dt>
+<dt><a target="_blank" href="../tiy/t874a.html?f=eg_js_output_dom">写入 HTML 元素</a></dt>
+<dt><a target="_blank" href="../tiy/t9fb9.html?f=eg_js_output_alert">写入窗口提示框</a></dt>
+<dt><a target="_blank" href="../tiy/t28f2.html?f=eg_js_output_console">写入浏览器控制台</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_output.html" title="JavaScript 输出">例子解释：输出</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 语法</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t3812.html?f=eg_js_statements">JavaScript 语句</a></dt>
+<dt><a target="_blank" href="../tiy/t3474.html?f=eg_js_syntax_numbers">JavaScript 数字</a></dt>
+<dt><a target="_blank" href="../tiy/t3dcc.html?f=eg_js_syntax_strings">JavaScript 字符串</a></dt>
+<dt><a target="_blank" href="../tiy/t6e28.html?f=eg_js_syntax_variables">JavaScript 变量</a></dt>
+<dt><a target="_blank" href="../tiy/t31c0.html?f=eg_js_syntax_operators">JavaScript 运算符</a></dt>
+<dt><a target="_blank" href="../tiy/t0665.html?f=eg_js_syntax_assignment">JavaScript 赋值</a></dt>
+<dt><a target="_blank" href="../tiy/ta3af.html?f=eg_js_syntax_expressions">JavaScript 表达式（使用常量）</a></dt>
+<dt><a target="_blank" href="../tiy/t0f37.html?f=eg_js_syntax_expressions_strings">JavaScript 表达式（使用字符串）</a></dt>
+<dt><a target="_blank" href="../tiy/t4082.html?f=eg_js_syntax_expressions_variables">JavaScript 表达式（使用变量）</a></dt>
+<dt><a target="_blank" href="../tiy/t0d21.html?f=eg_js_syntax_keywords">JavaScript 关键词</a></dt>
+<dt><a target="_blank" href="../tiy/tc5a4.html?f=eg_js_syntax_comments">JavaScript 注释</a></dt>
+<dt><a target="_blank" href="../tiy/t4598.html?f=eg_js_syntax_case">JavaScript 对大小写敏感</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_syntax.html" title="JavaScript 语法">例子解释：语法</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 语句</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t3812.html?f=eg_js_statements">JavaScript 语句是对浏览器的命令</a></dt>
+<dt><a target="_blank" href="../tiy/td3fc.html?f=eg_js_statement">JavaScript 代码是一系列语句</a></dt>
+<dt><a target="_blank" href="../tiy/t816b.html?f=eg_js_statements_semicolon1">JavaScript 语句由分号分隔</a></dt>
+<dt><a target="_blank" href="../tiy/tee25.html?f=eg_js_statements_semicolon2">一行允许多条语句</a></dt>
+<dt><a target="_blank" href="../tiy/tcefb.html?f=eg_js_statements_blocks">JavaScript 语句可以在代码块中组合在一起</a></dt>
+<dt><a target="_blank" href="../tiy/t0a02.html?f=eg_js_statements_linebreak">您可以在运算符或逗号之后对代码折行</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_statements.html" title="JavaScript 语句">例子解释：语句</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 注释</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/tb01c.html?f=eg_js_comments_1">单行注释</a></dt>
+<dt><a target="_blank" href="../tiy/t2a60.html?f=eg_js_comments_2">行末的单行注释</a></dt>
+<dt><a target="_blank" href="../tiy/tf802.html?f=eg_js_comments_3">多行注释</a></dt>
+<dt><a target="_blank" href="../tiy/tdd9d.html?f=eg_js_comments_4">阻止执行的单行注释</a></dt>
+<dt><a target="_blank" href="../tiy/t01fc.html?f=eg_js_comments_5">阻止执行的多行注释</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_comments.html" title="JavaScript 注释">例子解释：注释</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 变量</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/tddae.html?f=eg_js_variables">JavaScript 变量</a></dt>
+<dt><a target="_blank" href="../tiy/tc0cb.html?f=eg_js_variables_total">作为代数的 JavaScript 变量</a></dt>
+<dt><a target="_blank" href="../tiy/tc695.html?f=eg_js_variables_types">JavaScript 数字和字符串</a></dt>
+<dt><a target="_blank" href="../tiy/t8a1e.html?f=eg_js_variables_create">JavaScript var 关键词</a></dt>
+<dt><a target="_blank" href="../tiy/t3ad0.html?f=eg_js_variables_multi">在一条语句中声明多个变量</a></dt>
+<dt><a target="_blank" href="../tiy/t08c6.html?f=eg_js_variables_multiline">多行声明多个变量</a></dt>
+<dt><a target="_blank" href="../tiy/t7dc5.html?f=eg_js_variables_undefined">没有值的变量返回值 undefined</a></dt>
+<dt><a target="_blank" href="../tiy/t6773.html?f=eg_js_variables_redefine">重新声明变量不会破坏值</a></dt>
+<dt><a target="_blank" href="../tiy/t2889.html?f=eg_js_variables_add_numbers">JavaScript 数组相加</a></dt>
+<dt><a target="_blank" href="../tiy/t7901.html?f=eg_js_variables_add_strings">JavaScript 字符串相加</a></dt>
+<dt><a target="_blank" href="../tiy/t5301.html?f=eg_js_variables_add_string_number">字符串和数字相加</a></dt>
+<dt><a target="_blank" href="../tiy/tb7c5.html?f=eg_js_variables_add_number_string">数值和字符串相加</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_variables.html" title="JavaScript 变量">例子解释：变量</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 算术</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t106d.html?f=eg_js_operator_addition">加 (+) 运算符</a></dt>
+<dt><a target="_blank" href="../tiy/t7fb2.html?f=eg_js_operator_subtraction">减 (-) 运算符</a></dt>
+<dt><a target="_blank" href="../tiy/tbc76.html?f=eg_js_operator_multiplication">乘 (*) 运算符</a></dt>
+<dt><a target="_blank" href="../tiy/tf2ab.html?f=eg_js_operator_division">除 (/) 运算符</a></dt>
+<dt><a target="_blank" href="../tiy/t47f0.html?f=eg_js_operator_modulus">取模 (%) 运算符</a></dt>
+<dt><a target="_blank" href="../tiy/t160f.html?f=eg_js_operator_increment">递增 (++) 运算符</a></dt>
+<dt><a target="_blank" href="../tiy/ta138.html?f=eg_js_operator_decrement">递减 (--) 运算符</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_arithmetic.html" title="JavaScript 算术">例子解释：算数</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 赋值</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t0738.html?f=eg_js_assignment_equal">= 赋值运算符</a></dt>
+<dt><a target="_blank" href="../tiy/tcd18.html?f=eg_js_assignment_plusequal">+= 赋值运算符</a></dt>
+<dt><a target="_blank" href="../tiy/t1a73.html?f=eg_js_assignment_minusequal">-= 赋值运算符</a></dt>
+<dt><a target="_blank" href="../tiy/t68be.html?f=eg_js_assignment_multiplicationequal">*= 赋值运算符</a></dt>
+<dt><a target="_blank" href="../tiy/t7822.html?f=eg_js_assignment_divideequal">/= 赋值运算符</a></dt>
+<dt><a target="_blank" href="../tiy/t0582.html?f=eg_js_assignment_modulusequal">%= 赋值运算符</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_assignment.html" title="JavaScript 赋值">例子解释：赋值</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 字符串级联</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t6d2f.html?f=eg_js_operator_concatenate_1">使用级联运算符 (+) 将两个字符串相加</a></dt>
+<dt><a target="_blank" href="../tiy/t94fc.html?f=eg_js_operator_concatenate_4">对两个字符串相加，第一个字符串中包含空格</a></dt>
+<dt><a target="_blank" href="../tiy/t56d8.html?f=eg_js_operator_concatenate_5">对两个字符串相加，字符串之间有空格</a></dt>
+<dt><a target="_blank" href="../tiy/t5bee.html?f=eg_js_operator_concatenate_2">使用 += 运算符对两个字符串相加</a></dt>
+<dt><a target="_blank" href="../tiy/t98b1.html?f=eg_js_operator_concatenate_3">对字符串和数字相加</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_operators.html" title="JavaScript 运算符">例子解释：字符串级联</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 数据类型</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t16f8.html?f=eg_js_datatypes_string">声明（创建）字符串</a></dt>
+<dt><a target="_blank" href="../tiy/t5d62.html?f=eg_js_datatypes_number">声明（创建）数字</a></dt>
+<dt><a target="_blank" href="../tiy/t90b2.html?f=eg_js_datatypes_array">声明（创建）数组</a></dt>
+<dt><a target="_blank" href="../tiy/t2e38.html?f=eg_js_datatypes_object">声明（创建）对象</a></dt>
+<dt><a target="_blank" href="../tiy/td77d.html?f=eg_js_datatypes_typeof">确定变量的类型</a></dt>
+<dt><a target="_blank" href="../tiy/t1e39.html?f=eg_js_datatypes_addstrings_3">对两个数字和一个字符串相加</a></dt>
+<dt><a target="_blank" href="../tiy/td516.html?f=eg_js_datatypes_addstrings_4">对一个字符串和两个数字相加</a></dt>
+<dt><a target="_blank" href="../tiy/t2fd3.html?f=eg_js_datatypes_undefined_1">一个未定义变量</a></dt>
+<dt><a target="_blank" href="../tiy/t9516.html?f=eg_js_datatypes_empty">一个空变量</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_datatypes.html" title="JavaScript 数据类型">例子解释：数据类型</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 对象</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t1a44.html?f=eg_js_object_variable">创建 JavaScript 变量</a></dt>
+<dt><a target="_blank" href="../tiy/t24cc.html?f=eg_js_object_object">创建 JavaScript 对象</a></dt>
+<dt><a target="_blank" href="../tiy/t0427.html?f=eg_js_object_create_1">创建 person 对象（单行）</a></dt>
+<dt><a target="_blank" href="../tiy/tc659.html?f=eg_js_object_create_2">创建 person 对象（多行）</a></dt>
+<dt><a target="_blank" href="../tiy/t9da6.html?f=eg_js_object_property_1">使用 .property 访问对象属性</a></dt>
+<dt><a target="_blank" href="../tiy/td346.html?f=eg_js_object_property_2">使用 [property] 访问对象属性</a></dt>
+<dt><a target="_blank" href="../tiy/tac44.html?f=eg_js_object_method">以方法访问函数属性</a></dt>
+<dt><a target="_blank" href="../tiy/t06cc.html?f=eg_js_object_function">以属性访问函数属性</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_objects.html" title="JavaScript 对象">例子解释：对象</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 函数</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/te3df.html?f=eg_js_function_1">一个简单的函数</a></dt>
+<dt><a target="_blank" href="../tiy/tbb76.html?f=eg_js_function_2">带一个参数的函数</a></dt>
+<dt><a target="_blank" href="../tiy/t6007.html?f=eg_js_function_3">带一个参数的函数 2</a></dt>
+<dt><a target="_blank" href="../tiy/te74c.html?f=eg_js_function_return">返回一个值的函数</a></dt>
+<dt><a target="_blank" href="../tiy/ta557.html?f=eg_js_farenheit_to_celsius">把华氏度转换为摄氏度的函数</a></dt>
+<dt><a target="_blank" href="../tiy/t0cf0.html?f=eg_js_farenheit_to_celsius_2">没有 () 的函数</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_functions.html" title="JavaScript 函数">例子解释：函数</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 事件</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/tf30e.html?f=eg_js_event_onclick">更改 HTML 元素的 onclick 事件</a></dt>
+<dt><a target="_blank" href="../tiy/t046d.html?f=eg_js_event_onclick_this">更改元素本身的 onclick 事件</a></dt>
+<dt><a target="_blank" href="../tiy/t2f08.html?f=eg_js_event_onclick_function">调用函数的 onclick 事件</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_events.html" title="JavaScript 事件">例子解释：事件</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 字符串</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t3a9c.html?f=eg_js_string_quotes">字符串可由单引号或双引号包围</a></dt>
+<dt><a target="_blank" href="../tiy/t7425.html?f=eg_js_string_quotes_mixed">展示一些字符串实例</a></dt>
+<dt><a target="_blank" href="../tiy/t5a8f.html?f=eg_js_string_escape_quotes_1">在引号前添加反斜杠被认定为引号</a></dt>
+<dt><a target="_blank" href="../tiy/tb093.html?f=eg_js_string_length">确定字符串的长度</a></dt>
+<dt><a target="_blank" href="../tiy/t3c3e.html?f=eg_js_string_break_1">用反斜杠对文本字符串折行</a></dt>
+<dt><a target="_blank" href="../tiy/tadf7.html?f=eg_js_string_break_code">无法对代码使用反斜杠折行</a></dt>
+<dt><a target="_blank" href="../tiy/t5508.html?f=eg_js_string_indexof">确定文本在字符串中首次出现的位置 - indexOf()</a></dt>
+<dt><a target="_blank" href="../tiy/t5da2.html?f=eg_js_string_match">在字符串中搜索文本并在找到后返回这段文本 - match()</a></dt>
+<dt><a target="_blank" href="../tiy/t519a.html?f=eg_js_string_replace">替换字符串中的字符 - replace()</a></dt>
+<dt><a target="_blank" href="../tiy/tfadb.html?f=eg_js_string_touppercase">把字符串转换为大写 - toUpperCase()</a></dt>
+<dt><a target="_blank" href="../tiy/t5dc1.html?f=eg_js_string_tolowercase">把字符串转换为小写 - toLowerCase()</a></dt>
+<dt><a target="_blank" href="../tiy/t4ac2.html?f=eg_js_string_split">把字符串拆分入数组 - split()</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_strings.html" title="JavaScript 字符串">例子解释：字符串</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 数字</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t3c3d.html?f=eg_js_number_1">带或不带小数点都可以写数值</a></dt>
+<dt><a target="_blank" href="../tiy/t65f0.html?f=eg_js_number_2">可以使用指数计数法编写极大或极小的数</a></dt>
+<dt><a target="_blank" href="../tiy/t7840.html?f=eg_js_number_inaccurate_1">数字会被精确到 15 位</a></dt>
+<dt><a target="_blank" href="../tiy/tfd5e.html?f=eg_js_number_inaccurate_2">浮点算术不总是 100% 精确</a></dt>
+<dt><a target="_blank" href="../tiy/tfde6.html?f=eg_js_number_inaccurate_3">但是可以通过乘并除以 10 解决此问题</a></dt>
+<dt><a target="_blank" href="../tiy/tdbb2.html?f=eg_js_number_add">两数相加会产生新数</a></dt>
+<dt><a target="_blank" href="../tiy/te39a.html?f=eg_js_number_add_strings_1">两个数字字符串相加会产生连接的字符串</a></dt>
+<dt><a target="_blank" href="../tiy/t906b.html?f=eg_js_number_add_strings_2">数字和数字字符串相加也会产生连接的字符串</a></dt>
+<dt><a target="_blank" href="../tiy/t8bd2.html?f=eg_js_number_add_strings_3">数字字符串和数字相加也会产生连接的字符串</a></dt>
+<dt><a target="_blank" href="../tiy/t594d.html?f=eg_js_number_add_strings_4">字符串和数字相加的常见错误 1</a></dt>
+<dt><a target="_blank" href="../tiy/t4a00.html?f=eg_js_number_add_strings_5">字符串和数字相加的常见错误 2</a></dt>
+<dt><a target="_blank" href="../tiy/tf85c.html?f=eg_js_number_string_1">在除法运算时，JavaScript 会尝试把字符串转换为数字</a></dt>
+<dt><a target="_blank" href="../tiy/t0cb7.html?f=eg_js_number_string_2">在乘法运算时，JavaScript 会尝试把字符串转换为数字</a></dt>
+<dt><a target="_blank" href="../tiy/t674d.html?f=eg_js_number_string_3">在减法运算时，JavaScript 会尝试把字符串转换为数字</a></dt>
+<dt><a target="_blank" href="../tiy/tfa7d-2.html?f=eg_js_number_string_4">在加法运算时，JavaScript 不会把字符串转换为数字</a></dt>
+<dt><a target="_blank" href="../tiy/t014c.html?f=eg_js_number_divide_string">被字符串除的数不再是数</a></dt>
+<dt><a target="_blank" href="../tiy/ta140.html?f=eg_js_number_divide_number">数字除以数字字符串为数字</a></dt>
+<dt><a target="_blank" href="../tiy/tdf36.html?f=eg_js_number_isnan_true">全局 JavaScript 函数 isNaN() 判断值是否为数字</a></dt>
+<dt><a target="_blank" href="../tiy/t3f86.html?f=eg_js_number_nan_math">在数学运算中使用 NaN 会始终返回 NaN</a></dt>
+<dt><a target="_blank" href="../tiy/taaa0.html?f=eg_js_number_nan_concat">在数学字符串运算中使用 NaN 将连接 NaN</a></dt>
+<dt><a target="_blank" href="../tiy/t5034.html?f=eg_js_number_nan_typeof">NaN 的类型是数字（没错！typeof NaN 返回 number）</a></dt>
+<dt><a target="_blank" href="../tiy/td828.html?f=eg_js_number_infinity">如果计算出最大可能数字之外的数字，则返回无穷大（Infinity）</a></dt>
+<dt><a target="_blank" href="../tiy/t8461.html?f=eg_js_number_infinity_zero">被零除会生成 Infinity</a></dt>
+<dt><a target="_blank" href="../tiy/tcd3a.html?f=eg_js_number_infinity_typeof">Infinity 也是数（typeof Infinity 返回 number）</a></dt>
+<dt><a target="_blank" href="../tiy/tfc51.html?f=eg_js_number_hex">前缀为 0x 的常量会被解释为十六进制</a></dt>
+<dt><a target="_blank" href="../tiy/t2d9d.html?f=eg_js_number_tostring">toString() 方法能够以十六进制、八进制或二进制输出数</a></dt>
+<dt><a target="_blank" href="../tiy/t84f4.html?f=eg_js_number_object_1">数字可以是对象</a></dt>
+<dt><a target="_blank" href="../tiy/t70a6.html?f=eg_js_number_object_3">数字和对象无法安全地比较</a></dt>
+<dt><a target="_blank" href="../tiy/t3f96.html?f=eg_js_number_object_4">对象和对象无法安全地比较</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_numbers.html" title="JavaScript 数字">例子解释：数字</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 数字方法</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t2d9d.html?f=eg_js_number_tostring">toString() 方法将数字转换为字符串</a></dt>
+<dt><a target="_blank" href="../tiy/t0957.html?f=eg_js_number_valueof">valueOf() 方法以数字返回数字</a></dt>
+<dt><a target="_blank" href="../tiy/td7bf.html?f=eg_js_number_toexponential">toExponential() 返回一个带指数表示法的数字</a></dt>
+<dt><a target="_blank" href="../tiy/t38a7.html?f=eg_js_number_tofixed">toFixed() 方法将数字四舍五入为指定位的数字</a></dt>
+<dt><a target="_blank" href="../tiy/tfe9d.html?f=eg_js_number_toprecision">toPrecision() 返回指定长度的数字</a></dt>
+<dt><a target="_blank" href="../tiy/t0da2.html?f=eg_js_global_number">全局方法 Number() 将变量转换为数字</a></dt>
+<dt><a target="_blank" href="../tiy/t150e.html?f=eg_js_global_number_date">全局方法 Number() 甚至可以将日期转换为数字</a></dt>
+<dt><a target="_blank" href="../tiy/tb69e.html?f=eg_js_global_parseint">全局方法 parseInt() 将字符串转换为数字</a></dt>
+<dt><a target="_blank" href="../tiy/t8794.html?f=eg_js_global_parsefloat">全局方法 parseFloat() 将字符串转换为数字</a></dt>
+<dt><a target="_blank" href="../tiy/t8e98.html?f=eg_js_number_max_value">MAX_VALUE 返回 JavaScript 中可能的最大数字</a></dt>
+<dt><a target="_blank" href="../tiy/t2454.html?f=eg_js_number_min_value">MIN_VALUE 返回 JavaScript 中可能的最小数字</a></dt>
+<dt><a target="_blank" href="../tiy/t2bdd.html?f=eg_js_number_positive_infinity_1">POSITIVE_INFINITY 表示无穷大</a></dt>
+<dt><a target="_blank" href="../tiy/te0b3.html?f=eg_js_number_positive_infinity_2">溢出时返回 POSITIVE_INFINITY</a></dt>
+<dt><a target="_blank" href="../tiy/t4be2.html?f=eg_js_number_negative_infinity_1">NEGATIVE_INFINITY 表示负无穷大</a></dt>
+<dt><a target="_blank" href="../tiy/t4ef7.html?f=eg_js_number_negative_infinity_2">溢出时返回 NEGATIVE_INFINITY</a></dt>
+<dt><a target="_blank" href="../tiy/tc06e.html?f=eg_js_number_nan">NaN 代表“非数字”</a></dt>
+<dt><a target="_blank" href="../tiy/t94ed.html?f=eg_js_number_nan_divide_string">对字符串执行的算术将导致 NaN</a></dt>
+<dt><a target="_blank" href="../tiy/te253.html?f=eg_js_number_max_undefined">对变量使用数字属性将返回 undefined</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_number_methods.html" title="JavaScript 数值方法">例子解释：数字方法</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 数学</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t36b9.html?f=eg_js_math_pi">Math.PI 返回 PI 的值</a></dt>
+<dt><a target="_blank" href="../tiy/t9501.html?f=eg_js_math_round">Math.round(x) 返回 x 的 取整值（舍入值）</a></dt>
+<dt><a target="_blank" href="../tiy/tb20b.html?f=eg_js_math_pow">Math.pow(x, y) 返回 x 的 y 次方</a></dt>
+<dt><a target="_blank" href="../tiy/t9ab7.html?f=eg_js_math_sqrt">Math.sqrt(x) 返回 x 的平方</a></dt>
+<dt><a target="_blank" href="../tiy/t2125.html?f=eg_js_math_abs">Math.abs(x) 返回 x 的绝对值</a></dt>
+<dt><a target="_blank" href="../tiy/t6984.html?f=eg_js_math_ceil">Math.ceil(x) 返回 x 的向上舍入值</a></dt>
+<dt><a target="_blank" href="../tiy/t48b1.html?f=eg_js_math_floor">Math.floor(x) 返回 x 的向下舍入值</a></dt>
+<dt><a target="_blank" href="../tiy/t64b2.html?f=eg_js_math_sin">Math.sin(x) 返回角度 x（以弧度计）的正弦</a></dt>
+<dt><a target="_blank" href="../tiy/t91cd.html?f=eg_js_math_cos">Math.cos(x) 返回角度 x（以弧度计）的余弦</a></dt>
+<dt><a target="_blank" href="../tiy/t1f6f.html?f=eg_js_math_max">Math.max() 返回参数列表中的最高值</a></dt>
+<dt><a target="_blank" href="../tiy/tf659.html?f=eg_js_math_min">Math.min() 返回参数列表中的最低值</a></dt>
+<dt><a target="_blank" href="../tiy/t8135.html?f=eg_js_math_celsius_to_fahrenheit">把摄氏度转换为华氏度</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_math.html" title="JavaScript Math 对象">例子解释：数学</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 随机</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t4cee.html?f=eg_js_random">Math.random() 返回介于 0（包括）与 1（不包括）之间的随机整数</a></dt>
+<dt><a target="_blank" href="../tiy/t0a34.html?f=eg_js_random_0_9">如何返回介于 0 与 9 之间（都包括）的随机整数</a></dt>
+<dt><a target="_blank" href="../tiy/tbf22.html?f=eg_js_random_0_10">如何返回介于 0 与 10 之间（都包括）的随机整数</a></dt>
+<dt><a target="_blank" href="../tiy/t38df.html?f=eg_js_random_0_99">如何返回介于 0 与 99 之间（都包括）的随机整数</a></dt>
+<dt><a target="_blank" href="../tiy/tebf8-2.html?f=eg_js_random_0_100">如何返回介于 0 与 100 之间（都包括）的随机整数</a></dt>
+<dt><a target="_blank" href="../tiy/t649e.html?f=eg_js_random_1_10">如何返回介于 1 与 10 之间（都包括）的随机整数</a></dt>
+<dt><a target="_blank" href="../tiy/tc602.html?f=eg_js_random_1_100">如何返回介于 1 与 100 之间（都包括）的随机整数</a></dt>
+<dt><a target="_blank" href="../tiy/taeb6.html?f=eg_js_random_function_1">如何返回介于 x（包括）与 y（不包括）之间的随机整数</a></dt>
+<dt><a target="_blank" href="../tiy/te03d.html?f=eg_js_random_function_2">如何返回介于 x 与 y 之间（都包括）的随机整数</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_random.html" title="JavaScript 随机">例子解释：随机</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 日期</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t9fc3.html?f=eg_js_date_current">使用 Date() 来显示今天的日期和时间</a></dt>
+<dt><a target="_blank" href="../tiy/tded9.html?f=eg_js_date_getfullyear">使用 getFullYear() 显示年份</a></dt>
+<dt><a target="_blank" href="../tiy/t9ee6.html?f=eg_js_date_gettime">使用 getTime() 计算 1970 年至今的毫秒数</a></dt>
+<dt><a target="_blank" href="../tiy/t741f.html?f=eg_js_date_setfullyear">使用 setFullYear() 设置一个具体的日期</a></dt>
+<dt><a target="_blank" href="../tiy/t3371.html?f=eg_js_date_toutcstring">使用 toUTCString() 把今天的日期（根据 UTC）转换为字符串</a></dt>
+<dt><a target="_blank" href="../tiy/t9fe5.html?f=eg_js_date_getday">使用 getDay() 以数字显示星期名</a></dt>
+<dt><a target="_blank" href="../tiy/t7eff.html?f=eg_js_date_getday_weekday">使用 getDay() 以及一个数组以名称显示星期名</a></dt>
+<dt><a target="_blank" href="../tiy/t3a08.html?f=js_timing_clock">显示时钟</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_dates.html" title="JavaScript 日期">例子解释：日期</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 数组</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t133a.html?f=eg_js_array">创建数组 1</a></dt>
+<dt><a target="_blank" href="../tiy/tdbea.html?f=eg_js_array_newlines">创建数组 2</a></dt>
+<dt><a target="_blank" href="../tiy/t7173.html?f=eg_js_array_element">访问数组元素</a></dt>
+<dt><a target="_blank" href="../tiy/t777f.html?f=eg_js_array_element_change">更改数组元素</a></dt>
+<dt><a target="_blank" href="../tiy/t3ec4.html?f=eg_js_array_full">访问整个数组</a></dt>
+<dt><a target="_blank" href="../tiy/t2d36.html?f=eg_js_array_length">确定数组的长度</a></dt>
+<dt><a target="_blank" href="../tiy/t308f.html?f=eg_js_array_loop_for">遍历数组</a></dt>
+<dt><a target="_blank" href="../tiy/t18e9.html?f=eg_js_array_add_length">向数组添加元素</a></dt>
+<dt><a target="_blank" href="../tiy/t2158.html?f=eg_js_array_holes">将未定义的“孔”添加到数组中</a></dt>
+<dt><a target="_blank" href="../tiy/t83b8.html?f=eg_js_array_instanceof">如何识别数组 1</a></dt>
+<dt><a target="_blank" href="../tiy/t83e5.html?f=eg_js_array_isarray_method">如何识别数组 2</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_arrays.html" title="JavaScript 数组">例子解释：数组</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 数组方法</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t1e1a.html?f=eg_js_array_push">向数组添加元素</a></dt>
+<dt><a target="_blank" href="../tiy/tdc30.html?f=eg_js_array_pop">删除数组中最后一个元素 - pop()</a></dt>
+<dt><a target="_blank" href="../tiy/t15f2.html?f=eg_js_array_join">将数组的所有元素连接成一个字符串 - join()</a></dt>
+<dt><a target="_blank" href="../tiy/te3f4.html?f=eg_js_array_concat_1">连接两个数组 - concat()</a></dt>
+<dt><a target="_blank" href="../tiy/td076.html?f=eg_js_array_concat_2">连接三个数组 - concat()</a></dt>
+<dt><a target="_blank" href="../tiy/t403c.html?f=eg_js_array_splice">将一个元素添加到数组中的位置 2 - splice()</a></dt>
+<dt><a target="_blank" href="../tiy/ta1e6.html?f=eg_js_array_tostring">把数组转换为字符串 - toString()</a></dt>
+<dt><a target="_blank" href="../tiy/tae8b.html?f=eg_js_array_unshift">把新元素添加到数组的开头 - unshift()</a></dt>
+<dt><a target="_blank" href="../tiy/t78f8.html?f=eg_js_array_shift">删除数组中的第一个元素 - shift()</a></dt>
+<dt><a target="_blank" href="../tiy/t403c.html?f=eg_js_array_splice">选取数组中的元素 - slice()</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_array_methods.html" title="JavaScript 数组方法">例子解释：数组方法</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 数组排序</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t08b0.html?f=eg_js_array_sort">按升序对数组排序</a></dt>
+<dt><a target="_blank" href="../tiy/t71fe.html?f=eg_js_array_sort_reverse">按降序对数组排序</a></dt>
+<dt><a target="_blank" href="../tiy/t3260.html?f=eg_js_array_sort_numeric_1">按升序排列数字</a></dt>
+<dt><a target="_blank" href="../tiy/t8a84.html?f=eg_js_array_sort_numeric_2">按降序排列数字</a></dt>
+<dt><a target="_blank" href="../tiy/tc83c.html?f=eg_js_array_sort_alpha">排序数字（按字母顺序或数字顺序）</a></dt>
+<dt><a target="_blank" href="../tiy/t704c.html?f=eg_js_array_sort_random">按随机顺序排序数组中的数字</a></dt>
+<dt><a target="_blank" href="../tiy/t9fed.html?f=eg_js_array_sort_low">确定数组中最小的数</a></dt>
+<dt><a target="_blank" href="../tiy/t6e89.html?f=eg_js_array_sort_high">确定数组中最大的数</a></dt>
+<dt><a target="_blank" href="../tiy/tdf30.html?f=eg_js_array_sort_math_min">使用 Math.min() 确定数组中最小的数</a></dt>
+<dt><a target="_blank" href="../tiy/t4f3d.html?f=eg_js_array_sort_math_max">使用 Math.max() 确定数组中最大的数</a></dt>
+<dt><a target="_blank" href="../tiy/tcbba.html?f=eg_js_array_sort_min">使用“自制的” myArrayMin 方法</a></dt>
+<dt><a target="_blank" href="../tiy/tee0d.html?f=eg_js_array_sort_max">使用“自制的” myArrayMax 方法</a></dt>
+<dt><a target="_blank" href="../tiy/teca6.html?f=eg_js_array_sort_object_1">按数字属性排序对象</a></dt>
+<dt><a target="_blank" href="../tiy/t6364.html?f=eg_js_array_sort_object_2">按字符串属性排序对象</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_array_sort.html" title="JavaScript 数组排序">例子解释：数组排序</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 数组迭代</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t8bcb.html?f=eg_js_array_foreach">Array.forEach()</a></dt>
+<dt><a target="_blank" href="../tiy/t3657.html?f=eg_js_array_map">Array.map()</a></dt>
+<dt><a target="_blank" href="../tiy/tfb20.html?f=eg_js_array_filter">Array.filter()</a></dt>
+<dt><a target="_blank" href="../tiy/t9324.html?f=eg_js_array_reduce">Array.reduce()</a></dt>
+<dt><a target="_blank" href="../tiy/tb742.html?f=eg_js_array_reduceright">Array.reduceRight()</a></dt>
+<dt><a target="_blank" href="../tiy/t9c9f.html?f=eg_js_array_every">Array.every()</a></dt>
+<dt><a target="_blank" href="../tiy/t00d8.html?f=eg_js_array_some">Array.some()</a></dt>
+<dt><a target="_blank" href="../tiy/tb670.html?f=eg_js_array_indexof">Array.indexOf()</a></dt>
+<dt><a target="_blank" href="../tiy/t6ea3.html?f=eg_js_array_lastindexof">Array.lastIndexOf()</a></dt>
+<dt><a target="_blank" href="../tiy/tf693.html?f=eg_js_array_find">Array.find()</a></dt>
+<dt><a target="_blank" href="../tiy/tc43e.html?f=eg_js_array_find_index">Array.findIndex()</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_array_iteration.html" title="JavaScript 数组迭代方法">例子解释：数组迭代</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 类型转换</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/tbf28.html?f=eg_js_type_convert_typeof_all">显示所有变量的类型</a></dt>
+<dt><a target="_blank" href="../tiy/tef04.html?f=eg_js_type_convert_constructor_all">显示所有变量类型的构造器</a></dt>
+<dt><a target="_blank" href="../tiy/tfcd4.html?f=eg_js_type_convert_number_string">使用 String() 把数转换为字符串</a></dt>
+<dt><a target="_blank" href="../tiy/tdb85.html?f=eg_js_type_convert_number_tostring">使用 toString() 把数转换为字符串</a></dt>
+<dt><a target="_blank" href="../tiy/t81da.html?f=eg_js_array_isarray">确认变量是否是数组</a></dt>
+<dt><a target="_blank" href="../tiy/tb119.html?f=eg_js_date_isdate">确认变量是否是日期</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_type_conversion.html" title="JavaScript 类型转换">例子解释：类型转换</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 布尔</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t57cf.html?f=eg_js_boolean_expression_1">显示 Boolean(10 > 9) 的值</a></dt>
+<dt><a target="_blank" href="../tiy/t057c.html?f=eg_js_boolean_expression_2">显示 10 &gt; 9 的值</a></dt>
+<dt><a target="_blank" href="../tiy/t2f8d.html?f=eg_js_boolean">拥有真正值的一切均为 true</a></dt>
+<dt><a target="_blank" href="../tiy/tbe20.html?f=eg_js_boolean_zero">零的布尔值是 false</a></dt>
+<dt><a target="_blank" href="../tiy/t8ab5.html?f=eg_js_boolean_minus">减零（minus zero）的布尔值是 false</a></dt>
+<dt><a target="_blank" href="../tiy/t38be.html?f=eg_js_boolean_empty">空字符串的布尔值是 false</a></dt>
+<dt><a target="_blank" href="../tiy/t163c.html?f=eg_js_boolean_undefined">undefined 的布尔值是 false</a></dt>
+<dt><a target="_blank" href="../tiy/t9622.html?f=eg_js_boolean_null">null 的布尔值是 false</a></dt>
+<dt><a target="_blank" href="../tiy/tb258.html?f=eg_js_boolean_false">false 的布尔值是 false</a></dt>
+<dt><a target="_blank" href="../tiy/t9c87.html?f=eg_js_boolean_nan">NaN 的布尔值是 false</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_booleans.html" title="JavaScript 逻辑">例子解释：布尔</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 比较</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t2f11.html?f=eg_js_comparison_01">把 5 赋值给 x，然后显示 (x == 8) 的值</a></dt>
+<dt><a target="_blank" href="../tiy/tccb1.html?f=eg_js_comparison_02">把 5 赋值给 x，然后显示 (x == 5) 的值</a></dt>
+<dt><a target="_blank" href="../tiy/t456e.html?f=eg_js_comparison_04">把 5 赋值给 x，然后显示 (x === 5) 的值</a></dt>
+<dt><a target="_blank" href="../tiy/t65dd.html?f=eg_js_comparison_03">把 5 赋值给 x，然后显示 (x === &quot;5&quot;) 的值</a></dt>
+<dt><a target="_blank" href="../tiy/t68c4.html?f=eg_js_comparison_06">把 5 赋值给 x，然后显示 (x != 8) 的值</a></dt>
+<dt><a target="_blank" href="../tiy/t8010.html?f=eg_js_comparison_07">把 5 赋值给 x，然后显示 (x !== 5) 的值</a></dt>
+<dt><a target="_blank" href="../tiy/t9e09.html?f=eg_js_comparison_08">把 5 赋值给 x，然后显示 (x !== &quot;5&quot;) 的值</a></dt>
+<dt><a target="_blank" href="../tiy/t183c.html?f=eg_js_comparison_10">把 5 赋值给 x，然后显示 (x &gt; 8) 的值</a></dt>
+<dt><a target="_blank" href="../tiy/tdc6f.html?f=eg_js_comparison_11">把 5 赋值给 x，然后显示 (x &lt; 8) 的值</a></dt>
+<dt><a target="_blank" href="../tiy/tbde3.html?f=eg_js_comparison_12">把 5 赋值给 x，然后显示 (x &gt;= 8) 的值</a></dt>
+<dt><a target="_blank" href="../tiy/ta537.html?f=eg_js_comparison_13">把 5 赋值给 x，然后显示 (x &lt;= 8) 的值</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_comparisons.html" title="JavaScript 比较和逻辑运算符">例子解释：比较</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 条件</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t5158.html?f=eg_js_ifthen">if 语句</a></dt>
+<dt><a target="_blank" href="../tiy/t8397.html?f=eg_js_ifthenelse">else 语句</a></dt>
+<dt><a target="_blank" href="../tiy/t6541.html?f=eg_js_elseif">else if 语句</a></dt>
+<dt><a target="_blank" href="../tiy/t07ab.html?f=eg_js_randomlink">随机链接</a></dt>
+<dt><a target="_blank" href="../tiy/tb340.html?f=eg_js_switch_1">Switch 语句</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_if_else.html" title="JavaScript If...Else 语句">例子解释：条件</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 循环</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t952e.html?f=eg_js_fornext">for 循环</a></dt>
+<dt><a target="_blank" href="../tiy/t23ab.html?f=eg_js_fornext_header">遍历 HTML 标题</a></dt>
+<dt><a target="_blank" href="../tiy/tb8df.html?f=eg_js_while">while 循环</a></dt>
+<dt><a target="_blank" href="../tiy/ta849.html?f=eg_js_dowhile">do while 循环</a></dt>
+<dt><a target="_blank" href="../tiy/te82f.html?f=eg_js_break">打破循环</a></dt>
+<dt><a target="_blank" href="../tiy/tb95e.html?f=eg_js_continue">打破并继续循环</a></dt>
+<dt><a target="_blank" href="../tiy/t4f60.html?f=eg_js_loop_for_in_object">使用 for...in 语句遍历对象中的元素</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_loop_for.html" title="JavaScript For 循环">例子解释：循环</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 错误处理</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t2ea0.html?f=eg_js_try_catch">try...catch 语句</a></dt>
+<dt><a target="_blank" href="../tiy/tebd1.html?f=eg_js_try_catch_2">弹出提示框的 try...catch 语句</a></dt>
+<dt><a target="_blank" href="../tiy/taf17.html?f=eg_js_onerror">onerror 事件</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_errors.html" title="JavaScript 错误 - Throw 和 Try to Catch">例子解释：错误</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 正则表达式</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/te2b6.html?f=eg_js_regexp_string_search">在字符串中检索表达式</a></dt>
+<dt><a target="_blank" href="../tiy/t2c02.html?f=eg_js_regexp_string_replace">检索表达式然后替换它</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_regexp.html" title="JavaScript 正则表达式">例子解释：正则表达式</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 对象</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t1a44.html?f=eg_js_object_variable">创建 JavaScript 变量</a></dt>
+<dt><a target="_blank" href="../tiy/t24cc.html?f=eg_js_object_object">创建 JavaScript 对象</a></dt>
+<dt><a target="_blank" href="../tiy/t0427.html?f=eg_js_object_create_1">创建 JavaScript 对象（单行）</a></dt>
+<dt><a target="_blank" href="../tiy/tc659.html?f=eg_js_object_create_2">创建 JavaScript 对象（多行）</a></dt>
+<dt><a target="_blank" href="../tiy/t8a0c.html?f=eg_js_object_create_new">使用 new 创建 JavaScript 对象</a></dt>
+<dt><a target="_blank" href="../tiy/tb6f0.html?f=eg_js_object_constructor_1">使用构造器创建 JavaScript 对象</a></dt>
+<dt><a target="_blank" href="../tiy/t6bcd.html?f=eg_js_object_constructor_builtin_1">创建内置的 JavaScript 对象</a></dt>
+<dt><a target="_blank" href="../tiy/t28a2.html?f=eg_js_object_constructor_builtin_2">创建 JavaScript 变量的最佳方式</a></dt>
+<dt><a target="_blank" href="../tiy/t6e73.html?f=eg_js_object_mutable">JavaScript 对象是易变的</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_object_definition.html" title="JavaScript 对象定义">例子解释：对象</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JavaScript 对象属性</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t276b.html?f=eg_js_object_property_access_1">使用 .property 访问属性</a></dt>
+<dt><a target="_blank" href="../tiy/ta8b8.html?f=eg_js_object_property_access_2">使用 [property] 访问属性</a></dt>
+<dt><a target="_blank" href="../tiy/tca3d.html?f=eg_js_object_property_for_in">使用 for in 访问属性</a></dt>
+<dt><a target="_blank" href="../tiy/t71c6.html?f=eg_js_object_property_add">向已有对象添加新属性</a></dt>
+<dt><a target="_blank" href="../tiy/teddb.html?f=eg_js_object_property_delete">从对象中删除属性</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_object_properties.html" title="JavaScript 对象属性">例子解释：对象属性</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JSON 对象</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t3fa4.html?f=eg_js_json_object_dot">使用 .property 访问属性</a></dt>
+<dt><a target="_blank" href="../tiy/t1c26.html?f=eg_js_json_object_bracket">使用 [property] 访问属性</a></dt>
+<dt><a target="_blank" href="../tiy/t3790.html?f=eg_js_json_object_loop">遍历属性</a></dt>
+<dt><a target="_blank" href="../tiy/tee5f.html?f=eg_js_json_object_loop_bracket">遍历属性值</a></dt>
+<dt><a target="_blank" href="../tiy/tc5d5.html?f=eg_js_json_object_nested">访问嵌套的 JSON 对象</a></dt>
+<dt><a target="_blank" href="../tiy/t0a06.html?f=eg_js_json_object_modify">使用点号表示法修改值</a></dt>
+<dt><a target="_blank" href="../tiy/t29ba-2.html?f=eg_js_json_object_modify_bracket">使用括号表示法修改值</a></dt>
+<dt><a target="_blank" href="../tiy/tb363.html?f=eg_js_json_object_delete">删除对象属性</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_json_objects.html" title="JSON 对象">例子解释：JSON 对象</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JSON 数组</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t29c2.html?f=eg_js_json_array_access">访问数组值</a></dt>
+<dt><a target="_blank" href="../tiy/t0e85.html?f=eg_js_json_array_loop_in">使用 for-in 循环遍历数组</a></dt>
+<dt><a target="_blank" href="../tiy/td0d5.html?f=eg_js_json_array_loop">使用 for 循环遍历数组</a></dt>
+<dt><a target="_blank" href="../tiy/t2910.html?f=eg_js_json_array_nested">访问嵌套的 JSON 数组</a></dt>
+<dt><a target="_blank" href="../tiy/td9a7.html?f=eg_js_json_array_modify">修改数组值</a></dt>
+<dt><a target="_blank" href="../tiy/tf277.html?f=eg_js_json_array_delete">删除数组项目</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_json_arrays.html" title="JSON 数组">例子解释：JSON 数组</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JSON 解析</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/te161.html?f=eg_js_json_parse">使用 JSON 解析</a></dt>
+<dt><a target="_blank" href="../tiy/tc43b.html?f=eg_js_json_ajax">在 AJAX 实例中使用 JSON 解析</a></dt>
+<dt><a target="_blank" href="../tiy/t6cec.html?f=eg_js_json_ajax_array">对数组使用 JSON 解析</a></dt>
+<dt><a target="_blank" href="../tiy/t4048.html?f=eg_js_json_parse_date">解析日期</a></dt>
+<dt><a target="_blank" href="../tiy/t9be2.html?f=eg_js_json_parse_reviver">使用 reviver 函数解析日期</a></dt>
+<dt><a target="_blank" href="../tiy/tf218.html?f=eg_js_json_parse_function">解析函数</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_json_parse.html" title="JSON.parse()">例子解释：JSON 解析</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JSON Stringify</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t2794.html?f=eg_js_json_stringify">使用 JSON 字符串化</a></dt>
+<dt><a target="_blank" href="../tiy/t00f1.html?f=eg_js_json_stringify_array">对数组使用 JSON 字符串化</a></dt>
+<dt><a target="_blank" href="../tiy/t91d8.html?f=eg_js_json_stringify_date">对日期字符串化</a></dt>
+<dt><a target="_blank" href="../tiy/tbedc.html?f=eg_js_json_stringify_function">对函数字符串化</a></dt>
+<dt><a target="_blank" href="../tiy/t28ae.html?f=eg_js_json_stringify_function_tostring">使用 toString() 方法对日期进行字符串化</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_json_stringify.html" title="JSON.stringify()">例子解释：JSON Stringify</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JSON PHP</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t2462.html?f=eg_js_json_php_simple">从 php 文件获取 JSON</a></dt>
+<dt><a target="_blank" href="../tiy/t61a2.html?f=eg_js_json_php_array">从 php 文件获取 JSON 数组</a></dt>
+<dt><a target="_blank" href="../tiy/t5081.html?f=eg_js_json_php_db">从数据库获取 JSON</a></dt>
+<dt><a target="_blank" href="../tiy/t71d6.html?f=eg_js_json_php_db_loop">遍历来自数据库的结果</a></dt>
+<dt><a target="_blank" href="../tiy/t9c37.html?f=eg_js_json_php_db_post">使用 POST 方法发送 JSON</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_json_php.html" title="JSON PHP">例子解释：JSON PHP</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JSON HTML</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t64ad.html?f=json_html_table">生成基于 JSON 数据的 HTML 表格</a></dt>
+<dt><a target="_blank" href="../tiy/t3567.html?f=json_html_table_dynamic">生成动态 HTML 表格</a></dt>
+<dt><a target="_blank" href="../tiy/t019f.html?f=json_html_select">生成基于 JSON 数据的 HTML 下拉列表</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_json_html.html" title="JSON HTML">例子解释：JSON HTML</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>JSON JSONP</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t467e.html?f=eg_js_json_jsonp">简单的 JSONP 实例</a></dt>
+<dt><a target="_blank" href="../tiy/tadc3.html?f=eg_js_json_jsonp_create">创建动态脚本标签</a></dt>
+<dt><a target="_blank" href="../tiy/t8164.html?f=eg_js_json_jsonp_php">带动态结果的 JSONP 实例</a></dt>
+<dt><a target="_blank" href="../tiy/tcc32.html?f=eg_js_json_jsonp_callback">带回调函数的 JSONP 实例</a></dt>
+</dl>
+
+<p class="btn-eg"><a target="_blank" href="js_json_jsonp.html" title="JSONP">例子解释：JSON JSONP</a></p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="js_graphics_d3js.html" title="D3.js">JS D3.js</a></li>
+<li class="next"><a href="js_examples_dom.html" title="JavaScript HTML DOM 实例">JS HTML DOM</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../jsref/index.html">JavaScript 和 HTML DOM 参考手册</a></h5>
+<h5 id="tools_example"><a href="js_examples.html">JavaScript 实例</a></h5>
+<h5 id="tools_quiz"><a href="js_quiz.html">JavaScript 测验</a></h5>
+<h5 id="tools_professional"><a href="index_pro.html">JavaScript 高级教程</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/js/js_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 01:53:55 GMT -->
+</html>

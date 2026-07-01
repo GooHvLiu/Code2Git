@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/typescript/typescript_utility_types.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:35:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>TypeScript 实用工具类型</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>TypeScript 教程</h2>
+<ul>
+<li><a href="index.html" title="TypeScript 教程">TS 教程</a></li>
+<li><a href="typescript_intro.html" title="TypeScript 简介">TS 简介</a></li>
+<li><a href="typescript_getstarted.html" title="TypeScript 入门">TS 入门</a></li>
+<li><a href="typescript_simple_types.html" title="TypeScript 简单类型">TS 简单类型</a></li>
+<li><a href="typescript_special_types.html" title="TypeScript 特殊类型">TS 特殊类型</a></li>
+<li><a href="typescript_arrays.html" title="TypeScript 数组">TS 数组</a></li>
+<li><a href="typescript_tuples.html" title="TypeScript 元组">TS 元组</a></li>
+<li><a href="typescript_object_types.html" title="TypeScript 对象类型">TS 对象类型</a></li>
+<li><a href="typescript_enums.html" title="TypeScript 枚举">TS 枚举</a></li>
+<li><a href="typescript_aliases_and_interfaces.html" title="TypeScript 别名与接口">TS 别名与接口</a></li>
+<li><a href="typescript_union_types.html" title="TypeScript 联合类型">TS 联合类型</a></li>
+<li><a href="typescript_functions.html" title="TypeScript 函数">TS 函数</a></li>
+<li><a href="typescript_casting.html" title="TypeScript 类型转换">TS 类型转换</a></li>
+<li><a href="typescript_classes.html" title="TypeScript 类">TS 类</a></li>
+<li><a href="typescript_basic_generics.html" title="TypeScript 基本泛型">TS 基本泛型</a></li>
+<li class="currentLink"><a href="typescript_utility_types.html" title="TypeScript 实用类型">TS 实用类型</a></li>
+<li><a href="typescript_keyof.html" title="TypeScript Keyof">TS Keyof</a></li>
+<li><a href="typescript_null.html" title="TypeScript Null">TS Null</a></li>
+<li><a href="typescript_definitely_typed.html" title="TypeScript Definitely Typed">TS Definitely Typed</a></li>
+<li><a href="typescript_5_updates.html" title="TypeScript 5.x 更新">TS 5 更新</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>TypeScript 实用工具类型</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="typescript_basic_generics.html" title="TypeScript 基本泛型">TS 基本泛型</a></li>
+<li class="next"><a href="typescript_keyof.html" title="TypeScript Keyof">TS Keyof</a></li>
+</ul>
+</div>
+
+
+
+<section id="intro">
+<p>TypeScript 提供了大量的类型，可以帮助进行一些常见的类型操作，这些类型通常被称为实用工具类型。</p>
+
+<p>本章将介绍最受欢迎的实用工具类型。</p>
+</section>
+
+
+
+<section>
+<h2>Partial</h2>
+
+<p><code>Partial</code> 将对象中的所有属性变为可选。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+interface Point {
+  x: number;
+  y: number;
+}
+
+let pointPart: Partial&lt;Point&gt; = {}; // 'Partial' 允许 x 和 y 为可选
+pointPart.x = 10;
+</pre>
+
+<p class="tiy"><a target="_blank" href="t3c45.html?f=typescript_utility_types_partial">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>Required</h2>
+
+<p><code>Required</code> 将对象中的所有属性变为必填。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+interface Car {
+  make: string;
+  model: string;
+  mileage?: number;
+}
+
+let myCar: Required&lt;Car&gt; = {
+  make: 'Ford',
+  model: 'Focus',
+  mileage: 12000 // 'Required' 强制定义 mileage
+};
+</pre>
+
+<p class="tiy"><a target="_blank" href="t3f2b.html?f=typescript_utility_types_required">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>Record</h2>
+
+<p><code>Record</code> 是定义具有特定键类型和值类型的对象类型的快捷方式。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+const nameAgeMap: Record&lt;string, number&gt; = {
+  'Alice': 21,
+  'Bob': 25
+};
+Record&lt;string, number&gt; is equivalent to { [key: string]: number }
+</pre>
+
+<p class="tiy"><a target="_blank" href="t08f8.html?f=typescript_utility_types_record">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>Omit</h2>
+
+<p><code>Omit</code> 从对象类型中移除键。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+interface Person {
+  name: string;
+  age: number;
+  location?: string;
+}
+
+const bob: Omit&lt;Person, 'age' | 'location'&gt; = {
+  name: 'Bob'
+  // 'Omit' 已从类型中移除了 age 和 location，因此不能在此处定义它们
+};
+</pre>
+
+<p class="tiy"><a target="_blank" href="t6240.html?f=typescript_utility_types_omit">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>Pick</h2>
+
+<p><code>Pick</code> 从对象类型中仅保留指定的键，移除其他所有键。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+interface Person {
+  name: string;
+  age: number;
+  location?: string;
+}
+
+const bob: Pick&lt;Person, 'name'&gt; = {
+  name: 'Bob'
+  // 'Pick' 仅保留了 name，因此从类型中移除了 age 和 location，不能在此处定义它们
+};
+</pre>
+
+<p class="tiy"><a target="_blank" href="t6766.html?f=typescript_utility_types_pick">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>Exclude</h2>
+
+<p><code>Exclude</code> 从联合类型中移除类型。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+type Primitive = string | number | boolean
+const value: Exclude&lt;Primitive, string&gt; = true; // 由于 Exclude 将其从类型中移除，因此此处不能使用字符串。
+</pre>
+
+<p class="tiy"><a target="_blank" href="t21a1.html?f=typescript_utility_types_exclude">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>ReturnType</h2>
+
+<p><code>ReturnType</code> 提取函数类型的返回类型。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+type PointGenerator = () =&gt; { x: number; y: number; };
+const point: ReturnType&lt;PointGenerator&gt; = {
+  x: 10,
+  y: 20
+};
+</pre>
+
+<p class="tiy"><a target="_blank" href="ta195.html?f=typescript_utility_types_return_type">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>Parameters</h2>
+
+<p><code>Parameters</code> 提取函数类型的参数类型作为数组。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+type PointPrinter = (p: { x: number; y: number; }) =&gt; void;
+const point: Parameters&lt;PointPrinter&gt;[0] = {
+  x: 10,
+  y: 20
+};
+</pre>
+
+<p class="tiy"><a target="_blank" href="t9b9e.html?f=typescript_utility_types_parameters">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>Readonly</h2>
+
+<p><code>Readonly</code> 用于创建一个新类型，其中所有属性都是只读的，这意味着一旦为它们分配了值，就无法修改它们。</p>
+
+<p>请记住，TypeScript 将在编译时阻止这种情况，但从理论上讲，由于它被编译为 JavaScript，您仍然可以覆盖只读属性。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+interface Person {
+  name: string;
+  age: number;
+}
+const person: Readonly&lt;Person&gt; = {
+  name: &quot;Dylan&quot;,
+  age: 35,
+};
+person.name = 'Israel'; // prog.ts(11,8): 错误 TS2540: 无法分配给 'name'，因为它是只读属性。
+</pre>
+
+<p class="tiy"><a target="_blank" href="t4356.html?f=typescript_utility_types_readonly">亲自试一试</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="typescript_basic_generics.html" title="TypeScript 基本泛型">TS 基本泛型</a></li>
+<li class="next"><a href="typescript_keyof.html" title="TypeScript Keyof">TS Keyof</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/typescript/typescript_utility_types.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:35:49 GMT -->
+</html>

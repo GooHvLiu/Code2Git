@@ -1,0 +1,96 @@
+<html>
+
+<!-- Mirrored from www.w3school.com.cn/example/aspnet/demo_aspnet_reqfieldvalidator.aspx by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:14:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<body>
+
+<form method="post" action="https://www.w3school.com.cn/example/aspnet/demo_aspnet_reqfieldvalidator.aspx" onsubmit="javascript:return WebForm_OnSubmit();" id="ctl00">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJODc2MzU2NDA2ZGROZQhhUXZ+OfA3SbfSb+agToFLI/Oe3YghyOUq5tRyKg==" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['ctl00'];
+if (!theForm) {
+    theForm = document.ctl00;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="../../WebResource7e61.js?d=OvYNubj8jkkiV5se0Z-iT1GfwcTvPr6xShdYVP2Ra4GujXK9gqW-T5_SW3cukVf0T1_QZHLFhIEpXlmfzL7ALnCzbJXTkblB1IGk6s7Qqe41&amp;t=638568892371266408" type="text/javascript"></script>
+
+
+<script src="../../WebResource4f5d.js?d=iDJwF3Aml8VPh8fSRYxS9DS2Hq3JwnmqYCifSBB0z4_vzop2MWXLVvK8_SyG5vJAatd1fAiwFvDxms5TbETccRzkUqQ7hCRMPeMRy4QUtdE1&amp;t=638568892371266408" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="08110FF6" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAT3uOt+uPyiEHxOCzBBx6hS1VXLCZniQEihPDabNrSt9Los57/4SEVy4GqN8sGw2l7xTrg7s/eG70UIAOod3OxqCJgGLPml43n5cJnSBwXM2D5C9pXPySvIkshfGWAGppY=" />
+</div>
+名称：<input name="name" type="text" id="name" />
+<br />
+年龄：<input name="age" type="text" id="age" />
+<br /><br />
+<input type="submit" name="ctl01" value="提交" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl01&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" />
+<br /><br />
+<span id="ctl02" style="visibility:hidden;">name 字段是必填的！</span>
+
+<script type="text/javascript">
+//<![CDATA[
+var Page_Validators =  new Array(document.getElementById("ctl02"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var ctl02 = document.all ? document.all["ctl02"] : document.getElementById("ctl02");
+ctl02.controltovalidate = "name";
+ctl02.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl02.initialvalue = "";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        //]]>
+</script>
+</form>
+
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/example/aspnet/demo_aspnet_reqfieldvalidator.aspx by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:14:00 GMT -->
+</html>

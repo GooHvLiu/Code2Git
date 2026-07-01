@@ -1,0 +1,169 @@
+// 基础常量定义
+#colors() {
+  primary: #cc0000;
+  secondary: #7c0000;
+  f-b-color: #fff;
+  foodborder: #e1e1e1;
+  footericon: #707070;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+html,
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.iconfont {
+  font-size: 2.5rem;
+}
+
+img {
+  width: 2rem;
+}
+
+//闪现部分代码样式
+#flash {
+  position: absolute;
+  left: 0;
+  top: o;
+  width: 100%;
+  height: 100vh;
+  background-color: #colors[primary];
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1.5s;
+
+  p {
+    color: #colors[f-b-color];
+    font-size: 2rem;
+  }
+
+  img {
+    width: 150px;
+  }
+}
+
+.fade {
+  opacity: 0;
+}
+
+//内容区信息
+#content {
+  background-color: #colors[f-b-color];
+
+  //头部页面，包含logo,搜索框
+  .app-header {
+    background: #colors[primary];
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+      margin-top: 1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    p {
+      color: #colors[f-b-color];
+      font-size: 1.3rem;
+    }
+
+    input {
+      height: 2rem;
+      width: 70%;
+      margin: 0.5rem auto;
+      border: none;
+      padding-left: 0.5rem;
+    }
+  }
+
+  //展示配送信息等相关副标题信息
+  .subheader {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    width: 90%;
+    color: #colors[f-b-color];
+    background-color: #colors[secondary];
+    margin: 0 auto;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+
+    .subheader-info {
+      .icon-rights-arrows {
+        font-size: 1.2rem
+      }
+    }
+
+    .subheader-img {
+      margin: auto;
+    }
+  }
+
+  //展示美食版块区域
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    margin: 1.5rem;
+
+
+    .item {
+      display: grid;
+      border: 1px solid #colors[foodborder];
+      margin: 0.3rem;
+      grid-template-columns: 1fr;
+
+      h4 {
+        justify-self: start;
+      }
+
+      p {
+        justify-self: start;
+        color: #colors[primary];
+      }
+
+      img {
+        justify-self: end;
+      }
+
+      h4,
+      p,
+      img {
+        padding: 0.15rem;
+      }
+    }
+  }
+}
+
+//底部导航
+#footer {
+  ul {
+    display: flex;
+    align-self: center;
+
+    justify-content: space-around;
+
+    li {
+      color: #colors[footericon];
+      font-size: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      i {
+        font-size: 2rem;
+        padding-bottom: 0.5rem;
+      }
+    }
+  }
+}

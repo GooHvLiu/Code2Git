@@ -1,0 +1,727 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/php/php_ref_date.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:10:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>PHP Date / Time 函数</title>
+
+</head>
+
+<body class="serverscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>PHP 教程</h2>
+<ul>
+<li><a href="index.html" title="PHP 教程">PHP 教程</a></li>
+<li><a href="php_intro.html" title="PHP 简介">PHP 简介</a></li>
+<li><a href="php_install.html" title="PHP 安装">PHP 安装</a></li>
+<li><a href="php_syntax.html" title="PHP 语法">PHP 语法</a></li>
+<li><a href="php_comments.html" title="PHP 注释">PHP 注释</a></li>
+<li><a href="php_comments_multiline.html" title="PHP 多行注释">PHP 多行注释</a></li>
+<li><a href="php_variables.html" title="PHP 变量">PHP 变量</a></li>
+<li><a href="php_variables_scope.html" title="PHP 变量作用域">PHP 变量作用域</a></li>
+<li><a href="php_echo_print.html" title="PHP Echo 和 Print 语句">PHP Echo / Print</a></li>
+<li><a href="php_datatypes.html" title="PHP 数据类型">PHP 数据类型</a></li>
+<li><a href="php_string.html" title="PHP 字符串">PHP 字符串</a></li>
+<li><a href="php_string_modify.html" title="PHP 字符串修改">PHP 字符串修改</a></li>
+<li><a href="php_string_concatenate.html" title="PHP 字符串连接">PHP 字符串连接</a></li>
+<li><a href="php_string_slicing.html" title="PHP 字符串切片">PHP 字符串切片</a></li>
+<li><a href="php_string_escape.html" title="PHP 转义字符">PHP 转义字符</a></li>
+<li><a href="php_numbers.html" title="PHP 数字">PHP 数字</a></li>
+<li><a href="php_casting.html" title="PHP 类型转换">PHP 类型转换</a></li>
+<li><a href="php_math.html" title="PHP 数学">PHP 数学</a></li>
+<li><a href="php_constants.html" title="PHP 常量">PHP 常量</a></li>
+<li><a href="php_magic_constants.html" title="PHP 魔法常量">PHP 魔法常量</a></li>
+<li><a href="php_operators.html" title="PHP 运算符">PHP 运算符</a></li>
+<li><a href="php_if_else.html" title="PHP if 语句">PHP if</a></li>
+<li><a href="php_if_operators.html" title="PHP if 运算符">PHP if 运算符</a></li>
+<li><a href="php_if_else_if.html" title="PHP if...else 语句">PHP if...else</a></li>
+<li><a href="php_if_shorthand.html" title="PHP 简写 if">PHP 简写 if</a></li>
+<li><a href="php_if_nested.html" title="PHP 嵌套 if 语句">PHP 嵌套 if</a></li>
+<li><a href="php_switch.html" title="PHP switch 语句">PHP switch</a></li>
+<li><a href="php_looping.html" title="PHP 循环">PHP 循环</a></li>
+<li><a href="php_looping_while.html" title="PHP while 循环">PHP While 循环</a></li>
+<li><a href="php_looping_do_while.html" title="PHP do while 循环">PHP do while 循环</a></li>
+<li><a href="php_looping_for.html" title="PHP for 循环">PHP for 循环</a></li>
+<li><a href="php_looping_foreach.html" title="PHP foreach 循环">PHP foreach 循环</a></li>
+<li><a href="php_looping_break.html" title="PHP Break">PHP Break</a></li>
+<li><a href="php_looping_continue.html" title="PHP Continue">PHP Continue</a></li>
+<li><a href="php_functions.html" title="PHP 函数">PHP 函数</a></li>
+<li><a href="php_arrays.html" title="PHP 数组">PHP 数组</a></li>
+<li><a href="php_arrays_indexed.html" title="PHP 索引数组">PHP 索引数组</a></li>
+<li><a href="php_arrays_associative.html" title="PHP 关联数组">PHP 关联数组</a></li>
+<li><a href="php_arrays_create.html" title="PHP 创建数组">PHP 创建数组</a></li>
+<li><a href="php_arrays_access.html" title="PHP 访问数组">PHP 访问数组</a></li>
+<li><a href="php_arrays_update.html" title="PHP 更新数组项">PHP 更新数组项</a></li>
+<li><a href="php_arrays_add.html" title="PHP 添加数组项">PHP 添加数组项</a></li>
+<li><a href="php_arrays_remove.html" title="PHP 删除数组项">PHP 删除数组项</a></li>
+<li><a href="php_arrays_sort.html" title="PHP 数组排序">PHP 数组排序</a></li>
+<li><a href="php_arrays_multidimensional.html" title="PHP 多维数组">PHP 多维数组</a></li>
+<li><a href="php_arrays_functions.html" title="PHP 数组函数">PHP 数组函数</a></li>
+<li><a href="php_superglobals.html" title="PHP 全局变量 - 超全局变量">PHP 超全局变量</a></li>
+<li><a href="php_superglobals_globals.html" title="PHP $GLOBALS">PHP $GLOBALS</a></li>
+<li><a href="php_superglobals_server.html" title="PHP $_SERVER">PHP $_SERVER</a></li>
+<li><a href="php_superglobals_request.html" title="PHP $_REQUEST">PHP $_REQUEST</a></li>
+<li><a href="php_superglobals_post.html" title="PHP $_POST">PHP $_POST</a></li>
+<li><a href="php_superglobals_get.html" title="PHP $_GET">PHP $_GET</a></li>
+<li><a href="php_regex.html" title="PHP 正则表达式">PHP 正则表达式</a></li>
+</ul>
+<h2>PHP 表单</h2>
+<ul>
+<li><a href="php_forms.html" title="PHP 表单处理">PHP 表单处理</a></li>
+<li><a href="php_form_validation.html" title="PHP 表单验证">PHP 表单验证</a></li>
+<li><a href="php_form_required.html" title="PHP 表单 - 必填字段">PHP 表单必填字段</a></li>
+<li><a href="php_form_url_email.html" title="PHP 表单 - 验证电子邮件和 URL">PHP 表单 URL/E-mail</a></li>
+<li><a href="php_form_complete.html" title="PHP 完整表单实例">PHP 完整表单实例</a></li>
+</ul>
+<h2>PHP 高级教程</h2>
+<ul>
+<li><a href="php_date.html" title="PHP 日期和时间">PHP 日期和时间</a></li>
+<li><a href="php_includes.html" title="PHP 包含文件">PHP 包含文件</a></li>
+<li><a href="php_file.html" title="PHP 文件处理">PHP 文件处理</a></li>
+<li><a href="php_file_open.html" title="PHP 文件打开/读取/关闭">PHP 文件打开/读取</a></li>
+<li><a href="php_file_create.html" title="PHP 文件创建/写入">PHP 文件创建/写入</a></li>
+<li><a href="php_file_upload.html" title="PHP 文件上传">PHP 文件上传</a></li>
+<li><a href="php_cookies.html" title="PHP Cookie">PHP Cookie</a></li>
+<li><a href="php_sessions.html" title="PHP 会话">PHP 会话</a></li>
+<li><a href="php_filter.html" title="PHP 过滤器">PHP 过滤器</a></li>
+<li><a href="php_filter_advanced.html" title="PHP 过滤器进阶">PHP 过滤器进阶</a></li>
+<li><a href="php_callback_functions.html" title="PHP 回调函数">PHP 回调函数</a></li>
+<li><a href="php_json.html" title="PHP 和 JSON">PHP JSON</a></li>
+<li><a href="php_exceptions.html" title="PHP 异常">PHP 异常</a></li>
+</ul>
+<h2>PHP OOP</h2>
+<ul>
+<li><a href="php_oop_what_is.html" title="PHP - 什么是 OOP？">PHP 什么是 OOP？</a></li>
+<li><a href="php_oop_classes_objects.html" title="PHP OOP - 类和对象">PHP 类/对象</a></li>
+<li><a href="php_oop_constructor.html" title="PHP OOP - 构造函数">PHP 构造函数</a></li>
+<li><a href="php_oop_destructor.html" title="PHP OOP - 析构函数">PHP 析构函数</a></li>
+<li><a href="php_oop_access_modifiers.html" title="PHP OOP - 访问修饰符">PHP 访问修饰符</a></li>
+<li><a href="php_oop_inheritance.html" title="PHP OOP - 继承">PHP 继承</a></li>
+<li><a href="php_oop_constants.html" title="PHP OOP - 类常量">PHP 类常量</a></li>
+<li><a href="php_oop_classes_abstract.html" title="PHP OOP - 抽象类">PHP 抽象类</a></li>
+<li><a href="php_oop_interfaces.html" title="PHP OOP - 接口">PHP 接口</a></li>
+<li><a href="php_oop_traits.html" title="PHP OOP - Trait">PHP Trait</a></li>
+<li><a href="php_oop_static_methods.html" title="PHP OOP - 静态方法">PHP 静态方法</a></li>
+<li><a href="php_oop_static_properties.html" title="PHP OOP - 静态属性">PHP 静态属性</a></li>
+<li><a href="php_namespaces.html" title="PHP OOP - 命名空间">PHP 命名空间</a></li>
+<li><a href="php_iterables.html" title="PHP Iterable">PHP Iterable</a></li>
+</ul>
+<h2>PHP 数据库</h2>
+<ul>
+<li><a href="php_mysql_intro.html" title="PHP MySQL 数据库">MySQL 数据库</a></li>
+<li><a href="php_mysql_connect.html" title="PHP 连接 MySQL">MySQL 连接</a></li>
+<li><a href="php_mysql_create.html" title="PHP 创建 MySQL 数据库">MySQL 创建 DB</a></li>
+<li><a href="php_mysql_create_table.html" title="PHP MySQL 创建表格">MySQL 创建表格</a></li>
+<li><a href="php_mysql_insert.html" title="PHP MySQL 插入数据">MySQL 插入数据</a></li>
+<li><a href="php_mysql_insert_lastid.html" title="PHP MySQL 获取最后插入的 ID">MySQL 获取最后的 ID</a></li>
+<li><a href="php_mysql_insert_multiple.html" title="PHP MySQL 插入多条记录">MySQL 插入多条记录</a></li>
+<li><a href="php_mysql_prepared_statements.html" title="PHP MySQL Prepared 语句">MySQL Prepared</a></li>
+<li><a href="php_mysql_select.html" title="PHP MySQL 选取数据">MySQL 选取数据</a></li>
+<li><a href="php_mysql_select_where.html" title="PHP MySQL 使用 WHERE 子句">MySQL WHERE</a></li>
+<li><a href="php_mysql_select_orderby.html" title="PHP MySQL 使用 ORDER BY 子句">MySQL ORDER BY</a></li>
+<li><a href="php_mysql_delete.html" title="PHP MySQL 删除数据">MySQL 删除数据</a></li>
+<li><a href="php_mysql_update.html" title="PHP MySQL 更新数据">MySQL 更新数据</a></li>
+<li><a href="php_mysql_select_limit.html" title="PHP MySQL 限制数据选择">MySQL 限制数据</a></li>
+</ul>
+<h2>PHP XML</h2>
+<ul>
+<li><a href="php_xml_parsers.html" title="PHP XML 解析器">PHP XML 解析器</a></li>
+<li><a href="php_xml_simplexml_read.html" title="PHP SimpleXML 解析器">PHP SimpleXML 解析器</a></li>
+<li><a href="php_xml_simplexml_get.html" title="PHP SimpleXML - 获取节点/属性值">PHP SimpleXML - 获取</a></li>
+<li><a href="php_xml_parser_expat.html" title="PHP XML Expat 解析器">PHP XML Expat</a></li>
+<li><a href="php_xml_dom.html" title="PHP XML DOM 解析器">PHP XML DOM 解析器</a></li>
+</ul>
+<h2>PHP 和 AJAX</h2>
+<ul>
+<li><a href="php_ajax_intro.html" title="PHP - AJAX 简介">AJAX 简介</a></li>
+<li><a href="php_ajax_php.html" title="PHP - AJAX 与 PHP">AJAX PHP</a></li>
+<li><a href="php_ajax_database.html" title="PHP - AJAX 与 MySQL">AJAX 数据库</a></li>
+<li><a href="php_ajax_xml.html" title="PHP 实例 - AJAX 与 XML">AJAX XML</a></li>
+<li><a href="php_ajax_livesearch.html" title="PHP 实例 - AJAX 实时搜索">AJAX 实时搜索</a></li>
+<li><a href="php_ajax_poll.html" title="PHP 实例 - AJAX 投票">AJAX Poll</a></li>
+</ul>
+<h2>PHP 参考手册</h2>
+<ul>
+<li><a href="php_ref.html" title="PHP 参考手册">PHP 参考手册</a></li>
+<li><a href="php_ref_array.html" title="PHP Array 函数">PHP Array</a></li>
+<li><a href="php_ref_calendar.html" title="PHP Calendar 函数">PHP Calendar</a></li>
+<li class="currentLink"><a href="php_ref_date.html" title="PHP Date / Time 函数">PHP Date</a></li>
+<li><a href="php_ref_directory.html" title="PHP Directory 函数">PHP Directory</a></li>
+<li><a href="php_ref_error.html" title="PHP Error 和 Logging 函数">PHP Error</a></li>
+<li><a href="php_ref_exception.html" title="PHP Exception 参考手册">PHP Exception</a></li>
+<li><a href="php_ref_filesystem.html" title="PHP Filesystem 函数">PHP Filesystem</a></li>
+<li><a href="php_ref_filter.html" title="PHP Filter 函数">PHP Filter</a></li>
+<li><a href="php_ref_ftp.html" title="PHP FTP 函数">PHP FTP</a></li>
+<li><a href="php_ref_http.html" title="PHP HTTP 函数">PHP HTTP</a></li>
+<li><a href="php_ref_json.html" title="PHP JSON 函数">PHP JSON</a></li>
+<li><a href="php_ref_libxml.html" title="PHP LibXML 函数">PHP LibXML</a></li>
+<li><a href="php_ref_mail.html" title="PHP Mail 函数">PHP Mail</a></li>
+<li><a href="php_ref_math.html" title="PHP Math 函数">PHP Math</a></li>
+<li><a href="php_ref_mysql.html" title="PHP MySQL 函数">PHP MySQL</a></li>
+<li><a href="php_ref_mysqli.html" title="PHP 5 MySQLi 函数">PHP MySQLi</a></li>
+<li><a href="php_ref_network.html" title="PHP Network 函数">PHP Network</a></li>
+<li><a href="php_ref_regex.html" title="PHP 正则表达式函数">PHP RegEx</a></li>
+<li><a href="php_ref_simplexml.html" title="PHP SimpleXML 函数">PHP SimpleXML</a></li>
+<li><a href="php_ref_stream.html" title="PHP Stream 函数">PHP Stream</a></li>
+<li><a href="php_ref_string.html" title="PHP String 函数">PHP String</a></li>
+<li><a href="php_ref_xml.html" title="PHP XML Parser 函数">PHP XML</a></li>
+<li><a href="php_ref_zip.html" title="PHP Zip File 函数">PHP Zip</a></li>
+<li><a href="php_ref_variable_handling.html" title="PHP 变量处理函数">PHP 变量处理</a></li>
+<li><a href="php_ref_output_control.html" title="PHP 输出控制函数">PHP 输出控制</a></li>
+<li><a href="php_ref_timezones.html" title="PHP 时区">PHP 时区</a></li>
+<li><a href="php_ref_misc.html" title="PHP 杂项函数">PHP 杂项</a></li>
+<li><a href="php_ref_keywords.html" title="PHP 关键词">PHP 关键词</a></li>
+</ul>
+<h2>PHP 实例</h2>
+<ul>
+<li><a href="php_examples.html" title="PHP 实例">PHP 实例</a></li>
+<li><a href="php_quiz.html" title="PHP 测验">PHP 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>PHP Date / Time 函数</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="php_ref_calendar.html" title="PHP Calendar 函数">PHP Calendar</a></li>
+<li class="next"><a href="php_ref_directory.html" title="PHP Directory 函数">PHP Directory</a></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>PHP Date/Time 简介</h2>
+
+<p>Date/Time 函数允许您从 PHP 脚本运行的服务器上获取日期和时间。您可以使用 Date/Time 函数通过不同的方式来格式化日期和时间。</p>
+
+<p class="note"><span>注释：</span>这些函数依赖于服务器的本地设置。使用这些函数时请记住要考虑夏令时和闰年。</p>
+</div>
+
+
+
+<div>
+<h2>安装</h2>
+
+<p>PHP Date/Time 函数是 PHP 核心的组成部分。无需安装即可使用这些函数。</p>
+</div>
+
+
+
+<div>
+<h2>Runtime 配置</h2>
+
+<p>Date/Time 函数的行为受到 php.ini 中设置的影响：</p>
+
+<table class="ref">
+<tr>
+<th>名称</th>
+<th>描述</th>
+<th>默认</th>
+<th>PHP 版本</th>
+</tr>
+
+<tr>
+<td>date.timezone</td>
+<td>默认时区（所有的 Date/Time 函数使用该选项）</td>
+<td>&quot;&quot;</td>
+<td>PHP 5.1</td>
+</tr>
+
+<tr>
+<td>date.default_latitude</td>
+<td>默认纬度（date_sunrise() 和 date_sunset() 使用该选项）</td>
+<td>&quot;31.7667&quot;</td>
+<td>PHP 5.0</td>
+</tr>
+
+<tr>
+<td>date.default_longitude</td>
+<td>默认经度（date_sunrise() 和 date_sunset() 使用该选项）</td>
+<td>&quot;35.2333&quot;</td>
+<td>PHP 5.0</td>
+</tr>
+
+<tr>
+<td>date.sunrise_zenith</td>
+<td>默认日出天顶（date_sunrise() 和 date_sunset() 使用该选项）</td>
+<td>&quot;90.83&quot;</td>
+<td>PHP 5.0</td>
+</tr>
+
+<tr>
+<td>date.sunset_zenith</td>
+<td>默认日落天顶（date_sunrise() 和 date_sunset() 使用该选项）</td>
+<td>&quot;90.83&quot;</td>
+<td>PHP 5.0</td>
+</tr>
+</table>
+</div>
+
+
+
+<div>
+<h2>PHP 5 Date/Time 函数</h2>
+
+<table class="ref">
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><a href="func_date_checkdate.html" title="PHP checkdate() 函数">checkdate()</a></td>
+<td>验证格利高里日期。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_date_add.html" title="PHP date_add() 函数">date_add()</a></td>
+<td>添加日、月、年、时、分和秒到日期。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_create_from_format.html" title="PHP date_create_from_format() 函数">date_create_from_format()</a></td>
+<td>返回根据指定格式进行格式化的新的 DateTime 对象。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_date_create.html" title="PHP date_create() 函数">date_create()</a></td>
+<td>返回新的 DateTime 对象。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_date_set.html" title="PHP date_date_set() 函数">date_date_set()</a></td>
+<td>设置新日期。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_default_timezone_get.html" title="PHP date_default_timezone_get() 函数">date_default_timezone_get()</a></td>
+<td>返回由所有的 Date/Time 函数使用的默认时区。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_default_timezone_set.html" title="PHP date_default_timezone_set() 函数">date_default_timezone_set()</a></td>
+<td>设置由所有的 Date/Time 函数使用的默认时区。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_date_diff.html" title="PHP date_diff() 函数">date_diff()</a></td>
+<td>返回两个日期间的差值。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_date_format.html" title="PHP date_format() 函数">date_format()</a></td>
+<td>返回根据指定格式进行格式化的日期。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_get_last_errors.html" title="PHP date_get_last_errors() 函数">date_get_last_errors()</a></td>
+<td>返回日期字符串中的警告/错误。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_interval_create_from_date_string.html" title="PHP date_interval_create_from_date_string() 函数">date_interval_create_from_date_string()</a></td>
+<td>从字符串的相关部分建立 DateInterval。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_interval_format.html" title="PHP date_interval_format() 函数">date_interval_format()</a></td>
+<td>格式化时间间隔。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_isodate_set.html" title="PHP date_isodate_set() 函数">date_isodate_set()</a></td>
+<td>设置 ISO 日期。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_modify.html" title="PHP date_modify() 函数">date_modify()</a></td>
+<td>修改时间戳。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_offset_get.html" title="PHP date_offset_get() 函数">date_offset_get()</a></td>
+<td>返回时区偏移。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_parse_from_format.html" title="PHP date_parse_from_format() 函数">date_parse_from_format()</a></td>
+<td>根据指定的格式返回带有关于指定日期的详细信息的关联数组。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_date_parse.html" title="PHP date_parse() 函数">date_parse()</a></td>
+<td>返回带有关于指定日期的详细信息的关联数组。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_date_sub.html" title="PHP date_sub() 函数">date_sub()</a></td>
+<td>从指定日期减去日、月、年、时、分和秒。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_sun_info.html" title="PHP date_sun_info() 函数">date_sun_info()</a></td>
+<td>返回包含有关指定日期与地点的日出/日落和黄昏开始/黄昏结束的信息的数组。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_sunrise.html" title="PHP date_sunrise() 函数">date_sunrise()</a></td>
+<td>返回指定日期与位置的日出时间。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_sunset.html" title="PHP date_sunset() 函数">date_sunset()</a></td>
+<td>返回指定日期与位置的日落时间。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_time_set.html" title="PHP date_time_set() 函数">date_time_set()</a></td>
+<td>设置时间。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_timestamp_get.html" title="PHP date_timestamp_get() 函数">date_timestamp_get()</a></td>
+<td>返回 Unix 时间戳。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_timestamp_set.html" title="PHP date_timestamp_set() 函数">date_timestamp_set()</a></td>
+<td>设置基于 Unix 时间戳的日期和时间。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_timezone_get.html" title="PHP date_timezone_get() 函数">date_timezone_get()</a></td>
+<td>返回给定 DateTime 对象的时区。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_timezone_set.html" title="PHP date_timezone_set() 函数">date_timezone_set()</a></td>
+<td>设置 DateTime 对象的时区。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_date.html" title="PHP date() 函数">date()</a></td>
+<td>格式化本地日期和时间。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_getdate.html" title="PHP getdate() 函数">getdate()</a></td>
+<td>返回某个时间戳或者当前本地的日期/时间的日期/时间信息。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_gettimeofday.html" title="PHP gettimeofday() 函数">gettimeofday()</a></td>
+<td>返回当前时间。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_gmdate.html" title="PHP gmdate() 函数">gmdate()</a></td>
+<td>格式化 GMT/UTC 日期和时间。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_gmmktime.html" title="PHP gmmktime() 函数">gmmktime()</a></td>
+<td>返回 GMT 日期的 UNIX 时间戳。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_gmstrftime.html" title="PHP gmstrftime() 函数">gmstrftime()</a></td>
+<td>根据区域设置对 GMT/UTC 日期和时间进行格式化。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_idate.html" title="PHP idate() 函数">idate()</a></td>
+<td>将本地时间/日期格式化为整数。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_localtime.html" title="PHP localtime() 函数">localtime()</a></td>
+<td>返回本地时间。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_microtime.html" title="PHP microtime() 函数">microtime()</a></td>
+<td>返回当前时间的微秒数。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_mktime.html" title="PHP mktime() 函数">mktime()</a></td>
+<td>返回日期的 Unix 时间戳。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_strftime.html" title="PHP strftime() 函数">strftime()</a></td>
+<td>根据区域设置对本地时间/日期进行格式化。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_strptime.html" title="PHP strptime() 函数">strptime()</a></td>
+<td>解析由 strftime() 生成的时间/日期。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_strtotime.html" title="PHP strtotime() 函数">strtotime()</a></td>
+<td>将任何英文文本的日期或时间描述解析为 Unix 时间戳。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_time.html" title="PHP time() 函数">time()</a></td>
+<td>返回当前时间的 Unix 时间戳。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_timezone_abbreviations_list.html" title="PHP timezone_abbreviations_list() 函数">timezone_abbreviations_list()</a></td>
+<td>返回包含夏令时、偏移量和时区名称的关联数组。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_timezone_identifiers_list.html" title="PHP timezone_identifiers_list() 函数">timezone_identifiers_list()</a></td>
+<td>返回带有所有时区标识符的索引数组。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_timezone_location_get.html" title="PHP timezone_location_get() 函数">timezone_location_get()</a></td>
+<td>返回指定时区的位置信息。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_timezone_name_from_abbr.html" title="PHP timezone_name_from_abbr() 函数">timezone_name_from_abbr()</a></td>
+<td>根据时区缩略语返回时区名称。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_timezone_name_get.html" title="PHP timezone_name_get() 函数">timezone_name_get()</a></td>
+<td>返回时区的名称。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_timezone_offset_get.html" title="PHP timezone_offset_get() 函数">timezone_offset_get()</a></td>
+<td>返回相对于 GMT 的时区偏移。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_timezone_open.html" title="PHP timezone_open() 函数">timezone_open()</a></td>
+<td>创建新的 DateTimeZone 对象。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_timezone_transitions_get.html" title="PHP timezone_transitions_get() 函数">timezone_transitions_get()</a></td>
+<td>返回时区的所有转换。</td>
+</tr>
+
+<tr>
+<td><a href="func_date_timezone_version_get.html" title="PHP timezone_version_get() 函数">timezone_version_get()</a></td>
+<td>返回时区数据库的版本。</td>
+</tr>
+</table>
+</div>
+
+
+
+<div>
+<h2>PHP 5 预定义的 Date/Time 常量</h2>
+
+<table class="ref">
+<tr>
+<th style="width: 35%;">常量</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td>DATE_ATOM</td>
+<td>Atom （例如：2005-08-15T16:13:03+0000）</td>
+</tr>
+
+<tr>
+<td>DATE_COOKIE</td>
+<td>HTTP Cookies （例如：Sun, 14 Aug 2005 16:13:03 UTC）</td>
+</tr>
+
+<tr>
+<td>DATE_ISO8601</td>
+<td>ISO-8601 （例如：2005-08-14T16:13:03+0000）</td>
+</tr>
+
+<tr>
+<td>DATE_RFC822</td>
+<td>RFC 822 （例如：Sun, 14 Aug 2005 16:13:03 UTC）</td>
+</tr>
+
+<tr>
+<td>DATE_RFC850</td>
+<td>RFC 850 （例如：Sunday, 14-Aug-05 16:13:03 UTC）</td>
+</tr>
+
+<tr>
+<td>DATE_RFC1036</td>
+<td>RFC 1036 （例如：Sunday, 14-Aug-05 16:13:03 UTC）</td>
+</tr>
+
+<tr>
+<td>DATE_RFC1123</td>
+<td>RFC 1123 （例如：Sun, 14 Aug 2005 16:13:03 UTC）</td>
+</tr>
+
+<tr>
+<td>DATE_RFC2822</td>
+<td>RFC 2822 （Sun, 14 Aug 2005 16:13:03 +0000）</td>
+</tr>
+
+<tr>
+<td>DATE_RSS</td>
+<td>RSS （Sun, 14 Aug 2005 16:13:03 UTC）</td>
+</tr>
+
+<tr>
+<td>DATE_W3C</td>
+<td>World Wide Web Consortium （例如： 2005-08-14T16:13:03+0000）</td>
+</tr>
+</table>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="php_ref_calendar.html" title="PHP Calendar 函数">PHP Calendar</a></li>
+<li class="next"><a href="php_ref_directory.html" title="PHP Directory 函数">PHP Directory</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="php_ref.html">PHP 参考手册</a></h5>
+<h5 id="tools_example"><a href="php_examples.html">PHP 实例</a></h5>
+<h5 id="tools_quiz"><a href="php_quiz.html">PHP 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/php/php_ref_date.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:11:13 GMT -->
+</html>

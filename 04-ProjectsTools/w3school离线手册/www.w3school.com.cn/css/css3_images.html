@@ -1,0 +1,1228 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/css/css3_images.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:19:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>CSS 设置图像样式</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>CSS 基础教程</h2>
+<ul>
+<li><a href="index.html" title="CSS 教程">CSS 教程</a></li>
+<li><a href="css_jianjie.html" title="CSS 简介">CSS 简介</a></li>
+<li><a href="css_syntax.html" title="CSS 语法">CSS 语法</a></li>
+<li><a href="css_selectors.html" title="CSS 选择器">CSS 选择器</a></li>
+<li><a href="css_shiyong.html" title="CSS 使用">CSS 使用</a></li>
+<li><a href="css_comments.html" title="CSS 注释">CSS 注释</a></li>
+<li><a href="css_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="css_colors_rgb.html" title="CSS RGB 颜色">CSS RGB 颜色</a></li>
+<li><a href="css_colors_hex.html" title="CSS HEX 颜色">CSS HEX 颜色</a></li>
+<li><a href="css_colors_hsl.html" title="CSS HSL 颜色">CSS HSL 颜色</a></li>
+<li><a href="css_background.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="css_background_image.html" title="CSS 背景图像">CSS 背景图像</a></li>
+<li><a href="css_background_repeat.html" title="CSS 背景重复">CSS 背景重复</a></li>
+<li><a href="css_background_attachment.html" title="CSS 背景附着">CSS 背景附着</a></li>
+<li><a href="css_background_shorthand.html" title="CSS 简写背景属性">CSS 简写背景属性</a></li>
+<li><a href="css_border.html" title="CSS 边框">CSS 边框</a></li>
+<li><a href="css_border_width.html" title="CSS 边框宽度">CSS 边框宽度</a></li>
+<li><a href="css_border_color.html" title="CSS 边框颜色">CSS 边框颜色</a></li>
+<li><a href="css_border_sides.html" title="CSS 边框各边">CSS 边框各边</a></li>
+<li><a href="css_border_shorthand.html" title="CSS 简写边框属性">CSS 简写边框属性</a></li>
+<li><a href="css_border_rounded.html" title="CSS 圆角边框">CSS 圆角边框</a></li>
+<li><a href="css_margin.html" title="CSS 外边距">CSS 外边距</a></li>
+<li><a href="css_margin_collapse.html" title="CSS 外边距合并">CSS 外边距合并</a></li>
+<li><a href="css_padding.html" title="CSS 内边距">CSS 内边距</a></li>
+<li><a href="css_dimension.html" title="CSS 高度和宽度">CSS 高度/宽度</a></li>
+<li><a href="css_boxmodel.html" title="CSS 框模型">CSS 框模型</a></li>
+<li><a href="css_outline.html" title="CSS 轮廓">CSS 轮廓</a></li>
+<li><a href="css_outline_width.html" title="CSS 轮廓宽度">CSS 轮廓宽度</a></li>
+<li><a href="css_outline_color.html" title="CSS 轮廓颜色">CSS 轮廓颜色</a></li>
+<li><a href="css_outline_shorthand.html" title="CSS 简写轮廓属性">CSS 简写轮廓属性</a></li>
+<li><a href="css_outline_offset.html" title="CSS 轮廓偏移">CSS 轮廓偏移</a></li>
+<li><a href="css_text.html" title="CSS 文本">CSS 文本</a></li>
+<li><a href="css_text_align.html" title="CSS 文本对齐">CSS 文本对齐</a></li>
+<li><a href="css_text_decoration.html" title="CSS 文本装饰">CSS 文本装饰</a></li>
+<li><a href="css_text_transformation.html" title="CSS 文本转换">CSS 文本转换</a></li>
+<li><a href="css_text_spacing.html" title="CSS 文字间距">CSS 文字间距</a></li>
+<li><a href="css_text_shadow.html" title="CSS 文本阴影">CSS 文本阴影</a></li>
+<li><a href="css_font.html" title="CSS 字体">CSS 字体</a></li>
+<li><a href="css_font_style.html" title="CSS 字体样式">CSS 字体样式</a></li>
+<li><a href="css_font_size.html" title="CSS 字体大小">CSS 字体大小</a></li>
+<li><a href="css_font_google.html" title="CSS 谷歌字体">CSS 谷歌字体</a></li>
+<li><a href="css_font_shorthand.html" title="CSS 简写字体属性">CSS 简写字体属性</a></li>
+<li><a href="css_icons.html" title="CSS 图标">CSS 图标</a></li>
+<li><a href="css_link.html" title="CSS 链接">CSS 链接</a></li>
+<li><a href="css_list.html" title="CSS 列表">CSS 列表</a></li>
+<li><a href="css_table.html" title="CSS 表格">CSS 表格</a></li>
+</ul>
+<h2>CSS 中级教程</h2>
+<ul>
+<li><a href="css_display_visibility.html" title="CSS 布局 - display 属性">CSS Display</a></li>
+<li><a href="css_max-width.html" title="CSS 布局 - width 和 max-width">CSS max-width</a></li>
+<li><a href="css_positioning.html" title="CSS 布局 - position 属性">CSS 定位</a></li>
+<li><a href="css_z-index.html" title="CSS 布局 - z-index 属性">CSS z-index</a></li>
+<li><a href="css_overflow.html" title="CSS 布局 - 溢出">CSS 溢出</a></li>
+<li><a href="css_float.html" title="CSS 布局 - 浮动和清除">CSS 浮动</a></li>
+<li><a href="css_float_clear.html" title="CSS 布局 - clear 和 clearfix">CSS 清除浮动</a></li>
+<li><a href="css_float_examples.html" title="CSS 布局 - 浮动实例">CSS 布局 - 浮动实例</a></li>
+<li><a href="css_inline-block.html" title="CSS 布局 - display: inline-block">CSS inline-block</a></li>
+<li><a href="css_align.html" title="CSS 布局 - 水平和垂直对齐">CSS 对齐</a></li>
+<li><a href="css_combinators.html" title="CSS 选择器">CSS 组合器</a></li>
+<li><a href="css_pseudo_classes.html" title="CSS 伪类">CSS 伪类</a></li>
+<li><a href="css_pseudo_elements.html" title="CSS 伪元素">CSS 伪元素</a></li>
+<li><a href="css_image_transparency.html" title="CSS 不透明度">CSS 不透明度</a></li>
+<li><a href="css_navbar.html" title="CSS 导航栏">CSS 导航栏</a></li>
+<li><a href="css_navbar_vertical.html" title="CSS 垂直导航栏">CSS 垂直导航栏</a></li>
+<li><a href="css_navbar_horizontal.html" title="CSS 水平导航栏">CSS 水平导航栏</a></li>
+<li><a href="css_dropdowns.html" title="CSS 下拉菜单">CSS 下拉菜单</a></li>
+<li><a href="css_image_gallery.html" title="CSS 图片库">CSS 图片库</a></li>
+<li><a href="css_image_sprites.html" title="CSS 图像精灵">CSS 图像精灵</a></li>
+<li><a href="css_attribute_selectors.html" title="CSS 属性选择器">CSS 属性选择器</a></li>
+<li><a href="css_form.html" title="CSS 表单">CSS 表单</a></li>
+<li><a href="css_counters.html" title="CSS 计数器">CSS 计数器</a></li>
+<li><a href="css_website_layout.html" title="CSS 网站布局">CSS 网站布局</a></li>
+<li><a href="css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="css_specificity.html" title="CSS 特异性">CSS 特异性</a></li>
+<li><a href="css_important.html" title="CSS !important 规则">CSS !important</a></li>
+<li><a href="css_math_functions.html" title="CSS 数学函数">CSS 数学函数</a></li>
+</ul>
+<h2>CSS3 高级教程</h2>
+<ul>
+<li><a href="css3_borders.html" title="CSS 圆角">CSS 圆角</a></li>
+<li><a href="css3_border_images.html" title="CSS 边框图像">CSS 边框图像</a></li>
+<li><a href="css3_backgrounds.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="css3_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="css_colors_keywords.html" title="CSS 颜色关键字">CSS 颜色关键字</a></li>
+<li><a href="css3_gradients.html" title="CSS 渐变">CSS 渐变</a></li>
+<li><a href="css3_gradients_radial.html" title="CSS 径向渐变">CSS 径向渐变</a></li>
+<li><a href="css3_shadows.html" title="CSS 阴影">CSS 阴影</a></li>
+<li><a href="css3_shadows_box.html" title="CSS box-shadow">CSS box-shadow</a></li>
+<li><a href="css3_text_effects.html" title="CSS 文本效果">CSS 文本效果</a></li>
+<li><a href="css3_fonts.html" title="CSS 网络字体">CSS 网络字体</a></li>
+<li><a href="css3_2dtransforms.html" title="CSS 2D 转换">CSS 2D 转换</a></li>
+<li><a href="css3_3dtransforms.html" title="CSS 3D 转换">CSS 3D 转换</a></li>
+<li><a href="css3_transitions.html" title="CSS 过渡">CSS 过渡</a></li>
+<li><a href="css3_animations.html" title="CSS 动画">CSS 动画</a></li>
+<li><a href="css_tooltip.html" title="CSS 工具提示">CSS 工具提示</a></li>
+<li class="currentLink"><a href="css3_images.html" title="CSS 图像样式">CSS 图像样式</a></li>
+<li><a href="css3_object-fit.html" title="CSS object-fit">CSS object-fit</a></li>
+<li><a href="css3_object-position.html" title="CSS object-position 属性">CSS object-position</a></li>
+<li><a href="css3_masking.html" title="CSS 遮罩">CSS 遮罩</a></li>
+<li><a href="css3_buttons.html" title="CSS 按钮">CSS 按钮</a></li>
+<li><a href="css3_pagination.html" title="CSS 分页">CSS 分页</a></li>
+<li><a href="css3_multiple_columns.html" title="CSS 多列">CSS 多列</a></li>
+<li><a href="css3_user_interface.html" title="CSS 用户界面">CSS 用户界面</a></li>
+<li><a href="css3_variables.html" title="CSS 变量">CSS 变量</a></li>
+<li><a href="css3_variables_overriding.html" title="CSS 覆盖变量">CSS 覆盖变量</a></li>
+<li><a href="css3_variables_javascript.html" title="CSS 使用 JavaScript 更改变量">CSS 变量 - JavaScript</a></li>
+<li><a href="css3_variables_mediaqueries.html" title="CSS 在媒体查询中使用变量">CSS 变量 - 媒体查询</a></li>
+<li><a href="css3_property.html" title="CSS @property 规则">CSS @property</a></li>
+<li><a href="css3_box-sizing.html" title="CSS Box Sizing">CSS Box Sizing</a></li>
+<li><a href="css3_flexbox.html" title="CSS Flexbox">CSS Flexbox</a></li>
+<li><a href="css3_mediaqueries.html" title="CSS 媒体查询">CSS 媒体查询</a></li>
+<li><a href="css3_mediaqueries_ex.html" title="CSS 媒体查询实例">CSS 媒体查询实例</a></li>
+</ul>
+<h2>CSS 响应式设计</h2>
+<ul>
+<li><a href="css_rwd_intro.html" title="响应式网站设计 - 简介">RWD 简介</a></li>
+<li><a href="css_rwd_viewport.html" title="响应式网页设计 - 视口">RWD 视口</a></li>
+<li><a href="css_rwd_grid.html" title="响应式网页设计 - Grid-View">RWD 网格视图</a></li>
+<li><a href="css_rwd_mediaqueries.html" title="响应式网页设计 - 媒体查询">RWD 媒体查询</a></li>
+<li><a href="css_rwd_images.html" title="响应式网页设计 - 图像">RWD 图像</a></li>
+<li><a href="css_rwd_videos.html" title="响应式网页设计 - 视频">RWD 视频</a></li>
+</ul>
+<h2>CSS 网格教程</h2>
+<ul>
+<li><a href="css_grid.html" title="CSS 网格布局模块">CSS 网格布局模块</a></li>
+<li><a href="css_grid_container.html" title="CSS 网格容器">CSS 网格容器</a></li>
+<li><a href="css_grid_item.html" title="CSS 网格项目">CSS 网格项目</a></li>
+</ul>
+<h2>CSS 实例</h2>
+<ul>
+<li><a href="css_examples.html" title="CSS 实例">CSS 实例</a></li>
+</ul>
+<h2>CSS 测验</h2>
+<ul>
+<li><a href="css_quiz.html" title="CSS 测验">CSS 测验</a></li>
+</ul>
+<h2>CSS 参考手册</h2>
+<ul>
+<li><a href="../cssref/index.html" title="CSS 参考手册">CSS 参考手册</a></li>
+<li><a href="../cssref/css_browsersupport.html" title="CSS 浏览器支持">CSS 浏览器支持</a></li>
+<li><a href="../cssref/css_selectors.html" title="CSS 选择器">CSS 选择器</a></li>
+<li><a href="../cssref/css_functions.html" title="CSS 函数">CSS 函数</a></li>
+<li><a href="../cssref/css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="../cssref/css_ref_aural.html" title="CSS 听觉">CSS 听觉</a></li>
+<li><a href="../cssref/css_websafe_fonts.html" title="CSS 网络安全字体">CSS 网络安全字体</a></li>
+<li><a href="../cssref/css_animatable.html" title="CSS 可动画制作">CSS 可动画制作</a></li>
+<li><a href="../cssref/css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="../cssref/css_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="../cssref/css_colors_legal.html" title="CSS 颜色值">CSS 颜色值</a></li>
+<li><a href="../cssref/css_default_values.html" title="CSS 默认值">CSS 默认值</a></li>
+<li><a href="../cssref/css_entities.html" title="CSS 实体">CSS 实体</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>CSS 设置图像样式</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css_tooltip.html" title="CSS 工具提示">CSS 工具提示</a></li>
+<li class="next"><a href="css3_object-fit.html" title="CSS object-fit">CSS object-fit</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p>学习如何使用 CSS 设置图像样式。</p>
+</div>
+
+
+
+<div>
+<h2>圆角图像</h2>
+
+<p>使用 <code>border-radius</code> 属性创建圆形图像：</p>
+
+<style>
+.p50 {
+padding: 10px;
+}
+
+</style>
+
+<div class="p50">
+<img src="../i/photo/coffee.jpg" style="border-radius:8px;" />
+
+<h3>实例</h3>
+
+<p>圆角图像:</p>
+
+<pre style="width: 100%; box-sizing: border-box;" class="csscode">
+img {
+  border-radius: 8px;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t1989.html?f=css_ex_images_round">亲自试一试</a></p>
+</div>
+
+<div class="p50">
+<img src="../i/photo/coffee.jpg" style="border-radius:50%;" />
+
+<h3>实例</h3>
+
+<p>圆形图像：</p>
+
+<pre style="width: 100%; box-sizing: border-box;" class="csscode">
+img {
+  border-radius: 50%;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/ta990.html?f=css_ex_images_circle">亲自试一试</a></p>
+</div>
+
+<p style="clear: both;"></p>
+</div>
+
+
+
+<div>
+<h2>缩略图图像</h2>
+
+<p>使用 <code>border</code> 属性创建缩略图。</p>
+
+<div class="p50">
+<p style="margin-bottom: 15px;">缩略图：</p>
+
+<img src="../i/photo/coffee-small.jpg" alt="Coffee" style="width:85%; width:150px; border:1px solid #ddd; border-radius:4px; padding:5px; margin: 0;">
+
+<h3>实例</h3>
+
+<pre style="width: 100%; box-sizing: border-box; height: 320px;" class="csscode">
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+}
+
+&lt;img src=&quot;paris.jpg&quot; alt=&quot;Paris&quot;&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t2cf8.html?f=css_ex_images_thumbnail">亲自试一试</a></p>
+</div>
+
+<div class="p50">
+<p style="margin-bottom: 15px;">作为链接的缩略图：</p>
+
+<style>
+a.thumba {
+  width: 150px;
+  transition: 0.3s;
+  display: inline-block;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding:5px;
+}
+
+a.thumba:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+</style>
+
+<a class="thumba" target="_blank" href="../i/photo/coffee.jpg">
+  <img src="../i/photo/coffee-small.jpg" style="width:100%;  margin: 0;" />
+</a>
+
+<h3>实例</h3>
+
+<pre style="width: 100%; box-sizing: border-box; height: 320px; overflow-y: scroll; overflow-x: hidden" class="csscode">
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+}
+
+img:hover {
+box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+&lt;a href=&quot;paris.jpg&quot;&gt;
+  &lt;img src=&quot;paris.jpg&quot; alt=&quot;Paris&quot;&gt;
+&lt;/a&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tee1c.html?f=css_ex_images_thumbnail_link">亲自试一试</a></p>
+</div>
+
+<p style="clear: both;"></p>
+</div>
+
+
+
+<div>
+<h2>响应式图像</h2>
+
+<p>响应式图像会自动调整以适合屏幕尺寸。</p>
+
+<p>如果您希望根据需要缩小图像，但需要杜绝放大到大于原始尺寸，请添加如下代码：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+img {
+  max-width: 100%;
+  height: auto;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t169e.html?f=css_ex_images_responsive">亲自试一试</a></p>
+
+<p class="tip"><span>提示：</span>在我们的 <a href="css_rwd_intro.html" title="响应式网页设计 - 简介">CSS RWD 教程</a> 中学习关于响应式 Web 设计的更多知识。</p>
+</div>
+
+
+
+<div>
+<h2>居中图像</h2>
+
+<p>如需使图像居中，请将左右外边距设置为 <code>auto</code> 并将其设置为块元素：</p>
+
+<img src="../i/photo/coffee.jpg" alt="Coffee" style="display:block; margin:15px auto 0 auto;">
+
+<h3>实例</h3>
+
+<pre class="language-css">
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tf32c.html?f=css_ex_images_center">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>宝丽来图片 / 卡片</h2>
+
+<style>
+div.polaroid {
+  width: 92%;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 25px;
+  box-sizing: border-box;
+  margin-top: 15px;
+}
+
+div#maincontent img.cardimg {
+  width: 100%;
+  margin: 0;
+}
+
+div.container {
+  text-align: center;
+  padding: 20px 20px;
+  box-sizing: border-box;
+}
+
+</style>
+
+
+<div class="p50">
+<div class="polaroid">
+  <img class="cardimg" src="../i/photo/tulip-yellow.jpg" alt="Tulip">
+  <div class="container">
+    <p>黄色郁金香</p>
+  </div>
+</div>
+</div>
+
+<div class="p50">
+<div class="polaroid">
+  <img class="cardimg" src="../i/photo/tulip-red.jpg" alt="Tulip">
+  <div class="container">
+    <p>红色郁金香</p>
+  </div>
+</div>
+</div>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+div.polaroid {
+  width: 80%;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+img {width: 100%}
+
+div.container {
+  text-align: center;
+  padding: 10px 20px;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tc511.html?f=css_ex_images_card">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>透明图像</h2>
+
+<p><code>opacity</code> 属性的取值范围为 0.0 - 1.0。值越低，越透明：</p>
+
+<style>
+.p33 {
+padding: 0 10px;
+margin: 15px 0;
+}
+
+</style>
+
+<div class="p33">
+<img src="../i/photo/tulip-red.jpg" alt="Tulip" style="margin: 0; width:100%; opacity:0.2;">
+<p style="text-align: center;">opacity 0.2</p>
+</div>
+
+<div class="p33">
+<img src="../i/photo/tulip-red.jpg" alt="Tulip" style="margin: 0; width:100%; opacity:0.5">
+<p style="text-align: center;">opacity 0.5</p>
+</div>
+
+<div class="p33">
+<img src="../i/photo/tulip-red.jpg" alt="Tulip" style="margin: 0; width:100%;">
+<p style="text-align: center;">opacity 1（默认）</p>
+</div>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+img {
+  opacity: 0.5;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t86de.html?f=css_image_opacity">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>图像文本</h2>
+
+<p>如何在图像中定位文本：</p>
+
+<h3>实例</h3>
+
+  <div style="position:relative;text-align:center; margin-top: 20px; color: #fff;">
+    <img src="../i/logo/w3logo-2.png" alt="W3School Logo" style="width:800px; height:auto; margin: 0; padding: 0;">
+    <div style="position:absolute;bottom:8px;left:16px;font-size:25px">Bottom Left</div>
+    <div style="position:absolute;top:8px;left:16px;font-size:25px">Top Left</div>
+    <div style="position:absolute;top:8px;right:16px;font-size:25px">Top Right</div>
+    <div style="position:absolute;bottom:8px;right:16px;font-size:25px">Bottom Right</div>
+    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); font-size:25px">Centered</div>
+  </div>
+
+<p>亲自试一试：</p>
+
+<p>
+<a class="tiy-btn" target="_blank" href="../tiy/tab88.html?f=css_image_text_top_left">左上</a>
+<a class="tiy-btn" target="_blank" href="../tiy/t29ef.html?f=css_image_text_top_right">右上</a>
+<a class="tiy-btn" target="_blank" href="../tiy/t5b9c.html?f=css_image_text_bottom_left">左下</a>
+<a class="tiy-btn" target="_blank" href="../tiy/td17f.html?f=css_image_text_bottom_right">右下</a>
+<a class="tiy-btn" target="_blank" href="../tiy/tf9b3.html?f=css_image_text_center">居中</a>
+</p>
+</div>
+
+
+
+<div>
+<h2>图像滤镜</h2>
+
+<p>CSS <code>filter</code> 属性把视觉效果（如模糊和饱和度）添加到元素。</p>
+
+<p class="important"><span>注意：</span>Internet Explorer 或 Edge 12 不支持 filter 属性。</p>
+
+<h3>实例</h3>
+
+<p>把所有图像的颜色更改为黑白（100％ 灰色）：</p>
+
+<pre class="language-css">
+img {
+  filter: grayscale(100%);
+}
+</pre>
+
+<iframe src="../demo/css/images_filters.html" style="width:100%; border:none; height:650px; margin-top: 20px;"></iframe>
+
+<p class="tiy"><a target="_blank" href="../tiy/t0f6e.html?f=css_ex_images_filters">亲自试一试</a></p>
+
+<p class="tip"><span>提示：</span>请访问我们的 <a href="../cssref/pr_filter.html" title="CSS filter 属性">CSS 滤镜参考手册</a>，了解有关 CSS 滤镜的更多信息。</p>
+</div>
+
+
+
+<div>
+<h2>图像悬停叠加</h2>
+
+<p>创建鼠标悬停时的叠加效果：</p>
+
+<style>
+div#maincontent .p33 h3 {
+  margin: 0;
+}
+
+.containerfade {
+  position: relative;
+}
+
+div#maincontent .imagefade {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  margin-top: 15px;
+}
+
+
+.overlayfade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #008CBA;
+}
+
+.containerfade:hover .overlayfade {
+  opacity: 1;
+}
+
+.textfade {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+</style>
+
+
+<div class="p33">
+<h3>实例 1</h3>
+
+<p>淡入文本：</p>
+
+<div class="containerfade">
+  <img src="../i/css/avatar.png" alt="Avatar" class="imagefade">
+    <div class="overlayfade">
+      <div class="textfade">Hello World</div>
+  </div>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/t7b24.html?f=css_css_image_overlay_fade">亲自试一试</a></p>
+</div>
+
+
+<style>
+.containeropac {
+    position: relative;
+}
+
+div#maincontent .imageopac {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  margin: 0;
+  margin-top: 15px;
+}
+
+.middleopac {
+  backface-visibility: hidden;
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+
+.containeropac:hover .imageopac {
+  opacity: 0.3;
+}
+
+.containeropac:hover .middleopac {
+  opacity: 1;
+}
+
+.textopac {
+  backface-visibility: hidden;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}
+</style>
+
+<div class="p33">
+<h3>实例 2</h3>
+
+<p>淡入框：</p>
+
+<div class="containeropac">
+  <img src="../i/css/avatar.png" alt="Avatar" class="imageopac">
+  <div class="middleopac">
+    <div class="textopac">Bill</div>
+  </div>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/tb93a.html?f=css_css_image_overlay_opacity">亲自试一试</a></p>
+</div>
+
+
+<style>
+.containerslidetop {
+  position: relative;
+}
+
+div#maincontent .imageslidetop {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  margin-top: 15px;
+}
+
+.overlayslidetop {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  background-color: #008CBA;
+  overflow: hidden;
+  width: 100%;
+  height:0;
+  transition: .5s ease;
+}
+
+.containerslidetop:hover .overlayslidetop {
+  bottom: 0;
+  height: 100%;
+}
+
+.textslidetop {
+  white-space: nowrap; 
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+</style>
+
+<div class="p33">
+<h3>实例 3</h3>
+
+<p>滑入（上）：</p>
+
+<div class="containerslidetop">
+  <img src="../i/css/avatar.png" alt="Avatar" class="imageslidetop">
+    <div class="overlayslidetop">
+      <div class="textslidetop">Hello World</div>
+  </div>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/td239.html?f=css_css_image_overlay_slidetop">亲自试一试</a></p>
+</div>
+
+
+<style>
+.containerslidebottom {
+  position: relative;
+}
+
+div#maincontent .imageslidebottom  {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  margin-top: 15px;
+}
+
+.overlayslidebottom  {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #008CBA;
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  transition: .5s ease;
+}
+
+.containerslidebottom:hover .overlayslidebottom {
+  height: 100%;
+}
+
+.textslidebottom {
+  white-space: nowrap; 
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+</style>
+
+<div class="p33">
+<h3>实例 4</h3>
+
+<p>滑入（下）：</p>
+
+<div class="containerslidebottom">
+  <img src="../i/css/avatar.png" alt="Avatar" class="imageslidebottom">
+    <div class="overlayslidebottom">
+      <div class="textslidebottom">Hello World</div>
+  </div>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/t882d.html?f=css_css_image_overlay_slidebottom">亲自试一试</a></p>
+</div>
+
+
+<style>
+.containerslideleft {
+  position: relative;
+}
+
+div#maincontent .imageslideleft {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  margin-top: 15px;
+}
+
+.overlayslideleft {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #008CBA;
+  overflow: hidden;
+  width: 0;
+  height: 100%;
+  transition: .5s ease;
+}
+
+.containerslideleft:hover .overlayslideleft {
+  width: 100%;
+}
+
+.textslideleft {
+  white-space: nowrap; 
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+.containerslideright {
+  position: relative;
+}
+</style>
+
+<div class="p33">
+<h3>实例 5</h3>
+
+<p>滑入（左）：</p>
+
+<div class="containerslideleft">
+  <img src="../i/css/avatar.png" alt="Avatar" class="imageslideleft">
+    <div class="overlayslideleft">
+      <div class="textslideleft">Hello World</div>
+  </div>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/tc6c3.html?f=css_css_image_overlay_slideleft">亲自试一试</a></p>
+</div>
+
+
+<style>
+.containerslideright {
+  position: relative;
+}
+
+div#maincontent .imageslideright {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  margin-top: 15px;
+}
+
+.overlayslideright {
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  right: 0;
+  background-color: #008CBA;
+  overflow: hidden;
+  width: 0;
+  height: 100%;
+  transition: .5s ease;
+}
+
+.containerslideright:hover .overlayslideright {
+  width: 100%;
+  left: 0;
+}
+
+.textslideright {
+  white-space: nowrap; 
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+</style>
+
+<div class="p33">
+<h3>实例 6</h3>
+
+<p>滑入（右）：</p>
+
+<div class="containerslideright">
+  <img src="../i/css/avatar.png" alt="Avatar" class="imageslideright">
+    <div class="overlayslideright">
+      <div class="textslideright">Hello World</div>
+  </div>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/tc1d4.html?f=css_css_image_overlay_slideright">亲自试一试</a></p>
+</div>
+
+<p style="clear: both;"></p>
+</div>
+
+
+
+<div>
+<h2>翻转图像</h2>
+
+<p>请把鼠标移到图像上：</p>
+
+<style>
+.flipimg:hover {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+</style>
+
+<img src="../i/photo/tiyugongyuan.jpg" class="flipimg" alt="体育公园" style="width:60%; min-width:300px;">
+
+<h3>实例</h3>
+
+<pre class="language-css">
+img:hover {
+  transform: scaleX(-1);
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t3196.html?f=css_image_flip">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>响应式图库</h2>
+
+<p>我们可以使用 CSS 创建自适应的图片库。</p>
+
+<p>本例使用媒体查询来重新排列不同屏幕尺寸的图像。请调整浏览器窗口的大小以查看效果：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.responsive {
+  padding: 0 6px;
+  float: left;
+  width: 24.99999%;
+}
+
+@media only screen and (max-width: 700px){
+  .responsive {
+    width: 49.99999%;
+    margin: 6px 0;
+  }
+}
+
+@media only screen and (max-width: 500px){
+  .responsive {
+    width: 100%;
+  }
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t3586.html?f=css_image_gallery_responsive">亲自试一试</a></p>
+
+<p class="tip"><span>提示：</span>请在我们的 <a href="css_rwd_intro.html" title="响应式网页设计 - 简介">CSS RWD 教程</a> 中学习有关响应式 Web 设计的更多知识。</p>
+</div>
+
+
+
+<div>
+<h2>图像模态（Image Modal）</h2>
+
+<p>这是一个演示 CSS 和 JavaScript 如何协同工作的例子。</p>
+
+<p>首先，请使用 CSS 创建模态窗口（对话框），并默认将其隐藏。</p>
+
+<p>然后，当用户单击图像时，使用 JavaScript 显示模态窗口并在模态内部显示图像：</p>
+
+<style>
+div#maincontent #myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 15px 0 0 0;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+div#maincontent .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+
+}
+
+/* Modal Content (image) */
+div#maincontent .modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 1500px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+div#maincontent .modal-content, #caption {  
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {transform: scale(0.1)} 
+  to {transform: scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+</style>
+
+
+<img id="myImg" src="../i/photo/tiyugongyuan.jpg" alt="绿茵场" style="width: 100%;" />
+<br>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById('myImg');
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+  modal.style.display = "none";
+}
+</script>
+
+<p class="tiy"><a target="_blank" href="../tiy/t5d19.html?f=css_image_modal_js">亲自试一试</a></p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css_tooltip.html" title="CSS 工具提示">CSS 工具提示</a></li>
+<li class="next"><a href="css3_object-fit.html" title="CSS object-fit">CSS object-fit</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../cssref/index.html">CSS 参考手册</a></h5>
+<h5 id="tools_example"><a href="css_examples.html">CSS 实例</a></h5>
+<h5 id="tools_quiz"><a href="css_quiz.html">CSS 测验</a></h5>
+<h5 id="tools_professional"><a href="index_pro.html">CSS 课外书</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/css/css3_images.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:19:18 GMT -->
+</html>

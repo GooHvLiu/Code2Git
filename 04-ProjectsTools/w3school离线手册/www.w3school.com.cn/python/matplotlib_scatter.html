@@ -1,0 +1,1273 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/python/matplotlib_scatter.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:48:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Matplotlib 散点图</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Python 教程</h2>
+<ul>
+<li><a href="index.html" title="Python 教程">Python 教程</a></li>
+<li><a href="python_intro.html" title="Python 简介">Python 简介</a></li>
+<li><a href="python_getstarted.html" title="Python 入门">Python 入门</a></li>
+<li><a href="python_syntax.html" title="Python 语法">Python 语法</a></li>
+<li><a href="python_comments.html" title="Python 注释">Python 注释</a></li>
+<li><a href="python_variables.html" title="Python 变量">Python 变量</a></li>
+<li><a href="python_datatypes.html" title="Python 数据类型">Python 数据类型</a></li>
+<li><a href="python_numbers.html" title="Python 简介">Python 数字</a></li>
+<li><a href="python_casting.html" title="Python Casting">Python Casting</a></li>
+<li><a href="python_strings.html" title="Python 字符串">Python 字符串</a></li>
+<li><a href="python_booleans.html" title="Python 布尔">Python 布尔</a></li>
+<li><a href="python_operators.html" title="Python 运算符">Python 运算符</a></li>
+<li><a href="python_lists.html" title="Python 列表">Python 列表</a></li>
+<li><a href="python_tuples.html" title="Python 元组">Python 元组</a></li>
+<li><a href="python_sets.html" title="Python 集合">Python 集合</a></li>
+<li><a href="python_dictionaries.html" title="Python 字典">Python 字典</a></li>
+<li><a href="python_conditions.html" title="Python If ... Else">Python If Else</a></li>
+<li><a href="python_while_loops.html" title="Python While 循环">Python While 循环</a></li>
+<li><a href="python_for_loops.html" title="Python For 循环">Python For 循环</a></li>
+<li><a href="python_functions.html" title="Python 函数">Python 函数</a></li>
+<li><a href="python_lambda.html" title="Python Lambda">Python Lambda</a></li>
+<li><a href="python_arrays.html" title="Python 数组">Python 数组</a></li>
+<li><a href="python_classes.html" title="Python 类和对象">Python 类/对象</a></li>
+<li><a href="python_inheritance.html" title="Python 继承">Python 继承</a></li>
+<li><a href="python_iterators.html" title="Python 迭代">Python 迭代</a></li>
+<li><a href="python_polymorphism.html" title="Python 多态">Python 多态</a></li>
+<li><a href="python_scope.html" title="Python 作用域">Python 作用域</a></li>
+<li><a href="python_modules.html" title="Python 模块">Python 模块</a></li>
+<li><a href="python_datetime.html" title="Python 日期">Python 日期</a></li>
+<li><a href="python_math.html" title="Python 数学">Python 数学</a></li>
+<li><a href="python_json.html" title="Python JSON">Python JSON</a></li>
+<li><a href="python_regex.html" title="Python RegEx">Python RegEx</a></li>
+<li><a href="python_pip.html" title="Python PIP">Python PIP</a></li>
+<li><a href="python_try_except.html" title="Python Try Except">Python Try Except</a></li>
+<li><a href="python_cmd_input.html" title="Python 命令行输入">Python 命令输入</a></li>
+<li><a href="python_string_formatting.html" title="Python 字符串格式化">Python 字符串格式化</a></li>
+</ul>
+<h2>Python 文件处理</h2>
+<ul>
+<li><a href="python_file_handling.html" title="Python 文件打开">Python 文件打开</a></li>
+<li><a href="python_file_open.html" title="Python 文件读取">Python 文件读取</a></li>
+<li><a href="python_file_write.html" title="Python 文件写入">Python 文件写入/创建</a></li>
+<li><a href="python_file_remove.html" title="Python 文件删除">Python 文件删除</a></li>
+</ul>
+<h2>Python 模块</h2>
+<ul>
+<li><a href="../numpy/index.html" title="NumPy 教程">NumPy 教程</a></li>
+<li><a href="../pandas/index.html" title="Pandas 教程">Pandas 教程</a></li>
+<li><a href="../scipy/index.html" title="SciPy 教程">SciPy 教程</a></li>
+</ul>
+<h2>Python Matplotlib</h2>
+<ul>
+<li><a href="matplotlib_intro.html" title="Matplotlib 简介">Matplotlib 简介</a></li>
+<li><a href="matplotlib_getting_started.html" title="Matplotlib 入门">Matplotlib 入门</a></li>
+<li><a href="matplotlib_pyplot.html" title="Matplotlib Pyplot">Matplotlib Pyplot</a></li>
+<li><a href="matplotlib_plotting.html" title="Matplotlib 绘图">Matplotlib 绘图</a></li>
+<li><a href="matplotlib_markers.html" title="Matplotlib 标记">Matplotlib 标记</a></li>
+<li><a href="matplotlib_line.html" title="Matplotlib 线条">Matplotlib 线条</a></li>
+<li><a href="matplotlib_labels.html" title="Matplotlib 标签">Matplotlib 标签</a></li>
+<li><a href="matplotlib_grid.html" title="Matplotlib 网格">Matplotlib 网格</a></li>
+<li><a href="matplotlib_subplot.html" title="Matplotlib 子图">Matplotlib 子图</a></li>
+<li class="currentLink"><a href="matplotlib_scatter.html" title="Matplotlib 散点图">Matplotlib 散点图</a></li>
+<li><a href="matplotlib_bars.html" title="Matplotlib 条形图">Matplotlib 条形图</a></li>
+<li><a href="matplotlib_histograms.html" title="Matplotlib 直方图">Matplotlib 直方图</a></li>
+<li><a href="matplotlib_pie_charts.html" title="Matplotlib 饼图">Matplotlib 饼图</a></li>
+</ul>
+<h2>Python NumPy</h2>
+<ul>
+<li><a href="numpy_intro.html" title="NumPy 简介">NumPy 简介</a></li>
+<li><a href="numpy_getting_started.html" title="NumPy 入门">NumPy 入门</a></li>
+<li><a href="numpy_creating_arrays.html" title="NumPy 数组创建">NumPy 数组创建</a></li>
+<li><a href="numpy_array_indexing.html" title="NumPy 数组索引">NumPy 数组索引</a></li>
+<li><a href="numpy_array_slicing.html" title="NumPy 数组裁切">NumPy 数组裁切</a></li>
+<li><a href="numpy_data_types.html" title="NumPy 数据类型">NumPy 数据类型</a></li>
+<li><a href="numpy_copy_vs_view.html" title="NumPy 副本/视图">NumPy 副本/视图</a></li>
+<li><a href="numpy_array_shape.html" title="NumPy 数组形状">NumPy 数组形状</a></li>
+<li><a href="numpy_array_reshape.html" title="NumPy 数组重塑">NumPy 数组重塑</a></li>
+<li><a href="numpy_array_iterating.html" title="NumPy 数组迭代">NumPy 数组迭代</a></li>
+<li><a href="numpy_array_join.html" title="NumPy 数组连接">NumPy 数组连接</a></li>
+<li><a href="numpy_array_split.html" title="NumPy 数组拆分">NumPy 数组拆分</a></li>
+<li><a href="numpy_array_search.html" title="NumPy 数组搜索">NumPy 数组搜索</a></li>
+<li><a href="numpy_array_sort.html" title="NumPy 数组排序">NumPy 数组排序</a></li>
+<li><a href="numpy_array_filter.html" title="NumPy 数组过滤">NumPy 数组过滤</a></li>
+<li><a href="numpy_random.html" title="NumPy 随机">NumPy 随机</a></li>
+<li><a href="numpy_ufunc.html" title="NumPy ufuncs">NumPy ufuncs</a></li>
+</ul>
+<h2>Python 机器学习</h2>
+<ul>
+<li><a href="python_ml_getting_started.html" title="机器学习 - 入门">入门</a></li>
+<li><a href="python_ml_mean_median_mode.html" title="机器学习 - 平均中位数模式">平均中位数模式</a></li>
+<li><a href="python_ml_standard_deviation.html" title="机器学习 - 标准差">标准差</a></li>
+<li><a href="python_ml_percentile.html" title="机器学习 - 百分位数">百分位数</a></li>
+<li><a href="python_ml_data_distribution.html" title="机器学习 - 数据分布">数据分布</a></li>
+<li><a href="python_ml_normal_data_distribution.html" title="机器学习 - 正态数据分布">正态数据分布</a></li>
+<li><a href="python_ml_scatterplot.html" title="机器学习 - 散点图">散点图</a></li>
+<li><a href="python_ml_linear_regression.html" title="机器学习 - 线性回归">线性回归</a></li>
+<li><a href="python_ml_polynomial_regression.html" title="机器学习 - 多项式回归">多项式回归</a></li>
+<li><a href="python_ml_multiple_regression.html" title="机器学习 - 多元回归">多元回归</a></li>
+<li><a href="python_ml_scale.html" title="机器学习 - 缩放">缩放</a></li>
+<li><a href="python_ml_train_test.html" title="机器学习 - 训练/测试">训练/测试</a></li>
+<li><a href="python_ml_decision_tree.html" title="机器学习 - 决策树">决策树</a></li>
+<li><a href="python_ml_confusion_matrix.html" title="机器学习 - 混淆矩阵">混淆矩阵</a></li>
+<li><a href="python_ml_hierarchial_clustering.html" title="机器学习 - 层次聚类">层次聚类</a></li>
+<li><a href="python_ml_logistic_regression.html" title="机器学习 - 逻辑回归">逻辑回归</a></li>
+<li><a href="python_ml_grid_search.html" title="机器学习 - 网格搜索">网格搜索</a></li>
+<li><a href="python_ml_preprocessing.html" title="机器学习 - 分类数据">分类数据</a></li>
+<li><a href="python_ml_k-means.html" title="机器学习 - K-means">K-means</a></li>
+<li><a href="python_ml_bagging.html" title="机器学习 - Bootstrap 聚合（Bagging）">Bootstrap 聚合</a></li>
+<li><a href="python_ml_cross_validation.html" title="机器学习 - 交叉验证">交叉验证</a></li>
+<li><a href="python_ml_auc_roc.html" title="机器学习 - AUC - ROC 曲线">AUC - ROC 曲线</a></li>
+<li><a href="python_ml_knn.html" title="机器学习 - K-最近邻算法（KNN）">K-最近邻算法</a></li>
+</ul>
+<h2>Python DSA</h2>
+<ul>
+<li><a href="python_dsa.html" title="Python MySQL">Python DSA</a></li>
+<li><a href="python_dsa_lists.html" title="Python 中的列表与数组">列表与数组</a></li>
+<li><a href="python_dsa_stacks.html" title="Python 中的栈">栈</a></li>
+<li><a href="python_dsa_queues.html" title="Python 中的队列">队列</a></li>
+<li><a href="python_dsa_linkedlists.html" title="Python 中的链表">链表</a></li>
+<li><a href="python_dsa_hashtables.html" title="Python 中的哈希表">哈希表</a></li>
+<li><a href="python_dsa_trees.html" title="Python 树">树</a></li>
+<li><a href="python_dsa_binarytrees.html" title="Python 二叉树">二叉树</a></li>
+<li><a href="python_dsa_binarysearchtrees.html" title="Python 二叉搜索树">二叉搜索树</a></li>
+<li><a href="python_dsa_avltrees.html" title="Python AVL 树">AVL 树</a></li>
+<li><a href="python_dsa_graphs.html" title="Python 图论">图</a></li>
+<li><a href="python_dsa_linearsearch.html" title="Python 实现的线性查找">线性查找</a></li>
+<li><a href="python_dsa_binarysearch.html" title="Python 实现的二分查找">二分查找</a></li>
+<li><a href="python_dsa_bubblesort.html" title="Python 实现的冒泡排序">冒泡排序</a></li>
+<li><a href="python_dsa_selectionsort.html" title="Python 实现的选择排序">选择排序</a></li>
+<li><a href="python_dsa_insertionsort.html" title="Python 实现的插入排序">插入排序</a></li>
+<li><a href="python_dsa_quicksort.html" title="Python 实现的 DSA 快速排序">快速排序</a></li>
+<li><a href="python_dsa_countingsort.html" title="Python 实现的 DSA 计数排序">计数排序</a></li>
+<li><a href="python_dsa_radixsort.html" title="Python 实现的 DSA 基数排序">基数排序</a></li>
+<li><a href="python_dsa_mergesort.html" title="Python 实现的 DSA 归并排序">归并排序</a></li>
+</ul>
+<h2>Python MySQL</h2>
+<ul>
+<li><a href="python_mysql_getstarted.html" title="Python MySQL 入门">MySQL 入门</a></li>
+<li><a href="python_mysql_create_db.html" title="Python MySQL Create Database">MySQL Create Database</a></li>
+<li><a href="python_mysql_create_table.html" title="Python MySQL Create Table">MySQL Create Table</a></li>
+<li><a href="python_mysql_insert.html" title="Python MySQL Insert Into Table">MySQL Insert</a></li>
+<li><a href="python_mysql_select.html" title="Python MySQL Select From">MySQL Select</a></li>
+<li><a href="python_mysql_where.html" title="Python MySQL Where">MySQL Where</a></li>
+<li><a href="python_mysql_orderby.html" title="Python MySQL Order By">MySQL Order By</a></li>
+<li><a href="python_mysql_delete.html" title="Python MySQL Delete From By">MySQL Delete</a></li>
+<li><a href="python_mysql_drop_table.html" title="Python MySQL Drop Table">MySQL Drop Table</a></li>
+<li><a href="python_mysql_update.html" title="Python MySQL 更新表">MySQL Update</a></li>
+<li><a href="python_mysql_limit.html" title="Python MySQL Limit">MySQL Limit</a></li>
+<li><a href="python_mysql_join.html" title="Python MySQL Join">MySQL Join</a></li>
+</ul>
+<h2>Python MongoDB</h2>
+<ul>
+<li><a href="python_mongodb_getstarted.html" title="Python 教程">MongoDB 入门</a></li>
+<li><a href="python_mongodb_create_db.html" title="Python 教程">MongoDB 创建数据库</a></li>
+<li><a href="python_mongodb_create_collection.html" title="Python 教程">MongoDB 创建集合</a></li>
+<li><a href="python_mongodb_insert.html" title="Python 教程">MongoDB Insert</a></li>
+<li><a href="python_mongodb_find.html" title="Python 教程">MongoDB Find</a></li>
+<li><a href="python_mongodb_query.html" title="Python 教程">MongoDB Query</a></li>
+<li><a href="python_mongodb_sort.html" title="Python 教程">MongoDB Sort</a></li>
+<li><a href="python_mongodb_delete.html" title="Python 教程">MongoDB Delete</a></li>
+<li><a href="python_mongodb_drop_collection.html" title="Python 教程">MongoDB 删除集合</a></li>
+<li><a href="python_mongodb_update.html" title="Python 教程">MongoDB Update</a></li>
+<li><a href="python_mongodb_limit.html" title="Python 教程">MongoDB Limit</a></li>
+</ul>
+<h2>Python 参考手册</h2>
+<ul>
+<li><a href="python_reference.html" title="Python 教程">Python 参考概览</a></li>
+<li><a href="python_ref_functions.html" title="Python 教程">Python 内建函数</a></li>
+<li><a href="python_ref_string.html" title="Python 教程">Python 字符串方法</a></li>
+<li><a href="python_ref_list.html" title="Python 教程">Python 列表方法</a></li>
+<li><a href="python_ref_dictionary.html" title="Python 教程">Python 字典方法</a></li>
+<li><a href="python_ref_tuple.html" title="Python 教程">Python 元组方法</a></li>
+<li><a href="python_ref_set.html" title="Python 教程">Python 集合方法</a></li>
+<li><a href="python_ref_file.html" title="Python 教程">Python 文件方法</a></li>
+<li><a href="python_ref_keywords.html" title="Python 教程">Python 关键字</a></li>
+<li><a href="python_ref_exceptions.html" title="Python 内建异常">Python 异常</a></li>
+<li><a href="python_ref_glossary.html" title="Python 术语表">Python 术语表</a></li>
+</ul>
+<h2>Python 模块参考手册</h2>
+<ul>
+<li><a href="module_random.html" title="Python 教程">随机模块</a></li>
+<li><a href="module_requests.html" title="Python 教程">请求模块</a></li>
+<li><a href="module_statistics.html" title="Python 统计模块">统计模块</a></li>
+<li><a href="module_math.html" title="Python 数学模块">数学模块</a></li>
+<li><a href="module_cmath.html" title="Python cmath 模块">复数数学模块</a></li>
+</ul>
+<h2>Python How To</h2>
+<ul>
+<li><a href="python_howto_remove_duplicates.html" title="Python 教程">删除列表重复项</a></li>
+<li><a href="python_howto_reverse_string.html" title="Python 教程">反转字符串</a></li>
+<li><a href="python_howto_add_two_numbers.html" title="如何在 Python 中加两个数字">两数相加</a></li>
+</ul>
+<h2>Python 实例</h2>
+<ul>
+<li><a href="python_examples.html" title="Python 实例">Python 实例</a></li>
+<li><a href="python_quiz.html" title="Python 测验">Python 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Matplotlib 散点图</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="matplotlib_subplot.html" title="Matplotlib 子图">Matplotlib 子图</a></li>
+<li class="next"><a href="matplotlib_bars.html" title="Matplotlib 条形图">Matplotlib 条形图</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>创建散点图</h2>
+
+<p>使用 Pyplot，您可以使用 <code>scatter()</code> 函数来绘制散点图。</p>
+
+<p><code>scatter()</code> 函数为每个观测值绘制一个点。它需要两个长度相同的数组，一个用于 x 轴的值，另一个用于 y 轴的值：</p>
+
+<h3>实例</h3>
+
+<p>一个简单的散点图：</p>
+
+<pre class="language-python">
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])
+y = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])
+
+plt.scatter(x, y)
+plt.show()
+</pre>
+
+<p class="tiy"><a target="_blank" href="tb8b5.html?f=matplotlib_scatter">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<img class="illustration" src="../i/matplotlib/matplotlib_scatter.png" alt="Matplotlib 散点图">
+
+<p>上例中的观测值是 13 辆汽车经过的结果。</p>
+
+<p>X 轴显示了汽车的车龄。</p>
+
+<p>Y 轴显示了汽车经过时的速度。</p>
+
+<p>这些观测值之间是否存在关系？</p>
+
+<p>看起来车越新，开得越快，但这可能只是巧合，毕竟我们只记录了 13 辆汽车。</p>
+</section>
+
+
+
+<section>
+<h2>比较图表</h2>
+
+<p>在上面的例子中，速度和年龄之间似乎存在某种关系，但如果我们再将另一天的观测值也绘制出来会如何呢？散点图会告诉我们其他信息吗？</p>
+
+<h3>实例</h3>
+
+<p>在同一张图上绘制两个图表：</p>
+
+<pre class="language-python">
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 第一天，13 辆汽车的车龄和速度：
+x = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])
+y = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])
+plt.scatter(x, y)
+
+# 第二天，15 辆汽车的车龄和速度：
+x = np.array([2,2,8,1,15,8,12,9,7,3,11,4,7,14,12])
+y = np.array([100,105,84,105,90,99,90,95,94,100,79,112,91,80,85])
+plt.scatter(x, y)
+
+plt.show()
+</pre>
+
+<p class="tiy"><a target="_blank" href="tb633.html?f=matplotlib_scatter_compare">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<img class="illustration" src="../i/matplotlib/matplotlib_scatter_compare.png" alt="Matplotlib 散点图">
+
+<p class="note"><span>注意：</span>两个图表使用两种不同的颜色绘制，默认是蓝色和橙色，稍后在本章中您将学习如何更改颜色。</p>
+
+<p>通过比较这两个图表，我认为可以安全地说它们都给出了相同的结论：汽车越新，开得越快。</p>
+</section>
+
+
+
+<section>
+<h2>颜色</h2>
+
+<p>您可以使用 <code>color</code> 或 <code>c</code> 参数为每个散点图设置自己的颜色：</p>
+
+<h3>实例</h3>
+
+<p>设置标记点的颜色：</p>
+
+<pre class="language-python">
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])
+y = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])
+plt.scatter(x, y, color = 'hotpink')
+
+x = np.array([2,2,8,1,15,8,12,9,7,3,11,4,7,14,12])
+y = np.array([100,105,84,105,90,99,90,95,94,100,79,112,91,80,85])
+plt.scatter(x, y, color = '#88c999')
+
+plt.show()
+</pre>
+
+<p class="tiy"><a target="_blank" href="t2e2a.html?f=matplotlib_scatter_color">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<img class="illustration" src="../i/matplotlib/matplotlib_scatter_color.png" alt="Matplotlib 散点图">
+</section>
+
+
+
+<section>
+<h2>为每个点着色</h2>
+
+<p>您甚至可以使用颜色数组作为 <code>c</code> 参数的值来为每个点设置特定颜色：</p>
+
+<p class="note"><span>注意：</span>您不能为此使用 <code>color</code> 参数，只能使用 <code>c</code> 参数。</p>
+
+<h3>实例</h3>
+
+<p>设置标记点的颜色：</p>
+
+<pre class="language-python">
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])
+y = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])
+colors = np.array([&quot;red&quot;,&quot;green&quot;,&quot;blue&quot;,&quot;yellow&quot;,&quot;pink&quot;,&quot;black&quot;,&quot;orange&quot;,&quot;purple&quot;,&quot;beige&quot;,&quot;brown&quot;,&quot;gray&quot;,&quot;cyan&quot;,&quot;magenta&quot;])
+
+plt.scatter(x, y, c=colors)
+
+plt.show()
+</pre>
+
+<p class="tiy"><a target="_blank" href="t0f12.html?f=matplotlib_scatter_c">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<img class="illustration" src="../i/matplotlib/matplotlib_scatter_colors_2.png" alt="Matplotlib 散点图">
+</section>
+
+
+
+<section>
+<h2>彩色映射</h2>
+
+<p>Matplotlib 模块提供了许多可用的彩色映射。</p>
+
+<p>彩色映射就像颜色列表，其中每种颜色都有一个从 0 到 100 的值。</p>
+
+<p>以下是一个彩色映射的例子：</p>
+
+<img class="illustration" src="../i/matplotlib/colorbar.png" alt="ColorMap">
+
+<p>这个彩色映射称为 'viridis'，如您所见，它从 0（紫色）开始，一直到 100（黄色）。</p>
+
+<h3>如何使用彩色映射</h3>
+
+<p>您可以使用关键字参数 <code>cmap</code> 和彩色映射的值来指定彩色映射，在这种情况下，<code>'viridis'</code> 是 Matplotlib 中可用的内置彩色映射之一。</p>
+
+<p>此外，您必须创建一个数组，其中包含值（从 0 到 100），每个散点图中的点一个值：</p>
+
+<h3>实例</h3>
+
+<p>创建颜色数组，并在散点图中指定彩色映射：</p>
+
+<pre class="language-python">
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])
+y = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])
+colors = np.array([0, 10, 20, 30, 40, 45, 50, 55, 60, 70, 80, 90, 100])
+
+plt.scatter(x, y, c=colors, cmap='viridis')
+
+plt.show()
+</pre>
+
+<p class="tiy"><a target="_blank" href="t5433.html?f=matplotlib_scatter_cmap_1">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<img class="illustration" src="../i/matplotlib/matplotlib_scatter_colormap_1.png" alt="Matplotlib 散点图">
+
+<p>您可以通过包含 <code>plt.colorbar()</code> 语句来在绘图中包含彩色映射：</p>
+
+<h3>实例</h3>
+
+<p>包含实际的彩色映射：</p>
+
+<pre class="language-python">
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])
+y = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])
+colors = np.array([0, 10, 20, 30, 40, 45, 50, 55, 60, 70, 80, 90, 100])
+
+plt.scatter(x, y, c=colors, cmap='viridis')
+
+plt.colorbar()
+
+plt.show()
+</pre>
+
+<p class="tiy"><a target="_blank" href="t5433.html?f=matplotlib_scatter_cmap_1">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<img class="illustration" src="../i/matplotlib/matplotlib_scatter_colormap_2.png" alt="Matplotlib 散点图">
+
+<h3>可用的彩色映射</h3>
+
+<p>您可以选择任意内置彩色映射：</p>
+
+<table class="dataintable">
+<tr>
+<th style="width: 40%;">名称</th>
+<th style="width: 10%;">试一试</th>
+<th>反转</th>
+<th style="width: 10%;">试一试</th>
+</tr>
+
+<tr>
+<td>Accent</td>
+<td><a target="_blank" href="t6b89.html?f=matplotlib_scatter_cmap_Accent">试一试</a></td>
+<td>Accent_r</td>
+<td><a target="_blank" href="t54b4.html?f=matplotlib_scatter_cmap_Accent_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>Blues</td>
+<td><a target="_blank" href="tc3df.html?f=matplotlib_scatter_cmap_Blues">试一试</a></td>
+<td>Blues_r</td>
+<td><a target="_blank" href="tb39d.html?f=matplotlib_scatter_cmap_Blues_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>BrBG</td>
+<td><a target="_blank" href="t80b7.html?f=matplotlib_scatter_cmap_BrBG">试一试</a></td>
+<td>BrBG_r</td>
+<td><a target="_blank" href="t70f4.html?f=matplotlib_scatter_cmap_BrBG_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>BuGn</td>
+<td><a target="_blank" href="ta430.html?f=matplotlib_scatter_cmap_BuGn">试一试</a></td>
+<td>BuGn_r</td>
+<td><a target="_blank" href="td1d9.html?f=matplotlib_scatter_cmap_BuGn_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>BuPu</td>
+<td><a target="_blank" href="t7d22.html?f=matplotlib_scatter_cmap_BuPu">试一试</a></td>
+<td>BuPu_r</td>
+<td><a target="_blank" href="tc68f.html?f=matplotlib_scatter_cmap_BuPu_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>CMRmap</td>
+<td><a target="_blank" href="t5582.html?f=matplotlib_scatter_cmap_CMRmap">试一试</a></td>
+<td>CMRmap_r</td>
+<td><a target="_blank" href="te6ee.html?f=matplotlib_scatter_cmap_CMRmap_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>Dark2</td>
+<td><a target="_blank" href="t1629.html?f=matplotlib_scatter_cmap_Dark2">试一试</a></td>
+<td>Dark2_r</td>
+<td><a target="_blank" href="t5709.html?f=matplotlib_scatter_cmap_Dark2_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>GnBu</td>
+<td><a target="_blank" href="t2c9a.html?f=matplotlib_scatter_cmap_GnBu">试一试</a></td>
+<td>GnBu_r</td>
+<td><a target="_blank" href="t9d04.html?f=matplotlib_scatter_cmap_GnBu_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>Greens</td>
+<td><a target="_blank" href="tc486.html?f=matplotlib_scatter_cmap_Greens">试一试</a></td>
+<td>Greens_r</td>
+<td><a target="_blank" href="t4c57.html?f=matplotlib_scatter_cmap_Greens_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>Greys</td>
+<td><a target="_blank" href="t54dc.html?f=matplotlib_scatter_cmap_Greys">试一试</a></td>
+<td>Greys_r</td>
+<td><a target="_blank" href="tcf18.html?f=matplotlib_scatter_cmap_Greys_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>OrRd</td>
+<td><a target="_blank" href="t0640.html?f=matplotlib_scatter_cmap_OrRd">试一试</a></td>
+<td>OrRd_r</td>
+<td><a target="_blank" href="t8eb8.html?f=matplotlib_scatter_cmap_OrRd_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>Oranges</td>
+<td><a target="_blank" href="teb0c.html?f=matplotlib_scatter_cmap_Oranges">试一试</a></td>
+<td>Oranges_r</td>
+<td><a target="_blank" href="t9541.html?f=matplotlib_scatter_cmap_Oranges_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>PRGn</td>
+<td><a target="_blank" href="te412.html?f=matplotlib_scatter_cmap_PRGn">试一试</a></td>
+<td>PRGn_r</td>
+<td><a target="_blank" href="tcf29.html?f=matplotlib_scatter_cmap_PRGn_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>Paired</td>
+<td><a target="_blank" href="t4c2d.html?f=matplotlib_scatter_cmap_Paired">试一试</a></td>
+<td>Paired_r</td>
+<td><a target="_blank" href="tccfc.html?f=matplotlib_scatter_cmap_Paired_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>Pastel1</td>
+<td><a target="_blank" href="t4bdb.html?f=matplotlib_scatter_cmap_Pastel1">试一试</a></td>
+<td>Pastel1_r</td>
+<td><a target="_blank" href="t209b-2.html?f=matplotlib_scatter_cmap_Pastel1_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>Pastel2</td>
+<td><a target="_blank" href="tf450.html?f=matplotlib_scatter_cmap_Pastel2">试一试</a></td>
+<td>Pastel2_r</td>
+<td><a target="_blank" href="t132c.html?f=matplotlib_scatter_cmap_Pastel2_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>PiYG</td>
+<td><a target="_blank" href="ta7d6.html?f=matplotlib_scatter_cmap_PiYG">试一试</a></td>
+<td>PiYG_r</td>
+<td><a target="_blank" href="te7d3.html?f=matplotlib_scatter_cmap_PiYG_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>PuBu</td>
+<td><a target="_blank" href="t55fe.html?f=matplotlib_scatter_cmap_PuBu">试一试</a></td>
+<td>PuBu_r</td>
+<td><a target="_blank" href="t02b3.html?f=matplotlib_scatter_cmap_PuBu_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>PuBuGn</td>
+<td><a target="_blank" href="t24bc.html?f=matplotlib_scatter_cmap_PuBuGn">试一试</a></td>
+<td>PuBuGn_r</td>
+<td><a target="_blank" href="t821b.html?f=matplotlib_scatter_cmap_PuBuGn_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>PuOr</td>
+<td><a target="_blank" href="t829b.html?f=matplotlib_scatter_cmap_PuOr">试一试</a></td>
+<td>PuOr_r</td>
+<td><a target="_blank" href="tb549.html?f=matplotlib_scatter_cmap_PuOr_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>PuRd</td>
+<td><a target="_blank" href="t3a42.html?f=matplotlib_scatter_cmap_PuRd">试一试</a></td>
+<td>PuRd_r</td>
+<td><a target="_blank" href="t997d.html?f=matplotlib_scatter_cmap_PuRd_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>Purples</td>
+<td><a target="_blank" href="t63d8.html?f=matplotlib_scatter_cmap_Purples">试一试</a></td>
+<td>Purples_r</td>
+<td><a target="_blank" href="t790e.html?f=matplotlib_scatter_cmap_Purples_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>RdBu</td>
+<td><a target="_blank" href="ta109.html?f=matplotlib_scatter_cmap_RdBu">试一试</a></td>
+<td>RdBu_r</td>
+<td><a target="_blank" href="t6b66.html?f=matplotlib_scatter_cmap_RdBu_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>RdGy</td>
+<td><a target="_blank" href="t5894.html?f=matplotlib_scatter_cmap_RdGy">试一试</a></td>
+<td>RdGy_r</td>
+<td><a target="_blank" href="t75cb.html?f=matplotlib_scatter_cmap_RdGy_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>RdPu</td>
+<td><a target="_blank" href="teb81.html?f=matplotlib_scatter_cmap_RdPu">试一试</a></td>
+<td>RdPu_r</td>
+<td><a target="_blank" href="t4001.html?f=matplotlib_scatter_cmap_RdPu_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>RdYlBu</td>
+<td><a target="_blank" href="t35fd.html?f=matplotlib_scatter_cmap_RdYlBu">试一试</a></td>
+<td>RdYlBu_r</td>
+<td><a target="_blank" href="tae78.html?f=matplotlib_scatter_cmap_RdYlBu_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>RdYlGn</td>
+<td><a target="_blank" href="t667a.html?f=matplotlib_scatter_cmap_RdYlGn">试一试</a></td>
+<td>RdYlGn_r</td>
+<td><a target="_blank" href="t0ac9.html?f=matplotlib_scatter_cmap_RdYlGn_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>Reds</td>
+<td><a target="_blank" href="t3af5.html?f=matplotlib_scatter_cmap_Reds">试一试</a></td>
+<td>Reds_r</td>
+<td><a target="_blank" href="t55bd.html?f=matplotlib_scatter_cmap_Reds_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>Set1</td>
+<td><a target="_blank" href="t713d.html?f=matplotlib_scatter_cmap_Set1">试一试</a></td>
+<td>Set1_r</td>
+<td><a target="_blank" href="t0f38.html?f=matplotlib_scatter_cmap_Set1_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>Set2</td>
+<td><a target="_blank" href="te83a.html?f=matplotlib_scatter_cmap_Set2">试一试</a></td>
+<td>Set2_r</td>
+<td><a target="_blank" href="t9d34.html?f=matplotlib_scatter_cmap_Set2_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>Set3</td>
+<td><a target="_blank" href="t1c9d.html?f=matplotlib_scatter_cmap_Set3">试一试</a></td>
+<td>Set3_r</td>
+<td><a target="_blank" href="t98f4.html?f=matplotlib_scatter_cmap_Set3_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>Spectral</td>
+<td><a target="_blank" href="t469b.html?f=matplotlib_scatter_cmap_Spectral">试一试</a></td>
+<td>Spectral_r</td>
+<td><a target="_blank" href="ta15c.html?f=matplotlib_scatter_cmap_Spectral_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>Wistia</td>
+<td><a target="_blank" href="t063e.html?f=matplotlib_scatter_cmap_Wistia">试一试</a></td>
+<td>Wistia_r</td>
+<td><a target="_blank" href="tc3f1.html?f=matplotlib_scatter_cmap_Wistia_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>YlGn</td>
+<td><a target="_blank" href="t799b.html?f=matplotlib_scatter_cmap_YlGn">试一试</a></td>
+<td>YlGn_r</td>
+<td><a target="_blank" href="tefe6.html?f=matplotlib_scatter_cmap_YlGn_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>YlGnBu</td>
+<td><a target="_blank" href="teb2a.html?f=matplotlib_scatter_cmap_YlGnBu">试一试</a></td>
+<td>YlGnBu_r</td>
+<td><a target="_blank" href="t6925.html?f=matplotlib_scatter_cmap_YlGnBu_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>YlOrBr</td>
+<td><a target="_blank" href="tdb35.html?f=matplotlib_scatter_cmap_YlOrBr">试一试</a></td>
+<td>YlOrBr_r</td>
+<td><a target="_blank" href="t2572.html?f=matplotlib_scatter_cmap_YlOrBr_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>YlOrRd</td>
+<td><a target="_blank" href="t1432.html?f=matplotlib_scatter_cmap_YlOrRd">试一试</a></td>
+<td>YlOrRd_r</td>
+<td><a target="_blank" href="t8242.html?f=matplotlib_scatter_cmap_YlOrRd_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>afmhot</td>
+<td><a target="_blank" href="tbf3a.html?f=matplotlib_scatter_cmap_afmhot">试一试</a></td>
+<td>afmhot_r</td>
+<td><a target="_blank" href="tc6e3.html?f=matplotlib_scatter_cmap_afmhot_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>autumn</td>
+<td><a target="_blank" href="t9381.html?f=matplotlib_scatter_cmap_autumn">试一试</a></td>
+<td>autumn_r</td>
+<td><a target="_blank" href="t4bbf.html?f=matplotlib_scatter_cmap_autumn_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>binary</td>
+<td><a target="_blank" href="tcb65.html?f=matplotlib_scatter_cmap_binary">试一试</a></td>
+<td>binary_r</td>
+<td><a target="_blank" href="t7a03.html?f=matplotlib_scatter_cmap_binary_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>bone</td>
+<td><a target="_blank" href="tc84c.html?f=matplotlib_scatter_cmap_bone">试一试</a></td>
+<td>bone_r</td>
+<td><a target="_blank" href="t15ea.html?f=matplotlib_scatter_cmap_bone_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>brg</td>
+<td><a target="_blank" href="t4ccd.html?f=matplotlib_scatter_cmap_brg">试一试</a></td>
+<td>brg_r</td>
+<td><a target="_blank" href="t5c8c.html?f=matplotlib_scatter_cmap_brg_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>bwr</td>
+<td><a target="_blank" href="ta4a5.html?f=matplotlib_scatter_cmap_bwr">试一试</a></td>
+<td>bwr_r</td>
+<td><a target="_blank" href="t88d3.html?f=matplotlib_scatter_cmap_bwr_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>cividis</td>
+<td><a target="_blank" href="tfb1e.html?f=matplotlib_scatter_cmap_cividis">试一试</a></td>
+<td>cividis_r</td>
+<td><a target="_blank" href="td2cb.html?f=matplotlib_scatter_cmap_cividis_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>cool</td>
+<td><a target="_blank" href="t6684.html?f=matplotlib_scatter_cmap_cool">试一试</a></td>
+<td>cool_r</td>
+<td><a target="_blank" href="t0104.html?f=matplotlib_scatter_cmap_cool_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>coolwarm</td>
+<td><a target="_blank" href="t53e7.html?f=matplotlib_scatter_cmap_coolwarm">试一试</a></td>
+<td>coolwarm_r</td>
+<td><a target="_blank" href="te932.html?f=matplotlib_scatter_cmap_coolwarm_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>copper</td>
+<td><a target="_blank" href="te749.html?f=matplotlib_scatter_cmap_copper">试一试</a></td>
+<td>copper_r</td>
+<td><a target="_blank" href="t5bf0.html?f=matplotlib_scatter_cmap_copper_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>cubehelix</td>
+<td><a target="_blank" href="t2c37.html?f=matplotlib_scatter_cmap_cubehelix">试一试</a></td>
+<td>cubehelix_r</td>
+<td><a target="_blank" href="t1463.html?f=matplotlib_scatter_cmap_cubehelix_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>flag</td>
+<td><a target="_blank" href="t2812.html?f=matplotlib_scatter_cmap_flag">试一试</a></td>
+<td>flag_r</td>
+<td><a target="_blank" href="ta9b5.html?f=matplotlib_scatter_cmap_flag_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>gist_earth</td>
+<td><a target="_blank" href="t3246.html?f=matplotlib_scatter_cmap_gist_earth">试一试</a></td>
+<td>gist_earth_r</td>
+<td><a target="_blank" href="t2dd9.html?f=matplotlib_scatter_cmap_gist_earth_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>gist_gray</td>
+<td><a target="_blank" href="td926.html?f=matplotlib_scatter_cmap_gist_gray">试一试</a></td>
+<td>gist_gray_r</td>
+<td><a target="_blank" href="tc813.html?f=matplotlib_scatter_cmap_gist_gray_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>gist_heat</td>
+<td><a target="_blank" href="t20e7.html?f=matplotlib_scatter_cmap_gist_heat">试一试</a></td>
+<td>gist_heat_r</td>
+<td><a target="_blank" href="te6ed.html?f=matplotlib_scatter_cmap_gist_heat_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>gist_ncar</td>
+<td><a target="_blank" href="te5bf.html?f=matplotlib_scatter_cmap_gist_ncar">试一试</a></td>
+<td>gist_ncar_r</td>
+<td><a target="_blank" href="t10c4.html?f=matplotlib_scatter_cmap_gist_ncar_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>gist_rainbow</td>
+<td><a target="_blank" href="te336.html?f=matplotlib_scatter_cmap_gist_rainbow">试一试</a></td>
+<td>gist_rainbow_r</td>
+<td><a target="_blank" href="t2a65.html?f=matplotlib_scatter_cmap_gist_rainbow_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>gist_stern</td>
+<td><a target="_blank" href="t8b95.html?f=matplotlib_scatter_cmap_gist_stern">试一试</a></td>
+<td>gist_stern_r</td>
+<td><a target="_blank" href="t4ed4.html?f=matplotlib_scatter_cmap_gist_stern_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>gist_yarg</td>
+<td><a target="_blank" href="t5527.html?f=matplotlib_scatter_cmap_gist_yarg">试一试</a></td>
+<td>gist_yarg_r</td>
+<td><a target="_blank" href="t0e7d.html?f=matplotlib_scatter_cmap_gist_yarg_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>gnuplot</td>
+<td><a target="_blank" href="t7b3f.html?f=matplotlib_scatter_cmap_gnuplot">试一试</a></td>
+<td>gnuplot_r</td>
+<td><a target="_blank" href="td3bb.html?f=matplotlib_scatter_cmap_gnuplot_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>gnuplot2</td>
+<td><a target="_blank" href="tccb4.html?f=matplotlib_scatter_cmap_gnuplot2">试一试</a></td>
+<td>gnuplot2_r</td>
+<td><a target="_blank" href="t7004.html?f=matplotlib_scatter_cmap_gnuplot2_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>gray</td>
+<td><a target="_blank" href="t2218.html?f=matplotlib_scatter_cmap_gray">试一试</a></td>
+<td>gray_r</td>
+<td><a target="_blank" href="t37cf.html?f=matplotlib_scatter_cmap_gray_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>hot</td>
+<td><a target="_blank" href="t227e.html?f=matplotlib_scatter_cmap_hot">试一试</a></td>
+<td>hot_r</td>
+<td><a target="_blank" href="taa4d.html?f=matplotlib_scatter_cmap_hot_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>hsv</td>
+<td><a target="_blank" href="tc7f8.html?f=matplotlib_scatter_cmap_hsv">试一试</a></td>
+<td>hsv_r</td>
+<td><a target="_blank" href="te614.html?f=matplotlib_scatter_cmap_hsv_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>inferno</td>
+<td><a target="_blank" href="t5450.html?f=matplotlib_scatter_cmap_inferno">试一试</a></td>
+<td>inferno_r</td>
+<td><a target="_blank" href="tdf0b.html?f=matplotlib_scatter_cmap_inferno_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>jet</td>
+<td><a target="_blank" href="tccf4.html?f=matplotlib_scatter_cmap_jet">试一试</a></td>
+<td>jet_r</td>
+<td><a target="_blank" href="t33b4.html?f=matplotlib_scatter_cmap_jet_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>magma</td>
+<td><a target="_blank" href="tb3b6.html?f=matplotlib_scatter_cmap_magma">试一试</a></td>
+<td>magma_r</td>
+<td><a target="_blank" href="t673e.html?f=matplotlib_scatter_cmap_magma_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>nipy_spectral</td>
+<td><a target="_blank" href="t3286.html?f=matplotlib_scatter_cmap_nipy_spectral">试一试</a></td>
+<td>nipy_spectral_r</td>
+<td><a target="_blank" href="t340b.html?f=matplotlib_scatter_cmap_nipy_spectral_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>ocean</td>
+<td><a target="_blank" href="t68f3.html?f=matplotlib_scatter_cmap_ocean">试一试</a></td>
+<td>ocean_r</td>
+<td><a target="_blank" href="tc911.html?f=matplotlib_scatter_cmap_ocean_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>pink</td>
+<td><a target="_blank" href="tf863.html?f=matplotlib_scatter_cmap_pink">试一试</a></td>
+<td>pink_r</td>
+<td><a target="_blank" href="t3519.html?f=matplotlib_scatter_cmap_pink_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>plasma</td>
+<td><a target="_blank" href="tf7a2.html?f=matplotlib_scatter_cmap_plasma">试一试</a></td>
+<td>plasma_r</td>
+<td><a target="_blank" href="t07ee.html?f=matplotlib_scatter_cmap_plasma_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>prism</td>
+<td><a target="_blank" href="ta415.html?f=matplotlib_scatter_cmap_prism">试一试</a></td>
+<td>prism_r</td>
+<td><a target="_blank" href="te56f.html?f=matplotlib_scatter_cmap_prism_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>rainbow</td>
+<td><a target="_blank" href="taa6a.html?f=matplotlib_scatter_cmap_rainbow">试一试</a></td>
+<td>rainbow_r</td>
+<td><a target="_blank" href="t603c.html?f=matplotlib_scatter_cmap_rainbow_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>seismic</td>
+<td><a target="_blank" href="t80ef.html?f=matplotlib_scatter_cmap_seismic">试一试</a></td>
+<td>seismic_r</td>
+<td><a target="_blank" href="tabae.html?f=matplotlib_scatter_cmap_seismic_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>spring</td>
+<td><a target="_blank" href="tc1d3.html?f=matplotlib_scatter_cmap_spring">试一试</a></td>
+<td>spring_r</td>
+<td><a target="_blank" href="tddb6.html?f=matplotlib_scatter_cmap_spring_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>summer</td>
+<td><a target="_blank" href="td518.html?f=matplotlib_scatter_cmap_summer">试一试</a></td>
+<td>summer_r</td>
+<td><a target="_blank" href="t8e9c.html?f=matplotlib_scatter_cmap_summer_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>tab10</td>
+<td><a target="_blank" href="t2f3b.html?f=matplotlib_scatter_cmap_tab10">试一试</a></td>
+<td>tab10_r</td>
+<td><a target="_blank" href="tada5.html?f=matplotlib_scatter_cmap_tab10_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>tab20</td>
+<td><a target="_blank" href="t21ed.html?f=matplotlib_scatter_cmap_tab20">试一试</a></td>
+<td>tab20_r</td>
+<td><a target="_blank" href="t8b35.html?f=matplotlib_scatter_cmap_tab20_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>tab20b</td>
+<td><a target="_blank" href="t1a15.html?f=matplotlib_scatter_cmap_tab20b">试一试</a></td>
+<td>tab20b_r</td>
+<td><a target="_blank" href="td277.html?f=matplotlib_scatter_cmap_tab20b_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>tab20c</td>
+<td><a target="_blank" href="teb19.html?f=matplotlib_scatter_cmap_tab20c">试一试</a></td>
+<td>tab20c_r</td>
+<td><a target="_blank" href="te335.html?f=matplotlib_scatter_cmap_tab20c_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>terrain</td>
+<td><a target="_blank" href="t9b40.html?f=matplotlib_scatter_cmap_terrain">试一试</a></td>
+<td>terrain_r</td>
+<td><a target="_blank" href="tfc4d.html?f=matplotlib_scatter_cmap_terrain_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>twilight</td>
+<td><a target="_blank" href="t024e.html?f=matplotlib_scatter_cmap_twilight">试一试</a></td>
+<td>twilight_r</td>
+<td><a target="_blank" href="t8b34.html?f=matplotlib_scatter_cmap_twilight_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>twilight_shifted</td>
+<td><a target="_blank" href="t678e.html?f=matplotlib_scatter_cmap_twilight_shifted">试一试</a></td>
+<td>twilight_shifted_r</td>
+<td><a target="_blank" href="t7d42.html?f=matplotlib_scatter_cmap_twilight_shifted_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>viridis</td>
+<td><a target="_blank" href="tfffb.html?f=matplotlib_scatter_cmap_viridis">试一试</a></td>
+<td>viridis_r</td>
+<td><a target="_blank" href="t3036.html?f=matplotlib_scatter_cmap_viridis_r">试一试</a></td>
+</tr>
+
+<tr>
+<td>winter</td>
+<td><a target="_blank" href="t7d69.html?f=matplotlib_scatter_cmap_winter">试一试</a></td>
+<td>winter_r</td>
+<td><a target="_blank" href="t5d3f.html?f=matplotlib_scatter_cmap_winter_r">试一试</a></td>
+</tr>
+</table>
+</section>
+
+
+
+<section>
+<h2>大小</h2>
+
+<p>您可以使用 <code>s</code> 参数来改变点的大小。</p>
+
+<p>就像颜色一样，请确保 <code>sizes</code> 数组的长度与 x 轴和 y 轴的数组长度相同：</p>
+
+<h3>实例</h3>
+
+<p>为标记设置您自己的大小：</p>
+
+<pre class="language-python">
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])
+y = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])
+sizes = np.array([20,50,100,200,500,1000,60,90,10,300,600,800,75])
+
+plt.scatter(x, y, s=sizes)
+
+plt.show()
+</pre>
+
+<p class="tiy"><a target="_blank" href="te0e9.html?f=matplotlib_scatter_size">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<img class="illustration" src="../i/matplotlib/matplotlib_scatter_size.png" alt="Matplotlib 散点图">
+</section>
+
+
+
+<section>
+<h2>透明度</h2>
+
+<p>您可以使用 <code>alpha</code> 参数来调整点的透明度。</p>
+
+<p>就像颜色一样，请确保 <code>sizes</code> 数组的长度与 x 轴和 y 轴的数组长度相同：</p>
+
+<h3>实例</h3>
+
+<p>为标记设置您自己的大小：</p>
+
+<pre class="language-python">
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])
+y = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])
+sizes = np.array([20,50,100,200,500,1000,60,90,10,300,600,800,75])
+
+plt.scatter(x, y, s=sizes, alpha=0.5)
+
+plt.show()
+</pre>
+
+<p class="tiy"><a target="_blank" href="tb548.html?f=matplotlib_scatter_alpha">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<img class="illustration" src="../i/matplotlib/matplotlib_scatter_alpha.png" alt="Matplotlib 散点图">
+</section>
+
+
+
+<section>
+<h2>结合颜色、大小和透明度</h2>
+
+<p>您可以将色彩映射与不同大小的点结合起来。如果点是透明的，这将得到最好的可视化效果：</p>
+
+<h3>实例</h3>
+
+<p>为 x 点、y 点、颜色和大小创建包含 100 个值的随机数组：</p>
+
+<pre class="language-python">
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.random.randint(100, size=(100))
+y = np.random.randint(100, size=(100))
+colors = np.random.randint(100, size=(100))
+sizes = 10 * np.random.randint(100, size=(100))
+
+plt.scatter(x, y, c=colors, s=sizes, alpha=0.5, cmap='nipy_spectral')
+
+plt.colorbar()
+
+plt.show()
+</pre>
+
+<p class="tiy"><a target="_blank" href="t66b4.html?f=matplotlib_scatter_combine">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<img class="illustration" src="../i/matplotlib/matplotlib_scatter_combine.png" alt="Matplotlib 散点图">
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="matplotlib_subplot.html" title="Matplotlib 子图">Matplotlib 子图</a></li>
+<li class="next"><a href="matplotlib_bars.html" title="Matplotlib 条形图">Matplotlib 条形图</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="python_reference.html">Python 参考手册</a></h5>
+<h5 id="tools_example"><a href="python_examples.html">Python 实例</a></h5>
+<h5 id="tools_quiz"><a href="python_quiz.html">Python 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/python/matplotlib_scatter.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:49:33 GMT -->
+</html>

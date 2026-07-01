@@ -1,0 +1,467 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/bootstrap5/bootstrap_get_started.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:20:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Bootstrap 5 入门</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Bootstrap 5 教程</h2>
+<ul>
+<li><a href="index.html" title="Bootstrap 5 教程">BS5 教程</a></li>
+<li class="currentLink"><a href="bootstrap_get_started.html" title="Bootstrap 5 入门">BS5 入门</a></li>
+<li><a href="bootstrap_containers.html" title="Bootstrap 5 容器">BS5 容器</a></li>
+<li><a href="bootstrap_grid_basic.html" title="Bootstrap 5 网格">BS5 网格基础</a></li>
+<li><a href="bootstrap_typography.html" title="Bootstrap 5 文字/排版">BS5 排版</a></li>
+<li><a href="bootstrap_colors.html" title="Bootstrap 5 颜色">BS5 颜色</a></li>
+<li><a href="bootstrap_tables.html" title="Bootstrap 5 表格">BS5 表格</a></li>
+<li><a href="bootstrap_images.html" title="Bootstrap 5 图像">BS5 图像</a></li>
+<li><a href="bootstrap_jumbotron.html" title="Bootstrap 5 Jumbotron">BS5 Jumbotron</a></li>
+<li><a href="bootstrap_alerts.html" title="Bootstrap 5 警告框">BS5 警告框</a></li>
+<li><a href="bootstrap_buttons.html" title="Bootstrap 5 按钮">BS5 按钮</a></li>
+<li><a href="bootstrap_button_groups.html" title="Bootstrap 5 按钮组">BS5 按钮组</a></li>
+<li><a href="bootstrap_badges.html" title="Bootstrap 5 徽章">BS5 徽章</a></li>
+<li><a href="bootstrap_progressbars.html" title="Bootstrap 5 进度条">BS5 进度条</a></li>
+<li><a href="bootstrap_spinners.html" title="Bootstrap 5 加载器">BS5 加载器</a></li>
+<li><a href="bootstrap_pagination.html" title="Bootstrap 5 分页">BS5 分页</a></li>
+<li><a href="bootstrap_list_groups.html" title="Bootstrap 5 列表组">BS5 列表组</a></li>
+<li><a href="bootstrap_cards.html" title="Bootstrap 5 卡片">BS5 卡片</a></li>
+<li><a href="bootstrap_dropdowns.html" title="Bootstrap 5 下拉菜单">BS5 下拉菜单</a></li>
+<li><a href="bootstrap_collapse.html" title="Bootstrap 5 折叠">BS5 折叠</a></li>
+<li><a href="bootstrap_navs.html" title="Bootstrap 5 导航">BS5 导航</a></li>
+<li><a href="bootstrap_navbar.html" title="Bootstrap 5 导航栏">BS5 导航栏</a></li>
+<li><a href="bootstrap_carousel.html" title="Bootstrap 5 轮播">BS5 轮播</a></li>
+<li><a href="bootstrap_modal.html" title="Bootstrap 5 模态">BS5 模态</a></li>
+<li><a href="bootstrap_tooltip.html" title="Bootstrap 5 工具提示">BS5 工具提示</a></li>
+<li><a href="bootstrap_popover.html" title="Bootstrap 5 弹出框">BS5 弹出框</a></li>
+<li><a href="bootstrap_toast.html" title="Bootstrap 5 Toast">BS5 Toast</a></li>
+<li><a href="bootstrap_scrollspy.html" title="Bootstrap 5 Scrollspy">BS5 Scrollspy</a></li>
+<li><a href="bootstrap_offcanvas.html" title="Bootstrap 5 Offcanvas">BS5 Offcanvas</a></li>
+<li><a href="bootstrap_utilities.html" title="Bootstrap 5 实用工具">BS5 实用工具</a></li>
+<li><a href="bootstrap_flex.html" title="Bootstrap 5 Flex">BS5 Flex</a></li>
+</ul>
+<h2>Bootstrap 5 表单</h2>
+<ul>
+<li><a href="bootstrap_forms.html" title="Bootstrap 5 表单">BS5 表单</a></li>
+<li><a href="bootstrap_form_select.html" title="Bootstrap 5 选择菜单">BS5 选择菜单</a></li>
+<li><a href="bootstrap_form_check_radio.html" title="Bootstrap 5 复选框和单选按钮">BS5 复选框和单选按钮</a></li>
+<li><a href="bootstrap_form_range.html" title="Bootstrap 5 范围">BS5 范围</a></li>
+<li><a href="bootstrap_form_input_group.html" title="Bootstrap 5 输入组">BS5 输入组</a></li>
+<li><a href="bootstrap_form_floating_labels.html" title="Bootstrap 5 表单浮动标签">BS5 浮动标签</a></li>
+<li><a href="bootstrap_form_validation.html" title="Bootstrap 5 表单验证">BS5 表单验证</a></li>
+</ul>
+<h2>Bootstrap 5 网格</h2>
+<ul>
+<li><a href="bootstrap_grid_system.html" title="Bootstrap 5 网格系统">BS5 网格系统</a></li>
+<li><a href="bootstrap_grid_stacked_to_hor.html" title="Bootstrap 5 堆叠/水平">BS5 堆叠/水平</a></li>
+<li><a href="bootstrap_grid_xsmall.html" title="Bootstrap 5 网格：超小型设备">BS5 网格 XSmall</a></li>
+<li><a href="bootstrap_grid_small.html" title="Bootstrap 5 网格：小型设备">BS5 网格 Small</a></li>
+<li><a href="bootstrap_grid_medium.html" title="Bootstrap 5 网格：中型设备">BS5 网格 Medium</a></li>
+<li><a href="bootstrap_grid_large.html" title="Bootstrap 5 网格：大型设备">BS5 网格 Large</a></li>
+<li><a href="bootstrap_grid_xlarge.html" title="Bootstrap 5 网格：超大型设备">BS5 网格 XLarge</a></li>
+<li><a href="bootstrap_grid_xxl.html" title="Bootstrap 5 网格：特大型设备">BS5 网格 XXL</a></li>
+<li><a href="bootstrap_grid_examples.html" title="Bootstrap 5 网格实例">BS5 网格实例</a></li>
+</ul>
+<h2>Bootstrap 5 其他</h2>
+<ul>
+<li><a href="bootstrap_templates.html" title="Bootstrap 5 基础模板">BS5 基础模板</a></li>
+<li><a href="bootstrap_quiz.html" title="Bootstrap 5 测验">BS5 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Bootstrap 5 入门</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="index.html" title="Bootstrap 5 教程">BS5 教程</a></li>
+<li class="next"><a href="bootstrap_containers.html" title="Bootstrap 5 容器">BS5 容器</a></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>什么是 Bootstrap？</h2>
+
+<ul>
+<li>Bootstrap 是一个免费的前端框架，用于更快、更轻松地进行 Web 开发</li>
+<li>Bootstrap 包括基于 HTML 和 CSS 的设计模板，用于排版、表单、按钮、表格、导航、模态、图像轮播等</li>
+<li>Bootstrap 提供了丰富的 JavaScript 插件</li>
+<li>Bootstrap 可使您能够轻松地创建响应式设计</li>
+</ul>
+
+<h3>什么是响应式网页设计？</h3>
+
+<p>响应式网页设计旨在创建能够自动调整的网站，以便增强所有设备上的使用体验，不论是手机还是大型台式机。</p>
+
+<h3>Bootstrap 5 实例</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;container-fluid p-5 bg-primary text-white text-center&quot;&gt;
+  &lt;h1&gt;我的第一张 Bootstrap 页面&lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;container mt-5&quot;&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-sm-4&quot;&gt;
+      &lt;h3&gt;列 1：春日&lt;/h3&gt;
+      &lt;p&gt;胜日寻芳泗水滨，无边光景一时新。&lt;/p&gt;
+      &lt;p&gt;等闲识得东风面，万紫千红总是春。&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col-sm-4&quot;&gt;
+      &lt;h3&gt;列 2：初夏绝句&lt;/h3&gt;
+      &lt;p&gt;纷纷红紫已成尘，布谷声中夏令新。&lt;/p&gt;
+      &lt;p&gt;夹路桑麻行不尽，始知身是太平人。&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col-sm-4&quot;&gt;
+      &lt;h3&gt;列 3：山行&lt;/h3&gt;
+      &lt;p&gt;远上寒山石径斜，白云生处有人家。&lt;/p&gt;
+      &lt;p&gt;停车坐爱枫林晚，霜叶红于二月花。&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tcadf.html?s=h&amp;f=bs_default">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>Bootstrap 版本</h2>
+
+<p>Bootstrap 5（2021 年发布）是 Bootstrap 的最新版本（2013 年发布）；使用新组件、更快的样式表，提供更快的响应能力。</p>
+
+<p>Bootstrap 5 支持所有主要浏览器和平台的最新的稳定版本。但是，不支持 Internet Explorer 11 及更早的版本。</p>
+
+<p>Bootstrap 5 和 Bootstrap 3 &amp; 4 的主要区别在于 Bootstrap 5 已经切换到 Vanilla JavaScript 而不是 jQuery。</p>
+
+<p class="note"><span>注释：</span>其团队仍然支持 Bootstrap 3 和 Bootstrap 4 的关键错误修复和文档更改，继续使用它们是完全安全的。但是不会向其中添加任何新特性。</p>
+</div>
+
+
+
+<div>
+<h2>为什么要使用 Bootstrap？</h2>
+
+<p>Bootstrap 的优点：</p>
+
+<ul>
+<li><em>易于使用：</em>任何对 HTML 和 CSS 有基本了解的人都可以马上开始使用 Bootstrap</li>
+<li><em>响应式特性：</em>Bootstrap 的响应式 CSS 可针对手机、平板电脑和台式机进行调整</li>
+<li><em>移动优先的方法：</em>在 Bootstrap 中，移动优先样式是其核心框架的一部分</li>
+<li><em>浏览器兼容性：</em>Bootstrap 5 与所有现代浏览器兼容（Chrome、Firefox、Edge、Safari 和 Opera）。</li>
+</ul>
+
+<p class="important"><span>注意：</span>如果您需要支持 IE11 及以下版本，则必须使用 BS4 或 BS3。</p>
+</div>
+
+
+
+<div>
+<h2>从哪里获得 Bootstrap 5？</h2>
+
+<p>有两种方法可以在您自己的网站上使用 Bootstrap 5。</p>
+
+<p>您可以：</p>
+
+<ul>
+<li>包含来自 CDN 的 Bootstrap 5</li>
+<li>从 getbootstrap.com 下载 Bootstrap 5</li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>Bootstrap 5 CDN</h2>
+
+<p>如果不想自己下载并托管 Bootstrap 5，则可以从 CDN（内容交付网络）中引用它。</p>
+
+<p>W3School 为 Bootstrap 的 CSS 和 JavaScript 提供了 CDN 支持：</p>
+
+<h3>MaxCDN:</h3>
+
+<pre class="language-html">
+&lt;!-- 最新编译并压缩的 CSS --&gt;
+&lt;link href=&quot;https://www.w3school.com.cn/lib/bs/bootstrap.css&quot; rel=&quot;stylesheet&quot;&gt;
+
+&lt;!-- 最新编译的 JavaScript --&gt;
+&lt;script src=&quot;https://www.w3school.com.cn/lib/bs/bootstrap.js&quot;&gt;&lt;/script&gt;
+</pre>
+
+<h3>使用 Bootstrap 5 CDN 的优势之一：</h3>
+
+<p>许多用户在访问另一个站点时已经从 jsDelivr 下载了 Bootstrap 5。因此，当他们访问您的网站时，它将从缓存中加载，从而缩短加载时间。此外，大多数 CDN 将确保一旦用户从中请求文件，它将从最接近他们的服务器提供服务，这也导致更快的加载时间。</p>
+
+<h3>JavaScript？</h3>
+
+<p>Bootstrap 5 将 JavaScript 用于不同的组件（如模态、工具提示、弹出框等）。但是，如果您只使用 Bootstrap 的 CSS 部分，那就不需要它们。</p>
+</div>
+
+
+
+<div>
+<h2>下载 Bootstrap 5</h2>
+
+<p>如果您想自己下载并托管 Bootstrap 5，请访问 <a href="https://getbootstrap.com/" target="_blank">https://getbootstrap.com/</a>，然后按照那里的说明进行操作。</p>
+</div>
+
+
+
+<div>
+<h2>使用 Bootstrap 5 创建您的第一张网页</h2>
+
+<h3>1. 添加 HTML5 文档类型</h3>
+
+<p>Bootstrap 5 使用的是需要 HTML5 doctype 的 HTML 元素和 CSS 属性。</p>
+
+<p>请始终在页面开头包含 HTML5 doctype，以及 lang 属性和正确的标题、字符集：</p>
+
+<pre class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;title&gt;Bootstrap 5 实例&lt;/title&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;/head&gt;
+&lt;/html&gt;
+</pre>
+
+<h3>2. Bootstrap 5 移动优先</h3>
+
+<p>Bootstrap 5 的设计目标是响应移动设备。移动优先的样式是核心框架的一部分。</p>
+
+<p>为确保正确的渲染和触摸缩放，请在 <code>&lt;head&gt;</code> 元素内添加以下 <code>&lt;meta&gt;</code> 标记：</p>
+
+<pre class="language-html">
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+</pre>
+
+<p><code>width=device-width</code> 设置了页面的宽度以跟随设备的 screen-width（将因设备而异）。</p>
+
+<p><code>initial-scale=1</code> 设置了浏览器首次加载页面时的初始缩放级别。</p>
+
+<h3>3. 容器</h3>
+
+<p>Bootstrap 5 还需要一个包含元素来包装站点内容。</p>
+
+<p>有两种容器类可供选择：</p>
+
+<ol>
+<li><code>.container</code> 类提供了一个响应式的固定宽度容器</li>
+<li><code>.container-fluid</code> 类提供了一个全宽容器，跨越视口的整个宽度</li>
+</ol>
+
+<iframe src="../demo/bs/container.html" style="width:100%;min-height:160px;border:none;margin-top:15px;"></iframe>
+
+</div>
+
+
+
+<div>
+<h2>两张基本的 Bootstrap 5 页面</h2>
+
+<h3>container 实例</h3>
+
+<p>下例展示了基本 Bootstrap 5 页面（带有响应式固定宽度容器）的代码：</p>
+
+<pre class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;title&gt;Bootstrap 实例&lt;/title&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;link href=&quot;https://www.w3school.com.cn/lib/bs/bootstrap.css&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;script src=&quot;https://www.w3school.com.cn/lib/bs/bootstrap.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;div class=&quot;container&quot;&gt;
+  &lt;h1&gt;我的第一张 Bootstrap 页面&lt;/h1&gt;
+  &lt;p&gt;这部分在 .container 类中。&lt;/p&gt;
+  &lt;p&gt;.container 类提供了响应式固定宽度的容器。&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t8f5c.html?s=h&amp;f=bs_gs_container">亲自试一试</a></p>
+
+<h3>Container Fluid 实例</h3>
+
+<p>下例展示了基本 Bootstrap 5 页面（带有全宽容器）的代码：</p>
+
+<pre class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;title&gt;Bootstrap 实例&lt;/title&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;link href=&quot;https://www.w3school.com.cn/lib/bs/bootstrap.css&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;script src=&quot;https://www.w3school.com.cn/lib/bs/bootstrap.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;div class=&quot;container-fluid&quot;&gt;
+  &lt;h1&gt;我的第一张 Bootstrap 页面&lt;/h1&gt;
+  &lt;p&gt;这部分在 .container-fluid 类中。&lt;/p&gt;
+  &lt;p&gt;.container-fluid 类提供全宽容器，跨越视口的整个宽度。&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t050e.html?s=h&amp;f=bs_gs_container-fluid">亲自试一试</a></p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="index.html" title="Bootstrap 5 教程">BS5 教程</a></li>
+<li class="next"><a href="bootstrap_containers.html" title="Bootstrap 5 容器">BS5 容器</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_quiz"><a href="bootstrap_quiz.html">JavaScript 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/bootstrap5/bootstrap_get_started.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:20:21 GMT -->
+</html>

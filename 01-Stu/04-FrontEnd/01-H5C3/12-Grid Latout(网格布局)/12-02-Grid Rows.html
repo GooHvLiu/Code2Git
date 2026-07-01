@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+  <title>12-02-Grid Rows</title>
+  <style>
+    .container {
+      display: grid;
+      /* 此为固定元素宽度 */
+      /* grid-template-columns: 200px 200px 200px; */
+      /* 全部为自动计算用来填充整个宽度 */
+      /* grid-template-columns: auto auto auto; */
+      /* 1和3为固定宽度，2为填充整个宽度 */
+      /* grid-template-columns: 200px auto 200px; */
+      /* 通过repeat函数进行设置，第1个参数3表示有3个，200px表示每个都是200px宽度 */
+      /* grid-template-columns: repeat(3, 200px); */
+      /* 通过repeat函数进行设置，第1个参数3表示有3个，auto表示每个都是等宽度 */
+      grid-template-columns: repeat(2, 1fr);
+      /* 三个列，按 1:2:1 比例分配,fr是fraction的简写 */
+      grid-template-rows: 1fr 2fr;
+      /* auto-rows一般是指定grid-template-rows没有被涉及的元素的占比情况 */
+      grid-auto-rows: 2fr;
+      /* gap表示两个元素之间的宽度*/
+      gap: 0.5rem;
+    }
+
+    .item {
+      padding: 3rem;
+      border: 1px #ccc solid;
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="item">Items 1</div>
+    <div class="item">Items 2</div>
+    <div class="item">Items 3</div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html>
+<style>
+* {margin: 0; padding: 0}
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+}
+
+#myBar {
+  width: 10%;
+  height: 36px;
+  background-color: #04AA6D;
+}
+
+#label {
+  text-align: center;
+  line-height: 36px;
+  color: white;
+}
+
+
+.w3-button-green {
+ margin-top: 15px;
+ background-color: #04AA6D;
+ color: #fff;
+ padding: 8px 16px;
+ border: 0;
+ cursor:pointer;
+ 
+}
+
+.w3-button-green:hover {
+ background-color: #ccc;
+ color: #000;
+}
+</style>
+
+<!-- Mirrored from www.w3school.com.cn/demo/howto/how_js_progressbar_label_js_2.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:40 GMT -->
+<body>
+
+<div id="myProgress">
+  <div id="myBar">
+    <div id="label">10%</div>
+  </div>
+</div>
+
+<button class="w3-button-green" onclick="move()">运行</button> 
+
+<script>
+var i = 0;
+function move() {
+  if (i == 0) {
+    i = 1;
+    var elem = document.getElementById("myBar");
+    var width = 10;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+      } else {
+        width++;
+        elem.style.width = width + "%";
+      document.getElementById("label").innerHTML = width + '%';
+      }
+    }
+  }
+}
+</script>
+
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/demo/howto/how_js_progressbar_label_js_2.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:40 GMT -->
+</html>

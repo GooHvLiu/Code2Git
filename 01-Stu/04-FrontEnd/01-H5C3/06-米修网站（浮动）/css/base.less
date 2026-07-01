@@ -1,0 +1,67 @@
+// Global Reset
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+// main stying
+html,
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.7em;
+}
+
+//Reset a label style
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+//Reset h label style
+h1,
+h2,
+h3 {
+  padding-bottom: 20px;
+}
+
+//Reset p label style
+p {
+  margin: 10px 0;
+}
+
+//left float in float layout
+.floatleft {
+  float: left;
+}
+
+//right float in float layout
+.floatright {
+  float: right;
+}
+
+//clear float in float layout
+.clearfloat::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+//以下为该项目通用样式
+
+//米修在线 的颜色不一样
+.text-content {
+  color: #f7c08a;
+  padding-left: 10px;
+  font-size: 40px;
+}
+
+//每个页面对应菜单栏的样式
+#selected a {
+  background-color: #444;
+  color: #f7c08a;
+}

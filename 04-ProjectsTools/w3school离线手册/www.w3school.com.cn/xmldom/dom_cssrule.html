@@ -1,0 +1,325 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/xmldom/dom_cssrule.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:13:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=gb2312" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="gbk" />
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+<link rel="stylesheet" type="text/css" href="../c5.css" />
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>XML DOM CSSRule 对象</title>
+
+</head>
+
+<body class="xml">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 椤电湁 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>XML DOM</h2>
+<ul>
+<li><a href="index.html" title="XML DOM 教程">DOM 首页</a></li>
+<li><a href="dom_intro.html" title="XML DOM 简介">DOM 简介</a></li>
+<li><a href="dom_nodes.html" title="XML DOM 节点">DOM 节点</a></li>
+<li><a href="dom_nodetree.html" title="XML DOM 节点树">DOM 节点树</a></li>
+<li><a href="dom_parser.html" title="解析 XML DOM">DOM 解析</a></li>
+<li><a href="dom_loadxmldoc.html" title="XML DOM 加载函数">DOM 加载</a></li>
+<li><a href="dom_methods.html" title="XML DOM - 属性和方法">DOM 属性和方法</a></li>
+<li><a href="dom_nodes_access.html" title="XML DOM 访问节点">DOM 访问节点</a></li>
+<li><a href="dom_nodes_info.html" title="XML DOM 节点信息">DOM 节点信息</a></li>
+<li><a href="dom_nodes_nodelist.html" title="XML DOM 节点列表">DOM 节点列表</a></li>
+<li><a href="dom_nodes_traverse.html" title="XML DOM 遍历节点">DOM 遍历节点</a></li>
+<li><a href="dom_mozilla_vs_ie.html" title="XML DOM 浏览器差异">DOM 浏览器</a></li>
+<li><a href="dom_nodes_navigate.html" title="XML DOM 定位节点">DOM 定位节点</a></li>
+</ul>
+<h2>节点操作</h2>
+<ul>
+<li><a href="dom_nodes_get.html" title="XML DOM 获取节点值">DOM 获取节点</a></li>
+<li><a href="dom_nodes_set.html" title="XML DOM 改变节点值">DOM 改变节点</a></li>
+<li><a href="dom_nodes_remove.html" title="XML DOM 删除节点">DOM 删除节点</a></li>
+<li><a href="dom_nodes_replace.html" title="XML DOM 替换节点">DOM 替换节点</a></li>
+<li><a href="dom_nodes_create.html" title="XML DOM 创建节点">DOM 创建节点</a></li>
+<li><a href="dom_nodes_add.html" title="XML DOM 添加节点">DOM 添加节点</a></li>
+<li><a href="dom_nodes_clone.html" title="XML DOM 克隆节点">DOM 克隆节点</a></li>
+<li><a href="dom_httprequest.html" title="XMLHttpRequest 对象">DOM HttpRequest</a></li>
+</ul>
+<h2>XML DOM 参考手册</h2>
+<ul>
+<li><a href="xmldom_reference.html" title="XML DOM 参考手册">DOM 手册目录</a></li>
+<li><a href="dom_nodetype.html" title="XML DOM 节点类型（Node Types）">DOM 节点类型</a></li>
+<li><a href="dom_attribute.html" title="XML DOM Attr 对象">DOM Attr</a></li>
+<li><a href="dom_cdatasection.html" title="XML DOM CDATASection 对象">DOM CDATASection</a></li>
+<li><a href="dom_characterdata.html" title="XML DOM CharacterData 对象">DOM CharacterData</a></li>
+<li><a href="dom_css2properties.html" title="XML DOM CSS2Properties 对象">DOM CSS2Properties</a></li>
+<li class="currentLink"><a href="dom_cssrule.html" title="XML DOM CSSRule 对象">DOM CSSRule</a></li>
+<li><a href="dom_cssstylerule.html" title="XML DOM CSSStyleRule 对象">DOM CSSStyleRule</a></li>
+<li><a href="dom_cssstylesheet.html" title="XML DOM CSSStyleSheet 对象">DOM CSSStyleSheet</a></li>
+<li><a href="dom_comment.html" title="XML DOM Comment 对象">DOM Comment</a></li>
+<li><a href="dom_document.html" title="XML DOM Document 对象">DOM Document</a></li>
+<li><a href="dom_documenttype.html" title="XML DOM DocumentType 对象">DOM DocumentType</a></li>
+<li><a href="dom_domexception.html" title="XML DOM DOMException 对象">DOM DOMException</a></li>
+<li><a href="dom_domimplementation.html" title="XML DOM Implementation 对象">DOM Implementation</a></li>
+<li><a href="dom_domparser.html" title="XML DOM DOMParser 对象">DOM DOMParser</a></li>
+<li><a href="dom_element.html" title="XML DOM Element 对象">DOM Element</a></li>
+<li><a href="dom_event.html" title="XML DOM Event 对象">DOM Event</a></li>
+<li><a href="dom_htmlcollection.html" title="XML DOM HTMLCollection 对象">DOM HTMLCollection</a></li>
+<li><a href="dom_htmldocument.html" title="XML DOM HTMLDocument 对象">DOM HTMLDocument</a></li>
+<li><a href="dom_htmlelement.html" title="XML DOM HTMLElement 对象">DOM HTMLElement</a></li>
+<li><a href="dom_namednodemap.html" title="XML DOM NamedNodeMap 对象">DOM NamedNodeMap</a></li>
+<li><a href="dom_node.html" title="XML DOM Node 对象">DOM Node</a></li>
+<li><a href="dom_nodelist.html" title="XML DOM NodeList 对象">DOM NodeList</a></li>
+<li><a href="dom_errors.html" title="XML DOM ParseError 对象">DOM ParseError</a></li>
+<li><a href="dom_processinginstruction.html" title="XML DOM ProcessingInstr 对象">DOM ProcessingInstr</a></li>
+<li><a href="dom_range.html" title="XML DOM Range 对象">DOM Range</a></li>
+<li><a href="dom_rangeexception.html" title="XML DOM RangeException 对象">DOM RangeException</a></li>
+<li><a href="dom_text.html" title="XML DOM Text 对象">DOM Text</a></li>
+<li><a href="dom_http.html" title="XML DOM XMLHttpRequest 对象">DOM XMLHttpRequest</a></li>
+<li><a href="dom_xmlserializer.html" title="XML DOM XMLSerializer 对象">DOM XMLSerializer</a></li>
+<li><a href="dom_xpathexpression.html" title="XML DOM XPathExpression 对象">DOM XPathExpression</a></li>
+<li><a href="dom_xpathresult.html" title="XML DOM XPathResult 对象">DOM XPathResult</a></li>
+<li><a href="dom_xsltprocessor.html" title="XML DOM XSLTProcessor 对象">DOM XSLTProcessor</a></li>
+</ul>
+<h2>DOM 实例</h2>
+<ul>
+<li><a href="../example/xdom_examples.html" title="XML DOM 实例">DOM 实例</a></li>
+<li><a href="dom_summary.html" title="你已经学习了XML DOM，下一步呢？">DOM 总结</a></li>
+</ul>
+</div><div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.html" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.html" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.html" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.html" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.html" title="语义网">语义网</a></li>
+<li><a href="../careers/index.html" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.html" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2>编程</h2>
+<ul>
+<li><a href="../python/index.html" title="Python 教程">Python 教程</a></li>
+</ul>
+
+<h2 id="link_about"><a href="../about/index.html" title="关于 W3School" target="_blank">关于 W3School</a></h2>
+<h2 id="link_help"><a href="../about/about_helping.html" title="帮助 W3School" target="_blank">帮助 W3School</a></h2>
+
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>XML DOM CSSRule 对象</h1>
+
+<div id="tpn">
+<ul class="prenext">
+<li class="pre"><a href="dom_css2properties.html" title="XML DOM CSS2Properties 对象">DOM CSS2Properties</a></li>
+<li class="next"><a href="dom_cssstylerule.html" title="XML DOM CSSStyleRule 对象">DOM CSSStyleRule</a></li>
+</ul>
+</div>
+
+
+<div>
+<h2>CSSRule 对象</h2>
+
+<p>CSSRule 对象是一个基类，用于定义 CSS 样式表中的任何规则，包括规则集（rule sets）和 @ 规则（at-rules）。</p>
+
+<p>规则存在若干种类型。所有这些类型在 CSSRule 接口共享的通用属性并不多，大部分类型都拥有专门针对特定规则类型的属性。</p>
+
+</div>
+
+<div>
+<h2>CSS 规则的类型</h2>
+
+<table class="dataintable">
+	<tr>
+	<th style="width:45%;">类型</th>
+	<th>对应的接口</th>
+	</tr>
+
+	<tr>
+	<td>CSSRule.STYLE_RULE</td>
+	<td><a href="dom_cssstylerule.html" title="XML DOM CSSStyleRule 对象">CSSStyleRule</a></td>
+	</tr>
+
+	<tr>
+	<td>CSSRule.MEDIA_RULE</td>
+	<td>CSSMediaRule</td>
+	</tr>
+
+	<tr>
+	<td>CSSRule.FONT_FACE_RULE</td>
+	<td>CSSFontFaceRule</td>
+	</tr>
+
+	<tr>
+	<td>CSSRule.PAGE_RULE</td>
+	<td>CSSPageRule</td>
+	</tr>
+
+	<tr>
+	<td>CSSRule.IMPORT_RULE</td>
+	<td>CSSImportRule</td>
+	</tr>
+
+	<tr>
+	<td>CSSRule.CHARSET_RULE</td>
+	<td>CSSCharsetRule</td>
+	</tr>
+
+	<tr>
+	<td>CSSRule.UNKNOWN_RULE</td>
+	<td>CSSUnknownRule</td>
+	</tr>
+</table>
+</div>
+
+
+<div>
+<h2>CSSRule 对象的属性</h2>
+
+<dl class="define">
+<dt>cssText</dt>
+<dd>返回规则的文本表示，例如 &quot;h1,h2 { font-size: 16pt }&quot;。</dd>
+
+<dt>parentRule</dt>
+<dd>返回包含规则（如果有的话）（例如，在 @media 块中的样式规则）。</dd>
+
+<dt>parentStyleSheet</dt>
+<dd>返回该规则所属的 stylesheet 对象。</dd>
+
+<dt>type</dt>
+<dd>规则类型，例如 CSSRule.CHARSET_RULE 或 CSSRule.IMPORT_RULE。</dd>
+</dl>
+
+<p class="note"><span>注释：</span>以上属性均为只读。</p>
+</div>
+
+
+<div>
+<h2>相关页面</h2>
+<p>XML DOM 参考手册：<a href="dom_cssstylerule.html" title="XML DOM CSSStyleRule 对象">CSSStyleRule 对象</a></p>
+</div>
+
+
+<div id="bpn">
+<ul class="prenext">
+<li class="pre"><a href="dom_css2properties.html" title="XML DOM CSS2Properties 对象">DOM CSS2Properties</a></li>
+<li class="next"><a href="dom_cssstylerule.html" title="XML DOM CSSStyleRule 对象">DOM CSSStyleRule</a></li>
+</ul>
+</div>
+
+<div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 正文广告 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="xmldom_reference.html">XML DOM 参考手册</a></h5>
+<h5 id="tools_example"><a href="../example/xdom_examples.html">XML DOM 实例</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 渚ф爮骞垮憡浣� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="https://beian.miit.gov.cn/">蒙ICP备06004630号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/xmldom/dom_cssrule.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:13:57 GMT -->
+</html>

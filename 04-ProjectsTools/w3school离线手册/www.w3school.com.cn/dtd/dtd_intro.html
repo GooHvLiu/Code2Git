@@ -1,0 +1,273 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/dtd/dtd_intro.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:13:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>DTD 简介</title>
+
+</head>
+
+<body class="xml">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>DTD 教程</h2>
+<ul>
+<li><a href="index.html" title="DTD 教程">DTD 教程</a></li>
+<li class="currentLink"><a href="dtd_intro.html" title="DTD 简介">DTD 简介</a></li>
+<li><a href="dtd_building.html" title="DTD - XML 构建模块">DTD 构建模块</a></li>
+<li><a href="dtd_elements.html" title="DTD - 元素">DTD 元素</a></li>
+<li><a href="dtd_attributes.html" title="DTD - 属性">DTD 属性</a></li>
+<li><a href="dtd_entities.html" title="DTD - 实体">DTD 实体</a></li>
+<li><a href="dtd_validation.html" title="DTD - 验证">DTD 验证</a></li>
+<li><a href="dtd_examples.html" title="DTD - 来自网络的实例">DTD 实例</a></li>
+<li><a href="dtd_summary.html" title="您已经学习了DTD，下一步呢？">DTD 总结</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>DTD 简介</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="index.html" title="DTD 教程">DTD 教程</a></li>
+<li class="next"><a href="dtd_building.html" title="DTD - XML 构建模块">DTD 构建模块</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p><strong>文档类型定义（DTD）可定义合法的XML文档构建模块。它使用一系列合法的元素来定义文档的结构。</strong></p>
+
+<p><strong>DTD 可被成行地声明于 XML 文档中，也可作为一个外部引用。</strong></p>
+</div>
+
+
+
+<div>
+<h2>内部的 DOCTYPE 声明</h2>
+
+<p>假如 DTD 被包含在您的 XML 源文件中，它应当通过下面的语法包装在一个 DOCTYPE 声明中：</p>
+
+<pre class="language-xml">
+&lt;!DOCTYPE 根元素 [元素声明]&gt;
+</pre>
+
+<p>带有 DTD 的 XML 文档实例（请在 IE5 以及更高的版本打开，并选择查看源代码）：</p>
+
+<pre class="language-xml">
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE note [
+  &lt;!ELEMENT note (to,from,heading,body)&gt;
+  &lt;!ELEMENT to      (#PCDATA)&gt;
+  &lt;!ELEMENT from    (#PCDATA)&gt;
+  &lt;!ELEMENT heading (#PCDATA)&gt;
+  &lt;!ELEMENT body    (#PCDATA)&gt;
+]&gt;
+&lt;note&gt;
+  &lt;to&gt;George&lt;/to&gt;
+  &lt;from&gt;John&lt;/from&gt;
+  &lt;heading&gt;Reminder&lt;/heading&gt;
+  &lt;body&gt;Don't forget the meeting!&lt;/body&gt;
+&lt;/note&gt;
+</pre>
+
+<p><a href="note_in_dtd.xml">在您的浏览器中打开此 XML 文件，并选择“查看源代码”命令</a>。</p>
+
+<h3>以上 DTD 解释如下：</h3>
+
+<p><em>!DOCTYPE note</em> (第二行)定义此文档是 <em>note</em> 类型的文档。</p>
+<p><em>!ELEMENT note</em> (第三行)定义 <em>note</em> 元素有四个元素：&quot;to、from、heading,、body&quot;</p>
+<p><em>!ELEMENT to</em> (第四行)定义 <em>to</em> 元素为 &quot;#PCDATA&quot; 类型</p>
+<p><em>!ELEMENT from</em> (第五行)定义 <em>from</em> 元素为 &quot;#PCDATA&quot; 类型</p>
+<p><em>!ELEMENT heading</em> (第六行)定义 <em>heading</em> 元素为 &quot;#PCDATA&quot; 类型</p>
+<p><em>!ELEMENT body</em> (第七行)定义 <em>body</em> 元素为 &quot;#PCDATA&quot; 类型</p>
+</div>
+
+
+
+<div>
+<h2>外部文档声明</h2>
+
+<p>假如 DTD 位于 XML 源文件的外部，那么它应通过下面的语法被封装在一个 DOCTYPE 定义中：</p>
+
+<pre class="language-xml">
+&lt;!DOCTYPE 根元素 SYSTEM &quot;文件名&quot;&gt;
+</pre>
+
+<p>这个 XML 文档和上面的 XML 文档相同，但是拥有一个外部的 DTD: （<a href="note_ex_dtd.xml">在 IE5 中打开</a>，并选择“查看源代码”命令。）</p>
+
+<pre class="language-xml">
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE note SYSTEM &quot;note.dtd&quot;&gt;
+&lt;note&gt;
+&lt;to&gt;George&lt;/to&gt;
+&lt;from&gt;John&lt;/from&gt;
+&lt;heading&gt;Reminder&lt;/heading&gt;
+&lt;body&gt;Don't forget the meeting!&lt;/body&gt;
+&lt;/note&gt;
+</pre>
+
+<p>这是包含 DTD 的 &quot;note.dtd&quot; 文件：</p>
+
+<pre class="language-xml">
+&lt;!ELEMENT note (to,from,heading,body)&gt;
+&lt;!ELEMENT to (#PCDATA)&gt;
+&lt;!ELEMENT from (#PCDATA)&gt;
+&lt;!ELEMENT heading (#PCDATA)&gt;
+&lt;!ELEMENT body (#PCDATA)&gt;
+</pre>
+</div>
+
+
+
+<div>
+<h2>为什么使用 DTD？</h2>
+
+<p>通过 DTD，您的每一个 XML 文件均可携带一个有关其自身格式的描述。</p>
+
+<p>通过 DTD，独立的团体可一致地使用某个标准的 DTD 来交换数据。</p>
+
+<p>而您的应用程序也可使用某个标准的 DTD 来验证从外部接收到的数据。</p>
+
+<p>您还可以使用 DTD 来验证您自身的数据。</p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="index.html" title="DTD 教程">DTD 教程</a></li>
+<li class="next"><a href="dtd_building.html" title="DTD - XML 构建模块">DTD 构建模块</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/dtd/dtd_intro.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:13:02 GMT -->
+</html>

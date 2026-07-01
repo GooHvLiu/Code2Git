@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>注册</title>
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css"
+      rel="stylesheet"
+    />
+    <style>
+      .row {
+        display: flex;
+        justify-content: center;
+      }
+      /* 入场淡入上浮动画 */
+      .col-md-4 {
+        opacity: 0;
+        transform: translateY(14px);
+        animation: formFadeUp 0.5s ease forwards;
+      }
+      @keyframes formFadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      /* 输入框、下拉框聚焦过渡效果 */
+      .form-control {
+        transition:
+          border-color 0.22s ease,
+          box-shadow 0.22s ease;
+      }
+      .form-control:focus {
+        box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
+      }
+      /* 按钮hover轻动画 */
+      .btn-block {
+        transition: all 0.2s ease;
+        margin-bottom: 12px;
+      }
+      .btn-block:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 102, 204, 0.22);
+      }
+      .title-wrap {
+        text-align: center;
+      }
+      /* 逐字弹出动画 */
+      .title-wrap span {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(-10px);
+        animation: wordShow 0.4s ease forwards;
+      }
+      .title-wrap span:nth-child(1) {
+        animation-delay: 0.3s;
+      }
+      .title-wrap span:nth-child(2) {
+        animation-delay: 0.45s;
+      }
+      @keyframes wordShow {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h2 class="title-wrap"><span>注</span><span>册</span></h2>
+          <hr />
+          <form method="post" action="/auth/reg">
+            <div class="form-group">
+              <label for="item">用户名</label>
+              <input
+                name="username"
+                type="text"
+                class="form-control"
+                id="item"
+              />
+            </div>
+            <div class="form-group">
+              <label for="time">密码</label>
+              <input
+                name="password"
+                type="password"
+                class="form-control"
+                id="time"
+              />
+            </div>
+            <div class="form-group">
+              <label for="role">账号角色</label>
+              <select name="role" id="role" class="form-control">
+                <option value="user" selected>使用者</option>
+                <option value="admin">管理员</option>
+              </select>
+            </div>
+            <hr />
+            <button type="submit" class="btn btn-primary btn-block">
+              注册
+            </button>
+            <!-- 返回登录按钮 -->
+            <a href="/auth/login" class="btn btn-default btn-block">
+              返回登录
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

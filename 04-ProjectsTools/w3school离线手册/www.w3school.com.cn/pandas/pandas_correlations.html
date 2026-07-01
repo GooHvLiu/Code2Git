@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/pandas/pandas_correlations.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:55:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Pandas 数据相关性</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Pandas 教程</h2>
+<ul>
+<li><a href="index.html" title="Pandas 教程">Pandas 教程</a></li>
+<li><a href="pandas_intro.html" title="Pandas 简介">Pandas 简介</a></li>
+<li><a href="pandas_getting_started.html" title="Pandas 入门">Pandas 入门</a></li>
+<li><a href="pandas_series.html" title="Pandas 序列">Pandas 序列</a></li>
+<li><a href="pandas_dataframes.html" title="Pandas 数据帧">Pandas 数据帧</a></li>
+<li><a href="pandas_csv.html" title="Pandas 读取 CSV">Pandas 读取 CSV</a></li>
+<li><a href="pandas_json.html" title="Pandas 读取 JSON">Pandas 读取 JSON</a></li>
+<li><a href="pandas_analyzing.html" title="Pandas 数据分析">Pandas 数据分析</a></li>
+</ul>
+<h2>数据清洗</h2>
+<ul>
+<li><a href="pandas_cleaning.html" title="Pandas 数据清洗">Pandas 数据清洗</a></li>
+<li><a href="pandas_cleaning_empty_cells.html" title="Pandas 清洗空单元格">Pandas 清洗空单元格</a></li>
+<li><a href="pandas_cleaning_wrong_format.html" title="Pandas 清洗错误格式">Pandas 清洗错误格式</a></li>
+<li><a href="pandas_cleaning_wrong_data.html" title="Pandas 清洗错误数据">Pandas 清洗错误数据</a></li>
+<li><a href="pandas_cleaning_duplicates.html" title="Pandas 删除重复项">Pandas 删除重复项</a></li>
+</ul>
+<h2>相关性</h2>
+<ul>
+<li class="currentLink"><a href="pandas_correlations.html" title="Pandas 相关性">Pandas 相关性</a></li>
+</ul>
+<h2>绘图</h2>
+<ul>
+<li><a href="pandas_plotting.html" title="Pandas 绘图">Pandas 绘图</a></li>
+</ul>
+<h2>参考手册</h2>
+<ul>
+<li><a href="pandas_ref_dataframe.html" title="DataFrames 参考手册">DataFrames 参考手册</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Pandas 数据相关性</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="pandas_cleaning_duplicates.html" title="Pandas 删除重复项">Pandas 删除重复项</a></li>
+<li class="next"><a href="pandas_plotting.html" title="Pandas 绘图">Pandas 绘图</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>寻找关系</h2>
+
+<p>Pandas 模块的一个很棒的方面是 <code>corr()</code> 方法。</p>
+
+<p><code>corr()</code> 方法计算数据集中每列之间的关系。</p>
+
+<p>本页中的例子使用了一个名为 'data.csv' 的 CSV 文件。</p>
+
+<p>下载 <a href="data.csv" target="_blank">data.csv</a>，或在浏览器中打开 <a href="data.csv.txt" target="_blank">data.csv</a></p>
+
+<h3>实例</h3>
+
+<p>显示列之间的关系：</p>
+
+<pre class="language-python">
+df.corr()
+</pre>
+
+<p class="tiy"><a target="_blank" href="t0544.html?f=pandas_corr">亲自试一试</a></p>
+
+<h4>结果</h4>
+
+<pre class="cmdline">
+          Duration     Pulse  Maxpulse  Calories
+Duration  1.000000 -0.155408  0.009403  0.922721
+Pulse    -0.155408  1.000000  0.786535  0.025120
+Maxpulse  0.009403  0.786535  1.000000  0.203814
+Calories  0.922721  0.025120  0.203814  1.000000
+</pre>
+
+<p class="note"><span>注意：</span><code>corr()</code> 方法会忽略“非数字”列。</p>
+
+<h3>结果解释</h3>
+
+<p><code>corr()</code> 方法的结果是一个包含许多数字的表格，这些数字表示两列之间的关系有多好。</p>
+
+<p>该数字的范围从 -1 到 1。</p>
+
+<p>1 意味着存在 1 对 1 的关系（完全相关），对于此数据集，每当第一列中的值上升时，另一列中的值也会上升。</p>
+
+<p>0.9 也是很好的关系，如果你增加一个值，另一个值也可能会增加。</p>
+
+<p>-0.9 与 0.9 一样有着良好的关系，但是如果你增加一个值，另一个值可能会下降。</p>
+
+<p>0.2 意味着关系不好，这意味着一个值的上升并不意味着另一个值也会上升。</p>
+
+<p><em>什么是好的相关性？</em>这取决于用途，但我认为可以肯定的是，你必须至少达到 <code>0.6</code>（或 <code>-0.6</code>）才能称其为好的相关性。</p>
+
+<h4>完美相关：</h4>
+
+<p>我们可以看到 &quot;Duration&quot; 和 &quot;Duration&quot; 得到了数字 <code>1.000000</code>，这是有道理的，每列始终与自身有完美的关系。</p>
+
+<h4>好的相关性：</h4>
+
+<p>&quot;Duration&quot; 和 &quot;Calories&quot; 的相关性为 <code>0.922721</code>，这是非常好的相关性，我们可以预测锻炼的时间越长，燃烧的卡路里就越多，反之亦然：如果你燃烧了很多卡路里，你可能锻炼了很长时间。</p>
+
+<h4>不好的相关性：</h4>
+
+<p>&quot;Duration&quot; 和 &quot;Maxpulse&quot; 的相关性为 <code>0.009403</code>，这是非常不好的相关性，这意味着我们无法仅通过查看锻炼的持续时间来预测最大脉搏，反之亦然。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="pandas_cleaning_duplicates.html" title="Pandas 删除重复项">Pandas 删除重复项</a></li>
+<li class="next"><a href="pandas_plotting.html" title="Pandas 绘图">Pandas 绘图</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+<div id="tools">
+<!--<h5 id="tools_quiz"><a href="/pandas/pandas_quiz.asp">Pandas 测验</a></h5>-->
+<h5 id="tools_reference"><a href="pandas_ref_dataframe.html" title="Pandas DataFrame 参考手册">Pandas</a></h5>
+</div>
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/pandas/pandas_correlations.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:55:07 GMT -->
+</html>

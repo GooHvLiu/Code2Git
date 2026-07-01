@@ -1,0 +1,10 @@
+/* mobile-移动端，宽度≤ 768px */
+body {
+  background-color: #7ebea5;
+}
+body h1 {
+  display: none;
+}
+body #mobile h1 {
+  display: block;
+}

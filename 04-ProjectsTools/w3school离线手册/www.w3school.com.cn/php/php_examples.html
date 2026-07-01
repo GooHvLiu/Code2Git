@@ -1,0 +1,881 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/php/php_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 01:56:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>PHP 实例</title>
+
+</head>
+
+<body class="serverscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>PHP 教程</h2>
+<ul>
+<li><a href="index.html" title="PHP 教程">PHP 教程</a></li>
+<li><a href="php_intro.html" title="PHP 简介">PHP 简介</a></li>
+<li><a href="php_install.html" title="PHP 安装">PHP 安装</a></li>
+<li><a href="php_syntax.html" title="PHP 语法">PHP 语法</a></li>
+<li><a href="php_comments.html" title="PHP 注释">PHP 注释</a></li>
+<li><a href="php_comments_multiline.html" title="PHP 多行注释">PHP 多行注释</a></li>
+<li><a href="php_variables.html" title="PHP 变量">PHP 变量</a></li>
+<li><a href="php_variables_scope.html" title="PHP 变量作用域">PHP 变量作用域</a></li>
+<li><a href="php_echo_print.html" title="PHP Echo 和 Print 语句">PHP Echo / Print</a></li>
+<li><a href="php_datatypes.html" title="PHP 数据类型">PHP 数据类型</a></li>
+<li><a href="php_string.html" title="PHP 字符串">PHP 字符串</a></li>
+<li><a href="php_string_modify.html" title="PHP 字符串修改">PHP 字符串修改</a></li>
+<li><a href="php_string_concatenate.html" title="PHP 字符串连接">PHP 字符串连接</a></li>
+<li><a href="php_string_slicing.html" title="PHP 字符串切片">PHP 字符串切片</a></li>
+<li><a href="php_string_escape.html" title="PHP 转义字符">PHP 转义字符</a></li>
+<li><a href="php_numbers.html" title="PHP 数字">PHP 数字</a></li>
+<li><a href="php_casting.html" title="PHP 类型转换">PHP 类型转换</a></li>
+<li><a href="php_math.html" title="PHP 数学">PHP 数学</a></li>
+<li><a href="php_constants.html" title="PHP 常量">PHP 常量</a></li>
+<li><a href="php_magic_constants.html" title="PHP 魔法常量">PHP 魔法常量</a></li>
+<li><a href="php_operators.html" title="PHP 运算符">PHP 运算符</a></li>
+<li><a href="php_if_else.html" title="PHP if 语句">PHP if</a></li>
+<li><a href="php_if_operators.html" title="PHP if 运算符">PHP if 运算符</a></li>
+<li><a href="php_if_else_if.html" title="PHP if...else 语句">PHP if...else</a></li>
+<li><a href="php_if_shorthand.html" title="PHP 简写 if">PHP 简写 if</a></li>
+<li><a href="php_if_nested.html" title="PHP 嵌套 if 语句">PHP 嵌套 if</a></li>
+<li><a href="php_switch.html" title="PHP switch 语句">PHP switch</a></li>
+<li><a href="php_looping.html" title="PHP 循环">PHP 循环</a></li>
+<li><a href="php_looping_while.html" title="PHP while 循环">PHP While 循环</a></li>
+<li><a href="php_looping_do_while.html" title="PHP do while 循环">PHP do while 循环</a></li>
+<li><a href="php_looping_for.html" title="PHP for 循环">PHP for 循环</a></li>
+<li><a href="php_looping_foreach.html" title="PHP foreach 循环">PHP foreach 循环</a></li>
+<li><a href="php_looping_break.html" title="PHP Break">PHP Break</a></li>
+<li><a href="php_looping_continue.html" title="PHP Continue">PHP Continue</a></li>
+<li><a href="php_functions.html" title="PHP 函数">PHP 函数</a></li>
+<li><a href="php_arrays.html" title="PHP 数组">PHP 数组</a></li>
+<li><a href="php_arrays_indexed.html" title="PHP 索引数组">PHP 索引数组</a></li>
+<li><a href="php_arrays_associative.html" title="PHP 关联数组">PHP 关联数组</a></li>
+<li><a href="php_arrays_create.html" title="PHP 创建数组">PHP 创建数组</a></li>
+<li><a href="php_arrays_access.html" title="PHP 访问数组">PHP 访问数组</a></li>
+<li><a href="php_arrays_update.html" title="PHP 更新数组项">PHP 更新数组项</a></li>
+<li><a href="php_arrays_add.html" title="PHP 添加数组项">PHP 添加数组项</a></li>
+<li><a href="php_arrays_remove.html" title="PHP 删除数组项">PHP 删除数组项</a></li>
+<li><a href="php_arrays_sort.html" title="PHP 数组排序">PHP 数组排序</a></li>
+<li><a href="php_arrays_multidimensional.html" title="PHP 多维数组">PHP 多维数组</a></li>
+<li><a href="php_arrays_functions.html" title="PHP 数组函数">PHP 数组函数</a></li>
+<li><a href="php_superglobals.html" title="PHP 全局变量 - 超全局变量">PHP 超全局变量</a></li>
+<li><a href="php_superglobals_globals.html" title="PHP $GLOBALS">PHP $GLOBALS</a></li>
+<li><a href="php_superglobals_server.html" title="PHP $_SERVER">PHP $_SERVER</a></li>
+<li><a href="php_superglobals_request.html" title="PHP $_REQUEST">PHP $_REQUEST</a></li>
+<li><a href="php_superglobals_post.html" title="PHP $_POST">PHP $_POST</a></li>
+<li><a href="php_superglobals_get.html" title="PHP $_GET">PHP $_GET</a></li>
+<li><a href="php_regex.html" title="PHP 正则表达式">PHP 正则表达式</a></li>
+</ul>
+<h2>PHP 表单</h2>
+<ul>
+<li><a href="php_forms.html" title="PHP 表单处理">PHP 表单处理</a></li>
+<li><a href="php_form_validation.html" title="PHP 表单验证">PHP 表单验证</a></li>
+<li><a href="php_form_required.html" title="PHP 表单 - 必填字段">PHP 表单必填字段</a></li>
+<li><a href="php_form_url_email.html" title="PHP 表单 - 验证电子邮件和 URL">PHP 表单 URL/E-mail</a></li>
+<li><a href="php_form_complete.html" title="PHP 完整表单实例">PHP 完整表单实例</a></li>
+</ul>
+<h2>PHP 高级教程</h2>
+<ul>
+<li><a href="php_date.html" title="PHP 日期和时间">PHP 日期和时间</a></li>
+<li><a href="php_includes.html" title="PHP 包含文件">PHP 包含文件</a></li>
+<li><a href="php_file.html" title="PHP 文件处理">PHP 文件处理</a></li>
+<li><a href="php_file_open.html" title="PHP 文件打开/读取/关闭">PHP 文件打开/读取</a></li>
+<li><a href="php_file_create.html" title="PHP 文件创建/写入">PHP 文件创建/写入</a></li>
+<li><a href="php_file_upload.html" title="PHP 文件上传">PHP 文件上传</a></li>
+<li><a href="php_cookies.html" title="PHP Cookie">PHP Cookie</a></li>
+<li><a href="php_sessions.html" title="PHP 会话">PHP 会话</a></li>
+<li><a href="php_filter.html" title="PHP 过滤器">PHP 过滤器</a></li>
+<li><a href="php_filter_advanced.html" title="PHP 过滤器进阶">PHP 过滤器进阶</a></li>
+<li><a href="php_callback_functions.html" title="PHP 回调函数">PHP 回调函数</a></li>
+<li><a href="php_json.html" title="PHP 和 JSON">PHP JSON</a></li>
+<li><a href="php_exceptions.html" title="PHP 异常">PHP 异常</a></li>
+</ul>
+<h2>PHP OOP</h2>
+<ul>
+<li><a href="php_oop_what_is.html" title="PHP - 什么是 OOP？">PHP 什么是 OOP？</a></li>
+<li><a href="php_oop_classes_objects.html" title="PHP OOP - 类和对象">PHP 类/对象</a></li>
+<li><a href="php_oop_constructor.html" title="PHP OOP - 构造函数">PHP 构造函数</a></li>
+<li><a href="php_oop_destructor.html" title="PHP OOP - 析构函数">PHP 析构函数</a></li>
+<li><a href="php_oop_access_modifiers.html" title="PHP OOP - 访问修饰符">PHP 访问修饰符</a></li>
+<li><a href="php_oop_inheritance.html" title="PHP OOP - 继承">PHP 继承</a></li>
+<li><a href="php_oop_constants.html" title="PHP OOP - 类常量">PHP 类常量</a></li>
+<li><a href="php_oop_classes_abstract.html" title="PHP OOP - 抽象类">PHP 抽象类</a></li>
+<li><a href="php_oop_interfaces.html" title="PHP OOP - 接口">PHP 接口</a></li>
+<li><a href="php_oop_traits.html" title="PHP OOP - Trait">PHP Trait</a></li>
+<li><a href="php_oop_static_methods.html" title="PHP OOP - 静态方法">PHP 静态方法</a></li>
+<li><a href="php_oop_static_properties.html" title="PHP OOP - 静态属性">PHP 静态属性</a></li>
+<li><a href="php_namespaces.html" title="PHP OOP - 命名空间">PHP 命名空间</a></li>
+<li><a href="php_iterables.html" title="PHP Iterable">PHP Iterable</a></li>
+</ul>
+<h2>PHP 数据库</h2>
+<ul>
+<li><a href="php_mysql_intro.html" title="PHP MySQL 数据库">MySQL 数据库</a></li>
+<li><a href="php_mysql_connect.html" title="PHP 连接 MySQL">MySQL 连接</a></li>
+<li><a href="php_mysql_create.html" title="PHP 创建 MySQL 数据库">MySQL 创建 DB</a></li>
+<li><a href="php_mysql_create_table.html" title="PHP MySQL 创建表格">MySQL 创建表格</a></li>
+<li><a href="php_mysql_insert.html" title="PHP MySQL 插入数据">MySQL 插入数据</a></li>
+<li><a href="php_mysql_insert_lastid.html" title="PHP MySQL 获取最后插入的 ID">MySQL 获取最后的 ID</a></li>
+<li><a href="php_mysql_insert_multiple.html" title="PHP MySQL 插入多条记录">MySQL 插入多条记录</a></li>
+<li><a href="php_mysql_prepared_statements.html" title="PHP MySQL Prepared 语句">MySQL Prepared</a></li>
+<li><a href="php_mysql_select.html" title="PHP MySQL 选取数据">MySQL 选取数据</a></li>
+<li><a href="php_mysql_select_where.html" title="PHP MySQL 使用 WHERE 子句">MySQL WHERE</a></li>
+<li><a href="php_mysql_select_orderby.html" title="PHP MySQL 使用 ORDER BY 子句">MySQL ORDER BY</a></li>
+<li><a href="php_mysql_delete.html" title="PHP MySQL 删除数据">MySQL 删除数据</a></li>
+<li><a href="php_mysql_update.html" title="PHP MySQL 更新数据">MySQL 更新数据</a></li>
+<li><a href="php_mysql_select_limit.html" title="PHP MySQL 限制数据选择">MySQL 限制数据</a></li>
+</ul>
+<h2>PHP XML</h2>
+<ul>
+<li><a href="php_xml_parsers.html" title="PHP XML 解析器">PHP XML 解析器</a></li>
+<li><a href="php_xml_simplexml_read.html" title="PHP SimpleXML 解析器">PHP SimpleXML 解析器</a></li>
+<li><a href="php_xml_simplexml_get.html" title="PHP SimpleXML - 获取节点/属性值">PHP SimpleXML - 获取</a></li>
+<li><a href="php_xml_parser_expat.html" title="PHP XML Expat 解析器">PHP XML Expat</a></li>
+<li><a href="php_xml_dom.html" title="PHP XML DOM 解析器">PHP XML DOM 解析器</a></li>
+</ul>
+<h2>PHP 和 AJAX</h2>
+<ul>
+<li><a href="php_ajax_intro.html" title="PHP - AJAX 简介">AJAX 简介</a></li>
+<li><a href="php_ajax_php.html" title="PHP - AJAX 与 PHP">AJAX PHP</a></li>
+<li><a href="php_ajax_database.html" title="PHP - AJAX 与 MySQL">AJAX 数据库</a></li>
+<li><a href="php_ajax_xml.html" title="PHP 实例 - AJAX 与 XML">AJAX XML</a></li>
+<li><a href="php_ajax_livesearch.html" title="PHP 实例 - AJAX 实时搜索">AJAX 实时搜索</a></li>
+<li><a href="php_ajax_poll.html" title="PHP 实例 - AJAX 投票">AJAX Poll</a></li>
+</ul>
+<h2>PHP 参考手册</h2>
+<ul>
+<li><a href="php_ref.html" title="PHP 参考手册">PHP 参考手册</a></li>
+<li><a href="php_ref_array.html" title="PHP Array 函数">PHP Array</a></li>
+<li><a href="php_ref_calendar.html" title="PHP Calendar 函数">PHP Calendar</a></li>
+<li><a href="php_ref_date.html" title="PHP Date / Time 函数">PHP Date</a></li>
+<li><a href="php_ref_directory.html" title="PHP Directory 函数">PHP Directory</a></li>
+<li><a href="php_ref_error.html" title="PHP Error 和 Logging 函数">PHP Error</a></li>
+<li><a href="php_ref_exception.html" title="PHP Exception 参考手册">PHP Exception</a></li>
+<li><a href="php_ref_filesystem.html" title="PHP Filesystem 函数">PHP Filesystem</a></li>
+<li><a href="php_ref_filter.html" title="PHP Filter 函数">PHP Filter</a></li>
+<li><a href="php_ref_ftp.html" title="PHP FTP 函数">PHP FTP</a></li>
+<li><a href="php_ref_http.html" title="PHP HTTP 函数">PHP HTTP</a></li>
+<li><a href="php_ref_json.html" title="PHP JSON 函数">PHP JSON</a></li>
+<li><a href="php_ref_libxml.html" title="PHP LibXML 函数">PHP LibXML</a></li>
+<li><a href="php_ref_mail.html" title="PHP Mail 函数">PHP Mail</a></li>
+<li><a href="php_ref_math.html" title="PHP Math 函数">PHP Math</a></li>
+<li><a href="php_ref_mysql.html" title="PHP MySQL 函数">PHP MySQL</a></li>
+<li><a href="php_ref_mysqli.html" title="PHP 5 MySQLi 函数">PHP MySQLi</a></li>
+<li><a href="php_ref_network.html" title="PHP Network 函数">PHP Network</a></li>
+<li><a href="php_ref_regex.html" title="PHP 正则表达式函数">PHP RegEx</a></li>
+<li><a href="php_ref_simplexml.html" title="PHP SimpleXML 函数">PHP SimpleXML</a></li>
+<li><a href="php_ref_stream.html" title="PHP Stream 函数">PHP Stream</a></li>
+<li><a href="php_ref_string.html" title="PHP String 函数">PHP String</a></li>
+<li><a href="php_ref_xml.html" title="PHP XML Parser 函数">PHP XML</a></li>
+<li><a href="php_ref_zip.html" title="PHP Zip File 函数">PHP Zip</a></li>
+<li><a href="php_ref_variable_handling.html" title="PHP 变量处理函数">PHP 变量处理</a></li>
+<li><a href="php_ref_output_control.html" title="PHP 输出控制函数">PHP 输出控制</a></li>
+<li><a href="php_ref_timezones.html" title="PHP 时区">PHP 时区</a></li>
+<li><a href="php_ref_misc.html" title="PHP 杂项函数">PHP 杂项</a></li>
+<li><a href="php_ref_keywords.html" title="PHP 关键词">PHP 关键词</a></li>
+</ul>
+<h2>PHP 实例</h2>
+<ul>
+<li class="currentLink"><a href="php_examples.html" title="PHP 实例">PHP 实例</a></li>
+<li><a href="php_quiz.html" title="PHP 测验">PHP 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>PHP 实例</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="php_ref_keywords.html" title="PHP 关键词">PHP 关键词</a></li>
+<li class="next"><a href="php_quiz.html" title="PHP 测验">PHP 测验</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>PHP 语法</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t46d2.html?f=php_syntax">使用 PHP 向输出写入文本</a></li>
+<li><a target="_blank" href="t369b.html?f=php_syntax_case_1">关键字、类、函数和用户自定义函数不区分大小写</a></li>
+<li><a target="_blank" href="taaaf.html?f=php_syntax_case_2">变量名区分大小写</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_syntax.html">实例解释：语法</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 注释</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t0fc8.html?f=php_comments_1">单行注释语法</a></li>
+<li><a target="_blank" href="t92cc.html?f=php_comments_2">多行注释语法</a></li>
+<li><a target="_blank" href="tc49c.html?f=php_comments_3">使用注释排除代码部分</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_comments.html">实例解释：注释</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 变量</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t273a.html?f=php_var_1">创建不同变量</a></li>
+<li><a target="_blank" href="t07fb.html?f=php_var_global">测试全局作用域（函数外的变量）</a></li>
+<li><a target="_blank" href="ta0b5.html?f=php_var_local">测试局部作用域（函数内的变量）</a></li>
+<li><a target="_blank" href="t88fd.html?f=php_var_global_keyword">使用 global 关键字在函数内访问全局变量</a></li>
+<li><a target="_blank" href="t1c33.html?f=php_var_globals">使用 $GLOBALS[] 数组在函数内访问全局变量</a></li>
+<li><a target="_blank" href="td4a4.html?f=php_var_static">使用 static 关键字使局部变量在函数执行后不被删除</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_variables.html">实例解释：变量</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP echo 和 print</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tf363.html?f=php_echo_1">用 echo 命令显示字符串</a></li>
+<li><a target="_blank" href="t3d6b.html?f=php_echo_2">用 echo 命令显示字符串和变量</a></li>
+<li><a target="_blank" href="t329e.html?f=php_print_1">用 print 命令显示字符串</a></li>
+<li><a target="_blank" href="ta0e9.html?f=php_print_2">用 print 命令显示字符串和变量</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_echo_print.html">实例解释：echo 和 print 语句</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 数据类型</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t78b1.html?f=php_datatypes_string">PHP 字符串</a></li>
+<li><a target="_blank" href="t73e3.html?f=php_datatypes_integer">PHP 整数</a></li>
+<li><a target="_blank" href="tb092.html?f=php_datatypes_float">PHP 浮点数</a></li>
+<li><a target="_blank" href="tae6a.html?f=php_datatypes_array">PHP 数组</a></li>
+<li><a target="_blank" href="t67b3.html?f=php_datatypes_object_var_dump">PHP 对象</a></li>
+<li><a target="_blank" href="t58cd.html?f=php_datatypes_null">PHP NULL 值</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_datatypes.html">实例解释：数据类型</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 字符串</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t586c.html?f=php_string_length">获取字符串长度 - strlen()</a></li>
+<li><a target="_blank" href="t06c2.html?f=php_string_word_count">统计字符串中的单词数 - str_word_count()</a></li>
+<li><a target="_blank" href="t521f.html?f=php_string_reverse">反转字符串 - strrev()</a></li>
+<li><a target="_blank" href="t860b.html?f=php_string_pos">在字符串中搜索特定文本 - strpos()</a></li>
+<li><a target="_blank" href="t8638.html?f=php_string_replace">替换字符串中的文本 - str_replace()</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_string.html">实例解释：字符串</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 数字</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tb6ed.html?f=php_numbers_integer">检查变量类型是否为整数</a></li>
+<li><a target="_blank" href="tb528.html?f=php_numbers_float">检查变量类型是否为浮点数</a></li>
+<li><a target="_blank" href="tb557.html?f=php_numbers_infinite">检查数值是有限还是无限</a></li>
+<li><a target="_blank" href="t540e.html?f=php_numbers_nan">无效计算将返回 NaN 值</a></li>
+<li><a target="_blank" href="td1e7.html?f=php_numbers_numeric">检查变量是否为数值</a></li>
+<li><a target="_blank" href="t737b.html?f=php_numbers_cast">将浮点数和字符串转换为整数</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_numbers.html">实例解释：数字</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 数学</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t5000.html?f=php_math_pi">获取 PI 的值</a></li>
+<li><a target="_blank" href="t6840.html?f=php_math_min_max">在参数列表中查找最小值和最大值</a></li>
+<li><a target="_blank" href="t9446.html?f=php_math_abs">获取数字的绝对值（正数）</a></li>
+<li><a target="_blank" href="t8005.html?f=php_math_sqrt">获取数字的平方根</a></li>
+<li><a target="_blank" href="t8bfa.html?f=php_math_round">将浮点数四舍五入为最接近的整数</a></li>
+<li><a target="_blank" href="t6015.html?f=php_math_rand_1">生成随机数</a></li>
+<li><a target="_blank" href="t853b.html?f=php_math_rand_2">生成 10 到 100 之间的随机数</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_math.html">实例解释：数学</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 常量</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t8a4b.html?f=php_constant_1">区分大小写的常量名</a></li>
+<li><a target="_blank" href="t8c0a.html?f=php_constant_2">不区分大小写的常量名</a></li>
+<li><a target="_blank" href="t3f49.html?f=php_constant_array">用 define() 创建数组常量</a></li>
+<li><a target="_blank" href="t1834.html?f=php_constant_3">在函数内使用常量（当常量在函数外定义时）</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_constants.html">实例解释：常量</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 运算符</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tfe35.html?f=php_oper_addition_1">算术运算符：加法（+）</a></li>
+<li><a target="_blank" href="t743d.html?f=php_oper_subtraction_1">算术运算符：减法（-）</a></li>
+<li><a target="_blank" href="t89ea.html?f=php_oper_multiplication_1">算术运算符：乘法（*）</a></li>
+<li><a target="_blank" href="tb1da.html?f=php_oper_division_1">算术运算符：除法（/）</a></li>
+<li><a target="_blank" href="t527d.html?f=php_oper_modulus_1">算术运算符：取模（%）</a></li>
+<li><a target="_blank" href="teb59.html?f=php_oper_set">赋值运算符：x = y</a></li>
+<li><a target="_blank" href="t4373.html?f=php_oper_addition_2">赋值运算符：x += y</a></li>
+<li><a target="_blank" href="t8893.html?f=php_oper_subtraction_2">赋值运算符：x -= y</a></li>
+<li><a target="_blank" href="tb788.html?f=php_oper_multiplication_2">赋值运算符：x *= y</a></li>
+<li><a target="_blank" href="t4d1a.html?f=php_oper_division_2">赋值运算符：x /= y</a></li>
+<li><a target="_blank" href="tc1b8.html?f=php_oper_modulus_2">赋值运算符：x %= y</a></li>
+<li><a target="_blank" href="t8bab.html?f=php_oper_equal">比较运算符：等于（==）</a></li>
+<li><a target="_blank" href="tca4e.html?f=php_oper_identical">比较运算符：全等（===）</a></li>
+<li><a target="_blank" href="t88aa.html?f=php_oper_not_equal_1">比较运算符：不等于（!=）</a></li>
+<li><a target="_blank" href="t8d75.html?f=php_oper_not_equal_2">比较运算符：不等于（&lt;&gt;）</a></li>
+<li><a target="_blank" href="tcd9b.html?f=php_oper_not_identical">比较运算符：不全等（!==）</a></li>
+<li><a target="_blank" href="t7fb2.html?f=php_oper_greater_than_1">比较运算符：大于（&gt;）</a></li>
+<li><a target="_blank" href="teaf1.html?f=php_oper_less_than_1">比较运算符：小于（&lt;）</a></li>
+<li><a target="_blank" href="tf141.html?f=php_oper_greater_than_2">比较运算符：大于或等于（&gt;=）</a></li>
+<li><a target="_blank" href="tdf88.html?f=php_oper_less_than_2">比较运算符：小于或等于（&lt;=）</a></li>
+<li><a target="_blank" href="t3208.html?f=php_oper_spaceship">比较运算符：太空船（&lt;=&gt;）</a></li>
+<li><a target="_blank" href="t0a1f.html?f=php_oper_pre_incr">递增运算符：++$x</a></li>
+<li><a target="_blank" href="t06d4.html?f=php_oper_post_incr">递增运算符：$x++</a></li>
+<li><a target="_blank" href="t924f.html?f=php_oper_pre_decr">递减运算符：--$x</a></li>
+<li><a target="_blank" href="td47d.html?f=php_oper_post_decr">递减运算符：$x--</a></li>
+<li><a target="_blank" href="tce00.html?f=php_oper_and_1">逻辑运算符：and</a></li>
+<li><a target="_blank" href="t23a4.html?f=php_oper_or_1">逻辑运算符：or</a></li>
+<li><a target="_blank" href="t934c.html?f=php_oper_xor">逻辑运算符：xor</a></li>
+<li><a target="_blank" href="te4a8.html?f=php_oper_and_2">逻辑运算符：&amp;&amp;（and）</a></li>
+<li><a target="_blank" href="tc8a4.html?f=php_oper_or_2">逻辑运算符：||（or）</a></li>
+<li><a target="_blank" href="td892.html?f=php_oper_not">逻辑运算符：not</a></li>
+<li><a target="_blank" href="tc7ab.html?f=php_oper_string_1">字符串运算符：连接 $txt1 和 $txt2</a></li>
+<li><a target="_blank" href="t5dd8.html?f=php_oper_string_2">字符串运算符：将 $txt2 追加到 $txt1</a></li>
+<li><a target="_blank" href="tf1c0.html?f=php_oper_arr_union">数组运算符：联合（+）</a></li>
+<li><a target="_blank" href="ta27f.html?f=php_oper_arr_equality">数组运算符：相等（==）</a></li>
+<li><a target="_blank" href="tbdc3.html?f=php_oper_arr_identity">数组运算符：全等（===）</a></li>
+<li><a target="_blank" href="ted30.html?f=php_oper_arr_inequality_1">数组运算符：不等（!=）</a></li>
+<li><a target="_blank" href="t523c.html?f=php_oper_arr_inequality_2">数组运算符：不等（&lt;&gt;）</a></li>
+<li><a target="_blank" href="ta22e.html?f=php_oper_arr_non_identity">数组运算符：不全等（!==）</a></li>
+<li><a target="_blank" href="t2257.html?f=php_oper_ternary">条件赋值运算符：三元（?:）</a></li>
+<li><a target="_blank" href="tbd38.html?f=php_oper_null_coalescing">条件赋值：空合并（??）</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_operators.html">实例解释：运算符</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP If...Else 和 Switch 语句</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tf738.html?f=php_if">if 语句</a></li>
+<li><a target="_blank" href="tf02c.html?f=php_if_else">if...else 语句</a></li>
+<li><a target="_blank" href="t59ef.html?f=php_if_elseif">if...elseif...else 语句</a></li>
+<li><a target="_blank" href="tc00f.html?f=php_switch">switch 语句</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_if_else.html">实例解释：条件</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP While 和 For 循环</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tfd7c.html?f=php_loop_while">while 循环</a></li>
+<li><a target="_blank" href="tc8e6.html?f=php_loop_do_while_1">do...while 循环</a></li>
+<li><a target="_blank" href="td181.html?f=php_loop_do_while_2">另一个 do...while 循环</a></li>
+<li><a target="_blank" href="tddc9.html?f=php_loop_for">for 循环</a></li>
+<li><a target="_blank" href="tc799.html?f=php_loop_foreach">foreach 循环</a></li>
+<li><a target="_blank" href="tdcfe.html?f=php_break">循环中的 break 语句</a></li>
+<li><a target="_blank" href="t45f8.html?f=php_continue">循环中的 continue 语句</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_looping.html">实例解释：循环</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 函数</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="td634.html?f=php_function_mymessage">创建函数</a></li>
+<li><a target="_blank" href="t2a5f.html?f=php_function_1">带一个参数的函数</a></li>
+<li><a target="_blank" href="t0b20.html?f=php_function_2">带两个参数的函数</a></li>
+<li><a target="_blank" href="tedc8.html?f=php_function_default_arg">带默认参数值的函数</a></li>
+<li><a target="_blank" href="t2815.html?f=php_function_return">返回值的函数</a></li>
+<li><a target="_blank" href="t5138.html?f=php_function_return_strict_1">返回类型声明</a></li>
+<li><a target="_blank" href="tf60a.html?f=php_function_pass_ref">通过引用传递参数</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_functions.html">实例解释：函数</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 数组</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t5190.html?f=php_arrays">索引数组</a></li>
+<li><a target="_blank" href="t4347.html?f=php_arrays_length">count() - 返回数组长度</a></li>
+<li><a target="_blank" href="tc62a.html?f=php_arrays_indexed_foreach">遍历索引数组</a></li>
+<li><a target="_blank" href="t41aa.html?f=php_arrays_assoc_1">关联数组</a></li>
+<li><a target="_blank" href="t8849.html?f=php_arrays_assoc_loop">遍历关联数组</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_arrays.html">实例解释：数组</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 多维数组</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t16d3.html?f=php_arrays_multi_1">输出多维数组的元素</a></li>
+<li><a target="_blank" href="te6ae.html?f=php_arrays_multi_2">遍历多维数组</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_arrays_multidimensional.html">实例解释：多维数组</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 数组排序</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tc479.html?f=php_arrays_sort_alpha">sort() - 按升序排列数组（字母顺序）</a></li>
+<li><a target="_blank" href="ta210.html?f=php_arrays_sort_num">sort() - 按升序排列数组（数值顺序）</a></li>
+<li><a target="_blank" href="t4645.html?f=php_arrays_rsort_alpha">rsort() - 按降序排列数组（字母顺序）</a></li>
+<li><a target="_blank" href="t60d7.html?f=php_arrays_rsort_num">rsort() - 按降序排列数组（数值顺序）</a></li>
+<li><a target="_blank" href="t371a.html?f=php_arrays_asort">asort() - 按值升序排列数组</a></li>
+<li><a target="_blank" href="t7cf3.html?f=php_arrays_ksort">ksort() - 按键升序排列数组</a></li>
+<li><a target="_blank" href="tf0b6.html?f=php_arrays_arsort">arsort() - 按值降序排列数组</a></li>
+<li><a target="_blank" href="t4554.html?f=php_arrays_krsort">krsort() - 按键降序排列数组</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_arrays_sort.html">实例解释：数组排序</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP Superglobals</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tecf5.html?f=php_global_globals_1">$GLOBALS - 用于在 PHP 脚本的任何位置访问全局变量</a></li>
+<li><a target="_blank" href="tc054.html?f=php_global_server">$_SERVER - 保存有关头信息、路径和脚本位置的信息</a></li>
+<li><a target="_blank" href="t7def.html?f=php_global_request">$_REQUEST - 用于提交 HTML 表单后收集数据</a></li>
+<li><a target="_blank" href="tc9d6.html?f=php_global_post">$_POST - 用于提交 HTML 表单后收集表单数据，也用于传递变量</a></li>
+<li><a target="_blank" href="t27ad.html?f=php_request_get">$_GET -  收集 URL 中发送的数据</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_superglobals.html">实例解释：Superglobals</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 正则表达式</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t17f9.html?f=php_regex_match">在字符串中不区分大小写搜索 &quot;w3school&quot;</a></li>
+<li><a target="_blank" href="t9a77.html?f=php_regex_match_all">在字符串中不区分大小写统计 &quot;ain&quot; 出现的次数</a></li>
+<li><a target="_blank" href="tfe7b.html?f=php_regex_replace">在字符串中将 &quot;Microsoft&quot; 替换为 &quot;W3School&quot;</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_regex.html">实例解释：正则表达式</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 表单验证</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="sf55b.html?f=php_form_validation_complete">PHP 表单验证</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_forms.html">实例解释：表单验证</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 日期和时间</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tbdcf.html?f=php_date_1">以多种方式格式化今天的日期</a></li>
+<li><a target="_blank" href="t660b.html?f=php_date_copyright">自动更新网站上的版权年份</a></li>
+<li><a target="_blank" href="t0fd5.html?f=php_date_2">输出当前时间（服务器时间）</a></li>
+<li><a target="_blank" href="tad33.html?f=php_date_3">设置时区，然后输出当前时间</a></li>
+<li><a target="_blank" href="tf243.html?f=php_date_4">用 mktime() 从多个参数创建日期和时间</a></li>
+<li><a target="_blank" href="tc2f6.html?f=php_date_5">用 strtotime() 函数创建日期和时间</a></li>
+<li><a target="_blank" href="tf6e5.html?f=php_date_6">从 strtotime() 创建更多日期/时间</a></li>
+<li><a target="_blank" href="t8587.html?f=php_date_7">输出接下来六个星期六的日期</a></li>
+<li><a target="_blank" href="t4e8a.html?f=php_date_8">输出距离 7 月 4 日还有多少天</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_date.html">实例解释：日期和时间</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 包含文件</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="sd09b.html?f=php_include_1">用 include 在页面中包含 &quot;footer.php&quot;</a></li>
+<li><a target="_blank" href="sc76e.html?f=php_include_2">用 include 在页面中包含 &quot;menu.php&quot;</a></li>
+<li><a target="_blank" href="sb698.html?f=php_include_3">用 include 在页面中包含 &quot;vars.php&quot;</a></li>
+<li><a target="_blank" href="sffb8.html?f=php_include_4">用 include 包含不存在的文件</a></li>
+<li><a target="_blank" href="s9852.html?f=php_include_5">用 require 包含不存在的文件</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_includes.html">实例解释：包含文件</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 文件处理</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="s7030.html?f=php_file_readfile">用 readfile() 读取文件并写入输出缓冲区</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_file.html">实例解释：文件处理</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 文件打开/读取/关闭</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="s7bfc.html?f=php_file_fopen">用 fopen()、fread() 和 fclose() 打开、读取和关闭文件</a></li>
+<li><a target="_blank" href="sd026.html?f=php_file_fgets">用 fgets() 从文件读取单行</a></li>
+<li><a target="_blank" href="sa958.html?f=php_file_feof">用 feof() 逐行读取文件直到文件末尾</a></li>
+<li><a target="_blank" href="s90bb.html?f=php_file_fgetc">用 fgetc() 从文件读取单个字符</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_file_open.html">实例解释：文件打开/读取/关闭</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP Cookie</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="s6034.html?f=php_cookie_1">创建和检索 cookie</a></li>
+<li><a target="_blank" href="s44f2.html?f=php_cookie_2">修改 cookie 值</a></li>
+<li><a target="_blank" href="sb23d.html?f=php_cookie_3">删除 cookie</a></li>
+<li><a target="_blank" href="s992c.html?f=php_cookie_4">检查是否启用了 cookie</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_cookies.html">实例解释：Cookie</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 会话</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="scc19.html?f=php_session_1">启动会话</a></li>
+<li><a target="_blank" href="s1463.html?f=php_session_2">获取会话变量值</a></li>
+<li><a target="_blank" href="s7a8f.html?f=php_session_3">获取所有会话变量值</a></li>
+<li><a target="_blank" href="s440e.html?f=php_session_4">修改会话变量</a></li>
+<li><a target="_blank" href="sbc52.html?f=php_session_5">销毁会话</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_sessions.html">实例解释：会话</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 过滤器</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t7449.html?f=php_filter_1">用 filter_list() 列出 PHP 过滤器扩展提供的功能</a></li>
+<li><a target="_blank" href="t82c9.html?f=php_filter_2">净化字符串</a></li>
+<li><a target="_blank" href="te375.html?f=php_filter_3">验证整数</a></li>
+<li><a target="_blank" href="t95b1.html?f=php_filter_4">验证值为 0 的整数</a></li>
+<li><a target="_blank" href="tdc87.html?f=php_filter_5">验证 IP 地址</a></li>
+<li><a target="_blank" href="t6530.html?f=php_filter_6">净化和验证电子邮件地址</a></li>
+<li><a target="_blank" href="t47fa.html?f=php_filter_7">净化和验证 URL</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_filter.html">实例解释：过滤器</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP JSON</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tb506.html?f=php_json_encode_1">将关联数组编码为 JSON 对象</a></li>
+<li><a target="_blank" href="t2c0d.html?f=php_json_decode_1">将 JSON 数据解码为 PHP 对象</a></li>
+<li><a target="_blank" href="ta43f.html?f=php_json_decode_3">从 PHP 对象访问值</a></li>
+<li><a target="_blank" href="t9fcc.html?f=php_json_decode_5">遍历 PHP 对象的值</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_json.html">实例解释：PHP JSON</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 异常</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t6a61.html?f=php_exceptions_throw">抛出异常</a></li>
+<li><a target="_blank" href="t3006.html?f=php_exceptions_try_catch">用 try..catch 在抛出异常时显示消息</a></li>
+<li><a target="_blank" href="t7780.html?f=php_exceptions_finally_1">使用 finally</a></li>
+<li><a target="_blank" href="ta5e2.html?f=php_exceptions_obj_info">输出抛出的异常信息</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_exceptions.html">实例解释：PHP 异常</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP 类和对象</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t51b9.html?f=php_class_1">定义类和对象</a></li>
+<li><a target="_blank" href="t47c6.html?f=php_this_1">使用 $this 关键字</a></li>
+<li><a target="_blank" href="t159c.html?f=php_class_3">使用 instanceof 关键字</a></li>
+<li><a target="_blank" href="tcd80.html?f=php_constructor_1">创建构造函数</a></li>
+<li><a target="_blank" href="tc7e2.html?f=php_destructor_1">创建析构函数</a></li>
+<li><a target="_blank" href="t096b.html?f=php_inheritance_1">继承</a></li>
+<li><a target="_blank" href="t4a63.html?f=php_class_constant_1">类常量</a></li>
+<li><a target="_blank" href="t4bcd.html?f=php_abstract_1">抽象类</a></li>
+<li><a target="_blank" href="t19fe.html?f=php_trait_1">特性（Trait）</a></li>
+<li><a target="_blank" href="t342b.html?f=php_static_method_1">静态方法</a></li>
+<li><a target="_blank" href="te958.html?f=php_static_prop_1">静态属性</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_oop_what_is.html">实例解释：PHP OOP (类/对象)</a></p>
+</section>
+
+
+<!--
+<section>
+<h2>PHP MySQL 选取数据</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="/php/s.php?f=php_db_select_oo">用 MySQLi（面向对象）选择数据</a></li>
+<li><a target="_blank" href="/php/s.php?f=php_db_select_proc">用 MySQLi（过程式）选择数据</a></li>
+<li><a target="_blank" href="/php/s.php?f=php_db_select_oo_table">将结果放入 HTML 表格（面向对象）</a></li>
+<li><a target="_blank" href="/php/s.php?f=php_db_select_pdo">用 PDO 选择数据（+ 预处理语句）</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_mysql_select.asp">实例解释：从 MySQL 选取数据</a></p>
+</section>
+-->
+
+
+<section>
+<h2>PHP SimpleXML 解析器</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="s9f73.html?f=php_simplexml_read_string">用 simplexml_load_string() 从字符串读取XML数据</a></li>
+<li><a target="_blank" href="sc3a5.html?f=php_simplexml_read_file">用 simplexml_load_file() 从文件读取 XML 数据</a></li>
+<li><a target="_blank" href="s2433.html?f=php_simplexml_get_one">获取节点值</a></li>
+<li><a target="_blank" href="s3bb7.html?f=php_simplexml_get_many_1">获取特定元素的节点值</a></li>
+<li><a target="_blank" href="sb30a.html?f=php_simplexml_get_many_2">获取节点值 - 循环</a></li>
+<li><a target="_blank" href="s266a.html?f=php_simplexml_get_attr_1">获取属性值</a></li>
+<li><a target="_blank" href="s0827.html?f=php_simplexml_get_attr_2">获取属性值 - 循环</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_xml_simplexml_read.html">实例解释：SimpleXML 解析器</a></p>
+</section>
+
+
+
+<section>
+<h2>PHP XML Expat 解析器</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="s021e.html?f=php_xml">初始化 XML Expat 解析器，定义一些处理程序，然后解析 XML 文件</a></li>
+</ul>
+
+<p><a class="btn-blue" href="php_xml_parser_expat.html">实例解释：XML Expat 解析器</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="php_ref_keywords.html" title="PHP 关键词">PHP 关键词</a></li>
+<li class="next"><a href="php_quiz.html" title="PHP 测验">PHP 测验</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="php_ref.html">PHP 参考手册</a></h5>
+<h5 id="tools_example"><a href="php_examples.html">PHP 实例</a></h5>
+<h5 id="tools_quiz"><a href="php_quiz.html">PHP 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/php/php_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 01:57:47 GMT -->
+</html>

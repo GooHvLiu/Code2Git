@@ -1,0 +1,649 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/css/css3_transitions.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:19:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>CSS 过渡</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>CSS 基础教程</h2>
+<ul>
+<li><a href="index.html" title="CSS 教程">CSS 教程</a></li>
+<li><a href="css_jianjie.html" title="CSS 简介">CSS 简介</a></li>
+<li><a href="css_syntax.html" title="CSS 语法">CSS 语法</a></li>
+<li><a href="css_selectors.html" title="CSS 选择器">CSS 选择器</a></li>
+<li><a href="css_shiyong.html" title="CSS 使用">CSS 使用</a></li>
+<li><a href="css_comments.html" title="CSS 注释">CSS 注释</a></li>
+<li><a href="css_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="css_colors_rgb.html" title="CSS RGB 颜色">CSS RGB 颜色</a></li>
+<li><a href="css_colors_hex.html" title="CSS HEX 颜色">CSS HEX 颜色</a></li>
+<li><a href="css_colors_hsl.html" title="CSS HSL 颜色">CSS HSL 颜色</a></li>
+<li><a href="css_background.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="css_background_image.html" title="CSS 背景图像">CSS 背景图像</a></li>
+<li><a href="css_background_repeat.html" title="CSS 背景重复">CSS 背景重复</a></li>
+<li><a href="css_background_attachment.html" title="CSS 背景附着">CSS 背景附着</a></li>
+<li><a href="css_background_shorthand.html" title="CSS 简写背景属性">CSS 简写背景属性</a></li>
+<li><a href="css_border.html" title="CSS 边框">CSS 边框</a></li>
+<li><a href="css_border_width.html" title="CSS 边框宽度">CSS 边框宽度</a></li>
+<li><a href="css_border_color.html" title="CSS 边框颜色">CSS 边框颜色</a></li>
+<li><a href="css_border_sides.html" title="CSS 边框各边">CSS 边框各边</a></li>
+<li><a href="css_border_shorthand.html" title="CSS 简写边框属性">CSS 简写边框属性</a></li>
+<li><a href="css_border_rounded.html" title="CSS 圆角边框">CSS 圆角边框</a></li>
+<li><a href="css_margin.html" title="CSS 外边距">CSS 外边距</a></li>
+<li><a href="css_margin_collapse.html" title="CSS 外边距合并">CSS 外边距合并</a></li>
+<li><a href="css_padding.html" title="CSS 内边距">CSS 内边距</a></li>
+<li><a href="css_dimension.html" title="CSS 高度和宽度">CSS 高度/宽度</a></li>
+<li><a href="css_boxmodel.html" title="CSS 框模型">CSS 框模型</a></li>
+<li><a href="css_outline.html" title="CSS 轮廓">CSS 轮廓</a></li>
+<li><a href="css_outline_width.html" title="CSS 轮廓宽度">CSS 轮廓宽度</a></li>
+<li><a href="css_outline_color.html" title="CSS 轮廓颜色">CSS 轮廓颜色</a></li>
+<li><a href="css_outline_shorthand.html" title="CSS 简写轮廓属性">CSS 简写轮廓属性</a></li>
+<li><a href="css_outline_offset.html" title="CSS 轮廓偏移">CSS 轮廓偏移</a></li>
+<li><a href="css_text.html" title="CSS 文本">CSS 文本</a></li>
+<li><a href="css_text_align.html" title="CSS 文本对齐">CSS 文本对齐</a></li>
+<li><a href="css_text_decoration.html" title="CSS 文本装饰">CSS 文本装饰</a></li>
+<li><a href="css_text_transformation.html" title="CSS 文本转换">CSS 文本转换</a></li>
+<li><a href="css_text_spacing.html" title="CSS 文字间距">CSS 文字间距</a></li>
+<li><a href="css_text_shadow.html" title="CSS 文本阴影">CSS 文本阴影</a></li>
+<li><a href="css_font.html" title="CSS 字体">CSS 字体</a></li>
+<li><a href="css_font_style.html" title="CSS 字体样式">CSS 字体样式</a></li>
+<li><a href="css_font_size.html" title="CSS 字体大小">CSS 字体大小</a></li>
+<li><a href="css_font_google.html" title="CSS 谷歌字体">CSS 谷歌字体</a></li>
+<li><a href="css_font_shorthand.html" title="CSS 简写字体属性">CSS 简写字体属性</a></li>
+<li><a href="css_icons.html" title="CSS 图标">CSS 图标</a></li>
+<li><a href="css_link.html" title="CSS 链接">CSS 链接</a></li>
+<li><a href="css_list.html" title="CSS 列表">CSS 列表</a></li>
+<li><a href="css_table.html" title="CSS 表格">CSS 表格</a></li>
+</ul>
+<h2>CSS 中级教程</h2>
+<ul>
+<li><a href="css_display_visibility.html" title="CSS 布局 - display 属性">CSS Display</a></li>
+<li><a href="css_max-width.html" title="CSS 布局 - width 和 max-width">CSS max-width</a></li>
+<li><a href="css_positioning.html" title="CSS 布局 - position 属性">CSS 定位</a></li>
+<li><a href="css_z-index.html" title="CSS 布局 - z-index 属性">CSS z-index</a></li>
+<li><a href="css_overflow.html" title="CSS 布局 - 溢出">CSS 溢出</a></li>
+<li><a href="css_float.html" title="CSS 布局 - 浮动和清除">CSS 浮动</a></li>
+<li><a href="css_float_clear.html" title="CSS 布局 - clear 和 clearfix">CSS 清除浮动</a></li>
+<li><a href="css_float_examples.html" title="CSS 布局 - 浮动实例">CSS 布局 - 浮动实例</a></li>
+<li><a href="css_inline-block.html" title="CSS 布局 - display: inline-block">CSS inline-block</a></li>
+<li><a href="css_align.html" title="CSS 布局 - 水平和垂直对齐">CSS 对齐</a></li>
+<li><a href="css_combinators.html" title="CSS 选择器">CSS 组合器</a></li>
+<li><a href="css_pseudo_classes.html" title="CSS 伪类">CSS 伪类</a></li>
+<li><a href="css_pseudo_elements.html" title="CSS 伪元素">CSS 伪元素</a></li>
+<li><a href="css_image_transparency.html" title="CSS 不透明度">CSS 不透明度</a></li>
+<li><a href="css_navbar.html" title="CSS 导航栏">CSS 导航栏</a></li>
+<li><a href="css_navbar_vertical.html" title="CSS 垂直导航栏">CSS 垂直导航栏</a></li>
+<li><a href="css_navbar_horizontal.html" title="CSS 水平导航栏">CSS 水平导航栏</a></li>
+<li><a href="css_dropdowns.html" title="CSS 下拉菜单">CSS 下拉菜单</a></li>
+<li><a href="css_image_gallery.html" title="CSS 图片库">CSS 图片库</a></li>
+<li><a href="css_image_sprites.html" title="CSS 图像精灵">CSS 图像精灵</a></li>
+<li><a href="css_attribute_selectors.html" title="CSS 属性选择器">CSS 属性选择器</a></li>
+<li><a href="css_form.html" title="CSS 表单">CSS 表单</a></li>
+<li><a href="css_counters.html" title="CSS 计数器">CSS 计数器</a></li>
+<li><a href="css_website_layout.html" title="CSS 网站布局">CSS 网站布局</a></li>
+<li><a href="css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="css_specificity.html" title="CSS 特异性">CSS 特异性</a></li>
+<li><a href="css_important.html" title="CSS !important 规则">CSS !important</a></li>
+<li><a href="css_math_functions.html" title="CSS 数学函数">CSS 数学函数</a></li>
+</ul>
+<h2>CSS3 高级教程</h2>
+<ul>
+<li><a href="css3_borders.html" title="CSS 圆角">CSS 圆角</a></li>
+<li><a href="css3_border_images.html" title="CSS 边框图像">CSS 边框图像</a></li>
+<li><a href="css3_backgrounds.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="css3_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="css_colors_keywords.html" title="CSS 颜色关键字">CSS 颜色关键字</a></li>
+<li><a href="css3_gradients.html" title="CSS 渐变">CSS 渐变</a></li>
+<li><a href="css3_gradients_radial.html" title="CSS 径向渐变">CSS 径向渐变</a></li>
+<li><a href="css3_shadows.html" title="CSS 阴影">CSS 阴影</a></li>
+<li><a href="css3_shadows_box.html" title="CSS box-shadow">CSS box-shadow</a></li>
+<li><a href="css3_text_effects.html" title="CSS 文本效果">CSS 文本效果</a></li>
+<li><a href="css3_fonts.html" title="CSS 网络字体">CSS 网络字体</a></li>
+<li><a href="css3_2dtransforms.html" title="CSS 2D 转换">CSS 2D 转换</a></li>
+<li><a href="css3_3dtransforms.html" title="CSS 3D 转换">CSS 3D 转换</a></li>
+<li class="currentLink"><a href="css3_transitions.html" title="CSS 过渡">CSS 过渡</a></li>
+<li><a href="css3_animations.html" title="CSS 动画">CSS 动画</a></li>
+<li><a href="css_tooltip.html" title="CSS 工具提示">CSS 工具提示</a></li>
+<li><a href="css3_images.html" title="CSS 图像样式">CSS 图像样式</a></li>
+<li><a href="css3_object-fit.html" title="CSS object-fit">CSS object-fit</a></li>
+<li><a href="css3_object-position.html" title="CSS object-position 属性">CSS object-position</a></li>
+<li><a href="css3_masking.html" title="CSS 遮罩">CSS 遮罩</a></li>
+<li><a href="css3_buttons.html" title="CSS 按钮">CSS 按钮</a></li>
+<li><a href="css3_pagination.html" title="CSS 分页">CSS 分页</a></li>
+<li><a href="css3_multiple_columns.html" title="CSS 多列">CSS 多列</a></li>
+<li><a href="css3_user_interface.html" title="CSS 用户界面">CSS 用户界面</a></li>
+<li><a href="css3_variables.html" title="CSS 变量">CSS 变量</a></li>
+<li><a href="css3_variables_overriding.html" title="CSS 覆盖变量">CSS 覆盖变量</a></li>
+<li><a href="css3_variables_javascript.html" title="CSS 使用 JavaScript 更改变量">CSS 变量 - JavaScript</a></li>
+<li><a href="css3_variables_mediaqueries.html" title="CSS 在媒体查询中使用变量">CSS 变量 - 媒体查询</a></li>
+<li><a href="css3_property.html" title="CSS @property 规则">CSS @property</a></li>
+<li><a href="css3_box-sizing.html" title="CSS Box Sizing">CSS Box Sizing</a></li>
+<li><a href="css3_flexbox.html" title="CSS Flexbox">CSS Flexbox</a></li>
+<li><a href="css3_mediaqueries.html" title="CSS 媒体查询">CSS 媒体查询</a></li>
+<li><a href="css3_mediaqueries_ex.html" title="CSS 媒体查询实例">CSS 媒体查询实例</a></li>
+</ul>
+<h2>CSS 响应式设计</h2>
+<ul>
+<li><a href="css_rwd_intro.html" title="响应式网站设计 - 简介">RWD 简介</a></li>
+<li><a href="css_rwd_viewport.html" title="响应式网页设计 - 视口">RWD 视口</a></li>
+<li><a href="css_rwd_grid.html" title="响应式网页设计 - Grid-View">RWD 网格视图</a></li>
+<li><a href="css_rwd_mediaqueries.html" title="响应式网页设计 - 媒体查询">RWD 媒体查询</a></li>
+<li><a href="css_rwd_images.html" title="响应式网页设计 - 图像">RWD 图像</a></li>
+<li><a href="css_rwd_videos.html" title="响应式网页设计 - 视频">RWD 视频</a></li>
+</ul>
+<h2>CSS 网格教程</h2>
+<ul>
+<li><a href="css_grid.html" title="CSS 网格布局模块">CSS 网格布局模块</a></li>
+<li><a href="css_grid_container.html" title="CSS 网格容器">CSS 网格容器</a></li>
+<li><a href="css_grid_item.html" title="CSS 网格项目">CSS 网格项目</a></li>
+</ul>
+<h2>CSS 实例</h2>
+<ul>
+<li><a href="css_examples.html" title="CSS 实例">CSS 实例</a></li>
+</ul>
+<h2>CSS 测验</h2>
+<ul>
+<li><a href="css_quiz.html" title="CSS 测验">CSS 测验</a></li>
+</ul>
+<h2>CSS 参考手册</h2>
+<ul>
+<li><a href="../cssref/index.html" title="CSS 参考手册">CSS 参考手册</a></li>
+<li><a href="../cssref/css_browsersupport.html" title="CSS 浏览器支持">CSS 浏览器支持</a></li>
+<li><a href="../cssref/css_selectors.html" title="CSS 选择器">CSS 选择器</a></li>
+<li><a href="../cssref/css_functions.html" title="CSS 函数">CSS 函数</a></li>
+<li><a href="../cssref/css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="../cssref/css_ref_aural.html" title="CSS 听觉">CSS 听觉</a></li>
+<li><a href="../cssref/css_websafe_fonts.html" title="CSS 网络安全字体">CSS 网络安全字体</a></li>
+<li><a href="../cssref/css_animatable.html" title="CSS 可动画制作">CSS 可动画制作</a></li>
+<li><a href="../cssref/css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="../cssref/css_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="../cssref/css_colors_legal.html" title="CSS 颜色值">CSS 颜色值</a></li>
+<li><a href="../cssref/css_default_values.html" title="CSS 默认值">CSS 默认值</a></li>
+<li><a href="../cssref/css_entities.html" title="CSS 实体">CSS 实体</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>CSS 过渡</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css3_3dtransforms.html" title="CSS 3D 转换">CSS 3D 转换</a></li>
+<li class="next"><a href="css3_animations.html" title="CSS 动画">CSS 动画</a></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>CSS 过渡</h2>
+
+<p>CSS 过渡允许您在给定的时间内平滑地改变属性值。</p>
+
+<p>请把鼠标移动到这个元素上，来查看 CSS 过渡效果：</p>
+
+<style> 
+.animated_div {
+	width:60px;
+	height:40px;
+	background:#92B901;
+	color:#ffffff;
+	font-weight:bold;
+	font-size:15px;
+	padding:10px;
+	margin:5px;
+	-webkit-transition:-webkit-transform 1s,opacity 1s,background 1s,width 1s,height 1s,font-size 1s;
+	-webkit-border-radius:5px;
+	-o-transition-property:width,height,-o-transform,background,font-size,opacity;
+	-o-transition-duration:1s,1s,1s,1s,1s,1s;
+	-moz-transition-property:width,height,-o-transform,background,font-size,opacity;
+	-moz-transition-duration:1s,1s,1s,1s,1s,1s;
+	transition-property:width,height,transform,background,font-size,opacity;
+	transition-duration:1s,1s,1s,1s,1s,1s;
+	border-radius:5px;
+	opacity:0.4;
+}
+
+.animated_div:hover
+{
+	opacity:1;
+	background:#1ec7e6;
+	width:130px;
+	height:80px;
+	font-size:35px;
+}
+</style>
+
+<div style="height: 100px; margin-top: 15px;">
+<div class="animated_div">CSS</div>
+</div>
+
+<p>在本章中，您将学习如下属性：</p>
+
+<ul>
+<li><code>transition</code></li>
+<li><code>transition-delay</code></li>
+<li><code>transition-duration</code></li>
+<li><code>transition-property</code></li>
+<li><code>transition-timing-function</code></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>对过渡的浏览器支持</h2>
+
+<p>表格中的数字注明了完全支持该属性的首个浏览器版本。</p>
+
+<table class="browser-support">
+<tr>
+<th class="bsTh">属性</th>
+<th class="bsChrome">Chrome</th>
+<th class="bsIE">IE</th>
+<th class="bsFirefox">Firefox</th>
+<th class="bsSafari">Safari</th>
+<th class="bsOpera">Opera</th>
+</tr>
+
+<tr>
+<td>transition</td>
+<td>26.0</td>
+<td>10.0</td>
+<td>16.0</td>
+<td>6.1</td>
+<td>12.1</td>
+</tr>
+
+<tr>
+<td>transition-delay</td>
+<td>26.0</td>
+<td>10.0</td>
+<td>16.0</td>
+<td>6.1</td>
+<td>12.1</td>
+</tr>
+
+<tr>
+<td>transition-duration</td>
+<td>26.0</td>
+<td>10.0</td>
+<td>16.0</td>
+<td>6.1</td>
+<td>12.1</td>
+</tr>
+
+<tr>
+<td>transition-property</td>
+<td>26.0</td>
+<td>10.0</td>
+<td>16.0</td>
+<td>6.1</td>
+<td>12.1</td>
+</tr>
+
+<tr>
+<td>transition-timing-function</td>
+<td>26.0</td>
+<td>10.0</td>
+<td>16.0</td>
+<td>6.1</td>
+<td>12.1</td>
+</tr>
+</table>
+</div>
+
+
+
+<div>
+<h2>如何使用 CSS 过渡？</h2>
+
+<p>如需创建过渡效果，必须明确两件事：</p>
+
+<ul>
+<li>您要添加效果的 CSS 属性</li>
+<li>效果的持续时间</li>
+</ul>
+
+<p class="important"><span>注意：</span>如果未规定持续时间部分，则过渡不会有效果，因为默认值为 0。</p>
+
+<p>下面的例子展示了 100px * 100px 的红色 &lt;div&gt; 元素。 &lt;div&gt; 元素还为 width 属性指定了过渡效果，持续时间为 2 秒：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+div {
+  width: 100px;
+  height: 100px;
+  background: red;
+  transition: width 2s;
+}
+</pre>
+
+<p>当指定的 CSS 属性（width）值发生变化时，将开始过渡效果。</p>
+
+<p>现在，让我们为 width 属性指定一个鼠标悬停在 &lt;div&gt; 元素上时的新值：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+div:hover {
+  width: 300px;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t9313.html?f=css3_transition_1">亲自试一试</a></p>
+
+<p>请注意，当光标从元素上移开时，它将逐渐变回其原始样式。</p>
+</div>
+
+
+
+<div>
+<h2>改变若干属性值</h2>
+
+<p>下面的例子为 width 和 height 属性都添加了过渡效果，width 是 2 秒，height 是 4 秒：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+div {
+  transition: width 2s, height 4s;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t135a.html?f=css3_transition_2">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>指定过渡的速度曲线</h2>
+
+<p><code>transition-timing-function</code> 属性规定过渡效果的速度曲线。</p>
+
+<p>transition-timing-function 属性可接受以下值：</p>
+
+<ul>
+<li><code>ease</code> - 规定过渡效果，先缓慢地开始，然后加速，然后缓慢地结束（默认）</li>
+<li><code>linear</code> - 规定从开始到结束具有相同速度的过渡效果</li>
+<li><code>ease-in</code> -规定缓慢开始的过渡效果</li>
+<li><code>ease-out</code> - 规定缓慢结束的过渡效果</li>
+<li><code>ease-in-out</code> - 规定开始和结束较慢的过渡效果</li>
+<li><code>cubic-bezier(n,n,n,n)</code> - 允许您在三次贝塞尔函数中定义自己的值</li>
+</ul>
+
+<p>下面的例子展示了可以使用的一些不同的速度曲线：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+#div1 {transition-timing-function: linear;}
+#div2 {transition-timing-function: ease;}
+#div3 {transition-timing-function: ease-in;}
+#div4 {transition-timing-function: ease-out;}
+#div5 {transition-timing-function: ease-in-out;}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t0949.html?f=css3_transition_speed">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>延迟过渡效果</h2>
+
+<p><code>transition-delay</code> 属性规定过渡效果的延迟（以秒计）。</p>
+
+<p>下例在启动之前有 1 秒的延迟：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+div {
+  transition-delay: 1s;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tfd9d.html?f=css3_transition_delay">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>过渡 + 转换</h2>
+
+<p>下例为转换添加过渡效果：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+div {
+  transition: width 2s, height 2s, transform 2s;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tf6ff.html?f=css3_transition_transform">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>更多过渡实例</h2>
+
+<p>您可以可以一一指定 CSS 过渡属性，如下所示：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+div {
+  transition-property: width;
+  transition-duration: 2s;
+  transition-timing-function: linear;
+  transition-delay: 1s;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/ta96d.html?f=css3_transition_3">亲自试一试</a></p>
+
+<p>或使用简写的 <code>transition</code> 属性：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+div {
+  transition: width 2s linear 1s;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tb896.html?f=css3_transition_4">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>CSS 过渡属性</h2>
+
+<p>下表列出了所有 CSS 过渡属性：</p>
+
+<table class="dataintable">
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_transition.html" title="CSS transition 属性">transition</a></td>
+<td>简写属性，用于将四个过渡属性设置为单一属性。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_transition-delay.asp" title="CSS transition-delay 属性">transition-delay</a></td>
+<td>规定过渡效果的延迟（以秒计）。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_transition-duration.asp" title="CSS transition-duration 属性">transition-duration</a></td>
+<td>规定过渡效果要持续多少秒或毫秒。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_transition-property.asp" title="CSS transition-property 属性">transition-property</a></td>
+<td>规定过渡效果所针对的 CSS 属性的名称。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_transition-timing-function.asp" title="CSS transition-timing-function 属性">transition-timing-function</a></td>
+<td>规定过渡效果的速度曲线。</td>
+</tr>
+</table>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css3_3dtransforms.html" title="CSS 3D 转换">CSS 3D 转换</a></li>
+<li class="next"><a href="css3_animations.html" title="CSS 动画">CSS 动画</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../cssref/index.html">CSS 参考手册</a></h5>
+<h5 id="tools_example"><a href="css_examples.html">CSS 实例</a></h5>
+<h5 id="tools_quiz"><a href="css_quiz.html">CSS 测验</a></h5>
+<h5 id="tools_professional"><a href="index_pro.html">CSS 课外书</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/css/css3_transitions.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:19:11 GMT -->
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+    <title>03-API-reject</title>
+</head>
+
+<body>
+    <!-- 
+5. Promise.reject方法 : (reason) => {}
+        (1) reason: 失败的原因 失败的原因 失败的原因
+        说明 : 返回一个失败的 返回一个失败的 返回一个失败的 返回一个失败的 promise
+-->
+    <script>
+        // let p = Promise.reject(521);
+        // let p2 = Promise.reject('iloveyou');
+        let p3 = Promise.reject(new Promise((resolve, reject) => {
+            resolve('OK');
+        }));
+
+        console.log(p3);
+    </script>
+</body>
+
+</html>

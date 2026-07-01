@@ -1,0 +1,254 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/xquery/index.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:53:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>XQuery 教程</title>
+
+</head>
+
+<body class="xml">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>XQuery 基础</h2>
+<ul>
+<li class="currentLink"><a href="index.html" title="XQuery 教程">XQuery 教程</a></li>
+<li><a href="xquery_intro.html" title="XQuery 简介">XQuery 简介</a></li>
+<li><a href="xquery_example.html" title="XQuery 实例">XQuery 实例</a></li>
+<li><a href="xquery_flwor.html" title="XQuery FLWOR 表达式">XQuery FLWOR</a></li>
+<li><a href="xquery_flwor_html.html" title="XQuery FLWOR + HTML">XQuery HTML</a></li>
+<li><a href="xquery_terms.html" title="XQuery 术语">XQuery 术语</a></li>
+<li><a href="xquery_syntax.html" title="XQuery 语法">XQuery 语法</a></li>
+</ul>
+<h2>XQuery 高级</h2>
+<ul>
+<li><a href="xquery_add.html" title="XQuery 添加元素和属性">XQuery 添加</a></li>
+<li><a href="xquery_select.html" title="XQuery 选择和过滤">XQuery 选取</a></li>
+<li><a href="xquery_functions.html" title="XQuery 函数">XQuery 函数</a></li>
+<li><a href="xquery_summary.html" title="XQuery 课程总结">XQuery 总结</a></li>
+</ul>
+<h2>XQuery 参考手册</h2>
+<ul>
+<li><a href="xquery_reference.html" title="XQuery 参考手册">XQuery 参考手册</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>XQuery 教程</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="index.html" title="XQuery 教程">XQuery 教程</a></li>
+<li class="next"><a href="xquery_intro.html" title="XQuery 简介">XQuery 简介</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p><strong>解释 XQuery 的最佳方式是：XQuery 相对于 XML，等同于 SQL 相对于数据库。</strong></p>
+
+<p><strong>XQuery 被设计用来查询 XML 数据。</strong></p>
+
+<p><strong>XQuery 也被称为 XML Query。</strong></p>
+
+<p><a href="xquery_intro.html" title="XQuery 教程">开始学习 XQuery</a> ！</p>
+</div>
+
+
+
+<div id="referencelist">
+<h2>XQuery 参考手册</h2>
+
+<p>在 W3School，我们提供 XQuery 1.0 中所有运算符、内置函数、数据类型的完整参考手册。</p>
+
+<p><a href="xquery_reference.html" title="XQuery 参考手册">XQuery 参考手册</a></p>
+</div>
+
+
+
+<div id="toc">
+<h2>内容目录</h2>
+
+<dl>
+<dt><a href="xquery_intro.html" title="XQuery 简介">XQuery 简介</a></dt>
+<dd>XQuery 的简介。包括其概念和作用。</dd>
+
+<dt><a href="xquery_example.html" title="XQuery 实例">XQuery 实例</a></dt>
+<dd>本章通过一个实例演示 XQuery。</dd>
+
+<dt><a href="xquery_flwor.html" title="XQuery FLWOR 表达式">XQuery FLWOR</a></dt>
+<dd>本章讲解 XQuery FLWOR 表达式。</dd>
+
+<dt><a href="xquery_flwor_html.html" title="XQuery FLWOR + HTML">XQuery FLWOR + HTML</a></dt>
+<dd>本章演示如何通过 HTML 列表提交 FLWOR 结果。</dd>
+
+<dt><a href="xquery_terms.html" title="XQuery 术语">XQuery 术语</a></dt>
+<dd>本章讲解 XQuery 中普遍使用的术语。</dd>
+
+<dt><a href="xquery_syntax.html" title="XQuery 语法">XQuery 语法</a></dt>
+<dd>本章讲解 XQuery 中基本的语法规则。</dd>
+
+<dt><a href="xquery_add.html" title="XQuery 添加元素和属性">XQuery 向结果添加结果和属性</a></dt>
+<dd>本章讲解如何向结果添加你自己的元素和属性。</dd>
+
+<dt><a href="xquery_select.html" title="XQuery 选择和过滤">XQuery 筛选元素</a></dt>
+<dd>本章讲解如何使用 FLWOR 筛选元素。</dd>
+
+<dt><a href="xquery_functions.html" title="XQuery 函数">XQuery 函数</a></dt>
+<dd>XQuery 内置函数和运算符的总论，以及如何创建用户自定义的函数。</dd>
+
+<dt><a href="xquery_summary.html" title="您已经学习了 XQuery，下一步呢？">XQuery 总结</a></dt>
+<dd>本文包括在本教程所学内容的一个总结，以及我们向你推荐的下一步应该学习的内容。</dd>
+</dl>
+
+<h3>XQuery 参考手册</h3>
+
+<dl>
+<dt><a href="xquery_reference.html" title="XQuery 参考手册">XQuery 参考手册</a></dt>
+<dd>包含 XQuery 运算符、内置函数、数据类型的完整参考手册。</dd>
+</dl>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="index.html" title="XQuery 教程">XQuery 教程</a></li>
+<li class="next"><a href="xquery_intro.html" title="XQuery 简介">XQuery 简介</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="xquery_reference.html">XQuery 参考手册</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/xquery/index.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:53:53 GMT -->
+</html>

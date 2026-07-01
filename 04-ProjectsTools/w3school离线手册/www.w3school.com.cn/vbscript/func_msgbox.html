@@ -1,0 +1,273 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/vbscript/func_msgbox.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:19:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>VBScript MsgBox 函数</title>
+
+</head>
+
+<body class="serverscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>VBScript 教程</h2>
+<ul>
+<li><a href="index.html" title="VBScript 教程">VB 教程</a></li>
+<li><a href="vbscript_intro.html" title="VBScript 简介">VB 简介</a></li>
+<li><a href="vbscript_howto.html" title="VBScript How to">VB How to</a></li>
+<li><a href="vbscript_whereto.html" title="VBScript Where to">VB Where to</a></li>
+<li><a href="vbscript_variables.html" title="VBScript 变量">VB 变量</a></li>
+<li><a href="vbscript_procedures.html" title="VBScript 程序">VB 程序</a></li>
+<li><a href="vbscript_conditionals.html" title="VBScript 条件语句">VB 条件语句</a></li>
+<li><a href="vbscript_looping.html" title="VBScript 循环语句">VB 循环语句</a></li>
+<li><a href="vbscript_summary.html" title="您已经学习了 VBScript，下一步呢？">VB 教程总结</a></li>
+</ul>
+<h2>VBScript 实例</h2>
+<ul>
+<li><a href="vbscript_examples.html" title="VBScript 实例">VB 实例</a></li>
+</ul>
+<h2>VBScript 参考手册</h2>
+<ul>
+<li><a href="vbscript_ref_functions.html" title="VBScript 函数">VB 函数</a></li>
+<li><a href="vbscript_ref_keywords.html" title="VBScript 关键字">VB 关键字</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>VBScript MsgBox 函数</h1>
+
+<div class="backtoreference">
+<p><a href="vbscript_ref_functions.html" title="VBScript 函数">VBScript 函数参考手册</a></p>
+</div>
+
+
+
+<div>
+<h2>定义和用法</h2>
+
+<p>MsgBox 函数可显示一个消息框，等待用户点击某个按钮，然后返回指示被点击按钮的值。</p>
+
+<p>MsgBox 函数可返回下面的值：</p>
+
+<ul>
+  <li>1 = vbOK - 确定按钮被单击。</li>
+  <li>2 = vbCancel - 取消按钮被单击。</li>
+  <li>3 = vbAbort - 终止按钮被单击。</li>
+  <li>4 = vbRetry - 重试按钮被单击。</li>
+  <li>5 = vbIgnore - 忽略按钮被单击。</li>
+  <li>6 = vbYes - 是按钮被单击。</li>
+  <li>7 = vbNo - 否按钮被单击。</li>
+</ul>
+
+<p class="note"><span>注释：</span>当 helpfile 和 context 参数均被规定后，用户可按 F1 键来查看帮助。</p>
+
+<p class="tip"><span>提示：</span>请参阅 InputBox 函数。</p>
+
+<h3>语法</h3>
+
+<pre class="language-vbnet">
+MsgBox(prompt[,buttons][,title][,helpfile,context])
+</pre>
+
+<table class="dataintable"> 
+  <tr>
+    <th>参数</th>
+    <th>描述</th>
+  </tr>  
+  <tr>
+    <td>prompt</td>
+    <td>必需的。作为消息显示在对话框中的字符串表达式。prompt 的最大长度大约是 1024 个字符，这取决于所使用的字符的宽度。如果 prompt 中包含多个行，则可在各行之间用回车符 (Chr(13))、换行符 (Chr(10)) 或回车换行符的组合 (Chr(13) &amp; Chr(10)) 分隔各行。</td>
+  </tr>
+  <tr>
+    <td>buttons</td>
+    <td>
+	<p>数值表达式，是表示指定显示按钮的数目和类型、使用的图标样式，默认按钮的标识以及消息框样式的数值的总和。如果省略，则 buttons 的默认值为 0。</p>
+	<p>button 的取值：</p>
+	<ul class="listintable">
+      <li>0 = vbOKOnly - 只显示确定按钮。</li>
+      <li>1 = vbOKCancel - 显示确定和取消按钮。</li>
+      <li>2 = vbAbortRetryIgnore - 显示放弃、重试和忽略按钮。</li>
+      <li>3 = vbYesNoCancel - 显示是、否和取消按钮。</li>
+      <li>4 = vbYesNo - 显示是和否按钮。</li>
+      <li>5 = vbRetryCancel - 显示重试和取消按钮。</li>
+      <li>16 = vbCritical - 显示临界信息图标。</li>
+      <li>32 = vbQuestion - 显示警告查询图标。</li>
+      <li>48 = vbExclamation - 显示警告消息图标。</li>
+      <li>64 = vbInformation - 显示信息消息图标。</li>
+      <li>0 = vbDefaultButton1 - 第一个按钮为默认按钮。</li>
+      <li>256 = vbDefaultButton2 - 第二个按钮为默认按钮。</li>
+      <li>512 = vbDefaultButton3 - 第三个按钮为默认按钮。</li>
+      <li>768 = vbDefaultButton4 - 第四个按钮为默认按钮。</li>
+      <li>0 = vbApplicationModal - 应用程序模式：用户必须响应消息框才能继续在当前应用程序中工作。</li>
+      <li>4096 = vbSystemModal - 系统模式：在用户响应消息框前，所有应用程序都被挂起。</li>
+    </ul>
+	<p>第一组值 (0 - 5) 用于描述对话框中显示的按钮类型与数目；第二组值 (16, 32, 48, 64) 用于描述图标的样式；第三组值 (0, 256, 512) 用于确定默认按钮；而第四组值 (0, 4096) 则决定消息框的样式。在将这些数字相加以生成 buttons 参数值时，只能从每组值中取用一个数字。</p>
+	</td>
+  </tr>
+  <tr>
+    <td>title</td>
+    <td>显示在对话框标题栏中的字符串表达式。如果省略 title，则将应用程序的名称显示在标题栏中。</td>
+  </tr>
+  <tr>
+    <td>helpfile</td>
+    <td>字符串表达式，用于标识为对话框提供上下文相关帮助的帮助文件。如果已提供 helpfile，则必须提供 context。在 16 位系统平台上不可用。</td>
+  </tr>
+  <tr>
+    <td>context</td>
+    <td>数值表达式，用于标识由帮助文件的作者指定给某个帮助主题的上下文编号。如果已提供 context，则必须提供 helpfile。在 16 位系统平台上不可用。</td>
+  </tr>
+</table>
+</div>
+
+
+
+<div>
+<h2>实例</h2>
+
+<pre class="language-vbnet">
+dim answer
+answer=MsgBox(&quot;Hello everyone!&quot;,65,&quot;Example&quot;)
+document.write(answer)
+</pre>
+</div>
+
+
+
+<div class="backtoreference">
+<p><a href="vbscript_ref_functions.html" title="VBScript 函数">VBScript 函数参考手册</a></p>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="vbscript_ref_functions.html">VBScript 参考手册</a></h5>
+<h5 id="tools_example"><a href="vbscript_examples.html">VBScript 实例</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/vbscript/func_msgbox.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:19:43 GMT -->
+</html>

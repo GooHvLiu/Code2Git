@@ -1,0 +1,378 @@
+/* =========================================
+   bs_m_main.css 主页面核心样式
+   ========================================= */
+
+/* --- 全局重置 --- */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%; /* 让 html 也占满 */
+}
+
+body {
+    background: #e4e9f5;
+    font-family: 'Arial', 'Microsoft YaHei', sans-serif;
+    color:#2c3e50;/* 主文字 */
+    /* 【核心魔法 1】让 body 成为滚动容器 */
+    height: 100vh;
+    overflow-y: auto;       /* 允许垂直滚动 */
+    overflow-x: hidden;     /* 禁止水平滚动 */
+    
+    /* 【核心魔法 2】开启 Y 轴强制吸附 */
+    /* 注意：mandatory 依然有效，即使 section 高度超过 100vh，
+       它也会在滚动停止时尝试对齐到最近的 section 顶部 */
+    scroll-snap-type: y mandatory;
+    
+    /* 【核心魔法 3】平滑滚动行为 */
+    scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar { 
+    display: none; 
+}
+
+/* 滚动提示横幅容器 */
+.banner-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* 滚动提示横幅样式 */
+.sroll-banner {
+    position: absolute;
+    top: 10px;
+    left: 35px;
+    display: flex;
+    background-color: #f0f0f0;
+    padding: 10px 15px;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    width: 430px;
+    animation: Scroll 15s linear infinite;
+    cursor: pointer;
+    z-index: 1;
+    pointer-events: auto;
+
+}
+.sroll-banner:hover {
+    animation-play-state: paused;
+}
+.sroll-banner .scroll-content {
+    font-size: 14px;
+    color: #666;
+    margin-right: 20px;
+}
+.sroll-banner .close-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+    z-index: 10;
+}
+.sroll-banner .close-btn:hover {
+    color: #333;
+}
+@keyframes Scroll {
+    0% { transform: translateX(calc(100vw)); }
+    100% { transform: translateX(-450px); }
+}
+
+/* --- Section 核心修正 (支持长内容) --- */
+section {
+    /* 【核心魔法 4】定义吸附点：顶部对齐 */
+    scroll-snap-align: start;
+    
+    /* 【关键修改】改为 min-height，允许内容撑开高度 */
+    /* min-height: 100vh;  */
+    width: 100%;
+    
+    /* 恢复 Flex 布局以实现“内容少时居中，内容多时自然排列” */
+    display: flex;
+    flex-direction: column; /* 垂直排列子元素 */
+    justify-content: center; /* 内容少时：垂直居中 */
+    align-items: center;     /* 水平居中 */
+    
+    position: relative;
+    box-sizing: border-box;
+    padding: 20px;
+    background: #e4e9f5;
+    
+    /* 禁止选中 (侧边栏交互需要) */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    
+    /* 确保长内容不会被截断 */
+    overflow: visible; 
+    /*z-index: 1000;  确保在背景之上 */
+}
+
+/* 
+   【重要技巧】当内容超过一屏时，justify-content: center 可能会导致上下留白不均。
+   但这对显示内容没有影响，内容会完整显示。
+   如果你希望内容多时强制从顶部开始显示（不留上方空白），
+   可以取消下面的注释，但这会牺牲“短内容居中”的效果。
+   目前配置是：短内容居中，长内容完整显示（上下可能有留白，但内容全在）。
+*/
+
+/* 允许子页面内容区域恢复文字选中 */
+section .content-wrapper,
+section .tools-library,
+section .donate-wrapper,
+section .stack-container,
+section .dev-container,
+section * {
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+/* ================= 左侧侧边栏 (.shell) - 保持原样 ================= */
+.shell {
+    position: fixed;
+    width: var(--sectionClosedWidth);
+    height: 100%;
+    background: #000000;
+    z-index: 9999; /* 确保始终在最上层 */
+    transition: width 0.5s;
+    overflow: hidden;
+    
+}
+
+.shell:hover {
+    width: var(--sectionOpenWidth);
+}
+
+#triangleGuid{
+    width: 30px;
+    height:30px;
+}
+
+.imageBox {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    top:-0.6px;
+    left:10.2px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #fff;
+    margin-left: -10px;
+}
+
+.imageBox img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.active {
+    /* background: #e4e9f5; */
+    /* border-top-left-radius: var(--selectedRadius); */
+    /* border-bottom-left-radius: var(--selectedRadius); */
+    /* color: #ffad32c1; */
+}
+/* 
+.active::before {
+    content: "";
+    position: absolute;
+    top: -30px;
+    right: 0;
+    width: 20px;
+    height: 30px;
+    border-bottom-right-radius: var(--selectedRadius);
+    box-shadow: 5px 5px 0 5px #e4e9f5;
+    background: transparent;
+}
+
+.active::after {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    right: 0;
+    width: 20px;
+    height: 30px;
+    border-top-right-radius: var(--selectedRadius);
+    box-shadow: 5px -5px 0 5px #e4e9f5;
+    background: transparent; 
+}
+    */
+
+#logo {
+    margin: 40px 0 20px 0;
+    /* background-color: red; */
+}
+
+.shell ul {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+}
+
+.shell ul li {
+    position: relative;
+}
+
+.shell ul li a {
+    position: relative;
+    display: flex;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.icon {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 2.5px;
+    /* height: 70px; */
+    color: rgb(255, 255, 255);
+    transition: 0.5s;
+}
+
+.icon .iconfont {
+    font-size: 25px;
+}
+
+/* 选中菜单后面的黑色圆圈 */
+.active a .icon::before {
+    content: "";
+    position: absolute;
+    top:18.79px;
+    width: 32px;
+    height: 32px;
+    left:-1px;
+    background: #000000;
+    border-radius: 50%;
+    transition: 0.5s;
+    border: 3px solid #ffa117;
+    box-sizing: border-box;
+}
+
+.active a .icon,
+.active a .text {
+    
+    color: #ffa117;
+}
+
+.icon i {
+    font-size: 30px;
+    z-index: 999;
+}
+
+.text {
+    position: relative;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 20px;
+    color: #e4e9f5;
+    /* color: #ffad32c1; */
+    padding-left: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.5s;
+}
+
+.logo-text {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.5;
+    margin-left: 10px;
+}
+
+.logo-text span {
+    display: block;
+    transition: color 0.5s;
+}
+
+.shell ul li:hover a .logo-text span,
+.shell ul li:hover a .icon,
+.shell ul li:hover a .text {
+    color: #ffa117;
+}
+
+/* ================= 友情链接 ================= */
+.friend-links-container {
+    position: absolute;
+    bottom: -10px;
+    left: -15px;
+    width: calc(100% - 20px);
+    transition: all 0.5s;
+    z-index: 100;
+}
+
+.links-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    padding-left: 12px;
+    align-items: center;
+    height: 50px;
+}
+
+.links-wrapper a, 
+.sub-links a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 20px;
+    transition: all 0.3s;
+    text-decoration: none;
+    flex-shrink: 0;
+    margin-left: 2px;
+}
+
+.links-wrapper a:hover,
+.sub-links a:hover {
+    background: #ffa117;
+    color: #000;
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 4px 10px rgba(255, 161, 23, 0.4);
+}
+
+.sub-links { display: none; }
+.main-entry { display: flex; }
+
+.shell:hover .main-entry { display: none; }
+.shell:hover .sub-links {
+    display: flex;
+    gap: 15px;
+}
+
+@keyframes popInLinks {
+    to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+.shell:hover .sub-links a {
+    opacity: 0;
+    transform: translateX(-10px) scale(0.5);
+    animation: popInLinks 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.shell:hover .sub-links a:nth-child(1) { animation-delay: 0.05s; }
+.shell:hover .sub-links a:nth-child(2) { animation-delay: 0.1s; }
+.shell:hover .sub-links a:nth-child(3) { animation-delay: 0.15s; }

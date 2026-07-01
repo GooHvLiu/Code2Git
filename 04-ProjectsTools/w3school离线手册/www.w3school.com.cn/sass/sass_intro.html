@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/sass/sass_intro.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:20:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Sass 简介</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Sass 教程</h2>
+<ul>
+<li><a href="index.html" title="Sass 教程">Sass 教程</a></li>
+<li class="currentLink"><a href="sass_intro.html" title="Sass 简介">Sass 简介</a></li>
+<li><a href="sass_installation.html" title="Sass 安装">Sass 安装</a></li>
+<li><a href="sass_variables.html" title="Sass 变量">Sass 变量</a></li>
+<li><a href="sass_nesting.html" title="Sass 嵌套规则和属性">Sass 嵌套</a></li>
+<li><a href="sass_import.html" title="Sass @import 和 Partials">Sass @import</a></li>
+<li><a href="sass_mixin_include.html" title="Sass @mixin 和 @include">Sass @mixin</a></li>
+<li><a href="sass_extend.html" title="Sass @extend 和继承">Sass @extend</a></li>
+</ul>
+<h2>Sass 函数</h2>
+<ul>
+<li><a href="sass_functions_string.html" title="Sass 字符串函数">Sass 字符串</a></li>
+<li><a href="sass_functions_numeric.html" title="Sass 数字函数">Sass 数字</a></li>
+<li><a href="sass_functions_list.html" title="Sass 列表函数">Sass 列表</a></li>
+<li><a href="sass_functions_map.html" title="Sass 映射函数">Sass 映射</a></li>
+<li><a href="sass_functions_selector.html" title="Sass 选择器函数">Sass 选择器</a></li>
+<li><a href="sass_functions_introspection.html" title="Sass 自省函数">Sass 自省</a></li>
+<li><a href="sass_functions_color.html" title="Sass 颜色函数">Sass 颜色</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Sass 简介</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="index.html" title="Sass 教程">Sass 教程</a></li>
+<li class="next"><a href="sass_installation.html" title="Sass 安装">Sass 安装</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>您应该知道的</h2>
+
+<p>在继续之前，您应该对以下内容有基本的了解：</p>
+
+<ul>
+<li>HTML</li>
+<li>CSS</li>
+</ul>
+
+<p>如果您想先学习这些科目，请在我们的 <a href="../index-2.html" title="W3School 在线教程">主页</a> 上访问这些教程。</p>
+</section>
+
+
+
+<section>
+<h2>什么是 Sass？</h2>
+
+<ul>
+<li>Sass 指的是 <em>S</em>yntactically <em>A</em>wesome <em>S</em>tyle<em>s</em>heet（语法超棒的样式表）</li>
+<li>Sass 是一种 CSS 扩展</li>
+<li>Sass 是一种 CSS 预处理器</li>
+<li>Sass 完全兼容所有版本的 CSS</li>
+<li>Sass 减少了 CSS 的重复，从而节省了时间</li>
+<li>Sass 由 Hampton Catlin 设计，并由 Natalie Weizenbaum 于 2006 年开发</li>
+<li>Sass 可以免费下载和使用</li>
+</ul>
+</section>
+
+
+
+<section>
+<h2>为什么要使用 Sass？</h2>
+
+<p>样式表越来越大、越来越复杂，也越来越难维护。这是 CSS 预处理器可以提供帮助的地方。</p>
+
+<p>Sass 允许您使用 CSS 中不存在的特性，比如变量、嵌套规则、mixin、导入、继承、内置函数和其他功能。</p>
+</section>
+
+
+
+<section>
+<h2>一个关于 Sass 很有用的简单例子</h2>
+
+<p>假设我们有一个具有三种主要颜色的网站：</p>
+
+<div style="width: 100%; box-sizing: border-box; margin-top: 15px; padding: 20px; background-color: #a2b9bc;">#a2b9bc</div>
+
+<div style="width: 100%; box-sizing: border-box; padding: 20px; background-color: #b2ad7f;">#b2ad7f</div>
+
+<div style="width: 100%; box-sizing: border-box; padding: 20px; background-color: #878f99; color: #fff;">#878f99</div>
+
+<p>那么，您需要键入这些 HEX 值多少次？很多次。如果相同的颜色发生变化呢？</p>
+
+<p>您可以使用 Sass 写以下代码，而不是多次键入上面的值：</p>
+
+<h3>Sass 实例</h3>
+
+<pre class="language-css">
+/* 为原始颜色定义变量 */
+$primary_1: #a2b9bc;
+$primary_2: #b2ad7f;
+$primary_3: #878f99;
+
+/* 使用变量 */
+.main-header {
+  background-color: $primary_1;
+}
+
+.menu-left {
+  background-color: $primary_2;
+}
+
+.menu-right {
+  background-color: $primary_3;
+}
+</pre>
+
+<p>所以，在使用 Sass 的时，如果原始颜色发生变化，你只需要在一个地方更改它。</p>
+</section>
+
+
+
+<section>
+<h2>Sass 是如何工作的？</h2>
+
+<p>浏览器不理解 Sass 代码。因此，您需要一个 Sass 预处理器来将 Sass 代码转换为标准 CSS。</p>
+
+<p>这个过程称为转译（transpiling）。所以，您需要为转译器（某种程序）提供 Sass 代码，然后取回 CSS 代码。</p>
+
+<p class="tip"><span>提示：</span>转译是一个术语，用于将用一种语言编写的源代码转换/翻译成另一种语言。</p>
+</section>
+
+
+
+<section>
+<h2>Sass 文件类型</h2>
+
+<p>Sass 文件的文件扩展名是 &quot;.scss&quot;。</p>
+</section>
+
+
+
+<section>
+<h2>Sass 评论</h2>
+
+<p>Sass 支持标准的 CSS 注释 <code>/* <i>comment</i> */</code>，此外还支持行内注释 <code>// <i>comment</i></code>：</p>
+
+<h3>Sass 实例</h3>
+
+<pre class="language-css">
+/* 定义主要的颜色 */
+$primary_1: #a2b9bc;
+$primary_2: #b2ad7f;
+
+/* 使用变量 */
+.main-header {
+  background-color: $primary_1; // 您可以在这里添加行内的评论
+}
+</pre>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="index.html" title="Sass 教程">Sass 教程</a></li>
+<li class="next"><a href="sass_installation.html" title="Sass 安装">Sass 安装</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="sass_functions_string.html">Sass 参考手册</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/sass/sass_intro.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:20:18 GMT -->
+</html>

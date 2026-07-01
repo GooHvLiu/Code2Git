@@ -1,0 +1,13 @@
+#wrap {
+  width: 500px;
+  height: 500px;
+  background-color: #ccc;
+}
+#wrap .inner {
+  width: 200px;
+  height: 200px;
+  background-color: #f00;
+}
+#wrap .inner:hover {
+  background-color: gray;
+}

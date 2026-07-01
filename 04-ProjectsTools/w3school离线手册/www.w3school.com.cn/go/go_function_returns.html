@@ -1,0 +1,450 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/go/go_function_returns.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Go 函数返回</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Go 教程</h2>
+<ul>
+<li><a href="index.html" title="Go 教程">Go 教程</a></li>
+<li><a href="go_introduction.html" title="Go 简介">Go 简介</a></li>
+<li><a href="go_getting_started.html" title="Go 入门">Go 入门</a></li>
+<li><a href="go_syntax.html" title="Go 语法">Go 语法</a></li>
+<li><a href="go_comments.html" title="Go 注释">Go 注释</a></li>
+<li><a href="go_variables.html" title="Go 变量">Go 变量</a></li>
+<li><a href="go_variable_multi.html" title="Go 声明多变量">Go 声明多变量</a></li>
+<li><a href="go_variable_naming_rules.html" title="Go 变量命名规则">Go 变量命名规则</a></li>
+<li><a href="go_constants.html" title="Go 常量">Go 常量</a></li>
+<li><a href="go_output.html" title="Go 输出">Go 输出</a></li>
+<li><a href="go_formatting_verbs.html" title="Go 格式化动词">Go 格式化动词</a></li>
+<li><a href="go_data_types.html" title="Go 数据类型">Go 数据类型</a></li>
+<li><a href="go_boolean_data_type.html" title="Go 布尔数据类型">Go 布尔</a></li>
+<li><a href="go_integer_data_type.html" title="Go 整数数据类型">Go 整数</a></li>
+<li><a href="go_float_data_type.html" title="Go 浮点数据类型">Go 浮点</a></li>
+<li><a href="go_string_data_type.html" title="Go 字符串数据类型">Go 字符串</a></li>
+<li><a href="go_arrays.html" title="Go 数组">Go 数组</a></li>
+<li><a href="go_slices.html" title="Go 创建切片">Go 创建切片</a></li>
+<li><a href="go_slices_modify.html" title="Go 修改切片">Go 修改切片</a></li>
+<li><a href="go_operators.html" title="Go 运算符">Go 运算符</a></li>
+<li><a href="go_conditions.html" title="Go 条件语句">Go 条件语句</a></li>
+<li><a href="go_if_statement.html" title="Go if 语句">Go if 语句</a></li>
+<li><a href="go_else_statement.html" title="Go if else 语句">Go if else 语句</a></li>
+<li><a href="go_elseif_statement.html" title="Go else if 语句">Go else if 语句</a></li>
+<li><a href="go_nested_if.html" title="Go 嵌套 if 语句">Go 嵌套 if 语句</a></li>
+<li><a href="go_switch.html" title="Go Switch 语句">Go Switch</a></li>
+<li><a href="go_loops.html" title="Go 循环">Go 循环</a></li>
+<li><a href="go_functions.html" title="Go 函数">Go 函数</a></li>
+<li><a href="go_function_parameters.html" title="Go 函数参数">Go 函数参数</a></li>
+<li class="currentLink"><a href="go_function_returns.html" title="Go 函数返回">Go 函数返回</a></li>
+<li><a href="go_function_recursion.html" title="Go 递归函数">Go 递归函数</a></li>
+<li><a href="go_struct.html" title="Go 结构体">Go 结构体</a></li>
+<li><a href="go_maps.html" title="Go 映射">Go 映射</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Go 函数返回</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="go_function_parameters.html" title="Go 函数参数">Go 函数参数</a></li>
+<li class="next"><a href="go_function_recursion.html" title="Go 递归函数">Go 递归函数</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>返回值</h2>
+
+<p>如果你想让函数返回值，你需要定义返回值的数据类型（如 <code>int</code>、<code>string</code> 等），同时在函数内部使用 <code>return</code> 关键字：</p>
+
+<h3>语法</h3>
+
+<pre class="language-go">
+func <i>FunctionName</i>(<i>param1</i> <i>type</i>, <i>param2</i> <i>type</i>) <i>type</i> {
+  // 要执行的代码
+  return <i>output</i>
+}
+</pre>
+</section>
+
+
+
+<section>
+<h2>实例：函数返回</h2>
+
+<h3>实例</h3>
+
+<p>这里，<code>myFunction()</code> 接收两个整数（<code>x</code> 和 <code>y</code>）并将它们的和 (<code>x + y</code>) 作为整数 (<code>int</code>) 返回：</p>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func myFunction(x int, y int) int {
+  return x + y
+}
+
+func main() {
+  fmt.Println(myFunction(1, 2))
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+3
+</pre>
+
+<p class="tiy"><a target="_blank" href="t20f5.html?f=go_func_5">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>命名返回值</h2>
+
+<p>在 Go 中，你可以为函数的返回值命名。</p>
+
+<h3>实例</h3>
+
+<p>这里，我们将返回值命名为 <code>result</code>（类型为 <code>int</code>），并使用裸返回（意味着我们在 <code>return</code> 语句中没有指定变量名）：</p>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func myFunction(x int, y int) (result int) {
+  result = x + y
+  return
+}
+
+func main() {
+  fmt.Println(myFunction(1, 2))
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+3
+</pre>
+
+<p class="tiy"><a target="_blank" href="t1bdb.html?f=go_func_6">亲自试一试</a></p>
+
+<p>上面的例子也可以这样写。在这里，<code>return</code> 语句指定了变量名：</p>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func myFunction(x int, y int) (result int) {
+  result = x + y
+  return result
+}
+
+func main() {
+  fmt.Println(myFunction(1, 2))
+}
+</pre>
+</section>
+
+
+
+<section>
+<h2>将返回值存储在变量中</h2>
+
+<p>您还可以将返回值存储在变量中，如下所示：</p>
+
+<h3>实例</h3>
+
+<p>在这里，我们将返回值存储在一个名为 <code>total</code> 的变量中：</p>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func myFunction(x int, y int) (result int) {
+  result = x + y
+  return
+}
+
+func main() {
+  total := myFunction(1, 2)
+  fmt.Println(total)
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t65c5.html?f=go_func_7">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>多个返回值</h2>
+
+<p>Go 函数还可以返回多个值。</p>
+
+<h3>实例</h3>
+
+<p>这里，<code>myFunction()</code> 返回一个整数（<code>result</code>）和一个字符串（<code>txt1</code>）：</p>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func myFunction(x int, y string) (result int, txt1 string) {
+  result = x + x
+  txt1 = y + &quot; World!&quot;
+  return
+}
+
+func main() {
+  fmt.Println(myFunction(5, &quot;Hello&quot;))
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+10 Hello World!
+</pre>
+
+<p class="tiy"><a target="_blank" href="t58b6.html?f=go_func_8">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p>这里，我们将两个返回值存储在两个变量（<code>a</code> 和 <code>b</code>）中：</p>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func myFunction(x int, y string) (result int, txt1 string) {
+  result = x + x
+  txt1 = y + &quot; World!&quot;
+  return
+}
+
+func main() {
+  a, b := myFunction(5, &quot;Hello&quot;)
+  fmt.Println(a, b)
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+10 Hello World!
+</pre>
+
+<p class="tiy"><a target="_blank" href="t7df4.html?f=go_func_9">亲自试一试</a></p>
+
+<p>如果我们（由于某种原因）不想使用某些返回的值，我们可以添加一个下划线（<code>_</code>），以省略该值。</p>
+
+<h3>实例</h3>
+
+<p>这里，我们想省略第一个返回值（存储在变量 <code>a</code> 中的 <code>result</code>）：</p>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func myFunction(x int, y string) (result int, txt1 string) {
+  result = x + x
+  txt1 = y + &quot; World!&quot;
+  return
+}
+
+func main() {
+   _, b := myFunction(5, &quot;Hello&quot;)
+  fmt.Println(b)
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+Hello World!
+</pre>
+
+<p class="tiy"><a target="_blank" href="tcc2c.html?f=go_func_10">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p>这里，我们想省略第二个返回值（存储在变量 <code>b</code> 中的 <code>txt1</code>）：</p>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func myFunction(x int, y string) (result int, txt1 string) {
+  result = x + x
+  txt1 = y + &quot; World!&quot;
+  return
+}
+
+func main() {
+   a, _ := myFunction(5, &quot;Hello&quot;)
+  fmt.Println(a)
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+10
+</pre>
+
+<p class="tiy"><a target="_blank" href="t31d4.html?f=go_func_11">亲自试一试</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="go_function_parameters.html" title="Go 函数参数">Go 函数参数</a></li>
+<li class="next"><a href="go_function_recursion.html" title="Go 递归函数">Go 递归函数</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/go/go_function_returns.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:07 GMT -->
+</html>

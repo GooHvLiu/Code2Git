@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>18-折叠式侧边栏</title>
+</head>
+
+<body>
+  <!-- 水平导航栏 -->
+  <navbar class="navbar">
+    <div id="openSideMenu" onclick="openSideMenu()">
+      <svg t="1777285011324" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        p-id="1743" width="30" height="30">
+        <path
+          d="M62.464 196.608h894.537143a61.805714 61.805714 0 0 0 0-123.392H62.464a61.805714 61.805714 0 0 0-61.805714 61.659429c0 34.377143 27.648 61.732571 61.805714 61.732571z m0 339.382857h894.537143a61.805714 61.805714 0 0 0 0-123.392H62.464a61.805714 61.805714 0 0 0-61.805714 61.659429c0 34.377143 27.648 61.732571 61.805714 61.732571z m0 339.382857h894.537143a61.805714 61.805714 0 0 0 0-123.392H62.464a61.805714 61.805714 0 0 0-61.805714 61.659429c0 34.377143 27.648 61.732571 61.805714 61.732571z"
+          p-id="1744" fill="#fff"></path>
+      </svg>
+    </div>
+    <ul class="horizontal-menu">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </navbar>
+
+  <!-- 侧边导航栏 -->
+  <div id="sidebar">
+    <ul class="vertical-menu">
+      <li id="closeSideMenu" onclick="closeSideMenu()"><a href="#">&times;</a></li>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- 主要内容区 -->
+  <div id="main">
+    <h1>欢迎来到 米修在线</h1>
+  </div>
+  <script>
+    function openSideMenu() {
+      const sidebarWidthClose = document.getElementById('sidebar');
+      sidebarWidthClose.style.width = '250px'
+      const mainContentWidthClose = document.getElementById('main');
+      mainContentWidthClose.style.marginLeft = '250px'
+    }
+    function closeSideMenu() {
+      const sidebarWidthClose = document.getElementById('sidebar');
+      sidebarWidthClose.style.width = '0'
+      const mainContentWidthClose = document.getElementById('main');
+      mainContentWidthClose.style.marginLeft = '0'
+    }
+  </script>
+</body>
+
+</html>

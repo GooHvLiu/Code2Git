@@ -1,0 +1,11 @@
+%% #1
+This is a great day!!
+
+%% #2 
+<h1>Smile</h1>
+
+%% #3 
+<img src="/i/eg_cute.gif">
+
+%% #4
+Here's a <a href="http://www.w3school.com.cn">link.</a>

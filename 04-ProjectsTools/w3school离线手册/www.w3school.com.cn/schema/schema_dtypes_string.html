@@ -1,0 +1,397 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/schema/schema_dtypes_string.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 05:57:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>XSD 字符串数据类型</title>
+
+</head>
+
+<body class="xml">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Schema 教程</h2>
+<ul>
+<li><a href="index.html" title="XSD 教程">XSD 教程</a></li>
+<li><a href="schema_intro.html" title="XSD 简介">XSD 简介</a></li>
+<li><a href="schema_why.html" title="为什么要使用 XML Schemas？">XSD 为何使用</a></li>
+<li><a href="schema_howto.html" title="如何使用 XSD？">XSD 如何使用</a></li>
+<li><a href="schema_schema.html" title="XSD - &lt;schema&gt; 元素">XSD &lt;schema&gt;</a></li>
+</ul>
+<h2>简单的类型</h2>
+<ul>
+<li><a href="schema_simple.html" title="XSD 简易元素">XSD 元素</a></li>
+<li><a href="schema_simple_attributes.html" title="XSD 属性">XSD 属性</a></li>
+<li><a href="schema_facets.html" title="XSD 限定/Facets">XSD 限定</a></li>
+</ul>
+<h2>复杂的类型</h2>
+<ul>
+<li><a href="schema_complex.html" title="XSD 复合元素">XSD 元素</a></li>
+<li><a href="schema_complex_empty.html" title="XSD 复合空元素">XSD 空元素</a></li>
+<li><a href="schema_complex_elements.html" title="XSD 复合类型 - 仅含元素">XSD 仅含元素</a></li>
+<li><a href="schema_complex_text.html" title="XSD 仅含文本复合元素">XSD 仅含文本</a></li>
+<li><a href="schema_complex_mixed.html" title="XSD 带有混合内容的复合类型">XSD 混合内容</a></li>
+<li><a href="schema_complex_indicators.html" title="XSD 复合类型指示器">XSD 指示器</a></li>
+<li><a href="schema_complex_any.html" title="XSD &lt;any&gt; 元素">XSD &lt;any&gt;</a></li>
+<li><a href="schema_complex_anyattribute.html" title="XSD &lt;anyAttribute&gt; 元素">XSD &lt;anyAttribute&gt;</a></li>
+<li><a href="schema_complex_subst.html" title="XSD 元素替换（Element Substitution）">XSD 元素替换</a></li>
+<li><a href="schema_example.html" title="一个 XSD 实例">XSD 实例</a></li>
+</ul>
+<h2>数据类型</h2>
+<ul>
+<li class="currentLink"><a href="schema_dtypes_string.html" title="XSD 字符串数据类型">XSD 字符串</a></li>
+<li><a href="schema_dtypes_date.html" title="XSD 日期及时间数据类型">XSD 日期</a></li>
+<li><a href="schema_dtypes_numeric.html" title="XSD 数值数据类型">XSD 数值</a></li>
+<li><a href="schema_dtypes_misc.html" title="XSD 杂项数据类型">XSD 杂项</a></li>
+<li><a href="schema_summary.html" title="您已经学习了 XML Schema，下一步学习什么呢？">XSD 总结</a></li>
+</ul>
+<h2>参考手册</h2>
+<ul>
+<li><a href="schema_elements_ref.html" title="XSD 参考手册">XSD 参考手册</a></li>
+<li><a href="http://www.w3.org/2001/03/webdata/xsv" title="XML Schema (REC (20010502) version, as amended) Checking Service">XSD 验证器</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>XSD 字符串数据类型</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="schema_example.html" title="一个 XSD 实例">XSD 实例</a></li>
+<li class="next"><a href="schema_dtypes_date.html" title="XSD 日期及时间数据类型">XSD 日期</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p><strong>字符串数据类型用于可包含字符串的值。</strong></p>
+</div>
+
+
+
+<div>
+<h2>字符串数据类型（String Data Type）</h2>
+
+<p>字符串数据类型可包含字符、换行、回车以及制表符。</p>
+
+<p>下面是一个关于某个 scheme 中字符串声明的例子：</p>
+
+<pre class="language-xml">
+&lt;xs:element name=&quot;customer&quot; type=&quot;xs:string&quot;/&gt;
+</pre>
+
+<p>文档中的元素看上去应该类似这样：</p>
+
+<pre class="language-xml">
+&lt;customer&gt;John Smith&lt;/customer&gt;
+</pre>
+
+<p>或者类似这样：</p>
+
+<pre class="language-xml">
+&lt;customer&gt;	John Smith	&lt;/customer&gt;
+</pre>
+
+<p class="note"><span>注释：</span>如果您使用字符串数据类型，XML 处理器就不会更改其中的值。</p>
+</div>
+
+
+
+<div>
+<h2>规格化字符串数据类型（NormalizedString Data Type）</h2>
+
+<p>规格化字符串数据类型源自于字符串数据类型。</p>
+
+<p>规格化字符串数据类型同样可包含字符，但是 XML 处理器会移除折行，回车以及制表符。</p>
+
+<p>下面是一个关于在某个 schema 中规格化字符串数据类型的例子：</p>
+
+<pre class="language-xml">
+&lt;xs:element name=&quot;customer&quot; type=&quot;xs:normalizedString&quot;/&gt;
+</pre>
+
+<p>文档中的元素看上去应该类似这样：</p>
+
+<pre class="language-xml">
+&lt;customer&gt;John Smith&lt;/customer&gt;
+</pre>
+
+<p>或者类似这样：</p>
+
+<pre class="language-xml">
+&lt;customer&gt;	John Smith	&lt;/customer&gt;
+</pre>
+
+<p class="note"><span>注释：</span>在上面的例子中，XML 处理器会使用空格替换所有的制表符。</p>
+</div>
+
+
+
+<div>
+<h2>Token 数据类型（Token Data Type）</h2>
+
+<p>Token 数据类型同样源自于字符串数据类型。</p>
+
+<p>Token 数据类型同样可包含字符，但是 XML 处理器会移除换行符、回车、制表符、开头和结尾的空格以及（连续的）空格。</p>
+
+<p>下面是在 schema 中一个有关 token 声明的例子：</p>
+
+<pre class="language-xml">
+&lt;xs:element name=&quot;customer&quot; type=&quot;xs:token&quot;/&gt;
+</pre>
+
+<p>文档中的元素看上去应该类似这样：</p>
+
+<pre class="language-xml">
+&lt;customer&gt;John Smith&lt;/customer&gt;
+</pre>
+
+<p>或者类似这样：</p>
+
+<pre class="language-xml">
+&lt;customer&gt;	John Smith	&lt;/customer&gt;
+</pre>
+
+<p class="note"><span>注释：</span>在上面这个例子中，XML 解析器会移除制表符。</p>
+</div>
+
+
+
+<div>
+<h2>字符串数据类型</h2>
+
+<p>请注意，所有以下的数据类型均衍生于字符串数据类型（除了字符串数据类型本身）！</p>
+
+<table class="dataintable">
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td>ENTITIES</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>ENTITY</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>ID</td>
+<td>在 XML 中提交 ID 属性的字符串 (仅与 schema 属性一同使用)</td>
+</tr>
+
+<tr>
+<td>IDREF</td>
+<td>在 XML 中提交 IDREF 属性的字符串(仅与 schema 属性一同使用)</td>
+</tr>
+
+<tr>
+<td>IDREFS language</td>
+<td>包含合法的语言 id 的字符串</td>
+</tr>
+
+<tr>
+<td>Name</td>
+<td>包含合法 XML 名称的字符串</td>
+</tr>
+
+<tr>
+<td>NCName</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>NMTOKEN</td>
+<td>在 XML 中提交 NMTOKEN 属性的字符串 (仅与 schema 属性一同使用)</td>
+</tr>
+
+<tr>
+<td>NMTOKENS</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>normalizedString</td>
+<td>不包含换行符、回车或制表符的字符串</td>
+</tr>
+
+<tr>
+<td>QName</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>string</td>
+<td>字符串</td>
+</tr>
+
+<tr>
+<td>token</td>
+<td>不包含换行符、回车或制表符、开头或结尾空格或者多个连续空格的字符串</td>
+</tr>
+</table>
+</div>
+
+
+
+<div>
+<h2>对字符串数据类型的限定（Restriction）</h2>
+
+<p>可与字符串数据类型一同使用的限定：</p>
+
+<ul>
+<li>enumeration</li>
+<li>length</li>
+<li>maxLength</li>
+<li>minLength</li>
+<li>pattern (NMTOKENS、IDREFS 以及 ENTITIES 无法使用此约束)</li>
+<li>whiteSpace</li>
+</ul>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="schema_example.html" title="一个 XSD 实例">XSD 实例</a></li>
+<li class="next"><a href="schema_dtypes_date.html" title="XSD 日期及时间数据类型">XSD 日期</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="schema_elements_ref.html">XML Schema 参考手册</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/schema/schema_dtypes_string.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 05:57:23 GMT -->
+</html>

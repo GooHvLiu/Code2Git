@@ -1,0 +1,316 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/typescript/typescript_null.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:35:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>TypeScript 空值与未定义</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>TypeScript 教程</h2>
+<ul>
+<li><a href="index.html" title="TypeScript 教程">TS 教程</a></li>
+<li><a href="typescript_intro.html" title="TypeScript 简介">TS 简介</a></li>
+<li><a href="typescript_getstarted.html" title="TypeScript 入门">TS 入门</a></li>
+<li><a href="typescript_simple_types.html" title="TypeScript 简单类型">TS 简单类型</a></li>
+<li><a href="typescript_special_types.html" title="TypeScript 特殊类型">TS 特殊类型</a></li>
+<li><a href="typescript_arrays.html" title="TypeScript 数组">TS 数组</a></li>
+<li><a href="typescript_tuples.html" title="TypeScript 元组">TS 元组</a></li>
+<li><a href="typescript_object_types.html" title="TypeScript 对象类型">TS 对象类型</a></li>
+<li><a href="typescript_enums.html" title="TypeScript 枚举">TS 枚举</a></li>
+<li><a href="typescript_aliases_and_interfaces.html" title="TypeScript 别名与接口">TS 别名与接口</a></li>
+<li><a href="typescript_union_types.html" title="TypeScript 联合类型">TS 联合类型</a></li>
+<li><a href="typescript_functions.html" title="TypeScript 函数">TS 函数</a></li>
+<li><a href="typescript_casting.html" title="TypeScript 类型转换">TS 类型转换</a></li>
+<li><a href="typescript_classes.html" title="TypeScript 类">TS 类</a></li>
+<li><a href="typescript_basic_generics.html" title="TypeScript 基本泛型">TS 基本泛型</a></li>
+<li><a href="typescript_utility_types.html" title="TypeScript 实用类型">TS 实用类型</a></li>
+<li><a href="typescript_keyof.html" title="TypeScript Keyof">TS Keyof</a></li>
+<li class="currentLink"><a href="typescript_null.html" title="TypeScript Null">TS Null</a></li>
+<li><a href="typescript_definitely_typed.html" title="TypeScript Definitely Typed">TS Definitely Typed</a></li>
+<li><a href="typescript_5_updates.html" title="TypeScript 5.x 更新">TS 5 更新</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>TypeScript 空值与未定义</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="typescript_keyof.html" title="TypeScript Keyof">TS Keyof</a></li>
+<li class="next"><a href="typescript_definitely_typed.html" title="TypeScript Definitely Typed">TS Definitely Typed</a></li>
+</ul>
+</div>
+
+
+
+<section id="intro">
+<p>TypeScript 有一个强大的系统来处理 <code>null</code> 或 <code>undefined</code> 值。</p>
+
+<p>TypeScript 有一个强大的系统来处理 <code>null</code> 或 <code>undefined</code> 值。</p>
+
+<p>默认情况下，空值和未定义值的处理是禁用的，可以通过将 <code>strictNullChecks</code> 设置为 true 来启用。</p>
+
+<p>本页的其余部分适用于启用 <code>strictNullChecks</code> 的情况。</p>
+</section>
+
+
+
+<section>
+<h2>类型</h2>
+
+<p><code>null</code> 和 <code>undefined</code> 是原始类型，可以像其他类型（如字符串）一样使用。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+let value: string | undefined | null = null;
+value = 'hello';
+value = undefined;
+</pre>
+
+<p class="tiy"><a target="_blank" href="tc983.html?f=typescript_null_optional">亲自试一试</a></p>
+
+<p>当启用 <code>strictNullChecks</code> 时，TypeScript 要求必须设置值，除非将 <code>undefined</code> 显式添加到类型中。</p>
+</section>
+
+
+
+<section>
+<h2>可选链</h2>
+
+<p>可选链是与 TypeScript 的空值处理配合良好的 JavaScript 特性。它允许以一种紧凑的语法访问对象上可能存在或不存在的属性。可以在访问属性时使用 <code>?.</code> 运算符。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+interface House {
+  sqft: number;
+  yard?: {
+    sqft: number;
+  };
+}
+function printYardSize(house: House) {
+  const yardSize = house.yard?.sqft;
+  if (yardSize === undefined) {
+    console.log('No yard');
+  } else {
+    console.log(`Yard is ${yardSize} sqft`);
+  }
+}
+
+let home: House = {
+  sqft: 500
+};
+
+printYardSize(home); // 打印 'No yard'
+</pre>
+
+<p class="tiy"><a target="_blank" href="td83c.html?f=typescript_null_chaining">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>空值合并</h2>
+
+<p>空值合并是另一个与 TypeScript 的空值处理配合良好的 JavaScript 特性。它允许编写具有回退的表达式，特别是在处理 <code>null</code> 或 <code>undefined</code> 时。当表达式中可能出现其他虚假值但仍然有效时，这非常有用。可以在表达式中使用 <code>??</code> 运算符，类似于使用 <code>&amp;&amp;</code> 运算符。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+function printMileage(mileage: number | null | undefined) {
+  console.log(`Mileage: ${mileage ?? 'Not Available'}`);
+}
+
+printMileage(null); // Prints 'Mileage: Not Available'
+printMileage(0); // Prints 'Mileage: 0'
+</pre>
+
+<p class="tiy"><a target="_blank" href="tb2f2.html?f=typescript_null_coalescence">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>空断言</h2>
+
+<p>TypeScript 的推理系统并不完美，有些时候忽略值可能为 <code>null</code> 或 <code>undefined</code> 是有意义的。一种简单的方法是使用类型转换，但 TypeScript 还提供了 <code>!</code> 运算符作为方便的快捷方式。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+function getValue(): string | undefined {
+  return 'hello';
+}
+let value = getValue();
+console.log('value length: ' + value!.length);
+</pre>
+
+<p class="tiy"><a target="_blank" href="tc12f.html?f=typescript_null_assertion">亲自试一试</a></p>
+
+<p>就像类型转换一样，这可能不安全，应谨慎使用。</p>
+</section>
+
+
+
+<section>
+<h2>数组边界处理</h2>
+
+<p>即使启用了 <code>strictNullChecks</code>，默认情况下，TypeScript 会假定数组访问永远不会返回 undefined（除非 undefined 是数组类型的一部分）。</p>
+
+<p>可以使用配置 <code>noUncheckedIndexedAccess</code> 来更改此行为。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+let array: number[] = [1, 2, 3];
+let value = array[0]; // 使用 noUncheckedIndexedAccess，这将是 number | undefined 类型
+</pre>
+
+<p class="tiy"><a target="_blank" href="t10a0.html?f=typescript_null_bounds">亲自试一试</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="typescript_keyof.html" title="TypeScript Keyof">TS Keyof</a></li>
+<li class="next"><a href="typescript_definitely_typed.html" title="TypeScript Definitely Typed">TS Definitely Typed</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/typescript/typescript_null.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:35:51 GMT -->
+</html>

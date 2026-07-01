@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+  <title>12-01-Grid Columns</title>
+  <style>
+    .container {
+      display: grid;
+      /* 此为固定元素宽度 */
+      /* grid-template-columns: 200px 200px 200px; */
+      /* 全部为自动计算用来填充整个宽度 */
+      /* grid-template-columns: auto auto auto; */
+      /* 1和3为固定宽度，2为填充整个宽度 */
+      /* grid-template-columns: 200px auto 200px; */
+      /* 通过repeat函数进行设置，第1个参数3表示有3个，200px表示每个都是200px宽度 */
+      /* grid-template-columns: repeat(3, 200px); */
+      /* 通过repeat函数进行设置，第1个参数3表示有3个，auto表示每个都是等宽度 */
+      /* grid-template-columns: repeat(3, auto); */
+      /* 三个列，按 1:2:1 比例分配,fr是fraction的简写 */
+      grid-template-columns: 1fr 2fr 1fr;
+      /* gap表示两个元素之间的宽度*/
+      gap: 0.5rem;
+    }
+
+    .item {
+      padding: 3rem;
+      border: 1px #ccc solid;
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="item">Items 1</div>
+    <div class="item">Items 2</div>
+    <div class="item">Items 3</div>
+  </div>
+  <main>
+    <section>
+      <h3>欢迎来到米修在线</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis assumenda vel facere blanditiis omnis iste
+        accusantium nobis cupiditate neque pariatur.</p>
+    </section>
+    <aside>
+      <h3>Hello Worlld</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, provident?</p>
+    </aside>
+  </main>
+</body>
+
+</html>

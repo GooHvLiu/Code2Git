@@ -1,0 +1,997 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/python/python_dsa_binarytrees.asp by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Mar 2026 14:34:09 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Python 二叉树</title>
+<link rel="preload" href="../lib/fonts/roboto-mono-v13-latin-500.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Python 教程</h2>
+<ul>
+<li><a href="index.html" title="Python 教程">Python 教程</a></li>
+<li><a href="python_intro.html" title="Python 简介">Python 简介</a></li>
+<li><a href="python_getstarted.html" title="Python 入门">Python 入门</a></li>
+<li><a href="python_syntax.html" title="Python 语法">Python 语法</a></li>
+<li><a href="python_comments.html" title="Python 注释">Python 注释</a></li>
+<li><a href="python_variables.html" title="Python 变量">Python 变量</a></li>
+<li><a href="python_datatypes.html" title="Python 数据类型">Python 数据类型</a></li>
+<li><a href="python_numbers.html" title="Python 简介">Python 数字</a></li>
+<li><a href="python_casting.html" title="Python Casting">Python Casting</a></li>
+<li><a href="python_strings.html" title="Python 字符串">Python 字符串</a></li>
+<li><a href="python_booleans.html" title="Python 布尔">Python 布尔</a></li>
+<li><a href="python_operators.html" title="Python 运算符">Python 运算符</a></li>
+<li><a href="python_lists.html" title="Python 列表">Python 列表</a></li>
+<li><a href="python_tuples.html" title="Python 元组">Python 元组</a></li>
+<li><a href="python_sets.html" title="Python 集合">Python 集合</a></li>
+<li><a href="python_dictionaries.html" title="Python 字典">Python 字典</a></li>
+<li><a href="python_conditions.html" title="Python If ... Else">Python If Else</a></li>
+<li><a href="python_while_loops.html" title="Python While 循环">Python While 循环</a></li>
+<li><a href="python_for_loops.html" title="Python For 循环">Python For 循环</a></li>
+<li><a href="python_functions.html" title="Python 函数">Python 函数</a></li>
+<li><a href="python_lambda.html" title="Python Lambda">Python Lambda</a></li>
+<li><a href="python_arrays.html" title="Python 数组">Python 数组</a></li>
+<li><a href="python_classes.html" title="Python 类和对象">Python 类/对象</a></li>
+<li><a href="python_inheritance.html" title="Python 继承">Python 继承</a></li>
+<li><a href="python_iterators.html" title="Python 迭代">Python 迭代</a></li>
+<li><a href="python_polymorphism.html" title="Python 多态">Python 多态</a></li>
+<li><a href="python_scope.html" title="Python 作用域">Python 作用域</a></li>
+<li><a href="python_modules.html" title="Python 模块">Python 模块</a></li>
+<li><a href="python_datetime.html" title="Python 日期">Python 日期</a></li>
+<li><a href="python_math.html" title="Python 数学">Python 数学</a></li>
+<li><a href="python_json.html" title="Python JSON">Python JSON</a></li>
+<li><a href="python_regex.html" title="Python RegEx">Python RegEx</a></li>
+<li><a href="python_pip.html" title="Python PIP">Python PIP</a></li>
+<li><a href="python_try_except.html" title="Python Try Except">Python Try Except</a></li>
+<li><a href="python_cmd_input.html" title="Python 命令行输入">Python 命令输入</a></li>
+<li><a href="python_string_formatting.html" title="Python 字符串格式化">Python 字符串格式化</a></li>
+</ul>
+<h2>Python 文件处理</h2>
+<ul>
+<li><a href="python_file_handling.html" title="Python 文件打开">Python 文件打开</a></li>
+<li><a href="python_file_open.html" title="Python 文件读取">Python 文件读取</a></li>
+<li><a href="python_file_write.html" title="Python 文件写入">Python 文件写入/创建</a></li>
+<li><a href="python_file_remove.html" title="Python 文件删除">Python 文件删除</a></li>
+</ul>
+<h2>Python 模块</h2>
+<ul>
+<li><a href="../numpy/index.html" title="NumPy 教程">NumPy 教程</a></li>
+<li><a href="../pandas/index.html" title="Pandas 教程">Pandas 教程</a></li>
+<li><a href="../scipy/index.html" title="SciPy 教程">SciPy 教程</a></li>
+</ul>
+<h2>Python Matplotlib</h2>
+<ul>
+<li><a href="matplotlib_intro.html" title="Matplotlib 简介">Matplotlib 简介</a></li>
+<li><a href="matplotlib_getting_started.html" title="Matplotlib 入门">Matplotlib 入门</a></li>
+<li><a href="matplotlib_pyplot.html" title="Matplotlib Pyplot">Matplotlib Pyplot</a></li>
+<li><a href="matplotlib_plotting.html" title="Matplotlib 绘图">Matplotlib 绘图</a></li>
+<li><a href="matplotlib_markers.html" title="Matplotlib 标记">Matplotlib 标记</a></li>
+<li><a href="matplotlib_line.html" title="Matplotlib 线条">Matplotlib 线条</a></li>
+<li><a href="matplotlib_labels.html" title="Matplotlib 标签">Matplotlib 标签</a></li>
+<li><a href="matplotlib_grid.html" title="Matplotlib 网格">Matplotlib 网格</a></li>
+<li><a href="matplotlib_subplot.html" title="Matplotlib 子图">Matplotlib 子图</a></li>
+<li><a href="matplotlib_scatter.html" title="Matplotlib 散点图">Matplotlib 散点图</a></li>
+<li><a href="matplotlib_bars.html" title="Matplotlib 条形图">Matplotlib 条形图</a></li>
+<li><a href="matplotlib_histograms.html" title="Matplotlib 直方图">Matplotlib 直方图</a></li>
+<li><a href="matplotlib_pie_charts.html" title="Matplotlib 饼图">Matplotlib 饼图</a></li>
+</ul>
+<h2>Python NumPy</h2>
+<ul>
+<li><a href="numpy_intro.html" title="NumPy 简介">NumPy 简介</a></li>
+<li><a href="numpy_getting_started.html" title="NumPy 入门">NumPy 入门</a></li>
+<li><a href="numpy_creating_arrays.html" title="NumPy 数组创建">NumPy 数组创建</a></li>
+<li><a href="numpy_array_indexing.html" title="NumPy 数组索引">NumPy 数组索引</a></li>
+<li><a href="numpy_array_slicing.html" title="NumPy 数组裁切">NumPy 数组裁切</a></li>
+<li><a href="numpy_data_types.html" title="NumPy 数据类型">NumPy 数据类型</a></li>
+<li><a href="numpy_copy_vs_view.html" title="NumPy 副本/视图">NumPy 副本/视图</a></li>
+<li><a href="numpy_array_shape.html" title="NumPy 数组形状">NumPy 数组形状</a></li>
+<li><a href="numpy_array_reshape.html" title="NumPy 数组重塑">NumPy 数组重塑</a></li>
+<li><a href="numpy_array_iterating.html" title="NumPy 数组迭代">NumPy 数组迭代</a></li>
+<li><a href="numpy_array_join.html" title="NumPy 数组连接">NumPy 数组连接</a></li>
+<li><a href="numpy_array_split.html" title="NumPy 数组拆分">NumPy 数组拆分</a></li>
+<li><a href="numpy_array_search.html" title="NumPy 数组搜索">NumPy 数组搜索</a></li>
+<li><a href="numpy_array_sort.html" title="NumPy 数组排序">NumPy 数组排序</a></li>
+<li><a href="numpy_array_filter.html" title="NumPy 数组过滤">NumPy 数组过滤</a></li>
+<li><a href="numpy_random.html" title="NumPy 随机">NumPy 随机</a></li>
+<li><a href="numpy_ufunc.html" title="NumPy ufuncs">NumPy ufuncs</a></li>
+</ul>
+<h2>Python 机器学习</h2>
+<ul>
+<li><a href="python_ml_getting_started.html" title="机器学习 - 入门">入门</a></li>
+<li><a href="python_ml_mean_median_mode.html" title="机器学习 - 平均中位数模式">平均中位数模式</a></li>
+<li><a href="python_ml_standard_deviation.html" title="机器学习 - 标准差">标准差</a></li>
+<li><a href="python_ml_percentile.html" title="机器学习 - 百分位数">百分位数</a></li>
+<li><a href="python_ml_data_distribution.html" title="机器学习 - 数据分布">数据分布</a></li>
+<li><a href="python_ml_normal_data_distribution.html" title="机器学习 - 正态数据分布">正态数据分布</a></li>
+<li><a href="python_ml_scatterplot.html" title="机器学习 - 散点图">散点图</a></li>
+<li><a href="python_ml_linear_regression.html" title="机器学习 - 线性回归">线性回归</a></li>
+<li><a href="python_ml_polynomial_regression.html" title="机器学习 - 多项式回归">多项式回归</a></li>
+<li><a href="python_ml_multiple_regression.html" title="机器学习 - 多元回归">多元回归</a></li>
+<li><a href="python_ml_scale.html" title="机器学习 - 缩放">缩放</a></li>
+<li><a href="python_ml_train_test.html" title="机器学习 - 训练/测试">训练/测试</a></li>
+<li><a href="python_ml_decision_tree.html" title="机器学习 - 决策树">决策树</a></li>
+<li><a href="python_ml_confusion_matrix.html" title="机器学习 - 混淆矩阵">混淆矩阵</a></li>
+<li><a href="python_ml_hierarchial_clustering.html" title="机器学习 - 层次聚类">层次聚类</a></li>
+<li><a href="python_ml_logistic_regression.html" title="机器学习 - 逻辑回归">逻辑回归</a></li>
+<li><a href="python_ml_grid_search.html" title="机器学习 - 网格搜索">网格搜索</a></li>
+<li><a href="python_ml_preprocessing.html" title="机器学习 - 分类数据">分类数据</a></li>
+<li><a href="python_ml_k-means.html" title="机器学习 - K-means">K-means</a></li>
+<li><a href="python_ml_bagging.html" title="机器学习 - Bootstrap 聚合（Bagging）">Bootstrap 聚合</a></li>
+<li><a href="python_ml_cross_validation.html" title="机器学习 - 交叉验证">交叉验证</a></li>
+<li><a href="python_ml_auc_roc.html" title="机器学习 - AUC - ROC 曲线">AUC - ROC 曲线</a></li>
+<li><a href="python_ml_knn.html" title="机器学习 - K-最近邻算法（KNN）">K-最近邻算法</a></li>
+</ul>
+<h2>Python DSA</h2>
+<ul>
+<li><a href="python_dsa.html" title="Python MySQL">Python DSA</a></li>
+<li><a href="python_dsa_lists.html" title="Python 中的列表与数组">列表与数组</a></li>
+<li><a href="python_dsa_stacks.html" title="Python 中的栈">栈</a></li>
+<li><a href="python_dsa_queues.html" title="Python 中的队列">队列</a></li>
+<li><a href="python_dsa_linkedlists.html" title="Python 中的链表">链表</a></li>
+<li><a href="python_dsa_hashtables.html" title="Python 中的哈希表">哈希表</a></li>
+<li><a href="python_dsa_trees.html" title="Python 树">树</a></li>
+<li class="currentLink"><a href="python_dsa_binarytrees.html" title="Python 二叉树">二叉树</a></li>
+<li><a href="python_dsa_binarysearchtrees.html" title="Python 二叉搜索树">二叉搜索树</a></li>
+<li><a href="python_dsa_avltrees.html" title="Python AVL 树">AVL 树</a></li>
+<li><a href="python_dsa_graphs.html" title="Python 图论">图</a></li>
+<li><a href="python_dsa_linearsearch.html" title="Python 实现的线性查找">线性查找</a></li>
+<li><a href="python_dsa_binarysearch.html" title="Python 实现的二分查找">二分查找</a></li>
+<li><a href="python_dsa_bubblesort.html" title="Python 实现的冒泡排序">冒泡排序</a></li>
+<li><a href="python_dsa_selectionsort.html" title="Python 实现的选择排序">选择排序</a></li>
+<li><a href="python_dsa_insertionsort.html" title="Python 实现的插入排序">插入排序</a></li>
+<li><a href="python_dsa_quicksort.html" title="Python 实现的 DSA 快速排序">快速排序</a></li>
+<li><a href="python_dsa_countingsort.html" title="Python 实现的 DSA 计数排序">计数排序</a></li>
+<li><a href="python_dsa_radixsort.html" title="Python 实现的 DSA 基数排序">基数排序</a></li>
+<li><a href="python_dsa_mergesort.html" title="Python 实现的 DSA 归并排序">归并排序</a></li>
+</ul>
+<h2>Python MySQL</h2>
+<ul>
+<li><a href="python_mysql_getstarted.html" title="Python MySQL 入门">MySQL 入门</a></li>
+<li><a href="python_mysql_create_db.html" title="Python MySQL Create Database">MySQL Create Database</a></li>
+<li><a href="python_mysql_create_table.html" title="Python MySQL Create Table">MySQL Create Table</a></li>
+<li><a href="python_mysql_insert.html" title="Python MySQL Insert Into Table">MySQL Insert</a></li>
+<li><a href="python_mysql_select.html" title="Python MySQL Select From">MySQL Select</a></li>
+<li><a href="python_mysql_where.html" title="Python MySQL Where">MySQL Where</a></li>
+<li><a href="python_mysql_orderby.html" title="Python MySQL Order By">MySQL Order By</a></li>
+<li><a href="python_mysql_delete.html" title="Python MySQL Delete From By">MySQL Delete</a></li>
+<li><a href="python_mysql_drop_table.html" title="Python MySQL Drop Table">MySQL Drop Table</a></li>
+<li><a href="python_mysql_update.html" title="Python MySQL 更新表">MySQL Update</a></li>
+<li><a href="python_mysql_limit.html" title="Python MySQL Limit">MySQL Limit</a></li>
+<li><a href="python_mysql_join.html" title="Python MySQL Join">MySQL Join</a></li>
+</ul>
+<h2>Python MongoDB</h2>
+<ul>
+<li><a href="python_mongodb_getstarted.html" title="Python 教程">MongoDB 入门</a></li>
+<li><a href="python_mongodb_create_db.html" title="Python 教程">MongoDB 创建数据库</a></li>
+<li><a href="python_mongodb_create_collection.html" title="Python 教程">MongoDB 创建集合</a></li>
+<li><a href="python_mongodb_insert.html" title="Python 教程">MongoDB Insert</a></li>
+<li><a href="python_mongodb_find.html" title="Python 教程">MongoDB Find</a></li>
+<li><a href="python_mongodb_query.html" title="Python 教程">MongoDB Query</a></li>
+<li><a href="python_mongodb_sort.html" title="Python 教程">MongoDB Sort</a></li>
+<li><a href="python_mongodb_delete.html" title="Python 教程">MongoDB Delete</a></li>
+<li><a href="python_mongodb_drop_collection.html" title="Python 教程">MongoDB 删除集合</a></li>
+<li><a href="python_mongodb_update.html" title="Python 教程">MongoDB Update</a></li>
+<li><a href="python_mongodb_limit.html" title="Python 教程">MongoDB Limit</a></li>
+</ul>
+<h2>Python 参考手册</h2>
+<ul>
+<li><a href="python_reference.html" title="Python 教程">Python 参考概览</a></li>
+<li><a href="python_ref_functions.html" title="Python 教程">Python 内建函数</a></li>
+<li><a href="python_ref_string.html" title="Python 教程">Python 字符串方法</a></li>
+<li><a href="python_ref_list.html" title="Python 教程">Python 列表方法</a></li>
+<li><a href="python_ref_dictionary.html" title="Python 教程">Python 字典方法</a></li>
+<li><a href="python_ref_tuple.html" title="Python 教程">Python 元组方法</a></li>
+<li><a href="python_ref_set.html" title="Python 教程">Python 集合方法</a></li>
+<li><a href="python_ref_file.html" title="Python 教程">Python 文件方法</a></li>
+<li><a href="python_ref_keywords.html" title="Python 教程">Python 关键字</a></li>
+<li><a href="python_ref_exceptions.html" title="Python 内建异常">Python 异常</a></li>
+<li><a href="python_ref_glossary.html" title="Python 术语表">Python 术语表</a></li>
+</ul>
+<h2>Python 模块参考手册</h2>
+<ul>
+<li><a href="module_random.html" title="Python 教程">随机模块</a></li>
+<li><a href="module_requests.html" title="Python 教程">请求模块</a></li>
+<li><a href="module_statistics.html" title="Python 统计模块">统计模块</a></li>
+<li><a href="module_math.html" title="Python 数学模块">数学模块</a></li>
+<li><a href="module_cmath.html" title="Python cmath 模块">复数数学模块</a></li>
+</ul>
+<h2>Python How To</h2>
+<ul>
+<li><a href="python_howto_remove_duplicates.html" title="Python 教程">删除列表重复项</a></li>
+<li><a href="python_howto_reverse_string.html" title="Python 教程">反转字符串</a></li>
+<li><a href="python_howto_add_two_numbers.html" title="如何在 Python 中加两个数字">两数相加</a></li>
+</ul>
+<h2>Python 实例</h2>
+<ul>
+<li><a href="python_examples.html" title="Python 实例">Python 实例</a></li>
+<li><a href="python_quiz.html" title="Python 测验">Python 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Python 二叉树</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="python_dsa_trees.html" title="Python 树">树</a></li>
+<li class="next"><a href="python_dsa_binarysearchtrees.html" title="Python 二叉搜索树">二叉搜索树</a></li>
+</ul>
+</div>
+
+
+
+<section id="intro">
+<p>树是一种由边连接的节点组成的层次数据结构。</p>
+
+<p>每个节点包含一个值和对其子节点的引用。</p>
+</section>
+
+
+
+<section>
+<h2>二叉树</h2>
+
+<p>二叉树是一种树数据结构，其中每个节点最多可以有两个子节点，即左子节点和右子节点。</p>
+
+<p>这种限制，即一个节点最多可以有两个子节点，为我们带来了许多好处：</p>
+
+<ul>
+<li>遍历、搜索、插入和删除等算法更容易理解、实现和运行得更快。</li>
+<li>在二叉搜索树（BST）中保持数据有序可以使搜索非常高效。</li>
+<li>使用 AVL 二叉树等例子，可以更容易地平衡具有有限数量子节点的树。</li>
+<li>二叉树可以表示为数组，使树更加内存高效。</li>
+</ul>
+</section>
+
+
+
+<section>
+<h2>二叉树实现</h2>
+
+<style>
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('../lib/fonts/roboto-mono-v13-latin-500.woff2') format('woff2');
+  font-weight: 500; /* 中等字重 */
+  font-style: normal;
+  font-display: swap; /* 可选，但强烈推荐 */
+}
+
+  .dsa_svg {
+    /*width: 420px;*/
+    width: 350px;
+    max-width: 100%;
+    height: auto;
+  }
+  #divAnim {
+    border: solid black 1px;
+    display: inline-block;
+    padding: 20px;
+  }
+  #divAnim #wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+  }
+  #divAnim #menu {
+    padding: 0 20px 0 0;
+  }
+  #divAnim label:hover {
+    cursor: pointer;
+  }
+  #divAnim input {
+    margin-right: 4px;
+  }
+  #divAnim p {
+    margin: 4px;
+  }
+  #divAnim circle, #divAnim line, #divAnim text{
+    transition: opacity 0.5s;
+  }
+  .svgDataText{
+      font-family: "Roboto Mono", monospace;
+      fill: black;
+      font-size: 20px;
+  }
+  .darkpagetheme .svgDataText{
+      fill: #ddd;
+  }
+  
+  .node {
+    stroke: black;
+    stroke-width: 1;
+    fill: gainsboro;
+  }
+  .darkpagetheme .node {
+    stroke: #ddd;
+    fill: dimgray;
+  }
+  
+  .branch {
+    stroke: black;
+    stroke-width: 1;
+    fill: black;
+  }
+  .darkpagetheme .branch {
+    stroke: #ddd;
+    fill: #ddd;
+  }
+  
+  #arrowhead line {
+    stroke: black;
+    fill: black;
+  }
+  .darkpagetheme #arrowhead line {
+      stroke: #ddd;
+      fill: #ddd;
+  }
+  </style>
+
+<svg xmlns="http://www.w3.org/2000/svg" width="350" height="320" viewBox="0 0 350 320" class="svgAnim">
+
+  <!-- 'R' node -->
+  <g class="root parent">
+    <circle cx="170" cy="30" r="20" class="node" />
+    <text x="164" y="37" class="svgDataText">R</text>
+    <line x1="155" y1="45" x2="101" y2="100" class="branch" marker-end="url(#arrowhead)" />
+    <line x1="185" y1="45" x2="250" y2="100" class="branch height" marker-end="url(#arrowhead)" />
+  </g>
+  <!-- 'A' node -->
+  <g class="parent child">
+    <circle cx="80" cy="120" r="20" class="node" />
+    <text x="73" y="126" class="svgDataText">A</text>
+    <line x1="70" y1="138" x2="50" y2="180" class="branch" marker-end="url(#arrowhead)" />
+    <line x1="90" y1="138" x2="110" y2="180" class="branch" marker-end="url(#arrowhead)" />
+  </g>
+  <!-- 'B' node -->
+  <g class="parent child">
+    <circle cx="271" cy="120" r="20" class="node" />
+    <text x="265" y="126" class="svgDataText">B</text>
+    <line x1="261" y1="138" x2="241" y2="180" class="branch" marker-end="url(#arrowhead)" />
+    <line x1="281" y1="138" x2="301" y2="180" class="branch height" marker-end="url(#arrowhead)" />
+  </g>
+
+  <!-- 'C' node -->
+  <g class="child leaf" id="aLeft">
+    <circle cx="41" cy="207" r="20" class="node" />
+    <text x="35" y="213" class="svgDataText" >C</text>
+  </g>
+
+  <!-- 'D' node -->
+  <g class="child leaf" id="aRight">
+    <circle cx="121" cy="207" r="20" class="node" />
+    <text x="115" y="213" class="svgDataText">D</text>
+  </g>
+
+  <!-- 'E' node -->
+<g class="child leaf">
+  <circle cx="232" cy="207" r="20" class="node" />
+  <text x="226" y="213" class="svgDataText" >E</text>
+</g>
+
+<!-- 'F' node -->
+<g class="child parent leaf">
+  <circle cx="312" cy="207" r="20" class="node" />
+  <text x="306" y="213" class="svgDataText">F</text>
+  <line x1="302" y1="225" x2="282" y2="267" class="branch height" marker-end="url(#arrowhead)" />
+</g>
+
+<!-- 'G' node -->
+<g class="child leaf">
+  <circle cx="271" cy="293" r="20" class="node" />
+  <text x="265" y="299" class="svgDataText">G</text>
+</g>
+</svg>
+
+<p>上面的二叉树可以像链表一样实现，只是我们不是将每个节点链接到一个下一个节点，而是创建一个结构，其中每个节点可以链接到其左子节点和右子节点。</p>
+
+<h3>实例</h3>
+
+<p>在 Python 中创建二叉树：</p>
+
+<pre class="language-python">
+class TreeNode:
+  def __init__(self, data):
+    self.data = data
+    self.left = None
+    self.right = None
+
+root = TreeNode('R')
+nodeA = TreeNode('A')
+nodeB = TreeNode('B')
+nodeC = TreeNode('C')
+nodeD = TreeNode('D')
+nodeE = TreeNode('E')
+nodeF = TreeNode('F')
+nodeG = TreeNode('G')
+
+root.left = nodeA
+root.right = nodeB
+
+nodeA.left = nodeC
+nodeA.right = nodeD
+
+nodeB.left = nodeE
+nodeB.right = nodeF
+
+nodeF.left = nodeG
+
+# 测试
+print(&quot;root.right.left.data:&quot;, root.right.left.data)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t72cc.html?f=python_dsa_binarytree">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>二叉树的类型</h2>
+
+<p>二叉树有不同的变体或类型，讨论这些有助于更好地理解二叉树的结构。</p>
+
+<p>现在也值得一提的是不同类型的二叉树，因为这些词汇和概念将在本教程的后面部分使用。</p>
+
+<p>以下是不同类型二叉树结构的简短解释，以及这些结构的示意图，以便尽可能容易理解。</p>
+
+<p><em>平衡</em>二叉树：对于树中的每个节点，其左子树和右子树的高度差最多为 1。</p>
+
+<p><em>完全</em>二叉树：除了最后一层可能不满外，其他所有层都满，且最后一层从左到右填充。完全二叉树的性质意味着它也是平衡的。</p>
+
+<p><em>满</em>二叉树：每个节点要么有0个子节点，要么有 2 个子节点。</p>
+
+<p><em>完美</em>二叉树：所有叶子节点都在同一层，这意味着所有层都满，且所有内部节点都有两个子节点。完美二叉树的性质意味着它也是满的、平衡的和完全的。</p>
+
+<div class="figureWrap">
+  <figure>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 320" class="dsa_svg">
+    <style>
+      .figureWrap {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
+      .figureWrap figure {
+        /*width: 250px;*/
+        width: 300px;
+        max-width: 100%;
+        height: auto;
+        border: solid black 1px;
+        margin: 1em;
+		margin-top: 30px;
+		margin-right: 30px;
+      }
+      .figureWrap figcaption {
+        text-align: center;
+      }
+      .figureWrap text {
+        opacity: 1;
+      }
+    </style>
+  <!-- 'R' node -->
+  <g class="root parent">
+    <circle cx="170" cy="30" r="20" class="node"></circle>
+    <text x="159" y="37" class="svgDataText">11</text>
+    <line x1="155" y1="45" x2="101" y2="100" class="branch" marker-end="url(#arrowhead)"></line>
+    <line x1="185" y1="45" x2="250" y2="100" class="branch height13" marker-end="url(#arrowhead)"></line>
+  </g>
+
+  <!-- 'A' node -->
+  <g class="parent child">
+    <circle cx="80" cy="120" r="20" class="node"></circle>
+    <text x="74" y="126" class="svgDataText">7</text>
+    <line x1="70" y1="138" x2="50" y2="180" class="branch" marker-end="url(#arrowhead)"></line>
+    <line x1="90" y1="138" x2="110" y2="180" class="branch" marker-end="url(#arrowhead)"></line>
+  </g>
+  <!-- 'B' node -->
+  <g class="parent child">
+    <circle cx="271" cy="120" r="20" class="node subtree15"></circle>
+    <text x="260" y="126" class="svgDataText subtree15">15</text>
+    <line x1="261" y1="138" x2="241" y2="180" class="branch subtree15" marker-end="url(#arrowhead)"></line>
+    <line x1="281" y1="138" x2="301" y2="180" class="branch height13 height15 subtree15" marker-end="url(#arrowhead)"></line>
+  </g>
+
+  <!-- 'C' node -->
+  <g class="child leaf" id="aLeft">
+    <circle cx="41" cy="207" r="20" class="node"></circle>
+    <text x="35" y="213" class="svgDataText">3</text>
+  </g>
+
+  <!-- 'D' node -->
+  <g class="child leaf" id="aRight">
+    <circle cx="121" cy="207" r="20" class="node"></circle>
+    <text x="115" y="213" class="svgDataText">9</text>
+  </g>
+
+  <!-- 'E' node -->
+<g class="child leaf">
+  <circle cx="232" cy="207" r="20" class="node subtree15 successor13"></circle>
+  <text x="221" y="213" class="svgDataText subtree15 successor13">13</text>
+</g>
+
+<!-- 'F' node -->
+<g class="child parent">
+  <circle cx="312" cy="207" r="20" class="node subtree15"></circle>
+  <text x="301" y="213" class="svgDataText subtree15">19</text>
+  <line x1="302" y1="225" x2="282" y2="267" class="branch height13 height15 subtree15" marker-end="url(#arrowhead)"></line>
+</g>
+
+<!-- 'G' node -->
+<g class="child leaf">
+  <circle cx="271" cy="293" r="20" class="node subtree15"></circle>
+  <text x="260" y="299" class="svgDataText subtree15">18</text>
+</g>
+</svg>
+    <figcaption>Balanced</figcaption>
+  </figure>
+
+  <figure>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 320" class="dsa_svg">
+    <g transform="translate(20 0)">
+  <!-- 'R' node -->
+  <g class="root parent">
+    <circle cx="170" cy="30" r="20" class="node"></circle>
+    <text x="159" y="37" class="svgDataText">11</text>
+    <line x1="155" y1="45" x2="101" y2="100" class="branch" marker-end="url(#arrowhead)"></line>
+    <line x1="185" y1="45" x2="250" y2="100" class="branch height13" marker-end="url(#arrowhead)"></line>
+  </g>
+
+  <!-- 'A' node -->
+  <g class="parent child">
+    <circle cx="80" cy="120" r="20" class="node"></circle>
+    <text x="74" y="126" class="svgDataText">7</text>
+    <line x1="70" y1="138" x2="50" y2="180" class="branch" marker-end="url(#arrowhead)"></line>
+    <line x1="92" y1="136" x2="145" y2="185" class="branch" marker-end="url(#arrowhead)"></line>
+  </g>
+  <!-- 'B' node -->
+  <g class="parent child">
+    <circle cx="271" cy="120" r="20" class="node subtree15"></circle>
+    <text x="260" y="126" class="svgDataText subtree15">15</text>
+    <line x1="261" y1="138" x2="241" y2="180" class="branch subtree15" marker-end="url(#arrowhead)"></line>
+    <line x1="281" y1="138" x2="301" y2="182" class="branch height13 height15 subtree15" marker-end="url(#arrowhead)"></line>
+  </g>
+
+  <!-- 'C' node -->
+  <g class="child leaf" id="aLeft">
+    <circle cx="41" cy="207" r="20" class="node"></circle>
+    <text x="35" y="213" class="svgDataText">3</text>
+  </g>
+
+  <!-- 'D' node -->
+  <g class="child leaf" id="aRight" transform="translate(43 0)">
+    <circle cx="121" cy="207" r="20" class="node"></circle>
+    <text x="115" y="213" class="svgDataText">9</text>
+  </g>
+
+  <!-- 'E' node -->
+<g class="child leaf">
+  <circle cx="232" cy="207" r="20" class="node subtree15 successor13"></circle>
+  <text x="221" y="213" class="svgDataText subtree15 successor13">13</text>
+</g>
+
+<!-- 'F' node -->
+<g class="child parent">
+  <circle cx="312" cy="207" r="20" class="node subtree15"></circle>
+  <text x="301" y="213" class="svgDataText subtree15">19</text>
+</g>
+</g>
+
+<!-- 'G' node -->
+<g class="child leaf" transform="translate(-251 0)">
+  <line x1="307" y1="227" x2="292" y2="267" class="branch height13 height15 subtree15" marker-end="url(#arrowhead)"></line>
+  <circle cx="279" cy="293" r="20" class="node subtree15"></circle>
+  <text x="274" y="299" class="svgDataText subtree15">2</text>
+  <line x1="317" y1="227" x2="332" y2="267" class="branch height13 height15 subtree15" marker-end="url(#arrowhead)"></line>
+  <circle cx="344" cy="293" r="20" class="node subtree15"></circle>
+  <text x="339" y="299" class="svgDataText subtree15">4</text>
+</g>
+
+<g transform="translate(-130 0)">
+<line x1="307" y1="227" x2="292" y2="267" class="branch height13 height15 subtree15" marker-end="url(#arrowhead)"></line>
+  <circle cx="279" cy="293" r="20" class="node subtree15"></circle>
+  <text x="274" y="299" class="svgDataText subtree15">8</text>
+</g>
+</svg>
+    <figcaption>Complete and balanced</figcaption>
+  </figure>
+
+  <figure>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 320" class="dsa_svg">
+    <g transform="translate(20 0)">
+  <!-- 'R' node -->
+  <g class="root parent">
+    <circle cx="170" cy="30" r="20" class="node"></circle>
+    <text x="159" y="37" class="svgDataText">11</text>
+    <line x1="155" y1="45" x2="101" y2="100" class="branch" marker-end="url(#arrowhead)"></line>
+    <line x1="185" y1="45" x2="250" y2="100" class="branch height13" marker-end="url(#arrowhead)"></line>
+  </g>
+
+  <!-- 'A' node -->
+  <g class="parent child">
+    <circle cx="80" cy="120" r="20" class="node"></circle>
+    <text x="74" y="126" class="svgDataText">7</text>
+  </g>
+  <!-- 'B' node -->
+  <g class="parent child">
+    <circle cx="271" cy="120" r="20" class="node subtree15"></circle>
+    <text x="260" y="126" class="svgDataText subtree15">15</text>
+    <line x1="261" y1="138" x2="241" y2="180" class="branch subtree15" marker-end="url(#arrowhead)"></line>
+    <line x1="281" y1="138" x2="301" y2="180" class="branch height13 height15 subtree15" marker-end="url(#arrowhead)"></line>
+  </g>
+
+ 
+
+  <!-- 'E' node -->
+<g class="child leaf">
+  <circle cx="232" cy="207" r="20" class="node subtree15 successor13"></circle>
+  <text x="221" y="213" class="svgDataText subtree15 successor13">13</text>
+</g>
+
+<!-- 'F' node -->
+<g class="child parent">
+  <circle cx="312" cy="207" r="20" class="node subtree15"></circle>
+  <text x="301" y="213" class="svgDataText subtree15">19</text>
+</g>
+</g>
+
+
+<!-- 'G' node -->
+<g class="child leaf" transform="translate(-60 0)">
+  <line x1="307" y1="227" x2="292" y2="267" class="branch height13 height15 subtree15" marker-end="url(#arrowhead)"></line>
+  <circle cx="279" cy="293" r="20" class="node subtree15"></circle>
+  <text x="268" y="299" class="svgDataText subtree15">12</text>
+  <line x1="317" y1="227" x2="324" y2="264" class="branch height13 height15 subtree15" marker-end="url(#arrowhead)"></line>
+  <circle cx="328" cy="293" r="20" class="node subtree15"></circle>
+  <text x="317" y="299" class="svgDataText subtree15">14</text>
+</g>
+</svg>
+    <figcaption>Full</figcaption>
+  </figure>
+
+  <figure>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 240" class="dsa_svg">
+    <g transform="translate(20 0)">
+  <!-- 'R' node -->
+  <g class="root parent">
+    <circle cx="170" cy="30" r="20" class="node"></circle>
+    <text x="159" y="37" class="svgDataText">11</text>
+    <line x1="155" y1="45" x2="101" y2="100" class="branch" marker-end="url(#arrowhead)"></line>
+    <line x1="185" y1="45" x2="250" y2="100" class="branch height13" marker-end="url(#arrowhead)"></line>
+  </g>
+
+  <!-- 'A' node -->
+  <g class="parent child">
+    <circle cx="80" cy="120" r="20" class="node"></circle>
+    <text x="74" y="126" class="svgDataText">7</text>
+    <line x1="70" y1="138" x2="50" y2="180" class="branch" marker-end="url(#arrowhead)"></line>
+  </g>
+  <!-- 'B' node -->
+  <g class="parent child">
+    <circle cx="271" cy="120" r="20" class="node subtree15"></circle>
+    <text x="260" y="126" class="svgDataText subtree15">15</text>
+    <line x1="261" y1="138" x2="241" y2="180" class="branch subtree15" marker-end="url(#arrowhead)"></line>
+    <line x1="281" y1="138" x2="301" y2="182" class="branch height13 height15 subtree15" marker-end="url(#arrowhead)"></line>
+  </g>
+
+  <!-- 'C' node -->
+  <g class="child leaf" id="aLeft">
+    <circle cx="41" cy="207" r="20" class="node"></circle>
+    <text x="35" y="213" class="svgDataText">3</text>
+  </g>
+
+  <!-- 'E' node -->
+<g class="child leaf">
+  <circle cx="232" cy="207" r="20" class="node subtree15 successor13"></circle>
+  <text x="221" y="213" class="svgDataText subtree15 successor13">13</text>
+</g>
+
+<!-- 'F' node -->
+<g class="child parent">
+  <circle cx="312" cy="207" r="20" class="node subtree15"></circle>
+  <text x="301" y="213" class="svgDataText subtree15">19</text>
+</g>
+
+<g class="child parent" transform="translate(-190 0)">
+  <line x1="281" y1="138" x2="301" y2="182" class="branch height13 height15 subtree15" marker-end="url(#arrowhead)"></line>
+  <circle cx="312" cy="207" r="20" class="node subtree15"></circle>
+  <text x="307" y="213" class="svgDataText subtree15">9</text>
+</g>
+</g>
+
+</svg>
+    <figcaption>Perfect, full, balanced and complete</figcaption>
+  </figure>
+</div>
+</section>
+
+
+
+<section>
+<h2>二叉树遍历</h2>
+
+<p>遍历树意味着逐个访问每个节点。</p>
+
+<p>由于数组和链表是线性数据结构，因此只有一种明显的遍历方式：从第一个元素或节点开始，继续访问下一个，直到访问完所有元素或节点。</p>
+
+<p>但由于树可以向不同方向分支（非线性），因此有几种不同的遍历树的方式。</p>
+
+<p>树遍历方法主要有两大类：</p>
+
+<p><em>广度优先搜索（BFS）：</em>在访问下一层的节点之前，先访问同一层的所有节点。这意味着树的探索方向更偏向于横向。</p>
+
+<p><em>深度优先搜索（DFS）：</em>遍历一直向下到叶子节点，以向下的方向逐个分支探索树。</p>
+
+<p>DFS 有三种不同的类型：</p>
+
+<ul>
+<li>前序遍历</li>
+<li>中序遍历</li>
+<li>后序遍历</li>
+</ul>
+</section>
+
+
+
+<section>
+<h2>二叉树的前序遍历</h2>
+
+<p>前序遍历是深度优先搜索的一种类型，其中每个节点都按照一定的顺序被访问。</p>
+
+<p>前序遍历是通过首先访问根节点，然后递归地对左子树进行前序遍历，最后递归地对右子树进行前序遍历来完成的。它用于创建树的副本、表达式树的前缀表示等。</p>
+
+<p>这种遍历被称为“前序”，是因为节点在递归前序遍历左子树和右子树之前被访问。</p>
+
+<p>以下是前序遍历的代码示例：</p>
+
+<h3>实例</h3>
+
+<p>前序遍历：</p>
+
+<pre class="language-python">
+def preOrderTraversal(node):
+  if node is None:
+    return
+  print(node.data, end=&quot;, &quot;)
+  preOrderTraversal(node.left)
+  preOrderTraversal(node.right)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t3f60.html?f=python_dsa_binarytree_traversal">亲自试一试</a></p>
+
+<p>第一个被打印的节点是节点 R，因为前序遍历的工作方式是首先访问或打印当前节点（第 4 行），然后再递归地调用左子节点和右子节点（第 5 行和第 6 行）。</p>
+
+<p><code>preOrderTraversal()</code> 函数会一直递归地遍历左子树（第 5 行），然后再去遍历右子树（第 6 行）。因此，接下来被打印的节点是 'A'，然后是 'C'。</p>
+
+<p>第一次当参数 <code>node</code> 为 <code>None</code> 时，是当节点C的左子节点作为参数给出时（C 没有左子节点）。</p>
+
+<p>在第一次调用 C 的左子节点返回 <code>None</code> 后，C 的右子节点也返回 <code>None</code>，然后递归调用继续回溯，以便接下来打印 A 的右子节点 D。</p>
+
+<p>代码继续回溯，以便打印 R 的右子树中的其余节点。</p>
+</section>
+
+
+
+<section>
+<h2>二叉树的中序遍历</h2>
+
+<p>中序遍历是深度优先搜索的一种类型，其中每个节点都按照一定的顺序被访问。</p>
+
+<p>中序遍历首先递归地对左子树进行中序遍历，然后访问根节点，最后递归地对右子树进行中序遍历。这种遍历主要用于二叉搜索树，其中它按升序返回值。</p>
+
+<p>这种遍历之所以被称为“中序”，是因为节点在递归函数调用之间被访问。节点在左子树的中序遍历之后被访问，在右子树的中序遍历之前被访问。</p>
+
+<p>以下是中序遍历的代码示例：</p>
+
+<h3>实例</h3>
+
+<p>创建中序遍历：</p>
+
+<pre class="language-python">
+def inOrderTraversal(node):
+  if node is None:
+    return
+  inOrderTraversal(node.left)
+  print(node.data, end=&quot;, &quot;)
+  inOrderTraversal(node.right)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t8d43.html?f=python_dsa_binarytree_inorder_traversal">亲自试一试</a></p>
+
+<p><code>inOrderTraversal()</code> 函数会一直以当前左子节点作为参数调用自身（第 4 行），直到该参数为 <code>None</code> 且函数返回（第 2-3 行）。</p>
+
+<p>第一次当参数 <code>node</code> 为 <code>None</code> 时，是当节点 C 的左子节点作为参数给出时（C 没有左子节点）。</p>
+
+<p>之后，打印节点 C 的 <code>data</code> 部分（第 5 行），这意味着 'C' 是第一个被打印的内容。</p>
+
+<p>然后，将节点 C 的右子节点作为参数给出（第 6 行），该节点为 <code>None</code>，因此函数调用返回而不执行其他任何操作。</p>
+
+<p>在 'C' 被打印后，之前的 <code>inOrderTraversal()</code> 函数调用继续运行，以便 'A' 被打印，然后是 'D'，接着是 'R'，依此类推。</p>
+</section>
+
+
+
+<section>
+<h2>二叉树的后序遍历</h2>
+
+<p>后序遍历是深度优先搜索的一种类型，其中每个节点都按照一定的顺序被访问。</p>
+
+<p>后序遍历首先递归地对左子树和右子树进行后序遍历，然后访问根节点。它用于删除树、表达式树的后缀表示等。</p>
+
+<p>这种遍历之所以被称为“后序”，是因为在递归调用左子节点和右子节点之后才访问节点。</p>
+
+<p>以下是后序遍历的代码示例：</p>
+
+<h3>实例</h3>
+
+Post-order Traversal:
+
+<pre class="language-python">
+def postOrderTraversal(node):
+  if node is None:
+    return
+  postOrderTraversal(node.left)
+  postOrderTraversal(node.right)
+  print(node.data, end=&quot;, &quot;)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t0479.html?f=python_dsa_binarytree_postorder_traversal">亲自试一试</a></p>
+
+<p><code>postOrderTraversal()</code> 函数会一直递归地遍历左子树（第 4 行），直到当 C 的左子节点作为 <code>node</code> 参数调用时返回 None。</p>
+
+<p>在 C 的左子节点返回 <code>None</code> 后，第 5 行运行，C 的右子节点也返回 <code>None</code>，然后打印字母 'C'（第 6 行）。</p>
+
+<p>这意味着 C 是在其左子节点和右子节点被遍历之后被访问或打印的，这就是为什么它被称为“后序”遍历。</p>
+
+<p><code>postOrderTraversal()</code> 函数继续回溯到之前的递归函数调用，因此下一个被打印的节点是 'D'，然后是 'A'。</p>
+
+<p>函数继续回溯并打印节点，直到所有节点都被打印或访问。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="python_dsa_trees.html" title="Python 树">树</a></li>
+<li class="next"><a href="python_dsa_binarysearchtrees.html" title="Python 二叉搜索树">二叉搜索树</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="python_reference.html">Python 参考手册</a></h5>
+<h5 id="tools_example"><a href="python_examples.html">Python 实例</a></h5>
+<h5 id="tools_quiz"><a href="python_quiz.html">Python 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/python/python_dsa_binarytrees.asp by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Mar 2026 14:34:10 GMT -->
+</html>

@@ -1,0 +1,532 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/sass/sass_functions_color.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:20:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Sass 颜色</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Sass 教程</h2>
+<ul>
+<li><a href="index.html" title="Sass 教程">Sass 教程</a></li>
+<li><a href="sass_intro.html" title="Sass 简介">Sass 简介</a></li>
+<li><a href="sass_installation.html" title="Sass 安装">Sass 安装</a></li>
+<li><a href="sass_variables.html" title="Sass 变量">Sass 变量</a></li>
+<li><a href="sass_nesting.html" title="Sass 嵌套规则和属性">Sass 嵌套</a></li>
+<li><a href="sass_import.html" title="Sass @import 和 Partials">Sass @import</a></li>
+<li><a href="sass_mixin_include.html" title="Sass @mixin 和 @include">Sass @mixin</a></li>
+<li><a href="sass_extend.html" title="Sass @extend 和继承">Sass @extend</a></li>
+</ul>
+<h2>Sass 函数</h2>
+<ul>
+<li><a href="sass_functions_string.html" title="Sass 字符串函数">Sass 字符串</a></li>
+<li><a href="sass_functions_numeric.html" title="Sass 数字函数">Sass 数字</a></li>
+<li><a href="sass_functions_list.html" title="Sass 列表函数">Sass 列表</a></li>
+<li><a href="sass_functions_map.html" title="Sass 映射函数">Sass 映射</a></li>
+<li><a href="sass_functions_selector.html" title="Sass 选择器函数">Sass 选择器</a></li>
+<li><a href="sass_functions_introspection.html" title="Sass 自省函数">Sass 自省</a></li>
+<li class="currentLink"><a href="sass_functions_color.html" title="Sass 颜色函数">Sass 颜色</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Sass 颜色函数</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="sass_functions_introspection.html" title="Sass 自省函数">Sass 自省</a></li>
+<li class="next"><a href="index.html" title="Sass 教程">Sass 教程</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>Sass 颜色函数</h2>
+
+<p>我们将 Sass 中的颜色函数分为三部分：设置颜色函数、获取颜色函数和操作颜色函数：</p>
+</section>
+
+
+
+<section>
+<h2>Sass 设置颜色函数</h2>
+
+<table class="definition-usage">
+<tr>
+<th style="width: 35%;">函数</th>
+<th>描述 &amp; 例子</th>
+</tr>
+
+<tr>
+<td>rgb(<i>red</i>, <i>green</i>, <i>blue</i>)</td>
+<td>
+<p>
+使用 Red-Green-Blue (RGB) 模型设置颜色。<br>
+通过 rgb(red, green, blue) 指定 RGB 颜色值。<br>
+每个参数定义该颜色的强度，可以是 0 到 255 之间的整数，也可以是百分比值（从 0% 到 100%）。
+</p>
+
+<h3>实例：</h3>
+<p>rgb(0, 0, 255); <br>// 呈现为蓝色，因为 blue 参数设置为其最高值 (255)，其他参数设置为 0</p>
+</td>
+</tr>
+
+<tr>
+<td>rgba(<i>red</i>, <i>green</i>, <i>blue</i>, <i>alpha</i>)</td>
+<td>
+<p>
+使用 Red-Green-Blue-Alpha (RGBA) 模型设置颜色。<br>
+RGBA 颜色值是带有 alpha 通道的 RGB 颜色值的扩展 - 该通道指定颜色的不透明度。<br>
+<i>alpha</i> 参数是介于 0.0（完全透明）和 1.0（完全不透明）之间的数字。
+</p>
+
+<h3>实例：</h3>
+<p>rgba(0, 0, 255, 0.3); // 呈现为有透明度的蓝色</p>
+</td>
+</tr>
+
+<tr>
+<td>hsl(<i>hue</i>, <i>saturation</i>, <i>lightness</i>)</td>
+<td>
+<p>
+使用 Hue-Saturation-Lightness 模型设置颜色 - 并代表颜色的圆柱坐标表示。<br>
+Hue（色调）是色轮上的度数（从0到360）- 0或360是红色，120是绿色，240是蓝色<br>
+Saturation（饱和度）是百分比值； 0% 表示灰色阴影，100% 表示全彩。<br>
+Lightness（亮度）也是百分比；0% 是黑色，100% 是白色。
+</p>
+
+<h3>实例：</h3>
+<p>
+hsl(120, 100%, 50%); // 绿色<br>
+hsl(120, 100%, 75%); // 浅绿色<br>
+hsl(120, 100%, 25%); // 深绿色<br>
+hsl(120, 60%, 70%); // 淡绿色
+</p>
+</td>
+</tr>
+
+<tr>
+<td>hsla(<i>hue</i>, <i>saturation</i>, <i>lightness</i>, <i>alpha</i>)</td>
+<td>
+<p>
+使用 Hue-Saturation-Lightness-Alpha (HSLA) 模型设置颜色。<br>
+HSLA 颜色值是 HSL 颜色值的扩展，带有 alpha 通道 - 指定颜色的不透明度。<br>
+<i>alpha</i> 参数是介于 0.0（完全透明）和 1.0（完全不透明）之间的数字。
+</p>
+
+<h3>实例：</h3>
+<p>
+hsl(120, 100%, 50%, 0.3); // 带不透明度的绿色<br>
+hsl(120, 100%, 75%, 0.3); // 带不透明度的浅绿色
+</p>
+</td>
+</tr>
+
+<tr>
+<td>grayscale(<i>color</i>)</td>
+<td>
+<p>设置与颜色具有相同亮度的灰色。</p>
+
+<h3>实例：</h3>
+<p>grayscale(#7fffd4);</p>
+<p>结果：#c6c6c6</p>
+</td>
+</tr>
+
+<tr>
+<td>complement(<i>color</i>)</td>
+<td>
+<p>设置颜色的互补色。</p>
+
+<h3>实例：</h3>
+<p>complement(#7fffd4);</p>
+<p>结果：#ff7faa</p>
+</td>
+</tr>
+
+<tr>
+<td>invert(<i>color</i>, <i>weight</i>)</td>
+<td>
+<p>
+设置颜色的反色或负色。<br>
+<i>weight</i>参数是可选的，必须是介于 0% 和 100% 之间的数字。默认值为100%。
+</p>
+
+<h3>实例：</h3>
+<p>invert(white);</p>
+<p>结果：black</p>
+</td>
+</tr>
+</table>
+</section>
+
+
+
+<section>
+<h2>Sass 获取颜色函数</h2>
+
+<table class="definition-usage">
+<tr>
+<th style="width: 35%;">函数</th>
+<th>描述 &amp; 例子</th>
+</tr>
+
+<tr>
+<td>red(<i>color</i>)</td>
+<td>
+<p>以 0 到 255 之间的数字返回颜色的红色值。</p>
+
+<h3>实例：</h3>
+<p>red(#7fffd4);</p>
+<p>结果：127</p>
+<p>red(red);</p>
+<p>结果：255</p>
+</td>
+</tr>
+
+<tr>
+<td>green(<i>color</i>)</td>
+<td>
+<p>以 0 到 255 之间的数字返回颜色的绿色值。</p>
+
+<h3>实例：</h3>
+<p>green(#7fffd4);</p>
+<p>结果：255</p>
+<p>green(blue);</p>
+<p>结果：0</p>
+</td>
+</tr>
+
+<tr>
+<td>blue(<i>color</i>)</td>
+<td>
+<p>以 0 到 255 之间的数字返回颜色的蓝色值。</p>
+
+<h3>实例：</h3>
+<p>blue(#7fffd4);</p>
+<p>结果：212</p>
+<p>blue(blue);</p>
+<p>结果：255</p>
+</td>
+</tr>
+
+<tr>
+<td>hue(<i>color</i>)</td>
+<td>
+<p>以 0deg 到 360deg 之间的数字形式返回颜色的色调。</p>
+
+<h3>实例：</h3>
+<p>hue(#7fffd4);</p>
+<p>结果：160deg</p>
+</td>
+</tr>
+
+<tr>
+<td>saturation(<i>color</i>)</td>
+<td>
+<p>以 0% 到 100% 之间的数字形式返回颜色的 HSL 饱和度。</p>
+
+<h3>实例：</h3>
+<p>saturation(#7fffd4);</p>
+<p>结果：100%</p>
+</td>
+</tr>
+
+<tr>
+<td>lightness(<i>color</i>)</td>
+<td>
+<p>以 0% 到 100% 之间的数字形式返回颜色的 HSL 亮度。</p>
+
+<h3>实例：</h3>
+<p>lightness(#7fffd4);</p>
+<p>Result: 74.9%</p>
+</td>
+</tr>
+
+<tr>
+<td>alpha(<i>color</i>)</td>
+<td>
+<p>以 0 到 1 之间的数字返回颜色的 Alpha 通道。</p>
+
+<h3>实例：</h3>
+<p>alpha(#7fffd4);</p>
+<p>Result: 1</p>
+</td>
+</tr>
+
+<tr>
+<td>opacity(<i>color</i>)</td>
+<td>
+<p>以 0 到 1 之间的数字返回颜色的 Alpha 通道。</p>
+
+<h3>实例：</h3>
+<p>opacity(rgba(127, 255, 212, 0.5));</p>
+<p>Result: 0.5</p>
+</td>
+</tr>
+</table>
+</section>
+
+
+
+<section>
+<h2>Sass 操作颜色函数</h2>
+
+<table class="definition-usage">
+<tr>
+<th style="width: 35%;">函数</th>
+<th>描述 &amp; 例子</th>
+</tr>
+
+<tr>
+<td>mix(<i>color1</i>, <i>color2</i>, <i>weight</i>)</td>
+<td>
+<p>
+创建颜色 1 和颜色 2 的混合颜色。<br>
+<i>weight</i> 参数必须介于 0% 和 100% 之间。默认值为 50%。<br>
+较大的权重意味着应该使用更多的 <i>color1</i>。<br>
+较小的权重意味着应该使用更多的 <i>color2</i>。
+</p>
+</td>
+</tr>
+
+<tr>
+<td>adjust-hue(<i>color</i>, <i>degrees</i>)</td>
+<td>
+<p>以 -360 度到 360 度的度数调整颜色的色调。</p>
+
+<h3>实例：</h3>
+<p>adjust-hue(#7fffd4, 80deg);</p>
+<p>Result: #8080ff</p>
+</td>
+</tr>
+
+<tr>
+<td>adjust-color(<i>color</i>, <i>red</i>, <i>green</i>, <i>blue</i>, <i>hue</i>, <i>saturation</i>, <i>lightness</i>, <i>alpha</i>)</td>
+<td>
+<p>按指定量调整一个或多个参数。<br>
+此函数在现有颜色值中添加或减去指定的量。</p>
+
+<h3>实例：</h3>
+<p>adjust-color(#7fffd4, blue: 25);</p>
+<p>Result:</p>
+</td>
+</tr>
+
+<tr>
+<td>change-color(<i>color</i>, <i>red</i>, <i>green</i>, <i>blue</i>, <i>hue</i>, <i>saturation</i>, <i>lightness</i>, <i>alpha</i>)</td>
+<td>
+<p>将颜色的一个或多个参数设置为新值。</p>
+
+<h3>实例：</h3>
+<p>change-color(#7fffd4, red: 255);</p>
+<p>Result: #ffffd4</p>
+</td>
+</tr>
+
+<tr>
+<td>scale-color(<i>color</i>, <i>red</i>, <i>green</i>, <i>blue</i>, <i>saturation</i>, <i>lightness</i>, <i>alpha</i>)</td>
+<td>缩放一个或多个颜色参数。</td>
+</tr>
+
+<tr>
+<td>rgba(color, alpha)</td>
+<td>
+<p>使用给定的 alpha 通道创建新颜色。</p>
+
+<h3>实例：</h3>
+<p>rgba(#7fffd4, 30%);</p>
+<p>Result: rgba(127, 255, 212, 0.3)</p>
+</td>
+</tr>
+
+<tr>
+<td>lighten(<i>color</i>, <i>amount</i>)</td>
+<td>使用介于 0% 和 100% 之间的量创建更浅的颜色。<br><i>amount</i> 参数按百分比提高 HSL 亮度。</td>
+</tr>
+
+<tr>
+<td>darken(<i>color</i>, <i>amount</i>)</td>
+<td>使用介于 0% 到 100% 之间的量创建更深的颜色。<br><i>amount</i> 参数按百分比降低 HSL 亮度。</td>
+</tr>
+
+<tr>
+<td>saturate(<i>color</i>, <i>amount</i>)</td>
+<td>使用介于 0% 和 100% 之间的量创建更饱和的颜色。<br><i>amount</i> 参数按百分比提高 HSL 饱和度。</td>
+</tr>
+
+<tr>
+<td>desaturate(<i>color</i>, <i>amount</i>)</td>
+<td>使用介于 0% 和 100% 之间的量创建饱和度较低的颜色。<br><i>amount</i> 参数按百分比降低 HSL 饱和度。</td>
+</tr>
+
+<tr>
+<td>opacify(<i>color</i>, <i>amount</i>)</td>
+<td>使用介于 0 和 1 之间的数量创建更不透明的颜色。<br><i>amount</i> 参数按照其值提高 Alpha 通道。</td>
+</tr>
+
+<tr>
+<td>fade-in(<i>color</i>, <i>amount</i>)</td>
+<td>使用介于 0 和 1 之间的数量创建更不透明的颜色。<br><i>amount</i> 参数按照其值降低 Alpha 通道。</td>
+</tr>
+
+<tr>
+<td>transparentize(<i>color</i>, <i>amount</i>)</td>
+<td>使用介于 0 和 1 之间的数量创建更透明的颜色。<br><i>amount</i> 参数按照其值降低 Alpha 通道。</td>
+</tr>
+
+<tr>
+<td>fade-out(<i>color</i>, <i>amount</i>)</td>
+<td>使用介于 0 和 1 之间的数量创建更透明的颜色。<br><i>amount</i> 参数按照其值提高 Alpha 通道。</td>
+</tr>
+</table>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="sass_functions_introspection.html" title="Sass 自省函数">Sass 自省</a></li>
+<li class="next"><a href="index.html" title="Sass 教程">Sass 教程</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="sass_functions_string.html">Sass 参考手册</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/sass/sass_functions_color.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:20:19 GMT -->
+</html>

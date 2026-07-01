@@ -1,0 +1,385 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/jquerymobile/jquerymobile_form_inputs.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:53:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=gb2312" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="gbk" />
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+<link rel="stylesheet" type="text/css" href="../c5.css" />
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>jQuery Mobile 表单输入元素</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 椤电湁 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>jQuery Mobile 教程</h2>
+<ul>
+<li><a href="index.html" title="jQuery Mobile 教程">jQuery Mobile 教程</a></li>
+<li><a href="jquerymobile_intro.html" title="jQuery Mobile 简介">jQuery Mobile 简介</a></li>
+<li><a href="jquerymobile_install.html" title="jQuery Mobile 安装">jQuery Mobile 安装</a></li>
+<li><a href="jquerymobile_pages.html" title="jQuery Mobile 页面">jQuery Mobile 页面</a></li>
+<li><a href="jquerymobile_transitions.html" title="jQuery Mobile 过渡">jQuery Mobile 过渡</a></li>
+<li><a href="jquerymobile_buttons.html" title="jQuery Mobile 按钮">jQuery Mobile 按钮</a></li>
+<li><a href="jquerymobile_icons.html" title="jQuery Mobile 图标">jQuery Mobile 图标</a></li>
+<li><a href="jquerymobile_toolbars.html" title="jQuery Mobile 工具栏">jQuery Mobile 工具栏</a></li>
+<li><a href="jquerymobile_navbars.html" title="jQuery Mobile 导航栏">jQuery Mobile 导航栏</a></li>
+<li><a href="jquerymobile_collapsibles.html" title="jQuery Mobile 可折叠">jQuery Mobile 可折叠</a></li>
+<li><a href="jquerymobile_grids.html" title="jQuery Mobile 网格">jQuery Mobile 网格</a></li>
+</ul>
+<h2>jQuery Mobile 列表</h2>
+<ul>
+<li><a href="jquerymobile_list_views.html" title="jQuery Mobile 列表视图">jQuery Mobile 列表视图</a></li>
+<li><a href="jquerymobile_list_content.html" title="jQuery Mobile 列表内容">jQuery Mobile 列表内容</a></li>
+</ul>
+<h2>jQuery Mobile 表单</h2>
+<ul>
+<li><a href="jquerymobile_form_basic.html" title="jQuery Mobile 表单基础">jQuery Mobile 表单基础</a></li>
+<li class="currentLink"><a href="jquerymobile_form_inputs.html" title="jQuery Mobile 表单 - 输入">jQuery Mobile 表单输入</a></li>
+<li><a href="jquerymobile_form_select.html" title="jQuery Mobile 表单 - 选择">jQuery Mobile 表单选择</a></li>
+<li><a href="jquerymobile_form_sliders.html" title="jQuery Mobile 表单 - 滑块">jQuery Mobile 表单滑块</a></li>
+</ul>
+<h2>jQuery Mobile 主题</h2>
+<ul>
+<li><a href="jquerymobile_themes.html" title="jQuery Mobile 主题">jQuery Mobile 主题</a></li>
+</ul>
+<h2>jQuery Mobile 事件</h2>
+<ul>
+<li><a href="jquerymobile_events_intro.html" title="jQuery Mobile 事件">jQuery Mobile 事件</a></li>
+<li><a href="jquerymobile_events_touch.html" title="jQuery Mobile 触控">jQuery Mobile 触控</a></li>
+<li><a href="jquerymobile_events_scroll.html" title="jQuery Mobile 滚动">jQuery Mobile 滚动</a></li>
+<li><a href="jquerymobile_events_orientation.html" title="jQuery Mobile 方向">jQuery Mobile 方向</a></li>
+<li><a href="jquerymobile_events_page.html" title="jQuery Mobile 页面事件">jQuery Mobile 页面事件</a></li>
+</ul>
+<h2>jQuery Mobile 实例</h2>
+<ul>
+<li><a href="jquerymobile_examples.html" title="jQuery Mobile 实例">jQuery Mobile 实例</a></li>
+</ul>
+<h2>jQuery Mobile 参考手册</h2>
+<ul>
+<li><a href="jquerymobile_ref_data.html" title="jQuery Mobile Data 参考手册">jQuery Mobile Data</a></li>
+<li><a href="jquerymobile_ref_events.html" title="jQuery Mobile 事件">jQuery Mobile 事件</a></li>
+<li><a href="jquerymobile_ref_icons.html" title="jQuery Mobile 图标">jQuery Mobile 图标</a></li>
+</ul>
+</div><div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.html" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.html" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.html" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.html" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.html" title="语义网">语义网</a></li>
+<li><a href="../careers/index.html" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.html" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2>编程</h2>
+<ul>
+<li><a href="../python/index.html" title="Python 教程">Python 教程</a></li>
+</ul>
+
+<h2 id="link_about"><a href="../about/index.html" title="关于 W3School" target="_blank">关于 W3School</a></h2>
+<h2 id="link_help"><a href="../about/about_helping.html" title="帮助 W3School" target="_blank">帮助 W3School</a></h2>
+
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>jQuery Mobile 表单输入元素</h1>
+
+<div id="tpn">
+<ul class="prenext">
+<li class="pre"><a href="jquerymobile_form_basic.html" title="jQuery Mobile 表单基础">jQuery Mobile 表单基础</a></li>
+<li class="next"><a href="jquerymobile_form_select.html" title="jQuery Mobile 表单 - 选择">jQuery Mobile 表单选择</a></li>
+</ul>
+</div>
+
+
+<div>
+<h2>jQuery Mobile 文本输入</h2>
+
+<p>输入字段是通过标准的 HTML 元素编写的，jQuery Mobile 会为它们设置专门针对移动设备的美观易用的样式。您还可以使用新的 HTML5 &lt;input&gt; 类型：</p>
+
+<h3>实例</h3>
+
+<pre>
+&lt;form method=&quot;post&quot; action=&quot;demoform.asp&quot;&gt;
+  &lt;div data-role=&quot;fieldcontain&quot;&gt;
+    &lt;label for=&quot;fullname&quot;&gt;全名：&lt;/label&gt;
+    &lt;input <span class="marked">type=&quot;text&quot;</span> name=&quot;fullname&quot; id=&quot;fullname&quot;&gt;
+
+    &lt;label for=&quot;bday&quot;&gt;生日：&lt;/label&gt;
+    &lt;input <span class="marked">type=&quot;date&quot;</span> name=&quot;bday&quot; id=&quot;bday&quot;&gt;
+
+    &lt;label for=&quot;email&quot;&gt;电邮：&lt;/label&gt;
+    &lt;input <span class="marked">type=&quot;email&quot;</span> name=&quot;email&quot; id=&quot;email&quot; placeholder=&quot;您的邮件地址..&quot;&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+</pre>
+
+<p><a target="_blank" href="../tiy/t8a8e.html?f=jquerymobile_forms_inputs">亲自试一试</a></p>
+
+<p class="tip"><span>提示：</span>请使用 placeholder 来规定简短的提示，以描述输入字段的预期值：</p>
+
+<pre>&lt;input placeholder=&quot;<i>sometext</i>&quot;&gt;</pre>
+</div>
+
+
+<div>
+<h2>文本框</h2>
+
+<p>请使用 &lt;textarea&gt; 来实现多行文本输入。</p>
+
+<p class="note"><span>注释：</span>文本框会自动扩大，以适应您输入的文本行。</p>
+
+<h3>实例</h3>
+
+<pre>
+&lt;form method=&quot;post&quot; action=&quot;demoform.asp&quot;&gt;
+  &lt;div data-role=&quot;fieldcontain&quot;&gt;
+    &lt;label for=&quot;info&quot;&gt;Additional Information:&lt;/label&gt;
+    <code>&lt;textarea name=&quot;addinfo&quot; id=&quot;info&quot;&gt;&lt;/textarea&gt;</code>
+  &lt;/div&gt;
+&lt;/form&gt;
+</pre>
+
+<p><a target="_blank" href="../tiy/tb43e.html?f=jquerymobile_forms_none">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>搜索框</h2>
+
+<p>输入类型 type=&quot;search&quot; 是 HTML5 中的新类型，用于定义供输入搜索词的文本字段：</p>
+
+<h3>实例</h3>
+
+<pre>
+&lt;form method=&quot;post&quot; action=&quot;demoform.asp&quot;&gt;
+  &lt;div data-role=&quot;fieldcontain&quot;&gt;
+    &lt;label for=&quot;search&quot;&gt;Search:&lt;/label&gt;
+    &lt;input <code>type=&quot;search&quot;</code> name=&quot;search&quot; id=&quot;search&quot;&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+</pre>
+
+<p><a target="_blank" href="../tiy/t71d6-2.html?f=jquerymobile_forms_search">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>单选按钮</h2>
+
+<p>当用户只选择有限数量选项中的一个时，会用到单选按钮。</p>
+
+<p>如需创建一套单选按钮，请添加 type=&quot;radio&quot; 的 input 元素以及相应的 label。在 &lt;fieldset&gt; 元素中包装单选按钮。您也可以增加一个 &lt;legend&gt; 元素来定义 &lt;fieldset&gt; 的标题。</p>
+
+<p class="tip"><span>提示：</span>请用 data-role=&quot;controlgroup&quot; 属性来组合这些按钮：</p>
+
+<h3>实例</h3>
+
+<pre>
+&lt;form method=&quot;post&quot; action=&quot;demoform.asp&quot;&gt;
+  &lt;fieldset <code>data-role=&quot;controlgroup&quot;</code>&gt;
+    &lt;legend&gt;Choose your gender:&lt;/legend&gt;
+      &lt;label for=&quot;male&quot;&gt;Male&lt;/label&gt;
+      &lt;input type=&quot;radio&quot; name=&quot;gender&quot; id=&quot;male&quot; value=&quot;male&quot;&gt;
+      &lt;label for=&quot;female&quot;&gt;Female&lt;/label&gt;
+      &lt;input type=&quot;radio&quot; name=&quot;gender&quot; id=&quot;female&quot; value=&quot;female&quot;&gt; 
+  &lt;/fieldset&gt;
+&lt;/form&gt;
+</pre>
+
+<p><a target="_blank" href="../tiy/t9ec2.html?f=jquerymobile_forms_radio">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>复选框</h2>
+
+<p>当用户选择有限数量选项中的一个或多个选项时，会用到复选框：</p>
+
+<h3>实例</h3>
+
+<pre>
+&lt;form method=&quot;post&quot; action=&quot;demoform.asp&quot;&gt;
+  &lt;fieldset data-role=&quot;controlgroup&quot;&gt;
+    &lt;legend&gt;Choose as many favorite colors as you'd like:&lt;/legend&gt;
+      &lt;label for=&quot;red&quot;&gt;Red&lt;/label&gt;
+      &lt;input type=&quot;checkbox&quot; name=&quot;favcolor&quot; id=&quot;red&quot; value=&quot;red&quot;&gt;
+      &lt;label for=&quot;green&quot;&gt;Green&lt;/label&gt;
+      &lt;input type=&quot;checkbox&quot; name=&quot;favcolor&quot; id=&quot;green&quot; value=&quot;green&quot;&gt;
+      &lt;label for=&quot;blue&quot;&gt;Blue&lt;/label&gt;
+      &lt;input type=&quot;checkbox&quot; name=&quot;favcolor&quot; id=&quot;blue&quot; value=&quot;blue&quot;&gt; 
+  &lt;/fieldset&gt;
+&lt;/form&gt;
+</pre>
+
+<p><a target="_blank" href="../tiy/t208f-2.html?f=jquerymobile_forms_checkbox">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>更多实例</h2>
+
+<p>如需对单选框或复选框进行水平分组，请使用 data-type=&quot;horizontal&quot; 属性：</p>
+
+<h3>实例</h3>
+
+<pre>&lt;fieldset data-role=&quot;controlgroup&quot; <code>data-type=&quot;horizontal&quot;</code>&gt;</pre>
+
+<p><a target="_blank" href="../tiy/tc207.html?f=jquerymobile_forms_horizontal">亲自试一试</a></p>
+
+<p>您也可以使用域容器来包装 &lt;fieldset&gt;：</p>
+
+<h3>实例</h3>
+
+<pre>
+<code>&lt;div data-role=&quot;fieldcontain&quot;&gt;</code>
+  &lt;fieldset data-role=&quot;controlgroup&quot;&gt;
+    &lt;legend&gt;Choose your gender:&lt;/legend&gt;
+  &lt;/fieldset&gt;
+<code>&lt;/div&gt;</code>
+</pre>
+
+<p><a target="_blank" href="../tiy/t4689.html?f=jquerymobile_forms_radio_check_fieldcontain">亲自试一试</a></p>
+
+<p>如果您希望“预选”其中一个按钮，请使用 HTML &lt;input&gt; 标签的 checked 属性：</p>
+
+<h3>实例</h3>
+
+<pre>
+&lt;input type=&quot;radio&quot; <code>checked</code>&gt;
+&lt;input type=&quot;checkbox&quot; <code>checked</code>&gt;
+</pre>
+
+<p><a target="_blank" href="../tiy/t9db7-2.html?f=jquerymobile_forms_checked">亲自试一试</a></p>
+</div>
+
+
+<div id="bpn">
+<ul class="prenext">
+<li class="pre"><a href="jquerymobile_form_basic.html" title="jQuery Mobile 表单基础">jQuery Mobile 表单基础</a></li>
+<li class="next"><a href="jquerymobile_form_select.html" title="jQuery Mobile 表单 - 选择">jQuery Mobile 表单选择</a></li>
+</ul>
+</div>
+
+
+<div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 正文广告 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="jquerymobile_ref_data.html">jQuery Mobile Data 属性</a></h5>
+<h5 id="tools_example"><a href="jquerymobile_examples.html">jQuery Mobile 实例</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 渚ф爮骞垮憡浣� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="https://beian.miit.gov.cn/">蒙ICP备06004630号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/jquerymobile/jquerymobile_form_inputs.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:53:27 GMT -->
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>项目管理中心</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/all.min.css" />
+    <link rel="stylesheet" href="/css/index.pm.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1><i class="fas fa-cubes"></i> <%= `项目管理中心` %></h1>
+        <p>>| 点击进入项目单元 |<</p>
+        <div class="user-info">
+          <div class="user-avatar">
+            <!-- U -->
+            <span id="serverStatus" class="heart-dot"></span>
+          </div>
+          <span id="userName"><%= user %></span>
+          <button class="logout-btn" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> 退出
+          </button>
+        </div>
+      </div>
+      <div class="projects-grid" id="projectsContainer">
+        <!-- EJS循环渲染数据库内所有项目 -->
+        <% projectsList.forEach(item => { %>
+        <div class="project-card <%= item.status %>" data-pid="<%= item._id %>">
+          <!-- 左侧图标 -->
+          <div class="project-icon-wrapper">
+            <i class="<%= item.icon %>"></i>
+          </div>
+          
+          <!-- 右侧内容区 -->
+          <div class="project-content">
+            <h3 class="project-title"><%= item.title %></h3>
+            <p class="project-desc"><%= item.description %></p>
+            
+            <!-- 技术标签横条 -->
+            <div class="project-tech">
+              <% item.tech.forEach(t => { %>
+                <span class="tech-tag"><%= t %></span>
+              <% }) %>
+            </div>
+            
+            <!-- 底部操作按钮：根据状态禁用对应按钮 -->
+            <div class="project-actions">
+              <% if(item.status === "active"){ %>
+                <button class="oper-btn stop-btn">停止</button>
+                <button class="oper-btn start-btn" disabled>启动</button>
+                <button class="oper-btn restart-btn">重启</button>
+              <% } else { %>
+                <button class="oper-btn stop-btn" disabled>停止</button>
+                <button class="oper-btn start-btn">启动</button>
+                <button class="oper-btn restart-btn" disabled>重启</button>
+              <% } %>
+            </div>  
+            <!-- 新增访问链接 -->
+            <% if(item.status === "active" && item.bindIp && item.bindPort){ %>
+              <div style="margin-top:12px;">
+                <a style="text-decoration: none; font-size: 0.85rem;color: #666;" target="_blank" href="http://<%= item.bindIp %>:<%= item.bindPort %>">
+                  NetAddress : http://<%= item.bindIp %>:<%= item.bindPort %>
+                </a>
+              </div>
+            <% }else{ %>
+                <div style="margin-top:12px;font-size: 0.85rem;color:#999;">
+                  NetAddress : 待启动
+                </div>
+            <% } %>
+          </div>
+        </div>
+        <% }) %>
+
+        <!-- 添加新项目卡片 -->
+        <div class="add-project-btn">
+          <i class="fas fa-plus-circle"></i>
+          <span>添加新项目配置</span>
+        </div>
+      </div>
+    </div>
+    <!-- 全局环境安全序列化，不会报token错误 -->
+    <script> window.GLOBAL_ENV = <%- JSON.stringify(env) %>;</script>
+    <script type="module" src="/js/pm.index.js"></script>
+  </body>
+</html>

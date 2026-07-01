@@ -1,0 +1,230 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/svg/svg_polyline.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:13:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=gb2312" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="gbk" />
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+<link rel="stylesheet" type="text/css" href="../c5.css" />
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>SVG &lt;polyline&gt;</title>
+
+</head>
+
+<body class="xml">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 椤电湁 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>SVG 基础</h2>
+<ul>
+<li><a href="index.html" title="SVG 教程">SVG 教程</a></li>
+<li><a href="svg_intro.html" title="SVG 简介">SVG 简介</a></li>
+<li><a href="svg_example.html" title="SVG 一个例子">SVG 实例</a></li>
+<li><a href="svg_inhtml.html" title="在 HTML 文档中的 SVG">SVG in HTML</a></li>
+</ul>
+<h2>SVG 形状</h2>
+<ul>
+<li><a href="svg_rect.html" title="SVG &lt;rect&gt;">SVG 矩形</a></li>
+<li><a href="svg_circle.html" title="SVG &lt;circle&gt;">SVG 圆形</a></li>
+<li><a href="svg_ellipse.html" title="SVG &lt;ellipse&gt;">SVG 椭圆</a></li>
+<li><a href="svg_line.html" title="SVG &lt;line&gt;">SVG 线条</a></li>
+<li><a href="svg_polygon.html" title="SVG &lt;polygon&gt;">SVG 多边形</a></li>
+<li class="currentLink"><a href="svg_polyline.html" title="SVG &lt;polyline&gt;">SVG 折线</a></li>
+<li><a href="svg_path.html" title="SVG &lt;path&gt;">SVG 路径</a></li>
+</ul>
+<h2>SVG 滤镜</h2>
+<ul>
+<li><a href="svg_filters_intro.html" title="SVG 滤镜">SVG 滤镜简介</a></li>
+<li><a href="svg_filters_gaussian.html" title="SVG 高斯滤镜">SVG 高斯滤镜</a></li>
+</ul>
+<h2>SVG 渐变</h2>
+<ul>
+<li><a href="svg_grad_linear.html" title="SVG 线性渐变">SVG 线性渐变</a></li>
+<li><a href="svg_grad_radial.html" title="SVG 放射性渐变">SVG 放射渐变</a></li>
+</ul>
+<h2>SVG 实例</h2>
+<ul>
+<li><a href="svg_examples.html" title="SVG 实例">SVG 实例</a></li>
+</ul>
+<h2>SVG 参考</h2>
+<ul>
+<li><a href="svg_reference.html" title="SVG 参考手册">SVG 元素</a></li>
+</ul>
+</div><div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.html" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.html" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.html" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.html" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.html" title="语义网">语义网</a></li>
+<li><a href="../careers/index.html" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.html" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2>编程</h2>
+<ul>
+<li><a href="../python/index.html" title="Python 教程">Python 教程</a></li>
+</ul>
+
+<h2 id="link_about"><a href="../about/index.html" title="关于 W3School" target="_blank">关于 W3School</a></h2>
+<h2 id="link_help"><a href="../about/about_helping.html" title="帮助 W3School" target="_blank">帮助 W3School</a></h2>
+
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>SVG &lt;polyline&gt;</h1>
+
+<div id="tpn">
+<ul class="prenext">
+<li class="pre"><a href="svg_polygon.html" title="SVG &lt;polygon&gt;">SVG 多边形</a></li>
+<li class="next"><a href="svg_path.html" title="SVG &lt;path&gt;">SVG 路径</a></li>
+</ul>
+</div>
+
+<div class="intro">
+<p><strong>SVG &lt;polyline&gt; 标签用来创建仅包含直线的形状。</strong></p>
+</div>
+
+<div>
+<h2>&lt;polyline&gt; 标签</h2>
+<p>&lt;polyline&gt; 标签用来创建仅包含直线的形状。</p>
+<p>请把下面的代码拷贝到记事本，然后把文件保存为 &quot;polyline1.svg&quot;。把此文件放入您的 web 目录：</p>
+<pre>&lt;?xml version=&quot;1.0&quot; standalone=&quot;no&quot;?&gt;
+&lt;!DOCTYPE svg PUBLIC &quot;-//W3C//DTD SVG 1.1//EN&quot; 
+&quot;http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd&quot;&gt;
+
+&lt;svg width=&quot;100%&quot; height=&quot;100%&quot; version=&quot;1.1&quot;
+xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+
+&lt;polyline points=&quot;0,0 0,20 20,20 20,40 40,40 40,60&quot;
+style=&quot;fill:white;stroke:red;stroke-width:2&quot;/&gt;
+
+&lt;/svg&gt;</pre>
+<p><a href="polyline1.svg">查看例子</a></p>
+</div>
+
+<div id="bpn">
+<ul class="prenext">
+<li class="pre"><a href="svg_polygon.html" title="SVG &lt;polygon&gt;">SVG 多边形</a></li>
+<li class="next"><a href="svg_path.html" title="SVG &lt;path&gt;">SVG 路径</a></li>
+</ul>
+</div>
+
+<div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 正文广告 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="svg_reference.html">SVG 参考手册</a></h5>
+<h5 id="tools_example"><a href="svg_examples.html">SVG 实例</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 渚ф爮骞垮憡浣� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="https://beian.miit.gov.cn/">蒙ICP备06004630号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/svg/svg_polyline.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:13:42 GMT -->
+</html>

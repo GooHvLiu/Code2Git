@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/xpath/xpath_intro.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 05:38:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>XPath 简介</title>
+
+</head>
+
+<body class="xml">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>XPath 教程</h2>
+<ul>
+<li><a href="index.html" title="XPath 教程">XPath 教程</a></li>
+<li class="currentLink"><a href="xpath_intro.html" title="XPath 简介">XPath 简介</a></li>
+<li><a href="xpath_nodes.html" title="XPath 节点">XPath 节点</a></li>
+<li><a href="xpath_syntax.html" title="XPath 语法">XPath 语法</a></li>
+<li><a href="xpath_axes.html" title="XPath Axes（轴）">XPath 轴</a></li>
+<li><a href="xpath_operators.html" title="XPath 运算符">XPath 运算符</a></li>
+<li><a href="xpath_examples.html" title="XPath 实例">XPath 实例</a></li>
+<li><a href="xpath_summary.html" title="您已经学习了 XPath，下一步呢？">XPath 总结</a></li>
+</ul>
+<h2>XPath 参考手册</h2>
+<ul>
+<li><a href="xpath_functions.html" title="XPath、XQuery 以及 XSLT 函数">XPath 函数</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>XPath 简介</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="index.html" title="XPath 教程">XPath 教程</a></li>
+<li class="next"><a href="xpath_nodes.html" title="XPath 节点">XPath 节点</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p><strong>XPath 是一门在 XML 文档中查找信息的语言。XPath 用于在 XML 文档中通过元素和属性进行导航。</strong></p>
+</div>
+
+
+
+<div>
+<h2>在学习之前应该具备的知识：</h2>
+
+<p>在您继续学习之前，应该对下面的知识有基本的了解：</p>
+
+<ul>
+<li>HTML / XHTML</li>
+<li>XML / XML 命名空间</li>
+</ul>
+
+<p>如果您希望首先学习这些项目，请在我们的 <a href="../index-2.html" title="W3School 在线教程">首页</a> 访问这些教程。</p>
+</div>
+
+
+
+<div>
+<h2>什么是 XPath?</h2>
+
+<ul>
+<li>XPath 使用路径表达式在 XML 文档中进行导航</li>
+<li>XPath 包含一个标准函数库</li>
+<li>XPath 是 XSLT 中的主要元素</li>
+<li>XPath 是一个 W3C 标准</li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>XPath 路径表达式</h2>
+
+<p>XPath 使用路径表达式来选取 XML 文档中的节点或者节点集。这些路径表达式和我们在常规的电脑文件系统中看到的表达式非常相似。</p>
+</div>
+
+
+
+<div>
+<h2>XPath 标准函数</h2>
+
+<p>XPath 含有超过 100 个内建的函数。这些函数用于字符串值、数值、日期和时间比较、节点和 QName 处理、序列处理、逻辑值等等。</p>
+</div>
+
+
+
+<div>
+<h2>XPath 在 XSLT 中使用</h2>
+
+<p>XPath 是 XSLT 标准中的主要元素。如果没有 XPath 方面的知识，您就无法创建 XSLT 文档。</p>
+
+<p>您可以在我们的《<a href="../xsl/index.html" title="XSLT教程">XSLT 教程</a>》中阅读更多的内容。</p>
+
+<p>XQuery 和 XPointer 均构建于 XPath 表达式之上。XQuery 1.0 和 XPath 2.0 共享相同的数据模型，并支持相同的函数和运算符。</p>
+
+<p>您可以在我们的《<a href="../xquery/index.html" title="XSLT教程">XQuery 教程</a>》中阅读更多有关 XQuery 的知识。</p>
+</div>
+
+
+
+<div>
+<h2>XPath 是 W3C 标准</h2>
+
+<p>XPath 于 1999 年 11 月 16 日 成为 W3C 标准。</p>
+
+<p>XPath 被设计为供 XSLT、XPointer 以及其他 XML 解析软件使用。</p>
+
+<p>您可以在我们的《<a href="../w3c/w3c_xpath.html" title="W3C XPath 活动">W3C 教程</a>》中阅读更多有关 XPath 标准的信息。</p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="index.html" title="XPath 教程">XPath 教程</a></li>
+<li class="next"><a href="xpath_nodes.html" title="XPath 节点">XPath 节点</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="xpath_functions.html">XPath, XQuery, 以及XSLT函数</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/xpath/xpath_intro.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 05:38:24 GMT -->
+</html>

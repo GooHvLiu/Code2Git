@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Mirrored from www.w3school.com.cn/tiy/t.asp?f=how_js_image_compare by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<title>W3School TIY Editor</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css-tiy-basic.css" />
+<link rel="stylesheet" href="../lib/codemirror.css" />
+<script src="../lib/codemirror.js"></script>
+<script src="../lib/codemirror_jsx.js"></script>
+<script src="../lib/htmlmixed.js"></script>
+<script src="../lib/xml.js"></script>
+<script src="../lib/javascript.js"></script>
+<script src="../lib/css.js"></script>
+<script src="../lib/clike.js"></script>
+
+
+<link href='https://fonts.googleapis.com/css?family=Source%20Code%20Pro' rel='stylesheet'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<!--[if lt IE 8]>
+<style>
+#textareacontainer, #iframecontainer {width:48%;}
+#container {height:500px;}
+#textarea, #iframe {width:90%;height:450px;}
+#textareaCode, #iframeResult {height:450px;}
+.stack {display:none;}
+</style>
+<![endif]-->
+</head>
+
+
+<body>
+
+
+<div id="tiy_header">
+<div id="tiy_logo">
+<h1><a href="../index-2.html" title="W3School TIY Editor" style="float:left;">W3School TIY Editor</a></h1>
+
+<div id="sp_tiy">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 TIY -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7947784850"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+</div>
+
+
+<div id="navfirst">
+<ul id="menu">
+<li id="tiy_btn_index"><a href="../index-2.html" title="W3School 在线教程">W3School 在线教程</a></li>
+<li id="tiy_btn_stack"><a href="javascript:void(0);" onclick="restack(currentStack)" title="更改方向">改变方向</a></li>
+<li id="tiy_btn_theme"><a href="javascript:void(0);" onclick="retheme()" title="更改主题">暗黑模式</a></li>
+<li id='tiy_btn_tryit'><a onclick='submitTryit()' title='更改主题'>运行代码</a></li>
+</ul>
+</div>
+
+
+<div id="container">
+
+    <div id="textareacontainer">
+        <div id="textarea">
+            <div id="textareawrapper">
+
+<textarea autocomplete="off" id="textareaCode" wrap="logical" spellcheck="false">
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {box-sizing: border-box;}
+
+.img-comp-container {
+  position: relative;
+  height: 200px; /*should be the same height as the images*/
+}
+
+.img-comp-img {
+  position: absolute;
+  width: auto;
+  height: auto;
+  overflow:hidden;
+}
+
+.img-comp-img img {
+  display:block;
+  vertical-align:middle;
+}
+
+.img-comp-slider {
+  position: absolute;
+  z-index:9;
+  cursor: ew-resize;
+  /*set the appearance of the slider:*/
+  width: 40px;
+  height: 40px;
+  background-color: #2196F3;
+  opacity: 0.7;
+  border-radius: 50%;
+}
+</style>
+<script>
+function initComparisons() {
+  var x, i;
+  /* 查找具有 "overlay" 类的所有元素： */
+  x = document.getElementsByClassName("img-comp-overlay");
+  for (i = 0; i < x.length; i++) {
+    /* 
+	对于每个“覆盖”元素执行一次：
+    执行compareImages函数时，将“覆盖”元素作为参数传递：
+	*/
+    compareImages(x[i]);
+  }
+  function compareImages(img) {
+    var slider, img, clicked = 0, w, h;
+    /* 获取 img 元素的宽度和高度 */
+    w = img.offsetWidth;
+    h = img.offsetHeight;
+    /* 将 img 元素的宽度设置为 50%： */
+    img.style.width = (w / 2) + "px";
+    /* 创建滑块： */
+    slider = document.createElement("DIV");
+    slider.setAttribute("class", "img-comp-slider");
+    /* 插入滑块 */
+    img.parentElement.insertBefore(slider, img);
+    /* 将滑块置于中间： */
+    slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
+    slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+    /* 按下鼠标按钮时执行的函数： */
+    slider.addEventListener("mousedown", slideReady);
+    /* 释放鼠标按钮时执行的另一个函数： */
+    window.addEventListener("mouseup", slideFinish);
+    /* 或者触摸（对于触摸屏：） */
+    slider.addEventListener("touchstart", slideReady);
+     /* 并且释放（对于触摸屏：） */
+    window.addEventListener("touchend", slideFinish);
+    function slideReady(e) {
+      /* 防止在图像上移动时可能发生的任何其他操作： */
+      e.preventDefault();
+      /* 滑块现已被点击并准备移动： */
+      clicked = 1;
+      /* 当滑块移动时执行的函数： */
+      window.addEventListener("mousemove", slideMove);
+      window.addEventListener("touchmove", slideMove);
+    }
+    function slideFinish() {
+      /* 不再单击滑块： */
+      clicked = 0;
+    }
+    function slideMove(e) {
+      var pos;
+      /* 如果不再点击滑块，则退出此函数： */
+      if (clicked == 0) return false;
+      /* 获取光标的 x 位置： */
+      pos = getCursorPos(e)
+      /* 防止滑块位于图像之外： */
+      if (pos < 0) pos = 0;
+      if (pos > w) pos = w;
+      /* 执行一个函数，根据光标调整覆盖图像的大小： */
+      slide(pos);
+    }
+    function getCursorPos(e) {
+      var a, x = 0;
+      e = (e.changedTouches) ? e.changedTouches[0] : e;
+      /* 获取图像的 x 位置： */
+      a = img.getBoundingClientRect();
+      /* 计算光标相对于图像的 x 坐标： */
+      x = e.pageX - a.left;
+      /* 考虑任何页面滚动： */
+      x = x - window.pageXOffset;
+      return x;
+    }
+    function slide(x) {
+      /* 调整图像大小： */
+      img.style.width = x + "px";
+      /* 定位滑块： */
+      slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
+    }
+  }
+}
+</script>
+</head>
+<body>
+
+<h1>比较两张图片</h1>
+
+<p>拖动蓝色滑块可比较两张图片：</p>
+
+<div class="img-comp-container">
+  <div class="img-comp-img">
+    <img src="../i/photo/beijing-2.jpg" width="600">
+  </div>
+  <div class="img-comp-img img-comp-overlay">
+    <img src="../i/photo/beijing-3.jpg" width="600">
+  </div>
+</div>
+
+<script>
+/* 执行一个函数，该函数将为每个具有 img-comp-overlay 类的元素执行图像比较功能。 */
+initComparisons();
+</script>
+
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/tiy/t.asp?f=how_js_image_compare by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:34 GMT -->
+</html>
+
+</textarea>
+            </div>
+        </div>
+    </div>
+        <form id="codeForm" autocomplete="off" style="margin:0px;display:none;">
+          <input type="hidden" name="code" id="code" />
+        </form>
+    <div id="iframecontainer">
+        <div id="iframe">
+            <div id="iframewrapper">
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script src='submitTryit.js'></script>
+
+
+<script>
+function colorcoding() {
+  var ua = navigator.userAgent;
+  //Opera Mini refreshes the page when trying to edit the textarea.
+  if (ua && ua.toUpperCase().indexOf("OPERA MINI") > -1) { return false; }
+  window.editor = CodeMirror.fromTextArea(document.getElementById("textareaCode"), {
+    mode: 'text/html',
+    htmlMode: true,
+    lineWrapping: true,
+    smartIndent: false,
+    addModeClass: true
+  });
+//  window.editor.on("change", function () {window.editor.save();});
+}
+colorcoding();
+</script>
+
+
+<script>
+var currentStack=true;
+if ((window.screen.availWidth <= 768 && window.innerHeight > window.innerWidth) || "" == " horizontal") {restack(true);}
+function restack(vertical) {
+    var tc, ic, t, i, c, n, f, sv, sh, d, height, flt, width;
+    tc = document.getElementById("textareacontainer");
+    ic = document.getElementById("iframecontainer");
+    t = document.getElementById("textarea");
+    i = document.getElementById("iframe");
+    c = document.getElementById("container");
+    n = document.getElementById("navfirst");
+    //sv = document.getElementById("stackV");
+    //sh = document.getElementById("stackH");
+    tc.className = tc.className.replace("horizontal", "");
+    ic.className = ic.className.replace("horizontal", "");
+    t.className = t.className.replace("horizontal", "");
+    i.className = i.className.replace("horizontal", "");
+    c.className = c.className.replace("horizontal", "");
+    n.className = n.className.replace("horizontal", "");
+    //if (sv) {sv.className = sv.className.replace("horizontal", "")};
+    //if (sv) {sh.className = sh.className.replace("horizontal", "")};
+    //stack = "";
+    if (vertical) {
+        tc.className = tc.className + " horizontal";
+        ic.className = ic.className + " horizontal";        
+        t.className = t.className + " horizontal";        
+        i.className = i.className + " horizontal";
+        c.className = c.className + " horizontal";
+        n.className = n.className + " horizontal";
+        //if (sv) {sv.className = sv.className + " horizontal"};
+        //if (sv) {sh.className = sh.className + " horizontal"};
+        //stack = " horizontal";
+        document.getElementById("textareacontainer").style.height = "50%";
+        document.getElementById("iframecontainer").style.height = "50%";
+        document.getElementById("textareacontainer").style.width = "100%";
+        document.getElementById("iframecontainer").style.width = "100%";
+        currentStack=false;
+    } else {
+        document.getElementById("textareacontainer").style.height = "100%";
+        document.getElementById("iframecontainer").style.height = "100%";
+        document.getElementById("textareacontainer").style.width = "50%";
+        document.getElementById("iframecontainer").style.width = "50%";
+        currentStack=true;        
+    }
+}
+</script>
+
+
+<script>
+function retheme() {
+  var cc = document.body.className;
+  if (cc.indexOf("darktheme") > -1) {
+    document.body.className = cc.replace("darktheme", "");
+  } else {
+    document.body.className += " darktheme";
+  }
+}
+</script>
+
+</body>
+
+</html>

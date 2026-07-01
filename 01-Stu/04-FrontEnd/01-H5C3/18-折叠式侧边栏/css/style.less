@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+// 水平导航栏的样式设定
+.navbar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: #334C8B;
+
+  #openSideMenu {
+    padding: 1rem;
+    cursor: pointer;
+
+  }
+
+  #openSideMenu:hover {
+    color: #333;
+    background: #dbdbdb;
+  }
+
+  ul {
+    display: flex;
+
+
+    li {
+      padding: 1rem;
+
+      a {
+        padding: 1rem;
+        color: #fff;
+      }
+
+      a:hover {
+        color: #333;
+        background: #fff;
+      }
+    }
+  }
+}
+
+// 垂直导航栏的样式设定
+#sidebar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: #333;
+  opacity: 0.95;
+  overflow: hidden; //这个是真猛啊，想了好久都没有想到
+  transition: all 0.5s;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+
+    li {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      padding-left: 2rem;
+      width: 100%;
+
+      a {
+        color: #fff;
+        font-size: 1.5rem;
+
+      }
+
+    }
+
+    li:nth-child(1) {
+      padding-right: 2rem;
+      text-align: end;
+    }
+
+  }
+}
+
+//主要内容部分
+#main {
+  transition: all 0.5s;
+}

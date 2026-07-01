@@ -1,0 +1,991 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/css/css3_buttons.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:19:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>CSS 按钮</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>CSS 基础教程</h2>
+<ul>
+<li><a href="index.html" title="CSS 教程">CSS 教程</a></li>
+<li><a href="css_jianjie.html" title="CSS 简介">CSS 简介</a></li>
+<li><a href="css_syntax.html" title="CSS 语法">CSS 语法</a></li>
+<li><a href="css_selectors.html" title="CSS 选择器">CSS 选择器</a></li>
+<li><a href="css_shiyong.html" title="CSS 使用">CSS 使用</a></li>
+<li><a href="css_comments.html" title="CSS 注释">CSS 注释</a></li>
+<li><a href="css_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="css_colors_rgb.html" title="CSS RGB 颜色">CSS RGB 颜色</a></li>
+<li><a href="css_colors_hex.html" title="CSS HEX 颜色">CSS HEX 颜色</a></li>
+<li><a href="css_colors_hsl.html" title="CSS HSL 颜色">CSS HSL 颜色</a></li>
+<li><a href="css_background.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="css_background_image.html" title="CSS 背景图像">CSS 背景图像</a></li>
+<li><a href="css_background_repeat.html" title="CSS 背景重复">CSS 背景重复</a></li>
+<li><a href="css_background_attachment.html" title="CSS 背景附着">CSS 背景附着</a></li>
+<li><a href="css_background_shorthand.html" title="CSS 简写背景属性">CSS 简写背景属性</a></li>
+<li><a href="css_border.html" title="CSS 边框">CSS 边框</a></li>
+<li><a href="css_border_width.html" title="CSS 边框宽度">CSS 边框宽度</a></li>
+<li><a href="css_border_color.html" title="CSS 边框颜色">CSS 边框颜色</a></li>
+<li><a href="css_border_sides.html" title="CSS 边框各边">CSS 边框各边</a></li>
+<li><a href="css_border_shorthand.html" title="CSS 简写边框属性">CSS 简写边框属性</a></li>
+<li><a href="css_border_rounded.html" title="CSS 圆角边框">CSS 圆角边框</a></li>
+<li><a href="css_margin.html" title="CSS 外边距">CSS 外边距</a></li>
+<li><a href="css_margin_collapse.html" title="CSS 外边距合并">CSS 外边距合并</a></li>
+<li><a href="css_padding.html" title="CSS 内边距">CSS 内边距</a></li>
+<li><a href="css_dimension.html" title="CSS 高度和宽度">CSS 高度/宽度</a></li>
+<li><a href="css_boxmodel.html" title="CSS 框模型">CSS 框模型</a></li>
+<li><a href="css_outline.html" title="CSS 轮廓">CSS 轮廓</a></li>
+<li><a href="css_outline_width.html" title="CSS 轮廓宽度">CSS 轮廓宽度</a></li>
+<li><a href="css_outline_color.html" title="CSS 轮廓颜色">CSS 轮廓颜色</a></li>
+<li><a href="css_outline_shorthand.html" title="CSS 简写轮廓属性">CSS 简写轮廓属性</a></li>
+<li><a href="css_outline_offset.html" title="CSS 轮廓偏移">CSS 轮廓偏移</a></li>
+<li><a href="css_text.html" title="CSS 文本">CSS 文本</a></li>
+<li><a href="css_text_align.html" title="CSS 文本对齐">CSS 文本对齐</a></li>
+<li><a href="css_text_decoration.html" title="CSS 文本装饰">CSS 文本装饰</a></li>
+<li><a href="css_text_transformation.html" title="CSS 文本转换">CSS 文本转换</a></li>
+<li><a href="css_text_spacing.html" title="CSS 文字间距">CSS 文字间距</a></li>
+<li><a href="css_text_shadow.html" title="CSS 文本阴影">CSS 文本阴影</a></li>
+<li><a href="css_font.html" title="CSS 字体">CSS 字体</a></li>
+<li><a href="css_font_style.html" title="CSS 字体样式">CSS 字体样式</a></li>
+<li><a href="css_font_size.html" title="CSS 字体大小">CSS 字体大小</a></li>
+<li><a href="css_font_google.html" title="CSS 谷歌字体">CSS 谷歌字体</a></li>
+<li><a href="css_font_shorthand.html" title="CSS 简写字体属性">CSS 简写字体属性</a></li>
+<li><a href="css_icons.html" title="CSS 图标">CSS 图标</a></li>
+<li><a href="css_link.html" title="CSS 链接">CSS 链接</a></li>
+<li><a href="css_list.html" title="CSS 列表">CSS 列表</a></li>
+<li><a href="css_table.html" title="CSS 表格">CSS 表格</a></li>
+</ul>
+<h2>CSS 中级教程</h2>
+<ul>
+<li><a href="css_display_visibility.html" title="CSS 布局 - display 属性">CSS Display</a></li>
+<li><a href="css_max-width.html" title="CSS 布局 - width 和 max-width">CSS max-width</a></li>
+<li><a href="css_positioning.html" title="CSS 布局 - position 属性">CSS 定位</a></li>
+<li><a href="css_z-index.html" title="CSS 布局 - z-index 属性">CSS z-index</a></li>
+<li><a href="css_overflow.html" title="CSS 布局 - 溢出">CSS 溢出</a></li>
+<li><a href="css_float.html" title="CSS 布局 - 浮动和清除">CSS 浮动</a></li>
+<li><a href="css_float_clear.html" title="CSS 布局 - clear 和 clearfix">CSS 清除浮动</a></li>
+<li><a href="css_float_examples.html" title="CSS 布局 - 浮动实例">CSS 布局 - 浮动实例</a></li>
+<li><a href="css_inline-block.html" title="CSS 布局 - display: inline-block">CSS inline-block</a></li>
+<li><a href="css_align.html" title="CSS 布局 - 水平和垂直对齐">CSS 对齐</a></li>
+<li><a href="css_combinators.html" title="CSS 选择器">CSS 组合器</a></li>
+<li><a href="css_pseudo_classes.html" title="CSS 伪类">CSS 伪类</a></li>
+<li><a href="css_pseudo_elements.html" title="CSS 伪元素">CSS 伪元素</a></li>
+<li><a href="css_image_transparency.html" title="CSS 不透明度">CSS 不透明度</a></li>
+<li><a href="css_navbar.html" title="CSS 导航栏">CSS 导航栏</a></li>
+<li><a href="css_navbar_vertical.html" title="CSS 垂直导航栏">CSS 垂直导航栏</a></li>
+<li><a href="css_navbar_horizontal.html" title="CSS 水平导航栏">CSS 水平导航栏</a></li>
+<li><a href="css_dropdowns.html" title="CSS 下拉菜单">CSS 下拉菜单</a></li>
+<li><a href="css_image_gallery.html" title="CSS 图片库">CSS 图片库</a></li>
+<li><a href="css_image_sprites.html" title="CSS 图像精灵">CSS 图像精灵</a></li>
+<li><a href="css_attribute_selectors.html" title="CSS 属性选择器">CSS 属性选择器</a></li>
+<li><a href="css_form.html" title="CSS 表单">CSS 表单</a></li>
+<li><a href="css_counters.html" title="CSS 计数器">CSS 计数器</a></li>
+<li><a href="css_website_layout.html" title="CSS 网站布局">CSS 网站布局</a></li>
+<li><a href="css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="css_specificity.html" title="CSS 特异性">CSS 特异性</a></li>
+<li><a href="css_important.html" title="CSS !important 规则">CSS !important</a></li>
+<li><a href="css_math_functions.html" title="CSS 数学函数">CSS 数学函数</a></li>
+</ul>
+<h2>CSS3 高级教程</h2>
+<ul>
+<li><a href="css3_borders.html" title="CSS 圆角">CSS 圆角</a></li>
+<li><a href="css3_border_images.html" title="CSS 边框图像">CSS 边框图像</a></li>
+<li><a href="css3_backgrounds.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="css3_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="css_colors_keywords.html" title="CSS 颜色关键字">CSS 颜色关键字</a></li>
+<li><a href="css3_gradients.html" title="CSS 渐变">CSS 渐变</a></li>
+<li><a href="css3_gradients_radial.html" title="CSS 径向渐变">CSS 径向渐变</a></li>
+<li><a href="css3_shadows.html" title="CSS 阴影">CSS 阴影</a></li>
+<li><a href="css3_shadows_box.html" title="CSS box-shadow">CSS box-shadow</a></li>
+<li><a href="css3_text_effects.html" title="CSS 文本效果">CSS 文本效果</a></li>
+<li><a href="css3_fonts.html" title="CSS 网络字体">CSS 网络字体</a></li>
+<li><a href="css3_2dtransforms.html" title="CSS 2D 转换">CSS 2D 转换</a></li>
+<li><a href="css3_3dtransforms.html" title="CSS 3D 转换">CSS 3D 转换</a></li>
+<li><a href="css3_transitions.html" title="CSS 过渡">CSS 过渡</a></li>
+<li><a href="css3_animations.html" title="CSS 动画">CSS 动画</a></li>
+<li><a href="css_tooltip.html" title="CSS 工具提示">CSS 工具提示</a></li>
+<li><a href="css3_images.html" title="CSS 图像样式">CSS 图像样式</a></li>
+<li><a href="css3_object-fit.html" title="CSS object-fit">CSS object-fit</a></li>
+<li><a href="css3_object-position.html" title="CSS object-position 属性">CSS object-position</a></li>
+<li><a href="css3_masking.html" title="CSS 遮罩">CSS 遮罩</a></li>
+<li class="currentLink"><a href="css3_buttons.html" title="CSS 按钮">CSS 按钮</a></li>
+<li><a href="css3_pagination.html" title="CSS 分页">CSS 分页</a></li>
+<li><a href="css3_multiple_columns.html" title="CSS 多列">CSS 多列</a></li>
+<li><a href="css3_user_interface.html" title="CSS 用户界面">CSS 用户界面</a></li>
+<li><a href="css3_variables.html" title="CSS 变量">CSS 变量</a></li>
+<li><a href="css3_variables_overriding.html" title="CSS 覆盖变量">CSS 覆盖变量</a></li>
+<li><a href="css3_variables_javascript.html" title="CSS 使用 JavaScript 更改变量">CSS 变量 - JavaScript</a></li>
+<li><a href="css3_variables_mediaqueries.html" title="CSS 在媒体查询中使用变量">CSS 变量 - 媒体查询</a></li>
+<li><a href="css3_property.html" title="CSS @property 规则">CSS @property</a></li>
+<li><a href="css3_box-sizing.html" title="CSS Box Sizing">CSS Box Sizing</a></li>
+<li><a href="css3_flexbox.html" title="CSS Flexbox">CSS Flexbox</a></li>
+<li><a href="css3_mediaqueries.html" title="CSS 媒体查询">CSS 媒体查询</a></li>
+<li><a href="css3_mediaqueries_ex.html" title="CSS 媒体查询实例">CSS 媒体查询实例</a></li>
+</ul>
+<h2>CSS 响应式设计</h2>
+<ul>
+<li><a href="css_rwd_intro.html" title="响应式网站设计 - 简介">RWD 简介</a></li>
+<li><a href="css_rwd_viewport.html" title="响应式网页设计 - 视口">RWD 视口</a></li>
+<li><a href="css_rwd_grid.html" title="响应式网页设计 - Grid-View">RWD 网格视图</a></li>
+<li><a href="css_rwd_mediaqueries.html" title="响应式网页设计 - 媒体查询">RWD 媒体查询</a></li>
+<li><a href="css_rwd_images.html" title="响应式网页设计 - 图像">RWD 图像</a></li>
+<li><a href="css_rwd_videos.html" title="响应式网页设计 - 视频">RWD 视频</a></li>
+</ul>
+<h2>CSS 网格教程</h2>
+<ul>
+<li><a href="css_grid.html" title="CSS 网格布局模块">CSS 网格布局模块</a></li>
+<li><a href="css_grid_container.html" title="CSS 网格容器">CSS 网格容器</a></li>
+<li><a href="css_grid_item.html" title="CSS 网格项目">CSS 网格项目</a></li>
+</ul>
+<h2>CSS 实例</h2>
+<ul>
+<li><a href="css_examples.html" title="CSS 实例">CSS 实例</a></li>
+</ul>
+<h2>CSS 测验</h2>
+<ul>
+<li><a href="css_quiz.html" title="CSS 测验">CSS 测验</a></li>
+</ul>
+<h2>CSS 参考手册</h2>
+<ul>
+<li><a href="../cssref/index.html" title="CSS 参考手册">CSS 参考手册</a></li>
+<li><a href="../cssref/css_browsersupport.html" title="CSS 浏览器支持">CSS 浏览器支持</a></li>
+<li><a href="../cssref/css_selectors.html" title="CSS 选择器">CSS 选择器</a></li>
+<li><a href="../cssref/css_functions.html" title="CSS 函数">CSS 函数</a></li>
+<li><a href="../cssref/css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="../cssref/css_ref_aural.html" title="CSS 听觉">CSS 听觉</a></li>
+<li><a href="../cssref/css_websafe_fonts.html" title="CSS 网络安全字体">CSS 网络安全字体</a></li>
+<li><a href="../cssref/css_animatable.html" title="CSS 可动画制作">CSS 可动画制作</a></li>
+<li><a href="../cssref/css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="../cssref/css_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="../cssref/css_colors_legal.html" title="CSS 颜色值">CSS 颜色值</a></li>
+<li><a href="../cssref/css_default_values.html" title="CSS 默认值">CSS 默认值</a></li>
+<li><a href="../cssref/css_entities.html" title="CSS 实体">CSS 实体</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>CSS 按钮</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css3_masking.html" title="CSS 遮罩">CSS 遮罩</a></li>
+<li class="next"><a href="css3_pagination.html" title="CSS 分页">CSS 分页</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p>学习如何使用 CSS 设置按钮样式。</p>
+</div>
+
+
+
+<div>
+<h2>基本按钮样式</h2>
+
+<style>
+.btn {
+background-color: #4CAF50;
+border: none;
+color: #FFFFFF;
+padding: 15px 32px;
+text-align: center;
+-webkit-transition-duration: 0.4s; /* Safari */
+transition-duration: 0.4s;
+margin: 16px 0 0 0 !important;
+text-decoration: none;
+font-size:16px;
+cursor:pointer;
+box-sizing: border-box;
+}
+
+.btn1 {background-color: #4CAF50;} /* Green */
+.btn2 {background-color: #008CBA;} /* Blue */
+.btn3 {background-color: #f44336;} /* Red */ 
+.btn4 {background-color: #e7e7e7;color:black;} /* Grey */ 
+.btn5 {background-color: #555555;} /* Orange */
+
+.btn1:hover {background-color: #4CAF50;}
+.btn2:hover {background-color: #008CBA;}
+.btn3:hover {background-color: #f44336;}
+.btn4:hover {background-color: #e7e7e7;color:black;}
+.btn5:hover {background-color: #555555;}
+
+</style>
+
+<p><button style="padding: 1px 6px;margin-right: 25px; border-width: 2px; border-style: outset;">默认按钮</button>
+<button type="button" class="btn btn1">CSS 按钮</button></p>
+
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/taf11.html?f=css_buttons_basic">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>按钮颜色</h2>
+
+
+<button type="button" class="btn btn1">绿色</button>
+<button type="button" class="btn btn2">蓝色</button>
+<button type="button" class="btn btn3">红色</button>
+<button type="button" class="btn btn4">灰色</button>
+<button type="button" class="btn btn5">黑色</button>
+
+<p>请使用 <code>background-color</code> 属性更改按钮的背景色：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.button1 {background-color: #4CAF50;} /* 绿色 */
+.button2 {background-color: #008CBA;} /* 蓝色 */
+.button3 {background-color: #f44336;} /* 红色 */ 
+.button4 {background-color: #e7e7e7; color: black;} /* 灰色 */ 
+.button5 {background-color: #555555;} /* 黑色 */
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t1e9a.html?f=css_buttons_color">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>按钮尺寸</h2>
+
+<style>
+.font1 {font-size:10px;}
+.font2 {font-size:12px;}
+.font3 {font-size:16px;}
+.font4 {font-size:20px;}
+.font5 {font-size:24px;}
+</style>
+
+<button type="button" class="btn btn1 font1">10px</button>
+<button type="button" class="btn btn2 font2">12px</button>
+<button type="button" class="btn btn3 font3">16px</button>
+<button type="button" class="btn btn4 font4">20px</button>
+<button type="button" class="btn btn5 font5">24px</button>
+
+<p>请使用 <code>font-size</code> 属性更改按钮的字体大小：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.button1 {font-size: 10px;}
+.button2 {font-size: 12px;}
+.button3 {font-size: 16px;}
+.button4 {font-size: 20px;}
+.button5 {font-size: 24px;}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t5f79.html?f=css_buttons_font">亲自试一试</a></p>
+
+<p>请使用 <code>padding</code> 属性更改按钮的内边距：</p>
+
+<style>
+.padding1 {padding:10px 24px;font-size:15px}
+.padding2 {padding:12px 28px;}
+.padding3 {padding:14px 40px;}
+.padding4 {padding:32px 16px;}
+.padding5 {padding:16px 16px;}
+</style>
+
+<button type="button" class="btn btn1 padding1">10px 24px</button>
+<button type="button" class="btn btn2 padding2">12px 28px</button>
+<button type="button" class="btn btn3 padding3">14px 40px</button>
+<button type="button" class="btn btn4 padding4">32px 16px</button>
+<button type="button" class="btn btn5 padding5">16px</button>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.button1 {padding: 10px 24px;}
+.button2 {padding: 12px 28px;}
+.button3 {padding: 14px 40px;}
+.button4 {padding: 32px 16px;}
+.button5 {padding: 16px;}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/ta774.html?f=css_buttons_padding">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>圆角按钮</h2>
+
+<style>
+.round1 {border-radius:2px;padding:20px}
+.round2 {border-radius:4px;padding:20px}
+.round3 {border-radius:8px;padding:20px}
+.round4 {border-radius:12px;padding:20px}
+.round5 {border-radius:50%;padding:20px}
+</style>
+
+<button type="button" class="btn btn1 round1">2px</button>
+<button type="button" class="btn btn2 round2">4px</button>
+<button type="button" class="btn btn3 round3">8px</button>
+<button type="button" class="btn btn4 round4">12px</button>
+<button type="button" class="btn btn5 round5">50%</button>
+
+<p>请使用 <code>border-radius</code> 属性为按钮添加圆角：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.button1 {border-radius: 2px;}
+.button2 {border-radius: 4px;}
+.button3 {border-radius: 8px;}
+.button4 {border-radius: 12px;}
+.button5 {border-radius: 50%;}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t5bec.html?f=css_buttons_round">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>彩色的按钮边框</h2>
+
+<style>
+.border1 {border-radius:3px;background-color:white;color:black;border:2px solid #4CAF50;}
+.border2 {border-radius:3px;background-color:white;color:black;border:2px solid #008CBA;}
+.border3 {border-radius:3px;background-color:white;color:black;border:2px solid #f44336;}
+.border4 {border-radius:3px;background-color:white;color:black;border:2px solid #e7e7e7;}
+.border5 {border-radius:3px;background-color:white;color:black;border:2px solid #555555;}
+</style>
+
+<button type="button" class="btn border1">绿色</button>
+<button type="button" class="btn border2">蓝色</button>
+<button type="button" class="btn border3">红色</button>
+<button type="button" class="btn border4">灰色</button>
+<button type="button" class="btn border5">黑色</button>
+
+<p>请使用 <code>border</code> 属性为按钮添加彩色边框：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.button1 {
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50; /* 绿色 */
+}
+...
+
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t812f.html?f=css_buttons_border">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>可悬停按钮</h2>
+
+<style>
+.border111{border-radius:3px;background-color:#4CAF50;color:white;}
+.border222{border-radius:3px;background-color:#008CBA;color:white;}
+.border333 {border-radius:3px;background-color:#f44336;color:white;}
+.border444 {border-radius:3px;background-color:#e7e7e7;}
+.border555 {border-radius:3px;background-color:#555555;color:white;}
+
+.border111:hover {background-color:white;color:black;border:2px solid #4CAF50;}
+.border222:hover {background-color:white;color:black;border:2px solid #008CBA;}
+.border333:hover {background-color:white;color:black;border:2px solid #f44336;}
+.border444:hover {background-color:white;color:black;border:2px solid #e7e7e7;}
+.border555:hover {background-color:white;color:black;border:2px solid #555555;}
+
+.border11:hover {background-color:#4CAF50;color:white;}
+.border22:hover {background-color:#008CBA;color:white;}
+.border33:hover {background-color:#f44336;color:white;}
+.border44:hover {background-color:#e7e7e7;}
+.border55:hover {background-color:#555555;color:white;}
+</style>
+
+<button type="button" class="btn border1 border111">绿色</button>
+<button type="button" class="btn border2 border222">蓝色</button>
+<button type="button" class="btn border3 border333">红色</button>
+<button type="button" class="btn border4 border444">灰色</button>
+<button type="button" class="btn border5 border555">黑色</button>
+<br>
+<button type="button" class="btn border1 border11">绿色</button>
+<button type="button" class="btn border2 border22">蓝色</button>
+<button type="button" class="btn border3 border33">红色</button>
+<button type="button" class="btn border4 border44">灰色</button>
+<button type="button" class="btn border5 border55">黑色</button>
+
+<p>当鼠标移动到按钮上方时，使用 <code>:hover</code> 选择器可更改按钮的样式。</p>
+
+<p class="tip"><span>提示：</span>请使用 <code>transition-duration</code> 属性来确定“悬停”效果的速度：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.button {
+  transition-duration: 0.4s;
+}
+
+.button:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+...
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t5ebe.html?f=css_buttons_hover">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>阴影按钮</h2>
+
+<style>
+.shadow1{box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important}
+.shadow2:hover{box-shadow:0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19) !important}
+</style>
+
+<button type="button" class="btn shadow1">有阴影的按钮</button>
+<button type="button" class="btn shadow2">鼠标悬停时出现阴影</button>
+
+<p>请使用 <code>box-shadow</code> 属性为按钮添加阴影：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.button1 {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.button2:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t086a.html?f=css_buttons_shadow">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>禁用的按钮</h2>
+
+<style>
+.disabled{cursor: not-allowed;opacity: 0.6;}
+</style>
+
+<button type="button" class="btn">普通按钮</button>
+<button type="button" class="btn disabled">被禁用的按钮</button>
+
+<p>请使用 <code>opacity</code> 属性为按钮添加透明度（创建“禁用”外观）。</p>
+
+<p class="tip"><span>提示：</span>您还可以添加带有 &quot;not-allowed&quot; 值的 <code>cursor</code> 属性，当您将鼠标悬停在按钮上时，该属性会显示 &quot;no parking sign&quot;（禁停标志）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tac6d.html?f=css_buttons_disabled">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>按钮宽度</h2>
+
+<style>
+.width1 {width: 250px}
+.width2 {width: 50%}
+.width3 {width: 100%}
+</style>
+
+<button type="button" class="btn btn1 width1">250px</button><br>
+<button type="button" class="btn btn2 width2">50%</button>
+<button type="button" class="btn btn3 width3">100%</button>
+
+<p>默认情况下，按钮的大小取决于其文本内容（与内容的宽度一样）。请使用 <code>width</code> 属性来更改按钮的宽度：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.button1 {width: 250px;}
+.button2 {width: 50%;}
+.button3 {width: 100%;}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t4a72.html?f=css_buttons_width">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>按钮分组</h2>
+
+<style>
+.float {
+    margin: 0 !important;
+    float: left;
+    transition: none;
+}
+
+.float:hover {
+    background-color: #3e8e41;
+}
+</style>
+
+<div style="margin: 15px 0;">
+<button type="button" class="btn btn1 float">Button</button>
+<button type="button" class="btn btn1 float">Button</button>
+<button type="button" class="btn btn1 float">Button</button>
+<button type="button" class="btn btn1 float">Button</button>
+</div>
+
+<p style="clear: both;">&nbsp;</p>
+
+<p style="margin-top: 0;">删除外边距并向每个按钮添加 <code>float:left</code>，来创建按钮组：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.button {
+  float: left;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/ta4d0.html?f=css_buttons_group">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>带边框的按钮组</h2>
+
+<div style="margin: 15px 0;">
+<button type="button" class="btn btn1 float" style="border:1px solid green;border-right:none;">Button</button>
+<button type="button" class="btn btn1 float" style="border:1px solid green;border-right:none;">Button</button>
+<button type="button" class="btn btn1 float" style="border:1px solid green;border-right:none;">Button</button>
+<button type="button" class="btn btn1 float" style="border:1px solid green">Button</button>
+</div>
+
+<p style="clear: both;">&nbsp;</p>
+
+<p style="margin-top: 0;">使用 <code>border</code> 属性来创建带边框的按钮组：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.button {
+  float: left;
+  border: 1px solid green;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t04e6.html?f=css_buttons_group_border">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>垂直按钮组</h2>
+
+<div style="margin-top: 15px;">
+<button type="button" class="btn btn1 float" style="float:none;display:block;width:150px;border: 1px solid green;border-bottom:none;margin:0!important;">Button</button>
+<button type="button" class="btn btn1 float" style="float:none;display:block;width:150px;border: 1px solid green;border-bottom:none;margin:0!important">Button</button>
+<button type="button" class="btn btn1 float" style="float:none;display:block;width:150px;border: 1px solid green;border-bottom:none;margin:0!important">Button</button>
+<button type="button" class="btn btn1 float" style="float:none;display:block;width:150px;border: 1px solid green;margin:0!important">Button</button>
+</div>
+
+<p>使用 <code>display:block</code> 取代 <code>float:left</code> 将按钮上下分组，而不是并排：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.button {
+  display: block;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tff24.html?f=css_buttons_group_vertical">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>图像上的按钮</h2>
+
+<style>
+.container {
+position: relative;
+margin-top: 15px;
+box-sizing: border-box;
+}
+
+.btnonimg {
+border-radius: 4px;
+position: absolute;
+top: 50%;
+left: 50%;
+border: none;
+display: inline-block;
+transform: translate(-50%,-50%);
+padding: 8px 16px;
+font-size: 18px;
+box-sizing: border-box;
+}
+
+.btnonimg:hover {
+color: #fff;
+background-color: #000;
+}
+</style>
+
+<div class="container" style="max-width:500px;">
+  <img src="../i/photo/coffee.jpg" alt="Coffee" style="width:100%; margin: 0;">
+  <button class="btnonimg">Button</button>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/tbed5.html?f=css_buttons_image">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>动画按钮</h2>
+
+<h3>实例 1</h3>
+
+<p>在鼠标悬停时添加箭头：</p>
+
+<style>
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 180px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: "\00bb";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+</style>
+
+<div style="margin-top: 15px;">
+<button class="button" style="vertical-align:middle"><span>悬停鼠标</span></button>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/tc9a1.html?f=css_buttons_animate_1">亲自试一试</a></p>
+
+<h3>实例 2</h3>
+
+<p>添加点击时的“按键按下”效果：</p>
+
+<style>
+.pressed {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.pressed:hover {background-color: #3e8e41}
+
+.pressed:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+</style>
+
+<div style="margin-top: 15px;">
+<button class="pressed" style="margin:5px; width:180px; padding:20px; font-size:28px;"><span>点击鼠标</span></button>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/t5994.html?f=css_buttons_animate_2">亲自试一试</a></p>
+
+<h3>实例 3</h3>
+
+<p>鼠标悬停时淡入：</p>
+
+<style>
+.btnfade {
+  background-color: #f4511e;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.btnfade:hover {opacity: 1}
+
+</style>
+
+<div style="margin-top: 15px;">
+<button class="btnfade" style="margin:5px;width:180px;padding:20px;font-size:28px;"><span>悬停淡入</span></button>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/t73dd.html?f=css_buttons_fade">亲自试一试</a></p>
+
+<h3>实例 4</h3>
+
+<p>添加点击时的“涟漪”效果：</p>
+
+<style>
+.rippleripple {
+    position: relative;
+    background-color: #4CAF50;
+    border: none;
+    font-size: 28px;
+    color: #FFFFFF;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.rippleripple:after {
+    content: "";
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.rippleripple:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+</style>
+
+<div style="margin-top: 15px;">
+<button class="rippleripple" style="box-shadow:none;margin:5px;width:180px;padding:20px;font-size:28px;"><span>点击鼠标</span></button>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/t7a7e.html?f=css_buttons_animate_3">亲自试一试</a></p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css3_masking.html" title="CSS 遮罩">CSS 遮罩</a></li>
+<li class="next"><a href="css3_pagination.html" title="CSS 分页">CSS 分页</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../cssref/index.html">CSS 参考手册</a></h5>
+<h5 id="tools_example"><a href="css_examples.html">CSS 实例</a></h5>
+<h5 id="tools_quiz"><a href="css_quiz.html">CSS 测验</a></h5>
+<h5 id="tools_professional"><a href="index_pro.html">CSS 课外书</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/css/css3_buttons.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:19:26 GMT -->
+</html>

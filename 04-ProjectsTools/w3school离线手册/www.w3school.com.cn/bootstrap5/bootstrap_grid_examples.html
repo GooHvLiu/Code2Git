@@ -1,0 +1,580 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/bootstrap5/bootstrap_grid_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:23:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Bootstrap 5 网格实例</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Bootstrap 5 教程</h2>
+<ul>
+<li><a href="index.html" title="Bootstrap 5 教程">BS5 教程</a></li>
+<li><a href="bootstrap_get_started.html" title="Bootstrap 5 入门">BS5 入门</a></li>
+<li><a href="bootstrap_containers.html" title="Bootstrap 5 容器">BS5 容器</a></li>
+<li><a href="bootstrap_grid_basic.html" title="Bootstrap 5 网格">BS5 网格基础</a></li>
+<li><a href="bootstrap_typography.html" title="Bootstrap 5 文字/排版">BS5 排版</a></li>
+<li><a href="bootstrap_colors.html" title="Bootstrap 5 颜色">BS5 颜色</a></li>
+<li><a href="bootstrap_tables.html" title="Bootstrap 5 表格">BS5 表格</a></li>
+<li><a href="bootstrap_images.html" title="Bootstrap 5 图像">BS5 图像</a></li>
+<li><a href="bootstrap_jumbotron.html" title="Bootstrap 5 Jumbotron">BS5 Jumbotron</a></li>
+<li><a href="bootstrap_alerts.html" title="Bootstrap 5 警告框">BS5 警告框</a></li>
+<li><a href="bootstrap_buttons.html" title="Bootstrap 5 按钮">BS5 按钮</a></li>
+<li><a href="bootstrap_button_groups.html" title="Bootstrap 5 按钮组">BS5 按钮组</a></li>
+<li><a href="bootstrap_badges.html" title="Bootstrap 5 徽章">BS5 徽章</a></li>
+<li><a href="bootstrap_progressbars.html" title="Bootstrap 5 进度条">BS5 进度条</a></li>
+<li><a href="bootstrap_spinners.html" title="Bootstrap 5 加载器">BS5 加载器</a></li>
+<li><a href="bootstrap_pagination.html" title="Bootstrap 5 分页">BS5 分页</a></li>
+<li><a href="bootstrap_list_groups.html" title="Bootstrap 5 列表组">BS5 列表组</a></li>
+<li><a href="bootstrap_cards.html" title="Bootstrap 5 卡片">BS5 卡片</a></li>
+<li><a href="bootstrap_dropdowns.html" title="Bootstrap 5 下拉菜单">BS5 下拉菜单</a></li>
+<li><a href="bootstrap_collapse.html" title="Bootstrap 5 折叠">BS5 折叠</a></li>
+<li><a href="bootstrap_navs.html" title="Bootstrap 5 导航">BS5 导航</a></li>
+<li><a href="bootstrap_navbar.html" title="Bootstrap 5 导航栏">BS5 导航栏</a></li>
+<li><a href="bootstrap_carousel.html" title="Bootstrap 5 轮播">BS5 轮播</a></li>
+<li><a href="bootstrap_modal.html" title="Bootstrap 5 模态">BS5 模态</a></li>
+<li><a href="bootstrap_tooltip.html" title="Bootstrap 5 工具提示">BS5 工具提示</a></li>
+<li><a href="bootstrap_popover.html" title="Bootstrap 5 弹出框">BS5 弹出框</a></li>
+<li><a href="bootstrap_toast.html" title="Bootstrap 5 Toast">BS5 Toast</a></li>
+<li><a href="bootstrap_scrollspy.html" title="Bootstrap 5 Scrollspy">BS5 Scrollspy</a></li>
+<li><a href="bootstrap_offcanvas.html" title="Bootstrap 5 Offcanvas">BS5 Offcanvas</a></li>
+<li><a href="bootstrap_utilities.html" title="Bootstrap 5 实用工具">BS5 实用工具</a></li>
+<li><a href="bootstrap_flex.html" title="Bootstrap 5 Flex">BS5 Flex</a></li>
+</ul>
+<h2>Bootstrap 5 表单</h2>
+<ul>
+<li><a href="bootstrap_forms.html" title="Bootstrap 5 表单">BS5 表单</a></li>
+<li><a href="bootstrap_form_select.html" title="Bootstrap 5 选择菜单">BS5 选择菜单</a></li>
+<li><a href="bootstrap_form_check_radio.html" title="Bootstrap 5 复选框和单选按钮">BS5 复选框和单选按钮</a></li>
+<li><a href="bootstrap_form_range.html" title="Bootstrap 5 范围">BS5 范围</a></li>
+<li><a href="bootstrap_form_input_group.html" title="Bootstrap 5 输入组">BS5 输入组</a></li>
+<li><a href="bootstrap_form_floating_labels.html" title="Bootstrap 5 表单浮动标签">BS5 浮动标签</a></li>
+<li><a href="bootstrap_form_validation.html" title="Bootstrap 5 表单验证">BS5 表单验证</a></li>
+</ul>
+<h2>Bootstrap 5 网格</h2>
+<ul>
+<li><a href="bootstrap_grid_system.html" title="Bootstrap 5 网格系统">BS5 网格系统</a></li>
+<li><a href="bootstrap_grid_stacked_to_hor.html" title="Bootstrap 5 堆叠/水平">BS5 堆叠/水平</a></li>
+<li><a href="bootstrap_grid_xsmall.html" title="Bootstrap 5 网格：超小型设备">BS5 网格 XSmall</a></li>
+<li><a href="bootstrap_grid_small.html" title="Bootstrap 5 网格：小型设备">BS5 网格 Small</a></li>
+<li><a href="bootstrap_grid_medium.html" title="Bootstrap 5 网格：中型设备">BS5 网格 Medium</a></li>
+<li><a href="bootstrap_grid_large.html" title="Bootstrap 5 网格：大型设备">BS5 网格 Large</a></li>
+<li><a href="bootstrap_grid_xlarge.html" title="Bootstrap 5 网格：超大型设备">BS5 网格 XLarge</a></li>
+<li><a href="bootstrap_grid_xxl.html" title="Bootstrap 5 网格：特大型设备">BS5 网格 XXL</a></li>
+<li class="currentLink"><a href="bootstrap_grid_examples.html" title="Bootstrap 5 网格实例">BS5 网格实例</a></li>
+</ul>
+<h2>Bootstrap 5 其他</h2>
+<ul>
+<li><a href="bootstrap_templates.html" title="Bootstrap 5 基础模板">BS5 基础模板</a></li>
+<li><a href="bootstrap_quiz.html" title="Bootstrap 5 测验">BS5 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Bootstrap 5 网格实例</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="bootstrap_grid_xxl.html" title="Bootstrap 5 网格：特大型设备">BS5 网格 XXL</a></li>
+<li class="next"><a href="bootstrap_templates.html" title="Bootstrap 5 基础模板">BS5 基础模板</a></li>
+</ul>
+</div>
+
+
+
+<div>
+<p>下面我们整理了一些 Bootstrap 5 网格布局的实例。</p>
+</div>
+
+
+
+<div>
+<h2>三等分列</h2>
+
+<p>在指定数量的元素上使用 <code>.col</code> 类，Bootstrap 将识别有多少元素（并创建等宽列）。在下面的例子中，我们使用了三个 col 元素，每个元素的宽度为 33.33%。</p>
+
+<iframe scrolling="no" src="../demo/bs/bs_grid_examples_1.html" style="width:100%;height:80px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;col&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;col&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;col&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tcc7a.html?s=h&amp;f=bs_grid_examples_1">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>使用数字的三个相等的列</h2>
+
+<p>您还可以使用数字来控制列宽。只需确保总和等于或小于 12（不需要使用所有 12 个可用列）：</p>
+
+<iframe scrolling="no" src="../demo/bs/bs_grid_examples_2.html" style="width:100%;height:80px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-4&quot;&gt;col-4&lt;/div&gt;
+  &lt;div class=&quot;col-4&quot;&gt;col-4&lt;/div&gt;
+  &lt;div class=&quot;col-4&quot;&gt;col-4&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tf23a.html?s=h&amp;f=bs_grid_examples_2">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>三不等分列</h2>
+
+<p>如需创建不相等的列，您必须使用数字。下例将创建 25%/50%/25% 的拆分：</p>
+
+<iframe scrolling="no" src="../demo/bs/bs_grid_examples_3.html" style="width:100%;height:80px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-3&quot;&gt;col-3&lt;/div&gt;
+  &lt;div class=&quot;col-6&quot;&gt;col-6&lt;/div&gt;
+  &lt;div class=&quot;col-3&quot;&gt;col-3&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t77d1.html?s=h&amp;f=bs_grid_examples_3">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>设置一列宽度</h2>
+
+<p>然而，只设置一列的宽度就足够了，并让兄弟列在周围自动调整尺寸。下例将创建 25%/50%/25% 的拆分：</p>
+
+<iframe scrolling="no" src="../demo/bs/bs_grid_examples_4.html" style="width:100%;height:80px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;col&lt;/div&gt;
+  &lt;div class=&quot;col-6&quot;&gt;col-6&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;col&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tc5e3.html?s=h&amp;f=bs_grid_examples_4">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>更多相等的列</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_grid_examples_5.html" style="width:100%;height:180px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;!-- 两个相等的列 --&gt;
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;1 of 2&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;2 of 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 四个相等的列 --&gt;
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;1 of 4&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;2 of 4&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;3 of 4&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;4 of 4&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 六个相等的列 --&gt;
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;1 of 6&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;2 of 6&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;3 of 6&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;4 of 6&lt;/div&gt;  
+  &lt;div class=&quot;col&quot;&gt;5 of 6&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;6 of 6&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t3090.html?s=h&amp;f=bs_grid_examples_5">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>Row Cols</h2>
+
+<p>您还可以使用 <code>.row-cols-*</code> 类控制应该出现在彼此旁边的列数（无论有多少列）：</p>
+
+<iframe scrolling="no" src="../demo/bs/bs_row-cols.html" style="width:100%;height:400px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;row row-cols-1&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;1 of 2&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;2 of 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;row row-cols-2&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;1 of 4&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;2 of 4&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;3 of 4&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;4 of 4&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;row row-cols-3&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;1 of 6&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;2 of 6&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;3 of 6&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;4 of 6&lt;/div&gt;  
+  &lt;div class=&quot;col&quot;&gt;5 of 6&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;6 of 6&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t982d.html?s=h&amp;f=bs_row-cols">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>更多不等列</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_grid_examples_6.html" style="width:100%;height:180px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;!-- 两个不相等的列 --&gt;
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-8&quot;&gt;1 of 2&lt;/div&gt;
+  &lt;div class=&quot;col-4&quot;&gt;2 of 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 四个不相等的列 --&gt;
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-2&quot;&gt;1 of 4&lt;/div&gt;
+  &lt;div class=&quot;col-2&quot;&gt;2 of 4&lt;/div&gt;
+  &lt;div class=&quot;col-2&quot;&gt;3 of 4&lt;/div&gt;
+  &lt;div class=&quot;col-6&quot;&gt;4 of 4&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Setting two column widths --&gt;
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-4&quot;&gt;1 of 4&lt;/div&gt;
+  &lt;div class=&quot;col-6&quot;&gt;2 of 4&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;3 of 4&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;4 of 4&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t9c91.html?s=h&amp;f=bs_grid_examples_6">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>等高</h2>
+
+<p>如果一列比另一列高（由于文本或 CSS 高度），其余的将跟随：</p>
+
+<iframe scrolling="no" src="../demo/bs/bs_grid_examples_7.html" style="width:100%;height:300px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;Lorem ipsum...&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;col&lt;/div&gt;
+  &lt;div class=&quot;col&quot;&gt;col&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t9132.html?s=h&amp;f=bs_grid_examples_7">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>嵌套的列</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_grid_examples_8.html" style="width:100%;height:120px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p>下例展示了如何创建两列布局，其中一列内有另外两列：</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-8&quot;&gt;
+    .col-8
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-6&quot;&gt;.col-6&lt;/div&gt;
+      &lt;div class=&quot;col-6&quot;&gt;.col-6&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;col-4&quot;&gt;.col-4&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t1dc4.html?s=h&amp;f=bs_grid_examples_8">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>响应类</h2>
+
+<p>Bootstrap 5 网格系统有五个类：</p>
+
+<ul>
+<li><code>.col-</code> (超小型设备 - 屏幕宽度小于 576px)</li>
+<li><code>.col-sm-</code> (小型设备 - 屏幕宽度等于或大于 576px)</li>
+<li><code>.col-md-</code> (中型设备 - 屏幕宽度等于或大于 768 像素)</li>
+<li><code>.col-lg-</code> (大型设备 - 屏幕宽度等于或大于 992 像素)</li>
+<li><code>.col-xl-</code> (xlarge 设备 - 屏幕宽度等于或大于 1200px)</li>
+<li><code>.col-xxl-</code> (xxlarge 设备 - 屏幕宽度等于或大于 1400px)</li>
+</ul>
+
+<p>可以组合上述类以创建更动态和灵活的布局。</p>
+
+<p class="tip"><span>提示：</span>每个类都按比例放大，因此如果您希望为 <code>sm</code> 和 <code>md</code> 设置相同的宽度，则只需指定 <code>sm</code>。</p>
+</div>
+
+
+
+<div>
+<h2>堆叠到水平</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_grid_examples_9.html" style="width:100%;height:130px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p>下例展示了如何创建列布局，该布局开始时在超小型设备上堆叠，然后在较大设备（sm、md、lg 和 xl）上变为水平布局：</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-sm-9&quot;&gt;col-sm-9&lt;/div&gt;
+  &lt;div class=&quot;col-sm-3&quot;&gt;col-sm-3&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-sm&quot;&gt;col-sm&lt;/div&gt;
+  &lt;div class=&quot;col-sm&quot;&gt;col-sm&lt;/div&gt;
+  &lt;div class=&quot;col-sm&quot;&gt;col-sm&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t6697.html?s=h&amp;f=bs_grid_examples_9">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>Mix 和 Match</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_grid_examples_10.html" style="width:100%;height:180px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;!-- 在超小型设备上 50%/50% 拆分，在大型设备上 75%/25% 拆分 --&gt;
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-6 col-sm-9&quot;&gt;col-6 col-sm-9&lt;/div&gt;
+  &lt;div class=&quot;col-6 col-sm-3&quot;&gt;col-6 col-sm-3&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 在超小型、小型、中型设备上 58%/42% 拆分，在大型和超大型设备上 66.3%/33.3% 拆分 --&gt;
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-7 col-lg-8&quot;&gt;col-7 col-lg-8&lt;/div&gt;
+  &lt;div class=&quot;col-5 col-lg-4&quot;&gt;col-5 col-lg-4&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 在小型设备上 25%/75% 拆分，在中型设备上 50%/50% 拆分，在大型和超大型设备上 33%/66% 拆分。在超小型设备上，会自动堆叠（100%） --&gt;
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-sm-3 col-md-6 col-lg-4&quot;&gt;col-sm-3 col-md-6 col-lg-4&lt;/div&gt;
+  &lt;div class=&quot;col-sm-9 col-md-6 col-lg-8&quot;&gt;col-sm-9 col-md-6 col-lg-8&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t6a41.html?s=h&amp;f=bs_grid_examples_10">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>无 gutter</h2>
+
+<p>如需更改列之间的间距（额外的空间），请使用任何 <code>.g-1|2|3|4|5</code> 类（<code>.g-4</code> 是默认值）。</p>
+
+<p>如需完全删除装订线（gutter），请使用 <code>.g-0</code>：</p>
+
+<iframe scrolling="no" src="../demo/bs/bs_grid_nogutters.html" style="width:100%;height:160px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;row g-0&quot;&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tef86.html?s=h&amp;f=bs_grid_nogutters">亲自试一试</a></p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="bootstrap_grid_xxl.html" title="Bootstrap 5 网格：特大型设备">BS5 网格 XXL</a></li>
+<li class="next"><a href="bootstrap_templates.html" title="Bootstrap 5 基础模板">BS5 基础模板</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_quiz"><a href="bootstrap_quiz.html">JavaScript 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/bootstrap5/bootstrap_grid_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:23:32 GMT -->
+</html>

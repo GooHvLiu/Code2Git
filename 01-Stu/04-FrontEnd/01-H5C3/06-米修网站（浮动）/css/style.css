@@ -1,0 +1,250 @@
+.header-nav {
+  background-color: #333;
+}
+.header-nav .header-nav-logo {
+  padding: 0 20px;
+  padding-top: 20px;
+}
+.header-nav .header-nav-logo a {
+  color: #fff;
+}
+.header-nav .header-nav-menu li {
+  padding: 20px;
+}
+.header-nav .header-nav-menu a {
+  padding: 20px 10px;
+  color: #fff;
+}
+.header-nav .header-nav-menu a:hover {
+  background-color: #444;
+  color: #f7c08a;
+}
+.content-nav {
+  height: 600px;
+  background: url(../imgs/index-show.jpg) no-repeat center center / cover;
+}
+.content-nav .content-nav-show {
+  color: #fff;
+  text-align: center;
+  padding-top: 170px;
+}
+.content-nav .content-nav-show .text-welcome {
+  font-size: 40px;
+  line-height: 1.2em;
+}
+.content-nav .content-nav-show p {
+  font-size: 20px;
+  line-height: 1.7em;
+  padding-bottom: 20px;
+}
+.content-nav .content-nav-show a {
+  display: inline-block;
+  font-size: 16px;
+  color: #fff;
+  background-color: #444;
+  padding: 13px 20px;
+  border-radius: 8px;
+}
+.content-nav .content-nav-show a:hover {
+  background-color: #333;
+  color: #f7c08a;
+  box-shadow: 0 0 50px white;
+  transition: 0.2s linear;
+}
+.lower-discription {
+  height: 500px;
+}
+.lower-discription .img {
+  width: 50%;
+  background: url(../imgs/index-mountain.jpg) no-repeat center center / cover;
+  height: 100%;
+}
+.lower-discription .discription {
+  width: 50%;
+  height: 100%;
+  padding: 15px;
+  text-align: center;
+  background-color: #3B3B3B;
+  color: white;
+}
+.lower-discription .discription p {
+  padding-left: 20px;
+}
+.lower-discription .discription p span {
+  font-size: 20px;
+}
+.lower-discription .discription p .text-content-lower {
+  color: #f7c08a;
+  padding-right: 10px;
+  font-weight: bolder;
+}
+.lower-discription .discription .read-more {
+  margin-top: 15px;
+  display: inline-block;
+  font-size: 15px;
+  color: #fff;
+  background-color: #444;
+  padding: 13px 20px;
+  border-radius: 8px;
+}
+.lower-discription .discription .read-more:hover {
+  background-color: #333;
+  color: #f7c08a;
+  box-shadow: 0 0 50px white;
+  transition: 0.2s linear;
+}
+.lower-teach {
+  text-align: center;
+}
+.lower-teach .teacher,
+.lower-teach .course,
+.lower-teach .student {
+  height: 400px;
+  width: 33.333%;
+  text-align: center;
+}
+.lower-teach .teacher .iconfont,
+.lower-teach .course .iconfont,
+.lower-teach .student .iconfont,
+.lower-teach .teacher .t-discription,
+.lower-teach .course .t-discription,
+.lower-teach .student .t-discription {
+  padding-top: 50px;
+}
+.lower-teach .teacher .t-name,
+.lower-teach .course .t-name,
+.lower-teach .student .t-name {
+  padding-top: 25px;
+  font-size: 20px;
+  font-weight: bolder;
+}
+.lower-teach .teacher .t-name,
+.lower-teach .course .t-name {
+  margin-left: -15px;
+}
+.lower-teach .course:hover,
+.lower-teach .teacher:hover,
+.lower-teach .student:hover {
+  background-color: #F6B781;
+  box-shadow: 0 0 20px #333;
+  transition: 0.3s linear;
+}
+.about-content {
+  height: 300px;
+}
+.about-content .about-left {
+  width: 50%;
+  height: 100%;
+}
+.about-content .about-left .about-header {
+  padding: 10px 0;
+}
+.about-content .about-left .text-about {
+  font-size: 40px;
+}
+.about-content .about-left .text-about-content {
+  font-size: 15px;
+}
+.about-content .about-right {
+  width: 50%;
+  height: 100%;
+}
+.about-content .about-right img {
+  display: block;
+  width: 60%;
+  margin: auto 0px;
+  border-radius: 50%;
+}
+.trainee-assess {
+  background: url(../imgs/about-city.jpg) no-repeat center center / cover;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
+}
+.trainee-assess .text-trainee-assess {
+  margin-top: 50px;
+  font-size: 30px;
+  color: white;
+}
+.trainee-assess .trainee {
+  height: 100px;
+  margin: 50px 50px;
+  background-color: #F6B781;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.trainee-assess .trainee .head-img {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.trainee-assess .trainee .head-img img {
+  width: 80px;
+  border-radius: 50%;
+}
+.trainee-assess .trainee .trainee-comment {
+  width: 90%;
+  margin-left: -50px;
+}
+.contact-container .contact-text-content-we {
+  font-size: 40px;
+  padding-top: 20px;
+  padding-left: 20px;
+}
+.contact-container p,
+.contact-container .contact-form {
+  padding-left: 30px;
+}
+.contact-container .contact-form label {
+  display: block;
+}
+.contact-container .contact-form input,
+.contact-container .contact-form textarea {
+  width: 100%;
+  height: 30px;
+}
+.contact-container .contact-form input:focus,
+.contact-container .contact-form textarea:focus {
+  outline: none;
+  border-color: #f7c08a;
+}
+.contact-container .contact-form textarea {
+  height: 200px;
+}
+.contact-container .btn {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+.contact-container .btn:hover {
+  cursor: pointer;
+  color: #f7c08a;
+}
+.contact-methods {
+  width: 100%;
+  height: 200px;
+  background-color: #333;
+}
+.contact-methods .contact-methods-address,
+.contact-methods .contact-methods-phone,
+.contact-methods .contact-methods-mail {
+  color: white;
+  width: 33.33%;
+  padding-top: 50px;
+  text-align: center;
+}
+.lower-foot {
+  height: 40px;
+  border: 2px solid #333;
+  background-color: #333;
+  text-align: center;
+}
+.lower-foot p {
+  font-size: 12px;
+  color: white;
+}

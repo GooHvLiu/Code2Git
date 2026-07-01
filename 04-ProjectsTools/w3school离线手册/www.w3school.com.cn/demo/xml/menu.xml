@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<breakfast_menu>
+<food>
+    <name>比利时华夫饼</name>
+    <price>$5.95</price>
+    <description>两块著名的比利时华夫饼，含有大量真正的枫糖浆。</description>
+    <calories>650</calories>
+</food>
+<food>
+    <name>草莓比利时华夫饼</name>
+    <price>$7.95</price>
+    <description>清淡的比利时华夫饼，上面覆盖着草莓和生奶油。</description>
+    <calories>900</calories>
+</food>
+<food>
+    <name>浆果比利时华夫饼</name>
+    <price>$8.95</price>
+    <description>比利时华夫饼，上面覆盖着各种新鲜浆果和生奶油</description>
+    <calories>900</calories>
+</food>
+<food>
+    <name>法式吐司</name>
+    <price>$4.50</price>
+    <description>由我们自制的酵母面包制成的厚片。</description>
+    <calories>600</calories>
+</food>
+<food>
+    <name>家庭式早餐</name>
+    <price>$6.95</price>
+    <description>两个鸡蛋、培根或香肠、吐司以及我们广受欢迎的薯饼。</description>
+    <calories>950</calories>
+</food>
+</breakfast_menu>

@@ -1,0 +1,102 @@
+
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.w3school.com.cn/pandas/r.php?f=pandas_ref_df_groupby by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:11:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8">
+<title>Python Result</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #000000;
+    color: #ffffff;
+    line-height: 1.5;
+    font-family: consolas,"courier new",monospace;
+}
+
+pre#python_result {
+    padding: 8px;
+	font-size:15px;
+}
+</style>
+</head>
+
+<body>
+<pre id="python_result">
+Traceback (most recent call last):
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\groupby\groupby.py&quot;, line 1942, in _agg_py_fallback
+    res_values = self._grouper.agg_series(ser, alt, preserve_dtype=True)
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\groupby\ops.py&quot;, line 864, in agg_series
+    result = self._aggregate_series_pure_python(obj, func)
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\groupby\ops.py&quot;, line 885, in _aggregate_series_pure_python
+    res = func(group)
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\groupby\groupby.py&quot;, line 2454, in &lt;lambda&gt;
+    alt=lambda x: Series(x, copy=False).mean(numeric_only=numeric_only),
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\series.py&quot;, line 6549, in mean
+    return NDFrame.mean(self, axis, skipna, numeric_only, **kwargs)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\generic.py&quot;, line 12420, in mean
+    return self._stat_function(
+           ~~~~~~~~~~~~~~~~~~~^
+        &quot;mean&quot;, nanops.nanmean, axis, skipna, numeric_only, **kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\generic.py&quot;, line 12377, in _stat_function
+    return self._reduce(
+           ~~~~~~~~~~~~^
+        func, name=name, axis=axis, skipna=skipna, numeric_only=numeric_only
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\series.py&quot;, line 6457, in _reduce
+    return op(delegate, skipna=skipna, **kwds)
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\nanops.py&quot;, line 147, in f
+    result = alt(values, axis=axis, skipna=skipna, **kwds)
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\nanops.py&quot;, line 404, in new_func
+    result = func(values, axis=axis, skipna=skipna, mask=mask, **kwargs)
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\nanops.py&quot;, line 720, in nanmean
+    the_sum = _ensure_numeric(the_sum)
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\nanops.py&quot;, line 1701, in _ensure_numeric
+    raise TypeError(f&quot;Could not convert string &#039;{x}&#039; to numeric&quot;)
+TypeError: Could not convert string &#039;FiestaFocusMondeoB-Max&#039; to numeric
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File &quot;example.py&quot;, line 11, in &lt;module&gt;
+    print(df.groupby([&quot;car&quot;]).mean())
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\groupby\groupby.py&quot;, line 2452, in mean
+    result = self._cython_agg_general(
+        &quot;mean&quot;,
+        alt=lambda x: Series(x, copy=False).mean(numeric_only=numeric_only),
+        numeric_only=numeric_only,
+    )
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\groupby\groupby.py&quot;, line 1998, in _cython_agg_general
+    new_mgr = data.grouped_reduce(array_func)
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\internals\managers.py&quot;, line 1469, in grouped_reduce
+    applied = sb.apply(func)
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\internals\blocks.py&quot;, line 393, in apply
+    result = func(self.values, **kwargs)
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\groupby\groupby.py&quot;, line 1995, in array_func
+    result = self._agg_py_fallback(how, values, ndim=data.ndim, alt=alt)
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\groupby\groupby.py&quot;, line 1946, in _agg_py_fallback
+    raise type(err)(msg) from err
+TypeError: agg function failed [how-&gt;mean,dtype-&gt;object]
+
+</pre>
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/pandas/r.php?f=pandas_ref_df_groupby by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:11:27 GMT -->
+</html>
+
+

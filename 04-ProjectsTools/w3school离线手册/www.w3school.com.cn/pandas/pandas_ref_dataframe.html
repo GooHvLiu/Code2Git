@@ -1,0 +1,991 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/pandas/pandas_ref_dataframe.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 01:46:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Pandas DataFrame 参考手册</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Pandas 教程</h2>
+<ul>
+<li><a href="index.html" title="Pandas 教程">Pandas 教程</a></li>
+<li><a href="pandas_intro.html" title="Pandas 简介">Pandas 简介</a></li>
+<li><a href="pandas_getting_started.html" title="Pandas 入门">Pandas 入门</a></li>
+<li><a href="pandas_series.html" title="Pandas 序列">Pandas 序列</a></li>
+<li><a href="pandas_dataframes.html" title="Pandas 数据帧">Pandas 数据帧</a></li>
+<li><a href="pandas_csv.html" title="Pandas 读取 CSV">Pandas 读取 CSV</a></li>
+<li><a href="pandas_json.html" title="Pandas 读取 JSON">Pandas 读取 JSON</a></li>
+<li><a href="pandas_analyzing.html" title="Pandas 数据分析">Pandas 数据分析</a></li>
+</ul>
+<h2>数据清洗</h2>
+<ul>
+<li><a href="pandas_cleaning.html" title="Pandas 数据清洗">Pandas 数据清洗</a></li>
+<li><a href="pandas_cleaning_empty_cells.html" title="Pandas 清洗空单元格">Pandas 清洗空单元格</a></li>
+<li><a href="pandas_cleaning_wrong_format.html" title="Pandas 清洗错误格式">Pandas 清洗错误格式</a></li>
+<li><a href="pandas_cleaning_wrong_data.html" title="Pandas 清洗错误数据">Pandas 清洗错误数据</a></li>
+<li><a href="pandas_cleaning_duplicates.html" title="Pandas 删除重复项">Pandas 删除重复项</a></li>
+</ul>
+<h2>相关性</h2>
+<ul>
+<li><a href="pandas_correlations.html" title="Pandas 相关性">Pandas 相关性</a></li>
+</ul>
+<h2>绘图</h2>
+<ul>
+<li><a href="pandas_plotting.html" title="Pandas 绘图">Pandas 绘图</a></li>
+</ul>
+<h2>参考手册</h2>
+<ul>
+<li class="currentLink"><a href="pandas_ref_dataframe.html" title="DataFrames 参考手册">DataFrames 参考手册</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Pandas DataFrame 参考手册</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="pandas_plotting.html" title="Pandas 绘图">Pandas 绘图</a></li>
+<li class="next"><a href="index.html" title="Pandas 教程">Pandas 教程</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<p>以下是 DataFrame 对象的所有属性和方法，附有解释和实例：</p>
+
+<table class="ref">
+<tr>
+<th style="width: 25%;">属性/方法</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><a href="ref_df_abs.html" title="Pandas DataFrame abs() 方法">abs()</a></td>
+<td>返回 DataFrame，其中包含每个值的绝对值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_add.html" title="Pandas DataFrame add() 方法">add()</a></td>
+<td>将 DataFrame 的值与指定的值相加。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_add_prefix.html" title="Pandas DataFrame add_prefix() 方法">add_prefix()</a></td>
+<td>为所有标签添加前缀。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_add_suffix.html" title="Pandas DataFrame add_suffix() 方法">add_suffix()</a></td>
+<td>为所有标签添加后缀。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_agg.html" title="Pandas DataFrame agg() 方法">agg()</a></td>
+<td>对 DataFrame 的一个轴应用函数或函数名。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_aggregate.html" title="Pandas DataFrame aggregate() 方法">aggregate()</a></td>
+<td>对 DataFrame 的一个轴应用函数或函数名。</td>
+</tr>
+
+<tr>
+<td>align()</td>
+<td>使用指定的连接方法对齐两个 DataFrame。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_all.html" title="Pandas DataFrame all() 方法">all()</a></td>
+<td>如果 DataFrame 中的所有值都为 True，则返回 True，否则返回 False。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_any.html" title="Pandas DataFrame any() 方法">any()</a></td>
+<td>如果 DataFrame 中的任意值为 True，则返回 True，否则返回 False。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_append.html" title="Pandas DataFrame append() 方法">append()</a></td>
+<td>追加新列。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_apply.html" title="Pandas DataFrame apply() 方法">apply()</a></td>
+<td>对 DataFrame 的一个轴应用函数。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_applymap.html" title="Pandas DataFrame applymap() 方法">applymap()</a></td>
+<td>对 DataFrame 中的每个元素执行函数。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_assign.html" title="Pandas DataFrame assign() 方法">assign()</a></td>
+<td>分配新列。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_astype.html" title="Pandas DataFrame astype() 方法">astype()</a></td>
+<td>将 DataFrame 转换为指定的 dtype。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_at.html" title="Pandas DataFrame at() 方法">at</a></td>
+<td>获取或设置具有指定标签的项目的值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_axes.html" title="Pandas DataFrame axes() 方法">axes</a></td>
+<td>返回 DataFrame 的行和列的标签。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_bfill.html" title="Pandas DataFrame bfill() 方法">bfill()</a></td>
+<td>使用下一行的值替换 NULL 值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_bool.html" title="Pandas DataFrame bool() 方法">bool()</a></td>
+<td>返回 DataFrame 的布尔值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_columns.html" title="Pandas DataFrame columns 属性">columns</a></td>
+<td>返回 DataFrame 的列标签。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_combine.html" title="Pandas DataFrame combine() 方法">combine()</a></td>
+<td>比较两个 DataFrame 中的值，并让函数决定保留哪些值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_combine_first.html" title="Pandas DataFrame combine_first() 方法">combine_first()</a></td>
+<td>
+	<p>比较两个 DataFrame。</p>
+	<p>如果第一个 DataFrame 有 NULL 值，则使用第二个 DataFrame 中的相应值填充。</p>
+</td>
+</tr>
+
+<tr>
+<td>compare()</td>
+<td>比较两个 DataFrame 并返回差值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_convert_dtypes.html" title="Pandas DataFrame convert_dtypes() 方法">convert_dtypes()</a></td>
+<td>将 DataFrame 中的列转换为新的 dtypes。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_copy.html" title="Pandas DataFrame copy() 方法">copy()</a></td>
+<td>返回 DataFrame 的副本。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_corr.html" title="Pandas DataFrame corr() 方法">corr()</a></td>
+<td>找出每列之间的相关性（关系）。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_count.html" title="Pandas DataFrame count() 方法">count()</a></td>
+<td>返回每列/行的非空单元格数量。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_cov.html" title="Pandas DataFrame cov() 方法">cov()</a></td>
+<td>求列的协方差。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_cummax.html" title="Pandas DataFrame cummax() 方法">cummax()</a></td>
+<td>计算 DataFrame 的累积最大值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_cummin.html" title="Pandas DataFrame cummin() 方法">cummin()</a></td>
+<td>计算 DataFrame 的累积最小值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_cumprod.html" title="Pandas DataFrame cumprod() 方法">cumprod()</a></td>
+<td>计算 DataFrame 上的累积乘积。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_cumsum.html" title="Pandas DataFrame cumsum() 方法">cumsum()</a></td>
+<td>计算 DataFrame 上的累积和。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_describe.html" title="Pandas DataFrame describe() 方法">describe()</a></td>
+<td>返回 DataFrame 中每列的描述摘要。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_diff.html" title="Pandas DataFrame diff() 方法">diff()</a></td>
+<td>计算值与上一行中相同列的值之间的差值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_div.html" title="Pandas DataFrame div() 方法">div()</a></td>
+<td>将 DataFrame 的值除以指定值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_dot.html" title="Pandas DataFrame dot() 方法">dot()</a></td>
+<td>将 DataFrame 的值与另一个类似数组的对象中的值相乘，并将结果相加。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_drop.html" title="Pandas DataFrame drop() 方法">drop()</a></td>
+<td>从 DataFrame 中删除指定的行/列。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_drop_duplicates.html" title="Pandas DataFrame drop_duplicates() 方法">drop_duplicates()</a></td>
+<td>从 DataFrame 中删除重复值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_droplevel.html" title="Pandas DataFrame droplevel() 方法">droplevel()</a></td>
+<td>删除指定的索引/列。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_dropna.html" title="Pandas DataFrame dropna() 方法">dropna()</a></td>
+<td>删除所有包含 NULL 值的行。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_dtypes.html" title="Pandas DataFrame dtypes() 方法">dtypes</a></td>
+<td>返回 DataFrame 列的 dtypes。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_duplicated.html" title="Pandas DataFrame duplicated() 方法">duplicated()</a></td>
+<td>对于重复行返回 True，否则返回 False。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_empty.html" title="Pandas DataFrame empty() 方法">empty</a></td>
+<td>如果 DataFrame 为空则返回 True，否则返回 False。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_eq.html" title="Pandas DataFrame eq() 方法">eq()</a></td>
+<td>对于等于指定值的值返回 True，否则返回 False。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_equals.html" title="Pandas DataFrame equals() 方法">equals()</a></td>
+<td>如果两个 DataFrame 相等，则返回 True，否则返回 False。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_eval.html" title="Pandas DataFrame eval() 方法">eval</a></td>
+<td>评估指定的字符串。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_explode.html" title="Pandas DataFrame explode() 方法">explode()</a></td>
+<td>将每个元素转换为行。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_ffill.html" title="Pandas DataFrame ffill() 方法">ffill()</a></td>
+<td>使用上一行的值替换 NULL 值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_fillna.html" title="Pandas DataFrame fillna() 方法">fillna()</a></td>
+<td>使用指定的值替换 NULL 值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_filter.html" title="Pandas DataFrame filter() 方法">filter()</a></td>
+<td>根据指定的过滤器过滤 DataFrame。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_first.html" title="Pandas DataFrame first() 方法">first()</a></td>
+<td>返回指定日期选择的第一行。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_floordiv.html" title="Pandas DataFrame floordiv() 方法">floordiv()</a></td>
+<td>将 DataFrame 的值除以指定的值，并将值向下取整。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_ge.html" title="Pandas DataFrame ge() 方法">ge()</a></td>
+<td>对于大于或等于指定值的值返回 True，否则返回 False。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_get.html" title="Pandas DataFrame get() 方法">get()</a></td>
+<td>返回指定键的项目。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_groupby.html" title="Pandas DataFrame groupby() 方法">groupby()</a></td>
+<td>将行/列分组到指定的组中。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_gt.html" title="Pandas DataFrame gt() 方法">gt()</a></td>
+<td>对于大于指定值的值返回 True，否则返回 False。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_head.html" title="Pandas DataFrame head() 方法">head()</a></td>
+<td>返回标题行和前 10 行，或指定数量的行。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_iat.html" title="Pandas DataFrame iat 属性">iat</a></td>
+<td>获取或设置指定位置项的值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_idxmax.html" title="Pandas DataFrame idxmax() 方法">idxmax()</a></td>
+<td>返回指定轴上最大值的标签。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_idxmin.html" title="Pandas DataFrame idxmin() 方法">idxmin()</a></td>
+<td>返回指定轴上最小值的标签。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_iloc.html" title="Pandas DataFrame iloc 属性">iloc</a></td>
+<td>获取或设置指定位置的一组元素的值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_index.html" title="Pandas DataFrame index 属性">index</a></td>
+<td>返回 DataFrame 的行标签。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_infer_objects.html" title="Pandas DataFrame infer_objects() 方法">infer_objects()</a></td>
+<td>更改 DataFrame 中列的 dtype。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_info.html" title="Pandas DataFrame info() 方法">info()</a></td>
+<td>打印有关 DataFrame 的信息。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_insert.html" title="Pandas DataFrame insert() 方法">insert()</a></td>
+<td>在 DataFrame 中插入列。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_interpolate.html" title="Pandas DataFrame interpolate() 方法">interpolate()</a></td>
+<td>用插值方法替换非数字值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_isin.html" title="Pandas DataFrame isin() 方法">isin()</a></td>
+<td>如果 DataFrame 中的每个元素都在指定值中，则返回 True。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_isna.html" title="Pandas DataFrame isna() 方法">isna()</a></td>
+<td>查找非数字值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_isnull.html" title="Pandas DataFrame isnull() 方法">isnull()</a></td>
+<td>查找 NULL 值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_items.html" title="Pandas DataFrame items() 方法">items()</a></td>
+<td>遍历 DataFrame 的列。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_iteritems.html" title="Pandas DataFrame iteritems() 方法">iteritems()</a></td>
+<td>遍历 DataFrame 的列。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_iterrows.html" title="Pandas DataFrame iterrows() 方法">iterrows()</a></td>
+<td>遍历 DataFrame 的行。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_itertuples.html" title="Pandas DataFrame itertuples() 方法">itertuples()</a></td>
+<td>将行作为命名元组进行迭代。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_join.html" title="Pandas DataFrame join() 方法">join()</a></td>
+<td>连接另一个 DataFrame 的列。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_keys.html" title="Pandas DataFrame keys() 方法">keys()</a></td>
+<td>返回信息轴的键。</td>
+</tr>
+
+<tr>
+<td>kurtosis()</td>
+<td>返回指定轴上值的峰度。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_last.html" title="Pandas DataFrame last() 方法">last()</a></td>
+<td>返回指定日期选择的最后几行。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_le.html" title="Pandas DataFrame le() 方法">le()</a></td>
+<td>对于小于或等于指定值的值返回 True，否则返回 False。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_loc.html" title="Pandas DataFrame loc 属性">loc</a></td>
+<td>获取或设置使用其标签指定的一组元素的值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_lt.html" title="Pandas DataFrame lt() 方法">lt()</a></td>
+<td>对于小于指定值的值返回 True，否则返回 False。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_mask.html" title="Pandas DataFrame mask() 方法">mask()</a></td>
+<td>替换满足指定条件的所有值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_max.html" title="Pandas DataFrame max() 方法">max()</a></td>
+<td>返回指定轴上值的最大值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_mean.html" title="Pandas DataFrame mean() 方法">mean()</a></td>
+<td>返回指定轴上值的平均值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_median.html" title="Pandas DataFrame median() 方法">median()</a></td>
+<td>返回指定轴上值的中位数。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_melt.html" title="Pandas DataFrame melt() 方法">melt()</a></td>
+<td>将 DataFrame 从宽表重塑为长表。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_memory_usage.html" title="Pandas DataFrame memory_usage() 方法">memory_usage()</a></td>
+<td>返回每列的内存使用情况。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_merge.html" title="Pandas DataFrame merge() 方法">merge()</a></td>
+<td>合并 DataFrame 对象。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_min.html" title="Pandas DataFrame min() 方法">min()</a></td>
+<td>返回指定轴上值的最小值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_mod.html" title="Pandas DataFrame mod() 方法">mod()</a></td>
+<td>对 DataFrame 的值求模（取余数）。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_mode.html" title="Pandas DataFrame mode() 方法">mode()</a></td>
+<td>返回指定轴上值的众数。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_mul.html" title="Pandas DataFrame mul() 方法">mul()</a></td>
+<td>将 DataFrame 的值与指定的值相乘。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_ndim.html" title="Pandas DataFrame ndim 属性">ndim</a></td>
+<td>返回 DataFrame 的维度数。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_ne.html" title="Pandas DataFrame ne() 方法">ne()</a></td>
+<td>对于不等于指定值的值返回 True，否则返回 False。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_nlargest.html" title="Pandas DataFrame nlargest() 方法">nlargest()</a></td>
+<td>按指定列降序排序 DataFrame，并返回指定数量的行。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_notna.html" title="Pandas DataFrame notna() 方法">notna()</a></td>
+<td>查找不是非数字的值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_notnull.html" title="Pandas DataFrame notnull() 方法">notnull()</a></td>
+<td>查找不是 NULL 的值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_nsmallest.html" title="Pandas DataFrame nsmallest() 方法">nsmallest()</a></td>
+<td>按指定列升序排序 DataFrame，并返回指定数量的行。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_nunique.html" title="Pandas DataFrame nunique() 方法">nunique()</a></td>
+<td>返回指定轴上唯一值的数量。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_pct_change.html" title="Pandas DataFrame pct_change() 方法">pct_change()</a></td>
+<td>返回当前值与前一个值之间的百分比变化。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_pipe.html" title="Pandas DataFrame pipe() 方法">pipe()</a></td>
+<td>对 DataFrame 应用函数。</td>
+</tr>
+
+<tr>
+<td>pivot()</td>
+<td>重塑 DataFrame。</td>
+</tr>
+
+<tr>
+<td>pivot_table()</td>
+<td>创建电子表格数据透视表作为 DataFrame。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_pop.html" title="Pandas DataFrame pop() 方法">pop()</a></td>
+<td>从 DataFrame 中移除一个元素。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_pow.html" title="Pandas DataFrame pow() 方法">pow()</a></td>
+<td>将一个 DataFrame 的值提升到另一个 DataFrame 的值的幂。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_prod.html" title="Pandas DataFrame prod() 方法">prod()</a></td>
+<td>返回指定轴上所有值的乘积。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_product.html" title="Pandas DataFrame product() 方法">product()</a></td>
+<td>返回指定轴上值的乘积。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_quantile.html" title="Pandas DataFrame quantile() 方法">quantile()</a></td>
+<td>返回指定轴上指定分位数的值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_query.html" title="Pandas DataFrame query() 方法">query()</a></td>
+<td>查询 DataFrame。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_radd.html" title="Pandas DataFrame radd() 方法">radd()</a></td>
+<td>将一个 DataFrame 的值与另一个 DataFrame 的值反向相加。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_rdiv.html" title="Pandas DataFrame rdiv() 方法">rdiv()</a></td>
+<td>将一个 DataFrame 的值与另一个 DataFrame 的值进行反向相除。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_reindex.html" title="Pandas DataFrame reindex() 方法">reindex()</a></td>
+<td>更改 DataFrame 的标签。</td>
+</tr>
+
+<tr>
+<td>reindex_like()</td>
+<td></td>
+</tr>
+
+<tr>
+<td><a href="ref_df_rename.html" title="Pandas DataFrame rename() 方法">rename()</a></td>
+<td>更改轴的标签。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_rename_axis.html" title="Pandas DataFrame rename_axis() 方法">rename_axis()</a></td>
+<td>更改轴的名称。</td>
+</tr>
+
+<tr>
+<td>reorder_levels()</td>
+<td>重新排序索引级别。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_replace.html" title="Pandas DataFrame replace() 方法">replace()</a></td>
+<td>替换指定的值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_reset_index.html" title="Pandas DataFrame reset_index() 方法">reset_index()</a></td>
+<td>重置索引。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_rfloordiv.html" title="Pandas DataFrame rfloordiv() 方法">rfloordiv()</a></td>
+<td>反向将一个 DataFrame 的值除以另一个 DataFrame 的值（向下取整）。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_rmod.html" title="Pandas DataFrame rmod() 方法">rmod()</a></td>
+<td>反向将一个 DataFrame 的值对另一个 DataFrame 的值求模。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_rmul.html" title="Pandas DataFrame rmul() 方法">rmul()</a></td>
+<td>将一个 DataFrame 的值与另一个 DataFrame 的值反向相乘。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_round.html" title="Pandas DataFrame round() 方法">round()</a></td>
+<td>返回所有值都四舍五入到指定格式后的 DataFrame。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_rpow.html" title="Pandas DataFrame rpow() 方法">rpow()</a></td>
+<td>反向将一个 DataFrame 的值提升到另一个 DataFrame 的值的幂。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_rsub.html" title="Pandas DataFrame rsub() 方法">rsub()</a></td>
+<td>反向将一个 DataFrame 的值减去另一个 DataFrame 的值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_rtruediv.html" title="Pandas DataFrame rtruediv() 方法">rtruediv()</a></td>
+<td>反向将一个 DataFrame 的值除以另一个 DataFrame 的值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_sample.html" title="Pandas DataFrame sample() 方法">sample()</a></td>
+<td>返回随机选择的元素。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_select_dtypes.html" title="Pandas DataFrame select_dtypes() 方法">select_dtypes()</a></td>
+<td>返回包含选定数据类型的列的 DataFrame。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_sem.html" title="Pandas DataFrame sem() 方法">sem()</a></td>
+<td>返回指定轴上平均值的标准误差。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_set_axis.html" title="Pandas DataFrame set_axis() 方法">set_axis()</a></td>
+<td>设置指定轴的索引。</td>
+</tr>
+
+<tr>
+<td>set_flags()</td>
+<td>返回具有指定标志的新 DataFrame。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_set_index.html" title="Pandas DataFrame set_index() 方法">set_index()</a></td>
+<td>设置 DataFrame 的索引。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_shape.html" title="Pandas DataFrame shape() 方法">shape</a></td>
+<td>返回 DataFrame 的行数和列数。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_size.html" title="Pandas DataFrame size() 方法">size</a></td>
+<td>返回 DataFrame 中的元素数量。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_skew.html" title="Pandas DataFrame skew() 方法">skew()</a></td>
+<td>返回指定轴上值的偏度。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_sort_index.html" title="Pandas DataFrame sort_index() 方法">sort_index()</a></td>
+<td>根据标签对 DataFrame 进行排序。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_sort_values.html" title="Pandas DataFrame sort_values() 方法">sort_values()</a></td>
+<td>根据值对 DataFrame 进行排序。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_squeeze.html" title="Pandas DataFrame squeeze() 方法">squeeze()</a></td>
+<td>将单列 DataFrame 转换为 Series。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_stack.html" title="Pandas DataFrame stack() 方法">stack()</a></td>
+<td>将 DataFrame 从宽表重塑为长表。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_std.html" title="Pandas DataFrame std() 方法">std()</a></td>
+<td>返回指定轴上值的标准差。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_sub.html" title="Pandas DataFrame sub() 方法">sub()</a></td>
+<td>将 DataFrame 的值减去指定的值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_sum.html" title="Pandas DataFrame sum() 方法">sum()</a></td>
+<td>回指定轴上值的总和。</td>
+</tr>
+
+<tr>
+<td>swaplevel()</td>
+<td>交换两个指定的级别。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_t.html" title="Pandas DataFrame T 属性">T</a></td>
+<td>将行变成列，将列变成行。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_tail.html" title="Pandas DataFrame tail() 方法">tail()</a></td>
+<td>返回表头和最后几行。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_take.html" title="Pandas DataFrame take() 方法">take()</a></td>
+<td>返回指定的元素。</td>
+</tr>
+
+<tr>
+<td>to_xarray()</td>
+<td>返回 xarray 对象。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_transform.html" title="Pandas DataFrame transform() 方法">transform()</a></td>
+<td>对 DataFrame 中的每个值执行函数。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_transpose.html" title="Pandas DataFrame transpose() 方法">transpose()</a></td>
+<td>将行变成列，将列变成行。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_truediv.html" title="Pandas DataFrame truediv() 方法">truediv()</a></td>
+<td>将 DataFrame 的值除以指定值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_truncate.html" title="Pandas DataFrame truncate() 方法">truncate()</a></td>
+<td>移除指定值集之外的元素。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_update.html" title="Pandas DataFrame update() 方法">update()</a></td>
+<td>使用另一个 DataFrame 中的值更新一个 DataFrame。</td>
+</tr>
+
+<tr>
+<td>value_counts()</td>
+<td>返回唯一行的数量。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_values.html" title="Pandas DataFrame values() 方法">values</a></td>
+<td>以 NumPy 数组形式返回 DataFrame。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_var.html" title="Pandas DataFrame var() 方法">var()</a></td>
+<td>返回指定轴上值的方差。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_where.html" title="Pandas DataFrame where() 方法">where()</a></td>
+<td>替换不满足指定条件的所有值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_xs.html" title="Pandas DataFrame xs() 方法">xs()</a></td>
+<td>返回 DataFrame 的横截面。</td>
+</tr>
+
+<tr>
+<td><a href="ref_df_iter.html" title="Pandas DataFrame __iter__() 方法">__iter__()</a></td>
+<td>返回信息轴的迭代器。</td>
+</tr>
+</table>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="pandas_plotting.html" title="Pandas 绘图">Pandas 绘图</a></li>
+<li class="next"><a href="index.html" title="Pandas 教程">Pandas 教程</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+<div id="tools">
+<!--<h5 id="tools_quiz"><a href="/pandas/pandas_quiz.asp">Pandas 测验</a></h5>-->
+<h5 id="tools_reference"><a href="pandas_ref_dataframe.html" title="Pandas DataFrame 参考手册">Pandas</a></h5>
+</div>
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/pandas/pandas_ref_dataframe.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 01:47:49 GMT -->
+</html>

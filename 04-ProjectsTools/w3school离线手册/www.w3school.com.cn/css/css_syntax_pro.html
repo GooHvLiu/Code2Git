@@ -1,0 +1,286 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/css/css_syntax_pro.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:18:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>CSS 高级语法</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>CSS 高级教程</h2>
+<ul>
+<li><a href="index_pro.html" title="CSS 课外书">CSS 课外书</a></li>
+<li><a href="pro_css_jianjie.html" title="CSS 简介">CSS 简介</a></li>
+<li><a href="pro_css_syntax.html" title="CSS 基础语法">CSS 基础语法</a></li>
+<li class="currentLink"><a href="css_syntax_pro.html" title="CSS 高级语法">CSS 高级语法</a></li>
+<li><a href="css_syntax_descendant_selector.html" title="CSS 派生选择器">CSS 派生选择器</a></li>
+<li><a href="css_syntax_id_selector.html" title="CSS id 选择器">CSS id 选择器</a></li>
+<li><a href="css_syntax_class_selector.html" title="CSS 类选择器">CSS 类选择器</a></li>
+<li><a href="css_howto.html" title="CSS 创建">CSS 创建</a></li>
+<li><a href="pro_css_background.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="pro_css_text.html" title="CSS 文本">CSS 文本</a></li>
+<li><a href="pro_css_font.html" title="CSS 字体">CSS 字体</a></li>
+<li><a href="pro_css_list.html" title="CSS 列表">CSS 列表</a></li>
+</ul>
+<h2>CSS 框模型</h2>
+<ul>
+<li><a href="pro_css_boxmodel.html" title="CSS 框模型概述">CSS 框模型概述</a></li>
+<li><a href="pro_css_padding.html" title="CSS 内边距">CSS 内边距</a></li>
+<li><a href="pro_css_border.html" title="CSS 边框">CSS 边框</a></li>
+<li><a href="pro_css_margin.html" title="CSS 外边距">CSS 外边距</a></li>
+<li><a href="pro_css_margin_collapsing.html" title="CSS 外边距合并">CSS 外边距合并</a></li>
+</ul>
+<h2>CSS 定位</h2>
+<ul>
+<li><a href="pro_css_positioning.html" title="CSS 定位概述">CSS 定位概述</a></li>
+<li><a href="css_positioning_relative.html" title="CSS 相对定位">CSS 相对定位</a></li>
+<li><a href="css_positioning_absolute.html" title="CSS 绝对定位">CSS 绝对定位</a></li>
+<li><a href="css_positioning_floating.html" title="CSS 浮动">CSS 浮动</a></li>
+</ul>
+<h2>CSS 选择器</h2>
+<ul>
+<li><a href="css_selector_type.html" title="CSS 元素选择器">CSS 元素选择器</a></li>
+<li><a href="css_selector_grouping.html" title="CSS 选择器分组">CSS 选择器分组</a></li>
+<li><a href="css_selector_class.html" title="CSS 类选择器详解">CSS 类选择器详解</a></li>
+<li><a href="css_selector_id.html" title="CSS ID 选择器详解">CSS ID 选择器详解</a></li>
+<li><a href="css_selector_attribute.html" title="CSS 属性选择器详解">CSS 属性选择器详解</a></li>
+<li><a href="css_selector_descendant.html" title="CSS 后代选择器">CSS 后代选择器</a></li>
+<li><a href="css_selector_child.html" title="CSS 子元素选择器">CSS 子元素选择器</a></li>
+<li><a href="css_selector_adjacent_sibling.html" title="CSS 相邻兄弟选择器">CSS 相邻兄弟选择器</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>CSS 高级语法</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="pro_css_syntax.html" title="CSS 基础语法">CSS 基础语法</a></li>
+<li class="next"><a href="css_syntax_descendant_selector.html" title="CSS 派生选择器">CSS 派生选择器</a></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>选择器的分组</h2>
+
+<p>你可以对选择器进行分组，这样，被分组的选择器就可以分享相同的声明。用逗号将需要分组的选择器分开。在下面的例子中，我们对所有的标题元素进行了分组。所有的标题元素都是绿色的。</p>
+
+<pre class="language-css">
+<mark>h1,h2,h3,h4,h5,h6</mark> {
+  color: green;
+  }
+</pre>
+</div>
+
+
+
+<div>
+<h2>继承及其问题</h2>
+
+<p>根据 CSS，子元素从父元素继承属性。但是它并不总是按此方式工作。看看下面这条规则：</p>
+
+<pre class="language-css">
+body {
+     font-family: Verdana, sans-serif;
+     }
+</pre>
+
+<p>根据上面这条规则，站点的 body 元素将使用 Verdana 字体（假如访问者的系统中存在该字体的话）。</p>
+
+<p>通过 CSS 继承，子元素将继承最高级元素（在本例中是 body）所拥有的属性（这些子元素诸如 p, td, ul, ol, ul, li, dl, dt,和 dd）。不需要另外的规则，所有 body 的子元素都应该显示 Verdana 字体，子元素的子元素也一样。并且在大部分的现代浏览器中，也确实是这样的。</p>
+
+<p>但是在那个浏览器大战的血腥年代里，这种情况就未必会发生，那时候对标准的支持并不是企业的优先选择。比方说，Netscape 4 就不支持继承，它不仅忽略继承，而且也忽略应用于 body 元素的规则。IE/Windows 直到 IE6 还存在相关的问题，在表格内的字体样式会被忽略。我们又该如何是好呢？</p>
+</div>
+
+
+
+<div>
+<h2>友善地对待Netscape 4</h2>
+
+<p>幸运地是，你可以通过使用我们称为 &quot;Be Kind to Netscape 4&quot; 的冗余法则来处理旧式浏览器无法理解继承的问题。</p>
+
+<pre class="language-css">
+body  {
+     font-family: Verdana, sans-serif;
+     }
+
+p, td, ul, ol, li, dl, dt, dd  {
+     font-family: Verdana, sans-serif;
+     }
+</pre>
+
+<p>4.0 浏览器无法理解继承，不过他们可以理解组选择器。这么做虽然会浪费一些用户的带宽，但是如果需要对 Netscape 4 用户进行支持，就不得不这么做。</p>
+</div>
+
+
+
+<div>
+<h2>继承是一个诅咒吗？</h2>
+
+<p>如果你不希望 &quot;Verdana, sans-serif&quot; 字体被所有的子元素继承，又该怎么做呢？比方说，你希望段落的字体是 Times。没问题。创建一个针对 p 的特殊规则，这样它就会摆脱父元素的规则：</p>
+
+<pre class="language-css">
+body  {
+     font-family: Verdana, sans-serif;
+     }
+
+td, ul, ol, ul, li, dl, dt, dd  {
+     font-family: Verdana, sans-serif;
+     }
+
+<mark>p</mark>  {
+     font-family: Times, &quot;Times New Roman&quot;, serif;
+     }
+</pre>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="pro_css_syntax.html" title="CSS 基础语法">CSS 基础语法</a></li>
+<li class="next"><a href="css_syntax_descendant_selector.html" title="CSS 派生选择器">CSS 派生选择器</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../cssref/index.html">CSS 参考手册</a></h5>
+<h5 id="tools_example"><a href="css_examples.html">CSS 实例</a></h5>
+<h5 id="tools_quiz"><a href="css_quiz.html">CSS 测验</a></h5>
+<h5 id="tools_tutorial"><a href="index.html">CSS 教程</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/css/css_syntax_pro.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:18:50 GMT -->
+</html>

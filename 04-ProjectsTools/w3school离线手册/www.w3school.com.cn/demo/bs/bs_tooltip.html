@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from www.w3school.com.cn/demo/bs/bs_tooltip.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:07 GMT -->
+<head>
+  <title>Bootstrap 5 实例</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../../lib/bs/bootstrap.css" rel="stylesheet">
+  <script src="../../lib/bs/bootstrap.js"></script>
+</head>
+
+<body style="background-color: #FCFDF8;">
+
+<div class="container mt-3">
+  <button type="button" class="btn btn-primary" data-bs-placement="bottom" data-bs-toggle="tooltip" title="太棒了！">
+    请悬停在我上面！
+  </button>
+</div>
+
+<script>
+// 初始化工具提示
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+</script>
+
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/demo/bs/bs_tooltip.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:07 GMT -->
+</html>

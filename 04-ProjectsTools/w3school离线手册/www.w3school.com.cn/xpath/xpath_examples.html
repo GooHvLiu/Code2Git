@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/xpath/xpath_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 05:38:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>XPath 实例</title>
+
+</head>
+
+<body class="xml">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>XPath 教程</h2>
+<ul>
+<li><a href="index.html" title="XPath 教程">XPath 教程</a></li>
+<li><a href="xpath_intro.html" title="XPath 简介">XPath 简介</a></li>
+<li><a href="xpath_nodes.html" title="XPath 节点">XPath 节点</a></li>
+<li><a href="xpath_syntax.html" title="XPath 语法">XPath 语法</a></li>
+<li><a href="xpath_axes.html" title="XPath Axes（轴）">XPath 轴</a></li>
+<li><a href="xpath_operators.html" title="XPath 运算符">XPath 运算符</a></li>
+<li class="currentLink"><a href="xpath_examples.html" title="XPath 实例">XPath 实例</a></li>
+<li><a href="xpath_summary.html" title="您已经学习了 XPath，下一步呢？">XPath 总结</a></li>
+</ul>
+<h2>XPath 参考手册</h2>
+<ul>
+<li><a href="xpath_functions.html" title="XPath、XQuery 以及 XSLT 函数">XPath 函数</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>XPath 实例</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="xpath_operators.html" title="XPath 运算符">XPath 运算符</a></li>
+<li class="next"><a href="xpath_summary.html" title="您已经学习了 XPath，下一步呢？">XPath 总结</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p><strong>在本节，让我们通过实例来学习一些基础的 XPath 语法。</strong></p>
+</div>
+
+
+
+<div>
+<h2>XML实例文档</h2>
+
+<p>我们将在下面的例子中使用这个 XML 文档：</p>
+
+<h3>&quot;books.xml&quot; :</h3>
+
+<pre class="language-xml">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+
+&lt;bookstore&gt;
+
+&lt;book category=&quot;COOKING&quot;&gt;
+  &lt;title lang=&quot;en&quot;&gt;Everyday Italian&lt;/title&gt;
+  &lt;author&gt;Giada De Laurentiis&lt;/author&gt;
+  &lt;year&gt;2005&lt;/year&gt;
+  &lt;price&gt;30.00&lt;/price&gt;
+&lt;/book&gt;
+
+&lt;book category=&quot;CHILDREN&quot;&gt;
+  &lt;title lang=&quot;en&quot;&gt;Harry Potter&lt;/title&gt;
+  &lt;author&gt;J K. Rowling&lt;/author&gt;
+  &lt;year&gt;2005&lt;/year&gt;
+  &lt;price&gt;29.99&lt;/price&gt;
+&lt;/book&gt;
+
+&lt;book category=&quot;WEB&quot;&gt;
+  &lt;title lang=&quot;en&quot;&gt;XQuery Kick Start&lt;/title&gt;
+  &lt;author&gt;James McGovern&lt;/author&gt;
+  &lt;author&gt;Per Bothner&lt;/author&gt;
+  &lt;author&gt;Kurt Cagle&lt;/author&gt;
+  &lt;author&gt;James Linn&lt;/author&gt;
+  &lt;author&gt;Vaidyanathan Nagarajan&lt;/author&gt;
+  &lt;year&gt;2003&lt;/year&gt;
+  &lt;price&gt;49.99&lt;/price&gt;
+&lt;/book&gt;
+
+&lt;book category=&quot;WEB&quot;&gt;
+  &lt;title lang=&quot;en&quot;&gt;Learning XML&lt;/title&gt;
+  &lt;author&gt;Erik T. Ray&lt;/author&gt;
+  &lt;year&gt;2003&lt;/year&gt;
+  &lt;price&gt;39.95&lt;/price&gt;
+&lt;/book&gt;
+
+&lt;/bookstore&gt;
+</pre>
+
+<p><a href="../example/xmle/books.xml">在您的浏览器中查看此 &quot;books.xml&quot; 文件</a>。</p>
+</div>
+
+
+
+<div>
+<h2>加载 XML 文档</h2>
+
+<p>所有现代浏览器都支持使用 XMLHttpRequest 来加载 XML 文档的方法。</p>
+
+<p>针对大多数现代浏览器的代码：</p>
+
+<pre class="language-js">var xmlhttp=new XMLHttpRequest()</pre>
+
+<p>针对古老的微软浏览器（IE 5 和 6）的代码：</p>
+
+<pre class="language-js">var xmlhttp=new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;)</pre>
+</div>
+
+
+
+<div>
+<h2>选取节点</h2>
+
+<p>不幸的是，Internet Explorer 和其他处理 XPath 的方式不同。</p>
+
+<p>在我们的例子中，包含适用于大多数主流浏览器的代码。</p>
+
+<p>Internet Explorer 使用 selectNodes() 方法从 XML 文档中的选取节点：</p>
+
+<pre class="language-js">xmlDoc.selectNodes(<i>xpath</i>);</pre>
+
+<p>Firefox、Chrome、Opera 以及 Safari 使用 evaluate() 方法从 XML 文档中选取节点：</p>
+
+<pre class="language-js">xmlDoc.evaluate(<i>xpath</i>, xmlDoc, null, XPathResult.ANY_TYPE,null);</pre>
+</div>
+
+
+
+<div>
+<h2>选取所有 title</h2>
+
+<p>下面的例子选取所有 title 节点：</p>
+
+<pre>
+/bookstore/book/title
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tfd2a.html?f=xpath_select_titlenodes">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>选取第一个 book 的 title</h2>
+
+<p>下面的例子选取 bookstore 元素下面的第一个 book 节点的 title：</p>
+
+<pre>
+/bookstore/book[1]/title
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t794f.html?f=xpath_select_titlenodes_first">亲自试一试</a></p>
+
+<p>这里有一个问题。上面的例子在 IE 和其他浏览器中输出不同的结果。</p>
+
+<p>IE5 以及更高版本将 [0] 视为第一个节点，而根据 W3C 的标准，应该是 [1]。</p>
+
+<p>为了解决 IE5+ 中 [0] 和 [1] 的问题，可以为 XPath 设置语言选择（SelectionLanguage）。</p>
+
+<p>下面的例子选取 bookstore 元素下面的第一个 book 节点的 title：</p>
+
+<pre class="language-js">
+xml.setProperty(&quot;SelectionLanguage&quot;,&quot;XPath&quot;);
+xml.selectNodes(&quot;/bookstore/book[1]/title&quot;);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t6e83.html?f=xpath_select_titlenodes_first_iesp1">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>选取所有价格</h2>
+
+<p>下面的例子选取 price 节点中的所有文本：</p>
+
+<pre>
+/bookstore/book/price/text()
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t2aed.html?f=xpath_select_pricenodes_text">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>选取价格高于 35 的 price 节点</h2>
+
+<p>下面的例子选取价格高于 35 的所有 price 节点：</p>
+
+<pre>
+/bookstore/book[price&gt;35]/price
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tf368.html?f=xpath_select_pricenodes_35">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>选取价格高于 35 的 title 节点</h2>
+
+<p>下面的例子选取价格高于 35 的所有 title 节点：</p>
+
+<pre>
+/bookstore/book[price&gt;35]/title
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t3d71.html?f=xpath_select_pricenodes_35_title">亲自试一试</a></p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="xpath_operators.html" title="XPath 运算符">XPath 运算符</a></li>
+<li class="next"><a href="xpath_summary.html" title="您已经学习了 XPath，下一步呢？">XPath 总结</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="xpath_functions.html">XPath, XQuery, 以及XSLT函数</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/xpath/xpath_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 05:38:24 GMT -->
+</html>

@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/kotlin/kotlin_conditions.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Kotlin If ... Else</title>
+
+</head>
+
+<body class="serverscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Kotlin 教程</h2>
+<ul>
+<li><a href="index.html" title="Kotlin 教程">Kotlin 教程</a></li>
+<li><a href="kotlin_intro-2.html" title="Kotlin 简介">Kotlin 简介</a></li>
+<li><a href="kotlin_getstarted.html" title="Kotlin 入门">Kotlin 入门</a></li>
+<li><a href="kotlin_syntax.html" title="Kotlin 语法">Kotlin 语法</a></li>
+<li><a href="kotlin_output.html" title="Kotlin 输出">Kotlin 输出</a></li>
+<li><a href="kotlin_comments.html" title="Kotlin 注释">Kotlin 注释</a></li>
+<li><a href="kotlin_variables.html" title="Kotlin 变量">Kotlin 变量</a></li>
+<li><a href="kotlin_data_types.html" title="Kotlin 数据类型">Kotlin 数据类型</a></li>
+<li><a href="kotlin_operators.html" title="Kotlin 运算符">Kotlin 运算符</a></li>
+<li><a href="kotlin_strings.html" title="Kotlin 字符串">Kotlin 字符串</a></li>
+<li><a href="kotlin_booleans.html" title="Kotlin 布尔值">Kotlin 布尔值</a></li>
+<li class="currentLink"><a href="kotlin_conditions.html" title="Kotlin If...Else">Kotlin If...Else</a></li>
+<li><a href="kotlin_when.html" title="Kotlin When">Kotlin When</a></li>
+<li><a href="kotlin_while_loop.html" title="Kotlin While 循环">Kotlin While 循环</a></li>
+<li><a href="kotlin_break_continue.html" title="Kotlin Break 和 Continue">Kotlin Break/Continue</a></li>
+<li><a href="kotlin_arrays.html" title="Kotlin 数组">Kotlin 数组</a></li>
+<li><a href="kotlin_for_loop.html" title="Kotlin For 循环">Kotlin For 循环</a></li>
+<li><a href="kotlin_ranges.html" title="Kotlin 范围">Kotlin 范围</a></li>
+<li><a href="kotlin_functions.html" title="Kotlin 函数">Kotlin 函数</a></li>
+</ul>
+<h2>Kotlin 类</h2>
+<ul>
+<li><a href="kotlin_oop.html" title="Kotlin OOP">Kotlin OOP</a></li>
+<li><a href="kotlin_classes.html" title="Kotlin 类和对象">Kotlin 类/对象</a></li>
+<li><a href="kotlin_constructors.html" title="Kotlin 构造函数">Kotlin 构造函数</a></li>
+<li><a href="kotlin_class_functions.html" title="Kotlin 类函数">Kotlin 类函数</a></li>
+<li><a href="kotlin_inheritance.html" title="Kotlin 继承">Kotlin 继承</a></li>
+</ul>
+<h2>Kotlin 实例</h2>
+<ul>
+<li><a href="kotlin_examples.html" title="Kotlin 实例">Kotlin 实例</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Kotlin If ... Else</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="kotlin_booleans.html" title="Kotlin 布尔值">Kotlin 布尔值</a></li>
+<li class="next"><a href="kotlin_when.html" title="Kotlin When">Kotlin When</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>Kotlin 条件和 If..Else</h2>
+
+<p>Kotlin 支持数学中常见的逻辑条件：</p>
+
+<ul>
+<li>小于：<code>a &lt; b</code></li>
+<li>小于或等于：<code>a &lt;= b</code></li>
+<li>大于：<code>a &gt; b</code></li>
+<li>大于或等于：<code>a &gt;= b</code></li>
+<li>等于：<code>a == b</code></li>
+<li>不等于：<code>a != b</code></li>
+</ul>
+
+<p>您可以使用这些条件来针对不同的决策执行不同的操作。</p>
+
+<p>Kotlin 有以下条件语句：</p>
+
+<ul>
+<li>使用 <code>if</code> 来指定一个代码块，当满足一个指定的条件时执行</li>
+<li>使用 <code>else</code> 来指定一个代码块，在同一条件不满足时执行</li>
+<li>使用 <code>else if</code> 来指定一个新的条件进行测试，如果第一个条件不满足</li>
+<li>使用 <code>when</code> 来指定许多替代的代码块来执行</li>
+</ul>
+
+<p class="note"><span>注意：</span>与 <a href="../java/index.html" title="Java 教程">Java</a> 不同，Kotlin 中的 <code>if..else</code> 可以作为<em>语句</em>或<em>表达式</em>（为变量赋值）使用。请参见页面底部的实例来更好地理解它。</p>
+</section>
+
+
+
+<section>
+<h2>Kotlin if</h2>
+
+<p>使用 <code>if</code> 指定条件为 true 时要执行的代码块。</p>
+
+<h3>语法</h3>
+
+<pre class="language-kotlin">
+if (<i>condition</i>) {
+  // 如果条件为真，要执行的代码块
+}
+</pre>
+
+<h3 class="tip">提示</h3>
+
+<p>请注意，<code>if</code> 是小写字母。大写字母（If 或 IF）将生成错误。</p>
+
+<p>在下面的例子中，我们测试两个值以确定 20 是否大于 18。如果条件为真，则打印一些文本：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+if (20 &gt; 18) {
+  println(&quot;20 大于 18&quot;)
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="tb6b0.html?f=kotlin_if_1">亲自试一试</a></p>
+
+<p>我们还可以测试变量：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val x = 20
+val y = 18
+if (x &gt; y) {
+  println(&quot;x 大于 y&quot;)
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t592e.html?f=kotlin_if_2">亲自试一试</a></p>
+
+<h4>例子解释</h4>
+
+<p>在上面的示例中，我们使用两个变量 <mark>x</mark> 和 <mark>y</mark> 来测试 x 是否大于 y（使用 <code>&gt;</code> 运算符）。因为 x 是 20，y 是 18，并且我们知道 20 大于 18，所以我们在屏幕上打印“x 大于 y”。</p>
+</section>
+
+
+
+<section>
+<h2>Kotlin else</h2>
+
+<p>使用 <code>else</code> 指定条件为 false 时要执行的代码块。</p>
+
+<h3>语法</h3>
+
+<pre class="language-kotlin">
+if (<i>condition</i>) {
+  // 如果条件为真，要执行的代码块
+} else {
+  // 如果条件为假，要执行的代码块
+}
+</pre>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val time = 20
+if (time &lt; 18) {
+  println(&quot;日安&quot;)
+} else {
+  println(&quot;晚安&quot;)
+}
+// 输出 &quot;晚安&quot;
+</pre>
+
+<p class="tiy"><a target="_blank" href="t4b4d.html?f=kotlin_if_else">亲自试一试</a></p>
+
+<h4>例子解释</h4>
+
+<p>在上面的实例中，时间 (20) 大于 18，因此条件为假，因此我们转到 <code>else</code> 条件并在屏幕上打印“晚安”。如果时间小于 18，程序将打印“日安”。</p>
+</section>
+
+
+
+<section>
+<h2>Kotlin else if</h2>
+
+<p>如果第一个条件为假，则使用 <code>else if</code> 指定新条件。</p>
+
+<h3>语法</h3>
+
+<pre class="language-kotlin">
+if (<i>condition1</i>) {
+  // 如果 condition1 为真，要执行的代码块
+} else if (<i>condition2</i>) {
+  // 如果 condition1 为假且 condition2 为真，要执行的代码块
+} else {
+  // 如果 condition1 和 condition2 都为假，要执行的代码块
+}
+</pre>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val time = 22
+if (time &lt; 10) {
+  println(&quot;早安&quot;)
+} else if (time &lt; 20) {
+  println(&quot;日安&quot;)
+} else {
+  println(&quot;晚安&quot;)
+}
+// 输出&quot;晚安&quot;
+</pre>
+
+<p class="tiy"><a target="_blank" href="tdd35.html?f=kotlin_if_else_if">亲自试一试</a></p>
+
+<h4>例子解释</h4>
+
+<p>在上面的示例中，时间（22）大于 10，因此<em>第一个条件</em>为假。<code>else if</code> 语句中的下一个条件也为假，因此我们继续执行 <code>else</code> 条件（因为 <mark>condition1</mark> 和 <mark>condition2</mark> 都为假），并在屏幕上打印“晚安”。</p>
+</section>
+
+
+
+<section>
+<h2>Kotlin If..Else 表达式</h2>
+
+<p>在 Kotlin 中，您还可以使用 <code>if..else</code> 语句作为表达式（为变量赋值并返回它）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val time = 20
+val greeting = if (time &lt; 18) {
+  &quot;日安&quot;
+} else {
+  &quot;晚安&quot;
+}
+println(greeting)
+</pre>
+
+<p class="tiy"><a target="_blank" href="ta207.html?f=kotlin_if_else_exp_1">亲自试一试</a></p>
+
+<p class="tip"><span>提示：</span>当 <code>if</code> 用作表达式时，您还必须包含 <code>else</code>（必需）。</p>
+
+<p class="note"><span>注意：</span>如果 <code>if</code> 只有一个语句，则可以省略花括号 <code>{}</code>：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+fun main() {
+  val time = 20
+  val greeting = if (time &lt; 18) &quot;Good day.&quot; else &quot;Good evening.&quot;
+  println(greeting)
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t2c1f.html?f=kotlin_if_else_exp_2">亲自试一试</a></p>
+
+<p class="tip"><span>提示：</span>此例类似于 <a href="../java/java_conditions.html#ternary-operator" title="">Java 中的三元运算符（简写 if...else）</a>。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="kotlin_booleans.html" title="Kotlin 布尔值">Kotlin 布尔值</a></li>
+<li class="next"><a href="kotlin_when.html" title="Kotlin When">Kotlin When</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_example"><a href="kotlin_examples.html">Kotlin 实例</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/kotlin/kotlin_conditions.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:27 GMT -->
+</html>

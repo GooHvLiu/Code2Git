@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./BootStrap/css/bootstrap.min.css">
+</head>
+<body>
+<!-- 第3部分：栅格网格系统 -->
+<div>
+    <div class="container">
+        <!-- 1) 行元素 -->
+        <div class="row">
+            <!-- 列元素(整体数值不能超过12)--col-xs-数值 col-sm-数值 col-md-数值 col-lgh-数值-->
+            <div class="col-md-4 col-lg-4" style="background-color: lightcyan;">4</div>
+            <div class="col-md-8 col-lg-8" style="background-color: red;">8</div>
+        </div>
+        <hr>
+        <!-- 2) 列组合 -->
+         <div class="row">
+            <div class="col-md-3" style="background-color:aliceblue;">3</div>
+            <div class="col-md-4" style="background-color:antiquewhite;">4</div>
+            <div class="col-md-4" style="background-color:aqua;">4</div>
+            <!-- 整个格子不能超过12，若超过12，直接在下一列排布 -->
+            <div class="col-md-4" style="background-color:aquamarine;">2</div>
+         </div>
+         <hr />
+        <!-- 3) 列偏移 在V4版本及以下，使用col-md-offset-数量；在V5版本及以上，使用offset-数量，去掉了col-md-前缀 -->
+        <div class="row">
+            <div class="col-md-1" style="background-color:aliceblue;">1</div>
+            <div class="col-md-1 offset-1" style="background-color:blue;">1</div>
+            <div class="col-md-1" style="background-color:brown;">1</div>
+            <div class="col-md-1 offset-4" style="background-color:antiquewhite;">1</div>
+        </div>
+        <hr>
+        <!-- 4) 列排序 在V4版本及以下，使用col-md-push-数量(表示向后)和col-md-pull-数量(表示向前)；在V5版本及以上，使用order-数量，通过“顺序值”来定义谁在前、谁在后 -->
+        <div class="row">
+            <div class="col-md-4 order-2" style="background-color: skyblue;">4</div>
+            <div class="col-md-3 order-1" style="background-color: orange;">3</div>
+        </div>
+        <hr>
+        <!-- 5) 列嵌套,在某一单元各种还可以继续布局 -->
+         <div class="row">
+            <div class="col-md-4" style="background-color: skyblue;">4</div>
+            <div class="col-md-2" style="background-color: lightgreen;">
+               <div class="col-md-8" style="background-color: skyblue;">8</div>
+               <div class="col-md-3" style="background-color: orange;">3</div>
+            </div>
+            <div class="col-md-3" style="background-color: orange;">3</div>
+         </div>
+         <hr>
+    </div>
+</div>
+</body>
+<script src="./BootStrap/js/bootstrap.min.js"></script>
+</html>
+</html>

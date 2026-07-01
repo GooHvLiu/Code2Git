@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= env.APP_NAME %> - 账号注册</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/all.min.css" />
+    <link rel="stylesheet" href="/css/auth.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-header">
+        <h1><i class="fas fa-user-plus"></i> 账号注册</h1>
+        <p>创建账户，使用_<%= env.APP_NAME %></p>
+      </div>
+
+      <div class="login-form">
+        <!-- 全局提示弹窗 -->
+        <div id="alertBox" class="alert"></div>
+        <form id="registerForm" action=<%=env.REGISTER_REDIRECT_URL %> method="POST">
+          <!-- 用户名 -->
+          <div class="form-group">
+            <label for="username"><i class="fas fa-user"></i> 用户名</label>
+            <div class="input-icon">
+              <i class="fas fa-user"></i>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                class="form-control"
+                placeholder="4-16位字母/数字，无特殊符号"
+                required
+                autocomplete="username"
+              />
+            </div>
+            <div class="error-message" id="usernameError">用户名格式错误</div>
+          </div>
+
+          <!-- 登录密码 -->
+          <div class="form-group">
+            <label for="password"><i class="fas fa-lock"></i> 设置密码</label>
+            <div class="input-icon">
+              <i class="fas fa-lock"></i>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                placeholder="最少6位字符"
+                required
+                autocomplete="new-password"
+              />
+              <i class="fas fa-eye" id="passwordToggle"></i>
+            </div>
+            <div class="error-message" id="passwordError">
+              密码长度不能小于6位
+            </div>
+          </div>
+
+          <!-- 确认密码 -->
+          <div class="form-group">
+            <label for="rePassword"
+              ><i class="fas fa-lock-open"></i> 确认密码</label
+            >
+            <div class="input-icon">
+              <i class="fas fa-lock-open"></i>
+              <input
+                type="password"
+                id="rePassword"
+                name="rePassword"
+                class="form-control"
+                placeholder="再次输入相同密码"
+                required
+                autocomplete="new-password"
+              />
+            </div>
+            <div class="error-message" id="rePasswordError">
+              两次输入密码不一致
+            </div>
+          </div>
+
+          <!-- 邮箱选填 -->
+          <div class="form-group">
+            <label for="email"
+              ><i class="fas fa-envelope"></i> 邮箱（选填）</label
+            >
+            <div class="input-icon">
+              <i class="fas fa-envelope"></i>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                placeholder="用于找回密码，可留空"
+                autocomplete="email"
+              />
+            </div>
+            <div class="error-message" id="emailError">邮箱格式不正确</div>
+          </div>
+
+          <!-- 用户协议勾选 -->
+          <div
+            class="login-options"
+            style="margin-bottom: 20px; border-top: none; padding-top: 0"
+          >
+            <div class="remember-me">
+              <input type="checkbox" id="agreeRule" checked required />
+              <label for="agreeRule">我已阅读并同意用户使用协议</label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-login" id="registerBtn">
+            <i class="fas fa-user-plus"></i> 立即注册
+          </button>
+        </form>
+
+        <!-- 跳转登录入口 -->
+        <div class="login-tip">
+          已有账号？
+          <a href=<%=env.LOGIN_REDIRECT_URL %> id="goLoginBtn">前往登录</a>
+        </div>
+
+        <div class="system-info">
+          <p><i class="fas fa-server"></i> Node.js >|< Express + MongoDB</p>
+          <p id="serverStatus">
+            <i
+              class="fas fa-circle"
+              style="color: #6c757d; font-size: 0.6rem"
+            ></i>
+            Server Status
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- 错误提示安全转义，避免引号破坏JS -->
+    <% if (errMsg) { %> <script> window.LOGIN_ERROR_MSG = <%- JSON.stringify(errMsg) %>; </script> <% } %>
+    <!-- 全局环境安全序列化，不会报token错误 -->
+    <script>  window.GLOBAL_ENV = <%- JSON.stringify(env) %>; </script>
+    <script type="module" src="/js/reg.js"></script>
+  </body>
+</html>

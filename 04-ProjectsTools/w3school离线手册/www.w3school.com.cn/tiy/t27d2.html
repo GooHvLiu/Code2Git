@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Mirrored from www.w3school.com.cn/tiy/t.asp?f=how_js_sidenav_dropdown_css by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<title>W3School TIY Editor</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css-tiy-basic.css" />
+<link rel="stylesheet" href="../lib/codemirror.css" />
+<script src="../lib/codemirror.js"></script>
+<script src="../lib/codemirror_jsx.js"></script>
+<script src="../lib/htmlmixed.js"></script>
+<script src="../lib/xml.js"></script>
+<script src="../lib/javascript.js"></script>
+<script src="../lib/css.js"></script>
+<script src="../lib/clike.js"></script>
+
+
+<link href='https://fonts.googleapis.com/css?family=Source%20Code%20Pro' rel='stylesheet'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<!--[if lt IE 8]>
+<style>
+#textareacontainer, #iframecontainer {width:48%;}
+#container {height:500px;}
+#textarea, #iframe {width:90%;height:450px;}
+#textareaCode, #iframeResult {height:450px;}
+.stack {display:none;}
+</style>
+<![endif]-->
+</head>
+
+
+<body>
+
+
+<div id="tiy_header">
+<div id="tiy_logo">
+<h1><a href="../index-2.html" title="W3School TIY Editor" style="float:left;">W3School TIY Editor</a></h1>
+
+<div id="sp_tiy">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 TIY -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7947784850"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+</div>
+
+
+<div id="navfirst">
+<ul id="menu">
+<li id="tiy_btn_index"><a href="../index-2.html" title="W3School 在线教程">W3School 在线教程</a></li>
+<li id="tiy_btn_stack"><a href="javascript:void(0);" onclick="restack(currentStack)" title="更改方向">改变方向</a></li>
+<li id="tiy_btn_theme"><a href="javascript:void(0);" onclick="retheme()" title="更改主题">暗黑模式</a></li>
+<li id='tiy_btn_tryit'><a onclick='submitTryit()' title='更改主题'>运行代码</a></li>
+</ul>
+</div>
+
+
+<div id="container">
+
+    <div id="textareacontainer">
+        <div id="textarea">
+            <div id="textareawrapper">
+
+<textarea autocomplete="off" id="textareaCode" wrap="logical" spellcheck="false">
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+/* 固定的侧边导航栏，全高 */
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* 设置侧边栏链接和下拉菜单按钮的样式 */
+.sidenav a, .dropdown-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+/* 鼠标悬停时 */
+.sidenav a:hover, .dropdown-btn:hover {
+  color: #f1f1f1;
+}
+
+/* 主内容 */
+.main {
+  margin-left: 200px; /* 与侧边栏的宽度相同 */
+  font-size: 20px; /* 增大文本以启用滚动 */
+  padding: 0px 10px;
+}
+
+/* 为活动的下拉菜单按钮添加一个活动类 */
+.active {
+  background-color: green;
+  color: white;
+}
+
+/* 下拉菜单容器（默认为隐藏）。可选：为下拉菜单内容添加更亮的背景色和一些左内边距以更改其设计 */
+.dropdown-container {
+  display: none;
+  background-color: #262626;
+  padding-left: 8px;
+}
+
+/* 可选：设置向下箭头图标的样式 */
+.fa-caret-down {
+  float: right;
+  padding-right: 8px;
+}
+
+/* 一些用于实现响应式设计的媒体查询 */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+</head>
+<body>
+
+<div class="sidenav">
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#clients">Clients</a>
+  <a href="#contact">Contact</a>
+  <button class="dropdown-btn">Dropdown 
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="#">Link 1</a>
+    <a href="#">Link 2</a>
+    <a href="#">Link 3</a>
+  </div>
+  <a href="#contact">Search</a>
+</div>
+
+<div class="main">
+  <h2>侧边栏下拉菜单</h2>
+  <p>一些随机文本..下一个示例将向您展示如何实现下拉菜单链接的功能。</p>
+  <p>此侧边栏为全高（100%），且始终显示。</p>
+  <p>一些随机文本..</p>
+</div>
+
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/tiy/t.asp?f=how_js_sidenav_dropdown_css by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:28 GMT -->
+</html> 
+
+</textarea>
+            </div>
+        </div>
+    </div>
+        <form id="codeForm" autocomplete="off" style="margin:0px;display:none;">
+          <input type="hidden" name="code" id="code" />
+        </form>
+    <div id="iframecontainer">
+        <div id="iframe">
+            <div id="iframewrapper">
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script src='submitTryit.js'></script>
+
+
+<script>
+function colorcoding() {
+  var ua = navigator.userAgent;
+  //Opera Mini refreshes the page when trying to edit the textarea.
+  if (ua && ua.toUpperCase().indexOf("OPERA MINI") > -1) { return false; }
+  window.editor = CodeMirror.fromTextArea(document.getElementById("textareaCode"), {
+    mode: 'text/html',
+    htmlMode: true,
+    lineWrapping: true,
+    smartIndent: false,
+    addModeClass: true
+  });
+//  window.editor.on("change", function () {window.editor.save();});
+}
+colorcoding();
+</script>
+
+
+<script>
+var currentStack=true;
+if ((window.screen.availWidth <= 768 && window.innerHeight > window.innerWidth) || "" == " horizontal") {restack(true);}
+function restack(vertical) {
+    var tc, ic, t, i, c, n, f, sv, sh, d, height, flt, width;
+    tc = document.getElementById("textareacontainer");
+    ic = document.getElementById("iframecontainer");
+    t = document.getElementById("textarea");
+    i = document.getElementById("iframe");
+    c = document.getElementById("container");
+    n = document.getElementById("navfirst");
+    //sv = document.getElementById("stackV");
+    //sh = document.getElementById("stackH");
+    tc.className = tc.className.replace("horizontal", "");
+    ic.className = ic.className.replace("horizontal", "");
+    t.className = t.className.replace("horizontal", "");
+    i.className = i.className.replace("horizontal", "");
+    c.className = c.className.replace("horizontal", "");
+    n.className = n.className.replace("horizontal", "");
+    //if (sv) {sv.className = sv.className.replace("horizontal", "")};
+    //if (sv) {sh.className = sh.className.replace("horizontal", "")};
+    //stack = "";
+    if (vertical) {
+        tc.className = tc.className + " horizontal";
+        ic.className = ic.className + " horizontal";        
+        t.className = t.className + " horizontal";        
+        i.className = i.className + " horizontal";
+        c.className = c.className + " horizontal";
+        n.className = n.className + " horizontal";
+        //if (sv) {sv.className = sv.className + " horizontal"};
+        //if (sv) {sh.className = sh.className + " horizontal"};
+        //stack = " horizontal";
+        document.getElementById("textareacontainer").style.height = "50%";
+        document.getElementById("iframecontainer").style.height = "50%";
+        document.getElementById("textareacontainer").style.width = "100%";
+        document.getElementById("iframecontainer").style.width = "100%";
+        currentStack=false;
+    } else {
+        document.getElementById("textareacontainer").style.height = "100%";
+        document.getElementById("iframecontainer").style.height = "100%";
+        document.getElementById("textareacontainer").style.width = "50%";
+        document.getElementById("iframecontainer").style.width = "50%";
+        currentStack=true;        
+    }
+}
+</script>
+
+
+<script>
+function retheme() {
+  var cc = document.body.className;
+  if (cc.indexOf("darktheme") > -1) {
+    document.body.className = cc.replace("darktheme", "");
+  } else {
+    document.body.className += " darktheme";
+  }
+}
+</script>
+
+</body>
+
+</html>

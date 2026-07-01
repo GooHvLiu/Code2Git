@@ -1,0 +1,294 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/typescript/typescript_special_types.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:35:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>TypeScript 特殊类型</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>TypeScript 教程</h2>
+<ul>
+<li><a href="index.html" title="TypeScript 教程">TS 教程</a></li>
+<li><a href="typescript_intro.html" title="TypeScript 简介">TS 简介</a></li>
+<li><a href="typescript_getstarted.html" title="TypeScript 入门">TS 入门</a></li>
+<li><a href="typescript_simple_types.html" title="TypeScript 简单类型">TS 简单类型</a></li>
+<li class="currentLink"><a href="typescript_special_types.html" title="TypeScript 特殊类型">TS 特殊类型</a></li>
+<li><a href="typescript_arrays.html" title="TypeScript 数组">TS 数组</a></li>
+<li><a href="typescript_tuples.html" title="TypeScript 元组">TS 元组</a></li>
+<li><a href="typescript_object_types.html" title="TypeScript 对象类型">TS 对象类型</a></li>
+<li><a href="typescript_enums.html" title="TypeScript 枚举">TS 枚举</a></li>
+<li><a href="typescript_aliases_and_interfaces.html" title="TypeScript 别名与接口">TS 别名与接口</a></li>
+<li><a href="typescript_union_types.html" title="TypeScript 联合类型">TS 联合类型</a></li>
+<li><a href="typescript_functions.html" title="TypeScript 函数">TS 函数</a></li>
+<li><a href="typescript_casting.html" title="TypeScript 类型转换">TS 类型转换</a></li>
+<li><a href="typescript_classes.html" title="TypeScript 类">TS 类</a></li>
+<li><a href="typescript_basic_generics.html" title="TypeScript 基本泛型">TS 基本泛型</a></li>
+<li><a href="typescript_utility_types.html" title="TypeScript 实用类型">TS 实用类型</a></li>
+<li><a href="typescript_keyof.html" title="TypeScript Keyof">TS Keyof</a></li>
+<li><a href="typescript_null.html" title="TypeScript Null">TS Null</a></li>
+<li><a href="typescript_definitely_typed.html" title="TypeScript Definitely Typed">TS Definitely Typed</a></li>
+<li><a href="typescript_5_updates.html" title="TypeScript 5.x 更新">TS 5 更新</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>TypeScript 特殊类型</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="typescript_simple_types.html" title="TypeScript 简单类型">TS 简单类型</a></li>
+<li class="next"><a href="typescript_arrays.html" title="TypeScript 数组">TS 数组</a></li>
+</ul>
+</div>
+
+
+
+<section id="intro">
+<p>TypeScript 拥有一些可能不指向任何特定数据类型的特殊类型。</p>
+</section>
+
+
+
+<section>
+<h2>类型：any</h2>
+
+<p><code>any</code> 是一种禁用类型检查并实际上允许使用所有类型的类型。</p>
+
+<p>下面的例子没有使用 <code>any</code>，将会抛出一个错误：</p>
+
+<h3>没有 any 的例子</h3>
+
+<pre class="language-typescript">
+let u = true;
+u = &quot;string&quot;; // 错误：类型 'string' 不能分配给类型 'boolean'。
+Math.round(u); // 错误：类型为 'boolean' 的参数不能分配给类型为 'number' 的参数。
+</pre>
+
+<p class="tiy"><a target="_blank" href="tc6f5.html?f=typescript_special_types_without_any">亲自试一试</a></p>
+
+<p>将特殊类型 <code>any</code> 设置为 <code>true</code> 会禁用类型检查：</p>
+
+<h3>带有 any 的例子</h3>
+
+<pre class="language-typescript">
+let v: any = true;
+v = &quot;string&quot;; // 没有错误，因为它可以是 “any” 类型
+Math.round(v); // 没有错误，因为它可以是 “any” 类型
+</pre>
+
+<p class="tiy"><a target="_blank" href="t512a.html?f=typescript_special_types_with_any">亲自试一试</a></p>
+
+<p>由于 <code>any</code> 禁用了类型检查，因此它可以作为一种有用的方法来解决错误，但 TypeScript 将无法提供类型安全性，而且依赖类型数据的工具（如自动完成）将无法工作。请记住，应该不惜 “任何” 代价避免使用它......</p>
+</section>
+
+
+
+<section>
+<h2>类型：unknown</h2>
+
+<p><code>unknown</code> 是一种与 any 类似但更安全的替代方案。</p>
+
+<p>TypeScript 将阻止使用 <code>unknown</code> 类型，如下面的例子所示：</p>
+
+<pre class="language-typescript">
+let w: unknown = 1;
+w = &quot;string&quot;; // no error
+w = {
+  runANonExistentMethod: () =&gt; {
+    console.log(&quot;I think therefore I am&quot;);
+  }
+} as { runANonExistentMethod: () =&gt; void}
+// 当我们不知道类型时，如何避免下面注释掉的代码出现错误？
+// w.runANonExistentMethod(); // Error: Object is of type 'unknown'.
+if(typeof w === 'object' &amp;&amp; w !== null) {
+  (w as { runANonExistentMethod: Function }).runANonExistentMethod();
+}
+// 尽管我们必须多次转换，但我们可以在 if 中进行检查以确保我们的类型安全，并进行更安全的转换
+</pre>
+
+<p class="tiy"><a target="_blank" href="t2a71.html?f=typescript_special_types_with_unknown">亲自试一试</a></p>
+
+<p>将上面的例子与之前的带有 <code>any</code> 的例子进行比较。</p>
+
+<p>当您不知道要键入的数据类型时，最好使用 <code>unknown</code>。要稍后添加类型，您需要进行类型转换。</p>
+
+<p>类型转换是当我们使用 “as” 关键字来说属性或变量是属于转换后的类型时。</p>
+</section>
+
+
+
+<section>
+<h2>类型：never</h2>
+
+<p><code>never</code> 在定义时实际上会抛出一个错误。</p>
+
+<pre class="language-typescript">
+let x: never = true; // 错误：类型 'boolean' 不能分配给类型 'never'。
+</pre>
+
+<p class="tiy"><a target="_blank" href="tf94a.html?f=typescript_special_types_never">亲自试一试</a></p>
+
+<p><code>never</code> 很少使用，尤其是单独使用，其主要用途是在高级泛型中。</p>
+</section>
+
+
+
+<section>
+<h2>类型：undefined 和 null</h2>
+
+<p><code>undefined</code> 和 <code>null</code> 是分别引用 JavaScript 原语 <code>undefined</code> 和 <code>null</code> 的类型。</p>
+
+<pre class="language-typescript">
+let y: undefined = undefined;
+let z: null = null;
+</pre>
+
+<p class="tiy"><a target="_blank" href="tc9d2.html?f=typescript_special_types_undefined_null">亲自试一试</a></p>
+
+<p>除非在 <em>tsconfig.json</em> 文件中启用了 <code>strictNullChecks</code>，否则这些类型没有多大用处。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="typescript_simple_types.html" title="TypeScript 简单类型">TS 简单类型</a></li>
+<li class="next"><a href="typescript_arrays.html" title="TypeScript 数组">TS 数组</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/typescript/typescript_special_types.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:35:30 GMT -->
+</html>

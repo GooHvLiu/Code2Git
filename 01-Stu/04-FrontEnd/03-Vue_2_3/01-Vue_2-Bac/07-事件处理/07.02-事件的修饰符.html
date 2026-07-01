@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../../favicon.png" type="image/x-icon">
+  <title>07.02-事件的修饰符</title>
+  <!-- 引入script -->
+  <script type="text/javascript" src="../../js_Tools/vue.js"></script>
+  <style>
+    * {
+      margin-top: 15px;
+      margin-left: 10px;
+      padding: 5px;
+    }
+
+    .demo {
+      height: 50px;
+      width: 100%;
+      background-color: pink;
+    }
+
+    .box1 {
+      background-color: orange;
+    }
+
+    .box2 {
+      height: 60px;
+      width: 100%;
+      background-color: olive;
+    }
+
+    .list {
+      height: 200px;
+      width: 200px;
+      background-color: aquamarine;
+      overflow: auto;
+    }
+
+    li {
+      height: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 
+    1.Vue中的事件修饰符：
+      1.prevent：阻止默认事件（常用）；
+      2.stop：阻止事件冒泡（常用）；
+      3.once：事件只触发一次（常用）；
+      4.capture：使用事件的捕获模式；
+      5.self：只有event.target是当前操作的元素时才 触发事件；
+      6.passive：事件的默认行为立即执行，无需等待事件回调执行完毕。
+    
+    2.修饰符可以进行连续使用，如a标签下：@click.stop.prevent="showInfo"，表示即可以停止冒泡，又可以阻止跳转
+  -->
+  <!-- 准备好一个容器 -->
+  <div id="root">
+    <h1>欢迎来到{{name}}学习</h1>
+    <!-- prevent：阻止默认事件（常用） -->
+    <a href="http://www.baidu.com/" @click.prevent="showInfo">点我有提示信息</a>
+
+    <!-- stop：阻止事件冒泡（常用） -->
+    <div class="demo" @click="showInfo">
+      <button @click.stop="showInfo">点我</button>
+      <!-- 修饰符可以连续使用 -->
+      <a href="http://www.baidu.com/" @click.stop.prevent="showInfo">点我有提示信息</a>
+    </div>
+
+    <!-- once：事件只触发一次（常用） -->
+    <button @click.once="showInfo">点我</button>
+
+    <!-- capture：使用事件的捕获模式 -->
+    <div class="box1" @click.capture="showMsg(1)">
+      <div class="box2" @click="showMsg(2)">
+      </div>
+    </div>
+
+    <!-- self：只有event.target是当前操作的元素时才触发事件 -->
+    <div class="demo" @click.self="showInfo">
+      <button @click="showInfo">点我</button>
+    </div>
+
+    <!-- passive：事件的默认行为立即执行，无需等待事件回调执行完毕 -->
+    <ul @wheel.passive="demo" class="list">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+    </ul>
+  </div>
+</body>
+<script type="text/javascript">
+  Vue.config.productionTip = false //阻止Vue在启动时生成生产提示。
+
+  const vm = new Vue({
+    el: '#root',
+    data: {
+      name: 'BeiJing'
+    },
+    methods: {
+      showInfo(e) {
+        alert('Hello')
+        console.log(e.target)
+      },
+      showMsg(msg) {
+        console.log(msg)
+      },
+      demo() {
+        // console.log('@')
+        for (let i = 0; i < 10000; i++) {
+          console.log('#')
+        }
+        console.log('累坏了')
+      }
+    }
+  })
+</script>
+
+</html>

@@ -1,0 +1,62 @@
+#container {
+  display: flex;
+  //项目在主轴上的对齐方式，使用justify-content，默认主轴为水平row
+  //justify-content的值：
+  // 1)flex-start:左对齐
+  // 2)flex-end:右对齐
+  // 3)center:居中对齐
+  // 4)space-between:左右两边靠边之后均分
+  // 5)space-around:每个元素两侧的空间相等，但首尾元素与容器边缘的距离只有中间间距的一半
+  // 6)space-evenly:每个元素两侧的空间都是相等的，包括与边缘的距离
+  justify-content: space-between;
+
+  //单行项目在交叉轴上的对齐方式，使用align-items，默认交叉轴为垂直column
+  //align-items的值：
+  // 1)stretch:交叉轴方向上拉伸以填满整个容器
+  // 2)flex-start:交叉轴方向上顶格对齐（靠起始边对齐）
+  // 3)flex-end:交叉轴方向上靠底对齐（靠结束边对齐）
+  // 4)center:交叉轴方向上中心对齐
+  // 5)baseline:让所有子元素的内容（文本）的第一行基线（Baseline）对齐
+  align-items: baseline;
+
+  //多行项目在交叉轴上的对齐方式，使用align-content，必须开启换行 (flex-wrap: wrap)
+  //align-content的值：
+  // 1)flex-start:左对齐
+  // 2)flex-end:右对齐
+  // 3)center:居中对齐
+  // 4)space-between:左右两边靠边之后均分
+  // 5)space-around:每个元素两侧的空间相等，但首尾元素与容器边缘的距离只有中间间距的一半
+  // 6)space-evenly:每个元素两侧的空间都是相等的，包括与边缘的距离
+  // 7)stretch:交叉轴方向上拉伸以填满整个容器
+  // 8)baseline:让所有子元素的内容（文本）的第一行基线（Baseline）对齐
+  align-content: space-between;
+  background: #555;
+  height: 500px;
+
+  //保持换行
+  // flex-wrap: wrap;
+
+  .item {
+    background: #f4f4f4;
+    border: #ccc solid 1px;
+    padding: 1rem;
+    margin: 0.75rem;
+    text-align: center;
+    flex-basis: 100px; //其实就是width: 300px
+  }
+
+  //为元素单独设置位置时，flex-wrap不可设置，即不可以是换行状态下
+  .item-2 {
+    align-self: flex-end;
+    order: 2; //设置排序，使用order属性
+  }
+
+  //为盒子设置排序，使用order属性
+  .item-1 {
+    order: 3; //设置排序，使用order属性
+  }
+
+  .item-3 {
+    order: 1; //设置排序，使用order属性
+  }
+}

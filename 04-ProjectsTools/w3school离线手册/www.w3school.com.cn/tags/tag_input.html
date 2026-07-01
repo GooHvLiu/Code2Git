@@ -1,0 +1,783 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/tags/tag_input.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:03:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>HTML &lt;input&gt; 标签</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>参考手册</h2>
+<ul>
+<li><a href="index.html" title="HTML 元素参考手册">HTML 元素（字母排序）</a></li>
+<li><a href="html_ref_byfunc.html" title="HTML 元素参考手册 - 功能排序">HTML 元素（功能排序）</a></li>
+<li><a href="html_ref_html_browsersupport.html" title="HTML 参考手册 - 浏览器支持">HTML 浏览器支持</a></li>
+<li><a href="html_ref_standardattributes.html" title="HTML 全局属性">HTML 全局属性</a></li>
+<li><a href="html_ref_eventattributes.html" title="HTML 事件参考手册">HTML 事件</a></li>
+<li><a href="html_ref_colornames.html" title="HTML 颜色名">HTML 颜色名</a></li>
+<li><a href="html_ref_canvas.html" title="HTML Canvas 参考手册">HTML 画布</a></li>
+<li><a href="html_ref_audio_video_dom.html" title="HTML 音频/视频参考手册">HTML 视频/音频</a></li>
+<li><a href="html_ref_charactersets.html" title="HTML 字符集">HTML 字符集</a></li>
+<li><a href="html_ref_dtd.html" title="HTML &lt;!DOCTYPE&gt;">HTML 文档类型</a></li>
+<li><a href="html_ref_urlencode.html" title="HTML URL 编码">HTML URL 编码</a></li>
+<li><a href="html_ref_language_codes.html" title="HTML 语言代码参考手册">HTML 语言代码</a></li>
+<li><a href="html_ref_country_codes.html" title="HTML ISO 国家代码参考手册">HTML 国家代码</a></li>
+<li><a href="html_ref_httpmessages.html" title="HTTP 状态消息">HTTP 消息</a></li>
+<li><a href="html_ref_httpmethods.html" title="HTTP 请求方法">HTTP 方法</a></li>
+<li><a href="html_ref_keyboardshortcuts.html" title="键盘快捷键">键盘快捷键</a></li>
+</ul>
+<h2>HTML 标签</h2>
+<ul>
+<li><a href="tag_comment.html" title="HTML &lt;!--&gt; 标签">&lt;!--&gt;</a></li>
+<li><a href="tag_doctype.html" title="HTML &lt;!DOCTYPE&gt; 标签">&lt;!DOCTYPE&gt;</a></li>
+<li><a href="tag_a.html" title="HTML &lt;a&gt; 标签">&lt;a&gt;</a></li>
+<li><a href="tag_abbr.html" title="HTML &lt;abbr&gt; 标签">&lt;abbr&gt;</a></li>
+<li><a href="tag_acronym.html" title="HTML &lt;acronym&gt; 标签">&lt;acronym&gt;</a></li>
+<li><a href="tag_address.html" title="HTML &lt;address&gt; 标签">&lt;address&gt;</a></li>
+<li><a href="tag_applet.html" title="HTML &lt;applet&gt; 标签">&lt;applet&gt;</a></li>
+<li><a href="tag_area.html" title="HTML &lt;area&gt; 标签">&lt;area&gt;</a></li>
+<li><a href="tag_article.html" title="HTML &lt;article&gt; 标签">&lt;article&gt;</a></li>
+<li><a href="tag_aside.html" title="HTML &lt;aside&gt; 标签">&lt;aside&gt;</a></li>
+<li><a href="tag_audio.html" title="HTML &lt;audio&gt; 标签">&lt;audio&gt;</a></li>
+<li><a href="tag_b.html" title="HTML &lt;b&gt; 标签">&lt;b&gt;</a></li>
+<li><a href="tag_base.html" title="HTML &lt;base&gt; 标签">&lt;base&gt;</a></li>
+<li><a href="tag_basefont.html" title="HTML &lt;basefont&gt; 标签">&lt;basefont&gt;</a></li>
+<li><a href="tag_bdi.html" title="HTML &lt;bdi&gt; 标签">&lt;bdi&gt;</a></li>
+<li><a href="tag_bdo.html" title="HTML &lt;bdo&gt; 标签">&lt;bdo&gt;</a></li>
+<li><a href="tag_big.html" title="HTML &lt;big&gt; 标签">&lt;big&gt;</a></li>
+<li><a href="tag_blockquote.html" title="HTML &lt;blockquote&gt; 标签">&lt;blockquote&gt;</a></li>
+<li><a href="tag_body.html" title="HTML &lt;body&gt; 标签">&lt;body&gt;</a></li>
+<li><a href="tag_br.html" title="HTML &lt;br&gt; 标签">&lt;br&gt;</a></li>
+<li><a href="tag_button.html" title="HTML &lt;button&gt; 标签">&lt;button&gt;</a></li>
+<li><a href="tag_canvas.html" title="HTML &lt;canvas&gt; 标签">&lt;canvas&gt;</a></li>
+<li><a href="tag_caption.html" title="HTML &lt;caption&gt; 标签">&lt;caption&gt;</a></li>
+<li><a href="tag_center.html" title="HTML &lt;center&gt; 标签">&lt;center&gt;</a></li>
+<li><a href="tag_cite.html" title="HTML &lt;cite&gt; 标签">&lt;cite&gt;</a></li>
+<li><a href="tag_code.html" title="HTML &lt;code&gt; 标签">&lt;code&gt;</a></li>
+<li><a href="tag_col.html" title="HTML &lt;col&gt; 标签">&lt;col&gt;</a></li>
+<li><a href="tag_colgroup.html" title="HTML &lt;colgroup&gt; 标签">&lt;colgroup&gt;</a></li>
+<li><a href="tag_data.html" title="HTML &lt;data&gt; 标签">&lt;data&gt;</a></li>
+<li><a href="tag_datalist.html" title="HTML &lt;datalist&gt; 标签">&lt;datalist&gt;</a></li>
+<li><a href="tag_dd.html" title="HTML &lt;dd&gt; 标签">&lt;dd&gt;</a></li>
+<li><a href="tag_del.html" title="HTML &lt;del&gt; 标签">&lt;del&gt;</a></li>
+<li><a href="tag_details.html" title="HTML &lt;details&gt; 标签">&lt;details&gt;</a></li>
+<li><a href="tag_dfn.html" title="HTML &lt;dfn&gt; 标签">&lt;dfn&gt;</a></li>
+<li><a href="tag_dialog.html" title="HTML &lt;dialog&gt; 标签">&lt;dialog&gt;</a></li>
+<li><a href="tag_dir.html" title="HTML &lt;dir&gt; 标签">&lt;dir&gt;</a></li>
+<li><a href="tag_div.html" title="HTML &lt;div&gt; 标签">&lt;div&gt;</a></li>
+<li><a href="tag_dl.html" title="HTML &lt;dl&gt; 标签">&lt;dl&gt;</a></li>
+<li><a href="tag_dt.html" title="HTML &lt;dt&gt; 标签">&lt;dt&gt;</a></li>
+<li><a href="tag_em.html" title="HTML &lt;em&gt; 标签">&lt;em&gt;</a></li>
+<li><a href="tag_embed.html" title="HTML &lt;embed&gt; 标签">&lt;embed&gt;</a></li>
+<li><a href="tag_fieldset.html" title="HTML &lt;fieldset&gt; 标签">&lt;fieldset&gt;</a></li>
+<li><a href="tag_figcaption.html" title="HTML &lt;figcaption&gt; 标签">&lt;figcaption&gt;</a></li>
+<li><a href="tag_figure.html" title="HTML &lt;figure&gt; 标签">&lt;figure&gt;</a></li>
+<li><a href="tag_font.html" title="HTML &lt;font&gt; 标签">&lt;font&gt;</a></li>
+<li><a href="tag_footer.html" title="HTML &lt;footer&gt; 标签">&lt;footer&gt;</a></li>
+<li><a href="tag_form.html" title="HTML &lt;form&gt; 标签">&lt;form&gt;</a></li>
+<li><a href="tag_frame.html" title="HTML &lt;frame&gt; 标签">&lt;frame&gt;</a></li>
+<li><a href="tag_frameset.html" title="HTML &lt;frameset&gt; 标签">&lt;frameset&gt;</a></li>
+<li><a href="tag_hn.html" title="HTML &lt;h1&gt; - &lt;h6&gt; 标签">&lt;h1&gt; - &lt;h6&gt;</a></li>
+<li><a href="tag_head.html" title="HTML &lt;head&gt; 标签">&lt;head&gt;</a></li>
+<li><a href="tag_header.html" title="HTML &lt;header&gt; 标签">&lt;header&gt;</a></li>
+<li><a href="tag_hgroup.html" title="HTML &lt;hgroup&gt; 标签">&lt;hgroup&gt;</a></li>
+<li><a href="tag_hr.html" title="HTML &lt;hr&gt; 标签">&lt;hr&gt;</a></li>
+<li><a href="tag_html.html" title="HTML &lt;html&gt; 标签">&lt;html&gt;</a></li>
+<li><a href="tag_i.html" title="HTML &lt;i&gt; 标签">&lt;i&gt;</a></li>
+<li><a href="tag_iframe.html" title="HTML &lt;iframe&gt; 标签">&lt;iframe&gt;</a></li>
+<li><a href="tag_img.html" title="HTML &lt;img&gt; 标签">&lt;img&gt;</a></li>
+<li class="currentLink"><a href="tag_input.html" title="HTML &lt;input&gt; 标签">&lt;input&gt;</a></li>
+<li><a href="tag_ins.html" title="HTML &lt;ins&gt; 标签">&lt;ins&gt;</a></li>
+<li><a href="tag_kbd.html" title="HTML &lt;kbd&gt; 标签">&lt;kbd&gt;</a></li>
+<li><a href="tag_label.html" title="HTML &lt;label&gt; 标签">&lt;label&gt;</a></li>
+<li><a href="tag_legend.html" title="HTML &lt;legend&gt; 标签">&lt;legend&gt;</a></li>
+<li><a href="tag_li.html" title="HTML &lt;li&gt; 标签">&lt;li&gt;</a></li>
+<li><a href="tag_link.html" title="HTML &lt;link&gt; 标签">&lt;link&gt;</a></li>
+<li><a href="tag_main.html" title="HTML &lt;main&gt; 标签">&lt;main&gt;</a></li>
+<li><a href="tag_map.html" title="HTML &lt;map&gt; 标签">&lt;map&gt;</a></li>
+<li><a href="tag_mark.html" title="HTML &lt;mark&gt; 标签">&lt;mark&gt;</a></li>
+<li><a href="tag_menu.html" title="HTML &lt;menu&gt; 标签">&lt;menu&gt;</a></li>
+<li><a href="tag_meta.html" title="HTML &lt;meta&gt; 标签">&lt;meta&gt;</a></li>
+<li><a href="tag_meter.html" title="HTML &lt;meter&gt; 标签">&lt;meter&gt;</a></li>
+<li><a href="tag_nav.html" title="HTML &lt;nav&gt; 标签">&lt;nav&gt;</a></li>
+<li><a href="tag_noframes.html" title="HTML &lt;noframes&gt; 标签">&lt;noframes&gt;</a></li>
+<li><a href="tag_noscript.html" title="HTML &lt;noscript&gt; 标签">&lt;noscript&gt;</a></li>
+<li><a href="tag_object.html" title="HTML &lt;object&gt; 标签">&lt;object&gt;</a></li>
+<li><a href="tag_ol.html" title="HTML &lt;ol&gt; 标签">&lt;ol&gt;</a></li>
+<li><a href="tag_optgroup.html" title="HTML &lt;optgroup&gt; 标签">&lt;optgroup&gt;</a></li>
+<li><a href="tag_option.html" title="HTML &lt;option&gt; 标签">&lt;option&gt;</a></li>
+<li><a href="tag_output.html" title="HTML &lt;output&gt; 标签">&lt;output&gt;</a></li>
+<li><a href="tag_p.html" title="HTML &lt;p&gt; 标签">&lt;p&gt;</a></li>
+<li><a href="tag_param.html" title="HTML &lt;param&gt; 标签">&lt;param&gt;</a></li>
+<li><a href="tag_picture.html" title="HTML &lt;picture&gt; 标签">&lt;picture&gt;</a></li>
+<li><a href="tag_pre.html" title="HTML &lt;pre&gt; 标签">&lt;pre&gt;</a></li>
+<li><a href="tag_progress.html" title="HTML &lt;progress&gt; 标签">&lt;progress&gt;</a></li>
+<li><a href="tag_q.html" title="HTML &lt;q&gt; 标签">&lt;q&gt;</a></li>
+<li><a href="tag_rp.html" title="HTML &lt;rp&gt; 标签">&lt;rp&gt;</a></li>
+<li><a href="tag_rt.html" title="HTML &lt;rt&gt; 标签">&lt;rt&gt;</a></li>
+<li><a href="tag_ruby.html" title="HTML &lt;ruby&gt; 标签">&lt;ruby&gt;</a></li>
+<li><a href="tag_s.html" title="HTML &lt;s&gt; 标签">&lt;s&gt;</a></li>
+<li><a href="tag_samp.html" title="HTML &lt;samp&gt; 标签">&lt;samp&gt;</a></li>
+<li><a href="tag_script.html" title="HTML &lt;script&gt; 标签">&lt;script&gt;</a></li>
+<li><a href="tag_search.html" title="HTML &lt;search&gt; 标签">&lt;search&gt;</a></li>
+<li><a href="tag_section.html" title="HTML &lt;section&gt; 标签">&lt;section&gt;</a></li>
+<li><a href="tag_select.html" title="HTML &lt;select&gt; 标签">&lt;select&gt;</a></li>
+<li><a href="tag_small.html" title="HTML &lt;small&gt; 标签">&lt;small&gt;</a></li>
+<li><a href="tag_source.html" title="HTML &lt;source&gt; 标签">&lt;source&gt;</a></li>
+<li><a href="tag_span.html" title="HTML &lt;span&gt; 标签">&lt;span&gt;</a></li>
+<li><a href="tag_strike.html" title="HTML &lt;strike&gt; 标签">&lt;strike&gt;</a></li>
+<li><a href="tag_strong.html" title="HTML &lt;strong&gt; 标签">&lt;strong&gt;</a></li>
+<li><a href="tag_style.html" title="HTML &lt;style&gt; 标签">&lt;style&gt;</a></li>
+<li><a href="tag_sub.html" title="HTML &lt;sub&gt; 标签">&lt;sub&gt;</a></li>
+<li><a href="tag_summary.html" title="HTML &lt;summary&gt; 标签">&lt;summary&gt;</a></li>
+<li><a href="tag_sup.html" title="HTML &lt;sup&gt; 标签">&lt;sup&gt;</a></li>
+<li><a href="tag_svg.html" title="HTML &lt;svg&gt; 标签">&lt;svg&gt;</a></li>
+<li><a href="tag_table.html" title="HTML &lt;table&gt; 标签">&lt;table&gt;</a></li>
+<li><a href="tag_tbody.html" title="HTML &lt;tbody&gt; 标签">&lt;tbody&gt;</a></li>
+<li><a href="tag_td.html" title="HTML &lt;td&gt; 标签">&lt;td&gt;</a></li>
+<li><a href="tag_template.html" title="HTML &lt;template&gt; 标签">&lt;template&gt;</a></li>
+<li><a href="tag_textarea.html" title="HTML &lt;textarea&gt; 标签">&lt;textarea&gt;</a></li>
+<li><a href="tag_tfoot.html" title="HTML &lt;tfoot&gt; 标签">&lt;tfoot&gt;</a></li>
+<li><a href="tag_th.html" title="HTML &lt;th&gt; 标签">&lt;th&gt;</a></li>
+<li><a href="tag_thead.html" title="HTML &lt;thead&gt; 标签">&lt;thead&gt;</a></li>
+<li><a href="tag_time.html" title="HTML &lt;time&gt; 标签">&lt;time&gt;</a></li>
+<li><a href="tag_title.html" title="HTML &lt;title&gt; 标签">&lt;title&gt;</a></li>
+<li><a href="tag_tr.html" title="HTML &lt;tr&gt; 标签">&lt;tr&gt;</a></li>
+<li><a href="tag_track.html" title="HTML &lt;track&gt; 标签">&lt;track&gt;</a></li>
+<li><a href="tag_tt.html" title="HTML &lt;tt&gt; 标签">&lt;tt&gt;</a></li>
+<li><a href="tag_u.html" title="HTML &lt;u&gt; 标签">&lt;u&gt;</a></li>
+<li><a href="tag_ul.html" title="HTML &lt;ul&gt; 标签">&lt;ul&gt;</a></li>
+<li><a href="tag_var.html" title="HTML &lt;var&gt; 标签">&lt;var&gt;</a></li>
+<li><a href="tag_video.html" title="HTML &lt;video&gt; 标签">&lt;video&gt;</a></li>
+<li><a href="tag_wbr.html" title="HTML &lt;wbr&gt; 标签">&lt;wbr&gt;</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>HTML &lt;input&gt; 标签</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="tag_img.html" title="HTML &lt;img&gt; 标签">&lt;img&gt;</a></li>
+<li class="next"><a href="tag_ins.html" title="HTML &lt;ins&gt; 标签">&lt;ins&gt;</a></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>定义和用法</h2>
+
+<p><code>&lt;input&gt;</code> 标签定义输入字段，用户可以在其中输入数据。</p>
+
+<p><code>&lt;input&gt;</code> 元素是最重要的表单元素。</p>
+
+<p><code>&lt;input&gt;</code> 元素可以以多种方式显示，具体取决于 <a href="att_input_type.html" title="HTML &lt;input&gt; type 属性">type 属性</a>。</p>
+
+<p>以下是不同的输入类型：</p>
+
+<ul>
+<li><code>&lt;input type=&quot;button&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;checkbox&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;color&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;date&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;datetime-local&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;email&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;file&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;hidden&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;image&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;month&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;number&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;password&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;radio&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;range&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;reset&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;search&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;submit&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;tel&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;text&quot;&gt;</code>（默认值）</li>
+<li><code>&lt;input type=&quot;time&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;url&quot;&gt;</code></li>
+<li><code>&lt;input type=&quot;week&quot;&gt;</code></li>
+</ul>
+
+<p>参阅 <a href="att_input_type.html" title="HTML &lt;input&gt; type 属性">type 属性</a>，以查看每种输入类型的实例！</p>
+</div>
+
+
+
+<div>
+<h2>实例</h2>
+
+<p>包含三个输入字段的 HTML 表单；两个文本字段和一个提交按钮：</p>
+
+<pre class="language-html">
+&lt;form action=&quot;/action_page.php&quot;&gt;
+  &lt;label for=&quot;fname&quot;&gt;名字：&lt;/label&gt;
+  &lt;input type=&quot;text&quot; id=&quot;fname&quot; name=&quot;fname&quot;&gt;&lt;br&gt;&lt;br&gt;
+  &lt;label for=&quot;lname&quot;&gt;姓氏：&lt;/label&gt;
+  &lt;input type=&quot;text&quot; id=&quot;lname&quot; name=&quot;lname&quot;&gt;&lt;br&gt;&lt;br&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;
+&lt;/form&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/te887.html?f=tags_input">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>提示和注释</h2>
+
+<p class="tip"><span>提示：</span>请始终使用 &lt;label&gt; 标签为以下元素定义标签：</p>
+
+<pre class="language-html">
+&lt;input type=&quot;text&quot;&gt;
+&lt;input type=&quot;checkbox&quot;&gt;
+&lt;input type=&quot;radio&quot;&gt;
+&lt;input type=&quot;file&quot;&gt;
+&lt;input type=&quot;password&quot;&gt;
+</pre>
+</div>
+
+
+
+<div>
+<h2>属性</h2>
+
+<table class="dataintable">
+<tr>
+<th style="width:20%;">属性</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><a href="att_input_accept.html" title="HTML &lt;input&gt; accept 属性">accept</a></td>
+<td>
+	<ul>
+	<li><i>文件扩展名</i></li>
+	<li>audio/*</li>
+	<li>video/*</li>
+	<li>image/*</li>
+	<li><i>媒体类型</i></li>
+	</ul>
+</td>
+<td>
+	<p>规定通过文件上传来提交的文件的类型。</p>
+	<p>规定用户可以从文件输入对话框中选择哪些文件类型的过滤器（仅适用于 type=&quot;file&quot;）。</p>
+</td>
+</tr>
+
+<tr>
+<td><a href="att_input_alt.html" title="HTML &lt;input&gt; alt 属性">alt</a></td>
+<td><i>文本</i></td>
+<td>规定图像的替代文本（仅适用于 type=&quot;image&quot;）。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_autocomplete.html" title="HTML &lt;input&gt; autocomplete 属性">autocomplete</a></td>
+<td>
+	<ul>
+	<li>on</li>
+	<li>off</li>
+	</ul>
+</td>
+<td>规定 &lt;input&gt; 元素是否应该启用自动完成。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_autofocus.html" title="HTML &lt;input&gt; autofocus 属性">autofocus</a></td>
+<td>autofocus</td>
+<td>规定 &lt;input&gt; 元素应在页面加载时应自动获得焦点。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_checked.html" title="HTML &lt;input&gt; checked 属性">checked</a></td>
+<td>checked</td>
+<td>规定在页面加载时应预先选中 &lt;input&gt; 元素（适用于 type=&quot;checkbox&quot; 或 type=&quot;radio&quot;）。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_dirname.html" title="HTML &lt;input&gt; dirname 属性">dirname</a></td>
+<td><i>inputname</i>.dir</td>
+<td>规定将被提交的文本方向。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_disabled.html" title="HTML &lt;input&gt; disabled 属性">disabled</a></td>
+<td>disabled</td>
+<td>规定应禁用 &lt;input&gt; 元素。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_form.html" title="HTML &lt;input&gt; form 属性">form</a></td>
+<td><i>表单 id</i></td>
+<td>规定 &lt;input&gt; 元素所属的表单。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_formaction.html" title="HTML &lt;input&gt; formaction 属性">formaction</a></td>
+<td><i>URL</i></td>
+<td>规定提交表单时将处理输入控件的文件的 URL（适用于 type=&quot;submit&quot; 和 type=&quot;image&quot;）。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_formenctype.html" title="HTML &lt;input&gt; formenctype 属性">formenctype</a></td>
+<td>
+	<ul>
+	<li>application/x-www-form-urlencoded</li>
+	<li>multipart/form-data</li>
+	<li>text/plain</li>
+	</ul>
+</td>
+<td>规定将表单数据提交到服务器时应如何对其进行编码（适用于 type=&quot;submit&quot; 和 type=&quot;image&quot;）。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_formmethod.html" title="HTML &lt;input&gt; formmethod 属性">formmethod</a></td>
+<td>
+	<ul>
+	<li>get</li>
+	<li>post</li>
+	</ul>
+</td>
+<td>定义用于将数据发送到 action URL 的 HTTP 方法（适用于 type=&quot;submit&quot; 和 type=&quot;image&quot;）。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_formnovalidate.html" title="HTML &lt;input&gt; formnovalidate 属性">formnovalidate</a></td>
+<td>formnovalidate</td>
+<td>定义在提交表单元素时不应对其进行验证。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_formtarget.html" title="HTML &lt;input&gt; formtarget 属性">formtarget</a></td>
+<td>
+	<ul>
+	<li>_blank</li>
+	<li>_self</li>
+	<li>_parent</li>
+	<li>_top</li>
+	</ul>
+<i>框架名称</i>
+</td>
+<td>规定在何处显示提交表单后收到的响应（适用于 type=&quot;submit&quot; 和 type=&quot;image&quot;）。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_height.html" title="HTML &lt;input&gt; height 属性">height</a></td>
+<td><i>像素</i></td>
+<td>规定 &lt;input&gt; 元素的高度（仅适用于 type=&quot;image&quot;）。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_list.html" title="HTML &lt;input&gt; list 属性">list</a></td>
+<td><i>datalist_id</i></td>
+<td>引用包含 &lt;input&gt; 元素的预定义选项的 &lt;datalist&gt; 元素。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_max.html" title="HTML &lt;input&gt; max 属性">max</a></td>
+<td>
+	<ul>
+	<li><i>数字</i></li>
+	<li><i>日期</i></li>
+	</ul>
+</td>
+<td>规定 &lt;input&gt; 元素的最大值。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_maxlength.html" title="HTML &lt;input&gt; maxlength 属性">maxlength</a></td>
+<td><i>数字</i></td>
+<td>规定 &lt;input&gt; 元素允许的最大字符数。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_min.html" title="HTML &lt;input&gt; min 属性">min</a></td>
+<td>
+	<ul>
+	<li><i>数字</i></li>
+	<li><i>日期</i></li>
+	</ul>
+</td>
+<td>规定 &lt;input&gt; 元素的最小值。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_minlength.html" title="HTML &lt;input&gt; minlength 属性">minlength</a></td>
+<td><i>数字</i></td>
+<td>规定 &lt;input&gt; 元素中所需的最少字符数。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_multiple.html" title="HTML &lt;input&gt; multiple 属性">multiple</a></td>
+<td>multiple</td>
+<td>规定用户可以在 &lt;input&gt; 元素中输入多个值。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_name.html" title="HTML &lt;input&gt; name 属性">name</a></td>
+<td><i>文本</i></td>
+<td>规定 &lt;input&gt; 元素的名称。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_pattern.html" title="HTML &lt;input&gt; pattern 属性">pattern</a></td>
+<td><i>正则表达式</i></td>
+<td>规定检查 &lt;input&gt; 元素值的正则表达式。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_placeholder.html" title="HTML &lt;input&gt; placeholder 属性">placeholder</a></td>
+<td><i>文本</i></td>
+<td>规定描述 &lt;input&gt; 元素预期值的简短提示。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_popovertarget.html" title="HTML &lt;input&gt; popovertarget 属性">popovertarget</a></td>
+<td><i>元素 id</i></td>
+<td>规定要调用的弹出框元素（仅适用于 type=&quot;button&quot;）。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_popovertargetaction.html" title="HTML &lt;input&gt; popovertargetaction 属性">popovertargetaction</a></td>
+<td>
+	<ul>
+	<li>hide</li>
+	<li>show</li>
+	<li>toggle</li>
+	</ul>
+</td>
+<td>规定当您单击按钮时弹出框元素会发生什么（仅适用于 type="button"）。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_readonly.html" title="HTML &lt;input&gt; readonly 属性">readonly</a></td>
+<td>readonly</td>
+<td>规定输入字段是只读的。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_required.html" title="HTML &lt;input&gt; required 属性">required</a></td>
+<td>required</td>
+<td>规定在提交表单之前必须填写输入字段。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_size.html" title="HTML &lt;input&gt; size 属性">size</a></td>
+<td><i>数字</i></td>
+<td>规定 &lt;input&gt; 元素的宽度（以字符数为单位）。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_src.html" title="HTML &lt;input&gt; src 属性">src</a></td>
+<td><i>URL</i></td>
+<td>规定用作提交按钮的图像的 URL（仅适用于 type=&quot;image&quot;）。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_step.html" title="HTML &lt;input&gt; step 属性">step</a></td>
+<td>
+	<ul>
+	<li><i>数字</i></li>
+	<li>any</li>
+	</ul>
+</td>
+<td>规定输入字段中合法数字之间的间隔。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_type.html" title="HTML &lt;input&gt; type 属性">type</a></td>
+<td>
+	<ul>
+	<li>button</li>
+	<li>checkbox</li>
+	<li>color</li>
+	<li>date</li>
+	<li>datetime-local</li>
+	<li>email</li>
+	<li>file</li>
+	<li>hidden</li>
+	<li>image</li>
+	<li>month</li>
+	<li>number</li>
+	<li>password</li>
+	<li>radio</li>
+	<li>range</li>
+	<li>reset</li>
+	<li>search</li>
+	<li>submit</li>
+	<li>tel</li>
+	<li>text</li>
+	<li>time</li>
+	<li>url</li>
+	<li>week</li>
+	</ul>
+</td>
+<td>规定要显示的 &lt;input&gt; 元素的类型。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_value.html" title="HTML &lt;input&gt; value 属性">value</a></td>
+<td><i>文本</i></td>
+<td>规定 &lt;input&gt; 元素的值。</td>
+</tr>
+
+<tr>
+<td><a href="att_input_width.html" title="HTML &lt;input&gt; width 属性">width</a></td>
+<td><i>像素</i></td>
+<td>规定 &lt;input&gt; 元素的宽度（仅适用于 type=&quot;image&quot;）。</td>
+</tr>
+</table>
+</div>
+
+
+
+<div>
+<h2>全局属性</h2>
+
+<p><code>&lt;input&gt;</code> 标签还支持 <a href="html_ref_standardattributes.html" title="HTML 全局属性">HTML 中的全局属性</a>。</p>
+</div>
+
+
+
+<div>
+<h2>事件属性</h2>
+
+<p><code>&lt;input&gt;</code> 标签还支持 <a href="html_ref_eventattributes.html" title="HTML 事件属性">HTML 中的事件属性</a>。</p>
+</div>
+
+
+
+<div>
+<h2>默认的 CSS 设置</h2>
+
+<p>无。</p>
+</div>
+
+
+
+<div>
+<h2>浏览器支持</h2>
+
+<table class="browser-support">
+<tr>
+<th class="bsChrome">Chrome</th>
+<th class="bsEdge">Edge</th>
+<th class="bsFirefox">Firefox</th>
+<th class="bsSafari">Safari</th>
+<th class="bsOpera">Opera</th>
+</tr>
+
+<tr>
+<td>Chrome</td>
+<td>Edge</td>
+<td>Firefox</td>
+<td>Safari</td>
+<td>Opera</td>
+</tr>
+
+<tr>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+</table>
+</div>
+
+
+
+<div>
+<h2>相关页面</h2>
+
+<h3>HTML 教程：</h3>
+
+<ul>
+<li><a href="../html/html_forms.html" title="HTML 表单">HTML 表单</a></li>
+<li><a href="../html/html_form_elements.html" title="HTML 表单元素">HTML 表单元素</a></li>
+<li><a href="../html/html_form_input_types.html" title="HTML 输入类型">HTML 输入类型</a></li>
+<li><a href="../html/html_form_attributes.html" title="HTML Input 属性">HTML 输入属性</a></li>
+<li><a href="../html/html_form_attributes_form.html" title="HTML Input form* 属性">HTML Input form* 属性</a></li>
+</ul>
+
+<h3>HTML DOM 参考手册：</h3>
+
+<ul>
+<li><a href="../jsref/dom_obj_button.html" title="HTML DOM Input Button 对象">Input Button 对象</a></li>
+<li><a href="../jsref/dom_obj_checkbox.html" title="HTML DOM Input Checkbox 对象">Input Checkbox 对象</a></li>
+<li><a href="../jsref/dom_obj_color.html" title="HTML DOM Input Color 对象">Input Color 对象</a></li>
+<li><a href="../jsref/dom_obj_date.html" title="HTML DOM Input Date 对象">Input Date 对象</a></li>
+<li><a href="../jsref/dom_obj_datetime.html" title="HTML DOM Input Datetime 对象">Input Datetime 对象</a></li>
+<li><a href="../jsref/dom_obj_datetime-local.html" title="HTML DOM Input DatetimeLocal 对象">Input DatetimeLocal 对象</a></li>
+<li><a href="../jsref/dom_obj_email.html" title="HTML DOM Input Email 对象">Input Email 对象</a></li>
+<li><a href="../jsref/dom_obj_email.html" title="HTML DOM Input FileUpload 对象">Input FileUpload 对象</a></li>
+<li><a href="../jsref/dom_obj_fileupload.html" title="HTML DOM Input Hidden 对象">Input Hidden 对象</a></li>
+<li><a href="../jsref/dom_obj_input_image.html" title="HTML DOM Input Image 对象">Input Image 对象</a></li>
+<li><a href="../jsref/dom_obj_month.html" title="HTML DOM Input Month 对象">Input Month 对象</a></li>
+<li><a href="../jsref/dom_obj_number.html" title="HTML DOM Input Number 对象">Input Number 对象</a></li>
+<li><a href="../jsref/dom_obj_password.html" title="HTML DOM Input Password 对象">Input Password 对象</a></li>
+<li><a href="../jsref/dom_obj_range.html" title="HTML DOM Input Range 对象">Input Range 对象</a></li>
+<li><a href="../jsref/dom_obj_radio.html" title="HTML DOM Input Radio 对象">Input Radio 对象</a></li>
+<li><a href="../jsref/dom_obj_reset.html" title="HTML DOM Input Reset 对象">Input Reset 对象</a></li>
+<li><a href="../jsref/dom_obj_search.html" title="HTML DOM Input Search 对象">Input Search 对象</a></li>
+<li><a href="../jsref/dom_obj_submit.html" title="HTML DOM Input Submit 对象">Input Submit 对象</a></li>
+<li><a href="../jsref/dom_obj_text.html" title="HTML DOM Input Text 对象">Input Text 对象</a></li>
+<li><a href="../jsref/dom_obj_input_time.html" title="HTML DOM Input Time 对象">Input Time 对象</a></li>
+<li><a href="../jsref/dom_obj_url.html" title="HTML DOM Input URL 对象">Input URL 对象</a></li>
+<li><a href="../jsref/dom_obj_week.html" title="HTML DOM Input Week 对象">Input Week 对象</a></li>
+</ul>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="tag_img.html" title="HTML &lt;img&gt; 标签">&lt;img&gt;</a></li>
+<li class="next"><a href="tag_ins.html" title="HTML &lt;ins&gt; 标签">&lt;ins&gt;</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="index.html">HTML 参考手册</a></h5>
+<h5 id="tools_example"><a href="../html/html_examples.html">HTML 实例</a></h5>
+<h5 id="tools_quiz"><a href="../html/html_quiz.html">HTML 测验</a></h5>
+<h5 id="tools_tutorial"><a href="../html/index.html">HTML 教程</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/tags/tag_input.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:04:00 GMT -->
+</html>

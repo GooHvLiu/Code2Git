@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.staticfile.net/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>axios 发送 AJAX请求</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="page-header">axios 发送 AJAX请求</h2>
+      <button class="btn btn-primary">GET</button>
+      <button class="btn btn-danger">POST</button>
+      <button class="btn btn-info">通用型AJAX</button>
+    </div>
+
+    <script>
+      const btns = document.querySelectorAll("button");
+      //配置 baseURL
+      // axios.defaults.baseURL = "http://127.0.0.1:8000";
+
+      btns[0].onclick = function () {
+        //GET 请求
+        axios
+          .get("http://127.0.0.1:8000/axio-server", {
+            //url 参数
+            params: {
+              id: 100,
+              vip: 7
+            },
+            //请求头信息
+            headers: {
+              name: "atguigu",
+              age: 20
+            }
+          })
+          .then((value) => {
+            console.log(value);
+          });
+      };
+
+      btns[1].onclick = function () {
+        //POST 请求
+        axios
+          .post(
+            "http://127.0.0.1:8000/axio-server",
+            // 请求体 data
+            {
+              username: "admin",
+              password: "admin123"
+            },
+            // axios 配置项 params / headers
+            {
+              params: {
+                id: 200,
+                vip: 9
+              },
+              headers: {
+                name: "atguigupost",
+                age: 202
+              }
+            }
+          )
+          .then((res) => {
+            console.log("POST请求成功", res.data);
+          })
+          .catch((err) => {
+            console.error("POST请求失败", err);
+          });
+      };
+
+      btns[2].onclick = function () {
+        axios({
+          method: "get",
+          //url
+          url: "http://127.0.0.1:8000/axio-json-server",
+          //url参数
+          params: {
+            vip: 10,
+            level: 30
+          },
+          //头信息
+          headers: {
+            a: 100,
+            b: 200
+          },
+          //请求体参数
+          data: {
+            username: "admin",
+            password: "admin"
+          }
+        })
+          .then((res) => {
+            console.log("通用方法请求成功", res.data);
+          })
+          .catch((err) => {
+            console.error("通用方法请求失败", err);
+          });
+      };
+    </script>
+  </body>
+</html>

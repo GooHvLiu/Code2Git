@@ -1,0 +1,433 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/jquery/ajax_post.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:10:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>jQuery ajax - post() 方法</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>jQuery 教程</h2>
+<ul>
+<li><a href="index.html" title="jQuery 教程">jQuery 教程</a></li>
+<li><a href="jquery_intro.html" title="jQuery 简介">jQuery 简介</a></li>
+<li><a href="jquery_install.html" title="jQuery 安装">jQuery 安装</a></li>
+<li><a href="jquery_syntax.html" title="jQuery 语法">jQuery 语法</a></li>
+<li><a href="jquery_selectors.html" title="jQuery 选择器">jQuery 选择器</a></li>
+<li><a href="jquery_events.html" title="jQuery 事件">jQuery 事件</a></li>
+</ul>
+<h2>jQuery 效果</h2>
+<ul>
+<li><a href="jquery_hide_show.html" title="jQuery jQuery 效果 - 隐藏和显示">jQuery 隐藏/显示</a></li>
+<li><a href="jquery_fade.html" title="jQuery jQuery 效果 - 淡入淡出">jQuery 淡入淡出</a></li>
+<li><a href="jquery_slide.html" title="jQuery 效果 - 滑动">jQuery 滑动</a></li>
+<li><a href="jquery_animate.html" title="jQuery 效果 - 动画">jQuery 动画</a></li>
+<li><a href="jquery_stop.html" title="jQuery 停止动画">jQuery stop()</a></li>
+<li><a href="jquery_callback.html" title="jQuery 回调函数">jQuery Callback</a></li>
+<li><a href="jquery_chaining.html" title="jQuery - Chaining">jQuery Chaining</a></li>
+</ul>
+<h2>jQuery HTML</h2>
+<ul>
+<li><a href="jquery_dom_get.html" title="jQuery - 获取内容和属性">jQuery 获取</a></li>
+<li><a href="jquery_dom_set.html" title="jQuery - 设置内容和属性">jQuery 设置</a></li>
+<li><a href="jquery_dom_add.html" title="jQuery - 添加元素">jQuery 添加</a></li>
+<li><a href="jquery_dom_remove.html" title="jQuery - 删除元素">jQuery 删除</a></li>
+<li><a href="jquery_css_classes.html" title="jQuery - 获取和设置 CSS 类">jQuery CSS 类</a></li>
+<li><a href="jquery_css.html" title="jQuery - css() 方法">jQuery css()</a></li>
+<li><a href="jquery_dimensions.html" title="jQuery - 尺寸">jQuery 尺寸</a></li>
+</ul>
+<h2>jQuery 遍历</h2>
+<ul>
+<li><a href="jquery_traversing.html" title="jQuery 遍历">jQuery 遍历</a></li>
+<li><a href="jquery_traversing_ancestors.html" title="jQuery 遍历 - 祖先">jQuery 祖先</a></li>
+<li><a href="jquery_traversing_descendants.html" title="jQuery 遍历 - 后代">jQuery 后代</a></li>
+<li><a href="jquery_traversing_siblings.html" title="jQuery 遍历 - 同胞">jQuery 同胞</a></li>
+<li><a href="jquery_traversing_filtering.html" title="jQuery 遍历 - 过滤">jQuery 过滤</a></li>
+</ul>
+<h2>jQuery AJAX</h2>
+<ul>
+<li><a href="jquery_ajax_intro.html" title="jQuery - AJAX 简介">jQuery AJAX 简介</a></li>
+<li><a href="jquery_ajax_load.html" title="jQuery - AJAX load() 方法">jQuery 加载</a></li>
+<li><a href="jquery_ajax_get_post.html" title="jQuery - AJAX get() 和 post() 方法">jQuery Get/Post</a></li>
+</ul>
+<h2>jQuery 杂项</h2>
+<ul>
+<li><a href="jquery_noconflict.html" title="jQuery - noConflict() 方法">jQuery noConflict()</a></li>
+</ul>
+<h2>jQuery 实例</h2>
+<ul>
+<li><a href="jquery_examples.html" title="jQuery 实例">jQuery 实例</a></li>
+<li><a href="jquery_quiz.html" title="jQuery 测验">jQuery 测验</a></li>
+</ul>
+<h2>jQuery 参考手册</h2>
+<ul>
+<li><a href="jquery_reference.html" title="jQuery 参考手册">jQuery 参考手册</a></li>
+<li><a href="jquery_ref_selectors.html" title="jQuery 参考手册 - 选择器">jQuery 选择器</a></li>
+<li><a href="jquery_ref_events.html" title="jQuery 参考手册 - 事件">jQuery 事件</a></li>
+<li><a href="jquery_ref_effects.html" title="jQuery 参考手册 - 效果">jQuery 效果</a></li>
+<li><a href="jquery_ref_manipulation.html" title="jQuery 参考手册 - 文档操作">jQuery 文档操作</a></li>
+<li><a href="jquery_ref_attributes.html" title="jQuery 参考手册 - 属性操作">jQuery 属性操作</a></li>
+<li><a href="jquery_ref_css.html" title="jQuery 参考手册 - CSS 操作">jQuery CSS 操作</a></li>
+<li><a href="jquery_ref_ajax.html" title="jQuery 参考手册 - Ajax">jQuery Ajax</a></li>
+<li><a href="jquery_ref_traversing.html" title="jQuery 参考手册 - 遍历">jQuery 遍历</a></li>
+<li><a href="jquery_ref_data.html" title="jQuery 参考手册 - 数据">jQuery 数据</a></li>
+<li><a href="jquery_ref_dom_element_methods.html" title="jQuery 参考手册 - DOM 元素方法">jQuery DOM 元素</a></li>
+<li><a href="jquery_ref_core.html" title="jQuery 参考手册 - 核心">jQuery 核心</a></li>
+<li><a href="jquery_ref_prop.html" title="jQuery 属性">jQuery 属性</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>jQuery ajax - post() 方法</h1>
+
+<div class="backtoreference">
+<p><a href="jquery_ref_ajax.html" title="jQuery 参考手册 - Ajax">jQuery Ajax 参考手册</a></p>
+</div>
+
+
+
+<div>
+<h2>实例</h2>
+
+<p>请求 test.php 网页，忽略返回值：</p>
+
+<pre class="language-js">
+$.post(&quot;test.php&quot;);
+</pre>
+
+<h3>TIY 实例</h3>
+
+<p>通过 AJAX POST 请求改变 div 元素的文本：</p>
+
+<pre class="language-js">
+$(&quot;input&quot;).keyup(function(){
+  txt=$(&quot;input&quot;).val();
+  $.post(&quot;demo_ajax_gethint.asp&quot;,{suggest:txt},function(result){
+    $(&quot;span&quot;).html(result);
+  });
+});
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t4a58.html?f=jquery_ajax_post">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>定义和用法</h2>
+
+<p>post() 方法通过 HTTP POST 请求从服务器载入数据。</p>
+
+<h3>语法</h3>
+
+<pre>jQuery.post(<i>url</i>,<i>data</i>,<i>success(data, textStatus, jqXHR)</i>,<i>dataType</i>)</pre>
+
+<table class="dataintable">
+<tr>
+<th style="width:35%;">参数</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><i>url</i></td>
+<td>必需。规定把请求发送到哪个 URL。</td>
+</tr>
+
+<tr>
+<td><i>data</i></td>
+<td>可选。映射或字符串值。规定连同请求发送到服务器的数据。</td>
+</tr>
+
+<tr>
+<td><i>success(data, textStatus, jqXHR)</i></td>
+<td>可选。请求成功时执行的回调函数。</td>
+</tr>
+
+<tr>
+<td><i>dataType</i></td>
+<td>
+<p>可选。规定预期的服务器响应的数据类型。</p>
+<p>默认执行智能判断（xml、json、script 或 html）。</p>
+</td>
+</tr>
+</table>
+
+<h3>详细说明</h3>
+
+<p>该函数是简写的 Ajax 函数，等价于：</p>
+
+<pre>
+$.ajax({
+  type: 'POST',
+  url: <i>url</i>,
+  data: <i>data</i>,
+  success: <i>success</i>,
+  dataType: <i>dataType</i>
+});
+</pre>
+
+<p>根据响应的不同的 MIME 类型，传递给 success 回调函数的返回数据也有所不同，这些数据可以是 XML 根元素、文本字符串、JavaScript 文件或者 JSON 对象。也可向 success 回调函数传递响应的文本状态。</p>
+
+<p>对于 jQuery 1.5，也可以向 success 回调函数传递 <a href="#jqxhr_object">jqXHR 对象</a>（jQuery 1.4 中传递的是 XMLHttpRequest 对象）。</p>
+
+<p>大部分实现会规定一个 success 函数：</p>
+
+<pre class="language-js">
+$.post(&quot;ajax/test.html&quot;, function(data) {
+  $(&quot;.result&quot;).html(data);
+});
+</pre>
+
+<p>本例读取被请求的 HTML 片段，并插入页面中。</p>
+
+<p>通过 POST 读取的页面不被缓存，因此 <a href="ajax_ajaxsetup.html" title="jQuery ajax - ajaxSetup() 方法">jQuery.ajaxSetup()</a> 中的 cache 和 ifModified 选项不会影响这些请求。</p>
+
+<p class="note"><span>注释：</span>由于浏览器安全方面的限制，大多数 "Ajax" 请求遵守同源策略；请求无法从不同的域、子域或协议成功地取回数据。</p>
+
+<p class="note"><span>注释：</span>如果由 jQuery.post() 发起的请求返回错误代码，那么不会有任何提示，除非脚本已调用了全局的 <a href="ajax_ajaxerror.html" title="jQuery ajax - ajaxError() 方法">.ajaxError() 方法</a>。或者对于 jQuery 1.5，jQuery.post() 返回的 jqXHR 对象的 .error() 方法也可以用于错误处理。</p>
+</div>
+
+
+
+
+<div id="jqxhr_object">
+<h2>jqXHR 对象</h2>
+
+<p>对于 jQuery 1.5，所有 jQuery 的 AJAX 方法返回的是 XMLHTTPRequest 对象的超集。由 $.post() 返回的 jQuery XHR 对象或 &quot;jqXHR,&quot;实现了约定的接口，赋予其所有的属性、方法，以及约定的行为。出于对由 <a href="ajax_ajax.html" title="jQuery ajax - ajax() 方法">$.ajax()</a> 使用的回调函数名称便利性和一致性的考虑，它提供了 .error(), .success() 以及 .complete() 方法。这些方法使用请求终止时调用的函数参数，该函数接受与对应命名的 $.ajax() 回调函数相同的参数。</p>
+
+<p>jQuery 1.5 中的约定接口同样允许 jQuery 的 Ajax 方法，包括 $.post()，来链接同一请求的多个 .success()、.complete() 以及 .error() 回调函数，甚至会在请求也许已经完成后分配这些回调函数。</p>
+
+<pre class="language-js">
+// 请求生成后立即分配处理程序，请记住该请求针对 jqxhr 对象
+    var jqxhr = $.post(&quot;example.php&quot;, function() {
+      alert(&quot;success&quot;);
+    })
+    .success(function() { alert(&quot;second success&quot;); })
+    .error(function() { alert(&quot;error&quot;); })
+    .complete(function() { alert(&quot;complete&quot;); });
+
+    // 在这里执行其他任务
+	
+    // 为上面的请求设置另一个完成函数
+    jqxhr.complete(function(){ alert(&quot;second complete&quot;); });
+</pre>
+</div>
+
+
+
+<div>
+<h2>更多实例</h2>
+
+<h3>例子 1</h3>
+
+<p>请求 test.php 页面，并一起发送一些额外的数据（同时仍然忽略返回值）：</p>
+
+<pre class="language-js">
+$.post(&quot;test.php&quot;, { name: &quot;Bill&quot;, time: &quot;2pm&quot; } );
+</pre>
+
+<h3>例子 2</h3>
+
+<p>向服务器传递数据数组（同时仍然忽略返回值）：</p>
+
+<pre class="language-js">
+$.post(&quot;test.php&quot;, { 'choices[]': [&quot;Jon&quot;, &quot;Susan&quot;] });
+</pre>
+
+<h3>例子 3</h3>
+
+<p>使用 ajax 请求发送表单数据：</p>
+
+<pre class="language-js">
+$.post(&quot;test.php&quot;, $(&quot;#testform&quot;).serialize());
+</pre>
+
+<h3>例子 4</h3>
+
+<p>输出来自请求页面 test.php 的结果（HTML 或 XML，取决于所返回的内容）：</p>
+
+<pre class="language-js">
+$.post(&quot;test.php&quot;, function(data){
+   alert(&quot;Data Loaded: &quot; + data);
+ });
+</pre>
+
+<h3>例子 5</h3>
+
+<p>向页面 test.php 发送数据，并输出结果（HTML 或 XML，取决于所返回的内容）：</p>
+
+<pre class="language-js">
+$.post(&quot;test.php&quot;, { name: &quot;Bill&quot;, time: &quot;2pm&quot; },
+   function(data){
+     alert(&quot;Data Loaded: &quot; + data);
+   });
+</pre>
+
+<h3>例子 6</h3>
+
+<p>获得 test.php 页面的内容，并存储为 XMLHttpResponse 对象，并通过 process() 这个 JavaScript 函数进行处理：</p>
+
+<pre class="language-js">
+$.post(&quot;test.php&quot;, { name: &quot;Bill&quot;, time: &quot;2pm&quot; },
+   function(data){
+     process(data);
+   }, &quot;xml&quot;);
+</pre>
+
+<h3>例子 7</h3>
+
+<p>获得 test.php 页面返回的 json 格式的内容：</p>
+
+<pre class="language-js">
+$.post(&quot;test.php&quot;, { &quot;func&quot;: &quot;getNameAndTime&quot; },
+   function(data){
+     alert(data.name); // Bill
+     console.log(data.time); //  2pm
+   }, &quot;json&quot;);
+</pre>
+</div>
+
+
+
+<div class="backtoreference">
+<p><a href="jquery_ref_ajax.html" title="jQuery 参考手册 - Ajax">jQuery Ajax 参考手册</a></p>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="jquery_reference.html">jQuery 参考手册</a></h5>
+<h5 id="tools_quiz"><a href="jquery_quiz.html">jQuery 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/jquery/ajax_post.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:10:35 GMT -->
+</html>

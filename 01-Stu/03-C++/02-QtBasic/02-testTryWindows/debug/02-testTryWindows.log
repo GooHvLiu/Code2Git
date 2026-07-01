@@ -1,0 +1,6 @@
+﻿  Generate moc_predefs.h
+   Qt/MSBuild: 3.4.1.0
+  Reading Qt configuration (D:/Qt/6.10.1/msvc2022_64/bin/qmake)
+   Qt: 6.10.1
+  main.cpp
+  02-testTryWindows.vcxproj -> C:\Users\Administrator\Desktop\Code\02-Qt\01-Study\02-testTryWindows\debug\DialogTest.exe

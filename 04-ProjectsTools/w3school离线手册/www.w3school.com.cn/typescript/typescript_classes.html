@@ -1,0 +1,457 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/typescript/typescript_classes.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:35:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>TypeScript 类</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>TypeScript 教程</h2>
+<ul>
+<li><a href="index.html" title="TypeScript 教程">TS 教程</a></li>
+<li><a href="typescript_intro.html" title="TypeScript 简介">TS 简介</a></li>
+<li><a href="typescript_getstarted.html" title="TypeScript 入门">TS 入门</a></li>
+<li><a href="typescript_simple_types.html" title="TypeScript 简单类型">TS 简单类型</a></li>
+<li><a href="typescript_special_types.html" title="TypeScript 特殊类型">TS 特殊类型</a></li>
+<li><a href="typescript_arrays.html" title="TypeScript 数组">TS 数组</a></li>
+<li><a href="typescript_tuples.html" title="TypeScript 元组">TS 元组</a></li>
+<li><a href="typescript_object_types.html" title="TypeScript 对象类型">TS 对象类型</a></li>
+<li><a href="typescript_enums.html" title="TypeScript 枚举">TS 枚举</a></li>
+<li><a href="typescript_aliases_and_interfaces.html" title="TypeScript 别名与接口">TS 别名与接口</a></li>
+<li><a href="typescript_union_types.html" title="TypeScript 联合类型">TS 联合类型</a></li>
+<li><a href="typescript_functions.html" title="TypeScript 函数">TS 函数</a></li>
+<li><a href="typescript_casting.html" title="TypeScript 类型转换">TS 类型转换</a></li>
+<li class="currentLink"><a href="typescript_classes.html" title="TypeScript 类">TS 类</a></li>
+<li><a href="typescript_basic_generics.html" title="TypeScript 基本泛型">TS 基本泛型</a></li>
+<li><a href="typescript_utility_types.html" title="TypeScript 实用类型">TS 实用类型</a></li>
+<li><a href="typescript_keyof.html" title="TypeScript Keyof">TS Keyof</a></li>
+<li><a href="typescript_null.html" title="TypeScript Null">TS Null</a></li>
+<li><a href="typescript_definitely_typed.html" title="TypeScript Definitely Typed">TS Definitely Typed</a></li>
+<li><a href="typescript_5_updates.html" title="TypeScript 5.x 更新">TS 5 更新</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>TypeScript 类</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="typescript_casting.html" title="TypeScript 类型转换">TS 类型转换</a></li>
+<li class="next"><a href="typescript_basic_generics.html" title="TypeScript 基本泛型">TS 基本泛型</a></li>
+</ul>
+</div>
+
+
+
+<section id="intro">
+<p>TypeScript 为 JavaScript 类添加了类型和可见性修饰符。</p>
+
+<p>在此处了解有关 JavaScript 类的更多信息。</p>
+</section>
+
+
+
+<section>
+<h2>成员：类型</h2>
+
+<p>类的成员（属性和方法）使用类型注解进行类型化，类似于变量。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+class Person {
+  name: string;
+}
+
+const person = new Person();
+person.name = &quot;Jane&quot;;
+</pre>
+
+<p class="tiy"><a target="_blank" href="t2eeb.html?f=typescript_class_intro">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>成员：可见性</h2>
+
+<p>类成员还可以被赋予特殊的修饰符，这些修饰符会影响其可见性。</p>
+
+<p>TypeScript 中主要有三个可见性修饰符。</p>
+
+<ul>
+<li><code>public</code> - （默认）允许从任何地方访问类成员</li>
+<li><code>private</code> - 仅允许从类内部访问类成员</li>
+<li><code>protected</code> - 允许从类本身和任何继承它的类中访问类成员，这在下面的继承部分中有介绍</li>
+</ul>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+class Person {  
+  private name: string;  
+  
+  public constructor(name: string) {  
+    this.name = name;  
+  }  
+  
+  public getName(): string {  
+    return this.name;  
+  }  
+}  
+  
+const person = new Person(&quot;Jane&quot;);  
+console.log(person.getName()); // 由于 name 是私有的，因此无法从类外部访问 person.name
+</pre>
+
+<p class="tiy"><a target="_blank" href="t188b.html?f=typescript_class_modifiers">亲自试一试</a></p>
+
+<p>类中的 <code>this</code> 关键字通常指的是类的实例。在此处阅读更多有关 <code>this</code> 的信息。</p>
+</section>
+
+
+
+<section>
+<h2>参数属性</h2>
+
+<p>TypeScript 提供了一种在构造函数中定义类成员的便捷方式，方法是在参数中添加可见性修饰符。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+class Person {  
+  // name 是一个私有成员变量  
+  public constructor(private name: string) {}  
+  
+  public getName(): string {  
+    return this.name;  
+  }  
+}  
+  
+const person = new Person(&quot;Jane&quot;);  
+console.log(person.getName());
+</pre>
+
+<p class="tiy"><a target="_blank" href="tc102.html?f=typescript_class_param_prop">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>只读</h2>
+
+<p>与数组类似，<code>readonly</code> 关键字可以防止类成员被更改。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+class Person {  
+  private readonly name: string;  
+  
+  public constructor(name: string) {  
+    // 名称在初始定义后无法更改，这必须在声明时或在构造函数中进行。  
+    this.name = name;  
+  }  
+  
+  public getName(): string {  
+    return this.name;  
+  }  
+}  
+  
+const person = new Person(&quot;Jane&quot;);  
+console.log(person.getName());
+</pre>
+
+<p class="tiy"><a target="_blank" href="td0d4.html?f=typescript_class_readonly">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>继承：实现</h2>
+
+<p>接口（此处介绍）可用于通过 <code>implements</code> 关键字定义类必须遵循的类型。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+interface Shape {
+  getArea: () =&gt; number;
+}
+
+class Rectangle implements Shape {
+  public constructor(protected readonly width: number, protected readonly height: number) {}
+
+  public getArea(): number {
+    return this.width * this.height;
+  }
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t7119.html?f=typescript_class_interface">亲自试一试</a></p>
+
+<p>一个类可以通过在 <code>implements</code> 后列出每一个接口，并用逗号分隔，来实现多个接口，如下所示：</p>
+
+<pre class="language-typescript">
+class Rectangle implements Shape, Colored {
+</pre>
+</section>
+
+
+
+<section>
+<h2>继承：扩展</h2>
+
+<p>类可以通过 <code>extends</code> 关键字相互继承。一个类只能扩展一个其他类。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+interface Shape {
+  getArea: () =&gt; number;
+}
+
+class Rectangle implements Shape {
+  public constructor(protected readonly width: number, protected readonly height: number) {}
+
+  public getArea(): number {
+    return this.width * this.height;
+  }
+}
+
+class Square extends Rectangle {
+  public constructor(width: number) {
+    super(width, width);
+  }
+
+  // getArea 从 Rectangle 继承
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t9921.html?f=typescript_class_extends">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>重写</h2>
+
+<p>当一个类扩展另一个类时，它可以替换父类中具有相同名称的成员。</p>
+
+<p>较新版本的 TypeScript 允许使用 <code>override</code> 关键字显式标记这一点。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+interface Shape {  
+  getArea: () =&gt; number;  
+}  
+  
+class Rectangle implements Shape {  
+  // 使用 protected 修饰符的这些成员允许从继承自此类的类（如 Square）进行访问  
+  public constructor(protected readonly width: number, protected readonly height: number) {}  
+  
+  public getArea(): number {  
+    return this.width * this.height;  
+  }  
+  
+  public toString(): string {  
+    return `Rectangle[width=${this.width}, height=${this.height}]`;  
+  }  
+}  
+  
+class Square extends Rectangle {  
+  public constructor(width: number) {  
+    super(width, width);  
+  }  
+  
+  // 这个 toString 替换了 Rectangle 的 toString  
+  public override toString(): string {  
+    return `Square[width=${this.width}]`;  
+  }  
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t8ebd.html?f=typescript_class_override">亲自试一试</a></p>
+
+<p>默认情况下，当重写方法时，<code>override</code> 关键字是可选的，它仅有助于防止意外重写不存在的方法。使用 <code>noImplicitOverride</code> 设置来强制在重写时使用它。</p>
+</section>
+
+
+
+<section>
+<h2>抽象类</h2>
+
+<p>类的编写方式可以允许它们用作其他类的基类，而不必实现所有成员。这是通过使用 <code>abstract</code> 关键字来完成的。未实现的成员也使用 <code>abstract</code> 关键字。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+abstract class Polygon {
+  public abstract getArea(): number;
+
+  public toString(): string {
+    return `Polygon[area=${this.getArea()}]`;
+  }
+}
+
+class Rectangle extends Polygon {
+  public constructor(protected readonly width: number, protected readonly height: number) {
+    super();
+  }
+
+  public getArea(): number {
+    return this.width * this.height;
+  }
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t3dc3.html?f=typescript_class_abstract">亲自试一试</a></p>
+
+<p>抽象类不能直接实例化，因为它们没有实现所有成员。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="typescript_casting.html" title="TypeScript 类型转换">TS 类型转换</a></li>
+<li class="next"><a href="typescript_basic_generics.html" title="TypeScript 基本泛型">TS 基本泛型</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/typescript/typescript_classes.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:35:45 GMT -->
+</html>

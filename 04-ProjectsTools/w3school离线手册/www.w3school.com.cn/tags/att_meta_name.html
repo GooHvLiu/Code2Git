@@ -1,0 +1,553 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/tags/att_meta_name.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:17:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>HTML &lt;meta&gt; name 属性</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>参考手册</h2>
+<ul>
+<li><a href="index.html" title="HTML 元素参考手册">HTML 元素（字母排序）</a></li>
+<li><a href="html_ref_byfunc.html" title="HTML 元素参考手册 - 功能排序">HTML 元素（功能排序）</a></li>
+<li><a href="html_ref_html_browsersupport.html" title="HTML 参考手册 - 浏览器支持">HTML 浏览器支持</a></li>
+<li><a href="html_ref_standardattributes.html" title="HTML 全局属性">HTML 全局属性</a></li>
+<li><a href="html_ref_eventattributes.html" title="HTML 事件参考手册">HTML 事件</a></li>
+<li><a href="html_ref_colornames.html" title="HTML 颜色名">HTML 颜色名</a></li>
+<li><a href="html_ref_canvas.html" title="HTML Canvas 参考手册">HTML 画布</a></li>
+<li><a href="html_ref_audio_video_dom.html" title="HTML 音频/视频参考手册">HTML 视频/音频</a></li>
+<li><a href="html_ref_charactersets.html" title="HTML 字符集">HTML 字符集</a></li>
+<li><a href="html_ref_dtd.html" title="HTML &lt;!DOCTYPE&gt;">HTML 文档类型</a></li>
+<li><a href="html_ref_urlencode.html" title="HTML URL 编码">HTML URL 编码</a></li>
+<li><a href="html_ref_language_codes.html" title="HTML 语言代码参考手册">HTML 语言代码</a></li>
+<li><a href="html_ref_country_codes.html" title="HTML ISO 国家代码参考手册">HTML 国家代码</a></li>
+<li><a href="html_ref_httpmessages.html" title="HTTP 状态消息">HTTP 消息</a></li>
+<li><a href="html_ref_httpmethods.html" title="HTTP 请求方法">HTTP 方法</a></li>
+<li><a href="html_ref_keyboardshortcuts.html" title="键盘快捷键">键盘快捷键</a></li>
+</ul>
+<h2>HTML 标签</h2>
+<ul>
+<li><a href="tag_comment.html" title="HTML &lt;!--&gt; 标签">&lt;!--&gt;</a></li>
+<li><a href="tag_doctype.html" title="HTML &lt;!DOCTYPE&gt; 标签">&lt;!DOCTYPE&gt;</a></li>
+<li><a href="tag_a.html" title="HTML &lt;a&gt; 标签">&lt;a&gt;</a></li>
+<li><a href="tag_abbr.html" title="HTML &lt;abbr&gt; 标签">&lt;abbr&gt;</a></li>
+<li><a href="tag_acronym.html" title="HTML &lt;acronym&gt; 标签">&lt;acronym&gt;</a></li>
+<li><a href="tag_address.html" title="HTML &lt;address&gt; 标签">&lt;address&gt;</a></li>
+<li><a href="tag_applet.html" title="HTML &lt;applet&gt; 标签">&lt;applet&gt;</a></li>
+<li><a href="tag_area.html" title="HTML &lt;area&gt; 标签">&lt;area&gt;</a></li>
+<li><a href="tag_article.html" title="HTML &lt;article&gt; 标签">&lt;article&gt;</a></li>
+<li><a href="tag_aside.html" title="HTML &lt;aside&gt; 标签">&lt;aside&gt;</a></li>
+<li><a href="tag_audio.html" title="HTML &lt;audio&gt; 标签">&lt;audio&gt;</a></li>
+<li><a href="tag_b.html" title="HTML &lt;b&gt; 标签">&lt;b&gt;</a></li>
+<li><a href="tag_base.html" title="HTML &lt;base&gt; 标签">&lt;base&gt;</a></li>
+<li><a href="tag_basefont.html" title="HTML &lt;basefont&gt; 标签">&lt;basefont&gt;</a></li>
+<li><a href="tag_bdi.html" title="HTML &lt;bdi&gt; 标签">&lt;bdi&gt;</a></li>
+<li><a href="tag_bdo.html" title="HTML &lt;bdo&gt; 标签">&lt;bdo&gt;</a></li>
+<li><a href="tag_big.html" title="HTML &lt;big&gt; 标签">&lt;big&gt;</a></li>
+<li><a href="tag_blockquote.html" title="HTML &lt;blockquote&gt; 标签">&lt;blockquote&gt;</a></li>
+<li><a href="tag_body.html" title="HTML &lt;body&gt; 标签">&lt;body&gt;</a></li>
+<li><a href="tag_br.html" title="HTML &lt;br&gt; 标签">&lt;br&gt;</a></li>
+<li><a href="tag_button.html" title="HTML &lt;button&gt; 标签">&lt;button&gt;</a></li>
+<li><a href="tag_canvas.html" title="HTML &lt;canvas&gt; 标签">&lt;canvas&gt;</a></li>
+<li><a href="tag_caption.html" title="HTML &lt;caption&gt; 标签">&lt;caption&gt;</a></li>
+<li><a href="tag_center.html" title="HTML &lt;center&gt; 标签">&lt;center&gt;</a></li>
+<li><a href="tag_cite.html" title="HTML &lt;cite&gt; 标签">&lt;cite&gt;</a></li>
+<li><a href="tag_code.html" title="HTML &lt;code&gt; 标签">&lt;code&gt;</a></li>
+<li><a href="tag_col.html" title="HTML &lt;col&gt; 标签">&lt;col&gt;</a></li>
+<li><a href="tag_colgroup.html" title="HTML &lt;colgroup&gt; 标签">&lt;colgroup&gt;</a></li>
+<li><a href="tag_data.html" title="HTML &lt;data&gt; 标签">&lt;data&gt;</a></li>
+<li><a href="tag_datalist.html" title="HTML &lt;datalist&gt; 标签">&lt;datalist&gt;</a></li>
+<li><a href="tag_dd.html" title="HTML &lt;dd&gt; 标签">&lt;dd&gt;</a></li>
+<li><a href="tag_del.html" title="HTML &lt;del&gt; 标签">&lt;del&gt;</a></li>
+<li><a href="tag_details.html" title="HTML &lt;details&gt; 标签">&lt;details&gt;</a></li>
+<li><a href="tag_dfn.html" title="HTML &lt;dfn&gt; 标签">&lt;dfn&gt;</a></li>
+<li><a href="tag_dialog.html" title="HTML &lt;dialog&gt; 标签">&lt;dialog&gt;</a></li>
+<li><a href="tag_dir.html" title="HTML &lt;dir&gt; 标签">&lt;dir&gt;</a></li>
+<li><a href="tag_div.html" title="HTML &lt;div&gt; 标签">&lt;div&gt;</a></li>
+<li><a href="tag_dl.html" title="HTML &lt;dl&gt; 标签">&lt;dl&gt;</a></li>
+<li><a href="tag_dt.html" title="HTML &lt;dt&gt; 标签">&lt;dt&gt;</a></li>
+<li><a href="tag_em.html" title="HTML &lt;em&gt; 标签">&lt;em&gt;</a></li>
+<li><a href="tag_embed.html" title="HTML &lt;embed&gt; 标签">&lt;embed&gt;</a></li>
+<li><a href="tag_fieldset.html" title="HTML &lt;fieldset&gt; 标签">&lt;fieldset&gt;</a></li>
+<li><a href="tag_figcaption.html" title="HTML &lt;figcaption&gt; 标签">&lt;figcaption&gt;</a></li>
+<li><a href="tag_figure.html" title="HTML &lt;figure&gt; 标签">&lt;figure&gt;</a></li>
+<li><a href="tag_font.html" title="HTML &lt;font&gt; 标签">&lt;font&gt;</a></li>
+<li><a href="tag_footer.html" title="HTML &lt;footer&gt; 标签">&lt;footer&gt;</a></li>
+<li><a href="tag_form.html" title="HTML &lt;form&gt; 标签">&lt;form&gt;</a></li>
+<li><a href="tag_frame.html" title="HTML &lt;frame&gt; 标签">&lt;frame&gt;</a></li>
+<li><a href="tag_frameset.html" title="HTML &lt;frameset&gt; 标签">&lt;frameset&gt;</a></li>
+<li><a href="tag_hn.html" title="HTML &lt;h1&gt; - &lt;h6&gt; 标签">&lt;h1&gt; - &lt;h6&gt;</a></li>
+<li><a href="tag_head.html" title="HTML &lt;head&gt; 标签">&lt;head&gt;</a></li>
+<li><a href="tag_header.html" title="HTML &lt;header&gt; 标签">&lt;header&gt;</a></li>
+<li><a href="tag_hgroup.html" title="HTML &lt;hgroup&gt; 标签">&lt;hgroup&gt;</a></li>
+<li><a href="tag_hr.html" title="HTML &lt;hr&gt; 标签">&lt;hr&gt;</a></li>
+<li><a href="tag_html.html" title="HTML &lt;html&gt; 标签">&lt;html&gt;</a></li>
+<li><a href="tag_i.html" title="HTML &lt;i&gt; 标签">&lt;i&gt;</a></li>
+<li><a href="tag_iframe.html" title="HTML &lt;iframe&gt; 标签">&lt;iframe&gt;</a></li>
+<li><a href="tag_img.html" title="HTML &lt;img&gt; 标签">&lt;img&gt;</a></li>
+<li><a href="tag_input.html" title="HTML &lt;input&gt; 标签">&lt;input&gt;</a></li>
+<li><a href="tag_ins.html" title="HTML &lt;ins&gt; 标签">&lt;ins&gt;</a></li>
+<li><a href="tag_kbd.html" title="HTML &lt;kbd&gt; 标签">&lt;kbd&gt;</a></li>
+<li><a href="tag_label.html" title="HTML &lt;label&gt; 标签">&lt;label&gt;</a></li>
+<li><a href="tag_legend.html" title="HTML &lt;legend&gt; 标签">&lt;legend&gt;</a></li>
+<li><a href="tag_li.html" title="HTML &lt;li&gt; 标签">&lt;li&gt;</a></li>
+<li><a href="tag_link.html" title="HTML &lt;link&gt; 标签">&lt;link&gt;</a></li>
+<li><a href="tag_main.html" title="HTML &lt;main&gt; 标签">&lt;main&gt;</a></li>
+<li><a href="tag_map.html" title="HTML &lt;map&gt; 标签">&lt;map&gt;</a></li>
+<li><a href="tag_mark.html" title="HTML &lt;mark&gt; 标签">&lt;mark&gt;</a></li>
+<li><a href="tag_menu.html" title="HTML &lt;menu&gt; 标签">&lt;menu&gt;</a></li>
+<li><a href="tag_meta.html" title="HTML &lt;meta&gt; 标签">&lt;meta&gt;</a></li>
+<li><a href="tag_meter.html" title="HTML &lt;meter&gt; 标签">&lt;meter&gt;</a></li>
+<li><a href="tag_nav.html" title="HTML &lt;nav&gt; 标签">&lt;nav&gt;</a></li>
+<li><a href="tag_noframes.html" title="HTML &lt;noframes&gt; 标签">&lt;noframes&gt;</a></li>
+<li><a href="tag_noscript.html" title="HTML &lt;noscript&gt; 标签">&lt;noscript&gt;</a></li>
+<li><a href="tag_object.html" title="HTML &lt;object&gt; 标签">&lt;object&gt;</a></li>
+<li><a href="tag_ol.html" title="HTML &lt;ol&gt; 标签">&lt;ol&gt;</a></li>
+<li><a href="tag_optgroup.html" title="HTML &lt;optgroup&gt; 标签">&lt;optgroup&gt;</a></li>
+<li><a href="tag_option.html" title="HTML &lt;option&gt; 标签">&lt;option&gt;</a></li>
+<li><a href="tag_output.html" title="HTML &lt;output&gt; 标签">&lt;output&gt;</a></li>
+<li><a href="tag_p.html" title="HTML &lt;p&gt; 标签">&lt;p&gt;</a></li>
+<li><a href="tag_param.html" title="HTML &lt;param&gt; 标签">&lt;param&gt;</a></li>
+<li><a href="tag_picture.html" title="HTML &lt;picture&gt; 标签">&lt;picture&gt;</a></li>
+<li><a href="tag_pre.html" title="HTML &lt;pre&gt; 标签">&lt;pre&gt;</a></li>
+<li><a href="tag_progress.html" title="HTML &lt;progress&gt; 标签">&lt;progress&gt;</a></li>
+<li><a href="tag_q.html" title="HTML &lt;q&gt; 标签">&lt;q&gt;</a></li>
+<li><a href="tag_rp.html" title="HTML &lt;rp&gt; 标签">&lt;rp&gt;</a></li>
+<li><a href="tag_rt.html" title="HTML &lt;rt&gt; 标签">&lt;rt&gt;</a></li>
+<li><a href="tag_ruby.html" title="HTML &lt;ruby&gt; 标签">&lt;ruby&gt;</a></li>
+<li><a href="tag_s.html" title="HTML &lt;s&gt; 标签">&lt;s&gt;</a></li>
+<li><a href="tag_samp.html" title="HTML &lt;samp&gt; 标签">&lt;samp&gt;</a></li>
+<li><a href="tag_script.html" title="HTML &lt;script&gt; 标签">&lt;script&gt;</a></li>
+<li><a href="tag_search.html" title="HTML &lt;search&gt; 标签">&lt;search&gt;</a></li>
+<li><a href="tag_section.html" title="HTML &lt;section&gt; 标签">&lt;section&gt;</a></li>
+<li><a href="tag_select.html" title="HTML &lt;select&gt; 标签">&lt;select&gt;</a></li>
+<li><a href="tag_small.html" title="HTML &lt;small&gt; 标签">&lt;small&gt;</a></li>
+<li><a href="tag_source.html" title="HTML &lt;source&gt; 标签">&lt;source&gt;</a></li>
+<li><a href="tag_span.html" title="HTML &lt;span&gt; 标签">&lt;span&gt;</a></li>
+<li><a href="tag_strike.html" title="HTML &lt;strike&gt; 标签">&lt;strike&gt;</a></li>
+<li><a href="tag_strong.html" title="HTML &lt;strong&gt; 标签">&lt;strong&gt;</a></li>
+<li><a href="tag_style.html" title="HTML &lt;style&gt; 标签">&lt;style&gt;</a></li>
+<li><a href="tag_sub.html" title="HTML &lt;sub&gt; 标签">&lt;sub&gt;</a></li>
+<li><a href="tag_summary.html" title="HTML &lt;summary&gt; 标签">&lt;summary&gt;</a></li>
+<li><a href="tag_sup.html" title="HTML &lt;sup&gt; 标签">&lt;sup&gt;</a></li>
+<li><a href="tag_svg.html" title="HTML &lt;svg&gt; 标签">&lt;svg&gt;</a></li>
+<li><a href="tag_table.html" title="HTML &lt;table&gt; 标签">&lt;table&gt;</a></li>
+<li><a href="tag_tbody.html" title="HTML &lt;tbody&gt; 标签">&lt;tbody&gt;</a></li>
+<li><a href="tag_td.html" title="HTML &lt;td&gt; 标签">&lt;td&gt;</a></li>
+<li><a href="tag_template.html" title="HTML &lt;template&gt; 标签">&lt;template&gt;</a></li>
+<li><a href="tag_textarea.html" title="HTML &lt;textarea&gt; 标签">&lt;textarea&gt;</a></li>
+<li><a href="tag_tfoot.html" title="HTML &lt;tfoot&gt; 标签">&lt;tfoot&gt;</a></li>
+<li><a href="tag_th.html" title="HTML &lt;th&gt; 标签">&lt;th&gt;</a></li>
+<li><a href="tag_thead.html" title="HTML &lt;thead&gt; 标签">&lt;thead&gt;</a></li>
+<li><a href="tag_time.html" title="HTML &lt;time&gt; 标签">&lt;time&gt;</a></li>
+<li><a href="tag_title.html" title="HTML &lt;title&gt; 标签">&lt;title&gt;</a></li>
+<li><a href="tag_tr.html" title="HTML &lt;tr&gt; 标签">&lt;tr&gt;</a></li>
+<li><a href="tag_track.html" title="HTML &lt;track&gt; 标签">&lt;track&gt;</a></li>
+<li><a href="tag_tt.html" title="HTML &lt;tt&gt; 标签">&lt;tt&gt;</a></li>
+<li><a href="tag_u.html" title="HTML &lt;u&gt; 标签">&lt;u&gt;</a></li>
+<li><a href="tag_ul.html" title="HTML &lt;ul&gt; 标签">&lt;ul&gt;</a></li>
+<li><a href="tag_var.html" title="HTML &lt;var&gt; 标签">&lt;var&gt;</a></li>
+<li><a href="tag_video.html" title="HTML &lt;video&gt; 标签">&lt;video&gt;</a></li>
+<li><a href="tag_wbr.html" title="HTML &lt;wbr&gt; 标签">&lt;wbr&gt;</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>HTML &lt;meta&gt; name 属性</h1>
+
+<div class="backtoreference">
+<p><a href="tag_meta.html">HTML &lt;meta&gt; 标签</a></p>
+</div>
+
+
+
+<div>
+<h2>定义和用法</h2>
+
+<p><code>name</code> 属性规定元数据的名称。</p>
+
+<p><code>name</code> 属性规定的是 <a href="att_meta_content.html" title="HTML &lt;meta&gt; content 属性">content 属性</a> 的值的名称。</p>
+
+<p>通过使用 <code>name</code> 和 <code>content</code> 属性，能够使用名/值对为文档定义元数据。其中，<code>name</code> 属性表示元数据的类型，而 <code>content</code> 属性用来提供值。</p>
+
+<p>下面的表格列出了几种预定义的元数据类型。</p>
+
+<p class="important"><span>注意：</span>如果设置了 <a href="att_meta_http_equiv.html" title="HTML &lt;meta&gt; http-equiv 属性">http-equiv 属性</a>，则不应设置 <code>name</code> 属性。</p>
+
+<p class="tip"><span>提示：</span>HTML5 引入了一种方法，让网页设计人员通过 &lt;meta&gt; 标签控制视口（网页的用户可见区域）（请参见下面的“设置视口”实例）。</p>
+</div>
+
+
+
+<div>
+<h2>实例</h2>
+
+<p>使用 name 属性定义关于 HTML 文档的描述、关键字和作者。还要定义视口，来控制页面的尺寸和针对不同设备的缩放比例：</p>
+
+<pre class="language-html">
+&lt;head&gt;
+  &lt;meta name=&quot;description&quot; content=&quot;免费的 Web 教程&quot;&gt;
+  &lt;meta name=&quot;keywords&quot; content=&quot;HTML,CSS,JavaScript&quot;&gt;
+  &lt;meta name=&quot;author&quot; content=&quot;YK Investment&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;/head&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tddad.html?f=tag_meta_name">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>语法</h2>
+
+<pre class="language-html">
+&lt;meta name=&quot;<i>value</i>&quot;&gt;
+</pre>
+
+<h3>属性值</h3>
+
+<table class="dataintable">
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td>application-name</td>
+<td>规定页面代表的 Web 应用程序的名称。</td>
+</tr>
+
+<tr>
+<td>author</td>
+<td>
+	<p>规定文档作者的姓名。例如：</p>
+	<p>&lt;meta name=&quot;author&quot; content=&quot;YK Investment&quot;&gt;</p>
+</td>
+</tr>
+
+<tr>
+<td>description</td>
+<td>
+	<p>规定页面的描述。搜索引擎可以选择此描述来显示搜索结果。例如：</p>
+	<p>&lt;meta name=&quot;description&quot; content=&quot;免费的 Web 教程&quot;&gt;</p>
+</td>
+</tr>
+
+<tr>
+<td>generator</td>
+<td>
+	<p>规定用于生成文档的软件包之一（不用于手写页面）。例如：</p>
+	<p>&lt;meta name=&quot;generator&quot; content=&quot;FrontPage 4.0&quot;&gt;</p>
+</td>
+</tr>
+
+<tr>
+<td>keywords</td>
+<td>
+	<p>规定与页面相关的关键字列表，以逗号分隔。告知搜索引擎关于页面的内容。</p>
+	<p class="tip"><span>提示：</span>请始终规定关键字（搜索引擎需要对页面进行分类）。例如：</p>
+	<p>&lt;meta name=&quot;keywords&quot; content=&quot;HTML, meta tag, tag reference&quot;&gt;</p>
+</td>
+</tr>
+
+<tr>
+<td>viewport</td>
+<td>控制视口（网页的用户可见区域）。</td>
+</tr>
+</table>
+
+<h3>说明</h3>
+
+<p>除了表中的六种预定义的元数据类型，还可以使用元数据扩展。访问此页面可获取一份时常更新的扩展清单：</p>
+
+<p>http://wiki.whatwg.org/wiki/MetaExtensions</p>
+
+<p>有些扩展用得较多，而另外一些则只有很窄的用途，几乎无人使用。robots 元数据显然属于前者。HTML 文档作者可以用它告诉搜索引擎该如何对待该文档。例如：</p>
+
+<pre class="language-html">
+&lt;meta name=&quot;robots&quot; content=&quot;noindex&quot;&gt;
+</pre>
+
+<p>这个元数据类型有三个大多数浏览器都认识的值：</p>
+
+<ul>
+<li>noindex - 表示不要索引本页</li>
+<li>noarchive - 表示不要将本页存档或缓存</li>
+<li>nofollow - 表示不要顺着本页的链接继续搜索下去</li>
+</ul>
+
+<p>可用的元数据扩展为数不多，开发者最好读读那份在线的清单，看看有哪些可用于自己的项目。</p>
+</div>
+
+
+
+<div>
+<h2>提示</h2>
+
+<p>要告诉搜索引擎如何对内容分类和分等级，过去最主要的手段就是使用 keywords 元数据。现在的搜索引擎对 keywords 元数据的重视程度已大不如前，这是因为它可以被滥用来制作页面内容与相关性的假象。创作者如何希望内容在搜索引擎眼里有所改观，最好的方法是使用它们自己提供的建议。大多数搜索引擎都提供了优化网页或整个网站的指南。</p>
+
+<h3>谷歌：搜索引擎优化 (SEO) 新手指南</h3>
+
+<p><a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=zh-cn" title="搜索引擎优化 (SEO) 新手指南" target="_blank">https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=zh-cn</a></p>
+
+<h3>百度：百度搜索引擎优化指南</h3>
+
+<p><a href="https://ziyuan.baidu.com/college/articleinfo?id=1346" title="百度搜索引擎优化指南2.0" target="_blank">https://ziyuan.baidu.com/college/articleinfo?id=1346</a></p>
+</div>
+
+
+
+<div>
+<h2>设置视口</h2>
+
+<p>视口是网页的用户可见区域。它因设备而异 —— 它在手机上会比在电脑屏幕上小。</p>
+
+<p>您应该在所有网页中包含以下 &lt;meta&gt; 元素：</p>
+
+<pre class="language-html">
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+</pre>
+
+<p>它为浏览器提供了有关如何控制页面尺寸和缩放比例的说明。</p>
+
+<p><code>width=device-width</code> 部分设置页面的宽度，以跟随设备的屏幕宽度（因设备而异）。</p>
+
+<p><code>initial-scale=1.0</code> 部分设置浏览器首次加载页面时的初始缩放级别。</p>
+
+<p>这是一个没有视口元标记的网页示例，以及带有视口元标记的同一网页：</p>
+
+<style>
+.p50 {
+text-align: center;
+margin-top: 20px;
+}
+
+div#maincontent img.viewport {
+   border:10px solid #f1f1f1;
+   border-radius:3px;
+   margin: 0;
+}
+
+div#maincontent img.viewport:hover {
+box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+div#maincontent .p50 a {
+border: 0;
+}
+
+div#maincontent .p50 span {
+border-bottom: 1px solid #000;
+color: #000;
+font-weight: bold;
+}
+
+div#maincontent .p50 span:hover {
+border-bottom: 1px solid #900b09;
+color: #900b09;
+}
+</style>
+
+<div class="p50">
+<a target="_blank" href="../demo/css/rwd_withoutviewport.html">
+<img src="../i/css/viewport1.jpg" class="viewport">
+<br><br><span>没有使用视口元标记</span>
+</a>
+<br>
+</div>
+
+<div class="p50">
+<a target="_blank" href="../demo/css/rwd_withviewport.html">
+<img src="../i/css/viewport2.jpg" class="viewport">
+<br><br><span>使用视口元标记</span>
+</a>
+<br>
+</div>  
+
+<p style="clear: both;"></p><br>
+
+<p class="tip"><span>提示：</span>如果您使用手机或平板电脑浏览此页面，您可以点击下面的两个链接来查看不同之处。</p>
+
+<p>您可以在我们的<a href="../css/css_rwd_viewport.html" title="响应式网页设计 - 视口">响应式网页设计 - 视口教程</a>中学到更多关于视口的内容。</p>
+</div>
+
+
+
+<div>
+<h2>浏览器支持</h2>
+
+<table class="browser-support">
+<tr>
+<th class="bsChrome">Chrome</th>
+<th class="bsEdge">Edge</th>
+<th class="bsFirefox">Firefox</th>
+<th class="bsSafari">Safari</th>
+<th class="bsOpera">Opera</th>
+</tr>
+
+<tr>
+<td>Chrome</td>
+<td>Edge</td>
+<td>Firefox</td>
+<td>Safari</td>
+<td>Opera</td>
+</tr>
+
+<tr>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+</table>
+</div>
+
+
+
+<div class="backtoreference">
+<p><a href="tag_meta.html">HTML &lt;meta&gt; 标签</a></p>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="index.html">HTML 参考手册</a></h5>
+<h5 id="tools_example"><a href="../html/html_examples.html">HTML 实例</a></h5>
+<h5 id="tools_quiz"><a href="../html/html_quiz.html">HTML 测验</a></h5>
+<h5 id="tools_tutorial"><a href="../html/index.html">HTML 教程</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/tags/att_meta_name.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:17:18 GMT -->
+</html>

@@ -1,0 +1,494 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/java/java_class_methods.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:37:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Java 类方法</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Java 教程</h2>
+<ul>
+<li><a href="index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="java_intro.html" title="Java 简介">Java 简介</a></li>
+<li><a href="java_getstarted.html" title="Java 入门">Java 入门</a></li>
+<li><a href="java_syntax.html" title="Java 语法">Java 语法</a></li>
+<li><a href="java_output.html" title="Java 输出 / 打印">Java 输出</a></li>
+<li><a href="java_comments.html" title="Java 注释">Java 注释</a></li>
+<li><a href="java_variables.html" title="Java 变量">Java 变量</a></li>
+<li><a href="java_data_types.html" title="Java 数据类型">Java 数据类型</a></li>
+<li><a href="java_type_casting.html" title="Java 类型转换">Java 类型转换</a></li>
+<li><a href="java_operators.html" title="Java 运算符">Java 运算符</a></li>
+<li><a href="java_strings.html" title="Java 字符串">Java 字符串</a></li>
+<li><a href="java_math.html" title="Java 数学">Java 数学</a></li>
+<li><a href="java_booleans.html" title="Java 布尔">Java 布尔</a></li>
+<li><a href="java_conditions.html" title="Java If...Else">Java If...Else</a></li>
+<li><a href="java_switch.html" title="Java Switch">Java Switch</a></li>
+<li><a href="java_while_loop.html" title="Java While 循环">Java While 循环</a></li>
+<li><a href="java_for_loop.html" title="Java For 循环">Java For 循环</a></li>
+<li><a href="java_break.html" title="Java Break 和 Continue">Java Break/Continue</a></li>
+<li><a href="java_arrays.html" title="Java 数组">Java 数组</a></li>
+</ul>
+<h2>Java 方法</h2>
+<ul>
+<li><a href="java_methods.html" title="Java 方法">Java 方法</a></li>
+<li><a href="java_methods_param.html" title="Java 方法参数">Java 方法参数</a></li>
+<li><a href="java_methods_overloading.html" title="Java 方法重载">Java 方法重载</a></li>
+<li><a href="java_scope.html" title="Java 作用域">Java 作用域</a></li>
+<li><a href="java_recursion.html" title="Java 递归">Java 递归</a></li>
+</ul>
+<h2>Java 类</h2>
+<ul>
+<li><a href="java_oop.html" title="Java OOP">Java OOP</a></li>
+<li><a href="java_classes.html" title="Java 类/对象">Java 类/对象</a></li>
+<li><a href="java_class_attributes.html" title="Java 类属性">Java 类属性</a></li>
+<li class="currentLink"><a href="java_class_methods.html" title="Java 类方法">Java 类方法</a></li>
+<li><a href="java_constructors.html" title="Java 构造函数">Java 构造函数</a></li>
+<li><a href="java_modifiers.html" title="Java 修饰符">Java 修饰符</a></li>
+<li><a href="java_encapsulation.html" title="Java 封装">Java 封装</a></li>
+<li><a href="java_packages.html" title="Java 包">Java 包 / API</a></li>
+<li><a href="java_inheritance.html" title="Java 继承">Java 继承</a></li>
+<li><a href="java_polymorphism.html" title="Java 多态">Java 多态</a></li>
+<li><a href="java_inner_classes.html" title="Java 内部类">Java 内部类</a></li>
+<li><a href="java_abstract.html" title="Java 抽象">Java 抽象</a></li>
+<li><a href="java_interface.html" title="Java 接口">Java 接口</a></li>
+<li><a href="java_enums.html" title="Java 枚举">Java 枚举</a></li>
+<li><a href="java_user_input.html" title="Java 用户输入">Java 用户输入</a></li>
+<li><a href="java_date.html" title="Java 日期">Java 日期</a></li>
+</ul>
+<h2>Java 数据结构</h2>
+<ul>
+<li><a href="java_arraylist.html" title="Java ArrayList">Java ArrayList</a></li>
+<li><a href="java_linkedlist.html" title="Java LinkedList">Java LinkedList</a></li>
+<li><a href="java_sort_list.html" title="Java 列表排序">Java 列表排序</a></li>
+<li><a href="java_hashmap.html" title="Java HashMap">Java HashMap</a></li>
+<li><a href="java_hashset.html" title="Java HashSet">Java HashSet</a></li>
+<li><a href="java_iterator.html" title="Java 迭代器">Java 迭代器</a></li>
+<li><a href="java_wrapper_classes.html" title="Java 包装类">Java 包装类</a></li>
+</ul>
+<h2>Java 高级</h2>
+<ul>
+<li><a href="java_try_catch.html" title="Java 异常">Java 异常</a></li>
+<li><a href="java_regex.html" title="Java RegEx">Java RegEx</a></li>
+<li><a href="java_threads.html" title="Java 线程">Java 线程</a></li>
+<li><a href="java_lambda.html" title="Java Lambda">Java Lambda</a></li>
+<li><a href="java_advanced_sorting.html" title="Java 高级排序（Comparator 和 Comparable）">Java 高级排序</a></li>
+</ul>
+<h2>Java 文件处理</h2>
+<ul>
+<li><a href="java_files.html" title="Java 文件">Java 文件</a></li>
+<li><a href="java_files_create.html" title="Java 创建/写入文件">Java 创建/写入文件</a></li>
+<li><a href="java_files_read.html" title="Java 读取文件">Java 读取文件</a></li>
+<li><a href="java_files_delete.html" title="Java 删除文件">Java 删除文件</a></li>
+</ul>
+<h2>Java 案例</h2>
+<ul>
+<li><a href="java_howto_add_two_numbers.html" title="Java 如何对两个数字相加">两个数字相加</a></li>
+<li><a href="java_howto_count_words.html" title="Java 如何统计字数">统计字数</a></li>
+<li><a href="java_howto_reverse_string.html" title="Java 如何反转字符串">反转字符串</a></li>
+<li><a href="java_howto_sum_of_array_elements.html" title="Java 如何计算数组元素的和">计算数组元素的和</a></li>
+<li><a href="java_howto_string_to_array.html" title="Java 如何将字符串转换为数组">将字符串转换为数组</a></li>
+<li><a href="java_howto_sort_an_array.html" title="Java 如何排序数组">排序数组</a></li>
+<li><a href="java_howto_calculate_avg_array.html" title="Java 如何计算数组元素的平均值">计算数组元素的平均值</a></li>
+<li><a href="java_howto_find_smallest_array_el.html" title="Java 如何找到数组中的最小元素">找到数组中的最小元素</a></li>
+<li><a href="java_howto_loop_through_arraylist.html" title="Java 如何遍历 ArrayList">遍历 ArrayList</a></li>
+<li><a href="java_howto_loop_through_hashmap.html" title="Java 如何遍历 HashMap">遍历 HashMap</a></li>
+<li><a href="java_howto_loop_through_enum.html" title="Java 如何遍历枚举">遍历枚举</a></li>
+<li><a href="java_howto_area_of_rectangle.html" title="Java 如何计算矩形的面积">计算矩形的面积</a></li>
+<li><a href="java_howto_even_or_odd.html" title="Java 如何判断数字的奇偶性">判断数字的奇偶性</a></li>
+<li><a href="java_howto_pos_or_neg.html" title="Java 如何判断数字的正负">判断数字的正负</a></li>
+<li><a href="java_howto_find_square_root.html" title="Java 如何求一个数的平方根">求一个数的平方根</a></li>
+<li><a href="java_howto_random_number.html" title="Java 如何生成随机数">生成随机数</a></li>
+</ul>
+<h2>Java 参考手册</h2>
+<ul>
+<li><a href="java_reference.html" title="Java 参考手册">Java 参考手册</a></li>
+<li><a href="java_ref_keywords.html" title="Java 关键字">Java 关键字</a></li>
+<li><a href="java_ref_string.html" title="Java String 方法">Java String 方法</a></li>
+<li><a href="java_ref_math.html" title="Java Math 方法">Java Math 方法</a></li>
+<li><a href="java_ref_output.html" title="Java Output 方法">Java Output 方法</a></li>
+<li><a href="java_ref_arrays.html" title="Java Arrays 方法">Java Arrays 方法</a></li>
+<li><a href="java_ref_arraylist.html" title="Java ArrayList 方法">Java ArrayList 方法</a></li>
+<li><a href="java_ref_linkedlist.html" title="Java LinkedList 方法">Java LinkedList 方法</a></li>
+<li><a href="java_ref_hashmap.html" title="Java HashMap 方法">Java HashMap 方法</a></li>
+<li><a href="java_ref_scanner.html" title="Java Scanner 方法">Java Scanner 方法</a></li>
+<li><a href="java_ref_iterators.html" title="Java Iterator 方法">Java Iterator 方法</a></li>
+<li><a href="java_ref_errors.html" title="Java 错误和异常类型">Java 错误和异常</a></li>
+</ul>
+<h2>Java 实例</h2>
+<ul>
+<li><a href="java_examples.html" title="Java 实例">Java 实例</a></li>
+<li><a href="java_quiz.html" title="Java 测验">Java 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Java 类方法</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="java_class_attributes.html" title="Java 类属性">Java 类属性</a></li>
+<li class="next"><a href="java_constructors.html" title="Java 构造函数">Java 构造函数</a></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>Java 类方法</h2>
+
+<p>您已从 <a href="java_methods.html" title="Java 方法">Java 方法</a> 一章中学到：方法是在类中声明的，并且它们用于执行某些操作：</p>
+
+<h3>实例</h3>
+
+<p>在 Main 中创建名为 <code>myMethod()</code> 的方法：</p>
+
+<pre class="language-java">
+public class Main {
+  static void myMethod() {
+    System.out.println(&quot;Hello World!&quot;);
+  }
+}
+</pre>
+
+<p><code>myMethod()</code> 在<em>被调用</em>时打印文本（操作）。如需调用方法，请写方法名称，后跟两个括号 <code>()</code> 和一个分号；</p>
+
+<h3>实例</h3>
+
+<p>在 <code>main</code> 中，调用 <code>myMethod()</code>：</p>
+
+<pre class="language-java">
+public class Main {
+  static void myMethod() {
+    System.out.println(&quot;Hello World!&quot;);
+  }
+
+  public static void main(String[] args) {
+    myMethod();
+  }
+}
+
+// 输出 &quot;Hello World!&quot;
+</pre>
+
+<p class="tiy"><a target="_blank" href="tcbb9.html?f=java_class_method">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>静态与非静态</h2>
+
+<p>您经常会看到具有 <code>static</code> 或 <code>public</code> 属性和方法的 Java 程序。</p>
+
+<p>在上面的例子中，我们创建了一个 <code>static</code> 方法，这意味着它可以在不创建类的对象的情况下访问，而 public 不同，它只能被对象访问：</p>
+
+<h3>实例</h3>
+
+<p>演示 <code>static</code> 方法和 <code>public</code> <em>方法</em>之间差异的例子：</p>
+
+<pre class="language-java">
+public class Main {
+  // 静态方法：
+  static void myStaticMethod() {
+    System.out.println(&quot;无需创建对象即可调用静态方法&quot;);
+  }
+
+  // 公共方法：
+  public void myPublicMethod() {
+    System.out.println(&quot;公共方法必须通过创建对象来调用&quot;);
+  }
+
+  // 主方法：
+  public static void main(String[] args) {
+    myStaticMethod(); // 调用静态方法
+    // myPublicMethod(); 这会编译错误
+
+    Main myObj = new Main(); // 创建 Main 的对象
+    myObj.myPublicMethod(); // 调用对象的公共方法
+  }
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t99ac.html?f=java_class_method_static">亲自试一试</a></p>
+
+<p class="important"><span>注意：</span>您将在 <a href="java_modifiers.html" title="Java 修饰符">Java 修饰符</a> 一章中学到关于关键字（被称为修饰符）的更多内容。</p>
+</div>
+
+
+
+<div>
+<h2>使用对象访问方法</h2>
+
+<h3>实例</h3>
+
+<p>创建名为 <code>myCar</code> 的 Car 对象。调用 <code>myCar</code> 对象上的 <code>fullThrottle()</code> 和 <code>speed()</code> 方法，并运行程序：</p>
+
+<pre class="language-java">
+// 创建 Main 类
+public class Main {
+ 
+  // 创建 fullThrottle() 方法
+  public void fullThrottle() {
+    System.out.println(&quot;这辆车正以最快的速度行驶！&quot;);
+  }
+
+  // 创建 speed() 方法并添加参数
+  public void speed(int maxSpeed) {
+    System.out.println(&quot;最高速是：&quot; + maxSpeed);
+  }
+
+  // 在 main 中，调用 myCar 对象上的方法
+  public static void main(String[] args) {
+    Main myCar = new Main();   // 创建 myCar 对象
+    myCar.fullThrottle();      // 调用 fullThrottle() 方法
+    myCar.speed(200);          // 调用 speed() 方法
+  }
+}
+
+// 这辆车正以最快的速度行驶！
+// 最高速是：200
+</pre>
+
+<p class="tiy"><a target="_blank" href="t5011.html?f=java_class_car">亲自试一试</a></p>
+
+<h3>例子解释</h3>
+
+<p>1) 我们使用 <code>class</code> 关键字创建了一个自定义的 <code>Main</code> 类。</p>
+
+<p>2) 我们在 <code>Main</code> 类中创建了 <code>fullThrottle()</code> 和 <code>speed()</code> 方法。</p>
+
+<p>3) <code>fullThrottle()</code> 方法和 <code>speed()</code> 方法在调用时会打印出一些文本。</p>
+
+<p>4) <code>speed()</code> 方法接受一个名为 <code>maxSpeed</code> 的 <code>int</code> 参数  -  我们将在 <em>8)</em> 中使用它。</p>
+
+<p>5) 为了使用 <code>Main</code> 类及其方法，我们需要创建 <code>Main</code> 类的<em>对象</em>。</p>
+
+<p>6) 然后，转到 <code>main()</code> 方法，您现在知道它是运行程序的内置 Java 方法（执行 main 中的任何代码）。</p>
+
+<p>7) 通过使用 <code>new</code> 关键字，我们创建了名为 <code>myCar</code> 的对象。</p>
+
+<p>8) 然后，我们在 <code>myCar</code> 对象上调用 <code>fullThrottle()</code> 和 <code>speed()</code> 方法：使用对象的名称（<code>myCar</code>），后跟一个点（<code>.</code>），后跟方法的名称（<code>fullThrottle();</code> 和 <code>speed(200);</code>)。请注意，我们在 <code>speed()</code> 方法中添加了一个 <code>int</code> 参数 <code>200</code>。</p>
+
+<div class="tip">
+<h3>请记住</h3>
+
+<p>点 (<code>.</code>) 用于访问对象的属性和方法。</p>
+
+<p>如需在 Java 中调用方法，请写：方法名称，后跟一组括号 <code>()</code>，后跟分号 (<code>;</code>)。</p>
+
+<p>类必须具有匹配的文件名（<code>Main</code> 和 <em>Main.java</em>）。</p>
+</div>
+</div>
+
+
+
+<div>
+<h2>使用多个类</h2>
+
+<p>就像我们在 <a href="java_classes.html" title="Java 类和对象">类和对象</a> 一章中讲到的那样，创建一个类的对象并在另一个类中访问它是一个很好的做法。</p>
+
+<p>请记住，java 文件的名称应与类名称匹配。在本例中，我们在同一目录中创建了两个文件：</p>
+
+<ul>
+<li>Main.java</li>
+<li>Second.java</li>
+</ul>
+
+<h3>Main.java</h3>
+
+<pre class="language-java">
+public class Main {
+  public void fullThrottle() {
+    System.out.println(&quot;这辆车正以最快的速度行驶！&quot;);
+  }
+
+  public void speed(int maxSpeed) {
+    System.out.println(&quot;最高速是：&quot; + maxSpeed);
+  }
+}
+</pre>
+
+<h3>Second.java</h3>
+
+<pre class="language-java">
+class Second {
+  public static void main(String[] args) {
+    Main myCar = new Main();     // 创建 myCar 对象
+    myCar.fullThrottle();      // 调用 fullThrottle() 方法
+    myCar.speed(200);          // 调用 speed() 方法
+  }
+}
+</pre>
+
+<p>当两个文件都编译完成后：</p>
+
+<pre class="cmdline">
+C:\Users\Your Name&gt;javac Main.java
+C:\Users\Your Name&gt;javac Second.java
+</pre>
+
+<p>运行 Second.java 文件：</p>
+
+<pre class="cmdline">
+C:\Users\Your Name&gt;java Second
+</pre>
+
+<p>输出将是：</p>
+
+<pre class="cmdline">
+这辆车正以最快的速度行驶！
+最高速是：200
+</pre>
+
+<!-- <p class="tiy"><a target="_blank" href="/java/t_multi.php?f=java_class_two2&multi=java_class_two2_multi">亲自试一试</a></p> -->
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="java_class_attributes.html" title="Java 类属性">Java 类属性</a></li>
+<li class="next"><a href="java_constructors.html" title="Java 构造函数">Java 构造函数</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="java_reference.html">Java 参考手册</a></h5>
+<h5 id="tools_example"><a href="java_examples.html">Java 实例</a></h5>
+<h5 id="tools_quiz"><a href="java_quiz.html">Java 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/java/java_class_methods.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:37:43 GMT -->
+</html>

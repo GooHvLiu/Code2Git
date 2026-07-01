@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.w3school.com.cn/demo/css/navbar_sticky.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:18:39 GMT -->
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  font-size: 28px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+  background-color: #f1f1f1;
+  padding: 30px;
+  text-align: center;
+}
+
+#navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+#navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+#navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+#navbar a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.content {
+  padding: 16px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 60px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h2>向下滚动</h2>
+  <p>请向下滚动页面，来查看粘性导航栏效果。</p>
+</div>
+
+<div id="navbar">
+  <a class="active" href="javascript:void(0)">Home</a>
+  <a href="javascript:void(0)">News</a>
+  <a href="javascript:void(0)">Contact</a>
+</div>
+
+<div class="content">
+  <h3>粘性导航实例</h3>
+  <p>导航栏滚动到顶部时，它将停留在顶部。</p>
+  <p>Some text to enable scrolling.. </p>
+  <p>Some text to enable scrolling.. </p>
+  <p>Some text to enable scrolling.. </p>
+  <p>Some text to enable scrolling.. </p>
+  <p>Some text to enable scrolling.. </p>
+  <p>Some text to enable scrolling.. </p>
+  <p>Some text to enable scrolling.. </p>
+  <p>Some text to enable scrolling.. </p>
+  <p>Some text to enable scrolling.. </p>
+  <p>Some text to enable scrolling.. </p>
+  <p>Some text to enable scrolling.. </p>
+  <p>Some text to enable scrolling.. </p>
+  <p>Some text to enable scrolling.. </p>
+  <p>Some text to enable scrolling.. </p>
+  <p>Some text to enable scrolling.. </p>
+  <p>Some text to enable scrolling.. </p>
+  <p>Some text to enable scrolling.. </p>
+  <p>Some text to enable scrolling.. </p>
+  <p>Some text to enable scrolling.. </p>
+  <p>Some text to enable scrolling.. </p>
+
+</div>
+
+<script>
+window.onscroll = function() {myFunction()};
+
+var navbar = document.getElementById("navbar");
+var sticky = navbar.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+</script>
+
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/demo/css/navbar_sticky.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:18:39 GMT -->
+</html>
+

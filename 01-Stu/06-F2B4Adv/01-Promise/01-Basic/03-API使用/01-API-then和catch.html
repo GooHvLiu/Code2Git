@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+    <title>01-API-then和catch</title>
+</head>
+<!-- 
+1. Promise构造函数 : Promise (excutor) {}
+    (1) executor函数 : 执行器 执行器 (resolve, reject) => {}
+    (2) resolve函数 : 内部定义成功时我们调用的函数 内部定义成功时我们调用的函数 内部定义成功时我们调用的函数 内部定义成功时我们调用的函数 内部定义成功时我们调用的函数 内部定义成功时我们调用的函数 内部定义成功时我们调用的函数 value => {}
+    (3) reject函数 : 内部定义失败时我们调用的函数 内部定义失败时我们调用的函数 内部定义失败时我们调用的函数 内部定义失败时我们调用的函数 内部定义失败时我们调用的函数 内部定义失败时我们调用的函数 内部定义失败时我们调用的函数 reason => {}
+    说明 : executor会在 Promise内部立即同步调用 内部立即同步调用 内部立即同步调用 内部立即同步调用 内部立即同步调用 ,异步操作在执行 器中异步操作在执行 器中异步操作在执行 器中异步操作在执行 器中异步操作在执行 器中异步操作在执行器中
+
+2. Promise.prototype.then方法 : (onResolved, onRejected) => {}
+    (1) onResolved函数 : 成功的回调函数 成功的回调函数 成功的回调函数 成功的回调函数 (value) => {}
+    (2) onRejected函数 : 失败的回调函数 失败的回调函数 失败的回调函数 失败的回调函数 (reason) => {}
+说明 : 指定用于得到成功 指定用于得到成功 指定用于得到成功 指定用于得到成功 指定用于得到成功 value的成功回调和用于得到失败 的成功回调和用于得到失败 的成功回调和用于得到失败 的成功回调和用于得到失败 的成功回调和用于得到失败 的成功回调和用于得到失败 的成功回调和用于得到失败 reason的失败回调 的失败回调 的失败回调返回一个新的 返回一个新的 返回一个新的 promise
+
+3. Promise.prototype.catch方法 : (onRejected) => {}
+    (1) onRejected函数 : 失败的回调函数 失败的回调函数 失败的回调函数 失败的回调函数 (reason) => {}
+    说明 : then()的语法糖 的语法糖 的语法糖 , 相当于 相当于 : then(undefined, onRejected)
+-->
+
+<body>
+    <script>
+        //
+        let p = new Promise((resolve, reject) => {
+            // ** 同步调用
+            // console.log(111);
+            //修改 promise 对象的状态
+            reject('error');
+        });
+
+        // console.log(222);
+
+        //执行 catch 方法
+        p.catch(reason => {
+            console.log(reason);
+        });
+    </script>
+</body>
+
+</html>

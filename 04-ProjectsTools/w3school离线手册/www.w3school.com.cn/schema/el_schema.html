@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/schema/el_schema.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:14:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>XML Schema schema 元素</title>
+
+</head>
+
+<body class="xml">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Schema 教程</h2>
+<ul>
+<li><a href="index.html" title="XSD 教程">XSD 教程</a></li>
+<li><a href="schema_intro.html" title="XSD 简介">XSD 简介</a></li>
+<li><a href="schema_why.html" title="为什么要使用 XML Schemas？">XSD 为何使用</a></li>
+<li><a href="schema_howto.html" title="如何使用 XSD？">XSD 如何使用</a></li>
+<li><a href="schema_schema.html" title="XSD - &lt;schema&gt; 元素">XSD &lt;schema&gt;</a></li>
+</ul>
+<h2>简单的类型</h2>
+<ul>
+<li><a href="schema_simple.html" title="XSD 简易元素">XSD 元素</a></li>
+<li><a href="schema_simple_attributes.html" title="XSD 属性">XSD 属性</a></li>
+<li><a href="schema_facets.html" title="XSD 限定/Facets">XSD 限定</a></li>
+</ul>
+<h2>复杂的类型</h2>
+<ul>
+<li><a href="schema_complex.html" title="XSD 复合元素">XSD 元素</a></li>
+<li><a href="schema_complex_empty.html" title="XSD 复合空元素">XSD 空元素</a></li>
+<li><a href="schema_complex_elements.html" title="XSD 复合类型 - 仅含元素">XSD 仅含元素</a></li>
+<li><a href="schema_complex_text.html" title="XSD 仅含文本复合元素">XSD 仅含文本</a></li>
+<li><a href="schema_complex_mixed.html" title="XSD 带有混合内容的复合类型">XSD 混合内容</a></li>
+<li><a href="schema_complex_indicators.html" title="XSD 复合类型指示器">XSD 指示器</a></li>
+<li><a href="schema_complex_any.html" title="XSD &lt;any&gt; 元素">XSD &lt;any&gt;</a></li>
+<li><a href="schema_complex_anyattribute.html" title="XSD &lt;anyAttribute&gt; 元素">XSD &lt;anyAttribute&gt;</a></li>
+<li><a href="schema_complex_subst.html" title="XSD 元素替换（Element Substitution）">XSD 元素替换</a></li>
+<li><a href="schema_example.html" title="一个 XSD 实例">XSD 实例</a></li>
+</ul>
+<h2>数据类型</h2>
+<ul>
+<li><a href="schema_dtypes_string.html" title="XSD 字符串数据类型">XSD 字符串</a></li>
+<li><a href="schema_dtypes_date.html" title="XSD 日期及时间数据类型">XSD 日期</a></li>
+<li><a href="schema_dtypes_numeric.html" title="XSD 数值数据类型">XSD 数值</a></li>
+<li><a href="schema_dtypes_misc.html" title="XSD 杂项数据类型">XSD 杂项</a></li>
+<li><a href="schema_summary.html" title="您已经学习了 XML Schema，下一步学习什么呢？">XSD 总结</a></li>
+</ul>
+<h2>参考手册</h2>
+<ul>
+<li><a href="schema_elements_ref.html" title="XSD 参考手册">XSD 参考手册</a></li>
+<li><a href="http://www.w3.org/2001/03/webdata/xsv" title="XML Schema (REC (20010502) version, as amended) Checking Service">XSD 验证器</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>XML Schema schema 元素</h1>
+
+<div class="backtoreference">
+<p><a href="schema_elements_ref.html" title="XML Schema 参考手册">返回 XML Schema 参考手册</a></p>
+</div>
+
+
+
+<div>
+<h2>定义和用法</h2>
+
+<p>schema 元素定义 schema 的根元素。</p>
+
+<h3>元素信息</h3>
+
+<table class="dataintable">
+<tr>
+<td class="no_wrap">出现次数</td>
+<td>一次</td>
+</tr>
+
+<tr>
+<td>父元素</td>
+<td>（无父元素）</td>
+</tr>
+
+<tr>
+<td>内容</td>
+<td>include、import、annotation、redefine、attribute、attributeGroup、element、group、notation、simpleType、complexType</td>
+</tr>
+</table>
+
+<h3>语法</h3>
+
+<pre class="language-xml">
+&lt;schema
+id=ID 
+attributeFormDefault=qualified|unqualified
+elementFormDefault=qualified|unqualified
+blockDefault=(#all|list of (extension|restriction|substitution))
+finalDefault=(#all|list of (extension|restriction|list|union))
+targetNamespace=anyURI
+version=token
+xmlns=anyURI
+<i>any attributes</i>
+&gt;
+
+((include|import|redefine|annotation)*,(((simpleType|complexType|
+group|attributeGroup)|element|attribute|notation),annotation*)*)
+
+&lt;/schema&gt;
+</pre>
+</div>
+
+
+
+<div>
+<h2>属性</h2>
+
+<h3>id</h3>
+
+<p>可选。规定该元素的唯一的 ID。</p>
+
+<h3>attributeFormDefault</h3>
+
+<p>可选。在该 schema 的目标命名空间中声明的属性的形式。该值必须是下列字符串之一： &quot;qualified&quot; 或 &quot;unqualified&quot;。 默认值为 &quot;unqualified&quot;。</p>
+
+<ul>
+<li>&quot;unqualified&quot; 指示无须通过命名空间前缀限定目标命名空间的属性。</li>
+<li>&quot;qualified&quot; 指示必须通过命名空间前缀限定目标命名空间的属性。</li>
+</ul>
+
+<h3>elementFormDefault</h3>
+
+<p>可选。在该 schema 的目标命名空间中声明的元素的形式。该值必须是下列字符串之一： &quot;qualified&quot; 或 &quot;unqualified&quot;。 默认值为 &quot;unqualified&quot;。</p>
+
+<ul>
+<li>&quot;unqualified&quot; 指示无须通过命名空间前缀限定目标命名空间的元素。</li>
+<li>&quot;qualified&quot; 指示必须通过命名空间前缀限定目标命名空间的元素。</li>
+</ul>
+
+<h3>blockDefault</h3>
+
+<p>可选。规定在目标命名空间中 element 和 complexType 元素上的 block 属性的默认值。block 属性防止具有指定派生类型的复杂类型（或元素）被用来代替继承的复杂类型（或元素）。该值可以包含 #all 或者一个列表，该列表是 extension、restriction 或 substitution 的子集：</p>
+
+<ul>
+<li>extension - 防止通过扩展派生的复杂类型被用来替代该复杂类型。</li>
+<li>restriction - 防止通过限制派生的复杂类型被用来替代该复杂类型。</li>
+<li>substitution - 防止元素的替换。</li>
+<li>#all - 防止所有派生的复杂类型被用来替代该复杂类型。</li>
+</ul>
+ 
+<h3>finalDefault</h3>
+
+<p>可选。规定在该架构的目标命名空间中 element、simpleType 和 complexType 元素的 final 属性的默认值。final 属性防止 element、simpleType 或 complexType 元素的指定的派生类型。对于 element 和 complexType 元素，该值可以包含 #all 或一个列表，该列表是 extension 或 restriction 的子集。 对于 simpleType 元素，该值还可以包含 list 和 union：</p>
+
+<ul>
+<li>extension - 默认情况下，该 schema 中的元素不能通过扩展派生。仅适用于 element 和 complexType 元素。</li>
+<li>restriction - 防止通过限制派生。</li>
+<li>list - 防止通过列表派生。仅适用于 simpleType 元素。</li>
+<li>union - 防止通过联合派生。仅适用于 simpleType 元素。</li>
+<li>#all - 默认情况下，该 schema 中的元素不能通过任何方法派生。</li>
+</ul>
+ 
+<h3>targetNamespace</h3>
+
+<p>该 schema 的命名空间的 URI 引用。还可以分配该命名空间的前缀。如果没有分配任何前缀，则该命名空间的 schema 组件可以和非限定的引用一起使用。</p>
+
+<h3>version</h3>
+
+<p>可选。规定 schema 的版本。</p>
+
+<h3>xmlns</h3>
+<p>规定在此 schema 中使用的一个或多个命名空间的 URI 引用。如果没有分配前缀，该命名空间的 schema 组件可与未限制的引用使用。</p>
+
+<h3>any attributes</h3>
+<p>可选。规定带有 non-schema 命名空间的任何其他属性。</p>
+</div>
+
+
+
+<div>
+<h2>实例</h2>
+
+<h3>例子 1</h3>
+
+<pre class="language-xml">
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
+
+&lt;xs:element name=&quot;values&quot; type=&quot;xs:string&quot;&gt;
+
+&lt;/xs:schema&gt;
+</pre>
+
+<h3>例子 2</h3>
+
+<p>在本例中，http://www.w3.org/2001/XMLSchema 命名空间中 schema 组件 (element name, type) 是未限制的，而 http://www.w3school.com.cn/w3schoolschema (mystring) 是通过 wsc 前缀限制的：</p>
+
+<pre class="language-xml">
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;schema xmlns=&quot;http://www.w3.org/2001/XMLSchema&quot;
+xmlns:wsc=&quot;http://www.w3school.com.cn/w3schoolschema&quot;&gt;
+
+&lt;element name=&quot;fname&quot; type=&quot;wsc:mystring&quot;/&gt;
+
+&lt;/schema&gt;
+</pre>
+</div>
+
+
+
+<div class="backtoreference">
+<p><a href="schema_elements_ref.html" title="XML Schema 参考手册">返回 XML Schema 参考手册</a></p>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="schema_elements_ref.html">XML Schema 参考手册</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/schema/el_schema.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:14:01 GMT -->
+</html>

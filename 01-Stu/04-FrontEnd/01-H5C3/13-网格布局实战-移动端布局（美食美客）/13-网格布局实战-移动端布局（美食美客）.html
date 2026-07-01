@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.font.im/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="////at.alicdn.com/t/c/font_5168299_5cnckhblb5q.css">
+  <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>13-网格布局实战-移动端布局（美食美客）</title>
+</head>
+
+<body>
+  <!-- 最初闪现页面 -->
+  <div id="flash">
+    <img src="./imgs/delicious-food.png" alt="logo">
+    <p>美食美客</p>
+  </div>
+  <!-- 整体内容区域 -->
+  <div id="content">
+
+    <!-- 头部logo+搜索区域 -->
+    <header class="app-header">
+      <img src="./imgs/delicious-food.png" alt="logo">
+      <p>美食美客</p>
+      <input type="text" class="reseach" placeholder="搜索...">
+    </header>
+
+    <!-- 小标题，用于提示和订单相关信息 -->
+    <div class="subheader">
+      <div class="subheader-info">
+        <p>配送信息</p>
+        <p>外卖小哥正在想你飞奔而来，点击查看具体信息... <i class="iconfont icon-rights-arrows"></i></p>
+      </div>
+      <div class="subheader-img">
+        <i class="iconfont icon-electromobile"></i>
+      </div>
+    </div>
+
+    <!-- 关于美食类相关主题部分 -->
+    <div class="grid">
+      <div class="item">
+        <h4>火锅</h4>
+        <p>没有什么事一顿火锅解决不了的...</p>
+        <img src="./imgs/hot-pot.png" alt="">
+      </div>
+      <div class="item">
+        <h4>烧烤</h4>
+        <p>在天愿作比翼鸟，在地就要吃烧烤...</p>
+        <img src="./imgs/barbecue.png" alt="">
+      </div>
+      <div class="item">
+        <h4>海鲜</h4>
+        <p>甄选全球生产，进项美食盛宴...</p>
+        <img src="./imgs/seafood.png" alt="">
+      </div>
+      <div class="item">
+        <h4>快餐</h4>
+        <p>健康美味，无需等待...</p>
+        <img src="./imgs/fast-food.png" alt="">
+      </div>
+      <div class="item">
+        <h4>下午茶</h4>
+        <p>我有下午茶，你有时间吗？</p>
+        <img src="./imgs/afternoon-tea.png" alt="">
+      </div>
+      <div class="item">
+        <h4>西餐</h4>
+        <p>感受西餐文化，体验异域风情...</p>
+        <img src="./imgs/western-food.png" alt="">
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部导航部分 -->
+  <footer id="footer">
+    <ul>
+      <li><i class="iconfont icon-favorite"></i>收藏</li>
+      <li><i class="iconfont icon-order"></i>订单</li>
+      <li><i class="iconfont icon-mine"></i>我的</li>
+      <li><i class="iconfont icon-location"></i>附件</li>
+    </ul>
+  </footer>
+</body>
+<script>
+  setTimeout(() => {
+    document.getElementById('flash').classList.add('fade')
+  }, 1000);
+</script>
+
+</html>

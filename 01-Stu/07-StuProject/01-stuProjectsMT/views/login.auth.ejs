@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= env.APP_NAME  %> - 账号登录</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/all.min.css"/>
+    <link rel="stylesheet" href="/css/auth.css" />
+  </head>
+<body>
+<div class="login-container">
+  <div class="login-header">
+    <h1><i class="fas fa-cubes"></i> <%= env.APP_NAME %></h1>
+    <p>欢迎回来，请登录您的账户</p>
+  </div>
+
+  <div class="login-form">
+    <div id="alertBox" class="alert"></div>
+    <form id="loginForm" action=<%=env.LOGIN_REDIRECT_URL %> method="POST">
+      <div class="form-group">
+        <label for="username"><i class="fas fa-user"></i> 用户名</label>
+        <div class="input-icon">
+          <i class="fas fa-user"></i>
+          <input type="text" id="username" name="username" class="form-control" placeholder="请输入用户名" required autocomplete="username" />
+        </div>
+        <div class="error-message" id="usernameError">请输入用户名</div>
+      </div>
+
+      <div class="form-group">
+        <label for="password"><i class="fas fa-lock"></i> 密码</label>
+        <div class="input-icon">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="password" name="password" class="form-control" placeholder="请输入密码" required autocomplete="current-password" />
+          <i class="fas fa-eye" id="passwordToggle"></i>
+        </div>
+        <div class="error-message" id="passwordError">请输入密码</div>
+      </div>
+
+      <div class="login-options">
+        <div class="remember-me">
+          <input type="checkbox" id="rememberMe" name="rememberMe" />
+          <label for="rememberMe">记住我</label>
+        </div>
+        <% if (env.ENABLE_FORGET_PWD) { %>
+        <a href=<%=env.FORGETPWD_REDIRECT_URL %> class="forget-link" id="forgetPwdBtn">
+          <i class="fas fa-question-circle"></i> 忘记密码？
+        </a>
+        <% } %>
+      </div>
+      <button type="submit" class="btn-login" id="loginBtn">
+        <i class="fas fa-sign-in-alt"></i> 立即登录
+      </button>
+    </form>
+
+    <% if (env.ENABLE_REGISTER) { %>
+    <div class="register-tip">
+      还没有账号？
+      <a href=<%= env.REGISTER_REDIRECT_URL %> id="goRegisterBtn">立即注册</a>
+    </div>
+    <% } %>
+
+    <div class="system-info">
+      <p><i class="fas fa-server"></i> Node.js >|< Express + MongoDB</p>
+      <p id="serverStatus">
+        <i class="fas fa-circle" style="color: #6c757d; font-size: 0.6rem"></i>
+        Server Status
+      </p>
+    </div>
+  </div>
+</div>
+<!-- 错误提示安全转义，避免引号破坏JS -->
+<% if (errMsg) { %> <script> window.LOGIN_ERROR_MSG = <%- JSON.stringify(errMsg) %>; </script> <% } %>
+<!-- 全局环境安全序列化，不会报token错误 -->
+<script> window.GLOBAL_ENV = <%- JSON.stringify(env) %>; </script>
+<script type="module" src="/js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,474 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/cs/cs_data_types.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:42:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>C# 数据类型</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>C# 教程</h2>
+<ul>
+<li><a href="index.html" title="C# 教程">C# 教程</a></li>
+<li><a href="cs_intro.html" title="C# 简介">C# 简介</a></li>
+<li><a href="cs_getstarted.html" title="C# 入门">C# 入门</a></li>
+<li><a href="cs_syntax.html" title="C# 语法">C# 语法</a></li>
+<li><a href="cs_output.html" title="C# 输出">C# 输出</a></li>
+<li><a href="cs_comments.html" title="C# 注释">C# 注释</a></li>
+<li><a href="cs_variables.html" title="C# 变量">C# 变量</a></li>
+<li><a href="cs_variables_constants.html" title="C# 常量">C# 常量</a></li>
+<li><a href="cs_variables_display.html" title="C# 显示变量">C# 显示变量</a></li>
+<li><a href="cs_variables_multiple.html" title="C# 多个变量">C# 多个变量</a></li>
+<li><a href="cs_variables_identifiers.html" title="C# 标识符">C# 标识符</a></li>
+<li class="currentLink"><a href="cs_data_types.html" title="C# 数据类型">C# 数据类型</a></li>
+<li><a href="cs_type_casting.html" title="C# 类型转换">C# 类型转换</a></li>
+<li><a href="cs_user_input.html" title="C# 用户输入">C# 用户输入</a></li>
+<li><a href="cs_operators.html" title="C# 算术运算符">C# 算术运算符</a></li>
+<li><a href="cs_operators_assignment.html" title="C# 赋值运算符">C# 赋值运算符</a></li>
+<li><a href="cs_operators_comparison.html" title="C# 比较运算符">C# 比较运算符</a></li>
+<li><a href="cs_operators_logical.html" title="C# 逻辑运算符">C# 逻辑运算符</a></li>
+<li><a href="cs_math.html" title="C# 数学运算">C# 数学运算</a></li>
+<li><a href="cs_strings.html" title="C# 字符串">C# 字符串</a></li>
+<li><a href="cs_strings_concat.html" title="C# 字符串拼接">C# 字符串拼接</a></li>
+<li><a href="cs_strings_interpol.html" title="C# 字符串插值">C# 字符串插值</a></li>
+<li><a href="cs_strings_access.html" title="C# 访问字符串">C# 访问字符串</a></li>
+<li><a href="cs_strings_chars.html" title="C# 特殊字符">C# 特殊字符</a></li>
+<li><a href="cs_booleans.html" title="C# 布尔值">C# 布尔值</a></li>
+<li><a href="cs_conditions.html" title="C# if 语句">C# if 语句</a></li>
+<li><a href="cs_conditions_else.html" title="C# else 语句">C# else 语句</a></li>
+<li><a href="cs_conditions_elseif.html" title="C# else if 语句">C# else if 语句</a></li>
+<li><a href="cs_conditions_shorthand.html" title="C# 简写 If...Else">C# 简写 If...Else</a></li>
+<li><a href="cs_switch.html" title="C# Switch">C# Switch</a></li>
+<li><a href="cs_while_loop.html" title="C# While 循环">C# While 循环</a></li>
+<li><a href="cs_for_loop.html" title="C# For 循环">C# For 循环</a></li>
+<li><a href="cs_foreach_loop.html" title="C# Foreach 循环">C# Foreach 循环</a></li>
+<li><a href="cs_break.html" title="C# Break 和 Continue">C# Break 和 Continue</a></li>
+<li><a href="cs_arrays.html" title="C# 数组">C# 数组</a></li>
+<li><a href="cs_arrays_loop.html" title="C# 遍历数组">C# 遍历数组</a></li>
+<li><a href="cs_arrays_sort.html" title="C# 数组排序">C# 数组排序</a></li>
+<li><a href="cs_arrays_multi.html" title="C# 多维数组">C# 多维数组</a></li>
+</ul>
+<h2>C# 方法</h2>
+<ul>
+<li><a href="cs_methods.html" title="C# 方法">C# 方法</a></li>
+<li><a href="cs_method_parameters.html" title="C# 方法参数">C# 方法参数</a></li>
+<li><a href="cs_method_parameters_default.html" title="C# 默认参数值">C# 默认参数值</a></li>
+<li><a href="cs_method_parameters_return.html" title="C# 返回值">C# 返回值</a></li>
+<li><a href="cs_method_parameters_named_args.html" title="C# 具名参数">C# 具名参数</a></li>
+<li><a href="cs_method_overloading.html" title="C# 方法重载">C# 方法重载</a></li>
+</ul>
+<h2>C# 类</h2>
+<ul>
+<li><a href="cs_oop.html" title="C# OOP">C# OOP</a></li>
+<li><a href="cs_classes.html" title="C# 类和对象">C# 类/对象</a></li>
+<li><a href="cs_classes_multi.html" title="C# 多个类和对象">C# 多个类和对象</a></li>
+<li><a href="cs_class_members.html" title="C# 类成员">C# 类成员</a></li>
+<li><a href="cs_constructors.html" title="C# 构造函数">C# 构造函数</a></li>
+<li><a href="cs_access_modifiers.html" title="C# 访问修饰符">C# 访问修饰符</a></li>
+<li><a href="cs_properties.html" title="C# 属性">C# 属性</a></li>
+<li><a href="cs_inheritance.html" title="C# 继承">C# 继承</a></li>
+<li><a href="cs_polymorphism.html" title="C# 多态">C# 多态</a></li>
+<li><a href="cs_abstract.html" title="C# 抽象">C# 抽象</a></li>
+<li><a href="cs_interface.html" title="C# 接口">C# 接口</a></li>
+<li><a href="cs_interface_multi.html" title="C# 多接口">C# 多接口</a></li>
+<li><a href="cs_enums.html" title="C# 枚举">C# 枚举</a></li>
+<li><a href="cs_files.html" title="C# 文件">C# 文件</a></li>
+<li><a href="cs_exceptions.html" title="C# 异常处理">C# 异常处理</a></li>
+</ul>
+<h2>C# 案例</h2>
+<ul>
+<li><a href="cs_howto_add_two_numbers.html" title="C# 如何加两个数字">加两个数字</a></li>
+</ul>
+<h2>实例 / 测验</h2>
+<ul>
+<li><a href="cs_examples.html" title="C# 实例">C# 实例</a></li>
+<li><a href="cs_quiz.html" title="C# 测验">C# 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>C# 数据类型</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="cs_variables_identifiers.html" title="C# 标识符">C# 标识符</a></li>
+<li class="next"><a href="cs_type_casting.html" title="C# 类型转换">C# 类型转换</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>C# 数据类型</h2>
+
+<p>正如变量一章中所解释的，C# 中的变量必须是指定的数据类型：</p>
+
+<h3>实例</h3>
+
+<pre class="language-csharp">
+int myNum = 5;               // 整数
+double myDoubleNum = 5.99D;  // 浮点数
+char myLetter = 'D';         // 字符
+bool myBool = true;          // 布尔值
+string myText = &quot;Hello&quot;;     // 字符串
+</pre>
+
+<p class="tiy"><a target="_blank" href="t3882.html?f=cs_data_types">亲自试一试</a></p>
+
+<p>数据类型指定变量值的大小和类型。</p>
+
+<p>为相应的变量使用正确的数据类型是很重要的；这样可以避免错误，节省时间和内存，而且也会使您的代码更易于维护和阅读。最常见的数据类型有：</p>
+
+<table class="ref">
+<tr>
+<th style="width: 15%;">数据类型</th>
+<th style="width: 15%;">大小</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><code>int</code></td>
+<td>4 字节</td>
+<td>存储从 -2,147,483,648 到 2,147,483,647 的整数</td>
+</tr>
+
+<tr>
+<td><code>long</code></td>
+<td>8 字节</td>
+<td>存储从 -9,223,372,036,854,775,808 到 9,223,372,036,854,775,807 的整数</td>
+</tr>
+
+<tr>
+<td><code>float</code></td>
+<td>4 字节</td>
+<td>存储分数数值。足以存储 6 到 7 位小数</td>
+</tr>
+
+<tr>
+<td><code>double</code></td>
+<td>8 字节</td>
+<td>存储分数数值。足以存储 15 位小数</td>
+</tr>
+
+<tr>
+<td><code>bool</code></td>
+<td>1 位</td>
+<td>存储 true 或 false 值</td>
+</tr>
+
+<tr>
+<td><code>char</code></td>
+<td>2 字节</td>
+<td>存储单个字符/字母，用单引号括起来</td>
+</tr>
+
+<tr>
+<td><code>string</code></td>
+<td>2 字节/字符</td>
+<td>存储一系列字符，用双引号括起来</td>
+</tr>
+</table>
+</section>
+
+
+
+<section>
+<h2>数字</h2>
+
+<p>数字类型分为两组：</p>
+
+<p><em>整数类型</em>存储正数或负数（如 123 或 -456），不带小数。有效的类型有 <code>int</code> 和 <code>long</code>。应该使用哪种类型，取决于数值。</p>
+
+<p><em>浮点类型</em>表示带有小数部分的数字，包含一个或多个小数。有效的类型有 <code>float</code> 和 <code>double</code>。</p>
+
+<p class="tip"><span>提示：</span>尽管 C# 中有许多数字类型，但最常用的数字类型是 <code>int</code>（用于整数）和 <code>double</code>（用于浮点数）。但是，随着您继续阅读，我们将一一介绍它们。</p>
+</section>
+
+
+
+<section>
+<h2>整数类型</h2>
+
+<h3>Int</h3>
+
+<p><code>int</code> 数据类型可以存储从 -2147483648 到 2147483647 的整数。通常，在我们的教程中，当我们创建带有数值的变量时，<code>int</code> 数据类型是首选的数据类型。</p>
+
+<h3>实例</h3>
+
+<pre class="language-csharp">
+int myNum = 100000;
+Console.WriteLine(myNum);
+</pre>
+
+<p class="tiy"><a target="_blank" href="tc12e.html?f=cs_type_int">亲自试一试</a></p>
+
+<h3>Long</h3>
+
+<p><code>long</code> 数据类型可以存储从 -9223372036854775808 到 9223372036854775807 的整数。当 <code>int</code> 不足以存储值时，请使用此类型。请注意，您应该以 <code>L</code> 结尾：</p>
+
+<h3>实例</h3>
+
+<pre class="language-csharp">
+long myNum = 15000000000L;
+Console.WriteLine(myNum);
+</pre>
+
+<p class="tiy"><a target="_blank" href="taf7d.html?f=cs_type_long">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>浮点类型</h2>
+
+<p>每当您需要带有小数的数字（如 9.99 或 3.14515）时，都应使用浮点类型。</p>
+
+<p><code>float</code> 和 <code>double</code> 数据类型可以存储小数。请注意，对于 <code>float</code> 应以 <code>F</code> 结尾，对于 <code>double</code> 应以 <code>D</code> 结尾：</p>
+
+<h3>Float 实例</h3>
+
+<pre class="language-csharp">
+float myNum = 5.75F;
+Console.WriteLine(myNum);
+</pre>
+
+<p class="tiy"><a target="_blank" href="tb747.html?f=cs_type_float">亲自试一试</a></p>
+
+<h3>Double 实例</h3>
+
+<pre class="language-csharp">
+double myNum = 19.99D;
+Console.WriteLine(myNum);
+</pre>
+
+<p class="tiy"><a target="_blank" href="t3207.html?f=cs_type_double">亲自试一试</a></p>
+</section>
+
+
+
+<section class="tip">
+<h2>使用浮动还是双精度？</h2>
+
+<p>浮点值的<em>精度</em>指示该值在小数点后可以有多少位数字。<code>float</code> 的精度只有六到七位小数，而 <code>double</code> 变量的精度约为 15 位。因此，对于大多数计算而言，使用 <code>double</code> 更安全。</p>
+</section>
+
+
+
+<section>
+<h2>科学计数法</h2>
+
+<p>浮点数也可以是带有 <code>e</code> 的科学计数法，表示 10 的幂：</p>
+
+<h3>实例</h3>
+
+<pre class="language-csharp">
+float f1 = 35e3F;
+double d1 = 12E4D;
+Console.WriteLine(f1);
+Console.WriteLine(d1);
+</pre>
+
+<p class="tiy"><a target="_blank" href="t7114.html?f=cs_type_scientific">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>布尔值</h2>
+
+<p>布尔数据类型使用 <code>bool</code> 关键字声明，并且只能取值 <code>true</code> 或 <code>false</code>：</p>
+
+<h3>实例</h3>
+
+<pre class="language-csharp">
+bool isCSharpFun = true;
+bool isFishTasty = false;
+Console.WriteLine(isCSharpFun);   // 输出 True
+Console.WriteLine(isFishTasty);   // 输出 False
+</pre>
+
+<p class="tiy"><a target="_blank" href="t9f52.html?f=cs_type_bool">亲自试一试</a></p>
+
+<p>布尔值主要用于条件测试，您将在后面的章节中了解更多信息。</p>
+</section>
+
+
+
+<section>
+<h2>字符</h2>
+
+<p><code>char</code> 数据类型用于存储<em>单个</em>字符。字符必须用单引号括起来，如 <code>'A'</code> 或 <code>'c'</code>：</p>
+
+<h3>实例</h3>
+
+<pre class="language-csharp">
+char myGrade = 'B';
+Console.WriteLine(myGrade);
+</pre>
+
+<p class="tiy"><a target="_blank" href="t6e71.html?f=cs_type_char">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>字符串</h2>
+
+<p><code>string</code> 数据类型用于存储字符（文本）序列。字符串值必须用双引号括起来：</p>
+
+<h3>实例</h3>
+
+<pre class="language-csharp">
+string greeting = &quot;Hello World&quot;;
+Console.WriteLine(greeting);
+</pre>
+
+<p class="tiy"><a target="_blank" href="ta042.html?f=cs_type_string">亲自试一试</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="cs_variables_identifiers.html" title="C# 标识符">C# 标识符</a></li>
+<li class="next"><a href="cs_type_casting.html" title="C# 类型转换">C# 类型转换</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_example"><a href="cs_examples.html">C# 实例</a></h5>
+<h5 id="tools_quiz"><a href="cs_quiz.html">C# 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/cs/cs_data_types.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:42:41 GMT -->
+</html>

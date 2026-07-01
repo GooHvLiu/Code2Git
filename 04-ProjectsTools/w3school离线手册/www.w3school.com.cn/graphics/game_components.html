@@ -1,0 +1,558 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/graphics/game_components.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:24:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>游戏组件</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>HTML 图形</h2>
+<ul>
+<li><a href="index.html" title="HTML 图形">HTML 图形</a></li>
+</ul>
+<h2>HTML 绘图</h2>
+<ul>
+<li><a href="plot_graphics.html" title="JavaScript 图形">Graphics</a></li>
+<li><a href="plot_canvas.html" title="HTML Canvas">Canvas</a></li>
+<li><a href="plot_plotly.html" title="Plotly.js">Plotly.js</a></li>
+<li><a href="plot_chartjs.html" title="Chart.js">Chart.js</a></li>
+<li><a href="plot_google_chart.html" title="谷歌图表">Google</a></li>
+<li><a href="plot_d3js.html" title="D3.js">D3.js</a></li>
+</ul>
+<h2>谷歌地图</h2>
+<ul>
+<li><a href="google_maps_intro.html" title="谷歌地图教程">Maps 简介</a></li>
+<li><a href="google_maps_basic.html" title="谷歌地图基础">Maps 基础</a></li>
+<li><a href="google_maps_overlays.html" title="谷歌地图叠加层">Maps 叠加层</a></li>
+<li><a href="google_maps_events.html" title="谷歌地图事件">Maps 事件</a></li>
+<li><a href="google_maps_controls.html" title="谷歌地图控件">Maps 控件</a></li>
+<li><a href="google_maps_types.html" title="谷歌地图类型">Maps 类型</a></li>
+<li><a href="google_maps_reference.html" title="谷歌地图参考手册">Maps 参考手册</a></li>
+</ul>
+<h2>SVG 教程</h2>
+<ul>
+<li><a href="svg_intro.html" title="SVG 教程">SVG 简介</a></li>
+<li><a href="svg_inhtml.html" title="HTML 中的 SVG">SVG 嵌入 HTML</a></li>
+<li><a href="svg_rect.html" title="SVG &lt;rect&gt;">SVG 矩形</a></li>
+<li><a href="svg_circle.html" title="SVG &lt;circle&gt;">SVG 圆形</a></li>
+<li><a href="svg_ellipse.html" title="SVG &lt;ellipse&gt;">SVG 椭圆</a></li>
+<li><a href="svg_line.html" title="SVG &lt;line&gt;">SVG 直线</a></li>
+<li><a href="svg_polygon.html" title="SVG &lt;polygon&gt;">SVG 多边形</a></li>
+<li><a href="svg_polyline.html" title="SVG &lt;polyline&gt;">SVG 折线</a></li>
+<li><a href="svg_path.html" title="SVG &lt;path&gt;">SVG 路径</a></li>
+<li><a href="svg_text.html" title="SVG &lt;text&gt;">SVG 文本</a></li>
+<li><a href="svg_stroking.html" title="SVG 笔触属性">SVG 笔触</a></li>
+<li><a href="svg_filters.html" title="SVG 滤镜">SVG 滤镜</a></li>
+<li><a href="svg_fegaussianblur.html" title="SVG 模糊效果">SVG 模糊</a></li>
+<li><a href="svg_feoffset.html" title="SVG 阴影">SVG 阴影</a></li>
+<li><a href="svg_grad_linear.html" title="SVG 线性渐变">SVG 线性渐变</a></li>
+<li><a href="svg_grad_radial.html" title="SVG 径向渐变">SVG 径向渐变</a></li>
+<li><a href="svg_examples.html" title="SVG 实例">SVG 实例</a></li>
+<li><a href="svg_reference.html" title="SVG 参考手册">SVG 参考手册</a></li>
+</ul>
+<h2>Canvas 教程</h2>
+<ul>
+<li><a href="canvas_intro.html" title="HTML Canvas 教程">Canvas 简介</a></li>
+<li><a href="canvas_drawing.html" title="HTML Canvas 绘制">Canvas 绘制</a></li>
+<li><a href="canvas_coordinates.html" title="HTML Canvas 坐标">Canvas 坐标</a></li>
+<li><a href="canvas_lines.html" title="HTML Canvas 直线">Canvas 直线</a></li>
+<li><a href="canvas_shapes.html" title="HTML Canvas 形状">Canvas 形状</a></li>
+<li><a href="canvas_rectangles.html" title="HTML Canvas 矩形">Canvas 矩形</a></li>
+<li><a href="canvas_circles.html" title="HTML Canvas 圆形">Canvas 圆形</a></li>
+<li><a href="canvas_curves.html" title="HTML Canvas 曲线">Canvas 曲线</a></li>
+<li><a href="canvas_gradients.html" title="HTML Canvas 渐变">Canvas 渐变</a></li>
+<li><a href="canvas_text.html" title="HTML Canvas 文本">Canvas 文本</a></li>
+<li><a href="canvas_images.html" title="HTML Canvas 图像">Canvas 图像</a></li>
+</ul>
+<h2>Canvas 时钟</h2>
+<ul>
+<li><a href="canvas_clock.html" title="Canvas 时钟">时钟简介</a></li>
+<li><a href="canvas_clock_face.html" title="Canvas 时钟钟面">时钟钟面</a></li>
+<li><a href="canvas_clock_numbers.html" title="Canvas 时钟数字">时钟数字</a></li>
+<li><a href="canvas_clock_hands.html" title="Canvas 时钟指针">时钟指针</a></li>
+<li><a href="canvas_clock_start.html" title="Canvas 时钟启动">时钟启动</a></li>
+</ul>
+<h2>HTML 游戏</h2>
+<ul>
+<li><a href="game_intro.html" title="HTML 游戏实例">游戏简介</a></li>
+<li><a href="game_canvas.html" title="游戏画布">游戏画布</a></li>
+<li class="currentLink"><a href="game_components.html" title="游戏组件">游戏组件</a></li>
+<li><a href="game_controllers.html" title="游戏控制器">游戏控制器</a></li>
+<li><a href="game_obstacles.html" title="游戏障碍">游戏障碍</a></li>
+<li><a href="game_score.html" title="游戏分数">游戏分数</a></li>
+<li><a href="game_images.html" title="游戏图像">游戏图像</a></li>
+<li><a href="game_sound.html" title="游戏声音">游戏声音</a></li>
+<li><a href="game_gravity.html" title="游戏重力">游戏重力</a></li>
+<li><a href="game_bouncing.html" title="游戏弹跳">游戏弹跳</a></li>
+<li><a href="game_rotation.html" title="游戏旋转">游戏旋转</a></li>
+<li><a href="game_movement.html" title="游戏运动">游戏运动</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>游戏组件</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="game_canvas.html" title="游戏画布">游戏画布</a></li>
+<li class="next"><a href="game_controllers.html" title="游戏控制器">游戏控制器</a></li>
+</ul>
+</div>
+
+
+
+<section id="intro">
+<p style="margin-bottom: 15px;">在游戏区域添加一个红色方块：</p>
+
+<style>
+canvas {border: 1px solid #c3c3c3;}
+</style>
+
+<div id="canvascontainer"></div>
+
+<script>
+var myGameArea;
+var myGamePiece;
+
+function startGame() {
+    myGameArea = new gamearea();
+    myGamePiece = new component(30, 30, "rgb(255, 0, 0)", 10, 75);
+}
+
+function gamearea() {
+    this.canvas = document.createElement("canvas");
+    this.canvas.width = 320;
+    this.canvas.height = 180;    
+    document.getElementById("canvascontainer").appendChild(this.canvas);
+    this.context = this.canvas.getContext("2d");
+}
+
+function component(width, height, color, x, y) {
+    this.width = width;
+    this.height = height;
+    this.x = x;
+    this.y = y;    
+    ctx = myGameArea.context;
+    ctx.fillStyle = color;
+    ctx.fillRect(this.x, this.y, this.width, this.height);
+}
+startGame();
+</script>
+</section>
+
+
+
+<section>
+<h2>添加组件</h2>
+
+<p>创建一个组件构造函数，它允许您将组件添加到游戏区域。</p>
+
+<p>这个对象构造函数称为<em>组件（component）</em>，我们创建了第一个组件，名为 <code>myGamePiece</code>：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+<mark>var myGamePiece;</mark>
+
+function startGame() {
+  myGameArea.start();
+  <mark>myGamePiece = new component(30, 30, &quot;red&quot;, 10, 120);</mark>
+}
+
+<mark>function component(width, height, color, x, y) {
+  this.width = width;
+  this.height = height;
+  this.x = x;
+  this.y = y;
+  ctx = myGameArea.context;
+  ctx.fillStyle = color;
+  ctx.fillRect(this.x, this.y, this.width, this.height);
+}</mark>
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tb1e9-2.html?f=graphics_game_component_simple">亲自试一试</a></p>
+
+<p>这些组件拥有控制其外观和运动的属性和方法。</p>
+</section>
+
+
+
+<section>
+<h2>帧</h2>
+
+<p>为了让游戏做好动作的准备，我们将每秒更新显示 50 次，这很像电影中的帧。</p>
+
+<p>首先，创建一个名为 <code>updateGameArea()</code> 的新函数。</p>
+
+<p>在 <code>myGameArea</code> 对象中，添加一个间隔，该间隔将每 20 毫秒运行一次 <code>updateGameArea()</code> 函数（每秒 50 次）。再添加一个名为 <code>clear()</code> 的函数，用于清除整个画布。</p>
+
+<p>在 <code>component</code> 构造函数中，添加了一个名为 <code>update()</code> 的函数，用于处理组件的绘制。</p>
+
+<p><code>updateGameArea()</code> 函数调用 <code>clear()</code> 和 <code>update()</code> 方法。</p>
+
+<p>结果是组件每秒会被绘制和清除 50 次：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var myGameArea = {
+  canvas : document.createElement(&quot;canvas&quot;),
+  start : function() {
+    this.canvas.width = 480;
+    this.canvas.height = 270;
+    this.context = this.canvas.getContext(&quot;2d&quot;);
+    document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+    <mark>this.interval = setInterval(updateGameArea, 20);</mark>
+  },
+  <mark>clear : function() {
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  }</mark>
+}
+
+function component(width, height, color, x, y) {
+  this.width = width;
+  this.height = height;
+  this.x = x;
+  this.y = y;
+  <mark>this.update = function(){</mark>
+    ctx = myGameArea.context;
+    ctx.fillStyle = color;
+    ctx.fillRect(this.x, this.y, this.width, this.height);
+  <mark>}</mark>
+}
+
+<mark>function updateGameArea() {
+  myGameArea.clear();
+  myGamePiece.update();
+}</mark>
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t7986.html?f=graphics_game_component">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>让它动起来</h2>
+
+<p>为了证明红色方块每秒被绘制 50 次，每次更新游戏区域时，我们都会将 x 位置（水平）更改一个像素：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+function updateGameArea() {
+  myGameArea.clear();
+  <mark>myGamePiece.x += 1;</mark>
+  myGamePiece.update();
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/te858.html?f=graphics_game_component_move">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>为什么要清理游戏区？</h2>
+
+<p>似乎没有必要在每次更新时清理游戏区域。然而，如果我们省略 <code>clear()</code> 方法，组件的所有移动都会留下它在最后一帧中的位置的痕迹：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+function updateGameArea() {
+  // myGameArea.clear();
+  <mark>myGamePiece.x += 1;</mark>
+  myGamePiece.update();
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tdcba.html?f=graphics_game_component_move_noclear">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>更改尺寸</h2>
+
+<p>您可以控制组件的宽度和高度：</p>
+
+<h3>实例</h3>
+
+<p>创建 10x140 像素的矩形：</p>
+
+<pre class="language-js">
+function startGame() {
+  myGameArea.start();
+  myGamePiece = new component(<mark>140</mark>, <mark>10</mark>, &quot;red&quot;, 10, 120);
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/te88f.html?f=graphics_game_component_long">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>改变颜色</h2>
+
+<p>您可以控制组件的颜色：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+function startGame() {
+  myGameArea.start();
+  myGamePiece = new component(30, 30, <mark>&quot;blue&quot;</mark>, 10, 120);
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t0ee5.html?f=graphics_game_component_color">亲自试一试</a></p>
+
+<p>您还可以使用其他颜色值，例如十六进制、rgb 或 rgba：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+function startGame() {
+  myGameArea.start();
+  myGamePiece = new component(30, 30, <mark>&quot;rgba(0, 0, 255, 0.5)&quot;</mark>, 10, 120);
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t7273.html?f=graphics_game_component_color_rgba">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>改变位置</h2>
+
+<p>我们使用 x 和 y 坐标将组件定位到游戏区域上。</p>
+
+<p>画布的左上角坐标为 (0,0)。</p>
+
+<p>将鼠标悬停在下面的游戏区域上可查看其 x 和 y 坐标：</p>
+
+<div style="width:230px;height:20px;text-align:center;clear:both; margin-top: 15px;">X</div>
+<div style="width:20px;padding-top:40px;float:left;">Y</div>
+<div style="width:402px;float:left"><iframe src="../demo/graphics/canvas_coordinates.html" frameborder="0" style="border:0;overflow:hidden;width:400px;height:120px;"></iframe></div>
+<div style="clear:both"></div>
+
+<p>您可以将组件放置在游戏区域中的任意位置：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+function startGame() {
+  myGameArea.start();
+  myGamePiece = new component(30, 30, &quot;red&quot;, <mark>2</mark>, <mark>2</mark>);
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t827e.html?f=graphics_game_component_position">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>多个组件</h2>
+
+<p>您可以在游戏区域中放置任意数量的组件：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+<mark>var redGamePiece, blueGamePiece, yellowGamePiece;</mark>
+
+function startGame() {
+  <mark>redGamePiece = new component(75, 75, &quot;red&quot;, 10, 10);</mark>
+  <mark>yellowGamePiece = new component(75, 75, &quot;yellow&quot;, 50, 60);</mark>
+  <mark>blueGamePiece = new component(75, 75, &quot;blue&quot;, 10, 110);</mark>
+  myGameArea.start();
+}
+
+function updateGameArea() {
+  myGameArea.clear();
+  <mark>redGamePiece.update();</mark>
+  <mark>yellowGamePiece.update();</mark>
+  <mark>blueGamePiece.update();</mark>
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t16a1.html?f=graphics_game_component_more">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>移动组件</h2>
+
+<p>使三个组件同时向不同方向移动：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+function updateGameArea() {
+  myGameArea.clear();
+  <mark>redGamePiece.x += 1;</mark>
+  <mark>yellowGamePiece.x += 1;</mark>
+  <mark>yellowGamePiece.y += 1;</mark>
+  <mark>blueGamePiece.x += 1;</mark>
+  <mark>blueGamePiece.y -= 1;</mark>
+  redGamePiece.update();
+  yellowGamePiece.update();
+  blueGamePiece.update();
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t8dad.html?f=graphics_game_component_more_move">亲自试一试</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="game_canvas.html" title="游戏画布">游戏画布</a></li>
+<li class="next"><a href="game_controllers.html" title="游戏控制器">游戏控制器</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../jsref/api_canvas.html">Canvas API</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/graphics/game_components.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:24:23 GMT -->
+</html>

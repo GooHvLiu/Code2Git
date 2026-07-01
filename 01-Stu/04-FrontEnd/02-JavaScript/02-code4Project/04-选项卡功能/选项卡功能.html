@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        ul {
+            overflow: hidden;
+            margin-bottom: 1px;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        li {
+            width: 100px;
+            height: 40px;
+            float: left;
+            background-color: #eee;
+            border: 1px solid #ccc;
+            line-height: 40px;
+            text-align: center;
+        }
+
+        li:hover {
+            cursor: pointer;
+        }
+
+        div {
+            width: 400px;
+            height: 400px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            /* 关键：保持宽高比进行缩放 */
+
+        }
+
+        img {
+            width: 400px;
+            object-fit: scale-down;
+            object-position: center;
+            display: none;
+
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>小可爱</li>
+        <li>小熊</li>
+        <li>小鸟</li>
+        <li>小鸭子</li>
+    </ul>
+    <div>
+        <img src="./images/小可爱.jpg" alt="小可爱" style="display: block;">
+        <img src="./images/小熊.jpg" alt="小熊">
+        <img src="./images/小鸟.jpg" alt="小鸟">
+        <img src="./images/小鸭子.jpeg" alt="小鸭子">
+    </div>
+
+    <script>
+        // 第1步，先获取li标签和图片，是一个数组
+        let li = document.getElementsByTagName('li');
+        let img = document.getElementsByTagName('img');
+        console.log(li[0].value + " / " + img[0].alt);
+
+        // 第2步，当鼠标移入对应li标签，颜色变化，图片更换
+
+        // 整个for循环的执行过程是这样的：
+        // -第1步，浏览器先渲染HTML
+        // -第2步，当遇到Javascript时，会立即停止渲染HTML，并将执行权交给Javascript引擎
+        // -第3步，Javascript引擎即可执行代码，它会遍历所有的 li 元素，为每一个 li 元素的 onmouseover 和 onmouseout 属性绑定一个函数（注意，是函数，不是函数执行结果）
+        // -第4步，for 循环结束：for 循环会非常快地完成。它只是绑定了事件处理函数，并没有执行这些函数内部的代码（例如 li[i].style.backgroundColor='yellow'）
+        // -第5步，JavaScript 引擎执行完所有同步代码后，会交还控制权给浏览器
+        // -第6步，HTML 解析完成，页面渲染完毕
+        // -第7步，当用户将鼠标移动到某一个 li 元素上时，浏览器才会去查找这个元素有没有绑定 onmouseover 事件
+        for (let i = 0; i < li.length; i++) {
+
+            li[i].onmouseover = function () {
+                li[i].style.backgroundColor = 'yellow';
+
+                //先把所有照片都隐藏起来，然后让对应的照片显示出来
+                for (let j = 0; j < img.length; j++) {
+                    img[j].style.display = 'none';
+                }
+
+                img[i].style.display = 'block';
+            }
+
+            li[i].onmouseout = function () {
+                li[i].style.backgroundColor = '#eee';
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

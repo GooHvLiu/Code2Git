@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/demo/graphics/canvas_coordinates.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:20 GMT -->
+<head>
+<meta charset="utf-8">
+<style>
+body
+{
+font-size:70%;
+font-family:verdana,helvetica,arial,sans-serif;
+}
+</style>
+<script>
+function cnvs_getCoordinates(e)
+{
+x=e.clientX;
+y=e.clientY;
+document.getElementById("xycoordinates").innerHTML=" 坐标：(" + x + "," + y + ")";
+}
+
+function cnvs_clearCoordinates()
+{
+document.getElementById("xycoordinates").innerHTML="";
+}
+</script>
+</head>
+<body style="margin:0px;">
+
+<div id="coordiv" style="float:left;width:199px;height:99px;border:1px solid #c3c3c3;margin-right: 10px;" onmousemove="cnvs_getCoordinates(event)" onmouseout="cnvs_clearCoordinates()"></div>
+<br>
+<br>
+<br>
+<div id="xycoordinates"></div>
+
+
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/demo/graphics/canvas_coordinates.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:20 GMT -->
+</html>

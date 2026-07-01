@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+    <title>Document</title>
+    <style>
+        #inputtext {
+            resize: none;
+            border-radius: 3px;
+            border: 2px solid #ccc;
+        }
+
+        #send {
+            width: 600px;
+            height: 200px;
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>敏感词过滤测试</h2>
+    <p>
+        <textarea name="" id="inputtext" cols="80" rows="15"></textarea>
+    </p>
+
+    <p>
+        <input type="submit" value="发布" id="push">
+    </p>
+    <p id="send"></p>
+    <script>
+        let inputtext = document.getElementById('inputtext');
+        let push = document.getElementById('push');
+        let send = document.getElementById('send');
+        push.onclick = function () {
+            let reg = /杀人|赌博|偷窃/g;
+            let result = inputtext.value.replace(reg, '###');
+            send.innerText = result;
+        }
+    </script>
+</body>
+
+</html>

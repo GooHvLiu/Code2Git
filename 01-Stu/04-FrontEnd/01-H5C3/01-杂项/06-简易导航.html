@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简易导航</title>
+    <style>
+        .firstnav{
+            text-decoration: none;
+            display: inline-block;
+            width: 100px;
+            height: 50px;
+            background-color: red;
+            color: white;
+            line-height: 50px;
+            text-align: center;
+
+        }
+        .firstnav:hover{
+            background-color: blue;
+        }
+
+        .secondtnav{
+            text-decoration: none;
+            display: inline-block;
+            width: 120px;
+            height: 58px;
+            background-color: green;
+            text-align: center;
+            line-height: 48px;
+        }
+
+        #one{
+            background-image: url(./images/bg1.png);
+        }
+
+        #two{
+            background-image: url(./images/bg2.png);
+        }
+
+        #three{
+            background-image: url(./images/bg3.png);
+        }
+
+        #four{
+            background-image: url(./images/bg4.png);
+        }
+
+        #one:hover,#two:hover,#three:hover,#four:hover{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div >
+        <a class="firstnav" href="#">导航11</a>
+        <a class="firstnav" href="#">导航12</a>
+        <a class="firstnav" href="#">导航13</a>
+        <a class="firstnav" href="#">导航14</a>
+        <a class="firstnav" href="#">导航15</a>
+    </div>
+    <hr>
+    <div>
+        <a class="secondtnav" id="one" href="#">五彩导航22</a>
+        <a class="secondtnav" id="two" href="#">五彩导航23</a>
+        <a class="secondtnav" id="three" href="#">五彩导航24</a>
+        <a class="secondtnav" id="four" href="#">五彩导航25</a>
+    </div>
+</body>
+</html>

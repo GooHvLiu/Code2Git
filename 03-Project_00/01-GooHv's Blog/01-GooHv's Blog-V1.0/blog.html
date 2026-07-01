@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GooHv's Blog</title>
+    <link rel="icon" href="./images/favicon.png" type="image/png">
+    <!-- 引用的统一字体图标 -->
+    <link rel="stylesheet" href="./font/iconfont.css">
+    <!-- 1. 基础重置 (保持不变) -->
+    <link rel="stylesheet" href="./css/bass.css">
+    <!-- 2. 核心架构与侧边栏 (必须第一个加载) -->
+    <link rel="stylesheet" href="./css/bs_m_main.css">
+    <!-- 3. 各个子页面的专用样式 (按需加载，顺序不重要，但在 main 之后) -->
+     
+    <link rel="stylesheet" href="./css/variables.css">
+    <link rel="stylesheet" href="./css/bs_s_myHome.css">
+    <link rel="stylesheet" href="./css/bs_s_standardpage.css">
+    <link rel="stylesheet" href="./css/bs_s_mybabble.css">
+    <link rel="stylesheet" href="./css/bs_s_donate.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="shell">
+        <ul class="nav">
+            <!-- 我的主页 -->
+            <li id="logo">
+                <a href="#myHome">
+                    <div class="icon">
+                        <div class="imageBox">
+                            <img src="./images/CodingMan.png" alt="">
+                        </div>
+                    </div>
+                    <div class="text logo-text">
+                        <span>GooHv'S</span>
+                        <span>&nbsp; BLOG</span>
+                    </div>
+                </a>
+            </li>
+            <!-- 我的学习 -->
+            <li>
+                <a href="#myStudies">
+                    <div class="icon">
+                        <i class="iconfont icon-myStudies"></i>
+                    </div>
+                    <div class="text">我的学习</div>
+                </a>
+            </li>
+            <!-- 我的经验 -->
+            <li>
+                <a href="#myExperience">
+                    <div class="icon">
+                        <i class="iconfont icon-myExperience"></i>
+                    </div>
+                    <div class="text">我的经验</div>
+                </a>
+            </li>
+            <!-- 我的项目 -->
+            <li>
+                <a href="#myProject" >
+                    <div class="icon">
+                        <i class="iconfont icon-myProject"></i>
+                    </div>
+                    <div class="text">我的项目</div>
+                </a>
+            </li>
+            <!-- 关于捐献 -->
+            <li>
+                <a href="#donate" >
+                    <div class="icon">
+                        <i class="iconfont icon-donate"></i>
+                    </div>
+                    <div class="text">关于捐献</div>
+                </a>
+            </li>
+            <!-- 这是页面的选框区之友情链接 -->
+            <li class="friend-links-container">
+                <div class="links-wrapper"> 
+                    <!-- 1. 主入口图标 (收起时显示，展开时隐藏) -->
+                    <a href="javascript:void(0)" class="main-entry" title="友情链接">
+                        <i class="iconfont icon-friend-link"></i> 
+                    </a>
+
+                    <!-- 2. 子链接列表 (收起时隐藏，展开时显示) -->
+                    <div class="sub-links">
+                        <!-- 链接 1: GitHub -->
+                        <a href="https://github.com/GooHvLiu/GooHv-s-Blog-V1.0" target="_blank" title="GitHub">
+                            <i class="iconfont icon-github"></i> 
+                        </a>
+                        <!-- 链接 2: w3School -->
+                        <a href="https://www.w3school.com.cn/" target="_blank" title="W3school">
+                            <i class="iconfont icon-w3school"></i>
+                        </a>
+                        <!-- 链接 3: 个人博客 -->
+                        <a href="./index.html" target="_blank" title="GooHv-Blog">
+                            <i class="iconfont icon-coding"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 滚动提示横幅容器 -->
+    <div class="banner-container">
+        <!-- 滚动提示横幅 -->
+        <div class="sroll-banner">
+            <span class="scroll-content">有关资料分享，商务合作，请联系Email: 879639340@qq.com。</span>
+            <span class="close-btn">&nbsp;&times;</span>
+        </div>
+    </div>
+
+    <!-- 我的主页 -->
+    <section id="myHome" >
+        
+    </section>
+
+    <!-- 我的学习 -->
+    <section id="myStudies">
+        
+    </section>
+
+    <!-- 我的经验 -->
+    <section id="myExperience">
+        
+    </section>
+
+    <!-- 我的项目 -->
+    <section id="myProject">
+        
+    </section>
+
+    <!-- 关于捐献 -->
+    <section id="donate">
+        
+    </section>
+
+<!-- 脚本加载顺序至关重要 -->
+<!-- 1. 全局配置 (必须第一个，提供 PAGE_PATH_MAP) -->
+<script src="./js/b_gconfig.js"></script>
+
+<!-- 2. 功能模块 (定义函数，依赖配置) -->
+<script src="./js/b_hightlight.js"></script>
+<script src="./js/b_load.js"></script>
+
+<!-- 3. 初始化入口 (最后加载，绑定事件并调用上述函数) -->
+<script src="./js/b_init.js"></script>
+
+<!-- 4. 点击菜单触发事件 -->
+<script src="./js/b_clickmenu.js"></script>
+
+<!-- 5. 滚动滑轮触发事件 -->
+<script src="./js/b_scroll.js"></script>
+
+<!-- 6. 下滑逐渐显示的功能，提高美感 -->
+<script src="./js/b_s_display.js"></script>
+
+<!-- 7. 滚动横幅关闭功能 -->
+<script src="./js/b_srollclosed.js"></script>
+
+</body>
+</html> 

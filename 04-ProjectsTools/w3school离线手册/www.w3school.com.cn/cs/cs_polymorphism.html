@@ -1,0 +1,410 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/cs/cs_polymorphism.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:43:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>C# 多态性</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>C# 教程</h2>
+<ul>
+<li><a href="index.html" title="C# 教程">C# 教程</a></li>
+<li><a href="cs_intro.html" title="C# 简介">C# 简介</a></li>
+<li><a href="cs_getstarted.html" title="C# 入门">C# 入门</a></li>
+<li><a href="cs_syntax.html" title="C# 语法">C# 语法</a></li>
+<li><a href="cs_output.html" title="C# 输出">C# 输出</a></li>
+<li><a href="cs_comments.html" title="C# 注释">C# 注释</a></li>
+<li><a href="cs_variables.html" title="C# 变量">C# 变量</a></li>
+<li><a href="cs_variables_constants.html" title="C# 常量">C# 常量</a></li>
+<li><a href="cs_variables_display.html" title="C# 显示变量">C# 显示变量</a></li>
+<li><a href="cs_variables_multiple.html" title="C# 多个变量">C# 多个变量</a></li>
+<li><a href="cs_variables_identifiers.html" title="C# 标识符">C# 标识符</a></li>
+<li><a href="cs_data_types.html" title="C# 数据类型">C# 数据类型</a></li>
+<li><a href="cs_type_casting.html" title="C# 类型转换">C# 类型转换</a></li>
+<li><a href="cs_user_input.html" title="C# 用户输入">C# 用户输入</a></li>
+<li><a href="cs_operators.html" title="C# 算术运算符">C# 算术运算符</a></li>
+<li><a href="cs_operators_assignment.html" title="C# 赋值运算符">C# 赋值运算符</a></li>
+<li><a href="cs_operators_comparison.html" title="C# 比较运算符">C# 比较运算符</a></li>
+<li><a href="cs_operators_logical.html" title="C# 逻辑运算符">C# 逻辑运算符</a></li>
+<li><a href="cs_math.html" title="C# 数学运算">C# 数学运算</a></li>
+<li><a href="cs_strings.html" title="C# 字符串">C# 字符串</a></li>
+<li><a href="cs_strings_concat.html" title="C# 字符串拼接">C# 字符串拼接</a></li>
+<li><a href="cs_strings_interpol.html" title="C# 字符串插值">C# 字符串插值</a></li>
+<li><a href="cs_strings_access.html" title="C# 访问字符串">C# 访问字符串</a></li>
+<li><a href="cs_strings_chars.html" title="C# 特殊字符">C# 特殊字符</a></li>
+<li><a href="cs_booleans.html" title="C# 布尔值">C# 布尔值</a></li>
+<li><a href="cs_conditions.html" title="C# if 语句">C# if 语句</a></li>
+<li><a href="cs_conditions_else.html" title="C# else 语句">C# else 语句</a></li>
+<li><a href="cs_conditions_elseif.html" title="C# else if 语句">C# else if 语句</a></li>
+<li><a href="cs_conditions_shorthand.html" title="C# 简写 If...Else">C# 简写 If...Else</a></li>
+<li><a href="cs_switch.html" title="C# Switch">C# Switch</a></li>
+<li><a href="cs_while_loop.html" title="C# While 循环">C# While 循环</a></li>
+<li><a href="cs_for_loop.html" title="C# For 循环">C# For 循环</a></li>
+<li><a href="cs_foreach_loop.html" title="C# Foreach 循环">C# Foreach 循环</a></li>
+<li><a href="cs_break.html" title="C# Break 和 Continue">C# Break 和 Continue</a></li>
+<li><a href="cs_arrays.html" title="C# 数组">C# 数组</a></li>
+<li><a href="cs_arrays_loop.html" title="C# 遍历数组">C# 遍历数组</a></li>
+<li><a href="cs_arrays_sort.html" title="C# 数组排序">C# 数组排序</a></li>
+<li><a href="cs_arrays_multi.html" title="C# 多维数组">C# 多维数组</a></li>
+</ul>
+<h2>C# 方法</h2>
+<ul>
+<li><a href="cs_methods.html" title="C# 方法">C# 方法</a></li>
+<li><a href="cs_method_parameters.html" title="C# 方法参数">C# 方法参数</a></li>
+<li><a href="cs_method_parameters_default.html" title="C# 默认参数值">C# 默认参数值</a></li>
+<li><a href="cs_method_parameters_return.html" title="C# 返回值">C# 返回值</a></li>
+<li><a href="cs_method_parameters_named_args.html" title="C# 具名参数">C# 具名参数</a></li>
+<li><a href="cs_method_overloading.html" title="C# 方法重载">C# 方法重载</a></li>
+</ul>
+<h2>C# 类</h2>
+<ul>
+<li><a href="cs_oop.html" title="C# OOP">C# OOP</a></li>
+<li><a href="cs_classes.html" title="C# 类和对象">C# 类/对象</a></li>
+<li><a href="cs_classes_multi.html" title="C# 多个类和对象">C# 多个类和对象</a></li>
+<li><a href="cs_class_members.html" title="C# 类成员">C# 类成员</a></li>
+<li><a href="cs_constructors.html" title="C# 构造函数">C# 构造函数</a></li>
+<li><a href="cs_access_modifiers.html" title="C# 访问修饰符">C# 访问修饰符</a></li>
+<li><a href="cs_properties.html" title="C# 属性">C# 属性</a></li>
+<li><a href="cs_inheritance.html" title="C# 继承">C# 继承</a></li>
+<li class="currentLink"><a href="cs_polymorphism.html" title="C# 多态">C# 多态</a></li>
+<li><a href="cs_abstract.html" title="C# 抽象">C# 抽象</a></li>
+<li><a href="cs_interface.html" title="C# 接口">C# 接口</a></li>
+<li><a href="cs_interface_multi.html" title="C# 多接口">C# 多接口</a></li>
+<li><a href="cs_enums.html" title="C# 枚举">C# 枚举</a></li>
+<li><a href="cs_files.html" title="C# 文件">C# 文件</a></li>
+<li><a href="cs_exceptions.html" title="C# 异常处理">C# 异常处理</a></li>
+</ul>
+<h2>C# 案例</h2>
+<ul>
+<li><a href="cs_howto_add_two_numbers.html" title="C# 如何加两个数字">加两个数字</a></li>
+</ul>
+<h2>实例 / 测验</h2>
+<ul>
+<li><a href="cs_examples.html" title="C# 实例">C# 实例</a></li>
+<li><a href="cs_quiz.html" title="C# 测验">C# 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>C# 多态性</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="cs_inheritance.html" title="C# 继承">C# 继承</a></li>
+<li class="next"><a href="cs_abstract.html" title="C# 抽象">C# 抽象</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>多态性和重写方法</h2>
+
+<p>多态性意味着“多种形式”，当我们有许多通过继承相互关联的类时，就会发生多态性。</p>
+
+<p>就像我们在上一章中指定的那样；<em>继承</em>允许我们从另一个类继承字段和方法。<em>多态性</em>使用这些方法来执行不同的任务。这使我们能够以不同的方式执行单个操作。</p>
+
+<p>例如，考虑一个名为 <code>Animal</code> 的基类，它有一个名为 <code>AnimalSound()</code> 的方法。动物的派生类可以是猪、猫、狗、鸟 - 并且它们也有自己的动物声音实现（猪叫声和猫喵叫声等）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-csharp">
+class Animal  // 基类 (父类)   
+{  
+  <mark>public void animalSound()</mark>
+  {  
+    Console.WriteLine(&quot;动物发出声音&quot;);  
+  }  
+}  
+  
+class Pig : Animal  // 派生类 (子类)   
+{  
+  <mark>public void animalSound()</mark>
+  {  
+    Console.WriteLine(&quot;猪说：wee wee&quot;);  
+  }  
+}  
+  
+class Dog : Animal  // 派生类 (子类)   
+{  
+  <mark>public void animalSound()</mark>
+  {  
+    Console.WriteLine(&quot;狗说：汪汪&quot;);  
+  }  
+}
+</pre>
+
+<p class="tip"><span>提示：</span>从<a href="cs_inheritance.html" title="C# 继承">继承</a>章节中记住，我们使用 : 符号从一个类继承。</p>
+
+<p>现在我们可以创建 <code>Pig</code> 和 <code>Dog</code> 对象，并在它们两者上调用 <code>animalSound()</code> 方法：</p>
+
+<h3>实例</h3>
+
+<pre class="language-csharp">
+class Animal  // 基类 (父类)   
+{  
+  <mark>public void animalSound()</mark>
+  {  
+    Console.WriteLine(&quot;动物发出声音&quot;);  
+  }  
+}  
+  
+class Pig : Animal  // 派生类 (子类)   
+{  
+  <mark>public void animalSound()</mark>
+  {  
+    Console.WriteLine(&quot;猪说：wee wee&quot;);  
+  }  
+}  
+  
+class Dog : Animal  // 派生类 (子类)   
+{  
+  <mark>public void animalSound()</mark>
+  {  
+    Console.WriteLine(&quot;狗说：汪汪&quot;);  
+  }  
+}  
+  
+class Program   
+{  
+  static void Main(string[] args)   
+  {  
+    Animal myAnimal = new Animal();  // 创建一个 Animal 对象  
+    Animal myPig = new Pig();  // 创建一个 Pig 对象  
+    Animal myDog = new Dog();  // 创建一个 Dog 对象  
+  
+    myAnimal.animalSound();  
+    myPig.animalSound();  
+    myDog.animalSound();  
+  }  
+}
+</pre>
+
+<p>输出将是：</p>
+
+<pre class="cmdline">
+动物发出声音
+动物发出声音
+动物发出声音
+</pre>
+
+<p class="tiy"><a target="_blank" href="t5c62.html?f=cs_polymorphism_1">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>不是我想要的输出</h2>
+
+<p>上面的例子的输出可能不是您所期望的。这是因为当它们共享相同的名称时，基类方法会覆盖派生类方法。</p>
+
+<p>但是，C# 提供了重写基类方法的选项，方法是向基类内部的方法添加 <code>virtual</code> 关键字，并为每个派生类方法使用 <code>override</code> 关键字：</p>
+
+<h3>实例</h3>
+
+<pre class="language-csharp">
+class Animal  // 基类 (父类)   
+{  
+  <mark>public virtual void animalSound()</mark>
+  {  
+    Console.WriteLine(&quot;动物发出声音&quot;);  
+  }  
+}  
+  
+class Pig : Animal  // 派生类 (子类)   
+{  
+  <mark>public override void animalSound()</mark>
+  {  
+    Console.WriteLine(&quot;猪说：wee wee&quot;);  
+  }  
+}  
+  
+class Dog : Animal  // 派生类 (子类)   
+{  
+  <mark>public override void animalSound()</mark>
+  {  
+    Console.WriteLine(&quot;狗说：汪汪&quot;);  
+  }  
+}  
+  
+class Program   
+{  
+  static void Main(string[] args)   
+  {  
+    Animal myAnimal = new Animal();  // 创建一个 Animal 对象  
+    Animal myPig = new Pig();  // 创建一个 Pig 对象  
+    Animal myDog = new Dog();  // 创建一个 Dog 对象  
+  
+    myAnimal.animalSound();  
+    myPig.animalSound();  
+    myDog.animalSound();  
+  }  
+}
+</pre>
+
+<p>输出将是：</p>
+
+<pre class="cmdline">
+动物发出声音
+猪说：wee wee
+狗说：汪汪
+</pre>
+
+<p class="tiy"><a target="_blank" href="t57b0.html?f=cs_polymorphism_2">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>为什么以及何时使用“继承”和“多态”？</h2>
+
+<p>- 它对于代码可重用性很有用：创建新类时重用现有类的字段和方法。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="cs_inheritance.html" title="C# 继承">C# 继承</a></li>
+<li class="next"><a href="cs_abstract.html" title="C# 抽象">C# 抽象</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_example"><a href="cs_examples.html">C# 实例</a></h5>
+<h5 id="tools_quiz"><a href="cs_quiz.html">C# 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/cs/cs_polymorphism.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:43:03 GMT -->
+</html>

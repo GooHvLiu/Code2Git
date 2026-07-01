@@ -1,0 +1,381 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+/* 头部 */
+.header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 30px 40px;
+  text-align: center;
+  position: relative;
+}
+
+.header h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.header h1 i {
+  margin-right: 8px;
+}
+
+.header p {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* 服务器状态 */
+.server-status-wrap {
+  position: absolute;
+  left: 25px;
+  top: 20px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 用户信息 */
+.user-info {
+  position: absolute;
+  top: 18px;
+  right: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  /* background: rgba(255, 255, 255, 0.2); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  position: relative;
+  overflow: visible;
+}
+
+/* 心跳状态小圆点 */
+.heart-dot {
+  position: absolute;
+  right: 0px;
+  bottom: 7px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  /* border: 1px solid #fff; */
+  animation: pulseDot 3s infinite ease-in-out;
+}
+
+#userName {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.logout-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 项目网格 */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 30px;
+}
+
+/* 项目卡片 - 左右布局 */
+.project-card {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+  border: 1px solid #e5e7eb;
+  cursor: default;
+  display: flex;
+  gap: 16px;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #d1d5db;
+}
+
+/* 左侧图标 */
+.project-icon-wrapper {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #667eea;
+  font-size: 2.2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* 右侧内容区 */
+.project-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.project-desc {
+  color: #4b5563;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: 14px;
+  min-height: 36px;
+}
+
+/* 技术标签横条 */
+.project-tech {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  padding: 4px 0;
+}
+
+.tech-tag {
+  background: white;
+  color: #4b5563;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid #e5e7eb;
+}
+
+/* 底部操作按钮 */
+.project-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.oper-btn {
+  flex: 1;
+  background: white;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.oper-btn:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.oper-btn.start-btn {
+  background: #f0fdf4;
+  color: #065f46;
+  border-color: #dcfce7;
+}
+
+.oper-btn.stop-btn {
+  background: #fef2f2;
+  color: #991b1b;
+  border-color: #fee2e2;
+}
+
+.oper-btn.restart-btn {
+  background: #fffbeb;
+  color: #92400e;
+  border-color: #fef9c3;
+}
+.oper-btn:disabled {
+  background: #999 !important;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* 添加项目按钮 */
+.add-project-btn {
+  background: #f9fafb;
+  color: #4b5563;
+  border: 1px dashed #d1d5db;
+  width: 280px;
+  height: 160px;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.add-project-btn:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.add-project-btn i {
+  font-size: 2rem;
+  color: #667eea;
+}
+
+/* 响应式 */
+@media (max-width: 1200px) {
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    padding: 25px;
+    gap: 16px;
+  }
+
+  .add-project-btn {
+    width: 240px;
+    height: 140px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 25px 20px;
+  }
+
+  .header h1 {
+    font-size: 1.6rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    gap: 15px;
+  }
+
+  .user-info {
+    position: static;
+    margin-top: 12px;
+    justify-content: center;
+  }
+
+  .add-project-btn {
+    width: 100%;
+    height: 120px;
+  }
+}
+
+/* 卡片入场动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.project-card {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.project-card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.project-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.project-card:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.project-card:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.project-card:nth-child(5) {
+  animation-delay: 0.25s;
+}
+.project-card:nth-child(6) {
+  animation-delay: 0.3s;
+}
+
+/* 空状态提示（可选） */
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #9ca3af;
+}
+
+.empty-state i {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  display: block;
+}
+
+/* 心跳圆点闪烁动画 */
+@keyframes pulseDot {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

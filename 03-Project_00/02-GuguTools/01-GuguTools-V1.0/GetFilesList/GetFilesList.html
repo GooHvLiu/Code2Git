@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>获取文件清单</title>
+    <link rel="icon" href="../Images/GetFilesList_icon.png">
+    <link rel="stylesheet" href="../Styles/G-Tool_header.css">
+    <link rel="stylesheet" href="../Styles/get_files_list.css">
+    <script src="../Sources/loading_dialog.js"></script>
+    <script src="../Sources/login_dialog.js"></script>
+</head>
+<body>
+    <header class="header" style="visibility: hidden">
+        <div class="logo">
+            <img src="../Images/G-Tool_icon.png" alt="工具箱图标">
+            <span>咕咕工具箱/获取文件清单</span>
+        </div>
+        <div class="debug-mode-toggle">
+            <button id="debugModeButton" class="debug-mode-button" title="切换调试模式">
+                <svg class="debug-icon" viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M20 8h-2.81c-.45-1.29-1.26-2.43-2.39-3.27L16 3l-1.71 1.71C13.08 4.25 11.76 4 10.5 4C9.24 4 7.92 4.25 6.71 4.71L5 3 6.2 4.73C5.07 5.57 4.26 6.71 3.81 8H1v2h2.09c-.05.33-.09.66-.09 1v1H1v2h2v1c0 .34.04.67.09 1H1v2h2.81c1.04 3.17 4.03 5 7.19 5s6.15-1.83 7.19-5H20v-2h-2.09c.05-.33.09-.66.09-1v-1h2v-2h-2v-1c0-.34-.04-.67-.09-1H20V8zm-4 4v-1h-2V9h-2v2h-2V9H8v2H6v1H4v2h2v1h2v2h2v-2h2v2h2v-2h2v-1h2v-2h-2z"/>
+                </svg>
+                <span class="debug-text">运行模式</span>
+            </button>
+        </div>
+    </header>
+    <div class="main-container" style="visibility: hidden">
+        <div class="content-area">
+            <div class="button-group">
+                <button id="sourceButton">源文件夹</button>
+                <button id="txtButton" style="background-color: #cccccc;" disabled>导出txt</button>
+                <button id="htmlButton" style="background-color: #cccccc;" disabled>导出html</button>
+                <button id="excelButton" style="background-color: #cccccc;" disabled>导出excel</button>
+                <div class="checkbox-group">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" id="folderCheckbox" checked>
+                        <span class="checkbox-icon"></span>
+                        <span class="checkbox-label">文件夹</span>
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="checkbox" id="extensionCheckbox" checked>
+                        <span class="checkbox-icon"></span>
+                        <span class="checkbox-label">包含后缀</span>
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="checkbox" id="hiddenCheckbox">
+                        <span class="checkbox-icon"></span>
+                        <span class="checkbox-label">隐藏文件</span>
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="checkbox" id="currentFolderCheckbox">
+                        <span class="checkbox-icon"></span>
+                        <span class="checkbox-label">当前文件夹</span>
+                    </label>
+                </div>
+            </div>
+            <div class="log-container" id="logContainer"></div>
+        </div>
+        <div class="debug-log-container">
+            <h3 id="debugLogTitle">调试日志</h3>
+            <div id="debugLog" class="debug-log"></div>
+        </div>
+    </div>
+
+    <script>
+        // 检查浏览器兼容性
+        if (typeof Promise === 'undefined' || !window.showDirectoryPicker) {
+            alert('您的浏览器不支持必要的现代Web功能，请使用最新版本的Chrome、Edge或Firefox浏览器。');
+        }
+
+        // 定义登录验证常量
+        const LOGIN_USERNAME = 'admin';
+        const LOGIN_PASSWORD = 'list';
+
+        // 设置验证函数
+        window.validateLogin = async function(username, password) {
+            // 验证用户名和密码
+            return username === LOGIN_USERNAME && password === LOGIN_PASSWORD;
+        };
+
+        // 检查是否从工具箱页面跳转而来
+        function isFromToolbox() {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const authToken = urlParams.get('auth');
+                return authToken === 'gugu2024';
+            } catch (e) {
+                console.error('检查验证参数失败:', e);
+                return false;
+            }
+        }
+
+        // 页面加载完成后检查登录状态
+        document.addEventListener('DOMContentLoaded', function() {
+            // 检查是否从工具箱页面跳转而来
+            const fromToolbox = isFromToolbox();
+            // 检查登录状态
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+            
+            // 如果不是从工具箱页面跳转而来且未登录，则需要登录验证
+            if (!fromToolbox && !isLoggedIn) {
+                // 显示登录窗口
+                showLoginDialog();
+            } else {
+                // 从工具箱进入或已登录时，直接显示界面
+                document.querySelector('.main-container').style.visibility = 'visible';
+                document.querySelector('.header').style.visibility = 'visible';
+            }
+        });
+
+        // 添加调试模式按钮点击事件
+        document.getElementById('debugModeButton').addEventListener('click', function() {
+            const debugText = this.querySelector('.debug-text');
+            const debugLogContainer = document.querySelector('.debug-log-container');
+            
+            if (debugText.textContent === '运行模式') {
+                // 显示登录弹窗，并标记这是从调试按钮触发的
+                window.loginDialogParams = { fromDebugButton: true };
+                showLoginDialog();
+            } else {
+                debugText.textContent = '运行模式';
+                this.classList.remove('engineering-mode');
+                debugLogContainer.style.visibility = 'hidden';
+            }
+        });
+
+        // 添加登录成功事件监听
+        document.addEventListener('loginSuccess', function() {
+            // 显示主界面内容和header
+            document.querySelector('.main-container').style.visibility = 'visible';
+            document.querySelector('.header').style.visibility = 'visible';
+
+            // 如果是从调试按钮触发的登录
+            if (window.loginDialogParams && window.loginDialogParams.fromDebugButton) {
+                const debugModeButton = document.getElementById('debugModeButton');
+                const debugText = debugModeButton.querySelector('.debug-text');
+                const debugLogContainer = document.querySelector('.debug-log-container');
+                
+                debugText.textContent = '工程模式';
+                debugModeButton.classList.add('engineering-mode');
+                debugLogContainer.style.visibility = 'visible';
+
+                // 清除登录参数
+                window.loginDialogParams = null;
+            }
+        });
+        let sourceDir = null;
+        let targetDir = null;
+        let fileList = null;
+
+        // 初始化按钮状态
+        function initializeButtonStates() {
+            document.getElementById('txtButton').disabled = true;
+            document.getElementById('htmlButton').disabled = true;
+            document.getElementById('excelButton').disabled = true;
+        }
+
+        // 更新按钮状态
+        function updateButtonStates() {
+            const txtButton = document.getElementById('txtButton');
+            const htmlButton = document.getElementById('htmlButton');
+            const excelButton = document.getElementById('excelButton');
+
+            // 源文件夹选择后，按钮可用
+            txtButton.disabled = !sourceDir;
+            htmlButton.disabled = !sourceDir;
+            excelButton.disabled = !sourceDir;
+
+            // 更新按钮样式
+            [txtButton, htmlButton, excelButton].forEach(button => {
+                if (button.disabled) {
+                    button.style.backgroundColor = '#cccccc';
+                    button.style.cursor = 'not-allowed';
+                } else {
+                    button.style.backgroundColor = '#4CAF50';
+                    button.style.cursor = 'pointer';
+                }
+            });
+        }
+
+        // 初始化按钮状态
+        initializeButtonStates();
+
+        // 初始化状态信息
+        updateStatusInfo();
+
+        // 添加日志条目
+        function addLogEntry(message, type = 'success', totalEntries = null) {
+            const logContainer = document.getElementById('logContainer');
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry log-${type}`;
+            if (totalEntries !== null && message.includes('成功导出')) {
+                logEntry.textContent = `${message}，共 ${totalEntries} 个条目`;
+            } else {
+                logEntry.textContent = message;
+            }
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+
+        // 清空日志
+        function clearLog() {
+            const logContainer = document.getElementById('logContainer');
+            logContainer.innerHTML = '';
+            // 添加欢迎信息
+            addLogEntry('Ready，开始吧～', 'success');
+        }
+
+        // 页面加载完成时显示欢迎信息
+        clearLog();
+
+        // 更新状态信息显示
+        async function updateStatusInfo(copyProgress = null) {
+            const statusInfo = document.querySelector('.status-info');
+            const progressBar = document.querySelector('.progress-bar');
+            let progress = 0;
+            let stepText = '从选择[源文件夹]开始吧';
+        }
+
+        // 更新调试日志标题
+        function updateDebugLogTitle(completedCount, totalCount) {
+        }
+
+        // 添加调试日志
+        function addDebugLog(message) {
+            const debugLog = document.getElementById('debugLog');
+            const logEntry = document.createElement('div');
+            logEntry.textContent = message;
+            debugLog.appendChild(logEntry);
+            debugLog.scrollTop = debugLog.scrollHeight;
+        }
+
+        // 添加源文件按钮点击事件
+        document.getElementById('sourceButton').addEventListener('click', async function() {
+            try {
+                // 弹出文件夹选择对话框
+                const dirHandle = await window.showDirectoryPicker();
+                sourceDir = dirHandle;
+                
+                // 在日志容器中添加选中的文件夹名称
+                addLogEntry(`已选择源文件夹: ${dirHandle.name}`);
+            
+                // 更新按钮状态
+                updateButtonStates();
+            } catch (error) {
+                // 用户取消选择时添加错误日志
+                if (error.name === 'AbortError') {
+                    addLogEntry('选择源目录失败: The user aborted a request.', 'error');
+                } else {
+                    console.error('选择文件夹时发生错误:', error);
+                    addLogEntry(`选择源目录失败: ${error.message}`, 'error');
+                }
+            }
+        });
+        // 添加txt导出按钮点击事件
+        document.getElementById('txtButton').addEventListener('click', async function() {
+            try {
+                // 检查是否已选择源文件夹
+                if (!sourceDir) {
+                    addLogEntry('请先选择源文件夹', 'error');
+                    return;
+                }
+
+                // 显示加载对话框
+                showLoadingDialog('正在生成文件清单...');
+
+                // 递归获取所有文件和文件夹
+                const fileList = [];
+                async function traverseDirectory(dirHandle) {
+                    const folderChecked = document.getElementById('folderCheckbox').checked;
+                    const extensionChecked = document.getElementById('extensionCheckbox').checked;
+                    const hiddenChecked = document.getElementById('hiddenCheckbox').checked;
+                    const currentFolderOnly = document.getElementById('currentFolderCheckbox').checked;
+
+                    for await (const entry of dirHandle.values()) {
+                        // 检查是否为隐藏文件/文件夹
+                        if (!hiddenChecked && entry.name.startsWith('.')) {
+                            continue;
+                        }
+
+                        if (entry.kind === 'directory') {
+                            if (folderChecked) {
+                                fileList.push(`[文件夹] ${entry.name}`);
+                            }
+                            if (!currentFolderOnly) {
+                                await traverseDirectory(await dirHandle.getDirectoryHandle(entry.name));
+                            }
+                        } else {
+                            let fileName = entry.name;
+                            if (!extensionChecked) {
+                                fileName = fileName.replace(/\.[^\.]+$/, '');
+                            }
+                            fileList.push(`[文件] ${fileName}`);
+                        }
+                    }
+                }
+
+                await traverseDirectory(sourceDir);
+
+                // 生成文件内容
+                const content = fileList.join('\n');
+
+                // 创建文件句柄
+                const handle = await window.showSaveFilePicker({
+                    suggestedName: 'txt文件清单.txt',
+                    types: [{
+                        description: '文本文件',
+                        accept: {'text/plain': ['.txt']}
+                    }]
+                });
+
+                // 写入文件
+                const writable = await handle.createWritable();
+                await writable.write(content);
+                await writable.close();
+
+                // 隐藏加载对话框
+                hideLoadingDialog();
+
+                // 添加成功日志
+                addLogEntry('文件清单已成功导出为txt文件', 'success', fileList.length);
+                
+                // 添加调试日志
+                addDebugLog(`已导出文件清单，共 ${fileList.length} 个条目`);
+
+            } catch (error) {
+                // 隐藏加载对话框
+                hideLoadingDialog();
+
+                // 处理错误
+                if (error.name === 'AbortError') {
+                    addLogEntry('导出已取消', 'error');
+                } else {
+                    console.error('导出文件时发生错误:', error);
+                    addLogEntry(`导出失败: ${error.message}`, 'error');
+                }
+            }
+        });
+        // 添加html导出按钮点击事件
+        document.getElementById('htmlButton').addEventListener('click', async function() {
+            try {
+                // 检查是否已选择源文件夹
+                if (!sourceDir) {
+                    addLogEntry('请先选择源文件夹', 'error');
+                    return;
+                }
+
+                // 显示加载对话框
+                showLoadingDialog('正在生成文件清单...');
+
+                // 递归获取所有文件和文件夹，构建树形结构
+                const fileTree = [];
+                async function traverseDirectoryForHtml(dirHandle, currentPath = '') {
+                    const entries = [];
+                    const folderChecked = document.getElementById('folderCheckbox').checked;
+                    const extensionChecked = document.getElementById('extensionCheckbox').checked;
+                    const hiddenChecked = document.getElementById('hiddenCheckbox').checked;
+                    const currentFolderOnly = document.getElementById('currentFolderCheckbox').checked;
+
+                    for await (const entry of dirHandle.values()) {
+                        // 检查是否为隐藏文件/文件夹
+                        if (!hiddenChecked && entry.name.startsWith('.')) {
+                            continue;
+                        }
+
+                        if (entry.kind === 'directory') {
+                            if (folderChecked) {
+                                if (!currentFolderOnly) {
+                                    const subEntries = await traverseDirectoryForHtml(
+                                        await dirHandle.getDirectoryHandle(entry.name),
+                                        currentPath + '/' + entry.name
+                                    );
+                                    entries.push({
+                                        name: entry.name,
+                                        type: 'directory',
+                                        children: subEntries
+                                    });
+                                } else {
+                                    entries.push({
+                                        name: entry.name,
+                                        type: 'directory',
+                                        children: []
+                                    });
+                                }
+                            } else if (!currentFolderOnly) {
+                                // 如果不显示文件夹，仍然需要遍历子目录
+                                const subEntries = await traverseDirectoryForHtml(
+                                    await dirHandle.getDirectoryHandle(entry.name),
+                                    currentPath + '/' + entry.name
+                                );
+                                entries.push(...subEntries);
+                            }
+                        } else {
+                            let fileName = entry.name;
+                            if (!extensionChecked) {
+                                fileName = fileName.replace(/\.[^\.]+$/, '');
+                            }
+                            entries.push({
+                                name: fileName,
+                                type: 'file'
+                            });
+                        }
+                    }
+                    return entries;
+                }
+
+                const fileTreeData = await traverseDirectoryForHtml(sourceDir);
+
+                // 生成HTML内容
+                const htmlContent = `
+                <!DOCTYPE html>
+                <html lang="zh-CN">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>文件清单</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            margin: 20px;
+                            background-color: #f5f5f5;
+                        }
+                        .tree {
+                            margin-left: 20px;
+                        }
+                        .tree-item {
+                            margin: 5px 0;
+                            padding: 3px 0;
+                        }
+                        .directory {
+                            color: #2c3e50;
+                            font-weight: bold;
+                        }
+                        .file {
+                            color: #34495e;
+                            margin-left: 20px;
+                        }
+                        .icon {
+                            margin-right: 5px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>咕咕工作室提供技术支持</h1>
+                    <div class="tree">
+                        ${generateTreeHtml(fileTreeData)}
+                    </div>
+                </body>
+                </html>`;
+
+                // 创建文件句柄
+                const handle = await window.showSaveFilePicker({
+                    suggestedName: 'html文件清单.html',
+                    types: [{
+                        description: 'HTML文件',
+                        accept: {'text/html': ['.html']}
+                    }]
+                });
+
+                // 写入文件
+                const writable = await handle.createWritable();
+                await writable.write(htmlContent);
+                await writable.close();
+
+                // 隐藏加载对话框
+                hideLoadingDialog();
+
+                // 添加成功日志
+                let totalEntries = 0;
+                function countEntries(entries) {
+                    entries.forEach(entry => {
+                        totalEntries++;
+                        if (entry.type === 'directory' && entry.children) {
+                            countEntries(entry.children);
+                        }
+                    });
+                }
+                countEntries(fileTreeData);
+                addLogEntry('文件清单已成功导出为html文件', 'success', totalEntries);
+                addDebugLog(`已导出HTML文件清单，共 ${totalEntries} 个条目`);
+
+            } catch (error) {
+                // 隐藏加载对话框
+                hideLoadingDialog();
+
+                // 处理错误
+                if (error.name === 'AbortError') {
+                    addLogEntry('导出已取消', 'error');
+                } else {
+                    console.error('导出文件时发生错误:', error);
+                    addLogEntry(`导出失败: ${error.message}`, 'error');
+                }
+            }
+        });
+
+        // 生成树形结构的HTML
+        function generateTreeHtml(entries) {
+            return entries.map(entry => {
+                if (entry.type === 'directory') {
+                    return `
+                        <div class="tree-item">
+                            <span class="directory">
+                                <span class="icon">📁</span>${entry.name}
+                            </span>
+                            <div class="tree" style="margin-left: 20px;">
+                                ${generateTreeHtml(entry.children)}
+                            </div>
+                        </div>`;
+                } else {
+                    return `
+                        <div class="tree-item">
+                            <span class="file">
+                                <span class="icon">📄</span>${entry.name}
+                            </span>
+                        </div>`;
+                }
+            }).join('');
+        }
+        // 添加excel导出按钮点击事件
+        document.getElementById('excelButton').addEventListener('click', async function() {
+            try {
+                // 检查是否已选择源文件夹
+                if (!sourceDir) {
+                    addLogEntry('请先选择源文件夹', 'error');
+                    return;
+                }
+        
+                // 显示加载对话框
+                showLoadingDialog('正在生成文件清单...');
+        
+                // 递归获取所有文件和文件夹，构建树形结构
+                const fileTree = [];
+                async function traverseDirectoryForExcel(dirHandle, level = 0) {
+                    for await (const entry of dirHandle.values()) {
+                        // 获取复选框状态
+                        const includeFolders = document.getElementById('folderCheckbox').checked;
+                        const includeExtensions = document.getElementById('extensionCheckbox').checked;
+                        const includeHidden = document.getElementById('hiddenCheckbox').checked;
+                        const currentFolderOnly = document.getElementById('currentFolderCheckbox').checked;
+
+                        // 检查是否为隐藏文件
+                        if (!includeHidden && entry.name.startsWith('.')) {
+                            continue;
+                        }
+
+                        if (entry.kind === 'directory') {
+                            if (includeFolders) {
+                                fileTree.push({
+                                    level: level,
+                                    type: '文件夹',
+                                    name: entry.name
+                                });
+                            }
+                            if (!currentFolderOnly) {
+                                await traverseDirectoryForExcel(
+                                    await dirHandle.getDirectoryHandle(entry.name),
+                                    level + 1
+                                );
+                            }
+                        } else {
+                            let fileName = entry.name;
+                            if (!includeExtensions) {
+                                fileName = fileName.replace(/\.[^\.]+$/, '');
+                            }
+                            fileTree.push({
+                                level: level,
+                                type: '文件',
+                                name: fileName
+                            });
+                        }
+                    }
+                }
+        
+                await traverseDirectoryForExcel(sourceDir);
+        
+                // 生成Excel工作表内容
+                let excelContent = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>文件清单</x:Name><x:WorksheetOptions><x:DisplayGridlines/><x:AutoFilter/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><style>td { text-align: center; font-family: SimSun; height: 20px; } table { font-family: SimSun; } tr { height: 20px; } .header { font-weight: bold; }</style></head><body><table>';
+                
+                // 添加表头
+                excelContent += '<tr class="header"><td>序号</td><td>名称</td><td>类别</td><td>大小</td><td>单位</td><td>备注</td></tr>';
+                
+                // 添加数据行
+                fileTree.forEach((item, index) => {
+                    excelContent += `<tr><td>${index + 1}</td><td>${item.name}</td><td>${item.type}</td><td>${item.size}</td><td>${item.unit}</td><td></td></tr>`;
+                });
+                
+                excelContent += '</table></body></html>';
+                
+                // 创建Blob对象
+                const blob = new Blob([excelContent], { type: 'application/vnd.ms-excel;charset=utf-8' });
+        
+                // 创建文件句柄
+                const handle = await window.showSaveFilePicker({
+                    suggestedName: 'excel文件清单.xls',
+                    types: [{
+                        description: 'Excel文件',
+                        accept: {'application/vnd.ms-excel': ['.xls']}
+                    }]
+                });
+        
+                // 写入文件
+                const writable = await handle.createWritable();
+                await writable.write(blob);
+                await writable.close();
+        
+                // 隐藏加载对话框
+                hideLoadingDialog();
+        
+                // 添加成功日志 
+                addLogEntry('文件清单已成功导出为excel文件', 'success', fileTree.length);
+                // 添加调试日志
+                addDebugLog(`已导出excel文件清单，共 ${fileTree.length} 个条目`);
+        
+            } catch (error) {
+                // 隐藏加载对话框
+                hideLoadingDialog();
+        
+                // 处理错误
+                if (error.name === 'AbortError') {
+                    addLogEntry('导出已取消', 'error');
+                } else {
+                    console.error('导出文件时发生错误:', error);
+                    addLogEntry(`导出失败: ${error.message}`, 'error');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

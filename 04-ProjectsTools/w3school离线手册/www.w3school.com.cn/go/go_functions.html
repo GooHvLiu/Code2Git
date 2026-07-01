@@ -1,0 +1,310 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/go/go_functions.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Go 函数</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Go 教程</h2>
+<ul>
+<li><a href="index.html" title="Go 教程">Go 教程</a></li>
+<li><a href="go_introduction.html" title="Go 简介">Go 简介</a></li>
+<li><a href="go_getting_started.html" title="Go 入门">Go 入门</a></li>
+<li><a href="go_syntax.html" title="Go 语法">Go 语法</a></li>
+<li><a href="go_comments.html" title="Go 注释">Go 注释</a></li>
+<li><a href="go_variables.html" title="Go 变量">Go 变量</a></li>
+<li><a href="go_variable_multi.html" title="Go 声明多变量">Go 声明多变量</a></li>
+<li><a href="go_variable_naming_rules.html" title="Go 变量命名规则">Go 变量命名规则</a></li>
+<li><a href="go_constants.html" title="Go 常量">Go 常量</a></li>
+<li><a href="go_output.html" title="Go 输出">Go 输出</a></li>
+<li><a href="go_formatting_verbs.html" title="Go 格式化动词">Go 格式化动词</a></li>
+<li><a href="go_data_types.html" title="Go 数据类型">Go 数据类型</a></li>
+<li><a href="go_boolean_data_type.html" title="Go 布尔数据类型">Go 布尔</a></li>
+<li><a href="go_integer_data_type.html" title="Go 整数数据类型">Go 整数</a></li>
+<li><a href="go_float_data_type.html" title="Go 浮点数据类型">Go 浮点</a></li>
+<li><a href="go_string_data_type.html" title="Go 字符串数据类型">Go 字符串</a></li>
+<li><a href="go_arrays.html" title="Go 数组">Go 数组</a></li>
+<li><a href="go_slices.html" title="Go 创建切片">Go 创建切片</a></li>
+<li><a href="go_slices_modify.html" title="Go 修改切片">Go 修改切片</a></li>
+<li><a href="go_operators.html" title="Go 运算符">Go 运算符</a></li>
+<li><a href="go_conditions.html" title="Go 条件语句">Go 条件语句</a></li>
+<li><a href="go_if_statement.html" title="Go if 语句">Go if 语句</a></li>
+<li><a href="go_else_statement.html" title="Go if else 语句">Go if else 语句</a></li>
+<li><a href="go_elseif_statement.html" title="Go else if 语句">Go else if 语句</a></li>
+<li><a href="go_nested_if.html" title="Go 嵌套 if 语句">Go 嵌套 if 语句</a></li>
+<li><a href="go_switch.html" title="Go Switch 语句">Go Switch</a></li>
+<li><a href="go_loops.html" title="Go 循环">Go 循环</a></li>
+<li class="currentLink"><a href="go_functions.html" title="Go 函数">Go 函数</a></li>
+<li><a href="go_function_parameters.html" title="Go 函数参数">Go 函数参数</a></li>
+<li><a href="go_function_returns.html" title="Go 函数返回">Go 函数返回</a></li>
+<li><a href="go_function_recursion.html" title="Go 递归函数">Go 递归函数</a></li>
+<li><a href="go_struct.html" title="Go 结构体">Go 结构体</a></li>
+<li><a href="go_maps.html" title="Go 映射">Go 映射</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Go 函数</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="go_loops.html" title="Go 循环">Go 循环</a></li>
+<li class="next"><a href="go_function_parameters.html" title="Go 函数参数">Go 函数参数</a></li>
+</ul>
+</div>
+
+
+
+<section id="intro">
+<p>函数是可以在程序中重复使用的语句块。</p>
+
+<p>当页面加载时，函数不会自动执行。</p>
+
+<p>函数将通过对函数的调用来执行。</p>
+</section>
+
+
+
+<section>
+<h2>创建函数</h2>
+
+<p>要创建（通常称为声明）函数，请执行以下操作：</p>
+
+<ul>
+<li>使用 <code>func</code> 关键字。</li>
+<li>指定函数的名称，后跟括号 <code>()</code>。</li>
+<li>最后，在大括号 <code>{}</code> 内添加定义函数应执行的操作的代码。</li>
+</ul>
+
+<h3>语法</h3>
+
+<pre class="language-go">
+func <i>FunctionName</i>() {
+  // 要执行的代码
+}
+</pre>
+</section>
+
+
+
+<section>
+<h2>调用函数</h2>
+
+<p>函数不会立即执行。它们被“保存以供以后使用”，并将在被调用时执行。</p>
+
+<p>在下面的例子中，我们创建了一个名为 <code>myMessage()</code> 的函数。左大括号（<code>{</code>）表示函数代码的开始，而右大括号（<code>}</code>）表示函数的结束。该函数输出 &quot;本段代码刚被执行！&quot;。要调用该函数，只需写下其名称后跟两个括号 <code>()</code>：</p>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func myMessage() {
+  fmt.Println(&quot;本段代码刚被执行！&quot;)
+}
+
+func main() {
+  myMessage() // 调用函数
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+本段代码刚被执行！
+</pre>
+
+<p class="tiy"><a target="_blank" href="tb97c.html?f=go_func_1">亲自试一试</a></p>
+
+<p>一个函数可以被多次调用。</p>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func myMessage() {
+  fmt.Println(&quot;本段代码刚被执行！&quot;)
+}
+
+func main() {
+  myMessage()
+  myMessage()
+  myMessage()
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+本段代码刚被执行！
+本段代码刚被执行！
+本段代码刚被执行！
+</pre>
+
+<p class="tiy"><a target="_blank" href="tc46a.html?f=go_func_2">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>Go 函数的命名规则</h2>
+
+<ul>
+<li>函数名必须以字母开头</li>
+<li>函数名只能包含字母数字字符和下划线（<code>A-z</code>、<code>0-9</code> 和 <code>_</code>）</li>
+<li>函数名区分大小写</li>
+<li>函数名不能包含空格</li>
+<li>如果函数名由多个单词组成，则可以使用为<a href="go_variable_naming_rules.html" title="Go 变量命名规则">多词变量命名</a>时引入的技术</li>
+</ul>
+
+<p class="tip"><span>提示：</span>请给函数起一个反映其功能的名称！</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="go_loops.html" title="Go 循环">Go 循环</a></li>
+<li class="next"><a href="go_function_parameters.html" title="Go 函数参数">Go 函数参数</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/go/go_functions.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:04 GMT -->
+</html>

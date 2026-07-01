@@ -1,0 +1,528 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/mongodb/mongodb_aggregations_intro.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:45:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>MongoDB 聚合</title>
+
+</head>
+
+<body class="serverscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>MongoDB 教程</h2>
+<ul>
+<li><a href="index.html" title="MongoDB 教程">MongoDB 教程</a></li>
+<li><a href="mongodb_get_started.html" title="MongoDB 入门">MongoDB 入门</a></li>
+<li><a href="mongodb_query_api.html" title="MongoDB Query API">MongoDB Query API</a></li>
+<li><a href="mongodb_mongosh_create_database.html" title="MongoDB 创建数据库">MongoDB 创建数据库</a></li>
+<li><a href="mongodb_mongosh_create_collection.html" title="MongoDB 创建集合">MongoDB 创建集合</a></li>
+<li><a href="mongodb_mongosh_insert.html" title="MongoDB 插入">MongoDB 插入</a></li>
+<li><a href="mongodb_mongosh_find.html" title="MongoDB 查找">MongoDB 查找</a></li>
+<li><a href="mongodb_mongosh_update.html" title="MongoDB 更新">MongoDB 更新</a></li>
+<li><a href="mongodb_mongosh_delete.html" title="MongoDB 删除">MongoDB 删除</a></li>
+<li><a href="mongodb_query_operators.html" title="MongoDB 查询运算符">MongoDB 查询运算符</a></li>
+<li><a href="mongodb_update_operators.html" title="MongoDB 更新运算符">MongoDB 更新运算符</a></li>
+<li class="currentLink"><a href="mongodb_aggregations_intro.html" title="MongoDB 聚合">MongoDB 聚合</a></li>
+<li><a href="mongodb_indexing_search.html" title="MongoDB 索引与搜索">MongoDB 索引与搜索</a></li>
+<li><a href="mongodb_schema_validation.html" title="MongoDB 验证">MongoDB 验证</a></li>
+<li><a href="mongodb_data_api.html" title="MongoDB Data API">MongoDB Data API</a></li>
+<li><a href="mongodb_drivers.html" title="MongoDB 驱动程序">MongoDB 驱动程序</a></li>
+<li><a href="mongodb_nodejs_connect_database.html" title="MongoDB MongoDB Node.js 数据库交互">MongoDB Node.js</a></li>
+<li><a href="mongodb_charts.html" title="MongoDB 图表">MongoDB 图表</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>MongoDB 聚合</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="mongodb_update_operators.html" title="MongoDB 更新运算符">MongoDB 更新运算符</a></li>
+<li class="next"><a href="mongodb_indexing_search.html" title="MongoDB 索引与搜索">MongoDB 索引与搜索</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>聚合管道（Aggregation Pipelines）</h2>
+
+<p>聚合操作允许你进行分组、排序、执行计算、分析数据等更多操作。</p>
+
+<p>聚合管道可以有一个或多个“阶段”。这些阶段的顺序很重要。每个阶段都会对前一个阶段的结果进行操作。</p>
+
+<h3>实例</h3>
+
+<pre class="language-jsx">
+db.posts.aggregate([
+  // 第一阶段：只查找具有超过 1 个点赞的文档
+  {
+    $match: { likes: { $gt: 1 } }
+  },
+  // 第二阶段：按类别对文档进行分组，并对每个类别的点赞数进行求和
+  {
+    $group: { _id: &quot;$category&quot;, totalLikes: { $sum: &quot;$likes&quot; } }
+  }
+])
+</pre>
+
+<p class="tiy"><a target="_blank" href="sf066.html?f=mongodb_aggregations_intro">运行实例</a></p>
+</section>
+
+
+
+<section>
+<h2>样本数据</h2>
+
+<p>为了演示聚合管道中阶段的使用，我们将把示例数据加载到我们的数据库中。</p>
+
+<p>在 MongoDB Atlas 仪表板中，转到“数据库”。点击省略号并选择“加载示例数据集”。这将把几个示例数据集加载到你的数据库中。</p>
+
+<p>在接下来的部分中，我们将使用此示例数据更详细地探讨几个聚合管道阶段。</p>
+</section>
+
+
+
+<section>
+<h2>聚合 $group</h2>
+
+<p>此聚合阶段按提供的唯一 <code>_id</code> 表达式对文档进行分组。</p>
+
+<p>不要将此 <code>_id</code> 表达式与提供给每个文档的 <code>_id</code> ObjectId 混淆。</p>
+
+<h3>实例</h3>
+
+<p>在此例中，我们使用了从“聚合介绍”部分中的示例数据加载的“sample_airbnb”数据库。</p>
+
+<pre class="language-jsx">
+db.listingsAndReviews.aggregate(
+    [ { $group : { _id : &quot;$property_type&quot; } } ]
+)
+</pre>
+
+<p class="tiy"><a target="_blank" href="seb8c.html?f=mongodb_aggregations_group">运行实例</a></p>
+
+<p>这将返回 <code>property_type</code> 字段中的不同值。</p>
+</section>
+
+
+
+<section>
+<h2>聚合 $limit</h2>
+
+<p>此聚合阶段限制了传递到下一阶段的文档数量。</p>
+
+<h3>实例</h3>
+
+<p>在此例中，我们使用了从“聚合介绍”部分中的示例数据加载的“sample_mflix”数据库。</p>
+
+<pre class="language-jsx">
+db.movies.aggregate([ { $limit: 1 } ])
+</pre>
+
+<p class="tiy"><a target="_blank" href="se8d8.html?f=mongodb_aggregations_limit">运行实例</a></p>
+
+<p>这将从集合中返回 1 部电影。</p>
+</section>
+
+
+
+<section>
+<h2>聚合 $project</h2>
+
+<p>此聚合阶段仅将指定字段传递到下一个聚合阶段。</p>
+
+<p>这与 <code>find()</code> 方法使用的投影相同。</p>
+
+<h3>实例</h3>
+
+<p>在此例中，我们使用了从“聚合介绍”部分中的示例数据加载的“sample_restaurants”数据库。</p>
+
+<pre class="language-jsx">
+db.restaurants.aggregate([
+  {
+    $project: {
+      &quot;name&quot;: 1,
+      &quot;cuisine&quot;: 1,
+      &quot;address&quot;: 1
+    }
+  },
+  {
+    $limit: 5
+  }
+])
+</pre>
+
+<p class="tiy"><a target="_blank" href="sd32c.html?f=mongodb_aggregations_project">运行实例</a></p>
+
+<p>这将返回文档，但仅包含指定的字段。</p>
+
+<p>请注意，<code>_id</code> 字段也被包含在内。除非明确排除，否则此字段始终包含在内。</p>
+
+<p>我们使用 <code>1</code> 来包含字段，使用 <code>0</code> 来排除字段。</p>
+
+<p class="note"><span>注意：</span>您不能在同一对象中同时使用 0 和 1。唯一的例外是 <code>_id</code> 字段。您应该指定要包含的字段或要排除的字段。</p>
+</section>
+
+
+
+<section>
+<h2>聚合 $sort</h2>
+
+<p>此聚合阶段将所有文档按照指定的排序顺序进行分组排序。</p>
+
+<p>请记住，阶段的顺序很重要。每个阶段只对前一阶段提供的文档进行操作。</p>
+
+<h3>实例</h3>
+
+<p>在这个例子中，我们使用了从聚合介绍”部分的示例数据中加载的“sample_airbnb”数据库。</p>
+
+<pre class="language-jsx">
+db.listingsAndReviews.aggregate([ 
+  { 
+    $sort: { &quot;accommodates&quot;: -1 } 
+  },
+  {
+    $project: {
+      &quot;name&quot;: 1,
+      &quot;accommodates&quot;: 1
+    }
+  },
+  {
+    $limit: 5
+  }
+])
+</pre>
+
+<p class="tiy"><a target="_blank" href="s2826.html?f=mongodb_aggregations_sort">运行实例</a></p>
+
+<p>这将返回按 <code>accommodates</code> 字段降序排序的文档。</p>
+
+<p>可以使用 <code>1</code> 或 <code>-1</code> 来选择排序顺序。<code>1</code> 为升序，<code>-1</code> 为降序。</p>
+</section>
+
+
+
+<section>
+<h2>聚合 $match</h2>
+
+<p>此聚合阶段的行为类似于查找。它将过滤与所提供的查询匹配的文档。</p>
+
+<p>在管道中尽早使用 <code>$match</code> 可以提高性能，因为它限制了下一阶段必须处理的文档数量。</p>
+
+<h3>实例</h3>
+
+<p>在此例中，我们使用了从“聚合介绍”部分中的示例数据加载的“sample_airbnb”数据库。</p>
+
+<pre class="language-jsx">
+db.listingsAndReviews.aggregate([ 
+  { $match : { property_type : &quot;House&quot; } },
+  { $limit: 2 },
+  { $project: {
+    &quot;name&quot;: 1,
+    &quot;bedrooms&quot;: 1,
+    &quot;price&quot;: 1
+  }}
+])
+</pre>
+
+<p class="tiy"><a target="_blank" href="s2623.html?f=mongodb_aggregations_match">运行实例</a></p>
+
+<p>这将只返回 <code>property_type</code> 为 &quot;House&quot; 的文档。</p>
+</section>
+
+
+
+<section>
+<h2>聚合 $addFields</h2>
+
+<p>此聚合阶段向文档添加新字段。</p>
+
+<h3>实例</h3>
+
+<p>在这个例子中，我们使用了从“聚合介绍”部分的示例数据中加载的“sample_restaurants”数据库。</p>
+
+<pre class="language-jsx">
+db.restaurants.aggregate([
+  {
+    $addFields: {
+      avgGrade: { $avg: &quot;$grades.score&quot; }
+    }
+  },
+  {
+    $project: {
+      &quot;name&quot;: 1,
+      &quot;avgGrade&quot;: 1
+    }
+  },
+  {
+    $limit: 5
+  }
+])
+</pre>
+
+<p class="tiy"><a target="_blank" href="sf2ea.html?f=mongodb_aggregations_addFields">运行实例</a></p>
+
+<p>这将返回文档以及一个新字段 <code>avgGrade</code>，该字段将包含每家餐馆 <code>grades.score</code> 的平均值。</p>
+</section>
+
+
+
+<section>
+<h2>聚合 $count</h2>
+
+<p>此聚合阶段计算从上一阶段传递的文档总数。</p>
+
+<h3>实例</h3>
+
+<p>在这个例子中，我们使用了从“聚合介绍”部分的示例数据中加载的“sample_restaurants”数据库。</p>
+
+<pre class="language-jsx">
+db.restaurants.aggregate([
+  {
+    $match: { &quot;cuisine&quot;: &quot;Chinese&quot; }
+  },
+  {
+    $count: &quot;totalChinese&quot;
+  }
+])
+</pre>
+
+<p class="tiy"><a target="_blank" href="sddd9.html?f=mongodb_aggregations_count">运行实例</a></p>
+
+<p>这将返回 <code>$count</code> 阶段中文档的数量，并将其作为名为 &quot;totalChinese&quot; 的字段。</p>
+</section>
+
+
+
+<section>
+<h2>聚合 $lookup</h2>
+
+<p>此聚合阶段对同一数据库中的集合执行左外连接。</p>
+
+<p>有四个必填字段：</p>
+
+<table class="table-no-border">
+<tr>
+<td><code>from</code></td>
+<td>用于在同一数据库中查找的集合。</td>
+</tr>
+
+<tr>
+<td><code>localField</code></td>
+<td>主要集合中的字段，可用作 <code>from</code> 集合中的唯一标识符。</td>
+</tr>
+
+<tr>
+<td><code>foreignField</code></td>
+<td><code>from</code> 集合中的字段，可用作主要集合中的唯一标识符。</td>
+</tr>
+
+<tr>
+<td><code>as</code></td>
+<td>将包含 <code>from</code> 集合中匹配文档的新字段的名称。</td>
+</tr>
+</table>
+
+<h3>实例</h3>
+
+<p>在此例中，我们使用了从“聚合介绍”部分中的示例数据加载的“sample_mflix”数据库。</p>
+
+<pre class="language-jsx">
+db.comments.aggregate([
+  {
+    $lookup: {
+      from: &quot;movies&quot;,
+      localField: &quot;movie_id&quot;,
+      foreignField: &quot;_id&quot;,
+      as: &quot;movie_details&quot;,
+    },
+  },
+  {
+    $limit: 1
+  }
+])
+</pre>
+
+<p class="tiy"><a target="_blank" href="s58ba.html?f=mongodb_aggregations_lookup">运行实例</a></p>
+
+<p>这将返回与每条评论相关的电影数据。</p>
+</section>
+
+
+
+<section>
+<h2>聚合 $out</h2>
+
+<p>此聚合阶段将从聚合管道返回的文档写入集合。</p>
+
+<p><code>$out</code> 阶段必须是聚合管道的最后阶段。</p>
+
+<h3>实例</h3>
+
+<p>在此例中，我们使用了从“聚合介绍”部分的示例数据中加载的“sample_airbnb”数据库。</p>
+
+<pre class="language-jsx">
+db.listingsAndReviews.aggregate([
+  {
+    $group: {
+      _id: &quot;$property_type&quot;,
+      properties: {
+        $push: {
+          name: &quot;$name&quot;,
+          accommodates: &quot;$accommodates&quot;,
+          price: &quot;$price&quot;,
+        },
+      },
+    },
+  },
+  { $out: &quot;properties_by_type&quot; },
+])
+</pre>
+
+<p class="tiy"><a target="_blank" href="se24a.html?f=mongodb_aggregations_out">运行实例</a></p>
+
+<p>第一阶段将根据 <code>property_type</code> 对属性进行分组，并为每个属性包含 <code>name</code>、<code>accommodates</code> 和 <code>price</code> 字段。<code>$out</code> 阶段将在当前数据库中创建一个名为 <code>properties_by_type</code> 的新集合，并将结果文档写入该集合。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="mongodb_update_operators.html" title="MongoDB 更新运算符">MongoDB 更新运算符</a></li>
+<li class="next"><a href="mongodb_indexing_search.html" title="MongoDB 索引与搜索">MongoDB 索引与搜索</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/mongodb/mongodb_aggregations_intro.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:45:53 GMT -->
+</html>

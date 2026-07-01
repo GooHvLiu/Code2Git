@@ -1,0 +1,1 @@
+document.write("此文本来自外部脚本。");

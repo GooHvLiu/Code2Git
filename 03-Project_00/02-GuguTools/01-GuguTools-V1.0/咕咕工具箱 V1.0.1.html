@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>咕咕工具箱V1.01</title>
+    <link rel="icon" href="images/g-tool_icon.png" type="image/png">
+    <link rel="stylesheet" href="styles/g-tool_header.css">
+    <link rel="stylesheet" href="styles/g-tool_main.css">
+</head>
+<body>
+    <header class="header" style="visibility: hidden">
+        <div class="logo">
+            <img src="images/g-tool_icon.png" alt="工具箱图标">
+            <span>咕咕工具箱V1.01</span>
+        </div>
+        <div class="search-bar" style="visibility: hidden">
+            <div style="position: relative; flex-grow: 1;">
+                <input type="text" id="searchInput" placeholder="搜索工具...">
+                <div id="searchSuggestions" class="search-suggestions"></div>
+            </div>
+            <button onclick="performSearch()">搜索</button>
+        </div>
+    </header>
+
+    <main class="tools-grid" id="toolsGrid" style="visibility: hidden">
+        <!-- 工具卡片 -->
+        <a href="CopyFilesTool/CopyFilesTool.html?auth=gugu2024" class="tool-card" target="_blank">
+            <div class="tool-icon"><img src="images/copyfiles_icon.png" alt="批量拷贝工具" style="width: 100%; height: 100%; object-fit: cover;"></div>
+            <h3 class="tool-name">批量拷贝工具</h3>
+            <p class="tool-description">根据需要拷贝的清单文件，从源文件夹拷贝对应文件到目标文件夹，源文件不做任何处理，并输出拷贝结果。</p>
+            <div class="tool-card-footer">
+                <span class="tool-category">文档类</span>
+            </div>
+        </a>
+
+        <a href="GetFilesList/GetFilesList.html?auth=gugu2024" class="tool-card" target="_blank">
+            <div class="tool-icon"><img src="images/getfileslist_icon.png" alt="获取文件清单" style="width: 100%; height: 100%; object-fit: cover;"></div>
+            <h3 class="tool-name">获取文件清单</h3>
+            <p class="tool-description">将选中的文件夹内所有的文件名称和子文件夹内所有的文件名称获取，并导出为文件清单。</p>
+            <div class="tool-card-footer">
+                <span class="tool-category">文档类</span>
+            </div>
+        </a>
+
+        <a href="#" class="tool-card">
+            <div class="tool-icon"></div>
+            <h3 class="tool-name">工具卡片2</h3>
+            <p class="tool-description">工具卡片2</p>
+            <div class="tool-card-footer">
+                <span class="tool-category">图像类</span>
+            </div>
+        </a>
+
+        <a href="#" class="tool-card">
+            <div class="tool-icon"></div>
+            <h3 class="tool-name">工具卡片3</h3>
+            <p class="tool-description">工具卡片3</p>
+            <div class="tool-card-footer">
+                <span class="tool-category">开发类</span>
+            </div>
+        </a>
+
+        <a href="#" class="tool-card">
+            <div class="tool-icon"></div>
+            <h3 class="tool-name">工具卡片4</h3>
+            <p class="tool-description">工具卡片4</p>
+            <div class="tool-card-footer">
+                <span class="tool-category">设计类</span>
+            </div>
+        </a>
+
+        <a href="#" class="tool-card">
+            <div class="tool-icon"></div>
+            <h3 class="tool-name">工具卡片5</h3>
+            <p class="tool-description">工具卡片5</p>
+            <div class="tool-card-footer">
+                <span class="tool-category">音频类</span>
+            </div>
+        </a>
+
+        <a href="#" class="tool-card">
+            <div class="tool-icon"></div>
+            <h3 class="tool-name">工具卡片6</h3>
+            <p class="tool-description">工具卡片6</p>
+            <div class="tool-card-footer">
+                <span class="tool-category">视频类</span>
+            </div>
+        </a>
+
+        <a href="#" class="tool-card">
+            <div class="tool-icon"></div>
+            <h3 class="tool-name">工具卡片7</h3>
+            <p class="tool-description">工具卡片7</p>
+            <div class="tool-card-footer">
+                <span class="tool-category">工具类</span>
+            </div>
+        </a>
+
+        <a href="#" class="tool-card">
+            <div class="tool-icon"></div>
+            <h3 class="tool-name">工具卡片8</h3>
+            <p class="tool-description">工具卡片8</p>
+            <div class="tool-card-footer">
+                <span class="tool-category">其他</span>
+            </div>
+        </a>
+
+        <a href="#" class="tool-card">
+            <div class="tool-icon"></div>
+            <h3 class="tool-name">工具卡片9</h3>
+            <p class="tool-description">工具卡片9</p>
+            <div class="tool-card-footer">
+                <span class="tool-category">文档类</span>
+            </div>
+        </a>
+
+        <a href="#" class="tool-card">
+            <div class="tool-icon"></div>
+            <h3 class="tool-name">工具卡片10</h3>
+            <p class="tool-description">工具卡片10</p>
+            <div class="tool-card-footer">
+                <span class="tool-category">图像类</span>
+            </div>
+        </a>
+
+        <a href="#" class="tool-card">
+            <div class="tool-icon"></div>
+            <h3 class="tool-name">工具卡片11</h3>
+            <p class="tool-description">工具卡片11</p>
+            <div class="tool-card-footer">
+                <span class="tool-category">工具类</span>
+            </div>
+        </a>
+
+        <a href="#" class="tool-card">
+            <div class="tool-icon"></div>
+            <h3 class="tool-name">工具卡片12</h3>
+            <p class="tool-description">工具卡片12</p>
+            <div class="tool-card-footer">
+                <span class="tool-category">视频类</span>
+            </div>
+        </a>
+
+        <a href="#" class="tool-card">
+            <div class="tool-icon"></div>
+            <h3 class="tool-name">工具卡片13</h3>
+            <p class="tool-description">工具卡片13</p>
+            <div class="tool-card-footer">
+                <span class="tool-category">设计类</span>
+            </div>
+        </a>
+
+        <a href="#" class="tool-card">
+            <div class="tool-icon"></div>
+            <h3 class="tool-name">工具卡片14</h3>
+            <p class="tool-description">工具卡片14</p>
+            <div class="tool-card-footer">
+                <span class="tool-category">音频类</span>
+            </div>
+        </a>
+    </main>
+    <script src="sources/login_dialog.js"></script>
+    <script>
+        // 设置验证函数
+        window.validateLogin = async function(username, password) {
+            // 验证用户名和密码
+            return username === 'admin' && password === 'admin';
+        };
+
+        // 页面加载完成后检查登录状态
+        document.addEventListener('DOMContentLoaded', function() {
+            // 检查sessionStorage中的登录状态
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+            
+            if (!isLoggedIn) {
+                // 首次打开页面，隐藏主界面内容和header
+                document.querySelector('main').style.visibility = 'hidden';
+                document.querySelector('.search-bar').style.visibility = 'hidden';
+                document.querySelector('.header').style.visibility = 'hidden';
+                // 显示登录弹窗
+                showLoginDialog();
+            } else {
+                // 页面刷新，直接显示主界面
+                document.querySelector('main').style.visibility = 'visible';
+                document.querySelector('.search-bar').style.visibility = 'visible';
+                document.querySelector('.header').style.visibility = 'visible';
+            }
+        });
+
+        // 添加登录成功事件监听
+        document.addEventListener('loginSuccess', function() {
+            // 设置登录状态
+            sessionStorage.setItem('isLoggedIn', 'true');
+            // 显示主界面内容和header
+            document.querySelector('main').style.visibility = 'visible';
+            document.querySelector('.search-bar').style.visibility = 'visible';
+            document.querySelector('.header').style.visibility = 'visible';
+        });
+
+        const searchInput = document.getElementById('searchInput');
+        const searchSuggestions = document.getElementById('searchSuggestions');
+        const toolsGrid = document.getElementById('toolsGrid');
+        const tools = Array.from(toolsGrid.getElementsByClassName('tool-card'));
+
+        // 搜索建议功能
+        // 计算字符串相似度（使用Levenshtein距离）
+        function calculateSimilarity(str1, str2) {
+            const m = str1.length;
+            const n = str2.length;
+            const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+
+            for (let i = 0; i <= m; i++) dp[i][0] = i;
+            for (let j = 0; j <= n; j++) dp[0][j] = j;
+
+            for (let i = 1; i <= m; i++) {
+                for (let j = 1; j <= n; j++) {
+                    if (str1[i - 1] === str2[j - 1]) {
+                        dp[i][j] = dp[i - 1][j - 1];
+                    } else {
+                        dp[i][j] = Math.min(
+                            dp[i - 1][j - 1] + 1,
+                            dp[i - 1][j] + 1,
+                            dp[i][j - 1] + 1
+                        );
+                    }
+                }
+            }
+
+            const maxLength = Math.max(m, n);
+            return (1 - dp[m][n] / maxLength);
+        }
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            searchSuggestions.innerHTML = '';
+            searchSuggestions.style.display = 'none';
+
+            if (query) {
+                const matches = tools.filter(tool => {
+                    const name = tool.querySelector('.tool-name').textContent.toLowerCase();
+                    const similarity = calculateSimilarity(query, name);
+                    return similarity >= 0.6; // 只有相似度达到或超过60%时才显示
+                });
+
+                if (matches.length > 0) {
+                    matches.forEach(tool => {
+                        const name = tool.querySelector('.tool-name').textContent;
+                        const suggestion = document.createElement('div');
+                        suggestion.className = 'suggestion-item';
+                        suggestion.textContent = name;
+                        suggestion.addEventListener('click', () => {
+                            const href = tool.getAttribute('href');
+                            if (href && href !== '#') {
+                                window.open(href, '_blank');
+                            }
+                            searchInput.value = '';
+                            searchSuggestions.style.display = 'none';
+                        });
+                        searchSuggestions.appendChild(suggestion);
+                    });
+                    searchSuggestions.style.display = 'block';
+                }
+            }
+        });
+
+        // 执行搜索功能
+        function performSearch() {
+            const query = searchInput.value.toLowerCase().trim();
+            if (!query) {
+                alert('请输入搜索关键词');
+                return;
+            }
+
+            const matches = tools.filter(tool => {
+                const name = tool.querySelector('.tool-name').textContent.toLowerCase();
+                return name === query;
+            });
+
+            if (matches.length === 1) {
+                const href = matches[0].getAttribute('href');
+                if (href && href !== '#') {
+                    window.open(href, '_blank');
+                }
+            } else {
+                alert('未找到完全匹配的工具');
+            }
+        }
+
+        // 添加回车键事件监听
+        searchInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // 点击页面其他地方关闭搜索建议
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.search-bar')) {
+                searchSuggestions.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

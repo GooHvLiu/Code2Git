@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/webservices/ws_example.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:18:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Web Services 实例</title>
+
+</head>
+
+<body class="xml">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>WS 教程</h2>
+<ul>
+<li><a href="index.html" title="Web Services 教程">WS 教程</a></li>
+<li><a href="ws_intro.html" title="Web Services 简介">WS 简介</a></li>
+<li><a href="ws_why.html" title="Why Web Services?">Why WS</a></li>
+<li><a href="ws_platform.html" title="Web Services 平台元素">WS 平台</a></li>
+<li class="currentLink"><a href="ws_example.html" title="Web Services 实例">WS 实例</a></li>
+<li><a href="ws_use.html" title="Web Services 使用">WS 使用</a></li>
+<li><a href="ws_summary.html" title="您已经学习了 Web Services,下一步学习什么内容呢？">WS 总结</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Web Services 实例</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="ws_platform.html" title="Web Services 平台元素">WS 平台</a></li>
+<li class="next"><a href="ws_use.html" title="Web Services 使用">WS 使用</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p><strong>任何应用程序都可拥有 Web Service 组件。</strong></p>
+
+<p><strong>Web Services 的创建与编程语言的种类无关。</strong></p>
+</div>
+
+
+
+<div>
+<h2>一个实例：ASP.NET Web Service</h2>
+
+<p>在这个例子中，我们会使用 ASP.NET 来创建一个简单的 Web Service。</p>
+
+<pre class="language-vbnet">
+&lt;%@ WebService Language=&quot;VB&quot; Class=&quot;TempConvert&quot; %&gt;
+
+Imports System
+Imports System.Web.Services
+
+
+Public Class TempConvert :Inherits WebService
+
+&lt;WebMethod()&gt; Public Function FahrenheitToCelsius
+(ByVal Fahrenheit As Int16) As Int16
+	Dim celsius As Int16 
+	celsius = ((((Fahrenheit) - 32) / 9) * 5) 
+	Return celsius
+End Function
+
+&lt;WebMethod()&gt; Public Function CelsiusToFahrenheit
+(ByVal Celsius As Int16) As Int16
+	Dim fahrenheit As Int16
+	fahrenheit = ((((Celsius) * 9) / 5) + 32) 
+	Return fahrenheit
+End Function
+End Class
+</pre>
+
+<p>此文档是一个 .asmx 文件。这是用于 XML Web Services 的 ASP.NET 文件扩展名。</p>
+</div>
+
+
+
+<div>
+<h2>要运行这个例子，我们需要一个 .NET 服务器</h2>
+
+<p>此文档中第一行表明这是一个 Web Service，由 VB 编写，其 class 名称是 &quot;TempConvert&quot;。</p>
+
+<pre class="language-vbnet">
+&lt;%@ WebService Language=&quot;VB&quot; Class=&quot;TempConvert&quot; %&gt;
+</pre>
+
+<p>接下来的代码行从 .NET 框架导入了命名空间 &quot;System.Web.Services&quot;。</p>
+
+<pre class="language-vbnet">
+Imports System
+Imports System.Web.Services
+</pre>
+
+<p>下面这一行定义 &quot;TempConvert&quot; 类是一个 WebSerivce 类：</p>
+
+<pre class="language-vbnet">
+Public Class TempConvert :Inherits WebService
+</pre>
+
+<p>接下来的步骤是基础的 VB 编程。此应用程序有两个函数。一个把华氏度转换为摄氏度，而另一个把摄氏度转换为华氏度。</p>
+
+<p>与普通的应用程序唯一的不同是，此函数被定义为 &quot;WebMethod&quot;。</p>
+
+<p>请在您希望其成为 web services 的应用程序中使用 &quot;WebMethod&quot; 来标记函数。</p>
+
+<pre class="language-vbnet">
+&lt;WebMethod()&gt; Public Function FahrenheitToCelsius
+(ByVal Fahrenheit As Int16) As Int16
+	Dim celsius As Int16 
+	celsius = ((((Fahrenheit) - 32) / 9) * 5) 
+	Return celsius
+End Function
+
+&lt;WebMethod()&gt; Public Function CelsiusToFahrenheit
+(ByVal Celsius As Int16) As Int16
+	Dim fahrenheit As Int16
+	fahrenheit = ((((Celsius) * 9) / 5) + 32) 
+	Return fahrenheit
+End Function
+</pre>
+
+<p>最后要做的事情是终止函数和类：</p>
+
+<pre class="language-vbnet">
+End Function
+
+End Class
+</pre>
+
+<p>假如您把此文件另存为 .asmx 文件，并发布于支持 .NET 的服务器上，那么您就拥有了第一个可工作的 Web Service。</p>
+</div>
+
+
+
+<div>
+<h2>ASP.NET 的自动化处理</h2>
+
+<p>通过 ASP.NET，你不必亲自编写 WSDL 和 SOAP 文档。</p>
+
+<p>如果您仔细研究我们的这个例子，您会发现 ASP.NET 会自动创建 WSDL 和 SOAP 请求。</p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="ws_platform.html" title="Web Services 平台元素">WS 平台</a></li>
+<li class="next"><a href="ws_use.html" title="Web Services 使用">WS 使用</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/webservices/ws_example.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:18:07 GMT -->
+</html>

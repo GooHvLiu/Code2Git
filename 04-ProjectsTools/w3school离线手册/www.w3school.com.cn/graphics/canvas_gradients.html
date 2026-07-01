@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/graphics/canvas_gradients.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:24:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>HTML Canvas 渐变</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>HTML 图形</h2>
+<ul>
+<li><a href="index.html" title="HTML 图形">HTML 图形</a></li>
+</ul>
+<h2>HTML 绘图</h2>
+<ul>
+<li><a href="plot_graphics.html" title="JavaScript 图形">Graphics</a></li>
+<li><a href="plot_canvas.html" title="HTML Canvas">Canvas</a></li>
+<li><a href="plot_plotly.html" title="Plotly.js">Plotly.js</a></li>
+<li><a href="plot_chartjs.html" title="Chart.js">Chart.js</a></li>
+<li><a href="plot_google_chart.html" title="谷歌图表">Google</a></li>
+<li><a href="plot_d3js.html" title="D3.js">D3.js</a></li>
+</ul>
+<h2>谷歌地图</h2>
+<ul>
+<li><a href="google_maps_intro.html" title="谷歌地图教程">Maps 简介</a></li>
+<li><a href="google_maps_basic.html" title="谷歌地图基础">Maps 基础</a></li>
+<li><a href="google_maps_overlays.html" title="谷歌地图叠加层">Maps 叠加层</a></li>
+<li><a href="google_maps_events.html" title="谷歌地图事件">Maps 事件</a></li>
+<li><a href="google_maps_controls.html" title="谷歌地图控件">Maps 控件</a></li>
+<li><a href="google_maps_types.html" title="谷歌地图类型">Maps 类型</a></li>
+<li><a href="google_maps_reference.html" title="谷歌地图参考手册">Maps 参考手册</a></li>
+</ul>
+<h2>SVG 教程</h2>
+<ul>
+<li><a href="svg_intro.html" title="SVG 教程">SVG 简介</a></li>
+<li><a href="svg_inhtml.html" title="HTML 中的 SVG">SVG 嵌入 HTML</a></li>
+<li><a href="svg_rect.html" title="SVG &lt;rect&gt;">SVG 矩形</a></li>
+<li><a href="svg_circle.html" title="SVG &lt;circle&gt;">SVG 圆形</a></li>
+<li><a href="svg_ellipse.html" title="SVG &lt;ellipse&gt;">SVG 椭圆</a></li>
+<li><a href="svg_line.html" title="SVG &lt;line&gt;">SVG 直线</a></li>
+<li><a href="svg_polygon.html" title="SVG &lt;polygon&gt;">SVG 多边形</a></li>
+<li><a href="svg_polyline.html" title="SVG &lt;polyline&gt;">SVG 折线</a></li>
+<li><a href="svg_path.html" title="SVG &lt;path&gt;">SVG 路径</a></li>
+<li><a href="svg_text.html" title="SVG &lt;text&gt;">SVG 文本</a></li>
+<li><a href="svg_stroking.html" title="SVG 笔触属性">SVG 笔触</a></li>
+<li><a href="svg_filters.html" title="SVG 滤镜">SVG 滤镜</a></li>
+<li><a href="svg_fegaussianblur.html" title="SVG 模糊效果">SVG 模糊</a></li>
+<li><a href="svg_feoffset.html" title="SVG 阴影">SVG 阴影</a></li>
+<li><a href="svg_grad_linear.html" title="SVG 线性渐变">SVG 线性渐变</a></li>
+<li><a href="svg_grad_radial.html" title="SVG 径向渐变">SVG 径向渐变</a></li>
+<li><a href="svg_examples.html" title="SVG 实例">SVG 实例</a></li>
+<li><a href="svg_reference.html" title="SVG 参考手册">SVG 参考手册</a></li>
+</ul>
+<h2>Canvas 教程</h2>
+<ul>
+<li><a href="canvas_intro.html" title="HTML Canvas 教程">Canvas 简介</a></li>
+<li><a href="canvas_drawing.html" title="HTML Canvas 绘制">Canvas 绘制</a></li>
+<li><a href="canvas_coordinates.html" title="HTML Canvas 坐标">Canvas 坐标</a></li>
+<li><a href="canvas_lines.html" title="HTML Canvas 直线">Canvas 直线</a></li>
+<li><a href="canvas_shapes.html" title="HTML Canvas 形状">Canvas 形状</a></li>
+<li><a href="canvas_rectangles.html" title="HTML Canvas 矩形">Canvas 矩形</a></li>
+<li><a href="canvas_circles.html" title="HTML Canvas 圆形">Canvas 圆形</a></li>
+<li><a href="canvas_curves.html" title="HTML Canvas 曲线">Canvas 曲线</a></li>
+<li class="currentLink"><a href="canvas_gradients.html" title="HTML Canvas 渐变">Canvas 渐变</a></li>
+<li><a href="canvas_text.html" title="HTML Canvas 文本">Canvas 文本</a></li>
+<li><a href="canvas_images.html" title="HTML Canvas 图像">Canvas 图像</a></li>
+</ul>
+<h2>Canvas 时钟</h2>
+<ul>
+<li><a href="canvas_clock.html" title="Canvas 时钟">时钟简介</a></li>
+<li><a href="canvas_clock_face.html" title="Canvas 时钟钟面">时钟钟面</a></li>
+<li><a href="canvas_clock_numbers.html" title="Canvas 时钟数字">时钟数字</a></li>
+<li><a href="canvas_clock_hands.html" title="Canvas 时钟指针">时钟指针</a></li>
+<li><a href="canvas_clock_start.html" title="Canvas 时钟启动">时钟启动</a></li>
+</ul>
+<h2>HTML 游戏</h2>
+<ul>
+<li><a href="game_intro.html" title="HTML 游戏实例">游戏简介</a></li>
+<li><a href="game_canvas.html" title="游戏画布">游戏画布</a></li>
+<li><a href="game_components.html" title="游戏组件">游戏组件</a></li>
+<li><a href="game_controllers.html" title="游戏控制器">游戏控制器</a></li>
+<li><a href="game_obstacles.html" title="游戏障碍">游戏障碍</a></li>
+<li><a href="game_score.html" title="游戏分数">游戏分数</a></li>
+<li><a href="game_images.html" title="游戏图像">游戏图像</a></li>
+<li><a href="game_sound.html" title="游戏声音">游戏声音</a></li>
+<li><a href="game_gravity.html" title="游戏重力">游戏重力</a></li>
+<li><a href="game_bouncing.html" title="游戏弹跳">游戏弹跳</a></li>
+<li><a href="game_rotation.html" title="游戏旋转">游戏旋转</a></li>
+<li><a href="game_movement.html" title="游戏运动">游戏运动</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>HTML Canvas 渐变</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="canvas_curves.html" title="HTML Canvas 曲线">Canvas 曲线</a></li>
+<li class="next"><a href="canvas_text.html" title="HTML Canvas 文本">Canvas 文本</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>画布 - 渐变</h2>
+
+<p>渐变可用于填充矩形、圆形、线条、文本等。画布上的形状并不限于纯色。</p>
+
+<p>有两种不同类型的渐变：</p>
+
+<ul>
+<li>createLinearGradient(<i>x</i>,<i>y</i>,<i>x1</i>,<i>y1</i>) - 创建线性渐变</li>
+<li>createRadialGradient(<i>x</i>,<i>y</i>,<i>r</i>,<i>x1</i>,<i>y1</i>,<i>r1</i>) - 创建径向/圆形渐变</li>
+</ul>
+
+<p>一旦我们有了渐变对象，就必须添加两个或更多色标。</p>
+
+<p>addColorStop() 方法规定颜色的停止点及其沿渐变的位置。渐变位置可以是 0 到 1 之间的任意位置。</p>
+
+<p>要使用渐变，请将 fillStyle 或 strokeStyle 属性设置为渐变，然后绘制形状（矩形、文本或线条）。</p>
+
+Canvas - Gradients
+</section>
+
+
+
+<section>
+<h2>使用 createLinearGradient()</h2>
+
+<h3>实例</h3>
+
+<p>创建线性渐变。用渐变填充矩形：</p>
+
+<canvas id="myCanvas6" width="200" height="100" style="border:1px solid #d3d3d3;background:#ffffff;margin-top: 15px;">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+<script>
+var c=document.getElementById("myCanvas6");
+var canvOK=1;
+try {c.getContext("2d");}
+catch (er) {canvOK=0;}
+if (canvOK==1)
+ {
+    var ctx=c.getContext("2d");
+    var grd=ctx.createLinearGradient(0,0,200,0);
+    grd.addColorStop(0,"red");
+    grd.addColorStop(1,"white");
+    ctx.fillStyle=grd;
+    ctx.fillRect(10,10,150,80);
+ }
+</script>
+
+<p>JavaScript:</p>
+
+<pre class="language-js">
+const c = document.getElementById(&quot;myCanvas&quot;);
+const ctx = c.getContext(&quot;2d&quot;);
+
+// 创建渐变
+const grd = ctx.createLinearGradient(0, 0, 200, 0);
+grd.addColorStop(0, &quot;red&quot;);
+grd.addColorStop(1, &quot;white&quot;);
+
+// 用渐变填充
+ctx.fillStyle = grd;
+ctx.fillRect(10, 10, 150, 80);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t554d.html?f=graphics_canvas_grad_1">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>使用 createRadialGradient():</h2>
+
+<h3>实例</h3>
+
+<p>创建径向/圆形渐变。用渐变填充矩形：</p>
+
+<canvas id="myCanvas7" width="200" height="100" style="border:1px solid #d3d3d3;background:#ffffff;margin-top: 15px;">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+<script>
+var c=document.getElementById("myCanvas7");
+var canvOK=1;
+try {c.getContext("2d");}
+catch (er) {canvOK=0;}
+if (canvOK==1) {
+    var ctx=c.getContext("2d");
+    // Create gradient
+    var grd=ctx.createRadialGradient(75,50,5,90,60,100);
+    grd.addColorStop(0,"red");
+    grd.addColorStop(1,"white");
+    // Fill with gradient
+    ctx.fillStyle = grd;
+    ctx.fillRect(10,10,150,80);
+}
+</script> 
+
+<p>JavaScript:</p>
+
+<pre class="language-js">
+const c = document.getElementById(&quot;myCanvas&quot;);
+const ctx = c.getContext(&quot;2d&quot;);
+
+// 创建渐变
+const grd = ctx.createRadialGradient(75, 50, 5, 90, 60, 100);
+grd.addColorStop(0, &quot;red&quot;);
+grd.addColorStop(1, &quot;white&quot;);
+
+// 用渐变填充
+ctx.fillStyle = grd;
+ctx.fillRect(10, 10, 150, 80);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tba8c.html?f=graphics_canvas_grad_2">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>另请参阅：</h2>
+
+<p><a href="../jsref/api_canvas.html" title="Canvas API">W3School 的完整 Canvas 参考手册</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="canvas_curves.html" title="HTML Canvas 曲线">Canvas 曲线</a></li>
+<li class="next"><a href="canvas_text.html" title="HTML Canvas 文本">Canvas 文本</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../jsref/api_canvas.html">Canvas API</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/graphics/canvas_gradients.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:24:14 GMT -->
+</html>

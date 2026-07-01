@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>操作失败</title>
+<link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="./css/error.css">
+</head>
+<body>
+<div class="card">
+  <span class="title"><%= msg %></span>
+
+  <% if (error.status) { %>
+    <p class="status-text">状态码：<%= error.status %></p>
+  <% } %>
+
+  <% if (error.stack) { %>
+    <pre class="stack-box"><%= error.stack %></pre>
+  <% } %>
+
+  <div class="btn-wrap">
+    <a href="<%= url %>" class="btn btn-danger">前往首页</a>
+  </div>
+</div>
+</body>
+</html>

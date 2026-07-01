@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from www.w3school.com.cn/demo/cssref/translate_inuse.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:10:28 GMT -->
+<head>
+<meta charset="utf-8">
+
+<style>
+#div1
+{
+position: relative;
+height: 200px;
+width: 200px;
+margin: 50px;
+padding:10px;
+border: 1px solid black;
+perspective: 200px;
+}
+
+#div2
+{
+padding:50px;
+position: absolute;
+border: 1px solid black;
+background-color: red;
+}
+</style>
+<script>
+
+function changeOrg()
+{
+var x=document.getElementById('ox').value;
+var y=document.getElementById('oy').value;
+var z=document.getElementById('oz').value;
+document.getElementById('div2').style.translate=x + 'px ' + y + 'px ' + z + 'px';
+document.getElementById('origin').innerHTML=x + 'px ' + y + 'px ' + z + 'px';     
+}
+</script>
+</head>
+
+<body>
+
+<p>平移红色的 div 元素，尝试改变其 X 轴、Y 轴和 Z 轴的值。</p>
+
+<div id="div1">
+  <div id="div2">HELLO</div>
+</div>
+
+<p>平移</p>
+<p>
+  X 轴:<input type="range" min="-100" max="200" value="0" oninput="changeOrg()" id="ox" />
+</p>
+<p>
+  Y 轴:<input type="range" min="-100" max="200" value="0" oninput="changeOrg()" id="oy" />
+</p>
+<p>
+  Z 轴:<input type="range" min="-100" max="200" value="0" oninput="changeOrg()" id="oz"/>
+</p>
+<p>
+  平移: <span id="origin">0px 0px 0px</span>;
+</p>
+
+ 
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/demo/cssref/translate_inuse.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:10:28 GMT -->
+</html>

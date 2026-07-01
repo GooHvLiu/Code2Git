@@ -1,0 +1,542 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/r/r_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 01:59:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>R 实例</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>R 教程</h2>
+<ul>
+<li><a href="index.html" title="R 教程">R 教程</a></li>
+<li><a href="r_intro.html" title="R 简介">R 简介</a></li>
+<li><a href="r_get_started.html" title="R 入门">R 入门</a></li>
+<li><a href="r_syntax.html" title="R 语法">R 语法</a></li>
+<li><a href="r_print.html" title="R 打印输出">R 打印</a></li>
+<li><a href="r_comments.html" title="R 注释">R 注释</a></li>
+<li><a href="r_variables.html" title="R 变量">R 变量</a></li>
+<li><a href="r_variables_concat.html" title="R 连接元素">R 连接元素</a></li>
+<li><a href="r_variables_multiple.html" title="R 多变量">R 多变量</a></li>
+<li><a href="r_variables_name.html" title="R 变量名">R 变量名</a></li>
+<li><a href="r_data_types.html" title="R 数据类型">R 数据类型</a></li>
+<li><a href="r_numbers.html" title="R 数字">R 数字</a></li>
+<li><a href="r_math.html" title="R 数学运算">R 数学运算</a></li>
+<li><a href="r_strings.html" title="R 字符串">R 字符串</a></li>
+<li><a href="r_strings_esc.html" title="R 转义字符">R 转义字符</a></li>
+<li><a href="r_booleans.html" title="R 布尔值">R 布尔值</a></li>
+<li><a href="r_operators.html" title="R 运算符">R 运算符</a></li>
+<li><a href="r_if_else.html" title="R If...Else">R If...Else</a></li>
+<li><a href="r_if_else_nested.html" title="R Nested If">R 嵌套 If</a></li>
+<li><a href="r_if_else_andor.html" title="R AND OR 运算符">R AND OR 运算符</a></li>
+<li><a href="r_while_loop.html" title="R While 循环">R While 循环</a></li>
+<li><a href="r_for_loop.html" title="R For 循环">R For 循环</a></li>
+<li><a href="r_for_loop_nested.html" title="R 嵌套循环">R 嵌套循环</a></li>
+<li><a href="r_functions.html" title="R r_functions">R 函数</a></li>
+<li><a href="r_functions_nested.html" title="R 嵌套函数">R 嵌套函数</a></li>
+<li><a href="r_functions_recursion.html" title="R 函数递归">R 函数递归</a></li>
+<li><a href="r_variables_global.html" title="R 全局变量">R 全局变量</a></li>
+</ul>
+<h2>R 数据结构</h2>
+<ul>
+<li><a href="r_data_structures.html" title="R 数据结构">R 数据结构</a></li>
+<li><a href="r_vectors.html" title="R 向量">R 向量</a></li>
+<li><a href="r_lists.html" title="R 列表">R 列表</a></li>
+<li><a href="r_matrices.html" title="R 矩阵">R 矩阵</a></li>
+<li><a href="r_arrays.html" title="R 数组">R 数组</a></li>
+<li><a href="r_data_frames.html" title="R 数据框">R 数据框</a></li>
+<li><a href="r_factors.html" title="R 因子">R 因子</a></li>
+</ul>
+<h2>R 图形</h2>
+<ul>
+<li><a href="r_graph_plot.html" title="R 绘图">R 绘图</a></li>
+<li><a href="r_graph_line.html" title="R 线图">R 线图</a></li>
+<li><a href="r_graph_scatterplot.html" title="R 散点图">R 散点图</a></li>
+<li><a href="r_graph_pie.html" title="R 饼图">R 饼图</a></li>
+<li><a href="r_graph_bars.html" title="R 条形图">R 条形图</a></li>
+</ul>
+<h2>R 统计</h2>
+<ul>
+<li><a href="r_stat_intro.html" title="R 统计简介">R 统计简介</a></li>
+<li><a href="r_stat_data_set.html" title="R 数据集">R 数据集</a></li>
+<li><a href="r_stat_max_min.html" title="R 最大值和最小值">R 最大值和最小值</a></li>
+<li><a href="r_stat_mean.html" title="R 均值">R 均值</a></li>
+<li><a href="r_stat_median.html" title="R 中位数">R 中位数</a></li>
+<li><a href="r_stat_mode.html" title="R 众数">R 众数</a></li>
+<li><a href="r_stat_percentiles.html" title="R 百分位数">R 百分位数</a></li>
+</ul>
+<h2>实例 / 测验</h2>
+<ul>
+<li class="currentLink"><a href="r_examples.html" title="R 实例">R 实例</a></li>
+<li><a href="r_quiz.html" title="R 测验">R 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>R 实例</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="r_stat_percentiles.html" title="R 百分位数">R 百分位数</a></li>
+<li class="next"><a href="r_quiz.html" title="R 测验">R 测验</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>R 语法</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t3d49.html?f=r_syntax_str">输出一些文本</a></li>
+<li><a target="_blank" href="tc3f4.html?f=r_syntax_num">输出数字</a></li>
+<li><a target="_blank" href="t08c0.html?f=r_syntax_add">进行简单计算</a></li>
+<li><a target="_blank" href="t68b3.html?f=r_syntax_print">使用 print() 函数输出一些文本</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_syntax.html">实例解释：语法</a></p>
+</section>
+
+
+
+<section>
+<h2>R 注释</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t7722.html?f=r_comments_1">代码行前的单行注释</a></li>
+<li><a target="_blank" href="t218e.html?f=r_comments_2">代码行末尾的单行注释</a></li>
+<li><a target="_blank" href="t27cb.html?f=r_comments_4">多行注释</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_comments.html">实例解释：注释</a></p>
+</section>
+
+
+
+<section>
+<h2>R 变量</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tc5de.html?f=r_variables_1">创建两个变量</a></li>
+<li><a target="_blank" href="t30c8.html?f=r_variables_paste_1">结合文本和变量</a></li>
+<li><a target="_blank" href="t20c3.html?f=r_variables_paste_2">将一个变量加到另一个变量上</a></li>
+<li><a target="_blank" href="t07b3.html?f=r_variables_plus_1">使用 + 运算符显示两个变量的和</a></li>
+<li><a target="_blank" href="ta3e9.html?f=r_variables_multi">在一行中将相同的值赋给多个变量</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_variables.html">实例解释：变量</a></p>
+</section>
+
+
+
+<section>
+<h2>R 数据类型</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tcb46.html?f=r_variables_2">在变量设置后更改其类型</a></li>
+<li><a target="_blank" href="t7339.html?f=r_data_types">使用 class() 函数检查不同变量的数据类型</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_data_types.html">实例解释：数据类型</a></p>
+</section>
+
+
+
+<section>
+<h2>R 数字</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t6beb.html?f=r_numbers_numeric">创建数值数据类型</a></li>
+<li><a target="_blank" href="t8985.html?f=r_numbers_integer">创建整数</a></li>
+<li><a target="_blank" href="t5054.html?f=r_numbers_complex">创建复数</a></li>
+<li><a target="_blank" href="tab6b.html?f=r_numbers_convert">在不同类型之间进行转换</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_numbers.html">实例解释：数值数据类型</a></p>
+</section>
+
+
+
+<section>
+<h2>R 数学运算</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t6a04.html?f=r_math_oper_1">数字相加</a></li>
+<li><a target="_blank" href="t09c5.html?f=r_math_oper_2">数字相减</a></li>
+<li><a target="_blank" href="t48fd.html?f=r_math_max_min">找出一组数字中的最小值或最大值</a></li>
+<li><a target="_blank" href="t1d0a.html?f=r_math_sqrt">计算一个数字的平方根</a></li>
+<li><a target="_blank" href="tdeae.html?f=r_math_abs">返回一个数字的绝对值（正数）</a></li>
+<li><a target="_blank" href="t2261.html?f=r_math_ceiling_floor">将一个数字向上或向下舍入到最近的整数</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_math.html">实例解释：数学运算</a></p>
+</section>
+
+
+
+<section>
+<h2>R 字符串</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t26f1.html?f=r_strings_1">创建字符串字面量</a></li>
+<li><a target="_blank" href="tee43.html?f=r_strings_2">将字符串赋给变量</a></li>
+<li><a target="_blank" href="tfc2e.html?f=r_strings_nchar">查找字符串中的字符数</a></li>
+<li><a target="_blank" href="t0803.html?f=r_strings_grepl">检查字符串中是否包含某个字符或字符序列</a></li>
+<li><a target="_blank" href="t0655.html?f=r_strings_paste">合并/连接两个字符串</a></li>
+<li><a target="_blank" href="t01dd.html?f=r_strings_esc_2">使用转义字符在字符串中输出一个单词</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_strings.html">实例解释：字符串</a></p>
+</section>
+
+
+
+<section>
+<h2>R 布尔值</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tabb8.html?f=r_booleans">比较不同的值</a></li>
+<li><a target="_blank" href="t0446.html?f=r_booleans_var">比较变量</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_booleans.html">实例解释：布尔值</a></p>
+</section>
+
+
+
+<section>
+<h2>R 运算符</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t5888.html?f=r_oper_add">加法运算符</a></li>
+<li><a target="_blank" href="t38c4.html?f=r_oper_sub">减法运算符</a></li>
+<li><a target="_blank" href="t3275.html?f=r_oper_mult">乘法运算符</a></li>
+<li><a target="_blank" href="tb0bb.html?f=r_oper_div">除法运算符</a></li>
+<li><a target="_blank" href="t477f.html?f=r_oper_exp">指数运算符</a></li>
+<li><a target="_blank" href="td52b.html?f=r_oper_mod">取模运算符</a></li>
+<li><a target="_blank" href="tbd07.html?f=r_oper_int_div">整数除法运算符</a></li>
+<li><a target="_blank" href="td0bf.html?f=r_oper_compare_1">等于运算符</a></li>
+<li><a target="_blank" href="t8542.html?f=r_oper_compare_2">不等于运算符</a></li>
+<li><a target="_blank" href="t5bfb.html?f=r_oper_compare_3">大于运算符</a></li>
+<li><a target="_blank" href="t6b12.html?f=r_oper_compare_4">小于运算符</a></li>
+<li><a target="_blank" href="t7f10.html?f=r_oper_compare_5">大于或等于运算符</a></li>
+<li><a target="_blank" href="t89d1.html?f=r_oper_compare_6">小于或等于运算符</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_operators.html">实例解释：运算符</a></p>
+</section>
+
+
+
+<section>
+<h2>R If...Else 语句</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tbf99.html?f=r_if">If 语句</a></li>
+<li><a target="_blank" href="t0624.html?f=r_else_if">Else if 语句</a></li>
+<li><a target="_blank" href="t005d.html?f=r_if_else_1">If else 语句</a></li>
+<li><a target="_blank" href="t9ad8.html?f=r_if_nested">嵌套的 If 语句</a></li>
+<li><a target="_blank" href="tc358.html?f=r_if_and">与运算符（&amp;）</a></li>
+<li><a target="_blank" href="t97db.html?f=r_if_or">或运算符（|）</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_if_else.html">实例解释：If ... Else</a></p>
+</section>
+
+
+
+<section>
+<h2>R While 循环</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tff8a.html?f=r_while_loop">While 循环</a></li>
+<li><a target="_blank" href="t5dfc.html?f=r_while_loop_break">带 break 的 While 循环</a></li>
+<li><a target="_blank" href="t0d38.html?f=r_while_loop_next">带 next 语句的 While 循环</a></li>
+<li><a target="_blank" href="t71fb.html?f=r_while_loop_yahtzee">If..else 与 While 循环结合</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_while_loop.html">实例解释：While 循环</a></p>
+</section>
+
+
+
+<section>
+<h2>R For 循环</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t2f5e.html?f=r_syntax_print_for">使用 For 循环遍历一个序列</a></li>
+<li><a target="_blank" href="t6484.html?f=r_for_loop_1">使用 For 循环打印列表中的每一项</a></li>
+<li><a target="_blank" href="ta339.html?f=r_for_loop_2">使用 For 循环打印骰子的数量</a></li>
+<li><a target="_blank" href="t6c8e.html?f=r_for_loop_yahtzee">If..else 与 For 循环结合</a></li>
+<li><a target="_blank" href="t135f.html?f=r_for_loop_nested">嵌套的 For 循环</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_for_loop.html">实例解释：For 循环</a></p>
+</section>
+
+
+
+<section>
+<h2>R 函数</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t77c5.html?f=r_function">调用函数</a></li>
+<li><a target="_blank" href="t4ebf.html?f=r_function_args_1">函数参数</a></li>
+<li><a target="_blank" href="t09bc.html?f=r_function_default">默认参数值</a></li>
+<li><a target="_blank" href="t800f.html?f=r_function_return">让函数返回一个值</a></li>
+<li><a target="_blank" href="t3c7d.html?f=r_function_nested_1">嵌套函数</a></li>
+<li><a target="_blank" href="t96c8.html?f=r_function_recursion">递归</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_functions.html">实例解释：函数</a></p>
+</section>
+
+
+
+<section>
+<h2>R 全局变量</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t589c.html?f=r_variables_global_1">在函数外部创建变量并在函数内部使用它</a></li>
+<li><a target="_blank" href="t47ad.html?f=r_variables_global_2">在函数内部创建一个与全局变量同名的变量</a></li>
+<li><a target="_blank" href="tc957.html?f=r_variables_global_3">在函数内部创建全局变量</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_variables_global.html">实例解释：全局变量</a></p>
+</section>
+
+
+
+<section>
+<h2>R 向量</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t7784.html?f=r_vector_strings">创建字符串向量</a></li>
+<li><a target="_blank" href="tf870.html?f=r_vector_num">创建数字向量</a></li>
+<li><a target="_blank" href="t295f.html?f=r_vector_colon_1">创建一个按序列排列的数值向量</a></li>
+<li><a target="_blank" href="t85a5.html?f=r_vector_length">查找向量的长度</a></li>
+<li><a target="_blank" href="t4fca.html?f=r_vector_sort">对向量进行排序</a></li>
+<li><a target="_blank" href="td060.html?f=r_vector_access_1">访问向量</a></li>
+<li><a target="_blank" href="t5202.html?f=r_vector_modify">更改向量项</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_vectors.html">实例解释：向量</a></p>
+</section>
+
+
+
+<section>
+<h2>R 列表</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tf773.html?f=r_lists">创建列表</a></li>
+<li><a target="_blank" href="tf299.html?f=r_lists_access">访问列表</a></li>
+<li><a target="_blank" href="t204c.html?f=r_lists_change">更改项的值</a></li>
+<li><a target="_blank" href="t5ea2.html?f=r_lists_length">列表长度</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_lists.html">实例解释：列表</a></p>
+</section>
+
+
+
+<section>
+<h2>R 矩阵</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t1fd3.html?f=r_matrices_1">创建矩阵</a></li>
+<li><a target="_blank" href="t2104.html?f=r_matrices_access">访问矩阵项</a></li>
+<li><a target="_blank" href="tb93e.html?f=r_matrices_length">矩阵长度</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_matrices.html">实例解释：矩阵</a></p>
+</section>
+
+
+
+<section>
+<h2>R 数组</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t0a82.html?f=r_array">创建数组</a></li>
+<li><a target="_blank" href="t4150.html?f=r_array_access">访问数组项</a></li>
+<li><a target="_blank" href="tb69f.html?f=r_array_length">数组长度</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_arrays.html">实例解释：数组</a></p>
+</section>
+
+
+
+<section>
+<h2>R 数据框</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t147c.html?f=r_data_frames">创建数据框</a></li>
+<li><a target="_blank" href="t224d.html?f=r_data_frames_access">访问数据框项</a></li>
+<li><a target="_blank" href="t92e1.html?f=r_data_frames_length">数据框长度</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_data_frames.html">实例解释：数据框</a></p>
+</section>
+
+
+
+<section>
+<h2>R 因子</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tda31.html?f=r_factor">创建因子</a></li>
+<li><a target="_blank" href="td85f.html?f=r_factor_access">访问因子</a></li>
+<li><a target="_blank" href="t5be6.html?f=r_factor_length">因子长度</a></li>
+</ul>
+
+<p><a class="btn-blue" href="r_factors.html">实例解释：因子</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="r_stat_percentiles.html" title="R 百分位数">R 百分位数</a></li>
+<li class="next"><a href="r_quiz.html" title="R 测验">R 测验</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_example"><a href="r_examples.html">R 实例</a></h5>
+<h5 id="tools_quiz"><a href="r_quiz.html">R 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/r/r_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:00:12 GMT -->
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.w3school.com.cn/demo/css/layout_cols.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:18:13 GMT -->
+<head>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.header, .footer {
+  background-color: grey;
+  color: white;
+  padding: 15px;
+}
+
+.column {
+  float: left;
+  padding: 15px;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.menu {
+  width: 25%;
+}
+
+.content {
+  width: 75%;
+}
+
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  padding: 8px;
+  margin-bottom: 8px;
+  background-color: #33b5e5;
+  color: #ffffff;
+}
+
+.menu li:hover {
+  background-color: #0099cc;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Shanghai</h1>
+</div>
+
+<div class="clearfix">
+  <div class="column menu">
+    <ul>
+      <li>The Flight</li>
+      <li>The City</li>
+      <li>The Attractions</li>
+      <li>The Food</li>
+    </ul>
+  </div>
+
+  <div class="column content">
+    <h1>The City</h1>
+    <p>Shanghai is one of the four direct-administered municipalities of the People's Republic of China. It is under the direct administration of the State Council of China. The city is located on the southern estuary of the Yangtze, with the Huangpu River flowing through it. With a population of 24.28 million as of 2019, it is the most populous urban area in China and the second most populous city proper in the world. Shanghai is a global center for finance, technology, manufacturing, and transportation, and the Port of Shanghai is the world's busiest container port.</p>
+  </div>
+</div>
+
+<div class="footer">
+  <p>Footer Text</p>
+</div>
+
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/demo/css/layout_cols.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:18:13 GMT -->
+</html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+</body>
+</html>

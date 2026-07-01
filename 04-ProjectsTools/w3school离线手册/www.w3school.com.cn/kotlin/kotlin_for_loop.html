@@ -1,0 +1,250 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/kotlin/kotlin_for_loop.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Kotlin For 循环</title>
+
+</head>
+
+<body class="serverscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Kotlin 教程</h2>
+<ul>
+<li><a href="index.html" title="Kotlin 教程">Kotlin 教程</a></li>
+<li><a href="kotlin_intro-2.html" title="Kotlin 简介">Kotlin 简介</a></li>
+<li><a href="kotlin_getstarted.html" title="Kotlin 入门">Kotlin 入门</a></li>
+<li><a href="kotlin_syntax.html" title="Kotlin 语法">Kotlin 语法</a></li>
+<li><a href="kotlin_output.html" title="Kotlin 输出">Kotlin 输出</a></li>
+<li><a href="kotlin_comments.html" title="Kotlin 注释">Kotlin 注释</a></li>
+<li><a href="kotlin_variables.html" title="Kotlin 变量">Kotlin 变量</a></li>
+<li><a href="kotlin_data_types.html" title="Kotlin 数据类型">Kotlin 数据类型</a></li>
+<li><a href="kotlin_operators.html" title="Kotlin 运算符">Kotlin 运算符</a></li>
+<li><a href="kotlin_strings.html" title="Kotlin 字符串">Kotlin 字符串</a></li>
+<li><a href="kotlin_booleans.html" title="Kotlin 布尔值">Kotlin 布尔值</a></li>
+<li><a href="kotlin_conditions.html" title="Kotlin If...Else">Kotlin If...Else</a></li>
+<li><a href="kotlin_when.html" title="Kotlin When">Kotlin When</a></li>
+<li><a href="kotlin_while_loop.html" title="Kotlin While 循环">Kotlin While 循环</a></li>
+<li><a href="kotlin_break_continue.html" title="Kotlin Break 和 Continue">Kotlin Break/Continue</a></li>
+<li><a href="kotlin_arrays.html" title="Kotlin 数组">Kotlin 数组</a></li>
+<li class="currentLink"><a href="kotlin_for_loop.html" title="Kotlin For 循环">Kotlin For 循环</a></li>
+<li><a href="kotlin_ranges.html" title="Kotlin 范围">Kotlin 范围</a></li>
+<li><a href="kotlin_functions.html" title="Kotlin 函数">Kotlin 函数</a></li>
+</ul>
+<h2>Kotlin 类</h2>
+<ul>
+<li><a href="kotlin_oop.html" title="Kotlin OOP">Kotlin OOP</a></li>
+<li><a href="kotlin_classes.html" title="Kotlin 类和对象">Kotlin 类/对象</a></li>
+<li><a href="kotlin_constructors.html" title="Kotlin 构造函数">Kotlin 构造函数</a></li>
+<li><a href="kotlin_class_functions.html" title="Kotlin 类函数">Kotlin 类函数</a></li>
+<li><a href="kotlin_inheritance.html" title="Kotlin 继承">Kotlin 继承</a></li>
+</ul>
+<h2>Kotlin 实例</h2>
+<ul>
+<li><a href="kotlin_examples.html" title="Kotlin 实例">Kotlin 实例</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Kotlin For 循环</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="kotlin_arrays.html" title="Kotlin 数组">Kotlin 数组</a></li>
+<li class="next"><a href="kotlin_ranges.html" title="Kotlin 范围">Kotlin 范围</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>Kotlin For 循环</h2>
+
+<p>当你处理数组时，经常需要遍历所有的元素。</p>
+
+<p>要遍历数组元素，请将 <code>for</code> 循环与 <code>in</code> 运算符一起使用：</p>
+
+<h3>实例</h3>
+
+<p>输出 <code>cars</code> 数组中的所有元素：</p>
+
+<pre class="language-kotlin">
+val cars = arrayOf(&quot;Volvo&quot;, &quot;BMW&quot;, &quot;Ford&quot;, &quot;Mazda&quot;)
+for (x in cars) {
+  println(x)
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t404c.html?f=kotlin_array_for_loop_1">亲自试一试</a></p>
+
+<p>你可以遍历各种类型的数组。在上面的示例中，我们使用了字符串数组。</p>
+
+<p>在下面的例子中，我们遍历了一个整数数组：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val nums = arrayOf(1, 5, 10, 15, 20)
+for (x in nums) {
+  println(x)
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t356b.html?f=kotlin_array_for_loop_2">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>传统的 For 循环</h2>
+
+<p>与 <a href="../java/index.html" title="Java 教程">Java</a> 和其他编程语言不同，Kotlin 中没有传统的 <code>for</code> 循环。</p>
+
+<p>在 Kotlin 中，<code>for</code> 循环用于遍历数组、范围和其他包含可计数值的对象。</p>
+
+<p>你将在下一章了解更多关于<em>范围</em>的信息，这将创建一系列的值。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="kotlin_arrays.html" title="Kotlin 数组">Kotlin 数组</a></li>
+<li class="next"><a href="kotlin_ranges.html" title="Kotlin 范围">Kotlin 范围</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_example"><a href="kotlin_examples.html">Kotlin 实例</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/kotlin/kotlin_for_loop.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:27 GMT -->
+</html>

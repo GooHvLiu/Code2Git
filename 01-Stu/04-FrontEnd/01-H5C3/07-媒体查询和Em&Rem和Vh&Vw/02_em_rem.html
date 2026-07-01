@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- html默认的字体大小为16px -->
+<!-- em为单位时，代表为上级第一个设置字体的大小，若都没有设置，则参考根标签html -->
+<!-- rem则是直接参考根便签html -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+  <title>Em & Rem Units</title>
+  <style>
+    /* 当修改html的字体大小时，其下对应的字体都会对应变大 */
+    html {
+      font-size: 20px;
+    }
+
+    #box-1 {
+      font-size: 12px;
+    }
+
+    /* 此时的1.5em实际参考的是其父类已经设置的字体大小，即box-1的 字体大小 */
+    /* 因为em在实际使用中可能会造成混乱，所以，实际使用时，一般会采用rem作为单位，即参考根标签html */
+    #box-1 p {
+      font-size: 1.5em;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box-1">
+    <h3>Box One</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo deserunt facere saepe tenetur non explicabo, dolore
+      voluptate inventore odio alias omnis nam, vel quaerat nesciunt quod eaque officia deleniti? Aliquid!</p>
+  </div>
+  <div id="box-2">
+    <h3>Box Two</h3>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui nostrum sequi delectus. Fugit alias delectus,
+      possimus mollitia a tenetur ipsum. Quis perspiciatis asperiores omnis dicta, molestiae doloribus excepturi enim!
+      Ratione?</p>
+  </div>
+</body>
+
+</html>

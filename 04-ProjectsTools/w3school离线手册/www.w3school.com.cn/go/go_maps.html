@@ -1,0 +1,686 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/go/go_maps.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:09 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Go 映射</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Go 教程</h2>
+<ul>
+<li><a href="index.html" title="Go 教程">Go 教程</a></li>
+<li><a href="go_introduction.html" title="Go 简介">Go 简介</a></li>
+<li><a href="go_getting_started.html" title="Go 入门">Go 入门</a></li>
+<li><a href="go_syntax.html" title="Go 语法">Go 语法</a></li>
+<li><a href="go_comments.html" title="Go 注释">Go 注释</a></li>
+<li><a href="go_variables.html" title="Go 变量">Go 变量</a></li>
+<li><a href="go_variable_multi.html" title="Go 声明多变量">Go 声明多变量</a></li>
+<li><a href="go_variable_naming_rules.html" title="Go 变量命名规则">Go 变量命名规则</a></li>
+<li><a href="go_constants.html" title="Go 常量">Go 常量</a></li>
+<li><a href="go_output.html" title="Go 输出">Go 输出</a></li>
+<li><a href="go_formatting_verbs.html" title="Go 格式化动词">Go 格式化动词</a></li>
+<li><a href="go_data_types.html" title="Go 数据类型">Go 数据类型</a></li>
+<li><a href="go_boolean_data_type.html" title="Go 布尔数据类型">Go 布尔</a></li>
+<li><a href="go_integer_data_type.html" title="Go 整数数据类型">Go 整数</a></li>
+<li><a href="go_float_data_type.html" title="Go 浮点数据类型">Go 浮点</a></li>
+<li><a href="go_string_data_type.html" title="Go 字符串数据类型">Go 字符串</a></li>
+<li><a href="go_arrays.html" title="Go 数组">Go 数组</a></li>
+<li><a href="go_slices.html" title="Go 创建切片">Go 创建切片</a></li>
+<li><a href="go_slices_modify.html" title="Go 修改切片">Go 修改切片</a></li>
+<li><a href="go_operators.html" title="Go 运算符">Go 运算符</a></li>
+<li><a href="go_conditions.html" title="Go 条件语句">Go 条件语句</a></li>
+<li><a href="go_if_statement.html" title="Go if 语句">Go if 语句</a></li>
+<li><a href="go_else_statement.html" title="Go if else 语句">Go if else 语句</a></li>
+<li><a href="go_elseif_statement.html" title="Go else if 语句">Go else if 语句</a></li>
+<li><a href="go_nested_if.html" title="Go 嵌套 if 语句">Go 嵌套 if 语句</a></li>
+<li><a href="go_switch.html" title="Go Switch 语句">Go Switch</a></li>
+<li><a href="go_loops.html" title="Go 循环">Go 循环</a></li>
+<li><a href="go_functions.html" title="Go 函数">Go 函数</a></li>
+<li><a href="go_function_parameters.html" title="Go 函数参数">Go 函数参数</a></li>
+<li><a href="go_function_returns.html" title="Go 函数返回">Go 函数返回</a></li>
+<li><a href="go_function_recursion.html" title="Go 递归函数">Go 递归函数</a></li>
+<li><a href="go_struct.html" title="Go 结构体">Go 结构体</a></li>
+<li class="currentLink"><a href="go_maps.html" title="Go 映射">Go 映射</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Go 映射</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="go_struct.html" title="Go 结构体">Go 结构体</a></li>
+<li class="next"><a href="index.html" title="Go 教程">Go 教程</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>Go 映射</h2>
+
+<p>映射（Map）用于以键值对的形式存储数据值。</p>
+
+<p>映射中的每个元素都是一个键值对。</p>
+
+<p>映射是一个无序且可变的集合，不允许重复。</p>
+
+<p>映射的长度是其元素的数量。您可以使用 <code>len()</code> 函数找到它。</p>
+
+<p>映射的默认值是 <mark>nil</mark>。</p>
+
+<p>映射保存对底层哈希表的引用。</p>
+
+<p>Go 有多种创建映射的方式。</p>
+</section>
+
+
+
+<section>
+<h2>使用 var 和 := 创建映射</h2>
+
+<h3>语法</h3>
+
+<pre class="language-go">
+var <i>a</i> = map[<i>KeyType</i>]<i>ValueType</i>{<i>key1</i>:<i>value1</i>, <i>key2</i>:<i>value2</i>,...}
+<i>b</i> := map[<i>KeyType</i>]<i>ValueType</i>{<i>key1</i>:<i>value1</i>, <i>key2</i>:<i>value2</i>,...}
+</pre>
+
+<h3>实例</h3>
+
+<p>此例展示了如何在 Go 中创建映射。请注意代码中的顺序和输出中的顺序。</p>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var a = map[string]string{&quot;brand&quot;: &quot;Ford&quot;, &quot;model&quot;: &quot;Mustang&quot;, &quot;year&quot;: &quot;1964&quot;}
+  b := map[string]int{&quot;Oslo&quot;: 1, &quot;Bergen&quot;: 2, &quot;Trondheim&quot;: 3, &quot;Stavanger&quot;: 4}
+
+  fmt.Printf(&quot;a\t%v\n&quot;, a)
+  fmt.Printf(&quot;b\t%v\n&quot;, b)
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdlie">
+a   map[brand:Ford model:Mustang year:1964]
+b   map[Bergen:2 Oslo:1 Stavanger:4 Trondheim:3]
+</pre>
+
+<p class="tiy"><a target="_blank" href="t3f61.html?f=go_maps_1">亲自试一试</a></p>
+
+<p class="note"><span>注意：</span>代码中定义的映射元素的顺序与存储它们的方式不同。数据以一种能够有效检索数据的方式存储在映射中。</p>
+</section>
+
+
+
+<section>
+<h2>使用 make() 函数创建映射</h2>
+
+<h3>语法</h3>
+
+<pre class="language-go">
+var <i>a</i> = make(map[<i>KeyType</i>]<i>ValueType</i>)
+<i>b</i> := make(map[<i>KeyType</i>]<i>ValueType</i>)
+</pre>
+
+<h3>实例</h3>
+
+<p>此例展示了如何使用 <code>make()</code> 函数在 Go 中创建映射：</p>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var a = make(map[string]string) // 映射现在是空的
+  a[&quot;brand&quot;] = &quot;Ford&quot;
+  a[&quot;model&quot;] = &quot;Mustang&quot;
+  a[&quot;year&quot;] = &quot;1964&quot;
+                                 // a 不再为空
+  b := make(map[string]int)
+  b[&quot;Oslo&quot;] = 1
+  b[&quot;Bergen&quot;] = 2
+  b[&quot;Trondheim&quot;] = 3
+  b[&quot;Stavanger&quot;] = 4
+
+  fmt.Printf(&quot;a\t%v\n&quot;, a)
+  fmt.Printf(&quot;b\t%v\n&quot;, b)
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+a   map[brand:Ford model:Mustang year:1964]
+b   map[Bergen:2 Oslo:1 Stavanger:4 Trondheim:3]
+</pre>
+
+<p class="tiy"><a target="_blank" href="tbe31.html?f=go_maps_2">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>创建空映射</h2>
+
+<p>有两种创建空映射的方式。一种是使用 <code>make()</code> 函数，另一种是使用以下语法。</p>
+
+<h3>语法</h3>
+
+<pre class="language-go">
+var <i>a</i> map[<i>KeyType</i>]<i>ValueType</i>
+</pre>
+
+<p class="note"><span>注意：</span>使用 <code>make()</code> 函数是创建空映射的正确方式。如果您以其他方式创建了空映射并向其写入，将导致 runtime panic。</p>
+
+<h3>实例</h3>
+
+<p>此例展示了使用 <code>make()</code> 函数和不使用 <code>make()</code> 函数声明空映射之间的区别。</p>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var a = make(map[string]string)
+  var b map[string]string
+
+  fmt.Println(a == nil)
+  fmt.Println(b == nil)
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+false
+true
+</pre>
+
+<p class="tiy"><a target="_blank" href="tc0cc.html?f=go_maps_3">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>允许的键类型</h2>
+
+<p>映射键可以是任何定义了等号（<code>==</code>）的数据类型。这些类型包括：</p>
+
+<ul>
+<li>布尔型</li>
+<li>数字</li>
+<li>字符串</li>
+<li>数组</li>
+<li>指针</li>
+<li>结构体</li>
+<li>接口（只要动态类型支持等号）</li>
+</ul>
+
+<p>无效的键类型包括：</p>
+
+<ul>
+<li>切片</li>
+<li>映射</li>
+<li>函数</li>
+</ul>
+
+<p>这些类型是无效的，因为没有为它们定义相等运算符（<code>==</code>）。</p>
+</section>
+
+
+
+<section>
+<h2>允许的值类型</h2>
+
+<p>映射的值可以是<em>任何</em>类型。</p>
+</section>
+
+
+
+<section>
+<h2>访问映射元素</h2>
+
+<p>您可以通过以下语法访问映射元素：</p>
+
+<h3>语法</h3>
+
+<pre class="language-go">
+<i>value</i> = <i>map_name</i>[<i>key</i>]
+</pre>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var a = make(map[string]string)
+  a[&quot;brand&quot;] = &quot;Ford&quot;
+  a[&quot;model&quot;] = &quot;Mustang&quot;
+  a[&quot;year&quot;] = &quot;1964&quot;
+
+  fmt.Printf(a[&quot;brand&quot;])
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+Ford
+</pre>
+
+<p class="tiy"><a target="_blank" href="t96e0.html?f=go_maps_4">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>更新和添加映射元素</h2>
+
+<p>更新或添加元素的操作方式如下：</p>
+
+<h3>语法</h3>
+
+<pre class="language-go">
+<i>map_name</i>[<i>key</i>] = <i>value</i>
+</pre>
+
+<h3>实例</h3>
+
+<p>此例展示了如何更新和添加映射中的元素：</p>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var a = make(map[string]string)
+  a[&quot;brand&quot;] = &quot;Ford&quot;
+  a[&quot;model&quot;] = &quot;Mustang&quot;
+  a[&quot;year&quot;] = &quot;1964&quot;
+
+  fmt.Println(a)
+
+  a[&quot;year&quot;] = &quot;1970&quot; // Updating an element
+  a[&quot;color&quot;] = &quot;red&quot; // Adding an element
+
+  fmt.Println(a)
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="language-go">
+map[brand:Ford model:Mustang year:1964]
+map[brand:Ford color:red model:Mustang year:1970]
+</pre>
+
+<p class="tiy"><a target="_blank" href="t011e.html?f=go_maps_5">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>从映射中删除元素</h2>
+
+<p>使用 <code>delete()</code> 函数来删除元素。</p>
+
+<h3>语法</h3>
+
+<pre class="language-go">
+delete(<i>map_name</i>, <i>key</i>)
+</pre>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var a = make(map[string]string)
+  a[&quot;brand&quot;] = &quot;Ford&quot;
+  a[&quot;model&quot;] = &quot;Mustang&quot;
+  a[&quot;year&quot;] = &quot;1964&quot;
+
+  fmt.Println(a)
+
+  delete(a,&quot;year&quot;)
+
+  fmt.Println(a)
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+map[brand:Ford model:Mustang year:1964]
+map[brand:Ford model:Mustang]
+</pre>
+
+<p class="tiy"><a target="_blank" href="tdc72.html?f=go_maps_6">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>检查映射中的特定元素</h2>
+
+<p>您可以使用以下语法检查映射中是否存在某个键：</p>
+
+<h3>语法</h3>
+
+<pre class="language-go">
+<i>val</i>, <i>ok</i> :=<i>map_name</i>[<i>key</i>]
+</pre>
+
+<p>如果只想检查某个键是否存在，可以使用空白标识符（<code>_</code>）代替 <i>val</i>。</p>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var a = map[string]string{&quot;brand&quot;: &quot;Ford&quot;, &quot;model&quot;: &quot;Mustang&quot;, &quot;year&quot;: &quot;1964&quot;, &quot;day&quot;:&quot;&quot;}
+
+  val1, ok1 := a[&quot;brand&quot;] // Checking for existing key and its value
+  val2, ok2 := a[&quot;color&quot;] // Checking for non-existing key and its value
+  val3, ok3 := a[&quot;day&quot;]   // Checking for existing key and its value
+  _, ok4 := a[&quot;model&quot;]    // Only checking for existing key and not its value
+
+  fmt.Println(val1, ok1)
+  fmt.Println(val2, ok2)
+  fmt.Println(val3, ok3)
+  fmt.Println(ok4)
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+Ford true
+ false
+ true
+true
+</pre>
+
+<p class="tiy"><a target="_blank" href="tab44.html?f=go_maps_7">亲自试一试</a></p>
+
+<h3>Example Explained</h3>
+
+<p>在此例中，我们检查映射中是否存在不同的键。</p>
+
+<p>映射中不存在 <code>&quot;color&quot;</code> 键。因此，该值为空字符串 ('')。</p>
+
+<p><code>ok2</code> 变量用于查找键是否存在。因为如果 <code>&quot;color&quot;</code> 键的值为空，我们会得到相同的值。<code>val3</code> 就是这种情况。</p>
+</section>
+
+
+
+<section>
+<h2>映射作为引用</h2>
+
+<p>映射是对哈希表的引用。</p>
+
+<p>如果两个映射变量引用同一个哈希表，则更改一个变量的内容会影响另一个变量的内容。</p>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var a = map[string]string{&quot;brand&quot;: &quot;Ford&quot;, &quot;model&quot;: &quot;Mustang&quot;, &quot;year&quot;: &quot;1964&quot;}
+  b := a
+
+  fmt.Println(a)
+  fmt.Println(b)
+
+  b[&quot;year&quot;] = &quot;1970&quot;
+  fmt.Println(&quot;更改 b 之后：&quot;)
+
+  fmt.Println(a)
+  fmt.Println(b)
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+map[brand:Ford model:Mustang year:1964]
+map[brand:Ford model:Mustang year:1964]
+更改 b 之后：
+map[brand:Ford model:Mustang year:1970]
+map[brand:Ford model:Mustang year:1970]
+</pre>
+
+<p class="tiy"><a target="_blank" href="te451.html?f=go_maps_8">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>迭代映射</h2>
+
+<p>您可以使用 <code>range</code> 来迭代映射。</p>
+
+<h3>实例</h3>
+
+<p>此例展示了如何迭代映射中的元素。请注意输出中元素的顺序。</p>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  a := map[string]int{&quot;one&quot;: 1, &quot;two&quot;: 2, &quot;three&quot;: 3, &quot;four&quot;: 4}
+
+  for k, v := range a {
+    fmt.Printf(&quot;%v : %v, &quot;, k, v)
+  }
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+two : 2, three : 3, four : 4, one : 1,
+</pre>
+
+<p class="tiy"><a target="_blank" href="t551c.html?f=go_maps_9">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>按特定顺序迭代映射</h2>
+
+<p>映射是无序的数据结构。如果需要以特定顺序迭代映射，则必须有一个单独的数据结构来指定该顺序。</p>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main  
+import (&quot;fmt&quot;)  
+  
+func main() {  
+  a := map[string]int{&quot;one&quot;: 1, &quot;two&quot;: 2, &quot;three&quot;: 3, &quot;four&quot;: 4}  
+  
+  var b []string             // 定义顺序  
+  b = append(b, &quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;)  
+  
+  for k, v := range a {        // 无序循环  
+    fmt.Printf(&quot;%v : %v, &quot;, k, v)  
+  }  
+  
+  fmt.Println()  
+  
+  for _, element := range b {  // 按定义的顺序循环  
+    fmt.Printf(&quot;%v : %v, &quot;, element, a[element])  
+  }  
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+two : 2, three : 3, four : 4, one : 1,
+one : 1, two : 2, three : 3, four : 4,
+</pre>
+
+<p class="tiy"><a target="_blank" href="t5cbe.html?f=go_maps_10">亲自试一试</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="go_struct.html" title="Go 结构体">Go 结构体</a></li>
+<li class="next"><a href="index.html" title="Go 教程">Go 教程</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/go/go_maps.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:12 GMT -->
+</html>

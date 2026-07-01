@@ -1,0 +1,1379 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/jsref/dom_obj_style.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:08:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c15e1f.css?v=2" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>HTML DOM Style 对象</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>JS 参考手册</h2>
+<ul>
+<li><a href="index.html" title="JavaScript 和 HTML DOM 参考手册">JS 参考手册（类别排序）</a></li>
+<li><a href="jsref_reference.html" title="JavaScript 参考手册">JS 参考手册（字母排序）</a></li>
+</ul>
+<h2>JavaScript</h2>
+<ul>
+<li><a href="jsref_obj_array.html" title="JavaScript Array 参考手册">JS Array</a></li>
+<li><a href="jsref_obj_boolean.html" title="JavaScript Boolean 参考手册">JS Boolean</a></li>
+<li><a href="jsref_classes.html" title="JavaScript Class 参考手册">JS Class</a></li>
+<li><a href="jsref_obj_date.html" title="JavaScript Date 参考手册">JS Date</a></li>
+<li><a href="jsref_obj_error.html" title="JavaScript Error 参考手册">JS Error</a></li>
+<li><a href="jsref_obj_global.html" title="JavaScript Global 参考手册">JS Global</a></li>
+<li><a href="jsref_obj_json.html" title="JavaScript JSON 参考手册">JS JSON</a></li>
+<li><a href="jsref_obj_map.html" title="JavaScript Map 参考手册">JS Map</a></li>
+<li><a href="jsref_obj_math.html" title="JavaScript Math 参考手册">JS Math</a></li>
+<li><a href="jsref_obj_number.html" title="JavaScript Number 参考手册">JS Number</a></li>
+<li><a href="jsref_obj_promise.html" title="JavaScript Promise 对象">JS Promise</a></li>
+<li><a href="jsref_obj_regexp.html" title="JavaScript RegExp 参考手册">JS RegExp</a></li>
+<li><a href="jsref_obj_set.html" title="JavaScript Set 参考手册">JS Set</a></li>
+<li><a href="jsref_obj_string.html" title="JavaScript String 参考手册">JS String</a></li>
+<li><a href="jsref_obj_object.html" title="JavaScript Object 参考手册">JS 对象</a></li>
+<li><a href="jsref_operators.html" title="JavaScript 运算符参考手册">JS 运算符</a></li>
+<li><a href="jsref_precedence.html" title="JavaScript 运算符优先级">JS 运算符优先级</a></li>
+<li><a href="jsref_statements.html" title="JavaScript 语句参考手册">JS 语句</a></li>
+<li><a href="jsref_obj_typed_array.html" title="JavaScript 类型化数组参考手册">JS 类型化数组</a></li>
+</ul>
+<h2>Window</h2>
+<ul>
+<li><a href="obj_window.html" title="Window 对象">Window 对象</a></li>
+<li><a href="obj_console.html" title="Window Console 对象">Window Console</a></li>
+<li><a href="obj_history.html" title="Window History 对象">Window History</a></li>
+<li><a href="obj_location.html" title="Window Location 对象">Window Location</a></li>
+<li><a href="obj_navigator.html" title="Window Navigator 对象">Window Navigator</a></li>
+<li><a href="obj_screen.html" title="Window Screen 对象">Window Screen</a></li>
+</ul>
+<h2>HTML DOM</h2>
+<ul>
+<li><a href="dom_obj_document.html" title="HTML DOM Document 对象">HTML Document</a></li>
+<li><a href="dom_obj_all.html" title="HTML DOM Element 对象">HTML Element</a></li>
+<li><a href="dom_obj_attributes.html" title="HTML DOM Attr 对象">HTML Attribute</a></li>
+<li><a href="dom_obj_event.html" title="HTML DOM 事件">HTML Event</a></li>
+<li><a href="obj_events.html" title="HTML DOM Event 对象">HTML Event 对象</a></li>
+<li><a href="dom_obj_htmlcollection.html" title="DOM HTMLCollection">HTML Collection</a></li>
+<li><a href="dom_obj_html_nodelist.html" title="HTML DOM NodeList 对象">HTML NodeList</a></li>
+<li><a href="dom_obj_html_domtokenlist.html" title="HTML DOMTokenList 对象">HTML DOMTokenList</a></li>
+<li class="currentLink"><a href="dom_obj_style.html" title="HTML DOM Style 对象">HTML Style</a></li>
+</ul>
+<h2>Web API</h2>
+<ul>
+<li><a href="api_canvas.html" title="JavaScript Canvas API">API Canvas</a></li>
+<li><a href="api_console.html" title="JavaScript Console API">API Console</a></li>
+<li><a href="api_fetch.html" title="JavaScript Fetch API">API Fetch</a></li>
+<li><a href="api_fullscreen.html" title="JavaScript Fullscreen API">API Fullscreen</a></li>
+<li><a href="api_geolocation.html" title="JavaScript Geolocation API">API Geolocation</a></li>
+<li><a href="api_history.html" title="JavaScript History API">API History</a></li>
+<li><a href="api_mediaquerylist.html" title="JavaScript MediaQueryList API">API MediaQueryList</a></li>
+<li><a href="api_storage.html" title="JavaScript Storage API">API Storage</a></li>
+<li><a href="api_validation.html" title="JavaScript Validation API">API Validation</a></li>
+<li><a href="api_web.html" title="JavaScript Web API">API Web</a></li>
+</ul>
+<h2>HTML 对象</h2>
+<ul>
+<li><a href="dom_obj_anchor.html" title="HTML DOM Anchor 对象">&lt;a&gt;</a></li>
+<li><a href="dom_obj_abbr.html" title="HTML DOM Abbreviation 对象">&lt;abbr&gt;</a></li>
+<li><a href="dom_obj_address.html" title="HTML DOM Address 对象">&lt;address&gt;</a></li>
+<li><a href="dom_obj_area.html" title="HTML DOM Area 对象">&lt;area&gt;</a></li>
+<li><a href="dom_obj_article.html" title="HTML DOM Article 对象">&lt;article&gt;</a></li>
+<li><a href="dom_obj_aside.html" title="HTML DOM Aside 对象">&lt;aside&gt;</a></li>
+<li><a href="dom_obj_audio.html" title="HTML DOM Audio 对象">&lt;audio&gt;</a></li>
+<li><a href="dom_obj_b.html" title="HTML DOM Bold 对象">&lt;b&gt;</a></li>
+<li><a href="dom_obj_base.html" title="HTML DOM Base 对象">&lt;base&gt;</a></li>
+<li><a href="dom_obj_bdo.html" title="HTML DOM Bdo 对象">&lt;bdo&gt;</a></li>
+<li><a href="dom_obj_blockquote.html" title="HTML DOM Blockquote 对象">&lt;blockquote&gt;</a></li>
+<li><a href="dom_obj_body.html" title="HTML DOM Body 对象">&lt;body&gt;</a></li>
+<li><a href="dom_obj_br.html" title="HTML DOM BR 对象">&lt;br&gt;</a></li>
+<li><a href="dom_obj_pushbutton.html" title="HTML DOM Button 对象">&lt;button&gt;</a></li>
+<li><a href="dom_obj_canvas.html" title="HTML DOM Canvas 对象">&lt;canvas&gt;</a></li>
+<li><a href="dom_obj_caption.html" title="HTML DOM Caption 对象">&lt;caption&gt;</a></li>
+<li><a href="dom_obj_cite.html" title="HTML DOM Cite 对象">&lt;cite&gt;</a></li>
+<li><a href="dom_obj_code.html" title="HTML DOM Code 对象">&lt;code&gt;</a></li>
+<li><a href="dom_obj_col.html" title="HTML DOM Column 对象">&lt;col&gt;</a></li>
+<li><a href="dom_obj_colgroup.html" title="HTML DOM ColumnGroup 对象">&lt;colgroup&gt;</a></li>
+<li><a href="dom_obj_datalist.html" title="HTML DOM Datalist 对象">&lt;datalist&gt;</a></li>
+<li><a href="dom_obj_dd.html" title="HTML DOM DD 对象">&lt;dd&gt;</a></li>
+<li><a href="dom_obj_del.html" title="HTML DOM Del 对象">&lt;del&gt;</a></li>
+<li><a href="dom_obj_details.html" title="HTML DOM Details 对象">&lt;details&gt;</a></li>
+<li><a href="dom_obj_dfn.html" title="HTML DOM DFN 对象">&lt;dfn&gt;</a></li>
+<li><a href="dom_obj_dialog.html" title="HTML DOM Dialog 对象">&lt;dialog&gt;</a></li>
+<li><a href="dom_obj_div.html" title="HTML DOM Div 对象">&lt;div&gt;</a></li>
+<li><a href="dom_obj_dl.html" title="HTML DOM DList 对象">&lt;dl&gt;</a></li>
+<li><a href="dom_obj_dt.html" title="HTML DOM DT 对象">&lt;dt&gt;</a></li>
+<li><a href="dom_obj_em.html" title="HTML DOM Emphasized 对象">&lt;em&gt;</a></li>
+<li><a href="dom_obj_embed.html" title="HTML DOM Embed 对象">&lt;embed&gt;</a></li>
+<li><a href="dom_obj_fieldset.html" title="HTML DOM Fieldset 对象">&lt;fieldset&gt;</a></li>
+<li><a href="dom_obj_figcaption.html" title="HTML DOM Figcaption 对象">&lt;figcaption&gt;</a></li>
+<li><a href="dom_obj_figure.html" title="HTML DOM Figure 对象">&lt;figure&gt;</a></li>
+<li><a href="dom_obj_footer.html" title="HTML DOM Footer 对象">&lt;footer&gt;</a></li>
+<li><a href="dom_obj_form.html" title="HTML DOM Form 对象">&lt;form&gt;</a></li>
+<li><a href="dom_obj_head.html" title="HTML DOM Head 对象">&lt;head&gt;</a></li>
+<li><a href="dom_obj_header.html" title="HTML DOM Header 对象">&lt;header&gt;</a></li>
+<li><a href="dom_obj_heading.html" title="HTML DOM Heading 对象">&lt;h1&gt; - &lt;h6&gt;</a></li>
+<li><a href="dom_obj_hr.html" title="HTML DOM HR 对象">&lt;hr&gt;</a></li>
+<li><a href="dom_obj_html.html" title="HTML DOM HTML 对象">&lt;html&gt;</a></li>
+<li><a href="dom_obj_i.html" title="HTML DOM Italic 对象">&lt;i&gt;</a></li>
+<li><a href="dom_obj_frame.html" title="HTML DOM IFrame 对象">&lt;iframe&gt;</a></li>
+<li><a href="dom_obj_image.html" title="HTML DOM Image 对象">&lt;img&gt;</a></li>
+<li><a href="dom_obj_ins.html" title="HTML DOM Ins 对象">&lt;ins&gt;</a></li>
+<li><a href="dom_obj_button.html" title="HTML DOM Input Button 对象">&lt;input&gt; button</a></li>
+<li><a href="dom_obj_checkbox.html" title="HTML DOM Input Checkbox 对象">&lt;input&gt; checkbox</a></li>
+<li><a href="dom_obj_color.html" title="HTML DOM Input Color 对象">&lt;input&gt; color</a></li>
+<li><a href="dom_obj_date.html" title="HTML DOM Input Date 对象">&lt;input&gt; date</a></li>
+<li><a href="dom_obj_datetime.html" title="HTML DOM Input Datetime 对象">&lt;input&gt; datetime</a></li>
+<li><a href="dom_obj_datetime-local.html" title="HTML DOM Input DatetimeLocal 对象">&lt;input&gt; datetime-local</a></li>
+<li><a href="dom_obj_email.html" title="HTML DOM Input Email 对象">&lt;input&gt; email</a></li>
+<li><a href="dom_obj_fileupload.html" title="HTML DOM Input FileUpload 对象">&lt;input&gt; file</a></li>
+<li><a href="dom_obj_hidden.html" title="HTML DOM Input Hidden 对象">&lt;input&gt; hidden</a></li>
+<li><a href="dom_obj_input_image.html" title="HTML DOM Input Image 对象">&lt;input&gt; image</a></li>
+<li><a href="dom_obj_month.html" title="HTML DOM Input Month 对象">&lt;input&gt; month</a></li>
+<li><a href="dom_obj_number.html" title="HTML DOM Input Number 对象">&lt;input&gt; number</a></li>
+<li><a href="dom_obj_password.html" title="HTML DOM Input Password 对象">&lt;input&gt; password</a></li>
+<li><a href="dom_obj_radio.html" title="HTML DOM Input Radio 对象">&lt;input&gt; radio</a></li>
+<li><a href="dom_obj_range.html" title="HTML DOM Input Range 对象">&lt;input&gt; range</a></li>
+<li><a href="dom_obj_reset.html" title="HTML DOM Input Reset 对象">&lt;input&gt; reset</a></li>
+<li><a href="dom_obj_search.html" title="HTML DOM Input Search 对象">&lt;input&gt; search</a></li>
+<li><a href="dom_obj_submit.html" title="HTML DOM Input Submit 对象">&lt;input&gt; submit</a></li>
+<li><a href="dom_obj_text.html" title="HTML DOM Input Text 对象">&lt;input&gt; text</a></li>
+<li><a href="dom_obj_input_time.html" title="HTML DOM Input Time 对象">&lt;input&gt; time</a></li>
+<li><a href="dom_obj_url.html" title="HTML DOM Input URL 对象">&lt;input&gt; url</a></li>
+<li><a href="dom_obj_week.html" title="HTML DOM Input Week 对象">&lt;input&gt; week</a></li>
+<li><a href="dom_obj_kbd.html" title="HTML DOM Kbd 对象">&lt;kbd&gt;</a></li>
+<li><a href="dom_obj_label.html" title="HTML DOM Label 对象">&lt;label&gt;</a></li>
+<li><a href="dom_obj_legend.html" title="HTML DOM Legend 对象">&lt;legend&gt;</a></li>
+<li><a href="dom_obj_li.html" title="HTML DOM Li 对象">&lt;li&gt;</a></li>
+<li><a href="dom_obj_link.html" title="HTML DOM Link 对象">&lt;link&gt;</a></li>
+<li><a href="dom_obj_map.html" title="HTML DOM Map 对象">&lt;map&gt;</a></li>
+<li><a href="dom_obj_mark.html" title="HTML DOM Mark 对象">&lt;mark&gt;</a></li>
+<li><a href="dom_obj_menu.html" title="HTML DOM Menu 对象">&lt;menu&gt;</a></li>
+<li><a href="dom_obj_menuitem.html" title="HTML DOM MenuItem 对象">&lt;menuitem&gt;</a></li>
+<li><a href="dom_obj_meta.html" title="HTML DOM Meta 对象">&lt;meta&gt;</a></li>
+<li><a href="dom_obj_meter.html" title="HTML DOM Meter 对象">&lt;meter&gt;</a></li>
+<li><a href="dom_obj_nav.html" title="HTML DOM Nav 对象">&lt;nav&gt;</a></li>
+<li><a href="dom_obj_object.html" title="HTML DOM Object 对象">&lt;object&gt;</a></li>
+<li><a href="dom_obj_ol.html" title="HTML DOM Ol 对象">&lt;ol&gt;</a></li>
+<li><a href="dom_obj_optgroup.html" title="HTML DOM OptionGroup 对象">&lt;optgroup&gt;</a></li>
+<li><a href="dom_obj_option.html" title="HTML DOM Option 对象">&lt;option&gt;</a></li>
+<li><a href="dom_obj_output.html" title="HTML DOM Output 对象">&lt;output&gt;</a></li>
+<li><a href="dom_obj_paragraph.html" title="HTML DOM Paragraph 对象">&lt;p&gt;</a></li>
+<li><a href="dom_obj_param.html" title="HTML DOM Parameter 对象">&lt;param&gt;</a></li>
+<li><a href="dom_obj_pre.html" title="HTML DOM Pre 对象">&lt;pre&gt;</a></li>
+<li><a href="dom_obj_progress.html" title="HTML DOM Progress 对象">&lt;progress&gt;</a></li>
+<li><a href="dom_obj_quote.html" title="HTML DOM Quote 对象">&lt;q&gt;</a></li>
+<li><a href="dom_obj_s.html" title="HTML DOM S 对象">&lt;s&gt;</a></li>
+<li><a href="dom_obj_samp.html" title="HTML DOM Samp 对象">&lt;samp&gt;</a></li>
+<li><a href="dom_obj_script.html" title="HTML DOM Script 对象">&lt;script&gt;</a></li>
+<li><a href="dom_obj_section.html" title="HTML DOM Section 对象">&lt;section&gt;</a></li>
+<li><a href="dom_obj_select.html" title="HTML DOM Select 对象">&lt;select&gt;</a></li>
+<li><a href="dom_obj_small.html" title="HTML DOM Small 对象">&lt;small&gt;</a></li>
+<li><a href="dom_obj_source.html" title="HTML DOM Source 对象">&lt;source&gt;</a></li>
+<li><a href="dom_obj_span.html" title="HTML DOM Span 对象">&lt;span&gt;</a></li>
+<li><a href="dom_obj_strong.html" title="HTML DOM Strong 对象">&lt;strong&gt;</a></li>
+<li><a href="dom_obj_sub.html" title="HTML DOM Subscript 对象">&lt;sub&gt;</a></li>
+<li><a href="dom_obj_summary.html" title="HTML DOM Summary 对象">&lt;summary&gt;</a></li>
+<li><a href="dom_obj_sup.html" title="HTML DOM Superscript 对象">&lt;sup&gt;</a></li>
+<li><a href="dom_obj_table.html" title="HTML DOM Table 对象">&lt;table&gt;</a></li>
+<li><a href="dom_obj_tbody.html" title="HTML DOM TBody 对象">&lt;tbody&gt;</a></li>
+<li><a href="dom_obj_tabledata.html" title="HTML DOM TableData 对象">&lt;td&gt;</a></li>
+<li><a href="dom_obj_tfoot.html" title="HTML DOM TFoot 对象">&lt;tfoot&gt;</a></li>
+<li><a href="dom_obj_tablehead.html" title="HTML DOM TableHeader 对象">&lt;th&gt;</a></li>
+<li><a href="dom_obj_thead.html" title="HTML DOM THead 对象">&lt;thead&gt;</a></li>
+<li><a href="dom_obj_tablerow.html" title="HTML DOM TableRow 对象">&lt;tr&gt;</a></li>
+<li><a href="dom_obj_textarea.html" title="HTML DOM Textarea 对象">&lt;textarea&gt;</a></li>
+<li><a href="dom_obj_time.html" title="HTML DOM Time 对象">&lt;time&gt;</a></li>
+<li><a href="dom_obj_title.html" title="HTML DOM Title 对象">&lt;title&gt;</a></li>
+<li><a href="dom_obj_track.html" title="HTML DOM Track 对象">&lt;track&gt;</a></li>
+<li><a href="dom_obj_u.html" title="HTML DOM Underline 对象">&lt;u&gt;</a></li>
+<li><a href="dom_obj_ul.html" title="HTML DOM Ul 对象">&lt;ul&gt;</a></li>
+<li><a href="dom_obj_var.html" title="HTML DOM Variable 对象">&lt;var&gt;</a></li>
+<li><a href="dom_obj_video.html" title="HTML DOM Video 对象">&lt;video&gt;</a></li>
+</ul>
+<h2>其他参考手册</h2>
+<ul>
+<li><a href="obj_cssstyledeclaration.html" title="CSSStyleDeclaration 对象">CSSStyleDeclaration</a></li>
+<li><a href="jsref_type_conversion.html" title="JavaScript 类型转换">JS 类型转换</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>HTML DOM Style 对象</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="dom_obj_html_domtokenlist.html" title="HTML DOMTokenList 对象">HTML DOMTokenList</a></li>
+<li class="next"><a href="api_canvas.html" title="JavaScript Canvas API">API Canvas</a></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>Style 对象</h2>
+
+<p>Style 对象代表单独的样式声明。</p>
+</div>
+
+
+
+<div>
+<h2>Style 对象属性</h2>
+
+<table class="dataintable">
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><a href="prop_style_aligncontent.html" title="Style alignContent 属性">alignContent</a></td>
+<td>设置或返回弹性容器内的行之间的对齐方式，当项目不使用所有可用空间时。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_alignitems.html" title="Style alignItems 属性">alignItems</a></td>
+<td>设置或返回弹性容器内项目的对齐方式。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_alignself.html" title="Style alignSelf 属性">alignSelf</a></td>
+<td>设置或返回弹性容器内选定项目的对齐方式。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_animation.html" title="Style animation 属性">animation</a></td>
+<td>所有动画属性的简写属性，animationPlayState 属性除外。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_animationdelay.html" title="Style animationDelay 属性">animationDelay</a></td>
+<td>设置或返回动画何时开始。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_animationdirection.html" title="Style animationDirection 属性">animationDirection</a></td>
+<td>设置或返回动画是否应在交替循环中反向播放。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_animationduration.html" title="Style animationDuration 属性">animationDuration</a></td>
+<td>设置或返回动画完成一个周期所需的秒数或毫秒数。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_animationfillmode.html" title="Style animationFillMode 属性">animationFillMode</a></td>
+<td>设置或返回动画在执行时间之外应用的值。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_animationiterationcount.html" title="Style animationIterationCount 属性">animationIterationCount</a></td>
+<td>设置或返回动画应播放的次数。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_animationname.html" title="Style animationName 属性">animationName</a></td>
+<td>设置或返回 @keyframes 动画的名称。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_animationplaystate.html" title="Style animationPlayState 属性">animationPlayState</a></td>
+<td>设置或返回动画是正在运行还是暂停。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_animationtimingfunction.html" title="Style animationTimingFunction 属性">animationTimingFunction</a></td>
+<td>设置或返回动画的速度曲线。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_background.html" title="Style background 属性">background</a></td>
+<td>在一条声明中设置或返回所有背景属性。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_backgroundattachment.html" title="Style backgroundAttachment 属性">backgroundAttachment</a></td>
+<td>设置或返回背景图像是固定的还是随页面滚动。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_backgroundclip.html" title="Style backgroundClip 属性">backgroundClip</a></td>
+<td>设置或返回背景的绘制区域。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_backgroundcolor.html" title="Style backgroundColor 属性">backgroundColor</a></td>
+<td>设置或返回元素的背景颜色。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_backgroundimage.html" title="Style backgroundImage 属性">backgroundImage</a></td>
+<td>设置或返回元素的背景图像。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_backgroundorigin.html" title="Style backgroundOrigin 属性">backgroundOrigin</a></td>
+<td>设置或返回背景图像的定位区域。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_backgroundposition.html" title="Style backgroundPosition 属性">backgroundPosition</a></td>
+<td>设置或返回背景图像的起始位置。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_backgroundrepeat.html" title="Style backgroundRepeat 属性">backgroundRepeat</a></td>
+<td>设置或返回如何重复（平铺）背景图像。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_backgroundsize.html" title="Style backgroundSize 属性">backgroundSize</a></td>
+<td>设置或返回背景图像的大小。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_backfacevisibility.html" title="Style backfaceVisibility 属性">backfaceVisibility</a></td>
+<td>设置或返回元素在不面向屏幕时是否可见。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_border.html" title="Style border 属性">border</a></td>
+<td>在一条声明中设置或返回边框宽度、边框样式和边框颜色。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderbottom.html" title="Style borderBottom 属性">borderBottom</a></td>
+<td>在一条声明中设置或返回所有 borderBottom 属性。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderbottomcolor.html" title="Style borderBottomColor 属性">borderBottomColor</a></td>
+<td>设置或返回下边框的颜色。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderbottomleftradius.html" title="Style borderBottomLeftRadius 属性">borderBottomLeftRadius</a></td>
+<td>设置或返回左下角边框的形状。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderbottomrightradius.html" title="Style borderBottomRightRadius 属性">borderBottomRightRadius</a></td>
+<td>设置或返回右下角边框的形状。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderbottomstyle.html" title="Style borderBottomStyle 属性">borderBottomStyle</a></td>
+<td>设置或返回下边框的样式。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderbottomwidth.html" title="Style borderBottomWidth 属性">borderBottomWidth</a></td>
+<td>设置或返回下边框的宽度。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_bordercollapse.html" title="Style borderCollapse 属性">borderCollapse</a></td>
+<td>设置或返回表格边框是否应该折叠成单边框。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_bordercolor.html" title="Style borderColor 属性">borderColor</a></td>
+<td>设置或返回元素边框的颜色（最多可以设置四个值）。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderimage.html" title="Style borderImage 属性">borderImage</a></td>
+<td>用于设置或返回所有 borderImage 属性的简写属性。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderimageoutset.html" title="Style borderImageOutset 属性">borderImageOutset</a></td>
+<td>设置或返回边框图像区域超出边框 box 的量。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderimagerepeat.html" title="Style borderImageRepeat 属性">borderImageRepeat</a></td>
+<td>设置或返回图像边框是否应重复、环绕或拉伸。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderimageslice.html" title="Style borderImageSlice 属性">borderImageSlice</a></td>
+<td>设置或返回图像边框的向内偏移量。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderimagesource.html" title="Style borderImageSource 属性">borderImageSource</a></td>
+<td>设置或返回用作边框的图像。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderimagewidth.html" title="Style borderImageWidth 属性">borderImageWidth</a></td>
+<td>设置或返回图像边框的宽度。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderleft.html" title="Style borderLeft 属性">borderLeft</a></td>
+<td>在一条声明中设置或返回所有 borderLeft 属性。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderleftcolor.html" title="Style borderLeftColor 属性">borderLeftColor</a></td>
+<td>设置或返回左边框的颜色。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderleftstyle.html" title="Style borderLeftStyle 属性">borderLeftStyle</a></td>
+<td>设置或返回左边框的样式。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderleftwidth.html" title="Style borderLeftWidth 属性">borderLeftWidth</a></td>
+<td>设置或返回左边框的宽度。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderradius.html" title="Style borderRadius 属性">borderRadius</a></td>
+<td>用于设置或返回所有四个 borderRadius 属性的简写属性。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderright.html" title="Style borderRight 属性">borderRight</a></td>
+<td>在一条声明中设置或返回所有 borderRight 属性。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderrightcolor.html" title="Style borderRightColor 属性">borderRightColor</a></td>
+<td>设置或返回右边框的颜色。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderrightstyle.html" title="Style borderRightStyle 属性">borderRightStyle</a></td>
+<td>设置或返回右边框的样式。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderrightwidth.html" title="Style borderRightWidth 属性">borderRightWidth</a></td>
+<td>设置或返回右边框的宽度。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderspacing.html" title="Style borderSpacing 属性">borderSpacing</a></td>
+<td>设置或返回表格中单元格之间的空间。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderstyle.html" title="Style borderStyle 属性">borderStyle</a></td>
+<td>设置或返回元素边框的样式（最多可以设置四个值）。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_bordertop.html" title="Style borderTop 属性">borderTop</a></td>
+<td>在一条声明中设置或返回所有 borderTop 属性。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_bordertopcolor.html" title="Style borderTopColor 属性">borderTopColor</a></td>
+<td>设置或返回上边框的颜色。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_bordertopleftradius.html" title="Style borderTopLeftRadius 属性">borderTopLeftRadius</a></td>
+<td>设置或返回左上角边框的形状。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_bordertoprightradius.html" title="Style borderTopRightRadius 属性">borderTopRightRadius</a></td>
+<td>设置或返回右上角边框的形状。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_bordertopstyle.html" title="Style borderTopStyle 属性">borderTopStyle</a></td>
+<td>设置或返回上边框的样式。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_bordertopwidth.html" title="Style borderTopWidth 属性">borderTopWidth</a></td>
+<td>设置或返回上边框的宽度。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_borderwidth.html" title="Style borderWidth 属性">borderWidth</a></td>
+<td>设置或返回元素边框的宽度（最多可以设置四个值）。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_bottom.html" title="Style bottom 属性">bottom</a></td>
+<td>设置或返回定位元素的底部位置。</td>
+</tr>
+
+<tr>
+<td>boxDecorationBreak</td>
+<td>设置或返回元素在分页时的背景和边框的行为，或者对于行内元素，在换行时的行为。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_boxshadow.html" title="Style boxShadow 属性">boxShadow</a></td>
+<td>将一个或多个阴影附加到框（box）。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_boxsizing.html" title="Style boxSizing 属性">boxSizing</a></td>
+<td>允许您定义某些元素以某种方式适合某个区域。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_captionside.html" title="Style captionSide 属性">captionSide</a></td>
+<td>设置或返回表格标题的位置。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_caretcolor.html" title="Style caretColor 属性">caretColor</a></td>
+<td>设置或返回元素的插入符号/光标的颜色。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_clear.html" title="Style clear 属性">clear</a></td>
+<td>设置或返回元素相对于浮动对象的位置。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_clip.html" title="Style clip 属性">clip</a></td>
+<td>设置或返回定位元素的哪一部分可见。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_color.html" title="Style color 属性">color</a></td>
+<td>设置或返回文本的颜色。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_columncount.html" title="Style columnCount 属性">columnCount</a></td>
+<td>设置或返回元素应该被划分的列数。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_columnfill.html" title="Style columnFill 属性">columnFill</a></td>
+<td>设置或返回如何填充列。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_columngap.html" title="Style columnGap 属性">columnGap</a></td>
+<td>设置或返回列之间的间隙。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_columnrule.html" title="Style columnRule 属性">columnRule</a></td>
+<td>用于设置或返回所有 columnRule 属性的简写属性。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_columnrulecolor.html" title="Style columnRuleColor 属性">columnRuleColor</a></td>
+<td>设置或返回列之间规则的颜色。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_columnrulestyle.html" title="Style columnRuleStyle 属性">columnRuleStyle</a></td>
+<td>设置或返回列之间规则的样式。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_columnrulewidth.html" title="Style columnRuleWidth 属性">columnRuleWidth</a></td>
+<td>设置或返回列之间规则的宽度。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_columns.html" title="Style columns 属性">columns</a></td>
+<td>用于设置或返回 columnWidth 和 columnCount 的简写属性。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_columnspan.html" title="Style columnSpan 属性">columnSpan</a></td>
+<td>设置或返回元素应该跨越多少列。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_columnwidth.html" title="Style columnWidth 属性">columnWidth</a></td>
+<td>设置或返回列的宽度。</td>
+</tr>
+
+<tr>
+<td>content</td>
+<td>与 :before 和 :after 伪元素一起使用，插入生成的内容。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_counterincrement.html" title="Style counterIncrement 属性">counterIncrement</a></td>
+<td>增加一个或多个计数器。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_counterreset.html" title="Style counterReset 属性">counterReset</a></td>
+<td>创建或重置一个或多个计数器。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_cursor.html" title="Style cursor 属性">cursor</a></td>
+<td>设置或返回鼠标指针显示的光标类型。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_direction.html" title="Style direction 属性">direction</a></td>
+<td>设置或返回文本方向。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_display.html" title="Style display 属性">display</a></td>
+<td>设置或返回元素的显示类型。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_emptycells.html" title="Style emptyCells 属性">emptyCells</a></td>
+<td>设置或返回是否显示空单元格的边框和背景。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_filter.html" title="Style filter 属性">filter</a></td>
+<td>设置或返回图像滤镜（视觉效果，如模糊和饱和度）。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_flex.html" title="Style flex 属性">flex</a></td>
+<td>设置或返回项目的长度，相对于其余部分。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_flexbasis.html" title="Style flexBasis 属性">flexBasis</a></td>
+<td>设置或返回弹性项的初始长度。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_flexdirection.html" title="Style flexDirection 属性">flexDirection</a></td>
+<td>设置或返回弹性项的方向。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_flexflow.html" title="Style flexFlow 属性">flexFlow</a></td>
+<td>flexDirection 和 flexWrap 属性的简写属性。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_flexgrow.html" title="Style flexGrow 属性">flexGrow</a></td>
+<td>设置或返回项目相对于其他项目的增长量。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_flexshrink.html" title="Style flexShrink 属性">flexShrink</a></td>
+<td>设置或返回项目相对于其他项目的收缩方式。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_flexwrap.html" title="Style flexWrap 属性">flexWrap</a></td>
+<td>设置或返回弹性项是否应换行。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_cssfloat.html" title="Style cssFloat 属性">cssFloat</a></td>
+<td>设置或返回元素的水平对齐方式。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_font.html" title="Style font 属性">font</a></td>
+<td>在一条声明中设置或返回字体属性。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_fontfamily.html" title="Style fontFamily 属性">fontFamily</a></td>
+<td>设置或返回文本的字体族。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_fontsize.html" title="Style fontSize 属性">fontSize</a></td>
+<td>设置或返回文本的字体大小。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_fontstyle.html" title="Style fontStyle 属性">fontStyle</a></td>
+<td>设置或返回字体的样式是 normal、italic 还是 oblique。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_fontvariant.html" title="Style fontVariant 属性">fontVariant</a></td>
+<td>设置或返回字体是否应以小型大写字母显示。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_fontweight.html" title="Style fontWeight 属性">fontWeight</a></td>
+<td>设置或返回字体的粗细。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_fontsizeadjust.html" title="Style fontSizeAdjust 属性">fontSizeAdjust</a></td>
+<td>发生字体回退时保持文本的可读性。</td>
+</tr>
+
+<tr>
+<td>fontStretch</td>
+<td>从字体系列中选择伸缩变形方式。</td>
+</tr>
+
+<tr>
+<td>hangingPunctuation</td>
+<td>规定标点符号是否可以放在行框之外。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_height.html" title="Style height 属性">height</a></td>
+<td>设置或返回元素的高度。</td>
+</tr>
+
+<tr>
+<td>hyphens</td>
+<td>设置如何拆分单词以改善段落的布局。</td>
+</tr>
+
+<tr>
+<td>icon</td>
+<td>使作者能够使用标志性等价物来设置元素的样式。</td>
+</tr>
+
+<tr>
+<td>imageOrientation</td>
+<td>规定用户代理应用于图像的向右或顺时针方向的旋转。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_isolation.html" title="Style isolation 属性">isolation</a></td>
+<td>定义元素是否必须创建新的堆叠内容。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_justifycontent.html" title="Style justifyContent 属性">justifyContent</a></td>
+<td>当项目未使用所有可用空间时，设置或返回弹性容器内项目之间的对齐方式。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_left.html" title="Style left 属性">left</a></td>
+<td>设置或返回定位元素的左侧位置。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_letterspacing.html" title="Style letterSpacing 属性">letterSpacing</a></td>
+<td>设置或返回文本中字符之间的空间。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_lineheight.html" title="Style lineHeight 属性">lineHeight</a></td>
+<td>设置或返回文本中行之间的距离。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_liststyle.html" title="Style listStyle 属性">listStyle</a></td>
+<td>在一条声明中设置或返回列表样式。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_liststyleimage.html" title="Style listStyleImage 属性">listStyleImage</a></td>
+<td>设置或返回图像作为列表项标记。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_liststyleposition.html" title="Style listStylePosition 属性">listStylePosition</a></td>
+<td>设置或返回列表项标记的位置。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_liststyletype.html" title="Style listStyleType 属性">listStyleType</a></td>
+<td>设置或返回列表项标记的类型。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_margin.html" title="Style margin 属性">margin</a></td>
+<td>设置或返回元素的外边距（最多可以设置四个值）。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_marginbottom.html" title="Style marginBottom 属性">marginBottom</a></td>
+<td>设置或返回元素的下外边距。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_marginleft.html" title="Style marginLeft 属性">marginLeft</a></td>
+<td>设置或返回元素的左外边距。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_marginright.html" title="Style marginRight 属性">marginRight</a></td>
+<td>设置或返回元素的右外边距。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_margintop.html" title="Style marginTop 属性">marginTop</a></td>
+<td>设置或返回元素的上外边距。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_maxheight.html" title="Style maxHeight 属性">maxHeight</a></td>
+<td>设置或返回元素的最大高度。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_maxwidth.html" title="Style maxWidth 属性">maxWidth</a></td>
+<td>设置或返回元素的最大宽度。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_minheight.html" title="Style minHeight 属性">minHeight</a></td>
+<td>设置或返回元素的最小高度。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_minwidth.html" title="Style minWidth 属性">minWidth</a></td>
+<td>设置或返回元素的最小宽度。</td>
+</tr>
+
+<tr>
+<td>navDown</td>
+<td>设置或返回使用向下箭头导航键时的导航位置。</td>
+</tr>
+
+<tr>
+<td>navIndex</td>
+<td>设置或返回元素的跳转顺序。</td>
+</tr>
+
+<tr>
+<td>navLeft</td>
+<td>设置或返回使用左箭头导航键时的导航位置。</td>
+</tr>
+
+<tr>
+<td>navRight</td>
+<td>设置或返回使用右箭头导航键时的导航位置。</td>
+</tr>
+
+<tr>
+<td>navUp</td>
+<td>设置或返回使用上箭头导航键时的导航位置。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_objectfit.html" title="Style objectFit 属性">objectFit</a></td>
+<td>指定替换元素的内容应如何适合由其使用的高度和宽度建立的框。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_objectposition.html" title="Style objectPosition 属性">objectPosition</a></td>
+<td>指定被替换元素在其框内的对齐方式。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_opacity.html" title="Style opacity 属性">opacity</a></td>
+<td>设置或返回元素的不透明度级别。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_order.html" title="Style order 属性">order</a></td>
+<td>设置或返回弹性项相对于其余项的顺序。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_orphans.html" title="Style orphans 属性">orphans</a></td>
+<td>设置或返回元素内部发生分页时必须留在页面底部的元素的最小行数。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_outline.html" title="Style outline 属性">outline</a></td>
+<td>在一条声明中设置或返回所有 outline 属性。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_outlinecolor.html" title="Style outlineColor 属性">outlineColor</a></td>
+<td>设置或返回元素周围轮廓的颜色。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_outlineoffset.html" title="Style outlineOffset 属性">outlineOffset</a></td>
+<td>偏移轮廓，并将其绘制到边框边缘之外。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_outlinestyle.html" title="Style outlineStyle 属性">outlineStyle</a></td>
+<td>设置或返回元素周围轮廓的样式。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_outlinewidth.html" title="Style outlineWidth 属性">outlineWidth</a></td>
+<td>设置或返回元素周围轮廓的宽度。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_overflow.html" title="Style overflow 属性">overflow</a></td>
+<td>设置或返回如何处理在元素框外呈现的内容。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_overflowx.html" title="Style overflowX 属性">overflowX</a></td>
+<td>规定如何处理内容的左/右边缘，如果它溢出元素的内容区域。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_overflowy.html" title="Style overflowY 属性">overflowY</a></td>
+<td>指定如何处理内容的上/下边缘，如果它溢出元素的内容区域。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_padding.html" title="Style padding 属性">padding</a></td>
+<td>设置或返回元素的内边距（最多可以设置四个值）。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_paddingbottom.html" title="Style paddingBottom 属性">paddingBottom</a></td>
+<td>设置或返回元素的下内边距。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_paddingleft.html" title="Style paddingLeft 属性">paddingLeft</a></td>
+<td>设置或返回元素的左内边距。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_paddingright.html" title="Style paddingRight 属性">paddingRight</a></td>
+<td>设置或返回元素的右内边距。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_paddingtop.html" title="Style paddingTop 属性">paddingTop</a></td>
+<td>设置或返回元素的上内边距。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_pagebreakafter.html" title="Style pageBreakAfter 属性">pageBreakAfter</a></td>
+<td>设置或返回元素后的分页行为。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_pagebreakbefore.html" title="Style pageBreakBefore 属性">pageBreakBefore</a></td>
+<td>设置或返回元素前的分页行为。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_pagebreakinside.html" title="Style pageBreakInside 属性">pageBreakInside</a></td>
+<td>设置或返回元素内的分页行为。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_perspective.html" title="Style perspective 属性">perspective</a></td>
+<td>设置或返回有关如何查看 3D 元素的视角。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_perspectiveorigin.html" title="Style perspectiveOrigin 属性">perspectiveOrigin</a></td>
+<td>设置或返回 3D 元素的底部位置。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_position.html" title="Style position 属性">position</a></td>
+<td>设置或返回用于元素的定位方法的类型（静态、相对、绝对或固定）。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_quotes.html" title="Style quotes 属性">quotes</a></td>
+<td>设置或返回嵌入引号的引号类型。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_resize.html" title="Style resize 属性">resize</a></td>
+<td>设置或返回元素是否可以被用户调整大小。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_right.html" title="Style right 属性">right</a></td>
+<td>设置或返回定位元素的右侧位置。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_scrollbehavior.html" title="Style scrollBehavior 属性">scrollBehavior</a></td>
+<td>规定当用户单击可滚动框内的链接时，是否有平滑滚动定位的动画效果，而不是直接跳转。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_tablelayout.html" title="Style tableLayout 属性">tableLayout</a></td>
+<td>设置或返回表格单元格、行和列的布局方式。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_tabsize.html" title="Style tabSize 属性">tabSize</a></td>
+<td>设置或返回制表符的长度。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_textalign.html" title="Style textAlign 属性">textAlign</a></td>
+<td>设置或返回文本的水平对齐方式。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_textalignlast.html" title="Style textAlignLast 属性">textAlignLast</a></td>
+<td>当 text-align 为 &quot;justify&quot; 时，设置或返回块的最后一行或强制换行之前的行如何对齐。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_textdecoration.html" title="Style textDecoration 属性">textDecoration</a></td>
+<td>设置或返回文本装饰。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_textdecorationcolor.html" title="Style textDecorationColor 属性">textDecorationColor</a></td>
+<td>设置或返回文本装饰的颜色。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_textdecorationline.html" title="Style textDecorationLine 属性">textDecorationLine</a></td>
+<td>设置或返回文本装饰中的行类型。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_textdecorationstyle.html" title="Style textDecorationStyle 属性">textDecorationStyle</a></td>
+<td>设置或返回文本装饰中线条的样式。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_textindent.html" title="Style textIndent 属性">textIndent</a></td>
+<td>设置或返回第一行文本的缩进。</td>
+</tr>
+
+<tr>
+<td>textJustify</td>
+<td>设置或返回 text-align 为 &quot;justify&quot; 时使用的对齐方法。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_textoverflow.html" title="Style textOverflow 属性">textOverflow</a></td>
+<td>设置或返回文本溢出包含元素时应该发生的情况。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_textshadow.html" title="Style textShadow 属性">textShadow</a></td>
+<td>设置或返回文本的阴影效果。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_texttransform.html" title="Style textTransform 属性">textTransform</a></td>
+<td>设置或返回文本的大小写。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_top.html" title="Style top 属性">top</a></td>
+<td>设置或返回定位元素的顶部位置。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_transform.html" title="Style transform 属性">transform</a></td>
+<td>对元素应用 2D 或 3D 变换。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_transformorigin.html" title="Style transformOrigin 属性">transformOrigin</a></td>
+<td>设置或返回被转换元素的位置。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_transformstyle.html" title="Style transformStyle 属性">transformStyle</a></td>
+<td>设置或返回嵌套元素在 3D 空间中的渲染方式。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_transition.html" title="Style transition 属性">transition</a></td>
+<td>用于设置或返回四个转换属性的简写属性。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_transitionproperty.html" title="Style transitionProperty 属性">transitionProperty</a></td>
+<td>设置或返回过渡效果的 CSS 属性。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_transitionduration.html" title="Style transitionDuration 属性">transitionDuration</a></td>
+<td>设置或返回过渡效果完成所需的秒数或毫秒数。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_transitiontimingfunction.html" title="Style transitionTimingFunction 属性">transitionTimingFunction</a></td>
+<td>设置或返回过渡效果的速度曲线。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_transitiondelay.html" title="Style transitionDelay 属性">transitionDelay</a></td>
+<td>设置或返回过渡效果何时开始。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_unicodebidi.html" title="Style unicodeBidi 属性">unicodeBidi</a></td>
+<td>设置或返回是否应覆盖文本以支持同一文档中的多种语言。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_userselect.html" title="Style userSelect 属性">userSelect</a></td>
+<td>设置或返回是否可以选择元素的文本。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_verticalalign.html" title="Style verticalAlign 属性">verticalAlign</a></td>
+<td>设置或返回元素中内容的垂直对齐方式。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_visibility.html" title="Style visibility 属性">visibility</a></td>
+<td>设置或返回元素是否可见。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_whitespace.html" title="Style whiteSpace 属性">whiteSpace</a></td>
+<td>设置或返回如何处理文本中的制表符、换行符和空格。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_width.html" title="Style width 属性">width</a></td>
+<td>设置或返回元素的宽度。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_wordbreak.html" title="Style wordBreak 属性">wordBreak</a></td>
+<td>设置或返回非 CJK 脚本的换行规则。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_wordspacing.html" title="Style wordSpacing 属性">wordSpacing</a></td>
+<td>设置或返回文本中的单词间距。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_wordwrap.html" title="Style wordWrap 属性">wordWrap</a></td>
+<td>允许长的、不可打断的单词被打断并换行到下一行。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_widows.html" title="Style widows 属性">widows</a></td>
+<td>设置或返回必须在页面顶部可见的元素的最小行数。</td>
+</tr>
+
+<tr>
+<td><a href="prop_style_zindex.html" title="Style zIndex 属性">zIndex</a></td>
+<td>设置或返回定位元素的堆栈顺序。</td>
+</tr>
+</table>
+</div>
+
+
+
+<div>
+<h2>访问 Style 对象</h2>
+
+<p>可以从文档的 head 部分或具体的 HTML 元素访问 Style 对象。</p>
+
+<h3>例子 1</h3>
+
+<p>从文档的 head 部分访问样式对象：</p>
+
+<pre class="language-js">
+var x = document.getElementsByTagName(&quot;STYLE&quot;);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tfde3.html?f=jsck_style_get">亲自试一试</a></p>
+
+<h3>例子 2</h3>
+
+<p>访问指定元素的样式对象：</p>
+
+<pre class="language-js">
+var x = document.getElementById(&quot;myH1&quot;).style;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tcf61.html?f=jsck_style_get_element">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>创建 Style 对象</h2>
+
+<h3>例子 1</h3>
+
+<p>您可以使用 document.createElement() 方法创建 &lt;style&gt; 元素：</p>
+
+<pre class="language-js">
+var x = document.createElement(&quot;STYLE&quot;);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t9f52.html?f=jsck_style_create">亲自试一试</a></p>
+
+<h3>例子 2</h3>
+
+<p>您还可以设置现有元素的样式属性：</p>
+
+<pre class="language-js">
+document.getElementById(&quot;myH1&quot;).style.color = &quot;red&quot;;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t7880.html?f=jsck_style_create_element">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>相关页面</h2>
+
+<p>HTML 教程：<a href="../html/html_css.html" title="HTML CSS">HTML CSS</a></p>
+
+<p>CSS 教程：<a href="../css/index.html" title="CSS 教程">CSS 教程</a></p>
+
+<p>HTML 参考手册：<a href="../tags/tag_style.html" title="HTML &lt;style&gt; 标签">HTML &lt;style&gt; 标签</a></p>
+
+<p>CSS 参考手册：<a href="../cssref/index.html" title="CSS 参考手册">CSS 属性</a></p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="dom_obj_html_domtokenlist.html" title="HTML DOMTokenList 对象">HTML DOMTokenList</a></li>
+<li class="next"><a href="api_canvas.html" title="JavaScript Canvas API">API Canvas</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="index.html">JavaScript 和 HTML DOM 参考手册</a></h5>
+<h5 id="tools_example"><a href="../js/js_examples.html">JavaScript 实例</a></h5>
+<h5 id="tools_quiz"><a href="../js/js_quiz.html">JavaScript 测验</a></h5>
+<h5 id="tools_tutorial"><a href="../js/index.html">JavaScript 教程</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/jsref/dom_obj_style.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:09:06 GMT -->
+</html>

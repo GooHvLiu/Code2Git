@@ -1,0 +1,14 @@
+#navbar ul li {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  padding-left: 1rem;
+}
+#navbar ul li .first-menu {
+  color: #333;
+  text-align: left;
+}
+#navbar ul li:hover ul {
+  width: 100%;
+  position: relative;
+}

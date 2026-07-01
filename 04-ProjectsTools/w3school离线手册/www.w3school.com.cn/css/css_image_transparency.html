@@ -1,0 +1,591 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/css/css_image_transparency.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:18:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>CSS 不透明度 / 透明度</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>CSS 基础教程</h2>
+<ul>
+<li><a href="index.html" title="CSS 教程">CSS 教程</a></li>
+<li><a href="css_jianjie.html" title="CSS 简介">CSS 简介</a></li>
+<li><a href="css_syntax.html" title="CSS 语法">CSS 语法</a></li>
+<li><a href="css_selectors.html" title="CSS 选择器">CSS 选择器</a></li>
+<li><a href="css_shiyong.html" title="CSS 使用">CSS 使用</a></li>
+<li><a href="css_comments.html" title="CSS 注释">CSS 注释</a></li>
+<li><a href="css_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="css_colors_rgb.html" title="CSS RGB 颜色">CSS RGB 颜色</a></li>
+<li><a href="css_colors_hex.html" title="CSS HEX 颜色">CSS HEX 颜色</a></li>
+<li><a href="css_colors_hsl.html" title="CSS HSL 颜色">CSS HSL 颜色</a></li>
+<li><a href="css_background.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="css_background_image.html" title="CSS 背景图像">CSS 背景图像</a></li>
+<li><a href="css_background_repeat.html" title="CSS 背景重复">CSS 背景重复</a></li>
+<li><a href="css_background_attachment.html" title="CSS 背景附着">CSS 背景附着</a></li>
+<li><a href="css_background_shorthand.html" title="CSS 简写背景属性">CSS 简写背景属性</a></li>
+<li><a href="css_border.html" title="CSS 边框">CSS 边框</a></li>
+<li><a href="css_border_width.html" title="CSS 边框宽度">CSS 边框宽度</a></li>
+<li><a href="css_border_color.html" title="CSS 边框颜色">CSS 边框颜色</a></li>
+<li><a href="css_border_sides.html" title="CSS 边框各边">CSS 边框各边</a></li>
+<li><a href="css_border_shorthand.html" title="CSS 简写边框属性">CSS 简写边框属性</a></li>
+<li><a href="css_border_rounded.html" title="CSS 圆角边框">CSS 圆角边框</a></li>
+<li><a href="css_margin.html" title="CSS 外边距">CSS 外边距</a></li>
+<li><a href="css_margin_collapse.html" title="CSS 外边距合并">CSS 外边距合并</a></li>
+<li><a href="css_padding.html" title="CSS 内边距">CSS 内边距</a></li>
+<li><a href="css_dimension.html" title="CSS 高度和宽度">CSS 高度/宽度</a></li>
+<li><a href="css_boxmodel.html" title="CSS 框模型">CSS 框模型</a></li>
+<li><a href="css_outline.html" title="CSS 轮廓">CSS 轮廓</a></li>
+<li><a href="css_outline_width.html" title="CSS 轮廓宽度">CSS 轮廓宽度</a></li>
+<li><a href="css_outline_color.html" title="CSS 轮廓颜色">CSS 轮廓颜色</a></li>
+<li><a href="css_outline_shorthand.html" title="CSS 简写轮廓属性">CSS 简写轮廓属性</a></li>
+<li><a href="css_outline_offset.html" title="CSS 轮廓偏移">CSS 轮廓偏移</a></li>
+<li><a href="css_text.html" title="CSS 文本">CSS 文本</a></li>
+<li><a href="css_text_align.html" title="CSS 文本对齐">CSS 文本对齐</a></li>
+<li><a href="css_text_decoration.html" title="CSS 文本装饰">CSS 文本装饰</a></li>
+<li><a href="css_text_transformation.html" title="CSS 文本转换">CSS 文本转换</a></li>
+<li><a href="css_text_spacing.html" title="CSS 文字间距">CSS 文字间距</a></li>
+<li><a href="css_text_shadow.html" title="CSS 文本阴影">CSS 文本阴影</a></li>
+<li><a href="css_font.html" title="CSS 字体">CSS 字体</a></li>
+<li><a href="css_font_style.html" title="CSS 字体样式">CSS 字体样式</a></li>
+<li><a href="css_font_size.html" title="CSS 字体大小">CSS 字体大小</a></li>
+<li><a href="css_font_google.html" title="CSS 谷歌字体">CSS 谷歌字体</a></li>
+<li><a href="css_font_shorthand.html" title="CSS 简写字体属性">CSS 简写字体属性</a></li>
+<li><a href="css_icons.html" title="CSS 图标">CSS 图标</a></li>
+<li><a href="css_link.html" title="CSS 链接">CSS 链接</a></li>
+<li><a href="css_list.html" title="CSS 列表">CSS 列表</a></li>
+<li><a href="css_table.html" title="CSS 表格">CSS 表格</a></li>
+</ul>
+<h2>CSS 中级教程</h2>
+<ul>
+<li><a href="css_display_visibility.html" title="CSS 布局 - display 属性">CSS Display</a></li>
+<li><a href="css_max-width.html" title="CSS 布局 - width 和 max-width">CSS max-width</a></li>
+<li><a href="css_positioning.html" title="CSS 布局 - position 属性">CSS 定位</a></li>
+<li><a href="css_z-index.html" title="CSS 布局 - z-index 属性">CSS z-index</a></li>
+<li><a href="css_overflow.html" title="CSS 布局 - 溢出">CSS 溢出</a></li>
+<li><a href="css_float.html" title="CSS 布局 - 浮动和清除">CSS 浮动</a></li>
+<li><a href="css_float_clear.html" title="CSS 布局 - clear 和 clearfix">CSS 清除浮动</a></li>
+<li><a href="css_float_examples.html" title="CSS 布局 - 浮动实例">CSS 布局 - 浮动实例</a></li>
+<li><a href="css_inline-block.html" title="CSS 布局 - display: inline-block">CSS inline-block</a></li>
+<li><a href="css_align.html" title="CSS 布局 - 水平和垂直对齐">CSS 对齐</a></li>
+<li><a href="css_combinators.html" title="CSS 选择器">CSS 组合器</a></li>
+<li><a href="css_pseudo_classes.html" title="CSS 伪类">CSS 伪类</a></li>
+<li><a href="css_pseudo_elements.html" title="CSS 伪元素">CSS 伪元素</a></li>
+<li class="currentLink"><a href="css_image_transparency.html" title="CSS 不透明度">CSS 不透明度</a></li>
+<li><a href="css_navbar.html" title="CSS 导航栏">CSS 导航栏</a></li>
+<li><a href="css_navbar_vertical.html" title="CSS 垂直导航栏">CSS 垂直导航栏</a></li>
+<li><a href="css_navbar_horizontal.html" title="CSS 水平导航栏">CSS 水平导航栏</a></li>
+<li><a href="css_dropdowns.html" title="CSS 下拉菜单">CSS 下拉菜单</a></li>
+<li><a href="css_image_gallery.html" title="CSS 图片库">CSS 图片库</a></li>
+<li><a href="css_image_sprites.html" title="CSS 图像精灵">CSS 图像精灵</a></li>
+<li><a href="css_attribute_selectors.html" title="CSS 属性选择器">CSS 属性选择器</a></li>
+<li><a href="css_form.html" title="CSS 表单">CSS 表单</a></li>
+<li><a href="css_counters.html" title="CSS 计数器">CSS 计数器</a></li>
+<li><a href="css_website_layout.html" title="CSS 网站布局">CSS 网站布局</a></li>
+<li><a href="css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="css_specificity.html" title="CSS 特异性">CSS 特异性</a></li>
+<li><a href="css_important.html" title="CSS !important 规则">CSS !important</a></li>
+<li><a href="css_math_functions.html" title="CSS 数学函数">CSS 数学函数</a></li>
+</ul>
+<h2>CSS3 高级教程</h2>
+<ul>
+<li><a href="css3_borders.html" title="CSS 圆角">CSS 圆角</a></li>
+<li><a href="css3_border_images.html" title="CSS 边框图像">CSS 边框图像</a></li>
+<li><a href="css3_backgrounds.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="css3_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="css_colors_keywords.html" title="CSS 颜色关键字">CSS 颜色关键字</a></li>
+<li><a href="css3_gradients.html" title="CSS 渐变">CSS 渐变</a></li>
+<li><a href="css3_gradients_radial.html" title="CSS 径向渐变">CSS 径向渐变</a></li>
+<li><a href="css3_shadows.html" title="CSS 阴影">CSS 阴影</a></li>
+<li><a href="css3_shadows_box.html" title="CSS box-shadow">CSS box-shadow</a></li>
+<li><a href="css3_text_effects.html" title="CSS 文本效果">CSS 文本效果</a></li>
+<li><a href="css3_fonts.html" title="CSS 网络字体">CSS 网络字体</a></li>
+<li><a href="css3_2dtransforms.html" title="CSS 2D 转换">CSS 2D 转换</a></li>
+<li><a href="css3_3dtransforms.html" title="CSS 3D 转换">CSS 3D 转换</a></li>
+<li><a href="css3_transitions.html" title="CSS 过渡">CSS 过渡</a></li>
+<li><a href="css3_animations.html" title="CSS 动画">CSS 动画</a></li>
+<li><a href="css_tooltip.html" title="CSS 工具提示">CSS 工具提示</a></li>
+<li><a href="css3_images.html" title="CSS 图像样式">CSS 图像样式</a></li>
+<li><a href="css3_object-fit.html" title="CSS object-fit">CSS object-fit</a></li>
+<li><a href="css3_object-position.html" title="CSS object-position 属性">CSS object-position</a></li>
+<li><a href="css3_masking.html" title="CSS 遮罩">CSS 遮罩</a></li>
+<li><a href="css3_buttons.html" title="CSS 按钮">CSS 按钮</a></li>
+<li><a href="css3_pagination.html" title="CSS 分页">CSS 分页</a></li>
+<li><a href="css3_multiple_columns.html" title="CSS 多列">CSS 多列</a></li>
+<li><a href="css3_user_interface.html" title="CSS 用户界面">CSS 用户界面</a></li>
+<li><a href="css3_variables.html" title="CSS 变量">CSS 变量</a></li>
+<li><a href="css3_variables_overriding.html" title="CSS 覆盖变量">CSS 覆盖变量</a></li>
+<li><a href="css3_variables_javascript.html" title="CSS 使用 JavaScript 更改变量">CSS 变量 - JavaScript</a></li>
+<li><a href="css3_variables_mediaqueries.html" title="CSS 在媒体查询中使用变量">CSS 变量 - 媒体查询</a></li>
+<li><a href="css3_property.html" title="CSS @property 规则">CSS @property</a></li>
+<li><a href="css3_box-sizing.html" title="CSS Box Sizing">CSS Box Sizing</a></li>
+<li><a href="css3_flexbox.html" title="CSS Flexbox">CSS Flexbox</a></li>
+<li><a href="css3_mediaqueries.html" title="CSS 媒体查询">CSS 媒体查询</a></li>
+<li><a href="css3_mediaqueries_ex.html" title="CSS 媒体查询实例">CSS 媒体查询实例</a></li>
+</ul>
+<h2>CSS 响应式设计</h2>
+<ul>
+<li><a href="css_rwd_intro.html" title="响应式网站设计 - 简介">RWD 简介</a></li>
+<li><a href="css_rwd_viewport.html" title="响应式网页设计 - 视口">RWD 视口</a></li>
+<li><a href="css_rwd_grid.html" title="响应式网页设计 - Grid-View">RWD 网格视图</a></li>
+<li><a href="css_rwd_mediaqueries.html" title="响应式网页设计 - 媒体查询">RWD 媒体查询</a></li>
+<li><a href="css_rwd_images.html" title="响应式网页设计 - 图像">RWD 图像</a></li>
+<li><a href="css_rwd_videos.html" title="响应式网页设计 - 视频">RWD 视频</a></li>
+</ul>
+<h2>CSS 网格教程</h2>
+<ul>
+<li><a href="css_grid.html" title="CSS 网格布局模块">CSS 网格布局模块</a></li>
+<li><a href="css_grid_container.html" title="CSS 网格容器">CSS 网格容器</a></li>
+<li><a href="css_grid_item.html" title="CSS 网格项目">CSS 网格项目</a></li>
+</ul>
+<h2>CSS 实例</h2>
+<ul>
+<li><a href="css_examples.html" title="CSS 实例">CSS 实例</a></li>
+</ul>
+<h2>CSS 测验</h2>
+<ul>
+<li><a href="css_quiz.html" title="CSS 测验">CSS 测验</a></li>
+</ul>
+<h2>CSS 参考手册</h2>
+<ul>
+<li><a href="../cssref/index.html" title="CSS 参考手册">CSS 参考手册</a></li>
+<li><a href="../cssref/css_browsersupport.html" title="CSS 浏览器支持">CSS 浏览器支持</a></li>
+<li><a href="../cssref/css_selectors.html" title="CSS 选择器">CSS 选择器</a></li>
+<li><a href="../cssref/css_functions.html" title="CSS 函数">CSS 函数</a></li>
+<li><a href="../cssref/css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="../cssref/css_ref_aural.html" title="CSS 听觉">CSS 听觉</a></li>
+<li><a href="../cssref/css_websafe_fonts.html" title="CSS 网络安全字体">CSS 网络安全字体</a></li>
+<li><a href="../cssref/css_animatable.html" title="CSS 可动画制作">CSS 可动画制作</a></li>
+<li><a href="../cssref/css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="../cssref/css_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="../cssref/css_colors_legal.html" title="CSS 颜色值">CSS 颜色值</a></li>
+<li><a href="../cssref/css_default_values.html" title="CSS 默认值">CSS 默认值</a></li>
+<li><a href="../cssref/css_entities.html" title="CSS 实体">CSS 实体</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>CSS 不透明度 / 透明度</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css_pseudo_elements.html" title="CSS 伪元素">CSS 伪元素</a></li>
+<li class="next"><a href="css_navbar.html" title="CSS 导航栏">CSS 导航栏</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p><code>opacity</code> 属性指定元素的不透明度/透明度。</p>
+</div>
+
+
+
+<div>
+<h2>透明图像</h2>
+
+<p><code>opacity</code> 属性的取值范围为 0.0-1.0。值越低，越透明：</p>
+
+<div class="w3-33">
+<img src="../i/photo/coffee.jpg" alt="coffee" style="margin: 0; opacity: 0.2;" />
+<p>opacity 0.2</p>
+</div>
+
+<div class="w3-33">
+<img src="../i/photo/coffee.jpg" alt="coffee" style="margin: 0; opacity: 0.5;" />
+<p>opacity 0.5</p>
+</div>
+
+<div class="w3-33">
+<img src="../i/photo/coffee.jpg" alt="coffee" style="margin: 0;" />
+<p>opacity 1</p>
+</div>
+
+<h3 style="clear: left;">实例</h3>
+
+<pre class="language-css">
+img {
+  opacity: 0.5;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t86de.html?f=css_image_opacity">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>透明悬停效果</h2>
+
+<p><code>opacity</code> 属性通常与 <code>:hover</code> 选择器一同使用，这样就可以在鼠标悬停时更改不透明度：</p>
+
+<style>
+.imgopac { 
+  opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+
+.imgopac:hover {
+    opacity: 1.0;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+</style>
+
+<div class="w3-33">
+<img src="../i/photo/tulip.jpg" alt="Tulip" style="margin: 0; width: 90%;" class="imgopac" />
+</div>
+
+<div class="w3-33">
+<img src="../i/photo/tulip-2.jpg" alt="Tulip" style="margin: 0; width: 90%;" class="imgopac" />
+</div>
+
+<div class="w3-33">
+<img src="../i/photo/flower-4.jpg" alt="Flower" style="margin: 0; width: 90%;" class="imgopac" />
+</div>
+
+<h3 style="clear: left;">实例</h3>
+
+<pre class="language-css">
+img {
+  opacity: 0.5;
+}
+
+img:hover {
+  opacity: 1.0;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t9d8f.html?f=css_image_transparency_1">亲自试一试</a></p>
+
+<h3>例子解释</h3>
+
+<p>第一个 CSS 块类似于实例 1 中的代码。此外，我们还添加了当用户将鼠标悬停在其中一个图像上时的效果。在这种情况下，当用户将鼠标悬停在图像上时，我们希望图像不透明。这条 CSS 是 <code>opacity:1;</code>。</p>
+
+<p>当鼠标指针离开图像时，图像将再次透明。</p>
+
+<p>反向悬停效果的例子：</p>
+
+<style>
+.imgopac-2 { 
+  opacity: 1;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+
+.imgopac-2:hover {
+    opacity: 0.5;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+</style>
+
+
+<div class="w3-33">
+<img src="../i/photo/tulip.jpg" alt="Tulip" style="margin: 0; width: 90%;" class="imgopac-2" />
+</div>
+
+<div class="w3-33">
+<img src="../i/photo/tulip-2.jpg" alt="Tulip" style="margin: 0; width: 90%;" class="imgopac-2" />
+</div>
+
+<div class="w3-33">
+<img src="../i/photo/flower-4.jpg" alt="Flower" style="margin: 0; width: 90%;" class="imgopac-2" />
+</div>
+
+<h3 style="clear: left;">实例</h3>
+
+<pre class="language-css">
+img:hover {
+  opacity: 0.5;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tbec1.html?f=css_image_transparency_2">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>透明盒</h2>
+
+<p>使用 <code>opacity</code> 属性为元素的背景添加透明度时，其所有子元素都继承相同的透明度。这可能会使完全透明的元素内的文本难以阅读：</p>
+
+<div class="css-25" style="background-color:#4CAF50;opacity:1;">opacity 1</div>
+<div class="css-25" style="background-color:#4CAF50;opacity:0.6;">opacity 0.6</div>
+<div class="css-25" style="background-color:#4CAF50;opacity:0.3;">opacity 0.3</div>
+<div class="css-25" style="background-color:#4CAF50;opacity:0.1;">opacity 0.1</div>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+div {
+  opacity: 0.3;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tbebb.html?f=css_opacity_box_1">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>使用 RGBA 的透明度</h2>
+
+<p>如果您不希望对子元素应用不透明度，如上面的例子，请使用 RGBA 颜色值。下面的例子设置背景色而不是文本的不透明度：</p>
+
+<div class="css-25" style="background:rgb(76, 175, 80);">100% opacity</div>
+<div class="css-25" style="background:rgba(76, 175, 80,0.6);">60% opacity</div>
+<div class="css-25" style="background:rgba(76, 175, 80,0.3);">30% opacity</div>
+<div class="css-25" style="background:rgba(76, 175, 80,0.1);">10% opacity</div>
+
+<p>您已经从我们的 <a href="css_colors.html" title="CSS 颜色">CSS 颜色</a> 这一章中学到了可以将 RGB 用作颜色值。除 RGB 外，还可以将 RGB 颜色值与 alpha 通道（RGBA）一起使用 - 该通道规定颜色的不透明度。</p>
+
+<p>RGBA 颜色值指定为：rgba(<i>red</i>, <i>green</i>, <i>blue</i>, <i>alpha</i>)。 <i>alpha</i> 参数是介于 0.0（完全透明）和 1.0（完全不透明）之间的数字。</p>
+
+<p class="tip"><span>提示：</span>您将在我们的 <a href="css3_colors.html" title="CSS 颜色">CSS 颜色</a> 这一章中学到有关 RGBA 颜色的更多知识。</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+div {
+  background: rgba(76, 175, 80, 0.3) /* 不透明度为 30% 的绿色背景 */
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t9725.html?f=css_opacity_box_2">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>透明盒中的文本</h2>
+
+<style>
+div.background
+  {
+  background: url(../i/photo/tulip_peach_blossom_s.jpg) repeat;
+  border: 2px solid black;
+  margin-top: 20px;
+  }
+div.transbox
+  {
+  margin: 30px;
+  background-color: #ffffff;
+  border: 1px solid black;
+  /* for IE */
+  filter:alpha(opacity=60);
+  /* CSS3 standard */
+  opacity:0.6;
+  }
+div#maincontent div.transbox p
+  {
+  margin: 5%;
+  font-weight: bold;
+  color: #000000;
+  line-height: 1.5;
+  }
+</style>
+
+<div class="background">
+<div class="transbox">
+<p>这是一些位于透明框中的文本。</p>
+</div>
+</div>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+div.background {
+  background: url(klematis.jpg) repeat;
+  border: 2px solid black;
+}
+
+div.transbox {
+  margin: 30px;
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.6;
+}
+
+div.transbox p {
+  margin: 5%;
+  font-weight: bold;
+  color: #000000;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;div class=&quot;background&quot;&gt;
+  &lt;div class=&quot;transbox&quot;&gt;
+    &lt;p&gt;这是一些位于透明框中的文本。&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t87d5.html?f=css_transparency">亲自试一试</a></p>
+
+<h3>例子解释</h3>
+
+<p>首先，我们创建一个带有背景图像和边框的 &lt;div&gt; 元素（class=&quot;background&quot;）。</p>
+
+<p>然后，我们在第一个 &lt;div&gt; 中创建另一个 &lt;div&gt;（class=&quot;transbox&quot;）。</p>
+
+<p>&lt;div class=&quot;transbox&quot;&gt; 有背景色和边框 - 这个 div 是透明的。</p>
+
+<p>在透明的 &lt;div&gt; 内，我们在 &lt;p&gt; 元素内添加了一些文本。</p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css_pseudo_elements.html" title="CSS 伪元素">CSS 伪元素</a></li>
+<li class="next"><a href="css_navbar.html" title="CSS 导航栏">CSS 导航栏</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../cssref/index.html">CSS 参考手册</a></h5>
+<h5 id="tools_example"><a href="css_examples.html">CSS 实例</a></h5>
+<h5 id="tools_quiz"><a href="css_quiz.html">CSS 测验</a></h5>
+<h5 id="tools_professional"><a href="index_pro.html">CSS 课外书</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/css/css_image_transparency.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:18:42 GMT -->
+</html>

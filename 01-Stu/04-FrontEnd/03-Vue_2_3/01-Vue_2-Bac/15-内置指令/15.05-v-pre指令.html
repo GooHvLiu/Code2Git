@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="shortcut icon" href="../../favicon.png" type="image/x-icon">
+  <title>15.04-v-once指令</title>
+  <script type="text/javascript" src="../../js_Tools/vue.js"></script>
+</head>
+
+<body>
+  <!-- 
+    v-pre指令：
+        1.跳过其所在节点的编译过程。
+        2.可利用它跳过：没有使用指令语法、没有使用插值语法的节点，会加快编译。
+		-->
+  <div id="root">
+    <div v-pre>Vue其实很简单</div>
+    <div v-pre>当前的n的值：{{n}}</div>
+    <button v-pre @click="n++">点我n加1</button>
+  </div>
+</body>
+<script>
+  Vue.config.productionTip = false
+
+  new Vue({
+    el: '#root',
+    data: {
+      n: 1
+    }
+  })
+</script>
+
+</html>

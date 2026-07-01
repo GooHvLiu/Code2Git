@@ -1,0 +1,1313 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/jsref/dom_obj_event.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:06:09 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c15e1f.css?v=2" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>HTML DOM 事件</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>JS 参考手册</h2>
+<ul>
+<li><a href="index.html" title="JavaScript 和 HTML DOM 参考手册">JS 参考手册（类别排序）</a></li>
+<li><a href="jsref_reference.html" title="JavaScript 参考手册">JS 参考手册（字母排序）</a></li>
+</ul>
+<h2>JavaScript</h2>
+<ul>
+<li><a href="jsref_obj_array.html" title="JavaScript Array 参考手册">JS Array</a></li>
+<li><a href="jsref_obj_boolean.html" title="JavaScript Boolean 参考手册">JS Boolean</a></li>
+<li><a href="jsref_classes.html" title="JavaScript Class 参考手册">JS Class</a></li>
+<li><a href="jsref_obj_date.html" title="JavaScript Date 参考手册">JS Date</a></li>
+<li><a href="jsref_obj_error.html" title="JavaScript Error 参考手册">JS Error</a></li>
+<li><a href="jsref_obj_global.html" title="JavaScript Global 参考手册">JS Global</a></li>
+<li><a href="jsref_obj_json.html" title="JavaScript JSON 参考手册">JS JSON</a></li>
+<li><a href="jsref_obj_map.html" title="JavaScript Map 参考手册">JS Map</a></li>
+<li><a href="jsref_obj_math.html" title="JavaScript Math 参考手册">JS Math</a></li>
+<li><a href="jsref_obj_number.html" title="JavaScript Number 参考手册">JS Number</a></li>
+<li><a href="jsref_obj_promise.html" title="JavaScript Promise 对象">JS Promise</a></li>
+<li><a href="jsref_obj_regexp.html" title="JavaScript RegExp 参考手册">JS RegExp</a></li>
+<li><a href="jsref_obj_set.html" title="JavaScript Set 参考手册">JS Set</a></li>
+<li><a href="jsref_obj_string.html" title="JavaScript String 参考手册">JS String</a></li>
+<li><a href="jsref_obj_object.html" title="JavaScript Object 参考手册">JS 对象</a></li>
+<li><a href="jsref_operators.html" title="JavaScript 运算符参考手册">JS 运算符</a></li>
+<li><a href="jsref_precedence.html" title="JavaScript 运算符优先级">JS 运算符优先级</a></li>
+<li><a href="jsref_statements.html" title="JavaScript 语句参考手册">JS 语句</a></li>
+<li><a href="jsref_obj_typed_array.html" title="JavaScript 类型化数组参考手册">JS 类型化数组</a></li>
+</ul>
+<h2>Window</h2>
+<ul>
+<li><a href="obj_window.html" title="Window 对象">Window 对象</a></li>
+<li><a href="obj_console.html" title="Window Console 对象">Window Console</a></li>
+<li><a href="obj_history.html" title="Window History 对象">Window History</a></li>
+<li><a href="obj_location.html" title="Window Location 对象">Window Location</a></li>
+<li><a href="obj_navigator.html" title="Window Navigator 对象">Window Navigator</a></li>
+<li><a href="obj_screen.html" title="Window Screen 对象">Window Screen</a></li>
+</ul>
+<h2>HTML DOM</h2>
+<ul>
+<li><a href="dom_obj_document.html" title="HTML DOM Document 对象">HTML Document</a></li>
+<li><a href="dom_obj_all.html" title="HTML DOM Element 对象">HTML Element</a></li>
+<li><a href="dom_obj_attributes.html" title="HTML DOM Attr 对象">HTML Attribute</a></li>
+<li class="currentLink"><a href="dom_obj_event.html" title="HTML DOM 事件">HTML Event</a></li>
+<li><a href="obj_events.html" title="HTML DOM Event 对象">HTML Event 对象</a></li>
+<li><a href="dom_obj_htmlcollection.html" title="DOM HTMLCollection">HTML Collection</a></li>
+<li><a href="dom_obj_html_nodelist.html" title="HTML DOM NodeList 对象">HTML NodeList</a></li>
+<li><a href="dom_obj_html_domtokenlist.html" title="HTML DOMTokenList 对象">HTML DOMTokenList</a></li>
+<li><a href="dom_obj_style.html" title="HTML DOM Style 对象">HTML Style</a></li>
+</ul>
+<h2>Web API</h2>
+<ul>
+<li><a href="api_canvas.html" title="JavaScript Canvas API">API Canvas</a></li>
+<li><a href="api_console.html" title="JavaScript Console API">API Console</a></li>
+<li><a href="api_fetch.html" title="JavaScript Fetch API">API Fetch</a></li>
+<li><a href="api_fullscreen.html" title="JavaScript Fullscreen API">API Fullscreen</a></li>
+<li><a href="api_geolocation.html" title="JavaScript Geolocation API">API Geolocation</a></li>
+<li><a href="api_history.html" title="JavaScript History API">API History</a></li>
+<li><a href="api_mediaquerylist.html" title="JavaScript MediaQueryList API">API MediaQueryList</a></li>
+<li><a href="api_storage.html" title="JavaScript Storage API">API Storage</a></li>
+<li><a href="api_validation.html" title="JavaScript Validation API">API Validation</a></li>
+<li><a href="api_web.html" title="JavaScript Web API">API Web</a></li>
+</ul>
+<h2>HTML 对象</h2>
+<ul>
+<li><a href="dom_obj_anchor.html" title="HTML DOM Anchor 对象">&lt;a&gt;</a></li>
+<li><a href="dom_obj_abbr.html" title="HTML DOM Abbreviation 对象">&lt;abbr&gt;</a></li>
+<li><a href="dom_obj_address.html" title="HTML DOM Address 对象">&lt;address&gt;</a></li>
+<li><a href="dom_obj_area.html" title="HTML DOM Area 对象">&lt;area&gt;</a></li>
+<li><a href="dom_obj_article.html" title="HTML DOM Article 对象">&lt;article&gt;</a></li>
+<li><a href="dom_obj_aside.html" title="HTML DOM Aside 对象">&lt;aside&gt;</a></li>
+<li><a href="dom_obj_audio.html" title="HTML DOM Audio 对象">&lt;audio&gt;</a></li>
+<li><a href="dom_obj_b.html" title="HTML DOM Bold 对象">&lt;b&gt;</a></li>
+<li><a href="dom_obj_base.html" title="HTML DOM Base 对象">&lt;base&gt;</a></li>
+<li><a href="dom_obj_bdo.html" title="HTML DOM Bdo 对象">&lt;bdo&gt;</a></li>
+<li><a href="dom_obj_blockquote.html" title="HTML DOM Blockquote 对象">&lt;blockquote&gt;</a></li>
+<li><a href="dom_obj_body.html" title="HTML DOM Body 对象">&lt;body&gt;</a></li>
+<li><a href="dom_obj_br.html" title="HTML DOM BR 对象">&lt;br&gt;</a></li>
+<li><a href="dom_obj_pushbutton.html" title="HTML DOM Button 对象">&lt;button&gt;</a></li>
+<li><a href="dom_obj_canvas.html" title="HTML DOM Canvas 对象">&lt;canvas&gt;</a></li>
+<li><a href="dom_obj_caption.html" title="HTML DOM Caption 对象">&lt;caption&gt;</a></li>
+<li><a href="dom_obj_cite.html" title="HTML DOM Cite 对象">&lt;cite&gt;</a></li>
+<li><a href="dom_obj_code.html" title="HTML DOM Code 对象">&lt;code&gt;</a></li>
+<li><a href="dom_obj_col.html" title="HTML DOM Column 对象">&lt;col&gt;</a></li>
+<li><a href="dom_obj_colgroup.html" title="HTML DOM ColumnGroup 对象">&lt;colgroup&gt;</a></li>
+<li><a href="dom_obj_datalist.html" title="HTML DOM Datalist 对象">&lt;datalist&gt;</a></li>
+<li><a href="dom_obj_dd.html" title="HTML DOM DD 对象">&lt;dd&gt;</a></li>
+<li><a href="dom_obj_del.html" title="HTML DOM Del 对象">&lt;del&gt;</a></li>
+<li><a href="dom_obj_details.html" title="HTML DOM Details 对象">&lt;details&gt;</a></li>
+<li><a href="dom_obj_dfn.html" title="HTML DOM DFN 对象">&lt;dfn&gt;</a></li>
+<li><a href="dom_obj_dialog.html" title="HTML DOM Dialog 对象">&lt;dialog&gt;</a></li>
+<li><a href="dom_obj_div.html" title="HTML DOM Div 对象">&lt;div&gt;</a></li>
+<li><a href="dom_obj_dl.html" title="HTML DOM DList 对象">&lt;dl&gt;</a></li>
+<li><a href="dom_obj_dt.html" title="HTML DOM DT 对象">&lt;dt&gt;</a></li>
+<li><a href="dom_obj_em.html" title="HTML DOM Emphasized 对象">&lt;em&gt;</a></li>
+<li><a href="dom_obj_embed.html" title="HTML DOM Embed 对象">&lt;embed&gt;</a></li>
+<li><a href="dom_obj_fieldset.html" title="HTML DOM Fieldset 对象">&lt;fieldset&gt;</a></li>
+<li><a href="dom_obj_figcaption.html" title="HTML DOM Figcaption 对象">&lt;figcaption&gt;</a></li>
+<li><a href="dom_obj_figure.html" title="HTML DOM Figure 对象">&lt;figure&gt;</a></li>
+<li><a href="dom_obj_footer.html" title="HTML DOM Footer 对象">&lt;footer&gt;</a></li>
+<li><a href="dom_obj_form.html" title="HTML DOM Form 对象">&lt;form&gt;</a></li>
+<li><a href="dom_obj_head.html" title="HTML DOM Head 对象">&lt;head&gt;</a></li>
+<li><a href="dom_obj_header.html" title="HTML DOM Header 对象">&lt;header&gt;</a></li>
+<li><a href="dom_obj_heading.html" title="HTML DOM Heading 对象">&lt;h1&gt; - &lt;h6&gt;</a></li>
+<li><a href="dom_obj_hr.html" title="HTML DOM HR 对象">&lt;hr&gt;</a></li>
+<li><a href="dom_obj_html.html" title="HTML DOM HTML 对象">&lt;html&gt;</a></li>
+<li><a href="dom_obj_i.html" title="HTML DOM Italic 对象">&lt;i&gt;</a></li>
+<li><a href="dom_obj_frame.html" title="HTML DOM IFrame 对象">&lt;iframe&gt;</a></li>
+<li><a href="dom_obj_image.html" title="HTML DOM Image 对象">&lt;img&gt;</a></li>
+<li><a href="dom_obj_ins.html" title="HTML DOM Ins 对象">&lt;ins&gt;</a></li>
+<li><a href="dom_obj_button.html" title="HTML DOM Input Button 对象">&lt;input&gt; button</a></li>
+<li><a href="dom_obj_checkbox.html" title="HTML DOM Input Checkbox 对象">&lt;input&gt; checkbox</a></li>
+<li><a href="dom_obj_color.html" title="HTML DOM Input Color 对象">&lt;input&gt; color</a></li>
+<li><a href="dom_obj_date.html" title="HTML DOM Input Date 对象">&lt;input&gt; date</a></li>
+<li><a href="dom_obj_datetime.html" title="HTML DOM Input Datetime 对象">&lt;input&gt; datetime</a></li>
+<li><a href="dom_obj_datetime-local.html" title="HTML DOM Input DatetimeLocal 对象">&lt;input&gt; datetime-local</a></li>
+<li><a href="dom_obj_email.html" title="HTML DOM Input Email 对象">&lt;input&gt; email</a></li>
+<li><a href="dom_obj_fileupload.html" title="HTML DOM Input FileUpload 对象">&lt;input&gt; file</a></li>
+<li><a href="dom_obj_hidden.html" title="HTML DOM Input Hidden 对象">&lt;input&gt; hidden</a></li>
+<li><a href="dom_obj_input_image.html" title="HTML DOM Input Image 对象">&lt;input&gt; image</a></li>
+<li><a href="dom_obj_month.html" title="HTML DOM Input Month 对象">&lt;input&gt; month</a></li>
+<li><a href="dom_obj_number.html" title="HTML DOM Input Number 对象">&lt;input&gt; number</a></li>
+<li><a href="dom_obj_password.html" title="HTML DOM Input Password 对象">&lt;input&gt; password</a></li>
+<li><a href="dom_obj_radio.html" title="HTML DOM Input Radio 对象">&lt;input&gt; radio</a></li>
+<li><a href="dom_obj_range.html" title="HTML DOM Input Range 对象">&lt;input&gt; range</a></li>
+<li><a href="dom_obj_reset.html" title="HTML DOM Input Reset 对象">&lt;input&gt; reset</a></li>
+<li><a href="dom_obj_search.html" title="HTML DOM Input Search 对象">&lt;input&gt; search</a></li>
+<li><a href="dom_obj_submit.html" title="HTML DOM Input Submit 对象">&lt;input&gt; submit</a></li>
+<li><a href="dom_obj_text.html" title="HTML DOM Input Text 对象">&lt;input&gt; text</a></li>
+<li><a href="dom_obj_input_time.html" title="HTML DOM Input Time 对象">&lt;input&gt; time</a></li>
+<li><a href="dom_obj_url.html" title="HTML DOM Input URL 对象">&lt;input&gt; url</a></li>
+<li><a href="dom_obj_week.html" title="HTML DOM Input Week 对象">&lt;input&gt; week</a></li>
+<li><a href="dom_obj_kbd.html" title="HTML DOM Kbd 对象">&lt;kbd&gt;</a></li>
+<li><a href="dom_obj_label.html" title="HTML DOM Label 对象">&lt;label&gt;</a></li>
+<li><a href="dom_obj_legend.html" title="HTML DOM Legend 对象">&lt;legend&gt;</a></li>
+<li><a href="dom_obj_li.html" title="HTML DOM Li 对象">&lt;li&gt;</a></li>
+<li><a href="dom_obj_link.html" title="HTML DOM Link 对象">&lt;link&gt;</a></li>
+<li><a href="dom_obj_map.html" title="HTML DOM Map 对象">&lt;map&gt;</a></li>
+<li><a href="dom_obj_mark.html" title="HTML DOM Mark 对象">&lt;mark&gt;</a></li>
+<li><a href="dom_obj_menu.html" title="HTML DOM Menu 对象">&lt;menu&gt;</a></li>
+<li><a href="dom_obj_menuitem.html" title="HTML DOM MenuItem 对象">&lt;menuitem&gt;</a></li>
+<li><a href="dom_obj_meta.html" title="HTML DOM Meta 对象">&lt;meta&gt;</a></li>
+<li><a href="dom_obj_meter.html" title="HTML DOM Meter 对象">&lt;meter&gt;</a></li>
+<li><a href="dom_obj_nav.html" title="HTML DOM Nav 对象">&lt;nav&gt;</a></li>
+<li><a href="dom_obj_object.html" title="HTML DOM Object 对象">&lt;object&gt;</a></li>
+<li><a href="dom_obj_ol.html" title="HTML DOM Ol 对象">&lt;ol&gt;</a></li>
+<li><a href="dom_obj_optgroup.html" title="HTML DOM OptionGroup 对象">&lt;optgroup&gt;</a></li>
+<li><a href="dom_obj_option.html" title="HTML DOM Option 对象">&lt;option&gt;</a></li>
+<li><a href="dom_obj_output.html" title="HTML DOM Output 对象">&lt;output&gt;</a></li>
+<li><a href="dom_obj_paragraph.html" title="HTML DOM Paragraph 对象">&lt;p&gt;</a></li>
+<li><a href="dom_obj_param.html" title="HTML DOM Parameter 对象">&lt;param&gt;</a></li>
+<li><a href="dom_obj_pre.html" title="HTML DOM Pre 对象">&lt;pre&gt;</a></li>
+<li><a href="dom_obj_progress.html" title="HTML DOM Progress 对象">&lt;progress&gt;</a></li>
+<li><a href="dom_obj_quote.html" title="HTML DOM Quote 对象">&lt;q&gt;</a></li>
+<li><a href="dom_obj_s.html" title="HTML DOM S 对象">&lt;s&gt;</a></li>
+<li><a href="dom_obj_samp.html" title="HTML DOM Samp 对象">&lt;samp&gt;</a></li>
+<li><a href="dom_obj_script.html" title="HTML DOM Script 对象">&lt;script&gt;</a></li>
+<li><a href="dom_obj_section.html" title="HTML DOM Section 对象">&lt;section&gt;</a></li>
+<li><a href="dom_obj_select.html" title="HTML DOM Select 对象">&lt;select&gt;</a></li>
+<li><a href="dom_obj_small.html" title="HTML DOM Small 对象">&lt;small&gt;</a></li>
+<li><a href="dom_obj_source.html" title="HTML DOM Source 对象">&lt;source&gt;</a></li>
+<li><a href="dom_obj_span.html" title="HTML DOM Span 对象">&lt;span&gt;</a></li>
+<li><a href="dom_obj_strong.html" title="HTML DOM Strong 对象">&lt;strong&gt;</a></li>
+<li><a href="dom_obj_sub.html" title="HTML DOM Subscript 对象">&lt;sub&gt;</a></li>
+<li><a href="dom_obj_summary.html" title="HTML DOM Summary 对象">&lt;summary&gt;</a></li>
+<li><a href="dom_obj_sup.html" title="HTML DOM Superscript 对象">&lt;sup&gt;</a></li>
+<li><a href="dom_obj_table.html" title="HTML DOM Table 对象">&lt;table&gt;</a></li>
+<li><a href="dom_obj_tbody.html" title="HTML DOM TBody 对象">&lt;tbody&gt;</a></li>
+<li><a href="dom_obj_tabledata.html" title="HTML DOM TableData 对象">&lt;td&gt;</a></li>
+<li><a href="dom_obj_tfoot.html" title="HTML DOM TFoot 对象">&lt;tfoot&gt;</a></li>
+<li><a href="dom_obj_tablehead.html" title="HTML DOM TableHeader 对象">&lt;th&gt;</a></li>
+<li><a href="dom_obj_thead.html" title="HTML DOM THead 对象">&lt;thead&gt;</a></li>
+<li><a href="dom_obj_tablerow.html" title="HTML DOM TableRow 对象">&lt;tr&gt;</a></li>
+<li><a href="dom_obj_textarea.html" title="HTML DOM Textarea 对象">&lt;textarea&gt;</a></li>
+<li><a href="dom_obj_time.html" title="HTML DOM Time 对象">&lt;time&gt;</a></li>
+<li><a href="dom_obj_title.html" title="HTML DOM Title 对象">&lt;title&gt;</a></li>
+<li><a href="dom_obj_track.html" title="HTML DOM Track 对象">&lt;track&gt;</a></li>
+<li><a href="dom_obj_u.html" title="HTML DOM Underline 对象">&lt;u&gt;</a></li>
+<li><a href="dom_obj_ul.html" title="HTML DOM Ul 对象">&lt;ul&gt;</a></li>
+<li><a href="dom_obj_var.html" title="HTML DOM Variable 对象">&lt;var&gt;</a></li>
+<li><a href="dom_obj_video.html" title="HTML DOM Video 对象">&lt;video&gt;</a></li>
+</ul>
+<h2>其他参考手册</h2>
+<ul>
+<li><a href="obj_cssstyledeclaration.html" title="CSSStyleDeclaration 对象">CSSStyleDeclaration</a></li>
+<li><a href="jsref_type_conversion.html" title="JavaScript 类型转换">JS 类型转换</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>HTML DOM 事件</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="dom_obj_attributes.html" title="HTML DOM Attr 对象">HTML Attribute</a></li>
+<li class="next"><a href="obj_events.html" title="HTML DOM Event 对象">HTML Event 对象</a></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>HTML DOM 事件</h2>
+
+<p>HTML DOM 事件允许 JavaScript 在 HTML 文档中的元素上注册不同的事件处理程序。</p>
+
+<p>事件通常与函数结合使用，在事件发生之前函数不会被执行（例如当用户单击按钮时）。</p>
+
+<p>如需有关事件的教程，请学习我们的 <a href="../js/js_events.html">JavaScript 事件教程</a>。</p>
+
+<table class="dataintable">
+  <tr>
+    <th style="width: 20%">事件</th>
+    <th>描述</th>
+    <th style="width: 20%">属于</th>
+  </tr>
+  <tr>
+    <td><a href="event_onabort_media.html">abort</a></td>
+    <td>媒体加载中止时发生该事件。</td>
+	<td>
+		<ul>
+		<li><a href="obj_uievent.html" title="HTML DOM UiEvent">UiEvent</a></li>
+		<li><a href="obj_event.html">Event</a></li>
+		</ul>
+	</td>
+  </tr>
+  <tr>
+    <td><a href="event_onafterprint.html">afterprint</a></td>
+    <td>当页面开始打印时，或者关闭打印对话框时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_animationend.html">animationend</a></td>
+    <td>CSS 动画完成时发生此事件。</td>
+    <td><a href="obj_animationevent.html">AnimationEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_animationiteration.html">animationiteration</a></td>
+    <td>重复 CSS 动画时发生此事件。</td>
+    <td><a href="obj_animationevent.html">AnimationEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_animationstart.html">animationstart</a></td>
+    <td>CSS 动画开始时发生此事件。</td>
+    <td><a href="obj_animationevent.html">AnimationEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onbeforeprint.html">beforeprint</a></td>
+    <td>即将打印页面时发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onbeforeunload.html">beforeunload</a></td>
+    <td>在文档即将被卸载之前发生此事件。</td>
+	<td>
+		<ul>
+		<li><a href="obj_uievent.html" title="HTML DOM UiEvent">UiEvent</a></li>
+		<li><a href="obj_event.html">Event</a></li>
+		</ul>
+	</td>
+  </tr>
+  <tr>
+    <td><a href="event_onblur.html">blur</a></td>
+    <td>当元素失去焦点时发生此事件。</td>
+    <td><a href="obj_focusevent.html">FocusEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_oncanplay.html">canplay</a></td>
+    <td>当浏览器可以开始播放媒体时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_oncanplaythrough.html">canplaythrough</a></td>
+    <td>当浏览器可以在不停止缓冲的情况下播放媒体时发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onchange.html">change</a></td>
+    <td>当form元素的内容、选择的内容或选中的状态发生改变时，发生此事件</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onclick.html">click</a></td>
+    <td>当用户单击元素时发生此事件。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_oncontextmenu.html">contextmenu</a></td>
+    <td>当用户右键单击某个元素以打开上下文菜单时，发生此事件。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_oncopy.html">copy</a></td>
+    <td>当用户复制元素的内容时发生此事件。</td>
+    <td><a href="obj_clipboardevent.html">ClipboardEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_oncut.html">cut</a></td>
+    <td>当用户剪切元素的内容时发生此事件。</td>
+    <td><a href="obj_clipboardevent.html">ClipboardEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_ondblclick.html">dblclick</a></td>
+    <td>当用户双击元素时发生此事件。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_ondrag.html">drag</a></td>
+    <td>拖动元素时发生此事件。</td>
+    <td><a href="obj_dragevent.html">DragEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_ondragend.html">dragend</a></td>
+    <td>当用户完成拖动元素后，发生此事件。</td>
+    <td><a href="obj_dragevent.html">DragEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_ondragenter.html">dragenter</a></td>
+    <td>当拖动的元素进入放置目标时，发生此事件。</td>
+    <td><a href="obj_dragevent.html">DragEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_ondragleave.html">dragleave</a></td>
+    <td>当拖动的元素离开放置目标时，发生此事件。</td>
+    <td><a href="obj_dragevent.html">DragEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_ondragover.html">dragover</a></td>
+    <td>当拖动的元素位于放置目标之上时，发生此事件。</td>
+    <td><a href="obj_dragevent.html">DragEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_ondragstart.html">dragstart</a></td>
+    <td>当用户开始拖动元素时发生此事件。</td>
+    <td><a href="obj_dragevent.html">DragEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_ondrop.html">drop</a></td>
+    <td>当将拖动的元素放置在放置目标上时，发生此事件。</td>
+    <td><a href="obj_dragevent.html">DragEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_ondurationchange.html">durationchange</a></td>
+    <td>媒体时长改变时发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onended.html">ended</a></td>
+    <td>在媒体播放到尽头时发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onerror.html">error</a></td>
+    <td>当加载外部文件时发生错误后，发生此事件。</td>
+	<td>
+		<ul>
+		<li><a href="obj_progressevent.html" title="HTML DOM ProgressEvent">ProgressEvent</a></li>
+		<li><a href="obj_uievent.html" title="HTML DOM UiEvent">UiEvent</a></li>
+		<li><a href="obj_event.html">Event</a></li>
+		</ul>
+	</td>
+  </tr>
+  <tr>
+    <td><a href="event_onfocus.html">focus</a></td>
+    <td>在元素获得焦点时发生此事件。</td>
+    <td><a href="obj_focusevent.html">FocusEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onfocusin.html">focusin</a></td>
+    <td>在元素即将获得焦点时发生此事件。</td>
+    <td><a href="obj_focusevent.html">FocusEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onfocusout.html">focusout</a></td>
+    <td>在元素即将失去焦点时发生此事件。</td>
+    <td><a href="obj_focusevent.html">FocusEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_fullscreenchange.html">fullscreenchange</a></td>
+    <td>当元素以全屏模式显示时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_fullscreenerror.html">fullscreenerror</a></td>
+    <td>当元素无法在全屏模式下显示时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onhashchange.html">hashchange</a></td>
+    <td>当 URL 的锚部分发生改变时，发生此事件。</td>
+    <td><a href="obj_hashchangeevent.html">HashChangeEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_oninput.html">input</a></td>
+    <td>当元素获得用户输入时，发生此事件。</td>
+    <td>
+		<ul>
+		<li><a href="obj_inputevent.html" title="HTML DOM InputEvent">InputEvent</a></li>
+		<li><a href="obj_event.html">Event</a></li>
+		</ul>
+    </td>
+  </tr>
+  <tr>
+    <td><a href="event_oninvalid.html">invalid</a></td>
+    <td>当元素无效时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onkeydown.html">keydown</a></td>
+    <td>当用户正在按下键时，发生此事件。</td>
+    <td><a href="obj_keyboardevent.html">KeyboardEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onkeypress.html">keypress</a></td>
+    <td>当用户按下键时，发生此事件。</td>
+    <td><a href="obj_keyboardevent.html">KeyboardEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onkeyup.html">keyup</a></td>
+    <td>当用户松开键时，发生此事件。</td>
+    <td><a href="obj_keyboardevent.html">KeyboardEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onload.html">load</a></td>
+    <td>在对象已加载时，发生此事件。</td>
+	<td>
+		<ul>
+		<li><a href="obj_uievent.html" title="HTML DOM UiEvent">UiEvent</a></li>
+		<li><a href="obj_event.html">Event</a></li>
+		</ul>
+	</td>
+  </tr>
+  <tr>
+    <td><a href="event_onloadeddata.html">loadeddata</a></td>
+    <td>媒体数据加载后，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onloadedmetadata.html">loadedmetadata</a></td>
+    <td>加载元数据（比如尺寸和持续时间）时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onloadstart.html">loadstart</a></td>
+    <td>当浏览器开始查找指定的媒体时，发生此事件。</td>
+    <td><a href="obj_progressevent.html">ProgressEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onmessage_sse.html">message</a></td>
+    <td>在通过此事件源接收消息时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onmousedown.html">mousedown</a></td>
+    <td>当用户在元素上按下鼠标按钮时，发生此事件。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onmouseenter.html">mouseenter</a></td>
+    <td>当指针移动到元素上时，发生此事件。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onmouseleave.html">mouseleave</a></td>
+    <td>当指针从元素上移出时，发生此事件。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onmousemove.html">mousemove</a></td>
+    <td>当指针在元素上方移动时，发生此事件。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onmouseout.html">mouseout</a></td>
+    <td>当用户将鼠标指针移出元素或其中的子元素时，发生此事件。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onmouseover.html">mouseover</a></td>
+    <td>当指针移动到元素或其中的子元素上时，发生此事件。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onmouseup.html">mouseup</a></td>
+    <td>当用户在元素上释放鼠标按钮时，发生此事件。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td>mousewheel</td>
+	<td><span class="deprecated">不推荐使用。</span>请改用 <a href="event_onwheel.html">wheel</a> 事件。</td>
+    <td><a href="obj_wheelevent.html">WheelEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onoffline.html">offline</a></td>
+    <td>当浏览器开始脱机工作时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_ononline.html">online</a></td>
+    <td>当浏览器开始在线工作时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onopen_sse.html">open</a></td>
+    <td>当打开与事件源的连接时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onpagehide.html">pagehide</a></td>
+    <td>当用户离开某张网页进行导航时，发生此事件。</td>
+    <td><a href="obj_pagetransitionevent.html">PageTransitionEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onpageshow.html">pageshow</a></td>
+    <td>在用户导航到某张网页时，发生此事件。</td>
+    <td><a href="obj_pagetransitionevent.html">PageTransitionEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onpaste.html">paste</a></td>
+    <td>当用户将一些内容粘贴到元素中时，发生此事件。</td>
+    <td><a href="obj_clipboardevent.html">ClipboardEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onpause.html">pause</a></td>
+    <td>当媒体被用户暂停或以编程方式暂停时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onplay.html">play</a></td>
+    <td>当媒体已启动或不再暂停时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onplaying.html">playing</a></td>
+    <td>在媒体被暂停或停止以缓冲后播放时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td>popstate</td>
+    <td>窗口的历史记录改变时，发生此事件。</td>
+    <td><a href="obj_popstateevent.html">PopStateEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onprogress.html">progress</a></td>
+    <td>当浏览器正处于获得媒体数据的过程中时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onratechange.html">ratechange</a></td>
+    <td>媒体播放速度改变时发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onreset.html">reset</a></td>
+    <td>重置表单时发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onresize.html">resize</a></td>
+    <td>调整文档视图的大小时发生此事件。</td>
+	<td>
+		<ul>
+		<li><a href="obj_uievent.html" title="HTML DOM UiEvent">UiEvent</a></li>
+		<li><a href="obj_event.html">Event</a></li>
+		</ul>
+    </td>
+  </tr>
+  <tr>
+    <td><a href="event_onscroll.html">scroll</a></td>
+    <td>滚动元素的滚动条时发生此事件。</td>
+	<td>
+		<ul>
+		<li><a href="obj_uievent.html" title="HTML DOM UiEvent">UiEvent</a></li>
+		<li><a href="obj_event.html">Event</a></li>
+		</ul>
+    </td>
+  </tr>
+  <tr>
+    <td><a href="event_onsearch.html">search</a></td>
+    <td>当用户在搜索字段中输入内容时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onseeked.html">seeked</a></td>
+    <td>当用户完成移动/跳到媒体中的新位置时，发生该事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onseeking.html">seeking</a></td>
+    <td>当用户开始移动/跳到媒体中的新位置时，发生该事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onselect.html">select</a></td>
+    <td>用户选择文本后（对于&lt;input&gt;和&lt;textarea&gt;）发生此事件</td>
+	<td>
+		<ul>
+		<li><a href="obj_uievent.html" title="HTML DOM UiEvent">UiEvent</a></li>
+		<li><a href="obj_event.html">Event</a></li>
+		</ul>
+    </td>
+  </tr>
+  <tr>
+    <td><a href="event_onshow.html">show</a></td>
+    <td>当 &lt;menu&gt; 元素显示为上下文菜单时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onstalled.html">stalled</a></td>
+    <td>当浏览器尝试获取媒体数据但数据不可用时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td>storage</td>
+    <td>Web 存储区域更新时发生此事件。</td>
+    <td><a href="obj_storageevent.html">StorageEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onsubmit.html">submit</a></td>
+    <td>在提交表单时发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onsuspend.html">suspend</a></td>
+    <td>当浏览器有意不获取媒体数据时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_ontimeupdate.html">timeupdate</a></td>
+    <td>当播放位置更改时发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_ontoggle.html">toggle</a></td>
+    <td>当用户打开或关闭 &lt;details&gt; 元素时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_touchcancel.html">touchcancel</a></td>
+    <td>在触摸被中断时，发生此事件。</td>
+    <td><a href="obj_touchevent.html">TouchEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_touchend.html">touchend</a></td>
+    <td>当手指从触摸屏上移开时，发生此事件。</td>
+    <td><a href="obj_touchevent.html">TouchEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_touchmove.html">touchmove</a></td>
+    <td>当手指在屏幕上拖动时，发生此事件。</td>
+    <td><a href="obj_touchevent.html">TouchEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_touchstart.html">touchstart</a></td>
+    <td>当手指放在触摸屏上时，发生此事件。</td>
+    <td><a href="obj_touchevent.html">TouchEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_transitionend.html">transitionend</a></td>
+    <td>CSS 转换完成时，发生此事件。</td>
+    <td><a href="obj_transitionevent.html">TransitionEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onunload.html">unload</a></td>
+    <td>页面卸载后（对于 &lt;body&gt;），发生此事件。</td>
+	<td>
+		<ul>
+		<li><a href="obj_uievent.html" title="HTML DOM UiEvent">UiEvent</a></li>
+		<li><a href="obj_event.html">Event</a></li>
+		</ul>
+    </td>
+  </tr>
+  <tr>
+    <td><a href="event_onvolumechange.html">volumechange</a></td>
+    <td>当媒体的音量已更改时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onwaiting.html">waiting</a></td>
+    <td>当媒体已暂停但预期会恢复时，发生此事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_onwheel.html">wheel</a></td>
+    <td>当鼠标滚轮在元素向上或向下滚动时，发生此事件。</td>
+    <td><a href="obj_wheelevent.html">WheelEvent</a></td>
+  </tr>
+  </table>
+</div>
+
+
+
+<div>
+<h2>HTML DOM 事件属性和方法</h2>
+
+<table class="dataintable">
+  <tr>
+    <th style="width:20%">属性/方法</th>
+    <th>描述</th>
+    <th style="width: 20%">属于</th>
+  </tr>
+  <tr>
+    <td><a href="event_altkey.html">altKey</a></td>
+    <td>返回触发鼠标事件时是否按下了 &quot;ALT&quot; 键。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_key_altkey.html">altKey</a></td>
+    <td>返回触发按键事件时是否按下了 &quot;ALT&quot; 键。</td>
+    <td>
+		<ul>
+		<li><a href="obj_keyboardevent.html" title="HTML DOM KeyboardEvent">KeyboardEvent</a></li>
+		<li><a href="obj_touchevent.html" title="HTML DOM TouchEvent">TouchEvent</a></li>
+		</ul>
+	</td>
+  </tr>
+  <tr>
+    <td><a href="event_animation_animationName.html">animationName</a></td>
+    <td>返回动画的名称。</td>
+    <td><a href="obj_animationevent.html">AnimationEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_bubbles.html">bubbles</a></td>
+    <td>返回特定事件是否为冒泡事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_button.html">button</a></td>
+    <td>返回触发鼠标事件时按下的鼠标按钮。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_buttons.html">buttons</a></td>
+    <td>返回触发鼠标事件时按下的鼠标按钮。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_cancelbubble.html">cancelBubble</a></td>
+    <td>设置或返回事件是否应该向上层级进行传播。</td>
+  </tr>
+  <tr>
+    <td><a href="event_cancelable.html">cancelable</a></td>
+    <td>返回事件是否可以阻止其默认操作。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td>changeTouches</td>
+    <td>返回在上一触摸与该触摸之间其状态已更改的所有触摸对象的列表</td>
+    <td><a href="obj_touchevent.html">TouchEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_key_charcode.html">charCode</a></td>
+    <td>返回触发 onkeypress 事件的键的 Unicode 字符代码。</td>
+    <td><a href="obj_keyboardevent.html">KeyboardEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_clientx.html">clientX</a></td>
+    <td>返回触发鼠标事件时，鼠标指针相对于当前窗口的水平坐标。</td>
+    <td>
+		<ul>
+		<li><a href="obj_mouseevent.html" title="HTML DOM MouseEvent">MouseEvent</a></li>
+		<li><a href="obj_touchevent.html" title="HTML DOM TouchEvent">TouchEvent</a></li>
+		</ul>
+	</td>
+  </tr>
+  <tr>
+    <td><a href="event_clienty.html">clientY</a></td>
+    <td>返回触发鼠标事件时，鼠标指针相对于当前窗口的垂直坐标。</td>
+    <td>
+		<ul>
+		<li><a href="obj_mouseevent.html" title="HTML DOM MouseEvent">MouseEvent</a></li>
+		<li><a href="obj_touchevent.html" title="HTML DOM TouchEvent">TouchEvent</a></li>
+		</ul>
+	</td>
+  </tr>
+  <tr>
+    <td>clipboardData</td>
+    <td>返回对象，其中包含受剪贴板操作影响的数据。</td>
+    <td><a href="obj_clipboardevent.html">ClipboardData</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_key_code.html">code</a></td>
+    <td>返回触发事件的键的代码。</td>
+    <td><a href="obj_keyboardevent.html">KeyboardEvent</a></td>
+  </tr>
+  <tr>
+    <td>composed</td>
+    <td>指示该事件是否可以从 Shadow DOM 传递到一般的 DOM。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_composedpath.html">composedPath()</a></td>
+    <td>返回事件的路径。</td>
+  </tr>
+  <tr>
+    <td><a href="event_createevent.html">createEvent()</a></td>
+    <td>创建新事件。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_ctrlkey.html">ctrlKey</a></td>
+    <td>返回触发鼠标事件时是否按下了 &quot;CTRL&quot; 键。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_key_ctrlkey.html">ctrlKey</a></td>
+    <td>返回按键鼠标事件时是否按下了 &quot;CTRL&quot; 键。</td>
+	<td>
+	<ul>
+		<li><a href="obj_keyboardevent.html" title="HTML DOM KeyboardEvent">KeyboardEvent</a></li>
+		<li><a href="obj_touchevent.html" title="HTML DOM TouchEvent">TouchEvent</a></li>
+		</ul>
+	</td>
+  </tr>
+  <tr>
+    <td><a href="event_currenttarget.html">currentTarget</a></td>
+    <td>返回其事件侦听器触发事件的元素。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_inputevent_data.html">data</a></td>
+    <td>返回插入的字符。</td>
+    <td><a href="obj_inputevent.html">InputEvent</a></td>
+  </tr>
+  <tr>
+    <td>dataTransfer</td>
+    <td>返回一个对象，其中包含被拖放或插入/删除的数据。</td>
+	<td>
+		<ul>
+		<li><a href="obj_dragevent.html" title="HTML DOM DragEvent">DragEvent</a></li>
+		<li><a href="obj_inputevent.html" title="HTML DOM InputEvent">InputEvent</a></li>
+		</ul>
+	</td>
+  </tr>
+  <tr>
+    <td><a href="event_defaultprevented.html">defaultPrevented</a></td>
+    <td>返回是否为事件调用 preventDefault() 方法。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_wheel_deltax.html">deltaX</a></td>
+    <td>返回鼠标滚轮的水平滚动量（x 轴）。</td>
+    <td><a href="obj_wheelevent.html">WheelEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_wheel_deltay.html">deltaY</a></td>
+    <td>返回鼠标滚轮的垂直滚动量（y 轴）。</td>
+    <td><a href="obj_wheelevent.html">WheelEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_wheel_deltaz.html">deltaZ</a></td>
+    <td>返回鼠标滚轮的 Z 轴滚动量。</td>
+    <td><a href="obj_wheelevent.html">WheelEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_wheel_deltamode.html">deltaMode</a></td>
+    <td>返回数字，代表增量值（像素、线或页面）的度量单位。</td>
+    <td><a href="obj_wheelevent.html">WheelEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_detail.html">detail</a></td>
+    <td>返回数字，指示鼠标被单击了多少次。</td>
+    <td><a href="obj_uievent.html">UiEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_animation_elapsedtime.html">elapsedTime</a></td>
+    <td>返回动画已运行的秒数。</td>
+    <td><a href="obj_animationevent.html">AnimationEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_transition_elapsedtime.html">elapsedTime</a></td>
+    <td>返回过渡已运行的秒数。</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><a href="event_eventphase.html">eventPhase</a></td>
+    <td>返回当前正在评估事件流处于哪个阶段。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_mouse_getmodifierstate.html">getModifierState()</a></td>
+    <td>返回包含目标范围的数组，此范围将受到插入/删除的影响。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td>getTargetRanges()</td>
+    <td>返回包含目标范围的数组，此范围将受到插入/删除的影响。</td>
+    <td><a href="obj_inputevent.html">InputEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_inputevent_inputtype.html">inputType</a></td>
+    <td>返回更改的类型（即 &quot;inserting&quot; 或 &quot;deleting&quot;）。</td>
+    <td><a href="obj_inputevent.html">InputEvent</a></td>
+  </tr>
+  <tr>
+    <td>isComposing</td>
+    <td>返回事件的状态是否正在构成。</td>
+    <td>
+		<ul>
+		<li><a href="obj_inputevent.html" title="HTML DOM InputEvent">InputEvent</a></li>
+		<li><a href="obj_keyboardevent.html" title="HTML DOM KeyboardEvent">KeyboardEvent</a></li>
+		</ul>
+	</td>
+  </tr>
+  <tr>
+    <td><a href="event_istrusted.html">isTrusted</a></td>
+    <td>返回事件是否受信任。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_key_key.html">key</a></td>
+    <td>返回事件表示的键的键值。</td>
+    <td><a href="obj_keyboardevent.html">KeyboardEvent</a></td>
+  </tr>
+  <tr>
+    <td>key</td>
+    <td>返回更改后的存储项的键。</td>
+    <td><a href="obj_storageevent.html">StorageEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_key_keycode.html">keyCode</a></td>
+    <td>返回触发 onkeypress、onkeydown 或 onkeyup 事件的键的 Unicode 字符代码。</td>
+    <td><a href="obj_keyboardevent.html">KeyboardEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_key_location.html">location</a></td>
+    <td>返回键盘或设备上按键的位置。</td>
+    <td><a href="obj_keyboardevent.html">KeyboardEvent</a></td>
+  </tr>
+  <tr>
+    <td>lengthComputable</td>
+    <td>返回进度的长度是否可计算。</td>
+    <td><a href="obj_progressevent.html">ProgressEvent</a></td>
+  </tr>
+  <tr>
+    <td>loaded</td>
+    <td>返回已加载的工作量。</td>
+    <td><a href="obj_progressevent.html">ProgressEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_metakey.html">metaKey</a></td>
+    <td>返回事件触发时是否按下了 &quot;META&quot; 键。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_key_metakey.html">metaKey</a></td>
+    <td>返回按键事件触发时是否按下了 &quot;META&quot; 键。</td>
+    <td>
+		<ul>
+		<li><a href="obj_keyboardevent.html" title="HTML DOM KeyboardEvent">KeyboardEvent</a></li>
+		<li><a href="obj_touchevent.html" title="HTML DOM TouchEvent">TouchEvent</a></li>
+		</ul>
+	</td>
+  </tr>
+  <tr>
+    <td>MovementX</td>
+    <td>返回相对于上一 mousemove 事件的位置的鼠标指针的水平坐标</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td>MovementY</td>
+    <td>返回相对于上一 mousemove 事件的位置的鼠标指针的垂直坐标</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_hashchange_newurl.html">newURL</a></td>
+    <td>返回更改 hash 后的文档 URL。</td>
+    <td><a href="obj_hashchangeevent.html">HasChangeEvent</a></td>
+  </tr>
+  <tr>
+    <td>newValue</td>
+    <td>返回更改后的存储项目的新值。</td>
+    <td><a href="obj_storageevent.html">StorageEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_offsetx.html">offsetX</a></td>
+    <td>返回鼠标指针相对于目标元素边缘位置的水平坐标。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_offsety.html">offsetY</a></td>
+    <td>返回鼠标指针相对于目标元素边缘位置的垂直坐标。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_hashchange_oldurl.html">oldURL</a></td>
+    <td>返回更改 hash 前的文档 URL。</td>
+    <td><a href="obj_hashchangeevent.html">HasChangeEvent</a></td>
+  </tr>
+  <tr>
+    <td>oldValue</td>
+    <td>返回更改后的存储项目的旧值。</td>
+    <td><a href="obj_storageevent.html">StorageEvent</a></td>
+  </tr>
+  <tr>
+    <td>onemptied</td>
+    <td>当发生不良情况且媒体文件突然不可用时，发生此事件。</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><a href="event_pagex.html">pageX</a></td>
+    <td>返回触发鼠标事件时鼠标指针相对于文档的水平坐标。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+    </tr>
+  <tr>
+    <td><a href="event_pagey.html">pageY</a></td>
+    <td>返回触发鼠标事件时鼠标指针相对于文档的垂直坐标。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+    </tr>
+  <tr>
+    <td><a href="event_pagetransition_persisted.html">persisted</a></td>
+    <td>返回网页是否被浏览器缓存。</td>
+    <td><a href="obj_pagetransitionevent.html">PageTransitionEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_preventdefault.html">preventDefault()</a></td>
+    <td>如果可以取消事件，则将其取消，不执行属于该事件的默认操作。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_transition_propertyName.html">propertyName</a></td>
+    <td>返回与动画或过渡相关联的 CSS 属性的名称。</td>
+    <td>
+		<ul>
+		<li><a href="obj_animationevent.html" title="HTML DOM AnimationEvent">AnimationEvent</a></li>
+		<li><a href="obj_transitionevent.html" title="HTML DOM TransitionEvent">TransitionEvent</a></li>
+		</ul>
+    </td>
+  </tr>
+  <tr>
+    <td>pseudoElement</td>
+    <td>返回动画或过渡的伪元素的名称。</td>
+    <td>
+		<ul>
+		<li><a href="obj_animationevent.html" title="HTML DOM AnimationEvent">AnimationEvent</a></li>
+		<li><a href="obj_transitionevent.html" title="HTML DOM TransitionEvent">TransitionEvent</a></li>
+		</ul>
+    </td>
+  </tr>
+  <tr>
+    <td>region</td>
+    <td></td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_relatedtarget.html">relatedTarget</a></td>
+    <td>返回与触发鼠标事件的元素相关的元素。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_focus_relatedtarget.html">relatedTarget</a></td>
+    <td>返回与触发事件的元素相关的元素。</td>
+    <td><a href="obj_focusevent.html">FocusEvent</a></td>
+  </tr>
+  <tr>
+    <td>repeat</td>
+    <td>返回是否重复按住某个键。</td>
+    <td><a href="obj_keyboardevent.html">KeyboardEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_screenx.html">screenX</a></td>
+    <td>返回窗口/鼠标指针相对于屏幕的水平坐标。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_screeny.html">screenY</a></td>
+    <td>返回窗口/鼠标指针相对于屏幕的垂直坐标。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_shiftkey.html">shiftKey</a></td>
+    <td>返回事件触发时是否按下了 &quot;SHIFT&quot; 键。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_key_shiftkey.html">shiftKey</a></td>
+    <td>返回按键事件触发时是否按下了 &quot;SHIFT&quot; 键。</td>
+    <td>
+		<ul>
+		<li><a href="obj_keyboardevent.html" title="HTML DOM KeyboardEvent">KeyboardEvent</a></li>
+		<li><a href="obj_touchevent.html" title="HTML DOM TouchEvent">TouchEvent</a></li>
+		</ul>
+    </td>
+  </tr>
+  <tr>
+    <td>state</td>
+    <td>返回包含历史记录条目副本的对象。</td>
+    <td><a href="obj_popstateevent.html">PopStateEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_stopimmediatepropagation.html" title="stopImmediatePropagation() 事件方法">stopImme...()</a></td>
+    <td>防止同一事件的其他侦听器被调用。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_stoppropagation.html">stopPropagation()</a></td>
+    <td>防止事件在事件流中进一步传播。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td>storageArea</td>
+    <td>返回代表受影响的存储对象的对象。</td>
+    <td><a href="obj_storageevent.html">StorageEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_target.html">target</a></td>
+    <td>返回触发事件的元素。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_touch_targettouches.html">targetTouches</a></td>
+    <td>返回包含仍与触摸面接触的所有触摸点的Touch对象的TouchList列表</td>
+    <td><a href="obj_touchevent.html">TouchEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_timestamp.html">timeStamp</a></td>
+    <td>返回创建事件的时间（相对于纪元的毫秒数）。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td>total</td>
+    <td>返回将要加载的工作总量。</td>
+    <td><a href="obj_progressevent.html">ProgressEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_touch_touches.html">touches</a></td>
+    <td>返回当前与表面接触的所有 touch 对象的列表。</td>
+    <td><a href="obj_touchevent.html">TouchEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_type.html">type</a></td>
+    <td>返回事件名称。</td>
+    <td><a href="obj_event.html">Event</a></td>
+  </tr>
+  <tr>
+    <td>url</td>
+    <td>返回已更改项目的所在文档的 URL。</td>
+    <td><a href="obj_storageevent.html">StorageEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_which.html">which</a></td>
+    <td>返回触发鼠标事件时按下的鼠标按钮。</td>
+    <td><a href="obj_mouseevent.html">MouseEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_key_which.html">which</a></td>
+    <td>返回触发 onkeypress 事件的键的 Unicode 字符码，或触发 onkeydown 或 onkeyup 事件的键的 Unicode 键码</td>
+    <td><a href="obj_keyboardevent.html">KeyboardEvent</a></td>
+  </tr>
+  <tr>
+    <td><a href="event_view.html">view</a></td>
+    <td>返回对发生事件的 Window 对象的引用。</td>
+    <td><a href="obj_uievent.html">UiEvent</a></td>
+  </tr>
+</table>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="dom_obj_attributes.html" title="HTML DOM Attr 对象">HTML Attribute</a></li>
+<li class="next"><a href="obj_events.html" title="HTML DOM Event 对象">HTML Event 对象</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="index.html">JavaScript 和 HTML DOM 参考手册</a></h5>
+<h5 id="tools_example"><a href="../js/js_examples.html">JavaScript 实例</a></h5>
+<h5 id="tools_quiz"><a href="../js/js_quiz.html">JavaScript 测验</a></h5>
+<h5 id="tools_tutorial"><a href="../js/index.html">JavaScript 教程</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/jsref/dom_obj_event.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:07:00 GMT -->
+</html>

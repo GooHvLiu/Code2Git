@@ -1,0 +1,306 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/sass/sass_functions_string.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:20:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Sass 字符串</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Sass 教程</h2>
+<ul>
+<li><a href="index.html" title="Sass 教程">Sass 教程</a></li>
+<li><a href="sass_intro.html" title="Sass 简介">Sass 简介</a></li>
+<li><a href="sass_installation.html" title="Sass 安装">Sass 安装</a></li>
+<li><a href="sass_variables.html" title="Sass 变量">Sass 变量</a></li>
+<li><a href="sass_nesting.html" title="Sass 嵌套规则和属性">Sass 嵌套</a></li>
+<li><a href="sass_import.html" title="Sass @import 和 Partials">Sass @import</a></li>
+<li><a href="sass_mixin_include.html" title="Sass @mixin 和 @include">Sass @mixin</a></li>
+<li><a href="sass_extend.html" title="Sass @extend 和继承">Sass @extend</a></li>
+</ul>
+<h2>Sass 函数</h2>
+<ul>
+<li class="currentLink"><a href="sass_functions_string.html" title="Sass 字符串函数">Sass 字符串</a></li>
+<li><a href="sass_functions_numeric.html" title="Sass 数字函数">Sass 数字</a></li>
+<li><a href="sass_functions_list.html" title="Sass 列表函数">Sass 列表</a></li>
+<li><a href="sass_functions_map.html" title="Sass 映射函数">Sass 映射</a></li>
+<li><a href="sass_functions_selector.html" title="Sass 选择器函数">Sass 选择器</a></li>
+<li><a href="sass_functions_introspection.html" title="Sass 自省函数">Sass 自省</a></li>
+<li><a href="sass_functions_color.html" title="Sass 颜色函数">Sass 颜色</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Sass 字符串函数</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="sass_extend.html" title="Sass @extend 和继承">Sass @extend</a></li>
+<li class="next"><a href="sass_functions_numeric.html" title="Sass 数字函数">Sass 数字</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>Sass 字符串函数</h2>
+
+<p>字符串函数用于操作和获取有关字符串的信息。</p>
+
+<p>Sass 字符串是从 1 开始的。字符串中的第一个字符位于索引 1，而不是 0。</p>
+
+<p>下表列出了 Sass 中的所有字符串函数：</p>
+
+<table class="definition-usage">
+<tr>
+<th>函数</th>
+<th>描述 &amp; 例子</th>
+</tr>
+
+<tr>
+<td>quote(<i>string</i>)</td>
+<td>
+	<p>将引号添加到字符串，并返回结果。</p>
+
+	<h3>实例：</h3>
+	<p>quote(Hello world!)</p>
+	<p>结果：&quot;Hello world!&quot;</p>
+</td>
+</tr>
+
+<tr>
+<td>str-index(<i>string</i>, <i>substring</i>)</td>
+<td>
+	<p>返回子字符串在字符串中第一次出现的索引。</p>
+
+	<h3>实例：</h3>
+	<p>str-index(&quot;Hello world!&quot;, &quot;H&quot;)</p>
+	<p>结果：1</p>
+</td>
+</tr>
+
+<tr>
+<td>str-insert(<i>string</i>, <i>insert</i>, <i>index</i>)</td>
+<td>
+	<p>返回在指定索引位置插入 <i>insert</i> 的字符串。</p>
+
+	<h3>实例：</h3>
+	<p>str-insert(&quot;Hello world!&quot;, &quot; wonderful&quot;, 6)</p>
+	<p>结果：&quot;Hello wonderful world!&quot;</p>
+</td>
+</tr>
+
+<tr>
+<td>str-length(<i>string</i>)</td>
+<td>
+	<p>返回字符串的长度（以字符计）。</p>
+
+	<h3>实例：</h3>
+	<p>str-length(&quot;Hello world!&quot;)</p>
+	<p>结果：12</p>
+</td>
+</tr>
+
+<tr>
+<td>str-slice(<i>string</i>, <i>start</i>, <i>end</i>)</td>
+<td>
+	<p>从字符串中提取字符；从 <i>start</i> 开始到 <i>end</i> 结束，并返回切片。</p>
+
+	<h3>实例：</h3>
+	<p>str-slice(&quot;Hello world!&quot;, 2, 5)</p>
+	<p>结果：&quot;ello&quot;</p>
+</td>
+</tr>
+
+<tr>
+<td>to-lower-case(<i>string</i>)</td>
+<td>
+	<p>返回转换为小写的字符串副本。</p>
+
+	<h3>实例：</h3>
+	<p>to-lower-case(&quot;Hello World!&quot;)</p>
+	<p>结果：&quot;hello world!&quot;</p>
+</td>
+</tr>
+
+<tr>
+<td>to-upper-case(<i>string</i>)</td>
+<td>
+	<p>返回转换为大写的字符串副本。</p>
+
+	<h3>实例：</h3>
+	<p>to-upper-case(&quot;Hello World!&quot;)</p>
+	<p>结果：&quot;HELLO WORLD!&quot;</p>
+</td>
+</tr>
+
+<tr>
+<td>unique-id()</td>
+<td>
+	<p>返回唯一的随机生成的不带引号的字符串（保证在当前 sass 会话中是唯一的）。</p>
+
+	<h3>实例：</h3>
+	<p>unique-id()</p>
+	<p>结果：tyghefnsv</p>
+</td>
+</tr>
+
+<tr>
+<td>unquote(<i>string</i>)</td>
+<td>
+	<p>删除字符串周围的引号（如果有），并返回结果。</p>
+
+	<h3>实例：</h3>
+	<p>unquote(&quot;Hello world!&quot;)</p>
+	<p>结果：Hello world!</p>
+</td>
+</tr>
+</table>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="sass_extend.html" title="Sass @extend 和继承">Sass @extend</a></li>
+<li class="next"><a href="sass_functions_numeric.html" title="Sass 数字函数">Sass 数字</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="sass_functions_string.html">Sass 参考手册</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/sass/sass_functions_string.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:20:19 GMT -->
+</html>

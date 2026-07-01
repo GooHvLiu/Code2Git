@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/bootstrap5/bootstrap_dropdowns.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:21:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Bootstrap 5 下拉列表</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Bootstrap 5 教程</h2>
+<ul>
+<li><a href="index.html" title="Bootstrap 5 教程">BS5 教程</a></li>
+<li><a href="bootstrap_get_started.html" title="Bootstrap 5 入门">BS5 入门</a></li>
+<li><a href="bootstrap_containers.html" title="Bootstrap 5 容器">BS5 容器</a></li>
+<li><a href="bootstrap_grid_basic.html" title="Bootstrap 5 网格">BS5 网格基础</a></li>
+<li><a href="bootstrap_typography.html" title="Bootstrap 5 文字/排版">BS5 排版</a></li>
+<li><a href="bootstrap_colors.html" title="Bootstrap 5 颜色">BS5 颜色</a></li>
+<li><a href="bootstrap_tables.html" title="Bootstrap 5 表格">BS5 表格</a></li>
+<li><a href="bootstrap_images.html" title="Bootstrap 5 图像">BS5 图像</a></li>
+<li><a href="bootstrap_jumbotron.html" title="Bootstrap 5 Jumbotron">BS5 Jumbotron</a></li>
+<li><a href="bootstrap_alerts.html" title="Bootstrap 5 警告框">BS5 警告框</a></li>
+<li><a href="bootstrap_buttons.html" title="Bootstrap 5 按钮">BS5 按钮</a></li>
+<li><a href="bootstrap_button_groups.html" title="Bootstrap 5 按钮组">BS5 按钮组</a></li>
+<li><a href="bootstrap_badges.html" title="Bootstrap 5 徽章">BS5 徽章</a></li>
+<li><a href="bootstrap_progressbars.html" title="Bootstrap 5 进度条">BS5 进度条</a></li>
+<li><a href="bootstrap_spinners.html" title="Bootstrap 5 加载器">BS5 加载器</a></li>
+<li><a href="bootstrap_pagination.html" title="Bootstrap 5 分页">BS5 分页</a></li>
+<li><a href="bootstrap_list_groups.html" title="Bootstrap 5 列表组">BS5 列表组</a></li>
+<li><a href="bootstrap_cards.html" title="Bootstrap 5 卡片">BS5 卡片</a></li>
+<li class="currentLink"><a href="bootstrap_dropdowns.html" title="Bootstrap 5 下拉菜单">BS5 下拉菜单</a></li>
+<li><a href="bootstrap_collapse.html" title="Bootstrap 5 折叠">BS5 折叠</a></li>
+<li><a href="bootstrap_navs.html" title="Bootstrap 5 导航">BS5 导航</a></li>
+<li><a href="bootstrap_navbar.html" title="Bootstrap 5 导航栏">BS5 导航栏</a></li>
+<li><a href="bootstrap_carousel.html" title="Bootstrap 5 轮播">BS5 轮播</a></li>
+<li><a href="bootstrap_modal.html" title="Bootstrap 5 模态">BS5 模态</a></li>
+<li><a href="bootstrap_tooltip.html" title="Bootstrap 5 工具提示">BS5 工具提示</a></li>
+<li><a href="bootstrap_popover.html" title="Bootstrap 5 弹出框">BS5 弹出框</a></li>
+<li><a href="bootstrap_toast.html" title="Bootstrap 5 Toast">BS5 Toast</a></li>
+<li><a href="bootstrap_scrollspy.html" title="Bootstrap 5 Scrollspy">BS5 Scrollspy</a></li>
+<li><a href="bootstrap_offcanvas.html" title="Bootstrap 5 Offcanvas">BS5 Offcanvas</a></li>
+<li><a href="bootstrap_utilities.html" title="Bootstrap 5 实用工具">BS5 实用工具</a></li>
+<li><a href="bootstrap_flex.html" title="Bootstrap 5 Flex">BS5 Flex</a></li>
+</ul>
+<h2>Bootstrap 5 表单</h2>
+<ul>
+<li><a href="bootstrap_forms.html" title="Bootstrap 5 表单">BS5 表单</a></li>
+<li><a href="bootstrap_form_select.html" title="Bootstrap 5 选择菜单">BS5 选择菜单</a></li>
+<li><a href="bootstrap_form_check_radio.html" title="Bootstrap 5 复选框和单选按钮">BS5 复选框和单选按钮</a></li>
+<li><a href="bootstrap_form_range.html" title="Bootstrap 5 范围">BS5 范围</a></li>
+<li><a href="bootstrap_form_input_group.html" title="Bootstrap 5 输入组">BS5 输入组</a></li>
+<li><a href="bootstrap_form_floating_labels.html" title="Bootstrap 5 表单浮动标签">BS5 浮动标签</a></li>
+<li><a href="bootstrap_form_validation.html" title="Bootstrap 5 表单验证">BS5 表单验证</a></li>
+</ul>
+<h2>Bootstrap 5 网格</h2>
+<ul>
+<li><a href="bootstrap_grid_system.html" title="Bootstrap 5 网格系统">BS5 网格系统</a></li>
+<li><a href="bootstrap_grid_stacked_to_hor.html" title="Bootstrap 5 堆叠/水平">BS5 堆叠/水平</a></li>
+<li><a href="bootstrap_grid_xsmall.html" title="Bootstrap 5 网格：超小型设备">BS5 网格 XSmall</a></li>
+<li><a href="bootstrap_grid_small.html" title="Bootstrap 5 网格：小型设备">BS5 网格 Small</a></li>
+<li><a href="bootstrap_grid_medium.html" title="Bootstrap 5 网格：中型设备">BS5 网格 Medium</a></li>
+<li><a href="bootstrap_grid_large.html" title="Bootstrap 5 网格：大型设备">BS5 网格 Large</a></li>
+<li><a href="bootstrap_grid_xlarge.html" title="Bootstrap 5 网格：超大型设备">BS5 网格 XLarge</a></li>
+<li><a href="bootstrap_grid_xxl.html" title="Bootstrap 5 网格：特大型设备">BS5 网格 XXL</a></li>
+<li><a href="bootstrap_grid_examples.html" title="Bootstrap 5 网格实例">BS5 网格实例</a></li>
+</ul>
+<h2>Bootstrap 5 其他</h2>
+<ul>
+<li><a href="bootstrap_templates.html" title="Bootstrap 5 基础模板">BS5 基础模板</a></li>
+<li><a href="bootstrap_quiz.html" title="Bootstrap 5 测验">BS5 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Bootstrap 5 下拉列表</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="bootstrap_cards.html" title="Bootstrap 5 卡片">BS5 卡片</a></li>
+<li class="next"><a href="bootstrap_collapse.html" title="Bootstrap 5 折叠">BS5 折叠</a></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>基础的下拉列表</h2>
+
+<p>下拉菜单是一种可切换菜单，允许用户从预定义列表中选择值：</p>
+
+<iframe scrolling="no" src="../demo/bs/bs_dropdown-menu.html" style="width:100%;height:180px;border:none;margin-top:15px;overflow:visible;"></iframe>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;dropdown&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;btn btn-primary dropdown-toggle&quot; data-bs-toggle=&quot;dropdown&quot;&gt;
+    下拉按钮
+  &lt;/button&gt;
+  &lt;ul class=&quot;dropdown-menu&quot;&gt;
+    &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;链接 1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;链接 2&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;链接 3&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tcaa6.html?s=h&amp;f=bs_dropdown-menu">亲自试一试</a></p>
+
+<h3>例子解释</h3>
+
+<p><code>.dropdown</code> 类指示下拉菜单。</p>
+
+<p>如需打开下拉菜单，请使用设置了 <code>.dropdown-toggle</code> 类和 <code>data-toggle=&quot;dropdown&quot;</code> 属性的按钮或链接。</p>
+
+<p>将 <code>.dropdown-menu</code> 类添加到 <code>&lt;div&gt;</code> 元素，可实际构建下拉菜单。然后将 <code>.dropdown-item</code> 类添加到下拉菜单中的每个元素（链接或按钮）。</p>
+</div>
+
+
+
+<div>
+<h2>下拉列表分隔线</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_dropdown-divider.html" style="width:100%;height:230px;border:none;margin-top:15px;overflow: visible;"></iframe>
+
+<p><code>.dropdown-divider</code> 类用于通过水平细边框分隔下拉菜单中的链接：</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;li&gt;&lt;hr class=&quot;dropdown-divider&quot;&gt;&lt;/hr&gt;&lt;/li&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tb8e4.html?s=h&amp;f=bs_dropdown-divider">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>下拉列表标题</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_dropdown-header.html" style="width:100%;height:270px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p><code>.dropdown-header</code> 类用于在下拉菜单中添加标题：</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;li&gt;&lt;h5 class=&quot;dropdown-header&quot;&gt;Dropdown header 1&lt;/h5&gt;&lt;/li&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tc9f4.html?s=h&amp;f=bs_dropdown-header">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>禁用的和活动的项目</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_dropdown-active.html" style="width:100%;height:180px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p>请使用 <code>.active</code> 类突出显示特定的下拉项（添加蓝色背景色）。</p>
+
+<p>如需禁用下拉列表中的某个项目，请使用 <code>.disabled</code> 类（在悬停时获得浅灰色文本颜色和 &quot;no-parking-sign&quot; 图标）。</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;普通的&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&quot;dropdown-item active&quot; href=&quot;#&quot;&gt;活动的&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&quot;dropdown-item disabled&quot; href=&quot;#&quot;&gt;禁用的&lt;/a&gt;&lt;/li&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/te497.html?s=h&amp;f=bs_dropdown-active">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>下拉列表位置</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_dropdown-right.html" style="width:100%;height:120px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<iframe scrolling="no" src="../demo/bs/bs_dropdown-left.html" style="width:100%;height:120px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p>您还可以通过将 <code>.dropend</code> 或 <code>.dropstart</code> 类添加到下拉元素，来创建  &quot;dropend&quot; 或 &quot;dropstart&quot; 菜单。请注意，插入符号/箭头是自动添加的：</p>
+
+<h3>Dropright</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;dropdown dropend&quot;&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tc1c7.html?s=h&amp;f=bs_dropdown-right">亲自试一试</a></p>
+
+<h3>Dropleft</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;dropdown dropstart&quot;&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tbc9c.html?s=h&amp;f=bs_dropdown-left">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>下拉列表右对齐</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_dropdown-menu-right.html" style="width:100%;height:180px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p>如需右对齐下拉菜单，请将 <code>.dropdown-menu-end</code> 类添加到带有 <code>.dropdown-menu</code> 的元素：</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;dropdown-menu dropdown-menu-end&quot;&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t8647.html?s=h&amp;f=bs_dropdown-menu-right">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>上拉列表</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_dropdown-menu-dropup.html" style="width:100%;height:80px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p>如果您希望下拉菜单向上展开而不是向下展开，请将 class=&quot;dropdown&quot; 的 &lt;div&gt; 元素更改为 <code>&quot;dropup&quot;</code>：</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;dropup&quot;&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t2f3b-2.html?s=h&amp;f=bs_dropdown-menu-dropup">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>下拉文本</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_dropdown-text.html" style="width:100%;height:250px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p><code>.dropdown-item-text</code> 类用于为下拉项添加纯文本，或用于为链接添加默认链接样式。</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;ul class=&quot;dropdown-menu&quot;&gt;
+  &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;链接 1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;链接 2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;链接 3&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a class=&quot;dropdown-item-text&quot; href=&quot;#&quot;&gt;文本链接&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;span class=&quot;dropdown-item-text&quot;&gt;纯文本&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t5e9b.html?s=h&amp;f=bs_dropdown-text">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>组合按钮和下拉列表</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_button_group_dropdown.html" style="width:100%;height:150px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;btn-group&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot;&gt;华为&lt;/button&gt;
+  &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot;&gt;大疆&lt;/button&gt;
+  &lt;div class=&quot;btn-group&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn btn-primary dropdown-toggle&quot; data-bs-toggle=&quot;dropdown&quot;&gt;小米&lt;/button&gt;
+    &lt;ul class=&quot;dropdown-menu&quot;&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;手机&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;平板电脑&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t030e.html?s=h&amp;f=bs_button_group_dropdown">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>垂直组合按钮和下拉列表</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_button_group_v_dropdown.html" style="width:100%;height:130px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;btn-group-vertical&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot;&gt;华为&lt;/button&gt;
+  &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot;&gt;大疆&lt;/button&gt;
+  &lt;div class=&quot;btn-group&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn btn-primary dropdown-toggle&quot; data-bs-toggle=&quot;dropdown&quot;&gt;小米&lt;/button&gt;
+    &lt;ul class=&quot;dropdown-menu&quot;&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;手机&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;平板电脑&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tf01f.html?s=h&amp;f=bs_button_group_v_dropdown">亲自试一试</a></p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="bootstrap_cards.html" title="Bootstrap 5 卡片">BS5 卡片</a></li>
+<li class="next"><a href="bootstrap_collapse.html" title="Bootstrap 5 折叠">BS5 折叠</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_quiz"><a href="bootstrap_quiz.html">JavaScript 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/bootstrap5/bootstrap_dropdowns.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:21:40 GMT -->
+</html>

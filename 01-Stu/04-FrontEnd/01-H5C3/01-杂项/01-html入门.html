@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>html的入门页面</title>
+    <style>
+        *{
+            background-color: lightsteelblue;
+        }
+        h3 {
+            margin: 20px 0;
+
+         }
+
+         p{
+            font-size: 25px;
+         }
+         .iamol{
+            list-style-type: upper-alpha;
+            background-color: rgb(249, 10, 10);
+
+         }
+         #cat123{
+            background-color: rgb(50, 10, 249);
+         }
+
+         #bianzhong{
+            font-variant: small-caps;
+         }
+
+    </style>
+    <!-- 伪链接 -->
+    <style>
+        a:link {color: rgb(0, 0, 0);} /* 未访问的链接 */
+        a:visited {color: rgb(177, 177, 177);} /* 已访问的链接 */
+        a:hover {color: rgb(101, 150, 241);} /* 鼠标移动到链接上 */
+        a:active {color: yellow;} /* 选定的链接 */
+    </style>
+</head>
+<body>
+    <a href="#">公司首页</a>
+    <a href="#">公司简介</a>
+    <a href="#">产品介绍</a>
+    <a href="#">联系我们</a>
+    <BR></BR>
+    👇是h标签展示👇
+    <h1 align="center"><font face="宋体" >我是h1</font></h1>
+    <h2>我是h2</h2>
+    <h3>我是h3</h3>
+    <h4>我是h4</h4>
+    <h5>我是h5</h5>
+    <h6 style="color:blueviolet; background-color: lightgray;">我是h6</h6>
+    ▲▲▲是h标签展示
+    <br/>
+    👇是p标签展示
+    <p>i am duanluo</p>
+    ▲▲▲是h标签展示
+    <br>
+    👇是hr标签展示
+    <hr>
+    <br>
+    ▲▲▲是hr标签展示
+    <br>
+    👇是图片的标签展示
+    <br>
+    <img src="https://www.lxlinux.net/e/static/images/main.jpg" width="100"="图片描述" title="我是图片展示">
+    <br/>
+    ▲▲是图片的标签展示
+    <br>
+    👇👇是超链接的展示
+    <br>
+    <a href="http://www.baidu.com/">百度链接展示</a>
+    <br>
+    ▲▲是超链接的展示
+    <ol class="ianol">
+        <ol>
+            <li>子列表项1</li>
+            <li>子列表项2</li>
+            <li>子列表项3</li>
+            <li>子列表项4</li>
+        </ol>
+        <li>列表项1</li>
+        <li>列表项2</li>
+        <li>列表项3</li>
+    </ol>
+
+    <ul type="square" id="cat123">
+        <li>
+            lalalal
+        </li>
+        <li>
+            aaaa
+        </li>
+    </ul>
+
+    <!-- 无序列表展示 -->
+    <dl>
+        <dt>加油奥利给</dt>
+        <dd>是在鼓励自己或者鼓励别人时经常用到的词汇</dd>
+        <dd>近现代演变的词汇，目前普遍使用</dd>
+        <dd>特别是中少年人群尤其盛行</dd>
+    </dl>
+    <br>
+    <p>我是字体变种：<p id="bianzhong">I am good boy!</p></p>
+    <br>
+    <table border="1" height="10px">
+        <tr>
+            <td>单元格1</td>
+            <td>单元格2</td>
+            <td>单元格3</td>
+            <td>单元格4</td>
+            <td>单元格5</td>
+        </tr>
+         <tr>
+            <td>单元格1</td>
+            <td>单元格2</td>
+            <td>单元格3</td>
+            <td>单元格4</td>
+            <td>单元格5</td>
+        </tr>
+         <tr>
+            <td>单元格1</td>
+            <td>单元格2</td>
+            <td>单元格3</td>
+            <td>单元格4</td>
+            <td>单元格5</td>
+        </tr>
+         <tr>
+            <td>单元格1</td>
+            <td>单元格2</td>
+            <td>单元格3</td>
+            <td>单元格4</td>
+            <td>单元格5</td>
+        </tr>
+         <tr>
+            <td>单元格1</td>
+            <td>单元格2</td>
+            <td>单元格3</td>
+            <td>单元格4</td>
+            <td>单元格5</td>
+        </tr>
+    </table>
+
+    <form action="www.baidu.com">
+        <input type="text">
+        <input type="password">
+    </form>
+
+    <span>
+        <span>
+            <br>
+
+            <span>
+            <br>
+                <span>
+                    我是嵌套的span
+
+                </span>
+            </span>
+            <br>
+
+            我是嵌套的span</span>
+    </span>
+
+    <script>
+        var num=20;
+        console.log(num);
+        var sum=0;
+        for(var i=0;i<100;i++)
+        {
+            sum+=i;
+        }
+        console.log(sum);
+
+        function add(a,b)
+        {
+            return a+(b*2);
+        }
+
+        console.log(add(100,12));
+        var Arr=["123",23,"234",true];
+        for(var i=0;i<Arr.length;i++)
+        {
+            console.log(Arr[i]);
+        }
+    </script>
+</body>
+</html>

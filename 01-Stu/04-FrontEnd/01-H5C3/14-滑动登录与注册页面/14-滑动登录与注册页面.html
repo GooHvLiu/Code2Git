@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+  <link href="https://fonts.font.im/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="//at.alicdn.com/t/c/font_5168347_907ho5zo7d6.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>14-滑动登录与注册页面</title>
+</head>
+
+<body>
+  <div id="container">
+    <div class="center-container">
+      <!-- 提示相关的页面设置 -->
+      <div id="container-note">
+        <div class="logoin-note">
+          <h2>已有账号？</h2>
+          <p>请使用您的账号进行登录</p>
+          <botton id="btn-logoin" class="btn">登录</botton>
+        </div>
+        <div class="register-note">
+          <h2>没有账号？</h2>
+          <p>立即注册加入我们，和我们一起开始旅程吧</p>
+          <botton id="btn-register" class="btn">注册</botton>
+        </div>
+      </div>
+
+      <!-- 表单相关的页面设置 -->
+      <div id="container-form">
+        <div class="register-form">
+          <h2>注册</h2>
+          <div class="register-form-iconfont">
+            <i class="iconfont icon-QQ"></i>
+            <i class="iconfont icon-wechat"></i>
+            <i class="iconfont icon-weibo"></i>
+          </div>
+          <p>选择以上方式注册或使用您的账号</p>
+          <div class="register-form-form">
+            <input type="text" placeholder="姓名">
+            <input type="text" placeholder="邮箱">
+            <input type="password" placeholder="密码">
+          </div>
+          <botton class="btn btn-register-logoin">注册</botton>
+        </div>
+        <div class="logoin-form">
+          <h2>登录</h2>
+          <div class="logoin-form-iconfont">
+            <i class="iconfont icon-QQ"></i>
+            <i class="iconfont icon-wechat"></i>
+            <i class="iconfont icon-weibo"></i>
+          </div>
+          <p>选择以上方式登录或使用您的账号</p>
+          <div class="logoin-form-form">
+            <input type="text" placeholder="邮箱">
+            <input type="password" placeholder="密码">
+          </div>
+          <a href="#">忘记密码？</a>
+          <botton class="btn btn-register-logoin">登录</botton>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./js/javascript.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.w3school.com.cn/python/r.php?f=ml_preprocessing_3 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 05:58:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8">
+<title>Python Result</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #000000;
+    color: #ffffff;
+    line-height: 1.5;
+    font-family: consolas,"courier new",monospace;
+}
+
+pre#python_result {
+    padding: 8px;
+	font-size:15px;
+}
+</style>
+</head>
+
+<body>
+<pre id="python_result">
+Traceback (most recent call last):
+  File &quot;D:\site\w3school\example\ml\ml_preprocessing_3.py&quot;, line 8, in &lt;module&gt;
+    ohe_cars = pd.get_dummies(cars[[&#039;Car&#039;]])
+                              ~~~~^^^^^^^^^
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\frame.py&quot;, line 4108, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, &quot;columns&quot;)[1]
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\indexes\base.py&quot;, line 6200, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;D:\site\python313\Lib\site-packages\pandas\core\indexes\base.py&quot;, line 6249, in _raise_if_missing
+    raise KeyError(f&quot;None of [{key}] are in the [{axis_name}]&quot;)
+KeyError: &quot;None of [Index([&#039;Car&#039;], dtype=&#039;object&#039;)] are in the [columns]&quot;
+
+</pre>
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/python/r.php?f=ml_preprocessing_3 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 05:58:50 GMT -->
+</html>
+
+

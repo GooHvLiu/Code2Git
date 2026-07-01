@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>00-网页版获取请求模拟</title>
+</head>
+<style>
+  form {
+    margin: 15px 0;
+  }
+</style>
+
+<body>
+  <form action="http://127.0.0.1:9000/login" method="get">
+    <input type="text" name="username">
+    <input type="text" name="password">
+    <input type="submit" value="GET-login提交">
+  </form>
+  <form action="http://127.0.0.1:9000/reg" method="get">
+    <input type="text" name="username">
+    <input type="text" name="password">
+    <input type="submit" value="GET-reg提交">
+  </form>
+  <form action="http://127.0.0.1:9000/login" method="post">
+    <input type="text" name="username">
+    <input type="text" name="password">
+    <input type="submit" value="POST-login提交">
+  </form>
+  <hr>
+  <form action="http://127.0.0.1:9000/index.html" method="get">
+    <input type="text" name="username">
+    <input type="text" name="password">
+    <input type="submit" value="GET-index.html提交">
+  </form>
+  <form action="http://127.0.0.1:9000/css/index.css" method="get">
+    <input type="text" name="username">
+    <input type="text" name="password">
+    <input type="submit" value="GET-css/index.css提交">
+  </form>
+  <form action="http://127.0.0.1:9000/images/logo.png" method="get">
+    <input type="text" name="username">
+    <input type="text" name="password">
+    <input type="submit" value="GET-images/logo.png提交">
+  </form>
+</body>
+
+</html>

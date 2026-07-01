@@ -1,0 +1,594 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/cpp/cpp_vectors.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:58:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>C++ 向量</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>C++ 教程</h2>
+<ul>
+<li><a href="index.html" title="C++ 教程">C++ 教程</a></li>
+<li><a href="cpp_intro.html" title="C++ 简介">C++ 简介</a></li>
+<li><a href="cpp_getstarted.html" title="C++ 入门">C++ 入门</a></li>
+<li><a href="cpp_syntax.html" title="C++ 语法">C++ 语法</a></li>
+<li><a href="cpp_output.html" title="C++ 输出">C++ 输出</a></li>
+<li><a href="cpp_output_numbers.html" title="C++ 输出数字">C++ 输出数字</a></li>
+<li><a href="cpp_new_lines.html" title="C++ 新行">C++ 新行</a></li>
+<li><a href="cpp_comments.html" title="C++ 注释">C++ 注释</a></li>
+<li><a href="cpp_variables.html" title="C++ 变量">C++ 变量</a></li>
+<li><a href="cpp_variables_multiple.html" title="C++ 声明多个变量">C++ 多变量</a></li>
+<li><a href="cpp_variables_identifiers.html" title="C++ 标识符">C++ 标识符</a></li>
+<li><a href="cpp_variables_constants.html" title="C++ 常量">C++ 常量</a></li>
+<li><a href="cpp_variables_reallife.html" title="C++ 变量实例">C++ 变量实例</a></li>
+<li><a href="cpp_user_input.html" title="C++ 用户输入">C++ 用户输入</a></li>
+<li><a href="cpp_data_types.html" title="C++ 数据类型">C++ 数据类型</a></li>
+<li><a href="cpp_data_types_numeric.html" title="C++ 数值数据类型">C++ 数值类型</a></li>
+<li><a href="cpp_data_types_bool.html" title="C++ 布尔数据类型">C++ 布尔类型</a></li>
+<li><a href="cpp_data_types_char.html" title="C++ 字符数据类型">C++ 字符类型</a></li>
+<li><a href="cpp_data_types_string.html" title="C++ 字符串数据类型">C++ 字符串类型</a></li>
+<li><a href="cpp_data_types_reallife.html" title="C++ 数据类型实例">C++ 数据类型实例</a></li>
+<li><a href="cpp_operators.html" title="C++ 运算符">C++ 运算符</a></li>
+<li><a href="cpp_operators_assignment.html" title="C++ 赋值运算符">C++ 赋值运算符</a></li>
+<li><a href="cpp_operators_comparison.html" title="C++ 比较运算符">C++ 比较运算符</a></li>
+<li><a href="cpp_operators_logical.html" title="C++ 逻辑运算符">C++ 逻辑运算符</a></li>
+<li><a href="cpp_strings.html" title="C++ 字符串">C++ 字符串</a></li>
+<li><a href="cpp_strings_concat.html" title="C++ 字符串拼接">C++ 字符串拼接</a></li>
+<li><a href="cpp_strings_numbers.html" title="C++ 数字和字符串">C++ 数字和字符串</a></li>
+<li><a href="cpp_strings_length.html" title="C++ 字符串长度">C++ 字符串长度</a></li>
+<li><a href="cpp_strings_access.html" title="C++ 访问字符串">C++ 访问字符串</a></li>
+<li><a href="cpp_strings_esc.html" title="C++ 特殊字符">C++ 特殊字符</a></li>
+<li><a href="cpp_strings_input.html" title="C++ 用户输入字符串">C++ 用户输入字符串</a></li>
+<li><a href="cpp_strings_namespace.html" title="C++ 字符串命名空间">C++ 字符串命名空间</a></li>
+<li><a href="cpp_math.html" title="C++ 数学运算">C++ 数学运算</a></li>
+<li><a href="cpp_booleans.html" title="C++ 布尔值">C++ 布尔值</a></li>
+<li><a href="cpp_booleans_expressions.html" title="C++ 布尔表达式">C++ 布尔表达式</a></li>
+<li><a href="cpp_conditions.html" title="C++ If ... Else">C++ If ... Else</a></li>
+<li><a href="cpp_conditions_else.html" title="C++ Else">C++ Else</a></li>
+<li><a href="cpp_conditions_elseif.html" title="C++ Else If">C++ Else If</a></li>
+<li><a href="cpp_conditions_shorthand.html" title="C++ 简写 If Else">C++ 简写 If Else</a></li>
+<li><a href="cpp_conditions_reallife.html" title="C++ If ... Else 实际应用实例">C++ If ... Else 实例</a></li>
+<li><a href="cpp_switch.html" title="C++ Switch">C++ Switch</a></li>
+<li><a href="cpp_while_loop.html" title="C++ While 循环">C++ While 循环</a></li>
+<li><a href="cpp_do_while_loop.html" title="C++ Do/While 循环">C++ Do/While 循环</a></li>
+<li><a href="cpp_while_loop_reallife.html" title="C++ While 循环实例">C++ While 循环实例</a></li>
+<li><a href="cpp_for_loop.html" title="C++ For 循环">C++ For 循环</a></li>
+<li><a href="cpp_for_loop_reallife.html" title="C++ For 循环实例">C++ For 循环实例</a></li>
+<li><a href="cpp_break.html" title="C++ Break 和 Continue">C++ Break 和 Continue</a></li>
+<li><a href="cpp_arrays.html" title="C++ 数组">C++ 数组</a></li>
+<li><a href="cpp_arrays_loop.html" title="C++ 数组和循环">C++ 数组和循环</a></li>
+<li><a href="cpp_arrays_omit.html" title="C++ 省略数组大小">C++ 省略数组大小</a></li>
+<li><a href="cpp_arrays_size.html" title="C++ 数组大小">C++ 数组大小</a></li>
+<li><a href="cpp_arrays_reallife.html" title="C++ 数组实际应用实例">C++ 数组实例</a></li>
+<li><a href="cpp_arrays_multi.html" title="C++ 多维数组">C++ 多维数组</a></li>
+<li><a href="cpp_structs.html" title="C++ 结构体">C++ 结构体</a></li>
+<li><a href="cpp_enum.html" title="C++ 枚举">C++ 枚举</a></li>
+<li><a href="cpp_references.html" title="C++ 创建引用">C++ 创建引用</a></li>
+<li><a href="cpp_references_memory.html" title="C++ 内存地址">C++ 内存地址</a></li>
+<li><a href="cpp_pointers.html" title="C++ 创建指针">C++ 创建指针</a></li>
+<li><a href="cpp_pointers_dereference.html" title="C++ 解引用">C++ 解引用</a></li>
+<li><a href="cpp_pointers_modify.html" title="C++ 修改指针">C++ 修改指针</a></li>
+</ul>
+<h2>C++ 函数</h2>
+<ul>
+<li><a href="cpp_functions.html" title="C++ 函数">C++ 函数</a></li>
+<li><a href="cpp_function_param.html" title="C++ 函数参数">C++ 函数参数</a></li>
+<li><a href="cpp_function_default.html" title="C++ 默认参数">C++ 默认参数</a></li>
+<li><a href="cpp_function_multiple.html" title="C++ 多个参数">C++ 多个参数</a></li>
+<li><a href="cpp_function_return.html" title="C++ Return 关键字">C++ 返回值</a></li>
+<li><a href="cpp_function_reference.html" title="C++ 函数 - 通过引用传参">C++ 通过引用传参</a></li>
+<li><a href="cpp_function_array.html" title="C++ 向函数传递数组">C++ 传递数组</a></li>
+<li><a href="cpp_function_reallife.html" title="C++ 函数实例">C++ 函数实例</a></li>
+<li><a href="cpp_function_overloading.html" title="C++ 函数重载">C++ 函数重载</a></li>
+<li><a href="cpp_scope.html" title="C++ 变量作用域">C++ 变量作用域</a></li>
+<li><a href="cpp_functions_recursion.html" title="C++ 递归">C++ 递归</a></li>
+</ul>
+<h2>C++ 类</h2>
+<ul>
+<li><a href="cpp_oop.html" title="C++ OOP">C++ OOP</a></li>
+<li><a href="cpp_classes.html" title="C++ 类和对象">C++ 类/对象</a></li>
+<li><a href="cpp_class_methods.html" title="C++ 类方法">C++ 类方法</a></li>
+<li><a href="cpp_constructors.html" title="C++ 构造函数">C++ 构造函数</a></li>
+<li><a href="cpp_access_specifiers.html" title="C++ 访问修饰符">C++ 访问修饰符</a></li>
+<li><a href="cpp_encapsulation.html" title="C++ 封装">C++ 封装</a></li>
+<li><a href="cpp_inheritance.html" title="C++ 继承">C++ 继承</a></li>
+<li><a href="cpp_inheritance_multilevel.html" title="C++ 多层继承">C++ 多层继承</a></li>
+<li><a href="cpp_inheritance_multiple.html" title="C++ 多重继承">C++ 多重继承</a></li>
+<li><a href="cpp_inheritance_access.html" title="C++ 继承访问">C++ 继承访问</a></li>
+<li><a href="cpp_polymorphism.html" title="C++ 多态">C++ 多态</a></li>
+<li><a href="cpp_files.html" title="C++ 文件">C++ 文件</a></li>
+<li><a href="cpp_exceptions.html" title="C++ 异常处理">C++ 异常处理</a></li>
+<li><a href="cpp_date.html" title="C++ 日期和时间">C++ 日期</a></li>
+</ul>
+<h2>C++ 数据结构</h2>
+<ul>
+<li><a href="cpp_data_structures.html" title="C++ 数据结构和 STL">C++ 数据结构</a></li>
+<li class="currentLink"><a href="cpp_vectors.html" title="C++ 向量">C++ 向量</a></li>
+<li><a href="cpp_list.html" title="C++ 列表">C++ 列表</a></li>
+<li><a href="cpp_stacks.html" title="C++ 栈">C++ 栈</a></li>
+<li><a href="cpp_queues.html" title="C++ 队列">C++ 队列</a></li>
+<li><a href="cpp_deque.html" title="C++ 双端队列">C++ 双端队列</a></li>
+<li><a href="cpp_sets.html" title="C++ 集合">C++ 集合</a></li>
+<li><a href="cpp_maps.html" title="C++ 映射">C++ 映射</a></li>
+<li><a href="cpp_iterators.html" title="C++ 迭代器">C++ 迭代器</a></li>
+<li><a href="cpp_algorithms.html" title="C++ 算法">C++ 算法</a></li>
+</ul>
+<h2>C++ 案例</h2>
+<ul>
+<li><a href="cpp_howto_add_two_numbers.html" title="C++ 如何加两个数字">C++ 加两个数字</a></li>
+<li><a href="cpp_howto_random_number.html" title="C++ 如何生成随机数">C++ 随机数</a></li>
+</ul>
+<h2>C++ 数据结构</h2>
+<ul>
+<li><a href="cpp_reference.html" title="C++ 参考手册">C++ 参考手册</a></li>
+<li><a href="cpp_ref_keywords.html" title="C++ 关键词">C++ 关键词</a></li>
+<li><a href="cpp_ref_iostream.html" title="C++ &lt;iostream&gt; 库">C++ &lt;iostream&gt;</a></li>
+<li><a href="cpp_ref_fstream.html" title="C++ &lt;fstream&gt; 库">C++ &lt;fstream&gt;</a></li>
+<li><a href="cpp_ref_math.html" title="C++ &lt;cmath&gt; 库">C++ &lt;cmath&gt;</a></li>
+<li><a href="cpp_ref_string.html" title="C++ &lt;string&gt; 库">C++ &lt;string&gt;</a></li>
+<li><a href="cpp_ref_cstring.html" title="C++ &lt;cstring&gt; 库">C++ &lt;cstring&gt;</a></li>
+<li><a href="cpp_ref_ctime.html" title="C++ &lt;ctime&gt; 库">C++ &lt;ctime&gt;</a></li>
+<li><a href="cpp_ref_vector.html" title="C++ &lt;vector&gt; 库">C++ &lt;vector&gt;</a></li>
+<li><a href="cpp_ref_algorithm.html" title="C++ &lt;algorithm&gt; 库">C++ &lt;algorithm&gt;</a></li>
+</ul>
+<h2>实例 / 测验</h2>
+<ul>
+<li><a href="cpp_examples.html" title="C++ 实例">C++ 实例</a></li>
+<li><a href="cpp_quiz.html" title="C++ 测验">C++ 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>C++ 向量</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="cpp_data_structures.html" title="C++ 数据结构和 STL">C++ 数据结构</a></li>
+<li class="next"><a href="cpp_list.html" title="C++ 列表">C++ 列表</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>C++ 向量</h2>
+
+<p>C++ 中的向量 (vector) 是一种可动态调整大小的<a href="cpp_arrays.html" title="C++ 数组">数组</a>。</p>
+
+<p>向量和数组都是用于存储相同<em>数据类型</em>元素的数据结构。</p>
+
+<p>数组与向量的区别在于：数组的大小不可修改（无法增删元素），而向量可以根据需要自动扩容或缩容。</p>
+
+<p>使用向量需要包含 <code>&lt;vector&gt;</code> 头文件：</p>
+
+<pre class="language-cpp">
+// 引入 vector 库
+#include &lt;vector&gt;
+</pre>
+</section>
+
+
+
+<section>
+<h2>创建 Vector</h2>
+
+<p>使用 <code>vector</code> 关键字创建向量，在尖括号 <code>&lt;&gt;</code> 内指定存储的<em>数据类型</em>，然后命名向量，语法为：</p>
+
+<pre class="language-cpp">
+vector&lt;type&gt; vectorName
+</pre>
+
+<h3>实例</h3>
+
+<pre class="language-cpp">
+// 创建一个存储字符串的向量，命名为 cars
+vector&lt;string&gt; cars;
+</pre>
+
+<p>若要在声明时初始化元素，可以使用大括号 <code>{}</code> 包裹逗号分隔的列表（与数组类似）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-cpp">
+// 创建并初始化一个存储字符串的向量
+vector&lt;string&gt; cars = {&quot;Volvo&quot;, &quot;BMW&quot;, &quot;Ford&quot;, &quot;Tesla&quot;};
+
+// 打印 vector 元素
+for (string car : cars) {
+  cout &lt;&lt; car &lt;&lt; &quot;\n&quot;;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t2957.html?f=cpp_vectors">亲自试一试</a></p>
+
+<p class="note"><span>注意：</span>向量的类型（如本例中的 <code>string</code>）在声明后不可更改。</p>
+</section>
+
+
+
+<section>
+<h2>访问 Vector 元素</h2>
+
+<p>通过方括号 <code>[]</code> 内指定索引号来访问元素。</p>
+
+<p>与数组类似，向量的索引从 0 开始，即 <code>[0]</code> 是第一个元素，<code>[1]</code> 是第二个，依此类推：</p>
+
+<h3>实例</h3>
+
+<pre class="language-cpp">
+// 创建一个存储字符串的向量，命名为 cars
+vector&lt;string&gt; cars = {&quot;Volvo&quot;, &quot;BMW&quot;, &quot;Ford&quot;, &quot;Tesla&quot;};
+
+// 获取第一个元素
+cout &lt;&lt; cars[0];  // 输出 Volvo
+
+// 获取第二个元素
+cout &lt;&lt; cars[1];  // 输出 BMW
+</pre>
+
+<p class="tiy"><a target="_blank" href="t5f2a.html?f=cpp_vectors_access_1">亲自试一试</a></p>
+
+<p>vector 库的优势在于提供了许多实用函数。例如，可以用 <code>.front()</code> 和 <code>.back()</code> 分别访问首尾元素：</p>
+
+<h3>实例</h3>
+
+<pre class="language-cpp">
+// 创建一个存储字符串的向量，命名为 cars
+vector&lt;string&gt; cars = {&quot;Volvo&quot;, &quot;BMW&quot;, &quot;Ford&quot;, &quot;Tesla&quot;};
+
+// 获取第一个元素
+cout &lt;&lt; cars.front();  // 输出 Volvo
+
+// 获取最后一个元素 
+cout &lt;&lt; cars.back();   // 输出 Tesla
+</pre>
+
+<p class="tiy"><a target="_blank" href="t6f8e.html?f=cpp_vectors_access_2">亲自试一试</a></p>
+
+<p>要访问指定索引处的元素，可以使用 <code>.at()</code> 函数并指定索引号：</p>
+
+<h3>实例</h3>
+
+<pre class="language-cpp">
+// 创建一个名为 cars 的向量，用于存储字符串
+vector&lt;string&gt; cars = {&quot;Volvo&quot;, &quot;BMW&quot;, &quot;Ford&quot;, &quot;Tesla&quot;};
+
+// 获取第二个元素
+cout &lt;&lt; cars.at(1);
+
+// 获取第三个元素
+cout &lt;&lt; cars.at(2);
+</pre>
+
+<p class="tiy"><a target="_blank" href="tbf95.html?f=cpp_vectors_access_3">亲自试一试</a></p>
+
+<p class="note"><span>注意：</span>通常更推荐使用 <code>.at()</code> 函数而非方括号 <code>[]</code>，因为当元素超出范围时，<code>.at()</code> 函数会抛出错误信息：</p>
+
+<h3>实例</h3>
+
+<pre class="language-cpp">
+// 创建一个名为 cars 的向量，用于存储字符串
+vector&lt;string&gt; cars = {&quot;Volvo&quot;, &quot;BMW&quot;, &quot;Ford&quot;, &quot;Tesla&quot;};
+
+// 尝试访问不存在的元素（将抛出异常）
+cout &lt;&lt; cars.at(6);
+</pre>
+
+<p class="tiy"><a target="_blank" href="t3c7a.html?f=cpp_vectors_access_4">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>修改向量元素</h2>
+
+<p>要更改特定元素的值，可以引用其索引号：</p>
+
+<h3>实例</h3>
+
+<pre class="language-cpp">
+vector&lt;string&gt; cars = {&quot;Volvo&quot;, &quot;BMW&quot;, &quot;Ford&quot;, &quot;Tesla&quot;};
+
+// 更改第一个元素的值
+cars[0] = &quot;Opel&quot;;
+
+cout &lt;&lt; cars[0];  // 现在输出 Opel 而非 Volvo
+</pre>
+
+<p class="tiy"><a target="_blank" href="t97cc.html?f=cpp_vectors_change_1">亲自试一试</a></p>
+
+<p>然而，使用 <code>.at()</code> 函数更为安全：</p>
+
+<h3>实例</h3>
+
+<pre class="language-cpp">
+vector&lt;string&gt; cars = {&quot;Volvo&quot;, &quot;BMW&quot;, &quot;Ford&quot;, &quot;Tesla&quot;};
+
+// 更改第一个元素的值
+cars.at(0) = &quot;Opel&quot;;
+
+cout &lt;&lt; cars.at(0);  // 现在输出 Opel 而非 Volvo
+</pre>
+
+<p class="tiy"><a target="_blank" href="teae9.html?f=cpp_vectors_change_2">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>添加向量元素</h2>
+
+<p>向量和数组的最大区别在于，向量可以动态增长。这意味着可以向向量中添加或删除元素。</p>
+
+<p>要向向量中添加元素，可以使用 <code><a href="ref_vector_push_back.html" title="C++ vector push_back() 函数">.push_back()</a></code> 函数，该函数会在向量的末尾添加一个元素：</p>
+
+<h3>实例</h3>
+
+<pre class="language-cpp">
+vector&lt;string&gt; cars = {&quot;Volvo&quot;, &quot;BMW&quot;, &quot;Ford&quot;, &quot;Tesla&quot;};
+cars.push_back(&quot;Audi&quot;);
+</pre>
+
+<p class="tiy"><a target="_blank" href="t7955.html?f=cpp_vectors_add_1">亲自试一试</a></p>
+
+<p>可以添加任意数量的元素：</p>
+
+<h3>实例</h3>
+
+<pre class="language-cpp">
+vector&lt;string&gt; cars = {&quot;Volvo&quot;, &quot;BMW&quot;, &quot;Ford&quot;, &quot;Tesla&quot;};
+cars.push_back(&quot;Audi&quot;);
+cars.push_back(&quot;VW&quot;);
+cars.push_back(&quot;BYD&quot;);
+cars.push_back(&quot;Mini&quot;);
+</pre>
+
+<p class="tiy"><a target="_blank" href="tab52.html?f=cpp_vectors_add_2">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>删除向量元素</h2>
+
+<p>要从向量中删除元素，可以使用 <code><a href="ref_vector_pop_back.html" title="C++ vector pop_back() 函数">.pop_back()</a></code> 函数，该函数会从向量的末尾删除一个元素：</p>
+
+<h3>实例</h3>
+
+<pre class="language-cpp">
+vector&lt;string&gt; cars = {&quot;Volvo&quot;, &quot;BMW&quot;, &quot;Ford&quot;, &quot;Tesla&quot;};
+cars.pop_back();
+</pre>
+
+<p class="tiy"><a target="_blank" href="te1fb.html?f=cpp_vectors_remove">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>向量大小</h2>
+
+<p>要了解向量中有多少个元素，可以使用 <code><a href="ref_vector_size.html" title="C++ vector size() 函数">.size()</a></code> 函数：</p>
+
+<h3>实例</h3>
+
+<pre class="language-cpp">
+vector&lt;string&gt; cars = {&quot;Volvo&quot;, &quot;BMW&quot;, &quot;Ford&quot;, &quot;Tesla&quot;};
+cout &lt;&lt; cars.size();  // 输出 4
+</pre>
+
+<p class="tiy"><a target="_blank" href="t9ddf.html?f=cpp_vectors_size">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>检查向量是否为空</h2>
+
+<p>还有一个函数可以用来判断向量是否为空。</p>
+
+<p><code><a href="ref_vector_empty.html" title="C++ vector empty() 函数">.empty()</a></code> 函数在向量为空时返回 <code>1</code>（true），在向量包含一个或多个元素时返回 <code>0</code>（false）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-cpp">
+vector&lt;string&gt; cars;
+cout &lt;&lt; cars.empty();  // 输出 1（向量为空）
+</pre>
+
+<p class="tiy"><a target="_blank" href="tdc3b.html?f=cpp_vectors_empty_1">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<pre class="language-cpp">
+vector&lt;string&gt; cars = {&quot;Volvo&quot;, &quot;BMW&quot;, &quot;Ford&quot;, &quot;Tesla&quot;};
+cout &lt;&lt; cars.empty();  // 输出 0（向量不为空）
+</pre>
+
+<p class="tiy"><a target="_blank" href="tdb11.html?f=cpp_vectors_empty_2">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>遍历向量</h2>
+
+<p>可以使用 <code>for</code> 循环结合 <code><a href="ref_vector_size.html" title="C++ vector size() 函数">.size()</a></code> 函数来遍历向量元素：</p>
+
+<h3>实例</h3>
+
+<pre class="language-cpp">
+vector&lt;string&gt; cars = {&quot;Volvo&quot;, &quot;BMW&quot;, &quot;Ford&quot;, &quot;Tesla&quot;};
+
+for (int i = 0; i &lt; cars.size(); i++) {
+  cout &lt;&lt; cars[i] &lt;&lt; &quot;\n&quot;;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="ta6e5.html?f=cpp_vectors_loop_1">亲自试一试</a></p>
+
+<p>也可以使用 C++ 11（2011 年）引入的 <em>for-each 循环</em>，这种方式更简洁、更易读：</p>
+
+<h3>实例</h3>
+
+<pre class="language-cpp">
+vector&lt;string&gt; cars = {&quot;Volvo&quot;, &quot;BMW&quot;, &quot;Ford&quot;, &quot;Tesla&quot;};
+
+for (string car : cars) {
+  cout &lt;&lt; car &lt;&lt; &quot;\n&quot;;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="td0f5.html?f=cpp_vectors_loop_2">亲自试一试</a></p>
+
+<p class="tip"><span>提示：</span>还可以使用<a href="cpp_iterators.html" title="C++ 迭代器">迭代器</a>来遍历向量，这将在后续章节中详细介绍。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="cpp_data_structures.html" title="C++ 数据结构和 STL">C++ 数据结构</a></li>
+<li class="next"><a href="cpp_list.html" title="C++ 列表">C++ 列表</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="cpp_reference.html">C++ 参考手册</a></h5>
+<h5 id="tools_example"><a href="cpp_examples.html">C++ 实例</a></h5>
+<h5 id="tools_quiz"><a href="cpp_quiz.html">C++ 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/cpp/cpp_vectors.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:59:04 GMT -->
+</html>

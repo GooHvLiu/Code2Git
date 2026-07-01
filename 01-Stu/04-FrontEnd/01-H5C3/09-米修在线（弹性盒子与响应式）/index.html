@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 引入font-awesome -->
+  <link rel="stylesheet" href="https://cdn.staticfile.net/font-awesome/6.5.1/css/all.css">
+  <!-- 引入网站图标 -->
+  <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+  <!-- 引入重置样式 -->
+  <link rel="stylesheet" href="./css/base.css">
+  <!-- 引入公共样式style -->
+  <link rel="stylesheet" href="./css/utility.css">
+  <!-- 引入style样式 -->
+  <link rel="stylesheet" href="./css/style.css">
+  <!-- 引入响应式媒体查询-01-移动端 -->
+  <link rel="stylesheet" media="screen and (max-width:768px)" href="./css/mobile.css">
+  <!-- 引入响应式媒体查询-02-大屏幕端 -->
+  <link rel="stylesheet" media="screen and (min-width:1100px)" href="./css/widescreen.css">
+  <title>米修在线 | 前端在线学习平台</title>
+</head>
+
+<body>
+  <!-- 以下为导航栏nav部分-Start -->
+  <nav id="navbar">
+    <h1 class="logo">
+      <span class="text-primary">
+        <i class="fas fa-book-open"></i>
+      </span>
+      米修在线
+    </h1>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#what">What</a></li>
+      <li><a href="#who">Who</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <!-- 以上为导航栏nav部分-End -->
+
+  <!-- 以下为home部分-Start -->
+  <header id="home">
+    <div class="home-content">
+      <h1 class="l-heading">欢迎来到米修在线</h1>
+      <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse illum quas eveniet quaerat magnam
+        debitis?</p>
+      <a href="#what" class="btn">阅读更多</a>
+    </div>
+  </header>
+  <!-- 以上为Home部分-End -->
+
+  <!-- 以下为What We Do部分-Start -->
+  <section id="what" class="bg-light py-1">
+    <div class="container">
+      <h2 class="m-heading text-center"><span class="text-primary">What</span> We Do</h2>
+      <div class="items">
+        <div class="item">
+          <i class="fas fa-university fa-2x"></i>
+          <div>
+            <h3>前端基础课程</h3>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, praesentium.</p>
+          </div>
+        </div>
+        <div class="item">
+          <i class="fas fa-book-reader fa-2x"></i>
+          <div>
+            <h3>前端进阶课程</h3>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, praesentium.</p>
+          </div>
+        </div>
+        <div class="item">
+          <i class="fas fa-pencil-alt fa-2x"></i>
+          <div>
+            <h3>前端高阶课程</h3>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, praesentium.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- 以上为What We Do部分-End -->
+
+  <!-- 以下为Who We Are部分-Start -->
+  <section id="who">
+    <div class="who-img"></div>
+    <div class="who-text bg-dark p-2">
+      <h2 class="m-heading"><span class="text-primary">Who</span> We Are</h2>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem quaerat recusandae itaque numquam
+        similique ipsam rem quo aut doloribus quas suscipit officia, sunt animi, earum amet tempore ullam nihil
+        architecto.</p>
+      <h3>Our Team</h3>
+      <ul class="list">
+        <li>Mark Smith: CEO</li>
+        <li>Shannon Johnson: CFO</li>
+        <li>John Corbit: Lead Accountant</li>
+        <li>Janet Williams: Investment Manager</li>
+        <li>Kara Jackson: Senior Accountant</li>
+      </ul>
+    </div>
+  </section>
+  <!-- 以上为Who We Are部分-End -->
+
+  <!-- 以下为Our Clients部分-Start -->
+  <section id="clients" class="py-1">
+    <div class="container">
+      <h2 class="m-heading text-center">
+        <span class="text-primary">Our</span> Clients
+      </h2>
+      <div class="items py-1">
+        <div><img src="./img/logo1.png" alt="clients"></div>
+        <div><img src="./img/logo2.png" alt="clients"></div>
+        <div><img src="./img/logo3.png" alt="clients"></div>
+        <div><img src="./img/logo4.png" alt="clients"></div>
+        <div><img src="./img/logo5.png" alt="clients"></div>
+      </div>
+    </div>
+  </section>
+  <!-- 以上为Our Clients部分-End -->
+
+  <!-- 以下为Contact Us部分-Start -->
+  <section id="contact">
+    <div class="contact-form bg-primary p-2">
+      <h2 class="m-heading">Contact Us</h2>
+      <p>如有疑问请填写如下信息联系我们！</p>
+      <form>
+        <div class="form-group">
+          <label for="name">姓名</label>
+          <input type="name" name="name" id="name" placeholder="请输入姓名">
+        </div>
+        <div class="form-group">
+          <label for="email">邮箱</label>
+          <input type="email" name="email" id="email" placeholder="请输入邮箱">
+        </div>
+        <div class="form-group">
+          <label for="phone">电话</label>
+          <input type="phone" name="phone" id="phone" placeholder="请输入电话">
+        </div>
+        <div class="form-group">
+          <label for="message">反馈信息</label>
+          <textarea type="message" name="message" id="message" placeholder="请输入内容"></textarea>
+        </div>
+      </form>
+      <input type="submit" value="提交" class="btn btn-dark">
+    </div>
+    <div class="contact-img"></div>
+  </section>
+  <!-- 以上为Contact Us部分-End -->
+
+  <!-- 以下为Footer部分-End -->
+  <footer id="footer" class="bg-dark text-center">
+    <div class="container">
+      <p class="footer-content">
+        Copyright &copy; 2021,米修在线，All Rights Reserved
+      </p>
+    </div>
+  </footer>
+  <!-- 以上为Footer部分-End -->
+</body>
+
+</html>

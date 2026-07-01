@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>05-请求超时与网络异常</title>
+    <style>
+      #result {
+        width: 200px;
+        height: 100px;
+        border: orange 1px solid;
+      }
+    </style>
+  </head>
+  <body>
+    <button>点击发送请求</button>
+    <div id="result"></div>
+    <!-- IE浏览器会缓存AJAX此前的数据 -->
+    <script>
+      // 获取Button元素
+      const btn = document.getElementsByTagName("button")[0];
+      const result = document.querySelector("#result");
+      // 绑定事件
+      btn.addEventListener("click", function () {
+        // 1.创建对象
+        const xhr = new XMLHttpRequest();
+
+        // 增加一个2秒设置
+        xhr.timeout = 2000;
+
+        //服务器响应超时
+        xhr.ontimeout = function () {
+          console.log("网络服务器异常，请稍后再试");
+        };
+
+        //请求错误
+        xhr.onerror = function () {
+          console.log("您的网络存在异常，请稍后再试。");
+        };
+        // 2. 初始化
+        xhr.open("GET", "http://127.0.0.1:8000/delay");
+
+        // 3. 发送
+        xhr.send();
+      });
+    </script>
+  </body>
+</html>

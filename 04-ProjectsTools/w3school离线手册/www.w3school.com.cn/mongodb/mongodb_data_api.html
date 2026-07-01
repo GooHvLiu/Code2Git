@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/mongodb/mongodb_data_api.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:45:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>MongoDB Data API</title>
+
+</head>
+
+<body class="serverscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>MongoDB 教程</h2>
+<ul>
+<li><a href="index.html" title="MongoDB 教程">MongoDB 教程</a></li>
+<li><a href="mongodb_get_started.html" title="MongoDB 入门">MongoDB 入门</a></li>
+<li><a href="mongodb_query_api.html" title="MongoDB Query API">MongoDB Query API</a></li>
+<li><a href="mongodb_mongosh_create_database.html" title="MongoDB 创建数据库">MongoDB 创建数据库</a></li>
+<li><a href="mongodb_mongosh_create_collection.html" title="MongoDB 创建集合">MongoDB 创建集合</a></li>
+<li><a href="mongodb_mongosh_insert.html" title="MongoDB 插入">MongoDB 插入</a></li>
+<li><a href="mongodb_mongosh_find.html" title="MongoDB 查找">MongoDB 查找</a></li>
+<li><a href="mongodb_mongosh_update.html" title="MongoDB 更新">MongoDB 更新</a></li>
+<li><a href="mongodb_mongosh_delete.html" title="MongoDB 删除">MongoDB 删除</a></li>
+<li><a href="mongodb_query_operators.html" title="MongoDB 查询运算符">MongoDB 查询运算符</a></li>
+<li><a href="mongodb_update_operators.html" title="MongoDB 更新运算符">MongoDB 更新运算符</a></li>
+<li><a href="mongodb_aggregations_intro.html" title="MongoDB 聚合">MongoDB 聚合</a></li>
+<li><a href="mongodb_indexing_search.html" title="MongoDB 索引与搜索">MongoDB 索引与搜索</a></li>
+<li><a href="mongodb_schema_validation.html" title="MongoDB 验证">MongoDB 验证</a></li>
+<li class="currentLink"><a href="mongodb_data_api.html" title="MongoDB Data API">MongoDB Data API</a></li>
+<li><a href="mongodb_drivers.html" title="MongoDB 驱动程序">MongoDB 驱动程序</a></li>
+<li><a href="mongodb_nodejs_connect_database.html" title="MongoDB MongoDB Node.js 数据库交互">MongoDB Node.js</a></li>
+<li><a href="mongodb_charts.html" title="MongoDB 图表">MongoDB 图表</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>MongoDB Data API</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="mongodb_schema_validation.html" title="MongoDB 验证">MongoDB 验证</a></li>
+<li class="next"><a href="mongodb_drivers.html" title="MongoDB 驱动程序">MongoDB 驱动程序</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>MongoDB Data API</h2>
+
+<p><a href="https://www.mongodb.com/zh-cn/docs/atlas/app-services/data-api/" title="Atlas Data API" target="_blank">MongoDB Data API</a> 可用于查询和更新 MongoDB 数据库中的数据，而无需特定于语言的驱动程序。</p>
+
+<p>应尽可能使用语言驱动程序，但是当驱动程序不可用或对于应用程序而言过于繁琐时，MongoDB Data API 就派上了用场。</p>
+</section>
+
+
+
+<section>
+<h2>使用 MongoDB Data API 读取和写入</h2>
+
+<p>MongoDB Data API 是一组预先配置的 HTTPS 端点，可用于从 MongoDB Atlas 数据库中读取和写入数据。</p>
+
+<p>使用 MongoDB Data API，您可以在 MongoDB Atlas 数据库中创建、读取、更新、删除或聚合文档。</p>
+</section>
+
+
+
+<section>
+<h2>集群配置</h2>
+
+<p>为了使用 Data API，您必须首先从 Atlas UI 启用该功能。</p>
+
+<p>在 MongoDB Atlas 仪表板中，从左侧菜单导航到 <em>Data API</em>。</p>
+
+<p>选择要启用 API 的数据源，然后单击“<em>启用 Data API</em>”。</p>
+</section>
+
+
+
+<section>
+<h2>访问权限</h2>
+
+<p>默认情况下，不授予任何访问权限。选择您要授予 Data API 的访问级别。可选择的有：无访问权限、只读、读写或自定义访问。</p>
+</section>
+
+
+
+<section>
+<h2>Data API 密钥</h2>
+
+<p>为了通过 Data API 进行身份验证，您必须首先创建 Data API 密钥。</p>
+
+<p>单击“<em>创建 API 密钥</em>”，为密钥输入一个名称，然后单击“<em>生成 API 密钥</em>”。</p>
+
+<p>请务必复制 API 密钥并将其保存在安全的地方。您不会再有机会再次看到这个密钥。</p>
+</section>
+
+
+
+<section>
+<h2>发送 Data API 请求</h2>
+
+<p>现在我们可以使用 Data API 向数据库发送请求。</p>
+
+<p>在下一个例子中，我们将使用 curl 在我们的 <code>sample_mflix</code> 数据库的 <code>movies</code> 集合中找到第一个文档。我们在“聚合介绍”部分中加载了此示例数据。</p>
+
+<p>要运行此例子，您需要您的应用 ID、API 密钥和集群名称。</p>
+
+<p>您可以在 MongoDB Atlas UI 的 Data API 页面的 <em>URL 端点</em>字段中找到您的应用程序 ID。</p>
+
+<h3>实例</h3>
+
+<pre class="language-jsx">
+curl --location --request POST 'https://data.mongodb-api.com/app/&lt;DATA API APP ID&gt;/endpoint/data/v1/action/findOne' \
+--header 'Content-Type: application/json' \
+--header 'Access-Control-Request-Headers: *' \
+--header 'api-key: &lt;DATA API KEY&gt;' \
+--data-raw '{
+    &quot;dataSource&quot;:&quot;&lt;CLUSTER NAME&gt;&quot;,
+    &quot;database&quot;:&quot;sample_mflix&quot;,
+    &quot;collection&quot;:&quot;movies&quot;,
+    &quot;投影&quot;: {&quot;title&quot;: 1}
+}'
+</pre>
+
+<p class="tiy"><a target="_blank" href="sb4da.html?f=mongodb_data_api">运行实例</a></p>
+</section>
+
+
+
+<section>
+<h2>Data API 端点</h2>
+
+<p>在前面的示例中，我们在 URL 中使用了 <code>findOne</code> 端点。</p>
+
+<p>有几个端点可用于 Data API。</p>
+
+<p>所有端点均以基本 URL 开头：<code>https://data.mongodb-api.com/app/&lt;Data API App ID&gt;/endpoint/data/v1/action/</code></p>
+</section>
+
+
+
+<section>
+<h2>查找单个文档</h2>
+
+<h3>端点</h3>
+
+<p><code>POST Base_URL/findOne</code></p>
+
+<p><code>findOne</code> 端点用于在集合中查找单个文档。</p>
+
+<h3>请求正文</h3>
+
+<h3>实例</h3>
+
+<pre class="json">
+{
+  &quot;dataSource&quot;: &quot;&lt;数据源名称&gt;&quot;,
+  &quot;database&quot;: &quot;&lt;数据库名称&gt;&quot;,
+  &quot;collection&quot;: &quot;&lt;集合名称&gt;&quot;,
+  &quot;filter&quot;: &lt;查询过滤器&gt;,
+  &quot;投影&quot;: &lt;投影&gt;
+}
+</pre>
+</section>
+
+
+
+<section>
+<h2>查找多个文档</h2>
+
+<h3>端点</h3>
+
+<p><code>POST Base_URL/find</code></p>
+
+<p><code>find</code> 端点用于在集合中查找多个文档。 </p>
+
+<h3>请求正文</h3>
+
+<h3>实例</h3>
+
+<pre class="json">
+{
+  &quot;dataSource&quot;: &quot;&lt;数据源名称&gt;&quot;,
+  &quot;database&quot;: &quot;&lt;数据库名称&gt;&quot;,
+  &quot;collection&quot;: &quot;&lt;集合名称&gt;&quot;,
+  &quot;filter&quot;: &lt;查询过滤器&gt;,
+  &quot;投影&quot;: &lt;投影&gt;,
+  &quot;sort&quot;: &lt;排序表达式&gt;,
+  &quot;limit&quot;: &lt;数字&gt;,
+  &quot;skip&quot;: &lt;数字&gt;
+}
+</pre>
+</section>
+
+
+
+<section>
+<h2>插入单个文档</h2>
+
+<h3>端点</h3>
+
+<p><code>POST Base_URL/insertOne</code></p>
+
+<p><code>insertOne</code> 端点用于将单个文档插入到集合中。</p>
+
+<h3>请求正文</h3>
+
+<h3>实例</h3>
+
+<pre class="json">
+{
+  &quot;dataSource&quot;: &quot;&lt;数据源名称&gt;&quot;,
+  &quot;database&quot;: &quot;&lt;数据库名称&gt;&quot;,
+  &quot;collection&quot;: &quot;&lt;集合名称&gt;&quot;,
+  &quot;document&quot;: &lt;文档&gt;
+}
+</pre>
+</section>
+
+
+
+<section>
+<h2>插入多个文档</h2>
+
+<h3>端点</h3>
+
+<p><code>POST Base_URL/insertMany</code></p>
+
+<p><code>insertMany</code> 端点用于向集合中插入多个文档。</p>
+
+<h3>请求正文</h3>
+
+<h3>实例</h3>
+
+<pre class="json">
+{
+  &quot;dataSource&quot;: &quot;&lt;数据源名称&gt;&quot;,
+  &quot;database&quot;: &quot;&lt;数据库名称&gt;&quot;,
+  &quot;collection&quot;: &quot;&lt;集合名称&gt;&quot;,
+  &quot;documents&quot;: [&lt;文档&gt;, &lt;文档&gt;, ...]
+}
+</pre>
+</section>
+
+
+
+<section>
+<h2>更新单个文档</h2>
+
+<h3>端点</h3>
+
+<p><code>POST Base_URL/updateOne</code></p>
+
+<h3>请求正文</h3>
+
+<h3>实例</h3>
+
+<pre class="json">
+{
+  &quot;dataSource&quot;: &quot;&lt;数据源名称&gt;&quot;,
+  &quot;database&quot;: &quot;&lt;数据库名称&gt;&quot;,
+  &quot;collection&quot;: &quot;&lt;集合名称&gt;&quot;,
+
+  &quot;filter&quot;: &lt;查询过滤器&gt;,
+  &quot;update&quot;: &lt;更新表达式&gt;,
+  &quot;upsert&quot;: true|false
+}
+</pre>
+</section>
+
+
+
+<section>
+<h2>更新多个文档</h2>
+
+<h3>端点</h3>
+
+<p><code>POST Base_URL/updateMany</code></p>
+
+<h3>请求正文</h3>
+
+<h3>实例</h3>
+
+<pre class="json">
+{
+  &quot;dataSource&quot;: &quot;&lt;数据源名称&gt;&quot;,
+  &quot;database&quot;: &quot;&lt;数据库名称&gt;&quot;,
+  &quot;collection&quot;: &quot;&lt;集合名称&gt;&quot;,
+  &quot;filter&quot;: &lt;查询过滤器&gt;,
+  &quot;update&quot;: &lt;更新表达式&gt;,
+  &quot;upsert&quot;: true|false
+}
+</pre>
+</section>
+
+
+
+<section>
+<h2>删除单个文档</h2>
+
+<h3>端点</h3>
+
+<p><code>POST Base_URL/deleteOne</code></p>
+
+<h3>请求正文</h3>
+
+<h3>实例</h3>
+
+<pre class="json">
+{
+  &quot;dataSource&quot;: &quot;&lt;数据源名称&gt;&quot;,
+  &quot;database&quot;: &quot;&lt;数据库名称&gt;&quot;,
+  &quot;collection&quot;: &quot;&lt;集合名称&gt;&quot;,
+  &quot;filter&quot;: &lt;查询过滤器&gt;
+}
+</pre>
+</section>
+
+
+
+<section>
+<h2>删除多个文档</h2>
+
+<h3>端点</h3>
+
+<p><code>POST Base_URL/deleteMany</code></p>
+
+<h3>请求正文</h3>
+
+<h3>实例</h3>
+
+<pre class="json">
+{
+  &quot;dataSource&quot;: &quot;&lt;数据源名称&gt;&quot;,
+  &quot;database&quot;: &quot;&lt;数据库名称&gt;&quot;,
+  &quot;collection&quot;: &quot;&lt;集合名称&gt;&quot;,
+  &quot;filter&quot;: &lt;查询过滤器&gt;
+}
+</pre>
+</section>
+
+
+
+<section>
+<h2>聚合文档</h2>
+
+<h3>端点</h3>
+
+<p><code>POST Base_URL/aggregate</code></p>
+
+<h3>请求正文</h3>
+
+<h3>实例</h3>
+
+<pre class="json">
+{
+  &quot;dataSource&quot;: &quot;&lt;数据源名称&gt;&quot;,
+  &quot;database&quot;: &quot;&lt;数据库名称&gt;&quot;,
+  &quot;collection&quot;: &quot;&lt;集合名称&gt;&quot;,
+  &quot;pipeline&quot;: [&lt;管道表达式&gt;, ...]
+}
+</pre>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="mongodb_schema_validation.html" title="MongoDB 验证">MongoDB 验证</a></li>
+<li class="next"><a href="mongodb_drivers.html" title="MongoDB 驱动程序">MongoDB 驱动程序</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/mongodb/mongodb_data_api.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:45:55 GMT -->
+</html>

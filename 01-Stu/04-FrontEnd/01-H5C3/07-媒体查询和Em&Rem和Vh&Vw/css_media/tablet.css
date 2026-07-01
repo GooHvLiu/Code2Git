@@ -1,0 +1,10 @@
+/* tablet-平板，宽度≤ 992px 且 宽度≥768px */
+body {
+  background-color: #7ebeab;
+}
+body h1 {
+  display: none;
+}
+body #tablet h1 {
+  display: block;
+}

@@ -1,0 +1,425 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/sql/sql_foreignkey.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:37:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>SQL FOREIGN KEY 约束</title>
+
+</head>
+
+<body class="serverscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>SQL 基础教程</h2>
+<ul>
+<li><a href="index.html" title="SQL 教程">SQL 教程</a></li>
+<li><a href="sql_intro.html" title="SQL 简介">SQL 简介</a></li>
+<li><a href="sql_syntax.html" title="SQL 语法">SQL 语法</a></li>
+<li><a href="sql_select.html" title="SQL SELECT 语句">SQL select</a></li>
+<li><a href="sql_distinct.html" title="SQL SELECT DISTINCT 语句">SQL distinct</a></li>
+<li><a href="sql_where.html" title="SQL WHERE 子句">SQL where</a></li>
+<li><a href="sql_and_or.html" title="SQL AND &amp; OR">SQL AND &amp; OR</a></li>
+<li><a href="sql_orderby.html" title="SQL ORDER BY 语句">SQL Order By</a></li>
+<li><a href="sql_insert.html" title="SQL INSERT INTO 语句">SQL insert</a></li>
+<li><a href="sql_update.html" title="SQL UPDATE 语句">SQL update</a></li>
+<li><a href="sql_delete.html" title="SQL DELETE 语句">SQL delete</a></li>
+</ul>
+<h2>SQL 高级教程</h2>
+<ul>
+<li><a href="sql_top.html" title="SQL TOP 子句">SQL Top</a></li>
+<li><a href="sql_like.html" title="SQL LIKE 运算符">SQL Like</a></li>
+<li><a href="sql_wildcards.html" title="SQL 通配符">SQL 通配符</a></li>
+<li><a href="sql_in.html" title="SQL IN">SQL In</a></li>
+<li><a href="sql_between.html" title="SQL BETWEEN">SQL Between</a></li>
+<li><a href="sql_alias.html" title="SQL Alias（别名）">SQL Aliases</a></li>
+<li><a href="sql_join.html" title="SQL JOIN">SQL Join</a></li>
+<li><a href="sql_join_inner.html" title="SQL INNER JOIN 关键字">SQL Inner Join</a></li>
+<li><a href="sql_join_left.html" title="SQL LEFT JOIN 关键字">SQL Left Join</a></li>
+<li><a href="sql_join_right.html" title="SQL RIGHT JOIN 关键字">SQL Right Join</a></li>
+<li><a href="sql_join_full.html" title="SQL FULL JOIN 关键字">SQL Full Join</a></li>
+<li><a href="sql_union.html" title="SQL UNION 和 UNION ALL">SQL Union</a></li>
+<li><a href="sql_select_into.html" title="SQL SELECT INTO 语句">SQL Select Into</a></li>
+<li><a href="sql_create_db.html" title="SQL CREATE DATABASE 语句">SQL Create DB</a></li>
+<li><a href="sql_create_table.html" title="SQL CREATE TABLE 语句">SQL Create Table</a></li>
+<li><a href="sql_constraints.html" title="SQL 约束">SQL Constraints</a></li>
+<li><a href="sql_notnull.html" title="SQL NOT NULL 约束">SQL Not Null</a></li>
+<li><a href="sql_unique.html" title="SQL UNIQUE 约束">SQL Unique</a></li>
+<li><a href="sql_primarykey.html" title="SQL PRIMARY KEY 约束">SQL Primary Key</a></li>
+<li class="currentLink"><a href="sql_foreignkey.html" title="SQL FOREIGN KEY 约束">SQL Foreign Key</a></li>
+<li><a href="sql_check.html" title="SQL CHECK 约束">SQL Check</a></li>
+<li><a href="sql_default.html" title="SQL DEFAULT 约束">SQL Default</a></li>
+<li><a href="sql_create_index.html" title="SQL CREATE INDEX 语句">SQL Create Index</a></li>
+<li><a href="sql_drop.html" title="SQL 撤销索引、表以及数据库">SQL Drop</a></li>
+<li><a href="sql_alter.html" title="SQL ALTER TABLE">SQL Alter</a></li>
+<li><a href="sql_autoincrement.html" title="SQL AUTO INCREMENT 字段">SQL Increment</a></li>
+<li><a href="sql_view.html" title="SQL VIEW（视图）">SQL View</a></li>
+<li><a href="sql_dates.html" title="SQL Date 函数">SQL Date</a></li>
+<li><a href="sql_null_values.html" title="SQL NULL 值">SQL Nulls</a></li>
+<li><a href="sql_isnull.html" title="SQL NULL 函数">SQL isnull()</a></li>
+<li><a href="sql_datatypes.html" title="SQL 数据类型">SQL 数据类型</a></li>
+<li><a href="sql_server.html" title="SQL 服务器 - RDBMS">SQL 服务器</a></li>
+</ul>
+<h2>SQL 函数</h2>
+<ul>
+<li><a href="sql_functions.html" title="SQL 函数">SQL functions</a></li>
+<li><a href="sql_func_avg.html" title="SQL AVG() 函数">SQL avg()</a></li>
+<li><a href="sql_func_count.html" title="SQL COUNT() 函数">SQL count()</a></li>
+<li><a href="sql_func_first.html" title="SQL FIRST() 函数">SQL first()</a></li>
+<li><a href="sql_func_last.html" title="SQL LAST() 函数">SQL last()</a></li>
+<li><a href="sql_func_max.html" title="SQL MAX() 函数">SQL max()</a></li>
+<li><a href="sql_func_min.html" title="SQL MIN() 函数">SQL min()</a></li>
+<li><a href="sql_func_sum.html" title="SQL SUM() 函数">SQL sum()</a></li>
+<li><a href="sql_groupby.html" title="SQL GROUP BY 语句">SQL Group By</a></li>
+<li><a href="sql_having.html" title="SQL HAVING 子句">SQL Having</a></li>
+<li><a href="sql_func_ucase.html" title="SQL UCASE() 函数">SQL ucase()</a></li>
+<li><a href="sql_func_lcase.html" title="SQL LCASE() 函数">SQL lcase()</a></li>
+<li><a href="sql_func_mid.html" title="SQL MID() 函数">SQL mid()</a></li>
+<li><a href="sql_func_len.html" title="SQL LEN() 函数">SQL len()</a></li>
+<li><a href="sql_func_round.html" title="SQL ROUND() 函数">SQL round()</a></li>
+<li><a href="sql_func_now.html" title="SQL NOW() 函数">SQL now()</a></li>
+<li><a href="sql_func_format.html" title="SQL FORMAT() 函数">SQL format()</a></li>
+</ul>
+<h2>SQL 总结</h2>
+<ul>
+<li><a href="sql_quickref.html" title="SQL 快速参考">SQL 快速参考</a></li>
+<li><a href="sql_summary.html" title="我们已经学习了 SQL，下一步学习什么呢？">SQL 教程总结</a></li>
+</ul>
+<h2>SQL 测验</h2>
+<ul>
+<li><a href="sql_quiz.html" title="SQL 测验">SQL 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>SQL FOREIGN KEY 约束</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="sql_primarykey.html" title="SQL PRIMARY KEY 约束">SQL Primary Key</a></li>
+<li class="next"><a href="sql_check.html" title="SQL CHECK 约束">SQL Check</a></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>SQL FOREIGN KEY 约束</h2>
+
+<p>一个表中的 FOREIGN KEY 指向另一个表中的 PRIMARY KEY。</p>
+
+<p>让我们通过一个例子来解释外键。请看下面两个表：</p>
+
+<p>&quot;Persons&quot; 表：</p>
+
+<table class="dataintable">
+  <tr>
+    <th style="color:blue;">Id_P</th>
+	<th>LastName</th>
+	<th>FirstName</th>
+	<th>Address</th>
+	<th>City</th>
+  </tr>
+  <tr>
+	<td>1</td>
+	<td>Adams</td>
+	<td>John</td>
+	<td>Oxford Street</td>
+	<td>London</td>
+  </tr>
+  <tr>
+	<td>2</td>
+	<td>Bush</td>
+	<td>George</td>
+	<td>Fifth Avenue</td>
+	<td>New York</td>
+  </tr>
+  <tr>
+	<td>3</td>
+	<td>Carter</td>
+	<td>Thomas</td>
+	<td>Changan Street</td>
+	<td>Beijing</td>
+  </tr>
+</table>
+
+<p>&quot;Orders&quot; 表：</p>
+
+<table class="dataintable">
+  <tr>
+    <th style="color:blue;">Id_O</th>
+    <th>OrderNo</th>
+    <th style="color:red;">Id_P</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>77895</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>44678</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>22456</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>24562</td>
+    <td>1</td>
+  </tr>
+</table>
+
+<p>请注意，&quot;Orders&quot; 中的 &quot;Id_P&quot; 列指向 &quot;Persons&quot; 表中的 &quot;Id_P&quot; 列。</p>
+
+<p>&quot;Persons&quot; 表中的 &quot;Id_P&quot; 列是 &quot;Persons&quot; 表中的 PRIMARY KEY。</p>
+
+<p>&quot;Orders&quot; 表中的 &quot;Id_P&quot; 列是 &quot;Orders&quot; 表中的 FOREIGN KEY。</p>
+
+<p>FOREIGN KEY 约束用于预防破坏表之间连接的动作。</p>
+
+<p>FOREIGN KEY 约束也能防止非法数据插入外键列，因为它必须是它指向的那个表中的值之一。</p>
+</div>
+
+
+
+<div>
+<h2>SQL FOREIGN KEY Constraint on CREATE TABLE</h2>
+
+<p>下面的 SQL 在 &quot;Orders&quot; 表创建时为 &quot;Id_P&quot; 列创建 FOREIGN KEY：</p>
+
+<h3>MySQL:</h3>
+
+<pre class="language-sql">
+CREATE TABLE Orders
+(
+Id_O int NOT NULL,
+OrderNo int NOT NULL,
+Id_P int,
+PRIMARY KEY (Id_O),
+<mark>FOREIGN KEY (Id_P) REFERENCES Persons(Id_P)</mark>
+)
+</pre>
+
+<h3>SQL Server / Oracle / MS Access:</h3>
+
+<pre class="language-sql">
+CREATE TABLE Orders
+(
+Id_O int NOT NULL PRIMARY KEY,
+OrderNo int NOT NULL,
+<mark>Id_P int FOREIGN KEY REFERENCES Persons(Id_P)</mark>
+)
+</pre>
+
+<p>如果需要命名 FOREIGN KEY 约束，以及为多个列定义 FOREIGN KEY 约束，请使用下面的 SQL 语法：</p>
+
+<h3>MySQL / SQL Server / Oracle / MS Access:</h3>
+
+<pre class="language-sql">
+CREATE TABLE Orders
+(
+Id_O int NOT NULL,
+OrderNo int NOT NULL,
+Id_P int,
+PRIMARY KEY (Id_O),
+<mark>CONSTRAINT fk_PerOrders FOREIGN KEY (Id_P)
+REFERENCES Persons(Id_P)</mark>
+)
+</pre>
+</div>
+
+
+
+<div>
+<h2>SQL FOREIGN KEY Constraint on ALTER TABLE</h2>
+
+<p>如果在 &quot;Orders&quot; 表已存在的情况下为 &quot;Id_P&quot; 列创建 FOREIGN KEY 约束，请使用下面的 SQL：</p>
+
+<h3>MySQL / SQL Server / Oracle / MS Access:</h3>
+
+<pre class="language-sql">
+ALTER TABLE Orders
+<mark>ADD FOREIGN KEY (Id_P)
+REFERENCES Persons(Id_P)</mark>
+</pre>
+
+<p>如果需要命名 FOREIGN KEY 约束，以及为多个列定义 FOREIGN KEY 约束，请使用下面的 SQL 语法：</p>
+
+<h3>MySQL / SQL Server / Oracle / MS Access:</h3>
+
+<pre class="language-sql">
+ALTER TABLE Orders
+<mark>ADD CONSTRAINT fk_PerOrders
+FOREIGN KEY (Id_P)
+REFERENCES Persons(Id_P)</mark>
+</pre>
+</div>
+
+
+
+<div>
+<h2>撤销 FOREIGN KEY 约束</h2>
+
+<p>如需撤销 FOREIGN KEY 约束，请使用下面的 SQL：</p>
+
+<h3>MySQL:</h3>
+
+<pre class="language-sql">
+ALTER TABLE Orders
+<mark>DROP FOREIGN KEY fk_PerOrders</mark>
+</pre>
+
+<h3>SQL Server / Oracle / MS Access:</h3>
+
+<pre class="language-sql">
+ALTER TABLE Orders
+<mark>DROP CONSTRAINT fk_PerOrders</mark>
+</pre>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="sql_primarykey.html" title="SQL PRIMARY KEY 约束">SQL Primary Key</a></li>
+<li class="next"><a href="sql_check.html" title="SQL CHECK 约束">SQL Check</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_quiz"><a href="sql_quiz.html">SQL 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/sql/sql_foreignkey.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:37:04 GMT -->
+</html>

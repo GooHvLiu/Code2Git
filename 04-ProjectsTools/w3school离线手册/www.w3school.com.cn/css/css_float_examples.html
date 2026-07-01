@@ -1,0 +1,645 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/css/css_float_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:18:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>CSS 布局 - 浮动实例</title>
+
+<style>
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: DodgerBlue;
+}
+
+.flex-container > div {
+  background-color: #f1f1f1;
+  width: 50%;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 24px;
+}
+
+</style>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>CSS 基础教程</h2>
+<ul>
+<li><a href="index.html" title="CSS 教程">CSS 教程</a></li>
+<li><a href="css_jianjie.html" title="CSS 简介">CSS 简介</a></li>
+<li><a href="css_syntax.html" title="CSS 语法">CSS 语法</a></li>
+<li><a href="css_selectors.html" title="CSS 选择器">CSS 选择器</a></li>
+<li><a href="css_shiyong.html" title="CSS 使用">CSS 使用</a></li>
+<li><a href="css_comments.html" title="CSS 注释">CSS 注释</a></li>
+<li><a href="css_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="css_colors_rgb.html" title="CSS RGB 颜色">CSS RGB 颜色</a></li>
+<li><a href="css_colors_hex.html" title="CSS HEX 颜色">CSS HEX 颜色</a></li>
+<li><a href="css_colors_hsl.html" title="CSS HSL 颜色">CSS HSL 颜色</a></li>
+<li><a href="css_background.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="css_background_image.html" title="CSS 背景图像">CSS 背景图像</a></li>
+<li><a href="css_background_repeat.html" title="CSS 背景重复">CSS 背景重复</a></li>
+<li><a href="css_background_attachment.html" title="CSS 背景附着">CSS 背景附着</a></li>
+<li><a href="css_background_shorthand.html" title="CSS 简写背景属性">CSS 简写背景属性</a></li>
+<li><a href="css_border.html" title="CSS 边框">CSS 边框</a></li>
+<li><a href="css_border_width.html" title="CSS 边框宽度">CSS 边框宽度</a></li>
+<li><a href="css_border_color.html" title="CSS 边框颜色">CSS 边框颜色</a></li>
+<li><a href="css_border_sides.html" title="CSS 边框各边">CSS 边框各边</a></li>
+<li><a href="css_border_shorthand.html" title="CSS 简写边框属性">CSS 简写边框属性</a></li>
+<li><a href="css_border_rounded.html" title="CSS 圆角边框">CSS 圆角边框</a></li>
+<li><a href="css_margin.html" title="CSS 外边距">CSS 外边距</a></li>
+<li><a href="css_margin_collapse.html" title="CSS 外边距合并">CSS 外边距合并</a></li>
+<li><a href="css_padding.html" title="CSS 内边距">CSS 内边距</a></li>
+<li><a href="css_dimension.html" title="CSS 高度和宽度">CSS 高度/宽度</a></li>
+<li><a href="css_boxmodel.html" title="CSS 框模型">CSS 框模型</a></li>
+<li><a href="css_outline.html" title="CSS 轮廓">CSS 轮廓</a></li>
+<li><a href="css_outline_width.html" title="CSS 轮廓宽度">CSS 轮廓宽度</a></li>
+<li><a href="css_outline_color.html" title="CSS 轮廓颜色">CSS 轮廓颜色</a></li>
+<li><a href="css_outline_shorthand.html" title="CSS 简写轮廓属性">CSS 简写轮廓属性</a></li>
+<li><a href="css_outline_offset.html" title="CSS 轮廓偏移">CSS 轮廓偏移</a></li>
+<li><a href="css_text.html" title="CSS 文本">CSS 文本</a></li>
+<li><a href="css_text_align.html" title="CSS 文本对齐">CSS 文本对齐</a></li>
+<li><a href="css_text_decoration.html" title="CSS 文本装饰">CSS 文本装饰</a></li>
+<li><a href="css_text_transformation.html" title="CSS 文本转换">CSS 文本转换</a></li>
+<li><a href="css_text_spacing.html" title="CSS 文字间距">CSS 文字间距</a></li>
+<li><a href="css_text_shadow.html" title="CSS 文本阴影">CSS 文本阴影</a></li>
+<li><a href="css_font.html" title="CSS 字体">CSS 字体</a></li>
+<li><a href="css_font_style.html" title="CSS 字体样式">CSS 字体样式</a></li>
+<li><a href="css_font_size.html" title="CSS 字体大小">CSS 字体大小</a></li>
+<li><a href="css_font_google.html" title="CSS 谷歌字体">CSS 谷歌字体</a></li>
+<li><a href="css_font_shorthand.html" title="CSS 简写字体属性">CSS 简写字体属性</a></li>
+<li><a href="css_icons.html" title="CSS 图标">CSS 图标</a></li>
+<li><a href="css_link.html" title="CSS 链接">CSS 链接</a></li>
+<li><a href="css_list.html" title="CSS 列表">CSS 列表</a></li>
+<li><a href="css_table.html" title="CSS 表格">CSS 表格</a></li>
+</ul>
+<h2>CSS 中级教程</h2>
+<ul>
+<li><a href="css_display_visibility.html" title="CSS 布局 - display 属性">CSS Display</a></li>
+<li><a href="css_max-width.html" title="CSS 布局 - width 和 max-width">CSS max-width</a></li>
+<li><a href="css_positioning.html" title="CSS 布局 - position 属性">CSS 定位</a></li>
+<li><a href="css_z-index.html" title="CSS 布局 - z-index 属性">CSS z-index</a></li>
+<li><a href="css_overflow.html" title="CSS 布局 - 溢出">CSS 溢出</a></li>
+<li><a href="css_float.html" title="CSS 布局 - 浮动和清除">CSS 浮动</a></li>
+<li><a href="css_float_clear.html" title="CSS 布局 - clear 和 clearfix">CSS 清除浮动</a></li>
+<li class="currentLink"><a href="css_float_examples.html" title="CSS 布局 - 浮动实例">CSS 布局 - 浮动实例</a></li>
+<li><a href="css_inline-block.html" title="CSS 布局 - display: inline-block">CSS inline-block</a></li>
+<li><a href="css_align.html" title="CSS 布局 - 水平和垂直对齐">CSS 对齐</a></li>
+<li><a href="css_combinators.html" title="CSS 选择器">CSS 组合器</a></li>
+<li><a href="css_pseudo_classes.html" title="CSS 伪类">CSS 伪类</a></li>
+<li><a href="css_pseudo_elements.html" title="CSS 伪元素">CSS 伪元素</a></li>
+<li><a href="css_image_transparency.html" title="CSS 不透明度">CSS 不透明度</a></li>
+<li><a href="css_navbar.html" title="CSS 导航栏">CSS 导航栏</a></li>
+<li><a href="css_navbar_vertical.html" title="CSS 垂直导航栏">CSS 垂直导航栏</a></li>
+<li><a href="css_navbar_horizontal.html" title="CSS 水平导航栏">CSS 水平导航栏</a></li>
+<li><a href="css_dropdowns.html" title="CSS 下拉菜单">CSS 下拉菜单</a></li>
+<li><a href="css_image_gallery.html" title="CSS 图片库">CSS 图片库</a></li>
+<li><a href="css_image_sprites.html" title="CSS 图像精灵">CSS 图像精灵</a></li>
+<li><a href="css_attribute_selectors.html" title="CSS 属性选择器">CSS 属性选择器</a></li>
+<li><a href="css_form.html" title="CSS 表单">CSS 表单</a></li>
+<li><a href="css_counters.html" title="CSS 计数器">CSS 计数器</a></li>
+<li><a href="css_website_layout.html" title="CSS 网站布局">CSS 网站布局</a></li>
+<li><a href="css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="css_specificity.html" title="CSS 特异性">CSS 特异性</a></li>
+<li><a href="css_important.html" title="CSS !important 规则">CSS !important</a></li>
+<li><a href="css_math_functions.html" title="CSS 数学函数">CSS 数学函数</a></li>
+</ul>
+<h2>CSS3 高级教程</h2>
+<ul>
+<li><a href="css3_borders.html" title="CSS 圆角">CSS 圆角</a></li>
+<li><a href="css3_border_images.html" title="CSS 边框图像">CSS 边框图像</a></li>
+<li><a href="css3_backgrounds.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="css3_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="css_colors_keywords.html" title="CSS 颜色关键字">CSS 颜色关键字</a></li>
+<li><a href="css3_gradients.html" title="CSS 渐变">CSS 渐变</a></li>
+<li><a href="css3_gradients_radial.html" title="CSS 径向渐变">CSS 径向渐变</a></li>
+<li><a href="css3_shadows.html" title="CSS 阴影">CSS 阴影</a></li>
+<li><a href="css3_shadows_box.html" title="CSS box-shadow">CSS box-shadow</a></li>
+<li><a href="css3_text_effects.html" title="CSS 文本效果">CSS 文本效果</a></li>
+<li><a href="css3_fonts.html" title="CSS 网络字体">CSS 网络字体</a></li>
+<li><a href="css3_2dtransforms.html" title="CSS 2D 转换">CSS 2D 转换</a></li>
+<li><a href="css3_3dtransforms.html" title="CSS 3D 转换">CSS 3D 转换</a></li>
+<li><a href="css3_transitions.html" title="CSS 过渡">CSS 过渡</a></li>
+<li><a href="css3_animations.html" title="CSS 动画">CSS 动画</a></li>
+<li><a href="css_tooltip.html" title="CSS 工具提示">CSS 工具提示</a></li>
+<li><a href="css3_images.html" title="CSS 图像样式">CSS 图像样式</a></li>
+<li><a href="css3_object-fit.html" title="CSS object-fit">CSS object-fit</a></li>
+<li><a href="css3_object-position.html" title="CSS object-position 属性">CSS object-position</a></li>
+<li><a href="css3_masking.html" title="CSS 遮罩">CSS 遮罩</a></li>
+<li><a href="css3_buttons.html" title="CSS 按钮">CSS 按钮</a></li>
+<li><a href="css3_pagination.html" title="CSS 分页">CSS 分页</a></li>
+<li><a href="css3_multiple_columns.html" title="CSS 多列">CSS 多列</a></li>
+<li><a href="css3_user_interface.html" title="CSS 用户界面">CSS 用户界面</a></li>
+<li><a href="css3_variables.html" title="CSS 变量">CSS 变量</a></li>
+<li><a href="css3_variables_overriding.html" title="CSS 覆盖变量">CSS 覆盖变量</a></li>
+<li><a href="css3_variables_javascript.html" title="CSS 使用 JavaScript 更改变量">CSS 变量 - JavaScript</a></li>
+<li><a href="css3_variables_mediaqueries.html" title="CSS 在媒体查询中使用变量">CSS 变量 - 媒体查询</a></li>
+<li><a href="css3_property.html" title="CSS @property 规则">CSS @property</a></li>
+<li><a href="css3_box-sizing.html" title="CSS Box Sizing">CSS Box Sizing</a></li>
+<li><a href="css3_flexbox.html" title="CSS Flexbox">CSS Flexbox</a></li>
+<li><a href="css3_mediaqueries.html" title="CSS 媒体查询">CSS 媒体查询</a></li>
+<li><a href="css3_mediaqueries_ex.html" title="CSS 媒体查询实例">CSS 媒体查询实例</a></li>
+</ul>
+<h2>CSS 响应式设计</h2>
+<ul>
+<li><a href="css_rwd_intro.html" title="响应式网站设计 - 简介">RWD 简介</a></li>
+<li><a href="css_rwd_viewport.html" title="响应式网页设计 - 视口">RWD 视口</a></li>
+<li><a href="css_rwd_grid.html" title="响应式网页设计 - Grid-View">RWD 网格视图</a></li>
+<li><a href="css_rwd_mediaqueries.html" title="响应式网页设计 - 媒体查询">RWD 媒体查询</a></li>
+<li><a href="css_rwd_images.html" title="响应式网页设计 - 图像">RWD 图像</a></li>
+<li><a href="css_rwd_videos.html" title="响应式网页设计 - 视频">RWD 视频</a></li>
+</ul>
+<h2>CSS 网格教程</h2>
+<ul>
+<li><a href="css_grid.html" title="CSS 网格布局模块">CSS 网格布局模块</a></li>
+<li><a href="css_grid_container.html" title="CSS 网格容器">CSS 网格容器</a></li>
+<li><a href="css_grid_item.html" title="CSS 网格项目">CSS 网格项目</a></li>
+</ul>
+<h2>CSS 实例</h2>
+<ul>
+<li><a href="css_examples.html" title="CSS 实例">CSS 实例</a></li>
+</ul>
+<h2>CSS 测验</h2>
+<ul>
+<li><a href="css_quiz.html" title="CSS 测验">CSS 测验</a></li>
+</ul>
+<h2>CSS 参考手册</h2>
+<ul>
+<li><a href="../cssref/index.html" title="CSS 参考手册">CSS 参考手册</a></li>
+<li><a href="../cssref/css_browsersupport.html" title="CSS 浏览器支持">CSS 浏览器支持</a></li>
+<li><a href="../cssref/css_selectors.html" title="CSS 选择器">CSS 选择器</a></li>
+<li><a href="../cssref/css_functions.html" title="CSS 函数">CSS 函数</a></li>
+<li><a href="../cssref/css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="../cssref/css_ref_aural.html" title="CSS 听觉">CSS 听觉</a></li>
+<li><a href="../cssref/css_websafe_fonts.html" title="CSS 网络安全字体">CSS 网络安全字体</a></li>
+<li><a href="../cssref/css_animatable.html" title="CSS 可动画制作">CSS 可动画制作</a></li>
+<li><a href="../cssref/css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="../cssref/css_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="../cssref/css_colors_legal.html" title="CSS 颜色值">CSS 颜色值</a></li>
+<li><a href="../cssref/css_default_values.html" title="CSS 默认值">CSS 默认值</a></li>
+<li><a href="../cssref/css_entities.html" title="CSS 实体">CSS 实体</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>CSS 布局 - 浮动实例</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css_float_clear.html" title="CSS 布局 - clear 和 clearfix">CSS 清除浮动</a></li>
+<li class="next"><a href="css_inline-block.html" title="CSS 布局 - display: inline-block">CSS inline-block</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p>本页提供常见的浮动案例。</p>
+</div>
+
+
+
+<div>
+<h2>网格 / 等宽的框</h2>
+
+<div>
+<div class="w3-50" style="background-color: #bbb; line-height: 120px;">
+Box 1
+</div>
+
+<div class="w3-50" style="background-color: #ccc; line-height: 120px;">
+Box 2
+</div>
+</div>
+
+<div>
+<div class="w3-33" style="background-color: #bbb; line-height: 120px;">
+Box 1
+</div>
+
+<div class="w3-33" style="background-color: #ccc; line-height: 120px;">
+Box 2
+</div>
+
+<div class="w3-33" style="background-color: #ddd; line-height: 120px;">
+Box 3
+</div>
+</div>
+
+<p>通过使用 <code>float</code> 属性，可以轻松地并排浮动内容框：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+* {
+  box-sizing: border-box;
+}
+
+.box {
+  float: left;
+  width: 33.33%; /* 三个框（四框使用 25%，两框使用 50%，以此类推） */
+  padding: 50px; /* 如果需要在图片间增加间距 */
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t9462.html?f=css_float_boxes">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>什么是 box-sizing？</h2>
+
+<p>您可以轻松地并排创建三个浮动框。但是，当您添加一些内容来扩大每个框的宽度（例如，内边距或边框）时，这个框会损坏。 <code>box-sizing</code> 属性允许我们在框的总宽度（和高度）中包括内边距和边框，确保内边距留在框内而不会破裂。</p>
+
+<p>您可以在我们的 <a href="css3_box-sizing.html" title="CSS Box Sizing">CSS Box Sizing</a> 这一章中学习有关 box-sizing 属性的更多知识。</p>
+</div>
+
+
+
+<div>
+<h2>图像并排</h2>
+
+<div>
+  <div class="w3-33">
+    <img src="../i/photo/tulip.jpg" style="width:90%; margin: 0;">
+  </div>
+  <div class="w3-33">
+    <img src="../i/photo/tulip-2.jpg" style="width:90%; margin: 0;">
+  </div>
+  <div class="w3-33">
+    <img src="../i/photo/flower-4.jpg" style="width:90%; margin: 0;">
+  </div>
+</div>
+
+<p>这种框格（The grid of boxes）也可以用来并排显示图像：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.img-container {
+  float: left;
+  width: 33.33%; /* 三个框（四框使用 25%，两框使用 50%，以此类推） */
+  padding: 5px; /* 如果需要在图片间增加间距 */
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tb465.html?f=css_float_images_side">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>等宽的框</h2>
+
+<p>在上例中，您学习了如何以相等的宽度并排浮动框。但是，创建具有相同高度的浮动框并不容易。不过，快速解决方案是设置一个固定的高度，如下例所示：</p>
+
+
+<div>
+<div class="w3-50" style="background-color: #bbb; height: 300px;">
+<h2>Box 1</h2>
+<p>Some content, some content, some content</p>
+</div>
+
+<div class="w3-50" style="background-color: #ccc; height: 300px;">
+<h2>Box 2</h2>
+<p>Some content, some content, some content</p>
+<p>Some content, some content, some content</p>
+<p>Some content, some content, some content</p>
+</div>
+</div>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.box {
+  height: 500px;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t541c-2.html?f=css_float_boxes_height">亲自试一试</a></p>
+
+<p>但是，这么做就失去了弹性。如果可以保证框中始终有相同数量的内容，那是可以的。但是很多时候，内容是不一样的。如果您在手机上尝试上例，则会看到第二个框的内容将显示在框的外部。这是 CSS3 Flexbox 派上用场的地方 - 因为它可以自动拉伸框使其与最长的框一样长：</p>
+
+<h3>实例</h3>
+
+<p>使用 Flexbox 创建弹性框：</p>
+
+<div class="flex-container" style="margin-top: 15px;">
+  <div>Box 1 - 这是一些文本，以确保内容真的很高。这是一些文本，以确保内容真的很高。这是一些文本，以确保内容真的很高。这是一些文本，以确保内容真的很高。这是一些文本，以确保内容真的很高。</div>
+  <div>Box 2 - 我的高度将跟随框 1。</div>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/t1135.html?f=css_float_boxes_flex">亲自试一试</a></p>
+
+<p>Flexbox 的唯一问题是它在 Internet Explorer 10 或更早版本中不起作用。您可以在我们的 <a href="css3_flexbox.html" title="CSS Flexbox">CSS Flexbox</a> 章节中学习有关 Flexbox 布局模块的更多知识。</p>
+</div>
+
+
+
+<div>
+<h2>导航菜单</h2>
+
+<style>
+div#maincontent ul.navbarmenu {
+    list-style-type: none;
+    margin: 0;
+	margin-top: 15px;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+div#maincontent ul.navbarmenu li {
+    float: left;
+	margin: 0;
+    padding: 0;
+}
+
+ul.navbarmenu li a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+	border: 0;
+}
+
+ul.navbarmenu li a:hover {
+    background-color: #111;
+}
+
+ul.navbarmenu li a.active {
+    background-color: red;
+}
+</style>
+
+<p>将 <code>float</code> 与超链接列表一起使用，来创建水平菜单：</p>
+
+<h3>实例</h3>
+
+<ul class="navbarmenu">
+  <li><a href="javascript:void(0)" class="active">Home</a></li>
+  <li><a href="javascript:void(0)">News</a></li>
+  <li><a href="javascript:void(0)">Contact</a></li>
+  <li class="w3-hide-small"><a href="javascript:void(0)">About</a></li>
+</ul>
+
+<p class="tiy"><a target="_blank" href="../tiy/tebf8.html?f=css_float_navigation_menu">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>Web 布局实例</h2>
+
+<p>使用 <code>float</code> 属性完成整个 Web 布局也很常见：</p>
+
+<iframe src="../demo/css/layout_cols.html" style="width:100%; border:1px solid #f1f1f1; height:530px; padding:5px; overflow:auto; box-sizing: border-box; margin-top: 15px;">
+</iframe>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.header, .footer {
+  background-color: grey;
+  color: white;
+  padding: 15px;
+}
+
+.column {
+  float: left;
+  padding: 15px;
+}
+
+.clearfix::after {
+  content: &quot;&quot;;
+  clear: both;
+  display: table;
+}
+
+.menu {
+  width: 25%;
+}
+
+.content {
+  width: 75%;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t43ae.html?f=css_layout_cols">亲自试一试</a></p>
+</div>
+
+
+
+<div class="example">
+<h2>更多实例</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/tb313.html?f=css_float_2">带有边框和外边距的图像浮动到段落的右侧</a></dt>
+<dd>让图像浮动到段落的右侧。在图像上添加边框和外边距。</dd>
+
+<dt><a target="_blank" href="../tiy/t9e20.html?f=css_float_3">带标题的图像浮动到右侧</a></dt>
+<dd>让带有标题的图像向右浮动。</dd>
+
+<dt><a target="_blank" href="../tiy/te644.html?f=css_float_4">让段落的第一个字母向左浮动</a></dt>
+<dd>让段落的第一个字母向左浮动并设置该字母的样式。</dd>
+
+<dt><a target="_blank" href="../tiy/tb539.html?f=css_layout_webpage">用浮动创建一个网站</a></dt>
+<dd>使用浮动创建带有水平导航栏、页眉、页脚、左侧导航栏和主要内容的首页。</dd>
+</dl>
+</div>
+
+
+
+<div>
+<h2>所有 CSS 浮动属性</h2>
+
+<table class="dataintable">
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_box-sizing.html" title="CSS box-sizing 属性">box-sizing</a></td>
+<td>定义元素的宽度和高度的计算方式：它们是否应包含内边距和边框。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_class_clear.html" title="CSS clear 属性">clear</a></td>
+<td>指定哪些元素可以在被清除的元素旁边以及在哪一侧浮动。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_class_float.html" title="CSS float 属性">float</a></td>
+<td>指定元素应如何浮动。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_pos_overflow.html" title="CSS overflow 属性">overflow</a></td>
+<td>指定如果内容溢出元素框会发生什么情况。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_overflow-x.html" title="CSS overflow-x 属性">overflow-x</a></td>
+<td>指定当溢出元素的内容区域时，如何处理内容的左/右边缘。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_overflow-y.html" title="CSS overflow-y 属性">overflow-y</a></td>
+<td>指定当溢出元素的内容区域时，如何处理内容的上/下边缘。</td>
+</tr>
+</table>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css_float_clear.html" title="CSS 布局 - clear 和 clearfix">CSS 清除浮动</a></li>
+<li class="next"><a href="css_inline-block.html" title="CSS 布局 - display: inline-block">CSS inline-block</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../cssref/index.html">CSS 参考手册</a></h5>
+<h5 id="tools_example"><a href="css_examples.html">CSS 实例</a></h5>
+<h5 id="tools_quiz"><a href="css_quiz.html">CSS 测验</a></h5>
+<h5 id="tools_professional"><a href="index_pro.html">CSS 课外书</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/css/css_float_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:18:25 GMT -->
+</html>

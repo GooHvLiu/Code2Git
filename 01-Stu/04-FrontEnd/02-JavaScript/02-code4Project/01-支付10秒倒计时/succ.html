@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+    <title>支付反馈页面</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0;
+        }
+
+        .paytext {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .paytext .tensizecolor {
+            margin-top: 15px;
+            color: red;
+            font-size: 35px;
+        }
+
+        button {
+            margin-top: 5px;
+            padding: 5px 5px;
+            ;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="paytext">
+        <h1>
+            恭喜您，支付成功！
+        </h1>
+        <div>
+            <span class="tensizecolor">10</span>
+            <span>秒后自动返回首页</span>
+        </div>
+        <button>
+            立即返回
+        </button>
+    </div>
+
+    <script>
+        window.onload = function () {
+            let timer = 10;
+            setInterval(function () {
+                timer--;
+                document.getElementsByClassName("tensizecolor")[0].innerHTML = timer;
+                if (timer == 0) {
+                    window.location.href = "http://www.qq.com/";
+                }
+            }, 1000)
+        }
+
+        window.document.getElementsByTagName("button")[0].onclick = function () {
+            window.alert("您已成功支付完成了，即将退出此页面！");
+            window.location.href = "./confirm.html";
+        }
+    </script>
+</body>
+
+</html>

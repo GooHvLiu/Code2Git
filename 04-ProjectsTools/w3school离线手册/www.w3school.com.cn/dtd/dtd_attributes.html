@@ -1,0 +1,452 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/dtd/dtd_attributes.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:13:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>DTD - 属性</title>
+
+</head>
+
+<body class="xml">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>DTD 教程</h2>
+<ul>
+<li><a href="index.html" title="DTD 教程">DTD 教程</a></li>
+<li><a href="dtd_intro.html" title="DTD 简介">DTD 简介</a></li>
+<li><a href="dtd_building.html" title="DTD - XML 构建模块">DTD 构建模块</a></li>
+<li><a href="dtd_elements.html" title="DTD - 元素">DTD 元素</a></li>
+<li class="currentLink"><a href="dtd_attributes.html" title="DTD - 属性">DTD 属性</a></li>
+<li><a href="dtd_entities.html" title="DTD - 实体">DTD 实体</a></li>
+<li><a href="dtd_validation.html" title="DTD - 验证">DTD 验证</a></li>
+<li><a href="dtd_examples.html" title="DTD - 来自网络的实例">DTD 实例</a></li>
+<li><a href="dtd_summary.html" title="您已经学习了DTD，下一步呢？">DTD 总结</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>DTD - 属性</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="dtd_elements.html" title="DTD - 元素">DTD 元素</a></li>
+<li class="next"><a href="dtd_entities.html" title="DTD - 实体">DTD 实体</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p><strong>在 DTD 中，属性通过 ATTLIST 声明来进行声明。</strong></p>
+</div>
+
+
+
+<div>
+<h2>声明属性</h2>
+
+<p>属性声明使用下列语法：</p>
+
+<pre class="language-xml">
+&lt;!ATTLIST 元素名称 属性名称 属性类型 默认值&gt;
+</pre>
+
+<h3>DTD 实例:</h3>
+
+<pre class="language-xml">
+&lt;!ATTLIST payment type CDATA &quot;check&quot;&gt;
+</pre>
+
+<h3>XML 实例:</h3>
+
+<pre class="language-xml">
+&lt;payment type=&quot;check&quot; /&gt;
+</pre>
+
+<h3>以下是<em>属性类型</em>的选项：</h3>
+
+<table class="dataintable">
+<tr>
+<th style="width:35%;">类型</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td>CDATA</td>
+<td>值为字符数据 (character data)</td>
+</tr>
+
+<tr>
+<td>(<i>en1</i>|<i>en2</i>|..)</td>
+<td>此值是枚举列表中的一个值</td>
+</tr>
+
+<tr>
+<td>ID</td>
+<td>值为唯一的 id</td>
+</tr>
+
+<tr>
+<td>IDREF</td>
+<td>值为另外一个元素的 id</td>
+</tr>
+
+<tr>
+<td>IDREFS</td>
+<td>值为其他 id 的列表</td>
+</tr>
+
+<tr>
+<td>NMTOKEN</td>
+<td>值为合法的 XML 名称</td>
+</tr>
+
+<tr>
+<td>NMTOKENS</td>
+<td>值为合法的 XML 名称的列表</td>
+</tr>
+
+<tr>
+<td>ENTITY</td>
+<td>值是一个实体</td>
+</tr>
+
+<tr>
+<td>ENTITIES</td>
+<td>值是一个实体列表</td>
+</tr>
+
+<tr>
+<td>NOTATION</td>
+<td>此值是符号的名称</td>
+</tr>
+
+<tr>
+<td>xml:</td>
+<td>值是一个预定义的 XML 值</td>
+</tr>
+</table>
+
+<h3>默认值参数可使用下列值：</h3>
+
+<table class="dataintable">
+<tr>
+<th style="width:35%;">值</th>
+<th>解释</th>
+</tr>
+
+<tr>
+<td>值</td>
+<td>属性的默认值</td>
+</tr>
+
+<tr>
+<td>#REQUIRED</td>
+<td>属性值是必需的</td>
+</tr>
+
+<tr>
+<td>#IMPLIED</td>
+<td>属性不是必需的</td>
+</tr>
+
+<tr>
+<td>#FIXED value</td>
+<td>属性值是固定的</td>
+</tr>
+</table>
+</div>
+
+
+
+<div>
+<h2>规定一个默认的属性值</h2>
+
+<h3>DTD:</h3>
+
+<pre class="language-xml">
+&lt;!ELEMENT square EMPTY&gt;
+&lt;!ATTLIST square width CDATA &quot;0&quot;&gt;
+</pre>
+
+<h3>合法的 XML:</h3>
+
+<pre class="language-xml">
+&lt;square width=&quot;100&quot; /&gt;
+</pre>
+
+<p>在上面的例子中，&quot;square&quot; 被定义为带有 CDATA 类型的 &quot;width&quot; 属性的空元素。如果宽度没有被设定，其默认值为0 。</p>
+</div>
+
+
+
+<div>
+<h2>#IMPLIED</h2>
+
+<h3>语法</h3>
+
+<pre class="language-xml">
+&lt;!ATTLIST 元素名称 属性名称 属性类型 #IMPLIED&gt;
+</pre>
+
+<h3>例子</h3>
+
+<p>DTD:</p>
+
+<pre class="language-xml">
+&lt;!ATTLIST contact fax CDATA #IMPLIED&gt;
+</pre>
+
+<p>合法的 XML:</p>
+
+<pre class="language-xml">
+&lt;contact fax=&quot;555-667788&quot; /&gt;
+</pre>
+
+<p>合法的 XML:</p>
+
+<pre class="language-xml">
+&lt;contact /&gt;
+</pre>
+
+<p>假如您不希望强制作者包含属性，并且您没有默认值选项的话，请使用关键词 #IMPLIED。</p>
+</div>
+
+
+
+<div>
+<h2>#REQUIRED</h2>
+
+<h3>语法</h3>
+
+<pre class="language-xml">
+&lt;!ATTLIST 元素名称 属性名称 属性类型 #REQUIRED&gt;
+</pre>
+
+<h3>例子</h3>
+
+<p>DTD:</p>
+
+<pre class="language-xml">
+&lt;!ATTLIST person number CDATA #REQUIRED&gt;
+</pre>
+
+<p>合法的 XML:</p>
+
+<pre class="language-xml">
+&lt;person number=&quot;5677&quot; /&gt;
+</pre>
+
+<p>非法的 XML:</p>
+
+<pre class="language-xml">
+&lt;person /&gt;
+</pre>
+
+<p>假如您没有默认值选项，但是仍然希望强制作者提交属性的话，请使用关键词 #REQUIRED。</p>
+</div>
+
+
+
+<div>
+<h2>#FIXED</h2>
+
+<h3>语法</h3>
+
+<pre class="language-xml">
+&lt;!ATTLIST 元素名称 属性名称 属性类型 #FIXED &quot;value&quot;&gt;
+</pre>
+
+<h3>例子</h3>
+
+<p>DTD:</p>
+
+<pre class="language-xml">
+&lt;!ATTLIST sender company CDATA #FIXED &quot;Microsoft&quot;&gt;
+</pre>
+
+<p>合法的 XML:</p>
+
+<pre class="language-xml">
+&lt;sender company=&quot;Microsoft&quot; /&gt;
+</pre>
+
+<p>非法的 XML:</p>
+
+<pre class="language-xml">
+&lt;sender company=&quot;W3School&quot; /&gt;
+</pre>
+
+<p>如果您希望属性拥有固定的值，并不允许作者改变这个值，请使用 #FIXED 关键词。如果作者使用了不同的值，XML 解析器会返回错误。</p>
+</div>
+
+
+
+<div>
+<h2>列举属性值</h2>
+
+<h3>语法：</h3>
+
+<pre class="language-xml">
+&lt;!ATTLIST 元素名称 属性名称 (en1|en2|..) 默认值&gt;
+</pre>
+
+<h3>DTD 例子:</h3>
+
+<pre class="language-xml">
+&lt;!ATTLIST payment type (check|cash) &quot;cash&quot;&gt;
+</pre>
+
+<h3>XML 例子:</h3>
+
+<pre class="language-xml">
+&lt;payment type=&quot;check&quot; /&gt;
+</pre>
+
+<p>或者</p>
+
+<pre class="language-xml">
+&lt;payment type=&quot;cash&quot; /&gt;
+</pre>
+
+<p>如果您希望属性值为一系列固定的合法值之一，请使用列举属性值。</p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="dtd_elements.html" title="DTD - 元素">DTD 元素</a></li>
+<li class="next"><a href="dtd_entities.html" title="DTD - 实体">DTD 实体</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/dtd/dtd_attributes.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:13:02 GMT -->
+</html>

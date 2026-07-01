@@ -1,0 +1,967 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/jsref/jsref_operators.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:14:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c15e1f.css?v=2" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>JavaScript 运算符参考手册</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>JS 参考手册</h2>
+<ul>
+<li><a href="index.html" title="JavaScript 和 HTML DOM 参考手册">JS 参考手册（类别排序）</a></li>
+<li><a href="jsref_reference.html" title="JavaScript 参考手册">JS 参考手册（字母排序）</a></li>
+</ul>
+<h2>JavaScript</h2>
+<ul>
+<li><a href="jsref_obj_array.html" title="JavaScript Array 参考手册">JS Array</a></li>
+<li><a href="jsref_obj_boolean.html" title="JavaScript Boolean 参考手册">JS Boolean</a></li>
+<li><a href="jsref_classes.html" title="JavaScript Class 参考手册">JS Class</a></li>
+<li><a href="jsref_obj_date.html" title="JavaScript Date 参考手册">JS Date</a></li>
+<li><a href="jsref_obj_error.html" title="JavaScript Error 参考手册">JS Error</a></li>
+<li><a href="jsref_obj_global.html" title="JavaScript Global 参考手册">JS Global</a></li>
+<li><a href="jsref_obj_json.html" title="JavaScript JSON 参考手册">JS JSON</a></li>
+<li><a href="jsref_obj_map.html" title="JavaScript Map 参考手册">JS Map</a></li>
+<li><a href="jsref_obj_math.html" title="JavaScript Math 参考手册">JS Math</a></li>
+<li><a href="jsref_obj_number.html" title="JavaScript Number 参考手册">JS Number</a></li>
+<li><a href="jsref_obj_promise.html" title="JavaScript Promise 对象">JS Promise</a></li>
+<li><a href="jsref_obj_regexp.html" title="JavaScript RegExp 参考手册">JS RegExp</a></li>
+<li><a href="jsref_obj_set.html" title="JavaScript Set 参考手册">JS Set</a></li>
+<li><a href="jsref_obj_string.html" title="JavaScript String 参考手册">JS String</a></li>
+<li><a href="jsref_obj_object.html" title="JavaScript Object 参考手册">JS 对象</a></li>
+<li class="currentLink"><a href="jsref_operators.html" title="JavaScript 运算符参考手册">JS 运算符</a></li>
+<li><a href="jsref_precedence.html" title="JavaScript 运算符优先级">JS 运算符优先级</a></li>
+<li><a href="jsref_statements.html" title="JavaScript 语句参考手册">JS 语句</a></li>
+<li><a href="jsref_obj_typed_array.html" title="JavaScript 类型化数组参考手册">JS 类型化数组</a></li>
+</ul>
+<h2>Window</h2>
+<ul>
+<li><a href="obj_window.html" title="Window 对象">Window 对象</a></li>
+<li><a href="obj_console.html" title="Window Console 对象">Window Console</a></li>
+<li><a href="obj_history.html" title="Window History 对象">Window History</a></li>
+<li><a href="obj_location.html" title="Window Location 对象">Window Location</a></li>
+<li><a href="obj_navigator.html" title="Window Navigator 对象">Window Navigator</a></li>
+<li><a href="obj_screen.html" title="Window Screen 对象">Window Screen</a></li>
+</ul>
+<h2>HTML DOM</h2>
+<ul>
+<li><a href="dom_obj_document.html" title="HTML DOM Document 对象">HTML Document</a></li>
+<li><a href="dom_obj_all.html" title="HTML DOM Element 对象">HTML Element</a></li>
+<li><a href="dom_obj_attributes.html" title="HTML DOM Attr 对象">HTML Attribute</a></li>
+<li><a href="dom_obj_event.html" title="HTML DOM 事件">HTML Event</a></li>
+<li><a href="obj_events.html" title="HTML DOM Event 对象">HTML Event 对象</a></li>
+<li><a href="dom_obj_htmlcollection.html" title="DOM HTMLCollection">HTML Collection</a></li>
+<li><a href="dom_obj_html_nodelist.html" title="HTML DOM NodeList 对象">HTML NodeList</a></li>
+<li><a href="dom_obj_html_domtokenlist.html" title="HTML DOMTokenList 对象">HTML DOMTokenList</a></li>
+<li><a href="dom_obj_style.html" title="HTML DOM Style 对象">HTML Style</a></li>
+</ul>
+<h2>Web API</h2>
+<ul>
+<li><a href="api_canvas.html" title="JavaScript Canvas API">API Canvas</a></li>
+<li><a href="api_console.html" title="JavaScript Console API">API Console</a></li>
+<li><a href="api_fetch.html" title="JavaScript Fetch API">API Fetch</a></li>
+<li><a href="api_fullscreen.html" title="JavaScript Fullscreen API">API Fullscreen</a></li>
+<li><a href="api_geolocation.html" title="JavaScript Geolocation API">API Geolocation</a></li>
+<li><a href="api_history.html" title="JavaScript History API">API History</a></li>
+<li><a href="api_mediaquerylist.html" title="JavaScript MediaQueryList API">API MediaQueryList</a></li>
+<li><a href="api_storage.html" title="JavaScript Storage API">API Storage</a></li>
+<li><a href="api_validation.html" title="JavaScript Validation API">API Validation</a></li>
+<li><a href="api_web.html" title="JavaScript Web API">API Web</a></li>
+</ul>
+<h2>HTML 对象</h2>
+<ul>
+<li><a href="dom_obj_anchor.html" title="HTML DOM Anchor 对象">&lt;a&gt;</a></li>
+<li><a href="dom_obj_abbr.html" title="HTML DOM Abbreviation 对象">&lt;abbr&gt;</a></li>
+<li><a href="dom_obj_address.html" title="HTML DOM Address 对象">&lt;address&gt;</a></li>
+<li><a href="dom_obj_area.html" title="HTML DOM Area 对象">&lt;area&gt;</a></li>
+<li><a href="dom_obj_article.html" title="HTML DOM Article 对象">&lt;article&gt;</a></li>
+<li><a href="dom_obj_aside.html" title="HTML DOM Aside 对象">&lt;aside&gt;</a></li>
+<li><a href="dom_obj_audio.html" title="HTML DOM Audio 对象">&lt;audio&gt;</a></li>
+<li><a href="dom_obj_b.html" title="HTML DOM Bold 对象">&lt;b&gt;</a></li>
+<li><a href="dom_obj_base.html" title="HTML DOM Base 对象">&lt;base&gt;</a></li>
+<li><a href="dom_obj_bdo.html" title="HTML DOM Bdo 对象">&lt;bdo&gt;</a></li>
+<li><a href="dom_obj_blockquote.html" title="HTML DOM Blockquote 对象">&lt;blockquote&gt;</a></li>
+<li><a href="dom_obj_body.html" title="HTML DOM Body 对象">&lt;body&gt;</a></li>
+<li><a href="dom_obj_br.html" title="HTML DOM BR 对象">&lt;br&gt;</a></li>
+<li><a href="dom_obj_pushbutton.html" title="HTML DOM Button 对象">&lt;button&gt;</a></li>
+<li><a href="dom_obj_canvas.html" title="HTML DOM Canvas 对象">&lt;canvas&gt;</a></li>
+<li><a href="dom_obj_caption.html" title="HTML DOM Caption 对象">&lt;caption&gt;</a></li>
+<li><a href="dom_obj_cite.html" title="HTML DOM Cite 对象">&lt;cite&gt;</a></li>
+<li><a href="dom_obj_code.html" title="HTML DOM Code 对象">&lt;code&gt;</a></li>
+<li><a href="dom_obj_col.html" title="HTML DOM Column 对象">&lt;col&gt;</a></li>
+<li><a href="dom_obj_colgroup.html" title="HTML DOM ColumnGroup 对象">&lt;colgroup&gt;</a></li>
+<li><a href="dom_obj_datalist.html" title="HTML DOM Datalist 对象">&lt;datalist&gt;</a></li>
+<li><a href="dom_obj_dd.html" title="HTML DOM DD 对象">&lt;dd&gt;</a></li>
+<li><a href="dom_obj_del.html" title="HTML DOM Del 对象">&lt;del&gt;</a></li>
+<li><a href="dom_obj_details.html" title="HTML DOM Details 对象">&lt;details&gt;</a></li>
+<li><a href="dom_obj_dfn.html" title="HTML DOM DFN 对象">&lt;dfn&gt;</a></li>
+<li><a href="dom_obj_dialog.html" title="HTML DOM Dialog 对象">&lt;dialog&gt;</a></li>
+<li><a href="dom_obj_div.html" title="HTML DOM Div 对象">&lt;div&gt;</a></li>
+<li><a href="dom_obj_dl.html" title="HTML DOM DList 对象">&lt;dl&gt;</a></li>
+<li><a href="dom_obj_dt.html" title="HTML DOM DT 对象">&lt;dt&gt;</a></li>
+<li><a href="dom_obj_em.html" title="HTML DOM Emphasized 对象">&lt;em&gt;</a></li>
+<li><a href="dom_obj_embed.html" title="HTML DOM Embed 对象">&lt;embed&gt;</a></li>
+<li><a href="dom_obj_fieldset.html" title="HTML DOM Fieldset 对象">&lt;fieldset&gt;</a></li>
+<li><a href="dom_obj_figcaption.html" title="HTML DOM Figcaption 对象">&lt;figcaption&gt;</a></li>
+<li><a href="dom_obj_figure.html" title="HTML DOM Figure 对象">&lt;figure&gt;</a></li>
+<li><a href="dom_obj_footer.html" title="HTML DOM Footer 对象">&lt;footer&gt;</a></li>
+<li><a href="dom_obj_form.html" title="HTML DOM Form 对象">&lt;form&gt;</a></li>
+<li><a href="dom_obj_head.html" title="HTML DOM Head 对象">&lt;head&gt;</a></li>
+<li><a href="dom_obj_header.html" title="HTML DOM Header 对象">&lt;header&gt;</a></li>
+<li><a href="dom_obj_heading.html" title="HTML DOM Heading 对象">&lt;h1&gt; - &lt;h6&gt;</a></li>
+<li><a href="dom_obj_hr.html" title="HTML DOM HR 对象">&lt;hr&gt;</a></li>
+<li><a href="dom_obj_html.html" title="HTML DOM HTML 对象">&lt;html&gt;</a></li>
+<li><a href="dom_obj_i.html" title="HTML DOM Italic 对象">&lt;i&gt;</a></li>
+<li><a href="dom_obj_frame.html" title="HTML DOM IFrame 对象">&lt;iframe&gt;</a></li>
+<li><a href="dom_obj_image.html" title="HTML DOM Image 对象">&lt;img&gt;</a></li>
+<li><a href="dom_obj_ins.html" title="HTML DOM Ins 对象">&lt;ins&gt;</a></li>
+<li><a href="dom_obj_button.html" title="HTML DOM Input Button 对象">&lt;input&gt; button</a></li>
+<li><a href="dom_obj_checkbox.html" title="HTML DOM Input Checkbox 对象">&lt;input&gt; checkbox</a></li>
+<li><a href="dom_obj_color.html" title="HTML DOM Input Color 对象">&lt;input&gt; color</a></li>
+<li><a href="dom_obj_date.html" title="HTML DOM Input Date 对象">&lt;input&gt; date</a></li>
+<li><a href="dom_obj_datetime.html" title="HTML DOM Input Datetime 对象">&lt;input&gt; datetime</a></li>
+<li><a href="dom_obj_datetime-local.html" title="HTML DOM Input DatetimeLocal 对象">&lt;input&gt; datetime-local</a></li>
+<li><a href="dom_obj_email.html" title="HTML DOM Input Email 对象">&lt;input&gt; email</a></li>
+<li><a href="dom_obj_fileupload.html" title="HTML DOM Input FileUpload 对象">&lt;input&gt; file</a></li>
+<li><a href="dom_obj_hidden.html" title="HTML DOM Input Hidden 对象">&lt;input&gt; hidden</a></li>
+<li><a href="dom_obj_input_image.html" title="HTML DOM Input Image 对象">&lt;input&gt; image</a></li>
+<li><a href="dom_obj_month.html" title="HTML DOM Input Month 对象">&lt;input&gt; month</a></li>
+<li><a href="dom_obj_number.html" title="HTML DOM Input Number 对象">&lt;input&gt; number</a></li>
+<li><a href="dom_obj_password.html" title="HTML DOM Input Password 对象">&lt;input&gt; password</a></li>
+<li><a href="dom_obj_radio.html" title="HTML DOM Input Radio 对象">&lt;input&gt; radio</a></li>
+<li><a href="dom_obj_range.html" title="HTML DOM Input Range 对象">&lt;input&gt; range</a></li>
+<li><a href="dom_obj_reset.html" title="HTML DOM Input Reset 对象">&lt;input&gt; reset</a></li>
+<li><a href="dom_obj_search.html" title="HTML DOM Input Search 对象">&lt;input&gt; search</a></li>
+<li><a href="dom_obj_submit.html" title="HTML DOM Input Submit 对象">&lt;input&gt; submit</a></li>
+<li><a href="dom_obj_text.html" title="HTML DOM Input Text 对象">&lt;input&gt; text</a></li>
+<li><a href="dom_obj_input_time.html" title="HTML DOM Input Time 对象">&lt;input&gt; time</a></li>
+<li><a href="dom_obj_url.html" title="HTML DOM Input URL 对象">&lt;input&gt; url</a></li>
+<li><a href="dom_obj_week.html" title="HTML DOM Input Week 对象">&lt;input&gt; week</a></li>
+<li><a href="dom_obj_kbd.html" title="HTML DOM Kbd 对象">&lt;kbd&gt;</a></li>
+<li><a href="dom_obj_label.html" title="HTML DOM Label 对象">&lt;label&gt;</a></li>
+<li><a href="dom_obj_legend.html" title="HTML DOM Legend 对象">&lt;legend&gt;</a></li>
+<li><a href="dom_obj_li.html" title="HTML DOM Li 对象">&lt;li&gt;</a></li>
+<li><a href="dom_obj_link.html" title="HTML DOM Link 对象">&lt;link&gt;</a></li>
+<li><a href="dom_obj_map.html" title="HTML DOM Map 对象">&lt;map&gt;</a></li>
+<li><a href="dom_obj_mark.html" title="HTML DOM Mark 对象">&lt;mark&gt;</a></li>
+<li><a href="dom_obj_menu.html" title="HTML DOM Menu 对象">&lt;menu&gt;</a></li>
+<li><a href="dom_obj_menuitem.html" title="HTML DOM MenuItem 对象">&lt;menuitem&gt;</a></li>
+<li><a href="dom_obj_meta.html" title="HTML DOM Meta 对象">&lt;meta&gt;</a></li>
+<li><a href="dom_obj_meter.html" title="HTML DOM Meter 对象">&lt;meter&gt;</a></li>
+<li><a href="dom_obj_nav.html" title="HTML DOM Nav 对象">&lt;nav&gt;</a></li>
+<li><a href="dom_obj_object.html" title="HTML DOM Object 对象">&lt;object&gt;</a></li>
+<li><a href="dom_obj_ol.html" title="HTML DOM Ol 对象">&lt;ol&gt;</a></li>
+<li><a href="dom_obj_optgroup.html" title="HTML DOM OptionGroup 对象">&lt;optgroup&gt;</a></li>
+<li><a href="dom_obj_option.html" title="HTML DOM Option 对象">&lt;option&gt;</a></li>
+<li><a href="dom_obj_output.html" title="HTML DOM Output 对象">&lt;output&gt;</a></li>
+<li><a href="dom_obj_paragraph.html" title="HTML DOM Paragraph 对象">&lt;p&gt;</a></li>
+<li><a href="dom_obj_param.html" title="HTML DOM Parameter 对象">&lt;param&gt;</a></li>
+<li><a href="dom_obj_pre.html" title="HTML DOM Pre 对象">&lt;pre&gt;</a></li>
+<li><a href="dom_obj_progress.html" title="HTML DOM Progress 对象">&lt;progress&gt;</a></li>
+<li><a href="dom_obj_quote.html" title="HTML DOM Quote 对象">&lt;q&gt;</a></li>
+<li><a href="dom_obj_s.html" title="HTML DOM S 对象">&lt;s&gt;</a></li>
+<li><a href="dom_obj_samp.html" title="HTML DOM Samp 对象">&lt;samp&gt;</a></li>
+<li><a href="dom_obj_script.html" title="HTML DOM Script 对象">&lt;script&gt;</a></li>
+<li><a href="dom_obj_section.html" title="HTML DOM Section 对象">&lt;section&gt;</a></li>
+<li><a href="dom_obj_select.html" title="HTML DOM Select 对象">&lt;select&gt;</a></li>
+<li><a href="dom_obj_small.html" title="HTML DOM Small 对象">&lt;small&gt;</a></li>
+<li><a href="dom_obj_source.html" title="HTML DOM Source 对象">&lt;source&gt;</a></li>
+<li><a href="dom_obj_span.html" title="HTML DOM Span 对象">&lt;span&gt;</a></li>
+<li><a href="dom_obj_strong.html" title="HTML DOM Strong 对象">&lt;strong&gt;</a></li>
+<li><a href="dom_obj_sub.html" title="HTML DOM Subscript 对象">&lt;sub&gt;</a></li>
+<li><a href="dom_obj_summary.html" title="HTML DOM Summary 对象">&lt;summary&gt;</a></li>
+<li><a href="dom_obj_sup.html" title="HTML DOM Superscript 对象">&lt;sup&gt;</a></li>
+<li><a href="dom_obj_table.html" title="HTML DOM Table 对象">&lt;table&gt;</a></li>
+<li><a href="dom_obj_tbody.html" title="HTML DOM TBody 对象">&lt;tbody&gt;</a></li>
+<li><a href="dom_obj_tabledata.html" title="HTML DOM TableData 对象">&lt;td&gt;</a></li>
+<li><a href="dom_obj_tfoot.html" title="HTML DOM TFoot 对象">&lt;tfoot&gt;</a></li>
+<li><a href="dom_obj_tablehead.html" title="HTML DOM TableHeader 对象">&lt;th&gt;</a></li>
+<li><a href="dom_obj_thead.html" title="HTML DOM THead 对象">&lt;thead&gt;</a></li>
+<li><a href="dom_obj_tablerow.html" title="HTML DOM TableRow 对象">&lt;tr&gt;</a></li>
+<li><a href="dom_obj_textarea.html" title="HTML DOM Textarea 对象">&lt;textarea&gt;</a></li>
+<li><a href="dom_obj_time.html" title="HTML DOM Time 对象">&lt;time&gt;</a></li>
+<li><a href="dom_obj_title.html" title="HTML DOM Title 对象">&lt;title&gt;</a></li>
+<li><a href="dom_obj_track.html" title="HTML DOM Track 对象">&lt;track&gt;</a></li>
+<li><a href="dom_obj_u.html" title="HTML DOM Underline 对象">&lt;u&gt;</a></li>
+<li><a href="dom_obj_ul.html" title="HTML DOM Ul 对象">&lt;ul&gt;</a></li>
+<li><a href="dom_obj_var.html" title="HTML DOM Variable 对象">&lt;var&gt;</a></li>
+<li><a href="dom_obj_video.html" title="HTML DOM Video 对象">&lt;video&gt;</a></li>
+</ul>
+<h2>其他参考手册</h2>
+<ul>
+<li><a href="obj_cssstyledeclaration.html" title="CSSStyleDeclaration 对象">CSSStyleDeclaration</a></li>
+<li><a href="jsref_type_conversion.html" title="JavaScript 类型转换">JS 类型转换</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>JavaScript 运算符参考手册</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="jsref_obj_object.html" title="JavaScript Object 参考手册">JS 对象</a></li>
+<li class="next"><a href="jsref_precedence.html" title="JavaScript 运算符优先级">JS 运算符优先级</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p><strong>JavaScript 运算符用于赋值、比较值、执行算术运算等。</strong></p>
+
+<h3>另请参阅：</h3>
+
+<p>教程：<a href="../js/js_operators.html" title="JavaScript 运算符">JavaScript 运算符</a></p>
+
+<p>教程：<a href="../js/js_precedence.html" title="JavaScript 运算符优先级">JavaScript 运算符优先级</a></p>
+</div>
+
+
+
+<div>
+<h2>JavaScript 算术运算符</h2>
+
+<p>算术运算符用于在变量和/或值之间执行算术。</p>
+
+<p>给定 <b>y = 5</b>，下表解释了算术运算符：</p>
+
+<table class="dataintable">
+<tr>
+<th style="width: 15%;">运算符</th>
+<th style="width: 15%;">描述</th>
+<th>例子</th>
+<th>y 中的结果</th>
+<th>x 中的结果</th>
+<th style="width: 10%;">试一试</th>
+</tr>
+
+<tr>
+<td>+</td>
+<td>加</td>
+<td>x = y + 2</td>
+<td>y = 5</td>
+<td>x = 7</td>
+<td><a target="_blank" href="../tiy/t4fe7.html?f=jsck_oper_add">试一试</a></td>
+</tr>
+
+<tr>
+<td>-</td>
+<td>减</td>
+<td>x = y - 2</td>
+<td>y = 5</td>
+<td>x = 3</td>
+<td><a target="_blank" href="../tiy/tac29.html?f=jsck_oper_sub">试一试</a></td>
+</tr>
+
+<tr>
+<td>*</td>
+<td>乘</td>
+<td>x = y * 2</td>
+<td>y = 5</td>
+<td>x = 10</td>
+<td><a target="_blank" href="../tiy/t96ae.html?f=jsck_oper_mult">试一试</a></td>
+</tr>
+
+<tr>
+<td>/</td>
+<td>除</td>
+<td>x = y / 2</td>
+<td>y = 5</td>
+<td>x = 2.5</td>
+<td><a target="_blank" href="../tiy/ted24.html?f=jsck_oper_div">试一试</a></td>
+</tr>
+
+<tr>
+<td>%</td>
+<td>模数（除余）</td>
+<td>x = y % 2</td>
+<td>y = 5</td>
+<td>x = 1</td>
+<td><a target="_blank" href="../tiy/tc296.html?f=jsck_oper_mod">试一试</a></td>
+</tr>
+
+<tr>
+<td rowspan="2">++</td>
+<td rowspan="2">累加</td>
+<td>x = ++y</td>
+<td>y = 6</td>
+<td>x = 6</td>
+<td><a target="_blank" href="../tiy/t6589.html?f=jsck_oper_incr_1">试一试</a></td>
+</tr>
+
+<tr>
+<td>x = y++</td>
+<td>y = 6</td>
+<td>x = 5</td>
+<td><a target="_blank" href="../tiy/tf0f1.html?f=jsck_oper_incr_2">试一试</a></td>
+</tr>
+
+<tr>
+<td rowspan="2">--</td>
+<td rowspan="2">递减</td>
+<td>x = --y</td>
+<td>y = 4</td>
+<td>x = 4</td>
+<td><a target="_blank" href="../tiy/t3646.html?f=jsck_oper_decr_1">试一试</a></td>
+</tr>
+
+<tr>
+<td>x = y--</td>
+<td>y = 4</td>
+<td>x = 5</td>
+<td><a target="_blank" href="../tiy/t78fd.html?f=jsck_oper_decr_2">试一试</a></td>
+</tr>
+</table>
+
+<p>有关算术运算符的知识，请阅读我们的 <a href="../js/js_arithmetic.html" title="JavaScript 算术">JavaScript 算术教程</a>。</p>
+</div>
+
+
+
+<div>
+<h2>JavaScript 赋值运算符</h2>
+
+<p>赋值运算符用于为 JavaScript 变量赋值。</p>
+
+<p>给定 <b>x = 10</b> 且 <b>y = 5</b>，下表解释了赋值运算符：</p>
+
+<table class="dataintable">
+<tr>
+<th style="width: 15%;">运算符</th>
+<th>例子</th>
+<th>等同于</th>
+<th>x 中的结果</th>
+<th style="width: 10%;">试一试</th>
+</tr>
+
+<tr>
+<td>=</td>
+<td>x = y</td>
+<td>x = y</td>
+<td>x = 5</td>
+<td><a target="_blank" href="../tiy/t90ea.html?f=jsck_oper_equal">试一试</a></td>
+</tr>
+
+<tr>
+<td>+=</td>
+<td>x += y</td>
+<td>x = x + y</td>
+<td>x = 15</td>
+<td><a target="_blank" href="../tiy/te76d.html?f=jsck_oper_plusequal">试一试</a></td>
+</tr>
+
+<tr>
+<td>-=</td>
+<td>x -= y</td>
+<td>x = x - y</td>
+<td>x = 5</td>
+<td><a target="_blank" href="../tiy/t7d8f.html?f=jsck_oper_minequal">试一试</a></td>
+</tr>
+
+<tr>
+<td>*=</td>
+<td>x *= y</td>
+<td>x = x * y</td>
+<td>x = 50</td>
+<td><a target="_blank" href="../tiy/t45ab.html?f=jsck_oper_multequal">试一试</a></td>
+</tr>
+
+<tr>
+<td>/=</td>
+<td>x /= y</td>
+<td>x = x / y</td>
+<td>x = 2</td>
+<td><a target="_blank" href="../tiy/t2f14.html?f=jsck_oper_divequal">试一试</a></td>
+</tr>
+
+<tr>
+<td>%=</td>
+<td>x %= y</td>
+<td>x = x % y</td>
+<td>x = 0</td>
+<td><a target="_blank" href="../tiy/tc9b5.html?f=jsck_oper_modequal">试一试</a></td>
+</tr>
+</table>
+
+<p>有关赋值运算符的知识，请阅读我们的 <a href="../js/js_assignment.html" title="JavaScript 赋值">JavaScript 赋值教程</a>。</p>
+</div>
+
+
+
+<div>
+<h2>JavaScript 字符串运算符</h2>
+
+<p>+ 运算符和 += 运算符还可用于连接（添加）字符串。</p>
+
+<p>给定 <b>text1 = &quot;Good &quot;</b>、<b>text2 = &quot;Morning&quot;</b>，以及 <b>text3 = &quot;&quot;</b>，下表解释了该运算符：</p>
+
+<table class="dataintable">
+<tr>
+<th style="width: 15%;">运算符</th>
+<th>例子</th>
+<th>text1</th>
+<th>text2</th>
+<th>text3</th>
+<th style="width: 10%;">试一试</th>
+</tr>
+
+<tr>
+<td>+</td>
+<td>text3 = text1 + text2</td>
+<td>&quot;Good &quot;</td>
+<td>&quot;Morning&quot;</td>
+<td>&quot;Good Morning&quot;</td>
+<td><a target="_blank" href="../tiy/t164d.html?f=jsck_oper_string_1">试一试</a></td>
+</tr>
+
+<tr>
+<td>+=</td>
+<td>text1 += text2</td>
+<td>&quot;Good Morning&quot;</td>
+<td>&quot;Morning&quot;</td>
+<td>&quot;&quot;</td>
+<td><a target="_blank" href="../tiy/t1fac.html?f=jsck_oper_string_2">试一试</a></td>
+</tr>
+</table>
+</div>
+
+
+
+<div>
+<h2>比较运算符</h2>
+
+<p>在逻辑语句中使用比较运算符来确定变量或值之间的相等性或差异。</p>
+
+<p>给定 <b>x = 5</b>，下表解释了比较运算符：</p>
+
+<table class="dataintable">
+<tr>
+<th style="width: 15%;">运算符</th>
+<th>描述</th>
+<th>比较</th>
+<th>返回</th>
+<th style="width: 10%;">试一试</th>
+</tr>
+
+<tr>
+<td rowspan="2">==</td>
+<td rowspan="2">等于</td>
+<td>x == 8</td>
+<td>false</td>
+<td><a target="_blank" href="../tiy/t2212.html?f=jsck_oper_comparison_1">试一试</a></td>
+</tr>
+
+<tr>
+<td>x == 5</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/t2c79.html?f=jsck_oper_comparison_2">试一试</a></td>
+</tr>
+
+<tr>
+<td rowspan="2">===</td>
+<td rowspan="2">相等值和相等类型</td>
+<td>x === &quot;5&quot;</td>
+<td>false</td>
+<td><a target="_blank" href="../tiy/tdfd9.html?f=jsck_oper_comparison_3">试一试</a></td>
+</tr>
+
+<tr>
+<td>x === 5</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/td678.html?f=jsck_oper_comparison_4">试一试</a></td>
+</tr>
+
+<tr>
+<td>!=</td>
+<td>不相等</td>
+<td>x != 8</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/t9599.html?f=jsck_oper_comparison_5">试一试</a></td>
+</tr>
+
+<tr>
+<td rowspan="2">!==</td>
+<td rowspan="2">不相等的值或不相等的类型</td>
+<td>x !== &quot;5&quot;</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/tfe3c.html?f=jsck_oper_comparison_6">试一试</a></td>
+</tr>
+
+<tr>
+<td>x !== 5</td>
+<td>false</td>
+<td><a target="_blank" href="../tiy/t1b4b.html?f=jsck_oper_comparison_7">试一试</a></td>
+</tr>
+
+<tr>
+<td>&gt;</td>
+<td>大于</td>
+<td>x &gt; 8</td>
+<td>false</td>
+<td><a target="_blank" href="../tiy/tad7d.html?f=jsck_oper_comparison_8">试一试</a></td>
+</tr>
+
+<tr>
+<td>&lt;</td>
+<td>小于</td>
+<td>x &lt; 8</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/t1fae.html?f=jsck_oper_comparison_9">试一试</a></td>
+</tr>
+
+<tr>
+<td>&gt;=</td>
+<td>大于或等于</td>
+<td>x &gt;= 8</td>
+<td>false</td>
+<td><a target="_blank" href="../tiy/t9603.html?f=jsck_oper_comparison_10">试一试</a></td>
+</tr>
+
+<tr>
+<td>&lt;=</td>
+<td>小于或等于</td>
+<td>x &lt;= 8</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/t6dff.html?f=jsck_oper_comparison_11">试一试</a></td>
+</tr>
+</table>
+
+<p>有关比较运算符的知识，请阅读我们的 <a href="../js/js_comparisons.html" title="JavaScript 比较">JavaScript 比较教程</a>。</p>
+</div>
+
+
+
+<div>
+<h2>条件（三元）运算符</h2>
+
+<p>条件运算符根据条件将值赋给变量。</p>
+
+<h3>语法</h3>
+
+<pre><i>variablename</i> = (<i>condition</i>) ? <i>value1</i>:<i>value2</i></pre>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+voteable = (age &lt; 18) ? &quot;Too young&quot;:&quot;Old enough&quot;;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t5861.html?f=jsck_oper_comparison">亲自试一试</a></p>
+
+<h3>例子解释：</h3>
+
+<p>如果变量 &quot;age&quot; 的值小于 18，则变量 &quot;voteable&quot; 的值将为 &quot;Too young&quot;，否则，&quot;voteable&quot; 的值将为 &quot;Old enough&quot;。</p>
+</div>
+
+
+
+<div>
+<h2>逻辑运算符</h2>
+
+<p>逻辑运算符用于确定变量或值之间的逻辑。</p>
+
+<p>给定 <b>x = 6</b> 且 <b>y = 3</b>，下表解释了逻辑运算符：</p>
+
+<table class="dataintable">
+<tr>
+<th style="width: 15%;">运算符</th>
+<th style="width: 15%;">描述</th>
+<th>例子</th>
+<th style="width: 10%;">试一试</th>
+</tr>
+
+<tr>
+<td>&amp;&amp;</td>
+<td>and</td>
+<td>(x &lt; 10 && y &gt; 1) is true</td>
+<td><a target="_blank" href="../tiy/t352c.html?f=jsck_oper_and">试一试</a></td>
+</tr>
+
+<tr>
+<td>||</td>
+<td>or</td>
+<td>(x === 5 || y === 5) is false</td>
+<td><a target="_blank" href="../tiy/t4539.html?f=jsck_oper_or">试一试</a></td>
+</tr>
+
+<tr>
+<td>!</td>
+<td>not</td>
+<td>!(x === y) is true</td>
+<td><a target="_blank" href="../tiy/tef1b.html?f=jsck_oper_not">试一试</a></td>
+</tr>
+</table>
+</div>
+
+
+
+<div>
+<h2>JavaScript 位运算符</h2>
+
+<p>位运算符可处理 32 位数字。该运算中的任何数字操作数都将转换为 32 位数字。结果将转换回 JavaScript 数字。</p>
+
+<table class="dataintable">
+<tr>
+<th style="width: 15%;">运算符</th>
+<th style="width: 15%;">描述</th>
+<th>例子</th>
+<th>等同于</th>
+<th>结果</th>
+<th>十进制</th>
+</tr>
+
+<tr>
+<td>&amp;</td>
+<td>AND</td>
+<td>x = 5 &amp; 1</td>
+<td>0101 &amp; 0001</td>
+<td>0001</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>|</td>
+<td>OR</td>
+<td>x = 5 | 1</td>
+<td>0101 | 0001</td>
+<td>0101</td>
+<td>5</td>
+</tr>
+
+<tr>
+<td>~</td>
+<td>NOT</td>
+<td>x = ~ 5</td>
+<td>~0101</td>
+<td>1010</td>
+<td>10</td>
+</tr>
+
+<tr>
+<td>^</td>
+<td>XOR</td>
+<td>x = 5 ^ 1</td>
+<td>0101 ^</td>
+<td>0100</td>
+<td>4</td>
+</tr>
+
+<tr>
+<td>&lt;&lt;</td>
+<td>Left shift</td>
+<td>x = 5 &lt;&lt; 1</td>
+<td>0101 &lt;&lt; 1</td>
+<td>1010</td>
+<td>10</td>
+</tr>
+
+<tr>
+<td>&gt;&gt;</td>
+<td>Right shift</td>
+<td>x = 5 &gt;&gt; 1</td>
+<td>0101 &gt;&gt; 1</td>
+<td>0010</td>
+<td>2</td>
+</tr>
+</table>
+
+<p>上面的例子使用了 4 位无符号的示例。但是 JavaScript 使用 32 位带符号的数字。</p>
+
+<p>因此，在 JavaScript 中，~ 5 不会返回 10，而是返回 -6。</p>
+
+<p>~00000000000000000000000000000101 将返回 11111111111111111111111111111010</p>
+</div>
+
+
+
+<div>
+<h2>typeof 运算符</h2>
+
+<p><b>typeof</b> 运算符返回变量、对象、函数或表达式的类型：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+typeof &quot;Bill&quot;                 // 返回 string
+typeof 3.14                   // 返回 number
+typeof NaN                    // 返回 number
+typeof false                  // 返回 boolean
+typeof [1, 2, 3, 4]           // 返回 object
+typeof {name:'Bill', age:19}  // 返回 object
+typeof new Date()             // 返回 object
+typeof function () {}         // 返回 function
+typeof myCar                  // 返回 undefined（如果未声明 myCar）
+typeof null                   // 返回 object
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/taf64.html?f=jsck_oper_typeof">亲自试一试</a></p>
+
+<p>请注意：</p>
+
+<ul>
+<li>NaN 的数据类型是 number</li>
+<li>数组的数据类型是 object</li>
+<li>日期的数据类型是 object</li>
+<li>null 的数据类型是 object</li>
+<li>未定义变量的数据类型是 undefined</li>
+</ul>
+
+<p>您不能使用 typeof 定义 JavaScript 对象是否为数组（或日期）。</p>
+
+<p>您无法使用 typeof 来定义 JavaScript 对象是否为数组（或日期）。</p>
+</div>
+
+
+
+<div>
+<h2>delete 运算符</h2>
+
+<p><b>delete</b> 运算符从对象中删除属性：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var person = {firstName:&quot;Bill&quot;, lastName:&quot;Gates&quot;, age:19, eyeColor:&quot;blue&quot;};
+delete person.age;   // 删除 person[&quot;age&quot;];
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t9ce6-2.html?f=jsck_oper_delete">亲自试一试</a></p>
+
+<p>delete 运算符会同时删除属性的值和属性本身。</p>
+
+<p>删除后，再次将其重新添加前，无法使用该属性。</p>
+
+<p>delete 运算符旨在用于对象属性。它对变量或函数没有影响。</p>
+
+<p class="note"><span>注释：</span>不应在预定义的 JavaScript 对象属性上使用 delete 运算符。这么做可能会使您的应用程序崩溃。</p>
+</div>
+
+
+
+<div>
+<h2>in 运算符</h2>
+
+<p>如果指定的属性在指定的对象中，则 <b>in</b> 运算符将返回 true，否则返回 false：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+// 数组
+var cars = [&quot;Saab&quot;, &quot;Volvo&quot;, &quot;BMW&quot;];
+&quot;Saab&quot; in cars          // 返回 false（指定索引号而不是值）
+0 in cars               // 返回 true
+1 in cars               // 返回 true
+4 in cars               // 返回 false（不存在）
+&quot;length&quot; in cars        // 返回 true（length 是数组属性）
+
+// 对象
+var person = {firstName:&quot;Bill&quot;, lastName:&quot;Gates&quot;, age:19};
+&quot;firstName&quot; in person   // 返回 true
+&quot;age&quot; in person         // 返回 true
+
+// 预定义对象
+&quot;PI&quot; in Math            // 返回 true
+&quot;NaN&quot; in Number         // 返回 true
+&quot;length&quot; in String      // 返回 true
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t28af.html?f=jsck_oper_in">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>instanceof 运算符</h2>
+
+<p>如果指定对象是指定对象的实例，则 <b>instanceof</b> 运算符返回 true：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var cars = [&quot;Saab&quot;, &quot;Volvo&quot;, &quot;BMW&quot;];
+
+cars instanceof Array;          // 返回 true
+cars instanceof Object;         // 返回 true
+cars instanceof String;         // 返回 false
+cars instanceof Number;         // 返回 false
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t773f.html?f=jsck_oper_instanceof">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>void 运算符</h2>
+
+<p><b>void</b> 运算符计算一个表达式并返回 <b>undefined</b>。该运算符通常用于使用 &quot;void(0)&quot; 来获取未定义的原始值（在计算表达式而不使用返回值时很有用）。</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;a href=&quot;javascript:void(0);&quot;&gt;
+  无用的链接
+&lt;/a&gt;
+
+&lt;a href=&quot;javascript:void(document.body.style.backgroundColor='red');&quot;&gt;
+  单击我将 body 的背景色更改为红色
+&lt;/a&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tfd5b.html?f=jsck_oper_void">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+
+</div>
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="jsref_obj_object.html" title="JavaScript Object 参考手册">JS 对象</a></li>
+<li class="next"><a href="jsref_precedence.html" title="JavaScript 运算符优先级">JS 运算符优先级</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="index.html">JavaScript 和 HTML DOM 参考手册</a></h5>
+<h5 id="tools_example"><a href="../js/js_examples.html">JavaScript 实例</a></h5>
+<h5 id="tools_quiz"><a href="../js/js_quiz.html">JavaScript 测验</a></h5>
+<h5 id="tools_tutorial"><a href="../js/index.html">JavaScript 教程</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/jsref/jsref_operators.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:15:07 GMT -->
+</html>

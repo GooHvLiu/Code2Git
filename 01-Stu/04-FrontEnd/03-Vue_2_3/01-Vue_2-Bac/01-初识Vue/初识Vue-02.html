@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../../favicon.png" type="image/x-icon">
+  <title>初识Vue</title>
+  <!-- 引入script -->
+  <script type="text/javascript" src="../../js_Tools/vue.js"></script>
+
+</head>
+
+<body>
+  <!-- 
+    初识Vue：
+      1.想让Vue工作，就必须创建一个VUe实例，且要传入一个配置对象；
+      2.root容器里的代码依然符合html规范，只不过混入了一些特殊的Vue语法；
+      3.root容器里的代码被称为【root模板】；
+      4.容器和实例只能一一对应；
+      5.双括号{}}内只能写js表达式，如{{1+1}},{{Data.new()}} ;
+        注意事项，js表达式 和 js代码（语句）
+          1.表达式：一个表达式会产生一个值，可以放在任何一个需要值的地方：
+            1).a
+            2).a+b
+            3).demo(1)
+            4).x==y?'a':'b'
+
+          2.js代码（语句）：
+            1).if(){}
+            2).for(){}
+  -->
+  <div class="root">
+    <!-- 准备一个容器 -->
+    <h1>Hello,{{name}},{{address}}</h1>
+  </div>
+</body>
+<script type="text/javascript">
+  Vue.config.productionTip = false //阻止Vue在启动时生成生产提示。
+
+  //创建Vue实例
+  new Vue({
+    el: '.root', //el用于指定当前Vue实例为哪个容器服务，值通常为css选择器字符串，若选择为类，则可写为el:'.root'
+    data: {//data中用于存储数据，数据供el所指定的容器去使用，值我们暂时先写成一个对象。
+      name: 'BeiJing',
+      address: '北京昌平'
+    }
+  })
+</script>
+
+</html>

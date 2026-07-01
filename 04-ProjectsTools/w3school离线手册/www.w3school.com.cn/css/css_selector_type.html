@@ -1,0 +1,313 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/css/css_selector_type.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:17:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>CSS 元素选择器</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>CSS 高级教程</h2>
+<ul>
+<li><a href="index_pro.html" title="CSS 课外书">CSS 课外书</a></li>
+<li><a href="pro_css_jianjie.html" title="CSS 简介">CSS 简介</a></li>
+<li><a href="pro_css_syntax.html" title="CSS 基础语法">CSS 基础语法</a></li>
+<li><a href="css_syntax_pro.html" title="CSS 高级语法">CSS 高级语法</a></li>
+<li><a href="css_syntax_descendant_selector.html" title="CSS 派生选择器">CSS 派生选择器</a></li>
+<li><a href="css_syntax_id_selector.html" title="CSS id 选择器">CSS id 选择器</a></li>
+<li><a href="css_syntax_class_selector.html" title="CSS 类选择器">CSS 类选择器</a></li>
+<li><a href="css_howto.html" title="CSS 创建">CSS 创建</a></li>
+<li><a href="pro_css_background.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="pro_css_text.html" title="CSS 文本">CSS 文本</a></li>
+<li><a href="pro_css_font.html" title="CSS 字体">CSS 字体</a></li>
+<li><a href="pro_css_list.html" title="CSS 列表">CSS 列表</a></li>
+</ul>
+<h2>CSS 框模型</h2>
+<ul>
+<li><a href="pro_css_boxmodel.html" title="CSS 框模型概述">CSS 框模型概述</a></li>
+<li><a href="pro_css_padding.html" title="CSS 内边距">CSS 内边距</a></li>
+<li><a href="pro_css_border.html" title="CSS 边框">CSS 边框</a></li>
+<li><a href="pro_css_margin.html" title="CSS 外边距">CSS 外边距</a></li>
+<li><a href="pro_css_margin_collapsing.html" title="CSS 外边距合并">CSS 外边距合并</a></li>
+</ul>
+<h2>CSS 定位</h2>
+<ul>
+<li><a href="pro_css_positioning.html" title="CSS 定位概述">CSS 定位概述</a></li>
+<li><a href="css_positioning_relative.html" title="CSS 相对定位">CSS 相对定位</a></li>
+<li><a href="css_positioning_absolute.html" title="CSS 绝对定位">CSS 绝对定位</a></li>
+<li><a href="css_positioning_floating.html" title="CSS 浮动">CSS 浮动</a></li>
+</ul>
+<h2>CSS 选择器</h2>
+<ul>
+<li class="currentLink"><a href="css_selector_type.html" title="CSS 元素选择器">CSS 元素选择器</a></li>
+<li><a href="css_selector_grouping.html" title="CSS 选择器分组">CSS 选择器分组</a></li>
+<li><a href="css_selector_class.html" title="CSS 类选择器详解">CSS 类选择器详解</a></li>
+<li><a href="css_selector_id.html" title="CSS ID 选择器详解">CSS ID 选择器详解</a></li>
+<li><a href="css_selector_attribute.html" title="CSS 属性选择器详解">CSS 属性选择器详解</a></li>
+<li><a href="css_selector_descendant.html" title="CSS 后代选择器">CSS 后代选择器</a></li>
+<li><a href="css_selector_child.html" title="CSS 子元素选择器">CSS 子元素选择器</a></li>
+<li><a href="css_selector_adjacent_sibling.html" title="CSS 相邻兄弟选择器">CSS 相邻兄弟选择器</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>CSS 元素选择器</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css_positioning_floating.html" title="CSS 浮动">CSS 浮动</a></li>
+<li class="next"><a href="css_selector_grouping.html" title="CSS 选择器分组">CSS 选择器分组</a></li>
+</ul>
+</div>
+
+
+
+
+<div>
+<h2>CSS 元素选择器</h2>
+
+<p>最常见的 CSS 选择器是元素选择器。换句话说，文档的元素就是最基本的选择器。</p>
+
+<p>如果设置 HTML 的样式，选择器通常将是某个 HTML 元素，比如 p、h1、em、a，甚至可以是 html 本身：</p>
+
+<pre class="language-css">
+html {color:black;}
+h1 {color:blue;}
+h2 {color:silver;}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t85fc.html?f=eg_csse_selector_type_1">亲自试一试</a></p>
+
+<p>可以将某个样式从一个元素切换到另一个元素。</p>
+
+<p>假设您决定将上面的段落文本（而不是 h1 元素）设置为灰色。只需要把 h1 选择器改为 p：</p>
+
+<pre class="language-css">
+html {color:black;}
+<mark>p {color:gray;}</mark>
+h2 {color:silver;}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t18ef.html?f=eg_csse_selector_type_2">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>类型选择器</h2>
+
+<p>在 W3C 标准中，元素选择器又称为类型选择器（type selector）。</p>
+
+<p>“类型选择器匹配文档语言元素类型的名称。类型选择器匹配文档树中该元素类型的每一个实例。”</p>
+
+<p>下面的规则匹配文档树中所有 h1 元素：</p>
+
+<pre class="language-css">
+h1 {font-family: sans-serif;}
+</pre>
+
+<p>因此，我们也可以为 XML 文档中的元素设置样式：</p>
+
+<h3>XML 文档：</h3>
+
+<pre class="language-html">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+<mark>&lt;?xml-stylesheet type=&quot;text/css&quot; href=&quot;note.css&quot;?&gt;</mark>
+&lt;note&gt;
+&lt;to&gt;George&lt;/to&gt;
+&lt;from&gt;John&lt;/from&gt;
+&lt;heading&gt;Reminder&lt;/heading&gt;
+&lt;body&gt;Don't forget the meeting!&lt;/body&gt;
+&lt;/note&gt;
+</pre>
+
+<h3>CSS 文档：</h3>
+
+<pre class="language-css">
+note
+  {
+  font-family:Verdana, Arial;
+  margin-left:30px;
+  }
+
+to
+  {
+  font-size:28px;
+  display: block;
+  }
+
+from
+  {
+  font-size:28px;
+  display: block;
+  }
+
+heading
+  {
+  color: red;
+  font-size:60px;
+  display: block;
+  }
+
+body
+  {
+  color: blue;
+  font-size:35px;
+  display: block;
+  }
+</pre>
+
+<p><a href="../example/csse/note_css.xml">查看效果</a></p>
+
+<p>通过上面的例子，您可以看到，CSS 元素选择器（类型选择器）可以设置 XML 文档中元素的样式。</p>
+
+<p>如果您需要更多关于为 XML 文档添加样式的知识，请访问 w3school 的 <a href="../xml/index.html">XML 教程</a>。</p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css_positioning_floating.html" title="CSS 浮动">CSS 浮动</a></li>
+<li class="next"><a href="css_selector_grouping.html" title="CSS 选择器分组">CSS 选择器分组</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../cssref/index.html">CSS 参考手册</a></h5>
+<h5 id="tools_example"><a href="css_examples.html">CSS 实例</a></h5>
+<h5 id="tools_quiz"><a href="css_quiz.html">CSS 测验</a></h5>
+<h5 id="tools_tutorial"><a href="index.html">CSS 教程</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/css/css_selector_type.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:17:52 GMT -->
+</html>

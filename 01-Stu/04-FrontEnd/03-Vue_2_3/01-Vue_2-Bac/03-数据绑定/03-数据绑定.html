@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../../favicon.png" type="image/x-icon">
+  <title>03-数据绑定</title>
+  <!-- 引入script -->
+  <script type="text/javascript" src="../../js_Tools/vue.js"></script>
+</head>
+
+<body>
+  <!-- 
+    Vue中有2种数据绑定的方式：
+      1.单想绑定（v-bind）:数据只能从data流向页面；
+      2.双向绑定（v-model）:数据不仅能从data流向页面，爱可以从页面流向data。
+        特别注意：
+          1.双向绑定一般都应用在表单类元素上（如input、select等）；
+          2.v-model:value 可以简写为v-model,因为v-model默认收集的就是value的值。
+  -->
+  <div id="root">
+    <!-- 普通写法 -->
+    单项数据绑定：<input type="text" v-bind:value="name">
+    <hr>
+    双项数据绑定：<input type="text" v-model:value="name">
+    <hr>
+
+    <!-- 简写写法 -->
+    单项数据绑定：<input type="text" v-bind:value="name">
+    <hr>
+    双项数据绑定：<input type="text" v-model="name">
+    <hr>
+    <!-- 以下代码是错误的，因为v-model只能应用在表单类元素（输入类元素）上，即：有value值的元素上 -->
+    <h2 v-model:x="name">你好啊</h2>
+  </div>
+</body>
+<script type="text/javascript">
+  Vue.config.productionTip = false //阻止Vue在启动时生成生产提示。
+
+  new Vue({
+    el: '#root',
+    data: {
+      name: 'BeiJing'
+    }
+  })
+</script>
+
+</html>

@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/bootstrap5/bootstrap_tables.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:20:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Bootstrap 5 表格</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Bootstrap 5 教程</h2>
+<ul>
+<li><a href="index.html" title="Bootstrap 5 教程">BS5 教程</a></li>
+<li><a href="bootstrap_get_started.html" title="Bootstrap 5 入门">BS5 入门</a></li>
+<li><a href="bootstrap_containers.html" title="Bootstrap 5 容器">BS5 容器</a></li>
+<li><a href="bootstrap_grid_basic.html" title="Bootstrap 5 网格">BS5 网格基础</a></li>
+<li><a href="bootstrap_typography.html" title="Bootstrap 5 文字/排版">BS5 排版</a></li>
+<li><a href="bootstrap_colors.html" title="Bootstrap 5 颜色">BS5 颜色</a></li>
+<li class="currentLink"><a href="bootstrap_tables.html" title="Bootstrap 5 表格">BS5 表格</a></li>
+<li><a href="bootstrap_images.html" title="Bootstrap 5 图像">BS5 图像</a></li>
+<li><a href="bootstrap_jumbotron.html" title="Bootstrap 5 Jumbotron">BS5 Jumbotron</a></li>
+<li><a href="bootstrap_alerts.html" title="Bootstrap 5 警告框">BS5 警告框</a></li>
+<li><a href="bootstrap_buttons.html" title="Bootstrap 5 按钮">BS5 按钮</a></li>
+<li><a href="bootstrap_button_groups.html" title="Bootstrap 5 按钮组">BS5 按钮组</a></li>
+<li><a href="bootstrap_badges.html" title="Bootstrap 5 徽章">BS5 徽章</a></li>
+<li><a href="bootstrap_progressbars.html" title="Bootstrap 5 进度条">BS5 进度条</a></li>
+<li><a href="bootstrap_spinners.html" title="Bootstrap 5 加载器">BS5 加载器</a></li>
+<li><a href="bootstrap_pagination.html" title="Bootstrap 5 分页">BS5 分页</a></li>
+<li><a href="bootstrap_list_groups.html" title="Bootstrap 5 列表组">BS5 列表组</a></li>
+<li><a href="bootstrap_cards.html" title="Bootstrap 5 卡片">BS5 卡片</a></li>
+<li><a href="bootstrap_dropdowns.html" title="Bootstrap 5 下拉菜单">BS5 下拉菜单</a></li>
+<li><a href="bootstrap_collapse.html" title="Bootstrap 5 折叠">BS5 折叠</a></li>
+<li><a href="bootstrap_navs.html" title="Bootstrap 5 导航">BS5 导航</a></li>
+<li><a href="bootstrap_navbar.html" title="Bootstrap 5 导航栏">BS5 导航栏</a></li>
+<li><a href="bootstrap_carousel.html" title="Bootstrap 5 轮播">BS5 轮播</a></li>
+<li><a href="bootstrap_modal.html" title="Bootstrap 5 模态">BS5 模态</a></li>
+<li><a href="bootstrap_tooltip.html" title="Bootstrap 5 工具提示">BS5 工具提示</a></li>
+<li><a href="bootstrap_popover.html" title="Bootstrap 5 弹出框">BS5 弹出框</a></li>
+<li><a href="bootstrap_toast.html" title="Bootstrap 5 Toast">BS5 Toast</a></li>
+<li><a href="bootstrap_scrollspy.html" title="Bootstrap 5 Scrollspy">BS5 Scrollspy</a></li>
+<li><a href="bootstrap_offcanvas.html" title="Bootstrap 5 Offcanvas">BS5 Offcanvas</a></li>
+<li><a href="bootstrap_utilities.html" title="Bootstrap 5 实用工具">BS5 实用工具</a></li>
+<li><a href="bootstrap_flex.html" title="Bootstrap 5 Flex">BS5 Flex</a></li>
+</ul>
+<h2>Bootstrap 5 表单</h2>
+<ul>
+<li><a href="bootstrap_forms.html" title="Bootstrap 5 表单">BS5 表单</a></li>
+<li><a href="bootstrap_form_select.html" title="Bootstrap 5 选择菜单">BS5 选择菜单</a></li>
+<li><a href="bootstrap_form_check_radio.html" title="Bootstrap 5 复选框和单选按钮">BS5 复选框和单选按钮</a></li>
+<li><a href="bootstrap_form_range.html" title="Bootstrap 5 范围">BS5 范围</a></li>
+<li><a href="bootstrap_form_input_group.html" title="Bootstrap 5 输入组">BS5 输入组</a></li>
+<li><a href="bootstrap_form_floating_labels.html" title="Bootstrap 5 表单浮动标签">BS5 浮动标签</a></li>
+<li><a href="bootstrap_form_validation.html" title="Bootstrap 5 表单验证">BS5 表单验证</a></li>
+</ul>
+<h2>Bootstrap 5 网格</h2>
+<ul>
+<li><a href="bootstrap_grid_system.html" title="Bootstrap 5 网格系统">BS5 网格系统</a></li>
+<li><a href="bootstrap_grid_stacked_to_hor.html" title="Bootstrap 5 堆叠/水平">BS5 堆叠/水平</a></li>
+<li><a href="bootstrap_grid_xsmall.html" title="Bootstrap 5 网格：超小型设备">BS5 网格 XSmall</a></li>
+<li><a href="bootstrap_grid_small.html" title="Bootstrap 5 网格：小型设备">BS5 网格 Small</a></li>
+<li><a href="bootstrap_grid_medium.html" title="Bootstrap 5 网格：中型设备">BS5 网格 Medium</a></li>
+<li><a href="bootstrap_grid_large.html" title="Bootstrap 5 网格：大型设备">BS5 网格 Large</a></li>
+<li><a href="bootstrap_grid_xlarge.html" title="Bootstrap 5 网格：超大型设备">BS5 网格 XLarge</a></li>
+<li><a href="bootstrap_grid_xxl.html" title="Bootstrap 5 网格：特大型设备">BS5 网格 XXL</a></li>
+<li><a href="bootstrap_grid_examples.html" title="Bootstrap 5 网格实例">BS5 网格实例</a></li>
+</ul>
+<h2>Bootstrap 5 其他</h2>
+<ul>
+<li><a href="bootstrap_templates.html" title="Bootstrap 5 基础模板">BS5 基础模板</a></li>
+<li><a href="bootstrap_quiz.html" title="Bootstrap 5 测验">BS5 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Bootstrap 5 表格</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="bootstrap_colors.html" title="Bootstrap 5 颜色">BS5 颜色</a></li>
+<li class="next"><a href="bootstrap_images.html" title="Bootstrap 5 图像">BS5 图像</a></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>基础表格</h2>
+
+<p>一个基本的 Bootstrap 5 表格有一点内边距，以及水平分隔线。</p>
+
+<p><code>.table</code> 类为表格添加了基本样式：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_table_basic.html" style="width:100%;height:200px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p class="tiy"><a target="_blank" href="../tiy/t7d46.html?s=h&amp;f=bs_table_basic">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>条纹行</h2>
+
+<p><code>.table-striped</code> 类将斑马条纹添加到表中：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_table_striped.html" style="width:100%;height:200px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p class="tiy"><a target="_blank" href="../tiy/t7813-2.html?s=h&amp;f=bs_table_striped">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>带边框的表格</h2>
+
+<p><code>.table-bordered</code> 类为表格和单元格的所有边添加边框：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_table_bordered.html" style="width:100%;height:200px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p class="tiy"><a target="_blank" href="../tiy/t8634.html?s=h&amp;f=bs_table_bordered">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>有悬停效果的行</h2>
+
+<p><code>.table-hover</code> 类在表格行上添加悬停效果（灰色背景色）：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_table_hover.html" style="width:100%;height:200px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p class="tiy"><a target="_blank" href="../tiy/t9465.html?s=h&amp;f=bs_table_hover">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>黑色/深色表格</h2>
+
+<p><code>.table-dark</code> 类为表格添加黑色背景：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_table_dark.html" style="width:100%;height:200px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p class="tiy"><a target="_blank" href="../tiy/t0910.html?s=h&amp;f=bs_table_dark">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>深色条纹表格</h2>
+
+<p>结合 <code>.table-dark</code> 和 <code>.table-striped</code> 来创建深色的条纹表格：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_table_dark_striped.html" style="width:100%;height:200px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p class="tiy"><a target="_blank" href="../tiy/tbba5.html?s=h&amp;f=bs_table_dark_striped">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>可悬停的深色表格</h2>
+
+<p><code>.table-hover</code> 类在表格行上添加悬停效果（灰色背景色）：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_table_dark_hover.html" style="width:100%;height:200px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p class="tiy"><a target="_blank" href="../tiy/t4135.html?s=h&amp;f=bs_table_dark_hover">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>无边框表格</h2>
+
+<p><code>.table-borderless</code> 类从表格中删除边框：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_table_borderless.html" style="width:100%;height:200px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p class="tiy"><a target="_blank" href="../tiy/ta31a.html?s=h&amp;f=bs_table_borderless">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>上下文类</h2>
+
+<p>上下文类可用于为整个表格 (<code>&lt;table&gt;</code>)、表格行 (<code>&lt;tr&gt;</code>) 或表格单元格 (<code>&lt;td&gt;</code>) 着色。</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_table_contextual.html" style="width:100%;height:500px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p class="tiy"><a target="_blank" href="../tiy/t6c79.html?s=h&amp;f=bs_table_contextual">亲自试一试</a></p>
+
+<h3>可用的上下文类：</h3>
+
+<table class="definition-usage">
+<tr>
+<th>类</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><code>.table-primary</code></td>
+<td>蓝色：表示重要动作。</td>
+</tr>
+
+<tr>
+<td><code>.table-success</code></td>
+<td>绿色：表示成功或积极的动作。</td>
+</tr>
+
+<tr>
+<td><code>.table-danger</code></td>
+<td>红色：表示危险或潜在的负面行为。</td>
+</tr>
+
+<tr>
+<td><code>.table-info</code></td>
+<td>浅蓝色：表示中性的信息更改或操作。</td>
+</tr>
+
+<tr>
+<td><code>.table-warning</code></td>
+<td>橙色：表示可能需要注意的警告。</td>
+</tr>
+
+<tr>
+<td><code>.table-active</code></td>
+<td>灰色：将悬停颜色应用于表格行或表格单元格。</td>
+</tr>
+
+<tr>
+<td><code>.table-secondary</code></td>
+<td>灰色：表示不太重要的动作。</td>
+</tr>
+
+<tr>
+<td><code>.table-light</code></td>
+<td>浅灰色表格或表格行背景。</td>
+</tr>
+
+<tr>
+<td><code>.table-dark</code></td>
+<td>深灰色表格或表格行背景。</td>
+</tr>
+</table>
+</div>
+
+
+
+<div>
+<h2>表头颜色</h2>
+
+<p>您还可以使用任何上下文类只向表格标题添加背景颜色：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_table_head.html" style="width:100%;height:380px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p class="tiy"><a target="_blank" href="../tiy/taf02.html?s=h&amp;f=bs_table_head">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>小型表格</h2>
+
+<p><code>.table-sm</code> 类通过将单元格填充减半来使表格变小：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_table_sm.html" style="width:100%;height:170px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p class="tiy"><a target="_blank" href="../tiy/t2301.html?s=h&amp;f=bs_table_sm">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>响应式表格</h2>
+
+<p><code>.table-responsive</code> 类在需要时向表格添加滚动条（当它在水平方向上太大时）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;table-responsive&quot;&gt;
+  &lt;table class=&quot;table&quot;&gt;
+    ...
+  &lt;/table&gt;
+&lt;/div&gt;
+</pre>
+
+<iframe  src="../demo/bs/bs_table_responsive.html" style="width:100%;height:150px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p class="tiy"><a target="_blank" href="../tiy/t443f.html?s=h&amp;f=bs_table_responsive">亲自试一试</a></p>
+
+<p>您还可以决定表格何时应该获得滚动条，具体取决于屏幕宽度：</p>
+
+<table class="definition-usage">
+<tr>
+<th>类</th>
+<th>屏幕宽度</th>
+</tr>
+
+<tr>
+<td><code>.table-responsive-sm</code></td>
+<td>&lt; 576px</td>
+</tr>
+
+<tr>
+<td><code>.table-responsive-md</code></td>
+<td>&lt; 768px</td>
+</tr>
+
+<tr>
+<td><code>.table-responsive-lg</code></td>
+<td>&lt; 992px</td>
+</tr>
+
+<tr>
+<td><code>.table-responsive-xl</code></td>
+<td>&lt; 1200px</td>
+</tr>
+
+<tr>
+<td><code>.table-responsive-xxl</code></td>
+<td>&lt; 1400px</td>
+</tr>
+</table>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;table-responsive-sm&quot;&gt;
+  &lt;table class=&quot;table&quot;&gt;
+    ...
+  &lt;/table&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t5151.html?s=h&amp;f=bs_table_responsive_sm">亲自试一试</a></p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="bootstrap_colors.html" title="Bootstrap 5 颜色">BS5 颜色</a></li>
+<li class="next"><a href="bootstrap_images.html" title="Bootstrap 5 图像">BS5 图像</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_quiz"><a href="bootstrap_quiz.html">JavaScript 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/bootstrap5/bootstrap_tables.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:20:47 GMT -->
+</html>

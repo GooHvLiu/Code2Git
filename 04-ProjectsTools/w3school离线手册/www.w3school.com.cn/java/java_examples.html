@@ -1,0 +1,806 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/java/java_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 01:57:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Java 实例</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Java 教程</h2>
+<ul>
+<li><a href="index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="java_intro.html" title="Java 简介">Java 简介</a></li>
+<li><a href="java_getstarted.html" title="Java 入门">Java 入门</a></li>
+<li><a href="java_syntax.html" title="Java 语法">Java 语法</a></li>
+<li><a href="java_output.html" title="Java 输出 / 打印">Java 输出</a></li>
+<li><a href="java_comments.html" title="Java 注释">Java 注释</a></li>
+<li><a href="java_variables.html" title="Java 变量">Java 变量</a></li>
+<li><a href="java_data_types.html" title="Java 数据类型">Java 数据类型</a></li>
+<li><a href="java_type_casting.html" title="Java 类型转换">Java 类型转换</a></li>
+<li><a href="java_operators.html" title="Java 运算符">Java 运算符</a></li>
+<li><a href="java_strings.html" title="Java 字符串">Java 字符串</a></li>
+<li><a href="java_math.html" title="Java 数学">Java 数学</a></li>
+<li><a href="java_booleans.html" title="Java 布尔">Java 布尔</a></li>
+<li><a href="java_conditions.html" title="Java If...Else">Java If...Else</a></li>
+<li><a href="java_switch.html" title="Java Switch">Java Switch</a></li>
+<li><a href="java_while_loop.html" title="Java While 循环">Java While 循环</a></li>
+<li><a href="java_for_loop.html" title="Java For 循环">Java For 循环</a></li>
+<li><a href="java_break.html" title="Java Break 和 Continue">Java Break/Continue</a></li>
+<li><a href="java_arrays.html" title="Java 数组">Java 数组</a></li>
+</ul>
+<h2>Java 方法</h2>
+<ul>
+<li><a href="java_methods.html" title="Java 方法">Java 方法</a></li>
+<li><a href="java_methods_param.html" title="Java 方法参数">Java 方法参数</a></li>
+<li><a href="java_methods_overloading.html" title="Java 方法重载">Java 方法重载</a></li>
+<li><a href="java_scope.html" title="Java 作用域">Java 作用域</a></li>
+<li><a href="java_recursion.html" title="Java 递归">Java 递归</a></li>
+</ul>
+<h2>Java 类</h2>
+<ul>
+<li><a href="java_oop.html" title="Java OOP">Java OOP</a></li>
+<li><a href="java_classes.html" title="Java 类/对象">Java 类/对象</a></li>
+<li><a href="java_class_attributes.html" title="Java 类属性">Java 类属性</a></li>
+<li><a href="java_class_methods.html" title="Java 类方法">Java 类方法</a></li>
+<li><a href="java_constructors.html" title="Java 构造函数">Java 构造函数</a></li>
+<li><a href="java_modifiers.html" title="Java 修饰符">Java 修饰符</a></li>
+<li><a href="java_encapsulation.html" title="Java 封装">Java 封装</a></li>
+<li><a href="java_packages.html" title="Java 包">Java 包 / API</a></li>
+<li><a href="java_inheritance.html" title="Java 继承">Java 继承</a></li>
+<li><a href="java_polymorphism.html" title="Java 多态">Java 多态</a></li>
+<li><a href="java_inner_classes.html" title="Java 内部类">Java 内部类</a></li>
+<li><a href="java_abstract.html" title="Java 抽象">Java 抽象</a></li>
+<li><a href="java_interface.html" title="Java 接口">Java 接口</a></li>
+<li><a href="java_enums.html" title="Java 枚举">Java 枚举</a></li>
+<li><a href="java_user_input.html" title="Java 用户输入">Java 用户输入</a></li>
+<li><a href="java_date.html" title="Java 日期">Java 日期</a></li>
+</ul>
+<h2>Java 数据结构</h2>
+<ul>
+<li><a href="java_arraylist.html" title="Java ArrayList">Java ArrayList</a></li>
+<li><a href="java_linkedlist.html" title="Java LinkedList">Java LinkedList</a></li>
+<li><a href="java_sort_list.html" title="Java 列表排序">Java 列表排序</a></li>
+<li><a href="java_hashmap.html" title="Java HashMap">Java HashMap</a></li>
+<li><a href="java_hashset.html" title="Java HashSet">Java HashSet</a></li>
+<li><a href="java_iterator.html" title="Java 迭代器">Java 迭代器</a></li>
+<li><a href="java_wrapper_classes.html" title="Java 包装类">Java 包装类</a></li>
+</ul>
+<h2>Java 高级</h2>
+<ul>
+<li><a href="java_try_catch.html" title="Java 异常">Java 异常</a></li>
+<li><a href="java_regex.html" title="Java RegEx">Java RegEx</a></li>
+<li><a href="java_threads.html" title="Java 线程">Java 线程</a></li>
+<li><a href="java_lambda.html" title="Java Lambda">Java Lambda</a></li>
+<li><a href="java_advanced_sorting.html" title="Java 高级排序（Comparator 和 Comparable）">Java 高级排序</a></li>
+</ul>
+<h2>Java 文件处理</h2>
+<ul>
+<li><a href="java_files.html" title="Java 文件">Java 文件</a></li>
+<li><a href="java_files_create.html" title="Java 创建/写入文件">Java 创建/写入文件</a></li>
+<li><a href="java_files_read.html" title="Java 读取文件">Java 读取文件</a></li>
+<li><a href="java_files_delete.html" title="Java 删除文件">Java 删除文件</a></li>
+</ul>
+<h2>Java 案例</h2>
+<ul>
+<li><a href="java_howto_add_two_numbers.html" title="Java 如何对两个数字相加">两个数字相加</a></li>
+<li><a href="java_howto_count_words.html" title="Java 如何统计字数">统计字数</a></li>
+<li><a href="java_howto_reverse_string.html" title="Java 如何反转字符串">反转字符串</a></li>
+<li><a href="java_howto_sum_of_array_elements.html" title="Java 如何计算数组元素的和">计算数组元素的和</a></li>
+<li><a href="java_howto_string_to_array.html" title="Java 如何将字符串转换为数组">将字符串转换为数组</a></li>
+<li><a href="java_howto_sort_an_array.html" title="Java 如何排序数组">排序数组</a></li>
+<li><a href="java_howto_calculate_avg_array.html" title="Java 如何计算数组元素的平均值">计算数组元素的平均值</a></li>
+<li><a href="java_howto_find_smallest_array_el.html" title="Java 如何找到数组中的最小元素">找到数组中的最小元素</a></li>
+<li><a href="java_howto_loop_through_arraylist.html" title="Java 如何遍历 ArrayList">遍历 ArrayList</a></li>
+<li><a href="java_howto_loop_through_hashmap.html" title="Java 如何遍历 HashMap">遍历 HashMap</a></li>
+<li><a href="java_howto_loop_through_enum.html" title="Java 如何遍历枚举">遍历枚举</a></li>
+<li><a href="java_howto_area_of_rectangle.html" title="Java 如何计算矩形的面积">计算矩形的面积</a></li>
+<li><a href="java_howto_even_or_odd.html" title="Java 如何判断数字的奇偶性">判断数字的奇偶性</a></li>
+<li><a href="java_howto_pos_or_neg.html" title="Java 如何判断数字的正负">判断数字的正负</a></li>
+<li><a href="java_howto_find_square_root.html" title="Java 如何求一个数的平方根">求一个数的平方根</a></li>
+<li><a href="java_howto_random_number.html" title="Java 如何生成随机数">生成随机数</a></li>
+</ul>
+<h2>Java 参考手册</h2>
+<ul>
+<li><a href="java_reference.html" title="Java 参考手册">Java 参考手册</a></li>
+<li><a href="java_ref_keywords.html" title="Java 关键字">Java 关键字</a></li>
+<li><a href="java_ref_string.html" title="Java String 方法">Java String 方法</a></li>
+<li><a href="java_ref_math.html" title="Java Math 方法">Java Math 方法</a></li>
+<li><a href="java_ref_output.html" title="Java Output 方法">Java Output 方法</a></li>
+<li><a href="java_ref_arrays.html" title="Java Arrays 方法">Java Arrays 方法</a></li>
+<li><a href="java_ref_arraylist.html" title="Java ArrayList 方法">Java ArrayList 方法</a></li>
+<li><a href="java_ref_linkedlist.html" title="Java LinkedList 方法">Java LinkedList 方法</a></li>
+<li><a href="java_ref_hashmap.html" title="Java HashMap 方法">Java HashMap 方法</a></li>
+<li><a href="java_ref_scanner.html" title="Java Scanner 方法">Java Scanner 方法</a></li>
+<li><a href="java_ref_iterators.html" title="Java Iterator 方法">Java Iterator 方法</a></li>
+<li><a href="java_ref_errors.html" title="Java 错误和异常类型">Java 错误和异常</a></li>
+</ul>
+<h2>Java 实例</h2>
+<ul>
+<li class="currentLink"><a href="java_examples.html" title="Java 实例">Java 实例</a></li>
+<li><a href="java_quiz.html" title="Java 测验">Java 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Java 实例</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="java_ref_errors.html" title="Java 错误和异常类型">Java 错误和异常</a></li>
+<li class="next"><a href="java_quiz.html" title="Java 测验">Java 测验</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>Java 语法</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tef7b.html?f=java_helloworld">创建一个简单的 &quot;Hello World&quot; 程序</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_syntax.html">实例解释：Java 语法</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 注释</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t615f.html?f=java_comment_single">单行注释（位于代码行前）</a></li>
+<li><a target="_blank" href="t1fc8.html?f=java_comment_single_end">单行注释（位于代码行末尾）</a></li>
+<li><a target="_blank" href="t52f0.html?f=java_comment_multi">多行注释</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_comments.html">实例解释：Java 注释</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 变量</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tf143.html?f=java_variables_1">创建字符串变量</a></li>
+<li><a target="_blank" href="tc75d.html?f=java_variables_int_1">创建整型变量</a></li>
+<li><a target="_blank" href="t67c0.html?f=java_variables_int_2">先声明变量后赋值</a></li>
+<li><a target="_blank" href="t469c.html?f=java_variables_ow">覆盖已有变量值</a></li>
+<li><a target="_blank" href="t3dae.html?f=java_variables_final">创建 final 变量（不可修改，只读）</a></li>
+<li><a target="_blank" href="te31d.html?f=java_variables_2">显示时组合文本和变量</a></li>
+<li><a target="_blank" href="t8ac0.html?f=java_variables_3">将一个变量添加到另一个变量</a></li>
+<li><a target="_blank" href="t0554.html?f=java_variables_5">用逗号分隔列表声明多个同类型变量</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_variables.html">实例解释：Java 变量</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 数据类型</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t739a.html?f=java_data_types">对 Java 中不同数据类型的演示</a></li>
+<li><a target="_blank" href="t428f.html?f=java_type_byte">创建 byte 类型</a></li>
+<li><a target="_blank" href="t904c.html?f=java_type_short">创建 short 类型</a></li>
+<li><a target="_blank" href="t5dda.html?f=java_type_int">创建 int 类型</a></li>
+<li><a target="_blank" href="taa1e.html?f=java_type_long">创建 long 类型</a></li>
+<li><a target="_blank" href="tcf53.html?f=java_type_float">创建 float 类型</a></li>
+<li><a target="_blank" href="tfba5.html?f=java_type_double">创建 double 类型</a></li>
+<li><a target="_blank" href="t8daa.html?f=java_booleans">创建 boolean 类型</a></li>
+<li><a target="_blank" href="tf358.html?f=java_type_char">创建 char 类型</a></li>
+<li><a target="_blank" href="t189e.html?f=java_type_string">创建 String 类型</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_data_types.html">实例解释：Java 数据类型</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 类型转换</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t2305.html?f=java_casting_wide">自动类型转换（隐式转换）</a></li>
+<li><a target="_blank" href="t5043.html?f=java_casting_narrow">强制类型转换（显式转换）</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_type_casting.html">实例解释：Java 类型转换</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 运算符</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t5f40.html?f=java_oper_add">加法运算符</a></li>
+<li><a target="_blank" href="t3910.html?f=java_oper_sub">减法运算符</a></li>
+<li><a target="_blank" href="taf25.html?f=java_oper_mult">乘法运算符</a></li>
+<li><a target="_blank" href="t64e7.html?f=java_oper_div">除法运算符</a></li>
+<li><a target="_blank" href="t8867.html?f=java_oper_mod">取模运算符</a></li>
+<li><a target="_blank" href="te617.html?f=java_oper_inc">自增运算符</a></li>
+<li><a target="_blank" href="t632f.html?f=java_oper_dec">自减运算符</a></li>
+<li><a target="_blank" href="t2fc8.html?f=java_oper_ass_1">赋值运算符</a></li>
+<li><a target="_blank" href="tafaa.html?f=java_oper_compare_1">比较运算符</a></li>
+<li><a target="_blank" href="t3dbe.html?f=java_oper_logical_1">逻辑运算符</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_operators.html">实例解释：Java 运算符</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 字符串</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t7faa.html?f=java_strings">创建字符串</a></li>
+<li><a target="_blank" href="t03d6.html?f=java_strings_double_quote">字符串中的引号</a></li>
+<li><a target="_blank" href="tea8b.html?f=java_strings_length">获取字符串长度</a></li>
+<li><a target="_blank" href="t85e6.html?f=java_strings_touppercase">使用转大写/小写方法</a></li>
+<li><a target="_blank" href="t66dc.html?f=java_strings_indexof">在字符串中查找子串</a></li>
+<li><a target="_blank" href="tf4c1.html?f=java_strings_conc_1">字符串拼接</a></li>
+<li><a target="_blank" href="tb1af.html?f=java_strings_num_3">数字与字符串相加会转为字符串拼接</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_strings.html">实例解释：Java 字符串</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 数学</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t186f.html?f=java_math_max">Math.max(x,y) - 返回 x 和 y 中的较大值</a></li>
+<li><a target="_blank" href="tb1b0.html?f=java_math_min">Math.min(x,y) - 返回 x 和 y 中的较小值</a></li>
+<li><a target="_blank" href="tdd18.html?f=java_math_sqrt">Math.sqrt(x) - 返回 x 的平方根</a></li>
+<li><a target="_blank" href="tf705.html?f=java_math_abs">Math.abs(x) - 返回 x 的绝对值</a></li>
+<li><a target="_blank" href="t07dd.html?f=java_math_random_1">Math.random() - 返回 0 到 1 之间的随机数</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_math.html">实例解释：Java 数学</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 布尔值</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t8daa.html?f=java_booleans">创建布尔类型</a></li>
+<li><a target="_blank" href="tcf76.html?f=java_booleans_1">判断表达式真假</a></li>
+<li><a target="_blank" href="t00bd.html?f=java_booleans_3">用 &quot;等于&quot; 运算符计算布尔表达式</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_booleans.html">实例解释：Java 布尔值</a></p>
+</section>
+
+
+
+<section>
+<h2>Java If...Else (条件)</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="te803.html?f=java_if_1">if 语句</a></li>
+<li><a target="_blank" href="t965d.html?f=java_if_else">else 语句</a></li>
+<li><a target="_blank" href="t3e0a.html?f=java_if_else_if">else if 语句</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_conditions.html">实例解释：Java if ... else</a></p>
+</section>
+
+
+
+<section>
+<h2>Java Switch</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t44c2.html?f=java_switch">switch 语句</a></li>
+<li><a target="_blank" href="ta744.html?f=java_switch_default">带 default 关键字的 switch 语句</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_switch.html">实例解释：Java switch</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 循环</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t854d.html?f=java_while_loop">while 循环</a></li>
+<li><a target="_blank" href="t4461.html?f=java_do_while_loop">do while 循环</a></li>
+<li><a target="_blank" href="tadd9.html?f=java_for_loop">for 循环</a></li>
+<li><a target="_blank" href="t7f8c.html?f=java_array_for_each">for each 循环</a></li>
+<li><a target="_blank" href="t51ee.html?f=java_break">中断循环</a></li>
+<li><a target="_blank" href="t9027.html?f=java_continue">跳过当前循环迭代</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_while_loop.html">实例解释：Java while</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 数组</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="td0a3.html?f=java_array">创建并访问数组</a></li>
+<li><a target="_blank" href="t7748.html?f=java_array_change">修改数组元素</a></li>
+<li><a target="_blank" href="t865b.html?f=java_array_length">获取数组长度</a></li>
+<li><a target="_blank" href="t7748.html?f=java_array_change">访问数组元素</a></li>
+<li><a target="_blank" href="t809e.html?f=java_array_loop">遍历数组</a></li>
+<li><a target="_blank" href="t7f8c.html?f=java_array_for_each">用 for-each 遍历数组</a></li>
+<li><a target="_blank" href="tefd6.html?f=java_array_multi">多维数组</a></li>
+<li><a target="_blank" href="t3e12.html?f=java_array_multi_for">遍历多维数组</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_arrays.html">实例解释：Java 数组</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 方法</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t527b.html?f=java_method">创建并调用方法</a></li>
+<li><a target="_blank" href="t415a.html?f=java_method_multiple">多次调用方法</a></li>
+<li><a target="_blank" href="tdf0d.html?f=java_method_param_1">带参数的方法</a></li>
+<li><a target="_blank" href="t0781.html?f=java_method_param_2">带多个参数的方法</a></li>
+<li><a target="_blank" href="tb9ab.html?f=java_method_void_1">返回值</a></li>
+<li><a target="_blank" href="t4c4e.html?f=java_method_ifelse">包含 if...else 的方法</a></li>
+<li><a target="_blank" href="tc9a0.html?f=java_method_overloading_2">方法重载</a></li>
+<li><a target="_blank" href="t8aff.html?f=java_recursion_1">递归</a></li>
+<li><a target="_blank" href="t438d.html?f=java_recursion_2">带终止条件的递归函数</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_methods.html">实例解释：Java 方法</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 类和对象</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="ted43.html?f=java_class">创建类和对象</a></li>
+<li><a target="_blank" href="tf1e1.html?f=java_class_multi_obj">创建类的多个对象</a></li>
+<li><a target="_blank" href="t35b7.html?f=java_attributes_1">访问类属性（变量）</a></li>
+<li><a target="_blank" href="t7e14.html?f=java_attributes_2">修改属性</a></li>
+<li><a target="_blank" href="t86e0.html?f=java_attributes_3">覆盖现有属性值</a></li>
+<li><a target="_blank" href="t2816.html?f=java_attributes_multiple">多个属性</a></li>
+<li><a target="_blank" href="tcbb9.html?f=java_class_method">创建类方法</a></li>
+<li><a target="_blank" href="t028f.html?f=java_class_method_para">带参数的方法</a></li>
+<li><a target="_blank" href="t5011.html?f=java_class_car">通过对象访问类方法</a></li>
+<li><a target="_blank" href="t6f2b.html?f=java_constructor">创建类构造函数</a></li>
+<li><a target="_blank" href="tbbaf.html?f=java_constructor_para_2">带参数的构造函数</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_classes.html">实例解释：Java 类和对象</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 修饰符</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t8235.html?f=java_mod_public_1">公共类</a></li>
+<li><a target="_blank" href="tfc80.html?f=java_mod_default_1">默认类</a></li>
+<!--<li><a target="_blank" href="/java/s.php?f=java_mod_public_2">公共属性</a></li>-->
+<li><a target="_blank" href="t7b3c.html?f=java_mod_private">私有属性</a></li>
+<li><a target="_blank" href="t379f.html?f=java_mod_default_2">默认属性</a></li>
+<li><a target="_blank" href="t9c0f.html?f=java_mod_protected">受保护属性</a></li>
+<li><a target="_blank" href="t8830.html?f=java_mod_final">最终类</a></li>
+<!--<li><a target="_blank" href="/java/s.php?f=java_mod_abstract">包含抽象方法的抽象类</a></li>-->
+</ul>
+
+<p><a class="btn-blue" href="java_modifiers.html">实例解释：Java 修饰符</a></p>
+</section>
+
+
+<!--
+<section>
+<h2>Java 封装</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="showjava_classes.asp?filename=demo_getset">Java 封装（getter 和 setter 方法）</a></li>
+</ul>
+
+<p><a class="btn-blue" href="/java/java_encapsulation.asp">实例解释：Java 封装</a></p>
+</section>
+-->
+
+
+<section>
+<h2>Java 包</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="sf76c.html?f=java_api_scanner_1">从 Java API 导入类</a></li>
+<li><a target="_blank" href="sdbca.html?f=java_api_scanner_package">从 Java API 导入包</a></li>
+<li><a target="_blank" href="sb052.html?f=demo_java_package">创建包</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_packages.html">实例解释：Java 包</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 继承</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t98eb.html?f=java_inherit">Java 继承（extends 关键字）</a></li>
+<li><a target="_blank" href="tb2b1.html?f=java_polymorphism">Java 多态</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_inheritance.html">实例解释：Java 继承</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 内部类</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tb19b.html?f=java_class_inner_1">内部类</a></li>
+<li><a target="_blank" href="t5645.html?f=java_class_inner_2">私有内部类（外部类访问时会报错）</a></li>
+<li><a target="_blank" href="t0cdc.html?f=java_class_inner_3">静态内部类</a></li>
+<li><a target="_blank" href="t8645.html?f=java_class_inner_access">从内部类访问外部类</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_inner_classes.html">实例解释：Java 内部类</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 抽象 &amp; 接口</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t93d2.html?f=java_abstract">Java 抽象类和抽象方法</a></li>
+<li><a target="_blank" href="t6229.html?f=java_interface">Java 接口（implements 关键字）</a></li>
+<li><a target="_blank" href="tec4c.html?f=java_interface_multi">实现多个接口</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_interface.html">实例解释：Java 接口</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 枚举</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t2947.html?f=java_enums">创建包含常量组的枚举</a></li>
+<li><a target="_blank" href="tea2b.html?f=java_enums_class">类内定义的枚举</a></li>
+<li><a target="_blank" href="t09c4.html?f=java_enums_switch">switch 语句中使用枚举</a></li>
+<li><a target="_blank" href="t82a2.html?f=java_enums_loop">遍历枚举</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_enums.html">实例解释：Java 枚举</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 用户输入</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="sf76c.html?f=java_api_scanner_1">读取用户输入</a></li>
+<li><a target="_blank" href="s1267.html?f=java_api_scanner_2">读取不同类型的用户输入</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_user_input.html">实例解释：Java 用户输入</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 日期</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t28fe.html?f=java_date_localdate">显示当前日期</a></li>
+<li><a target="_blank" href="t26fa.html?f=java_date_localtime">显示当前时间</a></li>
+<li><a target="_blank" href="t8d0c.html?f=java_date_localdatetime">显示当前日期和时间</a></li>
+<li><a target="_blank" href="t5372.html?f=java_date_format">格式化日期和时间</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_date.html">实例解释：Java 日期和时间</a></p>
+</section>
+
+
+
+<section>
+<h2>Java ArrayList</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="te46c.html?f=java_arraylist_add_1">创建 ArrayList</a></li>
+<li><a target="_blank" href="t640b.html?f=java_arraylist_get">访问 ArrayList 中的元素</a></li>
+<li><a target="_blank" href="t2069.html?f=java_arraylist_remove">从 ArrayList 中移除元素</a></li>
+<li><a target="_blank" href="t8ebb.html?f=java_arraylist_clear">清空 ArrayList</a></li>
+<li><a target="_blank" href="tff0d.html?f=java_arraylist_size">获取 ArrayList 的大小</a></li>
+<li><a target="_blank" href="t9a63.html?f=java_arraylist_loop">遍历 ArrayList</a></li>
+<li><a target="_blank" href="t32f6.html?f=java_arraylist_for_each">使用 for-each 遍历 ArrayList</a></li>
+<li><a target="_blank" href="t13cb.html?f=java_arraylist_integer">创建存储整数的 ArrayList</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_arraylist.html">实例解释：Java ArrayList</a></p>
+</section>
+
+
+
+<section>
+<h2>Java HashMap</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t708c.html?f=java_hashmap_put">创建 HashMap</a></li>
+<li><a target="_blank" href="t4b09.html?f=java_hashmap_get">访问 HashMap 中的元素</a></li>
+<li><a target="_blank" href="tb10a.html?f=java_hashmap_remove">从 HashMap 中移除元素</a></li>
+<li><a target="_blank" href="t71f4.html?f=java_hashmap_clear">清空 HashMap</a></li>
+<li><a target="_blank" href="t26b8.html?f=java_hashmap_size">获取 HashMap 的大小</a></li>
+<li><a target="_blank" href="t6adf.html?f=java_hashmap_loop_keyvalue">遍历 HashMap</a></li>
+<li><a target="_blank" href="ta9a3.html?f=java_hashmap_integer">创建键为 String、值为 Integer 的 HashMap</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_hashmap.html">实例解释：Java HashMap</a></p>
+</section>
+
+
+
+<section>
+<h2>Java HashSet</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t700a.html?f=java_hashset_add">创建 HashSet 并添加元素</a></li>
+<li><a target="_blank" href="t9016.html?f=java_hashset_contains">检查 HashSet 中是否存在某元素</a></li>
+<li><a target="_blank" href="t44c0.html?f=java_hashset_remove">从 HashSet 中移除元素</a></li>
+<li><a target="_blank" href="tf550.html?f=java_hashset_clear">清空 HashSet</a></li>
+<li><a target="_blank" href="t4fb7.html?f=java_hashset_size">获取 HashSet 的大小</a></li>
+<li><a target="_blank" href="t5c9a.html?f=java_hashset_for_each">遍历 HashSet</a></li>
+<li><a target="_blank" href="td504.html?f=java_hashset_integer">创建存储整数的 HashSet</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_hashset.html">实例解释：Java HashSet</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 迭代器</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tc81a.html?f=java_iterator">获取迭代器</a></li>
+<li><a target="_blank" href="t7bb2.html?f=java_iterator_loop">遍历集合</a></li>
+<li><a target="_blank" href="ta1a8.html?f=java_iterator_remove">从集合中移除元素</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_iterator.html">实例解释：Java 迭代器</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 包装类</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t13cb.html?f=java_arraylist_integer">创建存储整数的 ArrayList</a></li>
+<li><a target="_blank" href="ted1d.html?f=java_wrapper_create">创建包装类对象</a></li>
+<li><a target="_blank" href="t0bc5.html?f=java_wrapper_methods">使用包装类方法</a></li>
+<li><a target="_blank" href="t3ce3.html?f=java_wrapper_string">将包装类对象转换为字符串</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_wrapper_classes.html">实例解释：Java 包装类</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 异常 (Try...Catch)</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t50e7.html?f=java_try_catch">try...catch 语句</a></li>
+<li><a target="_blank" href="tbb8b.html?f=java_try_catch_finally">finally 语句</a></li>
+<li><a target="_blank" href="t6a54.html?f=java_throw_1">throw 语句</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_try_catch.html">实例解释：Java 异常</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 正则表达式</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t8339.html?f=java_regex">在句子中搜索 "w3school" 单词</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_regex.html">实例解释：Java 正则表达式</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 线程</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t92d0.html?f=java_threads">通过继承 Thread 类运行线程</a></li>
+<li><a target="_blank" href="t8274.html?f=java_threads_runnable">通过实现 Runnable 接口运行线程</a></li>
+<li><a target="_blank" href="t256c.html?f=java_threads_concurrency_1">并发问题</a></li>
+<li><a target="_blank" href="t212d.html?f=java_threads_concurrency_2">避免并发问题</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_threads.html">实例解释：Java 线程</a></p>
+</section>
+
+
+
+<section>
+<h2>Java 文件</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="s63a7.html?f=demo_java_files_create_1">创建文件</a></li>
+<li><a target="_blank" href="s0058.html?f=demo_java_files_write">写入文件</a></li>
+<li><a target="_blank" href="s8524.html?f=demo_java_files_read">读取文件</a></li>
+<li><a target="_blank" href="s69ac.html?f=demo_java_files_get">获取文件信息</a></li>
+<li><a target="_blank" href="sa4a1.html?f=demo_java_files_delete">删除文件</a></li>
+</ul>
+
+<p><a class="btn-blue" href="java_files.html">实例解释：Java 文件</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="java_ref_errors.html" title="Java 错误和异常类型">Java 错误和异常</a></li>
+<li class="next"><a href="java_quiz.html" title="Java 测验">Java 测验</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="java_reference.html">Java 参考手册</a></h5>
+<h5 id="tools_example"><a href="java_examples.html">Java 实例</a></h5>
+<h5 id="tools_quiz"><a href="java_quiz.html">Java 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/java/java_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 01:58:39 GMT -->
+</html>

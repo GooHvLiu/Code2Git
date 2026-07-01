@@ -1,0 +1,349 @@
+// 共用-顶部导航栏
+.header-nav {
+  background-color: #333;
+
+  //左侧logo导航
+  .header-nav-logo {
+    padding: 0 20px;
+    padding-top: 20px;
+
+    a {
+      color: #fff;
+
+    }
+  }
+
+  //右侧3个page导航
+  .header-nav-menu {
+    li {
+      padding: 20px;
+    }
+
+    a {
+      padding: 20px 10px;
+      color: #fff;
+    }
+
+    a:hover {
+      background-color: #444;
+      color: #f7c08a;
+    }
+  }
+
+}
+
+// 主页-中间部分大图
+.content-nav {
+  height: 600px;
+  // 斜杠 / 是一个分隔符。在 CSS 简写语法中，斜杠用来区分“背景位置（position）”和“背景大小（size）”，此处为背景大小
+  background: url(../imgs/index-show.jpg) no-repeat center center /cover;
+
+  // 内容区域
+  .content-nav-show {
+    color: #fff;
+    text-align: center;
+    padding-top: 170px;
+
+    //中间大字体部分
+    .text-welcome {
+      font-size: 40px;
+      line-height: 1.2em;
+    }
+
+    //下方英文部分
+    p {
+      font-size: 20px;
+      line-height: 1.7em;
+      padding-bottom: 20px;
+    }
+
+    //下方的关于我们部分
+    a {
+      display: inline-block;
+      font-size: 16px;
+      color: #fff;
+      background-color: #444;
+      padding: 13px 20px;
+      border-radius: 8px;
+    }
+
+    //鼠标划过的效果
+    a:hover {
+      background-color: #333;
+      color: #f7c08a;
+      // 左右偏移0，上下偏移0 ，阴影50px，白色阴影
+      box-shadow: 0 0 50px white;
+      transition: 0.2s linear;
+    }
+
+  }
+}
+
+//主页-中下部图片与介绍
+.lower-discription {
+  height: 500px;
+
+  //左边的图片部分，设置为左浮动
+  .img {
+    width: 50%;
+    background: url(../imgs/index-mountain.jpg) no-repeat center center/cover;
+    height: 100%;
+  }
+
+  // 右边的介绍部分，设置的右浮动
+  .discription {
+    width: 50%;
+    height: 100%;
+    padding: 15px;
+    text-align: center;
+    background-color: #3B3B3B;
+    color: white;
+
+    p {
+      padding-left: 20px;
+
+      span {
+        font-size: 20px;
+      }
+
+      .text-content-lower {
+        color: #f7c08a;
+        padding-right: 10px;
+        font-weight: bolder;
+      }
+    }
+
+    //米修在线的介绍内容
+    .read-more {
+      margin-top: 15px;
+      display: inline-block;
+      font-size: 15px;
+      color: #fff;
+      background-color: #444;
+      padding: 13px 20px;
+      border-radius: 8px;
+    }
+
+    //鼠标划过的效果
+    .read-more:hover {
+      background-color: #333;
+      color: #f7c08a;
+      // 左右偏移0，上下偏移0 ，阴影50px，白色阴影
+      box-shadow: 0 0 50px white;
+      transition: 0.2s linear;
+    }
+
+  }
+}
+
+// 主页-下部讲师、课程、学员反馈
+.lower-teach {
+  text-align: center;
+  // border: 1px solid orange;
+
+  //三个框的设定
+  .teacher,
+  .course,
+  .student {
+    height: 400px;
+    width: 33.333%;
+    text-align: center;
+
+    //字体图标和描述的设定
+    .iconfont,
+    .t-discription {
+      padding-top: 50px;
+    }
+
+    //介绍的设定
+    .t-name {
+      padding-top: 25px;
+      font-size: 20px;
+      font-weight: bolder;
+    }
+
+  }
+
+  //字体图标和描述垂直方式有点偏的修复
+  .teacher .t-name,
+  .course .t-name {
+    margin-left: -15px;
+  }
+
+  //单独颜色的设定
+  .course:hover,
+  .teacher:hover,
+  .student:hover {
+    background-color: #F6B781;
+    box-shadow: 0 0 20px #333;
+    transition: 0.3s linear;
+  }
+}
+
+// 关于-左侧关于米修在线的说明
+.about-content {
+  height: 300px;
+
+  .about-left {
+    width: 50%;
+    height: 100%;
+
+    .about-header {
+      padding: 10px 0;
+    }
+
+    //关于米修在线的关于字体的设定
+    .text-about {
+      font-size: 40px;
+    }
+
+    //关于米修在线内详细内容的介绍
+    .text-about-content {
+      font-size: 15px;
+    }
+  }
+
+  //右边图片的设定
+  .about-right {
+    width: 50%;
+    height: 100%;
+
+    img {
+      display: block;
+      width: 60%;
+      margin: auto 0px; //上下居中，靠左
+      border-radius: 50%;
+    }
+  }
+}
+
+//关于-学员反馈的页面
+.trainee-assess {
+  background: url(../imgs/about-city.jpg) no-repeat center center/cover;
+  overflow: hidden; //在不使用float的情况下，解决塌陷问题
+  text-align: center;
+  vertical-align: middle;
+
+  //学员评价文字
+  .text-trainee-assess {
+    margin-top: 50px;
+    font-size: 30px;
+    color: white;
+  }
+
+  //学员评价整个模块
+  .trainee {
+    height: 100px;
+    margin: 50px 50px;
+    background-color: #F6B781;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    //左边的头像
+    .head-img {
+      width: 10%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      //左边的头像 
+      img {
+        width: 80px;
+        border-radius: 50%;
+      }
+    }
+
+    //右边的留言
+    .trainee-comment {
+      width: 90%;
+      margin-left: -50px;
+    }
+  }
+}
+
+//联系-提交区域
+.contact-container {
+
+  //标题中“我们”两个字的样式设置
+  .contact-text-content-we {
+    font-size: 40px;
+    padding-top: 20px;
+    padding-left: 20px;
+  }
+
+  //副标题、填写标签等的样式设置
+  p,
+  .contact-form {
+    padding-left: 30px;
+  }
+
+  //所有label标签设置为块元素
+  .contact-form label {
+    display: block;
+  }
+
+  //所有inout和textarea标签样式设置
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    height: 30px;
+  }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    outline: none;
+    border-color: #f7c08a;
+  }
+
+
+  //textarea标签单独设置
+  .contact-form textarea {
+    height: 200px;
+  }
+
+  // 提交按钮的样式
+  .btn {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border-radius: 2px;
+    margin-bottom: 10px;
+  }
+
+  // 提交按钮鼠标悬停的样式
+  .btn:hover {
+    cursor: pointer;
+    color: #f7c08a;
+  }
+}
+
+//联系-联系方式区域
+.contact-methods {
+  width: 100%;
+  height: 200px;
+  background-color: #333;
+
+  .contact-methods-address,
+  .contact-methods-phone,
+  .contact-methods-mail {
+    color: white;
+    width: 33.33%;
+    padding-top: 50px;
+    text-align: center;
+  }
+}
+
+//共用-底部的声明
+.lower-foot {
+  height: 40px;
+  border: 2px solid #333;
+  background-color: #333;
+  text-align: center;
+
+  p {
+    font-size: 12px;
+    color: white;
+  }
+}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bookstore>
+
+<book xmlns:m="https://www.w3school.com.cn/meishi/" category="美食">
+  <m:title lang="zh">雅舍谈吃</m:title>
+  <m:author>梁实秋</m:author>
+  <m:press>江苏文艺出版社</m:press>
+  <m:year>2013</m:year>
+  <m:price>35</m:price>
+  <m:ISBN>9787539962771</m:ISBN>
+</book>
+
+<book xmlns:e="https://www.w3school.com.cn/ertong/" category="儿童">
+  <e:title lang="zh">了不起的狐狸爸爸</e:title>
+  <e:author>罗尔德·达尔</e:author>
+  <e:translator>代维</e:translator>
+  <e:press>明天出版社</e:press>
+  <e:year>2009</e:year>
+  <e:price>10.00</e:price>
+  <e:ISBN>9787100011105</e:ISBN>
+</book>
+
+<book xmlns:w="https://www.w3school.com.cn/wenxue/" category="文学">
+  <w:title lang="zh">将熟悉变为陌生</w:title>
+  <w:author>齐格蒙·鲍曼</w:author>
+  <w:author>彼得·哈夫纳</w:author>
+  <w:translator>王立秋</w:translator>
+  <w:press>南京大学出版社</w:press>
+  <w:year>2023</w:year>
+  <w:price>68.00</w:price>
+  <w:ISBN>9787100011105</w:ISBN>
+</book>
+
+<book xmlns:k="https://www.w3school.com.cn/kexue/" category="科学">
+  <k:title lang="zh">你想飞吗，像鸟一样？</k:title>
+  <k:author>理查德·道金斯</k:author>
+  <k:author>亚娜·伦佐娃</k:author>
+  <k:translator>高天羽</k:translator>
+  <k:press>湖南科学技术出版社</k:press>
+  <k:year>2023</k:year>
+  <k:price>88.00</k:price>
+  <k:ISBN>9787571019075</k:ISBN>
+</book>
+
+<book xmlns:z="https://www.w3school.com.cn/zhengzhi/" category="政治" cover="平装">
+  <z:title lang="zh">论美国的民主</z:title>
+  <z:author>托克维尔</z:author>
+  <z:translator>董果良</z:translator>
+  <z:press>商务印书馆</z:press>
+  <z:year>1989</z:year>
+  <z:price>60.00</z:price>
+  <z:ISBN>9787100011105</z:ISBN>
+</book>
+
+</bookstore>

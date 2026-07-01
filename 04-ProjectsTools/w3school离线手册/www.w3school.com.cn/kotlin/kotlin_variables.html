@@ -1,0 +1,417 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/kotlin/kotlin_variables.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Kotlin 变量</title>
+
+</head>
+
+<body class="serverscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Kotlin 教程</h2>
+<ul>
+<li><a href="index.html" title="Kotlin 教程">Kotlin 教程</a></li>
+<li><a href="kotlin_intro-2.html" title="Kotlin 简介">Kotlin 简介</a></li>
+<li><a href="kotlin_getstarted.html" title="Kotlin 入门">Kotlin 入门</a></li>
+<li><a href="kotlin_syntax.html" title="Kotlin 语法">Kotlin 语法</a></li>
+<li><a href="kotlin_output.html" title="Kotlin 输出">Kotlin 输出</a></li>
+<li><a href="kotlin_comments.html" title="Kotlin 注释">Kotlin 注释</a></li>
+<li class="currentLink"><a href="kotlin_variables.html" title="Kotlin 变量">Kotlin 变量</a></li>
+<li><a href="kotlin_data_types.html" title="Kotlin 数据类型">Kotlin 数据类型</a></li>
+<li><a href="kotlin_operators.html" title="Kotlin 运算符">Kotlin 运算符</a></li>
+<li><a href="kotlin_strings.html" title="Kotlin 字符串">Kotlin 字符串</a></li>
+<li><a href="kotlin_booleans.html" title="Kotlin 布尔值">Kotlin 布尔值</a></li>
+<li><a href="kotlin_conditions.html" title="Kotlin If...Else">Kotlin If...Else</a></li>
+<li><a href="kotlin_when.html" title="Kotlin When">Kotlin When</a></li>
+<li><a href="kotlin_while_loop.html" title="Kotlin While 循环">Kotlin While 循环</a></li>
+<li><a href="kotlin_break_continue.html" title="Kotlin Break 和 Continue">Kotlin Break/Continue</a></li>
+<li><a href="kotlin_arrays.html" title="Kotlin 数组">Kotlin 数组</a></li>
+<li><a href="kotlin_for_loop.html" title="Kotlin For 循环">Kotlin For 循环</a></li>
+<li><a href="kotlin_ranges.html" title="Kotlin 范围">Kotlin 范围</a></li>
+<li><a href="kotlin_functions.html" title="Kotlin 函数">Kotlin 函数</a></li>
+</ul>
+<h2>Kotlin 类</h2>
+<ul>
+<li><a href="kotlin_oop.html" title="Kotlin OOP">Kotlin OOP</a></li>
+<li><a href="kotlin_classes.html" title="Kotlin 类和对象">Kotlin 类/对象</a></li>
+<li><a href="kotlin_constructors.html" title="Kotlin 构造函数">Kotlin 构造函数</a></li>
+<li><a href="kotlin_class_functions.html" title="Kotlin 类函数">Kotlin 类函数</a></li>
+<li><a href="kotlin_inheritance.html" title="Kotlin 继承">Kotlin 继承</a></li>
+</ul>
+<h2>Kotlin 实例</h2>
+<ul>
+<li><a href="kotlin_examples.html" title="Kotlin 实例">Kotlin 实例</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Kotlin 变量</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="kotlin_comments.html" title="Kotlin 注释">Kotlin 注释</a></li>
+<li class="next"><a href="kotlin_data_types.html" title="Kotlin 数据类型">Kotlin 数据类型</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>Kotlin 变量</h2>
+
+<p>变量是存储数据值的容器。</p>
+
+<p>要创建变量，请使用 <code>var</code> 或 <code>val</code>，并使用等号 (<code>=</code>) 为其赋值：</p>
+
+<h3>语法</h3>
+
+<pre class="language-kotlin">
+var <i>variableName</i> = <i>value</i>
+val <i>variableName</i> = <i>value</i>
+</pre>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+var name = &quot;Bill&quot;
+val birthyear = 1969
+
+println(name)          // 打印 name 的值
+println(birthyear)     // 打印 birthyear 的值
+</pre>
+
+<p class="tiy"><a target="_blank" href="t4ba1.html?f=kotlin_variables">亲自试一试</a></p>
+
+<p><code>var</code> 和 <code>val</code> 之间的区别是，使用 <code>var</code> 关键字声明的变量<em>可以更改/修改</em>，而 <code>val</code> 变量则<em>不能</em>。</p>
+</section>
+
+
+
+<section>
+<h2>变量类型</h2>
+
+<p>与许多其他编程语言不同，Kotlin 中的变量不需要使用特定类型（如文本使用 <code>String</code>，数字使用 <code>Int</code>，如果您熟悉这些类型）进行声明。</p>
+
+<p>要在 Kotlin 中创建一个应存储文本的变量和另一个应存储数字的变量，请查看下例：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+var name = &quot;Bill&quot;      // String (文本)
+val birthyear = 1969   // Int (数字)
+
+println(name)          // 打印 name 的值
+println(birthyear)     // 打印 birthyear 的值
+</pre>
+
+<p class="tiy"><a target="_blank" href="t744a.html?f=kotlin_variables_1">亲自试一试</a></p>
+
+<p>Kotlin 非常智能，可以理解 <code>&quot;Bill&quot;</code> 是一个 <code>String</code>（文本），而 <code>1969</code> 是一个 <code>Int</code>（数字）变量。</p>
+
+<p>但是，如果您坚持，可以指定类型：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+var name: String = &quot;Bill&quot; // String
+val birthyear: Int = 1969 // Int
+
+println(name)
+println(birthyear)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t5cbd.html?f=kotlin_variables_2">亲自试一试</a></p>
+
+<p>您还可以声明变量而不分配值，然后稍后再分配值。<em>但是</em>，仅当您指定类型时才可能这样做：</p>
+
+<h3>实例</h3>
+
+<p>这样可以正常工作：</p>
+
+<pre class="language-kotlin">
+var name: String
+name = &quot;Bill&quot;
+println(name)
+</pre>
+
+<p class="tiy"><a target="_blank" href="tde20.html?f=kotlin_variables_3">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p>这将生成错误：</p>
+
+<pre class="language-kotlin err">
+var name
+name = &quot;Bill&quot;
+println(name)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t8c4e.html?f=kotlin_variables_4">亲自试一试</a></p>
+
+<p class="note"><span>注意：</span>您将在下一章中了解有关数据类型的更多信息。</p>
+</section>
+
+
+
+<section>
+<h2>关于 val 的注意事项</h2>
+
+<p>当您使用 <code>val</code> 关键字创建变量时，<em>无法</em>更改/重新分配值。</p>
+
+<p>下例将生成错误：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin err">
+val name = &quot;Bill&quot;
+name = &quot;Robert&quot;  // 错误（Val 无法重新分配）
+println(name)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t4c5e.html?f=kotlin_variables_5">亲自试一试</a></p>
+
+<p>当使用 <code>var</code> 时，您可以随时更改值：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+var name = &quot;Bill&quot;
+name = &quot;Robert&quot;
+println(name)
+</pre>
+
+<p class="tiy"><a target="_blank" href="ta065.html?f=kotlin_variables_change">亲自试一试</a></p>
+
+<h3 class="tip">那么何时使用 val？</h3>
+
+<p>当您希望变量始终存储相同的值时，<code>val</code> 关键字很有用，例如 PI（3.14159...）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val pi = 3.14159265359
+println(pi)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t1e78.html?f=kotlin_variables_pi">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>显示变量</h2>
+
+<p>就像您在上面的例子中看到的那样，<code>println()</code> 方法通常用于显示变量。</p>
+
+<p>要组合文本和变量，请使用 <code>+</code> 字符：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val name = &quot;Bill&quot;
+println(&quot;Hello &quot; + name)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t1f3a.html?f=kotlin_variables_println_1">亲自试一试</a></p>
+
+<p>您还可以使用 <code>+</code> 字符将一个变量添加到另一个变量：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val firstName = &quot;Bill &quot;
+val lastName = &quot;Gates&quot;
+val fullName = firstName + lastName
+println(fullName)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t6fa5.html?f=kotlin_variables_println_2">亲自试一试</a></p>
+
+<p>对于数值，<code>+</code> 字符用作数学运算符：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+val x = 5
+val y = 6
+println(x + y) // 打印 x + y 的值
+</pre>
+
+<p class="tiy"><a target="_blank" href="t7908.html?f=kotlin_variables_println_3">亲自试一试</a></p>
+
+<p>从上面的例子中，您可以预期：</p>
+
+<ul>
+<li>x stores the value 5</li>
+<li>y stores the value 6</li>
+<li>然后，我们使用 <code>println()</code> 方法显示 <code>x + y</code> 的值，即 <mark>11</mark></li>
+</ul>
+</section>
+
+
+
+<section>
+<h2>变量名</h2>
+
+<p>变量可以有一个简短的名称（如 x 和 y）或更具有描述性的名称（age、sum、totalVolume）。</p>
+
+<p>Kotlin 变量的一般规则是：</p>
+
+<ul>
+<li>名称可以包含字母、数字、下划线和美元符号</li>
+<li>名称应以字母开头</li>
+<li>名称也可以以 <code>$</code> 和 <code>_</code> 开头（但我们在本教程中不会使用它）</li>
+<li>名称区分大小写（<mark>myVar</mark> 和 <mark>myvar</mark> 是不同的变量）</li>
+<li>名称应以小写字母开头，且不能包含空格</li>
+<li>保留字（如 Kotlin 关键字，如 <code>var</code> 或 <code>String</code>）不能用作名称</li>
+</ul>
+
+<h3 class="tip">驼峰式变量</h3>
+
+<p>您可能会注意到，我们在上面的示例中使用了 <mark>firstName</mark> 和 <mark>lastName</mark> 作为变量名，而不是 firstname 和 lastname。这被称为 &quot;camelCase&quot;，它被认为是一种好的做法，因为它使您在变量名中包含不同单词时更容易阅读，例如 &quot;myFavoriteFood&quot;、&quot;rateActionMovies&quot; 等。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="kotlin_comments.html" title="Kotlin 注释">Kotlin 注释</a></li>
+<li class="next"><a href="kotlin_data_types.html" title="Kotlin 数据类型">Kotlin 数据类型</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_example"><a href="kotlin_examples.html">Kotlin 实例</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/kotlin/kotlin_variables.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:21 GMT -->
+</html>

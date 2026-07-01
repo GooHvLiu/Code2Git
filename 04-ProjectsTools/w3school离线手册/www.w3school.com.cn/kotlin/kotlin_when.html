@@ -1,0 +1,247 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/kotlin/kotlin_when.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Kotlin When</title>
+
+</head>
+
+<body class="serverscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Kotlin 教程</h2>
+<ul>
+<li><a href="index.html" title="Kotlin 教程">Kotlin 教程</a></li>
+<li><a href="kotlin_intro-2.html" title="Kotlin 简介">Kotlin 简介</a></li>
+<li><a href="kotlin_getstarted.html" title="Kotlin 入门">Kotlin 入门</a></li>
+<li><a href="kotlin_syntax.html" title="Kotlin 语法">Kotlin 语法</a></li>
+<li><a href="kotlin_output.html" title="Kotlin 输出">Kotlin 输出</a></li>
+<li><a href="kotlin_comments.html" title="Kotlin 注释">Kotlin 注释</a></li>
+<li><a href="kotlin_variables.html" title="Kotlin 变量">Kotlin 变量</a></li>
+<li><a href="kotlin_data_types.html" title="Kotlin 数据类型">Kotlin 数据类型</a></li>
+<li><a href="kotlin_operators.html" title="Kotlin 运算符">Kotlin 运算符</a></li>
+<li><a href="kotlin_strings.html" title="Kotlin 字符串">Kotlin 字符串</a></li>
+<li><a href="kotlin_booleans.html" title="Kotlin 布尔值">Kotlin 布尔值</a></li>
+<li><a href="kotlin_conditions.html" title="Kotlin If...Else">Kotlin If...Else</a></li>
+<li class="currentLink"><a href="kotlin_when.html" title="Kotlin When">Kotlin When</a></li>
+<li><a href="kotlin_while_loop.html" title="Kotlin While 循环">Kotlin While 循环</a></li>
+<li><a href="kotlin_break_continue.html" title="Kotlin Break 和 Continue">Kotlin Break/Continue</a></li>
+<li><a href="kotlin_arrays.html" title="Kotlin 数组">Kotlin 数组</a></li>
+<li><a href="kotlin_for_loop.html" title="Kotlin For 循环">Kotlin For 循环</a></li>
+<li><a href="kotlin_ranges.html" title="Kotlin 范围">Kotlin 范围</a></li>
+<li><a href="kotlin_functions.html" title="Kotlin 函数">Kotlin 函数</a></li>
+</ul>
+<h2>Kotlin 类</h2>
+<ul>
+<li><a href="kotlin_oop.html" title="Kotlin OOP">Kotlin OOP</a></li>
+<li><a href="kotlin_classes.html" title="Kotlin 类和对象">Kotlin 类/对象</a></li>
+<li><a href="kotlin_constructors.html" title="Kotlin 构造函数">Kotlin 构造函数</a></li>
+<li><a href="kotlin_class_functions.html" title="Kotlin 类函数">Kotlin 类函数</a></li>
+<li><a href="kotlin_inheritance.html" title="Kotlin 继承">Kotlin 继承</a></li>
+</ul>
+<h2>Kotlin 实例</h2>
+<ul>
+<li><a href="kotlin_examples.html" title="Kotlin 实例">Kotlin 实例</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Kotlin When</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="kotlin_conditions.html" title="Kotlin If...Else">Kotlin If...Else</a></li>
+<li class="next"><a href="kotlin_while_loop.html" title="Kotlin While 循环">Kotlin While 循环</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>Kotlin when</h2>
+
+<p>当你需要写许多 <code>if..else</code> 表达式时，可以使用 <code>when</code> 表达式，它更易于阅读。</p>
+
+<p>它用于选择要执行的多个代码块之一：</p>
+
+<h3>实例</h3>
+
+<p>使用工作日编号来计算工作日名称：</p>
+
+<pre class="language-kotlin">
+val day = 4
+
+val result = when (day) {
+  1 -&gt; &quot;Monday&quot;
+  2 -&gt; &quot;Tuesday&quot;
+  3 -&gt; &quot;Wednesday&quot;
+  4 -&gt; &quot;Thursday&quot;
+  5 -&gt; &quot;Friday&quot;
+  6 -&gt; &quot;Saturday&quot;
+  7 -&gt; &quot;Sunday&quot;
+  else -&gt; &quot;Invalid day.&quot;
+}
+println(result)
+
+// 输出 &quot;Thursday&quot; (第 4 天)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t8369.html?f=kotlin_when">亲自试一试</a></p>
+
+<p class="tip"><span>提示：</span><code>when</code> 表达式类似于 Java 中的 <code>switch</code> 语句。</p>
+
+<p>它的工作原理如下：</p>
+
+<ul>
+<li><code>when</code> 变量 (<mark>day</mark>) 被评估一次</li>
+<li>将 <mark>day</mark> 变量的值与每个“分支”的值进行比较</li>
+<li>每个分支都以一个值开始，后跟一个箭头 (<code>-&gt;</code>) 和一个结果</li>
+<li>如果匹配，则执行相关联的代码块</li>
+<li><code>else</code> 用于指定在没有匹配项时要运行的某些代码</li>
+<li>在上面的例子中，<code>day</code> 的值为 <code>4</code>，这意味着将打印 &quot;Thursday&quot;</li>
+</ul>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="kotlin_conditions.html" title="Kotlin If...Else">Kotlin If...Else</a></li>
+<li class="next"><a href="kotlin_while_loop.html" title="Kotlin While 循环">Kotlin While 循环</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_example"><a href="kotlin_examples.html">Kotlin 实例</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/kotlin/kotlin_when.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:27 GMT -->
+</html>

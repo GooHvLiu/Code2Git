@@ -1,0 +1,639 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/go/go_operators.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:01:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Go 运算符</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Go 教程</h2>
+<ul>
+<li><a href="index.html" title="Go 教程">Go 教程</a></li>
+<li><a href="go_introduction.html" title="Go 简介">Go 简介</a></li>
+<li><a href="go_getting_started.html" title="Go 入门">Go 入门</a></li>
+<li><a href="go_syntax.html" title="Go 语法">Go 语法</a></li>
+<li><a href="go_comments.html" title="Go 注释">Go 注释</a></li>
+<li><a href="go_variables.html" title="Go 变量">Go 变量</a></li>
+<li><a href="go_variable_multi.html" title="Go 声明多变量">Go 声明多变量</a></li>
+<li><a href="go_variable_naming_rules.html" title="Go 变量命名规则">Go 变量命名规则</a></li>
+<li><a href="go_constants.html" title="Go 常量">Go 常量</a></li>
+<li><a href="go_output.html" title="Go 输出">Go 输出</a></li>
+<li><a href="go_formatting_verbs.html" title="Go 格式化动词">Go 格式化动词</a></li>
+<li><a href="go_data_types.html" title="Go 数据类型">Go 数据类型</a></li>
+<li><a href="go_boolean_data_type.html" title="Go 布尔数据类型">Go 布尔</a></li>
+<li><a href="go_integer_data_type.html" title="Go 整数数据类型">Go 整数</a></li>
+<li><a href="go_float_data_type.html" title="Go 浮点数据类型">Go 浮点</a></li>
+<li><a href="go_string_data_type.html" title="Go 字符串数据类型">Go 字符串</a></li>
+<li><a href="go_arrays.html" title="Go 数组">Go 数组</a></li>
+<li><a href="go_slices.html" title="Go 创建切片">Go 创建切片</a></li>
+<li><a href="go_slices_modify.html" title="Go 修改切片">Go 修改切片</a></li>
+<li class="currentLink"><a href="go_operators.html" title="Go 运算符">Go 运算符</a></li>
+<li><a href="go_conditions.html" title="Go 条件语句">Go 条件语句</a></li>
+<li><a href="go_if_statement.html" title="Go if 语句">Go if 语句</a></li>
+<li><a href="go_else_statement.html" title="Go if else 语句">Go if else 语句</a></li>
+<li><a href="go_elseif_statement.html" title="Go else if 语句">Go else if 语句</a></li>
+<li><a href="go_nested_if.html" title="Go 嵌套 if 语句">Go 嵌套 if 语句</a></li>
+<li><a href="go_switch.html" title="Go Switch 语句">Go Switch</a></li>
+<li><a href="go_loops.html" title="Go 循环">Go 循环</a></li>
+<li><a href="go_functions.html" title="Go 函数">Go 函数</a></li>
+<li><a href="go_function_parameters.html" title="Go 函数参数">Go 函数参数</a></li>
+<li><a href="go_function_returns.html" title="Go 函数返回">Go 函数返回</a></li>
+<li><a href="go_function_recursion.html" title="Go 递归函数">Go 递归函数</a></li>
+<li><a href="go_struct.html" title="Go 结构体">Go 结构体</a></li>
+<li><a href="go_maps.html" title="Go 映射">Go 映射</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Go 运算符</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="go_slices_modify.html" title="Go 修改切片">Go 修改切片</a></li>
+<li class="next"><a href="go_conditions.html" title="Go 条件语句">Go 条件语句</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>Go 运算符</h2>
+
+<p>运算符用于对变量和值执行操作。</p>
+
+<p><code>+</code> <em>运算符</em>将两个值相加，如下例所示：</p>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var a = 15 + 25
+  fmt.Println(a)
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t1dc5.html?f=go_oper_1">亲自试一试</a></p>
+
+<p>尽管 <code>+</code> 运算符通常用于将两个值相加，但它也可以用于将一个变量和一个值或一个变量和另一个变量相加：</p>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var (
+    sum1 = 100 + 50 // 150 (100 + 50)
+    sum2 = sum1 + 250 // 400 (150 + 250)
+    sum3 = sum2 + sum2 // 800 (400 + 400)
+  )
+  fmt.Println(sum3)
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t06d7.html?f=go_oper_2">亲自试一试</a></p>
+
+<p>Go 将运算符分为以下几类：</p>
+
+<ul>
+<li>算术运算符</li>
+<li>赋值运算符</li>
+<li>比较运算符</li>
+<li>逻辑运算符</li>
+<li>位运算符</li>
+</ul>
+</section>
+
+
+
+<section>
+<h2>算术运算符</h2>
+
+<p>算术运算符用于执行常见的数学运算。</p>
+
+<table class="ref">
+<tr>
+<th>运算符</th>
+<th>名称</th>
+<th>描述</th>
+<th>例子</th>
+<th>试一试</th>
+</tr>
+
+<tr>
+<td>+</td>
+<td>加法</td>
+<td>将两个值相加。</td>
+<td>x + y</td>
+<td><a target="_blank" href="td72a.html?f=go_oper_add">试一试</a></td>
+</tr>
+
+<tr>
+<td>-</td>
+<td>减法</td>
+<td>从一个值中减去另一个值。</td>
+<td>x - y</td>
+<td><a target="_blank" href="t9e00.html?f=go_oper_sub">试一试</a></td>
+</tr>
+
+<tr>
+<td>*</td>
+<td>乘法</td>
+<td>将两个值相乘。</td>
+<td>x * y</td>
+<td><a target="_blank" href="t7ddf.html?f=go_oper_mult">试一试</a></td>
+</tr>
+
+<tr>
+<td>/</td>
+<td>除法</td>
+<td>用一个值除以另一个值。</td>
+<td>x / y</td>
+<td><a target="_blank" href="t4676.html?f=go_oper_div">试一试</a></td>
+</tr>
+
+<tr>
+<td>%</td>
+<td>取模</td>
+<td>返回除法余数。</td>
+<td>x % y</td>
+<td><a target="_blank" href="tb71d.html?f=go_oper_mod">试一试</a></td>
+</tr>
+
+<tr>
+<td>++</td>
+<td>递增</td>
+<td>将变量的值加 1。</td>
+<td>x++</td>
+<td><a target="_blank" href="td569.html?f=go_oper_inc">试一试</a></td>
+</tr>
+
+<tr>
+<td>--</td>
+<td>递减</td>
+<td>将变量的值减 1。</td>
+<td>x--</td>
+<td><a target="_blank" href="tf595.html?f=go_oper_dec">试一试</a></td>
+</tr>
+</table>
+</section>
+
+
+
+<section>
+<h2>赋值运算符</h2>
+
+<p><em>赋值运算符</em>用于给变量赋值。</p>
+
+<p>在下面的例子中，我们使用<em>赋值运算符</em> (<code>=</code>) 将值 <mark>10</mark> 赋给名为 <mark>x</mark> 的变量：</p>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var x = 10
+  fmt.Println(x)
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="tddc7.html?f=go_oper_assignment_1">亲自试一试</a></p>
+
+<p><em>加法赋值运算符</em> (<code>+=</code>) 将值添加到变量：</p>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var x = 10
+  x +=5
+  fmt.Println(x)
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="te107.html?f=go_oper_assignment_2">亲自试一试</a></p>
+
+<p>所有赋值运算符的列表：</p>
+
+<table class="ref">
+<tr>
+<th>运算符</th>
+<th>例子</th>
+<th>等同于</th>
+<th>试一试</th>
+</tr>
+
+<tr>
+<td>=</td>
+<td>x = 5</td>
+<td>x = 5</td>
+<td><a target="_blank" href="tf523.html?f=go_oper_ass_1">试一试</a></td>
+</tr>
+
+<tr>
+<td>+=</td>
+<td>x += 3</td>
+<td>x = x + 3</td>
+<td><a target="_blank" href="tfd20.html?f=go_oper_ass_2">试一试</a></td>
+</tr>
+
+<tr>
+<td>-=</td>
+<td>x -= 3</td>
+<td>x = x - 3</td>
+<td><a target="_blank" href="tb80c.html?f=go_oper_ass_3">试一试</a></td>
+</tr>
+
+<tr>
+<td>*=</td>
+<td>x *= 3</td>
+<td>x = x * 3</td>
+<td><a target="_blank" href="t0766.html?f=go_oper_ass_4">试一试</a></td>
+</tr>
+
+<tr>
+<td>/=</td>
+<td>x /= 3</td>
+<td>x = x / 3</td>
+<td><a target="_blank" href="t7859.html?f=go_oper_ass_5">试一试</a></td>
+</tr>
+
+<tr>
+<td>%=</td>
+<td>x %= 3</td>
+<td>x = x % 3</td>
+<td><a target="_blank" href="t7058.html?f=go_oper_ass_6">试一试</a></td>
+</tr>
+
+<tr>
+<td>&amp;=</td>
+<td>x &amp;= 3</td>
+<td>x = x &amp; 3</td>
+<td><a target="_blank" href="t7716.html?f=go_oper_ass_7">试一试</a></td>
+</tr>
+
+<tr>
+<td>|=</td>
+<td>x |= 3</td>
+<td>x = x | 3</td>
+<td><a target="_blank" href="t2bbd.html?f=go_oper_ass_8">试一试</a></td>
+</tr>
+
+<tr>
+<td>^=</td>
+<td>x ^= 3</td>
+<td>x = x ^ 3</td>
+<td><a target="_blank" href="t03f4.html?f=go_oper_ass_9">试一试</a></td>
+</tr>
+
+<tr>
+<td>&gt;&gt;=</td>
+<td>x &gt;&gt;= 3</td>
+<td>x = x &gt;&gt; 3</td>
+<td><a target="_blank" href="tcca5.html?f=go_oper_ass_10">试一试</a></td>
+</tr>
+
+<tr>
+<td>&lt;&lt;=</td>
+<td>x &lt;&lt;= 3</td>
+<td>x = x &lt;&lt; 3</td>
+<td><a target="_blank" href="t5919.html?f=go_oper_ass_11">试一试</a></td>
+</tr>
+</table>
+</section>
+
+
+
+<section>
+<h2>比较运算符</h2>
+
+<p>比较运算符用于比较两个值。</p>
+
+<p class="note"><span>注意：</span>比较运算符的返回值要么是 true（<code>1</code>），要么是 false（<code>0</code>）。</p>
+
+<p>在下面的例子中，我们使用<em>大于运算符</em> (<code>&gt;</code>) 来判断 5 是否大于 3：</p>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var x = 5
+  var y = 3
+  fmt.Println(x&gt;y) // 返回 1（真），因为 5 大于 3
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t2d24.html?f=go_oper_assignment_3">亲自试一试</a></p>
+
+<p>所有比较运算符的列表：</p>
+
+<table class="ref">
+<tr>
+<th>运算符</th>
+<th>名称</th>
+<th>例子</th>
+<th>试一试</th>
+</tr>
+
+<tr>
+<td>==</td>
+<td>等于</td>
+<td>x == y</td>
+<td><a target="_blank" href="t64b0.html?f=go_oper_compare_1">试一试</a></td>
+</tr>
+
+<tr>
+<td>!=</td>
+<td>不等于</td>
+<td>x != y</td>
+<td><a target="_blank" href="taea5.html?f=go_oper_compare_2">试一试</a></td>
+</tr>
+
+<tr>
+<td>&gt;</td>
+<td>大于</td>
+<td>x &gt; y</td>
+<td><a target="_blank" href="t34a5.html?f=go_oper_compare_3">试一试</a></td>
+</tr>
+
+<tr>
+<td>&lt;</td>
+<td>小于</td>
+<td>x &lt; y</td>
+<td><a target="_blank" href="t7d86.html?f=go_oper_compare_4">试一试</a></td>
+</tr>
+
+<tr>
+<td>&gt;=</td>
+<td>大于或等于</td>
+<td>x &gt;= y</td>
+<td><a target="_blank" href="t0b7b.html?f=go_oper_compare_5">试一试</a></td>
+</tr>
+
+<tr>
+<td>&lt;=</td>
+<td>小于或等于</td>
+<td>x &lt;= y</td>
+<td><a target="_blank" href="t5d4d.html?f=go_oper_compare_6">试一试</a></td>
+</tr>
+</table>
+
+<p class="tip"><span>提示：</span>您将在 <a href="go_conditions.html" title="Go 条件">Go 条件</a> 章节中了解有关比较运算符以及如何使用它们的更多信息。</p>
+</section>
+
+
+
+<section>
+<h2>逻辑运算符</h2>
+
+<p>逻辑运算符用于确定变量或值之间的逻辑关系：</p>
+
+<table class="ref">
+<tr>
+<th>运算符</th>
+<th>名称</th>
+<th>描述</th>
+<th>例子</th>
+<th>试一试</th>
+</tr>
+
+<tr>
+<td>&amp;&amp;</td>
+<td>逻辑与</td>
+<td>如果两条语句都为真，则返回 true。</td>
+<td>x &lt; 5 &amp;&amp;  x &lt; 10</td>
+<td><a target="_blank" href="t50c2.html?f=go_oper_logical_1">试一试</a></td>
+</tr>
+
+<tr>
+<td>||</td>
+<td>逻辑或</td>
+<td>如果其中一条语句为真，则返回 true。</td>
+<td>x &lt; 5 || x &lt; 4</td>
+<td><a target="_blank" href="t2b34.html?f=go_oper_logical_2">试一试</a></td>
+</tr>
+
+<tr>
+<td>!</td>
+<td>逻辑非</td>
+<td>将结果取反，如果结果为真，则返回 false。</td>
+<td>!(x &lt; 5 &amp;&amp; x &lt; 10)</td>
+<td><a target="_blank" href="t2362.html?f=go_oper_logical_3">试一试</a></td>
+</tr>
+</table>
+</section>
+
+
+
+<section>
+<h2>位运算符</h2>
+
+<p>位运算符用于（二进制）数字：</p>
+
+<table class="ref">
+<tr>
+<th>运算符</th>
+<th>名称</th>
+<th>描述</th>
+<th>例子</th>
+<th>试一试</th>
+</tr>
+
+<tr>
+<td>&amp;</td>
+<td>AND</td>
+<td>如果两位均为 1，则将每位设置为 1。</td>
+<td>x &amp; y</td>
+<td><a target="_blank" href="t3a54.html?f=go_oper_bitwise_1">试一试</a></td>
+</tr>
+
+<tr>
+<td>|</td>
+<td>OR</td>
+<td>如果两位中有一位为 1，则将每位设置为 1。</td>
+<td>x | y</td>
+<td><a target="_blank" href="t2aa4.html?f=go_oper_bitwise_2">试一试</a></td>
+</tr>
+
+<tr>
+<td>^</td>
+<td>XOR</td>
+<td>如果两位中只有一位为 1，则将每位设置为 1。</td>
+<td>x ^ b</td>
+<td><a target="_blank" href="t0ba0.html?f=go_oper_bitwise_3">试一试</a></td>
+</tr>
+
+<tr>
+<td>&lt;&lt;</td>
+<td>零填充左移</td>
+<td>通过从右侧推入零来向左移动。</td>
+<td>x &lt;&lt; 2</td>
+<td><a target="_blank" href="t6980.html?f=go_oper_bitwise_4">试一试</a></td>
+</tr>
+
+<tr>
+<td>&gt;&gt;</td>
+<td>有符号右移</td>
+<td>通过从左侧推入最左侧位的副本来向右移动，并让最右侧的位脱落。</td>
+<td>x &gt;&gt; 2</td>
+<td><a target="_blank" href="t2680.html?f=go_oper_bitwise_5">试一试</a></td>
+</tr>
+</table>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="go_slices_modify.html" title="Go 修改切片">Go 修改切片</a></li>
+<li class="next"><a href="go_conditions.html" title="Go 条件语句">Go 条件语句</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/go/go_operators.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:01:55 GMT -->
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>12.04-列表排序</title>
+  <link rel="shortcut icon" href="../../favicon.png" type="image/x-icon">
+  <script type="text/javascript" src="../../js_Tools/vue.js"></script>
+</head>
+
+<body>
+  <!-- 准备好一个容器-->
+  <div id="root">
+    <h2>人员列表</h2>
+    <input type="text" placeholder="请输入名字" v-model="keyWord">
+    <button @click="sortTyle=2">升序排列</button>
+    <button @click="sortTyle=1">降序排列</button>
+    <button @click="sortTyle=0">原顺序</button>
+    <ul>
+      <li v-for="(p,index) of filPersons" :key="p.id">
+        {{p.name}}-{{p.age}}-{{p.sex}}
+      </li>
+    </ul>
+    <p style="color: orange;">当前的sortTyle={{sortTyle}}</p>
+  </div>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+
+    // 用computed实现
+    new Vue({
+      el: '#root',
+      data: {
+        keyWord: '',
+        persons: [
+          { id: '001', name: '马冬梅', age: 30, sex: '女' },
+          { id: '002', name: '周冬雨', age: 31, sex: '女' },
+          { id: '003', name: '周杰伦', age: 18, sex: '男' },
+          { id: '004', name: '温兆伦', age: 19, sex: '男' }
+        ],
+        sortTyle: 0 //0-原顺序，1-降序，2-升序
+      },
+      computed: {
+        filPersons() {
+          const arr = this.persons.filter((p) => {
+            return p.name.indexOf(this.keyWord) !== -1
+          })
+
+          if (this.sortTyle) {
+            //sort中的两个参数a,b
+            //当return a-b，则升序
+            //当return b-a，则降序
+            arr.sort((a, b) => {
+              return this.sortTyle === 1 ? b.age - a.age : a.age - b.age
+            })
+          }
+          return arr
+        }
+      }
+    })
+  </script>
+
+</html>

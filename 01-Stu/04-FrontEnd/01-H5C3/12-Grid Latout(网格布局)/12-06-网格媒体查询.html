@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+  <title>12-06-网格媒体查询</title>
+  <style>
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+    }
+
+    @media screen and (max-width:768px) {
+      .grid {
+        grid-template-columns: repeat(2, auto);
+      }
+    }
+
+    @media screen and (max-width:500px) {
+      .grid {
+        grid-template-columns: repeat(1, auto);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grid">
+    <div class="item">
+      <h3>标题一</h3>
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus dignissimos odit, laudantium
+        aspernatur maxime quo! Earum enim cumque provident nisi dolore nam voluptatibus, necessitatibus maiores quas
+        ipsam, consequatur eaque at.
+      </p>
+    </div>
+    <div class="item">
+      <h3>标题二</h3>
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus dignissimos odit, laudantium
+        aspernatur maxime quo! Earum enim cumque provident nisi dolore nam voluptatibus, necessitatibus maiores quas
+        ipsam, consequatur eaque at.
+      </p>
+    </div>
+    <div class="item">
+      <h3>标题三</h3>
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus dignissimos odit, laudantium
+        aspernatur maxime quo! Earum enim cumque provident nisi dolore nam voluptatibus, necessitatibus maiores quas
+        ipsam, consequatur eaque at.
+      </p>
+    </div>
+    <div class="item">
+      <h3>标题四</h3>
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus dignissimos odit, laudantium
+        aspernatur maxime quo! Earum enim cumque provident nisi dolore nam voluptatibus, necessitatibus maiores quas
+        ipsam, consequatur eaque at.
+      </p>
+    </div>
+
+  </div>
+</body>
+
+</html>

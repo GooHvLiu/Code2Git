@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/graphics/svg_path.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:23:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>SVG &lt;path&gt;</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>HTML 图形</h2>
+<ul>
+<li><a href="index.html" title="HTML 图形">HTML 图形</a></li>
+</ul>
+<h2>HTML 绘图</h2>
+<ul>
+<li><a href="plot_graphics.html" title="JavaScript 图形">Graphics</a></li>
+<li><a href="plot_canvas.html" title="HTML Canvas">Canvas</a></li>
+<li><a href="plot_plotly.html" title="Plotly.js">Plotly.js</a></li>
+<li><a href="plot_chartjs.html" title="Chart.js">Chart.js</a></li>
+<li><a href="plot_google_chart.html" title="谷歌图表">Google</a></li>
+<li><a href="plot_d3js.html" title="D3.js">D3.js</a></li>
+</ul>
+<h2>谷歌地图</h2>
+<ul>
+<li><a href="google_maps_intro.html" title="谷歌地图教程">Maps 简介</a></li>
+<li><a href="google_maps_basic.html" title="谷歌地图基础">Maps 基础</a></li>
+<li><a href="google_maps_overlays.html" title="谷歌地图叠加层">Maps 叠加层</a></li>
+<li><a href="google_maps_events.html" title="谷歌地图事件">Maps 事件</a></li>
+<li><a href="google_maps_controls.html" title="谷歌地图控件">Maps 控件</a></li>
+<li><a href="google_maps_types.html" title="谷歌地图类型">Maps 类型</a></li>
+<li><a href="google_maps_reference.html" title="谷歌地图参考手册">Maps 参考手册</a></li>
+</ul>
+<h2>SVG 教程</h2>
+<ul>
+<li><a href="svg_intro.html" title="SVG 教程">SVG 简介</a></li>
+<li><a href="svg_inhtml.html" title="HTML 中的 SVG">SVG 嵌入 HTML</a></li>
+<li><a href="svg_rect.html" title="SVG &lt;rect&gt;">SVG 矩形</a></li>
+<li><a href="svg_circle.html" title="SVG &lt;circle&gt;">SVG 圆形</a></li>
+<li><a href="svg_ellipse.html" title="SVG &lt;ellipse&gt;">SVG 椭圆</a></li>
+<li><a href="svg_line.html" title="SVG &lt;line&gt;">SVG 直线</a></li>
+<li><a href="svg_polygon.html" title="SVG &lt;polygon&gt;">SVG 多边形</a></li>
+<li><a href="svg_polyline.html" title="SVG &lt;polyline&gt;">SVG 折线</a></li>
+<li class="currentLink"><a href="svg_path.html" title="SVG &lt;path&gt;">SVG 路径</a></li>
+<li><a href="svg_text.html" title="SVG &lt;text&gt;">SVG 文本</a></li>
+<li><a href="svg_stroking.html" title="SVG 笔触属性">SVG 笔触</a></li>
+<li><a href="svg_filters.html" title="SVG 滤镜">SVG 滤镜</a></li>
+<li><a href="svg_fegaussianblur.html" title="SVG 模糊效果">SVG 模糊</a></li>
+<li><a href="svg_feoffset.html" title="SVG 阴影">SVG 阴影</a></li>
+<li><a href="svg_grad_linear.html" title="SVG 线性渐变">SVG 线性渐变</a></li>
+<li><a href="svg_grad_radial.html" title="SVG 径向渐变">SVG 径向渐变</a></li>
+<li><a href="svg_examples.html" title="SVG 实例">SVG 实例</a></li>
+<li><a href="svg_reference.html" title="SVG 参考手册">SVG 参考手册</a></li>
+</ul>
+<h2>Canvas 教程</h2>
+<ul>
+<li><a href="canvas_intro.html" title="HTML Canvas 教程">Canvas 简介</a></li>
+<li><a href="canvas_drawing.html" title="HTML Canvas 绘制">Canvas 绘制</a></li>
+<li><a href="canvas_coordinates.html" title="HTML Canvas 坐标">Canvas 坐标</a></li>
+<li><a href="canvas_lines.html" title="HTML Canvas 直线">Canvas 直线</a></li>
+<li><a href="canvas_shapes.html" title="HTML Canvas 形状">Canvas 形状</a></li>
+<li><a href="canvas_rectangles.html" title="HTML Canvas 矩形">Canvas 矩形</a></li>
+<li><a href="canvas_circles.html" title="HTML Canvas 圆形">Canvas 圆形</a></li>
+<li><a href="canvas_curves.html" title="HTML Canvas 曲线">Canvas 曲线</a></li>
+<li><a href="canvas_gradients.html" title="HTML Canvas 渐变">Canvas 渐变</a></li>
+<li><a href="canvas_text.html" title="HTML Canvas 文本">Canvas 文本</a></li>
+<li><a href="canvas_images.html" title="HTML Canvas 图像">Canvas 图像</a></li>
+</ul>
+<h2>Canvas 时钟</h2>
+<ul>
+<li><a href="canvas_clock.html" title="Canvas 时钟">时钟简介</a></li>
+<li><a href="canvas_clock_face.html" title="Canvas 时钟钟面">时钟钟面</a></li>
+<li><a href="canvas_clock_numbers.html" title="Canvas 时钟数字">时钟数字</a></li>
+<li><a href="canvas_clock_hands.html" title="Canvas 时钟指针">时钟指针</a></li>
+<li><a href="canvas_clock_start.html" title="Canvas 时钟启动">时钟启动</a></li>
+</ul>
+<h2>HTML 游戏</h2>
+<ul>
+<li><a href="game_intro.html" title="HTML 游戏实例">游戏简介</a></li>
+<li><a href="game_canvas.html" title="游戏画布">游戏画布</a></li>
+<li><a href="game_components.html" title="游戏组件">游戏组件</a></li>
+<li><a href="game_controllers.html" title="游戏控制器">游戏控制器</a></li>
+<li><a href="game_obstacles.html" title="游戏障碍">游戏障碍</a></li>
+<li><a href="game_score.html" title="游戏分数">游戏分数</a></li>
+<li><a href="game_images.html" title="游戏图像">游戏图像</a></li>
+<li><a href="game_sound.html" title="游戏声音">游戏声音</a></li>
+<li><a href="game_gravity.html" title="游戏重力">游戏重力</a></li>
+<li><a href="game_bouncing.html" title="游戏弹跳">游戏弹跳</a></li>
+<li><a href="game_rotation.html" title="游戏旋转">游戏旋转</a></li>
+<li><a href="game_movement.html" title="游戏运动">游戏运动</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>SVG &lt;path&gt;</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="svg_polyline.html" title="SVG &lt;polyline&gt;">SVG 折线</a></li>
+<li class="next"><a href="svg_text.html" title="SVG &lt;text&gt;">SVG 文本</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>SVG 路径 - &lt;path&gt;</h2>
+
+<p><code>&lt;path&gt;</code> 元素用于定义路径。</p>
+
+<p>以下命令可用于路径数据：</p>
+
+<ul>
+<li>M = moveto（移动到）</li>
+<li>L = lineto（画线到）</li>
+<li>H = horizontal lineto（水平线到）</li>
+<li>V = vertical lineto（垂直线到）</li>
+<li>C = curveto（曲线到）</li>
+<li>S = smooth curveto（平滑曲线到）</li>
+<li>Q = quadratic Bézier curve（二次贝塞尔曲线）</li>
+<li>T = smooth quadratic Bézier curveto（平滑二次贝塞尔曲线）</li>
+<li>A = elliptical Arc（椭圆弧）</li>
+<li>Z = closepath（闭合路径）</li>
+</ul>
+
+<p>注意：以上所有命令也可以用小写字母表示。大写字母表示绝对定位，小写字母表示相对定位。</p>
+</section>
+
+
+
+<section>
+<h2>例子 1</h2>
+
+<p>下面的例子定义了一个路径，起始位置为 150,0，然后画一条线到 75,200 的位置，接着从那里画一条线到 225,200 的位置，最后闭合路径回到 150,0。</p>
+
+<p>这是 SVG 代码：</p>
+
+<pre class="language-html">
+&lt;svg height=&quot;210&quot; width=&quot;400&quot;&gt;
+  &lt;path d=&quot;M150 0 L75 200 L225 200 Z&quot; /&gt;
+&lt;/svg&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tac95.html?f=graphics_svg_path_1">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>例子 2</h2>
+
+<p>贝塞尔曲线（Bézier curves）用于建模可无限缩放的平滑曲线。通常，用户选择两个端点和一或两个控制点。有一个控制点的贝塞尔曲线称为二次贝塞尔曲线（quadratic Bézier curve），有两个控制点的贝塞尔曲线称为三次贝塞尔曲线（cubic）。</p>
+
+<p>下例创建一条二次贝塞尔曲线，其中 A 和 C 是起点和终点，B 是控制点：</p>
+
+<svg height="400" width="450">
+  <path id="lineAB" d="M 100 350 l 150 -300" stroke="red" stroke-width="3" fill="none" />
+  <path id="lineBC" d="M 250 50 l 150 300" stroke="red" stroke-width="3" fill="none" />
+  <path d="M 175 200 l 150 0" stroke="green" stroke-width="3" fill="none" />
+  <path d="M 100 350 q 150 -300 300 0" stroke="blue" stroke-width="5" fill="none" />
+  <!-- 标记相关的点 -->
+  <g stroke="black" stroke-width="3" fill="black">
+    <circle id="pointA" cx="100" cy="350" r="3" />
+    <circle id="pointB" cx="250" cy="50" r="3" />
+    <circle id="pointC" cx="400" cy="350" r="3" />
+  </g>
+  <!-- 给点添加标签 -->
+  <g font-size="30" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+    <text x="100" y="350" dx="-30">A</text>
+    <text x="250" y="50" dy="-10">B</text>
+    <text x="400" y="350" dx="30">C</text>
+  </g>
+</svg>
+
+<p>这是 SVG 代码：</p>
+
+<pre class="language-html">
+&lt;svg height=&quot;400&quot; width=&quot;450&quot;&gt;
+  &lt;path id=&quot;lineAB&quot; d=&quot;M 100 350 l 150 -300&quot; stroke=&quot;red&quot; stroke-width=&quot;3&quot; fill=&quot;none&quot; /&gt;
+  &lt;path id=&quot;lineBC&quot; d=&quot;M 250 50 l 150 300&quot; stroke=&quot;red&quot; stroke-width=&quot;3&quot; fill=&quot;none&quot; /&gt;
+  &lt;path d=&quot;M 175 200 l 150 0&quot; stroke=&quot;green&quot; stroke-width=&quot;3&quot; fill=&quot;none&quot; /&gt;
+  &lt;path d=&quot;M 100 350 q 150 -300 300 0&quot; stroke=&quot;blue&quot; stroke-width=&quot;5&quot; fill=&quot;none&quot; /&gt;
+  &lt;!-- 标记相关的点 --&gt;
+  &lt;g stroke=&quot;black&quot; stroke-width=&quot;3&quot; fill=&quot;black&quot;&gt;
+    &lt;circle id=&quot;pointA&quot; cx=&quot;100&quot; cy=&quot;350&quot; r=&quot;3&quot; /&gt;
+    &lt;circle id=&quot;pointB&quot; cx=&quot;250&quot; cy=&quot;50&quot; r=&quot;3&quot; /&gt;
+    &lt;circle id=&quot;pointC&quot; cx=&quot;400&quot; cy=&quot;350&quot; r=&quot;3&quot; /&gt;
+  &lt;/g&gt;
+  &lt;!-- 给点添加标签 --&gt;
+  &lt;g font-size=&quot;30&quot; font-family=&quot;sans-serif&quot; fill=&quot;black&quot; stroke=&quot;none&quot;
+  text-anchor=&quot;middle&quot;&gt;
+    &lt;text x=&quot;100&quot; y=&quot;350&quot; dx=&quot;-30&quot;&gt;A&lt;/text&gt;
+    &lt;text x=&quot;250&quot; y=&quot;50&quot; dy=&quot;-10&quot;&gt;B&lt;/text&gt;
+    &lt;text x=&quot;400&quot; y=&quot;350&quot; dx=&quot;30&quot;&gt;C&lt;/text&gt;
+  &lt;/g&gt;
+&lt;/svg&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/te02b.html?f=graphics_svg_path_2">亲自试一试</a></p>
+
+<p>很复杂吧？是的！！！由于绘制路径非常复杂，强烈建议使用 SVG 编辑器来创建复杂图形。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="svg_polyline.html" title="SVG &lt;polyline&gt;">SVG 折线</a></li>
+<li class="next"><a href="svg_text.html" title="SVG &lt;text&gt;">SVG 文本</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../jsref/api_canvas.html">Canvas API</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/graphics/svg_path.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:24:00 GMT -->
+</html>

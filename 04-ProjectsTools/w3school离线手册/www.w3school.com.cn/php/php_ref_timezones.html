@@ -1,0 +1,1272 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/php/php_ref_timezones.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:42:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>PHP 时区</title>
+
+</head>
+
+<body class="serverscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>PHP 教程</h2>
+<ul>
+<li><a href="index.html" title="PHP 教程">PHP 教程</a></li>
+<li><a href="php_intro.html" title="PHP 简介">PHP 简介</a></li>
+<li><a href="php_install.html" title="PHP 安装">PHP 安装</a></li>
+<li><a href="php_syntax.html" title="PHP 语法">PHP 语法</a></li>
+<li><a href="php_comments.html" title="PHP 注释">PHP 注释</a></li>
+<li><a href="php_comments_multiline.html" title="PHP 多行注释">PHP 多行注释</a></li>
+<li><a href="php_variables.html" title="PHP 变量">PHP 变量</a></li>
+<li><a href="php_variables_scope.html" title="PHP 变量作用域">PHP 变量作用域</a></li>
+<li><a href="php_echo_print.html" title="PHP Echo 和 Print 语句">PHP Echo / Print</a></li>
+<li><a href="php_datatypes.html" title="PHP 数据类型">PHP 数据类型</a></li>
+<li><a href="php_string.html" title="PHP 字符串">PHP 字符串</a></li>
+<li><a href="php_string_modify.html" title="PHP 字符串修改">PHP 字符串修改</a></li>
+<li><a href="php_string_concatenate.html" title="PHP 字符串连接">PHP 字符串连接</a></li>
+<li><a href="php_string_slicing.html" title="PHP 字符串切片">PHP 字符串切片</a></li>
+<li><a href="php_string_escape.html" title="PHP 转义字符">PHP 转义字符</a></li>
+<li><a href="php_numbers.html" title="PHP 数字">PHP 数字</a></li>
+<li><a href="php_casting.html" title="PHP 类型转换">PHP 类型转换</a></li>
+<li><a href="php_math.html" title="PHP 数学">PHP 数学</a></li>
+<li><a href="php_constants.html" title="PHP 常量">PHP 常量</a></li>
+<li><a href="php_magic_constants.html" title="PHP 魔法常量">PHP 魔法常量</a></li>
+<li><a href="php_operators.html" title="PHP 运算符">PHP 运算符</a></li>
+<li><a href="php_if_else.html" title="PHP if 语句">PHP if</a></li>
+<li><a href="php_if_operators.html" title="PHP if 运算符">PHP if 运算符</a></li>
+<li><a href="php_if_else_if.html" title="PHP if...else 语句">PHP if...else</a></li>
+<li><a href="php_if_shorthand.html" title="PHP 简写 if">PHP 简写 if</a></li>
+<li><a href="php_if_nested.html" title="PHP 嵌套 if 语句">PHP 嵌套 if</a></li>
+<li><a href="php_switch.html" title="PHP switch 语句">PHP switch</a></li>
+<li><a href="php_looping.html" title="PHP 循环">PHP 循环</a></li>
+<li><a href="php_looping_while.html" title="PHP while 循环">PHP While 循环</a></li>
+<li><a href="php_looping_do_while.html" title="PHP do while 循环">PHP do while 循环</a></li>
+<li><a href="php_looping_for.html" title="PHP for 循环">PHP for 循环</a></li>
+<li><a href="php_looping_foreach.html" title="PHP foreach 循环">PHP foreach 循环</a></li>
+<li><a href="php_looping_break.html" title="PHP Break">PHP Break</a></li>
+<li><a href="php_looping_continue.html" title="PHP Continue">PHP Continue</a></li>
+<li><a href="php_functions.html" title="PHP 函数">PHP 函数</a></li>
+<li><a href="php_arrays.html" title="PHP 数组">PHP 数组</a></li>
+<li><a href="php_arrays_indexed.html" title="PHP 索引数组">PHP 索引数组</a></li>
+<li><a href="php_arrays_associative.html" title="PHP 关联数组">PHP 关联数组</a></li>
+<li><a href="php_arrays_create.html" title="PHP 创建数组">PHP 创建数组</a></li>
+<li><a href="php_arrays_access.html" title="PHP 访问数组">PHP 访问数组</a></li>
+<li><a href="php_arrays_update.html" title="PHP 更新数组项">PHP 更新数组项</a></li>
+<li><a href="php_arrays_add.html" title="PHP 添加数组项">PHP 添加数组项</a></li>
+<li><a href="php_arrays_remove.html" title="PHP 删除数组项">PHP 删除数组项</a></li>
+<li><a href="php_arrays_sort.html" title="PHP 数组排序">PHP 数组排序</a></li>
+<li><a href="php_arrays_multidimensional.html" title="PHP 多维数组">PHP 多维数组</a></li>
+<li><a href="php_arrays_functions.html" title="PHP 数组函数">PHP 数组函数</a></li>
+<li><a href="php_superglobals.html" title="PHP 全局变量 - 超全局变量">PHP 超全局变量</a></li>
+<li><a href="php_superglobals_globals.html" title="PHP $GLOBALS">PHP $GLOBALS</a></li>
+<li><a href="php_superglobals_server.html" title="PHP $_SERVER">PHP $_SERVER</a></li>
+<li><a href="php_superglobals_request.html" title="PHP $_REQUEST">PHP $_REQUEST</a></li>
+<li><a href="php_superglobals_post.html" title="PHP $_POST">PHP $_POST</a></li>
+<li><a href="php_superglobals_get.html" title="PHP $_GET">PHP $_GET</a></li>
+<li><a href="php_regex.html" title="PHP 正则表达式">PHP 正则表达式</a></li>
+</ul>
+<h2>PHP 表单</h2>
+<ul>
+<li><a href="php_forms.html" title="PHP 表单处理">PHP 表单处理</a></li>
+<li><a href="php_form_validation.html" title="PHP 表单验证">PHP 表单验证</a></li>
+<li><a href="php_form_required.html" title="PHP 表单 - 必填字段">PHP 表单必填字段</a></li>
+<li><a href="php_form_url_email.html" title="PHP 表单 - 验证电子邮件和 URL">PHP 表单 URL/E-mail</a></li>
+<li><a href="php_form_complete.html" title="PHP 完整表单实例">PHP 完整表单实例</a></li>
+</ul>
+<h2>PHP 高级教程</h2>
+<ul>
+<li><a href="php_date.html" title="PHP 日期和时间">PHP 日期和时间</a></li>
+<li><a href="php_includes.html" title="PHP 包含文件">PHP 包含文件</a></li>
+<li><a href="php_file.html" title="PHP 文件处理">PHP 文件处理</a></li>
+<li><a href="php_file_open.html" title="PHP 文件打开/读取/关闭">PHP 文件打开/读取</a></li>
+<li><a href="php_file_create.html" title="PHP 文件创建/写入">PHP 文件创建/写入</a></li>
+<li><a href="php_file_upload.html" title="PHP 文件上传">PHP 文件上传</a></li>
+<li><a href="php_cookies.html" title="PHP Cookie">PHP Cookie</a></li>
+<li><a href="php_sessions.html" title="PHP 会话">PHP 会话</a></li>
+<li><a href="php_filter.html" title="PHP 过滤器">PHP 过滤器</a></li>
+<li><a href="php_filter_advanced.html" title="PHP 过滤器进阶">PHP 过滤器进阶</a></li>
+<li><a href="php_callback_functions.html" title="PHP 回调函数">PHP 回调函数</a></li>
+<li><a href="php_json.html" title="PHP 和 JSON">PHP JSON</a></li>
+<li><a href="php_exceptions.html" title="PHP 异常">PHP 异常</a></li>
+</ul>
+<h2>PHP OOP</h2>
+<ul>
+<li><a href="php_oop_what_is.html" title="PHP - 什么是 OOP？">PHP 什么是 OOP？</a></li>
+<li><a href="php_oop_classes_objects.html" title="PHP OOP - 类和对象">PHP 类/对象</a></li>
+<li><a href="php_oop_constructor.html" title="PHP OOP - 构造函数">PHP 构造函数</a></li>
+<li><a href="php_oop_destructor.html" title="PHP OOP - 析构函数">PHP 析构函数</a></li>
+<li><a href="php_oop_access_modifiers.html" title="PHP OOP - 访问修饰符">PHP 访问修饰符</a></li>
+<li><a href="php_oop_inheritance.html" title="PHP OOP - 继承">PHP 继承</a></li>
+<li><a href="php_oop_constants.html" title="PHP OOP - 类常量">PHP 类常量</a></li>
+<li><a href="php_oop_classes_abstract.html" title="PHP OOP - 抽象类">PHP 抽象类</a></li>
+<li><a href="php_oop_interfaces.html" title="PHP OOP - 接口">PHP 接口</a></li>
+<li><a href="php_oop_traits.html" title="PHP OOP - Trait">PHP Trait</a></li>
+<li><a href="php_oop_static_methods.html" title="PHP OOP - 静态方法">PHP 静态方法</a></li>
+<li><a href="php_oop_static_properties.html" title="PHP OOP - 静态属性">PHP 静态属性</a></li>
+<li><a href="php_namespaces.html" title="PHP OOP - 命名空间">PHP 命名空间</a></li>
+<li><a href="php_iterables.html" title="PHP Iterable">PHP Iterable</a></li>
+</ul>
+<h2>PHP 数据库</h2>
+<ul>
+<li><a href="php_mysql_intro.html" title="PHP MySQL 数据库">MySQL 数据库</a></li>
+<li><a href="php_mysql_connect.html" title="PHP 连接 MySQL">MySQL 连接</a></li>
+<li><a href="php_mysql_create.html" title="PHP 创建 MySQL 数据库">MySQL 创建 DB</a></li>
+<li><a href="php_mysql_create_table.html" title="PHP MySQL 创建表格">MySQL 创建表格</a></li>
+<li><a href="php_mysql_insert.html" title="PHP MySQL 插入数据">MySQL 插入数据</a></li>
+<li><a href="php_mysql_insert_lastid.html" title="PHP MySQL 获取最后插入的 ID">MySQL 获取最后的 ID</a></li>
+<li><a href="php_mysql_insert_multiple.html" title="PHP MySQL 插入多条记录">MySQL 插入多条记录</a></li>
+<li><a href="php_mysql_prepared_statements.html" title="PHP MySQL Prepared 语句">MySQL Prepared</a></li>
+<li><a href="php_mysql_select.html" title="PHP MySQL 选取数据">MySQL 选取数据</a></li>
+<li><a href="php_mysql_select_where.html" title="PHP MySQL 使用 WHERE 子句">MySQL WHERE</a></li>
+<li><a href="php_mysql_select_orderby.html" title="PHP MySQL 使用 ORDER BY 子句">MySQL ORDER BY</a></li>
+<li><a href="php_mysql_delete.html" title="PHP MySQL 删除数据">MySQL 删除数据</a></li>
+<li><a href="php_mysql_update.html" title="PHP MySQL 更新数据">MySQL 更新数据</a></li>
+<li><a href="php_mysql_select_limit.html" title="PHP MySQL 限制数据选择">MySQL 限制数据</a></li>
+</ul>
+<h2>PHP XML</h2>
+<ul>
+<li><a href="php_xml_parsers.html" title="PHP XML 解析器">PHP XML 解析器</a></li>
+<li><a href="php_xml_simplexml_read.html" title="PHP SimpleXML 解析器">PHP SimpleXML 解析器</a></li>
+<li><a href="php_xml_simplexml_get.html" title="PHP SimpleXML - 获取节点/属性值">PHP SimpleXML - 获取</a></li>
+<li><a href="php_xml_parser_expat.html" title="PHP XML Expat 解析器">PHP XML Expat</a></li>
+<li><a href="php_xml_dom.html" title="PHP XML DOM 解析器">PHP XML DOM 解析器</a></li>
+</ul>
+<h2>PHP 和 AJAX</h2>
+<ul>
+<li><a href="php_ajax_intro.html" title="PHP - AJAX 简介">AJAX 简介</a></li>
+<li><a href="php_ajax_php.html" title="PHP - AJAX 与 PHP">AJAX PHP</a></li>
+<li><a href="php_ajax_database.html" title="PHP - AJAX 与 MySQL">AJAX 数据库</a></li>
+<li><a href="php_ajax_xml.html" title="PHP 实例 - AJAX 与 XML">AJAX XML</a></li>
+<li><a href="php_ajax_livesearch.html" title="PHP 实例 - AJAX 实时搜索">AJAX 实时搜索</a></li>
+<li><a href="php_ajax_poll.html" title="PHP 实例 - AJAX 投票">AJAX Poll</a></li>
+</ul>
+<h2>PHP 参考手册</h2>
+<ul>
+<li><a href="php_ref.html" title="PHP 参考手册">PHP 参考手册</a></li>
+<li><a href="php_ref_array.html" title="PHP Array 函数">PHP Array</a></li>
+<li><a href="php_ref_calendar.html" title="PHP Calendar 函数">PHP Calendar</a></li>
+<li><a href="php_ref_date.html" title="PHP Date / Time 函数">PHP Date</a></li>
+<li><a href="php_ref_directory.html" title="PHP Directory 函数">PHP Directory</a></li>
+<li><a href="php_ref_error.html" title="PHP Error 和 Logging 函数">PHP Error</a></li>
+<li><a href="php_ref_exception.html" title="PHP Exception 参考手册">PHP Exception</a></li>
+<li><a href="php_ref_filesystem.html" title="PHP Filesystem 函数">PHP Filesystem</a></li>
+<li><a href="php_ref_filter.html" title="PHP Filter 函数">PHP Filter</a></li>
+<li><a href="php_ref_ftp.html" title="PHP FTP 函数">PHP FTP</a></li>
+<li><a href="php_ref_http.html" title="PHP HTTP 函数">PHP HTTP</a></li>
+<li><a href="php_ref_json.html" title="PHP JSON 函数">PHP JSON</a></li>
+<li><a href="php_ref_libxml.html" title="PHP LibXML 函数">PHP LibXML</a></li>
+<li><a href="php_ref_mail.html" title="PHP Mail 函数">PHP Mail</a></li>
+<li><a href="php_ref_math.html" title="PHP Math 函数">PHP Math</a></li>
+<li><a href="php_ref_mysql.html" title="PHP MySQL 函数">PHP MySQL</a></li>
+<li><a href="php_ref_mysqli.html" title="PHP 5 MySQLi 函数">PHP MySQLi</a></li>
+<li><a href="php_ref_network.html" title="PHP Network 函数">PHP Network</a></li>
+<li><a href="php_ref_regex.html" title="PHP 正则表达式函数">PHP RegEx</a></li>
+<li><a href="php_ref_simplexml.html" title="PHP SimpleXML 函数">PHP SimpleXML</a></li>
+<li><a href="php_ref_stream.html" title="PHP Stream 函数">PHP Stream</a></li>
+<li><a href="php_ref_string.html" title="PHP String 函数">PHP String</a></li>
+<li><a href="php_ref_xml.html" title="PHP XML Parser 函数">PHP XML</a></li>
+<li><a href="php_ref_zip.html" title="PHP Zip File 函数">PHP Zip</a></li>
+<li><a href="php_ref_variable_handling.html" title="PHP 变量处理函数">PHP 变量处理</a></li>
+<li><a href="php_ref_output_control.html" title="PHP 输出控制函数">PHP 输出控制</a></li>
+<li class="currentLink"><a href="php_ref_timezones.html" title="PHP 时区">PHP 时区</a></li>
+<li><a href="php_ref_misc.html" title="PHP 杂项函数">PHP 杂项</a></li>
+<li><a href="php_ref_keywords.html" title="PHP 关键词">PHP 关键词</a></li>
+</ul>
+<h2>PHP 实例</h2>
+<ul>
+<li><a href="php_examples.html" title="PHP 实例">PHP 实例</a></li>
+<li><a href="php_quiz.html" title="PHP 测验">PHP 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>PHP 时区</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="php_ref_output_control.html" title="PHP 输出控制函数">PHP 输出控制</a></li>
+<li class="next"><a href="php_ref_misc.html" title="PHP 杂项函数">PHP 杂项</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>PHP 支持的时区</h2>
+
+<p>下面是 PHP 所支持时区的完整列表，它们对于多个 PHP 日期函数很有用。</p>
+
+<ul>
+<li><a href="#africa">非洲</a></li>
+<li><a href="#america">美洲</a></li>
+<li><a href="#antarctica">南极</a></li>
+<li><a href="#arctic">北极</a></li>
+<li><a href="#asia">亚洲</a></li>
+<li><a href="#atlantic">大西洋</a></li>
+<li><a href="#australia">澳洲</a></li>
+<li><a href="#europe">欧洲</a></li>
+<li><a href="#indian">印度</a></li>
+<li><a href="#pacific">太平洋</a></li>
+</ul>
+</section>
+
+
+
+<section id="africa">
+<h2>非洲</h2>
+
+<table class="ref">
+<tr>
+<td>Africa/Abidjan</td>
+<td>Africa/Accra</td>
+<td>Africa/Addis_Ababa</td>
+<td>Africa/Algiers</td>
+<td>Africa/Asmara</td>
+</tr>
+
+<tr>
+<td>Africa/Asmera</td>
+<td>Africa/Bamako</td>
+<td>Africa/Bangui</td>
+<td>Africa/Banjul</td>
+<td>Africa/Bissau</td>
+</tr>
+
+<tr>
+<td>Africa/Blantyre</td>
+<td>Africa/Brazzaville</td>
+<td>Africa/Bujumbura</td>
+<td>Africa/Cairo</td>
+<td>Africa/Casablanca</td>
+</tr>
+
+<tr>
+<td>Africa/Ceuta</td>
+<td>Africa/Conakry</td>
+<td>Africa/Dakar</td>
+<td>Africa/Dar_es_Salaam</td>
+<td>Africa/Djibouti</td>
+</tr>
+
+<tr>
+<td>Africa/Douala</td>
+<td>Africa/El_Aaiun</td>
+<td>Africa/Freetown</td>
+<td>Africa/Gaborone</td>
+<td>Africa/Harare</td>
+</tr>
+
+<tr>
+<td>Africa/Johannesburg</td>
+<td>Africa/Juba</td>
+<td>Africa/Kampala</td>
+<td>Africa/Khartoum</td>
+<td>Africa/Kigali</td>
+</tr>
+
+<tr>
+<td>Africa/Kinshasa</td>
+<td>Africa/Lagos</td>
+<td>Africa/Libreville</td>
+<td>Africa/Lome</td>
+<td>Africa/Luanda</td>
+</tr>
+
+<tr>
+<td>Africa/Lubumbashi</td>
+<td>Africa/Lusaka</td>
+<td>Africa/Malabo</td>
+<td>Africa/Maputo</td>
+<td>Africa/Maseru</td>
+</tr>
+
+<tr>
+<td>Africa/Mbabane</td>
+<td>Africa/Mogadishu</td>
+<td>Africa/Monrovia</td>
+<td>Africa/Nairobi</td>
+<td>Africa/Ndjamena</td>
+</tr>
+
+<tr>
+<td>Africa/Niamey</td>
+<td>Africa/Nouakchott</td>
+<td>Africa/Ouagadougou</td>
+<td>Africa/Porto-Novo</td>
+<td>Africa/Sao_Tome</td>
+</tr>
+
+<tr>
+<td>Africa/Timbuktu</td>
+<td>Africa/Tripoli</td>
+<td>Africa/Tunis</td>
+<td>Africa/Windhoek</td>
+</tr>
+</table>
+</section>
+
+
+
+<section id="america">
+<h2>美洲</h2>
+
+<table class="ref">
+<tr>
+<td>America/Adak</td>
+<td>America/Anchorage</td>
+<td>America/Anguilla</td>
+</tr>
+
+<tr>
+<td>America/Antigua</td>
+<td>America/Araguaina</td>
+<td>America/Argentina/Buenos_Aires</td>
+</tr>
+
+<tr>
+<td>America/Argentina/Catamarca</td>
+<td>America/Argentina/ComodRivadavia</td>
+<td>America/Argentina/Cordoba</td>
+</tr>
+
+<tr>
+<td>America/Argentina/Jujuy</td>
+<td>America/Argentina/La_Rioja</td>
+<td>America/Argentina/Mendoza</td>
+</tr>
+
+<tr>
+<td>America/Argentina/Rio_Gallegos</td>
+<td>America/Argentina/Salta</td>
+<td>America/Argentina/San_Juan</td>
+</tr>
+
+<tr>
+<td>America/Argentina/San_Luis</td>
+<td>America/Argentina/Tucuman</td>
+<td>America/Argentina/Ushuaia</td>
+</tr>
+
+<tr>
+<td>America/Aruba</td>
+<td>America/Asuncion</td>
+<td>America/Atikokan</td>
+</tr>
+
+<tr>
+<td>America/Atka</td>
+<td>America/Bahia</td>
+<td>America/Bahia_Banderas</td>
+</tr>
+
+<tr>
+<td>America/Barbados</td>
+<td>America/Belem</td>
+<td>America/Belize</td>
+</tr>
+
+<tr>
+<td>America/Blanc-Sablon</td>
+<td>America/Boa_Vista</td>
+<td>America/Bogota</td>
+</tr>
+
+<tr>
+<td>America/Boise</td>
+<td>America/Buenos_Aires</td>
+<td>America/Cambridge_Bay</td>
+</tr>
+
+<tr>
+<td>America/Campo_Grande</td>
+<td>America/Cancun</td>
+<td>America/Caracas</td>
+</tr>
+
+<tr>
+<td>America/Catamarca</td>
+<td>America/Cayenne</td>
+<td>America/Cayman</td>
+</tr>
+
+<tr>
+<td>America/Chicago</td>
+<td>America/Chihuahua</td>
+<td>America/Coral_Harbour</td>
+</tr>
+
+<tr>
+<td>America/Cordoba</td>
+<td>America/Costa_Rica</td>
+<td>America/Creston</td>
+</tr>
+
+<tr>
+<td>America/Cuiaba</td>
+<td>America/Curacao</td>
+<td>America/Danmarkshavn</td>
+</tr>
+
+<tr>
+<td>America/Dawson</td>
+<td>America/Dawson_Creek</td>
+<td>America/Denver</td>
+</tr>
+
+<tr>
+<td>America/Detroit</td>
+<td>America/Dominica</td>
+<td>America/Edmonton</td>
+</tr>
+
+<tr>
+<td>America/Eirunepe</td>
+<td>America/El_Salvador</td>
+<td>America/Ensenada</td>
+</tr>
+
+<tr>
+<td>America/Fort_Wayne</td>
+<td>America/Fortaleza</td>
+<td>America/Glace_Bay</td>
+</tr>
+
+<tr>
+<td>America/Godthab</td>
+<td>America/Goose_Bay</td>
+<td>America/Grand_Turk</td>
+</tr>
+
+<tr>
+<td>America/Grenada</td>
+<td>America/Guadeloupe</td>
+<td>America/Guatemala</td>
+</tr>
+
+<tr>
+<td>America/Guayaqui</td>
+<td>America/Guyana</td>
+<td>America/Halifax</td>
+</tr>
+
+<tr>
+<td>America/Havana</td>
+<td>America/Hermosillo</td>
+<td>America/Indiana/Indianapolis</td>
+</tr>
+
+<tr>
+<td>America/Indiana/Knox</td>
+<td>America/Indiana/Marengo</td>
+<td>America/Indiana/Petersburg</td>
+</tr>
+
+<tr>
+<td>America/Indiana/Tell_City</td>
+<td>America/Indiana/Vevay</td>
+<td>America/Indiana/Vincennes</td>
+</tr>
+
+<tr>
+<td>America/Indiana/Winamac</td>
+<td>America/Indianapolis</td>
+<td>America/Inuvik</td>
+</tr>
+
+<tr>
+<td>America/Iqaluit</td>
+<td>America/Jamaica</td>
+<td>America/Jujuy</td>
+</tr>
+
+<tr>
+<td>America/Juneau</td>
+<td>America/Kentucky/Louisville</td>
+<td>America/Kentucky/Monticello</td>
+</tr>
+
+<tr>
+<td>America/Knox_IN</td>
+<td>America/Kralendijk</td>
+<td>America/La_Paz</td>
+</tr>
+
+<tr>
+<td>America/Lima</td>
+<td>America/Los_Angeles</td>
+<td>America/Louisville</td>
+</tr>
+
+<tr>
+<td>America/Lower_Princes</td>
+<td>America/Maceio</td>
+<td>America/Managua</td>
+</tr>
+
+<tr>
+<td>America/Manaus</td>
+<td>America/Marigot</td>
+<td>America/Martinique</td>
+</tr>
+
+<tr>
+<td>America/Matamoros</td>
+<td>America/Mazatlan</td>
+<td>America/Mendoza</td>
+</tr>
+
+<tr>
+<td>America/Menominee</td>
+<td>America/Merida</td>
+<td>America/Metlakatla</td>
+</tr>
+
+<tr>
+<td>America/Mexico_City</td>
+<td>America/Miquelon</td>
+<td>America/Moncton</td>
+</tr>
+
+<tr>
+<td>America/Monterrey</td>
+<td>America/Montevideo</td>
+<td>America/Montreal</td>
+</tr>
+
+<tr>
+<td>America/Montserrat</td>
+<td>America/Nassau</td>
+<td>America/New_York</td>
+</tr>
+
+<tr>
+<td>America/Nipigon</td>
+<td>America/Nome</td>
+<td>America/Noronha</td>
+</tr>
+
+<tr>
+<td>America/North_Dakota/Beulah</td>
+<td>America/North_Dakota/Center</td>
+<td>America/North_Dakota/New_Salem</td>
+</tr>
+
+<tr>
+<td>America/Ojinaga</td>
+<td>America/Panama</td>
+<td>America/Pangnirtung</td>
+</tr>
+
+<tr>
+<td>America/Paramaribo</td>
+<td>America/Phoenix</td>
+<td>America/Port-au-Prince</td>
+</tr>
+
+<tr>
+<td>America/Port_of_Spain</td>
+<td>America/Porto_Acre</td>
+<td>America/Porto_Velho</td>
+</tr>
+
+<tr>
+<td>America/Puerto_Rico</td>
+<td>America/Rainy_River</td>
+<td>America/Rankin_Inlet</td>
+</tr>
+
+<tr>
+<td>America/Recife</td>
+<td>America/Regina</td>
+<td>America/Resolute</td>
+</tr>
+
+<tr>
+<td>America/Rio_Branco</td>
+<td>America/Rosario</td>
+<td>America/Santa_Isabel</td>
+</tr>
+
+<tr>
+<td>America/Santarem</td>
+<td>America/Santiago</td>
+<td>America/Santo_Domingo</td>
+</tr>
+
+<tr>
+<td>America/Sao_Paulo</td>
+<td>America/Scoresbysund</td>
+<td>America/Shiprock</td>
+</tr>
+
+<tr>
+<td>America/Sitka</td>
+<td>America/St_Barthelemy</td>
+<td>America/St_Johns</td>
+</tr>
+
+
+<tr>
+<td>America/St_Kitts</td>
+<td>America/St_Lucia</td>
+<td>America/St_Thomas</td>
+</tr>
+
+<tr>
+<td>America/St_Vincent</td>
+<td>America/Swift_Current</td>
+<td>America/Tegucigalpa</td>
+</tr>
+
+<tr>
+<td>America/Thule</td>
+<td>America/Thunder_Bay</td>
+<td>America/Tijuana</td>
+</tr>
+
+<tr>
+<td>America/Toronto</td>
+<td>America/Tortola</td>
+<td>America/Vancouver</td>
+</tr>
+
+<tr>
+<td>America/Virgin</td>
+<td>America/Whitehorse</td>
+<td>America/Winnipeg</td>
+</tr>
+
+<tr>
+<td>America/Yakutat</td>
+<td>America/Yellowknife</td>
+</tr>
+</table>
+</section>
+
+
+
+<section id="antarctica">
+<h2>南极</h2>
+
+<table class="ref">
+<tr>
+<td>Antarctica/Casey</td>
+<td>Antarctica/Davis</td>
+<td>Antarctica/DumontDUrville</td>
+<td>Antarctica/Macquarie</td>
+</tr>
+
+<tr>
+<td>Antarctica/Mawson</td>
+<td>Antarctica/McMurdo</td>
+<td>Antarctica/Palmer</td>
+<td>Antarctica/Rothera</td>
+</tr>
+
+<tr>
+<td>Antarctica/South_Pole</td>
+<td>Antarctica/Syowa</td>
+<td>Antarctica/Vostok</td>
+</tr>
+</table>
+</section>
+
+
+
+<section id="arctic">
+<h2>北极</h2>
+
+<table class="ref">
+<tr>
+<td>Arctic/Longyearbyen</td>
+</tr>
+</table>
+</section>
+
+
+
+<section id="asia">
+<h2>亚洲</h2>
+
+<table class="ref">
+<tr>
+<td>Asia/Aden</td>
+<td>Asia/Almaty</td>
+<td>Asia/Amman</td>
+<td>Asia/Anadyr</td>
+<td>Asia/Aqtau</td>
+</tr>
+
+<tr>
+<td>Asia/Aqtobe</td>
+<td>Asia/Ashgabat</td>
+<td>Asia/Ashkhabad</td>
+<td>Asia/Baghdad</td>
+<td>Asia/Bahrain</td>
+</tr>
+
+<tr>
+<td>Asia/Baku</td>
+<td>Asia/Bangkok</td>
+<td>Asia/Beirut</td>
+<td>Asia/Bishkek</td>
+<td>Asia/Brunei</td>
+</tr>
+
+<tr>
+<td>Asia/Calcutta</td>
+<td>Asia/Choibalsan</td>
+<td>Asia/Chongqing</td>
+<td>Asia/Chungking</td>
+<td>Asia/Colombo</td>
+</tr>
+
+<tr>
+<td>Asia/Dacca</td>
+<td>Asia/Damascus</td>
+<td>Asia/Dhaka</td>
+<td>Asia/Dili</td>
+<td>Asia/Dubai</td>
+</tr>
+
+<tr>
+<td>Asia/Dushanbe</td>
+<td>Asia/Gaza</td>
+<td>Asia/Harbin</td>
+<td>Asia/Hebron</td>
+<td>Asia/Ho_Chi_Minh</td>
+</tr>
+
+<tr>
+<td>Asia/Hong_Kong</td>
+<td>Asia/Hovd</td>
+<td>Asia/Irkutsk</td>
+<td>Asia/Istanbul</td>
+<td>Asia/Jakarta</td>
+</tr>
+
+<tr>
+<td>Asia/Jayapura</td>
+<td>Asia/Jerusalem</td>
+<td>Asia/Kabul</td>
+<td>Asia/Kamchatka</td>
+<td>Asia/Karachi</td>
+</tr>
+
+<tr>
+<td>Asia/Kashgar</td>
+<td>Asia/Kathmandu</td>
+<td>Asia/Katmandu</td>
+<td>Asia/Khandyga</td>
+<td>Asia/Kolkata</td>
+</tr>
+
+<tr>
+<td>Asia/Krasnoyarsk</td>
+<td>Asia/Kuala_Lumpur</td>
+<td>Asia/Kuching</td>
+<td>Asia/Kuwait</td>
+<td>Asia/Macao</td>
+</tr>
+
+<tr>
+<td>Asia/Macau</td>
+<td>Asia/Magadan</td>
+<td>Asia/Makassar</td>
+<td>Asia/Manila</td>
+<td>Asia/Muscat</td>
+</tr>
+
+<tr>
+<td>Asia/Nicosia</td>
+<td>Asia/Novokuznetsk</td>
+<td>Asia/Novosibirsk</td>
+<td>Asia/Omsk</td>
+<td>Asia/Oral</td>
+</tr>
+
+<tr>
+<td>Asia/Phnom_Penh</td>
+<td>Asia/Pontianak</td>
+<td>Asia/Pyongyang</td>
+<td>Asia/Qatar</td>
+<td>Asia/Qyzylorda</td>
+</tr>
+
+<tr>
+<td>Asia/Rangoon</td>
+<td>Asia/Riyadh</td>
+<td>Asia/Saigon</td>
+<td>Asia/Sakhalin</td>
+<td>Asia/Samarkand</td>
+</tr>
+
+<tr>
+<td>Asia/Seoul</td>
+<td>Asia/Shanghai</td>
+<td>Asia/Singapore</td>
+<td>Asia/Taipei</td>
+<td>Asia/Tashkent</td>
+</tr>
+
+<tr>
+<td>Asia/Tbilisi</td>
+<td>Asia/Tehran</td>
+<td>Asia/Tel_Aviv</td>
+<td>Asia/Thimbu</td>
+<td>Asia/Thimphu</td>
+</tr>
+
+<tr>
+<td>Asia/Tokyo</td>
+<td>Asia/Ujung_Pandang</td>
+<td>Asia/Ulaanbaatar</td>
+<td>Asia/Ulan_Bator</td>
+<td>Asia/Urumqi</td>
+</tr>
+
+<tr>
+<td>Asia/Ust-Nera</td>
+<td>Asia/Vientiane</td>
+<td>Asia/Vladivostok</td>
+<td>Asia/Yakutsk</td>
+<td>Asia/Yekaterinburg</td>
+</tr>
+
+<tr>
+<td>Asia/Yerevan</td>
+</tr>
+</table>
+</section>
+
+
+
+<section id="atlantic">
+<h2>大西洋</h2>
+
+<table class="ref">
+<tr>
+<td>Atlantic/Azores</td>
+<td>Atlantic/Bermuda</td>
+<td>Atlantic/Canary</td>
+<td>Atlantic/Cape_Verde</td>
+<td>Atlantic/Faeroe</td>
+</tr>
+
+<tr>
+<td>Atlantic/Faroe</td>
+<td>Atlantic/Jan_Mayen</td>
+<td>Atlantic/Madeira</td>
+<td>Atlantic/Reykjavik</td>
+<td>Atlantic/South_Georgia</td>
+</tr>
+
+<tr>
+<td>Atlantic/St_Helena</td>
+<td>Atlantic/Stanley</td>
+</tr>
+</table>
+</section>
+
+
+
+<section id="australia">
+<h2>澳洲</h2>
+
+<table class="ref">
+<tr>
+<td>Australia/ACT</td>
+<td>Australia/Adelaide</td>
+<td>Australia/Brisbane</td>
+<td>Australia/Broken_Hill</td>
+</tr>
+
+<tr>
+<td>Australia/Canberra</td>
+<td>Australia/Currie</td>
+<td>Australia/Darwin</td>
+<td>Australia/Eucla</td>
+</tr>
+
+<tr>
+<td>Australia/Hobart</td>
+<td>Australia/LHI</td>
+<td>Australia/Lindeman</td>
+<td>Australia/Lord_Howe</td>
+</tr>
+
+<tr>
+<td>Australia/Melbourne</td>
+<td>Australia/North</td>
+<td>Australia/NSW</td>
+<td>Australia/Perth</td>
+</tr>
+
+<tr>
+<td>Australia/Queensland</td>
+<td>Australia/South</td>
+<td>Australia/Sydney</td>
+<td>Australia/Tasmania</td>
+</tr>
+
+<tr>
+<td>Australia/Victoria</td>
+<td>Australia/West</td>
+<td>Australia/Yancowinna</td>
+</tr>
+</table>
+</section>
+
+
+
+<section id="europe">
+<h2>欧洲</h2>
+
+<table class="ref">
+<tr>
+<td>Europe/Amsterdam</td>
+<td>Europe/Andorra</td>
+<td>Europe/Athens</td>
+<td>Europe/Belfast</td>
+<td>Europe/Belgrade</td>
+</tr>
+
+<tr>
+<td>Europe/Berlin</td>
+<td>Europe/Bratislava</td>
+<td>Europe/Brussels</td>
+<td>Europe/Bucharest</td>
+<td>Europe/Budapest</td>
+</tr>
+
+<tr>
+<td>Europe/Busingen</td>
+<td>Europe/Chisinau</td>
+<td>Europe/Copenhagen</td>
+<td>Europe/Dublin</td>
+<td>Europe/Gibraltar</td>
+</tr>
+
+<tr>
+<td>Europe/Guernsey</td>
+<td>Europe/Helsinki</td>
+<td>Europe/Isle_of_Man</td>
+<td>Europe/Istanbul</td>
+<td>Europe/Jersey</td>
+</tr>
+
+<tr>
+<td>Europe/Kaliningrad</td>
+<td>Europe/Kiev</td>
+<td>Europe/Lisbon</td>
+<td>Europe/Ljubljana</td>
+<td>Europe/London</td>
+</tr>
+
+<tr>
+<td>Europe/Luxembourg</td>
+<td>Europe/Madrid</td>
+<td>Europe/Malta</td>
+<td>Europe/Mariehamn</td>
+<td>Europe/Minsk</td>
+</tr>
+
+<tr>
+<td>Europe/Monaco</td>
+<td>Europe/Moscow</td>
+<td>Europe/Nicosia</td>
+<td>Europe/Oslo</td>
+<td>Europe/Paris</td>
+</tr>
+
+<tr>
+<td>Europe/Podgorica</td>
+<td>Europe/Prague</td>
+<td>Europe/Riga</td>
+<td>Europe/Rome</td>
+<td>Europe/Samara</td>
+</tr>
+
+<tr>
+<td>Europe/San_Marino</td>
+<td>Europe/Sarajevo</td>
+<td>Europe/Simferopol</td>
+<td>Europe/Skopje</td>
+<td>Europe/Sofia</td>
+</tr>
+
+<tr>
+<td>Europe/Stockholm</td>
+<td>Europe/Tallinn</td>
+<td>Europe/Tirane</td>
+<td>Europe/Tiraspol</td>
+<td>Europe/Uzhgorod</td>
+</tr>
+
+<tr>
+<td>Europe/Vaduz</td>
+<td>Europe/Vatican</td>
+<td>Europe/Vienna</td>
+<td>Europe/Vilnius</td>
+<td>Europe/Volgograd</td>
+</tr>
+
+<tr>
+<td>Europe/Warsaw</td>
+<td>Europe/Zagreb</td>
+<td>Europe/Zaporozhye</td>
+<td>Europe/Zurich</td>
+</tr>
+</table>
+</section>
+
+
+
+<section id="indian">
+<h2>印度</h2>
+
+<table class="ref">
+<tr>
+<td>Indian/Antananarivo</td>
+<td>Indian/Chagos</td>
+<td>Indian/Christmas</td>
+<td>Indian/Cocos</td>
+<td>Indian/Comoro</td>
+</tr>
+
+<tr>
+<td>Indian/Kerguelen</td>
+<td>Indian/Mahe</td>
+<td>Indian/Maldives</td>
+<td>Indian/Mauritius</td>
+<td>Indian/Mayotte</td>
+</tr>
+
+<tr>
+<td>Indian/Reunion</td>
+</tr>
+</table>
+</section>
+
+
+
+<section id="pacific">
+<h2>太平洋</h2>
+
+<table class="ref">
+<tr>
+<td>Pacific/Apia</td>
+<td>Pacific/Auckland</td>
+<td>Pacific/Chatham</td>
+<td>Pacific/Chuuk</td>
+<td>Pacific/Easter</td>
+</tr>
+
+<tr>
+<td>Pacific/Efate</td>
+<td>Pacific/Enderbury</td>
+<td>Pacific/Fakaofo</td>
+<td>Pacific/Fiji</td>
+<td>Pacific/Funafuti</td>
+</tr>
+
+<tr>
+<td>Pacific/Galapagos</td>
+<td>Pacific/Gambier</td>
+<td>Pacific/Guadalcanal</td>
+<td>Pacific/Guam</td>
+<td>Pacific/Honolulu</td>
+</tr>
+
+<tr>
+<td>Pacific/Johnston</td>
+<td>Pacific/Kiritimati</td>
+<td>Pacific/Kosrae</td>
+<td>Pacific/Kwajalein</td>
+<td>Pacific/Majuro</td>
+</tr>
+
+<tr>
+<td>Pacific/Marquesas</td>
+<td>Pacific/Midway</td>
+<td>Pacific/Nauru</td>
+<td>Pacific/Niue</td>
+<td>Pacific/Norfolk</td>
+</tr>
+
+<tr>
+<td>Pacific/Noumea</td>
+<td>Pacific/Pago_Pago</td>
+<td>Pacific/Palau</td>
+<td>Pacific/Pitcairn</td>
+<td>Pacific/Pohnpei</td>
+</tr>
+
+<tr>
+<td>Pacific/Ponape</td>
+<td>Pacific/Port_Moresby</td>
+<td>Pacific/Rarotonga</td>
+<td>Pacific/Saipan</td>
+<td>Pacific/Samoa</td>
+</tr>
+
+<tr>
+<td>Pacific/Tahiti</td>
+<td>Pacific/Tarawa</td>
+<td>Pacific/Tongatapu</td>
+<td>Pacific/Truk</td>
+<td>Pacific/Wake</td>
+</tr>
+
+<tr>
+<td>Pacific/Wallis</td>
+<td>Pacific/Yap</td>
+</tr>
+</table>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="php_ref_output_control.html" title="PHP 输出控制函数">PHP 输出控制</a></li>
+<li class="next"><a href="php_ref_misc.html" title="PHP 杂项函数">PHP 杂项</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="php_ref.html">PHP 参考手册</a></h5>
+<h5 id="tools_example"><a href="php_examples.html">PHP 实例</a></h5>
+<h5 id="tools_quiz"><a href="php_quiz.html">PHP 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/php/php_ref_timezones.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:42:13 GMT -->
+</html>

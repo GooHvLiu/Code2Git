@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+
+<!-- Mirrored from www.w3school.com.cn/demo/html/html5_draganddrop.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:16:24 GMT -->
+<head>
+<style>
+#div1, #div2 {
+  float: left;
+  width: 198px;
+  height: 66px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid black;
+}
+</style>
+<script>
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+}
+</script>
+</head>
+<body>
+
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+  <img style="margin:0; padding:10px;" src="../../i/eg_dragdrop_w3school.gif" draggable="true" ondragstart="drag(event)" id="drag1" width="178" height="46">
+</div>
+
+<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/demo/html/html5_draganddrop.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:16:24 GMT -->
+</html>

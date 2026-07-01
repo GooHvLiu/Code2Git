@@ -1,0 +1,425 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/kotlin/kotlin_strings.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Kotlin 字符串</title>
+
+</head>
+
+<body class="serverscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Kotlin 教程</h2>
+<ul>
+<li><a href="index.html" title="Kotlin 教程">Kotlin 教程</a></li>
+<li><a href="kotlin_intro-2.html" title="Kotlin 简介">Kotlin 简介</a></li>
+<li><a href="kotlin_getstarted.html" title="Kotlin 入门">Kotlin 入门</a></li>
+<li><a href="kotlin_syntax.html" title="Kotlin 语法">Kotlin 语法</a></li>
+<li><a href="kotlin_output.html" title="Kotlin 输出">Kotlin 输出</a></li>
+<li><a href="kotlin_comments.html" title="Kotlin 注释">Kotlin 注释</a></li>
+<li><a href="kotlin_variables.html" title="Kotlin 变量">Kotlin 变量</a></li>
+<li><a href="kotlin_data_types.html" title="Kotlin 数据类型">Kotlin 数据类型</a></li>
+<li><a href="kotlin_operators.html" title="Kotlin 运算符">Kotlin 运算符</a></li>
+<li class="currentLink"><a href="kotlin_strings.html" title="Kotlin 字符串">Kotlin 字符串</a></li>
+<li><a href="kotlin_booleans.html" title="Kotlin 布尔值">Kotlin 布尔值</a></li>
+<li><a href="kotlin_conditions.html" title="Kotlin If...Else">Kotlin If...Else</a></li>
+<li><a href="kotlin_when.html" title="Kotlin When">Kotlin When</a></li>
+<li><a href="kotlin_while_loop.html" title="Kotlin While 循环">Kotlin While 循环</a></li>
+<li><a href="kotlin_break_continue.html" title="Kotlin Break 和 Continue">Kotlin Break/Continue</a></li>
+<li><a href="kotlin_arrays.html" title="Kotlin 数组">Kotlin 数组</a></li>
+<li><a href="kotlin_for_loop.html" title="Kotlin For 循环">Kotlin For 循环</a></li>
+<li><a href="kotlin_ranges.html" title="Kotlin 范围">Kotlin 范围</a></li>
+<li><a href="kotlin_functions.html" title="Kotlin 函数">Kotlin 函数</a></li>
+</ul>
+<h2>Kotlin 类</h2>
+<ul>
+<li><a href="kotlin_oop.html" title="Kotlin OOP">Kotlin OOP</a></li>
+<li><a href="kotlin_classes.html" title="Kotlin 类和对象">Kotlin 类/对象</a></li>
+<li><a href="kotlin_constructors.html" title="Kotlin 构造函数">Kotlin 构造函数</a></li>
+<li><a href="kotlin_class_functions.html" title="Kotlin 类函数">Kotlin 类函数</a></li>
+<li><a href="kotlin_inheritance.html" title="Kotlin 继承">Kotlin 继承</a></li>
+</ul>
+<h2>Kotlin 实例</h2>
+<ul>
+<li><a href="kotlin_examples.html" title="Kotlin 实例">Kotlin 实例</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Kotlin 字符串</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="kotlin_operators.html" title="Kotlin 运算符">Kotlin 运算符</a></li>
+<li class="next"><a href="kotlin_booleans.html" title="Kotlin 布尔值">Kotlin 布尔值</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>Kotlin 字符串</h2>
+
+<p>字符串用于存储文本。</p>
+
+<p>字符串包含用双引号括起来的字符集合：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+var greeting = &quot;Hello&quot;
+</pre>
+
+<p class="tiy"><a target="_blank" href="t4186.html?f=kotlin_strings_1">亲自试一试</a></p>
+
+<p>与 <a href="../java/index.html" title="Java 教程">Java</a> 不同，您不需要指定变量应该是 <code>String</code> 类型。由于双引号的存在，Kotlin 足够智能，可以理解上面示例中的 <code>greeting</code> 变量是一个字符串。</p>
+
+<p>但是，就像其他数据类型一样，如果您坚持的话，可以指定类型：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+var greeting: String = &quot;Hello&quot;
+</pre>
+
+<p class="tiy"><a target="_blank" href="te415.html?f=kotlin_strings_2">亲自试一试</a></p>
+
+<p class="note"><span>注意：</span>如果要创建一个 <code>String</code> 而不赋值（稍后赋值），则必须在声明变量时指定类型：</p>
+
+<h3>实例</h3>
+
+<p>这样可以正常工作：</p>
+
+<pre class="language-kotlin">
+var name: String
+name = &quot;Bill&quot;
+println(name)
+</pre>
+
+<p class="tiy"><a target="_blank" href="tde20.html?f=kotlin_variables_3">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p>这将生成错误：</p>
+
+<pre class="language-kotlin err">
+var name
+name = &quot;Bill&quot;
+println(name)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t8c4e.html?f=kotlin_variables_4">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>访问字符串</h2>
+
+<p>要访问字符串的字符（元素），必须引用<em>方括号</em>内的<em>索引号</em>。</p>
+
+<p>字符串索引从 <mark>0</mark> 开始。在下面的例子中，我们访问 <code>txt</code> 中的第一个和第三个元素：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+var txt = &quot;Hello World&quot;
+println(txt[0]) // 第一个元素 (H)
+println(txt[2]) // 第三个元素 (l)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t7aa3.html?f=kotlin_strings_access">亲自试一试</a></p>
+
+<p class="tip"><span>提示：</span><mark>[0]</mark> 是第一个元素。<mark>[1]</mark> 是第二个元素，<mark>[2]</mark> 是第三个元素，依此类推。</p>
+</section>
+
+
+
+<section>
+<h2>字符串长度</h2>
+
+<p>在 Kotlin 中，字符串是对象，其中包含可以对字符串执行某些操作的属性和函数，通过在特定字符串变量后写入点字符（<code>.</code>）来调用。例如，可以使用 <code>length</code> 属性找到字符串的长度：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+var txt = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;
+println(&quot;The length of the txt string is: &quot; + txt.length)
+</pre>
+
+<p class="tiy"><a target="_blank" href="tfce0.html?f=kotlin_strings_length">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>字符串函数</h2>
+
+<p>有许多可用的字符串函数，例如 <code>toUpperCase()</code> 和 <code>toLowerCase()</code>：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+var txt = &quot;Hello World&quot;
+println(txt.toUpperCase())   // 输出 &quot;HELLO WORLD&quot;
+println(txt.toLowerCase())   // 输出 &quot;hello world&quot;
+</pre>
+
+<p class="tiy"><a target="_blank" href="tabfd.html?f=kotlin_strings_touppercase">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>比较字符串</h2>
+
+<p><code>compareTo(<i>string</i>)</code> 函数比较两个字符串，如果两者相等则返回 <code>0</code>：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+var txt1 = &quot;Hello World&quot;
+var txt2 = &quot;Hello World&quot;
+println(txt1.compareTo(txt2))  // 输出 0（它们相等）
+</pre>
+
+<p class="tiy"><a target="_blank" href="tc11f.html?f=kotlin_strings_compareto">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>在字符串中查找字符串</h2>
+
+<p><code>indexOf()</code> 函数返回字符串中指定文本（包括空格）首次出现的<em>索引</em>（位置）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+var txt = &quot;Please locate where 'locate' occurs!&quot;
+println(txt.indexOf(&quot;locate&quot;))  // 输出 7
+</pre>
+
+<p class="tiy"><a target="_blank" href="t0008.html?f=kotlin_strings_indexof">亲自试一试</a></p>
+
+<h3 class="tip">提示</h3>
+
+<p>请记住，Kotlin 从零开始计算位置。</p>
+
+<p><mark>0</mark> 是字符串中的第一个位置，<mark>1</mark> 是第二个位置，<mark>2</mark> 是第三个位置...</p>
+</section>
+
+
+
+<section>
+<h2>字符串内的引号</h2>
+
+<p>要在字符串内使用引号，请使用单引号 (<code>'</code>)：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+var txt1 = &quot;It's alright&quot;
+var txt2 = &quot;That's great&quot;
+</pre>
+
+<p class="tiy"><a target="_blank" href="t765d.html?f=kotlin_strings_quotes">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>字符串连接</h2>
+
+<p><code>+</code> 运算符可用于字符串之间，将它们添加在一起以形成新字符串。这称为<em>连接</em>（串联）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+var firstName = &quot;Bill&quot;
+var lastName = &quot;Gates&quot;
+println(firstName + &quot; &quot; + lastName)
+</pre>
+
+<p class="tiy"><a target="_blank" href="tb8f3.html?f=kotlin_strings_conc_1">亲自试一试</a></p>
+
+<p class="tip"><span>提示：</span>请注意，我们添加了一个空文本 (<code>&quot; &quot;</code>)，以便在打印时在 <code>firstName</code> 和 <code>lastName</code> 之间创建一个空格。</p>
+
+<p>您还可以使用 <code>plus()</code> 函数连接两个字符串：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+var firstName = &quot;Bill &quot;
+var lastName = &quot;Gates&quot;
+println(firstName.plus(lastName))
+</pre>
+
+<p class="tiy"><a target="_blank" href="t9576.html?f=kotlin_strings_conc_2">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>字符串模板/插值</h2>
+
+<p>除了连接之外，您还可以使用“字符串模板”，这是一种在字符串内部添加变量和表达式的简单方法。</p>
+
+<p>只需用 <code>$</code> 符号引用变量即可：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+var firstName = &quot;Bill&quot;
+var lastName = &quot;Gates&quot;
+println(&quot;My name is $firstName $lastName&quot;)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t6c27.html?f=kotlin_strings_template">亲自试一试</a></p>
+
+<p class="tip"><span>提示：</span>“字符串模板”是 Kotlin 的一个流行功能，因为它减少了代码量。例如，您不必像我们在连接示例中那样在 <code>firstName</code> 和 <code>lastName</code> 之间指定一个空格。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="kotlin_operators.html" title="Kotlin 运算符">Kotlin 运算符</a></li>
+<li class="next"><a href="kotlin_booleans.html" title="Kotlin 布尔值">Kotlin 布尔值</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_example"><a href="kotlin_examples.html">Kotlin 实例</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/kotlin/kotlin_strings.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:25 GMT -->
+</html>

@@ -1,0 +1,276 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/css/pro_css_boxmodel.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:18:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>CSS 框模型概述</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>CSS 高级教程</h2>
+<ul>
+<li><a href="index_pro.html" title="CSS 课外书">CSS 课外书</a></li>
+<li><a href="pro_css_jianjie.html" title="CSS 简介">CSS 简介</a></li>
+<li><a href="pro_css_syntax.html" title="CSS 基础语法">CSS 基础语法</a></li>
+<li><a href="css_syntax_pro.html" title="CSS 高级语法">CSS 高级语法</a></li>
+<li><a href="css_syntax_descendant_selector.html" title="CSS 派生选择器">CSS 派生选择器</a></li>
+<li><a href="css_syntax_id_selector.html" title="CSS id 选择器">CSS id 选择器</a></li>
+<li><a href="css_syntax_class_selector.html" title="CSS 类选择器">CSS 类选择器</a></li>
+<li><a href="css_howto.html" title="CSS 创建">CSS 创建</a></li>
+<li><a href="pro_css_background.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="pro_css_text.html" title="CSS 文本">CSS 文本</a></li>
+<li><a href="pro_css_font.html" title="CSS 字体">CSS 字体</a></li>
+<li><a href="pro_css_list.html" title="CSS 列表">CSS 列表</a></li>
+</ul>
+<h2>CSS 框模型</h2>
+<ul>
+<li class="currentLink"><a href="pro_css_boxmodel.html" title="CSS 框模型概述">CSS 框模型概述</a></li>
+<li><a href="pro_css_padding.html" title="CSS 内边距">CSS 内边距</a></li>
+<li><a href="pro_css_border.html" title="CSS 边框">CSS 边框</a></li>
+<li><a href="pro_css_margin.html" title="CSS 外边距">CSS 外边距</a></li>
+<li><a href="pro_css_margin_collapsing.html" title="CSS 外边距合并">CSS 外边距合并</a></li>
+</ul>
+<h2>CSS 定位</h2>
+<ul>
+<li><a href="pro_css_positioning.html" title="CSS 定位概述">CSS 定位概述</a></li>
+<li><a href="css_positioning_relative.html" title="CSS 相对定位">CSS 相对定位</a></li>
+<li><a href="css_positioning_absolute.html" title="CSS 绝对定位">CSS 绝对定位</a></li>
+<li><a href="css_positioning_floating.html" title="CSS 浮动">CSS 浮动</a></li>
+</ul>
+<h2>CSS 选择器</h2>
+<ul>
+<li><a href="css_selector_type.html" title="CSS 元素选择器">CSS 元素选择器</a></li>
+<li><a href="css_selector_grouping.html" title="CSS 选择器分组">CSS 选择器分组</a></li>
+<li><a href="css_selector_class.html" title="CSS 类选择器详解">CSS 类选择器详解</a></li>
+<li><a href="css_selector_id.html" title="CSS ID 选择器详解">CSS ID 选择器详解</a></li>
+<li><a href="css_selector_attribute.html" title="CSS 属性选择器详解">CSS 属性选择器详解</a></li>
+<li><a href="css_selector_descendant.html" title="CSS 后代选择器">CSS 后代选择器</a></li>
+<li><a href="css_selector_child.html" title="CSS 子元素选择器">CSS 子元素选择器</a></li>
+<li><a href="css_selector_adjacent_sibling.html" title="CSS 相邻兄弟选择器">CSS 相邻兄弟选择器</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>CSS 框模型概述</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="pro_css_list.html" title="CSS 列表">CSS 列表</a></li>
+<li class="next"><a href="pro_css_padding.html" title="CSS 内边距">CSS 内边距</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p><strong>CSS 框模型 (Box Model) 规定了元素框处理元素内容、<a href="css_padding.html" title="CSS 内边距">内边距</a>、<a href="css_border.html" title="CSS 边框">边框</a> 和 <a href="css_margin.html" title="CSS 外边距">外边距</a> 的方式。</strong></p>
+</div>
+
+
+
+<div class="example">
+<h2>CSS 框模型概述</h2>
+
+<img class="illustration" src="../i/css/boxmodel.gif" alt="CSS 框模型" />
+
+<p>元素框的最内部分是实际的内容，直接包围内容的是内边距。内边距呈现了元素的背景。内边距的边缘是边框。边框以外是外边距，外边距默认是透明的，因此不会遮挡其后的任何元素。</p>
+
+<p class="tip"><span>提示：</span>背景应用于由内容和内边距、边框组成的区域。</p>
+
+<p>内边距、边框和外边距都是可选的，默认值是零。但是，许多元素将由用户代理样式表设置外边距和内边距。可以通过将元素的 margin 和 padding 设置为零来覆盖这些浏览器样式。这可以分别进行，也可以使用通用选择器对所有元素进行设置：</p>
+
+<pre class="language-css">
+* {
+  margin: 0;
+  padding: 0;
+}
+</pre>
+
+<p>在 CSS 中，width 和 height 指的是内容区域的宽度和高度。增加内边距、边框和外边距不会影响内容区域的尺寸，但是会增加元素框的总尺寸。</p>
+
+<p>假设框的每个边上有 10 个像素的外边距和 5 个像素的内边距。如果希望这个元素框达到 100 个像素，就需要将内容的宽度设置为 70 像素，请看下图：</p>
+
+<img class="illustration" src="../i/css/boxmodel_example.gif" alt="CSS 框模型实例" />
+
+<pre class="language-css">
+#box {
+  width: 70px;
+  margin: 10px;
+  padding: 5px;
+}
+</pre>
+
+<p class="tip"><span>提示：</span>内边距、边框和外边距可以应用于一个元素的所有边，也可以应用于单独的边。</p>
+
+<p class="tip"><span>提示：</span>外边距可以是负值，而且在很多情况下都要使用负值的外边距。</p>
+</div>
+
+
+
+<div>
+<h2>浏览器兼容性</h2>
+
+<p>一旦为页面设置了恰当的 DTD，大多数浏览器都会按照上面的图示来呈现内容。然而 IE 5 和 6 的呈现却是不正确的。根据 W3C 的规范，元素内容占据的空间是由 width 属性设置的，而内容周围的 padding 和 border 值是另外计算的。不幸的是，IE5.X 和 6 在怪异模式中使用自己的非标准模型。这些浏览器的 width 属性不是内容的宽度，而是内容、内边距和边框的宽度的总和。</p>
+
+<p>虽然有方法解决这个问题。但是目前最好的解决方案是回避这个问题。也就是，不要给元素添加具有指定宽度的内边距，而是尝试将内边距或外边距添加到元素的父元素和子元素。</p>
+
+<h3>术语翻译</h3>
+
+<ul>
+<li>element : 元素。</li>
+<li>padding : 内边距，也有资料将其翻译为填充。</li>
+<li>border : 边框。</li>
+<li>margin : 外边距，也有资料将其翻译为空白或空白边。</li>
+</ul>
+
+<p>在 w3school，我们把 padding 和 margin 统一地称为内边距和外边距。边框内的空白是内边距，边框外的空白是外边距，很容易记吧：）</p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="pro_css_list.html" title="CSS 列表">CSS 列表</a></li>
+<li class="next"><a href="pro_css_padding.html" title="CSS 内边距">CSS 内边距</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../cssref/index.html">CSS 参考手册</a></h5>
+<h5 id="tools_example"><a href="css_examples.html">CSS 实例</a></h5>
+<h5 id="tools_quiz"><a href="css_quiz.html">CSS 测验</a></h5>
+<h5 id="tools_tutorial"><a href="index.html">CSS 教程</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/css/pro_css_boxmodel.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:18:57 GMT -->
+</html>

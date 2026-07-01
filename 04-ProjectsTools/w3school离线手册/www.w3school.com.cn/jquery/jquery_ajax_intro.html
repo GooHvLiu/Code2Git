@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/jquery/jquery_ajax_intro.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:36:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>jQuery AJAX 简介</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>jQuery 教程</h2>
+<ul>
+<li><a href="index.html" title="jQuery 教程">jQuery 教程</a></li>
+<li><a href="jquery_intro.html" title="jQuery 简介">jQuery 简介</a></li>
+<li><a href="jquery_install.html" title="jQuery 安装">jQuery 安装</a></li>
+<li><a href="jquery_syntax.html" title="jQuery 语法">jQuery 语法</a></li>
+<li><a href="jquery_selectors.html" title="jQuery 选择器">jQuery 选择器</a></li>
+<li><a href="jquery_events.html" title="jQuery 事件">jQuery 事件</a></li>
+</ul>
+<h2>jQuery 效果</h2>
+<ul>
+<li><a href="jquery_hide_show.html" title="jQuery jQuery 效果 - 隐藏和显示">jQuery 隐藏/显示</a></li>
+<li><a href="jquery_fade.html" title="jQuery jQuery 效果 - 淡入淡出">jQuery 淡入淡出</a></li>
+<li><a href="jquery_slide.html" title="jQuery 效果 - 滑动">jQuery 滑动</a></li>
+<li><a href="jquery_animate.html" title="jQuery 效果 - 动画">jQuery 动画</a></li>
+<li><a href="jquery_stop.html" title="jQuery 停止动画">jQuery stop()</a></li>
+<li><a href="jquery_callback.html" title="jQuery 回调函数">jQuery Callback</a></li>
+<li><a href="jquery_chaining.html" title="jQuery - Chaining">jQuery Chaining</a></li>
+</ul>
+<h2>jQuery HTML</h2>
+<ul>
+<li><a href="jquery_dom_get.html" title="jQuery - 获取内容和属性">jQuery 获取</a></li>
+<li><a href="jquery_dom_set.html" title="jQuery - 设置内容和属性">jQuery 设置</a></li>
+<li><a href="jquery_dom_add.html" title="jQuery - 添加元素">jQuery 添加</a></li>
+<li><a href="jquery_dom_remove.html" title="jQuery - 删除元素">jQuery 删除</a></li>
+<li><a href="jquery_css_classes.html" title="jQuery - 获取和设置 CSS 类">jQuery CSS 类</a></li>
+<li><a href="jquery_css.html" title="jQuery - css() 方法">jQuery css()</a></li>
+<li><a href="jquery_dimensions.html" title="jQuery - 尺寸">jQuery 尺寸</a></li>
+</ul>
+<h2>jQuery 遍历</h2>
+<ul>
+<li><a href="jquery_traversing.html" title="jQuery 遍历">jQuery 遍历</a></li>
+<li><a href="jquery_traversing_ancestors.html" title="jQuery 遍历 - 祖先">jQuery 祖先</a></li>
+<li><a href="jquery_traversing_descendants.html" title="jQuery 遍历 - 后代">jQuery 后代</a></li>
+<li><a href="jquery_traversing_siblings.html" title="jQuery 遍历 - 同胞">jQuery 同胞</a></li>
+<li><a href="jquery_traversing_filtering.html" title="jQuery 遍历 - 过滤">jQuery 过滤</a></li>
+</ul>
+<h2>jQuery AJAX</h2>
+<ul>
+<li class="currentLink"><a href="jquery_ajax_intro.html" title="jQuery - AJAX 简介">jQuery AJAX 简介</a></li>
+<li><a href="jquery_ajax_load.html" title="jQuery - AJAX load() 方法">jQuery 加载</a></li>
+<li><a href="jquery_ajax_get_post.html" title="jQuery - AJAX get() 和 post() 方法">jQuery Get/Post</a></li>
+</ul>
+<h2>jQuery 杂项</h2>
+<ul>
+<li><a href="jquery_noconflict.html" title="jQuery - noConflict() 方法">jQuery noConflict()</a></li>
+</ul>
+<h2>jQuery 实例</h2>
+<ul>
+<li><a href="jquery_examples.html" title="jQuery 实例">jQuery 实例</a></li>
+<li><a href="jquery_quiz.html" title="jQuery 测验">jQuery 测验</a></li>
+</ul>
+<h2>jQuery 参考手册</h2>
+<ul>
+<li><a href="jquery_reference.html" title="jQuery 参考手册">jQuery 参考手册</a></li>
+<li><a href="jquery_ref_selectors.html" title="jQuery 参考手册 - 选择器">jQuery 选择器</a></li>
+<li><a href="jquery_ref_events.html" title="jQuery 参考手册 - 事件">jQuery 事件</a></li>
+<li><a href="jquery_ref_effects.html" title="jQuery 参考手册 - 效果">jQuery 效果</a></li>
+<li><a href="jquery_ref_manipulation.html" title="jQuery 参考手册 - 文档操作">jQuery 文档操作</a></li>
+<li><a href="jquery_ref_attributes.html" title="jQuery 参考手册 - 属性操作">jQuery 属性操作</a></li>
+<li><a href="jquery_ref_css.html" title="jQuery 参考手册 - CSS 操作">jQuery CSS 操作</a></li>
+<li><a href="jquery_ref_ajax.html" title="jQuery 参考手册 - Ajax">jQuery Ajax</a></li>
+<li><a href="jquery_ref_traversing.html" title="jQuery 参考手册 - 遍历">jQuery 遍历</a></li>
+<li><a href="jquery_ref_data.html" title="jQuery 参考手册 - 数据">jQuery 数据</a></li>
+<li><a href="jquery_ref_dom_element_methods.html" title="jQuery 参考手册 - DOM 元素方法">jQuery DOM 元素</a></li>
+<li><a href="jquery_ref_core.html" title="jQuery 参考手册 - 核心">jQuery 核心</a></li>
+<li><a href="jquery_ref_prop.html" title="jQuery 属性">jQuery 属性</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>jQuery AJAX 简介</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="jquery_traversing_filtering.html" title="jQuery 遍历 - 过滤">jQuery 过滤</a></li>
+<li class="next"><a href="jquery_ajax_load.html" title="jQuery - AJAX load() 方法">jQuery 加载</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p><strong>AJAX 是与服务器交换数据的艺术，它在不重载全部页面的情况下，实现了对部分网页的更新。</strong></p>
+</div>
+
+
+
+<div>
+<h2>jQuery AJAX 实例</h2>
+
+<script src="jquery.js"></script>
+
+<script>
+$(document).ready(function(){
+  $("#btn1").click(function(){
+    $('#test').load('../example/jquery/demo_test.txt');
+  })
+})
+</script>
+
+<h3 id="test">请点击下面的按钮，通过 jQuery AJAX 改变这段文本。</h3>
+
+<button id="btn1" type="button">获得外部的内容</button>
+
+<p class="tiy"><a target="_blank" href="../tiy/t0d95.html?f=jquery_ajax_load">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>什么是 AJAX？</h2>
+
+<p>AJAX = 异步 JavaScript 和 XML（Asynchronous JavaScript and XML）。</p>
+
+<p>简短地说，在不重载整个网页的情况下，AJAX 通过后台加载数据，并在网页上进行显示。</p>
+
+<p>使用 AJAX 的应用程序案例：谷歌地图、腾讯微博、优酷视频、人人网等等。</p>
+
+<p>您可以在我们的 <a href="../js/js_ajax_intro.html">AJAX 教程</a>中学到更多有关 AJAX 的知识。</p>
+</div>
+
+
+
+<div>
+<h2>关于 jQuery 与 AJAX</h2>
+
+<p>jQuery 提供多个与 AJAX 有关的方法。</p>
+
+<p>通过 jQuery AJAX 方法，您能够使用 HTTP Get 和 HTTP Post 从远程服务器上请求文本、HTML、XML 或 JSON - 同时您能够把这些外部数据直接载入网页的被选元素中。</p>
+
+<p class="tip"><span>提示：</span>如果没有 jQuery，AJAX 编程还是有些难度的。</p>
+
+<p>编写常规的 AJAX 代码并不容易，因为不同的浏览器对 AJAX 的实现并不相同。这意味着您必须编写额外的代码对浏览器进行测试。不过，jQuery 团队为我们解决了这个难题，我们只需要一行简单的代码，就可以实现 AJAX 功能。</p>
+</div>
+
+
+
+<div>
+<h2>jQuery AJAX 方法</h2>
+
+<p>在下面的章节，我们将学习到最重要的 jQuery AJAX 方法。</p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="jquery_traversing_filtering.html" title="jQuery 遍历 - 过滤">jQuery 过滤</a></li>
+<li class="next"><a href="jquery_ajax_load.html" title="jQuery - AJAX load() 方法">jQuery 加载</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="jquery_reference.html">jQuery 参考手册</a></h5>
+<h5 id="tools_quiz"><a href="jquery_quiz.html">jQuery 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/jquery/jquery_ajax_intro.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:36:25 GMT -->
+</html>

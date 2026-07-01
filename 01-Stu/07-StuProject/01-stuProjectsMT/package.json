@@ -1,0 +1,43 @@
+{
+  "name": "stuprojectsmt",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "kPort": "kill-port 1234",
+    "init": "npm run kPort && node ./middleware/dotenvInit.js",
+    "start": "npm run init && nodemon ./bin/www"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^6.0.0",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.6",
+    "dayjs": "^1.11.21",
+    "debug": "~2.6.9",
+    "dotenv": "^17.4.2",
+    "dotenv-expand": "^13.0.0",
+    "ejs": "~2.6.1",
+    "execa": "^9.6.1",
+    "express": "~4.16.1",
+    "express-session": "^1.19.0",
+    "forever": "^4.0.3",
+    "fs": "^0.0.1-security",
+    "http-errors": "~1.6.3",
+    "jsonwebtoken": "^9.0.3",
+    "module-alias": "^2.3.4",
+    "mongoose": "^9.7.2",
+    "morgan": "~1.9.1",
+    "nodemon": "^3.1.14",
+    "pm2": "^7.0.1"
+  },
+  "_moduleAliases": {
+    "@bin": "./bin",
+    "@middleware": "./middleware",
+    "@public": "./public",
+    "@routes": "./routes",
+    "@views": "./views",
+    "@utils": "./utils",
+    "@MongoDB": "./src/MongoDBV2dot3"
+  }
+}

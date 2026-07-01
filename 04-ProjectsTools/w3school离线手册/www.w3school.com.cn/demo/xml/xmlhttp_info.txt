@@ -1,0 +1,2 @@
+<p>通过使用 XMLHttpRequest 对象，您可以更新网页的部分内容，而无需重新加载整个页面。</p>
+<p>XMLHttpRequest 对象用于与后台服务器交换数据。</p>

@@ -1,0 +1,99 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+a {
+  color: black;
+}
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.4;
+  width: 100vw;
+  height: 100vh;
+  background: url(../imgs/bg01.jpg) no-repeat center center / cover;
+  overflow: hidden;
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(13, 110, 139, 0.75);
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+.container #header-bar {
+  height: 48px;
+  padding: 10px 10px;
+  flex-shrink: 0;
+  z-index: 10;
+}
+.container #header-bar .iconfont {
+  font-size: 2rem;
+  cursor: pointer;
+}
+.container .click-menu {
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+}
+.container .menu-active {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.75);
+  transform: scale(1);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container .menu-active ul {
+  padding-top: 10%;
+}
+.container .menu-active ul li {
+  list-style: none;
+  padding: 2rem;
+}
+.container .menu-active ul li a {
+  color: white;
+  font-size: 1.5rem;
+}
+.container .menu-active ul li a:hover {
+  color: pink;
+}
+.container #text-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container #text-container .text {
+  text-align: center;
+  width: 960px;
+}
+.container #text-container .text h1 {
+  font-size: 4rem;
+}
+.container #text-container .text p {
+  font-size: 1.3rem;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+.container #text-container .text .btn {
+  color: white;
+  font-size: 0.8rem;
+  padding: 1rem;
+  background-color: #176C86;
+  border-radius: 1rem;
+}
+.container #text-container .text .btn:hover {
+  opacity: 0.7;
+}

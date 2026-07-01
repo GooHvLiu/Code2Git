@@ -1,0 +1,466 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/scipy/scipy_spatial_data.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:55:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>SciPy 空间数据</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>SciPy 教程</h2>
+<ul>
+<li><a href="index.html" title="SciPy 教程">SciPy 教程</a></li>
+<li><a href="scipy_intro.html" title="SciPy 介绍">SciPy 介绍</a></li>
+<li><a href="scipy_getting_started.html" title="SciPy 入门">SciPy 入门</a></li>
+<li><a href="scipy_constants.html" title="SciPy 常量">SciPy 常量</a></li>
+<li><a href="scipy_optimizers.html" title="SciPy 优化器">SciPy 优化器</a></li>
+<li><a href="scipy_sparse_data.html" title="SciPy 稀疏数据">SciPy 稀疏数据</a></li>
+<li><a href="scipy_graphs.html" title="SciPy 图表">SciPy 图表</a></li>
+<li class="currentLink"><a href="scipy_spatial_data.html" title="SciPy 空间数据">SciPy 空间数据</a></li>
+<li><a href="scipy_matlab_arrays.html" title="SciPy Matlab 数组">SciPy Matlab 数组</a></li>
+<li><a href="scipy_interpolation.html" title="SciPy 插值">SciPy 插值</a></li>
+<li><a href="scipy_statistical_significance_tests.html" title="SciPy 显著性检验">SciPy 显著性检验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>SciPy 空间数据</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="scipy_graphs.html" title="SciPy 图表">SciPy 图表</a></li>
+<li class="next"><a href="scipy_matlab_arrays.html" title="SciPy Matlab 数组">SciPy Matlab 数组</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>处理空间数据</h2>
+
+<p>空间数据是指在几何空间中表示的数据。</p>
+
+<p>例如。坐标系上的点。</p>
+
+<p>我们在许多任务中处理空间数据问题。</p>
+
+<p>例如。查找一个点是否在边界内。</p>
+
+<p>SciPy 提供了 <code>scipy.spatial</code> 模块，其中包含用于处理空间数据的函数。</p>
+</section>
+
+
+
+<section>
+<h2>三角剖分（Triangulation）</h2>
+
+<p>多边形的三角剖分是将多边形划分为多个三角形，通过这些三角形我们可以计算多边形的面积。</p>
+
+<p>点三角剖分意味着创建由表面组成的三角形，其中所有给定点都位于表面中任何三角形的至少一个顶点上。</p>
+
+<p>通过点生成这些三角剖分的一种方法是 <code>Delaunay()</code> 三角剖分。</p>
+
+<h3>实例</h3>
+
+<p>从以下点创建三角剖分：</p>
+
+<pre class="language-python">
+import numpy as np
+from scipy.spatial import Delaunay
+import matplotlib.pyplot as plt
+
+points = np.array([
+  [2, 4],
+  [3, 4],
+  [3, 0],
+  [2, 2],
+  [4, 1]
+])
+
+simplices = Delaunay(points).simplices
+
+plt.triplot(points[:, 0], points[:, 1], simplices)
+plt.scatter(points[:, 0], points[:, 1], color='r')
+
+plt.show()
+</pre>
+
+<p class="tiy"><a target="_blank" href="te0bd.html?f=scipy_spatial_delaunay_mpl">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<img src="../i/scipy/scipy_spatial_delaunay.png">
+
+<p class="note"><span>注意：</span><code>simplices</code> 属性创建了三角形表示法的泛化。</p>
+</section>
+
+
+
+<section>
+<h2>凸包</h2>
+
+<p>凸包是覆盖所有给定点的最小多边形。</p>
+
+<p>使用 <code>ConvexHull()</code> 方法创建凸包。</p>
+
+<h3>实例</h3>
+
+<p>为以下点创建凸包：</p>
+
+<pre class="language-python">
+import numpy as np
+from scipy.spatial import ConvexHull
+import matplotlib.pyplot as plt
+
+points = np.array([
+  [2, 4],
+  [3, 4],
+  [3, 0],
+  [2, 2],
+  [4, 1],
+  [1, 2],
+  [5, 0],
+  [3, 1],
+  [1, 2],
+  [0, 2]
+])
+
+hull = ConvexHull(points)
+hull_points = hull.simplices
+
+plt.scatter(points[:,0], points[:,1])
+for simplex in hull_points:
+  plt.plot(points[simplex,0], points[simplex,1], 'k-')
+
+plt.show()
+</pre>
+
+<p class="tiy"><a target="_blank" href="t5ecf.html?f=scipy_spatial_convexhull_mpl">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<img src="../i/scipy/scipy_spatial_convexhull.png">
+</section>
+
+
+
+<section>
+<h2>KD 树（KDTree）</h2>
+
+<p>KD 树是一种针对最近邻查询优化的数据结构。</p>
+
+<p>例如，在点集中使用 KD 树，我们可以有效地询问哪些点最接近某个给定点。</p>
+
+<p><code>KDTree()</code> 方法返回 KDTree 对象。</p>
+
+<p><code>query()</code> 方法返回最近邻居的距离和邻居的位置。</p>
+
+<h3>实例</h3>
+
+<p>找到点 (1,1) 的最近邻点：</p>
+
+<pre class="language-python">
+from scipy.spatial import KDTree
+
+points = [(1, -1), (2, 3), (-2, 3), (2, -3)]
+
+kdtree = KDTree(points)
+
+res = kdtree.query((1, 1))
+
+print(res)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t7951.html?f=scipy_spatial_kdtree">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<pre class="cmdline">
+(2.0, 0)
+</pre>
+</section>
+
+
+
+<section>
+<h2>距离矩阵</h2>
+
+<p>在数据科学中，有许多距离度量用于查找两点之间的各种类型的距离，如欧几里德距离、余弦距离等。</p>
+
+<p>两个向量之间的距离不仅可以是它们之间直线的长度，还可以是它们与原点之间的角度，或者所需的单位步数等。</p>
+
+<p>许多机器学习算法的性能很大程度上取决于距离度量。例如。 “K 最近邻”或“K 均值”等。</p>
+
+<p>让我们看看一些距离度量：</p>
+</section>
+
+
+
+<section>
+<h2>欧氏距离（Euclidean Distance）</h2>
+
+<p>求给定点之间的欧氏距离。</p>
+
+<h3>实例</h3>
+
+<pre class="language-python">
+从 scipy.spatial.distance 导入 euclidean
+from scipy.spatial.distance import euclidean
+
+p1 = (1, 0)
+p2 = (10, 2)
+
+res = euclidean(p1, p2)
+
+print(res)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t065b.html?f=scipy_spatial_euclidean">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<pre class="cmdline">
+9.21954445729
+</pre>
+</section>
+
+
+
+<section>
+<h2>城市街区距离（曼哈顿距离）</h2>
+
+<p>是使用 4 个移动方向计算的距离。</p>
+
+<p>例如，我们只能向上、向下、向右或向左移动，不能对角线移动。</p>
+
+<h3>实例</h3>
+
+<p>求给定点之间的城市街区距离：</p>
+
+<pre class="language-python">
+from scipy.spatial.distance import cityblock
+
+p1 = (1, 0)
+p2 = (10, 2)
+
+res = cityblock(p1, p2)
+
+print(res)
+</pre>
+
+<p class="tiy"><a target="_blank" href="te314.html?f=scipy_spatial_cityblock">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<pre class="cmdline">
+11
+</pre>
+</section>
+
+
+
+<section>
+<h2>余弦距离</h2>
+
+<p>是 A、B 两点之间的余弦角值。</p>
+
+<h3>实例</h3>
+
+<p>求给定点之间的余弦距离：</p>
+
+<pre class="language-python">
+from scipy.spatial.distance import cosine
+
+p1 = (1, 0)
+p2 = (10, 2)
+
+res = cosine(p1, p2)
+
+print(res)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t964b.html?f=scipy_spatial_cosine">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<pre class="cmdline">
+0.019419324309079777
+</pre>
+</section>
+
+
+
+<section>
+<h2>汉明距离（Hamming Distance）</h2>
+
+<p>是两位不同的位数所占的比例。</p>
+
+<p>它是测量二进制序列距离的一种方法。</p>
+
+<h3>实例</h3>
+
+<p>求给定点之间的汉明距离：</p>
+
+<pre class="language-python">
+from scipy.spatial.distance import hamming
+
+p1 = (True, False, True)
+p2 = (False, True, True)
+
+res = hamming(p1, p2)
+
+print(res)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t516d.html?f=scipy_spatial_hamming">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<pre class="cmdline">
+0.666666666667
+</pre>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="scipy_graphs.html" title="SciPy 图表">SciPy 图表</a></li>
+<li class="next"><a href="scipy_matlab_arrays.html" title="SciPy Matlab 数组">SciPy Matlab 数组</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/scipy/scipy_spatial_data.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:55:26 GMT -->
+</html>

@@ -1,0 +1,1077 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/js/js_type_conversion.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:31:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>JavaScript 类型转换</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>JS 教程</h2>
+<ul>
+<li><a href="index.html" title="JavaScript 教程">JS 教程</a></li>
+<li><a href="js_intro.html" title="JavaScript 简介">JS 简介</a></li>
+<li><a href="js_shiyong.html" title="JavaScript 使用">JS 使用</a></li>
+<li><a href="js_output.html" title="JavaScript 输出">JS 输出</a></li>
+<li><a href="js_statements.html" title="JavaScript 语句">JS 语句</a></li>
+<li><a href="js_syntax.html" title="JavaScript 语法">JS 语法</a></li>
+<li><a href="js_comments.html" title="JavaScript 注释">JS 注释</a></li>
+<li><a href="js_variables.html" title="JavaScript 变量">JS 变量</a></li>
+<li><a href="js_let.html" title="JavaScript Let">JS Let</a></li>
+<li><a href="js_const.html" title="JavaScript Const">JS Const</a></li>
+<li><a href="js_operators.html" title="JavaScript 运算符">JS 运算符</a></li>
+<li><a href="js_arithmetic.html" title="JavaScript 算术">JS 算数</a></li>
+<li><a href="js_assignment.html" title="JavaScript 赋值">JS 赋值</a></li>
+<li><a href="js_datatypes.html" title="JavaScript 数据类型">JS 数据类型</a></li>
+<li><a href="js_functions.html" title="JavaScript 函数">JS 函数</a></li>
+<li><a href="js_objects.html" title="JavaScript 对象">JS 对象</a></li>
+<li><a href="js_events.html" title="JavaScript 事件">JS 事件</a></li>
+<li><a href="js_strings.html" title="JavaScript 字符串">JS 字符串</a></li>
+<li><a href="js_string_methods.html" title="JavaScript 字符串方法">JS 字符串方法</a></li>
+<li><a href="js_string_search.html" title="JavaScript 字符串搜索">JS 字符串搜索</a></li>
+<li><a href="js_string_templates.html" title="JavaScript 模板文字">JS 字符串模板</a></li>
+<li><a href="js_numbers.html" title="JavaScript 数字">JS 数字</a></li>
+<li><a href="js_bigint.html" title="JavaScript BigInt">JS BigInt</a></li>
+<li><a href="js_number_methods.html" title="JavaScript 数字方法">JS 数字方法</a></li>
+<li><a href="js_number_properties.html" title="JavaScript 数字属性">JS 数字属性</a></li>
+<li><a href="js_arrays.html" title="JavaScript 数组">JS 数组</a></li>
+<li><a href="js_array_methods.html" title="JavaScript 数组方法">JS 数组方法</a></li>
+<li><a href="js_array_search.html" title="JavaScript 数组搜索">JS 数组搜索</a></li>
+<li><a href="js_array_sort.html" title="JavaScript 数组排序">JS 数组排序</a></li>
+<li><a href="js_array_iteration.html" title="JavaScript 数组迭代方法">JS 数组迭代</a></li>
+<li><a href="js_array_const.html" title="JavaScript 数组 Const">JS 数组 Const</a></li>
+<li><a href="js_dates.html" title="JavaScript 日期">JS 日期</a></li>
+<li><a href="js_date_formats.html" title="JavaScript 日期格式">JS 日期格式</a></li>
+<li><a href="js_date_methods.html" title="JavaScript 获取日期方法">JS 日期获取方法</a></li>
+<li><a href="js_date_methods_set.html" title="JavaScript 设置日期方法">JS 日期设置方法</a></li>
+<li><a href="js_math.html" title="JavaScript Math 对象">JS 数学</a></li>
+<li><a href="js_random.html" title="JavaScript 随机">JS 随机</a></li>
+<li><a href="js_booleans.html" title="JavaScript 逻辑">JS 逻辑</a></li>
+<li><a href="js_comparisons.html" title="JavaScript 比较和逻辑运算">JS 比较</a></li>
+<li><a href="js_if_else.html" title="JavaScript If...Else 语句">JS 条件</a></li>
+<li><a href="js_switch.html" title="JavaScript Switch 语句">JS Switch</a></li>
+<li><a href="js_loop_for.html" title="JavaScript For 循环">JS Loop For</a></li>
+<li><a href="js_loop_forin.html" title="JavaScript For In">JS Loop For In</a></li>
+<li><a href="js_loop_forof.html" title="JavaScript For Of">JS Loop For Of</a></li>
+<li><a href="js_loop_while.html" title="JavaScript While 循环">JS Loop While</a></li>
+<li><a href="js_break.html" title="JavaScript Break 和 Continue">JS Break</a></li>
+<li><a href="js_iterables.html" title="JavaScript 可迭代对象">JS 可迭代对象</a></li>
+<li><a href="js_sets.html" title="JavaScript Set">JS Set</a></li>
+<li><a href="js_set_methods.html" title="JavaScript Set 方法">JS Set 方法</a></li>
+<li><a href="js_maps.html" title="JavaScript Map">JS Map</a></li>
+<li><a href="js_map_methods.html" title="JavaScript Map 方法">JS Map 方法</a></li>
+<li><a href="js_typeof.html" title="JavaScript typeof">JS typeof</a></li>
+<li class="currentLink"><a href="js_type_conversion.html" title="JavaScript 类型转换">JS 类型转换</a></li>
+<li><a href="js_destructuring.html" title="JavaScript 解构">JS 解构</a></li>
+<li><a href="js_bitwise.html" title="JavaScript 位运算符">JS 位运算</a></li>
+<li><a href="js_regexp.html" title="JavaScript 正则表达式">JS 正则表达式</a></li>
+<li><a href="js_precedence.html" title="JavaScript 运算符优先级">JS 运算符优先级</a></li>
+<li><a href="js_errors.html" title="JavaScript 错误 - Throw 和 Try to Catch">JS 异常</a></li>
+<li><a href="js_scope.html" title="JavaScript 作用域">JS 作用域</a></li>
+<li><a href="js_hoisting.html" title="JavaScript Hoisting">JS Hoisting</a></li>
+<li><a href="js_strict.html" title="JavaScript Use Strict">JS 严格模式</a></li>
+<li><a href="js_this.html" title="JavaScript this 关键词">JS this 关键词</a></li>
+<li><a href="js_arrow_function.html" title="JavaScript 箭头函数">JS 箭头函数</a></li>
+<li><a href="js_classes.html" title="JavaScript 类">JS 类</a></li>
+<li><a href="js_modules.html" title="JavaScript 模块">JS 模块</a></li>
+<li><a href="js_json.html" title="JavaScript JSON">JS JSON</a></li>
+<li><a href="js_debugging.html" title="JavaScript 调试">JS 调试</a></li>
+<li><a href="js_conventions.html" title="JavaScript 样式指南和代码约定">JS 样式指南</a></li>
+<li><a href="js_best_practices.html" title="JavaScript 最佳实践">JS 最佳实践</a></li>
+<li><a href="js_mistakes.html" title="JavaScript 常见错误">JS 错误</a></li>
+<li><a href="js_performance.html" title="JavaScript 性能">JS 性能</a></li>
+<li><a href="js_reserved.html" title="JavaScript 保留词">JS 保留词</a></li>
+</ul>
+<h2>JS 版本</h2>
+<ul>
+<li><a href="js_versions.html" title="JavaScript 版本">JS 版本</a></li>
+<li><a href="js_es5.html" title="JavaScript ES5">JS 2009 (ES5)</a></li>
+<li><a href="js_es6.html" title="Javascript ES6">JS 2015 (ES6)</a></li>
+<li><a href="js_2016.html" title="ECMAScript 2016">JS 2016</a></li>
+<li><a href="js_2017.html" title="ECMAScript 2017">JS 2017</a></li>
+<li><a href="js_2018.html" title="ECMAScript 2018">JS 2018</a></li>
+<li><a href="js_2019.html" title="ECMAScript 2019">JS 2019</a></li>
+<li><a href="js_2020.html" title="ECMAScript 2020">JS 2020</a></li>
+<li><a href="js_2021.html" title="ECMAScript 2021">JS 2021</a></li>
+<li><a href="js_2022.html" title="ECMAScript 2022">JS 2022</a></li>
+<li><a href="js_2023.html" title="ECMAScript 2023">JS 2023</a></li>
+<li><a href="js_2024.html" title="ECMAScript 2024">JS 2024</a></li>
+<li><a href="js_ie_edge.html" title="Internet Explorer / Edge">JS IE / Edge</a></li>
+<li><a href="js_history.html" title="JavaScript 历史">JS 历史</a></li>
+</ul>
+<h2>JS 对象</h2>
+<ul>
+<li><a href="js_object_definition.html" title="JavaScript 对象定义">JS 对象定义</a></li>
+<li><a href="js_object_properties.html" title="JavaScript 对象属性">JS 对象属性</a></li>
+<li><a href="js_object_methods.html" title="JavaScript 对象方法">JS 对象方法</a></li>
+<li><a href="js_object_display.html" title="JavaScript 显示对象">JS 对象显示</a></li>
+<li><a href="js_object_accessors.html" title="JavaScript 对象访问器">JS 对象访问器</a></li>
+<li><a href="js_object_constructors.html" title="JavaScript 对象构造器">JS 对象构造器</a></li>
+<li><a href="js_object_prototypes.html" title="JavaScript 对象原型">JS 对象原型</a></li>
+<li><a href="js_object_es5.html" title="JavaScript ES5 对象方法">JS 对象引用</a></li>
+</ul>
+<h2>JS 函数</h2>
+<ul>
+<li><a href="js_function_definition.html" title="JavaScript 函数定义">JS 函数定义</a></li>
+<li><a href="js_function_parameters.html" title="JavaScript 函数参数">JS 函数参数</a></li>
+<li><a href="js_function_invocation.html" title="JavaScript 函数调用">JS 函数调用</a></li>
+<li><a href="js_function_call.html" title="JavaScript 函数 Call">JS 函数 Call</a></li>
+<li><a href="js_function_apply.html" title="JavaScript 函数 Apply">JS 函数 Apply</a></li>
+<li><a href="js_function_bind.html" title="JavaScript 函数 bind()">JS 函数绑定</a></li>
+<li><a href="js_function_closures.html" title="JavaScript 闭包">JS 闭包</a></li>
+</ul>
+<h2>JS 类</h2>
+<ul>
+<li><a href="js_class_intro.html" title="JavaScript 类">JS 类简介</a></li>
+<li><a href="js_class_inheritance.html" title="JavaScript 类继承">JS 类继承</a></li>
+<li><a href="js_class_static.html" title="JavaScript Static 方法">JS Static</a></li>
+</ul>
+<h2>JS Async</h2>
+<ul>
+<li><a href="js_callback.html" title="JavaScript 回调">JS 回调</a></li>
+<li><a href="js_asynchronous.html" title="异步的 JavaScript">JS 异步</a></li>
+<li><a href="js_promise.html" title="JavaScript Promise">JS Promise</a></li>
+<li><a href="js_async.html" title="JavaScript Async/Await">JS Async</a></li>
+</ul>
+<h2>JS HTML DOM</h2>
+<ul>
+<li><a href="js_htmldom.html" title="JavaScript HTML DOM">DOM 简介</a></li>
+<li><a href="js_htmldom_methods.html" title="JavaScript - HTML DOM 方法">DOM 方法</a></li>
+<li><a href="js_htmldom_document.html" title="JavaScript HTML DOM 文档">DOM 文档</a></li>
+<li><a href="js_htmldom_elements.html" title="JavaScript HTML DOM 元素">DOM 元素</a></li>
+<li><a href="js_htmldom_html.html" title="JavaScript HTML DOM - 改变 HTML">DOM HTML</a></li>
+<li><a href="js_validation.html" title="JavaScript 表单">DOM 表单</a></li>
+<li><a href="js_htmldom_css.html" title="JavaScript HTML DOM - 改变 CSS">DOM CSS</a></li>
+<li><a href="js_htmldom_animate.html" title="JavaScript HTML DOM 动画">DOM 动画</a></li>
+<li><a href="js_htmldom_events.html" title="JavaScript HTML DOM 事件">DOM 事件</a></li>
+<li><a href="js_htmldom_eventlistener.html" title="JavaScript HTML DOM 事件监听程序">DOM 事件监听程序</a></li>
+<li><a href="js_htmldom_navigation.html" title="JavaScript HTML DOM 导航">DOM 导航</a></li>
+<li><a href="js_htmldom_nodes.html" title="JavaScript HTML DOM 元素（节点）">DOM 节点</a></li>
+<li><a href="js_htmldom_collections.html" title="JavaScript HTML DOM 集合">DOM 集合</a></li>
+<li><a href="js_htmldom_nodelist.html" title="JavaScript HTML DOM 节点列表">DOM 节点列表</a></li>
+</ul>
+<h2>JS Browser BOM</h2>
+<ul>
+<li><a href="js_window.html" title="JavaScript Window - 浏览器对象模型">JS Window</a></li>
+<li><a href="js_window_screen.html" title="JavaScript Window Screen">JS Screen</a></li>
+<li><a href="js_window_location.html" title="JavaScript Window Location">JS Location</a></li>
+<li><a href="js_window_history.html" title="JavaScript Window History">JS History</a></li>
+<li><a href="js_window_navigator.html" title="JavaScript Window Navigator">JS Navigator</a></li>
+<li><a href="js_popup.html" title="JavaScript 弹出框">JS 弹出框</a></li>
+<li><a href="js_timing.html" title="JavaScript Timing 事件">JS Timing</a></li>
+<li><a href="js_cookies.html" title="JavaScript Cookies">JS Cookies</a></li>
+</ul>
+<h2>JS Web API</h2>
+<ul>
+<li><a href="js_api_intro.html" title="Web APIs - 简介">Web API 简介</a></li>
+<li><a href="js_validation_api.html" title="JavaScript 验证 API">Web Form API</a></li>
+<li><a href="js_api_history.html" title="Web History API">Web History API</a></li>
+<li><a href="js_api_web_storage.html" title="Web Storage API">Web Storage API</a></li>
+<li><a href="js_api_web_workers.html" title="Web Worker API">Web Worker API</a></li>
+<li><a href="js_api_fetch.html" title="JavaScript Fetch API">Web Fetch API</a></li>
+<li><a href="js_api_geolocation.html" title="Web Geolocation API">Web Geolocation API</a></li>
+</ul>
+<h2>JS AJAX</h2>
+<ul>
+<li><a href="js_ajax_intro.html" title="AJAX 简介">AJAX 简介</a></li>
+<li><a href="js_ajax_http.html" title="AJAX - XMLHttpRequest 对象">AJAX XMLHttp</a></li>
+<li><a href="js_ajax_http_send.html" title="AJAX - XMLHttpRequest">AJAX 请求</a></li>
+<li><a href="js_ajax_http_response.html" title="AJAX - 服务器响应">AJAX 响应</a></li>
+<li><a href="js_ajax_xmlfile.html" title="AJAX XML 实例">AJAX XML 文件</a></li>
+<li><a href="js_ajax_php.html" title="AJAX PHP 实例">AJAX PHP</a></li>
+<li><a href="js_ajax_asp.html" title="AJAX ASP 实例">AJAX ASP</a></li>
+<li><a href="js_ajax_database.html" title="AJAX Database 实例">AJAX 数据库</a></li>
+<li><a href="js_ajax_applications.html" title="XML 应用程序">AJAX 应用程序</a></li>
+<li><a href="js_ajax_examples.html" title="AJAX 实例">AJAX 实例</a></li>
+</ul>
+<h2>JS JSON</h2>
+<ul>
+<li><a href="js_json_intro.html" title="JSON 简介">JSON 简介</a></li>
+<li><a href="js_json_syntax.html" title="JSON 语法">JSON 语法</a></li>
+<li><a href="js_json_xml.html" title="JSON vs XML">JSON vs XML</a></li>
+<li><a href="js_json_datatypes.html" title="JSON 数据类型">JSON 数据类型</a></li>
+<li><a href="js_json_parse.html" title="JSON.parse()">JSON 解析</a></li>
+<li><a href="js_json_stringify.html" title="JSON.stringify()">JSON 字符串化</a></li>
+<li><a href="js_json_objects.html" title="JSON 对象">JSON 对象</a></li>
+<li><a href="js_json_arrays.html" title="JSON 数组">JSON 数组</a></li>
+<li><a href="js_json_server.html" title="JSON 服务器">JSON 服务器</a></li>
+<li><a href="js_json_php.html" title="JSON PHP">JSON PHP</a></li>
+<li><a href="js_json_html.html" title="JSON HTML">JSON HTML</a></li>
+<li><a href="js_json_jsonp.html" title="JSONP">JSON JSONP</a></li>
+</ul>
+<h2>JS vs jQuery</h2>
+<ul>
+<li><a href="js_jquery_selectors.html" title="JavaScript / jQuery DOM 选择器">jQuery 选择器</a></li>
+<li><a href="js_jquery_elements.html" title="JavaScript / jQuery HTML 元素">jQuery HTML</a></li>
+<li><a href="js_jquery_css.html" title="JavaScript / jQuery CSS 样式">jQuery CSS</a></li>
+<li><a href="js_jquery_dom.html" title="JavaScript / jQuery HTML DOM">jQuery DOM</a></li>
+</ul>
+<h2>JS 图形</h2>
+<ul>
+<li><a href="js_graphics.html" title="JavaScript 图形">JS 图形</a></li>
+<li><a href="js_graphics_canvas.html" title="HTML Canvas">JS Canvas</a></li>
+<li><a href="js_graphics_plotly.html" title="Plotly.js">JS Plotly.js</a></li>
+<li><a href="js_graphics_chartjs.html" title="Chart.js">JS Chart</a></li>
+<li><a href="js_graphics_google_chart.html" title="谷歌图表">JS 谷歌图表</a></li>
+<li><a href="js_graphics_d3js.html" title="D3.js">JS D3.js</a></li>
+</ul>
+<h2>JS 实例</h2>
+<ul>
+<li><a href="js_examples.html" title="JavaScript 实例">JS 实例</a></li>
+<li><a href="js_examples_dom.html" title="JavaScript HTML DOM 实例">JS HTML DOM</a></li>
+<li><a href="js_examples_input.html" title="JavaScript HTML 输入实例">JS HTML 输入</a></li>
+<li><a href="js_examples_html.html" title="JavaScript HTML 对象实例">JS HTML 对象</a></li>
+<li><a href="js_examples_events.html" title="JavaScript HTML 事件实例">JS HTML 事件</a></li>
+<li><a href="js_examples_browser.html" title="JavaScript Browser 对象实例">JS Browser</a></li>
+<li><a href="js_quiz.html" title="JavaScript 测验">JS 测验</a></li>
+</ul>
+<h2>JS 参考手册</h2>
+<ul>
+<li><a href="../jsref/index.html" title="JavaScript 和 HTML DOM 参考手册">JavaScript 对象</a></li>
+<li><a href="../jsref/index.html" title="JavaScript 和 HTML DOM 参考手册">HTML DOM 对象</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>JavaScript 类型转换</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="js_typeof.html" title="JavaScript typeof">JS typeof</a></li>
+<li class="next"><a href="js_destructuring.html" title="JavaScript 解构">JS 解构</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p><strong><code>Number()</code> 转换数值，<code>String()</code> 转换字符串，<code>Boolean()</code> 转换布尔值。</strong></p>
+</div>
+
+
+
+<div>
+<h2>JavaScript 数据类型</h2>
+
+<p>JavaScript 中有五种可包含值的数据类型：</p>
+
+<ul>
+<li>字符串（string）</li>
+<li>数字（number）</li>
+<li>布尔（boolean）</li>
+<li>对象（object）</li>
+<li>函数（function）</li>
+</ul>
+
+<p>有三种对象类型：</p>
+
+<ul>
+<li>对象（Object）</li>
+<li>日期（Date）</li>
+<li>数组（Array）</li>
+</ul>
+
+<p>同时有两种不能包含值的数据类型：</p>
+
+<ul>
+<li>null</li>
+<li>undefined</li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>typeof 运算符</h2>
+
+<p>您可以使用 <code>typeof</code> 运算符来确定 JavaScript 变量的数据类型。</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+typeof &quot;Bill&quot;                 // 返回 &quot;string&quot;
+typeof 3.14                   // 返回 &quot;number&quot;
+typeof NaN                    // 返回 &quot;number&quot;
+typeof false                  // 返回 &quot;boolean&quot;
+typeof [1,2,3,4]              // 返回 &quot;object&quot;
+typeof {name:'Bill', age:62}  // 返回 &quot;object&quot;
+typeof new Date()             // 返回 &quot;object&quot;
+typeof function () {}         // 返回 &quot;function&quot;
+typeof myCar                  // 返回 &quot;undefined&quot; *
+typeof null                   // 返回 &quot;object&quot;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tbf28.html?f=eg_js_type_convert_typeof_all">亲自试一试</a></p>
+
+<p>请注意：</p>
+
+<ul>
+<li>NaN 的数据类型是数值</li>
+<li>数组的数据类型是对象</li>
+<li>日期的数据类型是对象</li>
+<li>null 的数据类型是对象</li>
+<li>未定义变量的数据类型是 <em>undefined</em></li>
+<li>尚未赋值的变量的数据类型也是 <em>undefined</em></li>
+</ul>
+
+<p>您无法使用 <code>typeof</code> 去判断 JavaScript 对象是否是数组（或日期）。</p>
+</div>
+
+
+
+<div>
+<h2>typeof 的数据类型</h2>
+
+<p><code>typeof</code> 运算符不是变量。它属于运算符。运算符（比如 <code>+</code> <code>-</code> <code>*</code> <code>/</code>）没有数据类型。</p>
+
+<p>但是，<code>typeof</code> 始终会<em>返回字符串</em>（包含运算数的类型）。</p>
+</div>
+
+
+
+<div>
+<h2>constructor 属性</h2>
+
+<p><code>constructor</code> 属性返回所有 JavaScript 变量的构造器函数。</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+&quot;Bill&quot;.constructor                 // 返回 &quot;function String()  { [native code] }&quot;
+(3.14).constructor                 // 返回 &quot;function Number()  { [native code] }&quot;
+false.constructor                  // 返回 &quot;function Boolean() { [native code] }&quot;
+[1,2,3,4].constructor              // 返回 &quot;function Array()   { [native code] }&quot;
+{name:'Bill', age:62}.constructor  // 返回&quot; function Object()  { [native code] }&quot;
+new Date().constructor             // 返回 &quot;function Date()    { [native code] }&quot;
+function () {}.constructor         // 返回 &quot;function Function(){ [native code] }&quot;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tef04.html?f=eg_js_type_convert_constructor_all">亲自试一试</a></p>
+
+<p>您可以通过检查 <code>constructor</code> 属性来确定某个对象是否为数组（包含单词 &quot;Array&quot;）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+function isArray(myArray) {
+    return myArray.constructor.toString().indexOf(&quot;Array&quot;) &gt; -1;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tfbc1.html?f=eg_js_type_convert_constructor_isarray_1">亲自试一试</a></p>
+
+<p>或者更简单，您可以检查对象是否是数组函数：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+function isArray(myArray) {
+    return myArray.constructor === Array;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tdfc8.html?f=eg_js_type_convert_constructor_isarray_2">亲自试一试</a></p>
+
+<p>您可以通过检查 <code>constructor</code> 属性来确定某个对象是否为日期（包含单词 &quot;Date&quot;）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+function isDate(myDate) {
+    return myDate.constructor.toString().indexOf(&quot;Date&quot;) &gt; -1;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tfbac.html?f=eg_js_type_convert_constructor_isdate_1">亲自试一试</a></p>
+
+<p>或者更简单，您可以检查对象是否是日期函数：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+function isDate(myDate) {
+    return myDate.constructor === Date;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t2e2a.html?f=eg_js_type_convert_constructor_isdate_2">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>JavaScript 类型转换</h2>
+
+<p>JavaScript 变量能够被转换为新变量以及另一种数据类型：</p>
+
+<ul>
+<li>通过使用 JavaScript 函数</li>
+<li>通过 JavaScript 本身<em>自动</em>转换</li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>把数值转换为字符串</h2>
+
+<p>全局方法 <code>String()</code> 能够把数字转换为字符串。</p>
+
+<p>它可用于任意类型的数字、文字、变量或表达式：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+String(x)         // 从数值变量 x 返回字符串
+String(123)       // 从数值文本 123 返回字符串
+String(100 + 23)  // 从表达式中的数值返回字符串
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tfcd4.html?f=eg_js_type_convert_number_string">亲自试一试</a></p>
+
+<p>数字方法 <code>toString()</code> 同理。</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+x.toString()
+(123).toString()
+(100 + 23).toString()
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tdb85.html?f=eg_js_type_convert_number_tostring">亲自试一试</a></p>
+
+<p>在<a href="js_number_methods.html" title="JavaScript 数值方法">数字方法</a>这一章，您将学到更多可用于将数值转换为字符串的方法：</p>
+
+<table class="dataintable">
+<tr>
+<th style="width:30%;">方法</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td>toExponential()</td>
+<td>返回字符串，对数字进行舍入，并使用指数计数法来写。</td>
+</tr>
+
+<tr>
+<td>toFixed()</td>
+<td>返回字符串，对数字进行舍入，并使用指定位数的小数来写。</td>
+</tr>
+
+<tr>
+<td>toPrecision()</td>
+<td>返回字符串，把数字写为指定的长度。</td>
+</tr>
+</table>
+</div>
+
+
+
+<div>
+<h2>把布尔转换为字符串</h2>
+
+<p>全局方法 <code>String()</code> 能够将布尔转换为字符串。</p>
+
+<pre class="language-js">
+String(false)        // 返回 &quot;false&quot;
+String(true)         // 返回 &quot;true&quot;
+</pre>
+
+<p>布尔方法 <code>toString()</code> 同理。</p>
+
+<pre class="language-js">
+false.toString()     // 返回 &quot;false&quot;
+true.toString()      // 返回 &quot;true&quot;
+</pre>
+</div>
+
+
+
+<div>
+<h2>把日期转换为字符串</h2>
+
+<p>全局方法 <code>String()</code> 可将日期转换为字符串。</p>
+
+<pre class="language-js">
+String(Date())      <span id="demo1"></span>
+</pre>
+
+<script>
+document.getElementById("demo1").innerHTML = "// 返回 " + "\"" + String(Date()) + "\"";
+</script>
+
+<p>日期方法 <code>toString()</code> 同理。</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+Date().toString()   <span id="demo2"></span>
+</pre>
+
+<script>
+document.getElementById("demo2").innerHTML = "// 返回 " + "\"" + Date().toString() + "\"";
+</script>
+
+<p>在<a href="js_date_methods.html" title="JavaScript 日期方法">日期方法</a>这一章，您能够找到更多可用于把日期转换为字符串的方法：</p>
+
+<table class="dataintable">
+<tr>
+<th style="width:30%;">方法</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td>getDate()</td>
+<td>获得以数值计（1-31）的日</td>
+</tr>
+
+<tr>
+<td>getDay()</td>
+<td>或者以数值计（0-6）的周</td>
+</tr>
+
+<tr>
+<td>getFullYear()</td>
+<td>获得四位的年（yyyy）</td>
+</tr>
+
+<tr>
+<td>getHours()</td>
+<td>获得时（0-23）</td>
+</tr>
+
+<tr>
+<td>getMilliseconds()</td>
+<td>获得毫秒（0-999）</td>
+</tr>
+
+<tr>
+<td>getMinutes()</td>
+<td>获得分钟（0-59）</td>
+</tr>
+
+<tr>
+<td>getMonth()</td>
+<td>获得月（0-11）</td>
+</tr>
+
+<tr>
+<td>getSeconds()</td>
+<td>获得秒（0-59）</td>
+</tr>
+
+<tr>
+<td>getTime()</td>
+<td>获得时间（1970 年 1 月 1 日以来的毫秒）</td>
+</tr>
+</table>
+</div>
+
+
+
+<div>
+<h2>把字符串转换为数值</h2>
+
+<p>全局方法 <code>Number()</code> 可把字符串转换为数字。</p>
+
+<p>包含数字的字符串（比如 &quot;3.14&quot;）转换为数字（比如 3.14）。</p>
+
+<p>空的字符串转换为 0。</p>
+
+<p>其他字符串将转换为 <code>NaN</code>（Not a number，不是数字）。</p>
+
+<pre class="language-js">
+Number(&quot;3.14&quot;)    // 返回 3.14
+Number(&quot; &quot;)       // 返回 0
+Number(&quot;&quot;)        // 返回 0
+Number(&quot;99 88&quot;)   // 返回 NaN
+</pre>
+
+<p>在<a href="js_number_methods.html" title="JavaScript 数值方法">数字方法</a>这一章中，您将找到更多可用于把字符串转换为数字的方法：</p>
+
+<table class="dataintable">
+<tr>
+<th style="width:30%;">方法</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td>parseFloat()</td>
+<td>解析字符串并返回浮点数。</td>
+</tr>
+
+<tr>
+<td>parseInt()</td>
+<td>解析字符串并返回整数。</td>
+</tr>
+</table>
+</div>
+
+
+
+<div>
+<h2>一元 + 运算符</h2>
+
+<p><em>一元的 <code>+</code> 运算符</em>可用于把变量转换为数字：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var y = &quot;5&quot;;      // y 是字符串
+var x = + y;      // x 是数字
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t665c.html?f=js_type_unary_addition_1">亲自试一试</a></p>
+
+<p>如果无法转换变量，则仍会成为数字，但是值为 <code>NaN</code>（Not a number）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var y = &quot;Bill&quot;;   // y 是字符串
+var x = + y;      // x 是数字 (NaN)
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t6be6.html?f=js_type_unary_addition_2">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>把布尔转换数值</h2>
+
+<p>全局方法 <code>Number()</code> 也可把布尔转换为数字。</p>
+
+<pre class="language-js">
+Number(false)     // 返回 0
+Number(true)      // 返回 1
+</pre>
+</div>
+
+
+
+<div>
+<h2>把日期转换为数字</h2>
+
+<p>全局方法 <code>Number()</code> 可用于把日期转换为数字。</p>
+
+<pre class="language-js">
+d = new Date();
+Number(d)          <span id="demo3"></span>
+</pre>
+
+<script>
+d = new Date();
+document.getElementById("demo3").innerHTML = "// 返回 " + Number(d);
+</script>
+
+<p>日期方法 <code>getTime()</code> 同理。</p>
+
+<pre class="language-js">
+d = new Date();
+d.getTime()        <span id="demo4"></span>
+</pre>
+
+<script>
+d = new Date();
+document.getElementById("demo4").innerHTML = "// 返回 " + d.getTime();
+</script>
+</div>
+
+
+
+<div>
+<h2>自动类型转换</h2>
+
+<p>如果 JavaScript 尝试操作一种“错误”的数据类型，它会试图将该值转换为“正确”的类型。</p>
+
+<p>结果并不总是你所期望的：</p>
+
+<pre class="language-js">
+5 + null    // 返回 5         因为 null 被转换为 0
+&quot;5&quot; + null  // 返回 &quot;5null&quot;   因为 null 被转换为  &quot;null&quot;
+&quot;5&quot; + 2     // 返回 52        因为 2 被转换为 &quot;2&quot;
+&quot;5&quot; - 2     // 返回 3         因为 &quot;5&quot; 被转换为 5
+&quot;5&quot; * &quot;2&quot;   // 返回 10        因为 &quot;5&quot; 和 &quot;2&quot; 被转换为 5 和 2
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tcdf1.html?f=eg_js_type_convert_auto">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>自动字符串转换</h2>
+
+<p>JavaScript 自动调用变量的 <code>toString()</code> 函数，当您试图“输出”对象或变量时：</p>
+
+<pre class="language-js">
+document.getElementById(&quot;demo&quot;).innerHTML = myVar;
+
+// 如果 myVar = {name:&quot;Fjohn&quot;}  // toString 转换为 &quot;[object Object]&quot;
+// 如果 myVar = [1,2,3,4]       // toString 转换为 &quot;1,2,3,4&quot;
+// 如果 myVar = new Date()      // toString 转换为 &quot;<span id="demo5"></span>&quot;
+</pre>
+
+<script>
+myVar = new Date();
+document.getElementById("demo5").innerHTML = myVar;
+</script>
+
+<p>数字和布尔也会被转换，但并不明显：</p>
+
+<pre class="language-js">
+// 如果 myVar = 123             // toString 转换为 &quot;123&quot;
+// 如果 myVar = true            // toString 转换为 &quot;true&quot;
+// 如果 myVar = false           // toString 转换为 &quot;false&quot;
+</pre>
+</div>
+
+
+
+<div>
+<h2>JavaScript 类型转换表</h2>
+
+<p>下表中列出了将不同 JavaScript 值转换为数字、字符串和布尔的结果：</p>
+
+<table class="dataintable">
+<tr>
+<th>原始值</th>
+<th>转换为数字</th>
+<th>转换为字符串</th>
+<th>转换为逻辑</th>
+<th>试一试</th>
+</tr>
+
+<tr>
+<td>false</td>
+<td>0</td>
+<td>&quot;false&quot;</td>
+<td>false</td>
+<td><a target="_blank" href="../tiy/t07bb.html?f=eg_js_type_convert_false">试一试</a></td>
+</tr>
+
+<tr>
+<td>true</td>
+<td>1</td>
+<td>&quot;true&quot;</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/t805b.html?f=eg_js_type_convert_true">试一试</a></td>
+</tr>
+
+<tr>
+<td>0</td>
+<td>0</td>
+<td>&quot;0&quot;</td>
+<td>false</td>
+<td><a target="_blank" href="../tiy/t5cde.html?f=eg_js_type_convert_number_0">试一试</a></td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>1</td>
+<td>&quot;1&quot;</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/tbac2.html?f=eg_js_type_convert_number_1">试一试</a></td>
+</tr>
+
+<tr>
+<td>&quot;0&quot;</td>
+<td>0</td>
+<td>&quot;0&quot;</td>
+<td><code>true</code></td>
+<td><a target="_blank" href="../tiy/t9f15.html?f=eg_js_type_convert_string_0">试一试</a></td>
+</tr>
+
+<tr>
+<td>&quot;000&quot;</td>
+<td>0</td>
+<td>&quot;000&quot;</td>
+<td><code>true</code></td>
+<td><a target="_blank" href="../tiy/te818.html?f=eg_js_type_convert_string_000">试一试</a></td>
+</tr>
+
+<tr>
+<td>&quot;1&quot;</td>
+<td>1</td>
+<td>&quot;1&quot;</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/t7536.html?f=eg_js_type_convert_string_1">试一试</a></td>
+</tr>
+
+<tr>
+<td>NaN</td>
+<td>NaN</td>
+<td>&quot;NaN&quot;</td>
+<td>false</td>
+<td><a target="_blank" href="../tiy/t8906.html?f=eg_js_type_convert_nan">试一试</a></td>
+</tr>
+
+<tr>
+<td>Infinity</td>
+<td>Infinity</td>
+<td>&quot;Infinity&quot;</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/tabc5.html?f=eg_js_type_convert_infinity">试一试</a></td>
+</tr>
+
+<tr>
+<td>-Infinity</td>
+<td>-Infinity</td>
+<td>&quot;-Infinity&quot;</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/te0f6.html?f=eg_js_type_convert_infinity_minus">试一试</a></td>
+</tr>
+
+<tr>
+<td>&quot;&quot;</td>
+<td><code>0</code></td>
+<td>&quot;&quot;</td>
+<td><code>false</code></td>
+<td><a target="_blank" href="../tiy/t34b3.html?f=eg_js_type_convert_string_empty">试一试</a></td>
+</tr>
+
+<tr>
+<td>&quot;20&quot;</td>
+<td>20</td>
+<td>&quot;20&quot;</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/t1bdb.html?f=eg_js_type_convert_string_number">试一试</a></td>
+</tr>
+
+<tr>
+<td>&quot;twenty&quot;</td>
+<td>NaN</td>
+<td>&quot;twenty&quot;</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/tfbcb.html?f=eg_js_type_convert_string_text">试一试</a></td>
+</tr>
+
+<tr>
+<td>[ ]</td>
+<td><code>0</code></td>
+<td>&quot;&quot;</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/taade.html?f=eg_js_type_convert_array_empty">试一试</a></td>
+</tr>
+
+<tr>
+<td>[20]</td>
+<td><code>20</code></td>
+<td>&quot;20&quot;</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/t7938.html?f=eg_js_type_convert_array_one_number">试一试</a></td>
+</tr>
+
+<tr>
+<td>[10,20]</td>
+<td>NaN</td>
+<td>&quot;10,20&quot;</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/t69a5.html?f=eg_js_type_convert_array_two_numbers">试一试</a></td>
+</tr>
+
+<tr>
+<td>[&quot;twenty&quot;]</td>
+<td>NaN</td>
+<td>&quot;twenty&quot;</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/td988.html?f=eg_js_type_convert_array_one_string">试一试</a></td>
+</tr>
+
+<tr>
+<td>[&quot;ten&quot;,&quot;twenty&quot;]</td>
+<td>NaN</td>
+<td>&quot;ten,twenty&quot;</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/tf163.html?f=eg_js_type_convert_array_two_strings">试一试</a></td>
+</tr>
+
+<tr>
+<td>function(){}</td>
+<td>NaN</td>
+<td>&quot;function(){}&quot;</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/t1aa9.html?f=eg_js_type_convert_function">试一试</a></td>
+</tr>
+
+<tr>
+<td>{ }</td>
+<td>NaN</td>
+<td>&quot;[object Object]&quot;</td>
+<td>true</td>
+<td><a target="_blank" href="../tiy/t6fd7.html?f=eg_js_type_convert_object">试一试</a></td>
+</tr>
+
+<tr>
+<td>null</td>
+<td><code>0</code></td>
+<td>&quot;null&quot;</td>
+<td>false</td>
+<td><a target="_blank" href="../tiy/t4d5a.html?f=eg_js_type_convert_null">试一试</a></td>
+</tr>
+
+<tr>
+<td>undefined</td>
+<td>NaN</td>
+<td>&quot;undefined&quot;</td>
+<td>false</td>
+<td><a target="_blank" href="../tiy/t912b.html?f=eg_js_type_convert_undefined">试一试</a></td>
+</tr>
+</table>
+
+<p>引号中的值指示字符串值。</p>
+
+<p><mark>红色的值</mark>指示了（某些）程序员也许不希望的值。</p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="js_typeof.html" title="JavaScript typeof">JS typeof</a></li>
+<li class="next"><a href="js_destructuring.html" title="JavaScript 解构">JS 解构</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../jsref/index.html">JavaScript 和 HTML DOM 参考手册</a></h5>
+<h5 id="tools_example"><a href="js_examples.html">JavaScript 实例</a></h5>
+<h5 id="tools_quiz"><a href="js_quiz.html">JavaScript 测验</a></h5>
+<h5 id="tools_professional"><a href="index_pro.html">JavaScript 高级教程</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/js/js_type_conversion.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:31:40 GMT -->
+</html>

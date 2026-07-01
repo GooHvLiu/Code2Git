@@ -1,0 +1,43 @@
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  }
+
+  header {
+    background: #333 url('https://ts1.tc.mm.bing.net/th/id/R-C.2c143cd6fae950e7b4aff89901d97ecd?rik=oHpxojU7W9g6WQ&riu=http%3a%2f%2fimg.netbian.com%2ffile%2f20110816%2fcfad750e10d52fb40ba1e4a025766e21.jpg&ehk=KxOB01UzvTdfv%2fpyKNseCanyqPtOg9kmm1uPxZSUG1M%3d&risl=&pid=ImgRaw&r=0') no-repeat center center/cover;
+    color: #fff;
+    /* 不起作用，因为body的高度是被内容撑开的，所以body也就这么大 */
+    /* height: 100%; */
+    /* 设置vh单位，可以覆盖整个视口的高度vh或者宽度vw */
+    height: 100vh;
+    text-align: center;
+    padding: 2rem;
+    padding-top: 15rem;
+
+    h1 {
+      font-size: 3rem;
+
+    }
+
+    p {
+      margin: 1rem 0;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      background: #f4f4f4;
+      color: #333;
+      padding: 0.7rem 2rem;
+    }
+  }
+
+  section {
+    padding: 2rem;
+  }

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浮动布局</title>
+    <link rel="stylesheet" href="./less2css/base.css">
+    <link rel="stylesheet" href="./less2css/float.css">
+</head>
+<body>
+    <!-- 总容器div -->
+    <div class="container">
+        <!-- 最上面01部分的div，logo与banner部分 -->
+        <div class="pagebanner clearfloat">
+            <div class="logo floatleft">logo</div>
+            <div class="banner1 floatleft">banner1</div>
+            <div class="banner2 floatleft">banner2</div>
+        </div>
+
+        <!-- 最上面02部分的div，menu部分 -->
+        <div class="pagemenu">
+            菜单
+        </div>
+
+        <!-- 最上面03部分的div，内容部分，分各个items -->
+        <div class="pagecontent clearfloat">
+            <!-- 最上面03部分的div，内容部分，左边的Items -->
+            <div class="pagecontent_leftItem floatleft">
+                <!-- 最上面03部分的div，内容部分，左边的上部分Items -->
+                <div class="pagecontent_leftItem_top clearfloat">
+                    <!-- 最上面03部分的div，内容部分，左边的上部分左边Items -->
+                    <div class="pagecontent_leftItem_top_left floatleft">栏目一</div>
+                    <!-- 最上面03部分的div，内容部分，左边的上部分右边Items -->
+                    <div class="pagecontent_leftItem_top_right floatleft">栏目二</div>
+                </div>
+                <!-- 最上面03部分的div，内容部分，左边的下部分Items -->
+                <div class="pagecontent_leftItem_bottom clearfloat">
+                    <!-- 最上面03部分的div，内容部分，左边的下部分左1Items -->
+                    <div class="pagecontent_leftItem_bottom_left01 floatleft">栏目三</div>
+                    <!-- 最上面03部分的div，内容部分，左边的下部分左2Items -->
+                    <div class="pagecontent_leftItem_bottom_left02 floatleft">栏目四</div>
+                    <!-- 最上面03部分的div，内容部分，左边的下部分左3Items -->
+                    <div class="pagecontent_leftItem_bottom_left03 floatleft">栏目五</div>
+                    <!-- 最上面03部分的div，内容部分，左边的下部分左4Items -->
+                    <div class="pagecontent_leftItem_bottom_left04 floatleft">栏目六</div>
+                </div>
+            </div>
+            <!-- 最上面03部分的div，内容部分，右边的Items -->
+            <div class="pagecontent_rightItem floatleft">
+                <!-- 最上面03部分的div，内容部分，右边的上1个Items -->
+                <div class="pagecontent_rightItem_top">栏目七</div>
+                <!-- 最上面03部分的div，内容部分，右边的中1个Items -->
+                <div class="pagecontent_rightItem_middle">栏目八</div>
+                <!-- 最上面03部分的div，内容部分，右边的下1个Items -->
+                <div class="pagecontent_rightItem_bottom">栏目九</div>
+            <!-- </div> -->
+            </div>
+        </div>  
+
+        <!-- 最上面04部分的div，页脚部分 -->
+        <div class="pagefooter">页脚</div>
+    </div>
+</body>
+</html>

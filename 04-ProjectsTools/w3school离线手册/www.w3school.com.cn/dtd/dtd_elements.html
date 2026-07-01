@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/dtd/dtd_elements.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:13:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>DTD - 元素</title>
+
+</head>
+
+<body class="xml">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>DTD 教程</h2>
+<ul>
+<li><a href="index.html" title="DTD 教程">DTD 教程</a></li>
+<li><a href="dtd_intro.html" title="DTD 简介">DTD 简介</a></li>
+<li><a href="dtd_building.html" title="DTD - XML 构建模块">DTD 构建模块</a></li>
+<li class="currentLink"><a href="dtd_elements.html" title="DTD - 元素">DTD 元素</a></li>
+<li><a href="dtd_attributes.html" title="DTD - 属性">DTD 属性</a></li>
+<li><a href="dtd_entities.html" title="DTD - 实体">DTD 实体</a></li>
+<li><a href="dtd_validation.html" title="DTD - 验证">DTD 验证</a></li>
+<li><a href="dtd_examples.html" title="DTD - 来自网络的实例">DTD 实例</a></li>
+<li><a href="dtd_summary.html" title="您已经学习了DTD，下一步呢？">DTD 总结</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>DTD - 元素</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="dtd_building.html" title="DTD - XML 构建模块">DTD 构建模块</a></li>
+<li class="next"><a href="dtd_attributes.html" title="DTD - 属性">DTD 属性</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p><strong>在一个 DTD 中，元素通过元素声明来进行声明。</strong></p>
+</div>
+
+
+
+<div>
+<h2>声明一个元素</h2>
+
+<p>在 DTD 中，XML 元素通过元素声明来进行声明。元素声明使用下面的语法：</p>
+
+<pre class="language-xml">
+&lt;!ELEMENT 元素名称 类别&gt;
+</pre>
+
+<p>或者</p>
+
+<pre class="language-xml">
+&lt;!ELEMENT 元素名称 (元素内容)&gt;
+</pre>
+</div>
+
+
+
+<div>
+<h2>空元素</h2>
+
+<p>空元素通过类别关键词EMPTY进行声明：</p>
+
+<pre class="language-xml">
+&lt;!ELEMENT 元素名称 EMPTY&gt;
+</pre>
+
+<h3>例子：</h3>
+
+<pre class="language-xml">
+&lt;!ELEMENT br EMPTY&gt;
+</pre>
+
+<h3>XML例子：</h3>
+
+<pre class="language-xml">
+&lt;br /&gt;
+</pre>
+</div>
+
+
+
+<div>
+<h2>只有 PCDATA 的元素</h2>
+
+<p>只有 PCDATA 的元素通过圆括号中的 #PCDATA 进行声明：</p>
+
+<pre class="language-xml">
+&lt;!ELEMENT 元素名称 (#PCDATA)&gt;
+</pre>
+
+<h3>例子：</h3>
+
+<pre class="language-xml">
+&lt;!ELEMENT from (#PCDATA)&gt;
+</pre>
+</div>
+
+
+
+<div>
+<h2>带有任何内容的元素</h2>
+
+<p>通过类别关键词 ANY 声明的元素，可包含任何可解析数据的组合：</p>
+
+<pre class="language-xml">
+&lt;!ELEMENT 元素名称 ANY&gt;
+</pre>
+
+<h3>例子：</h3>
+
+<pre class="language-xml">
+&lt;!ELEMENT note ANY&gt;
+</pre>
+</div>
+
+
+
+<div>
+<h2>带有子元素（序列）的元素</h2>
+
+<p>带有一个或多个子元素的元素通过圆括号中的子元素名进行声明：</p>
+
+<pre class="language-xml">
+&lt;!ELEMENT 元素名称 (子元素名称 1)&gt;
+</pre>
+
+<p>或者</p>
+
+<pre class="language-xml">
+&lt;!ELEMENT 元素名称 (子元素名称 1,子元素名称 2,.....)&gt;
+</pre>
+
+<h3>例子：</h3>
+
+<pre class="language-xml">
+&lt;!ELEMENT note (to,from,heading,body)&gt;
+</pre>
+
+<p>当子元素按照由逗号分隔开的序列进行声明时，这些子元素必须按照相同的顺序出现在文档中。在一个完整的声明中，子元素也必须被声明，同时子元素也可拥有子元素。&quot;note&quot; 元素的完整声明是：</p>
+
+<pre class="language-xml">
+&lt;!ELEMENT note (to,from,heading,body)&gt;
+&lt;!ELEMENT to      (#PCDATA)&gt;
+&lt;!ELEMENT from    (#PCDATA)&gt;
+&lt;!ELEMENT heading (#PCDATA)&gt;
+&lt;!ELEMENT body    (#PCDATA)&gt;
+</pre>
+</div>
+
+
+
+<div>
+<h2>声明只出现一次的元素</h2>
+
+<pre class="language-xml">
+&lt;!ELEMENT 元素名称 (子元素名称)&gt;
+</pre>
+
+<h3>例子：</h3>
+
+<pre class="language-xml">
+&lt;!ELEMENT note (message)&gt;
+</pre>
+
+<p>上面的例子声明了：message 子元素必须出现一次，并且必须只在 &quot;note&quot; 元素中出现一次。</p>
+</div>
+
+
+
+<div>
+<h2>声明最少出现一次的元素</h2>
+
+<pre class="language-xml">
+&lt;!ELEMENT 元素名称 (子元素名称+)&gt;
+</pre>
+
+<h3>例子：</h3>
+
+<pre class="language-xml">
+&lt;!ELEMENT note (message+)&gt;
+</pre>
+
+<p>上面的例子中的加号声明了：message 子元素必须在 &quot;note&quot; 元素内出现至少一次。</p>
+</div>
+
+
+
+<div>
+<h2>声明出现零次或多次的元素</h2>
+
+<pre class="language-xml">
+&lt;!ELEMENT 元素名称 (子元素名称*)&gt;
+</pre>
+
+<h3>例子：</h3>
+
+<pre class="language-xml">
+&lt;!ELEMENT note (message*)&gt;
+</pre>
+
+<p>上面的例子中的星号声明了：子元素 message 可在 &quot;note&quot; 元素内出现零次或多次。</p>
+</div>
+
+
+
+<div>
+<h2>声明出现零次或一次的元素</h2>
+
+<pre class="language-xml">
+&lt;!ELEMENT 元素名称 (子元素名称?)&gt;
+</pre>
+
+<h3>例子：</h3>
+
+<pre class="language-xml">
+&lt;!ELEMENT note (message?)&gt;
+</pre>
+
+<p>上面的例子中的问号声明了：子元素 message 可在 &quot;note&quot; 元素内出现零次或一次。</p>
+</div>
+
+
+
+<div>
+<h2>声明“非.../既...”类型的内容</h2>
+
+<h3>例子：</h3>
+
+<pre class="language-xml">
+&lt;!ELEMENT note (to,from,header,(message|body))&gt;
+</pre>
+
+<p>上面的例子声明了：&quot;note&quot; 元素必须包含 &quot;to&quot; 元素、&quot;from&quot; 元素、&quot;header&quot; 元素，以及非 &quot;message&quot; 元素既 &quot;body&quot; 元素。</p>
+</div>
+
+
+
+<div>
+<h2>声明混合型的内容</h2>
+
+<h3>例子：</h3>
+
+<pre class="language-xml">
+&lt;!ELEMENT note (#PCDATA|to|from|header|message)*&gt;
+</pre>
+
+<p>上面的例子声明了：&quot;note&quot; 元素可包含出现零次或多次的 PCDATA、&quot;to&quot;、&quot;from&quot;、&quot;header&quot; 或者 &quot;message&quot;。</p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="dtd_building.html" title="DTD - XML 构建模块">DTD 构建模块</a></li>
+<li class="next"><a href="dtd_attributes.html" title="DTD - 属性">DTD 属性</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/dtd/dtd_elements.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:13:02 GMT -->
+</html>

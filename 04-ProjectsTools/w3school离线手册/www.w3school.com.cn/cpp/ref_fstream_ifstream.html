@@ -1,0 +1,725 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/cpp/ref_fstream_ifstream.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 05:13:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>C++ ifstream 类</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>C++ 教程</h2>
+<ul>
+<li><a href="index.html" title="C++ 教程">C++ 教程</a></li>
+<li><a href="cpp_intro.html" title="C++ 简介">C++ 简介</a></li>
+<li><a href="cpp_getstarted.html" title="C++ 入门">C++ 入门</a></li>
+<li><a href="cpp_syntax.html" title="C++ 语法">C++ 语法</a></li>
+<li><a href="cpp_output.html" title="C++ 输出">C++ 输出</a></li>
+<li><a href="cpp_output_numbers.html" title="C++ 输出数字">C++ 输出数字</a></li>
+<li><a href="cpp_new_lines.html" title="C++ 新行">C++ 新行</a></li>
+<li><a href="cpp_comments.html" title="C++ 注释">C++ 注释</a></li>
+<li><a href="cpp_variables.html" title="C++ 变量">C++ 变量</a></li>
+<li><a href="cpp_variables_multiple.html" title="C++ 声明多个变量">C++ 多变量</a></li>
+<li><a href="cpp_variables_identifiers.html" title="C++ 标识符">C++ 标识符</a></li>
+<li><a href="cpp_variables_constants.html" title="C++ 常量">C++ 常量</a></li>
+<li><a href="cpp_variables_reallife.html" title="C++ 变量实例">C++ 变量实例</a></li>
+<li><a href="cpp_user_input.html" title="C++ 用户输入">C++ 用户输入</a></li>
+<li><a href="cpp_data_types.html" title="C++ 数据类型">C++ 数据类型</a></li>
+<li><a href="cpp_data_types_numeric.html" title="C++ 数值数据类型">C++ 数值类型</a></li>
+<li><a href="cpp_data_types_bool.html" title="C++ 布尔数据类型">C++ 布尔类型</a></li>
+<li><a href="cpp_data_types_char.html" title="C++ 字符数据类型">C++ 字符类型</a></li>
+<li><a href="cpp_data_types_string.html" title="C++ 字符串数据类型">C++ 字符串类型</a></li>
+<li><a href="cpp_data_types_reallife.html" title="C++ 数据类型实例">C++ 数据类型实例</a></li>
+<li><a href="cpp_operators.html" title="C++ 运算符">C++ 运算符</a></li>
+<li><a href="cpp_operators_assignment.html" title="C++ 赋值运算符">C++ 赋值运算符</a></li>
+<li><a href="cpp_operators_comparison.html" title="C++ 比较运算符">C++ 比较运算符</a></li>
+<li><a href="cpp_operators_logical.html" title="C++ 逻辑运算符">C++ 逻辑运算符</a></li>
+<li><a href="cpp_strings.html" title="C++ 字符串">C++ 字符串</a></li>
+<li><a href="cpp_strings_concat.html" title="C++ 字符串拼接">C++ 字符串拼接</a></li>
+<li><a href="cpp_strings_numbers.html" title="C++ 数字和字符串">C++ 数字和字符串</a></li>
+<li><a href="cpp_strings_length.html" title="C++ 字符串长度">C++ 字符串长度</a></li>
+<li><a href="cpp_strings_access.html" title="C++ 访问字符串">C++ 访问字符串</a></li>
+<li><a href="cpp_strings_esc.html" title="C++ 特殊字符">C++ 特殊字符</a></li>
+<li><a href="cpp_strings_input.html" title="C++ 用户输入字符串">C++ 用户输入字符串</a></li>
+<li><a href="cpp_strings_namespace.html" title="C++ 字符串命名空间">C++ 字符串命名空间</a></li>
+<li><a href="cpp_math.html" title="C++ 数学运算">C++ 数学运算</a></li>
+<li><a href="cpp_booleans.html" title="C++ 布尔值">C++ 布尔值</a></li>
+<li><a href="cpp_booleans_expressions.html" title="C++ 布尔表达式">C++ 布尔表达式</a></li>
+<li><a href="cpp_conditions.html" title="C++ If ... Else">C++ If ... Else</a></li>
+<li><a href="cpp_conditions_else.html" title="C++ Else">C++ Else</a></li>
+<li><a href="cpp_conditions_elseif.html" title="C++ Else If">C++ Else If</a></li>
+<li><a href="cpp_conditions_shorthand.html" title="C++ 简写 If Else">C++ 简写 If Else</a></li>
+<li><a href="cpp_conditions_reallife.html" title="C++ If ... Else 实际应用实例">C++ If ... Else 实例</a></li>
+<li><a href="cpp_switch.html" title="C++ Switch">C++ Switch</a></li>
+<li><a href="cpp_while_loop.html" title="C++ While 循环">C++ While 循环</a></li>
+<li><a href="cpp_do_while_loop.html" title="C++ Do/While 循环">C++ Do/While 循环</a></li>
+<li><a href="cpp_while_loop_reallife.html" title="C++ While 循环实例">C++ While 循环实例</a></li>
+<li><a href="cpp_for_loop.html" title="C++ For 循环">C++ For 循环</a></li>
+<li><a href="cpp_for_loop_reallife.html" title="C++ For 循环实例">C++ For 循环实例</a></li>
+<li><a href="cpp_break.html" title="C++ Break 和 Continue">C++ Break 和 Continue</a></li>
+<li><a href="cpp_arrays.html" title="C++ 数组">C++ 数组</a></li>
+<li><a href="cpp_arrays_loop.html" title="C++ 数组和循环">C++ 数组和循环</a></li>
+<li><a href="cpp_arrays_omit.html" title="C++ 省略数组大小">C++ 省略数组大小</a></li>
+<li><a href="cpp_arrays_size.html" title="C++ 数组大小">C++ 数组大小</a></li>
+<li><a href="cpp_arrays_reallife.html" title="C++ 数组实际应用实例">C++ 数组实例</a></li>
+<li><a href="cpp_arrays_multi.html" title="C++ 多维数组">C++ 多维数组</a></li>
+<li><a href="cpp_structs.html" title="C++ 结构体">C++ 结构体</a></li>
+<li><a href="cpp_enum.html" title="C++ 枚举">C++ 枚举</a></li>
+<li><a href="cpp_references.html" title="C++ 创建引用">C++ 创建引用</a></li>
+<li><a href="cpp_references_memory.html" title="C++ 内存地址">C++ 内存地址</a></li>
+<li><a href="cpp_pointers.html" title="C++ 创建指针">C++ 创建指针</a></li>
+<li><a href="cpp_pointers_dereference.html" title="C++ 解引用">C++ 解引用</a></li>
+<li><a href="cpp_pointers_modify.html" title="C++ 修改指针">C++ 修改指针</a></li>
+</ul>
+<h2>C++ 函数</h2>
+<ul>
+<li><a href="cpp_functions.html" title="C++ 函数">C++ 函数</a></li>
+<li><a href="cpp_function_param.html" title="C++ 函数参数">C++ 函数参数</a></li>
+<li><a href="cpp_function_default.html" title="C++ 默认参数">C++ 默认参数</a></li>
+<li><a href="cpp_function_multiple.html" title="C++ 多个参数">C++ 多个参数</a></li>
+<li><a href="cpp_function_return.html" title="C++ Return 关键字">C++ 返回值</a></li>
+<li><a href="cpp_function_reference.html" title="C++ 函数 - 通过引用传参">C++ 通过引用传参</a></li>
+<li><a href="cpp_function_array.html" title="C++ 向函数传递数组">C++ 传递数组</a></li>
+<li><a href="cpp_function_reallife.html" title="C++ 函数实例">C++ 函数实例</a></li>
+<li><a href="cpp_function_overloading.html" title="C++ 函数重载">C++ 函数重载</a></li>
+<li><a href="cpp_scope.html" title="C++ 变量作用域">C++ 变量作用域</a></li>
+<li><a href="cpp_functions_recursion.html" title="C++ 递归">C++ 递归</a></li>
+</ul>
+<h2>C++ 类</h2>
+<ul>
+<li><a href="cpp_oop.html" title="C++ OOP">C++ OOP</a></li>
+<li><a href="cpp_classes.html" title="C++ 类和对象">C++ 类/对象</a></li>
+<li><a href="cpp_class_methods.html" title="C++ 类方法">C++ 类方法</a></li>
+<li><a href="cpp_constructors.html" title="C++ 构造函数">C++ 构造函数</a></li>
+<li><a href="cpp_access_specifiers.html" title="C++ 访问修饰符">C++ 访问修饰符</a></li>
+<li><a href="cpp_encapsulation.html" title="C++ 封装">C++ 封装</a></li>
+<li><a href="cpp_inheritance.html" title="C++ 继承">C++ 继承</a></li>
+<li><a href="cpp_inheritance_multilevel.html" title="C++ 多层继承">C++ 多层继承</a></li>
+<li><a href="cpp_inheritance_multiple.html" title="C++ 多重继承">C++ 多重继承</a></li>
+<li><a href="cpp_inheritance_access.html" title="C++ 继承访问">C++ 继承访问</a></li>
+<li><a href="cpp_polymorphism.html" title="C++ 多态">C++ 多态</a></li>
+<li><a href="cpp_files.html" title="C++ 文件">C++ 文件</a></li>
+<li><a href="cpp_exceptions.html" title="C++ 异常处理">C++ 异常处理</a></li>
+<li><a href="cpp_date.html" title="C++ 日期和时间">C++ 日期</a></li>
+</ul>
+<h2>C++ 数据结构</h2>
+<ul>
+<li><a href="cpp_data_structures.html" title="C++ 数据结构和 STL">C++ 数据结构</a></li>
+<li><a href="cpp_vectors.html" title="C++ 向量">C++ 向量</a></li>
+<li><a href="cpp_list.html" title="C++ 列表">C++ 列表</a></li>
+<li><a href="cpp_stacks.html" title="C++ 栈">C++ 栈</a></li>
+<li><a href="cpp_queues.html" title="C++ 队列">C++ 队列</a></li>
+<li><a href="cpp_deque.html" title="C++ 双端队列">C++ 双端队列</a></li>
+<li><a href="cpp_sets.html" title="C++ 集合">C++ 集合</a></li>
+<li><a href="cpp_maps.html" title="C++ 映射">C++ 映射</a></li>
+<li><a href="cpp_iterators.html" title="C++ 迭代器">C++ 迭代器</a></li>
+<li><a href="cpp_algorithms.html" title="C++ 算法">C++ 算法</a></li>
+</ul>
+<h2>C++ 案例</h2>
+<ul>
+<li><a href="cpp_howto_add_two_numbers.html" title="C++ 如何加两个数字">C++ 加两个数字</a></li>
+<li><a href="cpp_howto_random_number.html" title="C++ 如何生成随机数">C++ 随机数</a></li>
+</ul>
+<h2>C++ 数据结构</h2>
+<ul>
+<li><a href="cpp_reference.html" title="C++ 参考手册">C++ 参考手册</a></li>
+<li><a href="cpp_ref_keywords.html" title="C++ 关键词">C++ 关键词</a></li>
+<li><a href="cpp_ref_iostream.html" title="C++ &lt;iostream&gt; 库">C++ &lt;iostream&gt;</a></li>
+<li><a href="cpp_ref_fstream.html" title="C++ &lt;fstream&gt; 库">C++ &lt;fstream&gt;</a></li>
+<li><a href="cpp_ref_math.html" title="C++ &lt;cmath&gt; 库">C++ &lt;cmath&gt;</a></li>
+<li><a href="cpp_ref_string.html" title="C++ &lt;string&gt; 库">C++ &lt;string&gt;</a></li>
+<li><a href="cpp_ref_cstring.html" title="C++ &lt;cstring&gt; 库">C++ &lt;cstring&gt;</a></li>
+<li><a href="cpp_ref_ctime.html" title="C++ &lt;ctime&gt; 库">C++ &lt;ctime&gt;</a></li>
+<li><a href="cpp_ref_vector.html" title="C++ &lt;vector&gt; 库">C++ &lt;vector&gt;</a></li>
+<li><a href="cpp_ref_algorithm.html" title="C++ &lt;algorithm&gt; 库">C++ &lt;algorithm&gt;</a></li>
+</ul>
+<h2>实例 / 测验</h2>
+<ul>
+<li><a href="cpp_examples.html" title="C++ 实例">C++ 实例</a></li>
+<li><a href="cpp_quiz.html" title="C++ 测验">C++ 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>C++ ifstream 类</h1>
+
+<div class="btn-toref">
+<p><a href="cpp_ref_fstream.html">C++ fstream 库</a></p>
+</div>
+
+
+
+<section>
+<h2>定义和用法</h2>
+
+<p><code><abbr>ifstream</abbr></code> 类（即 &quot;input file stream&quot; 的缩写）用于从文件中读取数据。</p>
+
+<p><code>ifstream</code> 类定义在 <code>&lt;fstream&gt;</code> 头文件中。</p>
+
+<p>要打开文件，请将文件路径传递给构造函数：</p>
+
+<pre class="language-cpp">
+ifstream MyReadFile(&quot;filename.txt&quot;);
+</pre>
+
+<p><code>ifstream</code> 类有多种方式从文件中读取数据。一种简单的方法是使用 <code>getline()</code> 函数读取直到下一行换行符的所有字符，并将它们写入一个字符串中。</p>
+
+<p>从文件中输出一行文本：</p>
+
+<pre class="language-cpp">
+string myText;
+getline(MyReadFile, myText);
+cout &lt;&lt; myText;
+</pre>
+</section>
+
+
+
+<section>
+<h2>实例</h2>
+
+<p>使用 <code>ifstream</code> 从文件中读取行：</p>
+
+<pre class="language-cpp">
+// 创建一个文本字符串，用于输出文本文件
+string myText;
+
+// 从文本文件中读取
+ifstream MyReadFile(&quot;filename.txt&quot;);
+
+// 使用 while 循环和 getline() 函数逐行读取文件
+while (getline(MyReadFile, myText)) {
+  // 输出文件中的文本
+  cout &lt;&lt; myText;
+}
+
+// 关闭文件
+MyReadFile.close();
+</pre>
+</section>
+
+
+
+<section>
+<h2>文件读取函数</h2>
+
+<p>文件读取函数从文件中提取字符并移动文件指针。</p>
+
+<h3>get()</h3>
+
+<p><code>get()</code> 方法从文件中读取单个字符，并以 <code>int</code> 值的形式返回其 ASCII 值。将其转换为 <code>char</code> 类型以查看字符。文件指针移动到文件中的下一个字符。</p>
+
+<pre class="language-cpp">
+char myChar = MyReadFile.get();
+cout &lt;&lt; myChar;
+</pre>
+
+<p><code>get(<i>destination</i>, <i>size</i>, <i>delimiter</i>)</code> 方法从文件中读取最多 <i>size</i> 个字符，并将其写入目标位置。它一旦遇到换行符、文件结尾或可选的由 <i>delimiter</i> 参数给定的字符，就会停止读取。写入目标位置的值始终以 <code>\0</code> 空终止字符结尾。此方法将文件指针移动到停止读取的换行符或分隔符处。</p>
+
+<pre class="language-cpp">
+char destination[20];
+MyReadFile.get(destination, 20);
+cout &lt;&lt; destination &lt;&lt; &quot;\n&quot;;
+
+// 当遇到 '.' 时停止读取
+MyReadFile.get(destination, 20, '.');
+cout &lt;&lt; destination &lt;&lt; &quot;\n&quot;;
+</pre>
+
+<h3>getline()</h3>
+
+<p><code>getline(<i>destination</i>, <i>size</i>, <i>delimiter</i>)</code> 方法与 <code>get(<i>destination</i>, <i>size</i>, <i>delimiter</i>)</code> 方法相同，只是换行符或分隔符被丢弃，且文件指针移动到紧随其后的字符。</p>
+
+<pre class="language-cpp">
+char destination[20];
+MyReadFile.getline(destination, 20);
+cout &lt;&lt; destination &lt;&lt; &quot;\n&quot;;
+
+// 当遇到 '.' 时停止读取
+MyReadFile.getline(destination, 20, '.');
+cout &lt;&lt; destination &lt;&lt; &quot;\n&quot;;
+</pre>
+
+<p>还有一个类似的 <code>getline(<i>stream</i>, <i>destination</i>, <i>delimiter</i>)</code> 函数，它从由 <code>ifstream</code> 对象的 stream 参数指定的文件中读取所有字符，直到下一个换行符（或可选的分隔符），并将它们写入由 <i>destination</i> 指定的字符串中。</p>
+
+<pre class="language-cpp">
+string destination;
+getline(MyFile, destination);
+cout &lt;&lt; destination &lt;&lt; &quot;\n&quot;;
+
+// 当遇到 '.' 时停止读取
+getline(MyFile, destination, '.');
+cout &lt;&lt; destination &lt;&lt; &quot;\n&quot;;
+</pre>
+
+<h3>read()</h3>
+
+<p><code>read(<i>destination</i>, <i>n</i>)</code> 方法从文件中读取 <i>n</i> 个字符，并将它们写入由 <i>destination</i> 参数指定的字符数组中。与其他函数不同，它不会在换行符处停止读取，也不会在数据中添加空终止字符。</p>
+
+<pre class="language-cpp">
+char destination[20];
+MyReadFile.read(destination, 19);
+destination[20] = '\0'; // 确保以空终止字符结尾
+cout &lt;&lt; destination &lt;&lt; &quot;\n&quot;;
+</pre>
+
+<h3>peek()</h3>
+
+<p><code>peek()</code> 方法从文件中读取单个字符，并以 <code>int</code> 值的形式返回其 ASCII 值。将其转换为 <code>char</code> 类型以查看字符。与 <code>get()</code> 方法不同，此方法不会移动文件指针。</p>
+
+<pre class="language-cpp">
+char myChar = MyReadFile.peek();
+cout &lt;&lt; myChar;
+</pre>
+
+<h3>gcount()</h3>
+
+<p><code>gcount()</code> 方法返回最近调用的文件读取方法从文件中提取的字符数。</p>
+
+<pre class="language-cpp">
+char destination[20];
+MyReadFile.getline(destination, 20);
+cout &lt;&lt; MyReadFile.gcount() &lt;&lt; &quot;\n&quot;;
+</pre>
+</section>
+
+
+
+<section>
+<h2>文件处理函数</h2>
+
+<p>文件处理函数用于打开、关闭和导航文件。</p>
+
+<h3>open()</h3>
+
+<p><code>open(<i>filepath</i>)</code> 方法打开由 <i>filepath</i> 指定的路径处的文件。如果文件已经打开，则此方法无效。</p>
+
+<pre class="language-cpp">
+ifstream MyReadFile;
+MyReadFile.open(&quot;filename.txt&quot;);
+</pre>
+
+<h3>is_open()</h3>
+
+<p><code>is_open()</code> 方法如果文件已打开，则返回 true；如果没有文件打开，则返回 false。</p>
+
+<pre class="language-cpp">
+ifstream MyReadFile;
+cout &lt;&lt; MyReadFile.is_open(); &lt;&lt; &quot;\n&quot;; // 显示 0，因为文件未打开
+MyReadFile.open(&quot;filename.txt&quot;);
+cout &lt;&lt; MyReadFile.is_open(); &lt;&lt; &quot;\n&quot;; // 显示 1，因为文件已打开
+</pre>
+
+<h3>close()</h3>
+
+<p><code>close()</code> 方法关闭文件。完成文件操作后关闭文件以释放资源是个好习惯。</p>
+
+<pre class="language-cpp">
+MyReadFile.close();
+</pre>
+
+<h3>rdbuf()</h3>
+
+<p><code>rdbuf()</code> 方法返回一个指向直接处理文件的内部 <code><a href="ref_fstream_filebuf.html" title="C++ filebuf 类">filebuf</a></code> 对象的指针。</p>
+
+<pre class="language-cpp">
+filebuf * buf = MyReadFile.rdbuf();
+</pre>
+
+<h3>unget()</h3>
+
+<p><code>unget()</code> 方法将文件指针向后移动一个字符。</p>
+
+<p>使用 <code>unget()</code> 方法打印同一个字符两次：</p>
+
+<pre class="language-cpp">
+char myChar = MyReadFile.get();
+cout &lt;&lt; myChar &lt;&lt; &quot;\n&quot;;
+MyReadFile.unget();
+myChar = MyReadFile.get();
+cout &lt;&lt; myChar;
+</pre>
+
+<h3>seekg()</h3>
+
+<p><code>seekg(<i>position</i>)</code> 方法将文件指针移动到相对于文件开头的指定位置。</p>
+
+<pre class="language-cpp">
+MyReadFile.seekg(6)
+</pre>
+
+<p><code>seekg(<i>position</i>, <i>origin</i>)</code> 方法将文件指针移动到相对于给定原点的文件中指定位置。<i>origin</i> 有三个可能的值：</p>
+
+<ul>
+<li><code>ifstream::beg</code> - 位置相对于文件开头</li>
+<li><code>ifstream::cur</code> - 位置相对于当前文件位置</li>
+<li><code>ifstream::end</code> - 位置相对于文件结尾</li>
+</ul>
+
+<p>将文件指针移动到不同位置：</p>
+
+<pre class="language-cpp">
+MyReadFile.seekg(6, ifstream::beg);
+cout &lt;&lt; MyReadFile.tellg(); &lt;&lt; &quot;\n&quot;;
+MyReadFile.seekg(-3, ifstream::cur);
+cout &lt;&lt; MyReadFile.tellg(); &lt;&lt; &quot;\n&quot;;
+MyReadFile.seekg(-4, ifstream::end);
+cout &lt;&lt; MyReadFile.tellg(); &lt;&lt; &quot;\n&quot;;
+</pre>
+
+<h3>tellg()</h3>
+
+<p><code>tellg()</code> 方法返回文件中文件指针的当前位置。</p>
+
+<pre class="language-cpp">
+cout &lt;&lt; MyReadFile.tellg();
+</pre>
+</section>
+
+
+
+<section>
+<h2>提取运算符 (&gt;&gt;)</h2>
+
+<p>提取运算符 (<code>&gt;&gt;</code>) 从文件的当前位置读取一定数量的字符，将其解释并将解释后的值写入变量中。然后，文件指针会移动到下一个尚未读取的字符。字符的解释方式取决于变量的数据类型。</p>
+
+<h3>语法</h3>
+
+<pre class="language-cpp">
+MyReadFile &gt;&gt; <i>variable</i>
+</pre>
+
+<p>它也可以多次使用，以逐个读取文件的部分内容：</p>
+
+<pre class="language-cpp">
+MyReadFile &gt;&gt; <i>variable1</i> &gt;&gt; <i>variable2</i> &gt;&gt; <i>variable3</i>
+</pre>
+
+<p>提取运算符 (<code>&gt;&gt;</code>) 首先会跳过空白字符（空格、制表符和换行符），直到遇到第一个非空白字符。之后，它会根据变量的数据类型按照以下表格中的规则进行读取。</p>
+
+<table class="ref">
+<tr>
+<th style="width: 15%;">数据类型</th>
+<th>描述</th>
+<th>示例</th>
+</tr>
+
+<tr>
+<td>
+	<ul>
+	<li><code>int</code></li>
+	<li><code>long</code></li>
+	<li><code>short</code></li>
+	</ul>
+</td>
+<td>
+	<p>读取一个数字序列并将其解释为整数。</p>
+	<p>序列前可以有一个符号（+ 或 -）。</p>
+	<p>读取会在遇到第一个非数字字符时停止。</p>
+	<p>如果未找到有效的序列，<code>ifstream</code> 对象将失败并停止进一步读取。</p>
+</td>
+<td>
+	<ul>
+	<li>15</li>
+	<li>+125</li>
+	<li>-30</li>
+	</ul>
+</td>
+</tr>
+
+<tr>
+<td><code>bool</code></td>
+<td>
+	<p>以与上述相同的方式读取一个整数，然后将 0 解释为 false，将 1 解释为 true。</p>
+	<p>任何其他整数值也会被解释为 true，但 <code>ifstream</code> 对象将失败并停止进一步读取。</p>
+	<p>下一节中描述的 <code>boolalpha</code> 操纵符会完全改变此行为。</p>
+</td>
+<td>
+	<ul>
+	<li>0</li>
+	<li>1</li>
+	<li>+01</li>
+	</ul>
+</td>
+</tr>
+
+<tr>
+<td>
+	<ul>
+	<li><code>float</code></li>
+	<li><code>double</code></li>
+	</ul>
+</td>
+<td>
+	<p>读取一个有效的字符序列并将其解释为浮点数。</p>
+	<p>有效的序列至少包含一个数字，前面可以有一个符号（+ 或 -），后面可以跟一个小数点和十进制数字。</p>
+	<p>科学计数法（数字后跟 e 或 E 和一些数字）也可以使用。</p>
+	<p>如果未找到有效的序列，<code>ifstream</code> 对象将失败并停止进一步读取。</p>
+</td>
+<td>
+	<ul>
+	<li>5</li>
+	<li>-5.46</li>
+	<li>+2e4</li>
+	<li>-1.62E-5</li>
+	</ul>
+</td>
+</tr>
+
+<tr>
+<td><code>char</code></td>
+<td>
+	<p>从文件中读取单个字符。</p>
+	<p>如果文件指针位于文件末尾，<code>ifstream</code> 对象将失败并停止进一步读取。</p>
+</td>
+<td>B</td>
+</tr>
+
+<tr>
+<td>
+	<ul>
+	<li><code>string</code></li>
+	<li><code>char *</code></li>
+	</ul>
+</td>
+<td>
+	<p>读取所有字符，直到下一个空白字符（空格、制表符或换行符）、空终止字符或文件末尾。</p>
+	<p>变量值将添加一个 \0 空终止字符。</p>
+	<p>如果文件指针已经位于空终止字符或文件末尾，<code>ifstream</code> 对象将失败并停止进一步读取。</p>
+</td>
+<td>Hello</td>
+</tr>
+</table>
+</section>
+
+
+
+<section>
+<h2>操纵符</h2>
+
+<p>操纵符可以代替变量使用。当使用操纵符时，它们会改变 <code>ifstream</code> 对象解释数据的方式。操纵符的效果会一直保持，直到另一个操纵符改变它。</p>
+
+<p>以下表格列出了 <code>ifstream</code> 对象可以使用的操纵符。</p>
+
+<table class="ref">
+<tr>
+<th style="width: 15%;">操纵符</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><code>noskipws</code></td>
+<td>
+	<p>提取运算符 (<code>&gt;&gt;</code>) 不会跳过空白字符，而是会读取它们。</p>
+	<p>这主要用于 char 类型的变量，因为对于其他数据类型，遇到空白字符时会停止读取。</p>
+</td>
+</tr>
+
+<tr>
+<td><code>skipws</code></td>
+<td>重置 <code>noskipws</code> 操纵符所做的更改。</td>
+</tr>
+
+<tr>
+<td><code>ws</code></td>
+<td>将文件指针移动到文件中下一个非空白字符的位置。</td>
+</tr>
+
+<tr>
+<td><code>hex</code></td>
+<td>在使用整数变量时，期望数字的十六进制表示（数字 0 到 9 和 A 到 F）。</td>
+</tr>
+
+<tr>
+<td><code>oct</code></td>
+<td>在使用整数变量时，期望数字的八进制表示（数字 0 到 7）。</td>
+</tr>
+
+<tr>
+<td><code>dec</code></td>
+<td>
+	<p>在使用整数变量时，期望数字的十进制表示（数字 0 到 9）。</p>
+	<p>这会重置 hex 和 oct 操纵符所做的更改。</p>
+</td>
+</tr>
+
+<tr>
+<td><code>boolalpha</code></td>
+<td>在为布尔变量读取数据时，不再查找整数，而是查找字符序列 &quot;true&quot; 或 &quot;false&quot;。</td>
+</tr>
+
+<tr>
+<td><code>noboolalpha</code></td>
+<td>重置 <code>boolalpha</code> 操纵符所做的更改。</td>
+</tr>
+</table>
+
+<h3>实例</h3>
+
+<p>使用操纵符改变数据解释方式：</p>
+
+<pre class="language-cpp">
+ifstream MyFile(&quot;example.txt&quot;);
+bool myBool;
+int myInt;
+
+// 将字符序列 &quot;true&quot; 和 &quot;false&quot; 解释为布尔值
+MyFile &gt;&gt; boolalpha &gt;&gt; myBool;
+
+// 恢复为正常读取布尔值
+MyFile &gt;&gt; noboolalpha;
+
+// 从文件中读取十六进制数字并将其解释为整数
+MyFile &gt;&gt; hex &gt;&gt; myInt;
+
+// 恢复为正常读取整数
+MyFile &gt;&gt; dec;
+
+MyFile.close();
+return 0;
+</pre>
+</section>
+
+
+
+<div class="btn-toref">
+<p><a href="cpp_ref_fstream.html">C++ fstream 库</a></p>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="cpp_reference.html">C++ 参考手册</a></h5>
+<h5 id="tools_example"><a href="cpp_examples.html">C++ 实例</a></h5>
+<h5 id="tools_quiz"><a href="cpp_quiz.html">C++ 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/cpp/ref_fstream_ifstream.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 05:13:34 GMT -->
+</html>

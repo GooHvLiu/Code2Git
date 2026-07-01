@@ -1,0 +1,316 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/vbscript/vbscript_conditionals.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:44:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>VBScript 条件语句</title>
+
+</head>
+
+<body class="serverscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>VBScript 教程</h2>
+<ul>
+<li><a href="index.html" title="VBScript 教程">VB 教程</a></li>
+<li><a href="vbscript_intro.html" title="VBScript 简介">VB 简介</a></li>
+<li><a href="vbscript_howto.html" title="VBScript How to">VB How to</a></li>
+<li><a href="vbscript_whereto.html" title="VBScript Where to">VB Where to</a></li>
+<li><a href="vbscript_variables.html" title="VBScript 变量">VB 变量</a></li>
+<li><a href="vbscript_procedures.html" title="VBScript 程序">VB 程序</a></li>
+<li class="currentLink"><a href="vbscript_conditionals.html" title="VBScript 条件语句">VB 条件语句</a></li>
+<li><a href="vbscript_looping.html" title="VBScript 循环语句">VB 循环语句</a></li>
+<li><a href="vbscript_summary.html" title="您已经学习了 VBScript，下一步呢？">VB 教程总结</a></li>
+</ul>
+<h2>VBScript 实例</h2>
+<ul>
+<li><a href="vbscript_examples.html" title="VBScript 实例">VB 实例</a></li>
+</ul>
+<h2>VBScript 参考手册</h2>
+<ul>
+<li><a href="vbscript_ref_functions.html" title="VBScript 函数">VB 函数</a></li>
+<li><a href="vbscript_ref_keywords.html" title="VBScript 关键字">VB 关键字</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>VBScript 条件语句</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="vbscript_procedures.html" title="VBScript 程序">VB 程序</a></li>
+<li class="next"><a href="vbscript_looping.html" title="VBScript 循环语句">VB 循环语句</a></li>
+</ul>
+</div>
+
+
+
+<div id="example">
+<h2>实例</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t022f.html?f=vbst_ifthen">If...then..else 语句</a></dt>
+<dd>本例演示如何编写 if...then..else 语句。</dd>
+
+<dt><a target="_blank" href="../tiy/t92ba.html?f=vbst_elseif">If...then..elseif 语句</a></dt>
+<dd>本例演示如何编写 if...then...elseif... 语句。</dd>
+
+<dt><a target="_blank" href="../tiy/tad94.html?f=vbst_selectcase">Select case 语句</a></dt>
+<dd>本例演示如何编写 select case 语句。</dd>
+</dl>
+</div>
+
+
+
+<div>
+<h2>条件语句</h2>
+
+<p>经常地，当我们编写代码时，我们需要根据不同的判断执行不同操作。我们可以使用条件语句完成这个工作。</p>
+
+<h3>在 VBScript 我们可以使用三种条件语句：</h3>
+
+<dl class="define">
+<dt>if 语句</dt>
+<dd>假如你希望在条件为 true 时执行一系列的代码，可以使用这个语句。</dd>
+
+<dt>if...then...else 语句</dt>
+<dd>假如你希望执行两套代码其中之一，可以使用这个语句。</dd>
+
+<dt>if...then...elseif 语句</dt>
+<dd>假如你希望选择多套代码之一来执行，可以使用这个语句。</dd>
+
+<dt>select case 语句</dt>
+<dd>假如你希望选择多套代码之一来执行，可以使用这个语句。</dd>
+</dl>
+</div>
+
+
+
+<div>
+<h2>If....Then.....Else</h2>
+
+<p>在下面的情况中，您可以使用 If...Then...Else 语句：</p>
+
+<ul>
+<li>在条件为 true 时，执行某段代码</li>
+<li>选择两段代码之一来执行时</li>
+</ul>
+
+<p>如果需要在条件为 true 时只执行一行语句，可以把代码写为一行：</p>
+
+<pre class="language-vbnet">
+if i=10 <mark>Then</mark> msgbox &quot;Hello&quot;
+</pre>
+
+<p>在上面的代码中，没有 .else.. 语句。我们仅仅让代码在条件为 true 时执行一项操作（当 i 为 10 时）。</p>
+
+<p>假如我们需要在条件为 true 时执行不止一条语句，那么就必须在一行写一条语句，然后使用关键词 &quot;End If&quot; 来结束这个语句：</p>
+
+<pre class="language-vbnet">
+if i=10 Then
+   msgbox &quot;Hello&quot;
+   i = i+1
+<mark>end If</mark>
+</pre>
+
+<p>在上面的代码中，同样没有 .else.. 语句。我们仅仅让代码在条件为 true 时执行了多项操作。</p>
+
+<p>假如我们希望在条件为 true 时执行某条语句，并当条件不为 true 时执行另一条语句，就必须添加关键词 &quot;Else&quot;：</p>
+
+<pre class="language-vbnet">
+if i=10 then
+   msgbox &quot;Hello&quot;
+<mark>else</mark>
+   msgbox &quot;Goodbye&quot;
+end If
+</pre>
+
+<p>当条件为 true 时会执行第一段代码，当条件不成立时执行第二段代码（当 i 不等于 10 时）。</p>
+</div>
+
+
+
+<div>
+<h2>If....Then.....Elseif</h2>
+
+<p>假如你希望选择多套代码之一来执行，可以使用if...then...elseif语句：</p>
+
+<pre class="language-vbnet">
+if payment=&quot;Cash&quot; then
+   msgbox &quot;You are going to pay cash!&quot;
+ elseif payment=&quot;Visa&quot; then
+   msgbox &quot;You are going to pay with visa.&quot;
+ elseif payment=&quot;AmEx&quot; then
+   msgbox &quot;You are going to pay with American Express.&quot;
+ else
+   msgbox &quot;Unknown method of payment.&quot;
+end If
+</pre>
+</div>
+
+
+
+<div>
+<h2>Select Case</h2>
+
+<p>假如你希望选择多套代码之一来执行，可以使用 SELECT 语句：</p>
+
+<pre class="language-vbnet">
+select case payment
+ case &quot;Cash&quot;
+   msgbox &quot;You are going to pay cash&quot;
+ case &quot;Visa&quot;
+   msgbox &quot;You are going to pay with visa&quot;
+ case &quot;AmEx&quot;
+   msgbox &quot;You are going to pay with American Express&quot;
+ case Else
+   msgbox &quot;Unknown method of payment&quot;
+end select
+</pre>
+
+<p>以上代码的工作原理：首先，我们需要一个简单的表达式（常常是一个变量），并且这个表达式会被做一次求值运算。然后，表达式的值会与每个 case 中的值作比较，如果匹配，被匹配的 case 所对应的代码会被执行。</p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="vbscript_procedures.html" title="VBScript 程序">VB 程序</a></li>
+<li class="next"><a href="vbscript_looping.html" title="VBScript 循环语句">VB 循环语句</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="vbscript_ref_functions.html">VBScript 参考手册</a></h5>
+<h5 id="tools_example"><a href="vbscript_examples.html">VBScript 实例</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/vbscript/vbscript_conditionals.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:44:58 GMT -->
+</html>

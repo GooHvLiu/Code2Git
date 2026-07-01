@@ -1,0 +1,225 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/soap/soap_body.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:13:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>SOAP Body 元素</title>
+
+</head>
+
+<body class="xml">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>SOAP 教程</h2>
+<ul>
+<li><a href="index.html" title="SOAP 教程">SOAP 教程</a></li>
+<li><a href="soap_intro.html" title="SOAP 简介">SOAP 简介</a></li>
+<li><a href="soap_syntax.html" title="SOAP 语法">SOAP 语法</a></li>
+<li><a href="soap_envelope.html" title="SOAP Envelope 元素">SOAP Envelope</a></li>
+<li><a href="soap_header.html" title="SOAP Header 元素">SOAP Header</a></li>
+<li class="currentLink"><a href="soap_body.html" title="SOAP Body 元素">SOAP Body</a></li>
+<li><a href="soap_fault.html" title="SOAP Fault 元素">SOAP Fault</a></li>
+<li><a href="soap_httpbinding.html" title="SOAP HTTP Binding">SOAP HTTP Binding</a></li>
+<li><a href="soap_example.html" title="SOAP 实例">SOAP 实例</a></li>
+<li><a href="soap_summary.html" title="您已经学习了 SOAP，下一步呢？">SOAP 总结</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>SOAP Body 元素</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="soap_header.html" title="SOAP Header 元素">SOAP Header</a></li>
+<li class="next"><a href="soap_fault.html" title="SOAP Fault 元素">SOAP Fault</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p><strong>强制使用的 SOAP Body 元素包含实际的 SOAP 消息。</strong></p>
+</div>
+
+
+
+<div>
+<h2>SOAP Body 元素</h2>
+
+<p>必需的 SOAP Body 元素可包含打算传送到消息最终端点的实际 SOAP 消息。</p>
+
+<p>SOAP Body 元素的直接子元素可以是合格的命名空间。SOAP 在默认的命名空间中(&quot;http://www.w3.org/2001/12/soap-envelope&quot;)定义了 Body 元素内部的一个元素。即 SOAP 的 Fault 元素，用于指示错误消息。</p>
+
+<pre class="language-xml">
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;soap:Envelope
+xmlns:soap=&quot;http://www.w3.org/2001/12/soap-envelope&quot;
+soap:encodingStyle=&quot;http://www.w3.org/2001/12/soap-encoding&quot;&gt;
+
+&lt;soap:Body&gt;
+   &lt;m:GetPrice xmlns:m=&quot;http://www.w3school.com.cn/prices&quot;&gt;
+      &lt;m:Item&gt;Apples&lt;/m:Item&gt;
+   &lt;/m:GetPrice&gt;
+&lt;/soap:Body&gt;
+
+&lt;/soap:Envelope&gt;
+</pre>
+
+<p>上面的例子请求苹果的价格。请注意，上面的 m:GetPrice 和 Item 元素是应用程序专用的元素。它们并不是 SOAP 标准的一部分。</p>
+
+<p>而一个 SOAP 响应应该类似这样：</p>
+
+<pre class="language-xml">
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;soap:Envelope
+xmlns:soap=&quot;http://www.w3.org/2001/12/soap-envelope&quot;
+soap:encodingStyle=&quot;http://www.w3.org/2001/12/soap-encoding&quot;&gt;
+
+&lt;soap:Body&gt;
+   &lt;m:GetPriceResponse xmlns:m=&quot;http://www.w3school.com.cn/prices&quot;&gt;
+      &lt;m:Price&gt;1.90&lt;/m:Price&gt;
+   &lt;/m:GetPriceResponse&gt;
+&lt;/soap:Body&gt;
+
+&lt;/soap:Envelope&gt;
+</pre>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="soap_header.html" title="SOAP Header 元素">SOAP Header</a></li>
+<li class="next"><a href="soap_fault.html" title="SOAP Fault 元素">SOAP Fault</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/soap/soap_body.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:13:04 GMT -->
+</html>

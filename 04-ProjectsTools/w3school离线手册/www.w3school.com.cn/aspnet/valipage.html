@@ -1,0 +1,100 @@
+<html>
+
+<!-- Mirrored from www.w3school.com.cn/aspnet/valipage.aspx by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:37:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<body>
+<form method="post" action="https://www.w3school.com.cn/aspnet/valipage.aspx" onsubmit="javascript:return WebForm_OnSubmit();" id="ctl00">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTkzNDM3MDUyOWRk/7dDU4D5CMVakk02Qo0bWnXDgIhiJjsRwpA1nMu4G2s=" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['ctl00'];
+if (!theForm) {
+    theForm = document.ctl00;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="../WebResource7e61.js?d=OvYNubj8jkkiV5se0Z-iT1GfwcTvPr6xShdYVP2Ra4GujXK9gqW-T5_SW3cukVf0T1_QZHLFhIEpXlmfzL7ALnCzbJXTkblB1IGk6s7Qqe41&amp;t=638568892371266408" type="text/javascript"></script>
+
+
+<script src="../WebResource4f5d.js?d=iDJwF3Aml8VPh8fSRYxS9DS2Hq3JwnmqYCifSBB0z4_vzop2MWXLVvK8_SyG5vJAatd1fAiwFvDxms5TbETccRzkUqQ7hCRMPeMRy4QUtdE1&amp;t=638568892371266408" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="1F5D571D" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAANxvKhxxpQ78ZkkJilwdJDcE1wVx3AjxyfpJ3OAS3QZ9PFOuDuz94bvRQgA6h3c7GqKlpELuUAAV3hG8M1KxvfMNrabQzPRW2yD3WXkEmMsgQ==" />
+</div>
+
+<p>请输入 1 到 100 之间的数字：
+<input name="tbox1" type="text" id="tbox1" />
+<br /><br />
+<input type="submit" name="ctl01" value="Submit" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl01&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" />
+</p>
+
+<p>
+<span id="ctl02" style="visibility:hidden;">值必须介于 1 到 100 之间</span>
+</p>
+
+
+<script type="text/javascript">
+//<![CDATA[
+var Page_Validators =  new Array(document.getElementById("ctl02"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var ctl02 = document.all ? document.all["ctl02"] : document.getElementById("ctl02");
+ctl02.controltovalidate = "tbox1";
+ctl02.type = "Integer";
+ctl02.evaluationfunction = "RangeValidatorEvaluateIsValid";
+ctl02.maximumvalue = "100";
+ctl02.minimumvalue = "1";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        //]]>
+</script>
+</form>
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/aspnet/valipage.aspx by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:37:01 GMT -->
+</html>

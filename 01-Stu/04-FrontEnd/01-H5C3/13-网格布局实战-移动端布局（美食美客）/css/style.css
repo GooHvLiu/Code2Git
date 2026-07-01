@@ -1,0 +1,123 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul {
+  list-style: none;
+}
+html,
+body {
+  font-family: 'Roboto', sans-serif;
+}
+.iconfont {
+  font-size: 2.5rem;
+}
+img {
+  width: 2rem;
+}
+#flash {
+  position: absolute;
+  left: 0;
+  top: o;
+  width: 100%;
+  height: 100vh;
+  background-color: #cc0000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1.5s;
+}
+#flash p {
+  color: #fff;
+  font-size: 2rem;
+}
+#flash img {
+  width: 150px;
+}
+.fade {
+  opacity: 0;
+}
+#content {
+  background-color: #fff;
+}
+#content .app-header {
+  background: #cc0000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#content .app-header img {
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+}
+#content .app-header p {
+  color: #fff;
+  font-size: 1.3rem;
+}
+#content .app-header input {
+  height: 2rem;
+  width: 70%;
+  margin: 0.5rem auto;
+  border: none;
+  padding-left: 0.5rem;
+}
+#content .subheader {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  width: 90%;
+  color: #fff;
+  background-color: #7c0000;
+  margin: 0 auto;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+}
+#content .subheader .subheader-info .icon-rights-arrows {
+  font-size: 1.2rem;
+}
+#content .subheader .subheader-img {
+  margin: auto;
+}
+#content .grid {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  margin: 1.5rem;
+}
+#content .grid .item {
+  display: grid;
+  border: 1px solid #e1e1e1;
+  margin: 0.3rem;
+  grid-template-columns: 1fr;
+}
+#content .grid .item h4 {
+  justify-self: start;
+}
+#content .grid .item p {
+  justify-self: start;
+  color: #cc0000;
+}
+#content .grid .item img {
+  justify-self: end;
+}
+#content .grid .item h4,
+#content .grid .item p,
+#content .grid .item img {
+  padding: 0.15rem;
+}
+#footer ul {
+  display: flex;
+  align-self: center;
+  justify-content: space-around;
+}
+#footer ul li {
+  color: #707070;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#footer ul li i {
+  font-size: 2rem;
+  padding-bottom: 0.5rem;
+}

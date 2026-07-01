@@ -1,0 +1,67 @@
+
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.w3school.com.cn/python/r.php?f=ml_preprocessing_2 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 05:58:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8">
+<title>Python Result</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #000000;
+    color: #ffffff;
+    line-height: 1.5;
+    font-family: consolas,"courier new",monospace;
+}
+
+pre#python_result {
+    padding: 8px;
+	font-size:15px;
+}
+</style>
+</head>
+
+<body>
+<pre id="python_result">
+Traceback (most recent call last):
+  File &quot;D:\site\w3school\example\ml\ml_preprocessing_2.py&quot;, line 3, in &lt;module&gt;
+    cars = pd.read_csv(&#039;/demo/python/data.csv&#039;)
+  File &quot;D:\site\python313\Lib\site-packages\pandas\io\parsers\readers.py&quot;, line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File &quot;D:\site\python313\Lib\site-packages\pandas\io\parsers\readers.py&quot;, line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File &quot;D:\site\python313\Lib\site-packages\pandas\io\parsers\readers.py&quot;, line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File &quot;D:\site\python313\Lib\site-packages\pandas\io\parsers\readers.py&quot;, line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...&lt;6 lines&gt;...
+        storage_options=self.options.get(&quot;storage_options&quot;, None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File &quot;D:\site\python313\Lib\site-packages\pandas\io\common.py&quot;, line 873, in get_handle
+    handle = open(
+        handle,
+    ...&lt;3 lines&gt;...
+        newline=&quot;&quot;,
+    )
+FileNotFoundError: [Errno 2] No such file or directory: &#039;/demo/python/data.csv&#039;
+
+</pre>
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/python/r.php?f=ml_preprocessing_2 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 05:58:50 GMT -->
+</html>
+
+

@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/typescript/typescript_getstarted.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:35:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>TypeScript 入门</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>TypeScript 教程</h2>
+<ul>
+<li><a href="index.html" title="TypeScript 教程">TS 教程</a></li>
+<li><a href="typescript_intro.html" title="TypeScript 简介">TS 简介</a></li>
+<li class="currentLink"><a href="typescript_getstarted.html" title="TypeScript 入门">TS 入门</a></li>
+<li><a href="typescript_simple_types.html" title="TypeScript 简单类型">TS 简单类型</a></li>
+<li><a href="typescript_special_types.html" title="TypeScript 特殊类型">TS 特殊类型</a></li>
+<li><a href="typescript_arrays.html" title="TypeScript 数组">TS 数组</a></li>
+<li><a href="typescript_tuples.html" title="TypeScript 元组">TS 元组</a></li>
+<li><a href="typescript_object_types.html" title="TypeScript 对象类型">TS 对象类型</a></li>
+<li><a href="typescript_enums.html" title="TypeScript 枚举">TS 枚举</a></li>
+<li><a href="typescript_aliases_and_interfaces.html" title="TypeScript 别名与接口">TS 别名与接口</a></li>
+<li><a href="typescript_union_types.html" title="TypeScript 联合类型">TS 联合类型</a></li>
+<li><a href="typescript_functions.html" title="TypeScript 函数">TS 函数</a></li>
+<li><a href="typescript_casting.html" title="TypeScript 类型转换">TS 类型转换</a></li>
+<li><a href="typescript_classes.html" title="TypeScript 类">TS 类</a></li>
+<li><a href="typescript_basic_generics.html" title="TypeScript 基本泛型">TS 基本泛型</a></li>
+<li><a href="typescript_utility_types.html" title="TypeScript 实用类型">TS 实用类型</a></li>
+<li><a href="typescript_keyof.html" title="TypeScript Keyof">TS Keyof</a></li>
+<li><a href="typescript_null.html" title="TypeScript Null">TS Null</a></li>
+<li><a href="typescript_definitely_typed.html" title="TypeScript Definitely Typed">TS Definitely Typed</a></li>
+<li><a href="typescript_5_updates.html" title="TypeScript 5.x 更新">TS 5 更新</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>TypeScript 入门</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="typescript_intro.html" title="TypeScript 简介">TS 简介</a></li>
+<li class="next"><a href="typescript_simple_types.html" title="TypeScript 简单类型">TS 简单类型</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>TypeScript 编译器</h2>
+
+<p>TypeScript 使用编译器转换为 JavaScript。</p>
+
+<p>TypeScript 转换为 JavaScript 意味着它可以在任何运行 JavaScript 的地方运行！</p>
+</section>
+
+
+
+<section>
+<h2>安装编译器</h2>
+
+<p>TypeScript 有一个官方编译器，可以通过 npm 安装。</p>
+
+<!--<p>了解有关 npm 以及如何开始的更多信息：<a href="https://www.w3schools.com/whatis/whatis_npm.asp" title="">什么是 npm？</a></p>-->
+
+<p>在您的 npm 项目中，运行以下命令来安装编译器：</p>
+
+<pre class="cmdline">
+npm install typescript --save-dev
+</pre>
+
+<p>应该会给出类似的输出：</p>
+
+<pre class="cmdline">
+added 1 package, and audited 2 packages in 2s
+found 0 vulnerabilities
+</pre>
+
+<p>编译器安装在 <code>node_modules</code> 目录中，可以使用以下命令运行：<code>npx tsc</code>。</p>
+
+<pre class="cmdline">
+npx tsc
+</pre>
+
+<p>应该会给出类似的输出：</p>
+
+<pre class="cmdline">
+Version 4.5.5
+tsc: The TypeScript Compiler - Version 4.5.5
+</pre>
+
+<p>后面是所有常用命令的列表。</p>
+</section>
+
+
+
+<section>
+<h2>配置编译器</h2>
+
+<p>默认情况下，如果在一个空项目中运行，TypeScript 编译器将打印一条帮助消息。</p>
+
+<p>可以使用 <em>tsconfig.json</em> 文件配置编译器。</p>
+
+<p>您可以使用以下命令让 TypeScript 创建具有推荐设置的 <em>tsconfig.json</em>：</p>
+
+<pre class="cmdline">
+npx tsc --init
+</pre>
+
+<p>应该会给出类似的输出：</p>
+
+<pre class="cmdline">
+Created a new tsconfig.json with:
+TS
+  target: es2016
+  module: commonjs
+  strict: true
+  esModuleInterop: true
+  skipLibCheck: true
+  forceConsistentCasingInFileNames: true
+
+You can learn more at https://aka.ms/tsconfig.json
+</pre>
+
+<p>例如，以下是您可以添加到 <em>tsconfig.json</em> 文件的更多内容：</p>
+
+<pre class="language-js">
+{
+  &quot;include&quot;: [&quot;src&quot;],
+  &quot;compilerOptions&quot;: {
+    &quot;outDir&quot;: &quot;./build&quot;
+  }
+}
+</pre>
+
+<p>您可以在编辑器中打开文件以添加这些选项。这将配置 TypeScript 编译器，将位于项目 <code>src/</code> 目录中的 TypeScript 文件转译为 <code>build/</code> 目录中的 JavaScript 文件。</p>
+
+<p>这是快速入门 TypeScript 的一种方法。还有许多其他选项可用，例如 <a href="https://create-react-app.dev/docs/adding-typescript/" title="Adding TypeScript | Create React App">create-react-app 模板</a>、<a href="https://github.com/microsoft/TypeScript-Node-Starter" title="microsoft / TypeScript-Node-Starter">node 入门项目</a>和 <a href="https://webpack.js.org/guides/typescript/" title="TypeScript | webpack">webpack 插件</a>。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="typescript_intro.html" title="TypeScript 简介">TS 简介</a></li>
+<li class="next"><a href="typescript_simple_types.html" title="TypeScript 简单类型">TS 简单类型</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/typescript/typescript_getstarted.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:35:27 GMT -->
+</html>

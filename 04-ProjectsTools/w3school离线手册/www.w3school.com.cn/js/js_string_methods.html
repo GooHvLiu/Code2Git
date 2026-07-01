@@ -1,0 +1,981 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/js/js_string_methods.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:29:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>JavaScript 字符串方法</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>JS 教程</h2>
+<ul>
+<li><a href="index.html" title="JavaScript 教程">JS 教程</a></li>
+<li><a href="js_intro.html" title="JavaScript 简介">JS 简介</a></li>
+<li><a href="js_shiyong.html" title="JavaScript 使用">JS 使用</a></li>
+<li><a href="js_output.html" title="JavaScript 输出">JS 输出</a></li>
+<li><a href="js_statements.html" title="JavaScript 语句">JS 语句</a></li>
+<li><a href="js_syntax.html" title="JavaScript 语法">JS 语法</a></li>
+<li><a href="js_comments.html" title="JavaScript 注释">JS 注释</a></li>
+<li><a href="js_variables.html" title="JavaScript 变量">JS 变量</a></li>
+<li><a href="js_let.html" title="JavaScript Let">JS Let</a></li>
+<li><a href="js_const.html" title="JavaScript Const">JS Const</a></li>
+<li><a href="js_operators.html" title="JavaScript 运算符">JS 运算符</a></li>
+<li><a href="js_arithmetic.html" title="JavaScript 算术">JS 算数</a></li>
+<li><a href="js_assignment.html" title="JavaScript 赋值">JS 赋值</a></li>
+<li><a href="js_datatypes.html" title="JavaScript 数据类型">JS 数据类型</a></li>
+<li><a href="js_functions.html" title="JavaScript 函数">JS 函数</a></li>
+<li><a href="js_objects.html" title="JavaScript 对象">JS 对象</a></li>
+<li><a href="js_events.html" title="JavaScript 事件">JS 事件</a></li>
+<li><a href="js_strings.html" title="JavaScript 字符串">JS 字符串</a></li>
+<li class="currentLink"><a href="js_string_methods.html" title="JavaScript 字符串方法">JS 字符串方法</a></li>
+<li><a href="js_string_search.html" title="JavaScript 字符串搜索">JS 字符串搜索</a></li>
+<li><a href="js_string_templates.html" title="JavaScript 模板文字">JS 字符串模板</a></li>
+<li><a href="js_numbers.html" title="JavaScript 数字">JS 数字</a></li>
+<li><a href="js_bigint.html" title="JavaScript BigInt">JS BigInt</a></li>
+<li><a href="js_number_methods.html" title="JavaScript 数字方法">JS 数字方法</a></li>
+<li><a href="js_number_properties.html" title="JavaScript 数字属性">JS 数字属性</a></li>
+<li><a href="js_arrays.html" title="JavaScript 数组">JS 数组</a></li>
+<li><a href="js_array_methods.html" title="JavaScript 数组方法">JS 数组方法</a></li>
+<li><a href="js_array_search.html" title="JavaScript 数组搜索">JS 数组搜索</a></li>
+<li><a href="js_array_sort.html" title="JavaScript 数组排序">JS 数组排序</a></li>
+<li><a href="js_array_iteration.html" title="JavaScript 数组迭代方法">JS 数组迭代</a></li>
+<li><a href="js_array_const.html" title="JavaScript 数组 Const">JS 数组 Const</a></li>
+<li><a href="js_dates.html" title="JavaScript 日期">JS 日期</a></li>
+<li><a href="js_date_formats.html" title="JavaScript 日期格式">JS 日期格式</a></li>
+<li><a href="js_date_methods.html" title="JavaScript 获取日期方法">JS 日期获取方法</a></li>
+<li><a href="js_date_methods_set.html" title="JavaScript 设置日期方法">JS 日期设置方法</a></li>
+<li><a href="js_math.html" title="JavaScript Math 对象">JS 数学</a></li>
+<li><a href="js_random.html" title="JavaScript 随机">JS 随机</a></li>
+<li><a href="js_booleans.html" title="JavaScript 逻辑">JS 逻辑</a></li>
+<li><a href="js_comparisons.html" title="JavaScript 比较和逻辑运算">JS 比较</a></li>
+<li><a href="js_if_else.html" title="JavaScript If...Else 语句">JS 条件</a></li>
+<li><a href="js_switch.html" title="JavaScript Switch 语句">JS Switch</a></li>
+<li><a href="js_loop_for.html" title="JavaScript For 循环">JS Loop For</a></li>
+<li><a href="js_loop_forin.html" title="JavaScript For In">JS Loop For In</a></li>
+<li><a href="js_loop_forof.html" title="JavaScript For Of">JS Loop For Of</a></li>
+<li><a href="js_loop_while.html" title="JavaScript While 循环">JS Loop While</a></li>
+<li><a href="js_break.html" title="JavaScript Break 和 Continue">JS Break</a></li>
+<li><a href="js_iterables.html" title="JavaScript 可迭代对象">JS 可迭代对象</a></li>
+<li><a href="js_sets.html" title="JavaScript Set">JS Set</a></li>
+<li><a href="js_set_methods.html" title="JavaScript Set 方法">JS Set 方法</a></li>
+<li><a href="js_maps.html" title="JavaScript Map">JS Map</a></li>
+<li><a href="js_map_methods.html" title="JavaScript Map 方法">JS Map 方法</a></li>
+<li><a href="js_typeof.html" title="JavaScript typeof">JS typeof</a></li>
+<li><a href="js_type_conversion.html" title="JavaScript 类型转换">JS 类型转换</a></li>
+<li><a href="js_destructuring.html" title="JavaScript 解构">JS 解构</a></li>
+<li><a href="js_bitwise.html" title="JavaScript 位运算符">JS 位运算</a></li>
+<li><a href="js_regexp.html" title="JavaScript 正则表达式">JS 正则表达式</a></li>
+<li><a href="js_precedence.html" title="JavaScript 运算符优先级">JS 运算符优先级</a></li>
+<li><a href="js_errors.html" title="JavaScript 错误 - Throw 和 Try to Catch">JS 异常</a></li>
+<li><a href="js_scope.html" title="JavaScript 作用域">JS 作用域</a></li>
+<li><a href="js_hoisting.html" title="JavaScript Hoisting">JS Hoisting</a></li>
+<li><a href="js_strict.html" title="JavaScript Use Strict">JS 严格模式</a></li>
+<li><a href="js_this.html" title="JavaScript this 关键词">JS this 关键词</a></li>
+<li><a href="js_arrow_function.html" title="JavaScript 箭头函数">JS 箭头函数</a></li>
+<li><a href="js_classes.html" title="JavaScript 类">JS 类</a></li>
+<li><a href="js_modules.html" title="JavaScript 模块">JS 模块</a></li>
+<li><a href="js_json.html" title="JavaScript JSON">JS JSON</a></li>
+<li><a href="js_debugging.html" title="JavaScript 调试">JS 调试</a></li>
+<li><a href="js_conventions.html" title="JavaScript 样式指南和代码约定">JS 样式指南</a></li>
+<li><a href="js_best_practices.html" title="JavaScript 最佳实践">JS 最佳实践</a></li>
+<li><a href="js_mistakes.html" title="JavaScript 常见错误">JS 错误</a></li>
+<li><a href="js_performance.html" title="JavaScript 性能">JS 性能</a></li>
+<li><a href="js_reserved.html" title="JavaScript 保留词">JS 保留词</a></li>
+</ul>
+<h2>JS 版本</h2>
+<ul>
+<li><a href="js_versions.html" title="JavaScript 版本">JS 版本</a></li>
+<li><a href="js_es5.html" title="JavaScript ES5">JS 2009 (ES5)</a></li>
+<li><a href="js_es6.html" title="Javascript ES6">JS 2015 (ES6)</a></li>
+<li><a href="js_2016.html" title="ECMAScript 2016">JS 2016</a></li>
+<li><a href="js_2017.html" title="ECMAScript 2017">JS 2017</a></li>
+<li><a href="js_2018.html" title="ECMAScript 2018">JS 2018</a></li>
+<li><a href="js_2019.html" title="ECMAScript 2019">JS 2019</a></li>
+<li><a href="js_2020.html" title="ECMAScript 2020">JS 2020</a></li>
+<li><a href="js_2021.html" title="ECMAScript 2021">JS 2021</a></li>
+<li><a href="js_2022.html" title="ECMAScript 2022">JS 2022</a></li>
+<li><a href="js_2023.html" title="ECMAScript 2023">JS 2023</a></li>
+<li><a href="js_2024.html" title="ECMAScript 2024">JS 2024</a></li>
+<li><a href="js_ie_edge.html" title="Internet Explorer / Edge">JS IE / Edge</a></li>
+<li><a href="js_history.html" title="JavaScript 历史">JS 历史</a></li>
+</ul>
+<h2>JS 对象</h2>
+<ul>
+<li><a href="js_object_definition.html" title="JavaScript 对象定义">JS 对象定义</a></li>
+<li><a href="js_object_properties.html" title="JavaScript 对象属性">JS 对象属性</a></li>
+<li><a href="js_object_methods.html" title="JavaScript 对象方法">JS 对象方法</a></li>
+<li><a href="js_object_display.html" title="JavaScript 显示对象">JS 对象显示</a></li>
+<li><a href="js_object_accessors.html" title="JavaScript 对象访问器">JS 对象访问器</a></li>
+<li><a href="js_object_constructors.html" title="JavaScript 对象构造器">JS 对象构造器</a></li>
+<li><a href="js_object_prototypes.html" title="JavaScript 对象原型">JS 对象原型</a></li>
+<li><a href="js_object_es5.html" title="JavaScript ES5 对象方法">JS 对象引用</a></li>
+</ul>
+<h2>JS 函数</h2>
+<ul>
+<li><a href="js_function_definition.html" title="JavaScript 函数定义">JS 函数定义</a></li>
+<li><a href="js_function_parameters.html" title="JavaScript 函数参数">JS 函数参数</a></li>
+<li><a href="js_function_invocation.html" title="JavaScript 函数调用">JS 函数调用</a></li>
+<li><a href="js_function_call.html" title="JavaScript 函数 Call">JS 函数 Call</a></li>
+<li><a href="js_function_apply.html" title="JavaScript 函数 Apply">JS 函数 Apply</a></li>
+<li><a href="js_function_bind.html" title="JavaScript 函数 bind()">JS 函数绑定</a></li>
+<li><a href="js_function_closures.html" title="JavaScript 闭包">JS 闭包</a></li>
+</ul>
+<h2>JS 类</h2>
+<ul>
+<li><a href="js_class_intro.html" title="JavaScript 类">JS 类简介</a></li>
+<li><a href="js_class_inheritance.html" title="JavaScript 类继承">JS 类继承</a></li>
+<li><a href="js_class_static.html" title="JavaScript Static 方法">JS Static</a></li>
+</ul>
+<h2>JS Async</h2>
+<ul>
+<li><a href="js_callback.html" title="JavaScript 回调">JS 回调</a></li>
+<li><a href="js_asynchronous.html" title="异步的 JavaScript">JS 异步</a></li>
+<li><a href="js_promise.html" title="JavaScript Promise">JS Promise</a></li>
+<li><a href="js_async.html" title="JavaScript Async/Await">JS Async</a></li>
+</ul>
+<h2>JS HTML DOM</h2>
+<ul>
+<li><a href="js_htmldom.html" title="JavaScript HTML DOM">DOM 简介</a></li>
+<li><a href="js_htmldom_methods.html" title="JavaScript - HTML DOM 方法">DOM 方法</a></li>
+<li><a href="js_htmldom_document.html" title="JavaScript HTML DOM 文档">DOM 文档</a></li>
+<li><a href="js_htmldom_elements.html" title="JavaScript HTML DOM 元素">DOM 元素</a></li>
+<li><a href="js_htmldom_html.html" title="JavaScript HTML DOM - 改变 HTML">DOM HTML</a></li>
+<li><a href="js_validation.html" title="JavaScript 表单">DOM 表单</a></li>
+<li><a href="js_htmldom_css.html" title="JavaScript HTML DOM - 改变 CSS">DOM CSS</a></li>
+<li><a href="js_htmldom_animate.html" title="JavaScript HTML DOM 动画">DOM 动画</a></li>
+<li><a href="js_htmldom_events.html" title="JavaScript HTML DOM 事件">DOM 事件</a></li>
+<li><a href="js_htmldom_eventlistener.html" title="JavaScript HTML DOM 事件监听程序">DOM 事件监听程序</a></li>
+<li><a href="js_htmldom_navigation.html" title="JavaScript HTML DOM 导航">DOM 导航</a></li>
+<li><a href="js_htmldom_nodes.html" title="JavaScript HTML DOM 元素（节点）">DOM 节点</a></li>
+<li><a href="js_htmldom_collections.html" title="JavaScript HTML DOM 集合">DOM 集合</a></li>
+<li><a href="js_htmldom_nodelist.html" title="JavaScript HTML DOM 节点列表">DOM 节点列表</a></li>
+</ul>
+<h2>JS Browser BOM</h2>
+<ul>
+<li><a href="js_window.html" title="JavaScript Window - 浏览器对象模型">JS Window</a></li>
+<li><a href="js_window_screen.html" title="JavaScript Window Screen">JS Screen</a></li>
+<li><a href="js_window_location.html" title="JavaScript Window Location">JS Location</a></li>
+<li><a href="js_window_history.html" title="JavaScript Window History">JS History</a></li>
+<li><a href="js_window_navigator.html" title="JavaScript Window Navigator">JS Navigator</a></li>
+<li><a href="js_popup.html" title="JavaScript 弹出框">JS 弹出框</a></li>
+<li><a href="js_timing.html" title="JavaScript Timing 事件">JS Timing</a></li>
+<li><a href="js_cookies.html" title="JavaScript Cookies">JS Cookies</a></li>
+</ul>
+<h2>JS Web API</h2>
+<ul>
+<li><a href="js_api_intro.html" title="Web APIs - 简介">Web API 简介</a></li>
+<li><a href="js_validation_api.html" title="JavaScript 验证 API">Web Form API</a></li>
+<li><a href="js_api_history.html" title="Web History API">Web History API</a></li>
+<li><a href="js_api_web_storage.html" title="Web Storage API">Web Storage API</a></li>
+<li><a href="js_api_web_workers.html" title="Web Worker API">Web Worker API</a></li>
+<li><a href="js_api_fetch.html" title="JavaScript Fetch API">Web Fetch API</a></li>
+<li><a href="js_api_geolocation.html" title="Web Geolocation API">Web Geolocation API</a></li>
+</ul>
+<h2>JS AJAX</h2>
+<ul>
+<li><a href="js_ajax_intro.html" title="AJAX 简介">AJAX 简介</a></li>
+<li><a href="js_ajax_http.html" title="AJAX - XMLHttpRequest 对象">AJAX XMLHttp</a></li>
+<li><a href="js_ajax_http_send.html" title="AJAX - XMLHttpRequest">AJAX 请求</a></li>
+<li><a href="js_ajax_http_response.html" title="AJAX - 服务器响应">AJAX 响应</a></li>
+<li><a href="js_ajax_xmlfile.html" title="AJAX XML 实例">AJAX XML 文件</a></li>
+<li><a href="js_ajax_php.html" title="AJAX PHP 实例">AJAX PHP</a></li>
+<li><a href="js_ajax_asp.html" title="AJAX ASP 实例">AJAX ASP</a></li>
+<li><a href="js_ajax_database.html" title="AJAX Database 实例">AJAX 数据库</a></li>
+<li><a href="js_ajax_applications.html" title="XML 应用程序">AJAX 应用程序</a></li>
+<li><a href="js_ajax_examples.html" title="AJAX 实例">AJAX 实例</a></li>
+</ul>
+<h2>JS JSON</h2>
+<ul>
+<li><a href="js_json_intro.html" title="JSON 简介">JSON 简介</a></li>
+<li><a href="js_json_syntax.html" title="JSON 语法">JSON 语法</a></li>
+<li><a href="js_json_xml.html" title="JSON vs XML">JSON vs XML</a></li>
+<li><a href="js_json_datatypes.html" title="JSON 数据类型">JSON 数据类型</a></li>
+<li><a href="js_json_parse.html" title="JSON.parse()">JSON 解析</a></li>
+<li><a href="js_json_stringify.html" title="JSON.stringify()">JSON 字符串化</a></li>
+<li><a href="js_json_objects.html" title="JSON 对象">JSON 对象</a></li>
+<li><a href="js_json_arrays.html" title="JSON 数组">JSON 数组</a></li>
+<li><a href="js_json_server.html" title="JSON 服务器">JSON 服务器</a></li>
+<li><a href="js_json_php.html" title="JSON PHP">JSON PHP</a></li>
+<li><a href="js_json_html.html" title="JSON HTML">JSON HTML</a></li>
+<li><a href="js_json_jsonp.html" title="JSONP">JSON JSONP</a></li>
+</ul>
+<h2>JS vs jQuery</h2>
+<ul>
+<li><a href="js_jquery_selectors.html" title="JavaScript / jQuery DOM 选择器">jQuery 选择器</a></li>
+<li><a href="js_jquery_elements.html" title="JavaScript / jQuery HTML 元素">jQuery HTML</a></li>
+<li><a href="js_jquery_css.html" title="JavaScript / jQuery CSS 样式">jQuery CSS</a></li>
+<li><a href="js_jquery_dom.html" title="JavaScript / jQuery HTML DOM">jQuery DOM</a></li>
+</ul>
+<h2>JS 图形</h2>
+<ul>
+<li><a href="js_graphics.html" title="JavaScript 图形">JS 图形</a></li>
+<li><a href="js_graphics_canvas.html" title="HTML Canvas">JS Canvas</a></li>
+<li><a href="js_graphics_plotly.html" title="Plotly.js">JS Plotly.js</a></li>
+<li><a href="js_graphics_chartjs.html" title="Chart.js">JS Chart</a></li>
+<li><a href="js_graphics_google_chart.html" title="谷歌图表">JS 谷歌图表</a></li>
+<li><a href="js_graphics_d3js.html" title="D3.js">JS D3.js</a></li>
+</ul>
+<h2>JS 实例</h2>
+<ul>
+<li><a href="js_examples.html" title="JavaScript 实例">JS 实例</a></li>
+<li><a href="js_examples_dom.html" title="JavaScript HTML DOM 实例">JS HTML DOM</a></li>
+<li><a href="js_examples_input.html" title="JavaScript HTML 输入实例">JS HTML 输入</a></li>
+<li><a href="js_examples_html.html" title="JavaScript HTML 对象实例">JS HTML 对象</a></li>
+<li><a href="js_examples_events.html" title="JavaScript HTML 事件实例">JS HTML 事件</a></li>
+<li><a href="js_examples_browser.html" title="JavaScript Browser 对象实例">JS Browser</a></li>
+<li><a href="js_quiz.html" title="JavaScript 测验">JS 测验</a></li>
+</ul>
+<h2>JS 参考手册</h2>
+<ul>
+<li><a href="../jsref/index.html" title="JavaScript 和 HTML DOM 参考手册">JavaScript 对象</a></li>
+<li><a href="../jsref/index.html" title="JavaScript 和 HTML DOM 参考手册">HTML DOM 对象</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>JavaScript 字符串方法</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="js_strings.html" title="JavaScript 字符串">JS 字符串</a></li>
+<li class="next"><a href="js_string_search.html" title="JavaScript 字符串搜索">JS 字符串搜索</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p><strong>字符串方法帮助您处理字符串。</strong></p>
+</div>
+
+
+
+<div>
+<h2>字符串方法和属性</h2>
+
+<p>原始值，比如“Bill Gates”，无法拥有属性和方法（因为它们不是对象）。</p>
+
+<p>但是通过 JavaScript，方法和属性也可用于原始值，因为在执行方法和属性时 JavaScript 将原始值视为对象。</p>
+</div>
+
+
+
+<div>
+<h2>字符串长度</h2>
+
+<p><code>length</code> 属性返回字符串的长度：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var txt = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;;
+var sln = txt.length;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tb093.html?f=eg_js_string_length">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>查找字符串中的字符串</h2>
+
+<p><code>indexOf()</code> 方法返回字符串中指定文本<em>首次</em>出现的索引（位置）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var str = &quot;The full name of China is the People's Republic of China.&quot;;
+var pos = str.indexOf(&quot;China&quot;);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t5508.html?f=eg_js_string_indexof">亲自试一试</a></p>
+
+<p>JavaScript 从零计算位置。</p>
+
+<p>0 是字符串中的第一个位置，1 是第二个，2 是第三个 ...</p>
+
+<p><code>lastIndexOf()</code> 方法返回指定文本在字符串中<em>最后</em>一次出现的索引：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var str = &quot;The full name of China is the People's Republic of China.&quot;;
+var pos = str.lastIndexOf(&quot;China&quot;);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t1fc1.html?f=eg_js_string_lastindexof">亲自试一试</a></p>
+
+<p>如果未找到文本， <code>indexOf()</code> 和 <code>lastIndexOf()</code> 均返回 -1。</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var str = &quot;The full name of China is the People's Republic of China.&quot;;
+var pos = str.indexOf(&quot;USA&quot;);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tf5d8.html?f=eg_js_string_indexof_1">亲自试一试</a></p>
+
+<p>两种方法都接受作为检索起始位置的第二个参数。</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var str = &quot;The full name of China is the People's Republic of China.&quot;;
+var pos = str.indexOf(&quot;China&quot;, 18);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t7ec3.html?f=eg_js_string_indexof_2">亲自试一试</a></p>
+
+<p><code>lastIndexOf()</code> 方法向后进行检索（从尾到头），这意味着：假如第二个参数是 50，则从位置 50 开始检索，直到字符串的起点。</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var str = &quot;The full name of China is the People's Republic of China.&quot;;
+var pos = str.lastIndexOf(&quot;China&quot;, 50);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t5a14.html?f=eg_js_string_lastindexof_2">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>检索字符串中的字符串</h2>
+
+<p><code>search()</code> 方法搜索特定值的字符串，并返回匹配的位置：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var str = &quot;The full name of China is the People's Republic of China.&quot;;
+var pos = str.search(&quot;locate&quot;);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t246d.html?f=eg_js_string_search_locate">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>您注意到了吗？</h2>
+
+<p>两种方法，<code>indexOf()</code> 与 <code>search()</code>，是<em>相等的</em>。</p>
+
+<p>这两种方法是不相等的。区别在于：</p>
+
+<ul>
+<li>search() 方法无法设置第二个开始位置参数。</li>
+<li>indexOf() 方法无法设置更强大的搜索值（正则表达式）。</li>
+</ul>
+
+<p>您将在<a href="js_regexp.html" title="JavaScript 正则表达式">正则表达式</a>的章节学习到这些更强大的检索值。</p>
+</div>
+
+
+
+<div>
+<h2>提取部分字符串</h2>
+
+<p>有三种提取部分字符串的方法：</p>
+
+<ul>
+<li>slice(<i>start</i>, <i>end</i>)</li>
+<li>substring(<i>start</i>, <i>end</i>)</li>
+<li>substr(<i>start</i>, <i>length</i>)</li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>slice() 方法</h2>
+
+<p><code>slice()</code> 提取字符串的某个部分并在新字符串中返回被提取的部分。</p>
+
+<p>该方法设置两个参数：起始索引（开始位置），终止索引（结束位置）。</p>
+
+<p>这个例子裁剪字符串中位置 7 到位置 13 的片段：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var str = &quot;Apple, Banana, Mango&quot;;
+var res = str.slice(7,13);
+</pre>
+
+<p>res 的结果是：</p>
+
+<pre>Banana</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t6131.html?f=eg_js_string_slice">亲自试一试</a></p>
+
+<p>如果某个参数为负，则从字符串的结尾开始计数。</p>
+
+<p>这个例子裁剪字符串中位置 -12 到位置 -6 的片段：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var str = &quot;Apple, Banana, Mango&quot;;
+var res = str.slice(-13,-7);
+</pre>
+
+<p>res 的结果是：</p>
+
+<pre>Banana</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t5e1a.html?f=eg_js_string_slice_negative">亲自试一试</a></p>
+
+<p>如果省略第二个参数，则该方法将裁剪字符串的剩余部分：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var res = str.slice(7);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t6fa1.html?f=eg_js_string_slice_rest">亲自试一试</a></p>
+
+<p>或者从结尾计数：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var res = str.slice(-13);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t2431.html?f=eg_js_string_slice_rest_negative">亲自试一试</a></p>
+
+<p class="tip"><span>提示：</span>负值位置不适用 Internet Explorer 8 及其更早版本。</p>
+</div>
+
+
+
+<div>
+<h2>substring() 方法</h2>
+
+<p><code>substring()</code> 类似于 <code>slice()</code>。</p>
+
+<p>不同之处在于 <code>substring()</code> 无法接受负的索引。</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var str = &quot;Apple, Banana, Mango&quot;;
+var res = str.substring(7,13);
+</pre>
+
+<p>res 的结果是：</p>
+
+<pre>Banana</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t8d7d.html?f=eg_js_string_substring">亲自试一试</a></p>
+
+<p>如果省略第二个参数，则该 <code>substring()</code> 将裁剪字符串的剩余部分。</p>
+</div>
+
+
+
+<div>
+<h2>substr() 方法</h2>
+
+<p><code>substr()</code> 类似于 <code>slice()</code>。</p>
+
+<p>不同之处在于第二个参数规定被提取部分的<em>长度</em>。</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var str = &quot;Apple, Banana, Mango&quot;;
+var res = str.substr(7,6);
+</pre>
+
+<p>res 的结果是：</p>
+
+<pre>Banana</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tdb1c.html?f=eg_js_string_substr">亲自试一试</a></p>
+
+<p>如果省略第二个参数，则该 substr() 将裁剪字符串的剩余部分。</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var str = &quot;Apple, Banana, Mango&quot;;
+var res = str.substr(7);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t2991-2.html?f=eg_js_string_substr_1">亲自试一试</a></p>
+
+<p>res 的结果是：</p>
+
+<pre>Banana, Mango</pre>
+
+<p>如果首个参数为负，则从字符串的结尾计算位置。</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var str = &quot;Apple, Banana, Mango&quot;;
+var res = str.substr(-5);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t4476.html?f=eg_js_string_substr_2">亲自试一试</a></p>
+
+<p>res 的结果是：</p>
+
+<pre>Mango</pre>
+
+<p>第二个参数不能为负，因为它定义的是长度。</p>
+</div>
+
+
+
+<div>
+<h2>替换字符串内容</h2>
+
+<p><code>replace()</code> 方法用另一个值替换在字符串中指定的值：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+str = &quot;Please visit Microsoft!&quot;;
+var n = str.replace(&quot;Microsoft&quot;, &quot;W3School&quot;);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t519a.html?f=eg_js_string_replace">亲自试一试</a></p>
+
+<p><code>replace()</code> 方法不会改变调用它的字符串。它返回的是新字符串。</p>
+
+<p>默认地，<code>replace()</code> <em>只替换首个匹配</em>：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+str = &quot;Please visit Microsoft and Microsoft!&quot;;
+var n = str.replace(&quot;Microsoft&quot;, &quot;W3School&quot;);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t9546.html?f=eg_js_string_replace_first">亲自试一试</a></p>
+
+<p>默认地，<code>replace()</code> 对大小写敏感。因此不对匹配 MICROSOFT：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+str = &quot;Please visit Microsoft!&quot;;
+var n = str.replace(&quot;MICROSOFT&quot;, &quot;W3School&quot;);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/td4db.html?f=eg_js_string_replace_case">亲自试一试</a></p>
+
+<p>如需执行大小写不敏感的替换，请使用正则表达式 <code>/i</code>（大小写不敏感）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+str = &quot;Please visit Microsoft!&quot;;
+var n = str.replace(/MICROSOFT/i, &quot;W3School&quot;);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t519a-2.html?f=eg_js_string_replace_insensitive">亲自试一试</a></p>
+
+<p>请注意正则表达式不带引号。</p>
+
+<p>如需替换所有匹配，请使用正则表达式的 <code>g</code> 标志（用于全局搜索）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+str = &quot;Please visit Microsoft and Microsoft!&quot;;
+var n = str.replace(/Microsoft/g, &quot;W3School&quot;);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t8934.html?f=eg_js_string_replace_global">亲自试一试</a></p>
+
+<p>您将在 JavaScript 正则表达式这一章学到更多有关<a href="js_regexp.html" title="JavaScript 正则表达式">正则表达式</a>的内容。</p>
+</div>
+
+
+
+<div>
+<h2>转换为大写和小写</h2>
+
+<p>通过 <code>toUpperCase()</code> 把字符串转换为大写：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var text1 = &quot;Hello World!&quot;;       // 字符串
+var text2 = text1.toUpperCase();  // text2 是被转换为大写的 text1
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tfadb.html?f=eg_js_string_touppercase">亲自试一试</a></p>
+
+<p>通过 <code>toLowerCase()</code> 把字符串转换为小写：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var text1 = &quot;Hello World!&quot;;       // 字符串
+var text2 = text1.toLowerCase();  // text2 是被转换为小写的 text1
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t5dc1.html?f=eg_js_string_tolowercase">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>concat() 方法</h2>
+
+<p><code>concat()</code> 连接两个或多个字符串：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var text1 = &quot;Hello&quot;;
+var text2 = &quot;World&quot;;
+text3 = text1.concat(&quot; &quot;,text2);
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t78ed.html?f=eg_js_string_concat">亲自试一试</a></p>
+
+<p><code>concat()</code> 方法可用于代替加运算符。下面两行是等效的：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var text = &quot;Hello&quot; + &quot; &quot; + &quot;World!&quot;;
+var text = &quot;Hello&quot;.concat(&quot; &quot;,&quot;World!&quot;);
+</pre>
+
+<p>所有字符串方法都会返回新字符串。它们不会修改原始字符串。</p>
+
+<p>正式地说：字符串是不可变的：字符串不能更改，只能替换。</p>
+</div>
+
+
+
+<div>
+<h2>String.trim()</h2>
+
+<p><code>trim()</code> 方法删除字符串两端的空白符：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var str = &quot;       Hello World!        &quot;;
+alert(str.trim());
+</pre>
+
+<p class="important"><span>警告：</span>Internet Explorer 8 或更低版本不支持 <code>trim()</code> 方法。</p>
+
+<p class="tiy"><a target="_blank" href="../tiy/t51e7.html?f=eg_js_string_trim">亲自试一试</a></p>
+
+<p>如需支持 IE 8，您可搭配正则表达式使用 <code>replace()</code> 方法代替：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var str = &quot;       Hello World!        &quot;;
+alert(str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, ''));
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/te34d.html?f=eg_js_string_trim_regexp">亲自试一试</a></p>
+
+<p>您还可以使用上面的 replace 方案把 trim 函数添加到 JavaScript String.prototype：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+if (!String.prototype.trim) {
+  String.prototype.trim = function () {
+    return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+};
+var str = &quot;       Hello World!        &quot;;
+alert(str.trim());
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/ta3e6.html?f=eg_js_string_trim_polyfill">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>提取字符串字符</h2>
+
+<p>这是两个提取字符串字符的<em>安全</em>方法：</p>
+
+<ul>
+<li>charAt(<i>position</i>)</li>
+<li>charCodeAt(<i>position</i>)</li>
+</ul>
+</div>
+
+
+<div>
+<h2>charAt() 方法</h2>
+
+<p><code>charAt()</code> 方法返回字符串中指定下标（位置）的字符串：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var str = &quot;HELLO WORLD&quot;;
+str.charAt(0);            // 返回 H
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t1e91.html?f=eg_js_string_charat">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>charCodeAt() 方法</h2>
+
+<p><code>charCodeAt()</code> 方法返回字符串中指定索引的字符 unicode 编码：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var str = &quot;HELLO WORLD&quot;;
+
+str.charCodeAt(0);         // 返回 72
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/ta254.html?f=eg_js_string_charcodeat">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>属性访问（Property Access）</h2>
+
+<p>ECMAScript 5 (2009) 允许对字符串的属性访问 [ ]：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var str = &quot;HELLO WORLD&quot;;
+str[0];                   // 返回 H
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tc6b1.html?f=eg_js_string_property_access_1">亲自试一试</a></p>
+
+<p>使用属性访问有点不太靠谱：</p>
+
+<ul>
+<li>不适用 Internet Explorer 7 或更早的版本</li>
+<li>它让字符串看起来像是数组（其实并不是）</li>
+<li>如果找不到字符，<code>[ ]</code> 返回 <code>undefined</code>，而 <code>charAt()</code> 返回空字符串。</li>
+<li>它是只读的。<code>str[0] = &quot;A&quot;</code> 不会产生错误（但也不会工作！）</li>
+</ul>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var str = &quot;HELLO WORLD&quot;;
+str[0] = &quot;A&quot;;             // 不产生错误，但不会工作
+str[0];                   // 返回 H
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tc2ae.html?f=eg_js_string_property_access_2">亲自试一试</a></p>
+
+<p class="tip"><span>提示：</span>如果您希望按照数组的方式处理字符串，可以先把它转换为数组。</p>
+</div>
+
+
+
+<div>
+<h2>把字符串转换为数组</h2>
+
+<p>可以通过 <code>split()</code> 将字符串转换为数组：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var txt = &quot;a,b,c,d,e&quot;;   // 字符串
+txt.split(&quot;,&quot;);          // 用逗号分隔
+txt.split(&quot; &quot;);          // 用空格分隔
+txt.split(&quot;|&quot;);          // 用竖线分隔
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t4ac2.html?f=eg_js_string_split">亲自试一试</a></p>
+
+<p>如果省略分隔符，被返回的数组将包含  index [0] 中的整个字符串。</p>
+
+<p>如果分隔符是 &quot;&quot;，被返回的数组将是间隔单个字符的数组：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var txt = &quot;Hello&quot;;       // 字符串
+txt.split(&quot;&quot;);           // 分隔为字符
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tad2f.html?f=eg_js_string_split_character">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>完整的 String 参考手册</h2>
+
+<p>如需完整的参考手册，请访问我们完整的 <a href="../jsref/jsref_obj_string.html" title="JavaScript String 对象">JavaScript 字符串参考手册</a>。</p>
+
+<p>该手册包含了有关所有字符串属性和方法的描述和实例。</p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="js_strings.html" title="JavaScript 字符串">JS 字符串</a></li>
+<li class="next"><a href="js_string_search.html" title="JavaScript 字符串搜索">JS 字符串搜索</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../jsref/index.html">JavaScript 和 HTML DOM 参考手册</a></h5>
+<h5 id="tools_example"><a href="js_examples.html">JavaScript 实例</a></h5>
+<h5 id="tools_quiz"><a href="js_quiz.html">JavaScript 测验</a></h5>
+<h5 id="tools_professional"><a href="index_pro.html">JavaScript 高级教程</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/js/js_string_methods.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:29:58 GMT -->
+</html>

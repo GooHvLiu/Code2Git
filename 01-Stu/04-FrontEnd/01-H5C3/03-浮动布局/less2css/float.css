@@ -1,0 +1,79 @@
+.container {
+  margin: 0 auto;
+}
+.pagebanner {
+  width: 960px;
+}
+.pagebanner .logo,
+.pagebanner .banner1,
+.pagebanner .banner2 {
+  background-color: #DEDEDE;
+  height: 80px;
+  line-height: 80px;
+}
+.pagebanner .logo {
+  width: 200px;
+}
+.pagebanner .banner1 {
+  width: 540px;
+  margin: 0 10px;
+}
+.pagebanner .banner2 {
+  width: 200px;
+}
+.pagemenu {
+  background-color: #DEDEDE;
+  width: 960px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  margin: 10px 0;
+}
+.pagecontent {
+  margin: 10px 0;
+  line-height: 80px;
+}
+.pagecontent .pagecontent_leftItem .pagecontent_leftItem_top .pagecontent_leftItem_top_left,
+.pagecontent .pagecontent_leftItem .pagecontent_leftItem_top .pagecontent_leftItem_top_right {
+  width: 370px;
+  height: 200px;
+  border: 1px solid #000;
+}
+.pagecontent .pagecontent_leftItem .pagecontent_leftItem_top .pagecontent_leftItem_top_right {
+  margin-left: 10px;
+}
+.pagecontent .pagecontent_leftItem .pagecontent_leftItem_bottom .pagecontent_leftItem_bottom_left01,
+.pagecontent .pagecontent_leftItem .pagecontent_leftItem_bottom .pagecontent_leftItem_bottom_left02,
+.pagecontent .pagecontent_leftItem .pagecontent_leftItem_bottom .pagecontent_leftItem_bottom_left03,
+.pagecontent .pagecontent_leftItem .pagecontent_leftItem_bottom .pagecontent_leftItem_bottom_left04 {
+  width: 180px;
+  height: 200px;
+  border: 1px solid #000;
+  margin-top: 10px;
+}
+.pagecontent .pagecontent_leftItem .pagecontent_leftItem_bottom .pagecontent_leftItem_bottom_left02 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.pagecontent .pagecontent_leftItem .pagecontent_leftItem_bottom .pagecontent_leftItem_bottom_left03 {
+  margin-right: 10px;
+}
+.pagecontent .pagecontent_rightItem .pagecontent_rightItem_top,
+.pagecontent .pagecontent_rightItem .pagecontent_rightItem_middle,
+.pagecontent .pagecontent_rightItem .pagecontent_rightItem_bottom {
+  width: 200px;
+  height: 130px;
+  border: 1px solid #000;
+  margin-left: 10px;
+}
+.pagecontent .pagecontent_rightItem .pagecontent_rightItem_middle {
+  margin: 10px 0;
+  margin-left: 10px;
+}
+.pagefooter {
+  background-color: #DEDEDE;
+  width: 960px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+}

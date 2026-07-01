@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>操作失败</title>
+<link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #f0f4f9;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card {
+  width: 700px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 60px 50px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+.title {
+  color: #d9534f;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 32px;
+  font-weight: 600;
+}
+.status-text {
+  text-align: center;
+  color: #666;
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+.stack-box {
+  max-height: 220px;
+  overflow-y: auto;
+  background: #f7f8fa;
+  padding: 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 40px;
+}
+.btn-wrap {
+  text-align: center;
+}
+.btn-danger {
+  padding: 12px 48px;
+  font-size: 18px;
+  border-radius: 8px;
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <h6 class="title"><%= msg %></h6>
+
+  <% if (error.status) { %>
+    <p class="status-text">状态码：<%= error.status %></p>
+  <% } %>
+
+  <% if (error.stack) { %>
+    <pre class="stack-box"><%= error.stack %></pre>
+  <% } %>
+
+  <div class="btn-wrap">
+    <a href="<%= url %>" class="btn btn-danger">前往首页</a>
+  </div>
+</div>
+</body>
+</html>

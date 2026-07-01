@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>  
+<html>
+
+<!-- Mirrored from www.w3school.com.cn/php/r2.php?f=php_form_validation_special by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 05:55:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<style>
+.error {color: #FF0000;}
+</style>
+</head>
+<body>  
+
+
+<h2>PHP 表单验证示例</h2>
+<p><span class="error">* 必填字段</span></p>
+<form method="post" action="https://www.w3school.com.cn/example/php-2025/php_form_validation_special.php">  
+  姓名: <input type="text" name="name">
+  <span class="error">* </span>
+  <br><br>
+  邮箱: <input type="text" name="email">
+  <span class="error">* </span>
+  <br><br>
+  网站: <input type="text" name="website">
+  <span class="error"></span>
+  <br><br>
+  评论: <textarea name="comment" rows="5" cols="40"></textarea>
+  <br><br>
+  性别:
+  <input type="radio" name="gender" value="female">女
+  <input type="radio" name="gender" value="male">男
+  <span class="error">* </span>
+  <br><br>
+  <input type="submit" name="submit" value="提交">  
+</form>
+
+<h2>您的输入：</h2><br><br><br><br>
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/php/r2.php?f=php_form_validation_special by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 05:55:31 GMT -->
+</html>

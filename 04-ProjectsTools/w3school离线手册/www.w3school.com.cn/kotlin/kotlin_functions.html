@@ -1,0 +1,427 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/kotlin/kotlin_functions.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Kotlin 函数</title>
+
+</head>
+
+<body class="serverscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Kotlin 教程</h2>
+<ul>
+<li><a href="index.html" title="Kotlin 教程">Kotlin 教程</a></li>
+<li><a href="kotlin_intro-2.html" title="Kotlin 简介">Kotlin 简介</a></li>
+<li><a href="kotlin_getstarted.html" title="Kotlin 入门">Kotlin 入门</a></li>
+<li><a href="kotlin_syntax.html" title="Kotlin 语法">Kotlin 语法</a></li>
+<li><a href="kotlin_output.html" title="Kotlin 输出">Kotlin 输出</a></li>
+<li><a href="kotlin_comments.html" title="Kotlin 注释">Kotlin 注释</a></li>
+<li><a href="kotlin_variables.html" title="Kotlin 变量">Kotlin 变量</a></li>
+<li><a href="kotlin_data_types.html" title="Kotlin 数据类型">Kotlin 数据类型</a></li>
+<li><a href="kotlin_operators.html" title="Kotlin 运算符">Kotlin 运算符</a></li>
+<li><a href="kotlin_strings.html" title="Kotlin 字符串">Kotlin 字符串</a></li>
+<li><a href="kotlin_booleans.html" title="Kotlin 布尔值">Kotlin 布尔值</a></li>
+<li><a href="kotlin_conditions.html" title="Kotlin If...Else">Kotlin If...Else</a></li>
+<li><a href="kotlin_when.html" title="Kotlin When">Kotlin When</a></li>
+<li><a href="kotlin_while_loop.html" title="Kotlin While 循环">Kotlin While 循环</a></li>
+<li><a href="kotlin_break_continue.html" title="Kotlin Break 和 Continue">Kotlin Break/Continue</a></li>
+<li><a href="kotlin_arrays.html" title="Kotlin 数组">Kotlin 数组</a></li>
+<li><a href="kotlin_for_loop.html" title="Kotlin For 循环">Kotlin For 循环</a></li>
+<li><a href="kotlin_ranges.html" title="Kotlin 范围">Kotlin 范围</a></li>
+<li class="currentLink"><a href="kotlin_functions.html" title="Kotlin 函数">Kotlin 函数</a></li>
+</ul>
+<h2>Kotlin 类</h2>
+<ul>
+<li><a href="kotlin_oop.html" title="Kotlin OOP">Kotlin OOP</a></li>
+<li><a href="kotlin_classes.html" title="Kotlin 类和对象">Kotlin 类/对象</a></li>
+<li><a href="kotlin_constructors.html" title="Kotlin 构造函数">Kotlin 构造函数</a></li>
+<li><a href="kotlin_class_functions.html" title="Kotlin 类函数">Kotlin 类函数</a></li>
+<li><a href="kotlin_inheritance.html" title="Kotlin 继承">Kotlin 继承</a></li>
+</ul>
+<h2>Kotlin 实例</h2>
+<ul>
+<li><a href="kotlin_examples.html" title="Kotlin 实例">Kotlin 实例</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Kotlin 函数</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="kotlin_ranges.html" title="Kotlin 范围">Kotlin 范围</a></li>
+<li class="next"><a href="kotlin_oop.html" title="Kotlin OOP">Kotlin OOP</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<em>函数</em>是仅在被调用时运行的代码块。
+
+<p>您可以将数据（被称为参数）传递到函数中。</p>
+
+<p>函数用于执行某些操作，它们也被称为<em>方法</em>。</p>
+</section>
+
+
+
+<section>
+<h2>预定义函数</h2>
+
+<p>事实证明，你已经知道函数是什么了。你在整个教程中一直都在使用它！</p>
+
+<p>例如，<code>println()</code> 是一个函数。它用于在屏幕上输出/打印文本：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+fun main() {
+  println(&quot;Hello World&quot;)
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="tbc1a.html?f=kotlin_helloworld">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>创建您自己的函数</h2>
+
+<p>要创建您自己的函数，请使用 <code>fun</code> 关键字，并编写函数名称，后跟括号 <code>()</code>：</p>
+
+<h3>实例</h3>
+
+<p>创建一个名为 <code>myFunction</code> 的函数，该函数应输出一些文本：</p>
+
+<pre class="language-kotlin">
+fun myFunction() {
+  println(&quot;本段代码刚被执行！&quot;)
+} 
+</pre>
+</section>
+
+
+
+<section>
+<h2>调用函数</h2>
+
+<p>现在您已经创建了一个函数，您可以通过<em>调用</em>它来执行它。</p>
+
+<p>要在 Kotlin 中调用函数，请编写函数名称，后跟两个括号 <code>()</code>。</p>
+
+<p>在下面的例子中，当调用 <code>myFunction()</code> 时，将打印一些文本（操作）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+fun main() 调用
+  myFunction() // Call myFunction
+}
+
+// 输出 &quot;本段代码刚被执行！&quot;
+</pre>
+
+<p class="tiy"><a target="_blank" href="tb54f.html?f=kotlin_function">亲自试一试</a></p>
+
+<p>函数可以根据需要被多次调用：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+fun main() {
+  myFunction()
+  myFunction()
+  myFunction()
+}
+
+// 本段代码刚被执行！
+// 本段代码刚被执行！
+// 本段代码刚被执行！
+</pre>
+
+<p class="tiy"><a target="_blank" href="t7fa3.html?f=kotlin_function_multiple">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>函数参数</h2>
+
+<p>信息可以作为参数传递给函数。</p>
+
+<p>参数在函数名后的括号内指定。你可以根据需要添加任意多的参数，只需用逗号分隔它们。请注意，你必须指定每个参数的类型（<code>Int</code>、<code>String</code> 等）。</p>
+
+<p>以下示例中的函数采用一个名为 <mark>fname</mark> 的 <code>String</code> 参数。调用函数时，我们会传递一个名字，该函数在函数内部用于打印全名：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+fun myFunction(fname: String) {
+  println(fname + &quot; Gates&quot;)
+}
+
+fun main() {
+  myFunction(&quot;Bill&quot;)
+  myFunction(&quot;Jane&quot;)
+  myFunction(&quot;George&quot;)
+}
+  
+// Bill Gates
+// Jane Gates
+// George Gates
+</pre>
+
+<p class="tiy"><a target="_blank" href="td089.html?f=kotlin_function_param_1">亲自试一试</a></p>
+
+<p class="tip"><span>提示：</span>当<em>参数</em>传递给函数时，它被称为<em>实参</em>。所以，从上面的例子来看：<code>fname</code> 是一个<em>参数</em>（形参），而 <mark>Bill</mark>、<mark>Jane</mark> 和 <mark>George</mark> 是<em>实参</em>。</p>
+</section>
+
+
+
+<section>
+<h2>多个参数</h2>
+
+<p>你可以根据需要拥有任意多的参数：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+fun myFunction(fname: String, age: Int) {
+  println(fname + &quot; is &quot; + age)
+}
+
+fun main() {
+  myFunction(&quot;Bill&quot;, 35)
+  myFunction(&quot;Jane&quot;, 32)
+  myFunction(&quot;George&quot;, 15)
+}
+
+// Bill is 35
+// Jane is 32
+// George is 15
+</pre>
+
+<p class="tiy"><a target="_blank" href="t3f3e.html?f=kotlin_function_param_2">亲自试一试</a></p>
+
+<p class="note"><span>注意：</span>使用多个参数时，函数调用的实参数量必须与参数的数量相同，并且实参的传递顺序必须相同。</p>
+</section>
+
+
+
+<section>
+<h2>返回值</h2>
+
+<p>在上面的例子中，我们使用函数来输出值。在下面的示例中，我们将使用一个函数<em>返回</em>一个值并将其分配给一个变量。</p>
+
+<p>要返回值，请使用 <code>return</code> 关键字，并在函数括号后指定<em>返回类型</em>（本例中为 <code>Int</code>）：</p>
+
+<h3>实例</h3>
+
+<p>具有一个 Int 参数和 Int 返回类型的函数：</p>
+
+<pre class="language-kotlin">
+fun myFunction(x: Int): Int {
+  return (x + 5)
+}
+
+fun main() {
+  var result = myFunction(3)
+  println(result)
+}
+
+// 8 (3 + 5) 
+</pre>
+
+<p class="tiy"><a target="_blank" href="t9b95.html?f=kotlin_function_return_1">亲自试一试</a></p>
+
+<p>使用两个参数：</p>
+
+<h3>实例</h3>
+
+<p>具有两个 <code>Int</code> 参数和 <code>Int</code> 返回类型的函数：</p>
+
+<pre class="language-kotlin">
+fun myFunction(x: Int, y: Int): Int {
+  return (x + y)
+}
+
+fun main() {
+  var result = myFunction(3, 5)
+  println(result)
+}
+
+// 8 (3 + 5)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t25c0.html?f=kotlin_function_return_2">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>返回值的简短语法</h2>
+
+<p>还有一种更简短的语法用于返回值。你可以使用 <code>=</code> 运算符而不是 <code>return</code>，而无需指定返回类型。Kotlin 足够智能，可以自动找出它是什么：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+fun myFunction(x: Int, y: Int) = x + y
+
+fun main() {
+  var result = myFunction(3, 5)
+  println(result)
+}
+
+// 8 (3 + 5)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t36c9.html?f=kotlin_function_assignment">亲自试一试</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="kotlin_ranges.html" title="Kotlin 范围">Kotlin 范围</a></li>
+<li class="next"><a href="kotlin_oop.html" title="Kotlin OOP">Kotlin OOP</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_example"><a href="kotlin_examples.html">Kotlin 实例</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/kotlin/kotlin_functions.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:28 GMT -->
+</html>

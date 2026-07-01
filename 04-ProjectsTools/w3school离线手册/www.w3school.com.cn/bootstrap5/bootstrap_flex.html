@@ -1,0 +1,862 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/bootstrap5/bootstrap_flex.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:22:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Bootstrap 5 Flex</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Bootstrap 5 教程</h2>
+<ul>
+<li><a href="index.html" title="Bootstrap 5 教程">BS5 教程</a></li>
+<li><a href="bootstrap_get_started.html" title="Bootstrap 5 入门">BS5 入门</a></li>
+<li><a href="bootstrap_containers.html" title="Bootstrap 5 容器">BS5 容器</a></li>
+<li><a href="bootstrap_grid_basic.html" title="Bootstrap 5 网格">BS5 网格基础</a></li>
+<li><a href="bootstrap_typography.html" title="Bootstrap 5 文字/排版">BS5 排版</a></li>
+<li><a href="bootstrap_colors.html" title="Bootstrap 5 颜色">BS5 颜色</a></li>
+<li><a href="bootstrap_tables.html" title="Bootstrap 5 表格">BS5 表格</a></li>
+<li><a href="bootstrap_images.html" title="Bootstrap 5 图像">BS5 图像</a></li>
+<li><a href="bootstrap_jumbotron.html" title="Bootstrap 5 Jumbotron">BS5 Jumbotron</a></li>
+<li><a href="bootstrap_alerts.html" title="Bootstrap 5 警告框">BS5 警告框</a></li>
+<li><a href="bootstrap_buttons.html" title="Bootstrap 5 按钮">BS5 按钮</a></li>
+<li><a href="bootstrap_button_groups.html" title="Bootstrap 5 按钮组">BS5 按钮组</a></li>
+<li><a href="bootstrap_badges.html" title="Bootstrap 5 徽章">BS5 徽章</a></li>
+<li><a href="bootstrap_progressbars.html" title="Bootstrap 5 进度条">BS5 进度条</a></li>
+<li><a href="bootstrap_spinners.html" title="Bootstrap 5 加载器">BS5 加载器</a></li>
+<li><a href="bootstrap_pagination.html" title="Bootstrap 5 分页">BS5 分页</a></li>
+<li><a href="bootstrap_list_groups.html" title="Bootstrap 5 列表组">BS5 列表组</a></li>
+<li><a href="bootstrap_cards.html" title="Bootstrap 5 卡片">BS5 卡片</a></li>
+<li><a href="bootstrap_dropdowns.html" title="Bootstrap 5 下拉菜单">BS5 下拉菜单</a></li>
+<li><a href="bootstrap_collapse.html" title="Bootstrap 5 折叠">BS5 折叠</a></li>
+<li><a href="bootstrap_navs.html" title="Bootstrap 5 导航">BS5 导航</a></li>
+<li><a href="bootstrap_navbar.html" title="Bootstrap 5 导航栏">BS5 导航栏</a></li>
+<li><a href="bootstrap_carousel.html" title="Bootstrap 5 轮播">BS5 轮播</a></li>
+<li><a href="bootstrap_modal.html" title="Bootstrap 5 模态">BS5 模态</a></li>
+<li><a href="bootstrap_tooltip.html" title="Bootstrap 5 工具提示">BS5 工具提示</a></li>
+<li><a href="bootstrap_popover.html" title="Bootstrap 5 弹出框">BS5 弹出框</a></li>
+<li><a href="bootstrap_toast.html" title="Bootstrap 5 Toast">BS5 Toast</a></li>
+<li><a href="bootstrap_scrollspy.html" title="Bootstrap 5 Scrollspy">BS5 Scrollspy</a></li>
+<li><a href="bootstrap_offcanvas.html" title="Bootstrap 5 Offcanvas">BS5 Offcanvas</a></li>
+<li><a href="bootstrap_utilities.html" title="Bootstrap 5 实用工具">BS5 实用工具</a></li>
+<li class="currentLink"><a href="bootstrap_flex.html" title="Bootstrap 5 Flex">BS5 Flex</a></li>
+</ul>
+<h2>Bootstrap 5 表单</h2>
+<ul>
+<li><a href="bootstrap_forms.html" title="Bootstrap 5 表单">BS5 表单</a></li>
+<li><a href="bootstrap_form_select.html" title="Bootstrap 5 选择菜单">BS5 选择菜单</a></li>
+<li><a href="bootstrap_form_check_radio.html" title="Bootstrap 5 复选框和单选按钮">BS5 复选框和单选按钮</a></li>
+<li><a href="bootstrap_form_range.html" title="Bootstrap 5 范围">BS5 范围</a></li>
+<li><a href="bootstrap_form_input_group.html" title="Bootstrap 5 输入组">BS5 输入组</a></li>
+<li><a href="bootstrap_form_floating_labels.html" title="Bootstrap 5 表单浮动标签">BS5 浮动标签</a></li>
+<li><a href="bootstrap_form_validation.html" title="Bootstrap 5 表单验证">BS5 表单验证</a></li>
+</ul>
+<h2>Bootstrap 5 网格</h2>
+<ul>
+<li><a href="bootstrap_grid_system.html" title="Bootstrap 5 网格系统">BS5 网格系统</a></li>
+<li><a href="bootstrap_grid_stacked_to_hor.html" title="Bootstrap 5 堆叠/水平">BS5 堆叠/水平</a></li>
+<li><a href="bootstrap_grid_xsmall.html" title="Bootstrap 5 网格：超小型设备">BS5 网格 XSmall</a></li>
+<li><a href="bootstrap_grid_small.html" title="Bootstrap 5 网格：小型设备">BS5 网格 Small</a></li>
+<li><a href="bootstrap_grid_medium.html" title="Bootstrap 5 网格：中型设备">BS5 网格 Medium</a></li>
+<li><a href="bootstrap_grid_large.html" title="Bootstrap 5 网格：大型设备">BS5 网格 Large</a></li>
+<li><a href="bootstrap_grid_xlarge.html" title="Bootstrap 5 网格：超大型设备">BS5 网格 XLarge</a></li>
+<li><a href="bootstrap_grid_xxl.html" title="Bootstrap 5 网格：特大型设备">BS5 网格 XXL</a></li>
+<li><a href="bootstrap_grid_examples.html" title="Bootstrap 5 网格实例">BS5 网格实例</a></li>
+</ul>
+<h2>Bootstrap 5 其他</h2>
+<ul>
+<li><a href="bootstrap_templates.html" title="Bootstrap 5 基础模板">BS5 基础模板</a></li>
+<li><a href="bootstrap_quiz.html" title="Bootstrap 5 测验">BS5 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Bootstrap 5 Flex</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="bootstrap_utilities.html" title="Bootstrap 5 实用工具">BS5 实用工具</a></li>
+<li class="next"><a href="bootstrap_forms.html" title="Bootstrap 5 表单">BS5 表单</a></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>弹性框</h2>
+
+<p>Bootstrap 3 和 Bootstrap 4 &amp; 5 的最大区别在于 Bootstrap 5 现在使用 flexbox 而不是浮动来处理布局。</p>
+
+<p>弹性的框布局模块，可以更轻松地设计弹性响应式布局结构，而无需使用浮动或定位。</p>
+
+<p>如果您不熟悉 flex，可以在我们的 <a href="../css/css3_flexbox.html" title="CSS Flexbox">CSS Flexbox 教程</a> 中学习。</p>
+
+<p class="note"><span>注释：</span>IE9 及更早版本不支持 Flexbox。</p>
+
+<p class="note"><span>注释：</span>如果您需要 IE8-9 支持，请使用 Bootstrap 3。它是最稳定的 Bootstrap 版本，团队仍然支持它进行关键错误修复和文档更改。但是不会向其中添加任何新功能。</p>
+
+<h3>实例</h3>
+
+<p>如需创建 flexbox 容器并将直接子项转换为 flex 项，请使用 <code>d-flex</code> 类：</p>
+
+<iframe scrolling="no" src="../demo/bs/bs_flex.html" style="width:100%;height:100px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;d-flex p-3 bg-secondary text-white&quot;&gt;
+  &lt;div class=&quot;p-2 bg-info&quot;&gt;弹性项目 1&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-warning&quot;&gt;弹性项目 2&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-primary&quot;&gt;弹性项目 3&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t68bc.html?s=h&amp;f=bs_flex">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p>如需创建行内 flexbox 容器，请使用 <code>d-inline-flex</code> 类：</p>
+
+<iframe scrolling="no" src="../demo/bs/bs_flex-inline.html" style="width:100%;height:100px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;d-inline-flex p-3 bg-secondary text-white&quot;&gt;
+  &lt;div class=&quot;p-2 bg-info&quot;&gt;弹性项目 1&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-warning&quot;&gt;弹性项目 2&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-primary&quot;&gt;弹性项目 3&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t7237.html?s=h&amp;f=bs_flex-inline">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>水平方向</h2>
+
+<p>请使用 <code>.flex-row</code> 水平（并排）显示弹性项目。这是默认设置。</p>
+
+<p class="tip"><span>提示：</span>使用 <code>.flex-row-reverse</code> 可水平方向右对齐：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_flex-direction.html" style="width:100%;height:130px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;d-flex flex-row bg-secondary&quot;&gt;
+  &lt;div class=&quot;p-2 bg-info&quot;&gt;弹性项目 1&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-warning&quot;&gt;弹性项目 2&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-primary&quot;&gt;弹性项目 3&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;d-flex flex-row-reverse bg-secondary&quot;&gt;
+  &lt;div class=&quot;p-2 bg-info&quot;&gt;弹性项目 1&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-warning&quot;&gt;弹性项目 2&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-primary&quot;&gt;弹性项目 3&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t1711.html?s=h&amp;f=bs_flex-direction">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>垂直方向</h2>
+
+<p>请使用 <code>.flex-column</code> 垂直显示 flex 项目（彼此堆叠），或使用 <code>.flex-column-reverse</code> 反转垂直方向：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_flex-direction-col.html" style="width:100%;height:300px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;d-flex flex-column&quot;&gt;
+  &lt;div class=&quot;p-2 bg-info&quot;&gt;弹性项目 1&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-warning&quot;&gt;弹性项目 2&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-primary&quot;&gt;弹性项目 3&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;d-flex flex-column-reverse&quot;&gt;
+  &lt;div class=&quot;p-2 bg-info&quot;&gt;弹性项目 1&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-warning&quot;&gt;弹性项目 2&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-primary&quot;&gt;弹性项目 3&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t8915.html?s=h&amp;f=bs_flex-direction-col">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>对齐内容</h2>
+
+<p>使用 <code>.justify-content-*</code> 类可改变弹性项目的对齐方式。有效的类是：：</p>
+
+<ul>
+<li><code>start</code>（默认）</li>
+<li><code>end</code></li>
+<li><code>center</code></li>
+<li><code>between</code></li>
+<li><code>around</code></li>
+</ul>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_flex-justify.html" style="width:100%;height:300px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;d-flex justify-content-start&quot;&gt;...&lt;/div&gt;
+&lt;div class=&quot;d-flex justify-content-end&quot;&gt;...&lt;/div&gt;
+&lt;div class=&quot;d-flex justify-content-center&quot;&gt;...&lt;/div&gt;
+&lt;div class=&quot;d-flex justify-content-between&quot;&gt;...&lt;/div&gt;
+&lt;div class=&quot;d-flex justify-content-around&quot;&gt;...&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t8be1.html?s=h&amp;f=bs_flex-justify">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>等宽</h2>
+
+<p>在 flex 项目上使用 <code>.flex-fill</code> 可强制它们等宽：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_flex-fill.html" style="width:100%;height:70px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;d-flex&quot;&gt;
+  &lt;div class=&quot;p-2 bg-info flex-fill&quot;&gt;弹性项目 1&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-warning flex-fill&quot;&gt;弹性项目 2&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-primary flex-fill&quot;&gt;弹性项目 3&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/te7cf.html?s=h&amp;f=bs_flex-fill">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>伸展</h2>
+
+<p>在 flex 项目上使用 <code>.flex-grow-1</code> 可占用多余的空间。在下面的例子中，前两个 flex 项目占用了必要的空间，而最后一个项目占用了剩余的可用空间：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_flex-grow.html" style="width:100%;height:70px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;d-flex&quot;&gt;
+  &lt;div class=&quot;p-2 bg-info&quot;&gt;弹性项目 1&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-warning&quot;&gt;弹性项目 2&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-primary flex-grow-1&quot;&gt;弹性项目 3&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t9008.html?s=h&amp;f=bs_flex-grow">亲自试一试</a></p>
+
+<p class="tip"><span>提示：</span>在 flex 项目上使用 <code>.flex-shrink-1</code> 可使其在必要时收缩。</p>
+</div>
+
+
+
+<div>
+<h2>顺序</h2>
+
+<p>使用 <code>.order</code> 类可更改特定 flex 项的视觉顺序。有效的类从 0 到 5，其中最低的数字具有最高的优先级（order-1 显示在 order-2 之前，以此类推）：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_flex-order.html" style="width:100%;height:70px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;d-flex bg-secondary&quot;&gt;
+  &lt;div class=&quot;p-2 bg-info order-3&quot;&gt;弹性项目 1&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-warning order-2&quot;&gt;弹性项目 2&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-primary order-1&quot;&gt;弹性项目 3&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/te678.html?s=h&amp;f=bs_flex-order">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>自动外边距</h2>
+
+<p>使用 <code>.ms-auto</code>（将项目向右推）或使用 <code>.me-auto</code>（将项目向左推）可轻松地为弹性项目添加自动边距：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_flex-auto-margins.html" style="width:100%;height:130px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;d-flex bg-secondary&quot;&gt;
+  &lt;div class=&quot;p-2 ms-auto bg-info&quot;&gt;弹性项目 1&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-warning&quot;&gt;弹性项目 2&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-primary&quot;&gt;弹性项目 3&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;d-flex bg-secondary&quot;&gt;
+  &lt;div class=&quot;p-2 bg-info&quot;&gt;弹性项目 1&lt;/div&gt;
+  &lt;div class=&quot;p-2 bg-warning&quot;&gt;弹性项目 2&lt;/div&gt;
+  &lt;div class=&quot;p-2 me-auto bg-primary&quot;&gt;弹性项目 3&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tcc2e.html?s=h&amp;f=bs_flex-auto-margins">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>换行</h2>
+
+<p>通过 <code>.flex-nowrap</code>（默认）、<code>.flex-wrap</code> 或 <code>.flex-wrap-reverse</code>，可控制 flex 项目如何包装在 flex 容器中。</p>
+  
+<h3>实例</h3>
+
+<iframe src="../demo/bs/bs_flex-wrap.html" style="width:100%;height:260px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;d-flex flex-wrap&quot;&gt;..&lt;/div&gt;
+
+&lt;div class=&quot;d-flex flex-wrap-reverse&quot;&gt;..&lt;/div&gt;
+
+&lt;div class=&quot;d-flex flex-nowrap&quot;&gt;..&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/ta1ad.html?s=h&amp;f=bs_flex-wrap">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>对齐内容</h2>
+
+<p>请使用 <code>.align-content-*</code> 类控制弹性项目的垂直对齐方式。有效的类是：</p>
+
+<ul>
+<li><code>.align-content-start</code>（默认）</li>
+<li><code>.align-content-end</code></li>
+<li><code>.align-content-center</code></li>
+<li><code>.align-content-between</code></li>
+<li><code>.align-content-around</code></li>
+<li><code>.align-content-stretch</code></li>
+</ul>
+
+<p class="note"><span>注释：</span>这些类对单行弹性项没有影响。</p>
+
+<p>请单击下面的按钮，通过更改实例框中弹性项的垂直对齐方式来查看五个类的区别：</p>
+    
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_flex-align-content.html" style="width:100%;height:440px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;d-flex flex-wrap align-content-start&quot;&gt;..&lt;/div&gt;
+
+&lt;div class=&quot;d-flex flex-wrap align-content-end&quot;&gt;..&lt;/div&gt;
+
+&lt;div class=&quot;d-flex flex-wrap align-content-center&quot;&gt;..&lt;/div&gt;
+
+&lt;div class=&quot;d-flex flex-wrap align-content-around&quot;&gt;..&lt;/div&gt;
+
+&lt;div class=&quot;d-flex flex-wrap align-content-stretch&quot;&gt;..&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t6474.html?s=h&amp;f=bs_flex-align-content">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>对齐项目</h2>
+
+<p>请使用 <code>.align-items-*</code> 类控制<em>单行</em>弹性项目的垂直对齐方式。有效的类是：</p>
+
+<ul>
+<li><code>.align-items-start</code></li>
+<li><code>.align-items-end</code></li>
+<li><code>.align-items-center</code></li>
+<li><code>.align-items-baseline</code></li>
+<li><code>.align-items-stretch</code>（默认）</li>
+</ul>
+
+<p>请单击下面的按钮查看五个类之间的区别：</p>
+    
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_flex-align-items.html" style="width:100%;height:300px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;d-flex align-items-start&quot;&gt;..&lt;/div&gt;
+
+&lt;div class=&quot;d-flex align-items-end&quot;&gt;..&lt;/div&gt;
+
+&lt;div class=&quot;d-flex align-items-center&quot;&gt;..&lt;/div&gt;
+
+&lt;div class=&quot;d-flex align-items-baseline&quot;&gt;..&lt;/div&gt;
+
+&lt;div class=&quot;d-flex align-items-stretch&quot;&gt;..&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tb253.html?s=h&amp;f=bs_flex-align-items">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>自我对齐</h2>
+
+<p>请使用 <code>.align-self-*</code> 类控制<em>指定弹性项目</em>的垂直对齐方式。有效的类是：</p>
+
+<ul>
+<li><code>.align-self-start</code></li>
+<li><code>.align-self-end</code></li>
+<li><code>.align-self-center</code></li>
+<li><code>.align-self-baseline</code></li>
+<li><code>.align-self-stretch</code>（默认）</li>
+</ul>
+
+<p>单击下面的按钮查看五个类之间的区别：</p>
+    
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_flex-align-self.html" style="width:100%;height:250px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;d-flex bg-light&quot; style=&quot;height:150px&quot;&gt;
+  &lt;div class=&quot;p-2 border&quot;&gt;Flex item 1&lt;/div&gt;
+  &lt;div class=&quot;p-2 border align-self-start&quot;&gt;Flex item 2&lt;/div&gt;
+  &lt;div class=&quot;p-2 border&quot;&gt;Flex item 3&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/td246.html?s=h&amp;f=bs_flex-align-self">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>响应式 Flex 类</h2>
+
+<p>所有弹性类都带有额外的响应类，这使得在特定屏幕尺寸上设置特定 flex 类变得容易。</p>
+
+<p>* 符号可以替换为 sm、md、lg、xl 或 xxl，分别代表小、中、大、超大和特大屏幕。</p>
+
+<p>搜索特定的弹性类 ..</p>
+
+<table class="definition-usage">
+<tr>
+<th>类</th>
+<th>描述</th>
+<th>例子</th>
+</tr>
+
+<tr>
+<th colspan="3" style="background-color: #3f3f3f; color: #fff;">弹性容器</th>
+</tr>
+
+<tr>
+<td><code>.d-*-flex</code></td>
+<td>为不同的屏幕创建 flexbox 容器。</td>
+<td><a target="_blank" href="../tiy/tf98e.html?s=h&amp;f=bs_flex-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.d-*-inline-flex</code></td>
+<td>为不同的屏幕创建行内的 flexbox 容器。</td>
+<td><a target="_blank" href="../tiy/t2689.html?s=h&amp;f=bs_flex-inline-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<th colspan="3" style="background-color: #3f3f3f; color: #fff;">方向</th>
+</tr>
+
+<tr>
+<td><code>.flex-*-row</code></td>
+<td>在不同屏幕上水平显示弹性项目。</td>
+<td><a target="_blank" href="../tiy/tcf7e.html?s=h&amp;f=bs_flex-row-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.flex-*-row-reverse</code></td>
+<td>在不同的屏幕上水平和右对齐显示弹性项目。</td>
+<td><a target="_blank" href="../tiy/tb2bc.html?s=h&amp;f=bs_flex-row-reverse-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.flex-*-column</code></td>
+<td>在不同屏幕上垂直显示弹性项目。</td>
+<td><a target="_blank" href="../tiy/t6b90.html?s=h&amp;f=bs_flex-column-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.flex-*-column-reverse</code></td>
+<td>在不同的屏幕屏幕上以相反的顺序垂直显示弹性项目。</td>
+<td><a target="_blank" href="../tiy/t7637.html?s=h&amp;f=bs_flex-column-reverse-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<th colspan="3" style="background-color: #3f3f3f; color: #fff;">齐行的内容</th>
+</tr>
+
+<tr>
+<td><code>.justify-content-*-start</code></td>
+<td>在不同屏幕上从开头（左对齐）显示弹性项目。</td>
+<td><a target="_blank" href="../tiy/t418b.html?s=h&amp;f=bs_flex-justify-start-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.justify-content-*-end</code></td>
+<td>在不同屏幕的末尾（右对齐）显示弹性项目。</td>
+<td><a target="_blank" href="../tiy/t3b87.html?s=h&amp;f=bs_flex-justify-end-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.justify-content-*-center</code></td>
+<td>在不同屏幕的弹性容器中心显示弹性项目。</td>
+<td><a target="_blank" href="../tiy/t04bd.html?s=h&amp;f=bs_flex-justify-center-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.justify-content-*-between</code></td>
+<td>在不同屏幕上的均等显示弹性项目。</td>
+<td><a target="_blank" href="../tiy/tabf6.html?s=h&amp;f=bs_flex-justify-between-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.justify-content-*-around</code></td>
+<td>在不同屏幕上“围绕”显示弹性项目。</td>
+<td><a target="_blank" href="../tiy/t4842.html?s=h&amp;f=bs_flex-justify-around-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<th colspan="3" style="background-color: #3f3f3f; color: #fff;">Fill / 等宽</th>
+</tr>
+
+<tr>
+<td><code>.flex-*-fill</code></td>
+<td>强制弹性项目在不同屏幕上的宽度相等。</td>
+<td><a target="_blank" href="../tiy/t6875.html?s=h&amp;f=bs_flex-fill-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<th colspan="3" style="background-color: #3f3f3f; color: #fff;">扩展</th>
+</tr>
+
+<tr>
+<td><code>.flex-*-grow-0</code></td>
+<td>不要让项目在不同的屏幕上扩展。</td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>.flex-*-grow-1</code></td>
+<td>使项目在不同的屏幕上扩展。</td>
+<td></td>
+</tr>
+
+<tr>
+<th colspan="3" style="background-color: #3f3f3f; color: #fff;">收缩</th>
+</tr>
+
+<tr>
+<td><code>.flex-*-shrink-0</code></td>
+<td>不要让项目在不同屏幕上收缩。</td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>.flex-*-shrink-1</code></td>
+<td>使项目在不同屏幕上收缩。</td>
+<td></td>
+</tr>
+
+<tr>
+<th colspan="3" style="background-color: #3f3f3f; color: #fff;">顺序</th>
+</tr>
+
+<tr>
+<td><code>.order-*-0-12</code></td>
+<td>在小屏幕从 0 到 12 更改顺序。</td>
+<td><a target="_blank" href="../tiy/t516a.html?s=h&amp;f=bs_flex-order-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<th colspan="3" style="background-color: #3f3f3f; color: #fff;">换行</th>
+</tr>
+
+<tr>
+<td><code>.flex-*-nowrap</code></td>
+<td>不要在不同的屏幕上对项目换行。</td>
+<td><a target="_blank" href="../tiy/t606f.html?s=h&amp;f=bs_flex-nowrap-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.flex-*-wrap</code></td>
+<td>在不同的屏幕上对项目换行。</td>
+<td><a target="_blank" href="../tiy/t36d9.html?s=h&amp;f=bs_flex-wrap-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.flex-*-wrap-reverse</code></td>
+<td>反转不同屏幕上对项目的换行。</td>
+<td><a target="_blank" href="../tiy/tad88.html?s=h&amp;f=bs_flex-wrap-reverse-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<th colspan="3" style="background-color: #3f3f3f; color: #fff;">对齐内容</th>
+</tr>
+
+<tr>
+<td><code>.align-content-*-start</code></td>
+<td>在不同屏幕上从开头对齐项目。</td>
+<td><a target="_blank" href="../tiy/te605.html?s=h&amp;f=bs_flex-align-content-start-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.align-content-*-end</code></td>
+<td>在不同屏幕的末尾对齐项目。</td>
+<td><a target="_blank" href="../tiy/tfa4f.html?s=h&amp;f=bs_flex-align-content-end-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.align-content-*-center</code></td>
+<td>在不同屏幕的中心对齐项目。</td>
+<td><a target="_blank" href="../tiy/tfe35.html?s=h&amp;f=bs_flex-align-content-center-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.align-content-*-around</code></td>
+<td>在不同屏幕的周围对齐项目。</td>
+<td><a target="_blank" href="../tiy/t5dd7.html?s=h&amp;f=bs_flex-align-content-around-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.align-content-*-stretch</code></td>
+<td>在不同的屏幕上拉伸项目。</td>
+<td><a target="_blank" href="../tiy/t509a.html?s=h&amp;f=bs_flex-align-content-stretch-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<th colspan="3" style="background-color: #3f3f3f; color: #fff;">对齐项目</th>
+</tr>
+
+<tr>
+<td><code>.align-items-*-start</code></td>
+<td>在不同屏幕上从开头对齐单行项目。</td>
+<td><a target="_blank" href="../tiy/tcaad.html?s=h&amp;f=bs_flex-align-items-start-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.align-items-*-end</code></td>
+<td>在不同屏幕的末尾对齐单行项目。</td>
+<td><a target="_blank" href="../tiy/tb1d2.html?s=h&amp;f=bs_flex-align-items-end-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.align-items-*-center</code></td>
+<td>在不同屏幕的中心对齐单行项目。</td>
+<td><a target="_blank" href="../tiy/tb9f0.html?s=h&amp;f=bs_flex-align-items-center-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.align-items-*-baseline</code></td>
+<td>在不同屏幕的基线上对齐单行项目。</td>
+<td><a target="_blank" href="../tiy/td2e7.html?s=h&amp;f=bs_flex-align-items-baseline-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.align-items-*-stretch</code></td>
+<td>在不同屏幕上拉伸单行项目。</td>
+<td><a target="_blank" href="../tiy/t5e8a.html?s=h&amp;f=bs_flex-align-items-stretch-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<th colspan="3" style="background-color: #3f3f3f; color: #fff;">对齐自身</th>
+</tr>
+
+<tr>
+<td><code>.align-self-*-start</code></td>
+<td>在不同屏幕上从开头对齐弹性项目。</td>
+<td><a target="_blank" href="../tiy/t1757.html?s=h&amp;f=bs_flex-align-self-start-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.align-self-*-end</code></td>
+<td>在不同屏幕的末尾对齐弹性项目。</td>
+<td><a target="_blank" href="../tiy/t0fbf.html?s=h&amp;f=bs_flex-align-self-end-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.align-self-*-center</code></td>
+<td>在不同屏幕的中心对齐弹性项目。</td>
+<td><a target="_blank" href="../tiy/t5d29.html?s=h&amp;f=bs_flex-align-self-center-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.align-self-*-baseline</code></td>
+<td>在不同屏幕的基线上对齐弹性项目。</td>
+<td><a target="_blank" href="../tiy/t43c9.html?s=h&amp;f=bs_flex-align-self-baseline-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td><code>.align-self-*-stretch</code></td>
+<td>在不同屏幕上拉伸弹性项目。</td>
+<td><a target="_blank" href="../tiy/td955.html?s=h&amp;f=bs_flex-align-self-stretch-responsive">试一试</a></td>
+</tr>
+</table>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="bootstrap_utilities.html" title="Bootstrap 5 实用工具">BS5 实用工具</a></li>
+<li class="next"><a href="bootstrap_forms.html" title="Bootstrap 5 表单">BS5 表单</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_quiz"><a href="bootstrap_quiz.html">JavaScript 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/bootstrap5/bootstrap_flex.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:22:49 GMT -->
+</html>

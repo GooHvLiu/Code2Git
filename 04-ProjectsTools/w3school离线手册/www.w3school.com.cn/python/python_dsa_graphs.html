@@ -1,0 +1,974 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/python/python_dsa_graphs.asp by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Mar 2026 14:34:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Python 图论</title>
+<link rel="preload" href="../lib/fonts/roboto-mono-v13-latin-500.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Python 教程</h2>
+<ul>
+<li><a href="index.html" title="Python 教程">Python 教程</a></li>
+<li><a href="python_intro.html" title="Python 简介">Python 简介</a></li>
+<li><a href="python_getstarted.html" title="Python 入门">Python 入门</a></li>
+<li><a href="python_syntax.html" title="Python 语法">Python 语法</a></li>
+<li><a href="python_comments.html" title="Python 注释">Python 注释</a></li>
+<li><a href="python_variables.html" title="Python 变量">Python 变量</a></li>
+<li><a href="python_datatypes.html" title="Python 数据类型">Python 数据类型</a></li>
+<li><a href="python_numbers.html" title="Python 简介">Python 数字</a></li>
+<li><a href="python_casting.html" title="Python Casting">Python Casting</a></li>
+<li><a href="python_strings.html" title="Python 字符串">Python 字符串</a></li>
+<li><a href="python_booleans.html" title="Python 布尔">Python 布尔</a></li>
+<li><a href="python_operators.html" title="Python 运算符">Python 运算符</a></li>
+<li><a href="python_lists.html" title="Python 列表">Python 列表</a></li>
+<li><a href="python_tuples.html" title="Python 元组">Python 元组</a></li>
+<li><a href="python_sets.html" title="Python 集合">Python 集合</a></li>
+<li><a href="python_dictionaries.html" title="Python 字典">Python 字典</a></li>
+<li><a href="python_conditions.html" title="Python If ... Else">Python If Else</a></li>
+<li><a href="python_while_loops.html" title="Python While 循环">Python While 循环</a></li>
+<li><a href="python_for_loops.html" title="Python For 循环">Python For 循环</a></li>
+<li><a href="python_functions.html" title="Python 函数">Python 函数</a></li>
+<li><a href="python_lambda.html" title="Python Lambda">Python Lambda</a></li>
+<li><a href="python_arrays.html" title="Python 数组">Python 数组</a></li>
+<li><a href="python_classes.html" title="Python 类和对象">Python 类/对象</a></li>
+<li><a href="python_inheritance.html" title="Python 继承">Python 继承</a></li>
+<li><a href="python_iterators.html" title="Python 迭代">Python 迭代</a></li>
+<li><a href="python_polymorphism.html" title="Python 多态">Python 多态</a></li>
+<li><a href="python_scope.html" title="Python 作用域">Python 作用域</a></li>
+<li><a href="python_modules.html" title="Python 模块">Python 模块</a></li>
+<li><a href="python_datetime.html" title="Python 日期">Python 日期</a></li>
+<li><a href="python_math.html" title="Python 数学">Python 数学</a></li>
+<li><a href="python_json.html" title="Python JSON">Python JSON</a></li>
+<li><a href="python_regex.html" title="Python RegEx">Python RegEx</a></li>
+<li><a href="python_pip.html" title="Python PIP">Python PIP</a></li>
+<li><a href="python_try_except.html" title="Python Try Except">Python Try Except</a></li>
+<li><a href="python_cmd_input.html" title="Python 命令行输入">Python 命令输入</a></li>
+<li><a href="python_string_formatting.html" title="Python 字符串格式化">Python 字符串格式化</a></li>
+</ul>
+<h2>Python 文件处理</h2>
+<ul>
+<li><a href="python_file_handling.html" title="Python 文件打开">Python 文件打开</a></li>
+<li><a href="python_file_open.html" title="Python 文件读取">Python 文件读取</a></li>
+<li><a href="python_file_write.html" title="Python 文件写入">Python 文件写入/创建</a></li>
+<li><a href="python_file_remove.html" title="Python 文件删除">Python 文件删除</a></li>
+</ul>
+<h2>Python 模块</h2>
+<ul>
+<li><a href="../numpy/index.html" title="NumPy 教程">NumPy 教程</a></li>
+<li><a href="../pandas/index.html" title="Pandas 教程">Pandas 教程</a></li>
+<li><a href="../scipy/index.html" title="SciPy 教程">SciPy 教程</a></li>
+</ul>
+<h2>Python Matplotlib</h2>
+<ul>
+<li><a href="matplotlib_intro.html" title="Matplotlib 简介">Matplotlib 简介</a></li>
+<li><a href="matplotlib_getting_started.html" title="Matplotlib 入门">Matplotlib 入门</a></li>
+<li><a href="matplotlib_pyplot.html" title="Matplotlib Pyplot">Matplotlib Pyplot</a></li>
+<li><a href="matplotlib_plotting.html" title="Matplotlib 绘图">Matplotlib 绘图</a></li>
+<li><a href="matplotlib_markers.html" title="Matplotlib 标记">Matplotlib 标记</a></li>
+<li><a href="matplotlib_line.html" title="Matplotlib 线条">Matplotlib 线条</a></li>
+<li><a href="matplotlib_labels.html" title="Matplotlib 标签">Matplotlib 标签</a></li>
+<li><a href="matplotlib_grid.html" title="Matplotlib 网格">Matplotlib 网格</a></li>
+<li><a href="matplotlib_subplot.html" title="Matplotlib 子图">Matplotlib 子图</a></li>
+<li><a href="matplotlib_scatter.html" title="Matplotlib 散点图">Matplotlib 散点图</a></li>
+<li><a href="matplotlib_bars.html" title="Matplotlib 条形图">Matplotlib 条形图</a></li>
+<li><a href="matplotlib_histograms.html" title="Matplotlib 直方图">Matplotlib 直方图</a></li>
+<li><a href="matplotlib_pie_charts.html" title="Matplotlib 饼图">Matplotlib 饼图</a></li>
+</ul>
+<h2>Python NumPy</h2>
+<ul>
+<li><a href="numpy_intro.html" title="NumPy 简介">NumPy 简介</a></li>
+<li><a href="numpy_getting_started.html" title="NumPy 入门">NumPy 入门</a></li>
+<li><a href="numpy_creating_arrays.html" title="NumPy 数组创建">NumPy 数组创建</a></li>
+<li><a href="numpy_array_indexing.html" title="NumPy 数组索引">NumPy 数组索引</a></li>
+<li><a href="numpy_array_slicing.html" title="NumPy 数组裁切">NumPy 数组裁切</a></li>
+<li><a href="numpy_data_types.html" title="NumPy 数据类型">NumPy 数据类型</a></li>
+<li><a href="numpy_copy_vs_view.html" title="NumPy 副本/视图">NumPy 副本/视图</a></li>
+<li><a href="numpy_array_shape.html" title="NumPy 数组形状">NumPy 数组形状</a></li>
+<li><a href="numpy_array_reshape.html" title="NumPy 数组重塑">NumPy 数组重塑</a></li>
+<li><a href="numpy_array_iterating.html" title="NumPy 数组迭代">NumPy 数组迭代</a></li>
+<li><a href="numpy_array_join.html" title="NumPy 数组连接">NumPy 数组连接</a></li>
+<li><a href="numpy_array_split.html" title="NumPy 数组拆分">NumPy 数组拆分</a></li>
+<li><a href="numpy_array_search.html" title="NumPy 数组搜索">NumPy 数组搜索</a></li>
+<li><a href="numpy_array_sort.html" title="NumPy 数组排序">NumPy 数组排序</a></li>
+<li><a href="numpy_array_filter.html" title="NumPy 数组过滤">NumPy 数组过滤</a></li>
+<li><a href="numpy_random.html" title="NumPy 随机">NumPy 随机</a></li>
+<li><a href="numpy_ufunc.html" title="NumPy ufuncs">NumPy ufuncs</a></li>
+</ul>
+<h2>Python 机器学习</h2>
+<ul>
+<li><a href="python_ml_getting_started.html" title="机器学习 - 入门">入门</a></li>
+<li><a href="python_ml_mean_median_mode.html" title="机器学习 - 平均中位数模式">平均中位数模式</a></li>
+<li><a href="python_ml_standard_deviation.html" title="机器学习 - 标准差">标准差</a></li>
+<li><a href="python_ml_percentile.html" title="机器学习 - 百分位数">百分位数</a></li>
+<li><a href="python_ml_data_distribution.html" title="机器学习 - 数据分布">数据分布</a></li>
+<li><a href="python_ml_normal_data_distribution.html" title="机器学习 - 正态数据分布">正态数据分布</a></li>
+<li><a href="python_ml_scatterplot.html" title="机器学习 - 散点图">散点图</a></li>
+<li><a href="python_ml_linear_regression.html" title="机器学习 - 线性回归">线性回归</a></li>
+<li><a href="python_ml_polynomial_regression.html" title="机器学习 - 多项式回归">多项式回归</a></li>
+<li><a href="python_ml_multiple_regression.html" title="机器学习 - 多元回归">多元回归</a></li>
+<li><a href="python_ml_scale.html" title="机器学习 - 缩放">缩放</a></li>
+<li><a href="python_ml_train_test.html" title="机器学习 - 训练/测试">训练/测试</a></li>
+<li><a href="python_ml_decision_tree.html" title="机器学习 - 决策树">决策树</a></li>
+<li><a href="python_ml_confusion_matrix.html" title="机器学习 - 混淆矩阵">混淆矩阵</a></li>
+<li><a href="python_ml_hierarchial_clustering.html" title="机器学习 - 层次聚类">层次聚类</a></li>
+<li><a href="python_ml_logistic_regression.html" title="机器学习 - 逻辑回归">逻辑回归</a></li>
+<li><a href="python_ml_grid_search.html" title="机器学习 - 网格搜索">网格搜索</a></li>
+<li><a href="python_ml_preprocessing.html" title="机器学习 - 分类数据">分类数据</a></li>
+<li><a href="python_ml_k-means.html" title="机器学习 - K-means">K-means</a></li>
+<li><a href="python_ml_bagging.html" title="机器学习 - Bootstrap 聚合（Bagging）">Bootstrap 聚合</a></li>
+<li><a href="python_ml_cross_validation.html" title="机器学习 - 交叉验证">交叉验证</a></li>
+<li><a href="python_ml_auc_roc.html" title="机器学习 - AUC - ROC 曲线">AUC - ROC 曲线</a></li>
+<li><a href="python_ml_knn.html" title="机器学习 - K-最近邻算法（KNN）">K-最近邻算法</a></li>
+</ul>
+<h2>Python DSA</h2>
+<ul>
+<li><a href="python_dsa.html" title="Python MySQL">Python DSA</a></li>
+<li><a href="python_dsa_lists.html" title="Python 中的列表与数组">列表与数组</a></li>
+<li><a href="python_dsa_stacks.html" title="Python 中的栈">栈</a></li>
+<li><a href="python_dsa_queues.html" title="Python 中的队列">队列</a></li>
+<li><a href="python_dsa_linkedlists.html" title="Python 中的链表">链表</a></li>
+<li><a href="python_dsa_hashtables.html" title="Python 中的哈希表">哈希表</a></li>
+<li><a href="python_dsa_trees.html" title="Python 树">树</a></li>
+<li><a href="python_dsa_binarytrees.html" title="Python 二叉树">二叉树</a></li>
+<li><a href="python_dsa_binarysearchtrees.html" title="Python 二叉搜索树">二叉搜索树</a></li>
+<li><a href="python_dsa_avltrees.html" title="Python AVL 树">AVL 树</a></li>
+<li class="currentLink"><a href="python_dsa_graphs.html" title="Python 图论">图</a></li>
+<li><a href="python_dsa_linearsearch.html" title="Python 实现的线性查找">线性查找</a></li>
+<li><a href="python_dsa_binarysearch.html" title="Python 实现的二分查找">二分查找</a></li>
+<li><a href="python_dsa_bubblesort.html" title="Python 实现的冒泡排序">冒泡排序</a></li>
+<li><a href="python_dsa_selectionsort.html" title="Python 实现的选择排序">选择排序</a></li>
+<li><a href="python_dsa_insertionsort.html" title="Python 实现的插入排序">插入排序</a></li>
+<li><a href="python_dsa_quicksort.html" title="Python 实现的 DSA 快速排序">快速排序</a></li>
+<li><a href="python_dsa_countingsort.html" title="Python 实现的 DSA 计数排序">计数排序</a></li>
+<li><a href="python_dsa_radixsort.html" title="Python 实现的 DSA 基数排序">基数排序</a></li>
+<li><a href="python_dsa_mergesort.html" title="Python 实现的 DSA 归并排序">归并排序</a></li>
+</ul>
+<h2>Python MySQL</h2>
+<ul>
+<li><a href="python_mysql_getstarted.html" title="Python MySQL 入门">MySQL 入门</a></li>
+<li><a href="python_mysql_create_db.html" title="Python MySQL Create Database">MySQL Create Database</a></li>
+<li><a href="python_mysql_create_table.html" title="Python MySQL Create Table">MySQL Create Table</a></li>
+<li><a href="python_mysql_insert.html" title="Python MySQL Insert Into Table">MySQL Insert</a></li>
+<li><a href="python_mysql_select.html" title="Python MySQL Select From">MySQL Select</a></li>
+<li><a href="python_mysql_where.html" title="Python MySQL Where">MySQL Where</a></li>
+<li><a href="python_mysql_orderby.html" title="Python MySQL Order By">MySQL Order By</a></li>
+<li><a href="python_mysql_delete.html" title="Python MySQL Delete From By">MySQL Delete</a></li>
+<li><a href="python_mysql_drop_table.html" title="Python MySQL Drop Table">MySQL Drop Table</a></li>
+<li><a href="python_mysql_update.html" title="Python MySQL 更新表">MySQL Update</a></li>
+<li><a href="python_mysql_limit.html" title="Python MySQL Limit">MySQL Limit</a></li>
+<li><a href="python_mysql_join.html" title="Python MySQL Join">MySQL Join</a></li>
+</ul>
+<h2>Python MongoDB</h2>
+<ul>
+<li><a href="python_mongodb_getstarted.html" title="Python 教程">MongoDB 入门</a></li>
+<li><a href="python_mongodb_create_db.html" title="Python 教程">MongoDB 创建数据库</a></li>
+<li><a href="python_mongodb_create_collection.html" title="Python 教程">MongoDB 创建集合</a></li>
+<li><a href="python_mongodb_insert.html" title="Python 教程">MongoDB Insert</a></li>
+<li><a href="python_mongodb_find.html" title="Python 教程">MongoDB Find</a></li>
+<li><a href="python_mongodb_query.html" title="Python 教程">MongoDB Query</a></li>
+<li><a href="python_mongodb_sort.html" title="Python 教程">MongoDB Sort</a></li>
+<li><a href="python_mongodb_delete.html" title="Python 教程">MongoDB Delete</a></li>
+<li><a href="python_mongodb_drop_collection.html" title="Python 教程">MongoDB 删除集合</a></li>
+<li><a href="python_mongodb_update.html" title="Python 教程">MongoDB Update</a></li>
+<li><a href="python_mongodb_limit.html" title="Python 教程">MongoDB Limit</a></li>
+</ul>
+<h2>Python 参考手册</h2>
+<ul>
+<li><a href="python_reference.html" title="Python 教程">Python 参考概览</a></li>
+<li><a href="python_ref_functions.html" title="Python 教程">Python 内建函数</a></li>
+<li><a href="python_ref_string.html" title="Python 教程">Python 字符串方法</a></li>
+<li><a href="python_ref_list.html" title="Python 教程">Python 列表方法</a></li>
+<li><a href="python_ref_dictionary.html" title="Python 教程">Python 字典方法</a></li>
+<li><a href="python_ref_tuple.html" title="Python 教程">Python 元组方法</a></li>
+<li><a href="python_ref_set.html" title="Python 教程">Python 集合方法</a></li>
+<li><a href="python_ref_file.html" title="Python 教程">Python 文件方法</a></li>
+<li><a href="python_ref_keywords.html" title="Python 教程">Python 关键字</a></li>
+<li><a href="python_ref_exceptions.html" title="Python 内建异常">Python 异常</a></li>
+<li><a href="python_ref_glossary.html" title="Python 术语表">Python 术语表</a></li>
+</ul>
+<h2>Python 模块参考手册</h2>
+<ul>
+<li><a href="module_random.html" title="Python 教程">随机模块</a></li>
+<li><a href="module_requests.html" title="Python 教程">请求模块</a></li>
+<li><a href="module_statistics.html" title="Python 统计模块">统计模块</a></li>
+<li><a href="module_math.html" title="Python 数学模块">数学模块</a></li>
+<li><a href="module_cmath.html" title="Python cmath 模块">复数数学模块</a></li>
+</ul>
+<h2>Python How To</h2>
+<ul>
+<li><a href="python_howto_remove_duplicates.html" title="Python 教程">删除列表重复项</a></li>
+<li><a href="python_howto_reverse_string.html" title="Python 教程">反转字符串</a></li>
+<li><a href="python_howto_add_two_numbers.html" title="如何在 Python 中加两个数字">两数相加</a></li>
+</ul>
+<h2>Python 实例</h2>
+<ul>
+<li><a href="python_examples.html" title="Python 实例">Python 实例</a></li>
+<li><a href="python_quiz.html" title="Python 测验">Python 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Python 图论</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="python_dsa_avltrees.html" title="Python AVL 树">AVL 树</a></li>
+<li class="next"><a href="python_dsa_linearsearch.html" title="Python 实现的线性查找">线性查找</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>图（Graphs）</h2>
+
+<p>图是一种非线性数据结构，由顶点（节点）和边组成。</p>
+
+<style>
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('../lib/fonts/roboto-mono-v13-latin-500.woff2') format('woff2');
+  font-weight: 500; /* 中等字重 */
+  font-style: normal;
+  font-display: swap; /* 可选，但强烈推荐 */
+}
+
+  #main a[id] {
+    position: relative;
+    top: -100px;
+  }
+  .dsa_svg {
+    max-width: 100%;
+  }
+  #divAnim {
+    border: solid black 1px;
+    display: inline-block;
+    padding: 20px;
+  }
+  #divAnim #wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+  }
+  #divAnim #menu {
+    padding: 0 20px 0 0;
+  }
+  #divAnim label:hover {
+    cursor: pointer;
+  }
+  #divAnim input:disabled+label, #divAnim input:disabled {
+    cursor: not-allowed;
+  }
+  #divAnim input {
+    margin-right: 4px;
+  }
+  #divAnim p {
+    margin: 4px;
+  }
+  #divAnim circle, #divAnim line, #divAnim text, #divAnim path{
+    transition: opacity 0.5s;
+  }
+  .svgDataText{
+      font-family: "Roboto Mono", monospace;
+      fill: black;
+      font-size: 20px;
+  }
+  .darkpagetheme .svgDataText{
+      fill: #ddd;
+  }
+  
+  .node {
+    stroke: black;
+    stroke-width: 1;
+    fill: gainsboro;
+  }
+  .darkpagetheme .node {
+    stroke: #ddd;
+    fill: dimgray;
+  }
+  
+  .directed, .undirected, line, rect {
+    stroke: black;
+    stroke-width: 1;
+    fill: none;
+  }
+  .darkpagetheme .directed, 
+  .darkpagetheme .undirected, 
+  .darkpagetheme line, 
+  .darkpagetheme rect {
+    stroke: #ddd;
+    fill: none;
+  }
+  
+  #arrowhead line {
+    stroke: black;
+    fill: black;
+  }
+  .darkpagetheme #arrowhead line {
+      stroke: #ddd;
+      fill: #ddd;
+  }
+  #svgDiv, #svgDiv0 {
+    width: 283px;
+    max-width: 100%;
+    height: auto;
+  }
+  #divAnim2, #divAnim3, #divAnim4, #divAnim5 {
+    width: 366px;
+    max-width: 100%;
+    margin: 10px;
+    /*background-color: lavender;*/
+  }
+  #divAnim4, #divAnim5 {
+    width: 458px;
+  }
+  .svgBalFac {
+      font-family: "Roboto Mono", monospace;
+      fill: black;
+      /*font-size: 12px;*/
+      font-size: 16px;
+      opacity: 0;
+  }
+  #divAnim3 .svgBalFac, #divAnim5 .svgBalFac {
+    opacity: 1;
+  }
+  .darkpagetheme .svgBalFac{
+    fill: #ddd;
+  }
+  .dsa_figure figcaption {
+    text-align: center;
+    font-style: italic;
+  }
+  .svgDataText.index {
+    opacity: 0.5;
+  }
+  
+#maincontent .dsa_figure {margin-bottom: 30px;}
+</style>
+
+<div id="svgDiv0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 210" class="dsa_svg">
+  <g class="root parent" transform="translate(140 0)">
+    <circle cx="170" cy="30" r="20" class="node" />
+    <text x="164" y="37" class="svgDataText">F</text>
+  </g>
+
+  <line x1="274" y1="75" x2="297" y2="47" class="undirected BF" />
+  <text x="270" y="65" class="svgBalFac">2</text>
+
+  <line x1="191" y1="65" x2="291" y2="38" class="undirected CF"/>
+  <text x="240" y="47" class="svgBalFac">4</text>
+
+  <line x1="90" y1="95" x2="151" y2="77" class="undirected connected AC" />
+
+  <line x1="121" y1="169" x2="162" y2="88" class="undirected connected EC" />
+  <!-- 'B' node -->
+  <g class="child leaf" transform="translate(90 -30)">
+    <circle cx="170" cy="120" r="20" class="node" />
+    <text x="164" y="126" class="svgDataText">B</text>
+  </g>
+  <!-- 'C' node -->
+  <g class="parent child" transform="translate(-100 -50)">
+    <circle cx="271" cy="120" r="20" class="node" />
+    <text x="265" y="126" class="svgDataText">C</text>
+  </g>
+  <line x1="266" y1="174" x2="183" y2="86" class="undirected GC" />
+
+  <line x1="190" y1="75" x2="240" y2="86" class="undirected CB" />
+
+
+  <!-- Nodes A, D, and E -->
+  <g class="parent child" transform="translate(-10 -20)">
+    <circle cx="80" cy="120" r="20" class="node" />
+    <text x="73" y="126" class="svgDataText">A</text>
+    <line x1="70" y1="138" x2="48" y2="188" class="undirected AD" />
+
+    <line x1="90" y1="138" x2="112" y2="188" class="undirected AE" />
+
+    <circle cx="121" cy="207" r="20" class="node" />
+    <text x="115" y="213" class="svgDataText">E</text>
+    <circle cx="41" cy="207" r="20" class="node" />
+    <text x="35" y="213" class="svgDataText" >D</text>
+  </g>
+
+  <!-- 'G' node -->
+  <g class="child leaf" transform="translate(-110 -20)">
+    <circle cx="391" cy="207" r="20" class="node" />
+    <text x="385" y="213" class="svgDataText">G</text>
+  </g>
+</svg>
+</div>
+
+<p>顶点，也称为节点，是图中的一个点或一个对象，而边用于将两个顶点相互连接。</p>
+
+<p>图是非线性的，因为这种数据结构允许我们通过不同的路径从一个顶点到达另一个顶点，这与数组或链表等线性数据结构不同。</p>
+
+<p>图用于表示和解决数据由对象及其之间的关系组成的问题，例如：</p>
+
+<ul>
+<li>社交网络：每个人都是一个顶点，关系（如友谊）是边。算法可以推荐潜在的朋友。</li>
+<li>地图和导航：地点（如城镇或公交车站）存储为顶点，道路存储为边。当以图的形式存储时，算法可以找到两个地点之间的最短路线。</li>
+<li>互联网：可以用图来表示，网页作为顶点，超链接作为边。</li>
+<li>生物学：图可以模拟神经网络或疾病传播等系统。</li>
+</ul>
+</section>
+
+
+
+<section>
+<h2>图的表示方法</h2>
+
+<p>图的表示方法告诉我们图在内存中是如何存储的。</p>
+
+<p>不同的图的表示方法可以：</p>
+
+<ul>
+<li>占用或多或少的空间。</li>
+<li>搜索或操作的速度更快或更慢。</li>
+<li>根据我们拥有的图的类型（加权、有向等）以及我们想要对图做什么，选择更适合的表示方法。</li>
+<li>比其他方法更容易理解和实现。</li>
+</ul>
+
+<p>以下是不同图的表示方法的简要介绍，但在本教程的后续部分中，我们将使用邻接矩阵作为图的表示方法，因为它易于理解和实现，并且适用于本教程中所有相关情况。</p>
+
+<p>图的表示方法存储有关哪些顶点是相邻的以及顶点之间的边是如何的信息。如果边是有向的或加权的，图的表示方法会略有不同。</p>
+
+<p>如果两个顶点之间有一条边，则它们是相邻的或邻居。</p>
+</section>
+
+
+
+<section>
+<h2>邻接矩阵图表示方法</h2>
+
+<p>邻接矩阵是本教程将使用的图的表示方法（结构）。</p>
+
+<p>下一页将展示如何实现邻接矩阵。</p>
+
+<p>邻接矩阵是一个二维数组（矩阵），其中索引 <mark>(i,j)</mark> 处的每个单元格存储有关从顶点 <mark>i</mark> 到顶点 <mark>j</mark> 的边的信息。</p>
+
+<p>下面是一个图及其邻接矩阵表示方法。</p>
+
+<figure id="divAnim2" class="dsa_figure">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 220">
+    <!-- 'A' node -->
+  <g class="parent child" transform="translate(-240 -50)">
+    <circle cx="271" cy="120" r="20" class="node" />
+    <text x="265" y="126" class="svgDataText">A</text>
+  </g>
+  <!-- 'B' node -->
+  <g class="root parent" transform="translate(0 0)">
+    <circle cx="170" cy="30" r="20" class="node" />
+    <text x="164" y="37" class="svgDataText">B</text>
+  </g>
+
+  <line x1="274" y1="75" x2="297" y2="47" class="undirected BF" transform="translate(-140 0)" />
+
+  <line x1="191" y1="65" x2="291" y2="38" class="undirected CF" transform="translate(-140 0)"/>
+
+  <!-- 'C' node -->
+  <g class="child leaf" transform="translate(-50 -30)">
+    <circle cx="170" cy="120" r="20" class="node" />
+    <text x="164" y="126" class="svgDataText">C</text>
+  </g>
+  
+  <line x1="266" y1="174" x2="183" y2="86" class="undirected GC" transform="translate(-140 0)"/>
+
+  <line x1="190" y1="75" x2="240" y2="86" class="undirected CB" transform="translate(-140 0)"/>
+
+  <!-- 'D' node -->
+  <g class="child leaf" transform="translate(-250 -20)">
+    <circle cx="391" cy="207" r="20" class="node" />
+    <text x="385" y="213" class="svgDataText">D</text>
+  </g>
+
+  <g transform="translate(200 0)">
+    <text x="65" y="30" class="svgDataText">A</text>
+    <text x="105" y="30" class="svgDataText">B</text>
+    <text x="145" y="30" class="svgDataText">C</text>
+    <text x="185" y="30" class="svgDataText">D</text>
+
+    <text x="30" y="65" class="svgDataText">A</text>
+    <text x="30" y="105" class="svgDataText">B</text>
+    <text x="30" y="145" class="svgDataText">C</text>
+    <text x="30" y="185" class="svgDataText">D</text>
+
+    <text x="65" y="65" class="svgDataText"></text>
+    <text x="105" y="65" class="svgDataText">1</text>
+    <text x="145" y="65" class="svgDataText">1</text>
+    <text x="185" y="65" class="svgDataText">1</text>
+
+    <text x="65" y="105" class="svgDataText">1</text>
+    <text x="105" y="105" class="svgDataText"></text>
+    <text x="145" y="105" class="svgDataText">1</text>
+    <text x="185" y="105" class="svgDataText"></text>
+
+    <text x="65" y="145" class="svgDataText">1</text>
+    <text x="105" y="145" class="svgDataText">1</text>
+    <text x="145" y="145" class="svgDataText"></text>
+    <text x="185" y="145" class="svgDataText"></text>
+
+    <text x="65" y="185" class="svgDataText">1</text>
+    <text x="105" y="185" class="svgDataText"></text>
+    <text x="145" y="185" class="svgDataText"></text>
+    <text x="185" y="185" class="svgDataText"></text>
+
+    <rect x="50" y="35" width="160" height="160" ></rect>
+    <line x1="50" x2="210" y1="75" y2="75" ></line>
+    <line x1="50" x2="210" y1="115" y2="115" ></line>
+    <line x1="50" x2="210" y1="155" y2="155" ></line>
+
+    <line x1="90" x2="90" y1="35" y2="195" ></line>
+    <line x1="130" x2="130" y1="35" y2="195" ></line>
+    <line x1="170" x2="170" y1="35" y2="195" ></line>
+  </g>
+</svg>
+<figcaption>An undirected Graph <br>and the adjacency matrix</figcaption>
+</figure>
+
+<p>上面的邻接矩阵表示一个无向图，因此值 &quot;1&quot; 仅告诉我们边在哪里。此外，邻接矩阵中的值是对称的，因为边是双向的（无向图）。</p>
+
+<p>要使用邻接矩阵创建有向图，我们必须通过在正确的索引 <mark>(i,j)</mark> 处插入值来决定边的起点和终点。为了表示加权图，我们可以在邻接矩阵中放入除 '1' 以外的其他值。</p>
+
+<p>下面是一个有向加权图及其邻接矩阵表示方法。</p>
+
+<figure id="divAnim3" class="dsa_figure">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 220">
+    <!-- 'A' node -->
+  <g class="parent child" transform="translate(-240 -50)">
+    <circle cx="271" cy="120" r="20" class="node" />
+    <text x="265" y="126" class="svgDataText">A</text>
+  </g>
+  <!-- 'B' node -->
+  <g class="root parent" transform="translate(0 0)">
+    <circle cx="170" cy="30" r="20" class="node" />
+    <text x="164" y="37" class="svgDataText">B</text>
+  </g>
+
+  <line x1="280" y1="75" x2="295" y2="54" class="undirected CB" transform="translate(-140 0)" marker-end="url(#arrowhead)" />
+  <text x="151" y="75" class="svgBalFac CB">1</text>
+
+  <line x1="191" y1="65" x2="283" y2="38" class="undirected AB" transform="translate(-140 0)" marker-end="url(#arrowhead)"/>
+  <text x="100" y="45" class="svgBalFac AB">3</text>
+
+  <!-- 'C' node -->
+  <g class="child leaf" transform="translate(-40 -30)">
+    <circle cx="170" cy="120" r="20" class="node" />
+    <text x="164" y="126" class="svgDataText">C</text>
+  </g>
+  
+  <line x1="266" y1="174" x2="190" y2="91" class="undirected DA" transform="translate(-140 0)" marker-end="url(#arrowhead)"/>
+  <text x="98" y="140" class="svgBalFac AB">4</text>
+
+  <line x1="190" y1="75" x2="242" y2="84" class="undirected AC" transform="translate(-140 0)" marker-end="url(#arrowhead)"/>
+  <text x="80" y="78" class="svgBalFac CB">2</text>
+
+  <!-- 'D' node -->
+  <g class="child leaf" transform="translate(-250 -20)">
+    <circle cx="391" cy="207" r="20" class="node" />
+    <text x="385" y="213" class="svgDataText">D</text>
+  </g>
+
+  <g transform="translate(200 0)">
+    <text x="65" y="30" class="svgDataText">A</text>
+    <text x="105" y="30" class="svgDataText">B</text>
+    <text x="145" y="30" class="svgDataText">C</text>
+    <text x="185" y="30" class="svgDataText">D</text>
+
+    <text x="30" y="65" class="svgDataText">A</text>
+    <text x="30" y="105" class="svgDataText">B</text>
+    <text x="30" y="145" class="svgDataText">C</text>
+    <text x="30" y="185" class="svgDataText">D</text>
+
+    <text x="65" y="65" class="svgDataText"></text>
+    <text x="105" y="65" class="svgDataText">3</text>
+    <text x="145" y="65" class="svgDataText">2</text>
+    <text x="185" y="65" class="svgDataText"></text>
+
+    <text x="65" y="105" class="svgDataText"></text>
+    <text x="105" y="105" class="svgDataText"></text>
+    <text x="145" y="105" class="svgDataText"></text>
+    <text x="185" y="105" class="svgDataText"></text>
+
+    <text x="65" y="145" class="svgDataText"></text>
+    <text x="105" y="145" class="svgDataText">1</text>
+    <text x="145" y="145" class="svgDataText"></text>
+    <text x="185" y="145" class="svgDataText"></text>
+
+    <text x="65" y="185" class="svgDataText">4</text>
+    <text x="105" y="185" class="svgDataText"></text>
+    <text x="145" y="185" class="svgDataText"></text>
+    <text x="185" y="185" class="svgDataText"></text>
+
+    <rect x="50" y="35" width="160" height="160" ></rect>
+    <line x1="50" x2="210" y1="75" y2="75" ></line>
+    <line x1="50" x2="210" y1="115" y2="115" ></line>
+    <line x1="50" x2="210" y1="155" y2="155" ></line>
+
+    <line x1="90" x2="90" y1="35" y2="195" ></line>
+    <line x1="130" x2="130" y1="35" y2="195" ></line>
+    <line x1="170" x2="170" y1="35" y2="195" ></line>
+  </g>
+</svg>
+<figcaption>A directed and weighted Graph, <br>and its adjacency matrix.</figcaption>
+</figure>
+
+<p>在上面的邻接矩阵中，索引 <mark>(0,1)</mark> 处的值 <mark>3</mark> 告诉我们存在一条从顶点 A 到顶点 B 的边，且该边的权重为 <mark>3</mark>。</p>
+
+<p>如你所见，权重直接放入邻接矩阵中对应边的位置，对于有向图，邻接矩阵不必是对称的。</p>
+</section>
+
+
+
+<section>
+<h2>邻接表图表示方法</h2>
+
+<p>如果我们有一个具有许多顶点的“稀疏”图，与使用邻接矩阵相比，使用邻接表可以节省空间，因为邻接矩阵会为不存在的边在空数组元素上保留大量内存。</p>
+
+<p>“稀疏”图是指每个顶点仅与图中其他顶点的一小部分有边相连的图。</p>
+
+<p>邻接表有一个包含图中所有顶点的数组，并且每个顶点都有一个链表（或数组），其中包含该顶点的边。</p>
+
+<figure id="divAnim4" class="dsa_figure">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 220">
+    <style>
+      #divAnim4 {
+        /*background-color: lavender;*/
+      }
+    </style>
+    <!-- 'A' node -->
+  <g class="parent child" transform="translate(-240 -50)">
+    <circle cx="271" cy="120" r="20" class="node" />
+    <text x="265" y="126" class="svgDataText">A</text>
+  </g>
+  <!-- 'B' node -->
+  <g class="root parent" transform="translate(0 0)">
+    <circle cx="170" cy="30" r="20" class="node" />
+    <text x="164" y="37" class="svgDataText">B</text>
+  </g>
+
+  <line x1="274" y1="75" x2="297" y2="47" class="undirected BF" transform="translate(-140 0)" />
+
+  <line x1="191" y1="65" x2="291" y2="38" class="undirected CF" transform="translate(-140 0)"/>
+
+  <!-- 'C' node -->
+  <g class="child leaf" transform="translate(-50 -30)">
+    <circle cx="170" cy="120" r="20" class="node" />
+    <text x="164" y="126" class="svgDataText">C</text>
+  </g>
+  
+  <line x1="266" y1="174" x2="183" y2="86" class="undirected GC" transform="translate(-140 0)"/>
+
+  <line x1="190" y1="75" x2="240" y2="86" class="undirected CB" transform="translate(-140 0)"/>
+
+  <!-- 'D' node -->
+  <g class="child leaf" transform="translate(-250 -20)">
+    <circle cx="391" cy="207" r="20" class="node" />
+    <text x="385" y="213" class="svgDataText">D</text>
+  </g>
+
+  <g transform="translate(200 0)">
+    <rect  x="50"          y="35" width="40" height="160" class="node"></rect>
+    <line x1="50" x2="90" y1="75" y2="75" ></line>
+    <line x1="50" x2="90" y1="115" y2="115" ></line>
+    <line x1="50" x2="90" y1="155" y2="155" ></line>
+
+    <text x="30" y="65"  class="svgDataText index">0</text>
+    <text x="30" y="105" class="svgDataText index">1</text>
+    <text x="30" y="145" class="svgDataText index">2</text>
+    <text x="30" y="185" class="svgDataText index">3</text>
+
+    <text x="65" y="65"  class="svgDataText">A</text>
+    <text x="65" y="105" class="svgDataText">B</text>
+    <text x="65" y="145" class="svgDataText">C</text>
+    <text x="65" y="185" class="svgDataText">D</text>
+
+    <line x1="90" x2="111" y1="55" y2="55" marker-end="url(#arrowhead)" ></line>
+    <rect x="120" y="40" width="30" height="30" ></rect>
+    <text x="130" y="62" class="svgDataText">3</text>
+    <line x1="150" x2="171" y1="55" y2="55" marker-end="url(#arrowhead)" ></line>
+    <rect x="180" y="40" width="30" height="30" ></rect>
+    <text x="190" y="62" class="svgDataText">1</text>
+    <line x1="210" x2="231" y1="55" y2="55" marker-end="url(#arrowhead)" ></line>
+    <rect x="240" y="40" width="30" height="30" ></rect>
+    <text x="250" y="62" class="svgDataText">2</text>
+    <line x1="270" x2="291" y1="55" y2="55" marker-end="url(#arrowhead)" ></line>
+    <text x="300" y="62" class="svgDataText">null</text>
+
+    <line x1="90" x2="111" y1="95" y2="95" marker-end="url(#arrowhead)" ></line>
+    <rect x="120" y="80" width="30" height="30" ></rect>
+    <text x="130" y="102" class="svgDataText">0</text>
+    <line x1="150" x2="171" y1="95" y2="95" marker-end="url(#arrowhead)" ></line>
+    <rect x="180" y="80" width="30" height="30" ></rect>
+    <text x="190" y="102" class="svgDataText">2</text>
+    <line x1="210" x2="231" y1="95" y2="95" marker-end="url(#arrowhead)" ></line>
+    <text x="240" y="102" class="svgDataText">null</text>
+
+    <g transform="translate(0 40)">
+    <line x1="90" x2="111" y1="95" y2="95" marker-end="url(#arrowhead)" ></line>
+    <rect x="120" y="80" width="30" height="30" ></rect>
+    <text x="130" y="102" class="svgDataText">1</text>
+    <line x1="150" x2="171" y1="95" y2="95" marker-end="url(#arrowhead)" ></line>
+    <rect x="180" y="80" width="30" height="30" ></rect>
+    <text x="190" y="102" class="svgDataText">0</text>
+    <line x1="210" x2="231" y1="95" y2="95" marker-end="url(#arrowhead)" ></line>
+    <text x="240" y="102" class="svgDataText">null</text>
+    </g>
+
+    <g transform="translate(0 80)">
+    <line x1="90" x2="111" y1="95" y2="95" marker-end="url(#arrowhead)" ></line>
+    <rect x="120" y="80" width="30" height="30" ></rect>
+    <text x="130" y="102" class="svgDataText">0</text>
+    <line x1="150" x2="171" y1="95" y2="95" marker-end="url(#arrowhead)" ></line>
+    <text x="180" y="102" class="svgDataText">null</text>
+    </g>
+  </g>
+</svg>
+<figcaption>An undirected Graph <br>and its adjacency list.</figcaption>
+</figure>
+
+<p>在上面的邻接表中，顶点 A 到 D 被放置在一个数组中，并且数组中的每个顶点旁边都写有其索引。</p>
+
+<p>数组中的每个顶点都有一个指向链表的指针，该链表表示该顶点的边。更具体地说，链表包含相邻（邻居）顶点的索引。</p>
+
+<p>例如，顶点 A 有一个指向链表的链接，该链表包含值 3、1 和 2。这些值是 A 的相邻顶点 D、B 和 C 的索引。</p>
+
+<p>邻接表也可以表示有向加权图，如下所示：</p>
+
+<figure id="divAnim5" class="dsa_figure">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 220">
+  <g class="parent child" transform="translate(-240 -50)">
+    <circle cx="271" cy="120" r="20" class="node" />
+    <text x="265" y="126" class="svgDataText">A</text>
+  </g>
+  <!-- 'B' node -->
+  <g class="root parent" transform="translate(0 0)">
+    <circle cx="170" cy="30" r="20" class="node" />
+    <text x="164" y="37" class="svgDataText">B</text>
+  </g>
+
+  <line x1="280" y1="75" x2="295" y2="54" class="undirected CB" transform="translate(-140 0)" marker-end="url(#arrowhead)" />
+  <text x="151" y="75" class="svgBalFac CB">1</text>
+
+  <line x1="191" y1="65" x2="283" y2="38" class="undirected AB" transform="translate(-140 0)" marker-end="url(#arrowhead)"/>
+  <text x="100" y="45" class="svgBalFac AB">3</text>
+
+  <!-- 'C' node -->
+  <g class="child leaf" transform="translate(-40 -30)">
+    <circle cx="170" cy="120" r="20" class="node" />
+    <text x="164" y="126" class="svgDataText">C</text>
+  </g>
+  
+  <line x1="266" y1="174" x2="190" y2="91" class="undirected DA" transform="translate(-140 0)" marker-end="url(#arrowhead)"/>
+  <text x="98" y="140" class="svgBalFac AB">4</text>
+
+  <line x1="190" y1="75" x2="242" y2="84" class="undirected AC" transform="translate(-140 0)" marker-end="url(#arrowhead)"/>
+  <text x="80" y="78" class="svgBalFac CB">2</text>
+
+  <!-- 'D' node -->
+  <g class="child leaf" transform="translate(-250 -20)">
+    <circle cx="391" cy="207" r="20" class="node" />
+    <text x="385" y="213" class="svgDataText">D</text>
+  </g>
+
+  <g transform="translate(200 0)">
+    <rect  x="50"          y="35" width="40" height="160" class="node"></rect>
+    <line x1="50" x2="90" y1="75" y2="75" ></line>
+    <line x1="50" x2="90" y1="115" y2="115" ></line>
+    <line x1="50" x2="90" y1="155" y2="155" ></line>
+
+    <text x="30" y="65"  class="svgDataText index">0</text>
+    <text x="30" y="105" class="svgDataText index">1</text>
+    <text x="30" y="145" class="svgDataText index">2</text>
+    <text x="30" y="185" class="svgDataText index">3</text>
+
+    <text x="65" y="65"  class="svgDataText">A</text>
+    <text x="65" y="105" class="svgDataText">B</text>
+    <text x="65" y="145" class="svgDataText">C</text>
+    <text x="65" y="185" class="svgDataText">D</text>
+
+    <line x1="90" x2="111" y1="55" y2="55" marker-end="url(#arrowhead)" ></line>
+    <rect x="120" y="40" width="50" height="30" ></rect>
+    <text x="130" y="62" class="svgDataText">1,3</text>
+    <line x1="170" x2="191" y1="55" y2="55" marker-end="url(#arrowhead)" ></line>
+    <rect x="200" y="40" width="50" height="30" ></rect>
+    <text x="210" y="62" class="svgDataText">2,2</text>
+    <line x1="250" x2="271" y1="55" y2="55" marker-end="url(#arrowhead)" ></line>
+    <text x="280" y="62" class="svgDataText">null</text>
+
+    <line x1="90" x2="111" y1="95" y2="95" marker-end="url(#arrowhead)" ></line>
+    <text x="120" y="102" class="svgDataText">null</text>
+
+    <g transform="translate(0 40)">
+    <line x1="90" x2="111" y1="95" y2="95" marker-end="url(#arrowhead)" ></line>
+    <rect x="120" y="80" width="50" height="30" ></rect>
+    <text x="130" y="102" class="svgDataText">1,1</text>
+    <line x1="170" x2="191" y1="95" y2="95" marker-end="url(#arrowhead)" ></line>
+    <text x="200" y="102" class="svgDataText">null</text>
+    </g>
+
+    <g transform="translate(0 80)">
+    <line x1="90" x2="111" y1="95" y2="95" marker-end="url(#arrowhead)" ></line>
+    <rect x="120" y="80" width="50" height="30" ></rect>
+    <text x="130" y="102" class="svgDataText">0,4</text>
+    <line x1="170" x2="191" y1="95" y2="95" marker-end="url(#arrowhead)" ></line>
+    <text x="200" y="102" class="svgDataText">null</text>
+    </g>
+  </g>
+</svg>
+<figcaption>A directed and weighted Graph <br>and its adjacency list.</figcaption>
+</figure>
+
+<p>在上面的邻接表中，顶点存储在数组中。每个顶点都有一个指向链表的指针，链表中的边存储为 <mark>i,w</mark>，其中 <mark>i</mark> 是边所指向的顶点的索引，<mark>w</mark> 是该边的权重。</p>
+
+<p>例如，节点 D 有一个指向链表的指针，该链表有一条指向顶点 A 的边。值 <mark>0,4</mark> 表示顶点 D 有一条指向索引 <mark>0</mark>（顶点 A）的顶点的边，且该边的权重为 <mark>4</mark>。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="python_dsa_avltrees.html" title="Python AVL 树">AVL 树</a></li>
+<li class="next"><a href="python_dsa_linearsearch.html" title="Python 实现的线性查找">线性查找</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="python_reference.html">Python 参考手册</a></h5>
+<h5 id="tools_example"><a href="python_examples.html">Python 实例</a></h5>
+<h5 id="tools_quiz"><a href="python_quiz.html">Python 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/python/python_dsa_graphs.asp by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Mar 2026 14:34:13 GMT -->
+</html>

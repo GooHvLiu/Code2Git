@@ -1,0 +1,1229 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/python/python_dsa_binarysearchtrees.asp by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Mar 2026 14:34:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Python 二叉搜索树</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Python 教程</h2>
+<ul>
+<li><a href="index.html" title="Python 教程">Python 教程</a></li>
+<li><a href="python_intro.html" title="Python 简介">Python 简介</a></li>
+<li><a href="python_getstarted.html" title="Python 入门">Python 入门</a></li>
+<li><a href="python_syntax.html" title="Python 语法">Python 语法</a></li>
+<li><a href="python_comments.html" title="Python 注释">Python 注释</a></li>
+<li><a href="python_variables.html" title="Python 变量">Python 变量</a></li>
+<li><a href="python_datatypes.html" title="Python 数据类型">Python 数据类型</a></li>
+<li><a href="python_numbers.html" title="Python 简介">Python 数字</a></li>
+<li><a href="python_casting.html" title="Python Casting">Python Casting</a></li>
+<li><a href="python_strings.html" title="Python 字符串">Python 字符串</a></li>
+<li><a href="python_booleans.html" title="Python 布尔">Python 布尔</a></li>
+<li><a href="python_operators.html" title="Python 运算符">Python 运算符</a></li>
+<li><a href="python_lists.html" title="Python 列表">Python 列表</a></li>
+<li><a href="python_tuples.html" title="Python 元组">Python 元组</a></li>
+<li><a href="python_sets.html" title="Python 集合">Python 集合</a></li>
+<li><a href="python_dictionaries.html" title="Python 字典">Python 字典</a></li>
+<li><a href="python_conditions.html" title="Python If ... Else">Python If Else</a></li>
+<li><a href="python_while_loops.html" title="Python While 循环">Python While 循环</a></li>
+<li><a href="python_for_loops.html" title="Python For 循环">Python For 循环</a></li>
+<li><a href="python_functions.html" title="Python 函数">Python 函数</a></li>
+<li><a href="python_lambda.html" title="Python Lambda">Python Lambda</a></li>
+<li><a href="python_arrays.html" title="Python 数组">Python 数组</a></li>
+<li><a href="python_classes.html" title="Python 类和对象">Python 类/对象</a></li>
+<li><a href="python_inheritance.html" title="Python 继承">Python 继承</a></li>
+<li><a href="python_iterators.html" title="Python 迭代">Python 迭代</a></li>
+<li><a href="python_polymorphism.html" title="Python 多态">Python 多态</a></li>
+<li><a href="python_scope.html" title="Python 作用域">Python 作用域</a></li>
+<li><a href="python_modules.html" title="Python 模块">Python 模块</a></li>
+<li><a href="python_datetime.html" title="Python 日期">Python 日期</a></li>
+<li><a href="python_math.html" title="Python 数学">Python 数学</a></li>
+<li><a href="python_json.html" title="Python JSON">Python JSON</a></li>
+<li><a href="python_regex.html" title="Python RegEx">Python RegEx</a></li>
+<li><a href="python_pip.html" title="Python PIP">Python PIP</a></li>
+<li><a href="python_try_except.html" title="Python Try Except">Python Try Except</a></li>
+<li><a href="python_cmd_input.html" title="Python 命令行输入">Python 命令输入</a></li>
+<li><a href="python_string_formatting.html" title="Python 字符串格式化">Python 字符串格式化</a></li>
+</ul>
+<h2>Python 文件处理</h2>
+<ul>
+<li><a href="python_file_handling.html" title="Python 文件打开">Python 文件打开</a></li>
+<li><a href="python_file_open.html" title="Python 文件读取">Python 文件读取</a></li>
+<li><a href="python_file_write.html" title="Python 文件写入">Python 文件写入/创建</a></li>
+<li><a href="python_file_remove.html" title="Python 文件删除">Python 文件删除</a></li>
+</ul>
+<h2>Python 模块</h2>
+<ul>
+<li><a href="../numpy/index.html" title="NumPy 教程">NumPy 教程</a></li>
+<li><a href="../pandas/index.html" title="Pandas 教程">Pandas 教程</a></li>
+<li><a href="../scipy/index.html" title="SciPy 教程">SciPy 教程</a></li>
+</ul>
+<h2>Python Matplotlib</h2>
+<ul>
+<li><a href="matplotlib_intro.html" title="Matplotlib 简介">Matplotlib 简介</a></li>
+<li><a href="matplotlib_getting_started.html" title="Matplotlib 入门">Matplotlib 入门</a></li>
+<li><a href="matplotlib_pyplot.html" title="Matplotlib Pyplot">Matplotlib Pyplot</a></li>
+<li><a href="matplotlib_plotting.html" title="Matplotlib 绘图">Matplotlib 绘图</a></li>
+<li><a href="matplotlib_markers.html" title="Matplotlib 标记">Matplotlib 标记</a></li>
+<li><a href="matplotlib_line.html" title="Matplotlib 线条">Matplotlib 线条</a></li>
+<li><a href="matplotlib_labels.html" title="Matplotlib 标签">Matplotlib 标签</a></li>
+<li><a href="matplotlib_grid.html" title="Matplotlib 网格">Matplotlib 网格</a></li>
+<li><a href="matplotlib_subplot.html" title="Matplotlib 子图">Matplotlib 子图</a></li>
+<li><a href="matplotlib_scatter.html" title="Matplotlib 散点图">Matplotlib 散点图</a></li>
+<li><a href="matplotlib_bars.html" title="Matplotlib 条形图">Matplotlib 条形图</a></li>
+<li><a href="matplotlib_histograms.html" title="Matplotlib 直方图">Matplotlib 直方图</a></li>
+<li><a href="matplotlib_pie_charts.html" title="Matplotlib 饼图">Matplotlib 饼图</a></li>
+</ul>
+<h2>Python NumPy</h2>
+<ul>
+<li><a href="numpy_intro.html" title="NumPy 简介">NumPy 简介</a></li>
+<li><a href="numpy_getting_started.html" title="NumPy 入门">NumPy 入门</a></li>
+<li><a href="numpy_creating_arrays.html" title="NumPy 数组创建">NumPy 数组创建</a></li>
+<li><a href="numpy_array_indexing.html" title="NumPy 数组索引">NumPy 数组索引</a></li>
+<li><a href="numpy_array_slicing.html" title="NumPy 数组裁切">NumPy 数组裁切</a></li>
+<li><a href="numpy_data_types.html" title="NumPy 数据类型">NumPy 数据类型</a></li>
+<li><a href="numpy_copy_vs_view.html" title="NumPy 副本/视图">NumPy 副本/视图</a></li>
+<li><a href="numpy_array_shape.html" title="NumPy 数组形状">NumPy 数组形状</a></li>
+<li><a href="numpy_array_reshape.html" title="NumPy 数组重塑">NumPy 数组重塑</a></li>
+<li><a href="numpy_array_iterating.html" title="NumPy 数组迭代">NumPy 数组迭代</a></li>
+<li><a href="numpy_array_join.html" title="NumPy 数组连接">NumPy 数组连接</a></li>
+<li><a href="numpy_array_split.html" title="NumPy 数组拆分">NumPy 数组拆分</a></li>
+<li><a href="numpy_array_search.html" title="NumPy 数组搜索">NumPy 数组搜索</a></li>
+<li><a href="numpy_array_sort.html" title="NumPy 数组排序">NumPy 数组排序</a></li>
+<li><a href="numpy_array_filter.html" title="NumPy 数组过滤">NumPy 数组过滤</a></li>
+<li><a href="numpy_random.html" title="NumPy 随机">NumPy 随机</a></li>
+<li><a href="numpy_ufunc.html" title="NumPy ufuncs">NumPy ufuncs</a></li>
+</ul>
+<h2>Python 机器学习</h2>
+<ul>
+<li><a href="python_ml_getting_started.html" title="机器学习 - 入门">入门</a></li>
+<li><a href="python_ml_mean_median_mode.html" title="机器学习 - 平均中位数模式">平均中位数模式</a></li>
+<li><a href="python_ml_standard_deviation.html" title="机器学习 - 标准差">标准差</a></li>
+<li><a href="python_ml_percentile.html" title="机器学习 - 百分位数">百分位数</a></li>
+<li><a href="python_ml_data_distribution.html" title="机器学习 - 数据分布">数据分布</a></li>
+<li><a href="python_ml_normal_data_distribution.html" title="机器学习 - 正态数据分布">正态数据分布</a></li>
+<li><a href="python_ml_scatterplot.html" title="机器学习 - 散点图">散点图</a></li>
+<li><a href="python_ml_linear_regression.html" title="机器学习 - 线性回归">线性回归</a></li>
+<li><a href="python_ml_polynomial_regression.html" title="机器学习 - 多项式回归">多项式回归</a></li>
+<li><a href="python_ml_multiple_regression.html" title="机器学习 - 多元回归">多元回归</a></li>
+<li><a href="python_ml_scale.html" title="机器学习 - 缩放">缩放</a></li>
+<li><a href="python_ml_train_test.html" title="机器学习 - 训练/测试">训练/测试</a></li>
+<li><a href="python_ml_decision_tree.html" title="机器学习 - 决策树">决策树</a></li>
+<li><a href="python_ml_confusion_matrix.html" title="机器学习 - 混淆矩阵">混淆矩阵</a></li>
+<li><a href="python_ml_hierarchial_clustering.html" title="机器学习 - 层次聚类">层次聚类</a></li>
+<li><a href="python_ml_logistic_regression.html" title="机器学习 - 逻辑回归">逻辑回归</a></li>
+<li><a href="python_ml_grid_search.html" title="机器学习 - 网格搜索">网格搜索</a></li>
+<li><a href="python_ml_preprocessing.html" title="机器学习 - 分类数据">分类数据</a></li>
+<li><a href="python_ml_k-means.html" title="机器学习 - K-means">K-means</a></li>
+<li><a href="python_ml_bagging.html" title="机器学习 - Bootstrap 聚合（Bagging）">Bootstrap 聚合</a></li>
+<li><a href="python_ml_cross_validation.html" title="机器学习 - 交叉验证">交叉验证</a></li>
+<li><a href="python_ml_auc_roc.html" title="机器学习 - AUC - ROC 曲线">AUC - ROC 曲线</a></li>
+<li><a href="python_ml_knn.html" title="机器学习 - K-最近邻算法（KNN）">K-最近邻算法</a></li>
+</ul>
+<h2>Python DSA</h2>
+<ul>
+<li><a href="python_dsa.html" title="Python MySQL">Python DSA</a></li>
+<li><a href="python_dsa_lists.html" title="Python 中的列表与数组">列表与数组</a></li>
+<li><a href="python_dsa_stacks.html" title="Python 中的栈">栈</a></li>
+<li><a href="python_dsa_queues.html" title="Python 中的队列">队列</a></li>
+<li><a href="python_dsa_linkedlists.html" title="Python 中的链表">链表</a></li>
+<li><a href="python_dsa_hashtables.html" title="Python 中的哈希表">哈希表</a></li>
+<li><a href="python_dsa_trees.html" title="Python 树">树</a></li>
+<li><a href="python_dsa_binarytrees.html" title="Python 二叉树">二叉树</a></li>
+<li class="currentLink"><a href="python_dsa_binarysearchtrees.html" title="Python 二叉搜索树">二叉搜索树</a></li>
+<li><a href="python_dsa_avltrees.html" title="Python AVL 树">AVL 树</a></li>
+<li><a href="python_dsa_graphs.html" title="Python 图论">图</a></li>
+<li><a href="python_dsa_linearsearch.html" title="Python 实现的线性查找">线性查找</a></li>
+<li><a href="python_dsa_binarysearch.html" title="Python 实现的二分查找">二分查找</a></li>
+<li><a href="python_dsa_bubblesort.html" title="Python 实现的冒泡排序">冒泡排序</a></li>
+<li><a href="python_dsa_selectionsort.html" title="Python 实现的选择排序">选择排序</a></li>
+<li><a href="python_dsa_insertionsort.html" title="Python 实现的插入排序">插入排序</a></li>
+<li><a href="python_dsa_quicksort.html" title="Python 实现的 DSA 快速排序">快速排序</a></li>
+<li><a href="python_dsa_countingsort.html" title="Python 实现的 DSA 计数排序">计数排序</a></li>
+<li><a href="python_dsa_radixsort.html" title="Python 实现的 DSA 基数排序">基数排序</a></li>
+<li><a href="python_dsa_mergesort.html" title="Python 实现的 DSA 归并排序">归并排序</a></li>
+</ul>
+<h2>Python MySQL</h2>
+<ul>
+<li><a href="python_mysql_getstarted.html" title="Python MySQL 入门">MySQL 入门</a></li>
+<li><a href="python_mysql_create_db.html" title="Python MySQL Create Database">MySQL Create Database</a></li>
+<li><a href="python_mysql_create_table.html" title="Python MySQL Create Table">MySQL Create Table</a></li>
+<li><a href="python_mysql_insert.html" title="Python MySQL Insert Into Table">MySQL Insert</a></li>
+<li><a href="python_mysql_select.html" title="Python MySQL Select From">MySQL Select</a></li>
+<li><a href="python_mysql_where.html" title="Python MySQL Where">MySQL Where</a></li>
+<li><a href="python_mysql_orderby.html" title="Python MySQL Order By">MySQL Order By</a></li>
+<li><a href="python_mysql_delete.html" title="Python MySQL Delete From By">MySQL Delete</a></li>
+<li><a href="python_mysql_drop_table.html" title="Python MySQL Drop Table">MySQL Drop Table</a></li>
+<li><a href="python_mysql_update.html" title="Python MySQL 更新表">MySQL Update</a></li>
+<li><a href="python_mysql_limit.html" title="Python MySQL Limit">MySQL Limit</a></li>
+<li><a href="python_mysql_join.html" title="Python MySQL Join">MySQL Join</a></li>
+</ul>
+<h2>Python MongoDB</h2>
+<ul>
+<li><a href="python_mongodb_getstarted.html" title="Python 教程">MongoDB 入门</a></li>
+<li><a href="python_mongodb_create_db.html" title="Python 教程">MongoDB 创建数据库</a></li>
+<li><a href="python_mongodb_create_collection.html" title="Python 教程">MongoDB 创建集合</a></li>
+<li><a href="python_mongodb_insert.html" title="Python 教程">MongoDB Insert</a></li>
+<li><a href="python_mongodb_find.html" title="Python 教程">MongoDB Find</a></li>
+<li><a href="python_mongodb_query.html" title="Python 教程">MongoDB Query</a></li>
+<li><a href="python_mongodb_sort.html" title="Python 教程">MongoDB Sort</a></li>
+<li><a href="python_mongodb_delete.html" title="Python 教程">MongoDB Delete</a></li>
+<li><a href="python_mongodb_drop_collection.html" title="Python 教程">MongoDB 删除集合</a></li>
+<li><a href="python_mongodb_update.html" title="Python 教程">MongoDB Update</a></li>
+<li><a href="python_mongodb_limit.html" title="Python 教程">MongoDB Limit</a></li>
+</ul>
+<h2>Python 参考手册</h2>
+<ul>
+<li><a href="python_reference.html" title="Python 教程">Python 参考概览</a></li>
+<li><a href="python_ref_functions.html" title="Python 教程">Python 内建函数</a></li>
+<li><a href="python_ref_string.html" title="Python 教程">Python 字符串方法</a></li>
+<li><a href="python_ref_list.html" title="Python 教程">Python 列表方法</a></li>
+<li><a href="python_ref_dictionary.html" title="Python 教程">Python 字典方法</a></li>
+<li><a href="python_ref_tuple.html" title="Python 教程">Python 元组方法</a></li>
+<li><a href="python_ref_set.html" title="Python 教程">Python 集合方法</a></li>
+<li><a href="python_ref_file.html" title="Python 教程">Python 文件方法</a></li>
+<li><a href="python_ref_keywords.html" title="Python 教程">Python 关键字</a></li>
+<li><a href="python_ref_exceptions.html" title="Python 内建异常">Python 异常</a></li>
+<li><a href="python_ref_glossary.html" title="Python 术语表">Python 术语表</a></li>
+</ul>
+<h2>Python 模块参考手册</h2>
+<ul>
+<li><a href="module_random.html" title="Python 教程">随机模块</a></li>
+<li><a href="module_requests.html" title="Python 教程">请求模块</a></li>
+<li><a href="module_statistics.html" title="Python 统计模块">统计模块</a></li>
+<li><a href="module_math.html" title="Python 数学模块">数学模块</a></li>
+<li><a href="module_cmath.html" title="Python cmath 模块">复数数学模块</a></li>
+</ul>
+<h2>Python How To</h2>
+<ul>
+<li><a href="python_howto_remove_duplicates.html" title="Python 教程">删除列表重复项</a></li>
+<li><a href="python_howto_reverse_string.html" title="Python 教程">反转字符串</a></li>
+<li><a href="python_howto_add_two_numbers.html" title="如何在 Python 中加两个数字">两数相加</a></li>
+</ul>
+<h2>Python 实例</h2>
+<ul>
+<li><a href="python_examples.html" title="Python 实例">Python 实例</a></li>
+<li><a href="python_quiz.html" title="Python 测验">Python 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Python 二叉搜索树</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="python_dsa_binarytrees.html" title="Python 二叉树">二叉树</a></li>
+<li class="next"><a href="python_dsa_avltrees.html" title="Python AVL 树">AVL 树</a></li>
+</ul>
+</div>
+
+
+
+<section id="intro">
+<p>二叉搜索树是一种二叉树，其中每个节点的左子节点值都较小，每个节点的右子节点值都较大。</p>
+
+<p>二叉搜索树的一个明显优势是，搜索、删除和插入等操作非常快速，且无需在内存中移动值。</p>
+</section>
+
+
+
+<section>
+<h2>二叉搜索树</h2>
+
+<p>二叉搜索树（BST）是一种二叉树数据结构，对于树中的任意节点“X”，必须满足以下属性：</p>
+
+<ul>
+<li>X 节点的左子节点及其所有后代（子节点、子节点的子节点等）的值都小于 X 的值。</li>
+<li>右子节点及其所有后代的值都大于 X 的值。</li>
+<li>左右子树也必须是二叉搜索树。</li>
+</ul>
+
+<p>这些属性使得搜索、添加和删除值的速度比普通二叉树更快。</p>
+
+<p>为了使二叉搜索树尽可能易于理解和实现，我们还假设二叉搜索树中的所有值都是唯一的。</p>
+
+<p>树的<em>大小</em>是指树中的节点数量 <mark>(n)</mark>。</p>
+
+<p><em>子树</em>以树中的一个节点作为局部根节点开始，由该节点及其所有后代组成。</p>
+
+<p>节点的<em>后代</em>是指该节点的所有子节点，以及所有子节点的子节点，以此类推。从一个节点开始，其所有连接的下方节点都是其后代。</p>
+
+<p><em>节点的高度</em>是指该节点与叶节点之间的最大边数。</p>
+
+<p><em>节点的中序后继</em>是指在中序遍历时位于该节点之后的节点。对上述BST进行中序遍历，节点13将位于节点 14 之前，因此节点13的后继是节点 14。</p>
+</section>
+
+
+
+<section>
+<h2>二叉搜索树的遍历</h2>
+
+<p>为了确认我们面前确实是一个二叉搜索树数据结构，我们可以检查页面顶部的属性是否成立。因此，对于上图中的每个节点，检查该节点左侧的所有值是否都较小，右侧的所有值是否都较大。</p>
+
+<p>另一种检查二叉树是否为BST的方法是进行中序遍历（如上一页所述），并检查结果值列表是否按升序排列。</p>
+
+<p>以下代码实现了上图中的二叉搜索树及其遍历。</p>
+
+<h3>实例</h3>
+
+<p>Python 二叉搜索树的遍历：</p>
+
+<pre class="language-python">
+class TreeNode:
+  def __init__(self, data):
+    self.data = data
+    self.left = None
+    self.right = None
+
+def inOrderTraversal(node):
+  if node is None:
+    return
+  inOrderTraversal(node.left)
+  print(node.data, end=&quot;, &quot;)
+  inOrderTraversal(node.right)
+
+root = TreeNode(13)
+node7 = TreeNode(7)
+node15 = TreeNode(15)
+node3 = TreeNode(3)
+node8 = TreeNode(8)
+node14 = TreeNode(14)
+node19 = TreeNode(19)
+node18 = TreeNode(18)
+
+root.left = node7
+root.right = node15
+
+node7.left = node3
+node7.right = node8
+
+node15.left = node14
+node15.right = node19
+
+node19.left = node18
+
+# 遍历
+inOrderTraversal(root)
+</pre>
+
+<p class="tiy"><a target="_blank" href="tcd25.html?f=python_dsa_binarysearchtree">亲自试一试</a></p>
+
+<p>通过运行上面的代码示例，我们可以看到中序遍历产生的数字列表是按升序排列的，这意味着这棵二叉树是二叉搜索树。</p>
+</section>
+
+
+
+<section>
+<h2>在 BST 中搜索值</h2>
+
+<p>在 BST 中搜索值与使用二分查找在数组中查找值非常相似。</p>
+
+<p>为了使二分查找有效，数组必须已经排序，然后可以在数组中非常快速地查找值。</p>
+
+<p>同样，由于节点的排列方式，在 BST 中查找值也可以非常快速。</p>
+
+<div class="info">
+<h3>工作原理：</h3>
+
+<ol>
+<li>从根节点开始。</li>
+<li>如果这是我们要查找的值，则返回。</li>
+<li>如果我们要查找的值较大，则继续在右子树中搜索。</li>
+<li>如果我们要查找的值较小，则继续在左子树中搜索。</li>
+<li>如果要搜索的子树不存在，则根据编程语言返回 None、NULL 或类似值，以表示该值不在 BST 中。</li>
+</ol>
+</div>
+
+<p>该算法可以这样实现：</p>
+
+<h3>实例</h3>
+
+<p>在树中搜索值 &quot;13&quot;：</p>
+
+<pre class="language-python">
+def search(node, target):
+  if node is None:
+    return None
+  elif node.data == target:
+    return node
+  elif target &lt; node.data:
+    return search(node.left, target)
+  else:
+    return search(node.right, target)
+
+# 搜索值
+result = search(root, 13)
+if result:
+  print(f&quot;Found the node with value: {result.data}&quot;)
+else:
+  print(&quot;Value not found in the BST.&quot;)
+</pre>
+
+<p class="tiy"><a target="_blank" href="td3d3.html?f=python_dsa_binarysearchtree_find">亲自试一试</a></p>
+
+<p>在 BST 中搜索值的时间复杂度为 <mark>O(h)</mark>，其中 <mark>h</mark> 是树的高度。</p>
+
+<p>例如，对于右侧节点较多的 BST，树的高度会变得比必要的高度更大，最坏情况下的搜索时间会更长。这样的树被称为不平衡树。</p>
+
+<style>
+  .dsa_svg {
+    width: 292px;
+    max-width: 100%;
+    height: auto;
+  }
+  .divAnim, #divAnim {
+    border: solid black 1px;
+    display: inline-block;
+    padding: 10px;
+  }
+  
+  .divAnim .wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .inputDiv ul {
+    padding-left: 20px;
+  }
+  
+  #divAnim4 .inputDiv {
+    margin-right: 20px;
+  }
+  #divAnim2 .buttonDiv,
+  #divAnim4 .buttonDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  #divAnim2 input,
+  #divAnim4 input {
+    margin-right: 5px;
+  }
+  .divAnim button,
+  .divAnim label {
+    display: block;
+    margin-left: 8px;
+  }
+  .divAnim p {
+    text-align: center;
+    height: 1.5em;
+    font-family: monospace, monospace;
+  }
+  
+  #divAnim #wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+  }
+  #divAnim #menu {
+    padding: 0 20px 0 0;
+  }
+  .divAnim label, #divAnim label {
+    cursor: pointer;
+  }
+  #divAnim input {
+    margin-right: 4px;
+  }
+  #divAnim p {
+    margin: 4px;
+  }
+  #divAnim circle, #divAnim line, #divAnim text {
+    transition: opacity 0.3s;
+  }
+  
+  #divAnim0 circle,
+  #divAnim3 circle, #divAnim3 text,
+  #divAnim4 circle, #divAnim4 text {
+    transition: fill 0.3s, strokeWidth 0.3s;
+  }
+  #divAnim2 circle, #divAnim2 text{
+    transition: fill 0.3s, strokeWidth 0.3s;
+  }
+  .svgDataText{
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+	  font-weight: normal;
+	  fill: black;
+      font-size: 20px;
+  }
+  .darkpagetheme .svgDataText{
+      fill: #ddd;
+  }
+  
+  .node {
+    stroke: black;
+    stroke-width: 1;
+    fill: gainsboro;
+  }
+  .darkpagetheme .node {
+    stroke: #ddd;
+    fill: dimgray;
+  }
+  
+  .branch {
+    stroke: black;
+    stroke-width: 1;
+    fill: black;
+  }
+  .darkpagetheme .branch {
+    stroke: #ddd;
+    fill: #ddd;
+  }
+  
+  #arrowhead line, 
+  #arrowheadRA line, 
+  #arrowheadAC line, 
+  #arrowheadAD line, 
+  #arrowheadRB line, 
+  #arrowheadBE line, 
+  #arrowheadBF line, 
+  #arrowheadFG line,
+  .arrowhead line {
+    stroke: black;
+    fill: black;
+  }
+  .darkpagetheme #arrowhead line, 
+  .darkpagetheme #arrowheadRA line, 
+  .darkpagetheme #arrowheadAC line, 
+  .darkpagetheme #arrowheadAD line, 
+  .darkpagetheme #arrowheadRB line, 
+  .darkpagetheme #arrowheadBE line, 
+  .darkpagetheme #arrowheadBF line, 
+  .darkpagetheme #arrowheadFG line, 
+  .darkpagetheme .arrowhead line {
+      stroke: #ddd;
+      fill: #ddd;
+  }
+  .hidden-svg {
+    position: absolute;
+    left: -9999px;
+    width: 0;
+    height: 0;
+  }
+  .nodePrinted {
+    fill: #90ee90;
+  }
+  .darkpagetheme .nodePrinted {
+    fill: #54a563;
+  }
+  .nodeActive {
+    fill: #fcfc62;
+  }
+  .darkpagetheme .nodeActive {
+    fill: #fc9f5b;
+  }
+  .nodeFinished {
+    fill: #90ee90;
+  }
+  .darkpagetheme .nodeFinished {
+    fill: #54a563;
+  }
+  .nodeDelete {
+    fill: lightpink;
+  }
+  .darkpagetheme .nodeDelete {
+    fill: #E75480;
+  }
+  .fatLine {
+    stroke-width: 3;
+  }
+  .dsa_figure {
+    width: 100%;
+    max-width: 292px; 
+    border: solid black 1px; 
+    display: block;
+	margin: 30px 30px 15px 0;
+  }
+  .dsa_figure img {
+    width: 100%;
+  }
+  .dsa_figure figcaption {
+    text-align: center;
+    font-style: italic;
+  }
+  .figureWrap {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  input[name="dataNode"], 
+  input[name="rbgSearchValue"], 
+  input[name="dataNode3"], 
+  input[name="dataNode4"] {
+    /* Styles for the radio button */
+    display: none;
+  }
+  input[name="dataNode"] + label,
+  input[name="rbgSearchValue"] + label,
+  input[name="dataNode3"] + label,
+  input[name="dataNode4"] + label {
+    /* Styles for the radio button */
+    border-style: dashed;
+    height: 2.5em;
+    width: 2.5em;
+    line-height: 2.5em;
+    text-align: center;
+    border-width: 1px;
+    border-color: black;
+    border-radius: 50%;
+  }
+  
+  /* This will style the label text next to the checked radio button */
+  input[name="dataNode"]:checked + label,
+  input[name="rbgSearchValue"]:checked + label,
+  input[name="dataNode3"]:checked + label,
+  input[name="dataNode4"]:checked + label {
+    /* Styles for the label */
+    border-style: solid;
+    border-width: 2px;
+    font-weight: bold;
+  }
+  .darkpagetheme input[name="dataNode"] + label,
+  .darkpagetheme input[name="dataNode"]:checked + label,
+  .darkpagetheme input[name="rbgSearchValue"] + label,
+  .darkpagetheme input[name="rbgSearchValue"]:checked + label,
+  .darkpagetheme input[name="dataNode3"] + label,
+  .darkpagetheme input[name="dataNode3"]:checked + label,
+  .darkpagetheme input[name="dataNode4"] + label,
+  .darkpagetheme input[name="dataNode4"]:checked + label {
+    /* Styles for the label */
+    border-color: #ddd;
+  }
+  .rbgDisabled {
+    opacity: 0.5;
+  }
+  .rbgDisabled:hover {
+    cursor: default;
+  }
+  #svgAnim2 {
+    width: 375px;
+  }
+</style>
+
+<div class="figureWrap">
+  <figure class="dsa_figure">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 320" >
+  <!-- 'R' node -->
+  <g class="root parent">
+    <circle cx="170" cy="30" r="20" class="node" />
+    <text x="159" y="37" class="svgDataText">13</text>
+    <line x1="155" y1="45" x2="101" y2="100" class="branch" marker-end="url(#arrowhead)" />
+    <line x1="185" y1="45" x2="250" y2="100" class="branch height13" marker-end="url(#arrowhead)" />
+  </g>
+
+  <!-- 'A' node -->
+  <g class="parent child">
+    <circle cx="80" cy="120" r="20" class="node" />
+    <text x="74" y="126" class="svgDataText">7</text>
+    <line x1="70" y1="138" x2="50" y2="180" class="branch" marker-end="url(#arrowhead)" />
+    <line x1="90" y1="138" x2="110" y2="180" class="branch" marker-end="url(#arrowhead)" />
+  </g>
+  <!-- 'B' node -->
+  <g class="parent child">
+    <circle cx="271" cy="120" r="20" class="node subtree15" />
+    <text x="260" y="126" class="svgDataText subtree15">15</text>
+    <line x1="261" y1="138" x2="241" y2="180" class="branch subtree15" marker-end="url(#arrowhead)" />
+    <line x1="281" y1="138" x2="301" y2="180" class="branch height13 height15 subtree15" marker-end="url(#arrowhead)" />
+  </g>
+
+  <!-- 'C' node -->
+  <g class="child leaf" id="aLeft">
+    <circle cx="41" cy="207" r="20" class="node" />
+    <text x="35" y="213" class="svgDataText" >3</text>
+  </g>
+
+  <!-- 'D' node -->
+  <g class="child leaf" id="aRight">
+    <circle cx="121" cy="207" r="20" class="node" />
+    <text x="115" y="213" class="svgDataText">8</text>
+  </g>
+
+  <!-- 'E' node -->
+<g class="child leaf">
+  <circle cx="232" cy="207" r="20" class="node subtree15 successor13" />
+  <text x="221" y="213" class="svgDataText subtree15 successor13" >14</text>
+</g>
+
+<!-- 'F' node -->
+<g class="child parent">
+  <circle cx="312" cy="207" r="20" class="node subtree15" />
+  <text x="301" y="213" class="svgDataText subtree15">19</text>
+  <line x1="302" y1="225" x2="282" y2="267" class="branch height13 height15 subtree15" marker-end="url(#arrowhead)" />
+</g>
+
+<!-- 'G' node -->
+<g class="child leaf">
+  <circle cx="271" cy="293" r="20" class="node subtree15" />
+  <text x="260" y="299" class="svgDataText subtree15">18</text>
+</g>
+</svg>
+    <figcaption>Balanced BST</figcaption>
+  </figure>
+  <figure class="dsa_figure">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 480">
+  <!-- 'R' node -->
+  <g class="root parent" transform="translate(-60,0)">
+    <circle cx="170" cy="30" r="20" class="node" />
+    <text x="164" y="37" class="svgDataText">7</text>
+    <line x1="155" y1="45" x2="121" y2="80" class="branch" marker-end="url(#arrowhead)" />
+    <line x1="185" y1="45" x2="230" y2="80" class="branch height13" marker-end="url(#arrowhead)" />
+  </g>
+
+    <!-- 'B' node -->
+  <g class="parent child" transform="translate(-60,0)">
+    <circle cx="251" cy="100" r="20" class="node subtree15" />
+    <text x="240" y="106" class="svgDataText subtree15">13</text>
+    <line x1="241" y1="118" x2="221" y2="160" class="branch subtree15" marker-end="url(#arrowhead)" />
+    <line x1="261" y1="118" x2="281" y2="160" class="branch height13 height15 subtree15" marker-end="url(#arrowhead)" />
+
+  </g>
+
+  <g class="parent child" transform="translate(-60,0)">
+    <circle cx="100" cy="100" r="20" class="node" />
+    <text x="94" y="106" class="svgDataText">3</text>
+</g>
+
+
+<!-- 'D' node -->
+<g class="child leaf" id="aRight" transform="translate(110,153)">
+    <circle cx="121" cy="207" r="20" class="node" />
+    <text x="110" y="213" class="svgDataText">15</text>
+</g>
+
+  <!-- 'E' node -->
+<g class="child leaf" transform="translate(-60,0)">
+  <circle cx="212" cy="187" r="20" class="node subtree15 successor13" />
+  <text x="206" y="193" class="svgDataText subtree15 successor13" >8</text>
+</g>
+
+<!-- 'F' node -->
+<g class="child parent" transform="translate(-60,0)">
+  <circle cx="292" cy="187" r="20" class="node subtree15" />
+  <text x="281" y="193" class="svgDataText subtree15">19</text>
+  <line x1="282" y1="205" x2="262" y2="247" class="branch height13 height15 subtree15" marker-end="url(#arrowhead)" />
+</g>
+
+<!-- 'G' node -->
+<g class="child leaf" transform="translate(-60,0)">
+  <circle cx="251" cy="273" r="20" class="node subtree15" />
+<text x="240" y="279" class="svgDataText subtree15">14</text>
+<line x1="260" y1="291" x2="280" y2="333" class="branch" marker-end="url(#arrowhead)" />
+</g>
+
+<line x1="260" y1="291" x2="280" y2="333" class="branch" marker-end="url(#arrowhead)" transform="translate(-20,87)" />
+
+<g class="child leaf" id="aLeft" transform="translate(230,240)">
+    <circle cx="41" cy="207" r="20" class="node" />
+    <text x="30" y="213" class="svgDataText">18</text>
+</g>
+</svg>
+      <figcaption>Unbalanced BST</figcaption>
+  </figure>
+</div>
+
+<p>上述两棵二叉搜索树具有相同的节点，并且对两棵树进行中序遍历得到的结果相同，但高度却大不相同。搜索上述不平衡树的时间更长，因为它的高度更高。</p>
+
+<p>我们将在下一页介绍一种称为 AVL 树的二叉树。AVL 树是自平衡的，这意味着树的高度保持在最低限度，以便搜索、插入和删除等操作花费的时间更少。</p>
+</section>
+
+
+
+<section>
+<h2>在 BST 中插入节点</h2>
+
+<p>在 BST 中插入节点与搜索值类似。</p>
+
+<div class="info">
+<h3>工作原理：</h3>
+
+<ol>
+<li>从根节点开始。</li>
+<li>比较每个节点：
+	<ul>
+	<li>值较小？向左走。</li>
+	<li>值较大？向右走。</li>
+	</ul>
+</li>
+<li>继续将节点与新值进行比较，直到没有左右节点可比较为止。那就是插入新节点的位置。</li>
+</ol>
+</div>
+
+<p>按照上述方式插入节点意味着插入的节点将始终成为新的叶节点。</p>
+
+<p>BST 中的所有节点都是唯一的，因此，如果我们找到与要插入的值相同的节点，则不执行任何操作。</p>
+
+<p>BST 中的节点插入可以这样实现：</p>
+
+<h3>实例</h3>
+
+<p>在 BST 中插入节点：</p>
+
+<pre class="language-python">
+def insert(node, data):
+  if node is None:
+    return TreeNode(data)
+  else:
+    if data &lt; node.data:
+      node.left = insert(node.left, data)
+    elif data > node.data:
+      node.right = insert(node.right, data)
+  return node
+
+# 将新值插入 BST
+insert(root, 10)
+</pre>
+
+<p class="tiy"><a target="_blank" href="tf428.html?f=python_dsa_binarysearchtree_insert">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>在 BST 子树中查找最小值</h2>
+
+<p>下一节将解释如何在 BST 中删除节点，但为此我们需要一个函数来查找节点子树中的最小值。</p>
+
+<div class="info">
+<h3>工作原理：</h3>
+
+<ol>
+<li>从子树的根节点开始。</li>
+<li>尽可能向左走。</li>
+<li>你最终到达的节点就是该 BST 子树中具有最小值的节点。</li>
+</ol>
+</div>
+
+<p>以下是在 BST 节点的子树中查找最小值的函数：</p>
+
+<h3>实例</h3>
+
+<p>在 BST 子树中查找最小值：</p>
+
+<pre class="language-python">
+def minValueNode(node):
+  current = node
+  while current.left is not None:
+    current = current.left
+  return current
+
+# 查找最小值
+print(&quot;\nLowest value:&quot;,minValueNode(root).data)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t255b.html?f=python_dsa_binarysearchtree_lowest">亲自试一试</a></p>
+
+<p>我们将在下面的部分中使用此 <code>minValueNode()</code> 函数来查找节点的中序后继，并使用它来删除节点。</p>
+</section>
+
+
+
+<section>
+<h2>在 BST 中删除节点</h2>
+
+<p>要删除节点，我们的函数必须首先在 BST 中搜索该节点。</p>
+
+<p>找到节点后，有三种不同的情况需要以不同的方式删除节点。</p>
+
+<div class="info">
+<h3>工作原理：</h3>
+
+<ol>
+<li>如果节点是叶节点，则通过移除指向它的链接来删除它。</li>
+<li>如果节点只有一个子节点，则将要删除节点的父节点连接到该子节点。</li>
+<li>如果节点既有右子节点又有左子节点：找到节点的中序后继，与该节点交换值，然后删除它。</li>
+</ol>
+</div>
+
+<p>在上述步骤 3 中，我们找到的后继始终是叶节点，并且由于它是紧跟在要删除节点之后的节点，因此我们可以与它交换值并删除它。</p>
+
+<p>以下是具有删除节点功能的 BST 的实现方式：</p>
+
+<h3>实例</h3>
+
+<p>在 BST 中删除节点：</p>
+
+<pre class="language-python">
+def delete(node, data):
+  if not node:
+    return None
+
+  if data &lt; node.data:
+    node.left = delete(node.left, data)
+  elif data > node.data:
+    node.right = delete(node.right, data)
+  else:
+    # 只有一个子节点或没有子节点的节点
+    if not node.left:
+      temp = node.right
+      node = None
+      return temp
+    elif not node.right:
+      temp = node.left
+      node = None
+      return temp
+
+    # 有两个子节点的节点，获取中序后继
+    node.data = minValueNode(node.right).data
+    node.right = delete(node.right, node.data)
+
+  return node
+
+# 删除节点 15
+delete(root,15)
+</pre>
+
+<p class="tiy"><a target="_blank" href="td8f1.html?f=python_dsa_binarysearchtree_delete">亲自试一试</a></p>
+
+<p><em>第 1 行：</em>这里的 <code>node</code> 参数使函数能够在搜索要删除的 <code>data</code> 时对越来越小的子树递归调用自身。</p>
+
+<p><em>第 2-8 行：</em>这是在搜索具有要删除的正确 <code>data</code> 的节点。</p>
+
+<p><em>第 9-22 行：</em>已找到要删除的节点。有三种这样的情况：</p>
+
+<p><em>情况 1：</em>没有子节点的节点（叶节点）。返回 <code>None</code>，并通过递归使其成为父节点的新左值或右值（第 6 行或第 8 行）。</p>
+
+<p><em>情况 2：</em>有左子节点或右子节点的节点。通过递归使该左子节点或右子节点成为父节点的新左子节点或右子节点（第 7 行或第 9 行）。</p>
+
+<p><em>情况 3：</em>节点既有左子节点又有右子节点。使用 <code>minValueNode()</code> 函数找到中序后继。我们通过将中序后继的值设置为要删除节点的值来保留该值，然后我们可以删除后继节点。</p>
+
+<p><em>第 24 行：</em>返回 <code>node</code> 以保持递归功能。</p>
+</section>
+
+
+
+<section>
+<h2>BST 与其他数据结构的比较</h2>
+
+<p>二叉搜索树结合了另外两种数据结构的优点：数组和链表。</p>
+
+<table class="ref">
+<tr>
+<th>数据结构</th>
+<th>搜索值</th>
+<th>删除/插入导致内存中的移动</th>
+</tr>
+
+<tr>
+<td>有序数组</td>
+<td>O(\log n)</td>
+<td>是</td>
+</tr>
+
+<tr>
+<td>链表</td>
+<td>O(n)</td>
+<td>否</td>
+</tr>
+
+<tr>
+<td>二叉搜索树</td>
+<td>O(\log n)</td>
+<td>否</td>
+</tr>
+</table>
+
+<p>搜索 BST 的速度与在数组上进行二分查找一样快，时间复杂度相同，为 <mark>O(log n)</mark>。</p>
+
+<p>并且可以像链表一样，在删除和插入新值时无需在内存中移动元素。</p>
+</section>
+
+
+
+<section>
+<h2>BST 的平衡性与时间复杂度</h2>
+
+<p>在二叉搜索树上，插入新节点、删除节点或搜索节点等操作的时间复杂度实际上是 <mark>O(h)</mark>。这意味着树的高度（<mark>h</mark>）越高，操作所需的时间就越长。</p>
+
+<p>我们在上面的表格中写搜索值为 <mark>O(log n)</mark> 的原因是，如果树是“平衡的”，如上图所示，那么这是成立的。</p>
+
+<div class="figureWrap">
+  <figure class="dsa_figure">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 320">
+  <!-- 'R' node -->
+  <g class="root parent">
+    <circle cx="170" cy="30" r="20" class="node"></circle>
+    <text x="159" y="37" class="svgDataText">13</text>
+    <line x1="155" y1="45" x2="101" y2="100" class="branch" marker-end="url(#arrowhead)"></line>
+    <line x1="185" y1="45" x2="250" y2="100" class="branch height13" marker-end="url(#arrowhead)"></line>
+  </g>
+
+  <!-- 'A' node -->
+  <g class="parent child">
+    <circle cx="80" cy="120" r="20" class="node"></circle>
+    <text x="74" y="126" class="svgDataText">7</text>
+    <line x1="70" y1="138" x2="50" y2="180" class="branch" marker-end="url(#arrowhead)"></line>
+    <line x1="90" y1="138" x2="110" y2="180" class="branch" marker-end="url(#arrowhead)"></line>
+  </g>
+  <!-- 'B' node -->
+  <g class="parent child">
+    <circle cx="271" cy="120" r="20" class="node subtree15"></circle>
+    <text x="260" y="126" class="svgDataText subtree15">15</text>
+    <line x1="261" y1="138" x2="241" y2="180" class="branch subtree15" marker-end="url(#arrowhead)"></line>
+    <line x1="281" y1="138" x2="301" y2="180" class="branch height13 height15 subtree15" marker-end="url(#arrowhead)"></line>
+  </g>
+
+  <!-- 'C' node -->
+  <g class="child leaf" id="aLeft">
+    <circle cx="41" cy="207" r="20" class="node"></circle>
+    <text x="35" y="213" class="svgDataText">3</text>
+  </g>
+
+  <!-- 'D' node -->
+  <g class="child leaf" id="aRight">
+    <circle cx="121" cy="207" r="20" class="node"></circle>
+    <text x="115" y="213" class="svgDataText">8</text>
+  </g>
+
+  <!-- 'E' node -->
+<g class="child leaf">
+  <circle cx="232" cy="207" r="20" class="node subtree15 successor13"></circle>
+  <text x="221" y="213" class="svgDataText subtree15 successor13">14</text>
+</g>
+
+<!-- 'F' node -->
+<g class="child parent">
+  <circle cx="312" cy="207" r="20" class="node subtree15"></circle>
+  <text x="301" y="213" class="svgDataText subtree15">19</text>
+  <line x1="302" y1="225" x2="282" y2="267" class="branch height13 height15 subtree15" marker-end="url(#arrowhead)"></line>
+</g>
+
+<!-- 'G' node -->
+<g class="child leaf">
+  <circle cx="271" cy="293" r="20" class="node subtree15"></circle>
+  <text x="260" y="299" class="svgDataText subtree15">18</text>
+</g>
+</svg>
+    <figcaption>Balanced BST</figcaption>
+  </figure>
+</div>
+
+<p>我们称这棵树是平衡的，因为树的左侧和右侧的节点数量大致相同。</p>
+
+<p>判断二叉树是否平衡的确切方法是，任何节点的左右子树的高度差不超过 1。在上图中，根节点的左子树高度为 <mark>h=2</mark>，右子树高度为 <mark>h=3</mark>。</p>
+
+<p>对于具有大量节点（大 <mark>n</mark>）的平衡 BST，我们得到高度 <mark>h ≈ \log_2 n</mark>，因此搜索、删除或插入节点的时间复杂度可以表示为 <mark>O(h) = O(\log n)</mark>。</p>
+
+<p>但是，如果 BST 完全不平衡，如上图所示，树的高度大约与节点数量相同，<mark>h ≈ n</mark>，我们得到搜索、删除或插入节点的时间复杂度为 <mark>O(h) = O(n)</mark>。</p>
+
+<div class="figureWrap">
+  <figure class="dsa_figure">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 480">
+  <!-- 'R' node -->
+  <g class="root parent" transform="translate(-60,0)">
+    <circle cx="170" cy="30" r="20" class="node" />
+    <text x="164" y="37" class="svgDataText">7</text>
+    <line x1="155" y1="45" x2="121" y2="80" class="branch" marker-end="url(#arrowhead)" />
+    <line x1="185" y1="45" x2="230" y2="80" class="branch height13" marker-end="url(#arrowhead)" />
+  </g>
+
+    <!-- 'B' node -->
+  <g class="parent child" transform="translate(-60,0)">
+    <circle cx="251" cy="100" r="20" class="node subtree15" />
+    <text x="240" y="106" class="svgDataText subtree15">13</text>
+    <line x1="241" y1="118" x2="221" y2="160" class="branch subtree15" marker-end="url(#arrowhead)" />
+    <line x1="261" y1="118" x2="281" y2="160" class="branch height13 height15 subtree15" marker-end="url(#arrowhead)" />
+
+  </g>
+
+  <g class="parent child" transform="translate(-60,0)">
+    <circle cx="100" cy="100" r="20" class="node" />
+    <text x="94" y="106" class="svgDataText">3</text>
+</g>
+
+
+<!-- 'D' node -->
+<g class="child leaf" id="aRight" transform="translate(110,153)">
+    <circle cx="121" cy="207" r="20" class="node" />
+    <text x="110" y="213" class="svgDataText">15</text>
+</g>
+
+  <!-- 'E' node -->
+<g class="child leaf" transform="translate(-60,0)">
+  <circle cx="212" cy="187" r="20" class="node subtree15 successor13" />
+  <text x="206" y="193" class="svgDataText subtree15 successor13" >8</text>
+</g>
+
+<!-- 'F' node -->
+<g class="child parent" transform="translate(-60,0)">
+  <circle cx="292" cy="187" r="20" class="node subtree15" />
+  <text x="281" y="193" class="svgDataText subtree15">19</text>
+  <line x1="282" y1="205" x2="262" y2="247" class="branch height13 height15 subtree15" marker-end="url(#arrowhead)" />
+</g>
+
+<!-- 'G' node -->
+<g class="child leaf" transform="translate(-60,0)">
+  <circle cx="251" cy="273" r="20" class="node subtree15" />
+<text x="240" y="279" class="svgDataText subtree15">14</text>
+<line x1="260" y1="291" x2="280" y2="333" class="branch" marker-end="url(#arrowhead)" />
+</g>
+
+<line x1="260" y1="291" x2="280" y2="333" class="branch" marker-end="url(#arrowhead)" transform="translate(-20,87)" />
+
+<g class="child leaf" id="aLeft" transform="translate(230,240)">
+    <circle cx="41" cy="207" r="20" class="node" />
+    <text x="30" y="213" class="svgDataText">18</text>
+</g>
+</svg>
+      <figcaption>Unbalanced BST</figcaption>
+  </figure>
+</div>
+
+<p>因此，为了优化 BST 上的操作，必须最小化高度，为此必须平衡树。</p>
+
+<p>保持二叉搜索树平衡正是 AVL 树所做的，这是下一页将解释的数据结构。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="python_dsa_binarytrees.html" title="Python 二叉树">二叉树</a></li>
+<li class="next"><a href="python_dsa_avltrees.html" title="Python AVL 树">AVL 树</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="python_reference.html">Python 参考手册</a></h5>
+<h5 id="tools_example"><a href="python_examples.html">Python 实例</a></h5>
+<h5 id="tools_quiz"><a href="python_quiz.html">Python 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/python/python_dsa_binarysearchtrees.asp by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Mar 2026 14:34:12 GMT -->
+</html>

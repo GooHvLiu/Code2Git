@@ -1,0 +1,433 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/c/c_strings.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:56:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>C 语言字符串</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>C 教程</h2>
+<ul>
+<li><a href="index.html" title="C 教程">C 教程</a></li>
+<li><a href="c_intro.html" title="C 简介">C 简介</a></li>
+<li><a href="c_getstarted.html" title="C 入门">C 入门</a></li>
+<li><a href="c_syntax.html" title="C 语法">C 语法</a></li>
+<li><a href="c_statements.html" title="C 语句">C 语句</a></li>
+<li><a href="c_output.html" title="C 输出">C 输出</a></li>
+<li><a href="c_newline.html" title="C 新行">C 新行</a></li>
+<li><a href="c_comments.html" title="C 注释">C 注释</a></li>
+<li><a href="c_variables.html" title="C 变量">C 变量</a></li>
+<li><a href="c_variables_format.html" title="C 格式说明符">C 格式说明符</a></li>
+<li><a href="c_variables_change.html" title="C 变量值">C 变量值</a></li>
+<li><a href="c_variables_multiple.html" title="C 多变量">C 多变量</a></li>
+<li><a href="c_variables_names.html" title="C 变量名">C 变量名</a></li>
+<li><a href="c_variables_reallife.html" title="C 变量实例">C 变量实例</a></li>
+<li><a href="c_data_types.html" title="C 数据类型">C 数据类型</a></li>
+<li><a href="c_data_types_characters.html" title="C 字符数据类型">C 字符数据类型</a></li>
+<li><a href="c_data_types_numbers.html" title="C 数值数据类型">C 数值数据类型</a></li>
+<li><a href="c_data_types_dec.html" title="C 十进制精度">C 十进制精度</a></li>
+<li><a href="c_data_types_sizeof.html" title="C sizeof 运算符">C sizeof 运算符</a></li>
+<li><a href="c_data_types_reallife.html" title="C 数据类型实例">C 数据类型实例</a></li>
+<li><a href="c_type_conversion.html" title="C 类型转换">C 类型转换</a></li>
+<li><a href="c_constants.html" title="C 常量">C 常量</a></li>
+<li><a href="c_operators.html" title="C 运算符">C 运算符</a></li>
+<li><a href="c_booleans.html" title="C 布尔值">C 布尔值</a></li>
+<li><a href="c_booleans_reallife.html" title="C 布尔值实例">C 布尔值实例</a></li>
+<li><a href="c_conditions.html" title="C If...Else">C If...Else</a></li>
+<li><a href="c_conditions_else.html" title="C Else">C Else</a></li>
+<li><a href="c_conditions_elseif.html" title="C Else If">C Else If</a></li>
+<li><a href="c_conditions_short_hand.html" title="C 简写 If Else">C 简写 If Else</a></li>
+<li><a href="c_conditions_reallife.html" title="C If ... Else 实例">C If ... Else 实例</a></li>
+<li><a href="c_switch.html" title="C Switch">C Switch</a></li>
+<li><a href="c_while_loop.html" title="C While 循环">C While 循环</a></li>
+<li><a href="c_do_while_loop.html" title="C Do/While 循环">C Do/While 循环</a></li>
+<li><a href="c_while_loop_reallife.html" title="C While 循环实例">C While 循环实例</a></li>
+<li><a href="c_for_loop.html" title="C For 循环">C For 循环</a></li>
+<li><a href="c_for_loop_nested.html" title="C 嵌套循环">C 嵌套循环</a></li>
+<li><a href="c_for_loop_reallife.html" title="C For 循环实例">C For 循环实例</a></li>
+<li><a href="c_break_continue.html" title="C Break 和 Continue">C Break 和 Continue</a></li>
+<li><a href="c_arrays.html" title="C 数组">C 数组</a></li>
+<li><a href="c_arrays_size.html" title="C 数组大小">C 数组大小</a></li>
+<li><a href="c_arrays_reallife.html" title="C 数组实例">C 数组实例</a></li>
+<li><a href="c_arrays_multi.html" title="C 多维数组">C 多维数组</a></li>
+<li class="currentLink"><a href="c_strings.html" title="C 字符串">C 字符串</a></li>
+<li><a href="c_strings_esc.html" title="C 特殊字符">C 特殊字符</a></li>
+<li><a href="c_strings_functions.html" title="C 字符串函数">C 字符串函数</a></li>
+<li><a href="c_user_input.html" title="C 用户输入">C 用户输入</a></li>
+<li><a href="c_memory_address.html" title="C 内存地址">C 内存地址</a></li>
+<li><a href="c_pointers.html" title="C 指针">C 指针</a></li>
+</ul>
+<h2>C 函数</h2>
+<ul>
+<li><a href="c_functions.html" title="C 函数">C 函数</a></li>
+<li><a href="c_functions_parameters.html" title="C 函数参数">C 函数参数</a></li>
+<li><a href="c_functions_decl.html" title="C 函数声明">C 函数声明</a></li>
+<li><a href="c_functions_recursion.html" title="C 递归">C 递归</a></li>
+<li><a href="c_math.html" title="C 数学函数">C 数学函数</a></li>
+</ul>
+<h2>C 文件</h2>
+<ul>
+<li><a href="c_files.html" title="C 创建文件">C 创建文件</a></li>
+<li><a href="c_files_write.html" title="C 写入文件">C 写入文件</a></li>
+<li><a href="c_files_read.html" title="C 读取文件">C 读取文件</a></li>
+</ul>
+<h2>C 结构体</h2>
+<ul>
+<li><a href="c_structs.html" title="C 结构体">C 结构体</a></li>
+</ul>
+<h2>C 枚举</h2>
+<ul>
+<li><a href="c_enums.html" title="C 枚举">C 枚举</a></li>
+</ul>
+<h2>C 内存</h2>
+<ul>
+<li><a href="c_memory_management.html" title="C 内存管理">C 内存管理</a></li>
+<li><a href="c_memory_allocate.html" title="C 分配内存">C 分配内存</a></li>
+<li><a href="c_memory_access.html" title="C 访问内存">C 访问内存</a></li>
+<li><a href="c_memory_reallocate.html" title="C 重新分配内存">C 重新分配内存</a></li>
+<li><a href="c_memory_deallocate.html" title="C 释放内存">C 释放内存</a></li>
+<li><a href="c_memory_reallife.html" title="C 语言内存管理实例">C 内存管理实例</a></li>
+</ul>
+<h2>C 参考手册</h2>
+<ul>
+<li><a href="c_reference.html" title="C 参考手册">C 参考手册</a></li>
+<li><a href="c_ref_keywords.html" title="C 关键词">C 关键词</a></li>
+<li><a href="c_ref_stdio.html" title="C stdio (stdio.h) 库">C &lt;stdio.h&gt;</a></li>
+<li><a href="c_ref_stdlib.html" title="C stdlib (stdlib.h) 库">C &lt;stdlib.h&gt;</a></li>
+<li><a href="c_ref_string.html" title="C string (string.h) 库">C &lt;string.h&gt;</a></li>
+<li><a href="c_ref_math.html" title="C math (math.h) 库">C &lt;math.h&gt;</a></li>
+<li><a href="c_ref_ctype.html" title="C ctype (ctype.h) 库">C &lt;ctype.h&gt;</a></li>
+</ul>
+<h2>C 实例</h2>
+<ul>
+<li><a href="c_examples.html" title="C 实例">C 实例</a></li>
+<li><a href="c_real_life_examples.html" title="C 现实中的例子">C 现实中的例子</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>C 字符串</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="c_arrays_multi.html" title="C 多维数组">C 多维数组</a></li>
+<li class="next"><a href="c_strings_esc.html" title="C 特殊字符">C 特殊字符</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>字符串</h2>
+
+<p>字符串用于存储文本/字符。</p>
+
+<p>例如，&quot;Hello World&quot; 就是一个由字符组成的字符串。</p>
+
+<p>与许多其他编程语言不同，C 没有 <em>String 类型</em>来轻松创建字符串变量。相反，您必须使用 <code>char</code> 类型并创建一个字符数组来在 C 中生成字符串：</p>
+
+<pre class="language-c">
+char greetings[] = &quot;Hello World!&quot;;
+</pre>
+
+<p>请注意，您必须使用双引号 (<code>&quot;&quot;</code>)。</p>
+
+<p>要输出字符串，您可以使用 <code>printf()</code> 函数和格式说明符 <code>%s</code> 来告诉 C，我们现在处理的是字符串：</p>
+
+<h3>实例</h3>
+
+<pre class="language-c">
+char greetings[] = &quot;Hello World!&quot;;
+printf(&quot;%s&quot;, greetings);
+</pre>
+
+<p class="tiy"><a target="_blank" href="t61de.html?f=c_strings">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>访问字符串</h2>
+
+<p>由于字符串实际上是 C 中的<a href="c_arrays.html" title="C 语言数组">数组</a>，因此您可以通过引用方括号 <code>[]</code> 内的索引号来访问字符串。</p>
+
+<p>此例打印 <code>greetings</code> 中的<em>第一个字符 (0)</em>：</p>
+
+<h3>实例</h3>
+
+<pre class="language-c">
+char greetings[] = &quot;Hello World!&quot;;
+printf(&quot;%c&quot;, greetings[0]);
+</pre>
+
+<p class="tiy"><a target="_blank" href="t55fe.html?f=c_strings_access">亲自试一试</a></p>
+
+<p>请注意，我们必须使用 <code>%c</code> 格式说明符来打印<em>单个字符</em>。</p>
+</section>
+
+
+
+<section>
+<h2>修改字符串</h2>
+
+<p>要更改字符串中特定字符的值，请引用索引号并使用<em>单引号</em>：</p>
+
+<h3>实例</h3>
+
+<pre class="language-c">
+char greetings[] = &quot;Hello World!&quot;;
+greetings[0] = 'J';
+printf(&quot;%s&quot;, greetings);
+// 输出 Jello World! 而不是 Hello World!
+</pre>
+
+<p class="tiy"><a target="_blank" href="ta1df.html?f=c_strings_modify">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>遍历字符串</h2>
+
+<p>您也可以使用 <code>for</code> 循环来遍历字符串中的字符：</p>
+
+<h3>实例</h3>
+
+<pre class="language-c">
+char carName[] = &quot;Volvo&quot;;
+int i;
+
+for (i = 0; i &lt; 5; ++i) {
+  printf(&quot;%c\n&quot;, carName[i]);
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t50a8.html?f=c_strings_loop_1">亲自试一试</a></p>
+
+<p>正如我们在<a href="c_arrays.html" title="C 语言数组">数组</a>章节中所述，您还可以使用 <code>sizeof</code> 公式（而不是在循环条件中手动写入数组的大小（<code>i &lt; 5</code>）），以使循环更加灵活：</p>
+
+<h3>实例</h3>
+
+<pre class="language-c">
+char carName[] = &quot;Volvo&quot;;
+int length = sizeof(carName) / sizeof(carName[0]);
+int i;
+
+for (i = 0; i &lt; length; ++i) {
+  printf(&quot;%c\n&quot;, carName[i]);
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="t405d.html?f=c_strings_loop_2">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>创建字符串的另一种方式</h2>
+
+<p>在上面的示例中，我们使用了“字符串字面值”来创建字符串变量。这是在C中创建字符串的最简单方法。</p>
+
+<p>您还应该注意，您可以使用一组字符来创建字符串。这个示例将与本页开始的示例产生相同的结果：</p>
+
+<h3>实例</h3>
+
+<pre class="language-c">
+char greetings[] = {'H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd', '!', '\0'};
+printf(&quot;%s&quot;, greetings);
+</pre>
+
+<p class="tiy"><a target="_blank" href="tc13f.html?f=c_strings_chars">亲自试一试</a></p>
+
+<p><em>为什么我们在末尾包含 <code>\0</code> 字符？</em>这被称为“空终止字符”，在使用此方法创建字符串时必须包含该字符。它告诉 C 这是字符串的结尾。</p>
+</section>
+
+
+
+<section>
+<h2>差异</h2>
+
+<p>创建字符串的两种方法之间的区别在于，第一种方法更容易编写，并且您不必包含 <code>\0</code> 字符，因为 C 会为您做这件事。</p>
+
+<p>您应该注意，两个数组的大小是相同的：它们都有 <em>13 个字符</em>（顺便说一下，空格也算作一个字符），包括 <code>\0</code> 字符：</p>
+
+<h3>实例</h3>
+
+<pre class="language-c">
+char greetings[] = {'H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd', '!', '\0'};
+char greetings2[] = &quot;Hello World!&quot;;
+
+printf(&quot;%lu\n&quot;, sizeof(greetings));   // 输出 13
+printf(&quot;%lu\n&quot;, sizeof(greetings2));  // 输出 13
+</pre>
+
+<p class="tiy"><a target="_blank" href="t6390.html?f=c_strings_sizeof">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>现实生活中的例子</h2>
+
+<p>使用字符串创建简单的欢迎消息：</p>
+
+<h3>实例</h3>
+
+<pre class="language-c">
+char message[] = &quot;很高兴见到你，&quot;;
+char fname[] = &quot;Bill&quot;;
+
+printf(&quot;%s %s!&quot;, message, fname);
+</pre>
+
+<p class="tiy"><a target="_blank" href="t34b9.html?f=c_strings_reallife">亲自试一试</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="c_arrays_multi.html" title="C 多维数组">C 多维数组</a></li>
+<li class="next"><a href="c_strings_esc.html" title="C 特殊字符">C 特殊字符</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="c_reference.html">C 参考手册</a></h5>
+<h5 id="tools_example"><a href="c_examples.html">C 实例</a></h5>
+<h5 id="tools_quiz"><a href="c_quiz.html">C 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/c/c_strings.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:56:29 GMT -->
+</html>

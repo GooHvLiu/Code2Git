@@ -1,0 +1,319 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/pandas/ref_df_duplicated.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:20:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Pandas DataFrame duplicated() 方法</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Pandas 教程</h2>
+<ul>
+<li><a href="index.html" title="Pandas 教程">Pandas 教程</a></li>
+<li><a href="pandas_intro.html" title="Pandas 简介">Pandas 简介</a></li>
+<li><a href="pandas_getting_started.html" title="Pandas 入门">Pandas 入门</a></li>
+<li><a href="pandas_series.html" title="Pandas 序列">Pandas 序列</a></li>
+<li><a href="pandas_dataframes.html" title="Pandas 数据帧">Pandas 数据帧</a></li>
+<li><a href="pandas_csv.html" title="Pandas 读取 CSV">Pandas 读取 CSV</a></li>
+<li><a href="pandas_json.html" title="Pandas 读取 JSON">Pandas 读取 JSON</a></li>
+<li><a href="pandas_analyzing.html" title="Pandas 数据分析">Pandas 数据分析</a></li>
+</ul>
+<h2>数据清洗</h2>
+<ul>
+<li><a href="pandas_cleaning.html" title="Pandas 数据清洗">Pandas 数据清洗</a></li>
+<li><a href="pandas_cleaning_empty_cells.html" title="Pandas 清洗空单元格">Pandas 清洗空单元格</a></li>
+<li><a href="pandas_cleaning_wrong_format.html" title="Pandas 清洗错误格式">Pandas 清洗错误格式</a></li>
+<li><a href="pandas_cleaning_wrong_data.html" title="Pandas 清洗错误数据">Pandas 清洗错误数据</a></li>
+<li><a href="pandas_cleaning_duplicates.html" title="Pandas 删除重复项">Pandas 删除重复项</a></li>
+</ul>
+<h2>相关性</h2>
+<ul>
+<li><a href="pandas_correlations.html" title="Pandas 相关性">Pandas 相关性</a></li>
+</ul>
+<h2>绘图</h2>
+<ul>
+<li><a href="pandas_plotting.html" title="Pandas 绘图">Pandas 绘图</a></li>
+</ul>
+<h2>参考手册</h2>
+<ul>
+<li><a href="pandas_ref_dataframe.html" title="DataFrames 参考手册">DataFrames 参考手册</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Pandas DataFrame duplicated() 方法</h1>
+
+<div class="btn-toref">
+<p><a href="pandas_ref_dataframe.html">DataFrame 参考手册</a></p>
+</div>
+
+
+
+<section>
+<h2>定义和用法</h2>
+
+<p><code>duplicd()</code> 方法返回包含 True 和 False 值的 Series，这些值描述 DataFrame 中哪些行重复，哪些行不重复。</p>
+
+<p>使用 <code>subset</code> 参数指定在查找重复项时要包含哪些列。默认情况下，包含所有列。</p>
+
+<p>默认情况下，两个或多个重复项的第一次出现将被设置为 False。</p>
+
+<p>将 <code>keep</code> 参数设置为 <code>False</code>，以将第一次出现也设置为 True。</p>
+</section>
+
+
+
+<section>
+<h2>实例</h2>
+
+<h3>例子 1</h3>
+
+<p>检查哪些行重复，哪些行不重复：</p>
+
+<pre class="language-python">
+import pandas as pd
+
+data = {
+  &quot;name&quot;: [&quot;John&quot;, &quot;Mary&quot;, &quot;John&quot;, &quot;Sally&quot;, &quot;Mary&quot;],
+  &quot;age&quot;: [40, 30, 40, 50, 30],
+  &quot;city&quot;: [&quot;Bergen&quot;, &quot;Oslo&quot;, &quot;Stavanger&quot;, &quot;Oslo&quot;, &quot;Oslo&quot;]
+}
+
+df = pd.DataFrame(data)
+
+s = df.duplicated()
+
+print(s)
+</pre>
+
+<p class="tiy"><a target="_blank" href="tf044.html?f=pandas_ref_df_duplicated_1">亲自试一试</a></p>
+
+<h3>例子 2</h3>
+
+<p>仅包含 &quot;name&quot; 和 &quot;age&quot; 列：</p>
+
+<pre class="language-python">
+s = df.duplicated(subset=[&quot;name&quot;, &quot;age&quot;])
+
+print(s)
+</pre>
+
+<p class="tiy"><a target="_blank" href="ta03d.html?f=pandas_ref_df_duplicated_2">亲自试一试</a></p>
+
+<h3>例子 3</h3>
+
+<p>将所有重复项的出现都设置为 True：</p>
+
+<pre class="language-python">
+s = df.duplicated(keep=False)
+
+print(s)
+</pre>
+
+<p class="tiy"><a target="_blank" href="tec2a.html?f=pandas_ref_df_duplicated_3">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>语法</h2>
+
+<pre class="language-python">
+dataframe.duplicated(subset, keep)
+</pre>
+
+<h3>参数</h3>
+
+<p>参数是<a href="../python/gloss_python_function_keyword_arguments.html" title="Python 关键字参数">关键字参数</a>。</p>
+
+<table class="parameter">
+<tr>
+<th style="width: 20%;">参数</th>
+<th style="width: 15%;">值</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td>subset</td>
+<td><i>列标签</i></td>
+<td>
+	<p>可选。字符串或列表，包含在查找重复项时要包含的列名。</p>
+	<p>默认 subset=None（意味着未指定子集，并且应包含所有列）。</p>
+</td>
+</tr>
+
+<tr>
+<td>keep</td>
+<td>
+	<ul>
+	<li>'first'</li>
+	<li>'last'</li>
+	<li>False</li>
+	</ul>
+</td>
+<td>
+	<p>可选。默认为 'first'。指定如何处理重复项：</p>
+
+	<ul class="listintable">
+	<li>'first' 意味着将第一次出现设置为 False，其余设置为 True。</li>
+	<li>'last' 意味着将最后一次出现设置为 False，其余设置为 True。</li>
+	<li>False 意味着将所有出现都设置为 True。</li>
+	</ul>
+</td>
+</tr>
+</table>
+</section>
+
+
+
+<section>
+<h2>返回值</h2>
+
+<p><a href="pandas_series.html" title="Pandas Series">Series</a>，其中包含 DataFrame 中每一行的布尔值。</p>
+</section>
+
+
+
+<div class="btn-toref">
+<p><a href="pandas_ref_dataframe.html">DataFrame 参考手册</a></p>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+<div id="tools">
+<!--<h5 id="tools_quiz"><a href="/pandas/pandas_quiz.asp">Pandas 测验</a></h5>-->
+<h5 id="tools_reference"><a href="pandas_ref_dataframe.html" title="Pandas DataFrame 参考手册">Pandas</a></h5>
+</div>
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/pandas/ref_df_duplicated.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:20:00 GMT -->
+</html>

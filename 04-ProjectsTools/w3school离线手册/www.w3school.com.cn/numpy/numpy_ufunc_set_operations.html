@@ -1,0 +1,359 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/numpy/numpy_ufunc_set_operations.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:54:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>NumPy 集合操作</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>NumPy 教程</h2>
+<ul>
+<li><a href="index.html" title="NumPy 教程">NumPy 教程</a></li>
+<li><a href="numpy_intro.html" title="NumPy 简介">NumPy 简介</a></li>
+<li><a href="numpy_getting_started.html" title="NumPy 入门">NumPy 入门</a></li>
+<li><a href="numpy_creating_arrays.html" title="NumPy 创建数组">NumPy 创建数组</a></li>
+<li><a href="numpy_array_indexing.html" title="NumPy 数组索引">NumPy 数组索引</a></li>
+<li><a href="numpy_array_slicing.html" title="NumPy 数组切片">NumPy 数组切片</a></li>
+<li><a href="numpy_data_types.html" title="NumPy 数据类型">NumPy 数据类型</a></li>
+<li><a href="numpy_copy_vs_view.html" title="NumPy 复制与视图">NumPy 复制与视图</a></li>
+<li><a href="numpy_array_shape.html" title="NumPy 数组形状">NumPy 数组形状</a></li>
+<li><a href="numpy_array_reshape.html" title="NumPy 数组重塑">NumPy 数组重塑</a></li>
+<li><a href="numpy_array_iterating.html" title="NumPy 数组迭代">NumPy 数组迭代</a></li>
+<li><a href="numpy_array_join.html" title="NumPy 数组连接">NumPy 数组连接</a></li>
+<li><a href="numpy_array_split.html" title="NumPy 数组分割">NumPy 数组分割</a></li>
+<li><a href="numpy_array_search.html" title="NumPy 数组搜索">NumPy 数组搜索</a></li>
+<li><a href="numpy_array_sort.html" title="NumPy 数组排序">NumPy 数组排序</a></li>
+<li><a href="numpy_array_filter.html" title="NumPy 数组过滤">NumPy 数组过滤</a></li>
+</ul>
+<h2>NumPy 随机数</h2>
+<ul>
+<li><a href="numpy_random.html" title="NumPy 中的随机数">随机数简介</a></li>
+<li><a href="numpy_random_distribution.html" title="随机数据分布">数据分布</a></li>
+<li><a href="numpy_random_permutation.html" title="随机排列">随机排列</a></li>
+<li><a href="numpy_random_seaborn.html" title="Seaborn 模块">Seaborn</a></li>
+<li><a href="numpy_random_normal.html" title="正态分布">正态分布</a></li>
+<li><a href="numpy_random_binomial.html" title="二项分布">二项分布</a></li>
+<li><a href="numpy_random_poisson.html" title="泊松分布">泊松分布</a></li>
+<li><a href="numpy_random_uniform.html" title="均匀分布">均匀分布</a></li>
+<li><a href="numpy_random_logistic.html" title="逻辑分布">逻辑分布</a></li>
+<li><a href="numpy_random_multinomial.html" title="多项分布">多项分布</a></li>
+<li><a href="numpy_random_exponential.html" title="指数分布">指数分布</a></li>
+<li><a href="numpy_random_chisquare.html" title="卡方分布">卡方分布</a></li>
+<li><a href="numpy_random_rayleigh.html" title="瑞利分布">瑞利分布</a></li>
+<li><a href="numpy_random_pareto.html" title="帕累托分布">帕累托分布</a></li>
+<li><a href="numpy_random_zipf.html" title="齐普夫分布">齐普夫分布</a></li>
+</ul>
+<h2>NumPy ufunc</h2>
+<ul>
+<li><a href="numpy_ufunc.html" title="ufunc 简介">ufunc 简介</a></li>
+<li><a href="numpy_ufunc_create_function.html" title="ufunc 创建函数">ufunc 创建函数</a></li>
+<li><a href="numpy_ufunc_simple_arithmetic.html" title="ufunc 简单算术">ufunc 简单算术</a></li>
+<li><a href="numpy_ufunc_rounding_decimals.html" title="ufunc 四舍五入小数">ufunc 四舍五入小数</a></li>
+<li><a href="numpy_ufunc_logs.html" title="ufunc 对数">ufunc 对数</a></li>
+<li><a href="numpy_ufunc_summations.html" title="ufunc 求和">ufunc 求和</a></li>
+<li><a href="numpy_ufunc_products.html" title="ufunc 乘积">ufunc 乘积</a></li>
+<li><a href="numpy_ufunc_differences.html" title="ufunc 差值">ufunc 差值</a></li>
+<li><a href="numpy_ufunc_lcm.html" title="ufunc 求最小公倍数">ufunc 求最小公倍数</a></li>
+<li><a href="numpy_ufunc_gcd.html" title="ufunc 求最大公约数">ufunc 求最大公约数</a></li>
+<li><a href="numpy_ufunc_trigonometric.html" title="ufunc 三角函数">ufunc 三角函数</a></li>
+<li><a href="numpy_ufunc_hyperbolic.html" title="ufunc 双曲函数">ufunc 双曲函数</a></li>
+<li class="currentLink"><a href="numpy_ufunc_set_operations.html" title="ufunc 集合运算">ufunc 集合运算</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>NumPy 集合操作</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="numpy_ufunc_hyperbolic.html" title="ufunc 双曲函数">ufunc 双曲函数</a></li>
+<li class="next"><a href="index.html" title="NumPy 教程">NumPy 教程</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>什么是集合</h2>
+
+<p>数学中的集合是独特元素的集合。</p>
+
+<p>集合用于涉及频繁的交集、并集和差集运算的运算。</p>
+</section>
+
+
+
+<section>
+<h2>在 NumPy 中创建集合</h2>
+
+<p>我们可以使用 NumPy 的 <code>unique()</code> 方法来从任何数组中找到唯一的元素。例如，创建一个集合数组，但请记住，集合数组应该只是一维数组。</p>
+
+<h3>实例</h3>
+
+<p>将以下包含重复元素的数组转换为集合：</p>
+
+<pre class="language-python">
+import numpy as np
+
+arr = np.array([1, 1, 1, 2, 3, 4, 5, 5, 6, 7])
+
+x = np.unique(arr)
+
+print(x)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t8d36.html?f=numpy_ufunc_set_1">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>求并集</h2>
+
+<p>要找到两个数组的唯一值，请使用 <code>union1d()</code> 方法。</p>
+
+<h3>实例</h3>
+
+<p>求以下两个集合数组的并集：</p>
+
+<pre class="language-python">
+import numpy as np
+
+arr1 = np.array([1, 2, 3, 4])
+arr2 = np.array([3, 4, 5, 6])
+
+newarr = np.union1d(arr1, arr2)
+
+print(newarr)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t10b0.html?f=numpy_ufunc_set_2">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>求交集</h2>
+
+<p>要仅查找两个数组中都存在的值，请使用 <code>intersect1d()</code> 方法。</p>
+
+<h3>实例</h3>
+
+<p>求以下两个集合数组的交集：</p>
+
+<pre class="language-python">
+import numpy as np
+
+arr1 = np.array([1, 2, 3, 4])
+arr2 = np.array([3, 4, 5, 6])
+
+newarr = np.intersect1d(arr1, arr2, assume_unique=True)
+
+print(newarr)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t1e4f.html?f=numpy_ufunc_set_3">亲自试一试</a></p>
+
+<p class="note"><span>注意：</span><code>intersect1d()</code> 方法采用一个可选参数 <code>assume_unique</code>，如果设置为 <code>True</code>，则可以加速计算。处理集合时，应始终将其设置为 <code>True</code>。</p>
+</section>
+
+
+
+<section>
+<h2>求差集</h2>
+
+<p>要仅找到第一个集合中不存在于第二个集合中的值，请使用 <code>setdiff1d()</code> 方法。</p>
+
+<h3>实例</h3>
+
+<p>求 set1 与 set2 的差集：</p>
+
+<pre class="language-python">
+import numpy as np
+
+set1 = np.array([1, 2, 3, 4])
+set2 = np.array([3, 4, 5, 6])
+
+newarr = np.setdiff1d(set1, set2, assume_unique=True)
+
+print(newarr)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t0188.html?f=numpy_ufunc_set_4">亲自试一试</a></p>
+
+<p class="note"><span>注意：</span><code>setdiff1d()</code> 方法采用可选参数 <code>assume_unique</code>，如果将其设置为 <code>True</code>，则可以加快计算。处理集合时应始终将其设置为 <code>True</code>。</p>
+</section>
+
+
+
+<section>
+<h2>求对称差集</h2>
+
+<p>要仅查找两个集合中都不存在的值，请使用 <code>setxor1d()</code> 方法。</p>
+
+<h3>实例</h3>
+
+<p>求 set1 和 set2 的对称差集：</p>
+
+<pre class="language-python">
+import numpy as np
+
+set1 = np.array([1, 2, 3, 4])
+set2 = np.array([3, 4, 5, 6])
+
+newarr = np.setxor1d(set1, set2, assume_unique=True)
+
+print(newarr)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t3bf5.html?f=numpy_ufunc_set_5">亲自试一试</a></p>
+
+<p class="note"><span>注意：</span><code>setxor1d()</code> 方法采用可选参数 <code>assume_unique</code>，如果将其设置为 <code>True</code>，可以加快计算。处理集合时应始终将其设置为 <code>True</code>。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="numpy_ufunc_hyperbolic.html" title="ufunc 双曲函数">ufunc 双曲函数</a></li>
+<li class="next"><a href="index.html" title="NumPy 教程">NumPy 教程</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<!--<h5 id="tools_quiz"><a href="/numpy/js_quiz.asp">JavaScript 测验</a></h5>-->
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/numpy/numpy_ufunc_set_operations.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:54:50 GMT -->
+</html>

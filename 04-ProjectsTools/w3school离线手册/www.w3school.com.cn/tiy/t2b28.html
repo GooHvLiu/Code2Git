@@ -1,0 +1,266 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Mirrored from www.w3school.com.cn/tiy/t.asp?f=jsck_tolocalestring_date_all by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 05:39:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<title>W3School TIY Editor</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css-tiy-basic.css" />
+<link rel="stylesheet" href="../lib/codemirror.css" />
+<script src="../lib/codemirror.js"></script>
+<script src="../lib/codemirror_jsx.js"></script>
+<script src="../lib/htmlmixed.js"></script>
+<script src="../lib/xml.js"></script>
+<script src="../lib/javascript.js"></script>
+<script src="../lib/css.js"></script>
+<script src="../lib/clike.js"></script>
+
+
+<link href='https://fonts.googleapis.com/css?family=Source%20Code%20Pro' rel='stylesheet'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<!--[if lt IE 8]>
+<style>
+#textareacontainer, #iframecontainer {width:48%;}
+#container {height:500px;}
+#textarea, #iframe {width:90%;height:450px;}
+#textareaCode, #iframeResult {height:450px;}
+.stack {display:none;}
+</style>
+<![endif]-->
+</head>
+
+
+<body>
+
+
+<div id="tiy_header">
+<div id="tiy_logo">
+<h1><a href="../index-2.html" title="W3School TIY Editor" style="float:left;">W3School TIY Editor</a></h1>
+
+<div id="sp_tiy">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 TIY -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7947784850"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+</div>
+
+
+<div id="navfirst">
+<ul id="menu">
+<li id="tiy_btn_index"><a href="../index-2.html" title="W3School 在线教程">W3School 在线教程</a></li>
+<li id="tiy_btn_stack"><a href="javascript:void(0);" onclick="restack(currentStack)" title="更改方向">改变方向</a></li>
+<li id="tiy_btn_theme"><a href="javascript:void(0);" onclick="retheme()" title="更改主题">暗黑模式</a></li>
+<li id='tiy_btn_tryit'><a onclick='submitTryit()' title='更改主题'>运行代码</a></li>
+</ul>
+</div>
+
+
+<div id="container">
+
+    <div id="textareacontainer">
+        <div id="textarea">
+            <div id="textareawrapper">
+
+<textarea autocomplete="off" id="textareaCode" wrap="logical" spellcheck="false">
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>JavaScript Date toLocaleString()</h1>
+
+<p>此方法使用特定于语言的格式将日期格式化为字符串。</p>
+
+<p>在这个例子中，我们展示了所有合法的语言代码。</p>
+
+<code>
+<script>
+var n = new Date();
+document.write("ar-SA: " + n.toLocaleString("ar-SA") + "<br>");
+document.write("bn-BD: " + n.toLocaleString("bn-BD") + "<br>");
+document.write("bn-IN: " + n.toLocaleString("bn-IN") + "<br>");
+document.write("cs-CZ: " + n.toLocaleString("cs-CZ") + "<br>");
+document.write("da-DK: " + n.toLocaleString("da-DK") + "<br>");
+document.write("de-AT: " + n.toLocaleString("de-AT") + "<br>");
+document.write("de-CH: " + n.toLocaleString("de-CH") + "<br>");
+document.write("de-DE: " + n.toLocaleString("de-DE") + "<br>");
+document.write("el-GR: " + n.toLocaleString("el-GR") + "<br>");
+document.write("en-AU: " + n.toLocaleString("en-AU") + "<br>");
+document.write("en-CA: " + n.toLocaleString("en-CA") + "<br>");
+document.write("en-GB: " + n.toLocaleString("en-GB") + "<br>");
+document.write("en-IE: " + n.toLocaleString("en-IE") + "<br>");
+document.write("en-IN: " + n.toLocaleString("en-IN") + "<br>");
+document.write("en-NZ: " + n.toLocaleString("en-NZ") + "<br>");
+document.write("en-US: " + n.toLocaleString("en-US") + "<br>");
+document.write("en-ZA: " + n.toLocaleString("en-ZA") + "<br>");
+document.write("es-AR: " + n.toLocaleString("es-AR") + "<br>");
+document.write("es-CL: " + n.toLocaleString("es-CL") + "<br>");
+document.write("es-CO: " + n.toLocaleString("es-CO") + "<br>");
+document.write("es-ES: " + n.toLocaleString("es-ES") + "<br>");
+document.write("es-MX: " + n.toLocaleString("es-MX") + "<br>");
+document.write("es-US: " + n.toLocaleString("es-US") + "<br>");
+document.write("fi-FI: " + n.toLocaleString("fi-FI") + "<br>");
+document.write("fr-BE: " + n.toLocaleString("fr-BE") + "<br>");
+document.write("fr-CA: " + n.toLocaleString("fr-CA") + "<br>");
+document.write("fr-CH: " + n.toLocaleString("fr-CH") + "<br>");
+document.write("fr-FR: " + n.toLocaleString("fr-FR") + "<br>");
+document.write("he-IL: " + n.toLocaleString("he-IL") + "<br>");
+document.write("hi-IN: " + n.toLocaleString("hi-IN") + "<br>");
+document.write("hu-HU: " + n.toLocaleString("hu-HU") + "<br>");
+document.write("id-ID: " + n.toLocaleString("id-ID") + "<br>");
+document.write("it-CH: " + n.toLocaleString("it-CH") + "<br>");
+document.write("it-IT: " + n.toLocaleString("it-IT") + "<br>");
+document.write("ja-JP: " + n.toLocaleString("ja-JP") + "<br>");
+document.write("ko-KR: " + n.toLocaleString("ko-KR") + "<br>");
+document.write("nl-BE: " + n.toLocaleString("nl-BE") + "<br>");
+document.write("nl-NL: " + n.toLocaleString("nl-NL") + "<br>");
+document.write("no-NO: " + n.toLocaleString("no-NO") + "<br>");
+document.write("pl-PL: " + n.toLocaleString("pl-PL") + "<br>");
+document.write("pt-BR: " + n.toLocaleString("pt-BR") + "<br>");
+document.write("pt-PT: " + n.toLocaleString("pt-PT") + "<br>");
+document.write("ro-RO: " + n.toLocaleString("ro-RO") + "<br>");
+document.write("ru-RU: " + n.toLocaleString("ru-RU") + "<br>");
+document.write("sk-SK: " + n.toLocaleString("sk-SK") + "<br>");
+document.write("sv-SE: " + n.toLocaleString("sv-SE") + "<br>");
+document.write("ta-IN: " + n.toLocaleString("ta-IN") + "<br>");
+document.write("ta-LK: " + n.toLocaleString("ta-LK") + "<br>");
+document.write("th-TH: " + n.toLocaleString("th-TH") + "<br>");
+document.write("tr-TR: " + n.toLocaleString("tr-TR") + "<br>");
+document.write("zh-CN: " + n.toLocaleString("zh-CN") + "<br>");
+document.write("zh-HK: " + n.toLocaleString("zh-HK") + "<br>");
+document.write("zh-TW: " + n.toLocaleString("zh-TW") + "<br>");
+</script>
+</code>
+
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/tiy/t.asp?f=jsck_tolocalestring_date_all by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 05:39:19 GMT -->
+</html>
+
+</textarea>
+            </div>
+        </div>
+    </div>
+        <form id="codeForm" autocomplete="off" style="margin:0px;display:none;">
+          <input type="hidden" name="code" id="code" />
+        </form>
+    <div id="iframecontainer">
+        <div id="iframe">
+            <div id="iframewrapper">
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script src='submitTryit.js'></script>
+
+
+<script>
+function colorcoding() {
+  var ua = navigator.userAgent;
+  //Opera Mini refreshes the page when trying to edit the textarea.
+  if (ua && ua.toUpperCase().indexOf("OPERA MINI") > -1) { return false; }
+  window.editor = CodeMirror.fromTextArea(document.getElementById("textareaCode"), {
+    mode: 'text/html',
+    htmlMode: true,
+    lineWrapping: true,
+    smartIndent: false,
+    addModeClass: true
+  });
+//  window.editor.on("change", function () {window.editor.save();});
+}
+colorcoding();
+</script>
+
+
+<script>
+var currentStack=true;
+if ((window.screen.availWidth <= 768 && window.innerHeight > window.innerWidth) || "" == " horizontal") {restack(true);}
+function restack(vertical) {
+    var tc, ic, t, i, c, n, f, sv, sh, d, height, flt, width;
+    tc = document.getElementById("textareacontainer");
+    ic = document.getElementById("iframecontainer");
+    t = document.getElementById("textarea");
+    i = document.getElementById("iframe");
+    c = document.getElementById("container");
+    n = document.getElementById("navfirst");
+    //sv = document.getElementById("stackV");
+    //sh = document.getElementById("stackH");
+    tc.className = tc.className.replace("horizontal", "");
+    ic.className = ic.className.replace("horizontal", "");
+    t.className = t.className.replace("horizontal", "");
+    i.className = i.className.replace("horizontal", "");
+    c.className = c.className.replace("horizontal", "");
+    n.className = n.className.replace("horizontal", "");
+    //if (sv) {sv.className = sv.className.replace("horizontal", "")};
+    //if (sv) {sh.className = sh.className.replace("horizontal", "")};
+    //stack = "";
+    if (vertical) {
+        tc.className = tc.className + " horizontal";
+        ic.className = ic.className + " horizontal";        
+        t.className = t.className + " horizontal";        
+        i.className = i.className + " horizontal";
+        c.className = c.className + " horizontal";
+        n.className = n.className + " horizontal";
+        //if (sv) {sv.className = sv.className + " horizontal"};
+        //if (sv) {sh.className = sh.className + " horizontal"};
+        //stack = " horizontal";
+        document.getElementById("textareacontainer").style.height = "50%";
+        document.getElementById("iframecontainer").style.height = "50%";
+        document.getElementById("textareacontainer").style.width = "100%";
+        document.getElementById("iframecontainer").style.width = "100%";
+        currentStack=false;
+    } else {
+        document.getElementById("textareacontainer").style.height = "100%";
+        document.getElementById("iframecontainer").style.height = "100%";
+        document.getElementById("textareacontainer").style.width = "50%";
+        document.getElementById("iframecontainer").style.width = "50%";
+        currentStack=true;        
+    }
+}
+</script>
+
+
+<script>
+function retheme() {
+  var cc = document.body.className;
+  if (cc.indexOf("darktheme") > -1) {
+    document.body.className = cc.replace("darktheme", "");
+  } else {
+    document.body.className += " darktheme";
+  }
+}
+</script>
+
+</body>
+
+</html>

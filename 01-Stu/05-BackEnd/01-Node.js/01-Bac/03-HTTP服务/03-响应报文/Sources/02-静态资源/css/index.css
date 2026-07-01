@@ -1,0 +1,12 @@
+    td {
+      padding: 20px 40px;
+      border: 1px orange solid;
+    }
+
+    tr:nth-child(even) {
+      background-color: yellowgreen;
+    }
+
+    tr:nth-child(odd) {
+      background-color: lightblue;
+    }

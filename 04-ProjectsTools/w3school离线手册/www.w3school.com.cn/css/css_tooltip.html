@@ -1,0 +1,941 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/css/css_tooltip.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:19:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>CSS 工具提示</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>CSS 基础教程</h2>
+<ul>
+<li><a href="index.html" title="CSS 教程">CSS 教程</a></li>
+<li><a href="css_jianjie.html" title="CSS 简介">CSS 简介</a></li>
+<li><a href="css_syntax.html" title="CSS 语法">CSS 语法</a></li>
+<li><a href="css_selectors.html" title="CSS 选择器">CSS 选择器</a></li>
+<li><a href="css_shiyong.html" title="CSS 使用">CSS 使用</a></li>
+<li><a href="css_comments.html" title="CSS 注释">CSS 注释</a></li>
+<li><a href="css_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="css_colors_rgb.html" title="CSS RGB 颜色">CSS RGB 颜色</a></li>
+<li><a href="css_colors_hex.html" title="CSS HEX 颜色">CSS HEX 颜色</a></li>
+<li><a href="css_colors_hsl.html" title="CSS HSL 颜色">CSS HSL 颜色</a></li>
+<li><a href="css_background.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="css_background_image.html" title="CSS 背景图像">CSS 背景图像</a></li>
+<li><a href="css_background_repeat.html" title="CSS 背景重复">CSS 背景重复</a></li>
+<li><a href="css_background_attachment.html" title="CSS 背景附着">CSS 背景附着</a></li>
+<li><a href="css_background_shorthand.html" title="CSS 简写背景属性">CSS 简写背景属性</a></li>
+<li><a href="css_border.html" title="CSS 边框">CSS 边框</a></li>
+<li><a href="css_border_width.html" title="CSS 边框宽度">CSS 边框宽度</a></li>
+<li><a href="css_border_color.html" title="CSS 边框颜色">CSS 边框颜色</a></li>
+<li><a href="css_border_sides.html" title="CSS 边框各边">CSS 边框各边</a></li>
+<li><a href="css_border_shorthand.html" title="CSS 简写边框属性">CSS 简写边框属性</a></li>
+<li><a href="css_border_rounded.html" title="CSS 圆角边框">CSS 圆角边框</a></li>
+<li><a href="css_margin.html" title="CSS 外边距">CSS 外边距</a></li>
+<li><a href="css_margin_collapse.html" title="CSS 外边距合并">CSS 外边距合并</a></li>
+<li><a href="css_padding.html" title="CSS 内边距">CSS 内边距</a></li>
+<li><a href="css_dimension.html" title="CSS 高度和宽度">CSS 高度/宽度</a></li>
+<li><a href="css_boxmodel.html" title="CSS 框模型">CSS 框模型</a></li>
+<li><a href="css_outline.html" title="CSS 轮廓">CSS 轮廓</a></li>
+<li><a href="css_outline_width.html" title="CSS 轮廓宽度">CSS 轮廓宽度</a></li>
+<li><a href="css_outline_color.html" title="CSS 轮廓颜色">CSS 轮廓颜色</a></li>
+<li><a href="css_outline_shorthand.html" title="CSS 简写轮廓属性">CSS 简写轮廓属性</a></li>
+<li><a href="css_outline_offset.html" title="CSS 轮廓偏移">CSS 轮廓偏移</a></li>
+<li><a href="css_text.html" title="CSS 文本">CSS 文本</a></li>
+<li><a href="css_text_align.html" title="CSS 文本对齐">CSS 文本对齐</a></li>
+<li><a href="css_text_decoration.html" title="CSS 文本装饰">CSS 文本装饰</a></li>
+<li><a href="css_text_transformation.html" title="CSS 文本转换">CSS 文本转换</a></li>
+<li><a href="css_text_spacing.html" title="CSS 文字间距">CSS 文字间距</a></li>
+<li><a href="css_text_shadow.html" title="CSS 文本阴影">CSS 文本阴影</a></li>
+<li><a href="css_font.html" title="CSS 字体">CSS 字体</a></li>
+<li><a href="css_font_style.html" title="CSS 字体样式">CSS 字体样式</a></li>
+<li><a href="css_font_size.html" title="CSS 字体大小">CSS 字体大小</a></li>
+<li><a href="css_font_google.html" title="CSS 谷歌字体">CSS 谷歌字体</a></li>
+<li><a href="css_font_shorthand.html" title="CSS 简写字体属性">CSS 简写字体属性</a></li>
+<li><a href="css_icons.html" title="CSS 图标">CSS 图标</a></li>
+<li><a href="css_link.html" title="CSS 链接">CSS 链接</a></li>
+<li><a href="css_list.html" title="CSS 列表">CSS 列表</a></li>
+<li><a href="css_table.html" title="CSS 表格">CSS 表格</a></li>
+</ul>
+<h2>CSS 中级教程</h2>
+<ul>
+<li><a href="css_display_visibility.html" title="CSS 布局 - display 属性">CSS Display</a></li>
+<li><a href="css_max-width.html" title="CSS 布局 - width 和 max-width">CSS max-width</a></li>
+<li><a href="css_positioning.html" title="CSS 布局 - position 属性">CSS 定位</a></li>
+<li><a href="css_z-index.html" title="CSS 布局 - z-index 属性">CSS z-index</a></li>
+<li><a href="css_overflow.html" title="CSS 布局 - 溢出">CSS 溢出</a></li>
+<li><a href="css_float.html" title="CSS 布局 - 浮动和清除">CSS 浮动</a></li>
+<li><a href="css_float_clear.html" title="CSS 布局 - clear 和 clearfix">CSS 清除浮动</a></li>
+<li><a href="css_float_examples.html" title="CSS 布局 - 浮动实例">CSS 布局 - 浮动实例</a></li>
+<li><a href="css_inline-block.html" title="CSS 布局 - display: inline-block">CSS inline-block</a></li>
+<li><a href="css_align.html" title="CSS 布局 - 水平和垂直对齐">CSS 对齐</a></li>
+<li><a href="css_combinators.html" title="CSS 选择器">CSS 组合器</a></li>
+<li><a href="css_pseudo_classes.html" title="CSS 伪类">CSS 伪类</a></li>
+<li><a href="css_pseudo_elements.html" title="CSS 伪元素">CSS 伪元素</a></li>
+<li><a href="css_image_transparency.html" title="CSS 不透明度">CSS 不透明度</a></li>
+<li><a href="css_navbar.html" title="CSS 导航栏">CSS 导航栏</a></li>
+<li><a href="css_navbar_vertical.html" title="CSS 垂直导航栏">CSS 垂直导航栏</a></li>
+<li><a href="css_navbar_horizontal.html" title="CSS 水平导航栏">CSS 水平导航栏</a></li>
+<li><a href="css_dropdowns.html" title="CSS 下拉菜单">CSS 下拉菜单</a></li>
+<li><a href="css_image_gallery.html" title="CSS 图片库">CSS 图片库</a></li>
+<li><a href="css_image_sprites.html" title="CSS 图像精灵">CSS 图像精灵</a></li>
+<li><a href="css_attribute_selectors.html" title="CSS 属性选择器">CSS 属性选择器</a></li>
+<li><a href="css_form.html" title="CSS 表单">CSS 表单</a></li>
+<li><a href="css_counters.html" title="CSS 计数器">CSS 计数器</a></li>
+<li><a href="css_website_layout.html" title="CSS 网站布局">CSS 网站布局</a></li>
+<li><a href="css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="css_specificity.html" title="CSS 特异性">CSS 特异性</a></li>
+<li><a href="css_important.html" title="CSS !important 规则">CSS !important</a></li>
+<li><a href="css_math_functions.html" title="CSS 数学函数">CSS 数学函数</a></li>
+</ul>
+<h2>CSS3 高级教程</h2>
+<ul>
+<li><a href="css3_borders.html" title="CSS 圆角">CSS 圆角</a></li>
+<li><a href="css3_border_images.html" title="CSS 边框图像">CSS 边框图像</a></li>
+<li><a href="css3_backgrounds.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="css3_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="css_colors_keywords.html" title="CSS 颜色关键字">CSS 颜色关键字</a></li>
+<li><a href="css3_gradients.html" title="CSS 渐变">CSS 渐变</a></li>
+<li><a href="css3_gradients_radial.html" title="CSS 径向渐变">CSS 径向渐变</a></li>
+<li><a href="css3_shadows.html" title="CSS 阴影">CSS 阴影</a></li>
+<li><a href="css3_shadows_box.html" title="CSS box-shadow">CSS box-shadow</a></li>
+<li><a href="css3_text_effects.html" title="CSS 文本效果">CSS 文本效果</a></li>
+<li><a href="css3_fonts.html" title="CSS 网络字体">CSS 网络字体</a></li>
+<li><a href="css3_2dtransforms.html" title="CSS 2D 转换">CSS 2D 转换</a></li>
+<li><a href="css3_3dtransforms.html" title="CSS 3D 转换">CSS 3D 转换</a></li>
+<li><a href="css3_transitions.html" title="CSS 过渡">CSS 过渡</a></li>
+<li><a href="css3_animations.html" title="CSS 动画">CSS 动画</a></li>
+<li class="currentLink"><a href="css_tooltip.html" title="CSS 工具提示">CSS 工具提示</a></li>
+<li><a href="css3_images.html" title="CSS 图像样式">CSS 图像样式</a></li>
+<li><a href="css3_object-fit.html" title="CSS object-fit">CSS object-fit</a></li>
+<li><a href="css3_object-position.html" title="CSS object-position 属性">CSS object-position</a></li>
+<li><a href="css3_masking.html" title="CSS 遮罩">CSS 遮罩</a></li>
+<li><a href="css3_buttons.html" title="CSS 按钮">CSS 按钮</a></li>
+<li><a href="css3_pagination.html" title="CSS 分页">CSS 分页</a></li>
+<li><a href="css3_multiple_columns.html" title="CSS 多列">CSS 多列</a></li>
+<li><a href="css3_user_interface.html" title="CSS 用户界面">CSS 用户界面</a></li>
+<li><a href="css3_variables.html" title="CSS 变量">CSS 变量</a></li>
+<li><a href="css3_variables_overriding.html" title="CSS 覆盖变量">CSS 覆盖变量</a></li>
+<li><a href="css3_variables_javascript.html" title="CSS 使用 JavaScript 更改变量">CSS 变量 - JavaScript</a></li>
+<li><a href="css3_variables_mediaqueries.html" title="CSS 在媒体查询中使用变量">CSS 变量 - 媒体查询</a></li>
+<li><a href="css3_property.html" title="CSS @property 规则">CSS @property</a></li>
+<li><a href="css3_box-sizing.html" title="CSS Box Sizing">CSS Box Sizing</a></li>
+<li><a href="css3_flexbox.html" title="CSS Flexbox">CSS Flexbox</a></li>
+<li><a href="css3_mediaqueries.html" title="CSS 媒体查询">CSS 媒体查询</a></li>
+<li><a href="css3_mediaqueries_ex.html" title="CSS 媒体查询实例">CSS 媒体查询实例</a></li>
+</ul>
+<h2>CSS 响应式设计</h2>
+<ul>
+<li><a href="css_rwd_intro.html" title="响应式网站设计 - 简介">RWD 简介</a></li>
+<li><a href="css_rwd_viewport.html" title="响应式网页设计 - 视口">RWD 视口</a></li>
+<li><a href="css_rwd_grid.html" title="响应式网页设计 - Grid-View">RWD 网格视图</a></li>
+<li><a href="css_rwd_mediaqueries.html" title="响应式网页设计 - 媒体查询">RWD 媒体查询</a></li>
+<li><a href="css_rwd_images.html" title="响应式网页设计 - 图像">RWD 图像</a></li>
+<li><a href="css_rwd_videos.html" title="响应式网页设计 - 视频">RWD 视频</a></li>
+</ul>
+<h2>CSS 网格教程</h2>
+<ul>
+<li><a href="css_grid.html" title="CSS 网格布局模块">CSS 网格布局模块</a></li>
+<li><a href="css_grid_container.html" title="CSS 网格容器">CSS 网格容器</a></li>
+<li><a href="css_grid_item.html" title="CSS 网格项目">CSS 网格项目</a></li>
+</ul>
+<h2>CSS 实例</h2>
+<ul>
+<li><a href="css_examples.html" title="CSS 实例">CSS 实例</a></li>
+</ul>
+<h2>CSS 测验</h2>
+<ul>
+<li><a href="css_quiz.html" title="CSS 测验">CSS 测验</a></li>
+</ul>
+<h2>CSS 参考手册</h2>
+<ul>
+<li><a href="../cssref/index.html" title="CSS 参考手册">CSS 参考手册</a></li>
+<li><a href="../cssref/css_browsersupport.html" title="CSS 浏览器支持">CSS 浏览器支持</a></li>
+<li><a href="../cssref/css_selectors.html" title="CSS 选择器">CSS 选择器</a></li>
+<li><a href="../cssref/css_functions.html" title="CSS 函数">CSS 函数</a></li>
+<li><a href="../cssref/css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="../cssref/css_ref_aural.html" title="CSS 听觉">CSS 听觉</a></li>
+<li><a href="../cssref/css_websafe_fonts.html" title="CSS 网络安全字体">CSS 网络安全字体</a></li>
+<li><a href="../cssref/css_animatable.html" title="CSS 可动画制作">CSS 可动画制作</a></li>
+<li><a href="../cssref/css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="../cssref/css_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="../cssref/css_colors_legal.html" title="CSS 颜色值">CSS 颜色值</a></li>
+<li><a href="../cssref/css_default_values.html" title="CSS 默认值">CSS 默认值</a></li>
+<li><a href="../cssref/css_entities.html" title="CSS 实体">CSS 实体</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>CSS 工具提示</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css3_animations.html" title="CSS 动画">CSS 动画</a></li>
+<li class="next"><a href="css3_images.html" title="CSS 图像样式">CSS 图像样式</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p>通过 CSS 创建工具提示（Tooltip）。</p>
+</div>
+
+
+
+<div>
+<h2>演示：工具提示</h2>
+
+<h3>实例</h3>
+
+<p>当用户将鼠标指针移到元素上时，工具提示通常用于提供关于某内容的额外信息：</p>
+
+<style>
+.p100 {
+margin-top: 30px;
+margin-bottom: 20px;
+padding-left: 270px;
+}
+
+.p25 {
+margin-top: 30px;
+margin-bottom: 10px;
+padding-left: 70px;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted #ccc;
+    color: #006080;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    position: absolute;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity .6s;
+}
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.tooltip-top {
+  bottom: 125%;
+  left: 50%;  
+  margin-left: -60px;
+}
+
+.tooltip-top::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip-right {
+  top: -5px;
+  left: 125%;  
+}
+
+.tooltip-right::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #555 transparent transparent;
+}
+
+.tooltip-bottom {
+  top: 135%;
+  left: 50%;  
+  margin-left: -60px;
+}
+
+.tooltip-bottom::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #555 transparent;
+}
+
+.tooltip-left {
+  top: -5px;
+  bottom:auto;
+  right: 128%;  
+}
+
+.tooltip-left::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent #555;
+}
+</style>
+
+<div class="p25">
+  <div class="tooltip">Top
+    <span class="tooltiptext tooltip-top">Tooltip text</span>
+  </div>
+</div>
+
+<div class="p25">
+  <div class="tooltip">Right
+    <span class="tooltiptext tooltip-right">Tooltip text</span>
+  </div>
+</div>
+
+<div class="p25">
+  <div class="tooltip">Bottom
+    <span class="tooltiptext tooltip-bottom">Tooltip text</span>
+  </div>
+</div>
+
+
+<div class="p25">
+  <div class="tooltip">Left
+    <span class="tooltiptext tooltip-left">Tooltip text</span>
+  </div>
+</div>
+
+<p style="clear: both;"></p>
+</div>
+
+
+
+<div>
+<h2>基础的工具提示</h2>
+
+<p>创建一个鼠标移到元素上时显示的工具提示：</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;style&gt;
+/* Tooltip 容器 */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* 如果需要在可悬停文本下面显示点线 */
+}
+
+/* Tooltip 文本 */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  /* 定位工具提示文本 - 请看下面的例子 */
+  position: absolute;
+  z-index: 1;
+}
+
+/* 将鼠标悬停在工具提示容器上时，显示工具提示文本 */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+&lt;/style&gt;
+
+&lt;div class=&quot;tooltip&quot;&gt;Hover over me
+  &lt;span class=&quot;tooltiptext&quot;&gt;Tooltip text&lt;/span&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t8cc8.html?f=css_tooltip">亲自试一试</a></p>
+
+<h3>例子解释</h3>
+
+<h4>HTML：</h4>
+
+<p>使用容器元素（例如 &lt;div&gt;）并向其添加 <code>&quot;tooltip&quot;</code> 类。当用户将鼠标悬停在此 &lt;div&gt; 上时，会显示工具提示文本。</p>
+
+<p>工具提示文本位于 <code>class=&quot;tooltiptext&quot;</code> 的嵌入式元素（如 &lt;span&gt;）中。</p>
+
+<h4>CSS：</h4>
+
+<p><code>tooltip</code> 类使用 <code>position:relative</code>，用于放置工具提示文本（<code>position:absolute</code>）。注意：有关如何放置工具提示，请参见下面的例子。</p>
+
+<p><code>tooltiptext</code> 类保存实际的工具提示文本。默认情况下它是隐藏的，并会在鼠标悬停时可见（请参阅下文）。我们还为其添加了一些基本样式：120 像素的宽度、黑色背景、白色文本、文本居中以及 5px 的上下内边距（padding）。</p>
+
+<p>CSS <code>border-radius</code> 属性用于向工具提示文本添加圆角。</p>
+
+<p>当用户将鼠标移到 class=&quot;tooltip&quot; 的 &lt;div&gt; 上时，<code>:hover</code> 选择器用于显示工具提示文本。</p>
+</div>
+
+
+
+<div>
+<h2>定位工具提示</h2>
+
+<p>在本例中，工具提示位于“可悬停”文本（&lt;div&gt;）的右侧（<code>left:105%</code>）。另外请注意，<code>top:-5px</code> 用于将其放置在其容器元素的中间。我们使用数字 5 是因为工具提示文本的上下内边距均为 5px。如果增加其内边距，还请您同时增加 <code>top</code> 属性的值，以确保它停留在中间。如果要将工具提示放在左侧，也同样适用。</p>
+
+<h3>右侧工具提示</h3>
+
+<pre class="language-css">
+.tooltip .tooltiptext {
+  top: -5px;
+  left: 105%; 
+}
+</pre>
+
+<p>结果：</p>
+
+<style>
+.tooltip .tooltiptext2 {
+    visibility: hidden;
+    position: absolute;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext2 {
+    visibility: visible;
+}
+
+.tooltip-right2 {
+  top: -5px;
+  left: 105%;  
+}
+</style>
+
+<div class="p100">
+<div class="tooltip">请把鼠标指针移动到这段文字上方
+  <span class="tooltiptext2 tooltip-right2">Tooltip text</span>
+</div>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/tc597.html?f=css_tooltip_right">亲自试一试</a></p>
+
+<h3>左侧工具提示</h3>
+
+<pre class="language-css">
+.tooltip .tooltiptext {
+  top: -5px;
+  right: 105%; 
+}
+</pre>
+
+<p>结果：</p>
+
+<style>
+.tooltip-left2 {
+  top: -5px;
+  bottom:auto;
+  right: 105%;  
+}
+</style>
+
+<div class="p100">
+<div class="tooltip">请把鼠标指针移动到这段文字上方
+  <span class="tooltiptext2 tooltip-left2">Tooltip text</span>
+</div>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/t99bb.html?f=css_tooltip_left">亲自试一试</a></p>
+
+<p>如果您希望工具提示位于上方或下方，请看下面的例子。请注意，我们使用了负 60 像素的左外边距属性（margin-left）。这是为了把工具提示与可悬停文本进行居中对齐。该值是工具提示宽度的一半（120/2 = 60）。</p>
+
+<h3>顶部工具提示</h3>
+
+<pre class="language-css">
+.tooltip .tooltiptext {
+  width: 120px;
+  bottom: 100%;
+  left: 50%; 
+  margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+</pre>
+
+<p>结果：</p>
+
+<style>
+.tooltip-top2 {
+  bottom: 115%;
+  left: 50%;  
+  margin-left: -60px;
+}
+</style>
+
+<div class="p100">
+<div class="tooltip">请把鼠标指针移动到这段文字上方
+  <span class="tooltiptext2 tooltip-top2">Tooltip text</span>
+</div>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/t043f.html?f=css_tooltip_top">亲自试一试</a></p>
+
+<h3>底部工具提示</h3>
+
+<pre class="language-css">
+.tooltip .tooltiptext {
+  width: 120px;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+</pre>
+
+<p>结果：</p>
+
+<style>
+.tooltip-bottom2 {
+  top: 125%;
+  left: 50%;  
+  margin-left: -60px;
+}
+</style>
+
+<div class="p100">
+<div class="tooltip">请把鼠标指针移动到这段文字上方
+  <span class="tooltiptext2 tooltip-bottom2">Tooltip text</span>
+</div>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/tb40e.html?f=css_tooltip_bottom">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>工具提示箭头</h2>
+
+<p>如需创建在工具提示的指定侧面显示的箭头，请在工具提示后添加“空的”内容，并使用伪元素类 <code>::after</code> 和 <code>content</code> 属性。箭头本身是使用边框创建的。这会使工具提示看起来像气泡。</p>
+
+<p>本例演示如何在工具提示的底部添加箭头：</p>
+
+<h3>底部箭头</h3>
+
+<pre class="language-css">
+.tooltip .tooltiptext::after {
+  content: &quot; &quot;;
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+</pre>
+
+<p>结果：</p>
+
+<style>
+.tooltip .tooltiptext-bottomarrow {
+    visibility: hidden;
+    width: 120px;
+    background-color: #111;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 130%;
+    left: 50%;
+    margin-left: -60px;
+}
+.tooltip .tooltiptext-bottomarrow::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+.tooltip:hover .tooltiptext-bottomarrow {
+    visibility: visible;
+}
+</style>
+
+<div class="p100">
+<div class="tooltip">请把鼠标指针移动到这段文字上方
+  <span class="tooltiptext-bottomarrow">Tooltip text</span>
+</div>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/tacad.html?f=css_tooltip_arrow_bottom">亲自试一试</a></p>
+
+<h3>例子解释</h3>
+
+<p>将箭头定位在工具提示内：<code>top: 100%</code> 将箭头放置在工具提示的底部。<code>left: 50%</code> 将使箭头居中。</p>
+
+<p class="important"><span>注意：</span><code>border-width</code> 属性指定箭头的大小。如果您更改此设置，也请将 <code>margin-left</code> 值更改为相同值。这将使箭头居中。</p>
+
+<p><code>border-color</code> 用于将内容转换为箭头。我们将上边框设置为黑色，其余设置为透明。如果所有面都是黑色，则最终将得到一个黑色的方形框。</p>
+
+<p>本例演示了如何在工具提示的顶部添加箭头。请注意，这次我们设置了下边框的颜色：</p>
+
+<h3>顶部箭头</h3>
+
+<pre class="language-css">
+.tooltip .tooltiptext::after {
+  content: &quot; &quot;;
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
+</pre>
+
+<p>结果：</p>
+
+<style>
+.tooltip .tooltiptext-toparrow {
+    visibility: hidden;
+    width: 120px;
+    background-color: #111;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 150%;
+    left: 50%;
+    margin-left: -60px;
+}
+.tooltip .tooltiptext-toparrow::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+.tooltip:hover .tooltiptext-toparrow {
+    visibility: visible;
+}
+</style>
+
+<div class="p100">
+  <div class="tooltip">请把鼠标指针移动到这段文字上方
+    <span class="tooltiptext-toparrow">Tooltip text</span>
+  </div>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/t552a.html?f=css_tooltip_arrow_top">亲自试一试</a></p>
+
+<p>本例演示如何在工具提示的左侧添加箭头：</p>
+
+<h3>左侧箭头</h3>
+
+<pre class="language-css">
+.tooltip .tooltiptext::after {
+  content: &quot; &quot;;
+  position: absolute;
+  top: 50%;
+  right: 100%; /* To the left of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+</pre>
+
+<p>结果：</p>
+
+<style>
+.tooltip .tooltiptext-leftarrow {
+    visibility: hidden;
+    width: 120px;
+    background-color: #111;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 110%;
+}
+.tooltip .tooltiptext-leftarrow::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+}
+.tooltip:hover .tooltiptext-leftarrow {
+    visibility: visible;
+}
+</style>
+
+<div class="p100">
+  <div class="tooltip">请把鼠标指针移动到这段文字上方
+    <span class="tooltiptext-leftarrow">Tooltip text</span>
+  </div>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/tad72.html?f=css_tooltip_arrow_left">亲自试一试</a></p>
+
+<p>本例演示如何在工具提示的右侧添加箭头：</p>
+
+<h3>右侧箭头</h3>
+
+<pre class="language-css">
+.tooltip .tooltiptext::after {
+  content: &quot; &quot;;
+  position: absolute;
+  top: 50%;
+  left: 100%; /* To the right of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent black;
+}
+</pre>
+
+<p>结果：</p>
+
+<style>
+.tooltip .tooltiptext-rightarrow {
+    visibility: hidden;
+    width: 120px;
+    background-color: #111;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 110%;
+}
+.tooltip .tooltiptext-rightarrow::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
+}
+.tooltip:hover .tooltiptext-rightarrow {
+    visibility: visible;
+}
+</style>
+
+<div class="p100">
+  <div class="tooltip">请把鼠标指针移动到这段文字上方
+    <span class="tooltiptext-rightarrow">Tooltip text</span>
+  </div>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/tf351.html?f=css_tooltip_arrow_right">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>淡入的工具提示（动画）</h2>
+
+<p>如果希望在即将显示的工具提示文本中淡入淡出，可以将 CSS <code>transition</code> 属性与 <code>opacity</code> 属性一同使用，并在指定的秒数（例子中是 1 秒）内从完全不可见变为 100％ 可见：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.tooltip .tooltiptext {
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.tooltip:hover .tooltiptext {
+  opacity: 1;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t47a7.html?f=css_tooltip_transition">亲自试一试</a></p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css3_animations.html" title="CSS 动画">CSS 动画</a></li>
+<li class="next"><a href="css3_images.html" title="CSS 图像样式">CSS 图像样式</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../cssref/index.html">CSS 参考手册</a></h5>
+<h5 id="tools_example"><a href="css_examples.html">CSS 实例</a></h5>
+<h5 id="tools_quiz"><a href="css_quiz.html">CSS 测验</a></h5>
+<h5 id="tools_professional"><a href="index_pro.html">CSS 课外书</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/css/css_tooltip.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:19:14 GMT -->
+</html>

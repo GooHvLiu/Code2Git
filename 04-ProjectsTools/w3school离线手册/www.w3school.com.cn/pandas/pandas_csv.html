@@ -1,0 +1,288 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/pandas/pandas_csv.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:54:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Pandas 读取 CSV</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Pandas 教程</h2>
+<ul>
+<li><a href="index.html" title="Pandas 教程">Pandas 教程</a></li>
+<li><a href="pandas_intro.html" title="Pandas 简介">Pandas 简介</a></li>
+<li><a href="pandas_getting_started.html" title="Pandas 入门">Pandas 入门</a></li>
+<li><a href="pandas_series.html" title="Pandas 序列">Pandas 序列</a></li>
+<li><a href="pandas_dataframes.html" title="Pandas 数据帧">Pandas 数据帧</a></li>
+<li class="currentLink"><a href="pandas_csv.html" title="Pandas 读取 CSV">Pandas 读取 CSV</a></li>
+<li><a href="pandas_json.html" title="Pandas 读取 JSON">Pandas 读取 JSON</a></li>
+<li><a href="pandas_analyzing.html" title="Pandas 数据分析">Pandas 数据分析</a></li>
+</ul>
+<h2>数据清洗</h2>
+<ul>
+<li><a href="pandas_cleaning.html" title="Pandas 数据清洗">Pandas 数据清洗</a></li>
+<li><a href="pandas_cleaning_empty_cells.html" title="Pandas 清洗空单元格">Pandas 清洗空单元格</a></li>
+<li><a href="pandas_cleaning_wrong_format.html" title="Pandas 清洗错误格式">Pandas 清洗错误格式</a></li>
+<li><a href="pandas_cleaning_wrong_data.html" title="Pandas 清洗错误数据">Pandas 清洗错误数据</a></li>
+<li><a href="pandas_cleaning_duplicates.html" title="Pandas 删除重复项">Pandas 删除重复项</a></li>
+</ul>
+<h2>相关性</h2>
+<ul>
+<li><a href="pandas_correlations.html" title="Pandas 相关性">Pandas 相关性</a></li>
+</ul>
+<h2>绘图</h2>
+<ul>
+<li><a href="pandas_plotting.html" title="Pandas 绘图">Pandas 绘图</a></li>
+</ul>
+<h2>参考手册</h2>
+<ul>
+<li><a href="pandas_ref_dataframe.html" title="DataFrames 参考手册">DataFrames 参考手册</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Pandas 读取 CSV</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="pandas_dataframes.html" title="Pandas 数据帧">Pandas 数据帧</a></li>
+<li class="next"><a href="pandas_json.html" title="Pandas 读取 JSON">Pandas 读取 JSON</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>读取 CSV 文件</h2>
+
+<p>存储大型数据集的简单方法是使用 CSV 文件（逗号分隔的文件）。</p>
+
+<p>CSV 文件包含纯文本，是一种众所周知的格式，可以被每个人（包括 Pandas）读取。</p>
+
+<p>在我们的例子中，我们将使用一个名为 'data.csv' 的 CSV 文件。</p>
+
+<p>下载 <a href="data.csv" target="_blank">data.csv</a>，或在浏览器中打开 <a href="data.csv.txt" target="_blank">data.csv</a></p>
+
+<h3>实例</h3>
+
+<p>将 CSV 加载到 DataFrame 中：</p>
+
+<pre class="language-python">
+import pandas as pd
+
+df = pd.read_csv('data.csv')
+
+print(df.to_string()) 
+</pre>
+
+<p class="tiy"><a target="_blank" href="t8b2f.html?f=pandas_csv">亲自试一试</a></p>
+
+<p class="tip"><span>提示：</span>使用 <code>to_string()</code> 打印整个 DataFrame。</p>
+
+<p>如果你有一个包含很多行的大型 DataFrame，Pandas 将仅返回前 5 行和最后 5 行：</p>
+
+<h3>实例</h3>
+
+<p>不使用 <code>to_string()</code> 方法打印 DataFrame：</p>
+
+<pre class="language-python">
+import pandas as pd
+
+df = pd.read_csv('data.csv')
+
+print(df) 
+</pre>
+
+<p class="tiy"><a target="_blank" href="tbb0e.html?f=pandas_csv_reduced">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>max_rows</h2>
+
+<p>返回的行数在 Pandas 选项设置中定义。</p>
+
+<p>您可以使用 <code>pd.options.display.max_rows</code> 语句检查系统的最大行数。</p>
+
+<h3>实例</h3>
+
+<p>检查返回的最大行数：</p>
+
+<pre class="language-python">
+import pandas as pd
+
+print(pd.options.display.max_rows) 
+</pre>
+
+<p class="tiy"><a target="_blank" href="t99ee.html?f=pandas_csv_max_rows">亲自试一试</a></p>
+
+<p>在我的系统中，数字是 60，这意味着如果 DataFrame 包含超过 60 行，则 <code>print(df)</code> 语句将仅返回标题以及前 5 行和最后 5 行。</p>
+
+<p>您可以使用相同的语句更改最大行数。</p>
+
+<h3>实例</h3>
+
+<p>增加要显示的最大行数，以显示整个 DataFrame：</p>
+
+<pre class="language-python">
+import pandas as pd
+
+pd.options.display.max_rows = 9999
+
+df = pd.read_csv('data.csv')
+
+print(df)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t4ff8.html?f=pandas_csv_set_max_rows">亲自试一试</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="pandas_dataframes.html" title="Pandas 数据帧">Pandas 数据帧</a></li>
+<li class="next"><a href="pandas_json.html" title="Pandas 读取 JSON">Pandas 读取 JSON</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+<div id="tools">
+<!--<h5 id="tools_quiz"><a href="/pandas/pandas_quiz.asp">Pandas 测验</a></h5>-->
+<h5 id="tools_reference"><a href="pandas_ref_dataframe.html" title="Pandas DataFrame 参考手册">Pandas</a></h5>
+</div>
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/pandas/pandas_csv.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:54:58 GMT -->
+</html>

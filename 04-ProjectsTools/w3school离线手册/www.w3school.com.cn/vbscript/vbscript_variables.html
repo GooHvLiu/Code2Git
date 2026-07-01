@@ -1,0 +1,315 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/vbscript/vbscript_variables.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:44:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>VBScript 变量</title>
+
+</head>
+
+<body class="serverscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>VBScript 教程</h2>
+<ul>
+<li><a href="index.html" title="VBScript 教程">VB 教程</a></li>
+<li><a href="vbscript_intro.html" title="VBScript 简介">VB 简介</a></li>
+<li><a href="vbscript_howto.html" title="VBScript How to">VB How to</a></li>
+<li><a href="vbscript_whereto.html" title="VBScript Where to">VB Where to</a></li>
+<li class="currentLink"><a href="vbscript_variables.html" title="VBScript 变量">VB 变量</a></li>
+<li><a href="vbscript_procedures.html" title="VBScript 程序">VB 程序</a></li>
+<li><a href="vbscript_conditionals.html" title="VBScript 条件语句">VB 条件语句</a></li>
+<li><a href="vbscript_looping.html" title="VBScript 循环语句">VB 循环语句</a></li>
+<li><a href="vbscript_summary.html" title="您已经学习了 VBScript，下一步呢？">VB 教程总结</a></li>
+</ul>
+<h2>VBScript 实例</h2>
+<ul>
+<li><a href="vbscript_examples.html" title="VBScript 实例">VB 实例</a></li>
+</ul>
+<h2>VBScript 参考手册</h2>
+<ul>
+<li><a href="vbscript_ref_functions.html" title="VBScript 函数">VB 函数</a></li>
+<li><a href="vbscript_ref_keywords.html" title="VBScript 关键字">VB 关键字</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>VBScript 变量</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="vbscript_whereto.html" title="VBScript Where to">VB Where to</a></li>
+<li class="next"><a href="vbscript_procedures.html" title="VBScript 程序">VB 程序</a></li>
+</ul>
+</div>
+
+
+
+<div class="example">
+<h2>实例</h2>
+
+<dl>
+<dt><a target="_blank" href="../tiy/td554.html?f=vbst_variable">创建变量</a></dt>
+<dd>变量用于存储信息。本例演示如何创建一个变量，并为它赋值。</dd>
+
+<dt><a target="_blank" href="../tiy/t088b.html?f=vbst_variable2">在一段文本中插入变量值</a></dt>
+<dd>本例为您演示如何在一段文本中插入变量值。</dd>
+
+<dt><a target="_blank" href="../tiy/t03c6.html?f=vbst_array">创建数组</a></dt>
+<dd>数组用来存储一系列相关的数据项。本例演示如何创建一个存储名字的数组。（我们使用 &quot;for loop&quot; 来演示如何输出名字。）</dd>
+</dl>
+</div>
+
+
+
+<div>
+<h2>什么是变量？</h2>
+
+<p>变量是可存储信息的“容器”。在脚本中，变量的值是可以改变的。您可以通过引用某个变量的名称，来查看或修改它的值。在 VBScript 中，所有的变量都与类型相关，可存储不同类型的数据。</p>
+</div>
+
+
+
+<div>
+<h2>变量名称的规则：</h2>
+
+<ul>
+<li>必须以字母开头</li>
+<li>不能包含点号 (.)</li>
+<li>不能超过 255 个字符</li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>变量声明</h2>
+
+<p>您可以使用 Dim、Public 或 Private 语句来声明变量，比如这样：</p>
+
+<pre class="language-vbnet">
+dim name
+name=some value
+</pre>
+
+<p>现在，你创建了一个变量。变量名是 &quot;name&quot;。 </p>
+
+<p>您也可以通过使用其名称来创建变量。比如这样：</p>
+
+<pre class="language-vbnet">
+name=some value
+</pre>
+
+<p>这样，您同样创建了一个名为 &quot;name&quot; 的变量。</p>
+
+<p>不过，后面这样的做法不是一种好习惯，这是因为您可能会在脚本中拼错变量名，那样可能会在脚本运行时引起奇怪的结果。比如，当您把 &quot;name&quot; 变量错拼为 &quot;nime&quot; 时，脚本会自动创建一个名为 &quot;nime&quot; 的变量。为了防止脚本这样做，您可以使用 Option Explicit 语句。如果您使用这个语句，就必须使用 dim、public 或 private 语句来声明所有的变量。把 Option Explicit 语句放置于脚本的顶端，这像这样：</p>
+
+<pre class="language-vbnet">
+option explicit
+dim name
+name=some value
+</pre>
+</div>
+
+
+
+<div>
+<h2>为变量赋值</h2>
+
+<p>您可以像这样为某个变量赋值：</p>
+
+<pre class="language-vbnet">
+name=&quot;George&quot;
+i=300 
+</pre>
+
+<p>变量名在表达式的左侧，需要赋的值在表达式的右侧。现在，变量 &quot;name&quot; 的值是 &quot;George&quot;。</p>
+</div>
+
+
+
+<div>
+<h2>变量的生存期</h2>
+
+<p>变量的生存期指的是它可以存在的时长。</p>
+
+<p>当您在一个子程序中声明变量后，变量只能在此程序内进行访问。当退出此程序时，变量也会失效。这样的变量称为本地变量。您可以在不同的子程序中使用名称相同的本地变量，因为每个变量只能在声明它的程序内得到识别。</p>
+
+<p>如果您在子程序以外声明了一个变量，在您的页面上的所有子程序都可以访问访问它。这类变量的生存期始于它们被声明，止于页面被关闭。</p>
+</div>
+
+
+
+<div>
+<h2>数组变量</h2>
+
+<p>有时，您需要向一个单一的变量赋于多个值。那么您可以创建一个可包含一系列值的变量。这种变量被称为数组。数组变量的声明使用变量名后跟一个括号()。在下面的例子中，创建了一个包含三个元素的数组：</p>
+
+<pre class="language-vbnet">
+dim names(2)
+</pre>
+
+<p>括号中的数字是 2。数组的下标以 0 开始，因为此数组包含三个元素。这是容量固定的数组。您可以为数组的每个元素分配数据：</p>
+
+<pre class="language-vbnet">
+names(0)=&quot;George&quot;
+names(1)=&quot;John&quot;
+names(2)=&quot;Thomas&quot; 
+</pre>
+
+<p>同样地，通过使用特定数组元素的下标号，我们也可以取回任何元素的值。比如：</p>
+
+<pre class="language-vbnet">
+father=names(0)
+</pre>
+
+<p>您可以在一个数组中使用多达 60 个维数。声明多维数组的方法是在括号中用逗号来分隔数字。比如，我们声明了一个包含 5 行 7 列的 2 维数组：</p>
+
+<pre class="language-vbnet">
+dim table(4, 6)
+</pre>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="vbscript_whereto.html" title="VBScript Where to">VB Where to</a></li>
+<li class="next"><a href="vbscript_procedures.html" title="VBScript 程序">VB 程序</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="vbscript_ref_functions.html">VBScript 参考手册</a></h5>
+<h5 id="tools_example"><a href="vbscript_examples.html">VBScript 实例</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/vbscript/vbscript_variables.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:44:58 GMT -->
+</html>

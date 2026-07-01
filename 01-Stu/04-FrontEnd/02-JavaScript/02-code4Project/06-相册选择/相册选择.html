@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        .topbox {
+            width: 600px;
+            height: 600px;
+            background-color: rgb(244, 244, 244);
+            border-radius: 8px;
+        }
+
+        .topbox img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+
+        }
+
+        .botbox {
+            width: 600px;
+            /* background-color: blue; */
+        }
+
+        .botbox .botimg {
+            width: 24.41%;
+            height: auto;
+            background-color: red;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topbox">
+        <img src="./images/小可爱.jpg" alt="">
+    </div>
+    <div class="botbox">
+        <img class='botimg' src="./images/小可爱.jpg" alt="">
+        <img class='botimg' src="./images/小熊.jpg" alt="">
+        <img class='botimg' src="./images/小鸟.jpg" alt="">
+        <img class='botimg' src="./images/小鸭子.png" alt="">
+    </div>
+
+    <script>
+        // 获取img标签的全部数组集合
+        let img = document.getElementsByTagName('img');
+
+        //循环鼠标移入事件
+        for (let i = 1; i < img.length; i++) {
+            img[i].onmouseover = function () {
+                img[0].src = img[i].src;
+                img[i].style.border = '1px solid #ccc';
+            }
+        }
+
+    </script>
+</body>
+
+</html>

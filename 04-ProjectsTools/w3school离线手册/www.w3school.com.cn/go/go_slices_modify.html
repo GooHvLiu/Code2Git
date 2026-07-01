@@ -1,0 +1,475 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/go/go_slices_modify.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:01:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Go 访问、修改、添加和复制切片</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Go 教程</h2>
+<ul>
+<li><a href="index.html" title="Go 教程">Go 教程</a></li>
+<li><a href="go_introduction.html" title="Go 简介">Go 简介</a></li>
+<li><a href="go_getting_started.html" title="Go 入门">Go 入门</a></li>
+<li><a href="go_syntax.html" title="Go 语法">Go 语法</a></li>
+<li><a href="go_comments.html" title="Go 注释">Go 注释</a></li>
+<li><a href="go_variables.html" title="Go 变量">Go 变量</a></li>
+<li><a href="go_variable_multi.html" title="Go 声明多变量">Go 声明多变量</a></li>
+<li><a href="go_variable_naming_rules.html" title="Go 变量命名规则">Go 变量命名规则</a></li>
+<li><a href="go_constants.html" title="Go 常量">Go 常量</a></li>
+<li><a href="go_output.html" title="Go 输出">Go 输出</a></li>
+<li><a href="go_formatting_verbs.html" title="Go 格式化动词">Go 格式化动词</a></li>
+<li><a href="go_data_types.html" title="Go 数据类型">Go 数据类型</a></li>
+<li><a href="go_boolean_data_type.html" title="Go 布尔数据类型">Go 布尔</a></li>
+<li><a href="go_integer_data_type.html" title="Go 整数数据类型">Go 整数</a></li>
+<li><a href="go_float_data_type.html" title="Go 浮点数据类型">Go 浮点</a></li>
+<li><a href="go_string_data_type.html" title="Go 字符串数据类型">Go 字符串</a></li>
+<li><a href="go_arrays.html" title="Go 数组">Go 数组</a></li>
+<li><a href="go_slices.html" title="Go 创建切片">Go 创建切片</a></li>
+<li class="currentLink"><a href="go_slices_modify.html" title="Go 修改切片">Go 修改切片</a></li>
+<li><a href="go_operators.html" title="Go 运算符">Go 运算符</a></li>
+<li><a href="go_conditions.html" title="Go 条件语句">Go 条件语句</a></li>
+<li><a href="go_if_statement.html" title="Go if 语句">Go if 语句</a></li>
+<li><a href="go_else_statement.html" title="Go if else 语句">Go if else 语句</a></li>
+<li><a href="go_elseif_statement.html" title="Go else if 语句">Go else if 语句</a></li>
+<li><a href="go_nested_if.html" title="Go 嵌套 if 语句">Go 嵌套 if 语句</a></li>
+<li><a href="go_switch.html" title="Go Switch 语句">Go Switch</a></li>
+<li><a href="go_loops.html" title="Go 循环">Go 循环</a></li>
+<li><a href="go_functions.html" title="Go 函数">Go 函数</a></li>
+<li><a href="go_function_parameters.html" title="Go 函数参数">Go 函数参数</a></li>
+<li><a href="go_function_returns.html" title="Go 函数返回">Go 函数返回</a></li>
+<li><a href="go_function_recursion.html" title="Go 递归函数">Go 递归函数</a></li>
+<li><a href="go_struct.html" title="Go 结构体">Go 结构体</a></li>
+<li><a href="go_maps.html" title="Go 映射">Go 映射</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Go 访问、修改、添加和复制切片</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="go_slices.html" title="Go 创建切片">Go 创建切片</a></li>
+<li class="next"><a href="go_operators.html" title="Go 运算符">Go 运算符</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>访问切片的元素</h2>
+
+<p>您可以通过引用索引号来访问特定的切片元素。</p>
+
+<p>在 Go 中，索引从 <mark>0</mark> 开始。这意味着 <mark>[0]</mark> 是第一个元素，<mark>[1]</mark> 是第二个元素，依此类推。</p>
+
+<h3>实例</h3>
+
+<p>此例展示了如何访问 <code>prices</code> 切片中的第一个和第三个元素：</p>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  prices := []int{10,20,30}
+
+  fmt.Println(prices[0])
+  fmt.Println(prices[2])
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+10
+30
+</pre>
+
+<p class="tiy"><a target="_blank" href="t443b.html?f=go_slices_4">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>修改切片的元素</h2>
+
+<p>你也可以通过引用索引号来修改特定的切片元素。</p>
+
+<h3>实例</h3>
+
+<p>此例展示了如何修改 <code>prices</code> 切片中的第三个元素：</p>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  prices := []int{10,20,30}
+  prices[2] = 50
+  fmt.Println(prices[0])
+  fmt.Println(prices[2])
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+10
+50
+</pre>
+
+<p class="tiy"><a target="_blank" href="tb1cb.html?f=go_slices_4_2">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>向切片添加元素</h2>
+
+<p>你可以使用 <code>append()</code> 函数将元素添加到切片的末尾：</p>
+
+<h3>语法</h3>
+
+<pre class="language-go">
+<i>slice_name</i> = append(<i>slice_name</i>, <i>element1</i>, <i>element2</i>, ...)
+</pre>
+
+<h3>实例</h3>
+
+<p>此例展示了如何将元素添加到切片的末尾：</p>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  myslice1 := []int{1, 2, 3, 4, 5, 6}
+  fmt.Printf(&quot;myslice1 = %v\n&quot;, myslice1)
+  fmt.Printf(&quot;length = %d\n&quot;, len(myslice1))
+  fmt.Printf(&quot;capacity = %d\n&quot;, cap(myslice1))
+
+  myslice1 = append(myslice1, 20, 21)
+  fmt.Printf(&quot;myslice1 = %v\n&quot;, myslice1)
+  fmt.Printf(&quot;length = %d\n&quot;, len(myslice1))
+  fmt.Printf(&quot;capacity = %d\n&quot;, cap(myslice1))
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+myslice1 = [1 2 3 4 5 6]
+length = 6
+capacity = 6
+myslice1 = [1 2 3 4 5 6 20 21]
+length = 8
+capacity = 12
+</pre>
+
+<p class="tiy"><a target="_blank" href="tf93d.html?f=go_slices_5">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>将一个切片追加到另一个切片</h2>
+
+<p>要将一个切片的所有元素追加到另一个切片，请使用 <code>append()</code>/ 函数：</p>
+
+<h3>语法</h3>
+
+<pre class="language-go">
+<i>slice3</i> = append(<i>slice1</i>, <i>slice2</i>...)
+</pre>
+
+<p class="note"><span>注意：</span>在将一个切片的元素追加到另一个切片时，<code>slice2</code> 后的 '...' 是<em>必需的</em>。</p>
+
+<h3>实例</h3>
+
+<p>此例展示了如何将一个切片追加到另一个切片：</p>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  myslice1 := []int{1,2,3}
+  myslice2 := []int{4,5,6}
+  myslice3 := append(myslice1, myslice2...)
+
+  fmt.Printf(&quot;myslice3=%v\n&quot;, myslice3)
+  fmt.Printf(&quot;length=%d\n&quot;, len(myslice3))
+  fmt.Printf(&quot;capacity=%d\n&quot;, cap(myslice3))
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="language-go">
+myslice3=[1 2 3 4 5 6]
+length=6
+capacity=6
+</pre>
+
+<p class="tiy"><a target="_blank" href="tb786.html?f=go_slices_6">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>更改切片的长度</h2>
+
+<p>与数组不同，切片的长度是可变的。</p>
+
+<h3>实例</h3>
+
+<p>此例展示了如何更改切片的长度：</p>
+
+<pre class="language-go">
+package main  
+import (&quot;fmt&quot;)  
+  
+func main() {  
+  arr1 := [6]int{9, 10, 11, 12, 13, 14} // 一个数组  
+  myslice1 := arr1[1:5] // 切片数组  
+  fmt.Printf(&quot;myslice1 = %v\n&quot;, myslice1)  
+  fmt.Printf(&quot;length = %d\n&quot;, len(myslice1))  
+  fmt.Printf(&quot;capacity = %d\n&quot;, cap(myslice1))  
+  
+  myslice1 = arr1[1:3] // 通过重新切片数组来改变长度  
+  fmt.Printf(&quot;myslice1 = %v\n&quot;, myslice1)  
+  fmt.Printf(&quot;length = %d\n&quot;, len(myslice1))  
+  fmt.Printf(&quot;capacity = %d\n&quot;, cap(myslice1))  
+  
+  myslice1 = append(myslice1, 20, 21, 22, 23) // 通过添加项目来改变长度  
+  fmt.Printf(&quot;myslice1 = %v\n&quot;, myslice1)  
+  fmt.Printf(&quot;length = %d\n&quot;, len(myslice1))  
+  fmt.Printf(&quot;capacity = %d\n&quot;, cap(myslice1))  
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+myslice1 = [10 11 12 13]
+length = 4
+capacity = 5
+myslice1 = [10 11]
+length = 2
+capacity = 5
+myslice1 = [10 11 20 21 22 23]
+length = 6
+capacity = 10
+</pre>
+
+<p class="tiy"><a target="_blank" href="ta697.html?f=go_slices_7">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>内存效率</h2>
+
+<p>当使用切片时，Go 会将所有底层元素加载到内存中。</p>
+
+<p>如果数组很大，而你只需要几个元素，那么最好使用 <code>copy()</code> 函数来复制这些元素。</p>
+
+<p><code>copy()</code> 函数会创建一个新的底层数组，其中仅包含切片所需的元素。这将减少程序使用的内存。</p>
+
+<h3>语法</h3>
+
+<pre class="language-go">
+copy(<i>dest</i>, <i>src</i>)
+</pre>
+
+<p><code>copy()</code> 函数采用两个切片 <i>dest</i> 和 <i>src</i>，并将数据从 <i>src</i> 复制到 <i>dest</i>。它返回复制的元素数。</p>
+
+<h3>实例</h3>
+
+<p>此例展示了如何使用 <code>copy()</code> 函数：</p>
+
+<pre class="language-go">
+package main  
+import (&quot;fmt&quot;)  
+  
+func main() {  
+  numbers := []int{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}  
+  // 原始切片  
+  fmt.Printf(&quot;numbers = %v\n&quot;, numbers)  
+  fmt.Printf(&quot;length = %d\n&quot;, len(numbers))  
+  fmt.Printf(&quot;capacity = %d\n&quot;, cap(numbers))  
+  
+  // 仅使用所需数字创建副本  
+  neededNumbers := numbers[:len(numbers)-10]  
+  numbersCopy := make([]int, len(neededNumbers))  
+  copy(numbersCopy, neededNumbers)  
+  
+  fmt.Printf(&quot;numbersCopy = %v\n&quot;, numbersCopy)  
+  fmt.Printf(&quot;length = %d\n&quot;, len(numbersCopy))  
+  fmt.Printf(&quot;capacity = %d\n&quot;, cap(numbersCopy))  
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="cmdline">
+// 原始切片  
+numbers = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15]  
+length = 15  
+capacity = 15  
+// 新切片  
+numbersCopy = [1 2 3 4 5]  
+length = 5  
+capacity = 5
+</pre>
+
+<p class="tiy"><a target="_blank" href="t26d3.html?f=go_slices_8">亲自试一试</a></p>
+
+<p>新切片的容量现在小于原始切片的容量，因为新的底层数组较小。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="go_slices.html" title="Go 创建切片">Go 创建切片</a></li>
+<li class="next"><a href="go_operators.html" title="Go 运算符">Go 运算符</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/go/go_slices_modify.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:01:43 GMT -->
+</html>

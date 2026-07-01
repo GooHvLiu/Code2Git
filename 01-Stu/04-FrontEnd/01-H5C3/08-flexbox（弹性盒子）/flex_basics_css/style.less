@@ -1,0 +1,35 @@
+#container {
+  display: flex;
+
+  // 排布方向为横向，即为行项
+  flex-direction: row;
+
+  // 排布方向为纵向，即为列项
+  // flex-direction: column;
+
+  //wrap为放不下是否换行，wrap表示放不下时自动掉到下一行
+  flex-wrap: wrap;
+
+  //flex-flow是flex-direction和flex-wrap的复合属性
+  // flex-flow: row nowrap;
+
+  .item {
+    background: #f4f4f4;
+    border: #ccc solid 1px;
+    padding: 1rem;
+    margin: 0.75rem;
+    text-align: center;
+    // flex:1表示为权重，此处表示所有的item权重都为1，即按照等比例分
+    flex: 1;
+  }
+
+  //让第一个盒子的权重增加为3
+  .item:first-child {
+    flex: 2;
+  }
+
+  /* 选中所有奇数(odd)/偶数(even)位置的 .item 元素 */
+  .item:nth-child(odd) {
+    flex: 5;
+  }
+}

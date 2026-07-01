@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="shortcut icon" href="../../favicon.png" type="image/x-icon">
+  <title>15.03-v-cloak指令</title>
+  <script type="text/javascript" src="../../js_Tools/vue.js"></script>
+  <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.11.18/dayjs.min.js"></script>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 
+    v-cloak指令（没有值）：
+        1.本质是一个特殊属性，Vue实例创建完毕并接管容器后，会删掉v-cloak属性。
+        2.使用css配合v-cloak可以解决网速慢时页面展示出{{xxx}}的问题。
+		-->
+  <div id="root">
+    <div>你好,{{name}}</div>
+    <div v-html="str">我好，</div>
+    <h2 v-cloak>你好,{{name}}</h2>
+  </div>
+</body>
+<script>
+  Vue.config.productionTip = false
+
+  new Vue({
+    el: '#root',
+    data: {
+      name: 'Beijing',
+      str: '<h3>你好啊！</h3>'
+    }
+  })
+</script>
+
+</html>

@@ -1,0 +1,1581 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/python/python_dsa_linkedlists.asp by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Mar 2026 14:34:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Python 中的链表</title>
+<link rel="preload" href="../lib/fonts/roboto-mono-v13-latin-500.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Python 教程</h2>
+<ul>
+<li><a href="index.html" title="Python 教程">Python 教程</a></li>
+<li><a href="python_intro.html" title="Python 简介">Python 简介</a></li>
+<li><a href="python_getstarted.html" title="Python 入门">Python 入门</a></li>
+<li><a href="python_syntax.html" title="Python 语法">Python 语法</a></li>
+<li><a href="python_comments.html" title="Python 注释">Python 注释</a></li>
+<li><a href="python_variables.html" title="Python 变量">Python 变量</a></li>
+<li><a href="python_datatypes.html" title="Python 数据类型">Python 数据类型</a></li>
+<li><a href="python_numbers.html" title="Python 简介">Python 数字</a></li>
+<li><a href="python_casting.html" title="Python Casting">Python Casting</a></li>
+<li><a href="python_strings.html" title="Python 字符串">Python 字符串</a></li>
+<li><a href="python_booleans.html" title="Python 布尔">Python 布尔</a></li>
+<li><a href="python_operators.html" title="Python 运算符">Python 运算符</a></li>
+<li><a href="python_lists.html" title="Python 列表">Python 列表</a></li>
+<li><a href="python_tuples.html" title="Python 元组">Python 元组</a></li>
+<li><a href="python_sets.html" title="Python 集合">Python 集合</a></li>
+<li><a href="python_dictionaries.html" title="Python 字典">Python 字典</a></li>
+<li><a href="python_conditions.html" title="Python If ... Else">Python If Else</a></li>
+<li><a href="python_while_loops.html" title="Python While 循环">Python While 循环</a></li>
+<li><a href="python_for_loops.html" title="Python For 循环">Python For 循环</a></li>
+<li><a href="python_functions.html" title="Python 函数">Python 函数</a></li>
+<li><a href="python_lambda.html" title="Python Lambda">Python Lambda</a></li>
+<li><a href="python_arrays.html" title="Python 数组">Python 数组</a></li>
+<li><a href="python_classes.html" title="Python 类和对象">Python 类/对象</a></li>
+<li><a href="python_inheritance.html" title="Python 继承">Python 继承</a></li>
+<li><a href="python_iterators.html" title="Python 迭代">Python 迭代</a></li>
+<li><a href="python_polymorphism.html" title="Python 多态">Python 多态</a></li>
+<li><a href="python_scope.html" title="Python 作用域">Python 作用域</a></li>
+<li><a href="python_modules.html" title="Python 模块">Python 模块</a></li>
+<li><a href="python_datetime.html" title="Python 日期">Python 日期</a></li>
+<li><a href="python_math.html" title="Python 数学">Python 数学</a></li>
+<li><a href="python_json.html" title="Python JSON">Python JSON</a></li>
+<li><a href="python_regex.html" title="Python RegEx">Python RegEx</a></li>
+<li><a href="python_pip.html" title="Python PIP">Python PIP</a></li>
+<li><a href="python_try_except.html" title="Python Try Except">Python Try Except</a></li>
+<li><a href="python_cmd_input.html" title="Python 命令行输入">Python 命令输入</a></li>
+<li><a href="python_string_formatting.html" title="Python 字符串格式化">Python 字符串格式化</a></li>
+</ul>
+<h2>Python 文件处理</h2>
+<ul>
+<li><a href="python_file_handling.html" title="Python 文件打开">Python 文件打开</a></li>
+<li><a href="python_file_open.html" title="Python 文件读取">Python 文件读取</a></li>
+<li><a href="python_file_write.html" title="Python 文件写入">Python 文件写入/创建</a></li>
+<li><a href="python_file_remove.html" title="Python 文件删除">Python 文件删除</a></li>
+</ul>
+<h2>Python 模块</h2>
+<ul>
+<li><a href="../numpy/index.html" title="NumPy 教程">NumPy 教程</a></li>
+<li><a href="../pandas/index.html" title="Pandas 教程">Pandas 教程</a></li>
+<li><a href="../scipy/index.html" title="SciPy 教程">SciPy 教程</a></li>
+</ul>
+<h2>Python Matplotlib</h2>
+<ul>
+<li><a href="matplotlib_intro.html" title="Matplotlib 简介">Matplotlib 简介</a></li>
+<li><a href="matplotlib_getting_started.html" title="Matplotlib 入门">Matplotlib 入门</a></li>
+<li><a href="matplotlib_pyplot.html" title="Matplotlib Pyplot">Matplotlib Pyplot</a></li>
+<li><a href="matplotlib_plotting.html" title="Matplotlib 绘图">Matplotlib 绘图</a></li>
+<li><a href="matplotlib_markers.html" title="Matplotlib 标记">Matplotlib 标记</a></li>
+<li><a href="matplotlib_line.html" title="Matplotlib 线条">Matplotlib 线条</a></li>
+<li><a href="matplotlib_labels.html" title="Matplotlib 标签">Matplotlib 标签</a></li>
+<li><a href="matplotlib_grid.html" title="Matplotlib 网格">Matplotlib 网格</a></li>
+<li><a href="matplotlib_subplot.html" title="Matplotlib 子图">Matplotlib 子图</a></li>
+<li><a href="matplotlib_scatter.html" title="Matplotlib 散点图">Matplotlib 散点图</a></li>
+<li><a href="matplotlib_bars.html" title="Matplotlib 条形图">Matplotlib 条形图</a></li>
+<li><a href="matplotlib_histograms.html" title="Matplotlib 直方图">Matplotlib 直方图</a></li>
+<li><a href="matplotlib_pie_charts.html" title="Matplotlib 饼图">Matplotlib 饼图</a></li>
+</ul>
+<h2>Python NumPy</h2>
+<ul>
+<li><a href="numpy_intro.html" title="NumPy 简介">NumPy 简介</a></li>
+<li><a href="numpy_getting_started.html" title="NumPy 入门">NumPy 入门</a></li>
+<li><a href="numpy_creating_arrays.html" title="NumPy 数组创建">NumPy 数组创建</a></li>
+<li><a href="numpy_array_indexing.html" title="NumPy 数组索引">NumPy 数组索引</a></li>
+<li><a href="numpy_array_slicing.html" title="NumPy 数组裁切">NumPy 数组裁切</a></li>
+<li><a href="numpy_data_types.html" title="NumPy 数据类型">NumPy 数据类型</a></li>
+<li><a href="numpy_copy_vs_view.html" title="NumPy 副本/视图">NumPy 副本/视图</a></li>
+<li><a href="numpy_array_shape.html" title="NumPy 数组形状">NumPy 数组形状</a></li>
+<li><a href="numpy_array_reshape.html" title="NumPy 数组重塑">NumPy 数组重塑</a></li>
+<li><a href="numpy_array_iterating.html" title="NumPy 数组迭代">NumPy 数组迭代</a></li>
+<li><a href="numpy_array_join.html" title="NumPy 数组连接">NumPy 数组连接</a></li>
+<li><a href="numpy_array_split.html" title="NumPy 数组拆分">NumPy 数组拆分</a></li>
+<li><a href="numpy_array_search.html" title="NumPy 数组搜索">NumPy 数组搜索</a></li>
+<li><a href="numpy_array_sort.html" title="NumPy 数组排序">NumPy 数组排序</a></li>
+<li><a href="numpy_array_filter.html" title="NumPy 数组过滤">NumPy 数组过滤</a></li>
+<li><a href="numpy_random.html" title="NumPy 随机">NumPy 随机</a></li>
+<li><a href="numpy_ufunc.html" title="NumPy ufuncs">NumPy ufuncs</a></li>
+</ul>
+<h2>Python 机器学习</h2>
+<ul>
+<li><a href="python_ml_getting_started.html" title="机器学习 - 入门">入门</a></li>
+<li><a href="python_ml_mean_median_mode.html" title="机器学习 - 平均中位数模式">平均中位数模式</a></li>
+<li><a href="python_ml_standard_deviation.html" title="机器学习 - 标准差">标准差</a></li>
+<li><a href="python_ml_percentile.html" title="机器学习 - 百分位数">百分位数</a></li>
+<li><a href="python_ml_data_distribution.html" title="机器学习 - 数据分布">数据分布</a></li>
+<li><a href="python_ml_normal_data_distribution.html" title="机器学习 - 正态数据分布">正态数据分布</a></li>
+<li><a href="python_ml_scatterplot.html" title="机器学习 - 散点图">散点图</a></li>
+<li><a href="python_ml_linear_regression.html" title="机器学习 - 线性回归">线性回归</a></li>
+<li><a href="python_ml_polynomial_regression.html" title="机器学习 - 多项式回归">多项式回归</a></li>
+<li><a href="python_ml_multiple_regression.html" title="机器学习 - 多元回归">多元回归</a></li>
+<li><a href="python_ml_scale.html" title="机器学习 - 缩放">缩放</a></li>
+<li><a href="python_ml_train_test.html" title="机器学习 - 训练/测试">训练/测试</a></li>
+<li><a href="python_ml_decision_tree.html" title="机器学习 - 决策树">决策树</a></li>
+<li><a href="python_ml_confusion_matrix.html" title="机器学习 - 混淆矩阵">混淆矩阵</a></li>
+<li><a href="python_ml_hierarchial_clustering.html" title="机器学习 - 层次聚类">层次聚类</a></li>
+<li><a href="python_ml_logistic_regression.html" title="机器学习 - 逻辑回归">逻辑回归</a></li>
+<li><a href="python_ml_grid_search.html" title="机器学习 - 网格搜索">网格搜索</a></li>
+<li><a href="python_ml_preprocessing.html" title="机器学习 - 分类数据">分类数据</a></li>
+<li><a href="python_ml_k-means.html" title="机器学习 - K-means">K-means</a></li>
+<li><a href="python_ml_bagging.html" title="机器学习 - Bootstrap 聚合（Bagging）">Bootstrap 聚合</a></li>
+<li><a href="python_ml_cross_validation.html" title="机器学习 - 交叉验证">交叉验证</a></li>
+<li><a href="python_ml_auc_roc.html" title="机器学习 - AUC - ROC 曲线">AUC - ROC 曲线</a></li>
+<li><a href="python_ml_knn.html" title="机器学习 - K-最近邻算法（KNN）">K-最近邻算法</a></li>
+</ul>
+<h2>Python DSA</h2>
+<ul>
+<li><a href="python_dsa.html" title="Python MySQL">Python DSA</a></li>
+<li><a href="python_dsa_lists.html" title="Python 中的列表与数组">列表与数组</a></li>
+<li><a href="python_dsa_stacks.html" title="Python 中的栈">栈</a></li>
+<li><a href="python_dsa_queues.html" title="Python 中的队列">队列</a></li>
+<li class="currentLink"><a href="python_dsa_linkedlists.html" title="Python 中的链表">链表</a></li>
+<li><a href="python_dsa_hashtables.html" title="Python 中的哈希表">哈希表</a></li>
+<li><a href="python_dsa_trees.html" title="Python 树">树</a></li>
+<li><a href="python_dsa_binarytrees.html" title="Python 二叉树">二叉树</a></li>
+<li><a href="python_dsa_binarysearchtrees.html" title="Python 二叉搜索树">二叉搜索树</a></li>
+<li><a href="python_dsa_avltrees.html" title="Python AVL 树">AVL 树</a></li>
+<li><a href="python_dsa_graphs.html" title="Python 图论">图</a></li>
+<li><a href="python_dsa_linearsearch.html" title="Python 实现的线性查找">线性查找</a></li>
+<li><a href="python_dsa_binarysearch.html" title="Python 实现的二分查找">二分查找</a></li>
+<li><a href="python_dsa_bubblesort.html" title="Python 实现的冒泡排序">冒泡排序</a></li>
+<li><a href="python_dsa_selectionsort.html" title="Python 实现的选择排序">选择排序</a></li>
+<li><a href="python_dsa_insertionsort.html" title="Python 实现的插入排序">插入排序</a></li>
+<li><a href="python_dsa_quicksort.html" title="Python 实现的 DSA 快速排序">快速排序</a></li>
+<li><a href="python_dsa_countingsort.html" title="Python 实现的 DSA 计数排序">计数排序</a></li>
+<li><a href="python_dsa_radixsort.html" title="Python 实现的 DSA 基数排序">基数排序</a></li>
+<li><a href="python_dsa_mergesort.html" title="Python 实现的 DSA 归并排序">归并排序</a></li>
+</ul>
+<h2>Python MySQL</h2>
+<ul>
+<li><a href="python_mysql_getstarted.html" title="Python MySQL 入门">MySQL 入门</a></li>
+<li><a href="python_mysql_create_db.html" title="Python MySQL Create Database">MySQL Create Database</a></li>
+<li><a href="python_mysql_create_table.html" title="Python MySQL Create Table">MySQL Create Table</a></li>
+<li><a href="python_mysql_insert.html" title="Python MySQL Insert Into Table">MySQL Insert</a></li>
+<li><a href="python_mysql_select.html" title="Python MySQL Select From">MySQL Select</a></li>
+<li><a href="python_mysql_where.html" title="Python MySQL Where">MySQL Where</a></li>
+<li><a href="python_mysql_orderby.html" title="Python MySQL Order By">MySQL Order By</a></li>
+<li><a href="python_mysql_delete.html" title="Python MySQL Delete From By">MySQL Delete</a></li>
+<li><a href="python_mysql_drop_table.html" title="Python MySQL Drop Table">MySQL Drop Table</a></li>
+<li><a href="python_mysql_update.html" title="Python MySQL 更新表">MySQL Update</a></li>
+<li><a href="python_mysql_limit.html" title="Python MySQL Limit">MySQL Limit</a></li>
+<li><a href="python_mysql_join.html" title="Python MySQL Join">MySQL Join</a></li>
+</ul>
+<h2>Python MongoDB</h2>
+<ul>
+<li><a href="python_mongodb_getstarted.html" title="Python 教程">MongoDB 入门</a></li>
+<li><a href="python_mongodb_create_db.html" title="Python 教程">MongoDB 创建数据库</a></li>
+<li><a href="python_mongodb_create_collection.html" title="Python 教程">MongoDB 创建集合</a></li>
+<li><a href="python_mongodb_insert.html" title="Python 教程">MongoDB Insert</a></li>
+<li><a href="python_mongodb_find.html" title="Python 教程">MongoDB Find</a></li>
+<li><a href="python_mongodb_query.html" title="Python 教程">MongoDB Query</a></li>
+<li><a href="python_mongodb_sort.html" title="Python 教程">MongoDB Sort</a></li>
+<li><a href="python_mongodb_delete.html" title="Python 教程">MongoDB Delete</a></li>
+<li><a href="python_mongodb_drop_collection.html" title="Python 教程">MongoDB 删除集合</a></li>
+<li><a href="python_mongodb_update.html" title="Python 教程">MongoDB Update</a></li>
+<li><a href="python_mongodb_limit.html" title="Python 教程">MongoDB Limit</a></li>
+</ul>
+<h2>Python 参考手册</h2>
+<ul>
+<li><a href="python_reference.html" title="Python 教程">Python 参考概览</a></li>
+<li><a href="python_ref_functions.html" title="Python 教程">Python 内建函数</a></li>
+<li><a href="python_ref_string.html" title="Python 教程">Python 字符串方法</a></li>
+<li><a href="python_ref_list.html" title="Python 教程">Python 列表方法</a></li>
+<li><a href="python_ref_dictionary.html" title="Python 教程">Python 字典方法</a></li>
+<li><a href="python_ref_tuple.html" title="Python 教程">Python 元组方法</a></li>
+<li><a href="python_ref_set.html" title="Python 教程">Python 集合方法</a></li>
+<li><a href="python_ref_file.html" title="Python 教程">Python 文件方法</a></li>
+<li><a href="python_ref_keywords.html" title="Python 教程">Python 关键字</a></li>
+<li><a href="python_ref_exceptions.html" title="Python 内建异常">Python 异常</a></li>
+<li><a href="python_ref_glossary.html" title="Python 术语表">Python 术语表</a></li>
+</ul>
+<h2>Python 模块参考手册</h2>
+<ul>
+<li><a href="module_random.html" title="Python 教程">随机模块</a></li>
+<li><a href="module_requests.html" title="Python 教程">请求模块</a></li>
+<li><a href="module_statistics.html" title="Python 统计模块">统计模块</a></li>
+<li><a href="module_math.html" title="Python 数学模块">数学模块</a></li>
+<li><a href="module_cmath.html" title="Python cmath 模块">复数数学模块</a></li>
+</ul>
+<h2>Python How To</h2>
+<ul>
+<li><a href="python_howto_remove_duplicates.html" title="Python 教程">删除列表重复项</a></li>
+<li><a href="python_howto_reverse_string.html" title="Python 教程">反转字符串</a></li>
+<li><a href="python_howto_add_two_numbers.html" title="如何在 Python 中加两个数字">两数相加</a></li>
+</ul>
+<h2>Python 实例</h2>
+<ul>
+<li><a href="python_examples.html" title="Python 实例">Python 实例</a></li>
+<li><a href="python_quiz.html" title="Python 测验">Python 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Python 中的链表</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="python_dsa_queues.html" title="Python 中的队列">队列</a></li>
+<li class="next"><a href="python_dsa_hashtables.html" title="Python 中的哈希表">哈希表</a></li>
+</ul>
+</div>
+
+
+
+<section id="intro">
+<p>顾名思义，链表是一种节点相互链接的列表。每个节点包含数据和一个指针。它们链接的方式是，每个节点指向下一个节点在内存中的位置。</p>
+</section>
+
+
+
+<section>
+<h2>链表</h2>
+
+<p>链表由包含某种数据的节点以及指向下一个节点的指针（或链接）组成。</p>
+
+<img src="../i/python/linkedlists_singly.svg" alt="单链表" class="illustration left" />
+</section>
+
+
+
+<section>
+<h2>链表与数组的比较</h2>
+
+<p>理解链表最简单的方法或许是将链表与数组进行比较。</p>
+
+<p>链表由节点组成，是一种我们自行构建的线性数据结构，而数组则是编程语言中已存在的数据结构，我们可以直接使用。</p>
+
+<p>链表中的节点存储指向其他节点的链接，但数组元素不需要存储指向其他元素的链接。</p>
+
+<p class="note"><span>注意：</span>链表和数组在内存中的存储方式在“内存中的链表”页面中有详细说明。</p>
+
+<p>下表通过比较链表和数组，帮助更好地理解链表。</p>
+
+<table class="ref">
+<tr>
+<th>特性</th>
+<th style="width: 15%;">数组</th>
+<th style="width: 15%;">链表</th>
+</tr>
+
+<tr>
+<td>编程语言中已存在的数据结构</td>
+<td>是</td>
+<td>否</td>
+</tr>
+
+<tr>
+<td>内存大小固定</td>
+<td>是</td>
+<td>否</td>
+</tr>
+
+<tr>
+<td>元素（或节点）在内存中连续存储</td>
+<td>是</td>
+<td>否</td>
+</tr>
+
+<tr>
+<td>
+	<p>内存使用量低</p>
+	<p>（每个节点仅包含数据，无指向其他节点的链接）</p>
+</td>
+<td>是</td>
+<td>否</td>
+</tr>
+
+<tr>
+<td>元素（或节点）可直接访问（随机访问）</td>
+<td>是</td>
+<td>否</td>
+</tr>
+
+<tr>
+<td>元素（或节点）可在常数时间内插入或删除，无需内存中的移动操作</td>
+<td>否</td>
+<td>是</td>
+</tr>
+</table>
+
+<p>以下是链表与数组相比的一些关键特性：</p>
+
+<ul>
+<li>链表不像数组那样在内存中分配固定大小，因此当固定内存空间填满时，链表不需要像数组那样将整个列表移动到更大的内存空间。</li>
+<li>链表节点在内存中并非连续排列，因此插入或删除节点时，链表节点不需要在内存中上下移动。</li>
+<li>链表节点需要更多内存来存储指向其他节点的一个或多个链接。数组元素不需要那么多内存，因为数组元素不包含指向其他元素的链接。</li>
+<li>链表操作通常比类似的数组操作更难编程，且需要更多代码行，因为编程语言对数组有更好的内置支持。</li>
+<li>我们必须遍历链表才能找到特定位置的节点，但对于数组，我们可以通过编写 <code>myArray[5]</code> 直接访问元素。</li>
+</ul>
+</section>
+
+
+
+<section>
+<h2>链表的类型</h2>
+
+<p>链表有三种基本形式：</p>
+
+<ul>
+<li>单向链表</li>
+<li>双向链表</li>
+<li>循环链表</li>
+</ul>
+
+<p><em>单向链表</em>是最简单的链表类型。它在内存中占用的空间更少，因为每个节点只有一个指向下一个节点的地址，如下图所示。</p>
+
+<img src="../i/python/linkedlists_singly.svg" alt="单向链表" class="illustration left" />
+
+<p><em>双向链表</em>的节点同时包含指向前一个节点和后一个节点的地址，如下图所示，因此占用的内存更多。但双向链表的好处是，你可以在列表中双向移动。</p>
+
+<img src="../i/python/linkedlists_doubly.svg" alt="双向链表" class="illustration left" />
+
+<p><em>循环链表</em>类似于单向或双向链表，但第一个节点（“头”）和最后一个节点（“尾”）是相连的。</p>
+
+<p>在单向或双向链表中，我们只需检查链接是否为 <code>null</code>，即可找到列表的开始和结束。但对于循环链表，在某些应用中需要更复杂的代码来显式检查起始和结束节点。</p>
+
+<p>循环链表适用于需要连续循环遍历的列表。</p>
+
+<p>下图是一个单向循环链表的示例：</p>
+
+<img src="../i/python/linkedlists_circsingly.svg" alt="单向循环链表" class="illustration left" />
+
+<p>下图是一个双向循环链表的示例：</p>
+
+<img src="../i/python/linkedlists_circdoubly.svg" alt="双向循环链表" class="illustration left" />
+
+<div class="note">
+<p class="note"><span>注意：</span>你需要哪种链表取决于你要解决的问题。</p>
+</div>
+</section>
+
+
+
+<section>
+<h2>链表操作</h2>
+
+<p>我们可以对链表进行的基本操作包括：</p>
+
+<ul>
+<li>遍历</li>
+<li>删除节点</li>
+<li>插入节点</li>
+<li>排序</li>
+</ul>
+
+<p>为简单起见，下面将使用单向链表来解释这些操作。</p>
+</section>
+
+
+
+<section>
+<h2>链表的遍历</h2>
+
+<p>遍历链表意味着通过从一个节点到下一个节点的链接来遍历整个链表。</p>
+
+<p>遍历链表通常是为了搜索特定节点，并读取或修改节点内容、删除节点，或在节点之前或之后插入节点。</p>
+
+<p>要遍历单向链表，我们从列表的第一个节点（头节点）开始，跟随该节点的下一个链接，然后是下一个节点的下一个链接，依此类推，直到下一个地址为空。</p>
+
+<p>下面的代码在遍历链表时打印出节点值，与上面的动画效果相同。</p>
+
+<h3>实例</h3>
+
+<p>Python 中的单向链表遍历：</p>
+
+<pre class="language-python">
+class Node:
+  def __init__(self, data):
+    self.data = data
+    self.next = None
+
+def traverseAndPrint(head):
+  currentNode = head
+  while currentNode:
+    print(currentNode.data, end=&quot; -> &quot;)
+    currentNode = currentNode.next
+  print(&quot;null&quot;)
+
+node1 = Node(7)
+node2 = Node(11)
+node3 = Node(3)
+node4 = Node(2)
+node5 = Node(9)
+
+node1.next = node2
+node2.next = node3
+node3.next = node4
+node4.next = node5
+
+traverseAndPrint(node1)
+</pre>
+
+<p class="tiy"><a target="_blank" href="ta59a.html?f=python_dsa_linkedlists_traverse">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>在链表中查找最小值</h2>
+
+<p>让我们通过遍历单向链表并检查每个值来查找最小值。</p>
+
+<p>在链表中查找最小值与在数组中查找最小值非常相似，只是我们需要跟随下一个链接来到达下一个节点。</p>
+
+<p>要查找最小值，我们需要像前面的代码那样遍历列表。但除了遍历列表外，当我们找到一个值更小的节点时，还必须更新当前最小值。</p>
+
+<p>在下面的代码中，查找最小值的算法被移入了一个名为 <code>findLowestValue</code> 的函数中。</p>
+
+<h3>实例</h3>
+
+<p>Python 中的单向链表最小值查找：</p>
+
+<pre class="language-python">
+class Node:
+  def __init__(self, data):
+    self.data = data
+    self.next = None
+
+def findLowestValue(head):
+  minValue = head.data
+  currentNode = head.next
+  while currentNode:
+    if currentNode.data &lt; minValue:
+      minValue = currentNode.data
+    currentNode = currentNode.next
+  return minValue
+
+node1 = Node(7)
+node2 = Node(11)
+node3 = Node(3)
+node4 = Node(2)
+node5 = Node(9)
+
+node1.next = node2
+node2.next = node3
+node3.next = node4
+node4.next = node5
+
+print(&quot;The lowest value in the linked list is:&quot;, findLowestValue(node1))
+</pre>
+
+<p class="tiy"><a target="_blank" href="t3ffe.html?f=python_dsa_linkedlists_findlowest">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>在链表中删除节点</h2>
+
+<p>如果你想在链表中删除一个节点，重要的是在删除之前连接该节点两侧的节点，以免链表断裂。</p>
+
+<p>因此，在删除节点之前，我们需要从前一个节点获取下一个指针，并在删除中间的节点之前将前一个节点连接到新的下一个节点。</p>
+
+<p>此外，最好在删除节点之前，先将下一个指针连接到要删除节点之后的节点。这是为了避免出现“悬空”指针，即指向无内容的指针，即使只是短暂的一瞬间。</p>
+
+<p>下面的模拟演示了要删除的节点，以及如何首先遍历列表以在删除节点之前正确连接列表，从而不破坏链表。</p>
+
+<style>
+.dsa_svg {
+  max-width: 100%;
+}
+#divAnim1, #divAnim2 {
+  width: 90%;
+  background-color: white;
+  color: black;
+  padding-left: 10px;
+  margin: 30px;
+  max-width: 100%;
+  border: solid black 1px;
+}
+
+#divAnim1 .btnDiv, #divAnim2 .btnDiv {
+  margin-bottom: 30px;
+}
+</style>
+
+<div id="divAnim1">
+  <svg id="svgDeleteLowest" class="dsa_svg" viewBox="0 0 570 100" xmlns="http://www.w3.org/2000/svg">
+<defs>
+        <style>
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('../lib/fonts/roboto-mono-v13-latin-500.woff2') format('woff2');
+  font-weight: 500; /* 中等字重 */
+  font-style: normal;
+  font-display: swap; /* 可选，但强烈推荐 */
+}
+
+		#maincontent .dsa_svg {
+		    font-family: "Segoe UI", -apple-system, Arial, Verdana, sans-serif;
+		    font-size: 16px /*15px*/;
+				
+		}
+            .svgText {
+                font-family: Veranda, sans-serif;
+                fill: black;
+            }
+            .svgDataText{
+                font-family: "Roboto Mono", monospace;
+                fill: black;
+                stroke: black;
+                stroke-width: 0;
+            }
+            .svgAddressText2{
+                font-family: "Roboto Mono", monospace;
+                fill: black;
+                font-size: 12px;
+                stroke: black;
+                stroke-width: 0;
+            }
+            .svgAddressTextRed{
+                font-family: "Roboto Mono", monospace;
+                fill: #dc143c;
+                stroke: #dc143c;
+                stroke-width: 0;
+            }
+
+            .svgText2 {
+                font-family: Veranda, sans-serif;
+                fill: black;
+                font-size: smaller;
+            }
+
+            .svgTextRed {
+                font-family: Veranda, sans-serif;
+                fill: red;
+            }
+
+            #arrowheadRed00 polyline {
+                stroke: red;
+                stroke-width: 2;
+                fill: red;
+            }
+            .shadow {
+                filter: url(#f1);
+            }
+        </style>
+        <filter id="f1" x="0" y="0" width="150%" height="150%">
+            <feOffset result="offOut" in="SourceAlpha" dx="3" dy="3" />
+            <feGaussianBlur result="blurOut" in="offOut" stdDeviation="3" />
+            <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+        </filter>
+        <marker id="arrowhead001" markerWidth="8" markerHeight="14" refX="0" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+            <line x1="0.5" y1="0.5" x2="7.5" y2="7.5" stroke="black" stroke-width="1.5"/>
+            <line x1="0" y1="7" x2="6" y2="7" stroke="black" stroke-width="1"/>
+            <line x1="0.5" y1="13.5" x2="7.5" y2="6.5" stroke="black" stroke-width="1.5"/>
+        </marker>
+        <marker id="arrowhead002" markerWidth="8" markerHeight="14" refX="0" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+            <line x1="0.5" y1="0.5" x2="7.5" y2="7.5" stroke="black" stroke-width="1.5"/>
+            <line x1="0" y1="7" x2="6" y2="7" stroke="black" stroke-width="1"/>
+            <line x1="0.5" y1="13.5" x2="7.5" y2="6.5" stroke="black" stroke-width="1.5"/>
+        </marker>
+        <marker id="arrowhead003" markerWidth="8" markerHeight="14" refX="0" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+            <line x1="0.5" y1="0.5" x2="7.5" y2="7.5" stroke="black" stroke-width="1.5"/>
+            <line x1="0" y1="7" x2="6" y2="7" stroke="black" stroke-width="1"/>
+            <line x1="0.5" y1="13.5" x2="7.5" y2="6.5" stroke="black" stroke-width="1.5"/>
+        </marker>
+        <marker id="arrowhead004" markerWidth="8" markerHeight="14" refX="0" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+            <line x1="0.5" y1="0.5" x2="7.5" y2="7.5" stroke="black" stroke-width="1.5"/>
+            <line x1="0" y1="7" x2="6" y2="7" stroke="black" stroke-width="1"/>
+            <line x1="0.5" y1="13.5" x2="7.5" y2="6.5" stroke="black" stroke-width="1.5"/>
+        </marker>
+        <marker id="arrowhead005" markerWidth="8" markerHeight="14" refX="0" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+            <line x1="0.5" y1="0.5" x2="7.5" y2="7.5" stroke="black" stroke-width="1.5"/>
+            <line x1="0" y1="7" x2="6" y2="7" stroke="black" stroke-width="1"/>
+            <line x1="0.5" y1="13.5" x2="7.5" y2="6.5" stroke="black" stroke-width="1.5"/>
+        </marker>
+        <marker id="arrowheadRed00" markerWidth="8" markerHeight="14" refX="0" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+            <line x1="0.5" y1="0.5" x2="7.5" y2="7.5" stroke="#dc143c" stroke-width="1.5"/>
+            <line x1="0" y1="7" x2="6" y2="7" stroke="#dc143c" stroke-width="1"/>
+            <line x1="0.5" y1="13.5" x2="7.5" y2="6.5" stroke="#dc143c" stroke-width="1.5"/>
+        </marker>
+    </defs>
+    <!-- Node 1 -->
+    <line class="arrow001" x1="42" y1="33" x2="60" y2="33" stroke="black" stroke-width="1" fill="none" marker-end="url(#arrowhead001)"></line>
+    <text x="1" y="37" class="svgDataText text1">Head</text>
+    <path d="M 70 25
+              L 120 25
+              L 120 53 
+              L 70 53 Z"
+          stroke="black" stroke-width="1" fill="#E0E0E0" class="valNode1">
+    </path>
+    <line x1="70" y1="40" x2="120" y2="40" stroke="black" stroke-width="1"></line>
+    <rect x="75" y="38" width="40" height="4" fill="#E0E0E0" stroke-width="0" class="rectNode1"></rect>
+    <text x="90" y="45" class="svgDataText val1">7</text>
+    <path d="M 70 53 
+              L 120 53 
+              L 120 81 
+              L 70 81 Z"
+          stroke="black" stroke-width="1" fill="#FCFC62">
+    </path>
+    <line x1="70" y1="68" x2="120" y2="68" stroke="black" stroke-width="1"></line>
+    <line x1="75" y1="68" x2="115" y2="68" stroke="#FCFC62" stroke-width="3"></line>
+    <text x="80" y="72" class="svgAddressText2 text2">next</text>
+    
+    <path class="arrow002" d="M120,68 C150,68 120,33 150,33" stroke="black" stroke-width="1" fill="none"
+          marker-end="url(#arrowhead002)"></path>
+    <path d="M 70 25
+              L 120 25
+              L 120 81 
+              L 70 81 Z"
+          stroke="black" stroke-width="0" fill="none" class="path1">
+    </path>
+    <!-- Node 2 -->
+    <path d="M 160 25
+              L 210 25
+              L 210 53 
+              L 160 53 Z"
+          stroke="black" stroke-width="1" fill="#E0E0E0" class="valNode2">
+    </path>
+    <line x1="160" y1="40" x2="210" y2="40" stroke="black" stroke-width="1"></line>
+    <line x1="165" y1="40" x2="205" y2="40" stroke="#E0E0E0" stroke-width="3"></line>
+    <text x="175" y="45" class="svgDataText val2">11</text>
+    <path d="M 160 53 
+              L 210 53 
+              L 210 82 
+              L 160 82 Z"
+          stroke="black" stroke-width="1" fill="#FCFC62">
+    </path>
+    <line x1="160" y1="68" x2="210" y2="68" stroke="black" stroke-width="1"></line>
+    <line x1="165" y1="68" x2="205" y2="68" stroke="#FCFC62" stroke-width="3"></line>
+    <text x="170" y="72" class="svgAddressText2 text3">next</text>
+    <path class="arrow003" d="M210,68 C240,68 210,33 240,33" stroke="black" stroke-width="1" fill="none"
+          marker-end="url(#arrowhead003)"></path>
+    <path d="M 160 25
+              L 210 25
+              L 210 82 
+              L 160 82 Z"
+          stroke="black" stroke-width="0" fill="none" class="path2">
+    </path>
+    <!-- Node 3 -->
+    <path d="M 250 25 
+              L 300 25 
+              L 300 53 
+              L 250 53 Z"
+          stroke="black" stroke-width="1" fill="#E0E0E0" class="valNode3">
+    </path>
+    <line x1="250" y1="40" x2="300" y2="40" stroke="black" stroke-width="1"></line>
+    <rect x="255" y="38" width="40" height="4" fill="#E0E0E0" stroke-width="0" class="rectNode3"></rect>
+    <text x="270" y="45" class="svgDataText val3">3</text>
+    <path d="M 250 53 
+              L 300 53 
+              L 300 82 
+              L 250 82 Z"
+          stroke="black" stroke-width="1" fill="#FCFC62">
+    </path>
+    <line x1="250" y1="68" x2="300" y2="68" stroke="black" stroke-width="1"></line>
+    <line x1="255" y1="68" x2="295" y2="68" stroke="#FCFC62" stroke-width="3"></line>
+    <text x="260" y="72" class="svgAddressText2 text4">next</text>
+    
+    <path d="M 250 25 
+              L 300 25 
+              L 300 82 
+              L 250 82 Z"
+          stroke="black" stroke-width="0" fill="none" class="path3">
+    </path>
+  <!-- Node 4 -->
+<g class="deletedNode">
+<path d="M 340 25
+          L 390 25
+          L 390 53 
+          L 340 53 Z"
+    stroke="black" stroke-width="1" fill="#E0E0E0" class="valNode4"></path>
+<line x1="340" y1="40" x2="390" y2="40" stroke="black" stroke-width="1"></line>
+<rect x="345" y="38" width="40" height="4" fill="#E0E0E0" stroke-width="0" class="rectNode4"></rect>
+<text x="360" y="45" class="svgDataText val4">2</text>
+<path d="M 340 53 
+          L 390 53 
+          L 390 82 
+          L 340 82 Z"
+    stroke="black" stroke-width="1" fill="#FCFC62"></path>
+<line x1="340" y1="68" x2="390" y2="68" stroke="black" stroke-width="1"></line>
+<line x1="345" y1="68" x2="385" y2="68" stroke="#FCFC62" stroke-width="3"></line>
+<text x="350" y="72" class="svgAddressText2 text5">next</text>
+<path class="arrow005" d="M390,68 C420,68 390,33 420,33" stroke="black" stroke-width="1" fill="none"
+          marker-end="url(#arrowhead005)"></path>
+<path d="M 340 25
+          L 390 25
+          L 390 82 
+          L 340 82 Z"
+    stroke="#dc143c" stroke-width="2" fill="none" class="path4"></path>
+</g>
+<path class="arrow004" d="M300,68 C330,68 300,33 330,33" stroke="black" stroke-width="1" fill="none"
+      marker-end="url(#arrowhead004)"></path>
+    <!-- Node 5 -->
+<path d="M 430 25
+          L 480 25
+          L 480 53 
+          L 430 53 Z"
+    stroke="black" stroke-width="1" fill="#E0E0E0" class="valNode5"></path>
+<line x1="430" y1="40" x2="480" y2="40" stroke="black" stroke-width="1"></line>
+<line x1="435" y1="40" x2="475" y2="40" stroke="#E0E0E0" stroke-width="3"></line>
+<text x="450" y="45" class="svgDataText val5">9</text>
+<path d="M 430 53 
+          L 480 53 
+          L 480 82 
+          L 430 82 Z"
+    stroke="black" stroke-width="1" fill="#FCFC62"></path>
+<line x1="430" y1="68" x2="480" y2="68" stroke="black" stroke-width="1"></line>
+<line x1="435" y1="68" x2="475" y2="68" stroke="#FCFC62" stroke-width="3"></line>
+<text x="440" y="72" class="svgAddressText2 text6">next</text>
+<line class="arrow006" x1="482" y1="68" x2="505" y2="68" stroke="#dc143c" stroke-width="1" fill="none" stroke-dasharray="5,5" marker-end="url(#arrowheadRed00)"></line>
+<text x="520" y="72" class="svgAddressTextRed text7">null</text>
+<path d="M 430 25
+          L 480 25
+          L 480 82 
+          L 430 82 Z"
+    stroke="black" stroke-width="0" fill="none" class="path5"></path>
+
+</svg>
+<div class="btnDiv">
+  <button id="btnDeleteLowest" class="w3-btn">删除</button><span id="spanDeleteFinished" style="margin-left: 10px;"></span>
+</div>
+
+<script src="../../cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+let btnDeleteLowest = document.getElementById('btnDeleteLowest');
+let spanDeleteFinished = document.getElementById('spanDeleteFinished');
+
+let animDelay3 = 800;
+
+btnDeleteLowest.addEventListener("click", function() {
+  if(btnDeleteLowest.innerHTML === "删除"){
+    btnDeleteLowest.disabled = true;
+    btnDeleteLowest.innerHTML = "删除中...";
+    // Animation to traverse the list
+    let traverseTimeline = anime.timeline({
+      loop: false,
+      easing: 'easeInOutBack',
+      // spanEl: #spanLowest
+      duration: animDelay3,
+      complete: function(){
+        btnDeleteLowest.disabled = false;
+        btnDeleteLowest.innerHTML = '再试一次';
+        spanDeleteFinished.innerHTML = '已完成！';
+        anime({
+          // targets: '#svgDeleteLowest'
+        });
+      }
+    });
+
+    traverseTimeline
+      .add({
+        targets: '#svgDeleteLowest .text1',
+        strokeWidth: [
+          { value: 1 },
+          { value: 0 }
+        ]
+      })
+      .add({
+        targets: '#svgDeleteLowest .arrow001, #arrowhead001 line',
+        strokeWidth: [
+          { value: 3 },
+          { value: 1 }
+        ]
+      }, '-=800')
+      .add({
+        targets: '#svgDeleteLowest .path1',
+        strokeWidth: [
+          { value: 4 },
+          { value: 0 }
+        ]
+      }, '-=400')
+      .add({
+        targets: '#svgDeleteLowest .text2',
+        strokeWidth: [
+          { value: 1 },
+          { value: 0 }
+        ]
+      }, '-=300')
+      .add({
+        targets: '#svgDeleteLowest .arrow002, #arrowhead002 line',
+        strokeWidth: [
+          { value: 3 },
+          { value: 1 }
+        ]
+      }, '-=800')
+      .add({
+        targets: '#svgDeleteLowest .path2',
+        strokeWidth: [
+          { value: 4 },
+          { value: 0 }
+        ]
+      }, '-=400')
+      .add({
+        targets: '#svgDeleteLowest .text3',
+        strokeWidth: [
+          { value: 1 },
+          { value: 0 }
+        ]
+      }, '-=300')
+      .add({
+        targets: '#svgDeleteLowest .arrow003, #arrowhead003 line',
+        strokeWidth: [
+          { value: 3 },
+          { value: 1 }
+        ]
+      }, '-=800')
+      .add({
+        targets: '#svgDeleteLowest .path3',
+        strokeWidth: [
+          { value: 4 },
+          { value: 0 }
+        ]
+      }, '-=400')
+      .add({
+        targets: '#svgDeleteLowest .text4',
+        strokeWidth: 1,
+        duration: 400
+      }, '-=300')
+      .add({
+        targets: '#svgDeleteLowest .arrow004, #arrowhead004 line',
+        strokeWidth: 3,
+        duration: 400
+      }, '-=400')
+      .add({
+        targets: '#svgDeleteLowest .path4',
+        strokeWidth: [
+          { value: 4 },
+          { value: 3 }
+        ]
+      }, '-=400')
+      .add({
+        targets: '#svgDeleteLowest .text5',
+        strokeWidth: [
+          { value: 1 },
+          { value: 0 }
+        ]
+      }, '-=300')
+      .add({
+        targets: '#svgDeleteLowest .arrow005, #arrowhead005 line',
+        strokeWidth: [
+          { value: 3 },
+          { value: 1 }
+        ]
+      }, '-=800')
+      .add({
+        targets: '#svgDeleteLowest .path5',
+        strokeWidth: [
+          { value: 4 },
+          { value: 3 }
+        ]
+      }, '-=400')
+      .add({
+        targets: '#svgDeleteLowest .arrow004, #arrowhead004 line',
+        strokeWidth: 2
+      })
+      .add({
+        targets: '#svgDeleteLowest .deletedNode',
+        opacity: 0.8,
+        duration: 50
+      }, '-=400')
+      .add({
+        targets: '#svgDeleteLowest .arrow004',
+        d: 'M300,68 C350,68 370,33 420,33',
+        easing: 'linear'
+      }, '-=400')
+      .add({
+        targets: '#svgDeleteLowest .deletedNode',
+        opacity: 0
+      }, '-=0');
+
+      traverseTimeline.play();
+  }
+  else {
+    btnDeleteLowest.innerHTML = 'Delete';
+    spanDeleteFinished.innerHTML = '';
+    anime({
+      targets: '#svgDeleteLowest .valNode4, #svgDeleteLowest .rectNode4',
+      fill: '#e0e0e0',
+      duration: 200,
+      easing: 'linear'
+    });
+    anime({
+      targets: '#svgDeleteLowest .path5',
+      strokeWidth: 0,
+      duration: 100
+    });
+    anime({
+      targets: '#svgDeleteLowest .text4',
+      strokeWidth: 0,
+      duration: 100
+    });
+    anime({
+      targets: '#svgDeleteLowest .path4',
+      strokeWidth: 2,
+      duration: 200,
+      easing: 'linear'
+    });
+    anime({
+      targets: '#svgDeleteLowest .arrow004',
+      d: 'M300,68 C330,68 300,33 330,33',
+      duration: 200,
+      easing: 'linear'
+    });
+    anime({
+      targets: '#svgDeleteLowest .arrow004, #arrowhead004 line',
+      strokeWidth: 1,
+      duration: 200
+    });
+    anime({
+      targets: '#svgDeleteLowest .deletedNode',
+      opacity: 1,
+      duration: 200,
+      delay: 200
+    });
+  }
+  
+  });
+</script>
+</div>
+
+<p>在下面的代码中，删除节点的算法被移入了一个名为 deleteSpecificNode 的函数中。</p>
+
+<h3>实例</h3>
+
+<p>在 Python 中删除单链表中的特定节点：</p>
+
+<pre class="language-python">
+class Node:
+  def __init__(self, data):
+    self.data = data
+    self.next = None
+
+def traverseAndPrint(head):
+  currentNode = head
+  while currentNode:
+    print(currentNode.data, end=&quot; -> &quot;)
+    currentNode = currentNode.next
+  print(&quot;null&quot;)
+
+def deleteSpecificNode(head, nodeToDelete):
+  if head == nodeToDelete:
+    return head.next
+
+  currentNode = head
+  while currentNode.next and currentNode.next != nodeToDelete:
+    currentNode = currentNode.next
+
+  if currentNode.next is None:
+    return head
+
+  currentNode.next = currentNode.next.next
+
+  return head
+
+node1 = Node(7)
+node2 = Node(11)
+node3 = Node(3)
+node4 = Node(2)
+node5 = Node(9)
+
+node1.next = node2
+node2.next = node3
+node3.next = node4
+node4.next = node5
+
+print(&quot;Before deletion:&quot;)
+traverseAndPrint(node1)
+
+# 删除 node4
+node1 = deleteSpecificNode(node1, node4)
+
+print(&quot;\nAfter deletion:&quot;)
+traverseAndPrint(node1)
+</pre>
+
+<p class="tiy"><a target="_blank" href="ta530.html?f=python_dsa_linkedlists_delete">亲自试一试</a></p>
+
+<p>在上面的 <code>deleteSpecificNode</code> 函数中，返回值是链表的新头节点。例如，如果要删除的节点是第一个节点，则返回的新头节点将是下一个节点。</p>
+</section>
+
+
+
+<section>
+<h2>在链表中插入节点</h2>
+
+<p>在链表中插入节点与删除节点非常相似，因为在两种情况下，我们都需要处理下一个指针，以确保不破坏链表。</p>
+
+<p>要在链表中插入节点，我们首先需要创建节点，然后在插入的位置，我们需要调整指针，使前一个节点指向新节点，新节点指向正确的下一个节点。</p>
+
+<p>下面的模拟演示了插入新节点时链接是如何调整的。</p>
+
+<div id="divAnim2">
+<svg id="svgInsert" class="dsa_svg" viewBox="0 0 570 100" xmlns="http://www.w3.org/2000/svg">
+<defs>
+        <style>
+            .svgText {
+                font-family: Veranda, sans-serif;
+                fill: black;
+            }
+            .svgDataText{
+                font-family: "Roboto Mono", monospace;
+                fill: black;
+                stroke: black;
+                stroke-width: 0;
+            }
+            .svgAddressText2{
+                font-family: "Roboto Mono", monospace;
+                fill: black;
+                font-size: 12px;
+                stroke: black;
+                stroke-width: 0;
+            }
+            .svgAddressTextRed{
+                font-family: "Roboto Mono", monospace;
+                fill: #dc143c;
+                stroke: #dc143c;
+                stroke-width: 0;
+            }
+
+            .svgText2 {
+                font-family: Veranda, sans-serif;
+                fill: black;
+                font-size: smaller;
+            }
+
+            .svgTextRed {
+                font-family: Veranda, sans-serif;
+                fill: red;
+            }
+
+            #arrowheadRed000 polyline {
+                stroke: red;
+                stroke-width: 2;
+                fill: red;
+            }
+            .shadow {
+                filter: url(#f1);
+            }
+            .insertedNode {
+              opacity: 0;
+            }
+            .topNodes {
+              translate: -90px 0;
+            }
+        </style>
+        <filter id="f1" x="0" y="0" width="150%" height="150%">
+            <feOffset result="offOut" in="SourceAlpha" dx="3" dy="3" />
+            <feGaussianBlur result="blurOut" in="offOut" stdDeviation="3" />
+            <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+        </filter>
+        <marker id="arrowhead0001" markerWidth="8" markerHeight="14" refX="0" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+            <line x1="0.5" y1="0.5" x2="7.5" y2="7.5" stroke="black" stroke-width="1.5"/>
+            <line x1="0" y1="7" x2="6" y2="7" stroke="black" stroke-width="1"/>
+            <line x1="0.5" y1="13.5" x2="7.5" y2="6.5" stroke="black" stroke-width="1.5"/>
+        </marker>
+        <marker id="arrowhead0002" markerWidth="8" markerHeight="14" refX="0" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+            <line x1="0.5" y1="0.5" x2="7.5" y2="7.5" stroke="black" stroke-width="1.5"/>
+            <line x1="0" y1="7" x2="6" y2="7" stroke="black" stroke-width="1"/>
+            <line x1="0.5" y1="13.5" x2="7.5" y2="6.5" stroke="black" stroke-width="1.5"/>
+        </marker>
+        <marker id="arrowhead0003" markerWidth="8" markerHeight="14" refX="0" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+            <line x1="0.5" y1="0.5" x2="7.5" y2="7.5" stroke="black" stroke-width="1.5"/>
+            <line x1="0" y1="7" x2="6" y2="7" stroke="black" stroke-width="1"/>
+            <line x1="0.5" y1="13.5" x2="7.5" y2="6.5" stroke="black" stroke-width="1.5"/>
+        </marker>
+        <marker id="arrowhead0004" markerWidth="8" markerHeight="14" refX="0" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+            <line x1="0.5" y1="0.5" x2="7.5" y2="7.5" stroke="black" stroke-width="1.5"/>
+            <line x1="0" y1="7" x2="6" y2="7" stroke="black" stroke-width="1"/>
+            <line x1="0.5" y1="13.5" x2="7.5" y2="6.5" stroke="black" stroke-width="1.5"/>
+        </marker>
+        <marker id="arrowhead0005" markerWidth="8" markerHeight="14" refX="0" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+            <line x1="0.5" y1="0.5" x2="7.5" y2="7.5" stroke="black" stroke-width="1.5"/>
+            <line x1="0" y1="7" x2="6" y2="7" stroke="black" stroke-width="1"/>
+            <line x1="0.5" y1="13.5" x2="7.5" y2="6.5" stroke="black" stroke-width="1.5"/>
+        </marker>
+        <marker id="arrowheadRed000" markerWidth="8" markerHeight="14" refX="0" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+            <line x1="0.5" y1="0.5" x2="7.5" y2="7.5" stroke="#dc143c" stroke-width="1.5"/>
+            <line x1="0" y1="7" x2="6" y2="7" stroke="#dc143c" stroke-width="1"/>
+            <line x1="0.5" y1="13.5" x2="7.5" y2="6.5" stroke="#dc143c" stroke-width="1.5"/>
+        </marker>
+    </defs>
+    <!-- Node 1 -->
+    <line class="arrow0001" x1="42" y1="33" x2="60" y2="33" stroke="black" stroke-width="1" fill="none" marker-end="url(#arrowhead0001)"></line>
+    <text x="1" y="37" class="svgDataText text1">Head</text>
+    <path d="M 70 25
+              L 120 25
+              L 120 53 
+              L 70 53 Z"
+          stroke="black" stroke-width="1" fill="#E0E0E0" class="valNode1">
+    </path>
+    <line x1="70" y1="40" x2="120" y2="40" stroke="black" stroke-width="1"></line>
+    <rect x="75" y="38" width="40" height="4" fill="#E0E0E0" stroke-width="0" class="rectNode1"></rect>
+    <text x="90" y="45" class="svgDataText val1">7</text>
+    <path d="M 70 53 
+              L 120 53 
+              L 120 81 
+              L 70 81 Z"
+          stroke="black" stroke-width="1" fill="#FCFC62">
+    </path>
+    <line x1="70" y1="68" x2="120" y2="68" stroke="black" stroke-width="1"></line>
+    <line x1="75" y1="68" x2="115" y2="68" stroke="#FCFC62" stroke-width="3"></line>
+    <text x="80" y="72" class="svgAddressText2 text2">next</text>
+    <path d="M 70 25
+              L 120 25
+              L 120 81 
+              L 70 81 Z"
+          stroke="black" stroke-width="0" fill="none" class="path1">
+    </path>
+    <!-- Node 2 -->
+    <g class="insertedNode">
+    <path d="M 160 25
+              L 210 25
+              L 210 53 
+              L 160 53 Z"
+          stroke="black" stroke-width="1" fill="#E0E0E0" class="valNode2">
+    </path>
+    <line x1="160" y1="40" x2="210" y2="40" stroke="black" stroke-width="1"></line>
+    <line x1="165" y1="40" x2="205" y2="40" stroke="#E0E0E0" stroke-width="3"></line>
+    <text x="175" y="45" class="svgDataText val2">97</text>
+    <path d="M 160 53 
+              L 210 53 
+              L 210 82 
+              L 160 82 Z"
+          stroke="black" stroke-width="1" fill="#FCFC62">
+    </path>
+    <line x1="160" y1="68" x2="210" y2="68" stroke="black" stroke-width="1"></line>
+    <line x1="165" y1="68" x2="205" y2="68" stroke="#FCFC62" stroke-width="3"></line>
+    <text x="170" y="72" class="svgAddressText2 text3">next</text>
+    <path class="arrow0003" d="M210,68 C240,68 210,33 240,33" stroke="black" stroke-width="1" fill="none"
+          marker-end="url(#arrowhead0003)"></path>
+    <path d="M 160 25
+              L 210 25
+              L 210 82 
+              L 160 82 Z"
+          stroke="black" stroke-width="0" fill="none" class="path2">
+    </path>
+    </g>
+    <path class="arrow0002" d="M120,68 C150,68 120,33 150,33" stroke="black" stroke-width="1" fill="none"
+          marker-end="url(#arrowhead0002)"></path>
+    <!-- Node 3 -->
+    <g class="topNodes">
+    <path d="M 250 25 
+              L 300 25 
+              L 300 53 
+              L 250 53 Z"
+          stroke="black" stroke-width="1" fill="#E0E0E0" class="valNode3">
+    </path>
+    <line x1="250" y1="40" x2="300" y2="40" stroke="black" stroke-width="1"></line>
+    <rect x="255" y="38" width="40" height="4" fill="#E0E0E0" stroke-width="0" class="rectNode3"></rect>
+    <text x="270" y="45" class="svgDataText val3">3</text>
+    <path d="M 250 53 
+              L 300 53 
+              L 300 82 
+              L 250 82 Z"
+          stroke="black" stroke-width="1" fill="#FCFC62">
+    </path>
+    <line x1="250" y1="68" x2="300" y2="68" stroke="black" stroke-width="1"></line>
+    <line x1="255" y1="68" x2="295" y2="68" stroke="#FCFC62" stroke-width="3"></line>
+    <text x="260" y="72" class="svgAddressText2 text4">next</text>
+    
+    <path d="M 250 25 
+              L 300 25 
+              L 300 82 
+              L 250 82 Z"
+          stroke="black" stroke-width="0" fill="none" class="path3">
+    </path>
+  <!-- Node 4 -->
+<path d="M 340 25
+          L 390 25
+          L 390 53 
+          L 340 53 Z"
+    stroke="black" stroke-width="1" fill="#E0E0E0" class="valNode4"></path>
+<line x1="340" y1="40" x2="390" y2="40" stroke="black" stroke-width="1"></line>
+<rect x="345" y="38" width="40" height="4" fill="#E0E0E0" stroke-width="0" class="rectNode4"></rect>
+<text x="360" y="45" class="svgDataText val4">2</text>
+<path d="M 340 53 
+          L 390 53 
+          L 390 82 
+          L 340 82 Z"
+    stroke="black" stroke-width="1" fill="#FCFC62"></path>
+<line x1="340" y1="68" x2="390" y2="68" stroke="black" stroke-width="1"></line>
+<line x1="345" y1="68" x2="385" y2="68" stroke="#FCFC62" stroke-width="3"></line>
+<text x="350" y="72" class="svgAddressText2 text5">next</text>
+<path class="arrow0005" d="M390,68 C420,68 390,33 420,33" stroke="black" stroke-width="1" fill="none"
+          marker-end="url(#arrowhead0005)"></path>
+<path d="M 340 25
+          L 390 25
+          L 390 82 
+          L 340 82 Z"
+    stroke="#dc143c" stroke-width="0" fill="none" class="path4"></path>
+<path class="arrow0004" d="M300,68 C330,68 300,33 330,33" stroke="black" stroke-width="1" fill="none"
+      marker-end="url(#arrowhead0004)"></path>
+    <!-- Node 5 -->
+<path d="M 430 25
+          L 480 25
+          L 480 53 
+          L 430 53 Z"
+    stroke="black" stroke-width="1" fill="#E0E0E0" class="valNode5"></path>
+<line x1="430" y1="40" x2="480" y2="40" stroke="black" stroke-width="1"></line>
+<line x1="435" y1="40" x2="475" y2="40" stroke="#E0E0E0" stroke-width="3"></line>
+<text x="450" y="45" class="svgDataText val5">9</text>
+<path d="M 430 53 
+          L 480 53 
+          L 480 82 
+          L 430 82 Z"
+    stroke="black" stroke-width="1" fill="#FCFC62"></path>
+<line x1="430" y1="68" x2="480" y2="68" stroke="black" stroke-width="1"></line>
+<line x1="435" y1="68" x2="475" y2="68" stroke="#FCFC62" stroke-width="3"></line>
+<text x="440" y="72" class="svgAddressText2 text6">next</text>
+<line class="arrow0006" x1="482" y1="68" x2="505" y2="68" stroke="#dc143c" stroke-width="1" fill="none" stroke-dasharray="5,5" marker-end="url(#arrowheadRed000)"></line>
+<text x="520" y="72" class="svgAddressTextRed text7">null</text>
+<path d="M 430 25
+          L 480 25
+          L 480 82 
+          L 430 82 Z"
+    stroke="black" stroke-width="0" fill="none" class="path5"></path>
+    </g>
+</svg>
+<div class="btnDiv">
+  <button id="btnInsert" class="w3-btn">插入</button><span id="spanInsertFinished" style="margin-left: 10px;"></span>
+</div>
+<script src="../../cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+let btnInsert = document.getElementById('btnInsert');
+let spanInsertFinished = document.getElementById('spanInsertFinished');
+
+let animDelay4 = 800;
+
+btnInsert.addEventListener("click", function() {
+  if(btnInsert.innerHTML === "插入"){
+    btnInsert.disabled = true;
+    btnInsert.innerHTML = "插入中...";
+    // Animation to traverse the list
+    let traverseTimeline = anime.timeline({
+      loop: false,
+      easing: 'easeInOutCubic',
+      // spanEl: #spanLowest
+      duration: animDelay4,
+      complete: function(){
+        btnInsert.disabled = false;
+        btnInsert.innerHTML = '再试一次';
+        spanDeleteFinished.innerHTML = '已完成！';
+        anime({
+          // targets: '#svgDeleteLowest'
+        });
+      }
+    });
+
+    traverseTimeline
+      .add({
+        targets: '#svgInsert .topNodes',
+        translate: '0px 0',
+        easing: 'easeInOutCubic'
+      })
+      .add({
+        targets: '#svgInsert .arrow0002',
+        d: [
+          { value: 'M120,68 C150,68 210,33 240,33' }
+        ]
+      }, '-=800')
+      .add({
+        targets: '#svgInsert .insertedNode',
+        opacity: 0.5,
+        easing: 'easeInOutCubic'
+      })
+      .add({
+        targets: '#svgInsert .text2',
+        strokeWidth: 1
+      })
+      .add({
+        targets: '#svgInsert .arrow0002, #arrowhead0002 line',
+        strokeWidth: 2
+      }, '-=800')
+      .add({
+        targets: '#svgInsert .arrow0002',
+        d: [
+          { value: 'M120,68 C150,68 120,33 150,33' }
+        ],
+        easing: 'easeOutBack'
+      })
+      .add({
+        targets: '#svgInsert .path2',
+        strokeWidth: [
+          { value: 4 },
+          { value: 3 }
+        ]
+      }, '-=0')
+      .add({
+        targets: '#svgInsert .insertedNode',
+        opacity: 1,
+        easing: 'easeInOutCubic'
+      }, '-=800')
+      .add({
+        targets: '#svgInsert .text3',
+        strokeWidth: 1
+      }, '-=0')
+      .add({
+        targets: '#svgInsert .arrow0003, #arrowhead0003 line',
+        strokeWidth: [
+          { value: 3 },
+          { value: 2 }
+        ]
+      }, '-=400');
+
+      traverseTimeline.play();
+  }
+  else {
+    btnInsert.innerHTML = 'Insert';
+    spanInsertFinished.innerHTML = '';
+    anime({
+      targets: '#svgInsert .arrow0002, #arrowhead0002 line, #svgInsert .arrow0003, #arrowhead0003 line, #svgInsert .path2',
+      strokeWidth: 1,
+      duration: 200,
+      easing: 'linear'
+    });
+    anime({
+      targets: '#svgInsert .text2, #svgInsert .text3',
+      strokeWidth: 0,
+      duration: 200
+    });
+    anime({
+      targets: '#svgInsert .path2',
+      strokeWidth: 1,
+      duration: 200
+    });
+    anime({
+      targets: '#svgInsert .insertedNode',
+      opacity: 0,
+      duration: 200
+    });
+    anime({
+      targets: '#svgInsert .topNodes',
+      translate: '-90px 0',
+      easing: 'linear',
+      duration: 200
+    });
+  }
+  
+  });
+</script>
+</div>
+
+<ol>
+<li>新节点被创建</li>
+<li>节点 1 链接到新节点</li>
+<li>新节点链接到下一个节点</li>
+</ol>
+
+<h3>实例</h3>
+
+<p>Python 中的单向链表节点插入：</p>
+
+<pre class="language-python">
+class Node:
+  def __init__(self, data):
+    self.data = data
+    self.next = None
+
+def traverseAndPrint(head):
+  currentNode = head
+  while currentNode:
+    print(currentNode.data, end=&quot; -> &quot;)
+    currentNode = currentNode.next
+  print(&quot;null&quot;)
+
+def insertNodeAtPosition(head, newNode, position):
+  if position == 1:
+    newNode.next = head
+    return newNode
+
+  currentNode = head
+  for _ in range(position - 2):
+    if currentNode is None:
+      break
+    currentNode = currentNode.next
+
+  newNode.next = currentNode.next
+  currentNode.next = newNode
+  return head
+
+node1 = Node(7)
+node2 = Node(3)
+node3 = Node(2)
+node4 = Node(9)
+
+node1.next = node2
+node2.next = node3
+node3.next = node4
+
+print(&quot;Original list:&quot;)
+traverseAndPrint(node1)
+
+# 在位置 2 插入一个值为 97 的新节点
+newNode = Node(97)
+node1 = insertNodeAtPosition(node1, newNode, 2)
+
+print(&quot;\nAfter insertion:&quot;)
+traverseAndPrint(node1)
+</pre>
+
+<p class="tiy"><a target="_blank" href="ta311.html?f=python_dsa_linkedlists_insert">亲自试一试</a></p>
+
+<p>在上面的 <code>insertNodeAtPosition</code> 函数中，返回值是链表的新头节点。例如，如果节点被插入到链表的开头，则返回的新头节点将是新节点。</p>
+</section>
+
+
+
+<section>
+<h2>链表操作的时间复杂度</h2>
+
+<p>下面我们讨论链表操作的时间复杂度，并将其与本教程前面讨论过的数组算法的时间复杂度进行比较。</p>
+
+<p>请记住，时间复杂度只是根据大量数据 <mark>(n)</mark> 来说明算法所需的大致操作次数，并不告诉我们算法特定实现所需的确切时间。</p>
+
+<p>这意味着，即使线性搜索对于数组和链表的时间复杂度相同：<mark>O(n)</mark>，也并不意味着它们所需的时间相同。算法运行的确切时间取决于编程语言、计算机硬件、数组和链表操作所需时间的差异以及其他许多因素。</p>
+
+<p>链表的线性搜索与数组的线性搜索工作方式相同。从头节点开始遍历未排序的列表，直到找到具有特定值的节点。时间复杂度为 <mark>O(n)</mark>。</p>
+
+<p>链表无法进行二分搜索，因为该算法基于直接跳转到不同的数组元素，这在链表中是不可能的。</p>
+
+<p>排序算法的时间复杂度与数组相同，这些在本教程前面已经解释过。但请记住，基于直接通过索引访问数组元素的排序算法不适用于链表。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="python_dsa_queues.html" title="Python 中的队列">队列</a></li>
+<li class="next"><a href="python_dsa_hashtables.html" title="Python 中的哈希表">哈希表</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="python_reference.html">Python 参考手册</a></h5>
+<h5 id="tools_example"><a href="python_examples.html">Python 实例</a></h5>
+<h5 id="tools_quiz"><a href="python_quiz.html">Python 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/python/python_dsa_linkedlists.asp by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Mar 2026 14:34:07 GMT -->
+</html>

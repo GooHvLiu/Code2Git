@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/java/ref_math_floor.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:32:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Java Math floor() 方法</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Java 教程</h2>
+<ul>
+<li><a href="index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="java_intro.html" title="Java 简介">Java 简介</a></li>
+<li><a href="java_getstarted.html" title="Java 入门">Java 入门</a></li>
+<li><a href="java_syntax.html" title="Java 语法">Java 语法</a></li>
+<li><a href="java_output.html" title="Java 输出 / 打印">Java 输出</a></li>
+<li><a href="java_comments.html" title="Java 注释">Java 注释</a></li>
+<li><a href="java_variables.html" title="Java 变量">Java 变量</a></li>
+<li><a href="java_data_types.html" title="Java 数据类型">Java 数据类型</a></li>
+<li><a href="java_type_casting.html" title="Java 类型转换">Java 类型转换</a></li>
+<li><a href="java_operators.html" title="Java 运算符">Java 运算符</a></li>
+<li><a href="java_strings.html" title="Java 字符串">Java 字符串</a></li>
+<li><a href="java_math.html" title="Java 数学">Java 数学</a></li>
+<li><a href="java_booleans.html" title="Java 布尔">Java 布尔</a></li>
+<li><a href="java_conditions.html" title="Java If...Else">Java If...Else</a></li>
+<li><a href="java_switch.html" title="Java Switch">Java Switch</a></li>
+<li><a href="java_while_loop.html" title="Java While 循环">Java While 循环</a></li>
+<li><a href="java_for_loop.html" title="Java For 循环">Java For 循环</a></li>
+<li><a href="java_break.html" title="Java Break 和 Continue">Java Break/Continue</a></li>
+<li><a href="java_arrays.html" title="Java 数组">Java 数组</a></li>
+</ul>
+<h2>Java 方法</h2>
+<ul>
+<li><a href="java_methods.html" title="Java 方法">Java 方法</a></li>
+<li><a href="java_methods_param.html" title="Java 方法参数">Java 方法参数</a></li>
+<li><a href="java_methods_overloading.html" title="Java 方法重载">Java 方法重载</a></li>
+<li><a href="java_scope.html" title="Java 作用域">Java 作用域</a></li>
+<li><a href="java_recursion.html" title="Java 递归">Java 递归</a></li>
+</ul>
+<h2>Java 类</h2>
+<ul>
+<li><a href="java_oop.html" title="Java OOP">Java OOP</a></li>
+<li><a href="java_classes.html" title="Java 类/对象">Java 类/对象</a></li>
+<li><a href="java_class_attributes.html" title="Java 类属性">Java 类属性</a></li>
+<li><a href="java_class_methods.html" title="Java 类方法">Java 类方法</a></li>
+<li><a href="java_constructors.html" title="Java 构造函数">Java 构造函数</a></li>
+<li><a href="java_modifiers.html" title="Java 修饰符">Java 修饰符</a></li>
+<li><a href="java_encapsulation.html" title="Java 封装">Java 封装</a></li>
+<li><a href="java_packages.html" title="Java 包">Java 包 / API</a></li>
+<li><a href="java_inheritance.html" title="Java 继承">Java 继承</a></li>
+<li><a href="java_polymorphism.html" title="Java 多态">Java 多态</a></li>
+<li><a href="java_inner_classes.html" title="Java 内部类">Java 内部类</a></li>
+<li><a href="java_abstract.html" title="Java 抽象">Java 抽象</a></li>
+<li><a href="java_interface.html" title="Java 接口">Java 接口</a></li>
+<li><a href="java_enums.html" title="Java 枚举">Java 枚举</a></li>
+<li><a href="java_user_input.html" title="Java 用户输入">Java 用户输入</a></li>
+<li><a href="java_date.html" title="Java 日期">Java 日期</a></li>
+</ul>
+<h2>Java 数据结构</h2>
+<ul>
+<li><a href="java_arraylist.html" title="Java ArrayList">Java ArrayList</a></li>
+<li><a href="java_linkedlist.html" title="Java LinkedList">Java LinkedList</a></li>
+<li><a href="java_sort_list.html" title="Java 列表排序">Java 列表排序</a></li>
+<li><a href="java_hashmap.html" title="Java HashMap">Java HashMap</a></li>
+<li><a href="java_hashset.html" title="Java HashSet">Java HashSet</a></li>
+<li><a href="java_iterator.html" title="Java 迭代器">Java 迭代器</a></li>
+<li><a href="java_wrapper_classes.html" title="Java 包装类">Java 包装类</a></li>
+</ul>
+<h2>Java 高级</h2>
+<ul>
+<li><a href="java_try_catch.html" title="Java 异常">Java 异常</a></li>
+<li><a href="java_regex.html" title="Java RegEx">Java RegEx</a></li>
+<li><a href="java_threads.html" title="Java 线程">Java 线程</a></li>
+<li><a href="java_lambda.html" title="Java Lambda">Java Lambda</a></li>
+<li><a href="java_advanced_sorting.html" title="Java 高级排序（Comparator 和 Comparable）">Java 高级排序</a></li>
+</ul>
+<h2>Java 文件处理</h2>
+<ul>
+<li><a href="java_files.html" title="Java 文件">Java 文件</a></li>
+<li><a href="java_files_create.html" title="Java 创建/写入文件">Java 创建/写入文件</a></li>
+<li><a href="java_files_read.html" title="Java 读取文件">Java 读取文件</a></li>
+<li><a href="java_files_delete.html" title="Java 删除文件">Java 删除文件</a></li>
+</ul>
+<h2>Java 案例</h2>
+<ul>
+<li><a href="java_howto_add_two_numbers.html" title="Java 如何对两个数字相加">两个数字相加</a></li>
+<li><a href="java_howto_count_words.html" title="Java 如何统计字数">统计字数</a></li>
+<li><a href="java_howto_reverse_string.html" title="Java 如何反转字符串">反转字符串</a></li>
+<li><a href="java_howto_sum_of_array_elements.html" title="Java 如何计算数组元素的和">计算数组元素的和</a></li>
+<li><a href="java_howto_string_to_array.html" title="Java 如何将字符串转换为数组">将字符串转换为数组</a></li>
+<li><a href="java_howto_sort_an_array.html" title="Java 如何排序数组">排序数组</a></li>
+<li><a href="java_howto_calculate_avg_array.html" title="Java 如何计算数组元素的平均值">计算数组元素的平均值</a></li>
+<li><a href="java_howto_find_smallest_array_el.html" title="Java 如何找到数组中的最小元素">找到数组中的最小元素</a></li>
+<li><a href="java_howto_loop_through_arraylist.html" title="Java 如何遍历 ArrayList">遍历 ArrayList</a></li>
+<li><a href="java_howto_loop_through_hashmap.html" title="Java 如何遍历 HashMap">遍历 HashMap</a></li>
+<li><a href="java_howto_loop_through_enum.html" title="Java 如何遍历枚举">遍历枚举</a></li>
+<li><a href="java_howto_area_of_rectangle.html" title="Java 如何计算矩形的面积">计算矩形的面积</a></li>
+<li><a href="java_howto_even_or_odd.html" title="Java 如何判断数字的奇偶性">判断数字的奇偶性</a></li>
+<li><a href="java_howto_pos_or_neg.html" title="Java 如何判断数字的正负">判断数字的正负</a></li>
+<li><a href="java_howto_find_square_root.html" title="Java 如何求一个数的平方根">求一个数的平方根</a></li>
+<li><a href="java_howto_random_number.html" title="Java 如何生成随机数">生成随机数</a></li>
+</ul>
+<h2>Java 参考手册</h2>
+<ul>
+<li><a href="java_reference.html" title="Java 参考手册">Java 参考手册</a></li>
+<li><a href="java_ref_keywords.html" title="Java 关键字">Java 关键字</a></li>
+<li><a href="java_ref_string.html" title="Java String 方法">Java String 方法</a></li>
+<li><a href="java_ref_math.html" title="Java Math 方法">Java Math 方法</a></li>
+<li><a href="java_ref_output.html" title="Java Output 方法">Java Output 方法</a></li>
+<li><a href="java_ref_arrays.html" title="Java Arrays 方法">Java Arrays 方法</a></li>
+<li><a href="java_ref_arraylist.html" title="Java ArrayList 方法">Java ArrayList 方法</a></li>
+<li><a href="java_ref_linkedlist.html" title="Java LinkedList 方法">Java LinkedList 方法</a></li>
+<li><a href="java_ref_hashmap.html" title="Java HashMap 方法">Java HashMap 方法</a></li>
+<li><a href="java_ref_scanner.html" title="Java Scanner 方法">Java Scanner 方法</a></li>
+<li><a href="java_ref_iterators.html" title="Java Iterator 方法">Java Iterator 方法</a></li>
+<li><a href="java_ref_errors.html" title="Java 错误和异常类型">Java 错误和异常</a></li>
+</ul>
+<h2>Java 实例</h2>
+<ul>
+<li><a href="java_examples.html" title="Java 实例">Java 实例</a></li>
+<li><a href="java_quiz.html" title="Java 测验">Java 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Java Math floor() 方法</h1>
+
+<div class="backtoreference">
+<p><a href="java_ref_math.html" title="Java Math 方法">Java Math 方法</a></p>
+</div>
+
+
+
+<section>
+<h2>定义和用法</h2>
+
+<p><code>floor()</code> 方法将数字向下舍入到最接近的整数。</p>
+
+<p class="tip"><span>提示：</span>要将数字向上舍入为最接近的整数，请查看 <a href="ref_math_ceil.html" title="Java Math ceil() 方法">ceil() 方法</a>。</p>
+
+<p class="tip"><span>提示：</span>要将数字沿任一方向舍入为最接近的整数，请查看 <a href="ref_math_round.html" title="Java Math round() 方法">round() 方法</a>。</p>
+
+<p class="note"><span>注意：</span>对于正数，<code>floor()</code> 方法仅删除小数部分，但对于负数，如果数字有小数部分，则数字的整数部分将被更改。如果你只想去掉小数部分，你可以将该数字类型转换为整数。</p>
+</section>
+
+
+
+<section>
+<h2>实例</h2>
+
+<p>将数字向下舍入到最接近的整数：</p>
+
+<pre class="language-java">
+System.out.println(Math.floor(0.60));
+System.out.println(Math.floor(0.40));
+System.out.println(Math.floor(5));
+System.out.println(Math.floor(5.1));
+System.out.println(Math.floor(-5.1));
+System.out.println(Math.floor(-5.9));
+</pre>
+
+<p class="tiy"><a target="_blank" href="t3988.html?f=java_ref_math_floor">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>语法</h2>
+
+<pre class="language-java">
+public static double floor(double <i>number</i>)
+</pre>
+
+<h3>参数</h3>
+
+<table class="parameter">
+<tr>
+<th style="width: 25%;">参数</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><i>number</i></td>
+<td>必需。要向下舍入的数字。</td>
+</tr>
+</table>
+</section>
+
+
+
+<section>
+<h2>技术细节</h2>
+
+<table class="technical-details">
+<tr>
+<th style="width: 25%;">返回：</th>
+<td>表示小于或等于某个数字的最接近整数的 <code>double</code> 值。</td>
+</tr>
+
+<tr>
+<th>Java 版本：</th>
+<td>任意版本。</td>
+</tr>
+</table>
+</section>
+
+
+
+<div class="backtoreference">
+<p><a href="java_ref_math.html" title="Java Math 方法">Java Math 方法</a></p>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="java_reference.html">Java 参考手册</a></h5>
+<h5 id="tools_example"><a href="java_examples.html">Java 实例</a></h5>
+<h5 id="tools_quiz"><a href="java_quiz.html">Java 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/java/ref_math_floor.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:32:12 GMT -->
+</html>

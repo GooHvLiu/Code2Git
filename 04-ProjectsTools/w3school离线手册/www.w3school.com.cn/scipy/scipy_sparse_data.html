@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/scipy/scipy_sparse_data.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:55:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>SciPy 稀疏数据</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>SciPy 教程</h2>
+<ul>
+<li><a href="index.html" title="SciPy 教程">SciPy 教程</a></li>
+<li><a href="scipy_intro.html" title="SciPy 介绍">SciPy 介绍</a></li>
+<li><a href="scipy_getting_started.html" title="SciPy 入门">SciPy 入门</a></li>
+<li><a href="scipy_constants.html" title="SciPy 常量">SciPy 常量</a></li>
+<li><a href="scipy_optimizers.html" title="SciPy 优化器">SciPy 优化器</a></li>
+<li class="currentLink"><a href="scipy_sparse_data.html" title="SciPy 稀疏数据">SciPy 稀疏数据</a></li>
+<li><a href="scipy_graphs.html" title="SciPy 图表">SciPy 图表</a></li>
+<li><a href="scipy_spatial_data.html" title="SciPy 空间数据">SciPy 空间数据</a></li>
+<li><a href="scipy_matlab_arrays.html" title="SciPy Matlab 数组">SciPy Matlab 数组</a></li>
+<li><a href="scipy_interpolation.html" title="SciPy 插值">SciPy 插值</a></li>
+<li><a href="scipy_statistical_significance_tests.html" title="SciPy 显著性检验">SciPy 显著性检验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>SciPy 稀疏数据</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="scipy_optimizers.html" title="SciPy 优化器">SciPy 优化器</a></li>
+<li class="next"><a href="scipy_graphs.html" title="SciPy 图表">SciPy 图表</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>什么是稀疏数据</h2>
+
+<p>稀疏数据是指大部分未使用元素（不携带任何信息的元素）的数据。</p>
+
+<p>它可以是像这样的数组：</p>
+
+<p><code>[1, 0, 2, 0, 0, 3, 0, 0, 0, 0, 0, 0]</code></p>
+
+<p><em>稀疏数据（Sparse Data）：</em>是大多数项目值为零的数据集。</p>
+
+<p><em>密集数组（Dense Array）：</em>与稀疏数组相反：大多数值不为零。</p>
+
+<p>在科学计算中，当我们处理线性代数中的偏导数时，会遇到稀疏数据。</p>
+</section>
+
+
+
+<section>
+<h2>如何处理稀疏数据</h2>
+
+<p>SciPy 有一个 <code>scipy.sparse</code> 模块，它提供了处理稀疏数据的函数。</p>
+
+<p>我们主要使用两种类型的稀疏矩阵：</p>
+
+<p><em>CSC</em> - 压缩稀疏列。用于高效算术，快速列切片。</p>
+
+<p><em>CSR</em> - 压缩稀疏行。用于快速行切片、更快的矩阵向量乘积。</p>
+
+<p>在本教程中，我们将使用 <em>CSR</em> 矩阵。</p>
+</section>
+
+
+
+<section>
+<h2>CSR 矩阵</h2>
+
+<p>我们可以通过将数组传递给函数 <code>scipy.sparse.csr_matrix()</code> 来创建 CSR 矩阵。</p>
+
+<h3>实例</h3>
+
+<p>从数组创建 CSR 矩阵：</p>
+
+<pre class="language-python">
+import numpy as np
+from scipy.sparse import csr_matrix
+
+arr = np.array([0, 0, 0, 0, 0, 1, 1, 0, 2])
+
+print(csr_matrix(arr))
+</pre>
+
+<p class="tiy"><a target="_blank" href="t0eb1.html?f=scipy_sparse_csr_1">亲自试一试</a></p>
+
+<p>上面的例子返回：</p>
+
+<pre class="cmdline">
+(0, 5)	1
+(0, 6)	1
+(0, 8)	2
+</pre>
+
+<p>从结果中我们可以看到有 3 个有值的项。</p>
+
+项在行 0 位置 5，值为 1。
+项在行 0 位置 6，值为 1。
+项在行 0 位置 8，值为 2。
+
+</section>
+
+
+
+<section>
+<h2>稀疏矩阵方法</h2>
+
+<p>使用 <code>data</code> 属性来查看存储的数据（不是零项）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-python">
+import numpy as np
+from scipy.sparse import csr_matrix
+
+arr = np.array([[0, 0, 0], [0, 0, 1], [1, 0, 2]])
+
+print(csr_matrix(arr).data)
+</pre>
+
+<p class="tiy"><a target="_blank" href="ta31c.html?f=scipy_sparse_csr_2">亲自试一试</a></p>
+
+<p>使用 <code>count_nonzero()</code> 方法计算非零数：</p>
+
+<h3>实例</h3>
+
+<pre class="language-python">
+import numpy as np
+from scipy.sparse import csr_matrix
+
+arr = np.array([[0, 0, 0], [0, 0, 1], [1, 0, 2]])
+
+print(csr_matrix(arr).count_nonzero())
+</pre>
+
+<p class="tiy"><a target="_blank" href="t15e3.html?f=scipy_sparse_count_nonzero">亲自试一试</a></p>
+
+<p>使用 <code>eliminate_zeros()</code> 方法从矩阵中删除零条目：</p>
+
+<h3>实例</h3>
+
+<pre class="language-python">
+import numpy as np
+from scipy.sparse import csr_matrix
+
+arr = np.array([[0, 0, 0], [0, 0, 1], [1, 0, 2]])
+
+mat = csr_matrix(arr)
+mat.eliminate_zeros()
+
+print(mat)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t2877.html?f=scipy_sparse_eliminate_zeros">亲自试一试</a></p>
+
+<p>使用 <code>sum_duplicates()</code> 方法消除重复条目：</p>
+
+<h3>实例</h3>
+
+<p>通过添加来消除重复项：</p>
+
+<pre class="language-python">
+import numpy as np
+from scipy.sparse import csr_matrix
+
+arr = np.array([[0, 0, 0], [0, 0, 1], [1, 0, 2]])
+
+mat = csr_matrix(arr)
+mat.sum_duplicates()
+
+print(mat)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t5bde.html?f=scipy_sparse_sum_duplicates">亲自试一试</a></p>
+
+<p>使用 <code>tocsc()</code> 方法从 csr 转换为 csc：</p>
+
+<h3>实例</h3>
+
+<pre class="language-python">
+import numpy as np
+from scipy.sparse import csr_matrix
+
+arr = np.array([[0, 0, 0], [0, 0, 1], [1, 0, 2]])
+
+newarr = csr_matrix(arr).tocsc()
+
+print(newarr)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t68b1.html?f=scipy_sparse_tocsc">亲自试一试</a></p>
+
+<p class="note"><span>注意：</span>除了提到的稀疏特定操作外，稀疏矩阵还支持正常矩阵支持的所有操作，例如重塑、求和、算术、广播等。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="scipy_optimizers.html" title="SciPy 优化器">SciPy 优化器</a></li>
+<li class="next"><a href="scipy_graphs.html" title="SciPy 图表">SciPy 图表</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/scipy/scipy_sparse_data.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:55:19 GMT -->
+</html>

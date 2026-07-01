@@ -1,0 +1,26 @@
+#container {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  align-content: space-between;
+  background: #555;
+  height: 500px;
+}
+#container .item {
+  background: #f4f4f4;
+  border: #ccc solid 1px;
+  padding: 1rem;
+  margin: 0.75rem;
+  text-align: center;
+  flex-basis: 100px;
+}
+#container .item-2 {
+  align-self: flex-end;
+  order: 2;
+}
+#container .item-1 {
+  order: 3;
+}
+#container .item-3 {
+  order: 1;
+}

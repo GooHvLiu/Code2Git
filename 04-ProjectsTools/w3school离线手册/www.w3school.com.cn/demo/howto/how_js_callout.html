@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from www.w3school.com.cn/demo/howto/how_js_callout.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:43 GMT -->
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+.callout {
+  position: fixed;
+  bottom: 35px;
+  right: 20px;
+  margin-left: 20px;
+  max-width: 300px;
+}
+
+.callout-header {
+  padding: 25px 15px;
+  background: #555;
+  font-size: 30px;
+  color: white;
+}
+
+.callout-container {
+  padding: 15px;
+  background-color: #ccc;
+  color: black
+}
+
+.closebtn {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.closebtn:hover {
+  color: lightgrey;
+}
+</style>
+</head>
+<body>
+
+<h2>弹出消息</h2>
+
+<p>Some content text, blabla.</p>
+<p>Some content text, blabla.</p>
+<p>点击 &quot;x&quot; 符号可关闭弹出消息。</p>
+<div class="callout">
+  <div class="callout-header">弹出消息标题</div>
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <div class="callout-container">
+    <p>一些描述弹出消息的文字。如需了解更多信息，<a href="#">请点击查看</a>，或者如果它妨碍到您了，可以将其关闭。</p>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/demo/howto/how_js_callout.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:43 GMT -->
+</html>

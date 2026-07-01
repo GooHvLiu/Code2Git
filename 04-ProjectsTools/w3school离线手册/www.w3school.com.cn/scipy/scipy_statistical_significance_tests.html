@@ -1,0 +1,510 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/scipy/scipy_statistical_significance_tests.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:55:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>SciPy 统计显著性检验</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>SciPy 教程</h2>
+<ul>
+<li><a href="index.html" title="SciPy 教程">SciPy 教程</a></li>
+<li><a href="scipy_intro.html" title="SciPy 介绍">SciPy 介绍</a></li>
+<li><a href="scipy_getting_started.html" title="SciPy 入门">SciPy 入门</a></li>
+<li><a href="scipy_constants.html" title="SciPy 常量">SciPy 常量</a></li>
+<li><a href="scipy_optimizers.html" title="SciPy 优化器">SciPy 优化器</a></li>
+<li><a href="scipy_sparse_data.html" title="SciPy 稀疏数据">SciPy 稀疏数据</a></li>
+<li><a href="scipy_graphs.html" title="SciPy 图表">SciPy 图表</a></li>
+<li><a href="scipy_spatial_data.html" title="SciPy 空间数据">SciPy 空间数据</a></li>
+<li><a href="scipy_matlab_arrays.html" title="SciPy Matlab 数组">SciPy Matlab 数组</a></li>
+<li><a href="scipy_interpolation.html" title="SciPy 插值">SciPy 插值</a></li>
+<li class="currentLink"><a href="scipy_statistical_significance_tests.html" title="SciPy 显著性检验">SciPy 显著性检验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>SciPy 统计显著性检验</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="scipy_interpolation.html" title="SciPy 插值">SciPy 插值</a></li>
+<li class="next"><a href="index.html" title="SciPy 教程">SciPy 教程</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>什么是统计显着性检验（Statistical Significance Test）？</h2>
+
+<p>在统计学中，统计显着性意味着产生的结果背后有原因，它不是随机产生的，也不是偶然产生的。</p>
+
+<p>SciPy 提供名为 <code>scipy.stats</code> 的模块，其中包含用于执行统计显著性检验的函数。</p>
+
+<p>执行此类测试时，以下技术和关键词很重要：</p>
+</section>
+
+
+
+<section>
+<h2>统计学中的假设</h2>
+
+<p>假设是关于总体参数的假设。</p>
+</section>
+
+
+
+<section>
+<h2>零假设（Null Hypothesis）</h2>
+
+<p>它假设观察结果不具有统计显着性。</p>
+</section>
+
+
+
+<section>
+<h2>替代假设（Alternate Hypothesis）</h2>
+
+<p>它假设观察结果是由于某种原因造成的。</p>
+
+<p>它是零假设的替代。</p>
+
+<h3>例如：</h3>
+
+<p>为了对学生进行评估，我们将采取：</p>
+
+<p>“学生比平均水平差” - 作为零假设，以及：</p>
+
+<p>“学生比平均水平好” - 作为替代假设。</p>
+</section>
+
+
+
+<section>
+<h2>单侧检验</h2>
+
+<p>当我们的假设仅测试值的一侧时，它被称为“单侧检验”。</p>
+
+<h3>例如：</h3>
+
+<p>对于原假设：</p>
+
+<p>“平均值等于 k”，我们可以有替代假设：</p>
+
+<p>“平均值小于 k”，或：</p>
+
+<p>“平均值大于 k”</p>
+</section>
+
+
+
+<section>
+<h2>双侧检验</h2>
+
+<p>当我们的假设测试值的两侧时。</p>
+
+<h3>例如：</h3>
+
+<p>对于零假设：</p>
+
+<p>“平均值等于 k”，我们可以有替代假设：</p>
+
+<p>“平均值不等于 k”</p>
+
+<p>在这种情况下，平均值小于或大于 k，并且需要检查两侧。</p>
+</section>
+
+
+
+<section>
+<h2>Alpha 值</h2>
+
+<p>Alpha 值是显著性水平。</p>
+
+<h3>例如：</h3>
+
+<p>数据必须有多接近极端才能拒绝零假设。</p>
+
+<p>通常取 0.01、0.05 或 0.1。</p>
+</section>
+
+
+
+<section>
+<h2>P 值</h2>
+
+<p>P 值表明数据实际上与极值的接近程度。</p>
+
+<p>比较 P 值和 alpha 值以确定统计显着性。</p>
+
+<p>如果 p 值 &lt;= alpha，我们拒绝零假设并说数据具有统计显着性。否则我们接受零假设。</p>
+</section>
+
+
+
+<section>
+<h2>T 检验</h2>
+
+<p>T 检验用于确定两个变量的均值之间是否存在显著差异，并让我们知道它们是否属于同一分布。</p>
+
+<p>它是双侧检验。</p>
+
+<p>函数 <code>ttest_ind()</code> 接受两个相同大小的样本，并生成包含 t 统计量和 p 值的元组。</p>
+
+<h3>实例</h3>
+
+<p>判断给定的值 v1 和 v2 是否来自同一分布：</p>
+
+<pre class="language-python">
+import numpy as np
+from scipy.stats import ttest_ind
+
+v1 = np.random.normal(size=100)
+v2 = np.random.normal(size=100)
+
+res = ttest_ind(v1, v2)
+
+print(res)
+</pre>
+
+<p class="tiy"><a target="_blank" href="te1c8.html?f=scipy_stat_sign_ttest_ind_1">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<pre class="cmdline">
+Ttest_indResult(statistic=0.40833510339674095, pvalue=0.68346891833752133)
+</pre>
+
+<p>如果您只想返回 p 值，请使用 <code>pvalue</code> 属性：</p>
+
+<h3>实例</h3>
+
+<pre class="language-python">
+...
+res = ttest_ind(v1, v2).pvalue
+
+print(res)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t4606.html?f=scipy_stat_sign_ttest_ind_2">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<pre class="cmdline">
+0.68346891833752133
+</pre>
+</section>
+
+
+
+<section>
+<h2>KS 检验</h2>
+
+<p>KS 检验用于检查给定值是否遵循某种分布。</p>
+
+<p>该函数将要测试的值和 CDF 作为两个参数。</p>
+
+<p class="tip"><span>提示：</span><em>CDF</em> 可以是字符串或返回概率的可调用函数。</p>
+
+<p>它可以用作单侧检验或双侧检验。</p>
+
+<p>默认情况下，它是双侧的。我们可以将参数 alternative 作为 &quot;two-sided&quot;、&quot;less&quot; 或 &quot;greater&quot; 的字符串传递。</p>
+
+<h3>实例</h3>
+
+<p>判断给定的值是否遵循正态分布：</p>
+
+<pre class="language-python">
+import numpy as np
+from scipy.stats import kstest
+
+v = np.random.normal(size=100)
+
+res = kstest(v, 'norm')
+
+print(res)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t4d9e.html?f=scipy_stat_sign_kstest">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<pre class="cmdline">
+KstestResult(statistic=0.047798701221956841, pvalue=0.97630967161777515)
+</pre>
+</section>
+
+
+
+<section>
+<h2>数据的统计描述</h2>
+
+<p>为了查看数组中值的摘要，我们可以使用 <code>describe()</code> 函数。</p>
+
+<p>它返回以下描述：</p>
+
+<ol>
+<li>观察次数（nobs）</li>
+<li>最小值和最大值 = minmax</li>
+<li>平均值</li>
+<li>方差</li>
+<li>偏度</li>
+<li>峰度</li>
+</ol>
+
+<h3>实例</h3>
+
+<p>显示数组中值的统计描述：</p>
+
+<pre class="language-python">
+import numpy as np
+from scipy.stats import describe
+
+v = np.random.normal(size=100)
+res = describe(v)
+
+print(res)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t1d63.html?f=scipy_stat_sign_describe">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<pre class="cmdline">
+DescribeResult(
+  nobs=100,
+  minmax=(-2.0991855456740121, 2.1304142707414964),
+  mean=0.11503747689121079,
+  variance=0.99418092655064605,
+  skewness=0.013953400984243667,
+  kurtosis=-0.671060517912661
+)
+</pre>
+</section>
+
+
+
+<section>
+<h2>正态性检验（偏度和峰度）</h2>
+
+<p>正态性检验基于偏度和峰度。</p>
+
+<p><code>normaltest()</code> 函数返回零假设的 p 值：</p>
+
+<p>“x 来自正态分布”。</p>
+</section>
+
+
+
+<section>
+<h2>偏度：</h2>
+
+<p>数据对称性的度量。</p>
+
+<p>对于正态分布，它是 0。</p>
+
+<p>如果它是负数，则表示数据向左偏斜。</p>
+
+<p>如果它是正数，则表示数据向右偏斜。</p>
+</section>
+
+
+
+<section>
+<h2>峰度：</h2>
+
+<p>衡量数据相对于正态分布是重尾还是轻尾。</p>
+
+<p>正峰度表示重尾。</p>
+
+<p>负峰度表示轻尾。</p>
+
+<h3>实例</h3>
+
+<p>求数组中值的偏度和峰度：</p>
+
+<pre class="language-python">
+import numpy as np
+from scipy.stats import skew, kurtosis
+
+v = np.random.normal(size=100)
+
+print(skew(v))
+print(kurtosis(v))
+</pre>
+
+<p class="tiy"><a target="_blank" href="td2cd.html?f=scipy_stat_sign_skew">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<pre class="cmdline">
+0.11168446328610283
+-0.1879320563260931
+</pre>
+
+<h3>实例</h3>
+
+<p>判断数据是否来自正态分布：</p>
+
+<pre class="language-python">
+import numpy as np
+from scipy.stats import normaltest
+
+v = np.random.normal(size=100)
+
+print(normaltest(v))
+</pre>
+
+<p class="tiy"><a target="_blank" href="t47c9.html?f=scipy_stat_sign_normaltest">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<pre class="cmdline">
+NormaltestResult(statistic=4.4783745697002848, pvalue=0.10654505998635538)
+</pre>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="scipy_interpolation.html" title="SciPy 插值">SciPy 插值</a></li>
+<li class="next"><a href="index.html" title="SciPy 教程">SciPy 教程</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/scipy/scipy_statistical_significance_tests.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:55:30 GMT -->
+</html>

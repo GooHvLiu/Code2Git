@@ -1,0 +1,596 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/cpp/cpp_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:00:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>C++ 实例</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>C++ 教程</h2>
+<ul>
+<li><a href="index.html" title="C++ 教程">C++ 教程</a></li>
+<li><a href="cpp_intro.html" title="C++ 简介">C++ 简介</a></li>
+<li><a href="cpp_getstarted.html" title="C++ 入门">C++ 入门</a></li>
+<li><a href="cpp_syntax.html" title="C++ 语法">C++ 语法</a></li>
+<li><a href="cpp_output.html" title="C++ 输出">C++ 输出</a></li>
+<li><a href="cpp_output_numbers.html" title="C++ 输出数字">C++ 输出数字</a></li>
+<li><a href="cpp_new_lines.html" title="C++ 新行">C++ 新行</a></li>
+<li><a href="cpp_comments.html" title="C++ 注释">C++ 注释</a></li>
+<li><a href="cpp_variables.html" title="C++ 变量">C++ 变量</a></li>
+<li><a href="cpp_variables_multiple.html" title="C++ 声明多个变量">C++ 多变量</a></li>
+<li><a href="cpp_variables_identifiers.html" title="C++ 标识符">C++ 标识符</a></li>
+<li><a href="cpp_variables_constants.html" title="C++ 常量">C++ 常量</a></li>
+<li><a href="cpp_variables_reallife.html" title="C++ 变量实例">C++ 变量实例</a></li>
+<li><a href="cpp_user_input.html" title="C++ 用户输入">C++ 用户输入</a></li>
+<li><a href="cpp_data_types.html" title="C++ 数据类型">C++ 数据类型</a></li>
+<li><a href="cpp_data_types_numeric.html" title="C++ 数值数据类型">C++ 数值类型</a></li>
+<li><a href="cpp_data_types_bool.html" title="C++ 布尔数据类型">C++ 布尔类型</a></li>
+<li><a href="cpp_data_types_char.html" title="C++ 字符数据类型">C++ 字符类型</a></li>
+<li><a href="cpp_data_types_string.html" title="C++ 字符串数据类型">C++ 字符串类型</a></li>
+<li><a href="cpp_data_types_reallife.html" title="C++ 数据类型实例">C++ 数据类型实例</a></li>
+<li><a href="cpp_operators.html" title="C++ 运算符">C++ 运算符</a></li>
+<li><a href="cpp_operators_assignment.html" title="C++ 赋值运算符">C++ 赋值运算符</a></li>
+<li><a href="cpp_operators_comparison.html" title="C++ 比较运算符">C++ 比较运算符</a></li>
+<li><a href="cpp_operators_logical.html" title="C++ 逻辑运算符">C++ 逻辑运算符</a></li>
+<li><a href="cpp_strings.html" title="C++ 字符串">C++ 字符串</a></li>
+<li><a href="cpp_strings_concat.html" title="C++ 字符串拼接">C++ 字符串拼接</a></li>
+<li><a href="cpp_strings_numbers.html" title="C++ 数字和字符串">C++ 数字和字符串</a></li>
+<li><a href="cpp_strings_length.html" title="C++ 字符串长度">C++ 字符串长度</a></li>
+<li><a href="cpp_strings_access.html" title="C++ 访问字符串">C++ 访问字符串</a></li>
+<li><a href="cpp_strings_esc.html" title="C++ 特殊字符">C++ 特殊字符</a></li>
+<li><a href="cpp_strings_input.html" title="C++ 用户输入字符串">C++ 用户输入字符串</a></li>
+<li><a href="cpp_strings_namespace.html" title="C++ 字符串命名空间">C++ 字符串命名空间</a></li>
+<li><a href="cpp_math.html" title="C++ 数学运算">C++ 数学运算</a></li>
+<li><a href="cpp_booleans.html" title="C++ 布尔值">C++ 布尔值</a></li>
+<li><a href="cpp_booleans_expressions.html" title="C++ 布尔表达式">C++ 布尔表达式</a></li>
+<li><a href="cpp_conditions.html" title="C++ If ... Else">C++ If ... Else</a></li>
+<li><a href="cpp_conditions_else.html" title="C++ Else">C++ Else</a></li>
+<li><a href="cpp_conditions_elseif.html" title="C++ Else If">C++ Else If</a></li>
+<li><a href="cpp_conditions_shorthand.html" title="C++ 简写 If Else">C++ 简写 If Else</a></li>
+<li><a href="cpp_conditions_reallife.html" title="C++ If ... Else 实际应用实例">C++ If ... Else 实例</a></li>
+<li><a href="cpp_switch.html" title="C++ Switch">C++ Switch</a></li>
+<li><a href="cpp_while_loop.html" title="C++ While 循环">C++ While 循环</a></li>
+<li><a href="cpp_do_while_loop.html" title="C++ Do/While 循环">C++ Do/While 循环</a></li>
+<li><a href="cpp_while_loop_reallife.html" title="C++ While 循环实例">C++ While 循环实例</a></li>
+<li><a href="cpp_for_loop.html" title="C++ For 循环">C++ For 循环</a></li>
+<li><a href="cpp_for_loop_reallife.html" title="C++ For 循环实例">C++ For 循环实例</a></li>
+<li><a href="cpp_break.html" title="C++ Break 和 Continue">C++ Break 和 Continue</a></li>
+<li><a href="cpp_arrays.html" title="C++ 数组">C++ 数组</a></li>
+<li><a href="cpp_arrays_loop.html" title="C++ 数组和循环">C++ 数组和循环</a></li>
+<li><a href="cpp_arrays_omit.html" title="C++ 省略数组大小">C++ 省略数组大小</a></li>
+<li><a href="cpp_arrays_size.html" title="C++ 数组大小">C++ 数组大小</a></li>
+<li><a href="cpp_arrays_reallife.html" title="C++ 数组实际应用实例">C++ 数组实例</a></li>
+<li><a href="cpp_arrays_multi.html" title="C++ 多维数组">C++ 多维数组</a></li>
+<li><a href="cpp_structs.html" title="C++ 结构体">C++ 结构体</a></li>
+<li><a href="cpp_enum.html" title="C++ 枚举">C++ 枚举</a></li>
+<li><a href="cpp_references.html" title="C++ 创建引用">C++ 创建引用</a></li>
+<li><a href="cpp_references_memory.html" title="C++ 内存地址">C++ 内存地址</a></li>
+<li><a href="cpp_pointers.html" title="C++ 创建指针">C++ 创建指针</a></li>
+<li><a href="cpp_pointers_dereference.html" title="C++ 解引用">C++ 解引用</a></li>
+<li><a href="cpp_pointers_modify.html" title="C++ 修改指针">C++ 修改指针</a></li>
+</ul>
+<h2>C++ 函数</h2>
+<ul>
+<li><a href="cpp_functions.html" title="C++ 函数">C++ 函数</a></li>
+<li><a href="cpp_function_param.html" title="C++ 函数参数">C++ 函数参数</a></li>
+<li><a href="cpp_function_default.html" title="C++ 默认参数">C++ 默认参数</a></li>
+<li><a href="cpp_function_multiple.html" title="C++ 多个参数">C++ 多个参数</a></li>
+<li><a href="cpp_function_return.html" title="C++ Return 关键字">C++ 返回值</a></li>
+<li><a href="cpp_function_reference.html" title="C++ 函数 - 通过引用传参">C++ 通过引用传参</a></li>
+<li><a href="cpp_function_array.html" title="C++ 向函数传递数组">C++ 传递数组</a></li>
+<li><a href="cpp_function_reallife.html" title="C++ 函数实例">C++ 函数实例</a></li>
+<li><a href="cpp_function_overloading.html" title="C++ 函数重载">C++ 函数重载</a></li>
+<li><a href="cpp_scope.html" title="C++ 变量作用域">C++ 变量作用域</a></li>
+<li><a href="cpp_functions_recursion.html" title="C++ 递归">C++ 递归</a></li>
+</ul>
+<h2>C++ 类</h2>
+<ul>
+<li><a href="cpp_oop.html" title="C++ OOP">C++ OOP</a></li>
+<li><a href="cpp_classes.html" title="C++ 类和对象">C++ 类/对象</a></li>
+<li><a href="cpp_class_methods.html" title="C++ 类方法">C++ 类方法</a></li>
+<li><a href="cpp_constructors.html" title="C++ 构造函数">C++ 构造函数</a></li>
+<li><a href="cpp_access_specifiers.html" title="C++ 访问修饰符">C++ 访问修饰符</a></li>
+<li><a href="cpp_encapsulation.html" title="C++ 封装">C++ 封装</a></li>
+<li><a href="cpp_inheritance.html" title="C++ 继承">C++ 继承</a></li>
+<li><a href="cpp_inheritance_multilevel.html" title="C++ 多层继承">C++ 多层继承</a></li>
+<li><a href="cpp_inheritance_multiple.html" title="C++ 多重继承">C++ 多重继承</a></li>
+<li><a href="cpp_inheritance_access.html" title="C++ 继承访问">C++ 继承访问</a></li>
+<li><a href="cpp_polymorphism.html" title="C++ 多态">C++ 多态</a></li>
+<li><a href="cpp_files.html" title="C++ 文件">C++ 文件</a></li>
+<li><a href="cpp_exceptions.html" title="C++ 异常处理">C++ 异常处理</a></li>
+<li><a href="cpp_date.html" title="C++ 日期和时间">C++ 日期</a></li>
+</ul>
+<h2>C++ 数据结构</h2>
+<ul>
+<li><a href="cpp_data_structures.html" title="C++ 数据结构和 STL">C++ 数据结构</a></li>
+<li><a href="cpp_vectors.html" title="C++ 向量">C++ 向量</a></li>
+<li><a href="cpp_list.html" title="C++ 列表">C++ 列表</a></li>
+<li><a href="cpp_stacks.html" title="C++ 栈">C++ 栈</a></li>
+<li><a href="cpp_queues.html" title="C++ 队列">C++ 队列</a></li>
+<li><a href="cpp_deque.html" title="C++ 双端队列">C++ 双端队列</a></li>
+<li><a href="cpp_sets.html" title="C++ 集合">C++ 集合</a></li>
+<li><a href="cpp_maps.html" title="C++ 映射">C++ 映射</a></li>
+<li><a href="cpp_iterators.html" title="C++ 迭代器">C++ 迭代器</a></li>
+<li><a href="cpp_algorithms.html" title="C++ 算法">C++ 算法</a></li>
+</ul>
+<h2>C++ 案例</h2>
+<ul>
+<li><a href="cpp_howto_add_two_numbers.html" title="C++ 如何加两个数字">C++ 加两个数字</a></li>
+<li><a href="cpp_howto_random_number.html" title="C++ 如何生成随机数">C++ 随机数</a></li>
+</ul>
+<h2>C++ 数据结构</h2>
+<ul>
+<li><a href="cpp_reference.html" title="C++ 参考手册">C++ 参考手册</a></li>
+<li><a href="cpp_ref_keywords.html" title="C++ 关键词">C++ 关键词</a></li>
+<li><a href="cpp_ref_iostream.html" title="C++ &lt;iostream&gt; 库">C++ &lt;iostream&gt;</a></li>
+<li><a href="cpp_ref_fstream.html" title="C++ &lt;fstream&gt; 库">C++ &lt;fstream&gt;</a></li>
+<li><a href="cpp_ref_math.html" title="C++ &lt;cmath&gt; 库">C++ &lt;cmath&gt;</a></li>
+<li><a href="cpp_ref_string.html" title="C++ &lt;string&gt; 库">C++ &lt;string&gt;</a></li>
+<li><a href="cpp_ref_cstring.html" title="C++ &lt;cstring&gt; 库">C++ &lt;cstring&gt;</a></li>
+<li><a href="cpp_ref_ctime.html" title="C++ &lt;ctime&gt; 库">C++ &lt;ctime&gt;</a></li>
+<li><a href="cpp_ref_vector.html" title="C++ &lt;vector&gt; 库">C++ &lt;vector&gt;</a></li>
+<li><a href="cpp_ref_algorithm.html" title="C++ &lt;algorithm&gt; 库">C++ &lt;algorithm&gt;</a></li>
+</ul>
+<h2>实例 / 测验</h2>
+<ul>
+<li class="currentLink"><a href="cpp_examples.html" title="C++ 实例">C++ 实例</a></li>
+<li><a href="cpp_quiz.html" title="C++ 测验">C++ 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>C++ 实例</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="cpp_ref_algorithm.html" title="C++ &lt;algorithm&gt; 库">C++ &lt;algorithm&gt;</a></li>
+<li class="next"><a href="cpp_quiz.html" title="C++ 测验">C++ 测验</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>C++ 语法</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="te44f.html?f=cpp_helloworld_1">创建一个简单的 &quot;Hello World&quot; 程序</a></li>
+</ul>
+
+<p><a class="btn-blue" href="cpp_syntax.html">实例解释：语法</a></p>
+</section>
+
+
+
+<section>
+<h2>C++ 输出/打印</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t007d.html?f=cpp_output_1">使用 cout 输出值/打印文本</a></li>
+<li><a target="_blank" href="tb2ae.html?f=cpp_output_2">使用多个 cout 对象</a></li>
+<li><a target="_blank" href="td2ff.html?f=cpp_output_3">使用 \n 插入换行</a></li>
+<li><a target="_blank" href="t0fd5.html?f=cpp_output_5">使用 endl 插入换行</a></li>
+</ul>
+
+<p><a class="btn-blue" href="cpp_output.html">实例解释：输出</a></p>
+</section>
+
+
+
+<section>
+<h2>C++ 注释</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tcecf.html?f=cpp_comment_single">在代码行前添加单行注释</a></li>
+<li><a target="_blank" href="tbcdd.html?f=cpp_comment_single_end">在代码行末尾添加单行注释</a></li>
+<li><a target="_blank" href="t3261.html?f=cpp_comment_multi">多行注释</a></li>
+</ul>
+
+<p><a class="btn-blue" href="cpp_comments.html">实例解释：注释</a></p>
+</section>
+
+
+
+<section>
+<h2>C++ 变量</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tf3a5.html?f=cpp_variables_int_1">创建整型变量</a></li>
+<li><a target="_blank" href="t2c28.html?f=cpp_variables_int_2">创建变量但不赋值，稍后赋值</a></li>
+<li><a target="_blank" href="te321.html?f=cpp_variables_int_3">为已有变量赋新值（覆盖原值）</a></li>
+<li><a target="_blank" href="t1c62.html?f=cpp_variables_const_1">用 const 关键字创建不可变变量</a></li>
+<li><a target="_blank" href="ta1b8.html?f=cpp_variables_display">打印时组合文本和变量</a></li>
+<li><a target="_blank" href="t4220.html?f=cpp_variables_add">将一个变量御另一个变量相加</a></li>
+<li><a target="_blank" href="td8bf.html?f=cpp_variables_many">用逗号分隔的列表声明多个同类型变量</a></li>
+<li><a target="_blank" href="t096c.html?f=cpp_variables_identifiers">标识符</a></li>
+</ul>
+
+<p><a class="btn-blue" href="cpp_variables.html">实例解释：变量</a></p>
+</section>
+
+
+
+<section>
+<h2>C++ 用户输入</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="s7ff1.html?f=cpp_user_input_1">输入数字并打印结果</a></li>
+<li><a target="_blank" href="sff93.html?f=cpp_user_input_2">输入两个数字并打印它们的和</a></li>
+</ul>
+
+<p><a class="btn-blue" href="cpp_user_input.html">实例解释：用户输入</a></p>
+</section>
+
+
+
+<section>
+<h2>C++ 数据类型</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t9014.html?f=cpp_data_types">对不同数据类型的演示</a></li>
+<li><a target="_blank" href="t7bb1.html?f=cpp_data_type_int">创建 int 类型变量</a></li>
+<li><a target="_blank" href="tea4f.html?f=cpp_data_type_float">创建 float 类型变量</a></li>
+<li><a target="_blank" href="t2724.html?f=cpp_data_type_double">创建 double 类型变量</a></li>
+<li><a target="_blank" href="t7be6.html?f=cpp_boolean">创建布尔类型变量</a></li>
+<li><a target="_blank" href="t1125.html?f=cpp_data_type_char">创建 char 类型变量</a></li>
+<li><a target="_blank" href="t000d.html?f=cpp_strings">创建 string 类型变量</a></li>
+</ul>
+
+<p><a class="btn-blue" href="cpp_data_types.html">实例解释：数据类型</a></p>
+</section>
+
+
+
+<section>
+<h2>C++ 运算符</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t36af.html?f=cpp_oper_1">加法运算符</a></li>
+<li><a target="_blank" href="t9a34.html?f=cpp_oper_inc">自增运算符</a></li>
+<li><a target="_blank" href="td6f6.html?f=cpp_oper_assignment_1">赋值运算符</a></li>
+<li><a target="_blank" href="t1e79.html?f=cpp_oper_assignment_2">加法赋值运算符</a></li>
+</ul>
+
+<p><a class="btn-blue" href="cpp_operators.html">实例解释：运算符</a></p>
+</section>
+
+
+
+<section>
+<h2>C++ 字符串</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t000d.html?f=cpp_strings">创建字符串</a></li>
+<li><a target="_blank" href="t1ba4.html?f=cpp_strings_concat_1">字符串拼接</a></li>
+<li><a target="_blank" href="t0f1b.html?f=cpp_strings_length">字符串长度</a></li>
+<li><a target="_blank" href="t854c.html?f=cpp_strings_access_1">访问字符串字符</a></li>
+<li><a target="_blank" href="tf158.html?f=cpp_strings_change">修改字符串字符</a></li>
+<li><a target="_blank" href="s8db9.html?f=cpp_strings_getline">用户输入字符串</a></li>
+</ul>
+
+<p><a class="btn-blue" href="cpp_strings.html">实例解释：字符串</a></p>
+</section>
+
+
+
+<section>
+<h2>C++ 数学</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t307a.html?f=cpp_math_max">找出两个数中的最大值</a></li>
+<li><a target="_blank" href="ta511.html?f=cpp_math_min">找出两个数中的最小值</a></li>
+<li><a target="_blank" href="t3155.html?f=cpp_math_cmath">使用 cmath 头文件调用其他数学函数</a></li>
+</ul>
+
+<p><a class="btn-blue" href="cpp_math.html">实例解释：数学</a></p>
+</section>
+
+
+
+<section>
+<h2>C++ 布尔值</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t7be6.html?f=cpp_boolean">布尔值</a></li>
+<li><a target="_blank" href="t27d0.html?f=cpp_boolean_2">比较两个值</a></li>
+<li><a target="_blank" href="t61d7.html?f=cpp_boolean_1">比较两个变量</a></li>
+</ul>
+
+<p><a class="btn-blue" href="cpp_booleans.html">实例解释：布尔值</a></p>
+</section>
+
+
+
+<section>
+<h2>C++ If...Else (条件)</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tca46.html?f=cpp_if_1">if 语句</a></li>
+<li><a target="_blank" href="te37f.html?f=cpp_if_else">else 语句</a></li>
+<li><a target="_blank" href="tdf47.html?f=cpp_if_else_if">else if 语句</a></li>
+</ul>
+
+<p><a class="btn-blue" href="cpp_conditions.html">实例解释：if...else</a></p>
+</section>
+
+
+
+<section>
+<h2>C++ Switch</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t9173.html?f=cpp_switch">switch 语句</a></li>
+<li><a target="_blank" href="t0ef9.html?f=cpp_switch_default">带 default 关键字的 switch 语句</a></li>
+</ul>
+
+<p><a class="btn-blue" href="cpp_switch.html">实例解释：switch</a></p>
+</section>
+
+
+
+<section>
+<h2>C++ 循环</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t5f33.html?f=cpp_while_loop">while 循环</a></li>
+<li><a target="_blank" href="t4684.html?f=cpp_do_while_loop">do while 循环</a></li>
+<li><a target="_blank" href="te002.html?f=cpp_for_loop">for 循环</a></li>
+<li><a target="_blank" href="t3e54.html?f=cpp_break">中断循环</a></li>
+<li><a target="_blank" href="tbf24.html?f=cpp_continue">继续循环</a></li>
+</ul>
+
+<p><a class="btn-blue" href="cpp_while_loop.html">实例解释：循环</a></p>
+</section>
+
+
+
+<section>
+<h2>C++ 数组</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tf1be.html?f=cpp_array">创建并访问数组</a></li>
+<li><a target="_blank" href="te3a4.html?f=cpp_array_change">修改数组元素</a></li>
+<li><a target="_blank" href="t1646.html?f=cpp_array_loop_1">遍历数组</a></li>
+<li><a target="_blank" href="t0b7e.html?f=cpp_array_length_1">获取数组的大小/长度</a></li>
+<li><a target="_blank" href="te218.html?f=cpp_array_multi_access">多维数组</a></li>
+</ul>
+
+<p><a class="btn-blue" href="cpp_arrays.html">实例解释：数组</a></p>
+</section>
+
+
+
+<section>
+<h2>C++ 引用</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tdb19.html?f=cpp_reference">创建引用变量</a></li>
+<li><a target="_blank" href="tc80b.html?f=cpp_reference_adr">访问变量的内存地址</a></li>
+</ul>
+
+<p><a class="btn-blue" href="cpp_references.html">实例解释：引用</a></p>
+</section>
+
+
+
+<section>
+<h2>C++ 指针</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="ta238.html?f=cpp_pointer">创建指针变量</a></li>
+<li><a target="_blank" href="tb389.html?f=cpp_pointer_dereference">用解引用运算符 * 获取变量的值</a></li>
+<li><a target="_blank" href="t1c66.html?f=cpp_pointer_change">修改指针的值</a></li>
+</ul>
+
+<p><a class="btn-blue" href="cpp_pointers.html">实例解释：指针</a></p>
+</section>
+
+
+
+<section>
+<h2>C++ 文件</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="s64d8.html?f=cpp_files_read">创建、写入和读取文本文件</a></li>
+</ul>
+
+<p><a class="btn-blue" href="cpp_files.html">实例解释：文件</a></p>
+</section>
+
+
+
+<section>
+<h2>C++ 函数</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t37b5.html?f=cpp_functions">创建并调用函数</a></li>
+<li><a target="_blank" href="t703c.html?f=cpp_functions_multiple">多次调用函数</a></li>
+<li><a target="_blank" href="t826e.html?f=cpp_functions_opt">函数声明和定义</a></li>
+<li><a target="_blank" href="t253f.html?f=cpp_functions_param">形参和实参</a></li>
+<li><a target="_blank" href="tfa00.html?f=cpp_functions_param_def">默认参数值</a></li>
+<li><a target="_blank" href="t0159.html?f=cpp_functions_param_multi">多个参数</a></li>
+<li><a target="_blank" href="t15a1.html?f=cpp_functions_void_1">返回值</a></li>
+<li><a target="_blank" href="t1542.html?f=cpp_functions_void_2">返回两个参数的和</a></li>
+<li><a target="_blank" href="tc105.html?f=cpp_functions_ref_1">按引用传递</a></li>
+<li><a target="_blank" href="ta633.html?f=cpp_functions_array">向函数传递数组</a></li>
+<li><a target="_blank" href="t05f7.html?f=cpp_function_overloading_1">函数重载</a></li>
+</ul>
+
+<p><a class="btn-blue" href="cpp_functions.html">实例解释：函数</a></p>
+</section>
+
+
+
+<section>
+<h2>C++ 类和对象</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tc6e7.html?f=cpp_object_attr">创建类的对象并访问类属性</a></li>
+<li><a target="_blank" href="t9bdf.html?f=cpp_object_real">创建多个对象</a></li>
+<li><a target="_blank" href="t4db6.html?f=cpp_object_method_1">创建类方法</a></li>
+<li><a target="_blank" href="ta6de.html?f=cpp_object_method_2">在类外定义类方法</a></li>
+<li><a target="_blank" href="tf6e6.html?f=cpp_object_method_param">向类方法添加参数</a></li>
+<li><a target="_blank" href="t40f8.html?f=cpp_constructor">创建构造函数</a></li>
+<li><a target="_blank" href="t8926.html?f=cpp_constructor_param_1">构造函数参数</a></li>
+<li><a target="_blank" href="tcb5e.html?f=cpp_constructor_param_2">在类外定义构造函数</a></li>
+<li><a target="_blank" href="t1eed.html?f=cpp_access_private">public 和 private 访问修饰符</a></li>
+<li><a target="_blank" href="t32e3.html?f=cpp_encapsulation">封装 - 对用户隐藏敏感数据</a></li>
+<li><a target="_blank" href="t6916.html?f=cpp_inheritance">继承 - 从类继承属性和方法</a></li>
+<li><a target="_blank" href="t9576.html?f=cpp_inheritance_multi_1">多级继承</a></li>
+<li><a target="_blank" href="t373a.html?f=cpp_inheritance_multi_2">多重继承</a></li>
+<li><a target="_blank" href="tc676.html?f=cpp_polymorphism">多态 - 以不同方式执行单一操作</a></li>
+<li><a target="_blank" href="t64d8.html?f=cpp_files_read">文件 - 创建、写入和读取文件</a></li>
+<li><a target="_blank" href="t67b2.html?f=cpp_try_catch_1">异常 - 错误处理</a></li>
+</ul>
+
+<p><a class="btn-blue" href="cpp_classes.html">实例解释：类和对象</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="cpp_ref_algorithm.html" title="C++ &lt;algorithm&gt; 库">C++ &lt;algorithm&gt;</a></li>
+<li class="next"><a href="cpp_quiz.html" title="C++ 测验">C++ 测验</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="cpp_reference.html">C++ 参考手册</a></h5>
+<h5 id="tools_example"><a href="cpp_examples.html">C++ 实例</a></h5>
+<h5 id="tools_quiz"><a href="cpp_quiz.html">C++ 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/cpp/cpp_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:00:31 GMT -->
+</html>

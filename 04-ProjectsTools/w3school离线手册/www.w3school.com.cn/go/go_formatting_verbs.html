@@ -1,0 +1,578 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/go/go_formatting_verbs.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:01:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Go 格式化动词</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Go 教程</h2>
+<ul>
+<li><a href="index.html" title="Go 教程">Go 教程</a></li>
+<li><a href="go_introduction.html" title="Go 简介">Go 简介</a></li>
+<li><a href="go_getting_started.html" title="Go 入门">Go 入门</a></li>
+<li><a href="go_syntax.html" title="Go 语法">Go 语法</a></li>
+<li><a href="go_comments.html" title="Go 注释">Go 注释</a></li>
+<li><a href="go_variables.html" title="Go 变量">Go 变量</a></li>
+<li><a href="go_variable_multi.html" title="Go 声明多变量">Go 声明多变量</a></li>
+<li><a href="go_variable_naming_rules.html" title="Go 变量命名规则">Go 变量命名规则</a></li>
+<li><a href="go_constants.html" title="Go 常量">Go 常量</a></li>
+<li><a href="go_output.html" title="Go 输出">Go 输出</a></li>
+<li class="currentLink"><a href="go_formatting_verbs.html" title="Go 格式化动词">Go 格式化动词</a></li>
+<li><a href="go_data_types.html" title="Go 数据类型">Go 数据类型</a></li>
+<li><a href="go_boolean_data_type.html" title="Go 布尔数据类型">Go 布尔</a></li>
+<li><a href="go_integer_data_type.html" title="Go 整数数据类型">Go 整数</a></li>
+<li><a href="go_float_data_type.html" title="Go 浮点数据类型">Go 浮点</a></li>
+<li><a href="go_string_data_type.html" title="Go 字符串数据类型">Go 字符串</a></li>
+<li><a href="go_arrays.html" title="Go 数组">Go 数组</a></li>
+<li><a href="go_slices.html" title="Go 创建切片">Go 创建切片</a></li>
+<li><a href="go_slices_modify.html" title="Go 修改切片">Go 修改切片</a></li>
+<li><a href="go_operators.html" title="Go 运算符">Go 运算符</a></li>
+<li><a href="go_conditions.html" title="Go 条件语句">Go 条件语句</a></li>
+<li><a href="go_if_statement.html" title="Go if 语句">Go if 语句</a></li>
+<li><a href="go_else_statement.html" title="Go if else 语句">Go if else 语句</a></li>
+<li><a href="go_elseif_statement.html" title="Go else if 语句">Go else if 语句</a></li>
+<li><a href="go_nested_if.html" title="Go 嵌套 if 语句">Go 嵌套 if 语句</a></li>
+<li><a href="go_switch.html" title="Go Switch 语句">Go Switch</a></li>
+<li><a href="go_loops.html" title="Go 循环">Go 循环</a></li>
+<li><a href="go_functions.html" title="Go 函数">Go 函数</a></li>
+<li><a href="go_function_parameters.html" title="Go 函数参数">Go 函数参数</a></li>
+<li><a href="go_function_returns.html" title="Go 函数返回">Go 函数返回</a></li>
+<li><a href="go_function_recursion.html" title="Go 递归函数">Go 递归函数</a></li>
+<li><a href="go_struct.html" title="Go 结构体">Go 结构体</a></li>
+<li><a href="go_maps.html" title="Go 映射">Go 映射</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Go 格式化动词</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="go_output.html" title="Go 输出">Go 输出</a></li>
+<li class="next"><a href="go_data_types.html" title="Go 数据类型">Go 数据类型</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>Printf() 的格式化动词</h2>
+
+<p>Go 提供了几种可以与 <code>Printf()</code> 函数一起使用的格式化动词。</p>
+</section>
+
+
+
+<section>
+<h2>通用格式化动词</h2>
+
+<p>以下动词可用于所有数据类型：</p>
+
+<table class="ref">
+<tr>
+<th>动词</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td>%v</td>
+<td>以默认格式打印值。</td>
+</tr>
+
+<tr>
+<td>%#v</td>
+<td>以 Go 语法格式打印值。</td>
+</tr>
+
+<tr>
+<td>%T</td>
+<td>打印值的类型。</td>
+</tr>
+
+<tr>
+<td>%%</td>
+<td>打印 % 符号。</td>
+</tr>
+</table>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var i = 15.5
+  var txt = &quot;Hello World!&quot;
+
+  fmt.Printf(&quot;%v\n&quot;, i)
+  fmt.Printf(&quot;%#v\n&quot;, i)
+  fmt.Printf(&quot;%v%%\n&quot;, i)
+  fmt.Printf(&quot;%T\n&quot;, i)
+
+  fmt.Printf(&quot;%v\n&quot;, txt)
+  fmt.Printf(&quot;%#v\n&quot;, txt)
+  fmt.Printf(&quot;%T\n&quot;, txt)
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="language-go">
+15.5
+15.5
+15.5%
+float64
+Hello World!
+&quot;Hello World!&quot;
+string
+</pre>
+
+<p class="tiy"><a target="_blank" href="tcbae.html?f=go_formatting_1">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>整数格式化动词</h2>
+
+<p>以下动词可以与整数数据类型一起使用：</p>
+
+<table class="ref">
+<tr>
+<th>动词</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td>%b</td>
+<td>二进制</td>
+</tr>
+
+<tr>
+<td>%d</td>
+<td>十进制</td>
+</tr>
+
+<tr>
+<td>%+d</td>
+<td>十进制，并始终显示符号</td>
+</tr>
+
+<tr>
+<td>%o</td>
+<td>八进制</td>
+</tr>
+
+<tr>
+<td>%O</td>
+<td>八进制，前缀为 0o</td>
+</tr>
+
+<tr>
+<td>%x</td>
+<td>十六进制，小写</td>
+</tr>
+
+<tr>
+<td>%X</td>
+<td>十六进制，大写</td>
+</tr>
+
+<tr>
+<td>%#x</td>
+<td>十六进制，前缀为 0x</td>
+</tr>
+
+<tr>
+<td>%4d</td>
+<td>用空格填充（宽度为 4，右对齐）</td>
+</tr>
+
+<tr>
+<td>%-4d</td>
+<td>用空格填充（宽度为 4，左对齐）</td>
+</tr>
+
+<tr>
+<td>%04d</td>
+<td>用零填充（宽度为 4）</td>
+</tr>
+</table>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var i = 15
+ 
+  fmt.Printf(&quot;%b\n&quot;, i)
+  fmt.Printf(&quot;%d\n&quot;, i)
+  fmt.Printf(&quot;%+d\n&quot;, i)
+  fmt.Printf(&quot;%o\n&quot;, i)
+  fmt.Printf(&quot;%O\n&quot;, i)
+  fmt.Printf(&quot;%x\n&quot;, i)
+  fmt.Printf(&quot;%X\n&quot;, i)
+  fmt.Printf(&quot;%#x\n&quot;, i)
+  fmt.Printf(&quot;%4d\n&quot;, i)
+  fmt.Printf(&quot;%-4d\n&quot;, i)
+  fmt.Printf(&quot;%04d\n&quot;, i)
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="language-go">
+1111
+15
++15
+17
+0o17
+f
+F
+0xf
+  15
+15
+0015
+</pre>
+
+<p class="tiy"><a target="_blank" href="t3d70.html?f=go_formatting_2">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>字符串格式化动词</h2>
+
+<p>以下动词可以与字符串数据类型一起使用：</p>
+
+<table class="ref">
+<tr>
+<th>动词</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td>%s</td>
+<td>将值打印为普通字符串。</td>
+</tr>
+
+<tr>
+<td>%q</td>
+<td>将值打印为带双引号的字符串。</td>
+</tr>
+
+<tr>
+<td>%8s</td>
+<td>将值打印为普通字符串（宽度为 8，右对齐）。</td>
+</tr>
+
+<tr>
+<td>%-8s</td>
+<td>将值打印为普通字符串（宽度为 8，左对齐）。</td>
+</tr>
+
+<tr>
+<td>%x</td>
+<td>将值打印为字节值的十六进制转储。</td>
+</tr>
+
+<tr>
+<td>% x</td>
+<td>将值打印为带空格的十六进制转储。</td>
+</tr>
+</table>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var txt = &quot;Hello&quot;
+ 
+  fmt.Printf(&quot;%s\n&quot;, txt)
+  fmt.Printf(&quot;%q\n&quot;, txt)
+  fmt.Printf(&quot;%8s\n&quot;, txt)
+  fmt.Printf(&quot;%-8s\n&quot;, txt)
+  fmt.Printf(&quot;%x\n&quot;, txt)
+  fmt.Printf(&quot;% x\n&quot;, txt)
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="language-go">
+Hello
+&quot;Hello&quot;
+   Hello
+Hello
+48656c6c6f
+48 65 6c 6c 6f
+</pre>
+
+<p class="tiy"><a target="_blank" href="t411f.html?f=go_formatting_3">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>布尔格式化动词</h2>
+
+<p>以下动词可以与布尔数据类型一起使用：</p>
+
+<table class="ref">
+<tr>
+<th>动词</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td>%t</td>
+<td>以 true 或 false 格式打印布尔运算符的值（与使用 %v 相同）。</td>
+</tr>
+</table>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var i = true
+  var j = false
+
+  fmt.Printf(&quot;%t\n&quot;, i)
+  fmt.Printf(&quot;%t\n&quot;, j)
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="language-go">
+true
+false
+</pre>
+
+<p class="tiy"><a target="_blank" href="t4a0e.html?f=go_formatting_4">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>浮点格式化动词</h2>
+
+<p>以下动词可与 float 数据类型一起使用：</p>
+
+<table class="ref">
+<tr>
+<th>动词</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td>%e</td>
+<td>使用 'e' 作为指数的科学计数法。</td>
+</tr>
+
+<tr>
+<td>%f</td>
+<td>小数点，没有指数。</td>
+</tr>
+
+<tr>
+<td>%.2f</td>
+<td>默认宽度，精度为 2。</td>
+</tr>
+
+<tr>
+<td>%6.2f</td>
+<td>宽度为 6，精度为 2。</td>
+</tr>
+
+<tr>
+<td>%g</td>
+<td>根据需要显示指数，仅显示必要的数字。</td>
+</tr>
+</table>
+
+<h3>实例</h3>
+
+<pre class="language-go">
+package main
+import (&quot;fmt&quot;)
+
+func main() {
+  var i = 3.141
+
+  fmt.Printf(&quot;%e\n&quot;, i)
+  fmt.Printf(&quot;%f\n&quot;, i)
+  fmt.Printf(&quot;%.2f\n&quot;, i)
+  fmt.Printf(&quot;%6.2f\n&quot;, i)
+  fmt.Printf(&quot;%g\n&quot;, i)
+}
+</pre>
+
+<p>结果：</p>
+
+<pre class="language-go">
+3.141000e+00
+3.141000
+3.14
+  3.14
+3.141
+</pre>
+
+<p class="tiy"><a target="_blank" href="tcaea.html?f=go_formatting_5">亲自试一试</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="go_output.html" title="Go 输出">Go 输出</a></li>
+<li class="next"><a href="go_data_types.html" title="Go 数据类型">Go 数据类型</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/go/go_formatting_verbs.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:01:33 GMT -->
+</html>

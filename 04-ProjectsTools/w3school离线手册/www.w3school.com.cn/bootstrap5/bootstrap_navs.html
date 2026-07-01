@@ -1,0 +1,521 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/bootstrap5/bootstrap_navs.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:21:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Bootstrap 5 导航</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Bootstrap 5 教程</h2>
+<ul>
+<li><a href="index.html" title="Bootstrap 5 教程">BS5 教程</a></li>
+<li><a href="bootstrap_get_started.html" title="Bootstrap 5 入门">BS5 入门</a></li>
+<li><a href="bootstrap_containers.html" title="Bootstrap 5 容器">BS5 容器</a></li>
+<li><a href="bootstrap_grid_basic.html" title="Bootstrap 5 网格">BS5 网格基础</a></li>
+<li><a href="bootstrap_typography.html" title="Bootstrap 5 文字/排版">BS5 排版</a></li>
+<li><a href="bootstrap_colors.html" title="Bootstrap 5 颜色">BS5 颜色</a></li>
+<li><a href="bootstrap_tables.html" title="Bootstrap 5 表格">BS5 表格</a></li>
+<li><a href="bootstrap_images.html" title="Bootstrap 5 图像">BS5 图像</a></li>
+<li><a href="bootstrap_jumbotron.html" title="Bootstrap 5 Jumbotron">BS5 Jumbotron</a></li>
+<li><a href="bootstrap_alerts.html" title="Bootstrap 5 警告框">BS5 警告框</a></li>
+<li><a href="bootstrap_buttons.html" title="Bootstrap 5 按钮">BS5 按钮</a></li>
+<li><a href="bootstrap_button_groups.html" title="Bootstrap 5 按钮组">BS5 按钮组</a></li>
+<li><a href="bootstrap_badges.html" title="Bootstrap 5 徽章">BS5 徽章</a></li>
+<li><a href="bootstrap_progressbars.html" title="Bootstrap 5 进度条">BS5 进度条</a></li>
+<li><a href="bootstrap_spinners.html" title="Bootstrap 5 加载器">BS5 加载器</a></li>
+<li><a href="bootstrap_pagination.html" title="Bootstrap 5 分页">BS5 分页</a></li>
+<li><a href="bootstrap_list_groups.html" title="Bootstrap 5 列表组">BS5 列表组</a></li>
+<li><a href="bootstrap_cards.html" title="Bootstrap 5 卡片">BS5 卡片</a></li>
+<li><a href="bootstrap_dropdowns.html" title="Bootstrap 5 下拉菜单">BS5 下拉菜单</a></li>
+<li><a href="bootstrap_collapse.html" title="Bootstrap 5 折叠">BS5 折叠</a></li>
+<li class="currentLink"><a href="bootstrap_navs.html" title="Bootstrap 5 导航">BS5 导航</a></li>
+<li><a href="bootstrap_navbar.html" title="Bootstrap 5 导航栏">BS5 导航栏</a></li>
+<li><a href="bootstrap_carousel.html" title="Bootstrap 5 轮播">BS5 轮播</a></li>
+<li><a href="bootstrap_modal.html" title="Bootstrap 5 模态">BS5 模态</a></li>
+<li><a href="bootstrap_tooltip.html" title="Bootstrap 5 工具提示">BS5 工具提示</a></li>
+<li><a href="bootstrap_popover.html" title="Bootstrap 5 弹出框">BS5 弹出框</a></li>
+<li><a href="bootstrap_toast.html" title="Bootstrap 5 Toast">BS5 Toast</a></li>
+<li><a href="bootstrap_scrollspy.html" title="Bootstrap 5 Scrollspy">BS5 Scrollspy</a></li>
+<li><a href="bootstrap_offcanvas.html" title="Bootstrap 5 Offcanvas">BS5 Offcanvas</a></li>
+<li><a href="bootstrap_utilities.html" title="Bootstrap 5 实用工具">BS5 实用工具</a></li>
+<li><a href="bootstrap_flex.html" title="Bootstrap 5 Flex">BS5 Flex</a></li>
+</ul>
+<h2>Bootstrap 5 表单</h2>
+<ul>
+<li><a href="bootstrap_forms.html" title="Bootstrap 5 表单">BS5 表单</a></li>
+<li><a href="bootstrap_form_select.html" title="Bootstrap 5 选择菜单">BS5 选择菜单</a></li>
+<li><a href="bootstrap_form_check_radio.html" title="Bootstrap 5 复选框和单选按钮">BS5 复选框和单选按钮</a></li>
+<li><a href="bootstrap_form_range.html" title="Bootstrap 5 范围">BS5 范围</a></li>
+<li><a href="bootstrap_form_input_group.html" title="Bootstrap 5 输入组">BS5 输入组</a></li>
+<li><a href="bootstrap_form_floating_labels.html" title="Bootstrap 5 表单浮动标签">BS5 浮动标签</a></li>
+<li><a href="bootstrap_form_validation.html" title="Bootstrap 5 表单验证">BS5 表单验证</a></li>
+</ul>
+<h2>Bootstrap 5 网格</h2>
+<ul>
+<li><a href="bootstrap_grid_system.html" title="Bootstrap 5 网格系统">BS5 网格系统</a></li>
+<li><a href="bootstrap_grid_stacked_to_hor.html" title="Bootstrap 5 堆叠/水平">BS5 堆叠/水平</a></li>
+<li><a href="bootstrap_grid_xsmall.html" title="Bootstrap 5 网格：超小型设备">BS5 网格 XSmall</a></li>
+<li><a href="bootstrap_grid_small.html" title="Bootstrap 5 网格：小型设备">BS5 网格 Small</a></li>
+<li><a href="bootstrap_grid_medium.html" title="Bootstrap 5 网格：中型设备">BS5 网格 Medium</a></li>
+<li><a href="bootstrap_grid_large.html" title="Bootstrap 5 网格：大型设备">BS5 网格 Large</a></li>
+<li><a href="bootstrap_grid_xlarge.html" title="Bootstrap 5 网格：超大型设备">BS5 网格 XLarge</a></li>
+<li><a href="bootstrap_grid_xxl.html" title="Bootstrap 5 网格：特大型设备">BS5 网格 XXL</a></li>
+<li><a href="bootstrap_grid_examples.html" title="Bootstrap 5 网格实例">BS5 网格实例</a></li>
+</ul>
+<h2>Bootstrap 5 其他</h2>
+<ul>
+<li><a href="bootstrap_templates.html" title="Bootstrap 5 基础模板">BS5 基础模板</a></li>
+<li><a href="bootstrap_quiz.html" title="Bootstrap 5 测验">BS5 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Bootstrap 5 导航</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="bootstrap_collapse.html" title="Bootstrap 5 折叠">BS5 折叠</a></li>
+<li class="next"><a href="bootstrap_navbar.html" title="Bootstrap 5 导航栏">BS5 导航栏</a></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>导航菜单</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_nav.html" style="width:100%;height:60px;border:none;margin-top:15px;overflow:visible;"></iframe>
+
+<p>如果要创建简单的水平菜单，请将 <code>.nav</code> 类添加到 <code>&lt;ul&gt;</code> 元素，然后为每个 <code>&lt;li&gt;</code> 元素添加 <code>.nav-item</code> 并将 <code>.nav-link</code> 类添加到它们的链接：</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;ul class=&quot;nav&quot;&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; href=&quot;#&quot;&gt;链接&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; href=&quot;#&quot;&gt;链接&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; href=&quot;#&quot;&gt;链接&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link disabled&quot; href=&quot;#&quot;&gt;禁用&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t4878.html?s=h&amp;f=bs_nav">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>对齐导航栏</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_nav_align.html" style="width:100%;height:150px;border:none;margin-top:15px;overflow:visible;"></iframe>
+
+<p>添加 <code>.justify-content-center</code> 类使导航居中，添加 <code>.justify-content-end</code> 类使导航右对齐。</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;!-- 居中的导航 --&gt;
+&lt;ul class=&quot;nav justify-content-center&quot;&gt;
+
+&lt;!-- 右对齐的导航 --&gt;
+&lt;ul class=&quot;nav justify-content-end&quot;&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t6737.html?s=h&amp;f=bs_nav_align">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>垂直导航栏</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_nav_vertical.html" style="width:100%;height:180px;border:none;margin-top:15px;overflow:visible;"></iframe>
+
+<p>添加 <code>.flex-column</code> 类可创建垂直导航：</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;ul class=&quot;nav flex-column&quot;&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t0a2b.html?s=h&amp;f=bs_nav_vertical">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>选项卡</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_nav_tabs.html" style="width:100%;height:60px;border:none;margin-top:15px;overflow:visible;"></iframe>
+
+<p>请使用 <code>.nav-tabs</code> 类将导航菜单转换为导航选项卡。并将 <code>.active</code> 类添加到活动/当前链接。如果您希望选项卡可切换，请参阅本页的最后一个例子。</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;ul class=&quot;nav nav-tabs&quot;&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link active&quot; href=&quot;#&quot;&gt;活动&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; href=&quot;#&quot;&gt;链接&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; href=&quot;#&quot;&gt;链接&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link disabled&quot; href=&quot;#&quot;&gt;禁用&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tc014.html?s=h&amp;f=bs_nav_tabs">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>胶囊</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_nav_pills.html" style="width:100%;height:60px;border:none;margin-top:15px;overflow:visible;"></iframe>
+
+<p>使用 <code>.nav-pills</code> 类可将导航菜单设置为导航胶囊。如果您希望胶囊可切换，请参阅本页的最后一个例子。</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;ul class=&quot;nav nav-pills&quot;&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link active&quot; href=&quot;#&quot;&gt;活动&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; href=&quot;#&quot;&gt;链接&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; href=&quot;#&quot;&gt;链接&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link disabled&quot; href=&quot;#&quot;&gt;禁用&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t2870.html?s=h&amp;f=bs_nav_pills">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>等宽的选项卡/胶囊导航</h2>
+
+<p>请使用 <code>.nav-justified</code> 类（等宽）对齐标签/胶囊：</p>
+
+<iframe scrolling="no" src="../demo/bs/bs_nav_justified.html" style="width:100%;height:130px;border:none;margin-top:15px;overflow:visible;"></iframe>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;ul class=&quot;nav nav-pills nav-justified&quot;&gt;..&lt;/ul&gt;
+&lt;ul class=&quot;nav nav-tabs nav-justified&quot;&gt;..&lt;/ul&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t34d7.html?s=h&amp;f=bs_nav_justified">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>胶囊下拉菜单</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_nav_pills_dropdown.html" style="width:100%;height:60px;border:none;margin-top:15px;overflow:visible;"></iframe>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;ul class=&quot;nav nav-pills&quot;&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link active&quot; href=&quot;#&quot;&gt;活动&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item dropdown&quot;&gt;
+    &lt;a class=&quot;nav-link dropdown-toggle&quot; data-bs-toggle=&quot;dropdown&quot; href=&quot;#&quot;&gt;Dropdown&lt;/a&gt;
+    &lt;ul class=&quot;dropdown-menu&quot;&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;链接 1&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;链接 2&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;链接 3&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; href=&quot;#&quot;&gt;链接&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link disabled&quot; href=&quot;#&quot;&gt;禁用&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t2ed8.html?s=h&amp;f=bs_nav_pills_dropdown">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>选项卡下拉菜单</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_nav_tabs_dropdown.html" style="width:100%;height:60px;border:none;margin-top:15px;overflow:visible;"></iframe>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;ul class=&quot;nav nav-tabs&quot;&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link active&quot; href=&quot;#&quot;&gt;活动&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item dropdown&quot;&gt;
+    &lt;a class=&quot;nav-link dropdown-toggle&quot; data-bs-toggle=&quot;dropdown&quot; href=&quot;#&quot;&gt;Dropdown&lt;/a&gt;
+    &lt;ul class=&quot;dropdown-menu&quot;&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;链接 1&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;链接 2&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;链接 3&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; href=&quot;#&quot;&gt;链接&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link disabled&quot; href=&quot;#&quot;&gt;禁用&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t6866.html?s=h&amp;f=bs_nav_tabs_dropdown">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>可切换的 / 动态选项卡</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_nav_tabs_toggleable.html" style="width:100%;height:200px;border:none;margin-top:15px;overflow:visible;"></iframe>
+
+<p>如需使选项卡可切换，请将 <code>data-toggle=&quot;tab&quot;</code> 属性添加到每个链接。然后为每个选项卡添加有唯一 ID 的 <code>.tab-pane</code> 类，并将它们包装在带有 <code>.tab-content</code> 类的 <code>&lt;div&gt;</code> 元素中。</p>
+
+<p>如果您希望选项卡在单击时能够淡入淡出，请将 <code>.fade</code> 类添加到 <code>.tab-pane</code>：</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;!-- Nav tabs --&gt;
+&lt;ul class=&quot;nav nav-tabs&quot;&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link active&quot; data-bs-toggle=&quot;tab&quot; href=&quot;#home&quot;&gt;Home&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; data-bs-toggle=&quot;tab&quot; href=&quot;#menu1&quot;&gt;Menu 1&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; data-bs-toggle=&quot;tab&quot; href=&quot;#menu2&quot;&gt;Menu 2&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- Tab panes --&gt;
+&lt;div class=&quot;tab-content&quot;&gt;
+  &lt;div class=&quot;tab-pane container active&quot; id=&quot;home&quot;&gt;...&lt;/div&gt;
+  &lt;div class=&quot;tab-pane container fade&quot; id=&quot;menu1&quot;&gt;...&lt;/div&gt;
+  &lt;div class=&quot;tab-pane container fade&quot; id=&quot;menu2&quot;&gt;...&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t03ef.html?s=h&amp;f=bs_nav_tabs_toggleable">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>可切换的 / 动态胶囊导航</h2>
+
+<iframe scrolling="no" src="../demo/bs/bs_nav_pills_toggleable.html" style="width:100%;height:200px;border:none;margin-top:15px;overflow:visible;"></iframe>
+
+<p>相同的代码适用于导航；仅将 data-toggle 属性更改为 <code>data-toggle=&quot;pill&quot;</code> 即可：</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;!--导航胶囊 --&gt;
+&lt;ul class=&quot;nav nav-pills&quot;&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link active&quot; data-bs-toggle=&quot;pill&quot; href=&quot;#home&quot;&gt;春日&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; data-bs-toggle=&quot;pill&quot; href=&quot;#menu1&quot;&gt;初夏&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; data-bs-toggle=&quot;pill&quot; href=&quot;#menu2&quot;&gt;山行&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- 选项卡窗格 --&gt;
+&lt;div class=&quot;tab-content&quot;&gt;
+  &lt;div class=&quot;tab-pane container active&quot; id=&quot;home&quot;&gt;...&lt;/div&gt;
+  &lt;div class=&quot;tab-pane container fade&quot; id=&quot;menu1&quot;&gt;...&lt;/div&gt;
+  &lt;div class=&quot;tab-pane container fade&quot; id=&quot;menu2&quot;&gt;...&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/ta1dd.html?s=h&amp;f=bs_nav_pills_toggleable">亲自试一试</a></p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="bootstrap_collapse.html" title="Bootstrap 5 折叠">BS5 折叠</a></li>
+<li class="next"><a href="bootstrap_navbar.html" title="Bootstrap 5 导航栏">BS5 导航栏</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_quiz"><a href="bootstrap_quiz.html">JavaScript 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/bootstrap5/bootstrap_navs.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:21:50 GMT -->
+</html>

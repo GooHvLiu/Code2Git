@@ -1,0 +1,9 @@
+﻿{
+    "name":"Bill",
+    "age":19,
+    "pets":[
+        { "animal":"dog", "name":"KaKa" },
+        { "animal":"cat", "name":"Kitty" },
+        { "animal":"hamster", "name":"Lightning" }
+    ]
+}

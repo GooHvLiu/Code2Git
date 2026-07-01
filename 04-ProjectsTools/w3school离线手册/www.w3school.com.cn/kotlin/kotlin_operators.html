@@ -1,0 +1,513 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/kotlin/kotlin_operators.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Kotlin 运算符</title>
+
+</head>
+
+<body class="serverscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Kotlin 教程</h2>
+<ul>
+<li><a href="index.html" title="Kotlin 教程">Kotlin 教程</a></li>
+<li><a href="kotlin_intro-2.html" title="Kotlin 简介">Kotlin 简介</a></li>
+<li><a href="kotlin_getstarted.html" title="Kotlin 入门">Kotlin 入门</a></li>
+<li><a href="kotlin_syntax.html" title="Kotlin 语法">Kotlin 语法</a></li>
+<li><a href="kotlin_output.html" title="Kotlin 输出">Kotlin 输出</a></li>
+<li><a href="kotlin_comments.html" title="Kotlin 注释">Kotlin 注释</a></li>
+<li><a href="kotlin_variables.html" title="Kotlin 变量">Kotlin 变量</a></li>
+<li><a href="kotlin_data_types.html" title="Kotlin 数据类型">Kotlin 数据类型</a></li>
+<li class="currentLink"><a href="kotlin_operators.html" title="Kotlin 运算符">Kotlin 运算符</a></li>
+<li><a href="kotlin_strings.html" title="Kotlin 字符串">Kotlin 字符串</a></li>
+<li><a href="kotlin_booleans.html" title="Kotlin 布尔值">Kotlin 布尔值</a></li>
+<li><a href="kotlin_conditions.html" title="Kotlin If...Else">Kotlin If...Else</a></li>
+<li><a href="kotlin_when.html" title="Kotlin When">Kotlin When</a></li>
+<li><a href="kotlin_while_loop.html" title="Kotlin While 循环">Kotlin While 循环</a></li>
+<li><a href="kotlin_break_continue.html" title="Kotlin Break 和 Continue">Kotlin Break/Continue</a></li>
+<li><a href="kotlin_arrays.html" title="Kotlin 数组">Kotlin 数组</a></li>
+<li><a href="kotlin_for_loop.html" title="Kotlin For 循环">Kotlin For 循环</a></li>
+<li><a href="kotlin_ranges.html" title="Kotlin 范围">Kotlin 范围</a></li>
+<li><a href="kotlin_functions.html" title="Kotlin 函数">Kotlin 函数</a></li>
+</ul>
+<h2>Kotlin 类</h2>
+<ul>
+<li><a href="kotlin_oop.html" title="Kotlin OOP">Kotlin OOP</a></li>
+<li><a href="kotlin_classes.html" title="Kotlin 类和对象">Kotlin 类/对象</a></li>
+<li><a href="kotlin_constructors.html" title="Kotlin 构造函数">Kotlin 构造函数</a></li>
+<li><a href="kotlin_class_functions.html" title="Kotlin 类函数">Kotlin 类函数</a></li>
+<li><a href="kotlin_inheritance.html" title="Kotlin 继承">Kotlin 继承</a></li>
+</ul>
+<h2>Kotlin 实例</h2>
+<ul>
+<li><a href="kotlin_examples.html" title="Kotlin 实例">Kotlin 实例</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Kotlin 运算符</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="kotlin_data_types.html" title="Kotlin 数据类型">Kotlin 数据类型</a></li>
+<li class="next"><a href="kotlin_strings.html" title="Kotlin 字符串">Kotlin 字符串</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>Kotlin 运算符</h2>
+
+<p>运算符用于对变量和值执行操作。</p>
+
+<p>该值被称为操作数，而两个操作数之间的操作是由<em>运算符</em>定义的：</p>
+
+<table class="ref">
+<tr>
+<th>操作数</th>
+<th>运算符</th>
+<th>操作数</th>
+</tr>
+
+<tr>
+<td>100</td>
+<td>+</td>
+<td>50</td>
+</tr>
+</table>
+
+<p>在下面的例子中，数字 100 和 50 是<em>操作数</em>，+ 符号是<em>运算符</em>：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+var x = 100 + 50
+</pre>
+
+<p class="tiy"><a target="_blank" href="t4e3a.html?f=kotlin_oper_1">亲自试一试</a></p>
+
+<p>尽管 <code>+</code> 运算符经常用于将两个值相加，如上例所示，但它也可以用于将变量和值相加，或者变量和变量相加：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+var sum1 = 100 + 50       // 150 (100 + 50)
+var sum2 = sum1 + 250     // 400 (150 + 250)
+var sum3 = sum2 + sum2    // 800 (400 + 400)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t1294.html?f=kotlin_oper_2">亲自试一试</a></p>
+
+<p>Kotlin 将运算符分为以下几组：</p>
+
+<ul>
+<li>算术运算符</li>
+<li>赋值运算符</li>
+<li>比较运算符</li>
+<li>逻辑运算符</li>
+</ul>
+</section>
+
+
+
+<section>
+<h2>算术运算符</h2>
+
+<p>算术运算符用于执行常见的数学运算。</p>
+
+<table class="ref">
+<tr>
+<th style="width: 15%;">运算符</th>
+<th style="width: 10%;">名称</th>
+<th>描述</th>
+<th style="width: 30%;">例子</th>
+<th style="width: 8%;">试一试</th>
+</tr>
+
+<tr>
+<td>+</td>
+<td>加法</td>
+<td>将两个值相加</td>
+<td>x + y</td>
+<td><a target="_blank" href="tca04.html?f=kotlin_oper_add">试一试</a></td>
+</tr>
+
+<tr>
+<td>-</td>
+<td>减法</td>
+<td>从一个值中减去另一个值</td>
+<td>x - y</td>
+<td><a target="_blank" href="t31e5.html?f=kotlin_oper_sub">试一试</a></td>
+</tr>
+
+<tr>
+<td>*</td>
+<td>乘法</td>
+<td>将两个值相乘</td>
+<td>x * y</td>
+<td><a target="_blank" href="tcac1.html?f=kotlin_oper_mult">试一试</a></td>
+</tr>
+
+<tr>
+<td>/</td>
+<td>除法</td>
+<td>将一个值除以另一个值</td>
+<td>x / y</td>
+<td><a target="_blank" href="tc5ba.html?f=kotlin_oper_div">试一试</a></td>
+</tr>
+
+<tr>
+<td>%</td>
+<td>取模</td>
+<td>返回除法余数</td>
+<td>x % y</td>
+<td><a target="_blank" href="t3d79.html?f=kotlin_oper_mod">试一试</a></td>
+</tr>
+
+<tr>
+<td>++</td>
+<td>递增</td>
+<td>将值增加 1</td>
+<td>++x</td>
+<td><a target="_blank" href="t4320.html?f=kotlin_oper_inc">试一试</a></td>
+</tr>
+
+<tr>
+<td>--</td>
+<td>递减</td>
+<td>将值减 1</td>
+<td>--x</td>
+<td><a target="_blank" href="tcd60.html?f=kotlin_oper_dec">试一试</a></td>
+</tr>
+</table>
+</section>
+
+
+
+<section>
+<h2>Kotlin 赋值运算符</h2>
+
+<p>赋值运算符用于给变量赋值。</p>
+
+<p>在下面的例子中，我们使用<em>赋值运算符</em> (<code>=</code>) 将值 <mark>10</mark> 赋给名为 <mark>x</mark> 的变量：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+var x = 10
+</pre>
+
+<p class="tiy"><a target="_blank" href="tea24.html?f=kotlin_oper_assignment_1">亲自试一试</a></p>
+
+<p><em>加法赋值运算符</em> (<mark>+=</mark>) 将值添加到变量：</p>
+
+<h3>实例</h3>
+
+<pre class="language-kotlin">
+var x = 10
+x += 5
+</pre>
+
+<p class="tiy"><a target="_blank" href="tcdac.html?f=kotlin_oper_assignment_2">亲自试一试</a></p>
+
+<p>所有赋值运算符的列表：</p>
+
+<table class="ref">
+<tr>
+<th style="width: 25%;">运算符</th>
+<th>例子</th>
+<th style="width: 30%;">等同于</th>
+<th style="width: 8%;">试一试</th>
+</tr>
+
+<tr>
+<td>=</td>
+<td>x = 5</td>
+<td>x = 5</td>
+<td><a target="_blank" href="t606c.html?f=kotlin_oper_ass_1">试一试</a></td>
+</tr>
+
+<tr>
+<td>+=</td>
+<td>x += 3</td>
+<td>x = x + 3</td>
+<td><a target="_blank" href="t327a.html?f=kotlin_oper_ass_2">试一试</a></td>
+</tr>
+
+<tr>
+<td>-=</td>
+<td>x -= 3</td>
+<td>x = x - 3</td>
+<td><a target="_blank" href="t2399.html?f=kotlin_oper_ass_3">试一试</a></td>
+</tr>
+
+<tr>
+<td>*=</td>
+<td>x *= 3</td>
+<td>x = x * 3</td>
+<td><a target="_blank" href="t4a68.html?f=kotlin_oper_ass_4">试一试</a></td>
+</tr>
+
+<tr>
+<td>/=</td>
+<td>x /= 3</td>
+<td>x = x / 3</td>
+<td><a target="_blank" href="t3593.html?f=kotlin_oper_ass_5">试一试</a></td>
+</tr>
+
+<tr>
+<td>%=</td>
+<td>x %= 3</td>
+<td>x = x % 3</td>
+<td><a target="_blank" href="t3d41.html?f=kotlin_oper_ass_6">试一试</a></td>
+</tr>
+</table>
+</section>
+
+
+
+<section>
+<h2>Kotlin 比较运算符</h2>
+
+<p>比较运算符用于比较两个值，并返回布尔值：<code>true</code> 或 <code>false</code>。</p>
+
+<table class="ref">
+<tr>
+<th style="width: 25%;">运算符</th>
+<th>名称</th>
+<th style="width: 30%;">例子</th>
+<th style="width: 8%;">试一试</th>
+</tr>
+
+<tr>
+<td>==</td>
+<td>等于</td>
+<td>x == y</td>
+<td><a target="_blank" href="t563a.html?f=kotlin_oper_compare_1">试一试</a></td>
+</tr>
+
+<tr>
+<td>!=</td>
+<td>不等于</td>
+<td>x != y</td>
+<td><a target="_blank" href="t8d84.html?f=kotlin_oper_compare_2">试一试</a></td>
+</tr>
+
+<tr>
+<td>&gt;</td>
+<td>大于</td>
+<td>x &gt; y</td>
+<td><a target="_blank" href="tceb0.html?f=kotlin_oper_compare_3">试一试</a></td>
+</tr>
+
+<tr>
+<td>&lt;</td>
+<td>小于</td>
+<td>x &lt; y</td>
+<td><a target="_blank" href="ta203.html?f=kotlin_oper_compare_4">试一试</a></td>
+</tr>
+
+<tr>
+<td>&gt;=</td>
+<td>大于或等于</td>
+<td>x &gt;= y</td>
+<td><a target="_blank" href="t306c.html?f=kotlin_oper_compare_5">试一试</a></td>
+</tr>
+
+<tr>
+<td>&lt;=</td>
+<td>小于或等于</td>
+<td>x &lt;= y</td>
+<td><a target="_blank" href="t2b3f.html?f=kotlin_oper_compare_6">试一试</a></td>
+</tr>
+</table>
+
+<p>您将在<a href="kotlin_booleans.html" title="Kotlin 布尔值">布尔</a>和<a href="kotlin_conditions.html" title="Kotlin If ... Else">条件</a>章节中了解有关布尔的更多信息。</p>
+</section>
+
+
+
+<section>
+<h2>Kotlin 逻辑运算符</h2>
+
+<p>逻辑运算符用于确定变量或值之间的逻辑：</p>
+
+<table class="ref">
+<tr>
+<th style="width: 15%;">运算符</th>
+<th style="width: 10%;">名称</th>
+<th>描述</th>
+<th style="width: 30%;">例子</th>
+<th style="width: 8%;">试一试</th>
+</tr>
+
+<tr>
+<td>&amp;&amp;</td>
+<td>逻辑与</td>
+<td>如果两个语句都为真，则返回 true。</td>
+<td>x &lt; 5 &amp;&amp;  x &lt; 10</td>
+<td><a target="_blank" href="t73e2.html?f=kotlin_oper_logical_1">试一试</a></td>
+</tr>
+
+<tr>
+<td>||</td>
+<td>逻辑或</td>
+<td>如果其中一项语句为真，则返回 true。</td>
+<td>x &lt; 5 || x &lt; 4</td>
+<td><a target="_blank" href="tba5a.html?f=kotlin_oper_logical_2">试一试</a></td>
+</tr>
+
+<tr>
+<td>!</td>
+<td>逻辑非</td>
+<td>将结果取反，如果结果为真，则返回 false。</td>
+<td></td>
+<td><a target="_blank" href="tcba9.html?f=kotlin_oper_logical_3">试一试</a></td>
+</table>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="kotlin_data_types.html" title="Kotlin 数据类型">Kotlin 数据类型</a></li>
+<li class="next"><a href="kotlin_strings.html" title="Kotlin 字符串">Kotlin 字符串</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_example"><a href="kotlin_examples.html">Kotlin 实例</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/kotlin/kotlin_operators.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:24 GMT -->
+</html>

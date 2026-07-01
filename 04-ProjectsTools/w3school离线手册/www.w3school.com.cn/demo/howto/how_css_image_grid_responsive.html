@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from www.w3school.com.cn/demo/howto/how_css_image_grid_responsive.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:30 GMT -->
+<meta charset="utf-8">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+}
+
+.header {
+  text-align: center;
+  padding: 32px;
+}
+
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .column {
+    -ms-flex: 50%;
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    -ms-flex: 100%;
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+</style>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <h1>响应式图片网格</h1>
+  <p>调整浏览器窗口大小可查看响应式效果。</p>
+</div>
+
+<!-- Photo Grid -->
+<div class="row"> 
+  <div class="column">
+    <img src="../../i/photo/shanghai.jpg" style="width:100%">
+    <img src="../../i/photo/wuhan.jpg" style="width:100%">
+    <img src="../../i/photo/beijing.jpg" style="width:100%">
+    <img src="../../i/photo/shenzhen.jpg" style="width:100%">
+    <img src="../../i/photo/shenzhen-1.jpg" style="width:100%">
+    <img src="../../i/photo/wuhan-1.jpg" style="width:100%">
+    <img src="../../i/photo/shenzhen.jpg" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="../../i/photo/shanghai-1.jpg" style="width:100%">
+    <img src="../../i/photo/hangzhou-1.jpg" style="width:100%">
+    <img src="../../i/photo/shanghai.jpg" style="width:100%">
+    <img src="../../i/photo/shanghai-2.jpg" style="width:100%">
+    <img src="../../i/photo/wuhan.jpg" style="width:100%">
+    <img src="../../i/photo/shanghai-1.jpg" style="width:100%">
+  </div>  
+  <div class="column">
+    <img src="../../i/photo/shanghai.jpg" style="width:100%">
+    <img src="../../i/photo/wuhan.jpg" style="width:100%">
+    <img src="../../i/photo/beijing.jpg" style="width:100%">
+    <img src="../../i/photo/shenzhen.jpg" style="width:100%">
+    <img src="../../i/photo/shenzhen-1.jpg" style="width:100%">
+    <img src="../../i/photo/wuhan-1.jpg" style="width:100%">
+    <img src="../../i/photo/shenzhen.jpg" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="../../i/photo/shanghai-1.jpg" style="width:100%">
+    <img src="../../i/photo/hangzhou-1.jpg" style="width:100%">
+    <img src="../../i/photo/shanghai.jpg" style="width:100%">
+    <img src="../../i/photo/shanghai-2.jpg" style="width:100%">
+    <img src="../../i/photo/wuhan.jpg" style="width:100%">
+    <img src="../../i/photo/shanghai-1.jpg" style="width:100%">
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/demo/howto/how_css_image_grid_responsive.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:31 GMT -->
+</html>

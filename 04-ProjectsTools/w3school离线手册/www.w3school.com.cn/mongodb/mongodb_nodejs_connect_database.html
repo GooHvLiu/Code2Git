@@ -1,0 +1,290 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/mongodb/mongodb_nodejs_connect_database.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:45:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>MongoDB Node.js 数据库交互</title>
+
+</head>
+
+<body class="serverscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>MongoDB 教程</h2>
+<ul>
+<li><a href="index.html" title="MongoDB 教程">MongoDB 教程</a></li>
+<li><a href="mongodb_get_started.html" title="MongoDB 入门">MongoDB 入门</a></li>
+<li><a href="mongodb_query_api.html" title="MongoDB Query API">MongoDB Query API</a></li>
+<li><a href="mongodb_mongosh_create_database.html" title="MongoDB 创建数据库">MongoDB 创建数据库</a></li>
+<li><a href="mongodb_mongosh_create_collection.html" title="MongoDB 创建集合">MongoDB 创建集合</a></li>
+<li><a href="mongodb_mongosh_insert.html" title="MongoDB 插入">MongoDB 插入</a></li>
+<li><a href="mongodb_mongosh_find.html" title="MongoDB 查找">MongoDB 查找</a></li>
+<li><a href="mongodb_mongosh_update.html" title="MongoDB 更新">MongoDB 更新</a></li>
+<li><a href="mongodb_mongosh_delete.html" title="MongoDB 删除">MongoDB 删除</a></li>
+<li><a href="mongodb_query_operators.html" title="MongoDB 查询运算符">MongoDB 查询运算符</a></li>
+<li><a href="mongodb_update_operators.html" title="MongoDB 更新运算符">MongoDB 更新运算符</a></li>
+<li><a href="mongodb_aggregations_intro.html" title="MongoDB 聚合">MongoDB 聚合</a></li>
+<li><a href="mongodb_indexing_search.html" title="MongoDB 索引与搜索">MongoDB 索引与搜索</a></li>
+<li><a href="mongodb_schema_validation.html" title="MongoDB 验证">MongoDB 验证</a></li>
+<li><a href="mongodb_data_api.html" title="MongoDB Data API">MongoDB Data API</a></li>
+<li><a href="mongodb_drivers.html" title="MongoDB 驱动程序">MongoDB 驱动程序</a></li>
+<li class="currentLink"><a href="mongodb_nodejs_connect_database.html" title="MongoDB MongoDB Node.js 数据库交互">MongoDB Node.js</a></li>
+<li><a href="mongodb_charts.html" title="MongoDB 图表">MongoDB 图表</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>MongoDB Node.js 数据库交互</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="mongodb_drivers.html" title="MongoDB 驱动程序">MongoDB 驱动程序</a></li>
+<li class="next"><a href="mongodb_charts.html" title="MongoDB 图表">MongoDB 图表</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>Node.js 数据库交互</h2>
+
+<p>在本教程中，我们将使用 MongoDB Atlas 数据库。如果您还没有 MongoDB Atlas 帐户，可以在 MongoDB Atlas 上免费创建一个。</p>
+
+<p>我们还将使用在“聚合简介”部分中从示例数据中加载的“sample_mflix”数据库。</p>
+</section>
+
+
+
+<section>
+<h2>MongoDB Node.js 驱动程序安装</h2>
+
+<p>要在 Node.js 中使用 MongoDB，您需要在 Node.js 项目中安装 <code>mongodb</code> 包。</p>
+
+<p>请在终端中使用以下命令安装 <code>mongodb</code> 包：</p>
+
+<pre class="cmdline">
+npm install mongodb
+</pre>
+
+<p>现在我们可以使用这个包连接到 MongoDB 数据库。</p>
+
+<p>在项目目录中创建一个 index.js 文件。</p>
+
+<h3>index.js</h3>
+
+<pre class="language-jsx">
+const { MongoClient } = require('mongodb');
+</pre>
+</section>
+
+
+
+<section>
+<h2>连接字符串</h2>
+
+<p>为了连接到我们的 MongoDB Atlas 数据库，我们需要从 Atlas 仪表板获取连接字符串。</p>
+
+<p>转到<em>数据库</em>，然后在您的集群上单击<em>连接</em>按钮。</p>
+
+<p>选择<em>连接您的应用程序</em>，然后复制您的连接字符串。</p>
+
+<p>示例：<code>mongodb+srv://&lt;username&gt;:&lt;password&gt;@&lt;cluster.string&gt;.mongodb.net/myFirstDatabase?retryWrites=true&w=majority</code></p>
+
+<p>您需要将 <code>&lt;username&gt;</code>、<code>&lt;password&gt;</code> 和 <code>&lt;cluster.string&gt;</code> 替换为您的 MongoDB Atlas 用户名、密码和集群字符串。</p>
+</section>
+
+
+
+<section>
+<h2>连接到 MongoDB</h2>
+
+<p>让我们添加到我们的 index.js 文件中。</p>
+
+<h3>index.js</h3>
+
+<pre class="language-jsx">
+const { MongoClient } = require('mongodb');
+
+const uri = &quot;&lt;Your Connection String&gt;&quot;;
+const client = new MongoClient(uri);
+
+async function run() {
+  try {
+    await client.connect();
+    const db = client.db('sample_mflix');
+    const collection = db.collection('movies');
+
+    // 在集合中找到第一个文档
+    const first = await collection.findOne();
+    console.log(first);
+  } finally {
+    // 完成或出现错误时关闭数据库连接
+    await client.close();
+  }
+}
+run().catch(console.error);
+</pre>
+
+<p class="tiy"><a target="_blank" href="sd129.html?f=mongodb_nodejs">运行实例</a></p>
+
+<p>在终端中运行此文件。</p>
+
+<pre class="language-jsx">
+node index.js
+</pre>
+
+<p>您应该会在控制台中看到第一个记录的文档。</p>
+</section>
+
+
+
+<section>
+<h2>CRUD 和文档聚合</h2>
+
+<p>就像我们使用 <code>mongosh</code> 一样，我们可以使用 MongoDB Node.js 语言驱动程序在数据库中创建、读取、更新、删除和聚合文档。</p>
+
+<p>基于前面的示例，我们可以将 <code>collection.findOne()</code> 替换为 <code>find()</code>、<code>insertOne()</code>、<code>insertMany()</code>、<code>updateOne()</code>、<code>updateMany()</code>、<code>deleteOne()</code>、<code>deleteMany()</code> 或 <code>aggregate()</code>。</p>
+
+<p>可以尝试其中一些方法。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="mongodb_drivers.html" title="MongoDB 驱动程序">MongoDB 驱动程序</a></li>
+<li class="next"><a href="mongodb_charts.html" title="MongoDB 图表">MongoDB 图表</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/mongodb/mongodb_nodejs_connect_database.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:45:55 GMT -->
+</html>

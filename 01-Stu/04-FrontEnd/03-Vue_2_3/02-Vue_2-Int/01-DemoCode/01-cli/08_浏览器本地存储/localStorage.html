@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<title>localStorage</title>
+</head>
+
+<body>
+	<h2>localStorage</h2>
+	<button onclick="saveData()">点我保存一个数据</button>
+	<button onclick="readData()">点我读取一个数据</button>
+	<button onclick="deleteData()">点我删除一个数据</button>
+	<button onclick="deleteAllData()">点我清空一个数据</button>
+
+	<script type="text/javascript">
+		let p = { name: '张三', age: 18 }
+
+		//本地保存
+		function saveData() {
+			localStorage.setItem('msg', 'hello!!!')
+			// 会把下面的666修改为字符串
+			localStorage.setItem('msg2', 666)
+			//JSON.stringify会把对象类型变为string类型，并且能够体现出来其内部的内容
+			localStorage.setItem('person', JSON.stringify(p))
+		}
+		// 本地读取数据
+		function readData() {
+			console.log(localStorage.getItem('msg'))
+			console.log(localStorage.getItem('msg2'))
+
+			const result = localStorage.getItem('person')
+			console.log(JSON.parse(result))
+
+			//当没有的时候，读取出来的数据为null，
+			// console.log(localStorage.getItem('msg3'))
+		}
+		//本地删除
+		function deleteData() {
+			localStorage.removeItem('msg2')
+		}
+		//清空本地数据
+		function deleteAllData() {
+			localStorage.clear()
+		}
+	</script>
+</body>
+
+</html>

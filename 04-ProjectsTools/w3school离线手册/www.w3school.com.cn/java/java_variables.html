@@ -1,0 +1,595 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/java/java_variables.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:37:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Java 变量</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Java 教程</h2>
+<ul>
+<li><a href="index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="java_intro.html" title="Java 简介">Java 简介</a></li>
+<li><a href="java_getstarted.html" title="Java 入门">Java 入门</a></li>
+<li><a href="java_syntax.html" title="Java 语法">Java 语法</a></li>
+<li><a href="java_output.html" title="Java 输出 / 打印">Java 输出</a></li>
+<li><a href="java_comments.html" title="Java 注释">Java 注释</a></li>
+<li class="currentLink"><a href="java_variables.html" title="Java 变量">Java 变量</a></li>
+<li><a href="java_data_types.html" title="Java 数据类型">Java 数据类型</a></li>
+<li><a href="java_type_casting.html" title="Java 类型转换">Java 类型转换</a></li>
+<li><a href="java_operators.html" title="Java 运算符">Java 运算符</a></li>
+<li><a href="java_strings.html" title="Java 字符串">Java 字符串</a></li>
+<li><a href="java_math.html" title="Java 数学">Java 数学</a></li>
+<li><a href="java_booleans.html" title="Java 布尔">Java 布尔</a></li>
+<li><a href="java_conditions.html" title="Java If...Else">Java If...Else</a></li>
+<li><a href="java_switch.html" title="Java Switch">Java Switch</a></li>
+<li><a href="java_while_loop.html" title="Java While 循环">Java While 循环</a></li>
+<li><a href="java_for_loop.html" title="Java For 循环">Java For 循环</a></li>
+<li><a href="java_break.html" title="Java Break 和 Continue">Java Break/Continue</a></li>
+<li><a href="java_arrays.html" title="Java 数组">Java 数组</a></li>
+</ul>
+<h2>Java 方法</h2>
+<ul>
+<li><a href="java_methods.html" title="Java 方法">Java 方法</a></li>
+<li><a href="java_methods_param.html" title="Java 方法参数">Java 方法参数</a></li>
+<li><a href="java_methods_overloading.html" title="Java 方法重载">Java 方法重载</a></li>
+<li><a href="java_scope.html" title="Java 作用域">Java 作用域</a></li>
+<li><a href="java_recursion.html" title="Java 递归">Java 递归</a></li>
+</ul>
+<h2>Java 类</h2>
+<ul>
+<li><a href="java_oop.html" title="Java OOP">Java OOP</a></li>
+<li><a href="java_classes.html" title="Java 类/对象">Java 类/对象</a></li>
+<li><a href="java_class_attributes.html" title="Java 类属性">Java 类属性</a></li>
+<li><a href="java_class_methods.html" title="Java 类方法">Java 类方法</a></li>
+<li><a href="java_constructors.html" title="Java 构造函数">Java 构造函数</a></li>
+<li><a href="java_modifiers.html" title="Java 修饰符">Java 修饰符</a></li>
+<li><a href="java_encapsulation.html" title="Java 封装">Java 封装</a></li>
+<li><a href="java_packages.html" title="Java 包">Java 包 / API</a></li>
+<li><a href="java_inheritance.html" title="Java 继承">Java 继承</a></li>
+<li><a href="java_polymorphism.html" title="Java 多态">Java 多态</a></li>
+<li><a href="java_inner_classes.html" title="Java 内部类">Java 内部类</a></li>
+<li><a href="java_abstract.html" title="Java 抽象">Java 抽象</a></li>
+<li><a href="java_interface.html" title="Java 接口">Java 接口</a></li>
+<li><a href="java_enums.html" title="Java 枚举">Java 枚举</a></li>
+<li><a href="java_user_input.html" title="Java 用户输入">Java 用户输入</a></li>
+<li><a href="java_date.html" title="Java 日期">Java 日期</a></li>
+</ul>
+<h2>Java 数据结构</h2>
+<ul>
+<li><a href="java_arraylist.html" title="Java ArrayList">Java ArrayList</a></li>
+<li><a href="java_linkedlist.html" title="Java LinkedList">Java LinkedList</a></li>
+<li><a href="java_sort_list.html" title="Java 列表排序">Java 列表排序</a></li>
+<li><a href="java_hashmap.html" title="Java HashMap">Java HashMap</a></li>
+<li><a href="java_hashset.html" title="Java HashSet">Java HashSet</a></li>
+<li><a href="java_iterator.html" title="Java 迭代器">Java 迭代器</a></li>
+<li><a href="java_wrapper_classes.html" title="Java 包装类">Java 包装类</a></li>
+</ul>
+<h2>Java 高级</h2>
+<ul>
+<li><a href="java_try_catch.html" title="Java 异常">Java 异常</a></li>
+<li><a href="java_regex.html" title="Java RegEx">Java RegEx</a></li>
+<li><a href="java_threads.html" title="Java 线程">Java 线程</a></li>
+<li><a href="java_lambda.html" title="Java Lambda">Java Lambda</a></li>
+<li><a href="java_advanced_sorting.html" title="Java 高级排序（Comparator 和 Comparable）">Java 高级排序</a></li>
+</ul>
+<h2>Java 文件处理</h2>
+<ul>
+<li><a href="java_files.html" title="Java 文件">Java 文件</a></li>
+<li><a href="java_files_create.html" title="Java 创建/写入文件">Java 创建/写入文件</a></li>
+<li><a href="java_files_read.html" title="Java 读取文件">Java 读取文件</a></li>
+<li><a href="java_files_delete.html" title="Java 删除文件">Java 删除文件</a></li>
+</ul>
+<h2>Java 案例</h2>
+<ul>
+<li><a href="java_howto_add_two_numbers.html" title="Java 如何对两个数字相加">两个数字相加</a></li>
+<li><a href="java_howto_count_words.html" title="Java 如何统计字数">统计字数</a></li>
+<li><a href="java_howto_reverse_string.html" title="Java 如何反转字符串">反转字符串</a></li>
+<li><a href="java_howto_sum_of_array_elements.html" title="Java 如何计算数组元素的和">计算数组元素的和</a></li>
+<li><a href="java_howto_string_to_array.html" title="Java 如何将字符串转换为数组">将字符串转换为数组</a></li>
+<li><a href="java_howto_sort_an_array.html" title="Java 如何排序数组">排序数组</a></li>
+<li><a href="java_howto_calculate_avg_array.html" title="Java 如何计算数组元素的平均值">计算数组元素的平均值</a></li>
+<li><a href="java_howto_find_smallest_array_el.html" title="Java 如何找到数组中的最小元素">找到数组中的最小元素</a></li>
+<li><a href="java_howto_loop_through_arraylist.html" title="Java 如何遍历 ArrayList">遍历 ArrayList</a></li>
+<li><a href="java_howto_loop_through_hashmap.html" title="Java 如何遍历 HashMap">遍历 HashMap</a></li>
+<li><a href="java_howto_loop_through_enum.html" title="Java 如何遍历枚举">遍历枚举</a></li>
+<li><a href="java_howto_area_of_rectangle.html" title="Java 如何计算矩形的面积">计算矩形的面积</a></li>
+<li><a href="java_howto_even_or_odd.html" title="Java 如何判断数字的奇偶性">判断数字的奇偶性</a></li>
+<li><a href="java_howto_pos_or_neg.html" title="Java 如何判断数字的正负">判断数字的正负</a></li>
+<li><a href="java_howto_find_square_root.html" title="Java 如何求一个数的平方根">求一个数的平方根</a></li>
+<li><a href="java_howto_random_number.html" title="Java 如何生成随机数">生成随机数</a></li>
+</ul>
+<h2>Java 参考手册</h2>
+<ul>
+<li><a href="java_reference.html" title="Java 参考手册">Java 参考手册</a></li>
+<li><a href="java_ref_keywords.html" title="Java 关键字">Java 关键字</a></li>
+<li><a href="java_ref_string.html" title="Java String 方法">Java String 方法</a></li>
+<li><a href="java_ref_math.html" title="Java Math 方法">Java Math 方法</a></li>
+<li><a href="java_ref_output.html" title="Java Output 方法">Java Output 方法</a></li>
+<li><a href="java_ref_arrays.html" title="Java Arrays 方法">Java Arrays 方法</a></li>
+<li><a href="java_ref_arraylist.html" title="Java ArrayList 方法">Java ArrayList 方法</a></li>
+<li><a href="java_ref_linkedlist.html" title="Java LinkedList 方法">Java LinkedList 方法</a></li>
+<li><a href="java_ref_hashmap.html" title="Java HashMap 方法">Java HashMap 方法</a></li>
+<li><a href="java_ref_scanner.html" title="Java Scanner 方法">Java Scanner 方法</a></li>
+<li><a href="java_ref_iterators.html" title="Java Iterator 方法">Java Iterator 方法</a></li>
+<li><a href="java_ref_errors.html" title="Java 错误和异常类型">Java 错误和异常</a></li>
+</ul>
+<h2>Java 实例</h2>
+<ul>
+<li><a href="java_examples.html" title="Java 实例">Java 实例</a></li>
+<li><a href="java_quiz.html" title="Java 测验">Java 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Java 变量</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="java_comments.html" title="Java 注释">Java 注释</a></li>
+<li class="next"><a href="java_data_types.html" title="Java 数据类型">Java 数据类型</a></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>Java 变量</h2>
+
+<p>变量是存储数据的容器。</p>
+
+<p>在 Java 中，有不同类型的变量，例如：</p>
+
+<ul>
+<li><code>String</code> - 存储文本，例如 &quot;Hello&quot;。字符串值用双引号括起来</li>
+<li><code>int</code> - 存储整数（whole numbers），没有小数，例如 123 或 -123</li>
+<li><code>float</code> - 存储带小数的浮点数，例如 19.99 或 -19.99</li>
+<li><code>char</code> - 存储单个字符，例如 'a' 或 'B'。 char 值用单引号括起来</li>
+<li><code>boolean</code> - 以两种状态存储值：true 或 false</li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>声明（创建）变量</h2>
+
+<p>如需创建变量，您必须指定类型并为其赋值：</p>
+
+<h3>语法</h3>
+
+<pre class="language-java">
+<i>type</i> <i>variable</i> = <i>value</i>;
+</pre>
+
+<p>其中 <i>type</i> 是 Java 的一种类型（比如 <code>int</code> 或者 <code>String</code>），<i>variableName</i> 是变量的名称（比如 <em>x</em> 或者 <em>name</em>）。等号用于为变量赋值。</p>
+
+<p>如需创建应存储文本的变量，请看下例：</p>
+
+<h3>实例</h3>
+
+<p>创建名为 <em>name</em> 的 <code>String</code> 类型变量，并将其赋值为 <em>&quot;Bill&quot;</em>：</p>
+
+<p>然后我们使用 println() 方法来打印 name 变量：</p>
+
+<pre class="language-java">
+String name = &quot;Bill&quot;;
+System.out.println(name);
+</pre>
+
+<p class="tiy"><a target="_blank" href="tf143.html?f=java_variables_1">亲自试一试</a></p>
+
+<p>如需创建应存储数字的变量，请看下例：</p>
+
+<h3>实例</h3>
+
+<p>创建名为 <em>myNum</em> 的 <code>int</code> 类型变量并将其赋值为 <em>15</em>：</p>
+
+<pre class="language-java">
+int myNum = 15;
+System.out.println(myNum);
+</pre>
+
+<p class="tiy"><a target="_blank" href="tc75d.html?f=java_variables_int_1">亲自试一试</a></p>
+
+<p>您也可以先声明变量，然后再赋值：</p>
+
+<h3>实例</h3>
+
+<pre class="language-java">
+int myNum;
+myNum = 15;
+System.out.println(myNum);
+</pre>
+
+<p class="tiy"><a target="_blank" href="t67c0.html?f=java_variables_int_2">亲自试一试</a></p>
+
+<p>请注意，如果您为现有变量分配新值，将覆盖以前的值：</p>
+
+<h3>实例</h3>
+
+<p>将 <code>myNum</code> 的值从 <code>15</code> 更改为 <code>20</code>：</p>
+
+<pre class="language-java">
+int myNum = 15;
+myNum = 20;  // myNum 现在是 20
+System.out.println(myNum);
+</pre>
+
+<p class="tiy"><a target="_blank" href="t469c.html?f=java_variables_ow">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>Final 变量</h2>
+
+<p>但是，如果您不希望其他人（或您自己）覆盖现有值，则可以添加 <code>final</code> 关键字（这会将变量声明为 &quot;final&quot; 或 &quot;constant&quot;，表示不可更改和只读）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-java err">
+final int myNum = 15;
+myNum = 20;  // 将产生错误：无法为 final 变量赋值
+</pre>
+
+<p class="tiy"><a target="_blank" href="t3dae.html?f=java_variables_final">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>其他类型</h2>
+
+<p>演示如何声明其他类型的变量：</p>
+
+<h3>实例</h3>
+
+<pre class="language-java">
+int myNum = 5;
+float myFloatNum = 5.99f;
+char myLetter = 'D';
+boolean myBool = true;
+String myText = &quot;Hello&quot;;
+</pre>
+
+<p class="tip"><span>提示：</span>您将在下一章中学习有关<a href="java_data_types.html" title="Java 数据类型">数据类型</a>的更多内容。</p>
+</div>
+
+
+
+<div>
+<h2>显示变量</h2>
+
+<p><code>println()</code> 方法常用于显示变量。</p>
+
+<p>要组合文本和变量，请使用 <code>+</code> 字符：</p>
+
+<h3>实例</h3>
+
+<pre class="language-java">
+String name = &quot;Bill&quot;;
+System.out.println(&quot;Hello &quot; + name);
+</pre>
+
+<p class="tiy"><a target="_blank" href="te31d.html?f=java_variables_2">亲自试一试</a></p>
+
+<p>您还可以使用 <code>+</code> 字符将变量与另一个变量相加：</p>
+
+<h3>实例</h3>
+
+<pre class="language-java">
+String firstName = &quot;Bill &quot;;
+String lastName = &quot;Gates&quot;;
+String fullName = firstName + lastName;
+System.out.println(fullName);
+</pre>
+
+<p class="tiy"><a target="_blank" href="t8ac0.html?f=java_variables_3">亲自试一试</a></p>
+
+<p>对于数值，<code>+</code> 字符用作数学运算符（注意我们在这里使用 <code>int</code>（整数）变量）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-java">
+int x = 5;
+int y = 6;
+System.out.println(x + y); // 打印 x + y 的值
+</pre>
+
+<p class="tiy"><a target="_blank" href="tb5cc.html?f=java_variables_4">亲自试一试</a></p>
+
+<p>从上例中，我们可以预期：</p>
+
+<ul>
+<li>x 存储值 5</li>
+<li>y 存储值 6</li>
+<li>然后我们使用 <code>println()</code> 方法来显示 x + y 的值，也就是 <em>11</em></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>声明多个变量</h2>
+
+<p>与其写成：</p>
+
+<pre class="language-java">
+int x = 5;
+int y = 6;
+int z = 50;
+System.out.println(x + y + z);
+</pre>
+
+<p>您可以简写为：</p>
+
+<h3>实例</h3>
+
+<p>如需声明多个<em>相同类型</em>的变量，请使用逗号分隔的列表：</p>
+
+<pre class="language-java">
+int x = 5, y = 6, z = 50;
+System.out.println(x + y + z);
+</pre>
+
+<p class="tiy"><a target="_blank" href="t0554.html?f=java_variables_5">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>将一个值赋给多个变量</h2>
+
+<p>您也可以在一行将相同的值赋给多个变量：</p>
+
+<h3>实例</h3>
+
+<pre class="language-java">
+int x, y, z;
+x = y = z = 50;
+System.out.println(x + y + z);
+</pre>
+
+<p class="tiy"><a target="_blank" href="tf0c1.html?f=java_variables_multi">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>Java 标识符</h2>
+
+<p>所有 Java <em>变量</em>都必须用<em>唯一名称</em>进行<em>标识</em>。</p>
+
+<p>这些唯一的名称称为<em>标识符</em>。</p>
+
+<p>标识符可以是短名称（如 x 和 y）或更具描述性的名称（age、sum、totalVolume）。</p>
+
+<p class="tip"><span>提示：</span>建议使用描述性名称来创建易于理解和可维护的代码：</p>
+
+<h3>实例</h3>
+
+<pre class="language-java">
+// 不错
+int minutesPerHour = 60;
+
+// 还行，但不是那么容易理解 m 实际上是什么
+int m = 60;
+</pre>
+
+<p class="tiy"><a target="_blank" href="tf02c.html?f=java_variables_identifiers">亲自试一试</a></p>
+
+<p>构造变量名（唯一标识符）的一般规则是：</p>
+
+<ul>
+<li>名称可以包含字母、数字、下划线和美元符号</li>
+<li>名称必须以字母开头</li>
+<li>名称应以小写字母开头且不能包含空格</li>
+<li>名称也可以以 $ 和 _ 开头（但我们不会在本教程中这么做）</li>
+<li>名称区分大小写（&quot;myVar&quot; 和 &quot;myvar&quot; 是不同的变量）</li>
+<li>保留字（如 Java 关键字，诸如 <code>int</code> 或 <code>boolean</code>）不能用作名称</li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>真实生活中的例子</h2>
+
+<p>在我们的例子中，通常会简化变量名称以匹配其数据类型（对于整型使用 myInt 或 myNum，对于字符型使用 myChar，等等）。这样做是为了避免混淆。</p>
+
+<p>然而，为了提供一个使用变量的实际实例，我们创建了一个程序，用于存储关于大学生的不同数据：</p>
+
+<pre class="language-java">
+// 学生数据
+String studentName = &quot;Bill Gates&quot;;
+int studentID = 15;
+int studentAge = 23;
+float studentFee = 75.25f;
+char studentGrade = 'B';
+
+// 打印变量
+System.out.println(&quot;Student name: &quot; + studentName);
+System.out.println(&quot;Student id: &quot; + studentID);
+System.out.println(&quot;Student age: &quot; + studentAge);
+System.out.println(&quot;Student fee: &quot; + studentFee);
+System.out.println(&quot;Student grade: &quot; + studentGrade);
+</pre>
+
+<p class="tiy"><a target="_blank" href="tf31d.html?f=java_variables_reallife_1">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>计算矩形的面积</h2>
+
+<p>在这个现实生活的例子中，我们创建了一个程序来计算矩形的面积（通过乘以长度和宽度）：</p>
+
+<pre class="language-java">
+// 创建整数变量
+int length = 4;
+int width = 6;
+int area;
+
+// 计算矩形面积
+area = length * width;
+
+// 打印变量
+System.out.println(&quot;Length is: &quot; + length);
+System.out.println(&quot;Width is: &quot; + width);
+System.out.println(&quot;Area of the rectangle is: &quot; + area);
+</pre>
+
+<p class="tiy"><a target="_blank" href="t38e8.html?f=java_variables_reallife_2">亲自试一试</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="java_comments.html" title="Java 注释">Java 注释</a></li>
+<li class="next"><a href="java_data_types.html" title="Java 数据类型">Java 数据类型</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="java_reference.html">Java 参考手册</a></h5>
+<h5 id="tools_example"><a href="java_examples.html">Java 实例</a></h5>
+<h5 id="tools_quiz"><a href="java_quiz.html">Java 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/java/java_variables.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:37:18 GMT -->
+</html>

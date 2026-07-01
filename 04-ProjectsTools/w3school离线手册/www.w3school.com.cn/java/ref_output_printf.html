@@ -1,0 +1,644 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/java/ref_output_printf.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:32:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Java Output printf() 方法</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Java 教程</h2>
+<ul>
+<li><a href="index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="java_intro.html" title="Java 简介">Java 简介</a></li>
+<li><a href="java_getstarted.html" title="Java 入门">Java 入门</a></li>
+<li><a href="java_syntax.html" title="Java 语法">Java 语法</a></li>
+<li><a href="java_output.html" title="Java 输出 / 打印">Java 输出</a></li>
+<li><a href="java_comments.html" title="Java 注释">Java 注释</a></li>
+<li><a href="java_variables.html" title="Java 变量">Java 变量</a></li>
+<li><a href="java_data_types.html" title="Java 数据类型">Java 数据类型</a></li>
+<li><a href="java_type_casting.html" title="Java 类型转换">Java 类型转换</a></li>
+<li><a href="java_operators.html" title="Java 运算符">Java 运算符</a></li>
+<li><a href="java_strings.html" title="Java 字符串">Java 字符串</a></li>
+<li><a href="java_math.html" title="Java 数学">Java 数学</a></li>
+<li><a href="java_booleans.html" title="Java 布尔">Java 布尔</a></li>
+<li><a href="java_conditions.html" title="Java If...Else">Java If...Else</a></li>
+<li><a href="java_switch.html" title="Java Switch">Java Switch</a></li>
+<li><a href="java_while_loop.html" title="Java While 循环">Java While 循环</a></li>
+<li><a href="java_for_loop.html" title="Java For 循环">Java For 循环</a></li>
+<li><a href="java_break.html" title="Java Break 和 Continue">Java Break/Continue</a></li>
+<li><a href="java_arrays.html" title="Java 数组">Java 数组</a></li>
+</ul>
+<h2>Java 方法</h2>
+<ul>
+<li><a href="java_methods.html" title="Java 方法">Java 方法</a></li>
+<li><a href="java_methods_param.html" title="Java 方法参数">Java 方法参数</a></li>
+<li><a href="java_methods_overloading.html" title="Java 方法重载">Java 方法重载</a></li>
+<li><a href="java_scope.html" title="Java 作用域">Java 作用域</a></li>
+<li><a href="java_recursion.html" title="Java 递归">Java 递归</a></li>
+</ul>
+<h2>Java 类</h2>
+<ul>
+<li><a href="java_oop.html" title="Java OOP">Java OOP</a></li>
+<li><a href="java_classes.html" title="Java 类/对象">Java 类/对象</a></li>
+<li><a href="java_class_attributes.html" title="Java 类属性">Java 类属性</a></li>
+<li><a href="java_class_methods.html" title="Java 类方法">Java 类方法</a></li>
+<li><a href="java_constructors.html" title="Java 构造函数">Java 构造函数</a></li>
+<li><a href="java_modifiers.html" title="Java 修饰符">Java 修饰符</a></li>
+<li><a href="java_encapsulation.html" title="Java 封装">Java 封装</a></li>
+<li><a href="java_packages.html" title="Java 包">Java 包 / API</a></li>
+<li><a href="java_inheritance.html" title="Java 继承">Java 继承</a></li>
+<li><a href="java_polymorphism.html" title="Java 多态">Java 多态</a></li>
+<li><a href="java_inner_classes.html" title="Java 内部类">Java 内部类</a></li>
+<li><a href="java_abstract.html" title="Java 抽象">Java 抽象</a></li>
+<li><a href="java_interface.html" title="Java 接口">Java 接口</a></li>
+<li><a href="java_enums.html" title="Java 枚举">Java 枚举</a></li>
+<li><a href="java_user_input.html" title="Java 用户输入">Java 用户输入</a></li>
+<li><a href="java_date.html" title="Java 日期">Java 日期</a></li>
+</ul>
+<h2>Java 数据结构</h2>
+<ul>
+<li><a href="java_arraylist.html" title="Java ArrayList">Java ArrayList</a></li>
+<li><a href="java_linkedlist.html" title="Java LinkedList">Java LinkedList</a></li>
+<li><a href="java_sort_list.html" title="Java 列表排序">Java 列表排序</a></li>
+<li><a href="java_hashmap.html" title="Java HashMap">Java HashMap</a></li>
+<li><a href="java_hashset.html" title="Java HashSet">Java HashSet</a></li>
+<li><a href="java_iterator.html" title="Java 迭代器">Java 迭代器</a></li>
+<li><a href="java_wrapper_classes.html" title="Java 包装类">Java 包装类</a></li>
+</ul>
+<h2>Java 高级</h2>
+<ul>
+<li><a href="java_try_catch.html" title="Java 异常">Java 异常</a></li>
+<li><a href="java_regex.html" title="Java RegEx">Java RegEx</a></li>
+<li><a href="java_threads.html" title="Java 线程">Java 线程</a></li>
+<li><a href="java_lambda.html" title="Java Lambda">Java Lambda</a></li>
+<li><a href="java_advanced_sorting.html" title="Java 高级排序（Comparator 和 Comparable）">Java 高级排序</a></li>
+</ul>
+<h2>Java 文件处理</h2>
+<ul>
+<li><a href="java_files.html" title="Java 文件">Java 文件</a></li>
+<li><a href="java_files_create.html" title="Java 创建/写入文件">Java 创建/写入文件</a></li>
+<li><a href="java_files_read.html" title="Java 读取文件">Java 读取文件</a></li>
+<li><a href="java_files_delete.html" title="Java 删除文件">Java 删除文件</a></li>
+</ul>
+<h2>Java 案例</h2>
+<ul>
+<li><a href="java_howto_add_two_numbers.html" title="Java 如何对两个数字相加">两个数字相加</a></li>
+<li><a href="java_howto_count_words.html" title="Java 如何统计字数">统计字数</a></li>
+<li><a href="java_howto_reverse_string.html" title="Java 如何反转字符串">反转字符串</a></li>
+<li><a href="java_howto_sum_of_array_elements.html" title="Java 如何计算数组元素的和">计算数组元素的和</a></li>
+<li><a href="java_howto_string_to_array.html" title="Java 如何将字符串转换为数组">将字符串转换为数组</a></li>
+<li><a href="java_howto_sort_an_array.html" title="Java 如何排序数组">排序数组</a></li>
+<li><a href="java_howto_calculate_avg_array.html" title="Java 如何计算数组元素的平均值">计算数组元素的平均值</a></li>
+<li><a href="java_howto_find_smallest_array_el.html" title="Java 如何找到数组中的最小元素">找到数组中的最小元素</a></li>
+<li><a href="java_howto_loop_through_arraylist.html" title="Java 如何遍历 ArrayList">遍历 ArrayList</a></li>
+<li><a href="java_howto_loop_through_hashmap.html" title="Java 如何遍历 HashMap">遍历 HashMap</a></li>
+<li><a href="java_howto_loop_through_enum.html" title="Java 如何遍历枚举">遍历枚举</a></li>
+<li><a href="java_howto_area_of_rectangle.html" title="Java 如何计算矩形的面积">计算矩形的面积</a></li>
+<li><a href="java_howto_even_or_odd.html" title="Java 如何判断数字的奇偶性">判断数字的奇偶性</a></li>
+<li><a href="java_howto_pos_or_neg.html" title="Java 如何判断数字的正负">判断数字的正负</a></li>
+<li><a href="java_howto_find_square_root.html" title="Java 如何求一个数的平方根">求一个数的平方根</a></li>
+<li><a href="java_howto_random_number.html" title="Java 如何生成随机数">生成随机数</a></li>
+</ul>
+<h2>Java 参考手册</h2>
+<ul>
+<li><a href="java_reference.html" title="Java 参考手册">Java 参考手册</a></li>
+<li><a href="java_ref_keywords.html" title="Java 关键字">Java 关键字</a></li>
+<li><a href="java_ref_string.html" title="Java String 方法">Java String 方法</a></li>
+<li><a href="java_ref_math.html" title="Java Math 方法">Java Math 方法</a></li>
+<li><a href="java_ref_output.html" title="Java Output 方法">Java Output 方法</a></li>
+<li><a href="java_ref_arrays.html" title="Java Arrays 方法">Java Arrays 方法</a></li>
+<li><a href="java_ref_arraylist.html" title="Java ArrayList 方法">Java ArrayList 方法</a></li>
+<li><a href="java_ref_linkedlist.html" title="Java LinkedList 方法">Java LinkedList 方法</a></li>
+<li><a href="java_ref_hashmap.html" title="Java HashMap 方法">Java HashMap 方法</a></li>
+<li><a href="java_ref_scanner.html" title="Java Scanner 方法">Java Scanner 方法</a></li>
+<li><a href="java_ref_iterators.html" title="Java Iterator 方法">Java Iterator 方法</a></li>
+<li><a href="java_ref_errors.html" title="Java 错误和异常类型">Java 错误和异常</a></li>
+</ul>
+<h2>Java 实例</h2>
+<ul>
+<li><a href="java_examples.html" title="Java 实例">Java 实例</a></li>
+<li><a href="java_quiz.html" title="Java 测验">Java 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Java Output printf() 方法</h1>
+
+<div class="backtoreference">
+<p><a href="java_ref_output.html" title="Java Output 方法">Java Output 方法</a></p>
+</div>
+
+
+
+<section>
+<h2>定义和用法</h2>
+
+<p><code>printf()</code> 方法输出一个格式化的字符串。</p>
+
+<p>附加参数中的数据被格式化并写入格式化字符串中的占位符，这些占位符由 <code>%</code> 符号标记。参数格式化的方式取决于 <code>%</code> 符号后面的字符序列。</p>
+
+<h3>占位符</h3>
+
+<p>占位符的形式为 %[<i>arg</i>$][<i>flags</i>][<i>width</i>][.<i>precision</i>]<i>conversion</i>。</p>
+
+<p>[方括号]中的组件是可选的。</p>
+
+<p>每个组件的解释：</p>
+
+<p><i>arg</i><code>$</code> - 可选。数字后跟 <code>$</code> 符号，指示要使用哪个附加参数，参数编号从 1 开始。这可以用 <code>&lt;</code> 替换，指定应使用前一个占位符中的参数。</p>
+
+<p><i>flags</i> - 可选。以下字符中的任何一个的序列：</p>
+
+<ul>
+<li><code>-</code> - 通过在右侧而不是左侧添加填充空格，使输出左对齐。</li>
+<li><code>+</code> - 使正数始终带有 &quot;+&quot; 前缀。</li>
+<li><code> </code> - （空格字符）为正数添加前缀空格，主要是为了使数字能够与负数的数字对齐。</li>
+<li><code>0</code> - 在数字左侧用零填充。</li>
+<li><code>,</code> - 对数字进行分组（例如按千位）并在组之间放置分隔符。</li>
+</ul>
+
+<p><i>width</i> - 可选。整数，指定输出应占用的最小字符数。如果需要，将在右侧添加空格以达到此数字，如果使用了 &quot;<code>-</code>&quot; 标志，则在左侧添加空格。</p>
+
+<p><code>.</code><i>precision</i> 可选。点（<code>.</code>）后跟整数，表示在格式化数据中显示多少位小数。</p>
+
+<p><i>conversion</i> - 必需。字符，指示应如何表示参数的数据。如果该字符是大写，则数据将尽可能以大写格式表示。可能的字符列表如下表所示。</p>
+
+<h3>转换列表</h3>
+
+<table class="dataintable">
+<tr>
+<th>字符</th>
+<th>转换</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><code>%</code></td>
+<td>百分号</td>
+<td>在输出中显示一个字面的 &quot;%&quot; 字符。</td>
+</tr>
+
+<tr>
+<td><code>n</code></td>
+<td>换行符</td>
+<td>在输出中显示一个换行符。</td>
+</tr>
+
+<tr>
+<td><code>b</code> 或 <code>B</code></td>
+<td>布尔值</td>
+<td>
+	<p>将参数的布尔值显示为 &quot;true&quot; 或 &quot;false&quot;。</p>
+	<p>如果使用 &quot;<code>B</code>&quot;，则显示为 &quot;TRUE&quot; 或 &quot;FALSE&quot;。</p>
+</td>
+</tr>
+
+<tr>
+<td><code>c</code> 或 <code>C</code></td>
+<td>Unicode 字符</td>
+<td>
+	<p>显示参数的 Unicode 字符表示。</p>
+	<p>对于整数，这是与数字对应的 Unicode 字符。</p>
+	<p>如果使用 &quot;<code>C</code>&quot;，则字符将尽可能转换为大写。</p>
+</td>
+</tr>
+
+<tr>
+<td><code>s</code> 或 <code>S</code></td>
+<td>字符串</td>
+<td>
+	<p>显示参数的默认字符串表示。</p>
+	<p>如果使用 &quot;<code>S</code>&quot;，则字符串将尽可能转换为大写。</p>
+</td>
+</tr>
+
+<tr>
+<td><code>d</code></td>
+<td>十进制整数</td>
+<td>将一个整数表示为十进制整数。</td>
+</tr>
+
+<tr>
+<td><code>h</code> 或 <code>H</code></td>
+<td>无符号十六进制整数</td>
+<td>
+	<p>将参数的二进制数据表示为无符号十六进制整数。</p>
+	<p>如果使用 &quot;<code>H</code>&quot;，则数字 A 到 F 以大写显示。</p>
+	<p class="note"><span>注意：</span>对于除正整数以外的任何数据，这并不表示其真实值。</p>
+</td>
+</tr>
+
+<tr>
+<td><code>o</code></td>
+<td>八进制整数</td>
+<td>将整数表示为八进制整数。&quot;<code>#</code>&quot; 标志将在数字前加上 &quot;0&quot;。</td>
+</tr>
+
+<tr>
+<td><code>x</code> 或 <code>X</code></td>
+<td>十六进制整数</td>
+<td>
+	<p>将整数表示为十六进制整数。&quot;<code>#</code>&quot; 标志将在数字前加上 &quot;0x&quot;。</p>
+	<p>如果使用 &quot;<code>X</code>&quot;，则数字 A 到 F 和字母 X 以大写显示。</p>
+</td>
+</tr>
+
+<tr>
+<td><code>e</code> 或 <code>E</code></td>
+<td>科学计数法</td>
+<td>
+	<p>将浮点数表示为科学计数法。如果使用 &quot;<code>E</code>&quot;，则表示的 &quot;E&quot; 字母将为大写。</p>
+	<p>&quot;<code>#</code>&quot; 标志将强制显示小数点，即使没有小数位数。</p>
+</td>
+</tr>
+
+<tr>
+<td><code>f</code></td>
+<td>浮点数</td>
+<td>表示浮点数。&quot;<code>#</code>&quot; 标志将强制显示小数点，即使没有小数位数。</td>
+</tr>
+
+<tr>
+<td><code>g</code> 或 <code>G</code></td>
+<td>通用数字</td>
+<td>对于浮点数，显示 f 和 e 或 E 之间的最短表示。</td>
+</tr>
+
+<tr>
+<td><code>a</code> 或 <code>A</code></td>
+<td>十六进制浮点数</td>
+<td>用十六进制数字显示浮点数的内部表示。</td>
+</tr>
+
+<tr>
+<td><code>t</code> 或 <code>T</code></td>
+<td>时间或日期</td>
+<td>
+	<p>显示格式化的日期或时间。<code>t</code> 或 <code>T</code> 后面必须跟一个字符，指示应如何格式化日期或时间。</p>
+	<p>如果使用 &quot;<code>T</code>&quot;，则日期的文本部分（如 &quot;JANUARY&quot;）将为大写。</p>
+	<p>以下字符可用于日期和时间格式化：</p>
+
+	<ul class="listintable">
+	<li>H - 小时的 24 小时格式（00 至 23）</li>
+	<li>I - 12 小时制的小时（01 至 12）</li>
+	<li>k - 24 小时制的小时（0 至 23）</li>
+	<li>l（小写 'L'）- 12 小时制的小时（1 至 12）</li>
+	<li>M - 带前导零的分钟（00 至 59）</li>
+	<li>S - 带前导零的秒（00 至 59）（闰秒可能出现值 60）</li>
+	<li>L - 带前导零的毫秒（000 至 999）</li>
+	<li>N - 带前导零的纳秒（000000000 至 999999999）</li>
+	<li>p - &quot;am&quot;、&quot;pm&quot;、&quot;AM&quot; 或 &quot;PM&quot;，指示上午或下午</li>
+	<li>z - 与格林威治时间的差异（例如：-0800）</li>
+	<li>Z - 时区缩写（例如：EST、MDT）</li>
+	<li>s - 自 Unix 纪元（1970 年 1 月 1 日 00:00:00 GMT）以来的秒数</li>
+	<li>Q - 自 Unix 纪元（1970 年 1 月 1 日 00:00:00 GMT）以来的毫秒数</li>
+	<li>B - 月份的完整文本表示（一月到十二月）</li>
+	<li>b 或 h - 月份的简短文本表示（三个字母）</li>
+	<li>A - 星期几的完整文本表示（例如：Monday）</li>
+	<li>a - 星期几的简短文本表示（例如：Mon）</li>
+	<li>C - 年份的前两位数字（对于 1970 年，将显示 &quot;19&quot;）</li>
+	<li>Y - 年份的四位数表示</li>
+	<li>y - 年份的两位数表示</li>
+	<li>j - 带前导零的年份中的天数（001 至 366）</li>
+	<li>m - 月份的数字表示（01 至 12）</li>
+	<li>d - 月份中的天数（01 至 31）</li>
+	<li>e - 不带前导零的月份中的天数（1 至 31）</li>
+	<li>R - 24 小时制的时间（例如：21:30）</li>
+	<li>T - 带秒的 24 小时制时间（例如：21:30:02）</li>
+	<li>r - 带秒的 12 小时制时间（例如：09:30:02 PM）（&quot;AM&quot; 和 &quot;PM&quot; 总是大写）</li>
+	<li>D - 日期表示为月/日/年（例如：12/17/23）</li>
+	<li>F - 日期表示为年-月-日（例如：2023-12-17）</li>
+	<li>c - 完整的日期和时间（例如：Thu Mar 28 10:51:00 EDT 2024）</li>
+	</ul>
+</td>
+</tr>
+</table>
+</section>
+
+
+
+<section>
+<h2>实例</h2>
+
+<h3>例子 1</h3>
+
+<p>向控制台打印一些格式化的文本。</p>
+
+<p><code>%s</code> 字符是字符串 &quot;World&quot; 的占位符：</p>
+
+<pre class="language-java">
+System.out.printf(&quot;Hello %s!&quot;, &quot;World&quot;);
+</pre>
+
+<p class="tiy"><a target="_blank" href="te436.html?f=java_ref_output_printf_1">亲自试一试</a></p>
+
+<h3>例子 2</h3>
+
+<p>打印包含字符串和整数的格式化文本：</p>
+
+<pre class="language-java">
+System.out.printf(&quot;Hello %s! One kilobyte is %,d bytes.&quot;, &quot;World&quot;, 1024);
+</pre>
+
+<p class="tiy"><a target="_blank" href="tfac8.html?f=java_ref_output_printf_2">亲自试一试</a></p>
+
+<h3>例子 3</h3>
+
+<p>以不同方式格式化浮点数：</p>
+
+<pre class="language-java">
+// 默认
+System.out.printf(&quot;%f%n&quot;, 123456.78);
+
+// 两位小数
+System.out.printf(&quot;%.2f%n&quot;, 123456.78);
+
+// 无小数位数
+System.out.printf(&quot;%.0f%n&quot;, 123456.78);
+
+// 无小数位数但保留小数点
+System.out.printf(&quot;%#.0f%n&quot;, 123456.78);
+
+// 分组数字
+System.out.printf(&quot;%,.2f%n&quot;, 123456.78);
+
+// 科学记数法，精确到两位小数
+System.out.printf(&quot;%.2e&quot;, 123456.78);
+</pre>
+
+<p class="tiy"><a target="_blank" href="t3d2e.html?f=java_ref_output_printf_3">亲自试一试</a></p>
+
+<h3>例子 4</h3>
+
+<p>使用所有组件的占位符：</p>
+
+<pre class="language-java">
+System.out.printf(&quot;%2$,3.2f %1$s&quot;, &quot;meters&quot;, 1260.5052);
+</pre>
+
+<p>这是占位符 <code>%2$,3.2f</code> 各部分的工作方式：</p>
+
+<ul>
+<li><code>2$</code> 表示使用第二个参数的值</li>
+<li><code>,</code> 表示数字应分组（通常按千位）</li>
+<li><code>3</code> 表示数据的表示形式应至少为 3 个字符长</li>
+<li><code>.2</code> 表示小数点后应有两位数字</li>
+<li><code>f</code> 表示数据被表示为浮点数</li>
+</ul>
+
+<p class="tiy"><a target="_blank" href="t65ee.html?f=java_ref_output_printf_4">亲自试一试</a></p>
+
+<h3>例子 5</h3>
+
+<p>以不同的顺序使用参数：</p>
+
+<pre class="language-java">
+System.out.printf(&quot;%3$c %2$c %1$c&quot;, 'a', 'b', 'c');
+</pre>
+
+<p class="tiy"><a target="_blank" href="tfcc7.html?f=java_ref_output_printf_5">亲自试一试</a></p>
+
+<h3>例子 6</h3>
+
+<p>用 Unix 时间戳格式化日期：</p>
+
+<pre class="language-java">
+long date = 1711638903488L; // Unix timestamp (number of milliseconds since January 1, 1970)
+
+// 时间
+System.out.printf(&quot;%tl:%&lt;tM %&lt;tp%n&quot;, date);
+
+// 月份和日期
+System.out.printf(&quot;%tB %&lt;te%n&quot;, date);
+
+// 完整日期表示
+System.out.printf(&quot;%tc%n&quot;, date);
+</pre>
+
+<p class="tiy"><a target="_blank" href="t1488.html?f=java_ref_output_printf_6">亲自试一试</a></p>
+
+<h3>例子 7</h3>
+
+<p>通过 Unicode 码点表示字符：</p>
+
+<pre class="language-java">
+// 通过 Unicode 码点表示字符
+System.out.printf(&quot;%c%c%c%c%c%n&quot;, 72, 101, 108, 108, 111);
+
+// 强制将 Unicode 字符转换为大写
+System.out.printf(&quot;%C%C%C%C%C&quot;, 72, 101, 108, 108, 111);
+</pre>
+
+<p class="tiy"><a target="_blank" href="tb546.html?f=java_ref_output_printf_7">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>语法</h2>
+
+<pre class="language-java">
+System.out.printf(<i>locale</i>, <i>formatString</i>, <i>args</i>)
+</pre>
+
+<h3>参数</h3>
+
+<table class="parameter">
+<tr>
+<th style="width: 20%;">参数</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><i>locale</i></td>
+<td>可选。用于确定某些格式设置（例如，用于小数点和分组分隔符的字符）的区域设置。</td>
+</tr>
+
+<tr>
+<td><i>formatString</i></td>
+<td>必需。包含附加参数的占位符的字符串，指示如何格式化这些参数。</td>
+</tr>
+
+<tr>
+<td><i>args</i></td>
+<td>可选。传递给方法的任意数量的附加参数，它们的值可以在 formatString 中被格式化并显示。</td>
+</tr>
+</table>
+</section>
+
+
+
+<section>
+<h2>技术细节</h2>
+
+<table class="technical-details">
+<tr>
+<th style="width: 20%;">返回：</th>
+<td>返回 <code>PrintStream</code> 对象。</td>
+</tr>
+
+<tr>
+<th>抛出：</th>
+<td>
+	<p><code>IllegalFormatException</code>：</p>
+
+	<ul class="listintable">
+	<li>如果格式字符串包含无效的占位符</li>
+	<li>或者占位符与参数的数据类型不兼容</li>
+	</ul>
+</td>
+</tr>
+
+<tr>
+<th>Java 版本：</th>
+<td>1.5</td>
+</tr>
+</table>
+</section>
+
+
+
+<div class="backtoreference">
+<p><a href="java_ref_output.html" title="Java Output 方法">Java Output 方法</a></p>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="java_reference.html">Java 参考手册</a></h5>
+<h5 id="tools_example"><a href="java_examples.html">Java 实例</a></h5>
+<h5 id="tools_quiz"><a href="java_quiz.html">Java 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/java/ref_output_printf.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:32:28 GMT -->
+</html>

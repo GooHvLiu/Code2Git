@@ -1,0 +1,317 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/wsdl/wsdl_documents.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:13:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>WSDL 文档</title>
+
+</head>
+
+<body class="xml">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>WSDL 教程</h2>
+<ul>
+<li><a href="index.html" title="WSDL 教程">WSDL 教程</a></li>
+<li><a href="wsdl_intro.html" title="WSDL 简介">WSDL 简介</a></li>
+<li class="currentLink"><a href="wsdl_documents.html" title="WSDL 文档">WSDL 文档</a></li>
+<li><a href="wsdl_ports.html" title="WSDL 端口">WSDL 端口</a></li>
+<li><a href="wsdl_binding.html" title="WSDL 绑定">WSDL 绑定</a></li>
+<li><a href="wsdl_uddi.html" title="WSDL 和 UDDI">WSDL 和 UDDI</a></li>
+<li><a href="wsdl_syntax.html" title="WSDL 语法">WSDL 语法</a></li>
+<li><a href="wsdl_summary.html" title="您已经学习了 WSDL，下一步呢？">WSDL 总结</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>WSDL 文档</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="wsdl_intro.html" title="WSDL 简介">WSDL 简介</a></li>
+<li class="next"><a href="wsdl_ports.html" title="WSDL 端口">WSDL 端口</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p><strong>WSDL 文档仅仅是一个简单的 XML 文档。</strong></p>
+
+<p><strong>它包含一系列描述某个 web service 的定义。</strong></p>
+</div>
+
+
+
+<div>
+<h2>WSDL 文档结构</h2>
+
+<p>WSDL 文档是利用这些主要的元素来描述某个 web service 的：</p>
+
+<table class="dataintable">
+<tr>
+<th>元素</th>
+<th>定义</th>
+</tr>
+
+<tr>
+<td>&lt;portType&gt;</td>
+<td>web service 执行的操作</td>
+</tr>
+
+<tr>
+<td>&lt;message&gt;</td>
+<td>web service 使用的消息</td>
+</tr>
+
+<tr>
+<td>&lt;types&gt;</td>
+<td>web service 使用的数据类型</td>
+</tr>
+
+<tr>
+<td>&lt;binding&gt;</td>
+<td>web service 使用的通信协议</td>
+</tr>
+</table>
+
+<p>一个 WSDL 文档的主要结构是类似这样的：</p>
+
+<pre class="language-xml">
+&lt;definitions&gt;
+
+&lt;types&gt;
+   definition of types........
+&lt;/types&gt;
+
+&lt;message&gt;
+   definition of a message....
+&lt;/message&gt;
+
+&lt;portType&gt;
+   definition of a port.......
+&lt;/portType&gt;
+
+&lt;binding&gt;
+   definition of a binding....
+&lt;/binding&gt;
+
+&lt;/definitions&gt;
+</pre>
+
+<p>WSDL 文档可包含其它的元素，比如 extension 元素，以及一个 service 元素，此元素可把若干个 web services 的定义组合在一个单一的 WSDL 文档中。</p>
+
+<p>如需完整的语法概述，请访问 <a href="wsdl_syntax.html">WSDL 语法</a> 这一节。</p>
+</div>
+
+
+
+<div>
+<h2>WSDL 端口</h2>
+
+<p><em>&lt;portType&gt;</em> 元素是最重要的 WSDL 元素。<p>
+
+<p>它可描述一个 web service、可被执行的操作，以及相关的消息。<p>
+
+<p>可以把 &lt;portType&gt; 元素比作传统编程语言中的一个函数库（或一个模块、或一个类）。<p>
+</div>
+
+
+
+<div>
+<h2>WSDL 消息</h2>
+
+<p><em>&lt;message&gt;</em> 元素定义一个操作的数据元素。<p>
+
+<p>每个消息均由一个或多个部件组成。可以把这些部件比作传统编程语言中一个函数调用的参数。<p>
+</div>
+
+
+
+<div>
+<h2>WSDL types</h2>
+
+<p><em>&lt;types&gt;</em> 元素定义 web service 使用的数据类型。<p>
+
+<p>为了最大程度的平台中立性，WSDL 使用 XML Schema 语法来定义数据类型。<p>
+</div>
+
+
+
+<div>
+<h2>WSDL Bindings</h2>
+
+<p><em>&lt;binding&gt;</em> 元素为每个端口定义消息格式和协议细节。<p>
+</div>
+
+
+
+<div>
+<h2>WSDL 实例</h2>
+
+<p>这是某个 WSDL 文档的简化的片段：<p>
+
+<pre class="language-xml">
+&lt;message name=&quot;getTermRequest&quot;&gt;
+   &lt;part name=&quot;term&quot; type=&quot;xs:string&quot;/&gt;
+&lt;/message&gt;
+
+&lt;message name=&quot;getTermResponse&quot;&gt;
+   &lt;part name=&quot;value&quot; type=&quot;xs:string&quot;/&gt;
+&lt;/message&gt;
+
+&lt;portType name=&quot;glossaryTerms&quot;&gt;
+  &lt;operation name=&quot;getTerm&quot;&gt;
+        &lt;input message=&quot;getTermRequest&quot;/&gt;
+        &lt;output message=&quot;getTermResponse&quot;/&gt;
+  &lt;/operation&gt;
+&lt;/portType&gt;
+</pre>
+
+<p>在这个例子中，<em>&lt;portType&gt;</em> 元素把 &quot;glossaryTerms&quot; 定义为某个<em>端口</em>的名称，把 &quot;getTerm&quot; 定义为某个<em>操作</em>的名称。</p>
+
+<p>操作 &quot;getTerm&quot; 拥有一个名为 &quot;getTermRequest&quot; 的<em>输入消息</em>，以及一个名为 &quot;getTermResponse&quot; 的<em>输出消息</em>。</p>
+
+<p><em>&lt;message&gt;</em> 元素可定义每个消息的<em>部件</em>，以及相关联的数据类型。</p>
+
+<p>对比传统的编程，glossaryTerms 是一个函数库，而 &quot;getTerm&quot; 是带有输入参数 &quot;getTermRequest&quot; 和返回参数 getTermResponse 的一个函数。</p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="wsdl_intro.html" title="WSDL 简介">WSDL 简介</a></li>
+<li class="next"><a href="wsdl_ports.html" title="WSDL 端口">WSDL 端口</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/wsdl/wsdl_documents.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:13:05 GMT -->
+</html>

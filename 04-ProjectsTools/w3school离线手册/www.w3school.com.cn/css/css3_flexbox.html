@@ -1,0 +1,1315 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/css/css3_flexbox.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:19:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>CSS Flexbox</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>CSS 基础教程</h2>
+<ul>
+<li><a href="index.html" title="CSS 教程">CSS 教程</a></li>
+<li><a href="css_jianjie.html" title="CSS 简介">CSS 简介</a></li>
+<li><a href="css_syntax.html" title="CSS 语法">CSS 语法</a></li>
+<li><a href="css_selectors.html" title="CSS 选择器">CSS 选择器</a></li>
+<li><a href="css_shiyong.html" title="CSS 使用">CSS 使用</a></li>
+<li><a href="css_comments.html" title="CSS 注释">CSS 注释</a></li>
+<li><a href="css_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="css_colors_rgb.html" title="CSS RGB 颜色">CSS RGB 颜色</a></li>
+<li><a href="css_colors_hex.html" title="CSS HEX 颜色">CSS HEX 颜色</a></li>
+<li><a href="css_colors_hsl.html" title="CSS HSL 颜色">CSS HSL 颜色</a></li>
+<li><a href="css_background.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="css_background_image.html" title="CSS 背景图像">CSS 背景图像</a></li>
+<li><a href="css_background_repeat.html" title="CSS 背景重复">CSS 背景重复</a></li>
+<li><a href="css_background_attachment.html" title="CSS 背景附着">CSS 背景附着</a></li>
+<li><a href="css_background_shorthand.html" title="CSS 简写背景属性">CSS 简写背景属性</a></li>
+<li><a href="css_border.html" title="CSS 边框">CSS 边框</a></li>
+<li><a href="css_border_width.html" title="CSS 边框宽度">CSS 边框宽度</a></li>
+<li><a href="css_border_color.html" title="CSS 边框颜色">CSS 边框颜色</a></li>
+<li><a href="css_border_sides.html" title="CSS 边框各边">CSS 边框各边</a></li>
+<li><a href="css_border_shorthand.html" title="CSS 简写边框属性">CSS 简写边框属性</a></li>
+<li><a href="css_border_rounded.html" title="CSS 圆角边框">CSS 圆角边框</a></li>
+<li><a href="css_margin.html" title="CSS 外边距">CSS 外边距</a></li>
+<li><a href="css_margin_collapse.html" title="CSS 外边距合并">CSS 外边距合并</a></li>
+<li><a href="css_padding.html" title="CSS 内边距">CSS 内边距</a></li>
+<li><a href="css_dimension.html" title="CSS 高度和宽度">CSS 高度/宽度</a></li>
+<li><a href="css_boxmodel.html" title="CSS 框模型">CSS 框模型</a></li>
+<li><a href="css_outline.html" title="CSS 轮廓">CSS 轮廓</a></li>
+<li><a href="css_outline_width.html" title="CSS 轮廓宽度">CSS 轮廓宽度</a></li>
+<li><a href="css_outline_color.html" title="CSS 轮廓颜色">CSS 轮廓颜色</a></li>
+<li><a href="css_outline_shorthand.html" title="CSS 简写轮廓属性">CSS 简写轮廓属性</a></li>
+<li><a href="css_outline_offset.html" title="CSS 轮廓偏移">CSS 轮廓偏移</a></li>
+<li><a href="css_text.html" title="CSS 文本">CSS 文本</a></li>
+<li><a href="css_text_align.html" title="CSS 文本对齐">CSS 文本对齐</a></li>
+<li><a href="css_text_decoration.html" title="CSS 文本装饰">CSS 文本装饰</a></li>
+<li><a href="css_text_transformation.html" title="CSS 文本转换">CSS 文本转换</a></li>
+<li><a href="css_text_spacing.html" title="CSS 文字间距">CSS 文字间距</a></li>
+<li><a href="css_text_shadow.html" title="CSS 文本阴影">CSS 文本阴影</a></li>
+<li><a href="css_font.html" title="CSS 字体">CSS 字体</a></li>
+<li><a href="css_font_style.html" title="CSS 字体样式">CSS 字体样式</a></li>
+<li><a href="css_font_size.html" title="CSS 字体大小">CSS 字体大小</a></li>
+<li><a href="css_font_google.html" title="CSS 谷歌字体">CSS 谷歌字体</a></li>
+<li><a href="css_font_shorthand.html" title="CSS 简写字体属性">CSS 简写字体属性</a></li>
+<li><a href="css_icons.html" title="CSS 图标">CSS 图标</a></li>
+<li><a href="css_link.html" title="CSS 链接">CSS 链接</a></li>
+<li><a href="css_list.html" title="CSS 列表">CSS 列表</a></li>
+<li><a href="css_table.html" title="CSS 表格">CSS 表格</a></li>
+</ul>
+<h2>CSS 中级教程</h2>
+<ul>
+<li><a href="css_display_visibility.html" title="CSS 布局 - display 属性">CSS Display</a></li>
+<li><a href="css_max-width.html" title="CSS 布局 - width 和 max-width">CSS max-width</a></li>
+<li><a href="css_positioning.html" title="CSS 布局 - position 属性">CSS 定位</a></li>
+<li><a href="css_z-index.html" title="CSS 布局 - z-index 属性">CSS z-index</a></li>
+<li><a href="css_overflow.html" title="CSS 布局 - 溢出">CSS 溢出</a></li>
+<li><a href="css_float.html" title="CSS 布局 - 浮动和清除">CSS 浮动</a></li>
+<li><a href="css_float_clear.html" title="CSS 布局 - clear 和 clearfix">CSS 清除浮动</a></li>
+<li><a href="css_float_examples.html" title="CSS 布局 - 浮动实例">CSS 布局 - 浮动实例</a></li>
+<li><a href="css_inline-block.html" title="CSS 布局 - display: inline-block">CSS inline-block</a></li>
+<li><a href="css_align.html" title="CSS 布局 - 水平和垂直对齐">CSS 对齐</a></li>
+<li><a href="css_combinators.html" title="CSS 选择器">CSS 组合器</a></li>
+<li><a href="css_pseudo_classes.html" title="CSS 伪类">CSS 伪类</a></li>
+<li><a href="css_pseudo_elements.html" title="CSS 伪元素">CSS 伪元素</a></li>
+<li><a href="css_image_transparency.html" title="CSS 不透明度">CSS 不透明度</a></li>
+<li><a href="css_navbar.html" title="CSS 导航栏">CSS 导航栏</a></li>
+<li><a href="css_navbar_vertical.html" title="CSS 垂直导航栏">CSS 垂直导航栏</a></li>
+<li><a href="css_navbar_horizontal.html" title="CSS 水平导航栏">CSS 水平导航栏</a></li>
+<li><a href="css_dropdowns.html" title="CSS 下拉菜单">CSS 下拉菜单</a></li>
+<li><a href="css_image_gallery.html" title="CSS 图片库">CSS 图片库</a></li>
+<li><a href="css_image_sprites.html" title="CSS 图像精灵">CSS 图像精灵</a></li>
+<li><a href="css_attribute_selectors.html" title="CSS 属性选择器">CSS 属性选择器</a></li>
+<li><a href="css_form.html" title="CSS 表单">CSS 表单</a></li>
+<li><a href="css_counters.html" title="CSS 计数器">CSS 计数器</a></li>
+<li><a href="css_website_layout.html" title="CSS 网站布局">CSS 网站布局</a></li>
+<li><a href="css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="css_specificity.html" title="CSS 特异性">CSS 特异性</a></li>
+<li><a href="css_important.html" title="CSS !important 规则">CSS !important</a></li>
+<li><a href="css_math_functions.html" title="CSS 数学函数">CSS 数学函数</a></li>
+</ul>
+<h2>CSS3 高级教程</h2>
+<ul>
+<li><a href="css3_borders.html" title="CSS 圆角">CSS 圆角</a></li>
+<li><a href="css3_border_images.html" title="CSS 边框图像">CSS 边框图像</a></li>
+<li><a href="css3_backgrounds.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="css3_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="css_colors_keywords.html" title="CSS 颜色关键字">CSS 颜色关键字</a></li>
+<li><a href="css3_gradients.html" title="CSS 渐变">CSS 渐变</a></li>
+<li><a href="css3_gradients_radial.html" title="CSS 径向渐变">CSS 径向渐变</a></li>
+<li><a href="css3_shadows.html" title="CSS 阴影">CSS 阴影</a></li>
+<li><a href="css3_shadows_box.html" title="CSS box-shadow">CSS box-shadow</a></li>
+<li><a href="css3_text_effects.html" title="CSS 文本效果">CSS 文本效果</a></li>
+<li><a href="css3_fonts.html" title="CSS 网络字体">CSS 网络字体</a></li>
+<li><a href="css3_2dtransforms.html" title="CSS 2D 转换">CSS 2D 转换</a></li>
+<li><a href="css3_3dtransforms.html" title="CSS 3D 转换">CSS 3D 转换</a></li>
+<li><a href="css3_transitions.html" title="CSS 过渡">CSS 过渡</a></li>
+<li><a href="css3_animations.html" title="CSS 动画">CSS 动画</a></li>
+<li><a href="css_tooltip.html" title="CSS 工具提示">CSS 工具提示</a></li>
+<li><a href="css3_images.html" title="CSS 图像样式">CSS 图像样式</a></li>
+<li><a href="css3_object-fit.html" title="CSS object-fit">CSS object-fit</a></li>
+<li><a href="css3_object-position.html" title="CSS object-position 属性">CSS object-position</a></li>
+<li><a href="css3_masking.html" title="CSS 遮罩">CSS 遮罩</a></li>
+<li><a href="css3_buttons.html" title="CSS 按钮">CSS 按钮</a></li>
+<li><a href="css3_pagination.html" title="CSS 分页">CSS 分页</a></li>
+<li><a href="css3_multiple_columns.html" title="CSS 多列">CSS 多列</a></li>
+<li><a href="css3_user_interface.html" title="CSS 用户界面">CSS 用户界面</a></li>
+<li><a href="css3_variables.html" title="CSS 变量">CSS 变量</a></li>
+<li><a href="css3_variables_overriding.html" title="CSS 覆盖变量">CSS 覆盖变量</a></li>
+<li><a href="css3_variables_javascript.html" title="CSS 使用 JavaScript 更改变量">CSS 变量 - JavaScript</a></li>
+<li><a href="css3_variables_mediaqueries.html" title="CSS 在媒体查询中使用变量">CSS 变量 - 媒体查询</a></li>
+<li><a href="css3_property.html" title="CSS @property 规则">CSS @property</a></li>
+<li><a href="css3_box-sizing.html" title="CSS Box Sizing">CSS Box Sizing</a></li>
+<li class="currentLink"><a href="css3_flexbox.html" title="CSS Flexbox">CSS Flexbox</a></li>
+<li><a href="css3_mediaqueries.html" title="CSS 媒体查询">CSS 媒体查询</a></li>
+<li><a href="css3_mediaqueries_ex.html" title="CSS 媒体查询实例">CSS 媒体查询实例</a></li>
+</ul>
+<h2>CSS 响应式设计</h2>
+<ul>
+<li><a href="css_rwd_intro.html" title="响应式网站设计 - 简介">RWD 简介</a></li>
+<li><a href="css_rwd_viewport.html" title="响应式网页设计 - 视口">RWD 视口</a></li>
+<li><a href="css_rwd_grid.html" title="响应式网页设计 - Grid-View">RWD 网格视图</a></li>
+<li><a href="css_rwd_mediaqueries.html" title="响应式网页设计 - 媒体查询">RWD 媒体查询</a></li>
+<li><a href="css_rwd_images.html" title="响应式网页设计 - 图像">RWD 图像</a></li>
+<li><a href="css_rwd_videos.html" title="响应式网页设计 - 视频">RWD 视频</a></li>
+</ul>
+<h2>CSS 网格教程</h2>
+<ul>
+<li><a href="css_grid.html" title="CSS 网格布局模块">CSS 网格布局模块</a></li>
+<li><a href="css_grid_container.html" title="CSS 网格容器">CSS 网格容器</a></li>
+<li><a href="css_grid_item.html" title="CSS 网格项目">CSS 网格项目</a></li>
+</ul>
+<h2>CSS 实例</h2>
+<ul>
+<li><a href="css_examples.html" title="CSS 实例">CSS 实例</a></li>
+</ul>
+<h2>CSS 测验</h2>
+<ul>
+<li><a href="css_quiz.html" title="CSS 测验">CSS 测验</a></li>
+</ul>
+<h2>CSS 参考手册</h2>
+<ul>
+<li><a href="../cssref/index.html" title="CSS 参考手册">CSS 参考手册</a></li>
+<li><a href="../cssref/css_browsersupport.html" title="CSS 浏览器支持">CSS 浏览器支持</a></li>
+<li><a href="../cssref/css_selectors.html" title="CSS 选择器">CSS 选择器</a></li>
+<li><a href="../cssref/css_functions.html" title="CSS 函数">CSS 函数</a></li>
+<li><a href="../cssref/css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="../cssref/css_ref_aural.html" title="CSS 听觉">CSS 听觉</a></li>
+<li><a href="../cssref/css_websafe_fonts.html" title="CSS 网络安全字体">CSS 网络安全字体</a></li>
+<li><a href="../cssref/css_animatable.html" title="CSS 可动画制作">CSS 可动画制作</a></li>
+<li><a href="../cssref/css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="../cssref/css_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="../cssref/css_colors_legal.html" title="CSS 颜色值">CSS 颜色值</a></li>
+<li><a href="../cssref/css_default_values.html" title="CSS 默认值">CSS 默认值</a></li>
+<li><a href="../cssref/css_entities.html" title="CSS 实体">CSS 实体</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>CSS Flexbox</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css3_box-sizing.html" title="CSS Box Sizing">CSS Box Sizing</a></li>
+<li class="next"><a href="css3_mediaqueries.html" title="CSS 媒体查询">CSS 媒体查询</a></li>
+</ul>
+</div>
+
+
+
+<style>
+.flex-container {
+    display: -webkit-flex;
+    display: flex;
+    background-color: dodgerblue;
+    text-align: center;
+}
+
+.flex-item {
+    background-color: #f1f1f1;
+    width: 100px;
+	height: 100px;
+	line-height: 100px;
+    margin: 10px;
+	box-sizing: border-box;
+	font-size: 42px;
+}
+
+
+</style>
+
+<div>
+<div class="flex-container" style="flex-wrap:nowrap">
+  <div class="flex-item">1</div>
+  <div class="flex-item">2</div>
+  <div class="flex-item">3</div>  
+  <div class="flex-item">4</div>
+  <div class="flex-item">5</div>
+  <div class="flex-item">6</div>  
+  <div class="flex-item">7</div>
+  <div class="flex-item">8</div>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/t2464.html?f=css3_flexbox_flex-wrap_nowrap">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>CSS Flexbox 布局模块</h2>
+
+<p>在 Flexbox 布局模块（问世）之前，可用的布局模式有以下四种：</p>
+
+<ul>
+<li>块（Block），用于网页中的部分（节）</li>
+<li>行内（Inline），用于文本</li>
+<li>表，用于二维表数据</li>
+<li>定位，用于元素的明确位置</li>
+</ul>
+
+<p>弹性框布局模块，可以更轻松地设计灵活的响应式布局结构，而无需使用浮动或定位。</p>
+</div>
+
+
+
+<div>
+<h2>浏览器支持</h2>
+
+<p>所有现代浏览器均支持 <code>flexbox</code> 属性。</p>
+
+<table class="dataintable browsersupport">
+<tr>
+<td class="bsChrome"></td>
+<td class="bsIE"></td>
+<td class="bsFirefox"></td>
+<td class="bsSafari"></td>
+<td class="bsOpera"></td>
+</tr>
+
+<tr>
+<td>29.0</td>
+<td>11.0</td>
+<td>22.0</td>
+<td>10</td>
+<td>48</td>
+</tr>
+</table>
+</div>
+
+
+
+<div>
+<h2>Flexbox 元素</h2>
+
+<p>如需开始使用 Flexbox 模型，您需要首先定义 Flex 容器。</p>
+
+<div class="flex-container" style="margin-top: 15px;">
+  <div class="flex-item">1</div>
+  <div class="flex-item">2</div>
+  <div class="flex-item">3</div>  
+</div>
+
+<p>上面的元素表示一个带有三个 flex 项目的 flex 容器（蓝色区域）。</p>
+
+<h3>实例</h3>
+
+<p>含有三个 flex 项目的 flex 容器：</p>
+
+<pre class="language-css">
+&lt;div class=&quot;flex-container&quot;&gt;
+  &lt;div&gt;1&lt;/div&gt;
+  &lt;div&gt;2&lt;/div&gt;
+  &lt;div&gt;3&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t2b65.html?f=css3_flexbox">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>父元素（容器）</h2>
+
+<p>通过将 <code>display</code> 属性设置为 <code>flex</code>，flex 容器将可伸缩：</p>
+
+<div class="flex-container" style="margin-top: 15px;">
+  <div class="flex-item">1</div>
+  <div class="flex-item">2</div>
+  <div class="flex-item">3</div>  
+</div>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t2b65.html?f=css3_flexbox">亲自试一试</a></p>
+
+<p>以下是 flex 容器属性：</p>
+
+<ul>
+<li><code><a href="#flex-direction" title="flex-direction 属性">flex-direction</a></code></li>
+<li><code><a href="#flex-wrap" title="flex-wrap 属性">flex-wrap</a></code></li>
+<li><code><a href="#flex-flow" title="flex-flow 属性">flex-flow</a></code></li>
+<li><code><a href="#justify-content" title="justify-content 属性">justify-content</a></code></li>
+<li><code><a href="#align-items" title="align-items 属性">align-items</a></code></li>
+<li><code><a href="#align-content" title="align-content 属性">align-content</a></code></li>
+</ul>
+</div>
+
+
+
+<div id="flex-direction">
+<h2>flex-direction 属性</h2>
+
+<p><code>flex-direction</code> 属性定义容器要在哪个方向上堆叠 flex 项目。</p>
+
+<div class="flex-container" style="margin-top: 15px; flex-direction:column;">
+  <div class="flex-item">1</div>
+  <div class="flex-item">2</div>
+  <div class="flex-item">3</div>  
+</div>
+
+<h3>实例</h3>
+
+<p><code>column</code> 值设置垂直堆叠 flex 项目（从上到下）：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  flex-direction: column;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t3302.html?f=css3_flexbox_flex-direction_column">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p><code>column-reverse</code> 值垂直堆叠 flex 项目（但从下到上）：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  flex-direction: column-reverse;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t2bb1.html?f=css3_flexbox_flex-direction_column-reverse">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p><code>row</code> 值水平堆叠 flex 项目（从左到右）：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t7096.html?f=css3_flexbox_flex-direction_row">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p><code>row-reverse</code> 值水平堆叠 flex 项目（但从右到左）：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  flex-direction: row-reverse;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t670d.html?f=css3_flexbox_flex-direction_row-reverse">亲自试一试</a></p>
+</div>
+
+
+
+<div id="flex-wrap">
+<h2>flex-wrap 属性</h2>
+
+<p><code>flex-wrap</code> 属性规定是否应该对 flex 项目换行。</p>
+
+<p>下面的例子包含 12 个 flex 项目，以便更好地演示 flex-wrap 属性。</p>
+
+<div class="flex-container" style="flex-wrap:wrap; margin-top: 15px;">
+  <div class="flex-item">1</div>
+  <div class="flex-item">2</div>
+  <div class="flex-item">3</div>  
+  <div class="flex-item">4</div>
+  <div class="flex-item">5</div>
+  <div class="flex-item">6</div>  
+  <div class="flex-item">7</div>
+  <div class="flex-item">8</div>
+  <div class="flex-item">9</div>
+  <div class="flex-item">10</div>
+  <div class="flex-item">11</div>
+  <div class="flex-item">12</div>
+  <div class="flex-item">13</div>
+  <div class="flex-item">14</div>
+  <div class="flex-item">15</div>
+</div>
+
+<h3>实例</h3>
+
+<p><code>wrap</code> 值规定 flex 项目将在必要时进行换行：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t9361.html?f=css3_flexbox_flex-wrap_wrap">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p><code>nowrap</code> 值规定将不对 flex 项目换行（默认）：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t2464.html?f=css3_flexbox_flex-wrap_nowrap">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p><code>wrap-reverse</code> 值规定如有必要，弹性项目将以相反的顺序换行：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  flex-wrap: wrap-reverse;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t4f7c.html?f=css3_flexbox_flex-wrap_wrap-reverse">亲自试一试</a></p>
+</div>
+
+
+
+<div id="flex-flow">
+<h2>flex-flow 属性</h2>
+
+<p><code>flex-flow</code> 属性是用于同时设置 flex-direction 和 flex-wrap 属性的简写属性。</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t1c9b.html?f=css3_flexbox_flex-flow_row_wrap">亲自试一试</a></p>
+</div>
+
+
+
+<div id="justify-content">
+<h2>justify-content 属性</h2>
+
+<p><code>justify-content</code> 属性用于对齐 flex 项目：</p>
+
+<div class="flex-container" style="justify-content: center; margin-top: 15px;">
+  <div class="flex-item">1</div>
+  <div class="flex-item">2</div>
+  <div class="flex-item">3</div>  
+</div>
+
+<h3>实例</h3>
+
+<p><code>center</code> 值将 flex 项目在容器的中心对齐：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  justify-content: center;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/ta4d6.html?f=css3_flexbox_justify-content_center">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p><code>flex-start</code> 值将 flex 项目在容器的开头对齐（默认）：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  justify-content: flex-start;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t8e2d.html?f=css3_flexbox_justify-content_flex-start">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p><code>flex-end</code> 值将 flex 项目在容器的末端对齐：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  justify-content: flex-end;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/td5c6.html?f=css3_flexbox_justify-content_flex-end">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p><code>space-around</code> 值显示行之前、之间和之后带有空格的 flex 项目：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  justify-content: space-around;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t6628.html?f=css3_flexbox_justify-content_space-around">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p><code>space-between</code> 值显示行之间有空格的 flex 项目：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/td169.html?f=css3_flexbox_justify-content_space-between">亲自试一试</a></p>
+</div>
+
+
+
+<div id="align-items">
+<h2>align-items 属性</h2>
+
+<p><code>align-items</code> 属性用于垂直对齐 flex 项目。</p>
+
+<div class="flex-container" style="height: 200px; align-items: center; margin-top: 15px;">
+  <div class="flex-item">1</div>
+  <div class="flex-item">2</div>
+  <div class="flex-item">3</div>  
+</div>
+
+<p>在这些例子中，我们使用 200 像素高的容器，以便更好地演示 align-items 属性。</p>
+
+<h3>实例</h3>
+
+<p><code>center</code> 值将 flex 项目在容器中间对齐：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  height: 200px;
+  align-items: center;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t43ad.html?f=css3_flexbox_align-items_center">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p><code>flex-start</code> 值将 flex 项目在容器顶部对齐：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  height: 200px;
+  align-items: flex-start;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t6da7.html?f=css3_flexbox_align-items_flex-start">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p><code>flex-end</code> 值将弹性项目在容器底部对齐：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  height: 200px;
+  align-items: flex-end;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t3641.html?f=css3_flexbox_align-items_flex-end">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p><code>stretch</code> 值拉伸 flex 项目以填充容器（默认）：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  height: 200px;
+  align-items: stretch;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/te622.html?f=css3_flexbox_align-items_stretch">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p><code>baseline</code> 值使 flex 项目基线对齐：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  height: 200px;
+  align-items: baseline;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t2541-2.html?f=css3_flexbox_align-items_baseline">亲自试一试</a></p>
+
+<p class="important"><span>注意：</span>该例使用不同的 font-size 来演示项目已按文本基线对齐：</p>
+
+<style>
+.flex-item2 {
+    background-color: #f1f1f1;
+    width: 100px;
+    margin: 10px;
+	box-sizing: border-box;
+	font-size: 42px;
+}
+</style>
+
+<div style="position:relative;">
+<hr style="position:absolute; color:red; background-color:red; border-color:red; top:42px; width:100%; border: 1px solid;">
+<div class="flex-container" style="align-items: baseline; height:100px; margin-top: 15px;">
+  <div class="flex-item2" style="font-size: 42px;">1</div>
+  <div class="flex-item2" style="font-size: 16px;">2</div>
+  <div class="flex-item2" style="font-size: 24px;">3</div>
+  <div class="flex-item2" style="font-size: 14px;">4</div>  
+</div>
+</div>
+
+</div>
+
+
+
+<div id="align-content">
+<h2>align-content 属性</h2>
+
+<p><code>align-content</code> 属性用于对齐弹性线。</p>
+
+<div class="flex-container" style="flex-wrap:wrap; align-content:space-between; height:500px; margin-top: 15px;">
+  <div class="flex-item">1</div>
+  <div class="flex-item">2</div>
+  <div class="flex-item">3</div>  
+  <div class="flex-item">4</div>
+  <div class="flex-item">5</div>
+  <div class="flex-item">6</div>  
+  <div class="flex-item">7</div>
+  <div class="flex-item">8</div>
+  <div class="flex-item">9</div>
+  <div class="flex-item">10</div>
+  <div class="flex-item">11</div>
+  <div class="flex-item">12</div>
+  <div class="flex-item">13</div>
+  <div class="flex-item">14</div>
+  <div class="flex-item">15</div>
+</div>
+
+<p>在这些例子中，我们使用 600 像素高的容器，并将 flex-wrap 属性设置为 wrap，以便更好地演示 align-content 属性。</p>
+
+<h3>实例</h3>
+
+<p><code>space-between</code> 值显示的弹性线之间有相等的间距：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  height: 600px;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tfb19.html?f=css3_flexbox_align-content_space-between">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p><code>space-around</code> 值显示弹性线在其之前、之间和之后带有空格：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  height: 600px;
+  flex-wrap: wrap;
+  align-content: space-around;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/taa62.html?f=css3_flexbox_align-content_space-around">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p><code>stretch</code> 值拉伸弹性线以占据剩余空间（默认）：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  height: 600px;
+  flex-wrap: wrap;
+  align-content: stretch;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t6bbc.html?f=css3_flexbox_align-content_stretch">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p><code>center</code> 值在容器中间显示弹性线：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  height: 600px;
+  flex-wrap: wrap;
+  align-content: center;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/ta93b.html?f=css3_flexbox_align-content_center">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p><code>flex-start</code> 值在容器开头显示弹性线：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  height: 600px;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t08a5.html?f=css3_flexbox_align-content_flex-start">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p><code>flex-end</code> 值在容器的末尾显示弹性线：</p>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  height: 600px;
+  flex-wrap: wrap;
+  align-content: flex-end;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t59d1.html?f=css3_flexbox_align-content_flex-end">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>完美的居中</h2>
+
+<p>在下面的例子中，我们会解决一个非常常见的样式问题：完美居中。</p>
+
+<p>解决方案：将 <code>justify-content</code> 和 <code>align-items</code> 属性设置为居中，然后 flex 项目将完美居中：</p>
+
+<div class="flex-container" style="justify-content:center; align-items:center; height:300px; margin-top: 15px;">
+  <div class="flex-item" style="height:100px; width:100px;"></div>
+</div>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+.flex-container {
+  display: flex;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t273b.html?f=css3_flexbox_perfect_center">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>子元素（项目）</h2>
+
+<p>flex 容器的直接子元素会自动成为弹性（flex）项目。</p>
+
+<style>
+.flex-container2 {
+    display: -webkit-flex;
+    display: flex;
+    background-color: #f1f1f1;
+    text-align: center;
+    color: white;
+	font-size: 42px;
+	margin-top: 15px;
+}
+
+.flex-item3 {
+    background-color: dodgerblue;
+    width: 100px;
+	height: 100px;
+	line-height: 100px;
+    margin: 10px;
+}
+
+</style>
+
+<div class="flex-container2">
+  <div class="flex-item3">1</div>
+  <div class="flex-item3">2</div>
+  <div class="flex-item3">3</div>  
+  <div class="flex-item3">4</div>
+</div>
+
+<p>上面的元素代表一个灰色 flex 容器内的四个蓝色 flex 项目。</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;flex-container&quot;&gt;
+  &lt;div&gt;1&lt;/div&gt;
+  &lt;div&gt;2&lt;/div&gt;
+  &lt;div&gt;3&lt;/div&gt; 
+  &lt;div&gt;4&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tddcb.html?f=css3_flexbox_item">亲自试一试</a></p>
+
+<p>用于弹性项目的属性有：</p>
+
+<ul>
+<li><code>order</code></li>
+<li><code>flex-grow</code></li>
+<li><code>flex-shrink</code></li>
+<li><code>flex-basis</code></li>
+<li><code>flex</code></li>
+<li><code>align-self</code></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>order 属性</h2>
+
+<p><code>order</code> 属性规定 flex 项目的顺序。</p>
+
+<div class="flex-container2">
+  <div class="flex-item3" style="order: 3;">1</div>
+  <div class="flex-item3" style="order: 2;">2</div>
+  <div class="flex-item3" style="order: 4;">3</div>  
+  <div class="flex-item3" style="order: 1;">4</div>
+</div>
+
+<p>代码中的首个 flex 项目不必在布局中显示为第一项。</p>
+
+<p><code>order</code> 值必须是数字，默认值是 0。</p>
+
+<h3>实例</h3>
+
+<p><code>order</code> 属性可以改变 flex 项目的顺序：</p>
+
+<pre class="language-html">
+&lt;div class=&quot;flex-container&quot;&gt;
+  &lt;div style=&quot;order: 3&quot;&gt;1&lt;/div&gt;
+  &lt;div style=&quot;order: 2&quot;&gt;2&lt;/div&gt;
+  &lt;div style=&quot;order: 4&quot;&gt;3&lt;/div&gt; 
+  &lt;div style=&quot;order: 1&quot;&gt;4&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tcf20.html?f=css3_flexbox_order">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>flex-grow 属性</h2>
+
+<p><code>flex-grow</code> 属性规定某个 flex 项目相对于其余 flex 项目将增长多少。</p>
+
+<div class="flex-container2">
+  <div class="flex-item3" style="flex-grow: 1;">1</div>
+  <div class="flex-item3" style="flex-grow: 1;">2</div>
+  <div class="flex-item3" style="flex-grow: 8;">3</div>  
+</div>
+
+<p>该值必须是数字，默认值是 0。</p>
+
+<h3>实例</h3>
+
+<p>使第三个弹性项目的增长速度比其他弹性项目快八倍：</p>
+
+<pre class="language-html">
+&lt;div class=&quot;flex-container&quot;&gt;
+  &lt;div style=&quot;flex-grow: 1&quot;&gt;1&lt;/div&gt;
+  &lt;div style=&quot;flex-grow: 1&quot;&gt;2&lt;/div&gt;
+  &lt;div style=&quot;flex-grow: 8&quot;&gt;3&lt;/div&gt; 
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t6234.html?f=css3_flexbox_flex-grow">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>flex-shrink 属性</h2>
+
+<p><code>flex-shrink</code> 属性规定某个 flex 项目相对于其余 flex 项目将收缩多少。</p>
+
+<div class="flex-container2">
+  <div class="flex-item3" style="flex-shrink: 1;">1</div>
+  <div class="flex-item3" style="flex-shrink: 1;">2</div>
+  <div class="flex-item3" style="flex-shrink: 0;">3</div>  
+  <div class="flex-item3" style="flex-shrink: 1;">4</div>
+  <div class="flex-item3" style="flex-shrink: 1;">5</div>
+  <div class="flex-item3" style="flex-shrink: 1;">6</div>
+  <div class="flex-item3" style="flex-shrink: 1;">7</div>
+  <div class="flex-item3" style="flex-shrink: 1;">8</div>
+  <div class="flex-item3" style="flex-shrink: 1;">9</div>
+</div>
+
+<p>该值必须是数字，默认值是 0。</p>
+
+<h3>实例</h3>
+
+<p>不要让第三个弹性项目收缩得与其他弹性项目一样多：</p>
+
+<pre class="language-html">
+&lt;div class=&quot;flex-container&quot;&gt;
+  &lt;div&gt;1&lt;/div&gt;
+  &lt;div&gt;2&lt;/div&gt;
+  &lt;div style=&quot;flex-shrink: 0&quot;&gt;3&lt;/div&gt;
+  &lt;div&gt;4&lt;/div&gt;
+  &lt;div&gt;5&lt;/div&gt;
+  &lt;div&gt;6&lt;/div&gt;
+  &lt;div&gt;7&lt;/div&gt;
+  &lt;div&gt;8&lt;/div&gt;
+  &lt;div&gt;9&lt;/div&gt;
+  &lt;div&gt;10&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t7a9c.html?f=css3_flexbox_flex-shrink">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>flex-basis 属性</h2>
+
+<p><code>flex-basis</code> 属性规定 flex 项目的初始长度。</p>
+
+<div class="flex-container2">
+  <div class="flex-item3">1</div>
+  <div class="flex-item3">2</div>
+  <div class="flex-item3" style="flex-basis: 200px;">3</div>  
+  <div class="flex-item3">4</div>
+</div>
+
+<h3>实例</h3>
+
+<p>将第三个弹性项目的初始长度设置为 200 像素：</p>
+
+<pre class="language-html">
+&lt;div class=&quot;flex-container&quot;&gt;
+  &lt;div&gt;1&lt;/div&gt;
+  &lt;div&gt;2&lt;/div&gt;
+  &lt;div style=&quot;flex-basis: 200px&quot;&gt;3&lt;/div&gt;
+  &lt;div&gt;4&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t584a.html?f=css3_flexbox_flex-basis">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>flex 属性</h2>
+
+<p><code>flex</code> 属性是 flex-grow、flex-shrink 和 flex-basis 属性的简写属性。</p>
+
+<h3>实例</h3>
+
+<p>使第三个弹性项目不可增长（0），不可收缩（0），且初始长度为 200 像素：</p>
+
+<pre class="language-html">
+&lt;div class=&quot;flex-container&quot;&gt;
+  &lt;div&gt;1&lt;/div&gt;
+  &lt;div&gt;2&lt;/div&gt;
+  &lt;div style=&quot;flex: 0 0 200px&quot;&gt;3&lt;/div&gt;
+  &lt;div&gt;4&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t8eb4.html?f=css3_flexbox_flex">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>align-self 属性</h2>
+
+<p><code>align-self</code> 属性规定弹性容器内所选项目的对齐方式。</p>
+
+<p><code>align-self</code> 属性将覆盖容器的 align-items 属性所设置的默认对齐方式。</p>
+
+<div class="flex-container2" style="height: 200px;">
+  <div class="flex-item3" style="height: 180px;">1</div>
+  <div class="flex-item3" style="height: 180px;">2</div>
+  <div class="flex-item3" style="align-self: center;">3</div>  
+  <div class="flex-item3" style="height: 180px;">4</div>
+</div>
+
+<p>在这些例子中，我们使用 200 像素高的容器，以便更好地演示 align-self 属性：</p>
+
+<h3>实例</h3>
+
+<p>把第三个弹性项目对齐到容器的中间：</p>
+
+<pre class="language-html">
+&lt;div class=&quot;flex-container&quot;&gt;
+  &lt;div&gt;1&lt;/div&gt;
+  &lt;div&gt;2&lt;/div&gt;
+  &lt;div style=&quot;align-self: center&quot;&gt;3&lt;/div&gt;
+  &lt;div&gt;4&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t7e37.html?f=css3_flexbox_align-self_center">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p>将第二个弹性项目在容器顶部对齐，将第三个弹性项目在容器底部对齐：</p>
+
+<pre class="language-html">
+&lt;div class=&quot;flex-container&quot;&gt;
+  &lt;div&gt;1&lt;/div&gt;
+  &lt;div style=&quot;align-self: flex-start&quot;&gt;2&lt;/div&gt;
+  &lt;div style=&quot;align-self: flex-end&quot;&gt;3&lt;/div&gt;
+  &lt;div&gt;4&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/ta8c4.html?f=css3_flexbox_align-self_flex">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>使用 Flexbox 的响应式图库</h2>
+
+<p>使用 flexbox 创建响应式图像库，该图像库根据屏幕大小在四幅、两幅或全宽图像之间变化：</p>
+
+<iframe src="../demo/css/flexbox_image_responsive.html" style="border:6px solid #f1f1f1; width:100%; height:600px; margin-top: 15px;"></iframe>
+
+<p class="tiy"><a target="_blank" href="../tiy/t88bc.html?f=css3_flexbox_image_gallery">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>使用 Flexbox 的响应式网站</h2>
+
+<p>使用 flexbox 创建响应式网站，其中包含弹性导航栏和弹性内容：</p>
+
+<iframe src="../demo/css/flexbox_website.html" style="border:6px solid #eee; width:100%; height:630px; margin-top: 15px;"></iframe>
+
+<p class="tiy"><a target="_blank" href="../tiy/t7ead.html?f=css3_flexbox_website">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>CSS Flexbox 属性</h2>
+
+<p>下表列出了与 flexbox 一起使用的 CSS 属性：</p>
+
+<table class="dataintable">
+<tr>
+<th style="width: 20%;">属性</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_class_display.html" title="CSS display 属性">display</td>
+<td>规定用于 HTML 元素的盒类型。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_flex-direction.html" title="CSS flex-direction 属性">flex-direction</td>
+<td>规定弹性容器内的弹性项目的方向。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_justify-content.html" title="CSS justify-content 属性">justify-content</td>
+<td>当弹性项目没有用到主轴上的所有可用空间时，水平对齐这些项目。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_align-items.html" title="CSS align-items 属性">align-items</td>
+<td>当弹性项目没有用到主轴上的所有可用空间时，垂直对齐这些项。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_flex-wrap.html" title="CSS flex-wrap 属性">flex-wrap</td>
+<td>规定弹性项目是否应该换行，若一条 flex 线上没有足够的空间容纳它们。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_align-content.html" title="CSS align-content 属性">align-content</td>
+<td>修改 flex-wrap 属性的行为。与 align-items 相似，但它不对齐弹性项目，而是对齐 flex 线。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_flex-flow.html" title="CSS flex-flow 属性">flex-flow</td>
+<td>flex-direction 和 flex-wrap 的简写属性。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_order.html" title="CSS order 属性">order</td>
+<td>规定弹性项目相对于同一容器内其余弹性项目的顺序。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_align-self.html" title="CSS align-self 属性">align-self</td>
+<td>用于弹性项目。覆盖容器的 align-items 属性。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_flex.html" title="CSS flex 属性">flex</a></td>
+<td>flex-grow、flex-shrink 以及 flex-basis 属性的简写属性。</td>
+</tr>
+</table>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css3_box-sizing.html" title="CSS Box Sizing">CSS Box Sizing</a></li>
+<li class="next"><a href="css3_mediaqueries.html" title="CSS 媒体查询">CSS 媒体查询</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../cssref/index.html">CSS 参考手册</a></h5>
+<h5 id="tools_example"><a href="css_examples.html">CSS 实例</a></h5>
+<h5 id="tools_quiz"><a href="css_quiz.html">CSS 测验</a></h5>
+<h5 id="tools_professional"><a href="index_pro.html">CSS 课外书</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/css/css3_flexbox.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:19:45 GMT -->
+</html>

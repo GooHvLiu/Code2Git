@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 自动跳转，毫秒转秒 -->
+    <meta
+      http-equiv="refresh"
+      content="<%= waitTime / 1000 %>;url=<%= url %>"
+    />
+    <title>提醒</title>
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css"
+      rel="stylesheet"
+    />
+    <style>
+      .h-50 {
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="h-50"></div>
+      <div class="alert alert-success" role="alert">
+        <h1>:) <%= msg %></h1>
+        <p>
+          将在 <span id="count"><%= waitTime / 1000 %></span> 秒后自动跳转，<a
+            href="<%= url %>"
+            >Click to Jump</a
+          >
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // 从模板传入毫秒，转成秒
+      const totalMs = <%= waitTime %>;
+      let count = totalMs / 1000;
+      const countDom = document.getElementById("count");
+      const targetUrl = "<%= url %>";
+      // 全局最多自动跳转1次
+      const MAX_REDIRECT_TIMES = 1;
+      let redirectTimes = Number(new URLSearchParams(location.search).get("redirectTimes") || 0);
+
+      if (redirectTimes < MAX_REDIRECT_TIMES) {
+        const timer = setInterval(() => {
+          count--;
+          countDom.innerText = count;
+          if (count <= 0) {
+            clearInterval(timer);
+            // 跳转叠加计数，限制二次自动跳转
+            const nextUrlObj = new URL(targetUrl, location.origin);
+            nextUrlObj.searchParams.set("redirectTimes", redirectTimes + 1);
+            location.href = nextUrlObj.toString();
+          }
+        }, 1000);
+      } else {
+        // 超过跳转次数，停止自动跳转
+        countDom.innerText = "自动跳转已停止，请手动点击链接";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+    <title>精美图片预览</title>
+    <style>
+        /* 重置默认样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        /* 美化按钮组 */
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            /* 使用 gap 替代 margin 实现间距 */
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            /* 允许换行 */
+        }
+
+        .button-item {
+            flex: 0 0 auto;
+            /* 防止按钮被压缩 */
+            width: 120px;
+            height: 50px;
+            background-color: #f0f2f5;
+            border: 2px solid transparent;
+            /* 初始无边框 */
+            border-radius: 12px;
+            line-height: 46px;
+            /* 与 height 减去 border 一致，实现垂直居中 */
+            text-align: center;
+            font-size: 16px;
+            font-weight: 500;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            /* 平滑的缓动效果 */
+            user-select: none;
+            /* 防止文字被选中 */
+        }
+
+        /* 悬停效果 */
+        .button-item:hover {
+            background-color: #e4e6eb;
+            color: #333;
+            transform: translateY(-2px);
+            /* 轻微上浮 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 选中状态 */
+        .button-item.active,
+        .button-item:active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+            transform: translateY(0);
+            /* 取消上浮 */
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+        }
+
+        /* 美化图片容器 */
+        .image-container {
+            width: 100%;
+            max-width: 600px;
+            /* 限制最大宽度 */
+            height: 400px;
+            margin: 0 auto;
+            /* 水平居中 */
+            border-radius: 12px;
+            overflow: hidden;
+            /* 隐藏溢出部分 */
+            border: 1px solid #e0e0e0;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.1);
+            background-color: #f8f9fa;
+            /* 添加浅色背景，使图片未加载时更友好 */
+            display: flex;
+            /* 使用 flex 使图片居中 */
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 美化图片 */
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* 保持宽高比，并完整显示在容器内 */
+            object-position: center;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+            /* 添加淡入淡出效果 */
+            border-radius: 8px;
+            /* 图片圆角 */
+        }
+
+        /* 显示的图片类 */
+        .gallery-image.active {
+            opacity: 1;
+        }
+
+        /* 提示文字，当没有图片时显示 */
+        .placeholder-text {
+            color: #aaa;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>精美的图片切换预览</h1>
+
+        <!-- 使用更具语义化的 class 名称 -->
+        <div class="button-group" id="buttonGroup">
+            <div class="button-item active" data-index="0">小可爱</div>
+            <div class="button-item" data-index="1">小熊</div>
+            <div class="button-item" data-index="2">小鸟</div>
+            <div class="button-item" data-index="3">小鸭子</div>
+        </div>
+
+        <div class="image-container" id="imageContainer">
+            <!-- 图片将通过JavaScript动态管理 -->
+            <img class="gallery-image active" src="./images/小可爱.jpg" alt="小可爱" data-index="0">
+            <img class="gallery-image" src="./images/小熊.jpg" alt="小熊" data-index="1">
+            <img class="gallery-image" src="./images/小鸟.jpg" alt="小鸟" data-index="2">
+            <img class="gallery-image" src="./images/小鸭子.jpeg" alt="小鸭子" data-index="3">
+            <!-- 可选：添加一个占位符 -->
+            <!-- <div class="placeholder-text">请选择一张图片</div> -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const buttons = document.querySelectorAll('.button-item');
+            const images = document.querySelectorAll('.gallery-image');
+            // const placeholderText = document.querySelector('.placeholder-text'); // 如果使用了占位符
+
+            // 为每个按钮添加点击事件监听器
+            buttons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // 获取当前点击按钮的索引
+                    const index = parseInt(this.getAttribute('data-index'));
+
+                    // 移除所有按钮的 'active' 类
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    // 为当前按钮添加 'active' 类
+                    this.classList.add('active');
+
+                    // 隐藏所有图片
+                    images.forEach(img => {
+                        img.classList.remove('active');
+                    });
+                    // 显示对应索引的图片
+                    if (images[index]) {
+                        images[index].classList.add('active');
+                    }
+                });
+            });
+
+            // 可选：添加鼠标悬停效果（虽然点击是主要交互）
+            // buttons.forEach(button => {
+            //     button.addEventListener('mouseenter', function () {
+            //         if (!this.classList.contains('active')) {
+            //             this.style.backgroundColor = '#dbeafe';
+            //         }
+            //     });
+            //     button.addEventListener('mouseleave', function () {
+            //         if (!this.classList.contains('active')) {
+            //             this.style.backgroundColor = '#f0f2f5';
+            //         }
+            //     });
+            // });
+        });
+    </script>
+</body>
+
+</html>

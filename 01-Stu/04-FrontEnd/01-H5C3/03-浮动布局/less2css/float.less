@@ -1,0 +1,129 @@
+// 引入后，变量就像定义在这里一样可用
+@import "./const_p.less";
+// 定义一个函数，函数名为getWidths，函数体为pagebanner的宽度计算公式
+#getWidths(){
+    pagebanner:@pagebanner_logoWidth + @pagebanner_banner1Width + @pagebanner_banner2Width + 2 * @pageWidthGap;//pagebanner的宽度为logo、banner1、banner2的宽度之和再加上它们之间的间距
+
+}
+// 首先一个大容器，所有目前的元素都在这个大容器当中
+.container{
+    // 让这个大容器水平居中
+    margin: 0 auto;
+}
+// 从上到下分别为：
+// 01-页面banner，pagebanner; 02-页面menu，pagemenu; 03-页面内容，pagecontent; 04-页脚，pagefooter
+// 01-页面banner，pagebanner
+.pagebanner{
+    // background-color: #ff0000;
+    width:#getWidths[pagebanner];//pagebanner的宽度映射到函数#getWidths的pagebanner属性值
+    .logo, .banner1, .banner2{
+        background-color: @backgroundColor-main;
+        height: 80px;
+        line-height: 80px;
+    }
+    .logo{
+        width: @pagebanner_logoWidth;
+    }
+    .banner1{
+        width: @pagebanner_banner1Width;
+        margin: 0 10px;
+    }
+    .banner2{
+        width: @pagebanner_banner2Width;
+    }
+}
+
+// 02-页面menu，pagemenu
+.pagemenu{
+    //背景颜色为整体页面的颜色
+    background-color:@backgroundColor-main;
+    //宽度为960px，高度为30px
+    width: @pagemenuWidth;
+    height: @pagemenuHeight;
+    //文本水平居中，行高为30px
+    text-align: center;
+    line-height: @pagemenuHeight;
+    //上下外边距为10px，左右外边距为0
+    margin: @pageHeightGap 0;
+}
+
+// 03-页面内容，pagecontent
+.pagecontent{
+    //背景颜色为整体页面的颜色
+    margin: @pageHeightGap 0;
+    //限定字体到上边缘的高度，使用继承方案设定行高为80px
+    line-height: @lineHeight-pagecontent;
+    .pagecontent_leftItem{
+        //pagecontent_leftItem_top_left和pagecontent_leftItem_top_right的宽度为370px，高度为200px，边框为1px实线黑色，pagecontent_leftItem_top_right的左外边距为10px
+        .pagecontent_leftItem_top{
+            .pagecontent_leftItem_top_left,
+            .pagecontent_leftItem_top_right{
+                //宽度为370px，高度为200px，边框为1px实线黑色
+                width:  @pagecontent_leftItem_top_XWidth;
+                height:  @pagecontent_leftItem_top_XHeight;
+                border: 1px solid #000;
+            }
+            .pagecontent_leftItem_top_right{
+                //左外边距为10px
+                margin-left: @pageWidthGap;
+            }
+        }
+        //pagecontent_leftItem_bottom_left01~04的宽度为180px，高度为200px，边框为1px实线黑色，pagecontent_leftItem_bottom_left02的左右外边距为10px，pagecontent_leftItem_bottom_left03的右外边距为10px
+        .pagecontent_leftItem_bottom{
+            .pagecontent_leftItem_bottom_left01,
+            .pagecontent_leftItem_bottom_left02,
+            .pagecontent_leftItem_bottom_left03,
+            .pagecontent_leftItem_bottom_left04{
+                //宽度为180px，高度为200px，边框为1px实线黑色
+                width: @pagecontent_leftItem_bottom_left0xWidth;
+                height: @pagecontent_leftItem_bottom_left0xHeight;
+                border: 1px solid #000;
+                //上外边距为10px
+                margin-top: @pageHeightGap;
+            }
+            //pagecontent_leftItem_bottom_left02的左右外边距为10px
+            .pagecontent_leftItem_bottom_left02{
+                //左右外边距为10px
+                margin-left: @pageWidthGap;
+                margin-right: @pageWidthGap;
+            }
+            //pagecontent_leftItem_bottom_left03的右外边距为10px
+            .pagecontent_leftItem_bottom_left03{
+                //右外边距为10px
+                margin-right: @pageWidthGap;
+            }
+        }
+    }
+    //pagecontent_rightItem_top/middle/bottom的宽度为200px，高度为130px，边框为1px实线黑色，pagecontent_rightItem_middle的上下外边距为10px，左右外边距为0，pagecontent_rightItem_top和pagecontent_rightItem_bottom的左右外边距为10px
+    .pagecontent_rightItem{
+        .pagecontent_rightItem_top,
+        .pagecontent_rightItem_middle,
+        .pagecontent_rightItem_bottom{
+            //宽度为200px，高度为130px，边框为1px实线黑色
+            width: @pagecontent_rightItem_XWidth;
+            height: @pagecontent_rightItem_XHeight;
+            border: 1px solid #000;
+            //左右外边距为10px
+            margin-left: @pageWidthGap;
+        }
+        //pagecontent_rightItem_middle的上下外边距为10px，左右外边距为0
+        .pagecontent_rightItem_middle{
+            //上下外边距为10px，左右外边距为0
+            margin: @pageHeightGap 0;
+            //左右外边距为10px
+            margin-left: @pageWidthGap;
+        }
+    }
+}
+
+//04-页脚，pagefooter
+.pagefooter{
+    //背景颜色为整体页面的颜色，宽度为960px，高度为60px，文本水平居中，行高为60px
+    background-color: @backgroundColor-main;
+    //宽度为960px，高度为60px
+    width: @pagefooterWidth;
+    height: @pagefooterHeight;
+    //文本水平居中，行高为60px
+    text-align: center;
+    line-height: @pagefooterHeight;
+}

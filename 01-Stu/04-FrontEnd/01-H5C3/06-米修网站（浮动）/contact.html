@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="Description" content="欢迎来到米修在线">
+  <meta name="keywords" content="前端学习，米修在线">
+  <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="./font-icon/iconfont.css">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>米修在线 | 联系我们</title>
+</head>
+
+<body>
+  <!-- 顶部导航栏 -->
+  <div class="header-nav clearfloat">
+    <!-- 左边的logo导航栏 -->
+    <div class="header-nav-logo floatleft">
+      <h2><a href="./index.html">米修在线</a></h2>
+    </div>
+    <!-- 右边的菜单栏 -->
+    <ul class="header-nav-menu floatright clearfloat">
+      <li class="floatleft"><a href="./index.html">首页</a></li>
+      <li class="floatleft"><a href="./about.html">关于我们</a></li>
+      <li class="floatleft" id="selected"><a href="./contact.html">联系我们</a></li>
+    </ul>
+  </div>
+
+  <!-- 提交区域 -->
+  <section>
+    <!-- 提交区域容器 -->
+    <div class="contact-container">
+      <!-- 主题为联系我们 -->
+      <h1 class="contact-text-content-we"><span class="text-content">联系</span>我们</h1>
+      <!-- 副标题 -->
+      <p>如有疑问请填写以下信息联系我们！</p>
+      <!-- 整体提交表单 -->
+      <form action="process.php" class="contact-form">
+        <!-- 提交表单模板样式之姓名 -->
+        <div class="form-group">
+          <label for="name">姓名</label>
+          <input type="text" name="name" id="name">
+        </div>
+
+        <!-- 提交表单模板样式之邮箱 -->
+        <div class="form-group">
+          <label for="mail">邮箱</label>
+          <input type="text" name="mail" id="mail">
+        </div>
+
+        <!-- 提交表单模板样式之反馈内容 -->
+        <div class="form-group">
+          <label for="message">反馈内容</label>
+          <textarea type="text" name="message" id="message"></textarea>
+        </div>
+        <button type="submit" class="btn">提交</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- 联系方式区域 -->
+  <section class="contact-methods clearfloat">
+    <a href="#" class="contact-methods-address floatleft">
+      <p class="iconfont icon-home"></p>
+      <p class="t-name">联系地址</p>
+      <p class="t-discription">Lorem ipsum dolor sit amet.</p>
+    </a>
+    <a href="#" class="contact-methods-phone floatleft">
+      <p class="iconfont icon-phone"></p>
+      <p class="t-name">联系电话</p>
+      <p class="t-discription">028-12345678</p>
+    </a>
+    <a href="#" class="contact-methods-mail floatleft">
+      <p class="iconfont icon-mail"></p>
+      <p class="t-name">邮箱地址</p>
+      <p class="t-discription">米修在线@163.com</p>
+    </a>
+  </section>
+
+  <!-- 最下面的版权说明 -->
+  <footer class="lower-foot">
+    <p>米修在线 @2021，All Rights Reserved</p>
+  </footer>
+
+</body>
+
+</html>

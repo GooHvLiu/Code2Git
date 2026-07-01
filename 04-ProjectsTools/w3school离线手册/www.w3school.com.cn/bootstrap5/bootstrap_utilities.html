@@ -1,0 +1,818 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/bootstrap5/bootstrap_utilities.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:22:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Bootstrap 5 实用工具</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Bootstrap 5 教程</h2>
+<ul>
+<li><a href="index.html" title="Bootstrap 5 教程">BS5 教程</a></li>
+<li><a href="bootstrap_get_started.html" title="Bootstrap 5 入门">BS5 入门</a></li>
+<li><a href="bootstrap_containers.html" title="Bootstrap 5 容器">BS5 容器</a></li>
+<li><a href="bootstrap_grid_basic.html" title="Bootstrap 5 网格">BS5 网格基础</a></li>
+<li><a href="bootstrap_typography.html" title="Bootstrap 5 文字/排版">BS5 排版</a></li>
+<li><a href="bootstrap_colors.html" title="Bootstrap 5 颜色">BS5 颜色</a></li>
+<li><a href="bootstrap_tables.html" title="Bootstrap 5 表格">BS5 表格</a></li>
+<li><a href="bootstrap_images.html" title="Bootstrap 5 图像">BS5 图像</a></li>
+<li><a href="bootstrap_jumbotron.html" title="Bootstrap 5 Jumbotron">BS5 Jumbotron</a></li>
+<li><a href="bootstrap_alerts.html" title="Bootstrap 5 警告框">BS5 警告框</a></li>
+<li><a href="bootstrap_buttons.html" title="Bootstrap 5 按钮">BS5 按钮</a></li>
+<li><a href="bootstrap_button_groups.html" title="Bootstrap 5 按钮组">BS5 按钮组</a></li>
+<li><a href="bootstrap_badges.html" title="Bootstrap 5 徽章">BS5 徽章</a></li>
+<li><a href="bootstrap_progressbars.html" title="Bootstrap 5 进度条">BS5 进度条</a></li>
+<li><a href="bootstrap_spinners.html" title="Bootstrap 5 加载器">BS5 加载器</a></li>
+<li><a href="bootstrap_pagination.html" title="Bootstrap 5 分页">BS5 分页</a></li>
+<li><a href="bootstrap_list_groups.html" title="Bootstrap 5 列表组">BS5 列表组</a></li>
+<li><a href="bootstrap_cards.html" title="Bootstrap 5 卡片">BS5 卡片</a></li>
+<li><a href="bootstrap_dropdowns.html" title="Bootstrap 5 下拉菜单">BS5 下拉菜单</a></li>
+<li><a href="bootstrap_collapse.html" title="Bootstrap 5 折叠">BS5 折叠</a></li>
+<li><a href="bootstrap_navs.html" title="Bootstrap 5 导航">BS5 导航</a></li>
+<li><a href="bootstrap_navbar.html" title="Bootstrap 5 导航栏">BS5 导航栏</a></li>
+<li><a href="bootstrap_carousel.html" title="Bootstrap 5 轮播">BS5 轮播</a></li>
+<li><a href="bootstrap_modal.html" title="Bootstrap 5 模态">BS5 模态</a></li>
+<li><a href="bootstrap_tooltip.html" title="Bootstrap 5 工具提示">BS5 工具提示</a></li>
+<li><a href="bootstrap_popover.html" title="Bootstrap 5 弹出框">BS5 弹出框</a></li>
+<li><a href="bootstrap_toast.html" title="Bootstrap 5 Toast">BS5 Toast</a></li>
+<li><a href="bootstrap_scrollspy.html" title="Bootstrap 5 Scrollspy">BS5 Scrollspy</a></li>
+<li><a href="bootstrap_offcanvas.html" title="Bootstrap 5 Offcanvas">BS5 Offcanvas</a></li>
+<li class="currentLink"><a href="bootstrap_utilities.html" title="Bootstrap 5 实用工具">BS5 实用工具</a></li>
+<li><a href="bootstrap_flex.html" title="Bootstrap 5 Flex">BS5 Flex</a></li>
+</ul>
+<h2>Bootstrap 5 表单</h2>
+<ul>
+<li><a href="bootstrap_forms.html" title="Bootstrap 5 表单">BS5 表单</a></li>
+<li><a href="bootstrap_form_select.html" title="Bootstrap 5 选择菜单">BS5 选择菜单</a></li>
+<li><a href="bootstrap_form_check_radio.html" title="Bootstrap 5 复选框和单选按钮">BS5 复选框和单选按钮</a></li>
+<li><a href="bootstrap_form_range.html" title="Bootstrap 5 范围">BS5 范围</a></li>
+<li><a href="bootstrap_form_input_group.html" title="Bootstrap 5 输入组">BS5 输入组</a></li>
+<li><a href="bootstrap_form_floating_labels.html" title="Bootstrap 5 表单浮动标签">BS5 浮动标签</a></li>
+<li><a href="bootstrap_form_validation.html" title="Bootstrap 5 表单验证">BS5 表单验证</a></li>
+</ul>
+<h2>Bootstrap 5 网格</h2>
+<ul>
+<li><a href="bootstrap_grid_system.html" title="Bootstrap 5 网格系统">BS5 网格系统</a></li>
+<li><a href="bootstrap_grid_stacked_to_hor.html" title="Bootstrap 5 堆叠/水平">BS5 堆叠/水平</a></li>
+<li><a href="bootstrap_grid_xsmall.html" title="Bootstrap 5 网格：超小型设备">BS5 网格 XSmall</a></li>
+<li><a href="bootstrap_grid_small.html" title="Bootstrap 5 网格：小型设备">BS5 网格 Small</a></li>
+<li><a href="bootstrap_grid_medium.html" title="Bootstrap 5 网格：中型设备">BS5 网格 Medium</a></li>
+<li><a href="bootstrap_grid_large.html" title="Bootstrap 5 网格：大型设备">BS5 网格 Large</a></li>
+<li><a href="bootstrap_grid_xlarge.html" title="Bootstrap 5 网格：超大型设备">BS5 网格 XLarge</a></li>
+<li><a href="bootstrap_grid_xxl.html" title="Bootstrap 5 网格：特大型设备">BS5 网格 XXL</a></li>
+<li><a href="bootstrap_grid_examples.html" title="Bootstrap 5 网格实例">BS5 网格实例</a></li>
+</ul>
+<h2>Bootstrap 5 其他</h2>
+<ul>
+<li><a href="bootstrap_templates.html" title="Bootstrap 5 基础模板">BS5 基础模板</a></li>
+<li><a href="bootstrap_quiz.html" title="Bootstrap 5 测验">BS5 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Bootstrap 5 实用工具</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="bootstrap_offcanvas.html" title="Bootstrap 5 Offcanvas">BS5 Offcanvas</a></li>
+<li class="next"><a href="bootstrap_flex.html" title="Bootstrap 5 Flex">BS5 Flex</a></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>Utilities / Helper 类</h2>
+
+<p>Bootstrap 5 有很多 utility/helper 类，可以在不使用任何 CSS 代码的情况下快速设置元素样式。</p>
+</div>
+
+
+
+<div>
+<h2>边框</h2>
+
+<p>使用边框类为元素添加或删除边框：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_utility_borders.html" style="width:100%;height:200px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;span class=&quot;border&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border border-0&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border border-top-0&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border border-right-0&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border border-bottom-0&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border border-left-0&quot;&gt;&lt;/span&gt;
+&lt;br&gt;
+
+&lt;span class=&quot;border-top&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border-end&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border-bottom&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border-start&quot;&gt;&lt;/span&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tcfcf.html?s=h&amp;f=bs_utility_borders">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>边框宽度</h2>
+
+<p>使用 <code>.border-1</code> 到 <code>.border-5</code> 来改变边框的宽度：</p>
+
+<iframe scrolling="no" src="../demo/bs/bs_utility_borders_width.html" style="width:100%;height:110px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;span class=&quot;border border-1&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border border-2&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border border-3&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border border-4&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border border-5&quot;&gt;&lt;/span&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t68ce.html?s=h&amp;f=bs_utility_borders_width">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>边框颜色</h2>
+
+<p>使用任意上下文边框颜色类向边框添加颜色：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_utility_borders_colors.html" style="width:100%;height:110px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;span class=&quot;border border-primary&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border border-secondary&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border border-success&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border border-danger&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border border-warning&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border border-info&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border border-light&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border border-dark&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;border border-white&quot;&gt;&lt;/span&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/te590.html?s=h&amp;f=bs_utility_borders_colors">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>边框圆角</h2>
+
+<p>使用 <code>rounded</code> 类为元素添加圆角：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_utility_borders_rounded.html" style="width:100%;height:200px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;span class=&quot;rounded&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;rounded-top&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;rounded-end&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;rounded-bottom&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;rounded-start&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;rounded-circle&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;rounded-pill&quot; style=&quot;width:130px&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;rounded-0&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;rounded-1&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;rounded-2&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;rounded-3&quot;&gt;&lt;/span&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t4b17.html?s=h&amp;f=bs_utility_borders_rounded">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>浮动和清除浮动</h2>
+
+<p>使用 <code>.float-end</code> 类向右浮动元素，或使用 <code>.float-start</code> 向左浮动，并使用 <code>.clearfix</code> 类清除浮动：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_utility_float.html" style="width:100%;height:80px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;clearfix&quot;&gt;
+  &lt;span class=&quot;float-start&quot;&gt;向左浮动&lt;/span&gt;
+  &lt;span class=&quot;float-end&quot;&gt;向右浮动&lt;/span&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t2651.html?s=h&amp;f=bs_utility_float">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>响应式浮动</h2>
+
+<p>根据屏幕宽度向左或向右浮动元素，使用响应式浮动类 (<code>.float-*-left|right</code>)，其中 * 是：</p>
+
+<ul>
+<li><code>sm</code> (&gt; = 576px)</li>
+<li><code>md</code> (&gt; = 768px)</li>
+<li><code>lg</code> (&gt; = 992px)</li>
+<li><code>xl</code> (&gt; = 1200px)</li>
+<li><code>xxl</code> (&gt; = 1400px)</li>
+</ul>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_utility_float_responsive.html" style="width:100%;height:250px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;float-sm-end&quot;&gt;在小型屏幕或更宽的屏幕上向右浮动&lt;/div&gt;&lt;br&gt;
+&lt;div class=&quot;float-md-end&quot;&gt;在中型屏幕或更宽的屏幕上向右浮动&lt;/div&gt;&lt;br&gt;
+&lt;div class=&quot;float-lg-end&quot;&gt;在大型屏幕或更宽的屏幕上向右浮动&lt;/div&gt;&lt;br&gt;
+&lt;div class=&quot;float-xl-end&quot;&gt;在超大型屏幕或更宽的屏幕上向右浮动&lt;/div&gt;&lt;br&gt;
+&lt;div class=&quot;float-xxl-end&quot;&gt;在特大型屏幕或更宽的屏幕上向右浮动&lt;/div&gt;&lt;br&gt;
+&lt;div class=&quot;float-none&quot;&gt;不进行浮动&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t6542.html?s=h&amp;f=bs_utility_float_responsive">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>居中对齐</h2>
+
+<p>使用 <code>.mx-auto</code> 类居中元素（添加 margin-left 和 margin-right: auto）：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_utility_center.html" style="width:100%;height:60px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;mx-auto bg-warning&quot; style=&quot;width:150px&quot;&gt;居中&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tb4e0.html?s=h&amp;f=bs_utility_center">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>宽度</h2>
+
+<p>使用 w-* 类（<code>.w-25</code>、<code>.w-50</code>、<code>.w-75</code>、<code>.w-100</code>、<code>.mw-auto</code>、<code>.mw-100</code>）设置元素的宽度：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_utility_width.html" style="width:100%;height:180px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;w-25 bg-warning&quot;&gt;宽度 25%&lt;/div&gt;
+&lt;div class=&quot;w-50 bg-warning&quot;&gt;宽度 50%&lt;/div&gt;
+&lt;div class=&quot;w-75 bg-warning&quot;&gt;宽度 75%&lt;/div&gt;
+&lt;div class=&quot;w-100 bg-warning&quot;&gt;宽度 100%&lt;/div&gt;
+&lt;div class=&quot;w-auto bg-warning&quot;&gt;自动宽度&lt;/div&gt;
+&lt;div class=&quot;mw-100 bg-warning&quot;&gt;最大宽度 100%&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t9456.html?s=h&amp;f=bs_utility_width">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>高度</h2>
+
+<p>使用 h-* 类（<code>.h-25</code>、<code>.h-50</code>、<code>.h-75</code>、<code>.h-100</code>、<code>.mh-auto</code>、<code>.mh-100</code>）设置元素的高度：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_utility_height.html" style="width:100%;height:230px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div style=&quot;height:200px;background-color:#ddd&quot;&gt;
+  &lt;div class=&quot;h-25 bg-warning&quot;&gt;高度 25%&lt;/div&gt;
+  &lt;div class=&quot;h-50 bg-warning&quot;&gt;高度 50%&lt;/div&gt;
+  &lt;div class=&quot;h-75 bg-warning&quot;&gt;高度 75%&lt;/div&gt;
+  &lt;div class=&quot;h-100 bg-warning&quot;&gt;高度 100%&lt;/div&gt;
+  &lt;div class=&quot;h-auto bg-warning&quot;&gt;自动高度&lt;/div&gt;
+  &lt;div class=&quot;mh-100 bg-warning&quot; style=&quot;height:500px&quot;&gt;最大高度 100%&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/td405.html?s=h&amp;f=bs_utility_height">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>间距</h2>
+
+<p>Bootstrap 5 拥有广泛的响应式 margin 和 padding 实用程序类。它们适用于所有断点：</p>
+
+<ul>
+<li><code>xs</code> (&lt;= 576px)</li>
+<li><code>sm</code> (&gt; = 576px)</li>
+<li><code>md</code> (&gt; = 768px)</li>
+<li><code>lg</code> (&gt; = 992px)</li>
+<li><code>xl</code> (&gt; = 1200px)</li>
+<li><code>xxl</code> (&gt; = 1400px)</li>
+</ul>
+
+<p>这些类的使用格式为：<code>{<i>property</i>}{<i>sides</i>}-{<i>size</i>}</code> 用于 <code>xs</code>，以及 <code>{<i>property</i>}{<i>sides</i>}-{<i>breakpoint</i>}-{<i>size</i>}</code> 用于 <code>sm</code>、<code>md</code>、<code>lg</code>、<code>xl</code> 和 <code>xxl</code>。</p>
+
+<p><i>property</i> 是以下之一：</p>
+
+<ul>
+<li><code>m</code> - 设置 <code>margin</code></li>
+<li><code>p</code> - 设置 <code>padding</code></li>
+</ul>
+
+<p><i>sides</i> 是以下之一：</p>
+
+<ul>
+<li><code>t</code> - 设置 <code>margin-top</code> 或 <code>padding-top</code></li>
+<li><code>b</code> - 设置 <code>margin-bottom</code> 或 <code>padding-bottom</code></li>
+<li><code>s</code> - 设置 <code>margin-left</code> 或 <code>padding-left</code></li>
+<li><code>e</code> - 设置 <code>margin-right</code> 或 <code>padding-right</code></li>
+<li><code>x</code> - 同时设置 <code>padding-left</code> 和 <code>padding-right</code> 或 <code>margin-left</code> 和 <code>margin-right</code></li>
+<li><code>y</code> - 同时设置 <code>padding-top</code> 和 <code>padding-bottom</code> 或 <code>margin-top</code> 和 <code>margin-bottom</code></li>
+<li>blank - 在元素的所有四个边设置 <code>margin</code> 或 <code>padding</code></li>
+</ul>
+
+<p><i>size</i> 是以下之一：</p>
+
+<ul>
+<li><code>0</code> - 把 <code>margin</code> 或 <code>padding</code> 设置为 <code>0</code></li>
+<li><code>1</code> - 把 <code>margin</code> 或 <code>padding</code> 设置为 <code>.25rem</code></li>
+<li><code>2</code> - 把 <code>margin</code> 或 <code>padding</code> 设置为 <code>.5rem</code></li>
+<li><code>3</code> - 把 <code>margin</code> 或 <code>padding</code> 设置为 <code>1rem</code></li>
+<li><code>4</code> - 把 <code>margin</code> 或 <code>padding</code> 设置为 <code>1.5rem</code></li>
+<li><code>5</code> - 把 <code>margin</code> 或 <code>padding</code> 设置为 <code>3rem</code></li>
+<li><code>auto</code> - 把 <code>margin</code> 设置为 auto</li>
+</ul>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_utility_spacing.html" style="width:100%;height:320px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;pt-4 bg-warning&quot;&gt;我只有上内边距 (1.5rem)&lt;/div&gt;
+&lt;div class=&quot;p-5 bg-success&quot;&gt;我在所有边都有内边距 (3rem)&lt;/div&gt;
+&lt;div class=&quot;m-5 pb-5 bg-info&quot;&gt;我在所有边都有外边距 (3rem) 和下内边距 (3rem)&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t16f2.html?s=h&amp;f=bs_utility_spacing">亲自试一试</a></p>
+
+<h3>更多间距实例</h3>
+
+<table class="definition-usage">
+<tr>
+<td>.m-# / m-*-#</td>
+<td>所有边的外边距</td>
+<td><a target="_blank" href="../tiy/t16f2.html?s=h&amp;f=bs_utility_spacing">试一试</a></td>
+</tr>
+
+<tr>
+<td>.mt-# / mt-*-#</td>
+<td>上外边距</td>
+<td><a target="_blank" href="../tiy/td0b9.html?s=h&amp;f=bs_utility_mt-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td>.mb-# / mb-*-#</td>
+<td>下外边距</td>
+<td><a target="_blank" href="../tiy/ta534.html?s=h&amp;f=bs_utility_mb-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td>.ms-# / ms-*-#</td>
+<td>左外边距</td>
+<td><a target="_blank" href="../tiy/tb9a2.html?s=h&amp;f=bs_utility_ms-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td>.me-# / me-*-#</td>
+<td>右外边距</td>
+<td><a target="_blank" href="../tiy/t8f2b.html?s=h&amp;f=bs_utility_me-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td>.mx-# / mx-*-#</td>
+<td>左和右内边距</td>
+<td><a target="_blank" href="../tiy/t3abd.html?s=h&amp;f=bs_utility_mx-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td>.my-# / my-*-#</td>
+<td>上和下外边距</td>
+<td><a target="_blank" href="../tiy/t3d75.html?s=h&amp;f=bs_utility_my-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td>.p-# / p-*-#</td>
+<td>所有边的内边距（填充）</td>
+<td><a target="_blank" href="../tiy/t67ed.html?s=h&amp;f=bs_utility_p-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td>.pt-# / pt-*-#</td>
+<td>上内边距</td>
+<td><a target="_blank" href="../tiy/t0edb.html?s=h&amp;f=bs_utility_pt-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td>.pb-# / pb-*-#</td>
+<td>下内边距</td>
+<td><a target="_blank" href="../tiy/td1c0.html?s=h&amp;f=bs_utility_pb-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td>.ps-# / ps-*-#</td>
+<td>左内边距</td>
+<td><a target="_blank" href="../tiy/tf59d-2.html?s=h&amp;f=bs_utility_ps-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td>.pe-# / pe-*-#</td>
+<td>右内边距</td>
+<td><a target="_blank" href="../tiy/t41c1.html?s=h&amp;f=bs_utility_pe-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td>.py-# / py-*-#</td>
+<td>上和下内边距</td>
+<td><a target="_blank" href="../tiy/t2520.html?s=h&amp;f=bs_utility_py-responsive">试一试</a></td>
+</tr>
+
+<tr>
+<td>.px-# / px-*-#</td>
+<td>左和右内边距</td>
+<td><a target="_blank" href="../tiy/t41d8.html?s=h&amp;f=bs_utility_px-responsive">试一试</a></td>
+</tr>
+</table>
+
+<p>您可以在我们的 <a href="../cssref/css_units.html" title="CSS 单位">CSS 单位参考手册</a> 中阅读有关 rem 和不同尺寸单位的更多内容。</p>
+</div>
+
+
+
+<div>
+<h2>阴影</h2>
+
+<p>请使用 <code>shadow-</code> 类为元素添加阴影：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_utility_shadow.html" style="width:100%;height:430px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;shadow-none p-4 mb-4 bg-light&quot;&gt;没有阴影&lt;/div&gt;
+&lt;div class=&quot;shadow-sm p-4 mb-4 bg-white&quot;&gt;小型阴影&lt;/div&gt;
+&lt;div class=&quot;shadow p-4 mb-4 bg-white&quot;&gt;默认阴影&lt;/div&gt;
+&lt;div class=&quot;shadow-lg p-4 mb-4 bg-white&quot;&gt;大型阴影&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tceeb.html?s=h&amp;f=bs_utility_shadow">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>垂直对齐</h2>
+
+<p>请使用 <code>align-</code> 类更改元素的对齐方式（仅适用于 inline、 inline-block、inline-table 和表格单元格元素）：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_utility_align.html" style="width:100%;height:60px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;span class=&quot;align-baseline&quot;&gt;baseline&lt;/span&gt;
+&lt;span class=&quot;align-top&quot;&gt;top&lt;/span&gt;
+&lt;span class=&quot;align-middle&quot;&gt;middle&lt;/span&gt;
+&lt;span class=&quot;align-bottom&quot;&gt;bottom&lt;/span&gt;
+&lt;span class=&quot;align-text-top&quot;&gt;text-top&lt;/span&gt;
+&lt;span class=&quot;align-text-bottom&quot;&gt;text-bottom&lt;/span&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/taaf4.html?s=h&amp;f=bs_utility_align">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>纵横比</h2>
+
+<p>根据父级的宽度创建响应式视频或幻灯片。</p>
+
+<p>将 <code>.ratio</code> 类与您选择的纵横比 <code>.aspect-ratio-*</code> 添加到父元素，并在其中添加嵌入（视频或 iframe）：</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;!-- Aspect ratio 1:1 --&gt;
+&lt;div class=&quot;ratio ratio-1x1&quot;&gt;
+  &lt;iframe src=&quot;shanghai.mp4&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;!-- Aspect ratio 4:3 --&gt;
+&lt;div class=&quot;ratio ratio-4x3&quot;&gt;
+  &lt;iframe src=&quot;shanghai.mp4&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;!-- Aspect ratio 16:9 --&gt;
+&lt;div class=&quot;ratio ratio-16x9&quot;&gt;
+  &lt;iframe src=&quot;shanghai.mp4&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;!-- Aspect ratio 21:9 --&gt;
+&lt;div class=&quot;ratio ratio-21x9&quot;&gt;
+  &lt;iframe src=&quot;shanghai.mp4&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/td998.html?f=bs_utility_aspect_ratio">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>可见性</h2>
+
+<p>使用 <code>.visible</code> 或 <code>.invisible</code> 类可控制元素的可见性：</p>
+
+<p class="note"><span>注释：</span>这些类不会更改 CSS display 值。它们只添加 <code>visibility:visible</code> 或 <code>visibility:hidden。</code></p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_utility_visibility.html" style="width:100%;height:80px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;div class=&quot;visible&quot;&gt;我是可见的。&lt;/div&gt;
+&lt;div class=&quot;invisible&quot;&gt;我是不可见的。&lt;/div&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t16be.html?s=h&amp;f=bs_utility_visibility">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>关闭图标</h2>
+
+<p>使用 <code>.btn-close</code> 类可设置关闭图标的样式。通常用于警告框和模态。</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_utility_close.html" style="width:100%;height:60px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<pre class="language-html">
+&lt;button type=&quot;button&quot; class=&quot;btn-close&quot;&gt;&lt;/button&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tfd1a.html?s=h&amp;f=bs_utility_close">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>屏幕阅读器</h2>
+
+<p>使用 <code>.visually-hidden</code> 类可在所有设备上隐藏元素，屏幕阅读器除外：</p>
+
+<h3>实例</h3>
+
+<pre class="language-html">
+&lt;span class=&quot;visually-hidden&quot;&gt;I will be hidden on all screens except for screen readers.&lt;/span&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t62d4.html?s=h&amp;f=bs_utility_sr">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>颜色</h2>
+
+<p>如“颜色”一章所述，下面列出了所有文本和背景颜色类的列表：</p>
+
+<p>针对文本颜色的类是：</p>
+
+<ul>
+<li><code>.text-muted</code></li>
+<li><code>.text-primary</code></li>
+<li><code>.text-success</code></li>
+<li><code>.text-info</code></li>
+<li><code>.text-warning</code></li>
+<li><code>.text-danger</code></li>
+<li><code>.text-secondary</code></li>
+<li><code>.text-white</code></li>
+<li><code>.text-dark</code></li>
+<li><code>.text-body</code>（默认 body 颜色/通常为黑色）</li>
+<li><code>.text-light</code></li>
+</ul>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_txt_colors.html" style="width:100%;height:400px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p class="tiy"><a target="_blank" href="../tiy/t94e7.html?s=h&amp;f=bs_txt_colors">亲自试一试</a></p>
+
+<p>上下文文本类也可用于链接：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_txt_colors_links.html" style="width:100%;height:60px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p class="tiy"><a target="_blank" href="../tiy/t3438.html?s=h&amp;f=bs_txt_colors_links">亲自试一试</a></p>
+
+<p>您还可以使用 .text-black-50 或 .text-white-50 类为黑色或白色文本添加 50% 的不透明度：</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_txt_colors_opacity.html" style="width:100%;height:100px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p class="tiy"><a target="_blank" href="../tiy/tfbe6.html?s=h&amp;f=bs_txt_colors_opacity">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>背景色</h2>
+
+<p>针对背景颜色的类是：</p>
+
+<ul>
+<li><code>.bg-primary</code></li>
+<li><code>.bg-success</code></li>
+<li><code>.bg-info</code></li>
+<li><code>.bg-warning</code></li>
+<li><code>.bg-danger</code></li>
+<li><code>.bg-secondary</code></li>
+<li><code>.bg-dark</code></li>
+<li><code>.bg-light</code></li>
+</ul>
+
+<p>请注意，背景颜色不会设置文本颜色，因此在某些情况下，您需要将它们与 <code>.text-*</code> 类一起使用。</p>
+
+<h3>实例</h3>
+
+<iframe scrolling="no" src="../demo/bs/bs_txt_bgcolors.html" style="width:100%;height:350px;border:none;margin-top:15px;overflow: hidden;"></iframe>
+
+<p class="tiy"><a target="_blank" href="../tiy/t24c1.html?s=h&amp;f=bs_txt_bgcolors">亲自试一试</a></p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="bootstrap_offcanvas.html" title="Bootstrap 5 Offcanvas">BS5 Offcanvas</a></li>
+<li class="next"><a href="bootstrap_flex.html" title="Bootstrap 5 Flex">BS5 Flex</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_quiz"><a href="bootstrap_quiz.html">JavaScript 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/bootstrap5/bootstrap_utilities.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:22:28 GMT -->
+</html>

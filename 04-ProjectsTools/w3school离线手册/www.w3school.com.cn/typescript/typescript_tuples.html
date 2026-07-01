@@ -1,0 +1,307 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/typescript/typescript_tuples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:35:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>TypeScript 元组</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>TypeScript 教程</h2>
+<ul>
+<li><a href="index.html" title="TypeScript 教程">TS 教程</a></li>
+<li><a href="typescript_intro.html" title="TypeScript 简介">TS 简介</a></li>
+<li><a href="typescript_getstarted.html" title="TypeScript 入门">TS 入门</a></li>
+<li><a href="typescript_simple_types.html" title="TypeScript 简单类型">TS 简单类型</a></li>
+<li><a href="typescript_special_types.html" title="TypeScript 特殊类型">TS 特殊类型</a></li>
+<li><a href="typescript_arrays.html" title="TypeScript 数组">TS 数组</a></li>
+<li class="currentLink"><a href="typescript_tuples.html" title="TypeScript 元组">TS 元组</a></li>
+<li><a href="typescript_object_types.html" title="TypeScript 对象类型">TS 对象类型</a></li>
+<li><a href="typescript_enums.html" title="TypeScript 枚举">TS 枚举</a></li>
+<li><a href="typescript_aliases_and_interfaces.html" title="TypeScript 别名与接口">TS 别名与接口</a></li>
+<li><a href="typescript_union_types.html" title="TypeScript 联合类型">TS 联合类型</a></li>
+<li><a href="typescript_functions.html" title="TypeScript 函数">TS 函数</a></li>
+<li><a href="typescript_casting.html" title="TypeScript 类型转换">TS 类型转换</a></li>
+<li><a href="typescript_classes.html" title="TypeScript 类">TS 类</a></li>
+<li><a href="typescript_basic_generics.html" title="TypeScript 基本泛型">TS 基本泛型</a></li>
+<li><a href="typescript_utility_types.html" title="TypeScript 实用类型">TS 实用类型</a></li>
+<li><a href="typescript_keyof.html" title="TypeScript Keyof">TS Keyof</a></li>
+<li><a href="typescript_null.html" title="TypeScript Null">TS Null</a></li>
+<li><a href="typescript_definitely_typed.html" title="TypeScript Definitely Typed">TS Definitely Typed</a></li>
+<li><a href="typescript_5_updates.html" title="TypeScript 5.x 更新">TS 5 更新</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>TypeScript 元组</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="typescript_arrays.html" title="TypeScript 数组">TS 数组</a></li>
+<li class="next"><a href="typescript_object_types.html" title="TypeScript 对象类型">TS 对象类型</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>类型化数组</h2>
+
+<p><em>元组</em>是类型化的数组，具有预定义长度，且每个索引都有对应的类型。</p>
+
+<p>元组非常有用，因为它们允许数组中的每个元素都是已知类型的值。</p>
+
+<p>要定义一个元组，需要指定数组中每个元素的类型：</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+// 定义我们的元组
+let ourTuple: [number, boolean, string];
+
+// 正确初始化
+ourTuple = [5, false, 'Coding God was here'];
+</pre>
+
+<p class="tiy"><a target="_blank" href="tb142.html?f=typescript_tuples">亲自试一试</a></p>
+
+<p>如您所见，我们有一个数字、一个布尔值和一个字符串。但是，如果我们尝试以错误的顺序设置它们，会发生什么呢：</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+// 定义我们的元组 
+let ourTuple: [number, boolean, string];
+
+// 初始化不正确会引发错误
+ourTuple = [false, 'Coding God was mistaken', 5];
+</pre>
+
+<p class="tiy"><a target="_blank" href="t0500.html?f=typescript_tuples_wrong_order">亲自试一试</a></p>
+
+<p>尽管我们有 <code>boolean</code>、<code>string</code> 和 <code>number</code>，但在我们的元组中，顺序很重要，否则会抛出错误。</p>
+</section>
+
+
+
+<section>
+<h2>只读元组</h2>
+
+<p>一个好的做法是将您的<em>元组</em>设置为只读。</p>
+
+<p>元组只对初始值有严格定义的类型：</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+// 定义我们的元组  
+let ourTuple: [number, boolean, string];  
+// 正确初始化  
+ourTuple = [5, false, 'Coding God was here'];  
+// 对于索引 3+，我们的元组中没有类型安全性  
+ourTuple.push('Something new and wrong');  
+console.log(ourTuple);
+</pre>
+
+<p class="tiy"><a target="_blank" href="t6e7e.html?f=typescript_tuples_newvalue">亲自试一试</a></p>
+
+<p>您会看到新的元组只对初始值有严格定义的类型：</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+// 定义我们的只读元组
+const ourReadonlyTuple: readonly [number, boolean, string] = [5, true, 'The Real Coding God'];
+// 抛出错误，因为它是只读的。
+ourReadonlyTuple.push('Coding God took a day off');
+</pre>
+
+<p class="tiy"><a target="_blank" href="t68f8.html?f=typescript_tuples_readonly">亲自试一试</a></p>
+
+<p>要了解有关只读等访问修饰符的更多信息，请转到我们关于它们的部分：TypeScript 类。</p>
+
+<p>如果您以前使用过 React，那么您很可能已经使用过元组。</p>
+
+<p><code>useState</code> 返回一个由值和设置函数组成的元组。</p>
+
+<p><code>const [firstName, setFirstName] = useState('Dylan')</code> 是一个常见的例子。</p>
+
+<p>由于结构原因，我们知道列表中的第一个值将是某种值类型（在本例中为 <code>string</code>），而第二个值是 <code>function</code>。</p>
+</section>
+
+
+
+<section>
+<h2>命名元组</h2>
+
+<p><em>命名元组</em>允许我们为每个索引处的值提供上下文。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+const graph: [x: number, y: number] = [55.2, 41.3];
+</pre>
+
+<p><em>命名元组</em>允许我们为每个索引处的值提供上下文。</p>
+</section>
+
+
+
+<section>
+<h2>解构元组</h2>
+
+<p>由于元组是数组，因此我们也可以对它们进行解构。</p>
+
+<h3>实例</h3>
+
+<pre class="language-typescript">
+const graph: [number, number] = [55.2, 41.3];
+const [x, y] = graph;
+</pre>
+
+<p>要回顾解构，请单击此处。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="typescript_arrays.html" title="TypeScript 数组">TS 数组</a></li>
+<li class="next"><a href="typescript_object_types.html" title="TypeScript 对象类型">TS 对象类型</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/typescript/typescript_tuples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:35:33 GMT -->
+</html>

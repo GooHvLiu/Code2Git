@@ -1,0 +1,114 @@
+#navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #333;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 1rem;
+}
+#navbar ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+#navbar ul li a {
+  color: #fff;
+  padding: 0.75rem;
+  margin: 0 0.25rem;
+}
+#navbar ul li a:hover {
+  background: #93cb52;
+  border-radius: 5px;
+}
+#home {
+  position: relative;
+  background: url(../img/home.png) no-repeat center center / cover;
+  height: 100vh;
+  color: #fff;
+}
+#home .home-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 0 2rem;
+}
+#what .items {
+  display: flex;
+  text-align: center;
+}
+#what .items .item {
+  flex: 1;
+}
+#what .items .item i {
+  padding: 1rem;
+  background-color: #93cb52;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+#what .items .item p {
+  font-size: 14px;
+}
+#who {
+  display: flex;
+}
+#who div {
+  flex: 1;
+  flex-basis: 50%;
+}
+#who .who-img {
+  background: url(../img/people.jpg) no-repeat center center / cover;
+}
+#who .who-text .list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px dotted #444;
+}
+#clients .container .items {
+  display: flex;
+  justify-content: space-evenly;
+}
+#clients .container .items img {
+  display: block;
+  margin: 0 auto;
+  width: 80px;
+}
+#contact {
+  display: flex;
+}
+#contact .contact-form,
+#contact .contact-img {
+  flex: 1;
+}
+#contact .contact-img {
+  background: url(../img/contact.png) no-repeat center center / cover;
+}
+#contact .contact-form .form-group {
+  margin: 0.75rem;
+}
+#contact .contact-form .form-group label {
+  display: block;
+}
+#contact .contact-form .form-group input,
+#contact .contact-form .form-group textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+}
+#contact input {
+  width: 100%;
+  padding: 0.5rem;
+}
+#footer .container .footer-content {
+  font-size: 12px;
+}

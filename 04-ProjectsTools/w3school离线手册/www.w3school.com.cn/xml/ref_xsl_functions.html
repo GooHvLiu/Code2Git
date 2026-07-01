@@ -1,0 +1,1508 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/xml/ref_xsl_functions.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:45:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>XSLT、XPath 以及 XQuery 函数</title>
+
+</head>
+
+<body class="xml">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>XML 教程</h2>
+<ul>
+<li><a href="index.html" title="XML 教程">XML 教程</a></li>
+<li><a href="xml_intro.html" title="XML 简介">XML 简介</a></li>
+<li><a href="xml_usedfor.html" title="XML 的用途">XML 用途</a></li>
+<li><a href="xml_tree.html" title="XML 树结构">XML 树结构</a></li>
+<li><a href="xml_syntax.html" title="XML 语法规则">XML 语法</a></li>
+<li><a href="xml_elements.html" title="XML 元素">XML 元素</a></li>
+<li><a href="xml_attributes.html" title="XML 属性">XML 属性</a></li>
+<li><a href="xml_namespaces.html" title="XML 命名空间">XML 命名空间</a></li>
+<li><a href="xml_display.html" title="显示 XML">XML 显示</a></li>
+<li><a href="xml_http.html" title="XML HttpRequest">XML HttpRequest</a></li>
+<li><a href="xml_parser.html" title="XML 解析器">XML 解析器</a></li>
+<li><a href="xml_dom.html" title="XML DOM">XML DOM</a></li>
+<li><a href="xml_xpath.html" title="XML 和 XPath">XML XPath</a></li>
+<li><a href="xml_xslt.html" title="XML 和 XSLT">XML XSLT</a></li>
+<li><a href="xml_xquery.html" title="XML 和 XQuery">XML XQuery</a></li>
+<li><a href="xml_xlink.html" title="XML、XLink 和 XPointer">XML XLink</a></li>
+<li><a href="xml_validator.html" title="XML 验证器">XML 验证器</a></li>
+<li><a href="xml_dtd.html" title="XML DTD">XML DTD</a></li>
+<li><a href="xml_schema.html" title="XML Schema">XML Schema</a></li>
+<li><a href="xml_server.html" title="服务器上的 XML">XML 服务器</a></li>
+<li><a href="xml_examples.html" title="XML 实例">XML 实例</a></li>
+<li><a href="xml_quiz.html" title="XML 测验">XML 测验</a></li>
+</ul>
+<h2>XML DOM 教程</h2>
+<ul>
+<li><a href="dom_intro.html" title="XML DOM 简介">DOM 简介</a></li>
+<li><a href="dom_nodes.html" title="XML DOM 节点">DOM 节点</a></li>
+<li><a href="dom_nodes_access.html" title="XML DOM 访问节点">DOM 访问节点</a></li>
+<li><a href="dom_nodes_info.html" title="XML DOM 节点信息">DOM 节点信息</a></li>
+<li><a href="dom_nodes_nodelist.html" title="XML DOM 节点列表">DOM 节点列表</a></li>
+<li><a href="dom_nodes_traverse.html" title="XML DOM 遍历节点">DOM 遍历节点</a></li>
+<li><a href="dom_nodes_navigate.html" title="XML DOM 定位节点">DOM 定位节点</a></li>
+<li><a href="dom_nodes_get.html" title="XML DOM 获取节点">DOM 获取节点</a></li>
+<li><a href="dom_nodes_set.html" title="XML DOM 改变节点">DOM 改变节点</a></li>
+<li><a href="dom_nodes_remove.html" title="XML DOM 删除节点">DOM 删除节点</a></li>
+<li><a href="dom_nodes_replace.html" title="XML DOM 替换节点">DOM 替换节点</a></li>
+<li><a href="dom_nodes_create.html" title="XML DOM 创建节点">DOM 创建节点</a></li>
+<li><a href="dom_nodes_add.html" title="XML DOM 添加节点">DOM 添加节点</a></li>
+<li><a href="dom_nodes_clone.html" title="XML DOM 克隆节点">DOM 克隆节点</a></li>
+<li><a href="dom_examples.html" title="XML DOM 实例">DOM 实例</a></li>
+</ul>
+<h2>XPath 教程</h2>
+<ul>
+<li><a href="xpath_intro.html" title="XPath 简介">XPath 简介</a></li>
+<li><a href="xpath_nodes.html" title="XPath 节点">XPath 节点</a></li>
+<li><a href="xpath_syntax.html" title="XPath 语法">XPath 语法</a></li>
+<li><a href="xpath_axes.html" title="XPath Axes（轴）">XPath 轴</a></li>
+<li><a href="xpath_operators.html" title="XPath 运算符">XPath 运算符</a></li>
+<li><a href="xpath_examples.html" title="XPath 实例">XPath 实例</a></li>
+</ul>
+<h2>XSLT 教程</h2>
+<ul>
+<li><a href="xsl_intro.html" title="XSLT 简介">XSLT 简介</a></li>
+<li><a href="xsl_languages.html" title="XSLT 语言">XSLT 语言</a></li>
+<li><a href="xsl_transformation.html" title="XSLT - 转换">XSLT 转换</a></li>
+<li><a href="xsl_templates.html" title="XSLT &lt;xsl:template&gt; 元素">XSLT &lt;template&gt;</a></li>
+<li><a href="xsl_value_of.html" title="XSLT &lt;xsl:value-of&gt; 元素">XSLT &lt;value-of&gt;</a></li>
+<li><a href="xsl_for_each.html" title="XSLT &lt;xsl:for-each&gt; 元素">XSLT &lt;for-each&gt;</a></li>
+<li><a href="xsl_sort.html" title="XSLT &lt;xsl:sort&gt; 元素">XSLT &lt;sort&gt;</a></li>
+<li><a href="xsl_if.html" title="XSLT &lt;xsl:if&gt; 元素">XSLT &lt;if&gt;</a></li>
+<li><a href="xsl_choose.html" title="XSLT &lt;xsl:choose&gt; 元素">XSLT &lt;choose&gt;</a></li>
+<li><a href="xsl_apply_templates.html" title="XSLT &lt;xsl:apply-templates&gt; 元素">XSLT Apply</a></li>
+<li><a href="xsl_client.html" title="XSLT - 在客户端">XSLT 在客户端</a></li>
+<li><a href="xsl_server.html" title="XSLT - 在服务器上">XSLT 在服务器端</a></li>
+<li><a href="xsl_editxml.html" title="XSLT - 编辑 XML">XSLT 编辑 XML</a></li>
+<li><a href="xsl_examples.html" title="XSLT 实例">XSLT 实例</a></li>
+</ul>
+<h2>XQuery 教程</h2>
+<ul>
+<li><a href="xquery_intro.html" title="XQuery 简介">XQuery 简介</a></li>
+<li><a href="xquery_example.html" title="XQuery 实例">XQuery 实例</a></li>
+<li><a href="xquery_flwor.html" title="XQuery FLWOR 表达式">XQuery FLWOR</a></li>
+<li><a href="xquery_flwor_html.html" title="XQuery FLWOR + HTML">XQuery HTML</a></li>
+<li><a href="xquery_terms.html" title="XQuery 术语">XQuery 术语</a></li>
+<li><a href="xquery_syntax.html" title="XQuery 语法">XQuery 语法</a></li>
+<li><a href="xquery_add.html" title="XQuery 添加元素和属性">XQuery 添加</a></li>
+<li><a href="xquery_select.html" title="XQuery 选择和过滤">XQuery 选取</a></li>
+<li><a href="xquery_functions.html" title="XQuery 函数">XQuery 函数</a></li>
+</ul>
+<h2>XML DTD 教程</h2>
+<ul>
+<li><a href="dtd_intro.html" title="DTD 简介">DTD 简介</a></li>
+<li><a href="dtd_building.html" title="DTD - XML 构建模块">DTD 构建模块</a></li>
+<li><a href="dtd_elements.html" title="DTD - 元素">DTD 元素</a></li>
+<li><a href="dtd_attributes.html" title="DTD - 属性">DTD 属性</a></li>
+<li><a href="dtd_el_vs_attr.html" title="DTD - 元素对比属性">DTD 元素对比属性</a></li>
+<li><a href="dtd_entities.html" title="DTD - 实体">DTD 实体</a></li>
+<li><a href="dtd_examples.html" title="DTD 实例">DTD 实例</a></li>
+</ul>
+<h2>XSD Schema 教程</h2>
+<ul>
+<li><a href="schema_intro.html" title="XML Schema 教程">XSD 教程</a></li>
+<li><a href="schema_howto.html" title="如何使用 XSD？">XSD 使用</a></li>
+<li><a href="schema_schema.html" title="XSD - &lt;schema&gt; 元素">XSD &lt;schema&gt;</a></li>
+<li><a href="schema_simple.html" title="XSD 简易元素">XSD 元素</a></li>
+<li><a href="schema_simple_attributes.html" title="XSD 属性">XSD 属性</a></li>
+<li><a href="schema_facets.html" title="XSD 限定/Facets">XSD 限定</a></li>
+<li><a href="schema_complex.html" title="XSD 复合元素">XSD 复合元素</a></li>
+<li><a href="schema_complex_empty.html" title="XSD 复合空元素">XSD 空元素</a></li>
+<li><a href="schema_complex_elements.html" title="XSD 复合类型 - 仅含元素">XSD 仅含元素</a></li>
+<li><a href="schema_complex_text.html" title="XSD 仅含文本复合元素">XSD 仅含文本</a></li>
+<li><a href="schema_complex_mixed.html" title="XSD 带有混合内容的复合类型">XSD 混合内容</a></li>
+<li><a href="schema_complex_indicators.html" title="XSD 复合类型指示器">XSD 指示器</a></li>
+<li><a href="schema_complex_any.html" title="XSD &lt;any&gt; 元素">XSD &lt;any&gt;</a></li>
+<li><a href="schema_complex_anyattribute.html" title="XSD &lt;anyAttribute&gt; 元素">XSD &lt;anyAttribute&gt;</a></li>
+<li><a href="schema_complex_subst.html" title="XSD 元素替换（Element Substitution）">XSD 元素替换</a></li>
+<li><a href="schema_example.html" title="一个 XSD 实例">XSD 实例</a></li>
+</ul>
+<h2>XSD 数据类型</h2>
+<ul>
+<li><a href="schema_dtypes_string.html" title="XSD 字符串数据类型">XSD 字符串</a></li>
+<li><a href="schema_dtypes_date.html" title="XSD 日期及时间数据类型">XSD 日期/时间</a></li>
+<li><a href="schema_dtypes_numeric.html" title="XSD 数值数据类型">XSD 数值</a></li>
+<li><a href="schema_dtypes_misc.html" title="XSD 杂项数据类型">XSD 杂项</a></li>
+</ul>
+<h2>参考手册</h2>
+<ul>
+<li><a href="xml_reference.html" title="XML DOM 参考手册">XML 参考手册</a></li>
+<li><a href="ref_dom_nodetype.html" title="XML DOM 节点类型">DOM 节点类型</a></li>
+<li><a href="ref_dom_node.html" title="XML DOM Node 对象">DOM Node</a></li>
+<li><a href="ref_dom_nodelist.html" title="XML DOM NodeList 对象">DOM NodeList</a></li>
+<li><a href="ref_dom_namednodemap.html" title="XML DOM NamedNodeMap 对象">DOM NamedNodeMap</a></li>
+<li><a href="ref_dom_document.html" title="XML DOM Document 对象">DOM Document</a></li>
+<li><a href="ref_dom_element.html" title="XML DOM Element 对象">DOM Element</a></li>
+<li><a href="ref_dom_attribute.html" title="XML DOM Attr 对象">DOM Attr</a></li>
+<li><a href="ref_dom_text.html" title="XML DOM Text 对象">DOM Text</a></li>
+<li><a href="ref_dom_cdatasection.html" title="XML DOM CDATASection 对象">DOM CDATA</a></li>
+<li><a href="ref_dom_comment.html" title="XML DOM Comment 对象">DOM Comment</a></li>
+<li><a href="ref_dom_http.html" title="XML DOM XMLHttpRequest 对象">DOM XMLHttpRequest</a></li>
+<li><a href="ref_dom_errors.html" title="XML DOM ParseError 对象">DOM ParseError</a></li>
+<li><a href="ref_schema_elements.html" title="XML Schema 参考手册">Schema 元素</a></li>
+<li><a href="ref_xsl_elements.html" title="XSLT 元素参考手册">XSLT 元素</a></li>
+<li class="currentLink"><a href="ref_xsl_functions.html" title="XSLT、XPath 以及 XQuery 函数">XSLT/XPath 函数</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>XSLT、XPath 以及 XQuery 函数</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="ref_xsl_elements.html" title="XSLT 元素参考手册">XSLT 元素</a></li>
+<li class="next"><a href="index.html" title="XML 教程">XML 教程</a></li>
+</ul>
+</div>
+
+
+
+<section id="intro">
+<p>XSLT 2.0、XPath 2.0 和 XQuery 1.0 共享相同的函数库。</p>
+</section>
+
+
+
+<section>
+<h2>函数参考手册</h2>
+
+<p>函数命名空间的默认前缀是：<code>fn:</code></p>
+
+<p>函数命名空间的 URI 为：<code>http://www.w3.org/2005/xpath-functions</code></p>
+
+<p class="tip"><span>提示：</span>通常使用 <code>fn:</code> 前缀来调用函数，例如 <code>fn:string()</code>。不过，由于 <code>fn:</code> 是命名空间的默认前缀，因此调用时函数名不需要添加前缀。</p>
+
+<ul>
+<li><a href="#accessor">存取</a></li>
+<li><a href="#error">错误和跟踪</a></li>
+<li><a href="#numeric">数值</a></li>
+<li><a href="#string">字符串</a></li>
+<li><a href="#anyuri">AnyURI</a></li>
+<li><a href="#boolean">逻辑</a></li>
+<li><a href="#datetime">持续时间/日期/时间</a></li>
+<li><a href="#qname">QName</a></li>
+<li><a href="#node">节点</a></li>
+<li><a href="#sequence">序列</a></li>
+<li><a href="#context">Context</a></li>
+<li><a href="#xslt_functions">内置函数</a></li>
+</ul>
+</section>
+
+
+
+<section>
+<h2 id="accessor">存取函数</h2>
+
+<table class="dataintable">
+<tr>
+<th style="width:40%">名称</th>
+<th style="width:60%">说明</th>
+</tr>
+
+<tr>
+<td>fn:node-name(node)</td>
+<td>返回参数节点的节点名称。</td>
+</tr>
+
+<tr>
+<td>fn:nilled(node)</td>
+<td>返回是否拒绝参数节点的布尔值。</td>
+</tr>
+
+<tr>
+<td>fn:data(item.item,...)</td>
+<td>接受项目序列，并返回原子值序列。</td>
+</tr>
+
+<tr>
+<td>
+<ul><li>fn:base-uri()</li>
+<li>fn:base-uri(node)</li></ul></td>
+<td>返回当前节点或指定节点的 base-uri 属性的值。</td>
+</tr>
+
+<tr>
+<td>fn:document-uri(node)</td>
+<td>返回指定节点的 document-uri 属性的值。</td>
+</tr>
+</table>
+
+<p class="gototop"><a href="#top">Top</a></p>
+</section>
+
+
+
+<section>
+<h2 id="error">错误和跟踪函数</h2>
+
+<table class="dataintable">
+<tr>
+<th style="width:40%">名称</th>
+<th style="width:60%">说明</th>
+</tr>
+
+<tr>
+<td>
+	<ul>
+	<li>fn:error()</li>
+	<li>fn:error(error)</li>
+	<li>fn:error(error,description)</li>
+	<li>fn:error(error,description,error-object)</li>
+	</ul>
+</td>
+<td>
+	<p>例子：error(fn:QName('http://example.com/test', 'err:toohigh'), 'Error: Price is too high')</p>
+	<p>结果：向外部处理环境返回 http://example.com/test#toohigh 以及字符串 &quot;Error: Price is too high&quot;。</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:trace(value,label)</td>
+<td>用于对查询进行 debug。</td>
+</tr>
+</table>
+
+<p class="gototop"><a href="#top">Top</a></p>
+</section>
+
+
+
+<section>
+<h2 id="numeric">有关数值的函数</h2>
+<table class="dataintable">
+<tr>
+<th style="width:40%">名称</th>
+<th style="width:60%">说明</th>
+</tr>
+
+<tr>
+<td>fn:number(arg)</td>
+<td>
+	<p>返回参数的数值。参数可以是布尔值、字符串或节点集。</p>
+	<p>例子：number('100')</p>
+	<p>结果：100</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:abs(num)</td>
+<td>
+	<p>返回参数的绝对值。</p>
+	<p>例子：abs(3.14)</p>
+	<p>结果：3.14</p>
+
+	<p>例子：abs(-3.14)</p>
+	<p>结果：3.14</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:ceiling(num)</td>
+<td>
+	<p>返回大于 num 参数的最小整数。</p>
+	<p>例子：ceiling(3.14)</p>
+	<p>结果：4</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:floor(num)</td>
+<td>
+	<p>返回不大于 num 参数的最大整数。</p>
+	<p>例子：floor(3.14)</p>
+	<p>结果：3</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:round(num)</td>
+<td>
+	<p>把 num 参数舍入为最接近的整数。</p>
+	<p>例子：round(3.14)</p>
+	<p>结果：3</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:round-half-to-even()</td>
+<td>
+	<p>例子：round-half-to-even(0.5)</p>
+	<p>结果：0 </p>
+
+	<p>例子：round-half-to-even(1.5)</p>
+	<p>结果：2</p>
+
+	<p>例子：round-half-to-even(2.5)</p>
+	<p>结果：2</p>
+</td>
+</tr>
+</table>
+
+<p class="gototop"><a href="#top">Top</a></p>
+</section>
+
+
+
+<section>
+<h2 id="string">有关字符串的函数</h2>
+<table class="dataintable">
+<tr>
+<th style="width:40%">名称</th>
+<th style="width:60%">说明</th>
+</tr>
+
+<tr>
+<td>fn:string(arg)</td>
+<td>
+	<p>返回参数的字符串值。参数可以是数字、逻辑值或节点集。</p>
+	<p>例子：string(314)</p>
+	<p>结果：&quot;314&quot;</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:codepoints-to-string(int,int,...)</td>
+<td>
+	<p>根据代码点序列返回字符串。</p>
+	<p>例子：codepoints-to-string(84, 104, 233, 114, 232, 115, 101)</p>
+	<p>结果：'Thérèse'</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:string-to-codepoints(string)</td>
+<td>
+	<p>根据字符串返回代码点序列。</p>
+	<p>例子：string-to-codepoints(&quot;Thérèse&quot;)</p>
+	<p>结果：84, 104, 233, 114, 232, 115, 101</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:codepoint-equal(comp1,comp2)</td>
+<td>根据 Unicode 代码点对照，如果 comp1 的值等于 comp2 的值，则返回 true。(http://www.w3.org/2005/02/xpath-functions/collation/codepoint)，否则返回 false。</td>
+</tr>
+
+<tr>
+<td>
+<ul>
+<li>fn:compare(comp1,comp2)</li>
+<li>fn:compare(comp1,comp2,collation)</li>
+</ul>
+</td>
+<td>
+	<p>如果 comp1 小于 comp2，则返回 -1。如果 comp1 等于 comp2，则返回 0。如果 comp1 大于 comp2，则返回 1。（根据所用的对照规则）。</p>
+	<p>例子：compare('ghi', 'ghi')</p>
+	<p>结果：0</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:concat(string,string,...)</td>
+<td>
+	<p>返回字符串的拼接。</p>
+	<p>例子：concat('XPath ','is ','FUN!')</p>
+	<p>结果：'XPath is FUN!'</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:string-join((string,string,...),sep)</td>
+<td>
+	<p>使用 sep 参数作为分隔符，来返回 string 参数拼接后的字符串。</p>
+	<p>例子：string-join(('We', 'are', 'having', 'fun!'), ' ')</p>
+	<p>结果：' We are having fun! '</p>
+
+	<p>例子：string-join(('We', 'are', 'having', 'fun!'))</p>
+	<p>结果：'Wearehavingfun!'</p>
+
+	<p>例子：string-join((), 'sep')</p>
+	<p>结果：''</p>
+</td>
+</tr>
+
+<tr>
+<td>
+	<ul>
+	<li>fn:substring(string,start,len)</li>
+	<li>fn:substring(string,start)</li>
+	</ul>
+</td>
+<td>
+	<p>返回从 start 位置开始的指定长度的子字符串。第一个字符的下标是 1。如果省略 len 参数，则返回从位置 start 到字符串末尾的子字符串。</p>
+	<p>例子：substring('Beatles',1,4)</p>
+	<p>结果：'Beat'</p>
+
+	<p>例子：substring('Beatles',2)</p>
+	<p>结果：'eatles'</p>
+</td>
+</tr>
+
+<tr>
+<td>
+	<ul>
+	<li>fn:string-length(string)</li>
+	<li>fn:string-length()</li>
+	</ul>
+</td>
+<td>
+	<p>返回指定字符串的长度。如果没有 string 参数，则返回当前节点的字符串值的长度。</p>
+	<p>例子：string-length('Beatles')</p>
+	<p>结果：7</p>
+</td>
+</tr>
+
+<tr>
+<td>
+	<ul>
+	<li>fn:normalize-space(string)</li>
+	<li>fn:normalize-space()</li>
+	</ul>
+</td>
+<td>
+	<p>删除指定字符串的开头和结尾的空白，并把内部的所有空白序列替换为一个，然后返回结果。如果没有 string 参数，则处理当前节点。</p>
+	<p>例子：normalize-space(' The&nbsp;&nbsp;&nbsp;XML ')</p>
+	<p>结果：'The XML'</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:normalize-unicode()</td>
+<td>执行 Unicode 规格化。</td>
+</tr>
+
+<tr>
+<td>fn:upper-case(string)</td>
+<td>
+	<p>把 string 参数转换为大写。</p>
+	<p>例子：upper-case('The XML')</p>
+	<p>结果：'THE XML'</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:lower-case(string)</td>
+<td>
+	<p>把 string 参数转换为小写。</p>
+	<p>例子：lower-case('The XML')</p>
+	<p>结果：'the xml'</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:translate(string1,string2,string3)</td>
+<td>
+	<p>把 string1 中的 string2 替换为 string3。</p>
+	<p>例子：translate('12:30','30','45')</p>
+	<p>结果：'12:45'</p>
+
+
+	<p>例子：translate('12:30','03','54')</p>
+	<p>结果：'12:45'</p>
+
+	<p>例子：translate('12:30','0123','abcd')</p>
+	<p>结果：'bc:da'</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:escape-uri(stringURI,esc-res)</td>
+<td>
+	<p>例子：escape-uri(&quot;http://example.com/test#car&quot;, true())</p>
+	<p>结果：&quot;http%3A%2F%2Fexample.com%2Ftest#car&quot;</p>
+	<p>例子：escape-uri(&quot;http://example.com/test#car&quot;, false())</p>
+	<p>结果：&quot;http://example.com/test#car&quot;</p>
+
+	<p>例子：escape-uri (&quot;http://example.com/~bébé&quot;, false())</p>
+	<p>结果：&quot;http://example.com/~b%C3%A9b%C3%A9&quot;</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:contains(string1,string2)</td>
+<td>
+	<p>如果 string1 包含 string2，则返回 true，否则返回 false。</p>
+	<p>例子：contains('XML','XM')</p>
+	<p>结果：true</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:starts-with(string1,string2)</td>
+<td>
+	<p>如果 string1 以 string2 开始，则返回 true，否则返回 false。</p>
+	<p>例子：starts-with('XML','X')</p>
+	<p>结果：true</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:ends-with(string1,string2)</td>
+<td>
+	<p>如果 string1 以 string2 结尾，则返回 true，否则返回 false。</p>
+	<p>例子：ends-with('XML','X')</p>
+	<p>结果：false</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:substring-before(string1,string2)</td>
+<td>
+	<p>返回 string2 在 string1 中出现之前的子字符串。</p>
+	<p>例子：substring-before('12/10','/')</p>
+	<p>结果：'12'</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:substring-after(string1,string2)</td>
+<td>
+	<p>返回 string2 在 string1 中出现之后的子字符串。</p>
+	<p>例子：substring-after('12/10','/')</p>
+	<p>结果：'10'</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:matches(string,pattern)</td>
+<td>
+	<p>如果 string 参数匹配指定的模式，则返回 true，否则返回 false。</p>
+	<p>例子：matches(&quot;Merano&quot;, &quot;ran&quot;)</p>
+	<p>结果：true</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:replace(string,pattern,replace)</td>
+<td>
+	<p>把指定的模式替换为 replace 参数，并返回结果。</p>
+	<p>例子：replace(&quot;Bella Italia&quot;, &quot;l&quot;, &quot;*&quot;)</p>
+	<p>结果：'Be**a Ita*ia'</p>
+
+	<p>例子：replace(&quot;Bella Italia&quot;, &quot;l&quot;, &quot;&quot;)</p>
+	<p>结果：'Bea Itaia'</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:tokenize(string,pattern)</td>
+<td>
+	<p>例子：tokenize(&quot;XPath is fun&quot;, &quot;\s+&quot;)</p>
+	<p>结果：(&quot;XPath&quot;, &quot;is&quot;, &quot;fun&quot;)</p>
+</td>
+</tr>
+</table>
+
+<p class="gototop"><a href="#top">Top</a></p>
+</section>
+
+
+
+<section>
+<h2 id="anyuri">针对 anyURI 的函数</h2>
+
+<table class="dataintable">
+<tr>
+<th style="width:40%">名称</th>
+<th style="width:60%">说明</th>
+</tr>
+
+<tr>
+<td>fn:resolve-uri(relative,base)</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+
+<p class="gototop"><a href="#top">Top</a></p>
+</section>
+
+
+
+<section>
+<h2 id="boolean">关于布尔值的函数</h2>
+
+<table class="dataintable">
+<tr>
+<th style="width:40%">名称</th>
+<th style="width:60%">说明</th>
+</tr>
+
+<tr>
+<td>fn:boolean(arg)</td>
+<td>返回数字、字符串或节点集的布尔值。</td>
+</tr>
+
+<tr>
+<td>fn:not(arg)</td>
+<td>
+	<p>首先通过 boolean() 函数把参数还原为一个布尔值。</p>
+	<p>如果该布尔值为 false，则返回 true，否则返回 true。</p>
+	<p>例子：not(true())</p>
+	<p>结果：false</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:true()</td>
+<td>
+	<p>返回布尔值 true。</p>
+	<p>例子：true()</p>
+	<p>结果：true</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:false()</td>
+<td>
+	<p>返回布尔值 false。</p>
+	<p>例子：false()</p>
+	<p>结果：false</p>
+</td>
+</tr>
+</table>
+
+<p class="gototop"><a href="#top">Top</a></p>
+</section> 
+
+
+
+<section>
+<h2 id="datetime">有关持续时间、日期和时间的函数</h2>
+
+<p>日期、时间、持续时间的组件提取函数</p>
+
+<table class="dataintable">
+<tr>
+<th style="width:40%">名称</th>
+<th style="width:60%">说明</th>
+</tr>
+
+<tr>
+<td>fn:dateTime(date,time)</td>
+<td>把参数转换为日期和时间。</td>
+</tr>
+
+<tr>
+<td>fn:years-from-duration(datetimedur)</td>
+<td>返回参数值的年份部分的整数，以标准词汇表示法来表示。</td>
+</tr>
+
+<tr>
+<td>fn:months-from-duration(datetimedur)</td>
+<td>返回参数值的月份部分的整数，以标准词汇表示法来表示。</td>
+</tr>
+
+<tr>
+<td>fn:days-from-duration(datetimedur)</td>
+<td>返回参数值的天部分的整数，以标准词汇表示法来表示。</td>
+</tr>
+
+<tr>
+<td>fn:hours-from-duration(datetimedur)</td>
+<td>返回参数值的小时部分的整数，以标准词汇表示法来表示。</td>
+</tr>
+
+<tr>
+<td>fn:minutes-from-duration(datetimedur)</td>
+<td>返回参数值的分钟部分的整数，以标准词汇表示法来表示。</td>
+</tr>
+
+<tr>
+<td>fn:seconds-from-duration(datetimedur)</td>
+<td>返回参数值的分钟部分的十进制数，以标准词汇表示法来表示。</td>
+</tr>
+
+<tr>
+<td>fn:year-from-dateTime(datetime)</td>
+<td>
+	<p>返回参数本地值的年部分的整数。</p>
+	<p>例子：year-from-dateTime(xs:dateTime(&quot;2005-01-10T12:30-04:10&quot;))</p>
+	<p>结果：2005</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:month-from-dateTime(datetime)</td>
+<td>
+	<p>返回参数本地值的月部分的整数。</p>
+	<p>例子：month-from-dateTime(xs:dateTime(&quot;2005-01-10T12:30-04:10&quot;))</p>
+	<p>结果：01</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:day-from-dateTime(datetime)</td>
+<td>
+	<p>返回参数本地值的天部分的整数。</p>
+	<p>例子：day-from-dateTime(xs:dateTime(&quot;2005-01-10T12:30-04:10&quot;))</p>
+	<p>结果：10</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:hours-from-dateTime(datetime)</td>
+<td>
+	<p>返回参数本地值的小时部分的整数。</p>
+	<p>例子：hours-from-dateTime(xs:dateTime(&quot;2005-01-10T12:30-04:10&quot;))</p>
+	<p>结果：12</p>
+</td>
+</tr>
+
+<tr> 
+<td>fn:minutes-from-dateTime(datetime)</td>
+<td>
+	<p>返回参数本地值的分钟部分的整数。</p>
+	<p>例子：minutes-from-dateTime(xs:dateTime(&quot;2005-01-10T12:30-04:10&quot;))</p>
+	<p>结果：30</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:seconds-from-dateTime(datetime)</td>
+<td>
+	<p>返回参数本地值的秒部分的十进制数。</p>
+	<p>例子：seconds-from-dateTime(xs:dateTime(&quot;2005-01-10T12:30:00-04:10&quot;))</p>
+	<p>结果：0</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:timezone-from-dateTime(datetime)</td>
+<td>返回参数的时区部分，如果存在。</td>
+</tr>
+
+<tr>
+<td>fn:year-from-date(date)</td>
+<td>
+	<p>返回参数本地值中表示年的整数。</p>
+	<p>例子：year-from-date(xs:date(&quot;2005-04-23&quot;))</p>
+	<p>结果：2005</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:month-from-date(date)</td>
+<td>
+	<p>返回参数本地值中表示月的整数。</p>
+	<p>例子：month-from-date(xs:date(&quot;2005-04-23&quot;))</p>
+	<p>结果：4</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:day-from-date(date)</td>
+<td>
+	<p>返回参数本地值中表示天的整数。</p>
+	<p>例子：day-from-date(xs:date(&quot;2005-04-23&quot;))</p>
+	<p>结果：23</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:timezone-from-date(date)</td>
+<td>返回参数的时区部分，如果存在。</td>
+</tr>
+
+<tr>
+<td>fn:hours-from-time(time)</td>
+<td>
+<p>返回参数本地值中表示小时部分的整数。</p>
+<p>例子：hours-from-time(xs:time(&quot;10:22:00&quot;))</p>
+<p>结果：10</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:minutes-from-time(time)</td>
+<td>
+	<p>返回参数本地值中表示分钟部分的整数。</p>
+	<p>例子：minutes-from-time(xs:time(&quot;10:22:00&quot;))</p>
+	<p>结果：22</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:seconds-from-time(time)</td>
+<td>
+	<p>返回参数本地值中表示秒部分的整数。</p>
+	<p>例子：seconds-from-time(xs:time(&quot;10:22:00&quot;))</p>
+	<p>结果：0</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:timezone-from-time(time)</td>
+<td>返回参数的时区部分，如果存在。</td>
+</tr>
+
+<tr>
+<td>fn:adjust-dateTime-to-timezone(datetime,timezone)</td>
+<td>
+	<p>如果 timezone 参数为空，则返回没有时区的 dateTime。</p>
+	<p>否则返回带有时区的 dateTime。</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:adjust-date-to-timezone(date,timezone)</td>
+<td>
+	<p>如果 timezone 参数为空，则返回没有时区的 date。</p>
+	<p>否则返回带有时区的 date。</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:adjust-time-to-timezone(time,timezone)</td>
+<td>
+	<p>如果 timezone 参数为空，则返回没有时区的 time。</p>
+	<p>否则返回带有时区的 time。</p>
+</td>
+</tr>
+
+</table>
+
+<p class="gototop"><a href="#top">Top</a></p>
+</section>
+
+
+
+<section>
+<h2 id="qname">与 QNames 相关的函数</h2>
+
+<table class="dataintable">
+<tr>
+<th style="width:40%">名称</th>
+<th style="width:60%">说明</th>
+</tr>
+
+<tr>
+<td>fn:QName()</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>fn:local-name-from-QName()</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>fn:namespace-uri-from-QName()</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>fn:namespace-uri-for-prefix()</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>fn:in-scope-prefixes()</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>fn:resolve-QName()</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+
+<p class="gototop"><a href="#top">Top</a></p>
+</section>
+
+
+
+<section>
+<h2 id="node">关于节点的函数</h2>
+
+<table class="dataintable">
+<tr>
+<th style="width:40%">名称</th>
+<th style="width:60%">说明</th>
+</tr>
+
+<tr>
+<td>
+<ul>
+<li>fn:name()</li>
+<li>fn:name(nodeset)</li>
+</ul>
+</td>
+<td>返回当前节点的名称或指定节点集中的第一个节点。</td>
+</tr>
+
+<tr>
+<td>
+<ul>
+<li>fn:local-name()</li>
+<li>fn:local-name(nodeset)</li>
+</ul>
+</td>
+<td>返回当前节点的名称或指定节点集中的第一个节点 - 不带有命名空间前缀。</td>
+</tr>
+
+<tr>
+<td>
+<ul>
+<li>fn:namespace-uri()</li>
+<li>fn:namespace-uri(nodeset)</li>
+</ul>
+</td>
+<td>返回当前节点或指定节点集中第一个节点的命名空间 URI。</td>
+</tr>
+
+<tr>
+<td>fn:lang(lang)</td>
+<td>
+	<p>如果当前节点的语言匹配指定的语言，则返回 true。</p>
+
+	<p>例子：Lang(&quot;en&quot;) is true for
+	&lt;p xml:lang=&quot;en&quot;&gt;...&lt;/p&gt;</p>
+
+	<p>例子：Lang(&quot;de&quot;) is false for
+	&lt;p xml:lang=&quot;en&quot;&gt;...&lt;/p&gt;</p>
+</td>
+</tr>
+
+<tr>
+<td>
+<ul>
+<li>fn:root()</li>
+<li>fn:root(node)</li>
+</ul>
+</td>
+<td>返回当前节点或指定的节点所属的节点树的根节点。通常是文档节点。</td>
+</tr>
+</table>
+
+<p class="gototop"><a href="#top">Top</a></p>
+</section>
+
+
+
+<section>
+<h2 id="sequence">有关序列的函数</h2>
+
+<h3>一般性的函数</h3>
+
+<table class="dataintable">
+<tr>
+<th style="width:40%">名称</th>
+<th style="width:60%">说明</th>
+</tr>
+
+<tr>
+<td>fn:index-of((item,item,...),searchitem)</td>
+<td>
+	<p>返回在项目序列中等于 searchitem 参数的位置。</p>
+	<p>例子：index-of ((15, 40, 25, 40, 10), 40)</p>
+	<p>结果：(2, 4)</p>
+
+	<p>例子：index-of ((&quot;a&quot;, &quot;dog&quot;, &quot;and&quot;, &quot;a&quot;, &quot;duck&quot;), &quot;a&quot;)</p>
+	<p>Result (1, 4)</p>
+
+	<p>例子：index-of ((15, 40, 25, 40, 10), 18)</p>
+	<p>结果：()</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:remove((item,item,...),position)</td>
+<td>
+	<p>返回由 item 参数构造的新序列 - 同时删除 position 参数指定的项目。</p>
+	<p>例子：remove((&quot;ab&quot;, &quot;cd&quot;, &quot;ef&quot;), 0)</p>
+	<p>结果：(&quot;ab&quot;, &quot;cd&quot;, &quot;ef&quot;)</p>
+
+	<p>例子：remove((&quot;ab&quot;, &quot;cd&quot;, &quot;ef&quot;), 1)</p>
+	<p>结果：(&quot;cd&quot;, &quot;ef&quot;)</p>
+
+	<p>例子：remove((&quot;ab&quot;, &quot;cd&quot;, &quot;ef&quot;), 4)</p>
+	<p>结果：(&quot;ab&quot;, &quot;cd&quot;, &quot;ef&quot;)</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:empty(item,item,...)</td>
+<td>
+	<p>如果参数值是空序列，则返回 true，否则返回 false。</p>
+	<p>例子：empty(remove((&quot;ab&quot;, &quot;cd&quot;), 1))</p>
+	<p>结果：false</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:exists(item,item,...)</td>
+<td>
+	<p>如果参数值不是空序列，则返回 true，否则返回 false。</p>
+	<p>例子：exists(remove((&quot;ab&quot;), 1))</p>
+	<p>结果：false</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:distinct-values((item,item,...),collation)</td>
+<td>
+	<p>返回唯一不同的值。</p>
+	<p>例子：distinct-values((1, 2, 3, 1, 2))</p>
+	<p>结果：(1, 2, 3)</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:insert-before((item,item,...),pos,inserts)</td>
+<td>
+	<p>返回由 item 参数构造的新序列 - 同时在 pos 参数指定位置插入 inserts 参数的值。</p>
+	<p>例子：insert-before((&quot;ab&quot;, &quot;cd&quot;), 0, &quot;gh&quot;)</p>
+	<p>结果：(&quot;gh&quot;, &quot;ab&quot;, &quot;cd&quot;)</p>
+
+	<p>例子：insert-before((&quot;ab&quot;, &quot;cd&quot;), 1, &quot;gh&quot;)</p>
+	<p>结果：(&quot;gh&quot;, &quot;ab&quot;, &quot;cd&quot;)</p>
+
+	<p>例子：insert-before((&quot;ab&quot;, &quot;cd&quot;), 2, &quot;gh&quot;)</p>
+	<p>结果：(&quot;ab&quot;, &quot;gh&quot;, &quot;cd&quot;)</p>
+
+	<p>例子：insert-before((&quot;ab&quot;, &quot;cd&quot;), 5, &quot;gh&quot;)</p>
+	<p>结果：(&quot;ab&quot;, &quot;cd&quot;, &quot;gh&quot;)</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:reverse((item,item,...))</td>
+<td>
+	<p>返回指定的项目的颠倒顺序。</p>
+	<p>例子：reverse((&quot;ab&quot;, &quot;cd&quot;, &quot;ef&quot;))</p>
+	<p>结果：(&quot;ef&quot;, &quot;cd&quot;, &quot;ab&quot;)</p>
+
+	<p>例子：reverse((&quot;ab&quot;))</p>
+	<p>结果：(&quot;ab&quot;)</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:subsequence((item,item,...),start,len)</td>
+<td>
+	<p>返回 start 参数指定的位置返回项目序列，序列的长度由 len 参数指定。</p>
+	<p>第一个项目的位置是 1。</p>
+
+	<p>例子：subsequence(($item1, $item2, $item3,...), 3)</p>
+	<p>结果：($item3, ...)</p>
+
+	<p>例子：subsequence(($item1, $item2, $item3, ...), 2, 2)</p>
+	<p>结果：($item2, $item3)</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:unordered((item,item,...))</td>
+<td>依据实现决定的顺序来返回项目。</td>
+</tr>
+</table>
+
+<h3>测试序列容量的函数</h3>
+
+<table class="dataintable">
+<tr>
+<th style="width:40%">名称</th>
+<th style="width:60%">说明</th>
+</tr>
+
+<tr>
+<td>fn:zero-or-one(item,item,...)</td>
+<td>如果参数包含零个或一个项目，则返回参数，否则生成错误。</td>
+</tr>
+
+<tr>
+<td>fn:one-or-more(item,item,...)</td>
+<td>如果参数包含一个或多个项目，则返回参数，否则生成错误。</td>
+</tr>
+
+<tr>
+<td>fn:exactly-one(item,item,...)</td>
+<td>如果参数包含一个项目，则返回参数，否则生成错误。</td>
+</tr>
+</table>
+
+<h3>Equals, Union, Intersection and Except </h3>
+
+<table class="dataintable">
+<tr>
+<th style="width:40%">名称</th>
+<th style="width:60%">说明</th>
+</tr>
+
+<tr>
+<td>fn:deep-equal(param1,param2,collation)</td>
+<td>如果 param1 和 param2 与彼此相等（deep-equal），则返回 true，否则返回 false。</td>
+</tr>
+</table>
+
+<h3>合计函数</h3>
+
+<table class="dataintable">
+<tr>
+<th style="width:40%">名称</th>
+<th style="width:60%">说明</th>
+</tr>
+
+<tr>
+<td>fn:count((item,item,...))</td>
+<td>返回节点的数量。</td>
+</tr>
+
+<tr>
+<td>fn:avg((arg,arg,...))</td>
+<td>
+	<p>返回参数值的平均数。</p>
+	<p>例子：avg((1,2,3))</p>
+	<p>结果：2</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:max((arg,arg,...))</td>
+<td>
+	<p>返回大于其它参数的参数。</p>
+	<p>例子：max((1,2,3))</p>
+	<p>结果：3</p>
+
+	<p>例子：max(('a', 'k'))</p>
+	<p>结果：'k'</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:min((arg,arg,...))</td>
+<td>
+	<p>返回小于其它参数的参数。</p>
+	<p>例子：min((1,2,3))</p>
+	<p>结果：1</p>
+
+	<p>例子：min(('a', 'k'))</p>
+	<p>结果：'a'</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:sum(arg,arg,...)</td>
+<td>返回指定节点集中每个节点的数值的总和。</td>
+</tr>
+</table>
+
+
+<h3>生成序列的函数</h3>
+<table class="dataintable">
+<tr>
+<th style="width:40%">名称</th>
+<th style="width:60%">说明</th>
+</tr>
+
+<tr>
+<td>fn:id((string,string,...),node)</td>
+<td>返回元素节点序列，这些节点的 ID 值等于 string 参数中指定的一个或多个值。</td>
+</tr>
+
+<tr>
+<td>fn:idref((string,string,...),node)</td>
+<td>返回元素或属性节点序列，这些节点的 IDREF 值等于 string 参数中指定的一个或多个值。</td>
+</tr>
+
+<tr>
+<td>fn:doc(URI)</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>fn:doc-available(URI)</td>
+<td>如果 doc() 函数返回文档节点，则返回 true，否则返回 false。</td>
+</tr>
+
+<tr>
+<td>
+<ul>
+<li>fn:collection()</li>
+<li>fn:collection(string)</li>
+</ul>
+</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+
+<p class="gototop"><a href="#top">Top</a></p>
+</section>
+
+
+
+<section>
+<h2 id="context">上下文函数</h2>
+<table class="dataintable">
+<tr>
+<th style="width:40%">名称</th>
+<th style="width:60%">说明</th>
+</tr>
+
+<tr>
+<td>fn:position()</td>
+<td>
+	<p>返回当前正在被处理的节点的 index 位置。</p>
+
+	<p>例子：//book[position()&lt;=3]</p>
+	<p>结果：选择前三个 book 元素 </p>
+</td>
+</tr>
+
+<tr>
+<td>fn:last()</td>
+<td>
+	<p>返回在被处理的节点列表中的项目数目。</p>
+	<p>例子：//book[last()]</p>
+	<p>结果：选择最后一个 book 元素</p>
+</td>
+</tr>
+
+<tr>
+<td>fn:current-dateTime()</td>
+<td>返回当前的 dateTime（带有时区）。</td>
+</tr>
+
+<tr>
+<td>fn:current-date()</td>
+<td>返回当前的日期（带有时区）。</td>
+</tr>
+
+<tr>
+<td>fn:current-time()</td>
+<td>返回当前的时间（带有时区）。</td>
+</tr>
+
+<tr>
+<td>fn:implicit-timezone()</td>
+<td>返回隐式时区的值。</td>
+</tr>
+
+<tr>
+<td>fn:default-collation()</td>
+<td>返回默认对照的值。</td>
+</tr>
+
+<tr>
+<td>fn:static-base-uri()</td>
+<td>返回 base-uri 的值。</td>
+</tr>
+</table>
+
+<p class="gototop"><a href="#top">Top</a></p>
+</section>
+
+
+
+<section id="xslt_functions">
+<h2>XSLT 函数</h2>
+
+<p>此外，还有以下内置的 XSLT 函数：</p>
+
+<table class="dataintable">
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><a href="func_current.html" title="XSLT current() 函数">current()</a></td>
+<td>返回当前节点作为唯一成员的节点集。</td>
+</tr>
+
+<tr>
+<td><a href="func_document.html" title="XSLT document() 函数">document()</a></td>
+<td>用于访问外部 XML 文档中的节点。</td>
+</tr>
+
+<tr>
+<td><a href="func_elementavailable.html" title="XSLT element-available() 函数">element-available()</a></td>
+<td>检测 XSLT 处理器是否支持指定的元素。</td>
+</tr>
+
+<tr>
+<td><a href="func_formatnumber.html" title="XSLT format-number() 函数">format-number()</a></td>
+<td>把数字转换为字符串。</td>
+</tr>
+
+<tr>
+<td><a href="func_functionavailable.html" title="XSLT function-available() 函数">function-available()</a></td>
+<td>检测 XSLT 处理器是否支持指定的函数。</td>
+</tr>
+
+<tr>
+<td><a href="func_generateid.html" title="XSLT generate-id() 函数">generate-id()</a></td>
+<td>返回唯一标识指定节点的字符串值。</td>
+</tr>
+
+<tr>
+<td><a href="func_key.html" title="XSLT key() 函数">key()</a></td>
+<td>检索以前使用 &lt;xsl:key&gt; 语句标记的元素。</td>
+</tr>
+
+<tr>
+<td><a href="func_nodeset.html" title="XSLT node-set() 函数">node-set </a></td>
+<td>将树转换为节点集。产生的节点集总是包含单个节点并且是树的根节点。</td>
+</tr>
+
+<tr>
+<td><a href="func_systemproperty.html" title="XSLT system-property() 函数">system-property()</a></td>
+<td>返回系统属性的值。</td>
+</tr>
+
+<tr>
+<td><a href="func_unparsedentityuri.html" title="XSLT unparsed-entity-uri() 函数">unparsed-entity-uri()</a></td>
+<td>返回未解析实体的 URI。</td>
+</tr>
+</table>
+
+<p class="gototop"><a href="#top">Top</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="ref_xsl_elements.html" title="XSLT 元素参考手册">XSLT 元素</a></li>
+<li class="next"><a href="index.html" title="XML 教程">XML 教程</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="xml_reference.html">XML 参考手册</a></h5>
+<h5 id="tools_example"><a href="xml_examples.html">XML 实例</a></h5>
+<h5 id="tools_quiz"><a href="xml_quiz.html">XML 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/xml/ref_xsl_functions.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:45:42 GMT -->
+</html>

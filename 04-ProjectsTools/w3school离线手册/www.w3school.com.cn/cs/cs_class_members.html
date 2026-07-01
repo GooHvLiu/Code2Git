@@ -1,0 +1,456 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/cs/cs_class_members.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:43:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>C# 类成员</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>C# 教程</h2>
+<ul>
+<li><a href="index.html" title="C# 教程">C# 教程</a></li>
+<li><a href="cs_intro.html" title="C# 简介">C# 简介</a></li>
+<li><a href="cs_getstarted.html" title="C# 入门">C# 入门</a></li>
+<li><a href="cs_syntax.html" title="C# 语法">C# 语法</a></li>
+<li><a href="cs_output.html" title="C# 输出">C# 输出</a></li>
+<li><a href="cs_comments.html" title="C# 注释">C# 注释</a></li>
+<li><a href="cs_variables.html" title="C# 变量">C# 变量</a></li>
+<li><a href="cs_variables_constants.html" title="C# 常量">C# 常量</a></li>
+<li><a href="cs_variables_display.html" title="C# 显示变量">C# 显示变量</a></li>
+<li><a href="cs_variables_multiple.html" title="C# 多个变量">C# 多个变量</a></li>
+<li><a href="cs_variables_identifiers.html" title="C# 标识符">C# 标识符</a></li>
+<li><a href="cs_data_types.html" title="C# 数据类型">C# 数据类型</a></li>
+<li><a href="cs_type_casting.html" title="C# 类型转换">C# 类型转换</a></li>
+<li><a href="cs_user_input.html" title="C# 用户输入">C# 用户输入</a></li>
+<li><a href="cs_operators.html" title="C# 算术运算符">C# 算术运算符</a></li>
+<li><a href="cs_operators_assignment.html" title="C# 赋值运算符">C# 赋值运算符</a></li>
+<li><a href="cs_operators_comparison.html" title="C# 比较运算符">C# 比较运算符</a></li>
+<li><a href="cs_operators_logical.html" title="C# 逻辑运算符">C# 逻辑运算符</a></li>
+<li><a href="cs_math.html" title="C# 数学运算">C# 数学运算</a></li>
+<li><a href="cs_strings.html" title="C# 字符串">C# 字符串</a></li>
+<li><a href="cs_strings_concat.html" title="C# 字符串拼接">C# 字符串拼接</a></li>
+<li><a href="cs_strings_interpol.html" title="C# 字符串插值">C# 字符串插值</a></li>
+<li><a href="cs_strings_access.html" title="C# 访问字符串">C# 访问字符串</a></li>
+<li><a href="cs_strings_chars.html" title="C# 特殊字符">C# 特殊字符</a></li>
+<li><a href="cs_booleans.html" title="C# 布尔值">C# 布尔值</a></li>
+<li><a href="cs_conditions.html" title="C# if 语句">C# if 语句</a></li>
+<li><a href="cs_conditions_else.html" title="C# else 语句">C# else 语句</a></li>
+<li><a href="cs_conditions_elseif.html" title="C# else if 语句">C# else if 语句</a></li>
+<li><a href="cs_conditions_shorthand.html" title="C# 简写 If...Else">C# 简写 If...Else</a></li>
+<li><a href="cs_switch.html" title="C# Switch">C# Switch</a></li>
+<li><a href="cs_while_loop.html" title="C# While 循环">C# While 循环</a></li>
+<li><a href="cs_for_loop.html" title="C# For 循环">C# For 循环</a></li>
+<li><a href="cs_foreach_loop.html" title="C# Foreach 循环">C# Foreach 循环</a></li>
+<li><a href="cs_break.html" title="C# Break 和 Continue">C# Break 和 Continue</a></li>
+<li><a href="cs_arrays.html" title="C# 数组">C# 数组</a></li>
+<li><a href="cs_arrays_loop.html" title="C# 遍历数组">C# 遍历数组</a></li>
+<li><a href="cs_arrays_sort.html" title="C# 数组排序">C# 数组排序</a></li>
+<li><a href="cs_arrays_multi.html" title="C# 多维数组">C# 多维数组</a></li>
+</ul>
+<h2>C# 方法</h2>
+<ul>
+<li><a href="cs_methods.html" title="C# 方法">C# 方法</a></li>
+<li><a href="cs_method_parameters.html" title="C# 方法参数">C# 方法参数</a></li>
+<li><a href="cs_method_parameters_default.html" title="C# 默认参数值">C# 默认参数值</a></li>
+<li><a href="cs_method_parameters_return.html" title="C# 返回值">C# 返回值</a></li>
+<li><a href="cs_method_parameters_named_args.html" title="C# 具名参数">C# 具名参数</a></li>
+<li><a href="cs_method_overloading.html" title="C# 方法重载">C# 方法重载</a></li>
+</ul>
+<h2>C# 类</h2>
+<ul>
+<li><a href="cs_oop.html" title="C# OOP">C# OOP</a></li>
+<li><a href="cs_classes.html" title="C# 类和对象">C# 类/对象</a></li>
+<li><a href="cs_classes_multi.html" title="C# 多个类和对象">C# 多个类和对象</a></li>
+<li class="currentLink"><a href="cs_class_members.html" title="C# 类成员">C# 类成员</a></li>
+<li><a href="cs_constructors.html" title="C# 构造函数">C# 构造函数</a></li>
+<li><a href="cs_access_modifiers.html" title="C# 访问修饰符">C# 访问修饰符</a></li>
+<li><a href="cs_properties.html" title="C# 属性">C# 属性</a></li>
+<li><a href="cs_inheritance.html" title="C# 继承">C# 继承</a></li>
+<li><a href="cs_polymorphism.html" title="C# 多态">C# 多态</a></li>
+<li><a href="cs_abstract.html" title="C# 抽象">C# 抽象</a></li>
+<li><a href="cs_interface.html" title="C# 接口">C# 接口</a></li>
+<li><a href="cs_interface_multi.html" title="C# 多接口">C# 多接口</a></li>
+<li><a href="cs_enums.html" title="C# 枚举">C# 枚举</a></li>
+<li><a href="cs_files.html" title="C# 文件">C# 文件</a></li>
+<li><a href="cs_exceptions.html" title="C# 异常处理">C# 异常处理</a></li>
+</ul>
+<h2>C# 案例</h2>
+<ul>
+<li><a href="cs_howto_add_two_numbers.html" title="C# 如何加两个数字">加两个数字</a></li>
+</ul>
+<h2>实例 / 测验</h2>
+<ul>
+<li><a href="cs_examples.html" title="C# 实例">C# 实例</a></li>
+<li><a href="cs_quiz.html" title="C# 测验">C# 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>C# 类成员</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="cs_classes_multi.html" title="C# 多个类和对象">C# 多个类和对象</a></li>
+<li class="next"><a href="cs_constructors.html" title="C# 构造函数">C# 构造函数</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>类成员</h2>
+
+<p>类内部的字段和方法通常被称为“类成员”：</p>
+
+<h3>实例</h3>
+
+<p>创建一个包含三个类成员的 <code>Car</code> 类：<em>两个字段</em>和<em>一个方法</em>。</p>
+
+<pre class="language-csharp">
+// 类
+class MyClass
+{
+  // 类成员
+  string color = &quot;red&quot;;        // 字段
+  int maxSpeed = 200;          // 字段
+  public void fullThrottle()   // 方法
+  {
+    Console.WriteLine(&quot;汽车正在全速前进！&quot;);
+  }
+}
+</pre>
+</section>
+
+
+
+<section>
+<h2>字段</h2>
+
+<p>在上一章中，您学习了类内部的变量被称为字段，您可以通过创建类的对象并使用点语法 (<code>.</code>) 来访问它们。</p>
+
+<p>下面的例子将创建一个名为 <code>myObj</code> 的 <code>Car</code> 类的对象。然后，我们打印字段 <code>color</code> 和 <code>maxSpeed</code> 的值：</p>
+
+<h3>实例</h3>
+
+<pre class="language-csharp">
+class Car 
+{
+  string color = &quot;red&quot;;
+  int maxSpeed = 200;
+
+  static void Main(string[] args)
+  {
+    Car myObj = new Car();
+    Console.WriteLine(myObj.color);
+    Console.WriteLine(myObj.maxSpeed);
+  }
+} 
+</pre>
+
+<p class="tiy"><a target="_blank" href="tef44.html?f=cs_fields_1">亲自试一试</a></p>
+
+<p>您还可以将字段留空，并在创建对象时修改它们：</p>
+
+<h3>实例</h3>
+
+<pre class="language-csharp">
+class Car 
+{
+  string color;
+  int maxSpeed;
+
+  static void Main(string[] args)
+  {
+    Car myObj = new Car();
+    myObj.color = &quot;red&quot;;
+    myObj.maxSpeed = 200;
+    Console.WriteLine(myObj.color);
+    Console.WriteLine(myObj.maxSpeed);
+  }
+} 
+</pre>
+
+<p class="tiy"><a target="_blank" href="t51c1.html?f=cs_fields_2">亲自试一试</a></p>
+
+<p>这在创建一个类的多个对象时特别有用：</p>
+
+<h3>实例</h3>
+
+<pre class="language-csharp">
+class Car 
+{
+  string model;
+  string color;
+  int year;
+
+  static void Main(string[] args)
+  {
+    Car Ford = new Car();
+    Ford.model = &quot;Mustang&quot;;
+    Ford.color = &quot;red&quot;;
+    Ford.year = 1969;
+
+    Car Opel = new Car();
+    Opel.model = &quot;Astra&quot;;
+    Opel.color = &quot;white&quot;;
+    Opel.year = 2005;
+
+    Console.WriteLine(Ford.model);
+    Console.WriteLine(Opel.model);
+  }
+} 
+</pre>
+
+<p class="tiy"><a target="_blank" href="tbb63.html?f=cs_fields_3">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>对象方法</h2>
+
+<p>您从 <a href="cs_methods.html" title="C# 方法">C# 方法</a> 一章中了解到，方法用于执行某些操作。</p>
+
+<p>方法通常属于一个类，并定义类对象的行为方式。</p>
+
+<p>与字段一样，您可以使用点语法访问方法。但是，请注意方法必须为 <code>public</code>。并且记住，我们使用方法名后跟两个括号 <code>()</code> 和一个分号 <code>;</code> 来调用（执行）方法：</p>
+
+<h3>实例</h3>
+
+<pre class="language-csharp">
+class Car 
+{
+  string color;                 // 字段
+  int maxSpeed;                 // 字段
+  public void fullThrottle()    // 方法
+  {
+    Console.WriteLine(&quot;汽车正在全速前进！&quot;); 
+  }
+
+  static void Main(string[] args)
+  {
+    Car myObj = new Car();
+    myObj.fullThrottle();  // 调用方法
+  }
+} 
+</pre>
+
+<p class="tiy"><a target="_blank" href="taa52.html?f=cs_class_methods">亲自试一试</a></p>
+
+<h3 class="tip">提示</h3>
+
+<p>为什么我们将方法声明为 <code>public</code>，而不是像 <a href="cs_methods.html" title="C# 方法">C# 方法</a> 一章的实例中那样声明为 <code>static</code>？</p>
+
+<p>原因很简单：静态方法可以在不创建类对象的情况下访问，而公共方法只能通过对象访问。</p>
+</section>
+
+
+
+<section>
+<h2>使用多个类</h2>
+
+<p>从上一章中您应该记得，我们可以使用多个类以更好地组织代码（一个类用于字段和方法，另一个类用于执行）。</p>
+
+<p>这是推荐的做法：</p>
+
+<h3>prog2.cs</h3>
+
+<pre class="language-csharp">
+class Car 
+{
+  public string model;
+  public string color;
+  public int year;
+  public void fullThrottle()
+  {
+    Console.WriteLine(&quot;汽车正在全速前进！&quot;); 
+  }
+}
+</pre>
+
+<h3>prog.cs</h3>
+
+<pre class="language-csharp">
+class Program
+{
+  static void Main(string[] args)
+  {
+    Car Ford = new Car();
+    Ford.model = &quot;Mustang&quot;;
+    Ford.color = &quot;red&quot;;
+    Ford.year = 1969;
+
+    Car Opel = new Car();
+    Opel.model = &quot;Astra&quot;;
+    Opel.color = &quot;white&quot;;
+    Opel.year = 2005;
+
+    Console.WriteLine(Ford.model);
+    Console.WriteLine(Opel.model);
+  }
+}
+</pre>
+
+<!--<p class="tiy"><a target="_blank" href="/cs/t.php?f=cs_fields_classes&f_2=cs_fields_classes_2">亲自试一试</a></p>-->
+
+<p>输出：</p>
+
+<pre class="cmdline">
+Mustang
+Astra
+</pre>
+
+<p><code>public</code> 关键字被称为<em>访问修饰符</em>，它指定 <code>Car</code> 的字段也可以被其他类（如 <code>Program</code>）访问。</p>
+
+<p>您将在后面的章节中了解更多关于<a href="cs_access_modifiers.html" title="C# 访问修饰符">访问修饰符</a>的信息。</p>
+
+<p class="tip"><span>提示：</span>随着您继续阅读，您还将了解更多关于其他类成员的信息，如<a href="cs_constructors.html" title="C# 构造函数">构造函数</a>和<a href="cs_properties.html" title="C# 属性（获取和设置）">属性</a>。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="cs_classes_multi.html" title="C# 多个类和对象">C# 多个类和对象</a></li>
+<li class="next"><a href="cs_constructors.html" title="C# 构造函数">C# 构造函数</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_example"><a href="cs_examples.html">C# 实例</a></h5>
+<h5 id="tools_quiz"><a href="cs_quiz.html">C# 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/cs/cs_class_members.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:43:02 GMT -->
+</html>

@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/pandas/ref_df_update.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:20:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Pandas DataFrame update() 方法</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Pandas 教程</h2>
+<ul>
+<li><a href="index.html" title="Pandas 教程">Pandas 教程</a></li>
+<li><a href="pandas_intro.html" title="Pandas 简介">Pandas 简介</a></li>
+<li><a href="pandas_getting_started.html" title="Pandas 入门">Pandas 入门</a></li>
+<li><a href="pandas_series.html" title="Pandas 序列">Pandas 序列</a></li>
+<li><a href="pandas_dataframes.html" title="Pandas 数据帧">Pandas 数据帧</a></li>
+<li><a href="pandas_csv.html" title="Pandas 读取 CSV">Pandas 读取 CSV</a></li>
+<li><a href="pandas_json.html" title="Pandas 读取 JSON">Pandas 读取 JSON</a></li>
+<li><a href="pandas_analyzing.html" title="Pandas 数据分析">Pandas 数据分析</a></li>
+</ul>
+<h2>数据清洗</h2>
+<ul>
+<li><a href="pandas_cleaning.html" title="Pandas 数据清洗">Pandas 数据清洗</a></li>
+<li><a href="pandas_cleaning_empty_cells.html" title="Pandas 清洗空单元格">Pandas 清洗空单元格</a></li>
+<li><a href="pandas_cleaning_wrong_format.html" title="Pandas 清洗错误格式">Pandas 清洗错误格式</a></li>
+<li><a href="pandas_cleaning_wrong_data.html" title="Pandas 清洗错误数据">Pandas 清洗错误数据</a></li>
+<li><a href="pandas_cleaning_duplicates.html" title="Pandas 删除重复项">Pandas 删除重复项</a></li>
+</ul>
+<h2>相关性</h2>
+<ul>
+<li><a href="pandas_correlations.html" title="Pandas 相关性">Pandas 相关性</a></li>
+</ul>
+<h2>绘图</h2>
+<ul>
+<li><a href="pandas_plotting.html" title="Pandas 绘图">Pandas 绘图</a></li>
+</ul>
+<h2>参考手册</h2>
+<ul>
+<li><a href="pandas_ref_dataframe.html" title="DataFrames 参考手册">DataFrames 参考手册</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Pandas DataFrame update() 方法</h1>
+
+<div class="btn-toref">
+<p><a href="pandas_ref_dataframe.html">DataFrame 参考手册</a></p>
+</div>
+
+
+
+<section>
+<h2>定义和用法</h2>
+
+<p><code>update()</code> 方法使用另一个类似对象（如另一个 DataFrame）中的元素更新 DataFrame。</p>
+
+<p class="note"><span>注意：</span>此方法不会返回新的 DataFrame。</p>
+
+<p>更新是在原始 DataFrame 上完成的。</p>
+</section>
+
+
+
+<section>
+<h2>实例</h2>
+
+<p>使用另一个 DataFrame 中的数据更新 DataFrame，Emil 是 17 而不是 16：</p>
+
+<pre class="language-python">
+import pandas as pd
+
+df1 = pd.DataFrame([[&quot;Emil&quot;, &quot;Tobias&quot;, &quot;Linus&quot;], [16, 14, 10]])
+df2 = pd.DataFrame([[&quot;Emil&quot;], [17]])
+
+df1.update(df2)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t67e1.html?f=pandas_ref_df_update">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>语法</h2>
+
+<pre class="language-python">
+dataframe.update(<i>other</i>, join, overwrite, filter_func, errors)
+</pre>
+
+<h3>参数</h3>
+
+<p><code>join</code>、<code>overwrite</code>、<code>filter_func</code>、<code>errors</code> 参数是<a href="../python/gloss_python_function_keyword_arguments.html" title="Python 关键字参数">关键字参数</a>。</p>
+
+<table class="parameter">
+<tr>
+<th style="width: 20%;">参数</th>
+<th style="width: 15%;">值</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><i>other</i></td>
+<td></td>
+<td>必需。DataFrame。</td>
+</tr>
+
+<tr>
+<td>join</td>
+<td>'left'</td>
+<td>
+	<p>可选。指定要更新这两个对象中的哪一个。</p>
+	<p class="note"><span>注意：</span>目前只允许使用 'left'。</p>
+	<p>默认为 'left'。</p>
+</td>
+</tr>
+
+<tr>
+<td>overwrite</td>
+<td>
+	<ul>
+	<li>True</li>
+	<li>False</li>
+	</ul>
+</td>
+<td>
+	<p>可选。指定是否覆盖 NULL 值。</p>
+	<p>默认为 True。</p>
+</td>
+</tr>
+
+<tr>
+<td>filter_func</td>
+<td>Function</td>
+<td>
+	<p>可选。指定要为每个替换的元素执行的函数。</p>
+	<p>该函数应为要更新的元素返回 True。</p>
+</td>
+</tr>
+
+<tr>
+<td>errors</td>
+<td>
+	<ul>
+	<li>'raise'</li>
+	<li>'ignore'</li>
+	</ul>
+</td>
+<td>
+	<p>可选。默认为 'ignore'。</p>
+	<p>如果为 'raise'：当两个 DataFrame 的同一元素为 NULL 值时，将引发错误。</p>
+</td>
+</tr>
+</table>
+</section>
+
+
+
+<section>
+<h2>返回值</h2>
+
+<p>此方法返回 None。更新是在原始 DataFrame 上完成的。</p>
+</section>
+
+
+
+<div class="btn-toref">
+<p><a href="pandas_ref_dataframe.html">DataFrame 参考手册</a></p>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+<div id="tools">
+<!--<h5 id="tools_quiz"><a href="/pandas/pandas_quiz.asp">Pandas 测验</a></h5>-->
+<h5 id="tools_reference"><a href="pandas_ref_dataframe.html" title="Pandas DataFrame 参考手册">Pandas</a></h5>
+</div>
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/pandas/ref_df_update.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:20:43 GMT -->
+</html>

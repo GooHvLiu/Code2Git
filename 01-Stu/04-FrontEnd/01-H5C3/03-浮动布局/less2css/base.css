@@ -1,0 +1,24 @@
+/* 标准通用样式 */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* float布局中的左浮动固定 */
+.floatleft{
+    float: left;
+}
+
+/* float布局中的右浮动固定 */
+.floatright{
+    float: right;
+}
+
+/* float布局中的清除浮动 */
+.clearfloat::after{
+  content: "";
+  display: block;
+  clear: both;
+}

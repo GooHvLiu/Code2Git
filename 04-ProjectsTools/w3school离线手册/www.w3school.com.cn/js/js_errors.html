@@ -1,0 +1,815 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/js/js_errors.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:32:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>JavaScript 错误 - Throw 和 Try to Catch</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>JS 教程</h2>
+<ul>
+<li><a href="index.html" title="JavaScript 教程">JS 教程</a></li>
+<li><a href="js_intro.html" title="JavaScript 简介">JS 简介</a></li>
+<li><a href="js_shiyong.html" title="JavaScript 使用">JS 使用</a></li>
+<li><a href="js_output.html" title="JavaScript 输出">JS 输出</a></li>
+<li><a href="js_statements.html" title="JavaScript 语句">JS 语句</a></li>
+<li><a href="js_syntax.html" title="JavaScript 语法">JS 语法</a></li>
+<li><a href="js_comments.html" title="JavaScript 注释">JS 注释</a></li>
+<li><a href="js_variables.html" title="JavaScript 变量">JS 变量</a></li>
+<li><a href="js_let.html" title="JavaScript Let">JS Let</a></li>
+<li><a href="js_const.html" title="JavaScript Const">JS Const</a></li>
+<li><a href="js_operators.html" title="JavaScript 运算符">JS 运算符</a></li>
+<li><a href="js_arithmetic.html" title="JavaScript 算术">JS 算数</a></li>
+<li><a href="js_assignment.html" title="JavaScript 赋值">JS 赋值</a></li>
+<li><a href="js_datatypes.html" title="JavaScript 数据类型">JS 数据类型</a></li>
+<li><a href="js_functions.html" title="JavaScript 函数">JS 函数</a></li>
+<li><a href="js_objects.html" title="JavaScript 对象">JS 对象</a></li>
+<li><a href="js_events.html" title="JavaScript 事件">JS 事件</a></li>
+<li><a href="js_strings.html" title="JavaScript 字符串">JS 字符串</a></li>
+<li><a href="js_string_methods.html" title="JavaScript 字符串方法">JS 字符串方法</a></li>
+<li><a href="js_string_search.html" title="JavaScript 字符串搜索">JS 字符串搜索</a></li>
+<li><a href="js_string_templates.html" title="JavaScript 模板文字">JS 字符串模板</a></li>
+<li><a href="js_numbers.html" title="JavaScript 数字">JS 数字</a></li>
+<li><a href="js_bigint.html" title="JavaScript BigInt">JS BigInt</a></li>
+<li><a href="js_number_methods.html" title="JavaScript 数字方法">JS 数字方法</a></li>
+<li><a href="js_number_properties.html" title="JavaScript 数字属性">JS 数字属性</a></li>
+<li><a href="js_arrays.html" title="JavaScript 数组">JS 数组</a></li>
+<li><a href="js_array_methods.html" title="JavaScript 数组方法">JS 数组方法</a></li>
+<li><a href="js_array_search.html" title="JavaScript 数组搜索">JS 数组搜索</a></li>
+<li><a href="js_array_sort.html" title="JavaScript 数组排序">JS 数组排序</a></li>
+<li><a href="js_array_iteration.html" title="JavaScript 数组迭代方法">JS 数组迭代</a></li>
+<li><a href="js_array_const.html" title="JavaScript 数组 Const">JS 数组 Const</a></li>
+<li><a href="js_dates.html" title="JavaScript 日期">JS 日期</a></li>
+<li><a href="js_date_formats.html" title="JavaScript 日期格式">JS 日期格式</a></li>
+<li><a href="js_date_methods.html" title="JavaScript 获取日期方法">JS 日期获取方法</a></li>
+<li><a href="js_date_methods_set.html" title="JavaScript 设置日期方法">JS 日期设置方法</a></li>
+<li><a href="js_math.html" title="JavaScript Math 对象">JS 数学</a></li>
+<li><a href="js_random.html" title="JavaScript 随机">JS 随机</a></li>
+<li><a href="js_booleans.html" title="JavaScript 逻辑">JS 逻辑</a></li>
+<li><a href="js_comparisons.html" title="JavaScript 比较和逻辑运算">JS 比较</a></li>
+<li><a href="js_if_else.html" title="JavaScript If...Else 语句">JS 条件</a></li>
+<li><a href="js_switch.html" title="JavaScript Switch 语句">JS Switch</a></li>
+<li><a href="js_loop_for.html" title="JavaScript For 循环">JS Loop For</a></li>
+<li><a href="js_loop_forin.html" title="JavaScript For In">JS Loop For In</a></li>
+<li><a href="js_loop_forof.html" title="JavaScript For Of">JS Loop For Of</a></li>
+<li><a href="js_loop_while.html" title="JavaScript While 循环">JS Loop While</a></li>
+<li><a href="js_break.html" title="JavaScript Break 和 Continue">JS Break</a></li>
+<li><a href="js_iterables.html" title="JavaScript 可迭代对象">JS 可迭代对象</a></li>
+<li><a href="js_sets.html" title="JavaScript Set">JS Set</a></li>
+<li><a href="js_set_methods.html" title="JavaScript Set 方法">JS Set 方法</a></li>
+<li><a href="js_maps.html" title="JavaScript Map">JS Map</a></li>
+<li><a href="js_map_methods.html" title="JavaScript Map 方法">JS Map 方法</a></li>
+<li><a href="js_typeof.html" title="JavaScript typeof">JS typeof</a></li>
+<li><a href="js_type_conversion.html" title="JavaScript 类型转换">JS 类型转换</a></li>
+<li><a href="js_destructuring.html" title="JavaScript 解构">JS 解构</a></li>
+<li><a href="js_bitwise.html" title="JavaScript 位运算符">JS 位运算</a></li>
+<li><a href="js_regexp.html" title="JavaScript 正则表达式">JS 正则表达式</a></li>
+<li><a href="js_precedence.html" title="JavaScript 运算符优先级">JS 运算符优先级</a></li>
+<li class="currentLink"><a href="js_errors.html" title="JavaScript 错误 - Throw 和 Try to Catch">JS 异常</a></li>
+<li><a href="js_scope.html" title="JavaScript 作用域">JS 作用域</a></li>
+<li><a href="js_hoisting.html" title="JavaScript Hoisting">JS Hoisting</a></li>
+<li><a href="js_strict.html" title="JavaScript Use Strict">JS 严格模式</a></li>
+<li><a href="js_this.html" title="JavaScript this 关键词">JS this 关键词</a></li>
+<li><a href="js_arrow_function.html" title="JavaScript 箭头函数">JS 箭头函数</a></li>
+<li><a href="js_classes.html" title="JavaScript 类">JS 类</a></li>
+<li><a href="js_modules.html" title="JavaScript 模块">JS 模块</a></li>
+<li><a href="js_json.html" title="JavaScript JSON">JS JSON</a></li>
+<li><a href="js_debugging.html" title="JavaScript 调试">JS 调试</a></li>
+<li><a href="js_conventions.html" title="JavaScript 样式指南和代码约定">JS 样式指南</a></li>
+<li><a href="js_best_practices.html" title="JavaScript 最佳实践">JS 最佳实践</a></li>
+<li><a href="js_mistakes.html" title="JavaScript 常见错误">JS 错误</a></li>
+<li><a href="js_performance.html" title="JavaScript 性能">JS 性能</a></li>
+<li><a href="js_reserved.html" title="JavaScript 保留词">JS 保留词</a></li>
+</ul>
+<h2>JS 版本</h2>
+<ul>
+<li><a href="js_versions.html" title="JavaScript 版本">JS 版本</a></li>
+<li><a href="js_es5.html" title="JavaScript ES5">JS 2009 (ES5)</a></li>
+<li><a href="js_es6.html" title="Javascript ES6">JS 2015 (ES6)</a></li>
+<li><a href="js_2016.html" title="ECMAScript 2016">JS 2016</a></li>
+<li><a href="js_2017.html" title="ECMAScript 2017">JS 2017</a></li>
+<li><a href="js_2018.html" title="ECMAScript 2018">JS 2018</a></li>
+<li><a href="js_2019.html" title="ECMAScript 2019">JS 2019</a></li>
+<li><a href="js_2020.html" title="ECMAScript 2020">JS 2020</a></li>
+<li><a href="js_2021.html" title="ECMAScript 2021">JS 2021</a></li>
+<li><a href="js_2022.html" title="ECMAScript 2022">JS 2022</a></li>
+<li><a href="js_2023.html" title="ECMAScript 2023">JS 2023</a></li>
+<li><a href="js_2024.html" title="ECMAScript 2024">JS 2024</a></li>
+<li><a href="js_ie_edge.html" title="Internet Explorer / Edge">JS IE / Edge</a></li>
+<li><a href="js_history.html" title="JavaScript 历史">JS 历史</a></li>
+</ul>
+<h2>JS 对象</h2>
+<ul>
+<li><a href="js_object_definition.html" title="JavaScript 对象定义">JS 对象定义</a></li>
+<li><a href="js_object_properties.html" title="JavaScript 对象属性">JS 对象属性</a></li>
+<li><a href="js_object_methods.html" title="JavaScript 对象方法">JS 对象方法</a></li>
+<li><a href="js_object_display.html" title="JavaScript 显示对象">JS 对象显示</a></li>
+<li><a href="js_object_accessors.html" title="JavaScript 对象访问器">JS 对象访问器</a></li>
+<li><a href="js_object_constructors.html" title="JavaScript 对象构造器">JS 对象构造器</a></li>
+<li><a href="js_object_prototypes.html" title="JavaScript 对象原型">JS 对象原型</a></li>
+<li><a href="js_object_es5.html" title="JavaScript ES5 对象方法">JS 对象引用</a></li>
+</ul>
+<h2>JS 函数</h2>
+<ul>
+<li><a href="js_function_definition.html" title="JavaScript 函数定义">JS 函数定义</a></li>
+<li><a href="js_function_parameters.html" title="JavaScript 函数参数">JS 函数参数</a></li>
+<li><a href="js_function_invocation.html" title="JavaScript 函数调用">JS 函数调用</a></li>
+<li><a href="js_function_call.html" title="JavaScript 函数 Call">JS 函数 Call</a></li>
+<li><a href="js_function_apply.html" title="JavaScript 函数 Apply">JS 函数 Apply</a></li>
+<li><a href="js_function_bind.html" title="JavaScript 函数 bind()">JS 函数绑定</a></li>
+<li><a href="js_function_closures.html" title="JavaScript 闭包">JS 闭包</a></li>
+</ul>
+<h2>JS 类</h2>
+<ul>
+<li><a href="js_class_intro.html" title="JavaScript 类">JS 类简介</a></li>
+<li><a href="js_class_inheritance.html" title="JavaScript 类继承">JS 类继承</a></li>
+<li><a href="js_class_static.html" title="JavaScript Static 方法">JS Static</a></li>
+</ul>
+<h2>JS Async</h2>
+<ul>
+<li><a href="js_callback.html" title="JavaScript 回调">JS 回调</a></li>
+<li><a href="js_asynchronous.html" title="异步的 JavaScript">JS 异步</a></li>
+<li><a href="js_promise.html" title="JavaScript Promise">JS Promise</a></li>
+<li><a href="js_async.html" title="JavaScript Async/Await">JS Async</a></li>
+</ul>
+<h2>JS HTML DOM</h2>
+<ul>
+<li><a href="js_htmldom.html" title="JavaScript HTML DOM">DOM 简介</a></li>
+<li><a href="js_htmldom_methods.html" title="JavaScript - HTML DOM 方法">DOM 方法</a></li>
+<li><a href="js_htmldom_document.html" title="JavaScript HTML DOM 文档">DOM 文档</a></li>
+<li><a href="js_htmldom_elements.html" title="JavaScript HTML DOM 元素">DOM 元素</a></li>
+<li><a href="js_htmldom_html.html" title="JavaScript HTML DOM - 改变 HTML">DOM HTML</a></li>
+<li><a href="js_validation.html" title="JavaScript 表单">DOM 表单</a></li>
+<li><a href="js_htmldom_css.html" title="JavaScript HTML DOM - 改变 CSS">DOM CSS</a></li>
+<li><a href="js_htmldom_animate.html" title="JavaScript HTML DOM 动画">DOM 动画</a></li>
+<li><a href="js_htmldom_events.html" title="JavaScript HTML DOM 事件">DOM 事件</a></li>
+<li><a href="js_htmldom_eventlistener.html" title="JavaScript HTML DOM 事件监听程序">DOM 事件监听程序</a></li>
+<li><a href="js_htmldom_navigation.html" title="JavaScript HTML DOM 导航">DOM 导航</a></li>
+<li><a href="js_htmldom_nodes.html" title="JavaScript HTML DOM 元素（节点）">DOM 节点</a></li>
+<li><a href="js_htmldom_collections.html" title="JavaScript HTML DOM 集合">DOM 集合</a></li>
+<li><a href="js_htmldom_nodelist.html" title="JavaScript HTML DOM 节点列表">DOM 节点列表</a></li>
+</ul>
+<h2>JS Browser BOM</h2>
+<ul>
+<li><a href="js_window.html" title="JavaScript Window - 浏览器对象模型">JS Window</a></li>
+<li><a href="js_window_screen.html" title="JavaScript Window Screen">JS Screen</a></li>
+<li><a href="js_window_location.html" title="JavaScript Window Location">JS Location</a></li>
+<li><a href="js_window_history.html" title="JavaScript Window History">JS History</a></li>
+<li><a href="js_window_navigator.html" title="JavaScript Window Navigator">JS Navigator</a></li>
+<li><a href="js_popup.html" title="JavaScript 弹出框">JS 弹出框</a></li>
+<li><a href="js_timing.html" title="JavaScript Timing 事件">JS Timing</a></li>
+<li><a href="js_cookies.html" title="JavaScript Cookies">JS Cookies</a></li>
+</ul>
+<h2>JS Web API</h2>
+<ul>
+<li><a href="js_api_intro.html" title="Web APIs - 简介">Web API 简介</a></li>
+<li><a href="js_validation_api.html" title="JavaScript 验证 API">Web Form API</a></li>
+<li><a href="js_api_history.html" title="Web History API">Web History API</a></li>
+<li><a href="js_api_web_storage.html" title="Web Storage API">Web Storage API</a></li>
+<li><a href="js_api_web_workers.html" title="Web Worker API">Web Worker API</a></li>
+<li><a href="js_api_fetch.html" title="JavaScript Fetch API">Web Fetch API</a></li>
+<li><a href="js_api_geolocation.html" title="Web Geolocation API">Web Geolocation API</a></li>
+</ul>
+<h2>JS AJAX</h2>
+<ul>
+<li><a href="js_ajax_intro.html" title="AJAX 简介">AJAX 简介</a></li>
+<li><a href="js_ajax_http.html" title="AJAX - XMLHttpRequest 对象">AJAX XMLHttp</a></li>
+<li><a href="js_ajax_http_send.html" title="AJAX - XMLHttpRequest">AJAX 请求</a></li>
+<li><a href="js_ajax_http_response.html" title="AJAX - 服务器响应">AJAX 响应</a></li>
+<li><a href="js_ajax_xmlfile.html" title="AJAX XML 实例">AJAX XML 文件</a></li>
+<li><a href="js_ajax_php.html" title="AJAX PHP 实例">AJAX PHP</a></li>
+<li><a href="js_ajax_asp.html" title="AJAX ASP 实例">AJAX ASP</a></li>
+<li><a href="js_ajax_database.html" title="AJAX Database 实例">AJAX 数据库</a></li>
+<li><a href="js_ajax_applications.html" title="XML 应用程序">AJAX 应用程序</a></li>
+<li><a href="js_ajax_examples.html" title="AJAX 实例">AJAX 实例</a></li>
+</ul>
+<h2>JS JSON</h2>
+<ul>
+<li><a href="js_json_intro.html" title="JSON 简介">JSON 简介</a></li>
+<li><a href="js_json_syntax.html" title="JSON 语法">JSON 语法</a></li>
+<li><a href="js_json_xml.html" title="JSON vs XML">JSON vs XML</a></li>
+<li><a href="js_json_datatypes.html" title="JSON 数据类型">JSON 数据类型</a></li>
+<li><a href="js_json_parse.html" title="JSON.parse()">JSON 解析</a></li>
+<li><a href="js_json_stringify.html" title="JSON.stringify()">JSON 字符串化</a></li>
+<li><a href="js_json_objects.html" title="JSON 对象">JSON 对象</a></li>
+<li><a href="js_json_arrays.html" title="JSON 数组">JSON 数组</a></li>
+<li><a href="js_json_server.html" title="JSON 服务器">JSON 服务器</a></li>
+<li><a href="js_json_php.html" title="JSON PHP">JSON PHP</a></li>
+<li><a href="js_json_html.html" title="JSON HTML">JSON HTML</a></li>
+<li><a href="js_json_jsonp.html" title="JSONP">JSON JSONP</a></li>
+</ul>
+<h2>JS vs jQuery</h2>
+<ul>
+<li><a href="js_jquery_selectors.html" title="JavaScript / jQuery DOM 选择器">jQuery 选择器</a></li>
+<li><a href="js_jquery_elements.html" title="JavaScript / jQuery HTML 元素">jQuery HTML</a></li>
+<li><a href="js_jquery_css.html" title="JavaScript / jQuery CSS 样式">jQuery CSS</a></li>
+<li><a href="js_jquery_dom.html" title="JavaScript / jQuery HTML DOM">jQuery DOM</a></li>
+</ul>
+<h2>JS 图形</h2>
+<ul>
+<li><a href="js_graphics.html" title="JavaScript 图形">JS 图形</a></li>
+<li><a href="js_graphics_canvas.html" title="HTML Canvas">JS Canvas</a></li>
+<li><a href="js_graphics_plotly.html" title="Plotly.js">JS Plotly.js</a></li>
+<li><a href="js_graphics_chartjs.html" title="Chart.js">JS Chart</a></li>
+<li><a href="js_graphics_google_chart.html" title="谷歌图表">JS 谷歌图表</a></li>
+<li><a href="js_graphics_d3js.html" title="D3.js">JS D3.js</a></li>
+</ul>
+<h2>JS 实例</h2>
+<ul>
+<li><a href="js_examples.html" title="JavaScript 实例">JS 实例</a></li>
+<li><a href="js_examples_dom.html" title="JavaScript HTML DOM 实例">JS HTML DOM</a></li>
+<li><a href="js_examples_input.html" title="JavaScript HTML 输入实例">JS HTML 输入</a></li>
+<li><a href="js_examples_html.html" title="JavaScript HTML 对象实例">JS HTML 对象</a></li>
+<li><a href="js_examples_events.html" title="JavaScript HTML 事件实例">JS HTML 事件</a></li>
+<li><a href="js_examples_browser.html" title="JavaScript Browser 对象实例">JS Browser</a></li>
+<li><a href="js_quiz.html" title="JavaScript 测验">JS 测验</a></li>
+</ul>
+<h2>JS 参考手册</h2>
+<ul>
+<li><a href="../jsref/index.html" title="JavaScript 和 HTML DOM 参考手册">JavaScript 对象</a></li>
+<li><a href="../jsref/index.html" title="JavaScript 和 HTML DOM 参考手册">HTML DOM 对象</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>JavaScript 错误 - Throw 和 Try to Catch</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="js_precedence.html" title="JavaScript 运算符优先级">JS 运算符优先级</a></li>
+<li class="next"><a href="js_scope.html" title="JavaScript 作用域">JS 作用域</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p><strong><code>try</code> 语句使您能够测试代码块中的错误。</strong></p>
+
+<p><strong><code>catch</code> 语句允许您处理错误。</strong></p>
+
+<p><strong><code>throw</code> 语句允许您创建自定义错误。</strong></p>
+
+<p><strong><code>finally</code> 使您能够执行代码，在 try 和 catch 之后，无论结果如何。</strong></p>
+</div>
+
+
+
+<div>
+<h2>错误总会发生！</h2>
+
+<p>当执行 JavaScript 代码时，会发生各种错误。</p>
+
+<p>错误可能是程序员的编码错误，由错误输入引起的错误，或者由于其他不可预见的问题。</p>
+
+<h3>实例</h3>
+
+<p>在本例中，我们通过 <code>adddlert</code> 编写警告代码来故意制造了一个错误：</p>
+
+<pre class="language-js">
+&lt;p id=&quot;demo&quot;&gt;&lt;/p&gt;
+
+&lt;script&gt;
+try {
+    adddlert(&quot;欢迎访问！&quot;);
+}
+catch(err) {
+    document.getElementById(&quot;demo&quot;).innerHTML = err.message;
+}
+&lt;/script&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t2ea0.html?f=eg_js_try_catch">亲自试一试</a></p>
+
+<p>JavaScript 将 adddlert 捕获为一个错误，然后执行代码来处理该错误。</p>
+</div>
+
+
+
+<div>
+<h2>JavaScript try 和 catch</h2>
+
+<p><code>try</code> 语句允许您定义一个代码块，以便在执行时检测错误。</p>
+
+<p><code>catch</code> 语句允许你定义一个要执行的代码块，如果 try 代码块中发生错误。</p>
+
+<p>JavaScript 语句 <code>try</code> 和 <code>catch</code> 成对出现：</p>
+
+<pre class="language-js">
+try {
+     <i>供测试的代码块</i>
+}
+ catch(err) {
+     <i>处理错误的代码块</i>
+} 
+</pre>
+</div>
+
+
+
+<div>
+<h2>JavaScript 抛出错误</h2>
+
+<p>当发生错误时，JavaScript 通常会停止并产生错误消息。</p>
+
+<p>技术术语是这样描述的：<em>JavaScript 将抛出异常（抛出错误）</em>。</p>
+
+<p>JavaScript 实际上会创建带有两个属性的 <em>Error 对象</em>：<code>name</code> 和 <code>message</code>。</p>
+</div>
+
+
+
+<div>
+<h2>throw 语句</h2>
+
+<p><code>throw</code> 语句允许您创建自定义错误。</p>
+
+<p>从技术上讲您能够<em>抛出异常（抛出错误）</em>。</p>
+
+<p>异常可以是 JavaScript 字符串、数字、布尔或对象：</p>
+
+<pre class="language-js">
+throw &quot;Too big&quot;;    // 抛出文本
+throw 500;          //抛出数字
+</pre>
+
+<p>如果把 <code>throw</code> 与 <code>try</code> 和 <code>catch</code> 一同使用，就可以控制程序流并生成自定义错误消息。</p>
+</div>
+
+
+
+<div>
+<h2>输入验证案例</h2>
+
+<p>本例会检查输入。如果值是错误的，将抛出异常（err）。</p>
+
+<p>该异常（err）被 catch 语句捕获并显示一条自定义的错误消息：</p>
+
+<pre class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;p&gt;请输入 5 - 10 之间的数字：&lt;/p&gt;
+
+&lt;input id=&quot;demo&quot; type=&quot;text&quot;&gt;
+&lt;button type=&quot;button&quot; onclick=&quot;myFunction()&quot;&gt;测试输入&lt;/button&gt;
+&lt;p id=&quot;message&quot;&gt;&lt;/p&gt;
+
+&lt;script&gt;
+function myFunction() {
+    var message, x;
+    message = document.getElementById(&quot;message&quot;);
+    message.innerHTML = &quot;&quot;;
+    x = document.getElementById(&quot;demo&quot;).value;
+    try { 
+        if(x == &quot;&quot;) throw &quot;空的&quot;;
+         if(isNaN(x)) throw &quot;不是数字&quot;;
+         x = Number(x);
+        if(x &lt; 5) throw  &quot;太小&quot;;
+        if(x &gt; 10) throw &quot;太大&quot;;
+    }
+    catch(err) {
+        message.innerHTML = &quot;输入是 &quot; + err;
+    }
+}
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt; 
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t4207.html?f=eg_js_throw_error">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>HTML 验证</h2>
+
+<p>以上代码仅仅是一个例子。</p>
+
+<p>现代浏览器通常会结合 JavaScript 与内置的 HTML 验证，通过使用在 HTML 属性中定义的预定义的验证规则：</p>
+
+<pre class="language-html">
+&lt;input id=&quot;demo&quot; type=&quot;number&quot; min=&quot;5&quot; max=&quot;10&quot; step=&quot;1&quot;&gt;
+</pre>
+
+<p>您将在本教程稍后的章节学到更多有关表单验证的知识。</p>
+</div>
+
+
+
+<div>
+<h2>finally 语句</h2>
+
+<p><code>finally</code> 语句允许您在 try 和 catch 之后执行代码，无论结果：</p>
+
+<pre class="language-js">
+try {
+     // 供测试的代码块
+}
+ catch(err) {
+     // 处理错误的代码块
+} 
+finally {
+     // 无论结果如何都执行的代码块
+}
+</pre>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+function myFunction() {
+    var message, x;
+    message = document.getElementById(&quot;message&quot;);
+    message.innerHTML = &quot;&quot;;
+    x = document.getElementById(&quot;demo&quot;).value;
+    try { 
+        if(x == &quot;&quot;) throw &quot;是空的&quot;;
+        if(isNaN(x)) throw &quot;不是数字&quot;;
+         x = Number(x);
+        if(x &gt;  10) throw &quot;太大&quot;;
+        if(x &lt;  5) throw &quot;太小&quot;;
+    }
+    catch(err) {
+        message.innerHTML = &quot;错误：&quot; + err + &quot;.&quot;;
+    }
+    finally {
+        document.getElementById(&quot;demo&quot;).value = &quot;&quot;;
+    }
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t6cc4.html?f=eg_js_finally_error">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>Error 对象</h2>
+
+<p>JavaScript 拥有当错误发生时提供错误信息的内置 error 对象。</p>
+
+<p>error 对象提供两个有用的属性：<code>name</code> 和 <code>message</code>。</p>
+</div>
+
+
+
+<div>
+<h2>Error 对象属性</h2>
+
+<table class="dataintable">
+<tr>
+<th style="width:25%;">属性</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td>name</td>
+<td>设置或返回错误名</td>
+</tr>
+
+<tr>
+<td>message</td>
+<td>设置或返回错误消息（一条字符串）</td>
+</tr>
+</table>
+</div>
+
+
+
+<div>
+<h2>Error Name Values</h2>
+
+<p>error 的 name 属性可返回六个不同的值：</p>
+
+<table class="dataintable">
+<tr>
+<th style="width:25%;">错误名</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td>EvalError</td>
+<td>已在 eval() 函数中发生的错误</td>
+</tr>
+
+<tr>
+<td>RangeError</td>
+<td>已发生超出数字范围的错误</td>
+</tr>
+
+<tr>
+<td>ReferenceError</td>
+<td>已发生非法引用</td>
+</tr>
+
+<tr>
+<td>SyntaxError</td>
+<td>已发生语法错误</td>
+</tr>
+
+<tr>
+<td>TypeError</td>
+<td>已发生类型错误</td>
+</tr>
+
+<tr>
+<td>URIError</td>
+<td>在 encodeURI() 中已发生的错误</td>
+</tr>
+</table>
+
+<p>下面为您详解这六个不同的值。</p>
+</div>
+
+
+
+<div>
+<h2>Eval 错误</h2>
+
+<p><code>EvalError</code> 指示 eval() 函数中的错误。</p>
+
+<p>更新版本的 JavaScript 不会抛出任何 <code>EvalError</code>。请使用 <code>SyntaxError</code> 代替。</p>
+</div>
+
+
+
+<div>
+<h2>范围错误</h2>
+
+<p><code>RangeError</code> 会在您使用了合法值的范围之外的数字时抛出。</p>
+
+<p>例如：您不能将数字的有效位数设置为 500。</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var num = 1;
+try {
+    num.toPrecision(500);   // 数无法拥有 500 个有效数
+ }
+catch(err) {
+    document.getElementById(&quot;demo&quot;).innerHTML = err.name;
+} 
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t7f80.html?f=eg_js_error_rangeerror">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>引用错误</h2>
+
+<p>假如您使用（引用）了尚未声明的变量，则 <code>ReferenceError</code> 会被抛出：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var x;
+try {
+    x = y + 1;   // y 无法被引用（使用）
+ }
+catch(err) {
+    document.getElementById(&quot;demo&quot;).innerHTML = err.name;
+} 
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t1568.html?f=eg_js_error_referenceerror">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>语法错误</h2>
+
+<p>假如您计算带语法错误的代码，会 <code>SyntaxError</code> 被抛出：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+try {
+    eval(&quot;alert('Hello)&quot;);   // 缺少 ' 会产生错误
+}
+catch(err) {
+     document.getElementById(&quot;demo&quot;).innerHTML = err.name;
+} 
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t7949.html?f=eg_js_error_syntaxerror">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>类型错误</h2>
+
+<p>假如您使用的值不在期望值的范围之内，则 <code>TypeError</code> 被抛出：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+var num = 1;
+try {
+    num.toUpperCase();   // 您无法将数字转换为大写
+ }
+catch(err) {
+    document.getElementById(&quot;demo&quot;).innerHTML = err.name;
+} 
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tb3f2.html?f=eg_js_error_typeerror">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>URI 错误</h2>
+
+<p>假如您在 URI 函数中使用非法字符，则 <code>URIError</code> 被抛出：</p>
+
+<h3>实例</h3>
+
+<pre class="language-js">
+try {
+    decodeURI(&quot;%%%&quot;);   // 您无法对这些百分号进行 URI 编码
+ }
+catch(err) {
+    document.getElementById(&quot;demo&quot;).innerHTML = err.name;
+} 
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tce1d.html?f=eg_js_error_urierror">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>非标准的 Error 对象属性</h2>
+
+<p>Mozilla 和 Microsoft 定义了非标准的 error 对象属性：</p>
+
+<ul>
+<li>fileName (Mozilla)</li>
+<li>lineNumber (Mozilla)</li>
+<li>columnNumber (Mozilla)</li>
+<li>stack (Mozilla)</li>
+<li>description (Microsoft)</li>
+<li>number (Microsoft)</li>
+</ul>
+
+<p>请勿在公共网站使用这些属性。它们并不会在所有浏览器中工作。</p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="js_precedence.html" title="JavaScript 运算符优先级">JS 运算符优先级</a></li>
+<li class="next"><a href="js_scope.html" title="JavaScript 作用域">JS 作用域</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../jsref/index.html">JavaScript 和 HTML DOM 参考手册</a></h5>
+<h5 id="tools_example"><a href="js_examples.html">JavaScript 实例</a></h5>
+<h5 id="tools_quiz"><a href="js_quiz.html">JavaScript 测验</a></h5>
+<h5 id="tools_professional"><a href="index_pro.html">JavaScript 高级教程</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/js/js_errors.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:32:14 GMT -->
+</html>

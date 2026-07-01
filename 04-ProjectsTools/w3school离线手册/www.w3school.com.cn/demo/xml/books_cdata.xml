@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bookstore>
+
+<book category="美食">
+  <title lang="zh">雅舍谈吃</title>
+  <author>梁实秋</author>
+  <press>江苏文艺出版社</press>
+  <year>2013</year>
+  <price>35</price>
+  <ISBN>9787539962771</ISBN>
+  <html><![CDATA[<a href="https://book.douban.com/subject/25774775/">豆瓣读书：雅舍谈吃</a>]]></html>
+</book>
+
+<book category="儿童">
+  <title lang="zh">了不起的狐狸爸爸</title>
+  <author>罗尔德·达尔</author>
+  <translator>代维</translator>
+  <press>明天出版社</press>
+  <year>2009</year>
+  <price>10.00</price>
+  <ISBN>9787100011105</ISBN>
+  <html><![CDATA[<a href="https://book.douban.com/subject/3621942/">豆瓣读书：了不起的狐狸爸爸</a>]]></html>
+</book>
+
+<book category="文学">
+  <title lang="zh">将熟悉变为陌生</title>
+  <author>齐格蒙·鲍曼</author>
+  <author>彼得·哈夫纳</author>
+  <translator>王立秋</translator>
+  <press>南京大学出版社</press>
+  <year>2023</year>
+  <price>68.00</price>
+  <ISBN>9787100011105</ISBN>
+  <html><![CDATA[<a href="https://book.douban.com/subject/36409321/">豆瓣读书：将熟悉变为陌生</a>]]></html>
+</book>
+
+<book category="科学">
+  <title lang="zh">你想飞吗，像鸟一样？</title>
+  <author>理查德·道金斯</author>
+  <author>亚娜·伦佐娃</author>
+  <translator>高天羽</translator>
+  <press>湖南科学技术出版社</press>
+  <year>2023</year>
+  <price>88.00</price>
+  <ISBN>9787571019075</ISBN>
+  <html><![CDATA[<a href="https://book.douban.com/subject/36164749/">豆瓣读书：你想飞吗，像鸟一样？</a>]]></html>
+</book>
+
+<book category="政治" cover="平装">
+  <title lang="zh">论美国的民主</title>
+  <author>托克维尔</author>
+  <translator>董果良</translator>
+  <press>商务印书馆</press>
+  <year>1989</year>
+  <price>60.00</price>
+  <ISBN>9787100011105</ISBN>
+  <html><![CDATA[<a href="https://book.douban.com/subject/26847521/">豆瓣读书：论美国的民主</a>]]></html>
+</book>
+
+</bookstore>

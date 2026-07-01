@@ -1,0 +1,177 @@
+.flex-set {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  font-family: 'Roboto', sans-serif;
+}
+.btn {
+  color: #f2f2f2;
+  background-color: #ff4b2b;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: bolder;
+  width: 6rem;
+  height: 2rem;
+  text-align: center;
+  line-height: 2rem;
+  border: 1px solid #ebebeb;
+  border-radius: 1rem;
+  transition: transform 80ms ease;
+}
+.btn:active {
+  transform: scale(0.85);
+}
+#container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f7f2f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#container .center-container {
+  width: 600px;
+  height: 360px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+#container .center-container #container-note {
+  position: relative;
+}
+#container .center-container #container-note .register-note,
+#container .center-container #container-note .logoin-note {
+  color: #f2f2f2;
+  border-radius: 10px 0 0 10px;
+  box-shadow: -2px 2px 10px gray;
+  background: linear-gradient(to right, #ff4b2b, #FF3C4F);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#container .center-container #container-note .register-note p,
+#container .center-container #container-note .logoin-note p {
+  margin: 1rem 0;
+  font-size: 0.7rem;
+  color: #ebebeb;
+}
+#container .center-container #container-note .register-note {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+#container .center-container #container-note .logoin-note {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+#container .center-container #container-form {
+  position: relative;
+}
+#container .center-container #container-form .register-form,
+#container .center-container #container-form .logoin-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 2px 2px 10px gray;
+}
+#container .center-container #container-form .register-form .register-form-iconfont,
+#container .center-container #container-form .logoin-form .register-form-iconfont,
+#container .center-container #container-form .register-form .logoin-form-iconfont,
+#container .center-container #container-form .logoin-form .logoin-form-iconfont {
+  margin: 1rem;
+}
+#container .center-container #container-form .register-form .register-form-iconfont .iconfont,
+#container .center-container #container-form .logoin-form .register-form-iconfont .iconfont,
+#container .center-container #container-form .register-form .logoin-form-iconfont .iconfont,
+#container .center-container #container-form .logoin-form .logoin-form-iconfont .iconfont {
+  font-size: 1rem;
+  padding: 0.3rem;
+  margin: 0.5rem;
+  border: 1px solid #a2a2a2;
+  border-radius: 50%;
+}
+#container .center-container #container-form .register-form p,
+#container .center-container #container-form .logoin-form p {
+  font-size: 0.7rem;
+  margin-bottom: 0.3rem;
+}
+#container .center-container #container-form .register-form .register-form-form,
+#container .center-container #container-form .logoin-form .register-form-form,
+#container .center-container #container-form .register-form .logoin-form-form,
+#container .center-container #container-form .logoin-form .logoin-form-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#container .center-container #container-form .register-form .register-form-form input,
+#container .center-container #container-form .logoin-form .register-form-form input,
+#container .center-container #container-form .register-form .logoin-form-form input,
+#container .center-container #container-form .logoin-form .logoin-form-form input {
+  width: 250px;
+  height: 2rem;
+  border: none;
+  background-color: #ebebeb;
+  font-size: 0.7rem;
+  padding-left: 0.3rem;
+}
+#container .center-container #container-form .register-form .register-form-form input:nth-child(2),
+#container .center-container #container-form .logoin-form .register-form-form input:nth-child(2),
+#container .center-container #container-form .register-form .logoin-form-form input:nth-child(2),
+#container .center-container #container-form .logoin-form .logoin-form-form input:nth-child(2) {
+  margin: 1rem 0;
+}
+#container .center-container #container-form .register-form a,
+#container .center-container #container-form .logoin-form a {
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: black;
+}
+#container .center-container #container-form .register-form .btn-register-logoin,
+#container .center-container #container-form .logoin-form .btn-register-logoin {
+  border: none;
+}
+#container .center-container #container-form .register-form {
+  position: absolute;
+  top: 0;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+#container .center-container #container-form .logoin-form {
+  position: absolute;
+  top: 0;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+#container .center-container .note-move-right {
+  transform: translateX(100%);
+}
+#container .center-container .form-move-left {
+  transform: translateX(-100%);
+}

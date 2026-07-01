@@ -1,0 +1,613 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/cpp/cpp_ref_math.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:59:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>C++ cmath 库</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>C++ 教程</h2>
+<ul>
+<li><a href="index.html" title="C++ 教程">C++ 教程</a></li>
+<li><a href="cpp_intro.html" title="C++ 简介">C++ 简介</a></li>
+<li><a href="cpp_getstarted.html" title="C++ 入门">C++ 入门</a></li>
+<li><a href="cpp_syntax.html" title="C++ 语法">C++ 语法</a></li>
+<li><a href="cpp_output.html" title="C++ 输出">C++ 输出</a></li>
+<li><a href="cpp_output_numbers.html" title="C++ 输出数字">C++ 输出数字</a></li>
+<li><a href="cpp_new_lines.html" title="C++ 新行">C++ 新行</a></li>
+<li><a href="cpp_comments.html" title="C++ 注释">C++ 注释</a></li>
+<li><a href="cpp_variables.html" title="C++ 变量">C++ 变量</a></li>
+<li><a href="cpp_variables_multiple.html" title="C++ 声明多个变量">C++ 多变量</a></li>
+<li><a href="cpp_variables_identifiers.html" title="C++ 标识符">C++ 标识符</a></li>
+<li><a href="cpp_variables_constants.html" title="C++ 常量">C++ 常量</a></li>
+<li><a href="cpp_variables_reallife.html" title="C++ 变量实例">C++ 变量实例</a></li>
+<li><a href="cpp_user_input.html" title="C++ 用户输入">C++ 用户输入</a></li>
+<li><a href="cpp_data_types.html" title="C++ 数据类型">C++ 数据类型</a></li>
+<li><a href="cpp_data_types_numeric.html" title="C++ 数值数据类型">C++ 数值类型</a></li>
+<li><a href="cpp_data_types_bool.html" title="C++ 布尔数据类型">C++ 布尔类型</a></li>
+<li><a href="cpp_data_types_char.html" title="C++ 字符数据类型">C++ 字符类型</a></li>
+<li><a href="cpp_data_types_string.html" title="C++ 字符串数据类型">C++ 字符串类型</a></li>
+<li><a href="cpp_data_types_reallife.html" title="C++ 数据类型实例">C++ 数据类型实例</a></li>
+<li><a href="cpp_operators.html" title="C++ 运算符">C++ 运算符</a></li>
+<li><a href="cpp_operators_assignment.html" title="C++ 赋值运算符">C++ 赋值运算符</a></li>
+<li><a href="cpp_operators_comparison.html" title="C++ 比较运算符">C++ 比较运算符</a></li>
+<li><a href="cpp_operators_logical.html" title="C++ 逻辑运算符">C++ 逻辑运算符</a></li>
+<li><a href="cpp_strings.html" title="C++ 字符串">C++ 字符串</a></li>
+<li><a href="cpp_strings_concat.html" title="C++ 字符串拼接">C++ 字符串拼接</a></li>
+<li><a href="cpp_strings_numbers.html" title="C++ 数字和字符串">C++ 数字和字符串</a></li>
+<li><a href="cpp_strings_length.html" title="C++ 字符串长度">C++ 字符串长度</a></li>
+<li><a href="cpp_strings_access.html" title="C++ 访问字符串">C++ 访问字符串</a></li>
+<li><a href="cpp_strings_esc.html" title="C++ 特殊字符">C++ 特殊字符</a></li>
+<li><a href="cpp_strings_input.html" title="C++ 用户输入字符串">C++ 用户输入字符串</a></li>
+<li><a href="cpp_strings_namespace.html" title="C++ 字符串命名空间">C++ 字符串命名空间</a></li>
+<li><a href="cpp_math.html" title="C++ 数学运算">C++ 数学运算</a></li>
+<li><a href="cpp_booleans.html" title="C++ 布尔值">C++ 布尔值</a></li>
+<li><a href="cpp_booleans_expressions.html" title="C++ 布尔表达式">C++ 布尔表达式</a></li>
+<li><a href="cpp_conditions.html" title="C++ If ... Else">C++ If ... Else</a></li>
+<li><a href="cpp_conditions_else.html" title="C++ Else">C++ Else</a></li>
+<li><a href="cpp_conditions_elseif.html" title="C++ Else If">C++ Else If</a></li>
+<li><a href="cpp_conditions_shorthand.html" title="C++ 简写 If Else">C++ 简写 If Else</a></li>
+<li><a href="cpp_conditions_reallife.html" title="C++ If ... Else 实际应用实例">C++ If ... Else 实例</a></li>
+<li><a href="cpp_switch.html" title="C++ Switch">C++ Switch</a></li>
+<li><a href="cpp_while_loop.html" title="C++ While 循环">C++ While 循环</a></li>
+<li><a href="cpp_do_while_loop.html" title="C++ Do/While 循环">C++ Do/While 循环</a></li>
+<li><a href="cpp_while_loop_reallife.html" title="C++ While 循环实例">C++ While 循环实例</a></li>
+<li><a href="cpp_for_loop.html" title="C++ For 循环">C++ For 循环</a></li>
+<li><a href="cpp_for_loop_reallife.html" title="C++ For 循环实例">C++ For 循环实例</a></li>
+<li><a href="cpp_break.html" title="C++ Break 和 Continue">C++ Break 和 Continue</a></li>
+<li><a href="cpp_arrays.html" title="C++ 数组">C++ 数组</a></li>
+<li><a href="cpp_arrays_loop.html" title="C++ 数组和循环">C++ 数组和循环</a></li>
+<li><a href="cpp_arrays_omit.html" title="C++ 省略数组大小">C++ 省略数组大小</a></li>
+<li><a href="cpp_arrays_size.html" title="C++ 数组大小">C++ 数组大小</a></li>
+<li><a href="cpp_arrays_reallife.html" title="C++ 数组实际应用实例">C++ 数组实例</a></li>
+<li><a href="cpp_arrays_multi.html" title="C++ 多维数组">C++ 多维数组</a></li>
+<li><a href="cpp_structs.html" title="C++ 结构体">C++ 结构体</a></li>
+<li><a href="cpp_enum.html" title="C++ 枚举">C++ 枚举</a></li>
+<li><a href="cpp_references.html" title="C++ 创建引用">C++ 创建引用</a></li>
+<li><a href="cpp_references_memory.html" title="C++ 内存地址">C++ 内存地址</a></li>
+<li><a href="cpp_pointers.html" title="C++ 创建指针">C++ 创建指针</a></li>
+<li><a href="cpp_pointers_dereference.html" title="C++ 解引用">C++ 解引用</a></li>
+<li><a href="cpp_pointers_modify.html" title="C++ 修改指针">C++ 修改指针</a></li>
+</ul>
+<h2>C++ 函数</h2>
+<ul>
+<li><a href="cpp_functions.html" title="C++ 函数">C++ 函数</a></li>
+<li><a href="cpp_function_param.html" title="C++ 函数参数">C++ 函数参数</a></li>
+<li><a href="cpp_function_default.html" title="C++ 默认参数">C++ 默认参数</a></li>
+<li><a href="cpp_function_multiple.html" title="C++ 多个参数">C++ 多个参数</a></li>
+<li><a href="cpp_function_return.html" title="C++ Return 关键字">C++ 返回值</a></li>
+<li><a href="cpp_function_reference.html" title="C++ 函数 - 通过引用传参">C++ 通过引用传参</a></li>
+<li><a href="cpp_function_array.html" title="C++ 向函数传递数组">C++ 传递数组</a></li>
+<li><a href="cpp_function_reallife.html" title="C++ 函数实例">C++ 函数实例</a></li>
+<li><a href="cpp_function_overloading.html" title="C++ 函数重载">C++ 函数重载</a></li>
+<li><a href="cpp_scope.html" title="C++ 变量作用域">C++ 变量作用域</a></li>
+<li><a href="cpp_functions_recursion.html" title="C++ 递归">C++ 递归</a></li>
+</ul>
+<h2>C++ 类</h2>
+<ul>
+<li><a href="cpp_oop.html" title="C++ OOP">C++ OOP</a></li>
+<li><a href="cpp_classes.html" title="C++ 类和对象">C++ 类/对象</a></li>
+<li><a href="cpp_class_methods.html" title="C++ 类方法">C++ 类方法</a></li>
+<li><a href="cpp_constructors.html" title="C++ 构造函数">C++ 构造函数</a></li>
+<li><a href="cpp_access_specifiers.html" title="C++ 访问修饰符">C++ 访问修饰符</a></li>
+<li><a href="cpp_encapsulation.html" title="C++ 封装">C++ 封装</a></li>
+<li><a href="cpp_inheritance.html" title="C++ 继承">C++ 继承</a></li>
+<li><a href="cpp_inheritance_multilevel.html" title="C++ 多层继承">C++ 多层继承</a></li>
+<li><a href="cpp_inheritance_multiple.html" title="C++ 多重继承">C++ 多重继承</a></li>
+<li><a href="cpp_inheritance_access.html" title="C++ 继承访问">C++ 继承访问</a></li>
+<li><a href="cpp_polymorphism.html" title="C++ 多态">C++ 多态</a></li>
+<li><a href="cpp_files.html" title="C++ 文件">C++ 文件</a></li>
+<li><a href="cpp_exceptions.html" title="C++ 异常处理">C++ 异常处理</a></li>
+<li><a href="cpp_date.html" title="C++ 日期和时间">C++ 日期</a></li>
+</ul>
+<h2>C++ 数据结构</h2>
+<ul>
+<li><a href="cpp_data_structures.html" title="C++ 数据结构和 STL">C++ 数据结构</a></li>
+<li><a href="cpp_vectors.html" title="C++ 向量">C++ 向量</a></li>
+<li><a href="cpp_list.html" title="C++ 列表">C++ 列表</a></li>
+<li><a href="cpp_stacks.html" title="C++ 栈">C++ 栈</a></li>
+<li><a href="cpp_queues.html" title="C++ 队列">C++ 队列</a></li>
+<li><a href="cpp_deque.html" title="C++ 双端队列">C++ 双端队列</a></li>
+<li><a href="cpp_sets.html" title="C++ 集合">C++ 集合</a></li>
+<li><a href="cpp_maps.html" title="C++ 映射">C++ 映射</a></li>
+<li><a href="cpp_iterators.html" title="C++ 迭代器">C++ 迭代器</a></li>
+<li><a href="cpp_algorithms.html" title="C++ 算法">C++ 算法</a></li>
+</ul>
+<h2>C++ 案例</h2>
+<ul>
+<li><a href="cpp_howto_add_two_numbers.html" title="C++ 如何加两个数字">C++ 加两个数字</a></li>
+<li><a href="cpp_howto_random_number.html" title="C++ 如何生成随机数">C++ 随机数</a></li>
+</ul>
+<h2>C++ 数据结构</h2>
+<ul>
+<li><a href="cpp_reference.html" title="C++ 参考手册">C++ 参考手册</a></li>
+<li><a href="cpp_ref_keywords.html" title="C++ 关键词">C++ 关键词</a></li>
+<li><a href="cpp_ref_iostream.html" title="C++ &lt;iostream&gt; 库">C++ &lt;iostream&gt;</a></li>
+<li><a href="cpp_ref_fstream.html" title="C++ &lt;fstream&gt; 库">C++ &lt;fstream&gt;</a></li>
+<li class="currentLink"><a href="cpp_ref_math.html" title="C++ &lt;cmath&gt; 库">C++ &lt;cmath&gt;</a></li>
+<li><a href="cpp_ref_string.html" title="C++ &lt;string&gt; 库">C++ &lt;string&gt;</a></li>
+<li><a href="cpp_ref_cstring.html" title="C++ &lt;cstring&gt; 库">C++ &lt;cstring&gt;</a></li>
+<li><a href="cpp_ref_ctime.html" title="C++ &lt;ctime&gt; 库">C++ &lt;ctime&gt;</a></li>
+<li><a href="cpp_ref_vector.html" title="C++ &lt;vector&gt; 库">C++ &lt;vector&gt;</a></li>
+<li><a href="cpp_ref_algorithm.html" title="C++ &lt;algorithm&gt; 库">C++ &lt;algorithm&gt;</a></li>
+</ul>
+<h2>实例 / 测验</h2>
+<ul>
+<li><a href="cpp_examples.html" title="C++ 实例">C++ 实例</a></li>
+<li><a href="cpp_quiz.html" title="C++ 测验">C++ 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>C++ cmath 库</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="cpp_ref_fstream.html" title="C++ &lt;fstream&gt; 库">C++ &lt;fstream&gt;</a></li>
+<li class="next"><a href="cpp_ref_string.html" title="C++ &lt;string&gt; 库">C++ &lt;string&gt;</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>C++ 数学函数</h2>
+
+<p><code>&lt;cmath&gt;</code> 库提供了许多函数，允许你对数字执行数学运算。</p>
+
+<p>下表列出了所有数学函数：</p>
+
+<table class="ref">
+<tr>
+<th style="width: 25%;">函数</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><a href="ref_math_abs.html" title="C++ cmath abs() 函数">abs(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的绝对值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_acos.html" title="C++ cmath acos() 函数">acos(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的反余弦值，以弧度计。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_acosh.html" title="C++ cmath acosh() 函数">acosh(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的双曲反余弦值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_asin.html" title="C++ cmath asin() 函数">asin(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的反正弦值，以弧度计。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_asinh.html" title="C++ cmath asinh() 函数">asinh(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的双曲反正弦值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_atan.html" title="C++ cmath atan() 函数">atan(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的反正切值，数值范围在 -PI/2 到 PI/2 弧度之间。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_atan2.html" title="C++ cmath atan2() 函数">atan2(<i>y</i>, <i>x</i>)</a></td>
+<td>将直角坐标 (<i>x</i>, <i>y</i>) 转换为极坐标 (r, theta)，返回角度 theta。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_atanh.html" title="C++ cmath atanh() 函数">atanh(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的双曲反正切值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_cbrt.html" title="C++ cmath cbrt() 函数">cbrt(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的立方根。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_ceil.html" title="C++ cmath ceil() 函数">ceil(<i>x</i>)</a></td>
+<td>返回向上舍入到最接近整数的 <i>x</i> 值。</td>
+</tr>
+
+<tr>
+<td>copysign(<i>x</i>, <i>y</i>)</td>
+<td>返回具有第二个浮点数 <i>y</i> 符号的第一个浮点数 <i>x</i>。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_cos.html" title="C++ cmath cos() 函数">cos(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的余弦值（<i>x</i> 以弧度计）。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_cosh.html" title="C++ cmath cosh() 函数">cosh(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的双曲余弦值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_exp.html" title="C++ cmath exp() 函数">exp(<i>x</i>)</a></td>
+<td>返回 E<sup><i>x</i></sup> 的值。</td>
+</tr>
+
+<tr>
+<td>exp2(<i>x</i>)</td>
+<td>返回 2<sup><i>x</i></sup> 的值。</td>
+</tr>
+
+<tr>
+<td>expm1(<i>x</i>)</td>
+<td>返回 e<sup><i>x</i></sup>-1 的值。</td>
+</tr>
+
+<tr>
+<td>erf(<i>x</i>)</td>
+<td>返回 <i>x</i> 处的误差函数值。</td>
+</tr>
+
+<tr>
+<td>erfc(<i>x</i>)</td>
+<td>返回 <i>x</i> 处的互补误差函数值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_fabs.html" title="C++ cmath fabs() 函数">fabs(<i>x</i>)</a></td>
+<td>返回浮点数 <i>x</i> 的绝对值。</td>
+</tr>
+
+<tr>
+<td>fdim(<i>x</i>, <i>y</i>)</td>
+<td>返回 <i>x</i> 和 <i>y</i> 之间的正差值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_floor.html" title="C++ cmath floor() 函数">floor(<i>x</i>)</a></td>
+<td>返回向下舍入到最接近整数的 <i>x</i> 值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_fma.html" title="C++ cmath fma() 函数">fma(<i>x</i>, <i>y</i>, <i>z</i>)</a></td>
+<td>返回 <i>x</i>*<i>y</i>+<i>z</i> 的值，且不丢失精度。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_fmax.html" title="C++ cmath fmax() 函数">fmax(<i>x</i>, <i>y</i>)</a></td>
+<td>返回浮点数 <i>x</i> 和 <i>y</i> 中的最大值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_fmin.html" title="C++ cmath fmin() 函数">fmin(<i>x</i>, <i>y</i>)</a></td>
+<td>返回浮点数 <i>x</i> 和 <i>y</i> 中的最小值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_fmod.html" title="C++ cmath fmod() 函数">fmod(<i>x</i>, <i>y</i>)</a></td>
+<td>返回 <i>x</i>/<i>y</i> 的浮点余数。</td>
+</tr>
+
+<tr>
+<td>frexp(<i>x</i>, <i>y</i>)</td>
+<td>将 <i>x</i> 表示为 m*2^<sup>n</sup>，返回 m 的值（介于 0.5 和 1.0 之间），并将 n 的值写入指针 <i>y</i> 所指向的内存。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_hypot.html" title="C++ cmath hypot() 函数">hypot(<i>x</i>, <i>y</i>)</a></td>
+<td>返回 sqrt(<i>x</i><sup>2</sup> +<i>y</i><sup>2</sup>) 的值，无中间溢出或下溢。</td>
+</tr>
+
+<tr>
+<td>ilogb(<i>x</i>)</td>
+<td>返回 <i>x</i> 的浮点基数对数的整数部分。</td>
+</tr>
+
+<tr>
+<td>ldexp(<i>x</i>, <i>y</i>)</td>
+<td>返回 <i>x</i>*2^<sup><i>y</i></sup> 的值。</td>
+</tr>
+
+<tr>
+<td>lgamma(<i>x</i>)</td>
+<td>返回 <i>x</i> 处 gamma 函数绝对值的对数。</td>
+</tr>
+
+<tr>
+<td>llrint(<i>x</i>)</td>
+<td>将 <i>x</i> 舍入到附近的整数，并返回 <code>long long</code> 整数类型的结果。</td>
+</tr>
+
+<tr>
+<td>llround(<i>x</i>)</td>
+<td>将 <i>x</i> 舍入到最近的整数，并返回 <code>long long</code> 整数类型的结果。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_log.html" title="C++ cmath log() 函数">log(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的自然对数。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_log10.html" title="C++ cmath log10() 函数">log10(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的以 10 为底的对数。</td>
+</tr>
+
+<tr>
+<td>log1p(<i>x</i>)</td>
+<td>返回 <i>x</i>+1 的自然对数。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_log2.html" title="C++ cmath log2() 函数">log2(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 绝对值的以 2 为底的对数。</td>
+</tr>
+
+<tr>
+<td>logb(<i>x</i>)</td>
+<td>返回 <i>x</i> 绝对值浮点基数对数的值。</td>
+</tr>
+
+<tr>
+<td>lrint(<i>x</i>)</td>
+<td>将 <i>x</i> 舍入到附近的整数，并返回 <code>long</code> 整数类型的结果。</td>
+</tr>
+
+<tr>
+<td>lround(<i>x</i>)</td>
+<td>将 <i>x</i> 舍入到最近的整数，并返回 <code>long</code> 整数类型的结果。</td>
+</tr>
+
+<tr>
+<td>modf(<i>x</i>, <i>y</i>)</td>
+<td>返回 <i>x</i> 的小数部分，并将整数部分写入指针 <i>y</i> 所指向的内存。</td>
+</tr>
+
+<tr>
+<td>nan(<i>s</i>)</td>
+<td>返回 NaN（非数）值。</td>
+</tr>
+
+<tr>
+<td>nearbyint(<i>x</i>)</td>
+<td>返回舍入到附近整数的 <i>x</i> 值。</td>
+</tr>
+
+<tr>
+<td>nextafter(<i>x</i>, <i>y</i>)</td>
+<td>返回朝 <i>y</i> 方向最接近 <i>x</i> 的浮点数。</td>
+</tr>
+
+<tr>
+<td>nexttoward(<i>x</i>, <i>y</i>)</td>
+<td>返回朝 <i>y</i> 方向最接近 <i>x</i> 的浮点数（与 <code>nextafter</code> 相同）。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_pow.html" title="C++ cmath pow() 函数">pow(<i>x</i>, <i>y</i>)</a></td>
+<td>返回 <i>x</i> 的 <i>y</i> 次幂的值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_remainder.html" title="C++ cmath remainder() 函数">remainder(<i>x</i>, <i>y</i>)</a></td>
+<td>返回 <i>x</i>/<i>y</i> 舍入到最近整数的余数。</td>
+</tr>
+
+<tr>
+<td>remquo(<i>x</i>, <i>y</i>, <i>z</i>)</td>
+<td>计算 <i>x</i>/<i>y</i> 舍入到最近整数的结果，将结果写入指针 <i>z</i> 所指向的内存，并返回余数。</td>
+</tr>
+
+<tr>
+<td>rint(<i>x</i>)</td>
+<td>返回舍入到附近整数的 <i>x</i> 值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_round.html" title="C++ cmath round() 函数">round(<i>x</i>)</a></td>
+<td>返回舍入到最近整数的 <i>x</i> 值。</td>
+</tr>
+
+<tr>
+<td>scalbln(<i>x</i>, <i>y</i>)</td>
+<td>返回 <i>x</i>*R^<sup><i>y</i></sup> 的值（R 通常为 2）。</td>
+</tr>
+
+<tr>
+<td>scalbn(<i>x</i>, <i>y</i>)</td>
+<td>返回 <i>x</i>*R^<sup><i>y</i></sup> 的值（R 通常为 2，与 <code>scalbln</code> 相同）。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_sin.html" title="C++ cmath sin() 函数">sin(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的正弦值（<i>x</i> 以弧度计）。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_sinh.html" title="C++ cmath sinh() 函数">sinh(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的双曲正弦值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_sqrt.html" title="C++ cmath sqrt() 函数">sqrt(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的平方根。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_tan.html" title="C++ cmath tan() 函数">tan(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的正切值（<i>x</i> 以弧度计）。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_tanh.html" title="C++ cmath tanh() 函数">tanh(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的双曲正切值。</td>
+</tr>
+
+<tr>
+<td>tgamma(<i>x</i>)</td>
+<td>返回 <i>x</i> 处 gamma 函数的值。</td>
+</tr>
+
+<tr>
+<td><a href="ref_math_trunc.html" title="C++ cmath trunc() 函数">trunc(<i>x</i>)</a></td>
+<td>返回 <i>x</i> 的整数部分。</td>
+</tr>
+</table>
+</section>
+
+
+
+<section>
+<h2>相关页面</h2>
+
+<p>教程：<a href="cpp_math.html" title="C++ 数学">C++ 数学</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="cpp_ref_fstream.html" title="C++ &lt;fstream&gt; 库">C++ &lt;fstream&gt;</a></li>
+<li class="next"><a href="cpp_ref_string.html" title="C++ &lt;string&gt; 库">C++ &lt;string&gt;</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="cpp_reference.html">C++ 参考手册</a></h5>
+<h5 id="tools_example"><a href="cpp_examples.html">C++ 实例</a></h5>
+<h5 id="tools_quiz"><a href="cpp_quiz.html">C++ 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/cpp/cpp_ref_math.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:00:03 GMT -->
+</html>

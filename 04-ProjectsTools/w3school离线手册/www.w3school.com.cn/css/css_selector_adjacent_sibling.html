@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/css/css_selector_adjacent_sibling.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:18:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>CSS 相邻兄弟选择器</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>CSS 高级教程</h2>
+<ul>
+<li><a href="index_pro.html" title="CSS 课外书">CSS 课外书</a></li>
+<li><a href="pro_css_jianjie.html" title="CSS 简介">CSS 简介</a></li>
+<li><a href="pro_css_syntax.html" title="CSS 基础语法">CSS 基础语法</a></li>
+<li><a href="css_syntax_pro.html" title="CSS 高级语法">CSS 高级语法</a></li>
+<li><a href="css_syntax_descendant_selector.html" title="CSS 派生选择器">CSS 派生选择器</a></li>
+<li><a href="css_syntax_id_selector.html" title="CSS id 选择器">CSS id 选择器</a></li>
+<li><a href="css_syntax_class_selector.html" title="CSS 类选择器">CSS 类选择器</a></li>
+<li><a href="css_howto.html" title="CSS 创建">CSS 创建</a></li>
+<li><a href="pro_css_background.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="pro_css_text.html" title="CSS 文本">CSS 文本</a></li>
+<li><a href="pro_css_font.html" title="CSS 字体">CSS 字体</a></li>
+<li><a href="pro_css_list.html" title="CSS 列表">CSS 列表</a></li>
+</ul>
+<h2>CSS 框模型</h2>
+<ul>
+<li><a href="pro_css_boxmodel.html" title="CSS 框模型概述">CSS 框模型概述</a></li>
+<li><a href="pro_css_padding.html" title="CSS 内边距">CSS 内边距</a></li>
+<li><a href="pro_css_border.html" title="CSS 边框">CSS 边框</a></li>
+<li><a href="pro_css_margin.html" title="CSS 外边距">CSS 外边距</a></li>
+<li><a href="pro_css_margin_collapsing.html" title="CSS 外边距合并">CSS 外边距合并</a></li>
+</ul>
+<h2>CSS 定位</h2>
+<ul>
+<li><a href="pro_css_positioning.html" title="CSS 定位概述">CSS 定位概述</a></li>
+<li><a href="css_positioning_relative.html" title="CSS 相对定位">CSS 相对定位</a></li>
+<li><a href="css_positioning_absolute.html" title="CSS 绝对定位">CSS 绝对定位</a></li>
+<li><a href="css_positioning_floating.html" title="CSS 浮动">CSS 浮动</a></li>
+</ul>
+<h2>CSS 选择器</h2>
+<ul>
+<li><a href="css_selector_type.html" title="CSS 元素选择器">CSS 元素选择器</a></li>
+<li><a href="css_selector_grouping.html" title="CSS 选择器分组">CSS 选择器分组</a></li>
+<li><a href="css_selector_class.html" title="CSS 类选择器详解">CSS 类选择器详解</a></li>
+<li><a href="css_selector_id.html" title="CSS ID 选择器详解">CSS ID 选择器详解</a></li>
+<li><a href="css_selector_attribute.html" title="CSS 属性选择器详解">CSS 属性选择器详解</a></li>
+<li><a href="css_selector_descendant.html" title="CSS 后代选择器">CSS 后代选择器</a></li>
+<li><a href="css_selector_child.html" title="CSS 子元素选择器">CSS 子元素选择器</a></li>
+<li class="currentLink"><a href="css_selector_adjacent_sibling.html" title="CSS 相邻兄弟选择器">CSS 相邻兄弟选择器</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>CSS 相邻兄弟选择器</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css_selector_child.html" title="CSS 子元素选择器">CSS 子元素选择器</a></li>
+<li class="next"><a href="index_pro.html" title="CSS 课外书">CSS 课外书</a></li>
+</ul>
+</div>
+
+
+
+<div id="intro">
+<p><strong>相邻兄弟选择器（Adjacent sibling selector）可选择紧接在另一元素后的元素，且二者有相同父元素。</strong></p>
+</div>
+
+
+
+<div>
+<h2>选择相邻兄弟</h2>
+
+<p>如果需要选择紧接在另一个元素后的元素，而且二者有相同的父元素，可以使用相邻兄弟选择器（Adjacent sibling selector）。</p>
+
+<p>例如，如果要增加紧接在 h1 元素后出现的段落的上边距，可以这样写：</p>
+
+<pre class="language-css">
+h1 + p {margin-top:50px;}
+</pre>
+
+<p>这个选择器读作：“选择紧接在 h1 元素后出现的段落，h1 和 p 元素拥有共同的父元素”。</p>
+
+<p class="tiy"><a target="_blank" href="../tiy/ta51e.html?f=eg_csse_selector_adjacent_sibling">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>语法解释</h2>
+
+<p>相邻兄弟选择器使用了加号（+），即相邻兄弟结合符（Adjacent sibling combinator）。</p>
+
+<p class="note"><span>注释：</span>与子结合符一样，相邻兄弟结合符旁边可以有空白符。</p>
+
+<p>请看下面这个文档树片段：</p>
+
+<pre class="language-html">
+&lt;div&gt;
+  &lt;ul&gt;
+    &lt;li&gt;List item 1&lt;/li&gt;
+    &lt;li&gt;List item 2&lt;/li&gt;
+    &lt;li&gt;List item 3&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;ol&gt;
+    &lt;li&gt;List item 1&lt;/li&gt;
+    &lt;li&gt;List item 2&lt;/li&gt;
+    &lt;li&gt;List item 3&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</pre>
+
+<p>在上面的片段中，div 元素中包含两个列表：一个无序列表，一个有序列表，每个列表都包含三个列表项。这两个列表是相邻兄弟，列表项本身也是相邻兄弟。不过，第一个列表中的列表项与第二个列表中的列表项不是相邻兄弟，因为这两组列表项不属于同一父元素（最多只能算堂兄弟）。</p>
+
+<p>请记住，用一个结合符只能选择两个相邻兄弟中的第二个元素。请看下面的选择器：</p>
+
+<pre class="language-css">
+li + li {font-weight:bold;}
+</pre>
+
+<p>上面这个选择器只会把列表中的第二个和第三个列表项变为粗体。第一个列表项不受影响。</p>
+
+<p class="tiy"><a target="_blank" href="../tiy/tb8c6.html?f=eg_csse_selector_adjacent_sibling_2">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>结合其他选择器</h2>
+
+<p>相邻兄弟结合符还可以结合其他结合符：</p>
+
+<pre class="language-css">
+html &gt; body table + ul {margin-top:20px;}
+</pre>
+
+<p>这个选择器解释为：选择紧接在 table 元素后出现的所有兄弟 ul 元素，该 table 元素包含在一个 body 元素中，body 元素本身是 html 元素的子元素。</p>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css_selector_child.html" title="CSS 子元素选择器">CSS 子元素选择器</a></li>
+<li class="next"><a href="index_pro.html" title="CSS 课外书">CSS 课外书</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../cssref/index.html">CSS 参考手册</a></h5>
+<h5 id="tools_example"><a href="css_examples.html">CSS 实例</a></h5>
+<h5 id="tools_quiz"><a href="css_quiz.html">CSS 测验</a></h5>
+<h5 id="tools_tutorial"><a href="index.html">CSS 教程</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/css/css_selector_adjacent_sibling.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:18:04 GMT -->
+</html>

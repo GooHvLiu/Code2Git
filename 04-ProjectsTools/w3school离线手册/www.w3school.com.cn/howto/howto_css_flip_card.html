@@ -1,0 +1,654 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/howto/howto_css_flip_card.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:27:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<link rel="stylesheet" href="../../cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+
+<title>如何创建：翻转卡片</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>百宝箱</h2>
+<ul>
+<li><a href="index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+</ul>
+<h2>菜单</h2>
+<ul>
+<li><a href="howto_css_icon_bar.html" title="如何实现：图标栏">图标栏</a></li>
+<li><a href="howto_css_menu_icon.html" title="如何实现：菜单图标">菜单图标</a></li>
+<li><a href="howto_js_accordion.html" title="如何实现：手风琴">手风琴</a></li>
+<li><a href="howto_js_tabs.html" title="如何实现：选项卡">选项卡</a></li>
+<li><a href="howto_js_vertical_tabs.html" title="如何实现：垂直选项卡">垂直选项卡</a></li>
+<li><a href="howto_js_tab_header.html" title="如何实现：选项卡标题">选项卡标题</a></li>
+<li><a href="howto_js_full_page_tabs.html" title="如何实现：全页选项卡">全页选项卡</a></li>
+<li><a href="howto_js_hover_tabs.html" title="如何实现：悬停选项卡">悬停选项卡</a></li>
+<li><a href="howto_js_topnav.html" title="如何实现：顶部导航">顶部导航</a></li>
+<li><a href="howto_js_topnav_responsive.html" title="如何实现：响应式顶部导航">响应式顶部导航</a></li>
+<li><a href="howto_css_topnav_split.html" title="如何实现：拆分导航">拆分导航</a></li>
+<li><a href="howto_css_navbar_icon.html" title="如何实现：带图标的导航栏">带图标的导航栏</a></li>
+<li><a href="howto_js_search_menu.html" title="如何实现：搜索菜单">搜索菜单</a></li>
+<li><a href="howto_css_searchbar.html" title="如何实现：搜索栏">搜索栏</a></li>
+<li><a href="howto_css_fixed_sidebar.html" title="如何实现：固定侧边栏">固定侧边栏</a></li>
+<li><a href="howto_js_sidenav.html" title="如何实现：侧面导航">侧面导航</a></li>
+<li><a href="howto_css_sidebar_responsive.html" title="如何实现：响应式侧边栏">响应式侧边栏</a></li>
+<li><a href="howto_js_fullscreen_overlay.html" title="如何实现：全屏导航">全屏导航</a></li>
+<li><a href="howto_js_off-canvas.html" title="如何实现：画布外菜单">画布外菜单</a></li>
+<li><a href="howto_css_sidenav_buttons.html" title="如何实现：悬停侧导航按钮">悬停侧导航按钮</a></li>
+<li><a href="howto_css_sidebar_icons.html" title="如何实现：带图标的侧边栏">带图标的侧边栏</a></li>
+<li><a href="howto_css_menu_horizontal_scroll.html" title="如何实现：水平滚动菜单">水平滚动菜单</a></li>
+<li><a href="howto_css_vertical_menu.html" title="如何实现：垂直菜单">垂直菜单</a></li>
+<li><a href="howto_css_bottom_nav.html" title="如何实现：底部导航">底部导航</a></li>
+<li><a href="howto_js_bottom_nav_responsive.html" title="如何实现：响应式底部导航">响应式底部导航</a></li>
+<li><a href="howto_css_navbar_border.html" title="如何实现：底部边框导航链接">底部边框导航链接</a></li>
+<li><a href="howto_css_topnav_right.html" title="如何实现：右对齐菜单链接">右对齐菜单链接</a></li>
+<li><a href="howto_css_topnav_centered.html" title="如何实现：居中菜单链接">居中菜单链接</a></li>
+<li><a href="howto_css_topnav_equal_width.html" title="如何实现：等宽菜单链接">等宽菜单链接</a></li>
+<li><a href="howto_css_fixed_menu.html" title="如何实现：固定菜单">固定菜单</a></li>
+<li><a href="howto_js_navbar_slide.html" title="如何实现：滚动时下滑栏">滚动时下滑栏</a></li>
+<li><a href="howto_js_navbar_hide_scroll.html" title="如何实现：滚动时隐藏导航栏">滚动时隐藏导航栏</a></li>
+<li><a href="howto_js_navbar_shrink_scroll.html" title="如何实现：滚动时缩小导航栏">滚动时缩小导航栏</a></li>
+<li><a href="howto_js_navbar_sticky.html" title="如何实现：粘性导航栏">粘性导航栏</a></li>
+<li><a href="howto_css_navbar_image.html" title="如何实现：图像上的导航栏">图像上的导航栏</a></li>
+<li><a href="howto_css_dropdown.html" title="如何实现：悬停下拉菜单">悬停下拉菜单</a></li>
+<li><a href="howto_js_dropdown.html" title="如何实现：单击下拉菜单">单击下拉菜单</a></li>
+<li><a href="howto_js_cascading_dropdown.html" title="如何实现：级联下拉菜单">级联下拉菜单</a></li>
+<li><a href="howto_css_dropdown_navbar.html" title="如何实现：顶部导航栏中的下拉菜单">顶部导航栏中的下拉菜单</a></li>
+<li><a href="howto_js_dropdown_sidenav.html" title="如何实现：侧边导航栏中的下拉菜单">侧边导航栏中的下拉菜单</a></li>
+<li><a href="howto_js_responsive_navbar_dropdown.html" title="如何实现：带下拉菜单的响应式导航栏">带下拉菜单的响应式导航栏</a></li>
+<li><a href="howto_css_subnav.html" title="如何实现：子导航菜单">子导航菜单</a></li>
+<li><a href="howto_css_dropup.html" title="如何实现：上拉菜单">上拉菜单</a></li>
+<li><a href="howto_css_mega_menu.html" title="如何实现：超级菜单">超级菜单</a></li>
+<li><a href="howto_js_mobile_navbar.html" title="如何实现：移动菜单">移动菜单</a></li>
+<li><a href="howto_js_curtain_menu.html" title="如何实现：窗帘菜单">窗帘菜单</a></li>
+<li><a href="howto_js_collapse_sidebar.html" title="如何实现：折叠的侧边栏">折叠的侧边栏</a></li>
+<li><a href="howto_js_collapse_sidepanel.html" title="如何实现：折叠的侧边面板">折叠的侧边面板</a></li>
+<li><a href="howto_css_pagination.html" title="如何实现：分页">分页</a></li>
+<li><a href="howto_css_breadcrumbs.html" title="如何实现：面包屑导航">面包屑导航</a></li>
+<li><a href="howto_css_button_group.html" title="如何实现：按钮组">按钮组</a></li>
+<li><a href="howto_css_button_group_vertical.html" title="如何实现：垂直按钮组">垂直按钮组</a></li>
+<li><a href="howto_css_sticky_social_bar.html" title="如何实现：粘性社交栏">粘性社交栏</a></li>
+<li><a href="howto_css_pill_nav.html" title="如何实现：药丸导航">药丸导航</a></li>
+<li><a href="howto_css_responsive_header.html" title="如何实现：响应式页眉">响应式页眉</a></li>
+</ul>
+<h2>图像</h2>
+<ul>
+<li><a href="howto_js_slideshow.html" title="如何实现：幻灯片">幻灯片</a></li>
+<li><a href="howto_js_slideshow_gallery.html" title="如何实现：幻灯片画廊">幻灯片画廊</a></li>
+<li><a href="howto_css_modal_images.html" title="如何实现：模态图像">模态图像</a></li>
+<li><a href="howto_js_lightbox.html" title="如何实现：灯箱">灯箱</a></li>
+<li><a href="howto_css_image_grid_responsive.html" title="如何实现：响应式图像网格">响应式图像网格</a></li>
+<li><a href="howto_js_image_grid.html" title="如何实现：图像网格">图像网格</a></li>
+<li><a href="howto_css_image_gallery.html" title="如何实现：图片库">图片库</a></li>
+<li><a href="howto_css_image_gallery_scroll.html" title="如何实现：可滚动图片库">可滚动图片库</a></li>
+<li><a href="howto_js_tab_img_gallery.html" title="如何实现：选项卡式图片库">选项卡式图片库</a></li>
+<li><a href="howto_css_image_overlay.html" title="如何实现：图像叠加淡出">图像叠加淡出</a></li>
+<li><a href="howto_css_image_overlay_slide.html" title="如何实现：图像叠加滑动">图像叠加滑动</a></li>
+<li><a href="howto_css_image_overlay_zoom.html" title="如何实现：图像叠加缩放">图像叠加缩放</a></li>
+<li><a href="howto_css_image_overlay_title.html" title="如何实现：图像叠加标题">图像叠加标题</a></li>
+<li><a href="howto_css_image_overlay_icon.html" title="如何实现：图像叠加图标">图像叠加图标</a></li>
+<li><a href="howto_css_image_effects.html" title="如何实现：图像效果">图像效果</a></li>
+<li><a href="howto_css_image_bw.html" title="如何实现：黑白图像">黑白图像</a></li>
+<li><a href="howto_css_image_text.html" title="如何实现：图片文本">图片文本</a></li>
+<li><a href="howto_css_image_text_blocks.html" title="如何实现：图像文本块">图像文本块</a></li>
+<li><a href="howto_css_image_transparent.html" title="如何实现：透明图像文本">透明图像文本</a></li>
+<li><a href="howto_css_full_page.html" title="如何实现：全页图片">全页图片</a></li>
+<li><a href="howto_css_form_on_image.html" title="如何实现：图像上的表单">图像上的表单</a></li>
+<li><a href="howto_css_hero_image.html" title="如何实现：焦点图">焦点图</a></li>
+<li><a href="howto_css_blurred_background.html" title="如何实现：模糊背景图像">模糊背景图像</a></li>
+<li><a href="howto_css_bg_change_scroll.html" title="如何实现：滚动时切换背景">滚动时切换背景</a></li>
+<li><a href="howto_css_images_side_by_side.html" title="如何实现：并排图像">并排图像</a></li>
+<li><a href="howto_css_rounded_images.html" title="如何实现：圆角图像">圆角图像</a></li>
+<li><a href="howto_css_image_avatar.html" title="如何实现：头像图片">头像图片</a></li>
+<li><a href="howto_css_image_responsive.html" title="如何实现：响应式图像">响应式图像</a></li>
+<li><a href="howto_css_image_center.html" title="如何实现：居中图像">居中图像</a></li>
+<li><a href="howto_css_thumbnail.html" title="如何实现：缩略图">缩略图</a></li>
+<li><a href="howto_css_border_image.html" title="如何实现：图像边框">图像边框</a></li>
+<li><a href="howto_css_team.html" title="如何实现：团队介绍">团队介绍</a></li>
+<li><a href="howto_css_image_sticky.html" title="如何实现：粘性图像">粘性图像</a></li>
+<li><a href="howto_css_flip_image.html" title="如何实现：翻转图像">翻转图像</a></li>
+<li><a href="howto_css_shake_image.html" title="如何实现：抖动图片">抖动图片</a></li>
+<li><a href="howto_css_portfolio_gallery.html" title="如何实现：作品集画廊">作品集画廊</a></li>
+<li><a href="howto_js_portfolio_filter.html" title="如何实现：可筛选的作品集">可筛选的作品集</a></li>
+<li><a href="howto_js_image_zoom.html" title="如何实现：图像缩放">图像缩放</a></li>
+<li><a href="howto_js_image_magnifier_glass.html" title="如何实现：图像放大镜">图像放大镜</a></li>
+<li><a href="howto_js_image_comparison.html" title="如何实现：图片对比滑块">图片对比滑块</a></li>
+<li><a href="howto_html_favicon.html" title="如何实现：网站图标">网站图标</a></li>
+</ul>
+<h2>按钮</h2>
+<ul>
+<li><a href="howto_css_alert_buttons.html" title="如何实现：警告按钮">警告按钮</a></li>
+<li><a href="howto_css_outline_buttons.html" title="如何实现：轮廓按钮">轮廓按钮</a></li>
+<li><a href="howto_css_button_split.html" title="如何实现：分割按钮">分割按钮</a></li>
+<li><a href="howto_css_animate_buttons.html" title="如何实现：动画按钮">动画按钮</a></li>
+<li><a href="howto_css_fading_buttons.html" title="如何实现：渐变按钮">渐变按钮</a></li>
+<li><a href="howto_css_button_on_image.html" title="如何实现：图像上的按钮">图像上的按钮</a></li>
+<li><a href="howto_css_social_media_buttons.html" title="如何实现：社交媒体按钮">社交媒体按钮</a></li>
+<li><a href="howto_js_read_more.html" title="如何实现：阅读更多/阅读更少">阅读更多/阅读更少</a></li>
+<li><a href="howto_css_loading_buttons.html" title="如何实现：加载按钮">加载按钮</a></li>
+<li><a href="howto_css_download_button.html" title="如何实现：下载按钮">下载按钮</a></li>
+<li><a href="howto_css_pill_button.html" title="如何实现：药丸按钮">药丸按钮</a></li>
+<li><a href="howto_css_notification_button.html" title="如何实现：通知按钮">通知按钮</a></li>
+<li><a href="howto_css_icon_buttons.html" title="如何实现：图标按钮">图标按钮</a></li>
+<li><a href="howto_css_next_prev.html" title="如何实现：下一页/上一页按钮">下一页/上一页按钮</a></li>
+<li><a href="howto_css_more_button.html" title="如何实现：导航中的更多按钮">导航中的更多按钮</a></li>
+<li><a href="howto_css_block_buttons.html" title="如何实现：块状按钮">块状按钮</a></li>
+<li><a href="howto_css_text_buttons.html" title="如何实现：文字按钮">文字按钮</a></li>
+<li><a href="howto_css_round_buttons.html" title="如何实现：圆角按钮">圆角按钮</a></li>
+<li><a href="howto_js_scroll_to_top.html" title="如何实现：返回顶部按钮">返回顶部按钮</a></li>
+</ul>
+<h2>表单</h2>
+<ul>
+<li><a href="howto_css_login_form.html" title="如何实现：登录表单">登录表单</a></li>
+<li><a href="howto_css_signup_form.html" title="如何实现：注册表单">注册表单</a></li>
+<li><a href="howto_css_checkout_form.html" title="如何实现：结帐表格">结帐表格</a></li>
+<li><a href="howto_css_contact_form.html" title="如何实现：联系表单">联系表单</a></li>
+<li><a href="howto_css_social_login.html" title="如何实现：社交登录表格">社交登录表格</a></li>
+<li><a href="howto_css_register_form.html" title="如何实现：登记表单">登记表单</a></li>
+<li><a href="howto_css_form_icon.html" title="如何实现：带图标的表单">带图标的表单</a></li>
+<li><a href="howto_css_newsletter.html" title="如何实现：新闻订阅">新闻订阅</a></li>
+<li><a href="howto_css_stacked_form.html" title="如何实现：堆叠表单">堆叠表单</a></li>
+<li><a href="howto_css_responsive_form.html" title="如何实现：响应式表单">响应式表单</a></li>
+<li><a href="howto_js_popup_form.html" title="如何实现：弹出表单">弹出表单</a></li>
+<li><a href="howto_css_inline_form.html" title="如何实现：内联表单">内联表单</a></li>
+<li><a href="howto_html_clear_input.html" title="如何实现：清除输入框">清除输入框</a></li>
+<li><a href="howto_css_hide_arrow_number.html" title="如何实现：隐藏数字箭头">隐藏数字箭头</a></li>
+<li><a href="howto_js_copy_clipboard.html" title="如何实现：复制文本到剪贴板">复制文本到剪贴板</a></li>
+<li><a href="howto_css_animated_search.html" title="如何实现：动画搜索">动画搜索</a></li>
+<li><a href="howto_css_search_button.html" title="如何实现：搜索按钮">搜索按钮</a></li>
+<li><a href="howto_css_fullscreen_search.html" title="如何实现：全屏搜索">全屏搜索</a></li>
+<li><a href="howto_css_input_navbar.html" title="如何实现：导航栏中的输入框">导航栏中的输入框</a></li>
+<li><a href="howto_css_login_form_navbar.html" title="如何实现：导航栏中的登录表单">导航栏中的登录表单</a></li>
+<li><a href="howto_css_custom_checkbox.html" title="如何实现：自定义复选框/单选按钮">自定义复选框/单选按钮</a></li>
+<li><a href="howto_js_custom_select.html" title="如何实现：自定义选择框">自定义选择框</a></li>
+<li><a href="howto_css_switch.html" title="如何实现：切换开关">切换开关</a></li>
+<li><a href="howto_js_display_checkbox_text.html" title="如何实现：选中复选框">选中复选框</a></li>
+<li><a href="howto_js_detect_capslock.html" title="如何实现：检测大写锁定">检测大写锁定</a></li>
+<li><a href="howto_js_trigger_button_enter.html" title="如何实现：按回车键触发按钮">按回车键触发按钮</a></li>
+<li><a href="howto_js_password_validation.html" title="如何实现：密码验证">密码验证</a></li>
+<li><a href="howto_js_toggle_password.html" title="如何实现：切换密码可见性">切换密码可见性</a></li>
+<li><a href="howto_js_form_steps.html" title="如何实现：多步骤表单">多步骤表单</a></li>
+<li><a href="howto_js_autocomplete.html" title="如何实现：自动完成">自动完成</a></li>
+<li><a href="howto_html_autocomplete_off.html" title="如何实现：关闭自动完成">关闭自动完成</a></li>
+<li><a href="howto_html_spellcheck_disable.html" title="如何实现：关闭拼写检查">关闭拼写检查</a></li>
+<li><a href="howto_html_file_upload_button.html" title="如何实现：文件上传按钮">文件上传按钮</a></li>
+<li><a href="howto_js_validation_empty_input.html" title="如何实现：空输入验证">空输入验证</a></li>
+</ul>
+<h2>筛选器</h2>
+<ul>
+<li><a href="howto_js_filter_lists.html" title="如何实现：筛选列表">筛选列表</a></li>
+<li><a href="howto_js_filter_table.html" title="如何实现：筛选表格">筛选表格</a></li>
+<li><a href="howto_js_filter_elements.html" title="如何实现：筛选元素">筛选元素</a></li>
+<li><a href="howto_js_filter_dropdown.html" title="如何实现：筛选下拉菜单">筛选下拉菜单</a></li>
+<li><a href="howto_js_sort_list.html" title="如何实现：排序列表">排序列表</a></li>
+<li><a href="howto_js_sort_table.html" title="如何实现：排序表格">排序表格</a></li>
+</ul>
+<h2>表格</h2>
+<ul>
+<li><a href="howto_css_table_zebra.html" title="如何实现：斑马纹表格">斑马纹表格</a></li>
+<li><a href="howto_css_table_center.html" title="如何实现：居中表格">居中表格</a></li>
+<li><a href="howto_css_table_full_width.html" title="如何实现：全宽表格">全宽表格</a></li>
+<li><a href="howto_html_table_nested.html" title="如何实现：嵌套表格">嵌套表格</a></li>
+<li><a href="howto_css_table_side_by_side.html" title="如何实现：并列表格">并列表格</a></li>
+<li><a href="howto_css_table_responsive.html" title="如何实现：响应式表格">响应式表格</a></li>
+<li><a href="howto_css_comparison_table.html" title="如何实现：对比表格">对比表格</a></li>
+</ul>
+<h2>更多</h2>
+<ul>
+<li><a href="howto_css_fullscreen_video.html" title="如何实现：全屏视频">全屏视频</a></li>
+<li><a href="howto_css_modals.html" title="如何实现：模态框">模态框</a></li>
+<li><a href="howto_css_delete_modal.html" title="如何实现：删除模态框">删除模态框</a></li>
+<li><a href="howto_css_timeline.html" title="如何实现：时间线">时间线</a></li>
+<li><a href="howto_js_scroll_indicator.html" title="如何实现：滚动指示器">滚动指示器</a></li>
+<li><a href="howto_js_progressbar.html" title="如何实现：进度条">进度条</a></li>
+<li><a href="howto_css_skill_bar.html" title="如何实现：技能条">技能条</a></li>
+<li><a href="howto_js_rangeslider.html" title="如何实现：范围滑块">范围滑块</a></li>
+<li><a href="howto_html_colorpicker.html" title="如何实现：颜色选择器">颜色选择器</a></li>
+<li><a href="howto_html_email_field.html" title="如何实现：邮箱字段">邮箱字段</a></li>
+<li><a href="howto_css_tooltip.html" title="如何实现：工具提示">工具提示</a></li>
+<li><a href="howto_css_display_element_hover.html" title="如何实现：悬停显示元素">悬停显示元素</a></li>
+<li><a href="howto_js_popup.html" title="如何实现：弹出窗口">弹出窗口</a></li>
+<li><a href="howto_js_collapsible.html" title="如何实现：可折叠内容">可折叠内容</a></li>
+<li><a href="howto_css_calendar.html" title="如何实现：日历">日历</a></li>
+<li><a href="howto_html_include.html" title="如何实现：HTML 包含">HTML 包含</a></li>
+<li><a href="howto_js_todolist.html" title="如何实现：待办事项列表">待办事项列表</a></li>
+<li><a href="howto_css_loader.html" title="如何实现：加载器">加载器</a></li>
+<li><a href="howto_css_badge.html" title="如何实现：徽章">徽章</a></li>
+<li><a href="howto_css_star_rating.html" title="如何实现：星级评分">星级评分</a></li>
+<li><a href="howto_css_user_rating.html" title="如何实现：用户评分">用户评分</a></li>
+<li><a href="howto_css_overlay.html" title="如何实现：覆盖效果">覆盖效果</a></li>
+<li><a href="howto_css_contact_chips.html" title="如何实现：联系人芯片">联系人芯片</a></li>
+<li><a href="howto_css_cards.html" title="如何实现：卡片">卡片</a></li>
+<li class="currentLink"><a href="howto_css_flip_card.html" title="如何实现：翻转卡片">翻转卡片</a></li>
+<li><a href="howto_css_profile_card.html" title="如何实现：个人资料卡片">个人资料卡片</a></li>
+<li><a href="howto_css_product_card.html" title="如何实现：产品卡片">产品卡片</a></li>
+<li><a href="howto_js_alert.html" title="如何实现：警告">警告</a></li>
+<li><a href="howto_js_callout.html" title="如何实现：提示框">提示框</a></li>
+<li><a href="howto_css_notes.html" title="如何实现：笔记">笔记</a></li>
+<li><a href="howto_css_labels.html" title="如何实现：标签">标签</a></li>
+<li><a href="howto_css_ribbon.html" title="如何实现：丝带">丝带</a></li>
+<li><a href="howto_css_tag_cloud.html" title="如何实现：标签云">标签云</a></li>
+<li><a href="howto_css_circles.html" title="如何实现：圆">圆</a></li>
+<li><a href="howto_css_style_hr.html" title="如何实现：样式化水平线">样式化水平线</a></li>
+<li><a href="howto_css_coupon.html" title="如何实现：优惠券">优惠券</a></li>
+<li><a href="howto_css_list_group.html" title="如何实现：列表组">列表组</a></li>
+<li><a href="howto_css_list_group_badges.html" title="如何实现：带徽章的列表组">带徽章的列表组</a></li>
+<li><a href="howto_css_list_without_bullets.html" title="如何实现：无项目符号的列表">无项目符号的列表</a></li>
+<li><a href="howto_css_responsive_text.html" title="如何实现：响应式文本">响应式文本</a></li>
+<li><a href="howto_css_cutout_text.html" title="如何实现：剪影文字">剪影文字</a></li>
+<li><a href="howto_css_glowing_text.html" title="如何实现：发光文字">发光文字</a></li>
+<li><a href="howto_css_fixed_footer.html" title="如何实现：固定页脚">固定页脚</a></li>
+<li><a href="howto_css_sticky_element.html" title="如何实现：粘性元素">粘性元素</a></li>
+<li><a href="howto_css_equal_height.html" title="如何实现：等高">等高</a></li>
+<li><a href="howto_css_clearfix.html" title="如何实现：清除浮动">清除浮动</a></li>
+<li><a href="howto_css_responsive_floats.html" title="如何实现：响应式浮动">响应式浮动</a></li>
+<li><a href="howto_js_snackbar.html" title="如何实现：通知条">通知条</a></li>
+<li><a href="howto_js_fullscreen.html" title="如何实现：全屏窗口">全屏窗口</a></li>
+<li><a href="howto_js_scrolldrawing.html" title="如何实现：滚动绘图">滚动绘图</a></li>
+<li><a href="howto_css_smooth_scroll.html" title="如何实现：平滑滚动">平滑滚动</a></li>
+<li><a href="howto_css_bg_gradient_scroll.html" title="如何实现：渐变背景滚动">渐变背景滚动</a></li>
+<li><a href="howto_js_sticky_header.html" title="如何实现：粘性页眉">粘性页眉</a></li>
+<li><a href="howto_js_shrink_header_scroll.html" title="如何实现：滚动时缩小页眉">滚动时缩小页眉</a></li>
+<li><a href="howto_css_pricing_table.html" title="如何实现：价格表">价格表</a></li>
+<li><a href="howto_css_parallax.html" title="如何实现：视差滚动">视差滚动</a></li>
+<li><a href="howto_css_aspect_ratio.html" title="如何实现：宽高比">宽高比</a></li>
+<li><a href="howto_css_responsive_iframes.html" title="如何实现：响应式内联框架">响应式内联框架</a></li>
+<li><a href="howto_js_toggle_like.html" title="如何实现：切换喜欢/不喜欢">切换喜欢/不喜欢</a></li>
+<li><a href="howto_js_toggle_hide_show.html" title="如何实现：切换隐藏/显示">切换隐藏/显示</a></li>
+<li><a href="howto_js_toggle_dark_mode.html" title="如何实现：切换深色模式">切换深色模式</a></li>
+<li><a href="howto_js_toggle_text.html" title="如何实现：切换文本">切换文本</a></li>
+<li><a href="howto_js_toggle_class.html" title="如何实现：切换类">切换类</a></li>
+<li><a href="howto_js_add_class.html" title="如何实现：添加类">添加类</a></li>
+<li><a href="howto_js_remove_class.html" title="如何实现：移除类">移除类</a></li>
+<li><a href="howto_js_change_class.html" title="如何实现：更改类">更改类</a></li>
+<li><a href="howto_js_active_element.html" title="如何实现：活动类">活动类</a></li>
+<li><a href="howto_js_treeview.html" title="如何实现：树状视图">树状视图</a></li>
+<li><a href="howto_js_remove_decimals.html" title="如何实现：移除小数">移除小数</a></li>
+<li><a href="howto_js_remove_property_object.html" title="如何实现：移除属性">移除属性</a></li>
+<li><a href="howto_js_offline_detection.html" title="如何实现：离线检测">离线检测</a></li>
+<li><a href="howto_js_check_hidden.html" title="如何实现：查找隐藏元素">查找隐藏元素</a></li>
+<li><a href="howto_js_redirect_webpage.html" title="如何实现：重定向网页">重定向网页</a></li>
+<li><a href="howto_js_format_number_dec.html" title="如何实现：格式化数字">格式化数字</a></li>
+<li><a href="howto_css_zoom_hover.html" title="如何实现：悬停缩放">悬停缩放</a></li>
+<li><a href="howto_css_flip_box.html" title="如何实现：翻转盒子">翻转盒子</a></li>
+<li><a href="howto_css_center_vertical.html" title="如何实现：垂直居中">垂直居中</a></li>
+<li><a href="howto_css_center_button.html" title="如何实现：在 DIV 中居中按钮">在 DIV 中居中按钮</a></li>
+<li><a href="howto_css_center_list.html" title="如何实现：居中列表">居中列表</a></li>
+<li><a href="howto_css_transition_hover.html" title="如何实现：悬停过渡">悬停过渡</a></li>
+<li><a href="howto_css_arrows.html" title="如何实现：箭头">箭头</a></li>
+<li><a href="howto_css_shapes.html" title="如何实现：形状">形状</a></li>
+<li><a href="howto_html_download_link.html" title="如何实现：下载链接">下载链接</a></li>
+<li><a href="howto_css_div_full_height.html" title="如何实现：全高元素">全高元素</a></li>
+<li><a href="howto_css_browser_window.html" title="如何实现：浏览器窗口">浏览器窗口</a></li>
+<li><a href="howto_css_custom_scrollbar.html" title="如何实现：自定义滚动条">自定义滚动条</a></li>
+<li><a href="howto_css_hide_scrollbars.html" title="如何实现：隐藏滚动条">隐藏滚动条</a></li>
+<li><a href="howto_css_force_scrollbars.html" title="如何实现：显示/强制显示滚动条">显示/强制显示滚动条</a></li>
+<li><a href="howto_css_devices.html" title="如何实现：设备外观">设备外观</a></li>
+<li><a href="howto_css_contenteditable_border.html" title="如何实现：可编辑内容的边框">可编辑内容的边框</a></li>
+<li><a href="howto_css_placeholder.html" title="如何实现：占位符颜色">占位符颜色</a></li>
+<li><a href="howto_css_disable_resize_textarea.html" title="如何实现：禁用文本区域调整大小">禁用文本区域调整大小</a></li>
+<li><a href="howto_css_disable_text_selection.html" title="如何实现：禁用文本选择">禁用文本选择</a></li>
+<li><a href="howto_css_text_selection.html" title="如何实现：文本选择颜色">文本选择颜色</a></li>
+<li><a href="howto_css_bullet_color.html" title="如何实现：项目符号颜色">项目符号颜色</a></li>
+<li><a href="howto_css_vertical_line.html" title="如何实现：垂直线">垂直线</a></li>
+<li><a href="howto_css_dividers.html" title="如何实现：分割线">分割线</a></li>
+<li><a href="howto_css_text_divider.html" title="如何实现：文本分割线">文本分割线</a></li>
+<li><a href="howto_js_animate_icons.html" title="如何实现：动画图标">动画图标</a></li>
+<li><a href="howto_js_countdown.html" title="如何实现：倒计时定时器">倒计时定时器</a></li>
+<li><a href="howto_js_typewriter.html" title="如何实现：打字机效果">打字机效果</a></li>
+<li><a href="howto_css_coming_soon.html" title="如何实现：即将上线页面">即将上线页面</a></li>
+<li><a href="howto_css_chat.html" title="如何实现：聊天消息">聊天消息</a></li>
+<li><a href="howto_js_popup_chat.html" title="如何实现：弹出聊天窗口">弹出聊天窗口</a></li>
+<li><a href="howto_css_split_screen.html" title="如何实现：分屏">分屏</a></li>
+<li><a href="howto_css_testimonials.html" title="如何实现：客户评价">客户评价</a></li>
+<li><a href="howto_css_section_counter.html" title="如何实现：区块计数器">区块计数器</a></li>
+<li><a href="howto_js_quotes_slideshow.html" title="如何实现：引语幻灯片">引语幻灯片</a></li>
+<li><a href="howto_js_close_list_items.html" title="如何实现：可关闭的列表项">可关闭的列表项</a></li>
+<li><a href="howto_css_media_query_breakpoints.html" title="如何实现：典型的设备断点">典型的设备断点</a></li>
+<li><a href="howto_js_draggable.html" title="如何实现：可拖动的 HTML 元素">可拖动的 HTML 元素</a></li>
+<li><a href="howto_js_media_queries.html" title="如何实现：JS 媒体查询">JS 媒体查询</a></li>
+<li><a href="howto_syntax_highlight.html" title="如何实现：语法高亮器">语法高亮器</a></li>
+<li><a href="howto_js_animate.html" title="如何实现：JS 动画">JS 动画</a></li>
+<li><a href="howto_js_string_length.html" title="如何实现：JS 字符串长度">JS 字符串长度</a></li>
+<li><a href="howto_js_exponentiation.html" title="如何实现：JS 指数运算">JS 指数运算</a></li>
+<li><a href="howto_js_default_parameters.html" title="如何实现：JS 默认参数">JS 默认参数</a></li>
+<li><a href="howto_js_random_number_two_nums.html" title="如何实现：JS 随机数">JS 随机数</a></li>
+<li><a href="howto_js_sort_numeric_array.html" title="如何实现：JS 数值数组排序">JS 数值数组排序</a></li>
+<li><a href="howto_js_spread_operator.html" title="如何实现：JS 展开运算符">JS 展开运算符</a></li>
+<li><a href="howto_js_scroll_into_view.html" title="如何实现：JS 滚动到视图">JS 滚动到视图</a></li>
+<li><a href="howto_js_get_date.html" title="如何实现：获取当前日期">获取当前日期</a></li>
+<li><a href="howto_js_get_url.html" title="如何实现：获取当前网址">获取当前网址</a></li>
+<li><a href="howto_js_get_current_window.html" title="如何实现：获取当前屏幕尺寸">获取当前屏幕尺寸</a></li>
+<li><a href="howto_js_element_iframe.html" title="如何实现：获取 iframe 元素">获取 iframe 元素</a></li>
+</ul>
+<h2>网格</h2>
+<ul>
+<li><a href="howto_css_two_columns.html" title="如何实现：两列布局">两列布局</a></li>
+<li><a href="howto_css_three_columns.html" title="如何实现：三列布局">三列布局</a></li>
+<li><a href="howto_css_four_columns.html" title="如何实现：四列布局">四列布局</a></li>
+<li><a href="howto_js_expanding_grid.html" title="如何实现：扩展网格">扩展网格</a></li>
+<li><a href="howto_js_list_grid_view.html" title="如何实现：列表网格视图">列表网格视图</a></li>
+<li><a href="howto_css_mixed_columns.html" title="如何实现：混合列布局">混合列布局</a></li>
+<li><a href="howto_css_column_cards.html" title="如何实现：列卡片">列卡片</a></li>
+<li><a href="howto_css_zig_zag_layout.html" title="如何实现：之字形布局">之字形布局</a></li>
+<li><a href="howto_css_blog_layout.html" title="如何实现：博客布局">博客布局</a></li>
+</ul>
+<h2>转换器</h2>
+<ul>
+<li><a href="howto_js_weight_converter.html" title="如何实现：换算重量">换算重量</a></li>
+<li><a href="howto_js_temperature_converter.html" title="如何实现：换算温度">换算温度</a></li>
+<li><a href="howto_js_length_converter.html" title="如何实现：换算长度">换算长度</a></li>
+<li><a href="howto_js_speed_converter.html" title="如何实现：换算速度">换算速度</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>如何创建：翻转卡片</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="howto_css_cards.html" title="如何实现：卡片">卡片</a></li>
+<li class="next"><a href="howto_css_profile_card.html" title="如何实现：个人资料卡片">个人资料卡片</a></li>
+</ul>
+</div>
+
+
+
+<section class="demo">
+<p>学习如何使用 CSS 创建翻转卡片。</p>
+
+<p>请将鼠标移至下图：</p>
+
+<style>
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 300px;
+  perspective: 1000px;
+  margin-top: 20px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+.flip-card-back {
+  background-color: #2980b9;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+#maincontent .flip-card-back h5 {
+font-size: 42px;
+margin: 10px 0;
+font-weight: 400;
+}
+
+#maincontent .demo .flip-card-back p {
+font-size: 15px;
+margin: 18px 0;
+}
+</style>
+
+<div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <img src="../i/pic/avatar-1.png" alt="Avatar" style="width:300px;height:300px;">
+    </div>
+    <div class="flip-card-back">
+      <h5>Bill Gates</h5> 
+      <p>Architect &amp; Engineer</p> 
+      <p>We love that guy</p>
+    </div>
+  </div>
+</div>
+
+<p class="tiy"><a target="_blank" href="../tiy/t42f6.html?f=how_css_flip_card">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>如何创建翻转卡片</h2>
+
+<h3>第一步 - 添加 HTML：</h3>
+
+<pre class="language-html">
+&lt;div class=&quot;flip-card&quot;&gt;
+  &lt;div class=&quot;flip-card-inner&quot;&gt;
+    &lt;div class=&quot;flip-card-front&quot;&gt;
+      &lt;img src=&quot;img_avatar.png&quot; alt=&quot;Avatar&quot; style=&quot;width:300px;height:300px;&quot;&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;flip-card-back&quot;&gt;
+      &lt;h1&gt;Bill Gates&lt;/h1&gt;
+      &lt;p&gt;Architect & Engineer&lt;/p&gt;
+      &lt;p&gt;We love that guy&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<h3>第二步 - 添加 CSS：</h3>
+
+<pre class="language-css">
+/* 翻转卡片的容器 - 设置你想要的宽度和高度。我们添加了 border 属性来演示翻转本身在悬停时会超出容器（如果您不想要 3D 效果，请删除透视图） */
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  border: 1px solid #f1f1f1;
+  perspective: 1000px; /* 如果您不想要 3D 效果，请将其删除 */
+}
+
+/* 这个容器用于定位正面和背面 */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* 当鼠标悬停在翻转卡片容器上时，进行水平翻转 */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* 定位正面和背面 */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* 设置正面的样式（如果图像缺失则备用） */
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+/* 设置背面的样式 */
+.flip-card-back {
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateY(180deg);
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t42f6.html?f=how_css_flip_card">亲自试一试</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="howto_css_cards.html" title="如何实现：卡片">卡片</a></li>
+<li class="next"><a href="howto_css_profile_card.html" title="如何实现：个人资料卡片">个人资料卡片</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../jsref/index.html">JavaScript 和 HTML DOM 参考手册</a></h5>
+<h5 id="tools_example"><a href="js_examples.html">JavaScript 实例</a></h5>
+<h5 id="tools_quiz"><a href="js_quiz.html">JavaScript 测验</a></h5>
+<h5 id="tools_professional"><a href="index_pro.html">JavaScript 高级教程</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/howto/howto_css_flip_card.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:27:19 GMT -->
+</html>

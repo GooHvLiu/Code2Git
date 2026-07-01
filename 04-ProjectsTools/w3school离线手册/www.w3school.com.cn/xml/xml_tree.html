@@ -1,0 +1,457 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/xml/xml_tree.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:44:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>XML 树结构</title>
+
+</head>
+
+<body class="xml">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>XML 教程</h2>
+<ul>
+<li><a href="index.html" title="XML 教程">XML 教程</a></li>
+<li><a href="xml_intro.html" title="XML 简介">XML 简介</a></li>
+<li><a href="xml_usedfor.html" title="XML 的用途">XML 用途</a></li>
+<li class="currentLink"><a href="xml_tree.html" title="XML 树结构">XML 树结构</a></li>
+<li><a href="xml_syntax.html" title="XML 语法规则">XML 语法</a></li>
+<li><a href="xml_elements.html" title="XML 元素">XML 元素</a></li>
+<li><a href="xml_attributes.html" title="XML 属性">XML 属性</a></li>
+<li><a href="xml_namespaces.html" title="XML 命名空间">XML 命名空间</a></li>
+<li><a href="xml_display.html" title="显示 XML">XML 显示</a></li>
+<li><a href="xml_http.html" title="XML HttpRequest">XML HttpRequest</a></li>
+<li><a href="xml_parser.html" title="XML 解析器">XML 解析器</a></li>
+<li><a href="xml_dom.html" title="XML DOM">XML DOM</a></li>
+<li><a href="xml_xpath.html" title="XML 和 XPath">XML XPath</a></li>
+<li><a href="xml_xslt.html" title="XML 和 XSLT">XML XSLT</a></li>
+<li><a href="xml_xquery.html" title="XML 和 XQuery">XML XQuery</a></li>
+<li><a href="xml_xlink.html" title="XML、XLink 和 XPointer">XML XLink</a></li>
+<li><a href="xml_validator.html" title="XML 验证器">XML 验证器</a></li>
+<li><a href="xml_dtd.html" title="XML DTD">XML DTD</a></li>
+<li><a href="xml_schema.html" title="XML Schema">XML Schema</a></li>
+<li><a href="xml_server.html" title="服务器上的 XML">XML 服务器</a></li>
+<li><a href="xml_examples.html" title="XML 实例">XML 实例</a></li>
+<li><a href="xml_quiz.html" title="XML 测验">XML 测验</a></li>
+</ul>
+<h2>XML DOM 教程</h2>
+<ul>
+<li><a href="dom_intro.html" title="XML DOM 简介">DOM 简介</a></li>
+<li><a href="dom_nodes.html" title="XML DOM 节点">DOM 节点</a></li>
+<li><a href="dom_nodes_access.html" title="XML DOM 访问节点">DOM 访问节点</a></li>
+<li><a href="dom_nodes_info.html" title="XML DOM 节点信息">DOM 节点信息</a></li>
+<li><a href="dom_nodes_nodelist.html" title="XML DOM 节点列表">DOM 节点列表</a></li>
+<li><a href="dom_nodes_traverse.html" title="XML DOM 遍历节点">DOM 遍历节点</a></li>
+<li><a href="dom_nodes_navigate.html" title="XML DOM 定位节点">DOM 定位节点</a></li>
+<li><a href="dom_nodes_get.html" title="XML DOM 获取节点">DOM 获取节点</a></li>
+<li><a href="dom_nodes_set.html" title="XML DOM 改变节点">DOM 改变节点</a></li>
+<li><a href="dom_nodes_remove.html" title="XML DOM 删除节点">DOM 删除节点</a></li>
+<li><a href="dom_nodes_replace.html" title="XML DOM 替换节点">DOM 替换节点</a></li>
+<li><a href="dom_nodes_create.html" title="XML DOM 创建节点">DOM 创建节点</a></li>
+<li><a href="dom_nodes_add.html" title="XML DOM 添加节点">DOM 添加节点</a></li>
+<li><a href="dom_nodes_clone.html" title="XML DOM 克隆节点">DOM 克隆节点</a></li>
+<li><a href="dom_examples.html" title="XML DOM 实例">DOM 实例</a></li>
+</ul>
+<h2>XPath 教程</h2>
+<ul>
+<li><a href="xpath_intro.html" title="XPath 简介">XPath 简介</a></li>
+<li><a href="xpath_nodes.html" title="XPath 节点">XPath 节点</a></li>
+<li><a href="xpath_syntax.html" title="XPath 语法">XPath 语法</a></li>
+<li><a href="xpath_axes.html" title="XPath Axes（轴）">XPath 轴</a></li>
+<li><a href="xpath_operators.html" title="XPath 运算符">XPath 运算符</a></li>
+<li><a href="xpath_examples.html" title="XPath 实例">XPath 实例</a></li>
+</ul>
+<h2>XSLT 教程</h2>
+<ul>
+<li><a href="xsl_intro.html" title="XSLT 简介">XSLT 简介</a></li>
+<li><a href="xsl_languages.html" title="XSLT 语言">XSLT 语言</a></li>
+<li><a href="xsl_transformation.html" title="XSLT - 转换">XSLT 转换</a></li>
+<li><a href="xsl_templates.html" title="XSLT &lt;xsl:template&gt; 元素">XSLT &lt;template&gt;</a></li>
+<li><a href="xsl_value_of.html" title="XSLT &lt;xsl:value-of&gt; 元素">XSLT &lt;value-of&gt;</a></li>
+<li><a href="xsl_for_each.html" title="XSLT &lt;xsl:for-each&gt; 元素">XSLT &lt;for-each&gt;</a></li>
+<li><a href="xsl_sort.html" title="XSLT &lt;xsl:sort&gt; 元素">XSLT &lt;sort&gt;</a></li>
+<li><a href="xsl_if.html" title="XSLT &lt;xsl:if&gt; 元素">XSLT &lt;if&gt;</a></li>
+<li><a href="xsl_choose.html" title="XSLT &lt;xsl:choose&gt; 元素">XSLT &lt;choose&gt;</a></li>
+<li><a href="xsl_apply_templates.html" title="XSLT &lt;xsl:apply-templates&gt; 元素">XSLT Apply</a></li>
+<li><a href="xsl_client.html" title="XSLT - 在客户端">XSLT 在客户端</a></li>
+<li><a href="xsl_server.html" title="XSLT - 在服务器上">XSLT 在服务器端</a></li>
+<li><a href="xsl_editxml.html" title="XSLT - 编辑 XML">XSLT 编辑 XML</a></li>
+<li><a href="xsl_examples.html" title="XSLT 实例">XSLT 实例</a></li>
+</ul>
+<h2>XQuery 教程</h2>
+<ul>
+<li><a href="xquery_intro.html" title="XQuery 简介">XQuery 简介</a></li>
+<li><a href="xquery_example.html" title="XQuery 实例">XQuery 实例</a></li>
+<li><a href="xquery_flwor.html" title="XQuery FLWOR 表达式">XQuery FLWOR</a></li>
+<li><a href="xquery_flwor_html.html" title="XQuery FLWOR + HTML">XQuery HTML</a></li>
+<li><a href="xquery_terms.html" title="XQuery 术语">XQuery 术语</a></li>
+<li><a href="xquery_syntax.html" title="XQuery 语法">XQuery 语法</a></li>
+<li><a href="xquery_add.html" title="XQuery 添加元素和属性">XQuery 添加</a></li>
+<li><a href="xquery_select.html" title="XQuery 选择和过滤">XQuery 选取</a></li>
+<li><a href="xquery_functions.html" title="XQuery 函数">XQuery 函数</a></li>
+</ul>
+<h2>XML DTD 教程</h2>
+<ul>
+<li><a href="dtd_intro.html" title="DTD 简介">DTD 简介</a></li>
+<li><a href="dtd_building.html" title="DTD - XML 构建模块">DTD 构建模块</a></li>
+<li><a href="dtd_elements.html" title="DTD - 元素">DTD 元素</a></li>
+<li><a href="dtd_attributes.html" title="DTD - 属性">DTD 属性</a></li>
+<li><a href="dtd_el_vs_attr.html" title="DTD - 元素对比属性">DTD 元素对比属性</a></li>
+<li><a href="dtd_entities.html" title="DTD - 实体">DTD 实体</a></li>
+<li><a href="dtd_examples.html" title="DTD 实例">DTD 实例</a></li>
+</ul>
+<h2>XSD Schema 教程</h2>
+<ul>
+<li><a href="schema_intro.html" title="XML Schema 教程">XSD 教程</a></li>
+<li><a href="schema_howto.html" title="如何使用 XSD？">XSD 使用</a></li>
+<li><a href="schema_schema.html" title="XSD - &lt;schema&gt; 元素">XSD &lt;schema&gt;</a></li>
+<li><a href="schema_simple.html" title="XSD 简易元素">XSD 元素</a></li>
+<li><a href="schema_simple_attributes.html" title="XSD 属性">XSD 属性</a></li>
+<li><a href="schema_facets.html" title="XSD 限定/Facets">XSD 限定</a></li>
+<li><a href="schema_complex.html" title="XSD 复合元素">XSD 复合元素</a></li>
+<li><a href="schema_complex_empty.html" title="XSD 复合空元素">XSD 空元素</a></li>
+<li><a href="schema_complex_elements.html" title="XSD 复合类型 - 仅含元素">XSD 仅含元素</a></li>
+<li><a href="schema_complex_text.html" title="XSD 仅含文本复合元素">XSD 仅含文本</a></li>
+<li><a href="schema_complex_mixed.html" title="XSD 带有混合内容的复合类型">XSD 混合内容</a></li>
+<li><a href="schema_complex_indicators.html" title="XSD 复合类型指示器">XSD 指示器</a></li>
+<li><a href="schema_complex_any.html" title="XSD &lt;any&gt; 元素">XSD &lt;any&gt;</a></li>
+<li><a href="schema_complex_anyattribute.html" title="XSD &lt;anyAttribute&gt; 元素">XSD &lt;anyAttribute&gt;</a></li>
+<li><a href="schema_complex_subst.html" title="XSD 元素替换（Element Substitution）">XSD 元素替换</a></li>
+<li><a href="schema_example.html" title="一个 XSD 实例">XSD 实例</a></li>
+</ul>
+<h2>XSD 数据类型</h2>
+<ul>
+<li><a href="schema_dtypes_string.html" title="XSD 字符串数据类型">XSD 字符串</a></li>
+<li><a href="schema_dtypes_date.html" title="XSD 日期及时间数据类型">XSD 日期/时间</a></li>
+<li><a href="schema_dtypes_numeric.html" title="XSD 数值数据类型">XSD 数值</a></li>
+<li><a href="schema_dtypes_misc.html" title="XSD 杂项数据类型">XSD 杂项</a></li>
+</ul>
+<h2>参考手册</h2>
+<ul>
+<li><a href="xml_reference.html" title="XML DOM 参考手册">XML 参考手册</a></li>
+<li><a href="ref_dom_nodetype.html" title="XML DOM 节点类型">DOM 节点类型</a></li>
+<li><a href="ref_dom_node.html" title="XML DOM Node 对象">DOM Node</a></li>
+<li><a href="ref_dom_nodelist.html" title="XML DOM NodeList 对象">DOM NodeList</a></li>
+<li><a href="ref_dom_namednodemap.html" title="XML DOM NamedNodeMap 对象">DOM NamedNodeMap</a></li>
+<li><a href="ref_dom_document.html" title="XML DOM Document 对象">DOM Document</a></li>
+<li><a href="ref_dom_element.html" title="XML DOM Element 对象">DOM Element</a></li>
+<li><a href="ref_dom_attribute.html" title="XML DOM Attr 对象">DOM Attr</a></li>
+<li><a href="ref_dom_text.html" title="XML DOM Text 对象">DOM Text</a></li>
+<li><a href="ref_dom_cdatasection.html" title="XML DOM CDATASection 对象">DOM CDATA</a></li>
+<li><a href="ref_dom_comment.html" title="XML DOM Comment 对象">DOM Comment</a></li>
+<li><a href="ref_dom_http.html" title="XML DOM XMLHttpRequest 对象">DOM XMLHttpRequest</a></li>
+<li><a href="ref_dom_errors.html" title="XML DOM ParseError 对象">DOM ParseError</a></li>
+<li><a href="ref_schema_elements.html" title="XML Schema 参考手册">Schema 元素</a></li>
+<li><a href="ref_xsl_elements.html" title="XSLT 元素参考手册">XSLT 元素</a></li>
+<li><a href="ref_xsl_functions.html" title="XSLT、XPath 以及 XQuery 函数">XSLT/XPath 函数</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>XML 树结构</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="xml_usedfor.html" title="XML 的用途">XML 用途</a></li>
+<li class="next"><a href="xml_syntax.html" title="XML 语法规则">XML 语法</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<p>XML 文档形成了一种树结构，它从“根部”开始，然后扩展到“枝叶”。</p>
+</section>
+
+
+
+<section>
+<h2>XML 树结构</h2>
+
+<img class="illustration" src="../i/xml/nodetree.png" width="95%" alt="DOM 节点树" />
+</section>
+
+
+
+<section>
+<h2>XML 文档实例</h2>
+
+<p>上图代表这个 XML 中的书单：</p>
+
+<pre class="language-xml">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;bookstore&gt;
+
+&lt;book category=&quot;美食&quot;&gt;
+  &lt;title lang=&quot;zh&quot;&gt;雅舍谈吃&lt;/title&gt;
+  &lt;author&gt;梁实秋&lt;/author&gt;
+  &lt;press&gt;江苏文艺出版社&lt;/press&gt;
+  &lt;year&gt;2013&lt;/year&gt;
+  &lt;price&gt;35&lt;/price&gt;
+  &lt;ISBN&gt;9787539962771&lt;/ISBN&gt;
+&lt;/book&gt;
+
+&lt;book category=&quot;儿童&quot;&gt;
+  &lt;title lang=&quot;zh&quot;&gt;了不起的狐狸爸爸&lt;/title&gt;
+  &lt;author&gt;罗尔德·达尔&lt;/author&gt;
+  &lt;translator&gt;代维&lt;/translator&gt;
+  &lt;press&gt;明天出版社&lt;/press&gt;
+  &lt;year&gt;2009&lt;/year&gt;
+  &lt;price&gt;10&lt;/price&gt;
+  &lt;ISBN&gt;9787533259563&lt;/ISBN&gt;
+&lt;/book&gt;
+
+&lt;book category=&quot;文学&quot;&gt;
+  &lt;title lang=&quot;zh&quot;&gt;将熟悉变为陌生&lt;/title&gt;
+  &lt;author&gt;齐格蒙·鲍曼&lt;/author&gt;
+  &lt;author&gt;彼得·哈夫纳&lt;/author&gt;
+  &lt;translator&gt;王立秋&lt;/translator&gt;
+  &lt;press&gt;南京大学出版社&lt;/press&gt;
+  &lt;year&gt;2023&lt;/year&gt;
+  &lt;price&gt;68&lt;/price&gt;
+  &lt;ISBN&gt;9787305269387&lt;/ISBN&gt;
+&lt;/book&gt;
+
+&lt;book category=&quot;科学&quot;&gt;
+  &lt;title lang=&quot;zh&quot;&gt;你想飞吗，像鸟一样？&lt;/title&gt;
+  &lt;author&gt;理查德·道金斯&lt;/author&gt;
+  &lt;author&gt;亚娜·伦佐娃&lt;/author&gt;
+  &lt;translator&gt;高天羽&lt;/translator&gt;
+  &lt;press&gt;湖南科学技术出版社&lt;/press&gt;
+  &lt;year&gt;2023&lt;/year&gt;
+  &lt;price&gt;88&lt;/price&gt;
+  &lt;ISBN&gt;9787571019075&lt;/ISBN&gt;
+&lt;/book&gt;
+
+&lt;book category=&quot;政治&quot; cover=&quot;平装&quot;&gt;
+  &lt;title lang=&quot;zh&quot;&gt;论美国的民主&lt;/title&gt;
+  &lt;author&gt;托克维尔&lt;/author&gt;
+  &lt;translator&gt;董果良&lt;/translator&gt;
+  &lt;press&gt;商务印书馆&lt;/press&gt;
+  &lt;year&gt;1989&lt;/year&gt;
+  &lt;price&gt;60&lt;/price&gt;
+  &lt;ISBN&gt;9787100124553&lt;/ISBN&gt;
+&lt;/book&gt;
+
+&lt;/bookstore&gt;
+</pre>
+</section>
+
+
+
+<section>
+<h2>XML 树结构</h2>
+
+<p>XML 文档中的元素形成了一棵<em>元素树</em>。</p>
+
+<p>这棵树从<em>根元素</em>开始，并扩展到树的<em>子元素</em>。</p>
+
+<p>XML 文档必须包含根元素。该元素是所有其他元素的父元素。</p>
+
+<p>所有元素都可以有子元素：</p>
+
+<pre class="language-xml">
+&lt;root&gt;
+  &lt;child&gt;
+    &lt;subchild&gt;.....&lt;/subchild&gt;
+  &lt;/child&gt;
+&lt;/root&gt;
+</pre>
+
+<p>父、子以及同胞等术语用于描述元素之间的关系。</p>
+
+<p>父元素拥有子元素。子元素也有父元素。相同层级上的子元素成为同胞（兄弟或姐妹）。</p>
+
+<p>所有元素均可拥有文本内容（雅舍谈吃）和属性（category=&quot;美食&quot;），类似 HTML 中那样。</p>
+</section>
+
+
+
+<section>
+<h2>自描述的语法</h2>
+
+<p>XML 使用简单的具有自我描述性的语法：</p>
+
+<pre class="language-xml">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;note&gt;
+&lt;to&gt;George&lt;/to&gt;
+&lt;from&gt;John&lt;/from&gt;
+&lt;heading&gt;Reminder&lt;/heading&gt;
+&lt;body&gt;Don't forget the meeting!&lt;/body&gt;
+&lt;/note&gt;
+</pre>
+
+<p>第一行是 XML 声明。它定义 XML 的版本 (1.0) 和所使用的编码 (ISO-8859-1 = Latin-1/西欧字符集)。</p>
+
+<p>下一行描述文档的<em>根元素</em>（像在说：“本文档是一个便签”）：</p>
+
+<pre class="language-xml">
+&lt;note&gt;
+</pre>
+
+<p>接下来 4 行描述根的 <em>4 个子元素</em>（to, from, heading 以及 body）：</p>
+
+<pre class="language-xml">
+&lt;to&gt;George&lt;/to&gt;
+&lt;from&gt;John&lt;/from&gt;
+&lt;heading&gt;Reminder&lt;/heading&gt;
+&lt;body&gt;Don't forget the meeting!&lt;/body&gt;
+</pre>
+
+<p>最后一行定义根元素的结尾：</p>
+
+<pre class="language-xml">
+&lt;/note&gt;
+</pre>
+
+<p>从本例可以设想，该 XML 文档包含了 John 给 George 的一张便签。</p>
+
+<p>XML 具有出色的自我描述性，你同意吗？</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="xml_usedfor.html" title="XML 的用途">XML 用途</a></li>
+<li class="next"><a href="xml_syntax.html" title="XML 语法规则">XML 语法</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="xml_reference.html">XML 参考手册</a></h5>
+<h5 id="tools_example"><a href="xml_examples.html">XML 实例</a></h5>
+<h5 id="tools_quiz"><a href="xml_quiz.html">XML 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/xml/xml_tree.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:45:00 GMT -->
+</html>

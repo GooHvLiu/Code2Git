@@ -1,0 +1,102 @@
+:root {
+  --page-1-color: steelblue;
+  --page-2-color: tan;
+  --page-3-color: teal;
+  --page-4-color: tomato;
+  --animate-speed: 1s;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.4;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #fff;
+  overflow: hidden;
+}
+
+#page-1 {
+  background: var(--page-1-color);
+
+  h1 {
+    transform: translateY(-1200px);
+    animation: heading var(--animate-speed) forwards ease-in;
+  }
+
+  p {
+    transform: translateX(-1800px);
+    animation: pElement var(--animate-speed) forwards ease-in 0.35s;
+  }
+}
+
+#page-2 {
+  background: var(--page-2-color);
+}
+
+#page-3 {
+  background: var(--page-3-color);
+}
+
+#page-4 {
+  background: var(--page-4-color);
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+
+  h1 {
+    font-size: 4rem;
+    line-height: 1.2;
+    margin: 1.2rem;
+  }
+
+  p {
+    font-size: 1.3rem;
+  }
+
+  .btn,
+  .btn-dark {
+    display: inline-block;
+    padding: 1rem 2rem;
+    margin-top: 1rem;
+    background: #f4f4f4;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    color: #333;
+    transition: all 0.3s ease-in;
+  }
+
+  .btn:hover,
+  .btn-dark:hover {
+    background: #333;
+    color: #fff;
+  }
+}
+
+//从上到下运动的动画
+@keyframes heading {
+  to {
+    transform: translateY(0);
+  }
+}
+
+//从左到右运动的动画
+@keyframes pElement {
+  to {
+    transform: translateX(0);
+  }
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from www.w3school.com.cn/demo/howto/how_js_toggle_dark_mode.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:20:08 GMT -->
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  padding: 25px;
+  background-color: white;
+  color: black;
+  font-size: 25px;
+}
+
+.dark-mode {
+  background-color: black;
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<h2>切换深色和浅色模式</h2>
+<p>点击按钮可在此页面之间切换深色模式和浅色模式。</p>
+
+<button onclick="myFunction()" style="padding: 8px 16px;">切换深色模式</button>
+
+<script>
+function myFunction() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+}
+</script>
+
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/demo/howto/how_js_toggle_dark_mode.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:20:08 GMT -->
+</html>

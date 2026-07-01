@@ -1,0 +1,865 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/python/python_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 01:55:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Python 实例</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Python 教程</h2>
+<ul>
+<li><a href="index.html" title="Python 教程">Python 教程</a></li>
+<li><a href="python_intro.html" title="Python 简介">Python 简介</a></li>
+<li><a href="python_getstarted.html" title="Python 入门">Python 入门</a></li>
+<li><a href="python_syntax.html" title="Python 语法">Python 语法</a></li>
+<li><a href="python_comments.html" title="Python 注释">Python 注释</a></li>
+<li><a href="python_variables.html" title="Python 变量">Python 变量</a></li>
+<li><a href="python_datatypes.html" title="Python 数据类型">Python 数据类型</a></li>
+<li><a href="python_numbers.html" title="Python 简介">Python 数字</a></li>
+<li><a href="python_casting.html" title="Python Casting">Python Casting</a></li>
+<li><a href="python_strings.html" title="Python 字符串">Python 字符串</a></li>
+<li><a href="python_booleans.html" title="Python 布尔">Python 布尔</a></li>
+<li><a href="python_operators.html" title="Python 运算符">Python 运算符</a></li>
+<li><a href="python_lists.html" title="Python 列表">Python 列表</a></li>
+<li><a href="python_tuples.html" title="Python 元组">Python 元组</a></li>
+<li><a href="python_sets.html" title="Python 集合">Python 集合</a></li>
+<li><a href="python_dictionaries.html" title="Python 字典">Python 字典</a></li>
+<li><a href="python_conditions.html" title="Python If ... Else">Python If Else</a></li>
+<li><a href="python_while_loops.html" title="Python While 循环">Python While 循环</a></li>
+<li><a href="python_for_loops.html" title="Python For 循环">Python For 循环</a></li>
+<li><a href="python_functions.html" title="Python 函数">Python 函数</a></li>
+<li><a href="python_lambda.html" title="Python Lambda">Python Lambda</a></li>
+<li><a href="python_arrays.html" title="Python 数组">Python 数组</a></li>
+<li><a href="python_classes.html" title="Python 类和对象">Python 类/对象</a></li>
+<li><a href="python_inheritance.html" title="Python 继承">Python 继承</a></li>
+<li><a href="python_iterators.html" title="Python 迭代">Python 迭代</a></li>
+<li><a href="python_polymorphism.html" title="Python 多态">Python 多态</a></li>
+<li><a href="python_scope.html" title="Python 作用域">Python 作用域</a></li>
+<li><a href="python_modules.html" title="Python 模块">Python 模块</a></li>
+<li><a href="python_datetime.html" title="Python 日期">Python 日期</a></li>
+<li><a href="python_math.html" title="Python 数学">Python 数学</a></li>
+<li><a href="python_json.html" title="Python JSON">Python JSON</a></li>
+<li><a href="python_regex.html" title="Python RegEx">Python RegEx</a></li>
+<li><a href="python_pip.html" title="Python PIP">Python PIP</a></li>
+<li><a href="python_try_except.html" title="Python Try Except">Python Try Except</a></li>
+<li><a href="python_cmd_input.html" title="Python 命令行输入">Python 命令输入</a></li>
+<li><a href="python_string_formatting.html" title="Python 字符串格式化">Python 字符串格式化</a></li>
+</ul>
+<h2>Python 文件处理</h2>
+<ul>
+<li><a href="python_file_handling.html" title="Python 文件打开">Python 文件打开</a></li>
+<li><a href="python_file_open.html" title="Python 文件读取">Python 文件读取</a></li>
+<li><a href="python_file_write.html" title="Python 文件写入">Python 文件写入/创建</a></li>
+<li><a href="python_file_remove.html" title="Python 文件删除">Python 文件删除</a></li>
+</ul>
+<h2>Python 模块</h2>
+<ul>
+<li><a href="../numpy/index.html" title="NumPy 教程">NumPy 教程</a></li>
+<li><a href="../pandas/index.html" title="Pandas 教程">Pandas 教程</a></li>
+<li><a href="../scipy/index.html" title="SciPy 教程">SciPy 教程</a></li>
+</ul>
+<h2>Python Matplotlib</h2>
+<ul>
+<li><a href="matplotlib_intro.html" title="Matplotlib 简介">Matplotlib 简介</a></li>
+<li><a href="matplotlib_getting_started.html" title="Matplotlib 入门">Matplotlib 入门</a></li>
+<li><a href="matplotlib_pyplot.html" title="Matplotlib Pyplot">Matplotlib Pyplot</a></li>
+<li><a href="matplotlib_plotting.html" title="Matplotlib 绘图">Matplotlib 绘图</a></li>
+<li><a href="matplotlib_markers.html" title="Matplotlib 标记">Matplotlib 标记</a></li>
+<li><a href="matplotlib_line.html" title="Matplotlib 线条">Matplotlib 线条</a></li>
+<li><a href="matplotlib_labels.html" title="Matplotlib 标签">Matplotlib 标签</a></li>
+<li><a href="matplotlib_grid.html" title="Matplotlib 网格">Matplotlib 网格</a></li>
+<li><a href="matplotlib_subplot.html" title="Matplotlib 子图">Matplotlib 子图</a></li>
+<li><a href="matplotlib_scatter.html" title="Matplotlib 散点图">Matplotlib 散点图</a></li>
+<li><a href="matplotlib_bars.html" title="Matplotlib 条形图">Matplotlib 条形图</a></li>
+<li><a href="matplotlib_histograms.html" title="Matplotlib 直方图">Matplotlib 直方图</a></li>
+<li><a href="matplotlib_pie_charts.html" title="Matplotlib 饼图">Matplotlib 饼图</a></li>
+</ul>
+<h2>Python NumPy</h2>
+<ul>
+<li><a href="numpy_intro.html" title="NumPy 简介">NumPy 简介</a></li>
+<li><a href="numpy_getting_started.html" title="NumPy 入门">NumPy 入门</a></li>
+<li><a href="numpy_creating_arrays.html" title="NumPy 数组创建">NumPy 数组创建</a></li>
+<li><a href="numpy_array_indexing.html" title="NumPy 数组索引">NumPy 数组索引</a></li>
+<li><a href="numpy_array_slicing.html" title="NumPy 数组裁切">NumPy 数组裁切</a></li>
+<li><a href="numpy_data_types.html" title="NumPy 数据类型">NumPy 数据类型</a></li>
+<li><a href="numpy_copy_vs_view.html" title="NumPy 副本/视图">NumPy 副本/视图</a></li>
+<li><a href="numpy_array_shape.html" title="NumPy 数组形状">NumPy 数组形状</a></li>
+<li><a href="numpy_array_reshape.html" title="NumPy 数组重塑">NumPy 数组重塑</a></li>
+<li><a href="numpy_array_iterating.html" title="NumPy 数组迭代">NumPy 数组迭代</a></li>
+<li><a href="numpy_array_join.html" title="NumPy 数组连接">NumPy 数组连接</a></li>
+<li><a href="numpy_array_split.html" title="NumPy 数组拆分">NumPy 数组拆分</a></li>
+<li><a href="numpy_array_search.html" title="NumPy 数组搜索">NumPy 数组搜索</a></li>
+<li><a href="numpy_array_sort.html" title="NumPy 数组排序">NumPy 数组排序</a></li>
+<li><a href="numpy_array_filter.html" title="NumPy 数组过滤">NumPy 数组过滤</a></li>
+<li><a href="numpy_random.html" title="NumPy 随机">NumPy 随机</a></li>
+<li><a href="numpy_ufunc.html" title="NumPy ufuncs">NumPy ufuncs</a></li>
+</ul>
+<h2>Python 机器学习</h2>
+<ul>
+<li><a href="python_ml_getting_started.html" title="机器学习 - 入门">入门</a></li>
+<li><a href="python_ml_mean_median_mode.html" title="机器学习 - 平均中位数模式">平均中位数模式</a></li>
+<li><a href="python_ml_standard_deviation.html" title="机器学习 - 标准差">标准差</a></li>
+<li><a href="python_ml_percentile.html" title="机器学习 - 百分位数">百分位数</a></li>
+<li><a href="python_ml_data_distribution.html" title="机器学习 - 数据分布">数据分布</a></li>
+<li><a href="python_ml_normal_data_distribution.html" title="机器学习 - 正态数据分布">正态数据分布</a></li>
+<li><a href="python_ml_scatterplot.html" title="机器学习 - 散点图">散点图</a></li>
+<li><a href="python_ml_linear_regression.html" title="机器学习 - 线性回归">线性回归</a></li>
+<li><a href="python_ml_polynomial_regression.html" title="机器学习 - 多项式回归">多项式回归</a></li>
+<li><a href="python_ml_multiple_regression.html" title="机器学习 - 多元回归">多元回归</a></li>
+<li><a href="python_ml_scale.html" title="机器学习 - 缩放">缩放</a></li>
+<li><a href="python_ml_train_test.html" title="机器学习 - 训练/测试">训练/测试</a></li>
+<li><a href="python_ml_decision_tree.html" title="机器学习 - 决策树">决策树</a></li>
+<li><a href="python_ml_confusion_matrix.html" title="机器学习 - 混淆矩阵">混淆矩阵</a></li>
+<li><a href="python_ml_hierarchial_clustering.html" title="机器学习 - 层次聚类">层次聚类</a></li>
+<li><a href="python_ml_logistic_regression.html" title="机器学习 - 逻辑回归">逻辑回归</a></li>
+<li><a href="python_ml_grid_search.html" title="机器学习 - 网格搜索">网格搜索</a></li>
+<li><a href="python_ml_preprocessing.html" title="机器学习 - 分类数据">分类数据</a></li>
+<li><a href="python_ml_k-means.html" title="机器学习 - K-means">K-means</a></li>
+<li><a href="python_ml_bagging.html" title="机器学习 - Bootstrap 聚合（Bagging）">Bootstrap 聚合</a></li>
+<li><a href="python_ml_cross_validation.html" title="机器学习 - 交叉验证">交叉验证</a></li>
+<li><a href="python_ml_auc_roc.html" title="机器学习 - AUC - ROC 曲线">AUC - ROC 曲线</a></li>
+<li><a href="python_ml_knn.html" title="机器学习 - K-最近邻算法（KNN）">K-最近邻算法</a></li>
+</ul>
+<h2>Python DSA</h2>
+<ul>
+<li><a href="python_dsa.html" title="Python MySQL">Python DSA</a></li>
+<li><a href="python_dsa_lists.html" title="Python 中的列表与数组">列表与数组</a></li>
+<li><a href="python_dsa_stacks.html" title="Python 中的栈">栈</a></li>
+<li><a href="python_dsa_queues.html" title="Python 中的队列">队列</a></li>
+<li><a href="python_dsa_linkedlists.html" title="Python 中的链表">链表</a></li>
+<li><a href="python_dsa_hashtables.html" title="Python 中的哈希表">哈希表</a></li>
+<li><a href="python_dsa_trees.html" title="Python 树">树</a></li>
+<li><a href="python_dsa_binarytrees.html" title="Python 二叉树">二叉树</a></li>
+<li><a href="python_dsa_binarysearchtrees.html" title="Python 二叉搜索树">二叉搜索树</a></li>
+<li><a href="python_dsa_avltrees.html" title="Python AVL 树">AVL 树</a></li>
+<li><a href="python_dsa_graphs.html" title="Python 图论">图</a></li>
+<li><a href="python_dsa_linearsearch.html" title="Python 实现的线性查找">线性查找</a></li>
+<li><a href="python_dsa_binarysearch.html" title="Python 实现的二分查找">二分查找</a></li>
+<li><a href="python_dsa_bubblesort.html" title="Python 实现的冒泡排序">冒泡排序</a></li>
+<li><a href="python_dsa_selectionsort.html" title="Python 实现的选择排序">选择排序</a></li>
+<li><a href="python_dsa_insertionsort.html" title="Python 实现的插入排序">插入排序</a></li>
+<li><a href="python_dsa_quicksort.html" title="Python 实现的 DSA 快速排序">快速排序</a></li>
+<li><a href="python_dsa_countingsort.html" title="Python 实现的 DSA 计数排序">计数排序</a></li>
+<li><a href="python_dsa_radixsort.html" title="Python 实现的 DSA 基数排序">基数排序</a></li>
+<li><a href="python_dsa_mergesort.html" title="Python 实现的 DSA 归并排序">归并排序</a></li>
+</ul>
+<h2>Python MySQL</h2>
+<ul>
+<li><a href="python_mysql_getstarted.html" title="Python MySQL 入门">MySQL 入门</a></li>
+<li><a href="python_mysql_create_db.html" title="Python MySQL Create Database">MySQL Create Database</a></li>
+<li><a href="python_mysql_create_table.html" title="Python MySQL Create Table">MySQL Create Table</a></li>
+<li><a href="python_mysql_insert.html" title="Python MySQL Insert Into Table">MySQL Insert</a></li>
+<li><a href="python_mysql_select.html" title="Python MySQL Select From">MySQL Select</a></li>
+<li><a href="python_mysql_where.html" title="Python MySQL Where">MySQL Where</a></li>
+<li><a href="python_mysql_orderby.html" title="Python MySQL Order By">MySQL Order By</a></li>
+<li><a href="python_mysql_delete.html" title="Python MySQL Delete From By">MySQL Delete</a></li>
+<li><a href="python_mysql_drop_table.html" title="Python MySQL Drop Table">MySQL Drop Table</a></li>
+<li><a href="python_mysql_update.html" title="Python MySQL 更新表">MySQL Update</a></li>
+<li><a href="python_mysql_limit.html" title="Python MySQL Limit">MySQL Limit</a></li>
+<li><a href="python_mysql_join.html" title="Python MySQL Join">MySQL Join</a></li>
+</ul>
+<h2>Python MongoDB</h2>
+<ul>
+<li><a href="python_mongodb_getstarted.html" title="Python 教程">MongoDB 入门</a></li>
+<li><a href="python_mongodb_create_db.html" title="Python 教程">MongoDB 创建数据库</a></li>
+<li><a href="python_mongodb_create_collection.html" title="Python 教程">MongoDB 创建集合</a></li>
+<li><a href="python_mongodb_insert.html" title="Python 教程">MongoDB Insert</a></li>
+<li><a href="python_mongodb_find.html" title="Python 教程">MongoDB Find</a></li>
+<li><a href="python_mongodb_query.html" title="Python 教程">MongoDB Query</a></li>
+<li><a href="python_mongodb_sort.html" title="Python 教程">MongoDB Sort</a></li>
+<li><a href="python_mongodb_delete.html" title="Python 教程">MongoDB Delete</a></li>
+<li><a href="python_mongodb_drop_collection.html" title="Python 教程">MongoDB 删除集合</a></li>
+<li><a href="python_mongodb_update.html" title="Python 教程">MongoDB Update</a></li>
+<li><a href="python_mongodb_limit.html" title="Python 教程">MongoDB Limit</a></li>
+</ul>
+<h2>Python 参考手册</h2>
+<ul>
+<li><a href="python_reference.html" title="Python 教程">Python 参考概览</a></li>
+<li><a href="python_ref_functions.html" title="Python 教程">Python 内建函数</a></li>
+<li><a href="python_ref_string.html" title="Python 教程">Python 字符串方法</a></li>
+<li><a href="python_ref_list.html" title="Python 教程">Python 列表方法</a></li>
+<li><a href="python_ref_dictionary.html" title="Python 教程">Python 字典方法</a></li>
+<li><a href="python_ref_tuple.html" title="Python 教程">Python 元组方法</a></li>
+<li><a href="python_ref_set.html" title="Python 教程">Python 集合方法</a></li>
+<li><a href="python_ref_file.html" title="Python 教程">Python 文件方法</a></li>
+<li><a href="python_ref_keywords.html" title="Python 教程">Python 关键字</a></li>
+<li><a href="python_ref_exceptions.html" title="Python 内建异常">Python 异常</a></li>
+<li><a href="python_ref_glossary.html" title="Python 术语表">Python 术语表</a></li>
+</ul>
+<h2>Python 模块参考手册</h2>
+<ul>
+<li><a href="module_random.html" title="Python 教程">随机模块</a></li>
+<li><a href="module_requests.html" title="Python 教程">请求模块</a></li>
+<li><a href="module_statistics.html" title="Python 统计模块">统计模块</a></li>
+<li><a href="module_math.html" title="Python 数学模块">数学模块</a></li>
+<li><a href="module_cmath.html" title="Python cmath 模块">复数数学模块</a></li>
+</ul>
+<h2>Python How To</h2>
+<ul>
+<li><a href="python_howto_remove_duplicates.html" title="Python 教程">删除列表重复项</a></li>
+<li><a href="python_howto_reverse_string.html" title="Python 教程">反转字符串</a></li>
+<li><a href="python_howto_add_two_numbers.html" title="如何在 Python 中加两个数字">两数相加</a></li>
+</ul>
+<h2>Python 实例</h2>
+<ul>
+<li class="currentLink"><a href="python_examples.html" title="Python 实例">Python 实例</a></li>
+<li><a href="python_quiz.html" title="Python 测验">Python 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Python 实例</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="python_howto_add_two_numbers.html" title="如何在 Python 中加两个数字">两数相加</a></li>
+<li class="next"><a href="python_quiz.html" title="Python 测验">Python 测验</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>Python 语法</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tf17e.html?f=python_default">打印 &quot;Hello World&quot;</a></li>
+<li><a target="_blank" href="t83a9.html?f=python_syntax_comment">Python 中的注释</a></li>
+<li><a target="_blank" href="t0af0.html?f=python_docstring">文档字符串（Docstrings）</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_syntax.html" title="Python 语法">例子解释：语法</a></p>
+</section>
+
+
+
+<section>
+<h2>Python 变量</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t52a9.html?f=python_variables_1">创建变量</a></li>
+<li><a target="_blank" href="te827.html?f=python_variables_6">同时输出文本和变量</a></li>
+<li><a target="_blank" href="tce91.html?f=python_variables_7">把变量添加到另一个变量</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_variables.html" title="Python 变量">例子解释：变量</a></p>
+</section>
+
+
+
+<section>
+<h2>Python 数字</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t30f4.html?f=python_numbers">验证对象的类型</a></li>
+<li><a target="_blank" href="t3568.html?f=python_numbers_int">创建整数</a></li>
+<li><a target="_blank" href="t8798.html?f=python_numbers_float_1">创建浮点数</a></li>
+<li><a target="_blank" href="t0fb1.html?f=python_numbers_float_2">创建带有“e”的科学数字以表示 10 的幂</a></li>
+<li><a target="_blank" href="t21da.html?f=python_numbers_complex">创建复数</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_numbers.html" title="Python 数字">例子解释：数字</a></p>
+</section>
+
+
+
+<section>
+<h2>Python Casting</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tdebc.html?f=python_casting_int">Casting - 整数</a></li>
+<li><a target="_blank" href="ta17f.html?f=python_casting_float">Casting - 浮点</a></li>
+<li><a target="_blank" href="t24e0.html?f=python_casting_string">Casting - 字符串</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_casting.html" title="Python Casting">例子解释：Casting</a></p>
+</section>
+
+
+
+<section>
+<h2>Python 字符串</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="ta629.html?f=python_string_array">获取字符串位置 1 处的字符</a></li>
+<li><a target="_blank" href="tb91a.html?f=python_string_slice">子串。获取从位置 2 到位置 5 （不包括）的字符。</a></li>
+<li><a target="_blank" href="tdbda.html?f=python_string_strip">删除字符串的开头或结尾的空格</a></li>
+<li><a target="_blank" href="t1c92.html?f=python_string_len">返回字符串的长度</a></li>
+<li><a target="_blank" href="tccb8.html?f=python_string_lower">把字符串转换为小写</a></li>
+<li><a target="_blank" href="t6e5e.html?f=python_string_upper">把字符串转换为大写</a></li>
+<li><a target="_blank" href="t5f6a.html?f=python_string_replace">把字符串替换为另一个字符串</a></li>
+<li><a target="_blank" href="t2410.html?f=python_string_split">把字符串拆分为子串</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_strings.html" title="Python 字符串">例子解释：字符串</a></p>
+</section>
+
+
+
+<section>
+<h2>Python 运算符</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t2b91.html?f=python_oper_add">加运算符</a></li>
+<li><a target="_blank" href="t8139.html?f=python_oper_sub">减运算符</a></li>
+<li><a target="_blank" href="t4b6d.html?f=python_oper_mult">乘运算符</a></li>
+<li><a target="_blank" href="t4f3a.html?f=python_oper_div">除运算符</a></li>
+<li><a target="_blank" href="t2415.html?f=python_oper_mod">取模运算符</a></li>
+<li><a target="_blank" href="tb53a.html?f=python_oper_ass_1">赋值运算符</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_operators.html" title="Python 运算符">例子解释：运算符</a></p>
+</section>
+
+
+
+<section>
+<h2>Python 列表</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t6d9c.html?f=python_list">创建列表</a></li>
+<li><a target="_blank" href="td7eb.html?f=python_list_access">访问列表项</a></li>
+<li><a target="_blank" href="t656f.html?f=python_list_change">更改列表项目的值</a></li>
+<li><a target="_blank" href="tebca.html?f=python_list_loop">遍历列表</a></li>
+<li><a target="_blank" href="tf124.html?f=python_list_in">检查列表项是否存在</a></li>
+<li><a target="_blank" href="t23ad.html?f=python_list_len">获取列表的长度</a></li>
+<li><a target="_blank" href="te2ff.html?f=python_list_append">把一个项目添加到列表末端</a></li>
+<li><a target="_blank" href="t5cc9.html?f=python_list_insert">把一个项目添加到指定索引</a></li>
+<li><a target="_blank" href="t0ad8.html?f=python_list_remove">删除项目</a></li>
+<li><a target="_blank" href="t7179.html?f=python_list_pop">删除最后一项</a></li>
+<li><a target="_blank" href="t9b15.html?f=python_list_del_1">删除指定索引的项目</a></li>
+<li><a target="_blank" href="t9b6d.html?f=python_list_clear">清空列表</a></li>
+<li><a target="_blank" href="t6fcf.html?f=python_list_constructor">使用 list() 构造函数来生成列表</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_lists.html" title="Python 列表">例子解释：列表</a></p>
+</section>
+
+
+
+<section>
+<h2>Python 元组</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tca58.html?f=python_tuple">创建元组</a></li>
+<li><a target="_blank" href="t9df5.html?f=python_tuple_access">访问元组项目</a></li>
+<li><a target="_blank" href="t5521.html?f=python_tuple_change">更改元组值</a></li>
+<li><a target="_blank" href="t4b7f.html?f=python_tuple_loop">遍历元组</a></li>
+<li><a target="_blank" href="t3d62.html?f=python_tuple_in">检查某个元组项目是否存在</a></li>
+<li><a target="_blank" href="tb681.html?f=python_tuple_length">获取元组的长度</a></li>
+<li><a target="_blank" href="t7acb.html?f=python_tuple_del">删除元组</a></li>
+<li><a target="_blank" href="td132.html?f=python_tuple_constructor">使用 tuple() 构造函数创建元组</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_tuples.html" title="Python 元组">例子解释：元组</a></p>
+</section>
+
+
+
+<section>
+<h2>Python 集合</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t13c7.html?f=python_set">创建集合</a></li>
+<li><a target="_blank" href="t8f01.html?f=python_set_loop">遍历集合</a></li>
+<li><a target="_blank" href="tf30e.html?f=python_set_in">检查项目是否存在</a></li>
+<li><a target="_blank" href="t914b.html?f=python_set_add">向集合添加一个项目</a></li>
+<li><a target="_blank" href="t2c84.html?f=python_set_update_1">向集合添加多个项目</a></li>
+<li><a target="_blank" href="t7258.html?f=python_set_length">获取集合的长度</a></li>
+<li><a target="_blank" href="tc6ee.html?f=python_set_remove">删除集合中的一个项目</a></li>
+<li><a target="_blank" href="t76a3.html?f=python_set_discard">使用 discard() 方法删除集合中的一个项目</a></li>
+<li><a target="_blank" href="t56cf.html?f=python_set_pop">使用 pop() 方法删除集合中的最后一项</a></li>
+<li><a target="_blank" href="t313e.html?f=python_set_clear">清空集合</a></li>
+<li><a target="_blank" href="t1a78.html?f=python_set_del">删除集合</a></li>
+<li><a target="_blank" href="td284.html?f=python_set_constructor">使用 set() 构造函数创建集合</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_sets.html" title="Python 集合">例子解释：集合</a></p>
+</section>
+
+
+
+<section>
+<h2>Python 字典</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tde08.html?f=python_dictionary">创建字典</a></li>
+<li><a target="_blank" href="t814b.html?f=python_dictionary_access">访问字典中的项目</a></li>
+<li><a target="_blank" href="ta4cf.html?f=python_dictionary_change">更改字典中某个具体项目的值</a></li>
+<li><a target="_blank" href="t33bb.html?f=python_dictionary_loop_1">逐一打印字典中的所有键名</a></li>
+<li><a target="_blank" href="td402.html?f=python_dictionary_loop_2">逐一打印字典中的所有值</a></li>
+<li><a target="_blank" href="tdcac.html?f=python_dictionary_loop_values">使用 values() 函数返回字典的值</a></li>
+<li><a target="_blank" href="t258c.html?f=python_dictionary_loop_items">使用 items() 遍历键和值</a></li>
+<li><a target="_blank" href="t305f.html?f=python_dictionary_in">检查某个键是否存在</a></li>
+<li><a target="_blank" href="t305f.html?f=python_dictionary_in">获取字典的长度</a></li>
+<li><a target="_blank" href="t1773.html?f=python_dictionary_add">向字典添加一个项目</a></li>
+<li><a target="_blank" href="t79da.html?f=python_dictionary_pop">从字典删除一个项目</a></li>
+<li><a target="_blank" href="t1ee8.html?f=python_dictionary_clear">清空字典</a></li>
+<li><a target="_blank" href="ta2a7.html?f=python_dictionary_dict">使用 dict() 构造函数创建字典</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_dictionaries.html" title="Python 字典">例子解释：字典</a></p>
+</section>
+
+
+
+<section>
+<h2>Python If ... Else</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tc8fe.html?f=python_if">if 语句</a></li>
+<li><a target="_blank" href="t73ae.html?f=python_if_elif">elif 语句</a></li>
+<li><a target="_blank" href="t30d5.html?f=python_if_else_1">else 语句</a></li>
+<li><a target="_blank" href="t7547.html?f=python_if_short">简写 if</a></li>
+<li><a target="_blank" href="tbf39.html?f=python_if_else_short_1">简写 if ... else</a></li>
+<li><a target="_blank" href="t97ef.html?f=python_if_and">and 关键字</a></li>
+<li><a target="_blank" href="tcca5.html?f=python_if_or">or 关键字</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_conditions.html" title="Python If ... Else">例子解释：If ... Else</a></p>
+</section>
+
+
+
+<section>
+<h2>Python While 循环</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tbe3d.html?f=python_while">while 循环</a></li>
+<li><a target="_blank" href="t9cec.html?f=python_while_break">在 while 循环中使用 break 语句</a></li>
+<li><a target="_blank" href="t5401.html?f=python_while_continue">在 while 循环中使用 continue 语句</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_while_loops.html" title="Python While 循环">例子解释：While 循环</a></p>
+</section>
+
+
+
+<section>
+<h2>Python For 循环</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tb77b.html?f=python_for">for 循环</a></li>
+<li><a target="_blank" href="taa6e.html?f=python_for_string">遍历字符串</a></li>
+<li><a target="_blank" href="t5197.html?f=python_for_break_1">在 for 循环中使用 break 语句</a></li>
+<li><a target="_blank" href="t625d.html?f=python_for_continue">在 for 循环中使用 continue 语句</a></li>
+<li><a target="_blank" href="tb55d.html?f=python_for_range_1">在 for 循环中使用 range() 函数</a></li>
+<li><a target="_blank" href="t237d.html?f=python_for_else">for 循环中的 Else</a></li>
+<li><a target="_blank" href="t23d8.html?f=python_for_nested">嵌套 for 循环</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_for_loops.html" title="Python For 循环">例子解释：For 循环</a></p>
+</section>
+
+
+
+<section>
+<h2>Python 函数</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="te695.html?f=python_function">创建并调用函数</a></li>
+<li><a target="_blank" href="t41c9.html?f=python_function_param_1">函数参数</a></li>
+<li><a target="_blank" href="t1175.html?f=python_function_param_2">默认参数值</a></li>
+<li><a target="_blank" href="t7e56.html?f=python_function_return">使函数返回值</a></li>
+<li><a target="_blank" href="tc7de.html?f=python_function_recursion">递归</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_functions.html" title="Python 函数">例子解释：函数</a></p>
+</section>
+
+
+
+<section>
+<h2>Python Lambda</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t814a.html?f=python_lambda_1">将作为参数传递的数字加 10 的 lambda 函数</a></li>
+<li><a target="_blank" href="tbc1f.html?f=python_lambda_2">将参数 a 与参数 b 相乘的 lambda 函数</a></li>
+<li><a target="_blank" href="tfc10.html?f=python_lambda_3">将参数 a、b 和 c 相加 lambda 函数</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_lambda.html" title="Python Lambda">例子解释：Lambda</a></p>
+</section>
+
+
+
+<section>
+<h2>Python 数组</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t7bad.html?f=python_array_1">创建数组</a></li>
+<li><a target="_blank" href="t3aa3.html?f=python_array_2">访问数组元素</a></li>
+<li><a target="_blank" href="t6228.html?f=python_array_3">更改数组元素的值</a></li>
+<li><a target="_blank" href="t81a5.html?f=python_array_4">获取数组的长度</a></li>
+<li><a target="_blank" href="t71a2.html?f=python_array_5">遍历数组中的所有元素</a></li>
+<li><a target="_blank" href="t6f5a.html?f=python_array_6">向数组添加元素</a></li>
+<li><a target="_blank" href="t1034.html?f=python_array_7">从数组删除元素</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_arrays.html" title="Python 数组">例子解释：数组</a></p>
+</section>
+
+
+
+<section>
+<h2>Python 类和对象</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="td3f4.html?f=python_class_1">创建类</a></li>
+<li><a target="_blank" href="tc943.html?f=python_class_2">创建对象</a></li>
+<li><a target="_blank" href="t2e04.html?f=python_class_3">__init__() 函数</a></li>
+<li><a target="_blank" href="te018.html?f=python_class_4">创建对象方法</a></li>
+<li><a target="_blank" href="t6abe.html?f=python_class_5">self 参数</a></li>
+<li><a target="_blank" href="t32bf.html?f=python_class_6">修改对象属性</a></li>
+<li><a target="_blank" href="t03dc.html?f=python_class_7">删除对象属性</a></li>
+<li><a target="_blank" href="t6070.html?f=python_class_8">删除对象</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_classes.html" title="Python 类和对象">例子解释：类/对象</a></p>
+</section>
+
+
+
+<section>
+<h2>Python 迭代器</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t9cbb.html?f=python_iterator_1">从元组返回迭代器</a></li>
+<li><a target="_blank" href="t3a85.html?f=python_iterator_2">从字符串返回迭代器</a></li>
+<li><a target="_blank" href="t9242.html?f=python_iterator_loop_1">遍历迭代器</a></li>
+<li><a target="_blank" href="tdb06.html?f=python_iterator_create_1">创建迭代器</a></li>
+<li><a target="_blank" href="t81b6.html?f=python_iterator_create_2">停止迭代器</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_iterators.html" title="Python 迭代器">例子解释：迭代器</a></p>
+</section>
+
+
+
+<section>
+<h2>Python 模块</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t3dfe.html?f=python_module_1">使用模块</a></li>
+<li><a target="_blank" href="tbee6.html?f=python_module_2">模块中的变量</a></li>
+<li><a target="_blank" href="t9c98.html?f=python_module_3">对模块重命名</a></li>
+<li><a target="_blank" href="t401b.html?f=python_module_4">内置模块</a></li>
+<li><a target="_blank" href="tf56c.html?f=python_module_5">使用 dir() 函数</a></li>
+<li><a target="_blank" href="t911f.html?f=python_module_6">从模块导入</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_modules.html" title="Python 模块">例子解释：模块</a></p>
+</section>
+
+
+
+<section>
+<h2>Python 日期</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t59af.html?f=python_datetime_1">导入 datetime 模块并显示当前日期</a></li>
+<li><a target="_blank" href="t5c1e.html?f=python_datetime_2">返回年份和 weekday 的名称</a></li>
+<li><a target="_blank" href="t43a2.html?f=python_datetime_3">创建 date 对象</a></li>
+<li><a target="_blank" href="t20d3.html?f=python_datetime_strftime">strftime() 方法</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_datetime.html" title="Python 日期">例子解释：日期</a></p>
+</section>
+
+
+
+<section>
+<h2>Python JSON</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t7eac.html?f=python_json">把 JSON 转换为 Python</a></li>
+<li><a target="_blank" href="t4835.html?f=python_json_from_python">把 Python 转换为 JSON</a></li>
+<li><a target="_blank" href="t2f1a.html?f=python_json_from_python_all">把 Python 对象转换为 JSON 字符串</a></li>
+<li><a target="_blank" href="t8781.html?f=python_json_from_python_all_in_one">转换包含所有合法数据类型的 Python 对象</a></li>
+<li><a target="_blank" href="t0b57.html?f=python_json_from_python_indent">使用 indent 参数来定义缩进量</a></li>
+<li><a target="_blank" href="td65a.html?f=python_json_from_python_separators">使用 separators 参数来更改默认分隔符</a></li>
+<li><a target="_blank" href="t2559.html?f=python_json_from_python_sort_keys">使用 sort_keys 参数指定结果是否应该排序</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_json.html" title="Python JSON">例子解释：JSON</a></p>
+</section>
+
+
+
+<section>
+<h2>Python RegEx</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t3fdc.html?f=python_regex">检索字符串是否以 &quot;China&quot; 开头并以 &quot;country&quot; 结尾</a></li>
+<li><a target="_blank" href="t7c25.html?f=python_regex_findall_1">使用 findall() 函数</a></li>
+<li><a target="_blank" href="t1feb.html?f=python_regex_search_1">使用 search() 函数</a></li>
+<li><a target="_blank" href="t165f.html?f=python_regex_split_1">使用 split() 函数</a></li>
+<li><a target="_blank" href="t90a7.html?f=python_regex_sub_1">使用 sub() 函数</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_regex.html" title="Python RegEx">例子解释：RegEx</a></p>
+</section>
+
+
+
+<section>
+<h2>Python PIP</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tc73a.html?f=python_camelcase">使用包</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_pip.html" title="Python PIP">例子解释：PIP</a></p>
+</section>
+
+
+
+<section>
+<h2>Python Try Except</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="te5a5.html?f=python_try_except_1">当发生错误时，打印一条消息。</a></li>
+<li><a target="_blank" href="t6cdb.html?f=python_try_except_2">多个异常</a></li>
+<li><a target="_blank" href="t0593.html?f=python_try_except_3">使用 else 关键字定义没有出现错误时执行的代码块</a></li>
+<li><a target="_blank" href="t89fd.html?f=python_try_except_4">使用 finally 块执行代码，不论 try 块是否引发了错误</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_try_except.html" title="Python Try Except">例子解释：Try Except</a></p>
+</section>
+
+
+
+<section>
+<h2>Python 文件</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t84e3.html?f=python_file_open_1">读取文件</a></li>
+<li><a target="_blank" href="tb249.html?f=python_file_open_2">只读取文件的一部分</a></li>
+<li><a target="_blank" href="tdb3e.html?f=python_file_readline_1">读取文件中的一行</a></li>
+<li><a target="_blank" href="tcab2.html?f=python_file_readline_3">遍历文件的所有行，逐行读取整个文件</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_file_handling.html" title="Python 文件处理">例子解释：文件处理</a></p>
+</section>
+
+
+
+<section>
+<h2>Python MySQL</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tcfc0.html?f=demo_python_mysql_connection">创建与数据库的连接</a></li>
+<li><a target="_blank" href="tcc64.html?f=demo_python_mysql_create_db">在 MySQL 中创建数据库</a></li>
+<li><a target="_blank" href="td5f1.html?f=demo_python_mysql_show_databases">检查数据库是否存在</a></li>
+<li><a target="_blank" href="t7131.html?f=demo_python_mysql_create_table">创建表</a></li>
+<li><a target="_blank" href="t7d9f.html?f=demo_python_mysql_show_tables">检查表是否存在</a></li>
+<li><a target="_blank" href="t1995.html?f=demo_python_mysql_primary_key">在建表时创建主键</a></li>
+<li><a target="_blank" href="tdc69.html?f=demo_python_mysql_insert">在表格中插入记录</a></li>
+<li><a target="_blank" href="t93e4.html?f=demo_python_mysql_insert_many">插入多行</a></li>
+<li><a target="_blank" href="t9bfb.html?f=demo_python_mysql_insert_id">获取所插入的 ID</a></li>
+<li><a target="_blank" href="tf50c.html?f=demo_python_mysql_select">选取表中的所有记录</a></li>
+<li><a target="_blank" href="t1ceb.html?f=demo_python_mysql_select_columns">选取表中的某些列</a></li>
+<li><a target="_blank" href="tbb22.html?f=demo_python_mysql_select_fetchone">使用 fetchone() 方法读取表中的单行</a></li>
+<li><a target="_blank" href="t3170.html?f=demo_python_mysql_where">使用筛选器来选取</a></li>
+<li><a target="_blank" href="t96a7.html?f=demo_python_mysql_where_wildcard">通配符</a></li>
+<li><a target="_blank" href="tcc3a.html?f=demo_python_mysql_where_escape">防止 SQL 注入</a></li>
+<li><a target="_blank" href="t9e45.html?f=demo_python_mysql_orderby">按字母顺序对表的结果进行排序</a></li>
+<li><a target="_blank" href="tc6ca.html?f=demo_python_mysql_orderby_desc">按降序对结果进行排序（按字母顺序反向）</a></li>
+<li><a target="_blank" href="t338f.html?f=demo_python_mysql_delete">从已有表中删除记录</a></li>
+<li><a target="_blank" href="t5154.html?f=demo_python_mysql_delete_escape">防止 SQL 注入</a></li>
+<li><a target="_blank" href="tb583.html?f=demo_python_mysql_drop_table_1">删除已有的表</a></li>
+<li><a target="_blank" href="td9c1.html?f=demo_python_mysql_drop_table_2">删除表，如果存在。</a></li>
+<li><a target="_blank" href="t5a8b.html?f=demo_python_mysql_update">更新表中的已有记录</a></li>
+<li><a target="_blank" href="tb754.html?f=demo_python_mysql_update_escape">防止 SQL 注入</a></li>
+<li><a target="_blank" href="t8378.html?f=demo_python_mysql_limit">限制查询返回的记录数</a></li>
+<li><a target="_blank" href="t72b1.html?f=demo_python_mysql_inner_join">根据两个或多个表之间的相关列合并行</a></li>
+<li><a target="_blank" href="tf041.html?f=demo_python_mysql_left_join">左联接（LEFT JOIN）</a></li>
+<li><a target="_blank" href="ta866.html?f=demo_python_mysql_right_join">右联接（RIGHT JOIN）</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_mysql_getstarted.html" title="Python MySQL">例子解释：MySQL</a></p>
+</section>
+
+
+
+<section>
+<h2>Python MongoDB</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tb28e.html?f=demo_python_mongodb_create_db">创建数据库</a></li>
+<li><a target="_blank" href="t8d48.html?f=demo_python_mongodb_check_db_1">检查数据库是否存在</a></li>
+<li><a target="_blank" href="tb1da.html?f=demo_python_mongodb_create_collection">创建集合</a></li>
+<li><a target="_blank" href="tf536.html?f=demo_python_mongodb_check_collection_1">检查集合是否存在</a></li>
+<li><a target="_blank" href="t4858.html?f=demo_python_mongodb_insert">插入集合</a></li>
+<li><a target="_blank" href="t735a.html?f=demo_python_mongodb_insert_id">返回 id 字段</a></li>
+<li><a target="_blank" href="t2ee1.html?f=demo_python_mongodb_insert_many_1">插入多个文档</a></li>
+<li><a target="_blank" href="td161.html?f=demo_python_mongodb_insert_many_2">插入具有指定 ID 的多个文档</a></li>
+<li><a target="_blank" href="t968a.html?f=demo_python_mongodb_find_one">查找集合中的首个文档</a></li>
+<li><a target="_blank" href="t8643.html?f=demo_python_mongodb_find">查找集合中的所有文档</a></li>
+<li><a target="_blank" href="t6582.html?f=demo_python_mongodb_find_some_1">只查找某些字段</a></li>
+<li><a target="_blank" href="t112c.html?f=demo_python_mongodb_query">过滤结果</a></li>
+<li><a target="_blank" href="t4435.html?f=demo_python_mongodb_query_modifier">高级查询</a></li>
+<li><a target="_blank" href="t0946.html?f=demo_python_mongodb_query_regex">通过正则表达式来过滤</a></li>
+<li><a target="_blank" href="ta089.html?f=demo_python_mongodb_sort_1">按字母顺序对结果排序</a></li>
+<li><a target="_blank" href="t1cf3.html?f=demo_python_mongodb_sort_2">按降序对结果排序（反向字母顺序）</a></li>
+<li><a target="_blank" href="t73eb.html?f=demo_python_mongodb_delete_one">删除文档</a></li>
+<li><a target="_blank" href="t4721.html?f=demo_python_mongodb_delete_many">删除多个文档</a></li>
+<li><a target="_blank" href="t07a6.html?f=demo_python_mongodb_delete_all">删除集合中的所有文档</a></li>
+<li><a target="_blank" href="t6857.html?f=demo_python_mongodb_drop_collection">删除集合</a></li>
+<li><a target="_blank" href="tb9d6.html?f=demo_python_mongodb_update_one">更新文档</a></li>
+<li><a target="_blank" href="t5c0d.html?f=demo_python_mongodb_update_many">更新多个/所有文档</a></li>
+<li><a target="_blank" href="t1103.html?f=demo_python_mongodb_limit">限制结果</a></li>
+</ul>
+
+<p class="btn-eg"><a target="_blank" href="python_mongodb_getstarted.html" title="Python MongoDB">例子解释：MongoDB</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="python_howto_add_two_numbers.html" title="如何在 Python 中加两个数字">两数相加</a></li>
+<li class="next"><a href="python_quiz.html" title="Python 测验">Python 测验</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="python_reference.html">Python 参考手册</a></h5>
+<h5 id="tools_example"><a href="python_examples.html">Python 实例</a></h5>
+<h5 id="tools_quiz"><a href="python_quiz.html">Python 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/python/python_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 01:56:40 GMT -->
+</html>

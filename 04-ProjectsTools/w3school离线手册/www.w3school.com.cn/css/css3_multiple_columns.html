@@ -1,0 +1,691 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/css/css3_multiple_columns.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:19:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>CSS 多列</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>CSS 基础教程</h2>
+<ul>
+<li><a href="index.html" title="CSS 教程">CSS 教程</a></li>
+<li><a href="css_jianjie.html" title="CSS 简介">CSS 简介</a></li>
+<li><a href="css_syntax.html" title="CSS 语法">CSS 语法</a></li>
+<li><a href="css_selectors.html" title="CSS 选择器">CSS 选择器</a></li>
+<li><a href="css_shiyong.html" title="CSS 使用">CSS 使用</a></li>
+<li><a href="css_comments.html" title="CSS 注释">CSS 注释</a></li>
+<li><a href="css_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="css_colors_rgb.html" title="CSS RGB 颜色">CSS RGB 颜色</a></li>
+<li><a href="css_colors_hex.html" title="CSS HEX 颜色">CSS HEX 颜色</a></li>
+<li><a href="css_colors_hsl.html" title="CSS HSL 颜色">CSS HSL 颜色</a></li>
+<li><a href="css_background.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="css_background_image.html" title="CSS 背景图像">CSS 背景图像</a></li>
+<li><a href="css_background_repeat.html" title="CSS 背景重复">CSS 背景重复</a></li>
+<li><a href="css_background_attachment.html" title="CSS 背景附着">CSS 背景附着</a></li>
+<li><a href="css_background_shorthand.html" title="CSS 简写背景属性">CSS 简写背景属性</a></li>
+<li><a href="css_border.html" title="CSS 边框">CSS 边框</a></li>
+<li><a href="css_border_width.html" title="CSS 边框宽度">CSS 边框宽度</a></li>
+<li><a href="css_border_color.html" title="CSS 边框颜色">CSS 边框颜色</a></li>
+<li><a href="css_border_sides.html" title="CSS 边框各边">CSS 边框各边</a></li>
+<li><a href="css_border_shorthand.html" title="CSS 简写边框属性">CSS 简写边框属性</a></li>
+<li><a href="css_border_rounded.html" title="CSS 圆角边框">CSS 圆角边框</a></li>
+<li><a href="css_margin.html" title="CSS 外边距">CSS 外边距</a></li>
+<li><a href="css_margin_collapse.html" title="CSS 外边距合并">CSS 外边距合并</a></li>
+<li><a href="css_padding.html" title="CSS 内边距">CSS 内边距</a></li>
+<li><a href="css_dimension.html" title="CSS 高度和宽度">CSS 高度/宽度</a></li>
+<li><a href="css_boxmodel.html" title="CSS 框模型">CSS 框模型</a></li>
+<li><a href="css_outline.html" title="CSS 轮廓">CSS 轮廓</a></li>
+<li><a href="css_outline_width.html" title="CSS 轮廓宽度">CSS 轮廓宽度</a></li>
+<li><a href="css_outline_color.html" title="CSS 轮廓颜色">CSS 轮廓颜色</a></li>
+<li><a href="css_outline_shorthand.html" title="CSS 简写轮廓属性">CSS 简写轮廓属性</a></li>
+<li><a href="css_outline_offset.html" title="CSS 轮廓偏移">CSS 轮廓偏移</a></li>
+<li><a href="css_text.html" title="CSS 文本">CSS 文本</a></li>
+<li><a href="css_text_align.html" title="CSS 文本对齐">CSS 文本对齐</a></li>
+<li><a href="css_text_decoration.html" title="CSS 文本装饰">CSS 文本装饰</a></li>
+<li><a href="css_text_transformation.html" title="CSS 文本转换">CSS 文本转换</a></li>
+<li><a href="css_text_spacing.html" title="CSS 文字间距">CSS 文字间距</a></li>
+<li><a href="css_text_shadow.html" title="CSS 文本阴影">CSS 文本阴影</a></li>
+<li><a href="css_font.html" title="CSS 字体">CSS 字体</a></li>
+<li><a href="css_font_style.html" title="CSS 字体样式">CSS 字体样式</a></li>
+<li><a href="css_font_size.html" title="CSS 字体大小">CSS 字体大小</a></li>
+<li><a href="css_font_google.html" title="CSS 谷歌字体">CSS 谷歌字体</a></li>
+<li><a href="css_font_shorthand.html" title="CSS 简写字体属性">CSS 简写字体属性</a></li>
+<li><a href="css_icons.html" title="CSS 图标">CSS 图标</a></li>
+<li><a href="css_link.html" title="CSS 链接">CSS 链接</a></li>
+<li><a href="css_list.html" title="CSS 列表">CSS 列表</a></li>
+<li><a href="css_table.html" title="CSS 表格">CSS 表格</a></li>
+</ul>
+<h2>CSS 中级教程</h2>
+<ul>
+<li><a href="css_display_visibility.html" title="CSS 布局 - display 属性">CSS Display</a></li>
+<li><a href="css_max-width.html" title="CSS 布局 - width 和 max-width">CSS max-width</a></li>
+<li><a href="css_positioning.html" title="CSS 布局 - position 属性">CSS 定位</a></li>
+<li><a href="css_z-index.html" title="CSS 布局 - z-index 属性">CSS z-index</a></li>
+<li><a href="css_overflow.html" title="CSS 布局 - 溢出">CSS 溢出</a></li>
+<li><a href="css_float.html" title="CSS 布局 - 浮动和清除">CSS 浮动</a></li>
+<li><a href="css_float_clear.html" title="CSS 布局 - clear 和 clearfix">CSS 清除浮动</a></li>
+<li><a href="css_float_examples.html" title="CSS 布局 - 浮动实例">CSS 布局 - 浮动实例</a></li>
+<li><a href="css_inline-block.html" title="CSS 布局 - display: inline-block">CSS inline-block</a></li>
+<li><a href="css_align.html" title="CSS 布局 - 水平和垂直对齐">CSS 对齐</a></li>
+<li><a href="css_combinators.html" title="CSS 选择器">CSS 组合器</a></li>
+<li><a href="css_pseudo_classes.html" title="CSS 伪类">CSS 伪类</a></li>
+<li><a href="css_pseudo_elements.html" title="CSS 伪元素">CSS 伪元素</a></li>
+<li><a href="css_image_transparency.html" title="CSS 不透明度">CSS 不透明度</a></li>
+<li><a href="css_navbar.html" title="CSS 导航栏">CSS 导航栏</a></li>
+<li><a href="css_navbar_vertical.html" title="CSS 垂直导航栏">CSS 垂直导航栏</a></li>
+<li><a href="css_navbar_horizontal.html" title="CSS 水平导航栏">CSS 水平导航栏</a></li>
+<li><a href="css_dropdowns.html" title="CSS 下拉菜单">CSS 下拉菜单</a></li>
+<li><a href="css_image_gallery.html" title="CSS 图片库">CSS 图片库</a></li>
+<li><a href="css_image_sprites.html" title="CSS 图像精灵">CSS 图像精灵</a></li>
+<li><a href="css_attribute_selectors.html" title="CSS 属性选择器">CSS 属性选择器</a></li>
+<li><a href="css_form.html" title="CSS 表单">CSS 表单</a></li>
+<li><a href="css_counters.html" title="CSS 计数器">CSS 计数器</a></li>
+<li><a href="css_website_layout.html" title="CSS 网站布局">CSS 网站布局</a></li>
+<li><a href="css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="css_specificity.html" title="CSS 特异性">CSS 特异性</a></li>
+<li><a href="css_important.html" title="CSS !important 规则">CSS !important</a></li>
+<li><a href="css_math_functions.html" title="CSS 数学函数">CSS 数学函数</a></li>
+</ul>
+<h2>CSS3 高级教程</h2>
+<ul>
+<li><a href="css3_borders.html" title="CSS 圆角">CSS 圆角</a></li>
+<li><a href="css3_border_images.html" title="CSS 边框图像">CSS 边框图像</a></li>
+<li><a href="css3_backgrounds.html" title="CSS 背景">CSS 背景</a></li>
+<li><a href="css3_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="css_colors_keywords.html" title="CSS 颜色关键字">CSS 颜色关键字</a></li>
+<li><a href="css3_gradients.html" title="CSS 渐变">CSS 渐变</a></li>
+<li><a href="css3_gradients_radial.html" title="CSS 径向渐变">CSS 径向渐变</a></li>
+<li><a href="css3_shadows.html" title="CSS 阴影">CSS 阴影</a></li>
+<li><a href="css3_shadows_box.html" title="CSS box-shadow">CSS box-shadow</a></li>
+<li><a href="css3_text_effects.html" title="CSS 文本效果">CSS 文本效果</a></li>
+<li><a href="css3_fonts.html" title="CSS 网络字体">CSS 网络字体</a></li>
+<li><a href="css3_2dtransforms.html" title="CSS 2D 转换">CSS 2D 转换</a></li>
+<li><a href="css3_3dtransforms.html" title="CSS 3D 转换">CSS 3D 转换</a></li>
+<li><a href="css3_transitions.html" title="CSS 过渡">CSS 过渡</a></li>
+<li><a href="css3_animations.html" title="CSS 动画">CSS 动画</a></li>
+<li><a href="css_tooltip.html" title="CSS 工具提示">CSS 工具提示</a></li>
+<li><a href="css3_images.html" title="CSS 图像样式">CSS 图像样式</a></li>
+<li><a href="css3_object-fit.html" title="CSS object-fit">CSS object-fit</a></li>
+<li><a href="css3_object-position.html" title="CSS object-position 属性">CSS object-position</a></li>
+<li><a href="css3_masking.html" title="CSS 遮罩">CSS 遮罩</a></li>
+<li><a href="css3_buttons.html" title="CSS 按钮">CSS 按钮</a></li>
+<li><a href="css3_pagination.html" title="CSS 分页">CSS 分页</a></li>
+<li class="currentLink"><a href="css3_multiple_columns.html" title="CSS 多列">CSS 多列</a></li>
+<li><a href="css3_user_interface.html" title="CSS 用户界面">CSS 用户界面</a></li>
+<li><a href="css3_variables.html" title="CSS 变量">CSS 变量</a></li>
+<li><a href="css3_variables_overriding.html" title="CSS 覆盖变量">CSS 覆盖变量</a></li>
+<li><a href="css3_variables_javascript.html" title="CSS 使用 JavaScript 更改变量">CSS 变量 - JavaScript</a></li>
+<li><a href="css3_variables_mediaqueries.html" title="CSS 在媒体查询中使用变量">CSS 变量 - 媒体查询</a></li>
+<li><a href="css3_property.html" title="CSS @property 规则">CSS @property</a></li>
+<li><a href="css3_box-sizing.html" title="CSS Box Sizing">CSS Box Sizing</a></li>
+<li><a href="css3_flexbox.html" title="CSS Flexbox">CSS Flexbox</a></li>
+<li><a href="css3_mediaqueries.html" title="CSS 媒体查询">CSS 媒体查询</a></li>
+<li><a href="css3_mediaqueries_ex.html" title="CSS 媒体查询实例">CSS 媒体查询实例</a></li>
+</ul>
+<h2>CSS 响应式设计</h2>
+<ul>
+<li><a href="css_rwd_intro.html" title="响应式网站设计 - 简介">RWD 简介</a></li>
+<li><a href="css_rwd_viewport.html" title="响应式网页设计 - 视口">RWD 视口</a></li>
+<li><a href="css_rwd_grid.html" title="响应式网页设计 - Grid-View">RWD 网格视图</a></li>
+<li><a href="css_rwd_mediaqueries.html" title="响应式网页设计 - 媒体查询">RWD 媒体查询</a></li>
+<li><a href="css_rwd_images.html" title="响应式网页设计 - 图像">RWD 图像</a></li>
+<li><a href="css_rwd_videos.html" title="响应式网页设计 - 视频">RWD 视频</a></li>
+</ul>
+<h2>CSS 网格教程</h2>
+<ul>
+<li><a href="css_grid.html" title="CSS 网格布局模块">CSS 网格布局模块</a></li>
+<li><a href="css_grid_container.html" title="CSS 网格容器">CSS 网格容器</a></li>
+<li><a href="css_grid_item.html" title="CSS 网格项目">CSS 网格项目</a></li>
+</ul>
+<h2>CSS 实例</h2>
+<ul>
+<li><a href="css_examples.html" title="CSS 实例">CSS 实例</a></li>
+</ul>
+<h2>CSS 测验</h2>
+<ul>
+<li><a href="css_quiz.html" title="CSS 测验">CSS 测验</a></li>
+</ul>
+<h2>CSS 参考手册</h2>
+<ul>
+<li><a href="../cssref/index.html" title="CSS 参考手册">CSS 参考手册</a></li>
+<li><a href="../cssref/css_browsersupport.html" title="CSS 浏览器支持">CSS 浏览器支持</a></li>
+<li><a href="../cssref/css_selectors.html" title="CSS 选择器">CSS 选择器</a></li>
+<li><a href="../cssref/css_functions.html" title="CSS 函数">CSS 函数</a></li>
+<li><a href="../cssref/css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="../cssref/css_ref_aural.html" title="CSS 听觉">CSS 听觉</a></li>
+<li><a href="../cssref/css_websafe_fonts.html" title="CSS 网络安全字体">CSS 网络安全字体</a></li>
+<li><a href="../cssref/css_animatable.html" title="CSS 可动画制作">CSS 可动画制作</a></li>
+<li><a href="../cssref/css_units.html" title="CSS 单位">CSS 单位</a></li>
+<li><a href="../cssref/css_colors.html" title="CSS 颜色">CSS 颜色</a></li>
+<li><a href="../cssref/css_colors_legal.html" title="CSS 颜色值">CSS 颜色值</a></li>
+<li><a href="../cssref/css_default_values.html" title="CSS 默认值">CSS 默认值</a></li>
+<li><a href="../cssref/css_entities.html" title="CSS 实体">CSS 实体</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>CSS 多列</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css3_pagination.html" title="CSS 分页">CSS 分页</a></li>
+<li class="next"><a href="css3_user_interface.html" title="CSS 用户界面">CSS 用户界面</a></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>CSS 多列布局</h2>
+
+<style> 
+.newspaper {
+   xborder:1px black solid;
+   padding: 15px;
+   -webkit-column-count: 3; /* Chrome, Safari, Opera */
+   -moz-column-count: 3; /* Firefox */
+   column-count: 3;
+   -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+   -moz-column-gap: 40px; /* Firefox */
+   column-gap: 40px;
+   -webkit-column-rule: 1px solid lightgrey; /* Chrome, Safari, Opera */
+   -moz-column-rule: 1px solid lightgrey; /* Firefox */
+   column-rule: 1px solid lightgrey;
+}
+</style>
+
+<p>CSS 多列布局允许我们轻松定义多列文本 - 就像报纸那样：</p>
+
+<style>
+.w3-light-grey {
+    background-color: #f1f1f1;
+	text-align: center;
+}
+
+div#maincontent div.w3-light-grey h3 {
+	margin: 10px 0;
+	
+}
+
+p.newspaper span {
+	font-size: 18px;
+	font-weight: 600;
+	display: block;
+	color: #333;
+}
+</style>
+
+<div style="border:1px solid #ddd; margin-top: 20px;">
+<div class="w3-light-grey w3-center" style="padding:32px 64px">
+<h3 style="font-size: 26px;">三国演义</h3>
+</div>
+<p class="newspaper">
+<span class="w3-large">第一回<br>宴桃园豪杰三结义<br>斩黄巾英雄首立功</span><br>
+话说天下大势，分久必合，合久必分：周末七国分争，并入于秦；及秦灭之后，楚、汉分争，又并入于汉；汉朝自高祖斩白蛇而起义，一统天下，后来光武中兴，传至献帝，遂分为三国。推其致乱之由，殆始于桓、灵二帝。桓帝禁锢善类，崇信宦官。及桓帝崩，灵帝即位，大将军窦武、太傅陈蕃，共相辅佐；时有宦官曹节等弄权，窦武、陈蕃谋诛之，机事不密，反为所害，中涓自此愈横。建宁二年四月望日，帝御温德殿。方升座，殿角狂风骤起，只见一条大青蛇，从梁上飞将下来，蟠于椅上。帝惊倒，左右急救入宫，百官俱奔避。须臾，蛇不见了。忽然大雷大雨，加以冰雹，落到半夜方止，坏却房屋无数。建宁四年二月，洛阳地震；又海水泛溢，沿海居民，尽被大浪卷入海中。光和元年，雌鸡化雄。六月朔，黑气十馀丈，飞入温德殿中。秋七月，有虹现于玉堂，五原山岸，尽皆崩裂。种种不祥，非止一端。帝下诏问群臣以灾异之由，议郎蔡邕上疏，以为蜺堕鸡化，乃妇寺干政之所致，言颇切直。帝览奏叹息，因起更衣。曹节在后窃视，悉宣告左右；遂以他事陷邕于罪，放归田里。后张让、赵忠、封谞、段珪、曹节、侯览、蹇硕、程旷、夏恽、郭胜十人朋比为奸，号为“十常侍”。帝尊信张让，呼为“阿父”。朝政日非，以致天下人心思乱，盗贼蜂起。<br><br>
+...... ......
+</p>
+</div>
+
+
+</div>
+
+
+
+<div>
+<h2>CSS 多列属性</h2>
+
+<p>在本章中，您将学到以下多列属性：</p>
+
+<ul>
+<li><code>column-count</code></li>
+<li><code>column-gap</code></li>
+<li><code>column-rule-style</code></li>
+<li><code>column-rule-width</code></li>
+<li><code>column-rule-color</code></li>
+<li><code>column-rule</code></li>
+<li><code>column-span</code></li>
+<li><code>column-width</code></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>浏览器支持</h2>
+
+<p>表格中的数字注明了完全支持该属性的首个浏览器版本。</p>
+
+<table class="browser-support">
+<tr>
+<th class="bsTh">属性</th>
+<th class="bsChrome">Chrome</th>
+<th class="bsIE">IE</th>
+<th class="bsFirefox">Firefox</th>
+<th class="bsSafari">Safari</th>
+<th class="bsOpera">Opera</th>
+</tr>
+
+<tr>
+<td>column-count</td>
+<td>50.0</td>
+<td>10.0</td>
+<td>52.0</td>
+<td>9.0</td>
+<td>37.0</td>
+</tr>
+
+<tr>
+<td>column-gap</td>
+<td>50.0</td>
+<td>10.0</td>
+<td>52.0</td>
+<td>9.0</td>
+<td>37.0</td>
+</tr>
+
+<tr>
+<td>column-rule</td>
+<td>50.0</td>
+<td>10.0</td>
+<td>52.0</td>
+<td>9.0</td>
+<td>37.0</td>
+</tr>
+
+<tr>
+<td>column-rule-color</td>
+<td>50.0</td>
+<td>10.0</td>
+<td>52.0</td>
+<td>9.0</td>
+<td>37.0</td>
+</tr>
+
+<tr>
+<td>column-rule-style</td>
+<td>50.0</td>
+<td>10.0</td>
+<td>52.0</td>
+<td>9.0</td>
+<td>37.0</td>
+</tr>
+
+<tr>
+<td>column-rule-width</td>
+<td>50.0</td>
+<td>10.0</td>
+<td>52.0</td>
+<td>9.0</td>
+<td>37.0</td>
+</tr>
+
+<tr>
+<td>column-span</td>
+<td>50.0</td>
+<td>10.0</td>
+<td>71.0</td>
+<td>9.0</td>
+<td>37.0</td>
+</tr>
+
+<tr>
+<td>column-width</td>
+<td>50.0</td>
+<td>10.0</td>
+<td>52.0</td>
+<td>9.0</td>
+<td>37.0</td>
+</tr>
+</table>
+</div>
+
+
+
+<div>
+<h2>CSS 创建多列</h2>
+
+<p><code>column-count</code> 属性规定元素应被划分的列数。</p>
+
+<p>下面的例子将 &lt;div&gt; 元素中的文本分为 3 列：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+div {
+  column-count: 3;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t6d61.html?f=css3_column-count">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>CSS 指定列之间的间隙</h2>
+
+<p><code>column-gap</code> 属性规定列之间的间隔。</p>
+
+<p>下面的例子指定列之间的间距为 40 像素：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+div {
+  column-gap: 40px;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t6f97.html?f=css3_column-gap">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>CSS 列规则</h2>
+
+<p><code>column-rule-style</code> 属性规定列之间的规则样式：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+div {
+  column-rule-style: solid;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/ta88b.html?f=css3_column-rule-style">亲自试一试</a></p>
+
+<p><code>column-rule-width</code> 属性规定列之间的规则宽度：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+div {
+  column-rule-width: 1px;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t6fd0.html?f=css3_column-rule-width">亲自试一试</a></p>
+
+<p><code>column-rule-color</code> 属性规定列之间的规则的颜色：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+div {
+  column-rule-color: lightblue;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t064f.html?f=css3_column-rule-color">亲自试一试</a></p>
+
+<p>column-rule 属性是用于设置上面所有 column-rule-* 属性的简写属性。</p>
+
+<p>下例设置了列之间的规则的宽度、样式和颜色：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+div {
+  column-rule: 1px solid lightblue;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t4727.html?f=css3_column-rule">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>指定元素应该横跨多少列</h2>
+
+<p><code>column-span</code> 属性规定元素应跨越多少列。</p>
+
+<p>下例规定了&lt;h2&gt; 元素应跨所有列：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+h2 {
+  column-span: all;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/tb237.html?f=css3_column-span">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>指定列宽度</h2>
+
+<p><code>column-width</code> 属性为列指定建议的最佳宽度。</p>
+
+<p>下例规定了列的建议最佳宽度应为 100px：</p>
+
+<h3>实例</h3>
+
+<pre class="language-css">
+div {
+  column-width: 100px;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/ta75b.html?f=css3_column-width">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>CSS 多列属性</h2>
+
+<p>下表列出了所有的多列属性：</p>
+
+<table class="dataintable">
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_column-count.html" title="CSS column-count 属性">column-count</a></td>
+<td>规定元素应划分的列数。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_column-fill.html" title="CSS column-fill 属性">column-fill</a></td>
+<td>规定如何填充列。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_column-gap.html" title="CSS column-gap 属性">column-gap</a></td>
+<td>指定列之间的间隙。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_column-rule.html" title="CSS column-rule 属性">column-rule</a></td>
+<td>用于设置所有 column-rule-* 属性的简写属性。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_column-rule-color.html" title="CSS column-rule-color 属性">column-rule-color</a></td>
+<td>规定列之间规则的颜色。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_column-rule-style.html" title="CSS column-rule-style 属性">column-rule-style</a></td>
+<td>规定列之间的规则样式。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_column-rule-width.html" title="CSS column-rule-width 属性">column-rule-width</a></td>
+<td>规定列之间的规则宽度。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_column-span.html" title="CSS column-span 属性">column-span</a></td>
+<td>规定一个元素应该跨越多少列。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_column-width.html" title="CSS column-width 属性">column-width</a></td>
+<td>为列指定建议的最佳宽度。</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/css3_pr_columns.html" title="CSS column 属性">columns</td>
+<td>用于设置 column-width 和 column-count 的简写属性。</td>
+</tr>
+</table>
+</div>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="css3_pagination.html" title="CSS 分页">CSS 分页</a></li>
+<li class="next"><a href="css3_user_interface.html" title="CSS 用户界面">CSS 用户界面</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../cssref/index.html">CSS 参考手册</a></h5>
+<h5 id="tools_example"><a href="css_examples.html">CSS 实例</a></h5>
+<h5 id="tools_quiz"><a href="css_quiz.html">CSS 测验</a></h5>
+<h5 id="tools_professional"><a href="index_pro.html">CSS 课外书</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/css/css3_multiple_columns.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:19:27 GMT -->
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from www.w3school.com.cn/demo/bs/bs_flex-wrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:10 GMT -->
+<head>
+  <title>Bootstrap 5 实例</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../../lib/bs/bootstrap.css" rel="stylesheet">
+  <script src="../../lib/bs/bootstrap.js"></script>
+  <link href="../../lib/css/w3.css" rel="stylesheet">
+	<style>
+	/* 设置 active 类和鼠标悬停按钮的样式 */
+	.wrapbtn, .alignbtn, .alignitbtn, .alignselfbtn {
+	  background-color:#E7E9EB!important;
+	}
+	.wrapbtnactive, .wrapbtn:hover,
+	.alignactive, .alignbtn:hover,
+	.alignitactive, .alignitbtn:hover,
+	.alignselfactive, .alignselfbtn:hover {
+		background-color: #666!important ;
+		color: white!important;
+	}
+	.w3-responsive .w3-btn {
+	  padding:2px 16px;
+	}
+	.topnav .w3-bar a[href^="/bootstrap/bootstrap_ver.asp"] {
+	  background-color: #04AA6D !important;
+	}
+	.btnsmall {
+	  text-decoration:none!important;
+	}
+	</style>
+</head>
+
+<body style="background-color: #FCFDF8;">
+
+<div id="wrapDiv" style="margin: 15px;">
+<button class="btn wrapbtn wrapbtnactive" onclick="wrapFunc()">flex-wrap</button>
+<button class="btn wrapbtn" onclick="wrapRevFunc()">flex-wrap-reverse</button>
+<button class="btn wrapbtn" onclick="nowrapFunc()">flex-nowrap</button>
+</div>
+
+<script>
+// 将 active 类添加到当前按钮（突出显示）
+var header = document.getElementById("wrapDiv");
+var btns = header.getElementsByClassName("wrapbtn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("wrapbtnactive");
+    current[0].className = current[0].className.replace(" wrapbtnactive", "");
+    this.className += " wrapbtnactive";
+  });
+}
+</script>
+
+<script>
+function wrapFunc() {
+document.getElementById("myFlexDIV").className = "d-flex flex-wrap bg-light";
+}
+function wrapRevFunc() {
+document.getElementById("myFlexDIV").className = "d-flex flex-wrap-reverse bg-light";
+}
+
+function nowrapFunc() {
+document.getElementById("myFlexDIV").className = "d-flex flex-nowrap bg-light";
+}
+</script>
+
+<div class="w3-white notranslate w3-padding">
+  <div class="d-flex flex-wrap mb-2 mt-2 bg-light" id="myFlexDIV">
+    <div class="p-2 border">Flex item 1</div>
+    <div class="p-2 border">Flex item 2</div>
+    <div class="p-2 border">Flex item 3</div>
+    <div class="p-2 border">Flex item 4</div>
+    <div class="p-2 border">Flex item 5</div>
+    <div class="p-2 border">Flex item 6</div>
+    <div class="p-2 border">Flex item 7</div>
+    <div class="p-2 border">Flex item 8</div>
+    <div class="p-2 border">Flex item 9</div>
+    <div class="p-2 border">Flex item 10</div>
+    <div class="p-2 border">Flex item 11</div>
+    <div class="p-2 border">Flex item 12</div>
+    <div class="p-2 border">Flex item 13 </div>
+    <div class="p-2 border">Flex item 14</div>
+    <div class="p-2 border">Flex item 15</div>
+    <div class="p-2 border">Flex item 16</div>
+    <div class="p-2 border">Flex item 17</div>
+    <div class="p-2 border">Flex item 18</div>
+    <div class="p-2 border">Flex item 19</div>
+    <div class="p-2 border">Flex item 20</div>
+    <div class="p-2 border">Flex item 21</div>
+    <div class="p-2 border">Flex item 22</div>
+    <div class="p-2 border">Flex item 23</div>
+    <div class="p-2 border">Flex item 24</div>
+    <div class="p-2 border">Flex item 25</div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/demo/bs/bs_flex-wrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:10 GMT -->
+</html>

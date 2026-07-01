@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from www.w3school.com.cn/demo/bs/bs_form_validation.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:14 GMT -->
+<head>
+  <title>Bootstrap 5 实例</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../../lib/bs/bootstrap.css" rel="stylesheet">
+  <script src="../../lib/bs/bootstrap.js"></script>
+  <link href="../../lib/css/w3.css" rel="stylesheet">
+</head>
+
+<body style="background-color: #fff;">
+<div style="margin:20px 0 25px 0;" class="w3-border w3-round w3-padding ws-grey">
+  <form class="was-validated">
+    <div class="mb-3 mt-3">
+      <label for="uname" class="form-label">用户名：</label>
+      <input type="text" class="form-control" id="uname" placeholder="请输入用户名" name="uname" required>
+      <div class="valid-feedback">有效的。</div>
+      <div class="invalid-feedback">请填写此字段。</div>
+    </div>
+    <div class="mb-3">
+      <label for="pwd" class="form-label">密码：</label>
+      <input type="password" class="form-control" id="pwd" placeholder="请输入密码" name="pswd" required>
+      <div class="valid-feedback">有效的。</div>
+      <div class="invalid-feedback">请填写此字段。</div>
+    </div>
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" id="myCheck"  name="remember" required>
+      <label class="form-check-label" for="myCheck">我同意这些条款。</label>
+       <div class="valid-feedback">
+        有效的。
+      </div>
+     <div class="invalid-feedback">
+        选中此复选框以继续。
+      </div>
+           
+    </div>
+  </form>
+</div>
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/demo/bs/bs_form_validation.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:19:14 GMT -->
+</html>

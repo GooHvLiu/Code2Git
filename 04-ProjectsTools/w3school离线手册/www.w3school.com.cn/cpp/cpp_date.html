@@ -1,0 +1,701 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/cpp/cpp_date.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:58:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>C++ 日期和时间</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>C++ 教程</h2>
+<ul>
+<li><a href="index.html" title="C++ 教程">C++ 教程</a></li>
+<li><a href="cpp_intro.html" title="C++ 简介">C++ 简介</a></li>
+<li><a href="cpp_getstarted.html" title="C++ 入门">C++ 入门</a></li>
+<li><a href="cpp_syntax.html" title="C++ 语法">C++ 语法</a></li>
+<li><a href="cpp_output.html" title="C++ 输出">C++ 输出</a></li>
+<li><a href="cpp_output_numbers.html" title="C++ 输出数字">C++ 输出数字</a></li>
+<li><a href="cpp_new_lines.html" title="C++ 新行">C++ 新行</a></li>
+<li><a href="cpp_comments.html" title="C++ 注释">C++ 注释</a></li>
+<li><a href="cpp_variables.html" title="C++ 变量">C++ 变量</a></li>
+<li><a href="cpp_variables_multiple.html" title="C++ 声明多个变量">C++ 多变量</a></li>
+<li><a href="cpp_variables_identifiers.html" title="C++ 标识符">C++ 标识符</a></li>
+<li><a href="cpp_variables_constants.html" title="C++ 常量">C++ 常量</a></li>
+<li><a href="cpp_variables_reallife.html" title="C++ 变量实例">C++ 变量实例</a></li>
+<li><a href="cpp_user_input.html" title="C++ 用户输入">C++ 用户输入</a></li>
+<li><a href="cpp_data_types.html" title="C++ 数据类型">C++ 数据类型</a></li>
+<li><a href="cpp_data_types_numeric.html" title="C++ 数值数据类型">C++ 数值类型</a></li>
+<li><a href="cpp_data_types_bool.html" title="C++ 布尔数据类型">C++ 布尔类型</a></li>
+<li><a href="cpp_data_types_char.html" title="C++ 字符数据类型">C++ 字符类型</a></li>
+<li><a href="cpp_data_types_string.html" title="C++ 字符串数据类型">C++ 字符串类型</a></li>
+<li><a href="cpp_data_types_reallife.html" title="C++ 数据类型实例">C++ 数据类型实例</a></li>
+<li><a href="cpp_operators.html" title="C++ 运算符">C++ 运算符</a></li>
+<li><a href="cpp_operators_assignment.html" title="C++ 赋值运算符">C++ 赋值运算符</a></li>
+<li><a href="cpp_operators_comparison.html" title="C++ 比较运算符">C++ 比较运算符</a></li>
+<li><a href="cpp_operators_logical.html" title="C++ 逻辑运算符">C++ 逻辑运算符</a></li>
+<li><a href="cpp_strings.html" title="C++ 字符串">C++ 字符串</a></li>
+<li><a href="cpp_strings_concat.html" title="C++ 字符串拼接">C++ 字符串拼接</a></li>
+<li><a href="cpp_strings_numbers.html" title="C++ 数字和字符串">C++ 数字和字符串</a></li>
+<li><a href="cpp_strings_length.html" title="C++ 字符串长度">C++ 字符串长度</a></li>
+<li><a href="cpp_strings_access.html" title="C++ 访问字符串">C++ 访问字符串</a></li>
+<li><a href="cpp_strings_esc.html" title="C++ 特殊字符">C++ 特殊字符</a></li>
+<li><a href="cpp_strings_input.html" title="C++ 用户输入字符串">C++ 用户输入字符串</a></li>
+<li><a href="cpp_strings_namespace.html" title="C++ 字符串命名空间">C++ 字符串命名空间</a></li>
+<li><a href="cpp_math.html" title="C++ 数学运算">C++ 数学运算</a></li>
+<li><a href="cpp_booleans.html" title="C++ 布尔值">C++ 布尔值</a></li>
+<li><a href="cpp_booleans_expressions.html" title="C++ 布尔表达式">C++ 布尔表达式</a></li>
+<li><a href="cpp_conditions.html" title="C++ If ... Else">C++ If ... Else</a></li>
+<li><a href="cpp_conditions_else.html" title="C++ Else">C++ Else</a></li>
+<li><a href="cpp_conditions_elseif.html" title="C++ Else If">C++ Else If</a></li>
+<li><a href="cpp_conditions_shorthand.html" title="C++ 简写 If Else">C++ 简写 If Else</a></li>
+<li><a href="cpp_conditions_reallife.html" title="C++ If ... Else 实际应用实例">C++ If ... Else 实例</a></li>
+<li><a href="cpp_switch.html" title="C++ Switch">C++ Switch</a></li>
+<li><a href="cpp_while_loop.html" title="C++ While 循环">C++ While 循环</a></li>
+<li><a href="cpp_do_while_loop.html" title="C++ Do/While 循环">C++ Do/While 循环</a></li>
+<li><a href="cpp_while_loop_reallife.html" title="C++ While 循环实例">C++ While 循环实例</a></li>
+<li><a href="cpp_for_loop.html" title="C++ For 循环">C++ For 循环</a></li>
+<li><a href="cpp_for_loop_reallife.html" title="C++ For 循环实例">C++ For 循环实例</a></li>
+<li><a href="cpp_break.html" title="C++ Break 和 Continue">C++ Break 和 Continue</a></li>
+<li><a href="cpp_arrays.html" title="C++ 数组">C++ 数组</a></li>
+<li><a href="cpp_arrays_loop.html" title="C++ 数组和循环">C++ 数组和循环</a></li>
+<li><a href="cpp_arrays_omit.html" title="C++ 省略数组大小">C++ 省略数组大小</a></li>
+<li><a href="cpp_arrays_size.html" title="C++ 数组大小">C++ 数组大小</a></li>
+<li><a href="cpp_arrays_reallife.html" title="C++ 数组实际应用实例">C++ 数组实例</a></li>
+<li><a href="cpp_arrays_multi.html" title="C++ 多维数组">C++ 多维数组</a></li>
+<li><a href="cpp_structs.html" title="C++ 结构体">C++ 结构体</a></li>
+<li><a href="cpp_enum.html" title="C++ 枚举">C++ 枚举</a></li>
+<li><a href="cpp_references.html" title="C++ 创建引用">C++ 创建引用</a></li>
+<li><a href="cpp_references_memory.html" title="C++ 内存地址">C++ 内存地址</a></li>
+<li><a href="cpp_pointers.html" title="C++ 创建指针">C++ 创建指针</a></li>
+<li><a href="cpp_pointers_dereference.html" title="C++ 解引用">C++ 解引用</a></li>
+<li><a href="cpp_pointers_modify.html" title="C++ 修改指针">C++ 修改指针</a></li>
+</ul>
+<h2>C++ 函数</h2>
+<ul>
+<li><a href="cpp_functions.html" title="C++ 函数">C++ 函数</a></li>
+<li><a href="cpp_function_param.html" title="C++ 函数参数">C++ 函数参数</a></li>
+<li><a href="cpp_function_default.html" title="C++ 默认参数">C++ 默认参数</a></li>
+<li><a href="cpp_function_multiple.html" title="C++ 多个参数">C++ 多个参数</a></li>
+<li><a href="cpp_function_return.html" title="C++ Return 关键字">C++ 返回值</a></li>
+<li><a href="cpp_function_reference.html" title="C++ 函数 - 通过引用传参">C++ 通过引用传参</a></li>
+<li><a href="cpp_function_array.html" title="C++ 向函数传递数组">C++ 传递数组</a></li>
+<li><a href="cpp_function_reallife.html" title="C++ 函数实例">C++ 函数实例</a></li>
+<li><a href="cpp_function_overloading.html" title="C++ 函数重载">C++ 函数重载</a></li>
+<li><a href="cpp_scope.html" title="C++ 变量作用域">C++ 变量作用域</a></li>
+<li><a href="cpp_functions_recursion.html" title="C++ 递归">C++ 递归</a></li>
+</ul>
+<h2>C++ 类</h2>
+<ul>
+<li><a href="cpp_oop.html" title="C++ OOP">C++ OOP</a></li>
+<li><a href="cpp_classes.html" title="C++ 类和对象">C++ 类/对象</a></li>
+<li><a href="cpp_class_methods.html" title="C++ 类方法">C++ 类方法</a></li>
+<li><a href="cpp_constructors.html" title="C++ 构造函数">C++ 构造函数</a></li>
+<li><a href="cpp_access_specifiers.html" title="C++ 访问修饰符">C++ 访问修饰符</a></li>
+<li><a href="cpp_encapsulation.html" title="C++ 封装">C++ 封装</a></li>
+<li><a href="cpp_inheritance.html" title="C++ 继承">C++ 继承</a></li>
+<li><a href="cpp_inheritance_multilevel.html" title="C++ 多层继承">C++ 多层继承</a></li>
+<li><a href="cpp_inheritance_multiple.html" title="C++ 多重继承">C++ 多重继承</a></li>
+<li><a href="cpp_inheritance_access.html" title="C++ 继承访问">C++ 继承访问</a></li>
+<li><a href="cpp_polymorphism.html" title="C++ 多态">C++ 多态</a></li>
+<li><a href="cpp_files.html" title="C++ 文件">C++ 文件</a></li>
+<li><a href="cpp_exceptions.html" title="C++ 异常处理">C++ 异常处理</a></li>
+<li class="currentLink"><a href="cpp_date.html" title="C++ 日期和时间">C++ 日期</a></li>
+</ul>
+<h2>C++ 数据结构</h2>
+<ul>
+<li><a href="cpp_data_structures.html" title="C++ 数据结构和 STL">C++ 数据结构</a></li>
+<li><a href="cpp_vectors.html" title="C++ 向量">C++ 向量</a></li>
+<li><a href="cpp_list.html" title="C++ 列表">C++ 列表</a></li>
+<li><a href="cpp_stacks.html" title="C++ 栈">C++ 栈</a></li>
+<li><a href="cpp_queues.html" title="C++ 队列">C++ 队列</a></li>
+<li><a href="cpp_deque.html" title="C++ 双端队列">C++ 双端队列</a></li>
+<li><a href="cpp_sets.html" title="C++ 集合">C++ 集合</a></li>
+<li><a href="cpp_maps.html" title="C++ 映射">C++ 映射</a></li>
+<li><a href="cpp_iterators.html" title="C++ 迭代器">C++ 迭代器</a></li>
+<li><a href="cpp_algorithms.html" title="C++ 算法">C++ 算法</a></li>
+</ul>
+<h2>C++ 案例</h2>
+<ul>
+<li><a href="cpp_howto_add_two_numbers.html" title="C++ 如何加两个数字">C++ 加两个数字</a></li>
+<li><a href="cpp_howto_random_number.html" title="C++ 如何生成随机数">C++ 随机数</a></li>
+</ul>
+<h2>C++ 数据结构</h2>
+<ul>
+<li><a href="cpp_reference.html" title="C++ 参考手册">C++ 参考手册</a></li>
+<li><a href="cpp_ref_keywords.html" title="C++ 关键词">C++ 关键词</a></li>
+<li><a href="cpp_ref_iostream.html" title="C++ &lt;iostream&gt; 库">C++ &lt;iostream&gt;</a></li>
+<li><a href="cpp_ref_fstream.html" title="C++ &lt;fstream&gt; 库">C++ &lt;fstream&gt;</a></li>
+<li><a href="cpp_ref_math.html" title="C++ &lt;cmath&gt; 库">C++ &lt;cmath&gt;</a></li>
+<li><a href="cpp_ref_string.html" title="C++ &lt;string&gt; 库">C++ &lt;string&gt;</a></li>
+<li><a href="cpp_ref_cstring.html" title="C++ &lt;cstring&gt; 库">C++ &lt;cstring&gt;</a></li>
+<li><a href="cpp_ref_ctime.html" title="C++ &lt;ctime&gt; 库">C++ &lt;ctime&gt;</a></li>
+<li><a href="cpp_ref_vector.html" title="C++ &lt;vector&gt; 库">C++ &lt;vector&gt;</a></li>
+<li><a href="cpp_ref_algorithm.html" title="C++ &lt;algorithm&gt; 库">C++ &lt;algorithm&gt;</a></li>
+</ul>
+<h2>实例 / 测验</h2>
+<ul>
+<li><a href="cpp_examples.html" title="C++ 实例">C++ 实例</a></li>
+<li><a href="cpp_quiz.html" title="C++ 测验">C++ 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>C++ 日期和时间</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="cpp_exceptions.html" title="C++ 异常处理">C++ 异常处理</a></li>
+<li class="next"><a href="cpp_data_structures.html" title="C++ 数据结构和 STL">C++ 数据结构</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>日期和时间</h2>
+
+<p><code>&lt;ctime&gt;</code> 库允许我们处理日期和时间。</p>
+
+<p>要使用它，您必须导入 <code>&lt;ctime&gt;</code> 头文件：</p>
+
+<h3>实例</h3>
+
+<pre class="language-cpp">
+#include &lt;ctime&gt; // 导入ctime库
+</pre>
+</section>
+
+
+
+<section>
+<h2>显示当前日期和时间</h2>
+
+<p><code>&lt;ctime&gt;</code> 库具有多种用于测量日期和时间的函数。</p>
+
+<p><code>time()</code> 函数为我们提供了表示当前日期和时间的<em>时间戳</em>。我们可以使用 <code>ctime()</code> 函数来显示时间戳所代表的日期和时间：</p>
+
+<h3>实例</h3>
+
+<p>显示当前日期：</p>
+
+<pre class="language-cpp">
+// 获取当前日期和时间的时间戳
+time_t timestamp;
+time(&amp;timestamp);
+
+// 显示时间戳所代表的日期和时间
+cout &lt;&lt; ctime(&amp;timestamp);
+</pre>
+
+<p class="tiy"><a target="_blank" href="t2d6a.html?f=cpp_date_time">亲自试一试</a></p>
+
+<h3><code>time()</code> 函数的两种使用方式</h3>
+
+<p><code>time()</code> 函数将时间戳写入由参数给定的内存位置，但它也返回时间戳的值。</p>
+
+<p>使用 <code>time()</code> 函数的另一种方法是传入一个空指针并使用返回值。</p>
+
+<pre class="language-cpp">
+time_t timestamp = time(NULL);
+</pre>
+</section>
+
+
+
+<section>
+<h2>数据类型</h2>
+
+<p>有两种不同的数据类型用于存储日期和时间：<code>time_t</code> 用于<em>时间戳</em>，<code>struct tm</code> 用于<em>日期时间结构</em>。</p>
+
+<p><em>时间戳</em>以单个数字表示时刻，这使得计算机更容易进行计算。</p>
+
+<p><em>日期时间结构</em>是表示日期和时间的不同组件作为成员的结构。这使我们更容易指定日期。日期时间结构具有以下成员：</p>
+
+<ul>
+<li><code>tm_sec</code> - 分钟内的秒数</li>
+<li><code>tm_min</code> - 小时内的分钟数</li>
+<li><code>tm_hour</code> - 一天内的小时数（从 0 到 23）</li>
+<li><code>tm_mday</code> - 月份中的天数</li>
+<li><code>tm_mon</code> - 月份（从 0 到 11，从 1 月开始）</li>
+<li><code>tm_year</code> - 自 1900 年以来的年数</li>
+<li><code>tm_wday</code> - 一周中的天数（从 0 到 6，从周日开始）</li>
+<li><code>tm_yday</code> - 一年中的天数（从 0 到 365，0 代表 1 月 1 日）</li>
+<li><code>tm_isdst</code> - 夏令时有效时为正值，无效时为0，未知时为负值</li>
+</ul>
+
+<p>请始终牢记日期组件的表示方式：</p>
+
+<ul>
+<li>小时采用 24 小时制。11pm 会表示为 <mark>23</mark>。</li>
+<li>月份从 0 到 11。例如，12 月会表示为 <mark>11</mark> 而不是 12。</li>
+<li>年份是相对于 1900 年表示的。2024 年会表示为 124，因为自 1900 年以来已经过去了 <mark>124</mark> 年。</li>
+</ul>
+</section>
+
+
+
+<section>
+<h2>创建时间戳</h2>
+
+<p><code>time()</code> 函数只能为当前日期创建时间戳，但我们可以使用 <code>mktime()</code> 函数为任何日期创建时间戳。</p>
+
+<p><code>mktime()</code> 函数将日期时间结构转换为时间戳。</p>
+
+<h3>实例</h3>
+
+<p>使用 <code>mktime()</code> 函数创建时间戳：</p>
+
+<pre class="language-cpp">
+struct tm datetime;
+time_t timestamp;
+
+datetime.tm_year = 2023 - 1900; // 自 1900 年以来的年数
+datetime.tm_mon = 12 - 1; // 自 1 月以来的月数
+datetime.tm_mday = 17;
+datetime.tm_hour = 12;
+datetime.tm_min = 30;
+datetime.tm_sec = 1;
+// 必须指定夏令时
+// -1 使用计算机的时区设置
+datetime.tm_isdst = -1;
+
+timestamp = mktime(&amp;datetime);
+
+cout &lt;&lt; ctime(&amp;timestamp);
+</pre>
+
+<p class="tiy"><a target="_blank" href="tf69a.html?f=cpp_date_mktime">亲自试一试</a></p>
+
+<p class="note"><span>注意：</span><code>mktime()</code> 函数需要这些成员具有值：<code>tm_year</code>、<code>tm_mon</code>、<code>tm_mday</code>、<code>tm_hour</code>、<code>tm_min</code>、<code>tm_sec</code> 和 <code>tm_isdst</code>。</p>
+</section>
+
+
+
+<section>
+<h2>创建日期时间结构</h2>
+
+<p><code>mktime()</code> 函数还会用正确的值填充日期时间结构的 <code>tm_wday</code> 和 <code>tm_yday</code> 成员，从而完成结构并给出有效的日期时间。例如，它可以用来查找给定日期的星期几：</p>
+
+<h3>实例</h3>
+
+<p>查找指定日期的星期几：</p>
+
+<pre class="language-cpp">
+// 创建日期时间结构并使用 mktime 填充缺失的成员
+struct tm datetime;
+datetime.tm_year = 2023 - 1900; // 自 1900 年以来的年数
+datetime.tm_mon = 12 - 1; // 自 1 月以来的月数
+datetime.tm_mday = 17;
+datetime.tm_hour = 0; datetime.tm_min = 0; datetime.tm_sec = 0;
+datetime.tm_isdst = -1;
+mktime(&amp;datetime);
+
+string weekdays[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+
+cout &lt;&lt; "The date is on a " &lt;&lt; weekdays[datetime.tm_wday];
+</pre>
+
+<p class="tiy"><a target="_blank" href="t5efd.html?f=cpp_date_localtime_1">亲自试一试</a></p>
+
+<p><code>localtime()</code> 和 <code>gmtime()</code> 函数可以将时间戳转换为日期时间结构。</p>
+
+<p><code>localtime()</code> 函数返回指向表示计算机时区时间的结构的指针。</p>
+
+<p><code>gmtime()</code> 函数返回指向表示GMT时区时间的结构的指针。</p>
+
+<p>这些函数返回指向日期时间结构的<em>指针</em>。如果我们想确保其值不会意外更改，我们应该通过解引用指针来复制它。如需了解解引用，请参阅 <a href="cpp_pointers_dereference.html" title="C++ 解引用">C++ 解引用教程</a>。</p>
+
+<h3>实例</h3>
+
+<p>获取日期时间结构并输出当前小时：</p>
+
+<pre class="language-cpp">
+time_t timestamp = time(&amp;timestamp);
+struct tm datetime = *localtime(&amp;timestamp);
+
+cout &lt;&lt; datetime.tm_hour;
+</pre>
+
+<p class="tiy"><a target="_blank" href="t6824.html?f=cpp_date_localtime_2">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>显示日期</h2>
+
+<p>到目前为止，我们一直在使用 <code>ctime()</code> 函数来显示时间戳中包含的日期。为了从日期时间结构中显示日期，我们可以使用 <code>asctime()</code> 函数。</p>
+
+<h3>实例</h3>
+
+<p>显示日期时间结构所代表的日期：</p>
+
+<pre class="language-cpp">
+time_t timestamp = time(NULL);
+struct tm datetime = *localtime(&amp;timestamp);
+
+cout &lt;&lt; asctime(&amp;datetime);
+</pre>
+
+<p class="tiy"><a target="_blank" href="t0d7d.html?f=cpp_date_asctime_1">亲自试一试</a></p>
+
+<p class="note"><span>注意：</span><code>asctime()</code> 函数不会校正无效的日期。例如，如果您将月份中的天数设置为 32，它将显示 32。<code>mktime()</code> 函数可以校正这类错误：</p>
+
+<h3>实例</h3>
+
+<p>在显示之前校正日期：</p>
+
+<pre class="language-cpp">
+// 创建日期时间结构并使用 mktime 校正错误
+struct tm datetime;
+datetime.tm_year = 2022 - 1900; // 自1900年以来的年数
+datetime.tm_mon = 0; // 0是1月
+datetime.tm_mday = 32;
+datetime.tm_hour = 0; datetime.tm_min = 0; datetime.tm_sec = 0;
+datetime.tm_isdst = -1;
+mktime(&amp;datetime);
+
+cout &lt;&lt; asctime(&amp;datetime);
+</pre>
+
+<p class="tiy"><a target="_blank" href="t5582.html?f=cpp_date_asctime_2">亲自试一试</a></p>
+
+<p><code>ctime()</code> 和 <code>asctime()</code> 函数允许我们显示日期，但它们不允许我们选择显示方式。</p>
+
+<p>为了选择日期的显示方式，我们可以使用 <code>strftime()</code> 函数。</p>
+
+<h3>实例</h3>
+
+<p>以不同的方式表示当前日期：</p>
+
+<pre class="language-cpp">
+time_t timestamp = time(NULL);
+struct tm datetime = *localtime(&amp;timestamp);
+
+char output[50];
+
+strftime(output, 50, "%B %e, %Y", &amp;datetime);
+cout &lt;&lt; output &lt;&lt; "\n";
+
+strftime(output, 50, "%I:%M:%S %p", &amp;datetime);
+cout &lt;&lt; output &lt;&lt; "\n";
+
+strftime(output, 50, "%m/%d/%y", &amp;datetime);
+cout &lt;&lt; output &lt;&lt; "\n";
+
+strftime(output, 50, "%a %b %e %H:%M:%S %Y", &amp;datetime);
+cout &lt;&lt; output &lt;&lt; "\n";
+</pre>
+
+<p class="tiy"><a target="_blank" href="te2eb.html?f=cpp_date_strftime">亲自试一试</a></p>
+
+<p><code>strftime()</code> 函数格式化日期并将其作为 C 风格字符串写入字符数组。它有四个参数：</p>
+
+<ol>
+<li>第一个参数指向将写入格式化日期的字符数组。</li>
+<li>第二个参数指定数组中可用的空间。</li>
+<li>第三个参数允许我们使用格式说明符选择日期的格式化方式。</li>
+<li>最后一个参数是指向包含我们要显示的日期的日期时间结构的指针。</li>
+</ol>
+
+<p>下表包含一些有用的格式说明符。有关更完整的列表，请查看 <a href="ref_ctime_strftime.html" title="C++ ctime strftime() 函数">strftime() 参考页面</a>。</p>
+
+<table class="ref">
+<tr>
+<th>格式说明符</th>
+<th>描述</th>
+<th>例子</th>
+</tr>
+
+<tr>
+<td><code>%a</code></td>
+<td>星期几的简短表示</td>
+<td>Fri</td>
+</tr>
+
+<tr>
+<td><code>%b</code></td>
+<td>月份名称的简短表示</td>
+<td>Dec</td>
+</tr>
+
+<tr>
+<td><code>%B</code></td>
+<td>月份名称的完整表示</td>
+<td>December</td>
+</tr>
+
+<tr>
+<td><code>%d</code></td>
+<td>月份中的天数，前面补零</td>
+<td>09</td>
+</tr>
+
+<tr>
+<td><code>%e</code></td>
+<td>月份中的天数，前面补空格</td>
+<td>9</td>
+</tr>
+
+<tr>
+<td><code>%H</code></td>
+<td>24 小时制的小时</td>
+<td>14</td>
+</tr>
+
+<tr>
+<td><code>%I</code></td>
+<td>12 小时制的小时</td>
+<td>02</td>
+</tr>
+
+<tr>
+<td><code>%M</code></td>
+<td>小时内的分钟数</td>
+<td>30</td>
+</tr>
+
+<tr>
+<td><code>%p</code></td>
+<td>AM 或 PM</td>
+<td>PM</td>
+</tr>
+
+<tr>
+<td><code>%S</code></td>
+<td>分钟内的秒数</td>
+<td>01</td>
+</tr>
+
+<tr>
+<td><code>%y</code></td>
+<td>2 位数的年份表示</td>
+<td>23</td>
+</tr>
+
+<tr>
+<td><code>%Y</code></td>
+<td>4 位数的年份表示</td>
+<td>2023</td>
+</tr>
+</table>
+</section>
+
+
+
+<section>
+<h2>时间测量</h2>
+
+<p>有两种不同的函数可用于测量时间差异。</p>
+
+<h3>difftime() 函数</h3>
+
+<p>该函数用于测量两个不同时间戳之间经过的秒数。在测量日期之间的时间差时，此函数非常有用。</p>
+
+<h3>实例</h3>
+
+<p>测量两个时间戳之间的时间差：</p>
+
+<pre class="language-cpp">
+time_t now;  
+time_t nextyear;  
+struct tm datetime;  
+  
+now = time(NULL);  // 获取当前时间  
+datetime = *localtime(&amp;now);  // 将当前时间转换为本地时间结构  
+datetime.tm_year = datetime.tm_year + 1;  // 将年份增加一年  
+datetime.tm_mon = 0;  // 设置月份为1月（注意：tm_mon从0开始）  
+datetime.tm_mday = 1;  // 设置日期为1日  
+datetime.tm_hour = 0;  // 设置小时为0点  
+datetime.tm_min = 0;  // 设置分钟为0分  
+datetime.tm_sec = 0;  // 设置秒数为0秒  
+datetime.is_dst = -1;  // 自动调整夏令时  
+nextyear = mktime(&amp;datetime);  // 将时间结构转换为时间戳  
+  
+int diff = difftime(nextyear, now);  // 计算时间差  
+  
+cout &lt;&lt; diff &lt;&lt; " seconds until next year";  // 输出到下一年的时间差（秒）
+</pre>
+
+<p class="tiy"><a target="_blank" href="t0fdb.html?f=cpp_date_difftime">亲自试一试</a></p>
+
+<h3>clock() 函数</h3>
+
+<p>该函数在程序运行时用于测量短时间段，比 <code>difftime()</code> 函数更精确。</p>
+
+<p>每次调用 <code>clock</code> 函数时，都会返回一个特殊的时间戳，以时钟周期（一种取决于库实现方式的时间单位）为单位，其数据类型为 <code>clock_t</code>。为了测量时间差，需要在两个不同的时间点存储时间戳，然后相减。时间差以时钟周期为单位测量，但可以通过除以 <code>CLOCKS_PER_SEC</code> 常量将其转换为秒。</p>
+
+<h3>实例</h3>
+
+<p>测量程序运行所需的时间：</p>
+
+<pre class="language-cpp">
+clock_t before = clock();  // 记录开始时间  
+int k = 0;  
+for(int i = 0; i &lt; 100000; i++) {  
+  k += i;  // 执行一些操作  
+}  
+clock_t duration = clock() - before;  // 计算时间差  
+cout &lt;&lt; "Duration: " &lt;&lt; (float)duration / CLOCKS_PER_SEC &lt;&lt; " seconds";  // 输出运行时间（秒）
+</pre>
+
+<p class="tiy"><a target="_blank" href="t680b.html?f=cpp_date_clock">亲自试一试</a></p>
+
+<p class="note"><span>注意：</span>在除法运算之前，请确保将值转换为 <code>float</code> 或 <code>double</code> 类型，否则可能会导致整数除法，从而截断小数部分。</p>
+</section>
+
+
+
+<section>
+<h2>完整的 &lt;ctime&gt; 参考手册</h2>
+
+<p>如需获取 <code>&lt;ctime&gt;</code> 函数的完整参考，请访问我们的 <a href="cpp_ref_ctime.html" title="C++ ctime 库">C++ &lt;ctime&gt; 参考手册</a>。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="cpp_exceptions.html" title="C++ 异常处理">C++ 异常处理</a></li>
+<li class="next"><a href="cpp_data_structures.html" title="C++ 数据结构和 STL">C++ 数据结构</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="cpp_reference.html">C++ 参考手册</a></h5>
+<h5 id="tools_example"><a href="cpp_examples.html">C++ 实例</a></h5>
+<h5 id="tools_quiz"><a href="cpp_quiz.html">C++ 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/cpp/cpp_date.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:58:58 GMT -->
+</html>

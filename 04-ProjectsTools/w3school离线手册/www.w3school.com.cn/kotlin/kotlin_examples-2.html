@@ -1,0 +1,464 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/Kotlin/kotlin_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>Kotlin 实例</title>
+
+</head>
+
+<body class="serverscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Kotlin 教程</h2>
+<ul>
+<li><a href="index.html" title="Kotlin 教程">Kotlin 教程</a></li>
+<li><a href="kotlin_intro-2.html" title="Kotlin 简介">Kotlin 简介</a></li>
+<li><a href="kotlin_getstarted.html" title="Kotlin 入门">Kotlin 入门</a></li>
+<li><a href="kotlin_syntax.html" title="Kotlin 语法">Kotlin 语法</a></li>
+<li><a href="kotlin_output.html" title="Kotlin 输出">Kotlin 输出</a></li>
+<li><a href="kotlin_comments.html" title="Kotlin 注释">Kotlin 注释</a></li>
+<li><a href="kotlin_variables.html" title="Kotlin 变量">Kotlin 变量</a></li>
+<li><a href="kotlin_data_types.html" title="Kotlin 数据类型">Kotlin 数据类型</a></li>
+<li><a href="kotlin_operators.html" title="Kotlin 运算符">Kotlin 运算符</a></li>
+<li><a href="kotlin_strings.html" title="Kotlin 字符串">Kotlin 字符串</a></li>
+<li><a href="kotlin_booleans.html" title="Kotlin 布尔值">Kotlin 布尔值</a></li>
+<li><a href="kotlin_conditions.html" title="Kotlin If...Else">Kotlin If...Else</a></li>
+<li><a href="kotlin_when.html" title="Kotlin When">Kotlin When</a></li>
+<li><a href="kotlin_while_loop.html" title="Kotlin While 循环">Kotlin While 循环</a></li>
+<li><a href="kotlin_break_continue.html" title="Kotlin Break 和 Continue">Kotlin Break/Continue</a></li>
+<li><a href="kotlin_arrays.html" title="Kotlin 数组">Kotlin 数组</a></li>
+<li><a href="kotlin_for_loop.html" title="Kotlin For 循环">Kotlin For 循环</a></li>
+<li><a href="kotlin_ranges.html" title="Kotlin 范围">Kotlin 范围</a></li>
+<li><a href="kotlin_functions.html" title="Kotlin 函数">Kotlin 函数</a></li>
+</ul>
+<h2>Kotlin 类</h2>
+<ul>
+<li><a href="kotlin_oop.html" title="Kotlin OOP">Kotlin OOP</a></li>
+<li><a href="kotlin_classes.html" title="Kotlin 类和对象">Kotlin 类/对象</a></li>
+<li><a href="kotlin_constructors.html" title="Kotlin 构造函数">Kotlin 构造函数</a></li>
+<li><a href="kotlin_class_functions.html" title="Kotlin 类函数">Kotlin 类函数</a></li>
+<li><a href="kotlin_inheritance.html" title="Kotlin 继承">Kotlin 继承</a></li>
+</ul>
+<h2>Kotlin 实例</h2>
+<ul>
+<li><a href="kotlin_examples.html" title="Kotlin 实例">Kotlin 实例</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>Kotlin 实例</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="#" title=""></a></li>
+<li class="next"><a href="#" title=""></a></li>
+</ul>
+</div>
+
+
+
+
+<section>
+<h2>Kotlin 语法与输出</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t6e2c.html?f=kotlin_output_1">输出一些文本</a></li>
+<li><a target="_blank" href="t401d.html?f=kotlin_output_2">在新行上输出文本</a></li>
+<li><a target="_blank" href="ta545.html?f=kotlin_output_3">执行简单的计算</a></li>
+<li><a target="_blank" href="t7ab2.html?f=kotlin_output_print">使用 print() 函数输出一些文本</a></li>
+</ul>
+
+<p><a class="btn-blue" href="kotlin_syntax.html">实例解释：语法</a></p>
+</section>
+
+
+
+<section>
+<h2>Kotlin 注释</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tddb2.html?f=kotlin_comments_single">代码行前的单行注释</a></li>
+<li><a target="_blank" href="tb862.html?f=kotlin_comments_end">代码行末尾的单行注释</a></li>
+<li><a target="_blank" href="t7054.html?f=kotlin_comments_multi">多行注释</a></li>
+</ul>
+
+<p><a class="btn-blue" href="kotlin_comments.html">实例解释：注释</a></p>
+</section>
+
+
+
+<section>
+<h2>Kotlin 变量</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t744a.html?f=kotlin_variables_1">创建两个变量</a></li>
+<li><a target="_blank" href="t5cbd.html?f=kotlin_variables_2">创建两个变量并指定数据类型</a></li>
+<li><a target="_blank" href="tde20.html?f=kotlin_variables_3">声明变量但不赋值</a></li>
+<li><a target="_blank" href="t4c5e.html?f=kotlin_variables_5">创建不可更改/重新赋值的变量</a></li>
+<li><a target="_blank" href="t1f3a.html?f=kotlin_variables_println_1">结合文本和变量</a></li>
+<li><a target="_blank" href="t6fa5.html?f=kotlin_variables_println_2">将一个变量加到另一个变量上</a></li>
+</ul>
+
+<p><a class="btn-blue" href="kotlin_variables.html">实例解释：变量</a></p>
+</section>
+
+
+
+<section>
+<h2>Kotlin 数据类型</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t1d92.html?f=kotlin_data_types_1">创建不同类型的不同变量</a></li>
+<li><a target="_blank" href="tbe58.html?f=kotlin_data_types_2">显式创建不同类型的不同变量</a></li>
+<li><a target="_blank" href="t5fe5.html?f=kotlin_type_byte">创建 Byte 类型变量</a></li>
+<li><a target="_blank" href="t468e.html?f=kotlin_type_short">创建 Short 类型变量</a></li>
+<li><a target="_blank" href="t0fda.html?f=kotlin_type_int">创建 Int 类型变量</a></li>
+<li><a target="_blank" href="t1dcd.html?f=kotlin_type_long">创建 Long 类型变量</a></li>
+<li><a target="_blank" href="t0531.html?f=kotlin_type_float">创建 Float 类型变量</a></li>
+<li><a target="_blank" href="ta698.html?f=kotlin_type_double">创建 Double 类型变量</a></li>
+<li><a target="_blank" href="tf96a.html?f=kotlin_booleans">创建 Boolean 类型变量</a></li>
+<li><a target="_blank" href="t2da9.html?f=kotlin_type_char">创建 Char 类型变量</a></li>
+<li><a target="_blank" href="t2160.html?f=kotlin_type_string">创建 String 类型变量</a></li>
+<li><a target="_blank" href="t7c3c.html?f=kotlin_type_conv_2">数据类型转换 - 将一种数据类型转换为另一种类型</a></li>
+</ul>
+
+<p><a class="btn-blue" href="kotlin_data_types.html">实例解释：数据类型</a></p>
+</section>
+
+
+
+<section>
+<h2>Kotlin 运算符</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tca04.html?f=kotlin_oper_add">加法运算符</a></li>
+<li><a target="_blank" href="t31e5.html?f=kotlin_oper_sub">减法运算符</a></li>
+<li><a target="_blank" href="tcac1.html?f=kotlin_oper_mult">乘法运算符</a></li>
+<li><a target="_blank" href="tc5ba.html?f=kotlin_oper_div">除法运算符</a></li>
+<li><a target="_blank" href="t3d79.html?f=kotlin_oper_mod">取模运算符</a></li>
+<li><a target="_blank" href="t4320.html?f=kotlin_oper_inc">自增运算符</a></li>
+<li><a target="_blank" href="tcd60.html?f=kotlin_oper_dec">自减运算符</a></li>
+<li><a target="_blank" href="tea24.html?f=kotlin_oper_assignment_1">赋值运算符</a></li>
+<li><a target="_blank" href="t563a.html?f=kotlin_oper_compare_1">等于运算符</a></li>
+<li><a target="_blank" href="t8d84.html?f=kotlin_oper_compare_2">不等于运算符</a></li>
+<li><a target="_blank" href="tceb0.html?f=kotlin_oper_compare_3">大于运算符</a></li>
+<li><a target="_blank" href="ta203.html?f=kotlin_oper_compare_4">小于运算符</a></li>
+<li><a target="_blank" href="t306c.html?f=kotlin_oper_compare_5">大于或等于运算符</a></li>
+<li><a target="_blank" href="t2b3f.html?f=kotlin_oper_compare_6">小于或等于运算符</a></li>
+<li><a target="_blank" href="t73e2.html?f=kotlin_oper_logical_1">逻辑与运算符</a></li>
+<li><a target="_blank" href="tba5a.html?f=kotlin_oper_logical_2">逻辑或运算符</a></li>
+<li><a target="_blank" href="tcba9.html?f=kotlin_oper_logical_3">逻辑非运算符</a></li>
+</ul>
+
+<p><a class="btn-blue" href="kotlin_operators.html">实例解释：运算符</a></p>
+</section>
+
+
+
+<section>
+<h2>Kotlin 字符串</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t4186.html?f=kotlin_strings_1">创建字符串</a></li>
+<li><a target="_blank" href="te415.html?f=kotlin_strings_2">创建字符串并指定类型</a></li>
+<li><a target="_blank" href="t7aa3.html?f=kotlin_strings_access">访问字符串</a></li>
+<li><a target="_blank" href="tfce0.html?f=kotlin_strings_length">查找字符串的长度</a></li>
+<li><a target="_blank" href="tc11f.html?f=kotlin_strings_compareto">比较两个字符串</a></li>
+<li><a target="_blank" href="t0008.html?f=kotlin_strings_indexof">在字符串中查找子字符串</a></li>
+<li><a target="_blank" href="tb8f3.html?f=kotlin_strings_conc_1">连接/合并两个字符串</a></li>
+<li><a target="_blank" href="t9576.html?f=kotlin_strings_conc_2">使用 plus() 函数连接/合并两个字符串</a></li>
+<li><a target="_blank" href="t765d.html?f=kotlin_strings_quotes">在字符串中使用引号</a></li>
+</ul>
+
+<p><a class="btn-blue" href="kotlin_strings.html">实例解释：字符串</a></p>
+</section>
+
+
+
+<section>
+<h2>Kotlin 布尔值</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t2ce9.html?f=kotlin_booleans_without">创建布尔值</a></li>
+<li><a target="_blank" href="tf96a.html?f=kotlin_booleans">创建布尔值并指定类型</a></li>
+<li><a target="_blank" href="tfe84.html?f=kotlin_booleans_1">比较两个值</a></li>
+</ul>
+
+<p><a class="btn-blue" href="kotlin_booleans.html">实例解释：布尔值</a></p>
+</section>
+
+
+
+<section>
+<h2>Kotlin If...Else</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tb6b0.html?f=kotlin_if_1">if 语句</a></li>
+<li><a target="_blank" href="t4b4d.html?f=kotlin_if_else">else 语句</a></li>
+<li><a target="_blank" href="tdd35.html?f=kotlin_if_else_if">else if 语句</a></li>
+<li><a target="_blank" href="ta207.html?f=kotlin_if_else_exp_1">if..else 表达式</a></li>
+<li><a target="_blank" href="t2c1f.html?f=kotlin_if_else_exp_2">简写 if..else</a></li>
+</ul>
+
+<p><a class="btn-blue" href="kotlin_conditions.html">实例解释：If...Else</a></p>
+</section>
+
+
+
+<section>
+<h2>Kotlin When</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t8369.html?f=kotlin_when">when 表达式</a></li>
+</ul>
+
+<p><a class="btn-blue" href="kotlin_when.html">实例解释：When</a></p>
+</section>
+
+
+
+<section>
+<h2>Kotlin While 循环</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t82e6.html?f=kotlin_while_loop">使用 while 循环遍历代码块</a></li>
+<li><a target="_blank" href="t9516.html?f=kotlin_do_while_loop">使用 do/while 循环遍历代码块</a></li>
+</ul>
+
+<p><a class="btn-blue" href="kotlin_while_loop.html">实例解释：While 循环</a></p>
+</section>
+
+
+
+<section>
+<h2>Kotlin Break 和 Continue</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t851b.html?f=kotlin_break">使用 break 语句跳出循环</a></li>
+<li><a target="_blank" href="ta9ec.html?f=kotlin_continue">使用 continue 语句跳过循环中的某个值</a></li>
+</ul>
+
+<p><a class="btn-blue" href="kotlin_break_continue.html">实例解释：Break 和 Continue</a></p>
+</section>
+
+
+
+<section>
+<h2>Kotlin 数组</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tf904.html?f=kotlin_array_access">创建并访问数组</a></li>
+<li><a target="_blank" href="t9269.html?f=kotlin_array_change">更改数组元素</a></li>
+<li><a target="_blank" href="t6ad1.html?f=kotlin_array_size">查找数组的长度/大小</a></li>
+<li><a target="_blank" href="tb8a0.html?f=kotlin_ranges_in_2">检查数组中是否存在某个元素</a></li>
+<li><a target="_blank" href="t404c.html?f=kotlin_array_for_loop_1">遍历数组</a></li>
+</ul>
+
+<p><a class="btn-blue" href="kotlin_arrays.html">实例解释：数组</a></p>
+</section>
+
+
+
+<section>
+<h2>Kotlin For 循环</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t404c.html?f=kotlin_array_for_loop_1">遍历字符串数组</a></li>
+<li><a target="_blank" href="t356b.html?f=kotlin_array_for_loop_2">遍历整数数组</a></li>
+</ul>
+
+<p><a class="btn-blue" href="kotlin_for_loop.html">实例解释：For 循环</a></p>
+</section>
+
+
+
+<section>
+<h2>Kotlin 范围</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="t6d18.html?f=kotlin_ranges_1">创建字符范围</a></li>
+<li><a target="_blank" href="t726d.html?f=kotlin_ranges_2">创建数字范围</a></li>
+<li><a target="_blank" href="t6009.html?f=kotlin_ranges_in_1">检查某个值是否在范围内</a></li>
+<li><a target="_blank" href="t3251.html?f=kotlin_ranges_break">在范围内使用 break 语句</a></li>
+<li><a target="_blank" href="t03d6.html?f=kotlin_ranges_continue">在范围内使用 continue 语句</a></li>
+</ul>
+
+<p><a class="btn-blue" href="kotlin_ranges.html">实例解释：范围</a></p>
+</section>
+
+
+
+<section>
+<h2>Kotlin 函数</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="tb54f.html?f=kotlin_function">创建一个函数并调用它</a></li>
+<li><a target="_blank" href="t7fa3.html?f=kotlin_function_multiple">多次调用一个函数</a></li>
+<li><a target="_blank" href="td089.html?f=kotlin_function_param_1">创建一个带参数的函数</a></li>
+<li><a target="_blank" href="t9b95.html?f=kotlin_function_return_1">在函数中使用 return 关键字</a></li>
+<li><a target="_blank" href="t36c9.html?f=kotlin_function_assignment">返回值的简写语法</a></li>
+</ul>
+
+<p><a class="btn-blue" href="kotlin_functions.html">实例解释：函数</a></p>
+</section>
+
+
+
+<section>
+<h2>Kotlin 类</h2>
+
+<ul class="example-list">
+<li><a target="_blank" href="ta974.html?f=kotlin_classes">创建类以及该类的一个对象</a></li>
+<li><a target="_blank" href="t47fb.html?f=kotlin_classes_multiple">创建类的多个对象</a></li>
+<li><a target="_blank" href="te33d.html?f=kotlin_constructor_2">创建构造函数</a></li>
+<li><a target="_blank" href="tbed8.html?f=kotlin_class_function_1">创建类方法（函数）</a></li>
+<li><a target="_blank" href="t1e79.html?f=kotlin_class_function_2">创建带参数的类方法（函数）</a></li>
+<li><a target="_blank" href="td761.html?f=kotlin_inheritance">创建应继承父类属性的类（继承）</a></li>
+</ul>
+
+<p><a class="btn-blue" href="kotlin_classes.html">实例解释：类</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="#" title=""></a></li>
+<li class="next"><a href="#" title=""></a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_example"><a href="kotlin_examples.html">Kotlin 实例</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/Kotlin/kotlin_examples.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 03:02:39 GMT -->
+</html>

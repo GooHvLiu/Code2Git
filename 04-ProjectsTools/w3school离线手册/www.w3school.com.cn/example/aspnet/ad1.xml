@@ -1,0 +1,23 @@
+<Advertisements>
+<Ad>
+<ImageUrl>/i/eg_banner_w3school.gif</ImageUrl>
+<NavigateUrl>http://www.w3school.com.cn</NavigateUrl>
+<AlternateText>W3School Main Site</AlternateText>
+<Impressions>50</Impressions>
+<Keyword>elearning</Keyword>
+</Ad>
+<Ad>
+<ImageUrl>/i/eg_banner_htmlref.gif</ImageUrl>
+<NavigateUrl>http://www.w3school.com.cn/html/html_reference.asp</NavigateUrl>
+<AlternateText>XHTML Reference</AlternateText>
+<Impressions>50</Impressions>
+<Keyword>XHTML</Keyword>
+</Ad>
+<Ad>
+<ImageUrl>/i/eg_banner_jsref.gif</ImageUrl>
+<NavigateUrl>http://www.w3school.com.cn/js/js_reference.asp</NavigateUrl>
+<AlternateText>XHTML Reference</AlternateText>
+<Impressions>50</Impressions>
+<Keyword>XHTML</Keyword>
+</Ad>
+</Advertisements>

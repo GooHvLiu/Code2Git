@@ -1,0 +1,50 @@
+
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.w3school.com.cn/python/r.php?f=python_ref_string_encode_2 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:14:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8">
+<title>Python Result</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #000000;
+    color: #ffffff;
+    line-height: 1.5;
+    font-family: consolas,"courier new",monospace;
+}
+
+pre#python_result {
+    padding: 8px;
+	font-size:15px;
+}
+</style>
+</head>
+
+<body>
+<pre id="python_result">
+b&#039;My name is St\\xe5le&#039;
+b&#039;My name is Stle&#039;
+b&#039;My name is St\\N{LATIN SMALL LETTER A WITH RING ABOVE}le&#039;
+b&#039;My name is St?le&#039;
+b&#039;My name is St&amp;#229;le&#039;
+Traceback (most recent call last):
+  File &quot;example.py&quot;, line 8, in &lt;module&gt;
+    print(txt.encode(encoding=&quot;ascii&quot;,errors=&quot;strict&quot;))
+          ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: &#039;ascii&#039; codec can&#039;t encode character &#039;\xe5&#039; in position 13: ordinal not in range(128)
+
+</pre>
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/python/r.php?f=python_ref_string_encode_2 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 06:14:01 GMT -->
+</html>
+
+

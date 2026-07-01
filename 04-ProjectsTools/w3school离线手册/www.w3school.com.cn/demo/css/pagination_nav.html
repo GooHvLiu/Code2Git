@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.w3school.com.cn/demo/css/pagination_nav.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:18:43 GMT -->
+<head>
+<style>
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+</style>
+</head>
+<body>
+
+<p>前进/后退按钮</p>
+<div class="pagination">
+  <a href="#">&#10094;</a>
+  <a href="#">&#10095;</a>
+</div>
+
+<p>导航分页：</p>
+<div class="pagination">
+  <a href="#" class="active">Home</a>
+  <a href="#">Link 1</a>
+  <a href="#">Link 2</a>
+  <a href="#">Link 3</a>
+</div>
+
+</body>
+
+<!-- Mirrored from www.w3school.com.cn/demo/css/pagination_nav.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 04:18:43 GMT -->
+</html>

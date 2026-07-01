@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+    <title>04-API-all</title>
+</head>
+
+<body>
+    <!-- 
+    6. Promise.all方法 : (promises) => {}
+        (1) promises: 包含 n个 promise的数组
+        说明 : 返回一个新的promise, 只有所有的promise都成功 才都成功, 只要有一个失败了就直接失败
+-->
+    <script>
+        let p1 = new Promise((resolve, reject) => {
+            resolve('OK');
+        })
+        // let p2 = Promise.resolve('Success');
+        let p2 = Promise.reject('Error');
+        let p3 = Promise.resolve('Oh Yeah');
+
+        //
+        const result = Promise.all([p1, p2, p3]);
+
+        console.log(result);
+    </script>
+</body>
+
+</html>

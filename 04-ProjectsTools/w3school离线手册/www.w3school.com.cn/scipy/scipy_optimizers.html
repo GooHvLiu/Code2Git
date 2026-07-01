@@ -1,0 +1,316 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/scipy/scipy_optimizers.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:55:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>SciPy 优化器</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>SciPy 教程</h2>
+<ul>
+<li><a href="index.html" title="SciPy 教程">SciPy 教程</a></li>
+<li><a href="scipy_intro.html" title="SciPy 介绍">SciPy 介绍</a></li>
+<li><a href="scipy_getting_started.html" title="SciPy 入门">SciPy 入门</a></li>
+<li><a href="scipy_constants.html" title="SciPy 常量">SciPy 常量</a></li>
+<li class="currentLink"><a href="scipy_optimizers.html" title="SciPy 优化器">SciPy 优化器</a></li>
+<li><a href="scipy_sparse_data.html" title="SciPy 稀疏数据">SciPy 稀疏数据</a></li>
+<li><a href="scipy_graphs.html" title="SciPy 图表">SciPy 图表</a></li>
+<li><a href="scipy_spatial_data.html" title="SciPy 空间数据">SciPy 空间数据</a></li>
+<li><a href="scipy_matlab_arrays.html" title="SciPy Matlab 数组">SciPy Matlab 数组</a></li>
+<li><a href="scipy_interpolation.html" title="SciPy 插值">SciPy 插值</a></li>
+<li><a href="scipy_statistical_significance_tests.html" title="SciPy 显著性检验">SciPy 显著性检验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>SciPy 优化器</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="scipy_constants.html" title="SciPy 常量">SciPy 常量</a></li>
+<li class="next"><a href="scipy_sparse_data.html" title="SciPy 稀疏数据">SciPy 稀疏数据</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>SciPy 中的优化器</h2>
+
+<p>优化器是 SciPy 中定义的一组过程，用于求函数的最小值或方程的根。</p>
+</section>
+
+
+
+<section>
+<h2>优化函数</h2>
+
+<p>本质上，机器学习中的所有算法都不过是一个复杂的方程，需要借助给定的数据进行最小化。</p>
+</section>
+
+
+
+<section>
+<h2>方程的根</h2>
+
+<p>NumPy 能够求多项式和线性方程的根，但无法求非线性方程的根，如下所示：</p>
+
+<p><code>x + cos(x)</code></p>
+
+<p>为此，您可以使用 SciPy 的 <code>optimize.root</code> 函数。</p>
+
+<p>此函数需要两个必需的参数：</p>
+
+<p><em><i>fun</i></em> - 表示方程的函数。</p>
+
+<p><em><i>x0</i></em> - 对根的初始猜测。</p>
+
+<p>该函数返回一个包含有关解决方案的信息的对象。</p>
+
+<p>实际的解决方案在返回对象的属性 <code>x</code> 下给出：</p>
+
+<h3>实例</h3>
+
+<p>求方程 <code>x + cos(x)</code> 的根：</p>
+
+<pre class="language-python">
+from scipy.optimize import root
+from math import cos
+
+def eqn(x):
+  return x + cos(x)
+
+myroot = root(eqn, 0)
+
+print(myroot.x)
+</pre>
+
+<p class="tiy"><a target="_blank" href="td27b.html?f=scipy_optimizers_root_1">亲自试一试</a></p>
+
+<p class="note"><span>注意：</span>返回的对象包含有关解决方案的更多信息。</p>
+
+<h3>实例</h3>
+
+<p>打印有关解决方案的所有信息（不仅仅是根 <code>x</code>）：</p>
+
+<pre class="language-python">
+print(myroot)
+</pre>
+
+<p class="tiy"><a target="_blank" href="te0e7.html?f=scipy_optimizers_root_2">亲自试一试</a></p>
+</section>
+
+
+
+<section>
+<h2>最小化函数</h2>
+
+<p>在此上下文中，函数代表一条曲线，曲线有高点和低点。</p>
+
+<p>高点称为最大值。</p>
+
+<p>低点称为最小值。</p>
+
+<p>整条曲线中的最高点称为全局最大值，而其余的点称为局部最大值。</p>
+
+<p>整个曲线的最低点称为全局最小值，而其余点称为局部最小值。</p>
+</section>
+
+
+
+<section>
+<h2>查找最小值</h2>
+
+<p>我们可以使用 <code>scipy.optimize.minimize()</code> 函数来最小化函数。</p>
+
+<p><code>minimize()</code> 函数采用以下参数：</p>
+
+<p><em><i>fun</i></em> - 表示方程的函数。</p>
+
+<p><em><i>x0</i></em> - 对根的初始猜测。</p>
+
+<p><em><i>method</i></em> - 要使用的方法的名称。合法值：</p>
+
+<ul>
+<li><code>'CG'</code></li>
+<li><code>'BFGS'</code></li>
+<li><code>'Newton-CG'</code></li>
+<li><code>'L-BFGS-B'</code></li>
+<li><code>'TNC'</code></li>
+<li><code>'COBYLA'</code></li>
+<li><code>'SLSQP'</code></li>
+</ul>
+
+<p><em><i>callback</i></em> - 每次优化迭代后调用的函数。</p>
+
+<p><em><i>options</i></em> - 定义额外参数的字典：</p>
+
+<pre>
+{
+     &quot;disp&quot;: boolean - 打印详细描述
+     &quot;gtol&quot;: number - 误差的容差
+  }
+</pre>
+
+<h3>实例</h3>
+
+<p>使用 <code>BFGS</code> 最小化函数 <code>x^2 + x + 2</code>：</p>
+
+<pre class="language-python">
+from scipy.optimize import minimize
+
+def eqn(x):
+  return x**2 + x + 2
+
+mymin = minimize(eqn, 0, method='BFGS')
+
+print(mymin)
+</pre>
+
+<p class="tiy"><a target="_blank" href="tc688.html?f=scipy_optimizers_minimize">亲自试一试</a></p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="scipy_constants.html" title="SciPy 常量">SciPy 常量</a></li>
+<li class="next"><a href="scipy_sparse_data.html" title="SciPy 稀疏数据">SciPy 稀疏数据</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/scipy/scipy_optimizers.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:55:17 GMT -->
+</html>

@@ -1,0 +1,681 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from www.w3school.com.cn/python/python_ml_bagging.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:50:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="utf-8">
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="../c17b30.css?v=4" />
+
+<script src='../lib/cc/prism2.js'></script>
+<link rel='stylesheet' href='../lib/cc/prism.css'>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../ui2019/logo-16-red.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../ui2019/logo-32-red.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="../ui2019/logo-180.png">
+
+
+<title>机器学习 - Bootstrap 聚合（Bagging）</title>
+
+</head>
+
+<body class="programming">
+
+<div id="wrapper">
+
+<div id="header">
+<a id="logo" href="../index-2.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="header_gg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3 页眉 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="7423315034"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.html" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.html" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.html" title="服务器脚本教程">服务器脚本</a></li>
+<li id="p"><a href="../p.html" title="编程教程">编程教程</a></li>
+<li id="x"><a href="../x.html" title="XML 系列教程">XML 系列教程</a></li>
+<li id="w"><a href="../w.html" title="建站手册">建站手册</a></li>
+<li id="r"><a href="../r.html" title="参考手册">参考手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>Python 教程</h2>
+<ul>
+<li><a href="index.html" title="Python 教程">Python 教程</a></li>
+<li><a href="python_intro.html" title="Python 简介">Python 简介</a></li>
+<li><a href="python_getstarted.html" title="Python 入门">Python 入门</a></li>
+<li><a href="python_syntax.html" title="Python 语法">Python 语法</a></li>
+<li><a href="python_comments.html" title="Python 注释">Python 注释</a></li>
+<li><a href="python_variables.html" title="Python 变量">Python 变量</a></li>
+<li><a href="python_datatypes.html" title="Python 数据类型">Python 数据类型</a></li>
+<li><a href="python_numbers.html" title="Python 简介">Python 数字</a></li>
+<li><a href="python_casting.html" title="Python Casting">Python Casting</a></li>
+<li><a href="python_strings.html" title="Python 字符串">Python 字符串</a></li>
+<li><a href="python_booleans.html" title="Python 布尔">Python 布尔</a></li>
+<li><a href="python_operators.html" title="Python 运算符">Python 运算符</a></li>
+<li><a href="python_lists.html" title="Python 列表">Python 列表</a></li>
+<li><a href="python_tuples.html" title="Python 元组">Python 元组</a></li>
+<li><a href="python_sets.html" title="Python 集合">Python 集合</a></li>
+<li><a href="python_dictionaries.html" title="Python 字典">Python 字典</a></li>
+<li><a href="python_conditions.html" title="Python If ... Else">Python If Else</a></li>
+<li><a href="python_while_loops.html" title="Python While 循环">Python While 循环</a></li>
+<li><a href="python_for_loops.html" title="Python For 循环">Python For 循环</a></li>
+<li><a href="python_functions.html" title="Python 函数">Python 函数</a></li>
+<li><a href="python_lambda.html" title="Python Lambda">Python Lambda</a></li>
+<li><a href="python_arrays.html" title="Python 数组">Python 数组</a></li>
+<li><a href="python_classes.html" title="Python 类和对象">Python 类/对象</a></li>
+<li><a href="python_inheritance.html" title="Python 继承">Python 继承</a></li>
+<li><a href="python_iterators.html" title="Python 迭代">Python 迭代</a></li>
+<li><a href="python_polymorphism.html" title="Python 多态">Python 多态</a></li>
+<li><a href="python_scope.html" title="Python 作用域">Python 作用域</a></li>
+<li><a href="python_modules.html" title="Python 模块">Python 模块</a></li>
+<li><a href="python_datetime.html" title="Python 日期">Python 日期</a></li>
+<li><a href="python_math.html" title="Python 数学">Python 数学</a></li>
+<li><a href="python_json.html" title="Python JSON">Python JSON</a></li>
+<li><a href="python_regex.html" title="Python RegEx">Python RegEx</a></li>
+<li><a href="python_pip.html" title="Python PIP">Python PIP</a></li>
+<li><a href="python_try_except.html" title="Python Try Except">Python Try Except</a></li>
+<li><a href="python_cmd_input.html" title="Python 命令行输入">Python 命令输入</a></li>
+<li><a href="python_string_formatting.html" title="Python 字符串格式化">Python 字符串格式化</a></li>
+</ul>
+<h2>Python 文件处理</h2>
+<ul>
+<li><a href="python_file_handling.html" title="Python 文件打开">Python 文件打开</a></li>
+<li><a href="python_file_open.html" title="Python 文件读取">Python 文件读取</a></li>
+<li><a href="python_file_write.html" title="Python 文件写入">Python 文件写入/创建</a></li>
+<li><a href="python_file_remove.html" title="Python 文件删除">Python 文件删除</a></li>
+</ul>
+<h2>Python 模块</h2>
+<ul>
+<li><a href="../numpy/index.html" title="NumPy 教程">NumPy 教程</a></li>
+<li><a href="../pandas/index.html" title="Pandas 教程">Pandas 教程</a></li>
+<li><a href="../scipy/index.html" title="SciPy 教程">SciPy 教程</a></li>
+</ul>
+<h2>Python Matplotlib</h2>
+<ul>
+<li><a href="matplotlib_intro.html" title="Matplotlib 简介">Matplotlib 简介</a></li>
+<li><a href="matplotlib_getting_started.html" title="Matplotlib 入门">Matplotlib 入门</a></li>
+<li><a href="matplotlib_pyplot.html" title="Matplotlib Pyplot">Matplotlib Pyplot</a></li>
+<li><a href="matplotlib_plotting.html" title="Matplotlib 绘图">Matplotlib 绘图</a></li>
+<li><a href="matplotlib_markers.html" title="Matplotlib 标记">Matplotlib 标记</a></li>
+<li><a href="matplotlib_line.html" title="Matplotlib 线条">Matplotlib 线条</a></li>
+<li><a href="matplotlib_labels.html" title="Matplotlib 标签">Matplotlib 标签</a></li>
+<li><a href="matplotlib_grid.html" title="Matplotlib 网格">Matplotlib 网格</a></li>
+<li><a href="matplotlib_subplot.html" title="Matplotlib 子图">Matplotlib 子图</a></li>
+<li><a href="matplotlib_scatter.html" title="Matplotlib 散点图">Matplotlib 散点图</a></li>
+<li><a href="matplotlib_bars.html" title="Matplotlib 条形图">Matplotlib 条形图</a></li>
+<li><a href="matplotlib_histograms.html" title="Matplotlib 直方图">Matplotlib 直方图</a></li>
+<li><a href="matplotlib_pie_charts.html" title="Matplotlib 饼图">Matplotlib 饼图</a></li>
+</ul>
+<h2>Python NumPy</h2>
+<ul>
+<li><a href="numpy_intro.html" title="NumPy 简介">NumPy 简介</a></li>
+<li><a href="numpy_getting_started.html" title="NumPy 入门">NumPy 入门</a></li>
+<li><a href="numpy_creating_arrays.html" title="NumPy 数组创建">NumPy 数组创建</a></li>
+<li><a href="numpy_array_indexing.html" title="NumPy 数组索引">NumPy 数组索引</a></li>
+<li><a href="numpy_array_slicing.html" title="NumPy 数组裁切">NumPy 数组裁切</a></li>
+<li><a href="numpy_data_types.html" title="NumPy 数据类型">NumPy 数据类型</a></li>
+<li><a href="numpy_copy_vs_view.html" title="NumPy 副本/视图">NumPy 副本/视图</a></li>
+<li><a href="numpy_array_shape.html" title="NumPy 数组形状">NumPy 数组形状</a></li>
+<li><a href="numpy_array_reshape.html" title="NumPy 数组重塑">NumPy 数组重塑</a></li>
+<li><a href="numpy_array_iterating.html" title="NumPy 数组迭代">NumPy 数组迭代</a></li>
+<li><a href="numpy_array_join.html" title="NumPy 数组连接">NumPy 数组连接</a></li>
+<li><a href="numpy_array_split.html" title="NumPy 数组拆分">NumPy 数组拆分</a></li>
+<li><a href="numpy_array_search.html" title="NumPy 数组搜索">NumPy 数组搜索</a></li>
+<li><a href="numpy_array_sort.html" title="NumPy 数组排序">NumPy 数组排序</a></li>
+<li><a href="numpy_array_filter.html" title="NumPy 数组过滤">NumPy 数组过滤</a></li>
+<li><a href="numpy_random.html" title="NumPy 随机">NumPy 随机</a></li>
+<li><a href="numpy_ufunc.html" title="NumPy ufuncs">NumPy ufuncs</a></li>
+</ul>
+<h2>Python 机器学习</h2>
+<ul>
+<li><a href="python_ml_getting_started.html" title="机器学习 - 入门">入门</a></li>
+<li><a href="python_ml_mean_median_mode.html" title="机器学习 - 平均中位数模式">平均中位数模式</a></li>
+<li><a href="python_ml_standard_deviation.html" title="机器学习 - 标准差">标准差</a></li>
+<li><a href="python_ml_percentile.html" title="机器学习 - 百分位数">百分位数</a></li>
+<li><a href="python_ml_data_distribution.html" title="机器学习 - 数据分布">数据分布</a></li>
+<li><a href="python_ml_normal_data_distribution.html" title="机器学习 - 正态数据分布">正态数据分布</a></li>
+<li><a href="python_ml_scatterplot.html" title="机器学习 - 散点图">散点图</a></li>
+<li><a href="python_ml_linear_regression.html" title="机器学习 - 线性回归">线性回归</a></li>
+<li><a href="python_ml_polynomial_regression.html" title="机器学习 - 多项式回归">多项式回归</a></li>
+<li><a href="python_ml_multiple_regression.html" title="机器学习 - 多元回归">多元回归</a></li>
+<li><a href="python_ml_scale.html" title="机器学习 - 缩放">缩放</a></li>
+<li><a href="python_ml_train_test.html" title="机器学习 - 训练/测试">训练/测试</a></li>
+<li><a href="python_ml_decision_tree.html" title="机器学习 - 决策树">决策树</a></li>
+<li><a href="python_ml_confusion_matrix.html" title="机器学习 - 混淆矩阵">混淆矩阵</a></li>
+<li><a href="python_ml_hierarchial_clustering.html" title="机器学习 - 层次聚类">层次聚类</a></li>
+<li><a href="python_ml_logistic_regression.html" title="机器学习 - 逻辑回归">逻辑回归</a></li>
+<li><a href="python_ml_grid_search.html" title="机器学习 - 网格搜索">网格搜索</a></li>
+<li><a href="python_ml_preprocessing.html" title="机器学习 - 分类数据">分类数据</a></li>
+<li><a href="python_ml_k-means.html" title="机器学习 - K-means">K-means</a></li>
+<li class="currentLink"><a href="python_ml_bagging.html" title="机器学习 - Bootstrap 聚合（Bagging）">Bootstrap 聚合</a></li>
+<li><a href="python_ml_cross_validation.html" title="机器学习 - 交叉验证">交叉验证</a></li>
+<li><a href="python_ml_auc_roc.html" title="机器学习 - AUC - ROC 曲线">AUC - ROC 曲线</a></li>
+<li><a href="python_ml_knn.html" title="机器学习 - K-最近邻算法（KNN）">K-最近邻算法</a></li>
+</ul>
+<h2>Python DSA</h2>
+<ul>
+<li><a href="python_dsa.html" title="Python MySQL">Python DSA</a></li>
+<li><a href="python_dsa_lists.html" title="Python 中的列表与数组">列表与数组</a></li>
+<li><a href="python_dsa_stacks.html" title="Python 中的栈">栈</a></li>
+<li><a href="python_dsa_queues.html" title="Python 中的队列">队列</a></li>
+<li><a href="python_dsa_linkedlists.html" title="Python 中的链表">链表</a></li>
+<li><a href="python_dsa_hashtables.html" title="Python 中的哈希表">哈希表</a></li>
+<li><a href="python_dsa_trees.html" title="Python 树">树</a></li>
+<li><a href="python_dsa_binarytrees.html" title="Python 二叉树">二叉树</a></li>
+<li><a href="python_dsa_binarysearchtrees.html" title="Python 二叉搜索树">二叉搜索树</a></li>
+<li><a href="python_dsa_avltrees.html" title="Python AVL 树">AVL 树</a></li>
+<li><a href="python_dsa_graphs.html" title="Python 图论">图</a></li>
+<li><a href="python_dsa_linearsearch.html" title="Python 实现的线性查找">线性查找</a></li>
+<li><a href="python_dsa_binarysearch.html" title="Python 实现的二分查找">二分查找</a></li>
+<li><a href="python_dsa_bubblesort.html" title="Python 实现的冒泡排序">冒泡排序</a></li>
+<li><a href="python_dsa_selectionsort.html" title="Python 实现的选择排序">选择排序</a></li>
+<li><a href="python_dsa_insertionsort.html" title="Python 实现的插入排序">插入排序</a></li>
+<li><a href="python_dsa_quicksort.html" title="Python 实现的 DSA 快速排序">快速排序</a></li>
+<li><a href="python_dsa_countingsort.html" title="Python 实现的 DSA 计数排序">计数排序</a></li>
+<li><a href="python_dsa_radixsort.html" title="Python 实现的 DSA 基数排序">基数排序</a></li>
+<li><a href="python_dsa_mergesort.html" title="Python 实现的 DSA 归并排序">归并排序</a></li>
+</ul>
+<h2>Python MySQL</h2>
+<ul>
+<li><a href="python_mysql_getstarted.html" title="Python MySQL 入门">MySQL 入门</a></li>
+<li><a href="python_mysql_create_db.html" title="Python MySQL Create Database">MySQL Create Database</a></li>
+<li><a href="python_mysql_create_table.html" title="Python MySQL Create Table">MySQL Create Table</a></li>
+<li><a href="python_mysql_insert.html" title="Python MySQL Insert Into Table">MySQL Insert</a></li>
+<li><a href="python_mysql_select.html" title="Python MySQL Select From">MySQL Select</a></li>
+<li><a href="python_mysql_where.html" title="Python MySQL Where">MySQL Where</a></li>
+<li><a href="python_mysql_orderby.html" title="Python MySQL Order By">MySQL Order By</a></li>
+<li><a href="python_mysql_delete.html" title="Python MySQL Delete From By">MySQL Delete</a></li>
+<li><a href="python_mysql_drop_table.html" title="Python MySQL Drop Table">MySQL Drop Table</a></li>
+<li><a href="python_mysql_update.html" title="Python MySQL 更新表">MySQL Update</a></li>
+<li><a href="python_mysql_limit.html" title="Python MySQL Limit">MySQL Limit</a></li>
+<li><a href="python_mysql_join.html" title="Python MySQL Join">MySQL Join</a></li>
+</ul>
+<h2>Python MongoDB</h2>
+<ul>
+<li><a href="python_mongodb_getstarted.html" title="Python 教程">MongoDB 入门</a></li>
+<li><a href="python_mongodb_create_db.html" title="Python 教程">MongoDB 创建数据库</a></li>
+<li><a href="python_mongodb_create_collection.html" title="Python 教程">MongoDB 创建集合</a></li>
+<li><a href="python_mongodb_insert.html" title="Python 教程">MongoDB Insert</a></li>
+<li><a href="python_mongodb_find.html" title="Python 教程">MongoDB Find</a></li>
+<li><a href="python_mongodb_query.html" title="Python 教程">MongoDB Query</a></li>
+<li><a href="python_mongodb_sort.html" title="Python 教程">MongoDB Sort</a></li>
+<li><a href="python_mongodb_delete.html" title="Python 教程">MongoDB Delete</a></li>
+<li><a href="python_mongodb_drop_collection.html" title="Python 教程">MongoDB 删除集合</a></li>
+<li><a href="python_mongodb_update.html" title="Python 教程">MongoDB Update</a></li>
+<li><a href="python_mongodb_limit.html" title="Python 教程">MongoDB Limit</a></li>
+</ul>
+<h2>Python 参考手册</h2>
+<ul>
+<li><a href="python_reference.html" title="Python 教程">Python 参考概览</a></li>
+<li><a href="python_ref_functions.html" title="Python 教程">Python 内建函数</a></li>
+<li><a href="python_ref_string.html" title="Python 教程">Python 字符串方法</a></li>
+<li><a href="python_ref_list.html" title="Python 教程">Python 列表方法</a></li>
+<li><a href="python_ref_dictionary.html" title="Python 教程">Python 字典方法</a></li>
+<li><a href="python_ref_tuple.html" title="Python 教程">Python 元组方法</a></li>
+<li><a href="python_ref_set.html" title="Python 教程">Python 集合方法</a></li>
+<li><a href="python_ref_file.html" title="Python 教程">Python 文件方法</a></li>
+<li><a href="python_ref_keywords.html" title="Python 教程">Python 关键字</a></li>
+<li><a href="python_ref_exceptions.html" title="Python 内建异常">Python 异常</a></li>
+<li><a href="python_ref_glossary.html" title="Python 术语表">Python 术语表</a></li>
+</ul>
+<h2>Python 模块参考手册</h2>
+<ul>
+<li><a href="module_random.html" title="Python 教程">随机模块</a></li>
+<li><a href="module_requests.html" title="Python 教程">请求模块</a></li>
+<li><a href="module_statistics.html" title="Python 统计模块">统计模块</a></li>
+<li><a href="module_math.html" title="Python 数学模块">数学模块</a></li>
+<li><a href="module_cmath.html" title="Python cmath 模块">复数数学模块</a></li>
+</ul>
+<h2>Python How To</h2>
+<ul>
+<li><a href="python_howto_remove_duplicates.html" title="Python 教程">删除列表重复项</a></li>
+<li><a href="python_howto_reverse_string.html" title="Python 教程">反转字符串</a></li>
+<li><a href="python_howto_add_two_numbers.html" title="如何在 Python 中加两个数字">两数相加</a></li>
+</ul>
+<h2>Python 实例</h2>
+<ul>
+<li><a href="python_examples.html" title="Python 实例">Python 实例</a></li>
+<li><a href="python_quiz.html" title="Python 测验">Python 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>课程推荐：</h2>
+<ul>
+<li><a href="../howto/index.html" title="W3School 百宝箱">W3School 百宝箱</a></li>
+<li><a href="../java/index.html" title="Java 教程">Java 教程</a></li>
+<li><a href="../c/index.html" title="C 教程">C</a></li>
+<li><a href="../cpp/index.html" title="C++ 教程">C++</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>机器学习 - Bootstrap 聚合（Bagging）</h1>
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="python_ml_k-means.html" title="机器学习 - K-means">K-means</a></li>
+<li class="next"><a href="python_ml_cross_validation.html" title="机器学习 - 交叉验证">交叉验证</a></li>
+</ul>
+</div>
+
+
+
+<section>
+<h2>Bagging</h2>
+
+<p>诸如决策树等方法容易在训练集上过度拟合，这可能导致对新数据的错误预测。</p>
+
+<p>Bootstrap 聚合（bagging）是一种集成方法，旨在解决分类或回归问题中的过度拟合问题。Bagging 旨在提高机器学习算法的准确性和性能。它通过从原始数据集中随机抽取（有放回地）子集，并对每个子集拟合一个分类器（用于分类）或回归器（用于回归）来实现这一点。然后通过多数投票（用于分类）或平均（用于回归）来聚合每个子集的预测，从而提高预测准确性。</p>
+</section>
+
+
+
+<section>
+<h2>评估基本分类器</h2>
+
+<p>为了了解 bagging 如何改进模型性能，我们首先必须评估基本分类器在数据集上的表现。如果您不知道什么是决策树，请在继续之前回顾决策树课程，因为 bagging 是该概念的一个延续。</p>
+
+<p>我们将尝试识别 <code>sklearn</code> 的葡萄酒数据集中发现的不同类别的葡萄酒。</p>
+
+<p>让我们首先导入必要的模块。</p>
+
+<pre class="language-python">
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from sklearn.tree import DecisionTreeClassifier
+</pre>
+
+<p>接下来，我们需要加载数据并将其存储到 X（输入特征）和 y（目标）中。参数 <code>as_frame</code> 设置为 <code>True</code>，以便在加载数据时不会丢失特征名称。（如果 sklearn 版本低于 0.23，则必须跳过 as_frame 参数，因为它不受支持）</p>
+
+<pre class="language-python">
+data = datasets.load_wine(as_frame = True)
+
+X = data.data
+y = data.target
+</pre>
+
+<p>为了正确评估模型在未见数据上的表现，我们需要将 X 和 y 分割为训练集和测试集。有关数据分割的信息，请参阅“训练/测试”课程。</p>
+
+<pre class="language-python">
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state = 22)
+</pre>
+
+<p>准备好数据后，我们现在可以实例化一个基本分类器并将其拟合到训练数据上。</p>
+
+<pre class="language-python">
+dtree = DecisionTreeClassifier(random_state = 22)
+dtree.fit(X_train,y_train)
+</pre>
+
+<p>结果：</p>
+
+<pre class="language-python">
+DecisionTreeClassifier(random_state=22)
+</pre>
+
+<p>我们现在可以预测未见测试集中葡萄酒的类别并评估模型性能。</p>
+
+<pre class="language-python">
+y_pred = dtree.predict(X_test)
+
+print(&quot;训练数据准确性：&quot;,accuracy_score(y_true = y_train, y_pred = dtree.predict(X_train)))
+print(&quot;测试数据准确性：&quot;,accuracy_score(y_true = y_test, y_pred = y_pred))
+</pre>
+
+<p>结果：</p>
+
+<pre class="language-python">
+Train data accuracy: 1.0
+Test data accuracy: 0.8222222222222222
+</pre>
+
+<h3>实例</h3>
+
+<p>导入必要的数据并评估基本分类器性能。</p>
+
+<pre class="language-python">
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from sklearn.tree import DecisionTreeClassifier
+
+data = datasets.load_wine(as_frame = True)
+
+X = data.data
+y = data.target
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state = 22)
+
+dtree = DecisionTreeClassifier(random_state = 22)
+dtree.fit(X_train,y_train)
+
+y_pred = dtree.predict(X_test)
+
+print(&quot;训练数据准确性：&quot;,accuracy_score(y_true = y_train, y_pred = dtree.predict(X_train)))
+print(&quot;测试数据准确性：&quot;,accuracy_score(y_true = y_test, y_pred = y_pred))
+</pre>
+
+<p class="tiy"><a target="_blank" href="t21cb.html?f=ml_bagging_1">亲自试一试</a></p>
+
+<p>使用当前参数，基本分类器在数据集上的表现相当不错，测试数据集上的准确率达到 82%（如果您没有设置 <code>random_state</code> 参数，则可能会出现不同的结果）。</p>
+
+<p>既然我们有了测试数据集的基线准确性，我们就可以看到 Bagging 分类器如何优于单个决策树分类器。</p>
+</section>
+
+
+
+<section>
+<h2>创建 Bagging 分类器</h2>
+
+<p>对于 bagging，我们需要设置参数 <code>n_estimators</code>，这是我们的模型将要聚合的基本分类器的数量。</p>
+
+<p>对于这个样本数据集，估计器的数量相对较低，通常探索的范围要大得多。超参数调整通常使用<a href="python_ml_grid_search.html" title="机器学习 - 网格搜索">网格搜索</a>进行，但现在我们将使用估计器数量的选定集合值。</p>
+
+<p>我们首先从导入必要的模型开始。</p>
+
+<pre class="language-python">
+from sklearn.ensemble import BaggingClassifier
+</pre>
+
+<p>现在让我们创建一个表示要在每个集成中使用的估计器数量的值范围。</p>
+
+<pre class="language-python">
+estimator_range = [2,4,6,8,10,12,14,16]
+</pre>
+
+<p>为了查看 Bagging 分类器在不同 <code>n_estimators</code> 值下的表现，我们需要一种方法来迭代值范围并存储每个集成的结果。为此，我们将创建一个 for 循环，将模型和分数分别存储在单独的列表中，以便稍后可视化。</p>
+
+<p class="note"><span>注意：</span><code>BaggingClassifier</code> 中基本分类器的默认参数是 <code>DicisionTreeClassifier</code>，因此我们在实例化 bagging 模型时不需要设置它。</p>
+
+<pre class="language-python">
+models = []
+scores = []
+
+for n_estimators in estimator_range:
+
+    # 创建 bagging 分类器
+    clf = BaggingClassifier(n_estimators = n_estimators, random_state = 22)
+
+    # 拟合模型
+    clf.fit(X_train, y_train)
+
+    # 将模型和分数追加到各自的列表中
+    models.append(clf)
+    scores.append(accuracy_score(y_true = y_test, y_pred = clf.predict(X_test)))
+</pre>
+
+<p>模型和分数存储完毕后，我们现在可以可视化模型性能的改进。</p>
+
+<pre class="language-python">
+import matplotlib.pyplot as plt
+
+# 生成估计器数量与得分的图
+plt.figure(figsize=(9,6))
+plt.plot(estimator_range, scores)
+
+# 调整标签和字体大小（以便可见）
+plt.xlabel(&quot;n_estimators&quot;, fontsize = 18)
+plt.ylabel(&quot;score&quot;, fontsize = 18)
+plt.tick_params(labelsize = 16)
+
+# 可视化图表
+plt.show()
+</pre>
+
+<img class="illustration" src="../i/ml/ml_bagging.png" style="width: 90%;">
+
+<h3>实例</h3>
+
+<p>导入必要的数据并评估 <code>BaggingClassifier</code> 性能。</p>
+
+<pre class="language-python">
+import matplotlib.pyplot as plt
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from sklearn.ensemble import BaggingClassifier
+
+data = datasets.load_wine(as_frame = True)
+
+X = data.data
+y = data.target
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state = 22)
+
+estimator_range = [2,4,6,8,10,12,14,16]
+
+models = []
+scores = []
+
+for n_estimators in estimator_range:
+
+    # 创建 bagging 分类器
+    clf = BaggingClassifier(n_estimators = n_estimators, random_state = 22)
+
+    # 拟合模型
+    clf.fit(X_train, y_train)
+
+    # 将模型和分数追加到各自的列表中
+    models.append(clf)
+    scores.append(accuracy_score(y_true = y_test, y_pred = clf.predict(X_test)))
+
+# 生成估计器数量与得分的图
+plt.figure(figsize=(9,6))
+plt.plot(estimator_range, scores)
+
+# 调整标签和字体大小（以便可见）
+plt.xlabel(&quot;n_estimators&quot;, fontsize = 18)
+plt.ylabel(&quot;score&quot;, fontsize = 18)
+plt.tick_params(labelsize = 16)
+
+# 可视化图表
+plt.show()
+</pre>
+
+<p class="tiy"><a target="_blank" href="ta777.html?f=ml_bagging_2_mpl">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<img class="illustration" src="../i/ml/ml_bagging.png" style="width: 90%;">
+</section>
+
+
+
+<section>
+<h2>结果解释</h2>
+
+<p>通过迭代估计器数量的不同值，我们可以看到模型性能从 82.2% 提高到 95.5%。在 14 个估计器之后，准确性开始下降，再次提醒，如果您设置了不同的 <code>random_state</code>，您看到的值将会有所不同。这就是为什么使用<a href="python_ml_cross_validation.html" title="机器学习 - 交叉验证">交叉验证</a>来确保稳定结果的最佳做法。</p>
+
+<p>在这种情况下，我们看到在识别葡萄酒类型方面，准确性提高了 13.3%。</p>
+</section>
+
+
+
+<section>
+<h2>另一种评估形式</h2>
+
+<p>由于引导程序选择观测值的随机子集来创建分类器，因此在选择过程中会留下一些“袋外”观测值。然后可以使用这些“袋外”观测值来评估模型，类似于测试集。请注意，袋外估计可能会高估二元分类问题的误差，并且仅应作为其他指标的补充。</p>
+
+<p>在上一个练习中，我们看到 12 个估计器产生了最高的准确性，因此我们将使用它来创建模型。这次设置参数 <code>oob_score</code> 为 <code>true</code>，以使用袋外得分评估模型。</p>
+
+<h3>实例</h3>
+
+<p>使用袋外指标创建模型。</p>
+
+<pre class="language-python">
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import BaggingClassifier
+
+data = datasets.load_wine(as_frame = True)
+
+X = data.data
+y = data.target
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state = 22)
+
+oob_model = BaggingClassifier(n_estimators = 12, oob_score = True,random_state = 22)
+
+oob_model.fit(X_train, y_train)
+
+print(oob_model.oob_score_)
+</pre>
+
+<p class="tiy"><a target="_blank" href="tc9ef.html?f=ml_bagging_3">亲自试一试</a></p>
+
+<p>由于 OOB 和测试集中使用的样本不同，并且数据集相对较小，因此在准确性方面存在差异。OOB 和测试集的准确率完全相同的情况很少见，OOB 应再次用作估算错误的快速方法，但它不是唯一的评估指标。</p>
+</section>
+
+
+
+<section>
+<h2>从 Bagging 分类器中生成决策树</h2>
+
+<p>正如在<a href="python_ml_decision_tree.html" title="机器学习 - 决策树">决策树</a>课程中所看到的，我们可以绘制出模型创建的决策树图形。我们还可以看到聚合分类器中使用的各个决策树。这有助于我们更直观地了解 bagging 模型如何得出其预测。</p>
+
+<p class="note"><span>注意：</span>这只适用于较小的数据集，其中的树相对较浅且较窄，因此易于可视化。</p>
+
+<p>我们需要从 <code>sklearn.tree</code> 导入 <code>plot_tree</code> 函数。可以通过更改要可视化的估计器来绘制不同的树形图。</p>
+
+<h3>实例</h3>
+
+<p>从 Bagging 分类器中生成决策树：</p>
+
+<pre class="language-python">
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import BaggingClassifier
+from sklearn.tree import plot_tree
+
+X = data.data
+y = data.target
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state = 22)
+
+clf = BaggingClassifier(n_estimators = 12, oob_score = True,random_state = 22)
+
+clf.fit(X_train, y_train)
+
+plt.figure(figsize=(30, 20))
+
+plot_tree(clf.estimators_[0], feature_names = X.columns)
+</pre>
+
+<p class="tiy"><a target="_blank" href="t781a.html?f=ml_bagging_4_mpl">亲自试一试</a></p>
+
+<h4>结果：</h4>
+
+<img class="illustration" src="../i/ml/ml_bagging_2.png" style="width: 90%;">
+
+<p>在这里，我们只能看到用于对最终预测进行投票的第一个决策树。同样，通过更改分类器的索引，您可以看到已聚合的每个树。</p>
+</section>
+
+
+
+<div class="prenextnav">
+<ul class="prenext">
+<li class="pre"><a href="python_ml_k-means.html" title="机器学习 - K-means">K-means</a></li>
+<li class="next"><a href="python_ml_cross_validation.html" title="机器学习 - 交叉验证">交叉验证</a></li>
+</ul>
+</div><div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School ���Ĺ�� -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="2086924285"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="python_reference.html">Python 参考手册</a></h5>
+<h5 id="tools_example"><a href="python_examples.html">Python 实例</a></h5>
+<h5 id="tools_quiz"><a href="python_quiz.html">Python 测验</a></h5>
+</div>
+
+<div id="sidebar_zzs">
+
+<div id="sbtg">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- W3School 侧栏广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="6744370501"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。版权所有，保留一切权利。
+</p>
+
+<p id="p2">
+<a href="../about/index.html" title="关于 W3School">关于 W3School</a>
+<a href="../about/about_helping.html" title="帮助 W3School">帮助 W3School</a>
+<a href="../about/about_use.html" title="关于使用">使用条款</a>
+<a href="../about/about_privacy.html" title="关于隐私">隐私条款</a>
+<a target="_blank" href="https://www.ykinvestment.com/">技术支持：赢科</a>
+<a target="_blank" href="http://beian.miit.gov.cn/">蒙 ICP 备 06004630 号</a>
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+
+</body>
+
+
+<!-- Mirrored from www.w3school.com.cn/python/python_ml_bagging.asp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Mar 2026 02:51:01 GMT -->
+</html>
