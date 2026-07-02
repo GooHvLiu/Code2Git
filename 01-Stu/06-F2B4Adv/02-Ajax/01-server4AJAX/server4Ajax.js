@@ -186,6 +186,7 @@ app.all("/jQuery-jsonp-server", (req, res) => {
 // 3.4 cors-server
 app.all("/cors-server", (req, res) => {
   //设置响应头 设置允许跨域
+
   res.setHeader("Access-Control-Allow-Origin", "*");
   // 1.1 可以直接反馈js代码
   // res.send('console.log("Hello Jsonp")');
