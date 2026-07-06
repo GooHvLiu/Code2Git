@@ -147,3 +147,8 @@ _Individual users can fully use it, please refer to the corresponding statement 
 - _Completed stuProjectsMT project;_
 - _Studying the AJAX_;
 - _Completed studying node.js and express frame;_
+
+###### _July 6, 2026_
+
+- _Completed studying AJAX;_
+- _Studying the Axios_;
