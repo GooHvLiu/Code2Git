@@ -1061,3 +1061,16 @@
 2026-07-07T00:17:01.454299Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
 2026-07-07T00:17:01.501086Z 0 [System] [MY-010931] [Server] C:\Program Files\MySQL\MySQL Server 9.7\bin\mysqld: ready for connections. Version: '9.7.0'  socket: ''  port: 3306  MySQL Community Server - GPL.
 2026-07-07T00:17:01.501237Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060
+2026-07-07T11:14:17.545406Z 0 [System] [MY-013105] [Server] C:\Program Files\MySQL\MySQL Server 9.7\bin\mysqld: Normal shutdown.
+2026-07-07T11:14:18.088463Z 0 [System] [MY-010910] [Server] C:\Program Files\MySQL\MySQL Server 9.7\bin\mysqld: Shutdown complete (mysqld 9.7.0)  MySQL Community Server - GPL.
+2026-07-07T11:14:18.089292Z 0 [System] [MY-015016] [Server] MySQL Server - end.
+2026-07-07T12:47:42.604685Z 0 [System] [MY-015015] [Server] MySQL Server - start.
+2026-07-07T12:47:42.935736Z 0 [System] [MY-010116] [Server] C:\Program Files\MySQL\MySQL Server 9.7\bin\mysqld (mysqld 9.7.0) starting as process 8648
+2026-07-07T12:47:42.936310Z 0 [System] [MY-015603] [Server] MySQL Server has access to 32 logical CPUs.
+2026-07-07T12:47:42.936529Z 0 [System] [MY-015603] [Server] MySQL Server has access to 68388900864 bytes of physical memory.
+2026-07-07T12:47:43.005256Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2026-07-07T12:47:43.616888Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2026-07-07T12:47:44.005996Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2026-07-07T12:47:44.007323Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2026-07-07T12:47:44.073645Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060
+2026-07-07T12:47:44.073941Z 0 [System] [MY-010931] [Server] C:\Program Files\MySQL\MySQL Server 9.7\bin\mysqld: ready for connections. Version: '9.7.0'  socket: ''  port: 3306  MySQL Community Server - GPL.

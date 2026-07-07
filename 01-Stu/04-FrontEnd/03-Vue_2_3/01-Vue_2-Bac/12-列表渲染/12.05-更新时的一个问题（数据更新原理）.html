@@ -39,7 +39,7 @@
             //this.persons[0].sex = '男'//奏效
             // this.persons[0] = { id: '001', name: '马老师', age: 50, sex: '男' }//不奏效
 
-            // 如下方法奏效，是因为vue中修改时数组，只能使用几个进行监控的方式
+            // 如下方法奏效，是因为vue中修改数组时，只能使用几个进行监控的方式push()、pop()、shift()、unshift()、splice()、sort()、reverse()
             this.persons.splice(0, 1, {
               id: "001",
               name: "马老师",
