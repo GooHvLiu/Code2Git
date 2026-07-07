@@ -1,39 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../../favicon.png" type="image/x-icon" />
+    <title>08.02-姓名案例_methods实现</title>
+    <!-- 引入script -->
+    <script type="text/javascript" src="../../js_Tools/vue.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="../../favicon.png" type="image/x-icon">
-  <title>08.02-姓名案例_methods实现</title>
-  <!-- 引入script -->
-  <script type="text/javascript" src="../../js_Tools/vue.js"></script>
-</head>
+  <body>
+    <div id="root">
+      <!-- "v-model:value=" = "v-model="" -->
+      姓：<input type="text" v-model="firstName" /><br /><br />
+      <!-- "v-model:value=" = "v-model="" -->
+      名：<input type="text" v-model="lastName" /><br /><br />
+      全名：<span>{{fullName()}}</span><br /><br />
+    </div>
 
-<body>
-  <div id="root">
-    <!-- "v-model:value=" = "v-model="" -->
-    姓：<input type="text" v-model="firstName"><br><br>
-    <!-- "v-model:value=" = "v-model="" -->
-    名：<input type="text" v-model="lastName"><br><br>
-    全名：<span>{{fullName()}}</span><br><br>
-  </div>
-</body>
-<script type="text/javascript">
-  Vue.config.productionTip = false //阻止Vue在启动时生成生产提示。
+    <script type="text/javascript">
+      Vue.config.productionTip = false; //阻止Vue在启动时生成生产提示。
 
-  new Vue({
-    el: "#root",
-    data: {
-      firstName: '张',
-      lastName: '三'
-    },
-    methods: {
-      fullName() {
-        return this.firstName + '-' + this.lastName
-      }
-    }
-  })
-</script>
-
+      new Vue({
+        el: "#root",
+        data: {
+          firstName: "张",
+          lastName: "三"
+        },
+        methods: {
+          fullName() {
+            return this.firstName + "-" + this.lastName;
+          }
+        }
+      });
+    </script>
+  </body>
 </html>

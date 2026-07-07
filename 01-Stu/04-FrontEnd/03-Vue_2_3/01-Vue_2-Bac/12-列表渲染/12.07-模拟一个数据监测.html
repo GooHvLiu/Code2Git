@@ -1,50 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" href="../../favicon.png" type="image/x-icon" />
+    <title>12.6-Vue监测数据改变的原理</title>
+    <script type="text/javascript" src="../../js_Tools/vue.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="shortcut icon" href="../../favicon.png" type="image/x-icon">
-  <title>12.6-Vue监测数据改变的原理</title>
-  <script type="text/javascript" src="../../js_Tools/vue.js"></script>
-</head>
+  <body>
+    <script type="text/javascript">
+      //模拟vm中的数据创建
+      let data = {
+        name: "BeiJing",
+        address: "Suzhou"
+      };
+      //创建一个监视的实例对象，用于监视data中属性的变化
+      const obs = new Observer(data);
 
-<body>
-  <script type="text/javascript">
+      //准备一个vm实例对象
+      let vm = {};
+      vm._data = data = obs;
 
-    let data = {
-      name: 'BeiJing',
-      address: 'Suzhou',
-    }
+      function Observer(obj) {
+        //汇总对象中所有的属性形成一个数组,数组的内容就是对象的键值
+        const keys = Object.keys(obj);
 
-    //创建一个监视的实例对象，用于监视data中属性的变化
-    const obs = new Observer(data)
-    console.log(obs)
-
-    //准备一个vm实例对象
-    let vm = {}
-    vm._data = data = obs
-
-    function Observer(obj) {
-      //汇总对象中所有的属性形成一个数组
-      const keys = Object.keys(obj)
-      //遍历
-      keys.forEach((k) => {
-        Object.defineProperty(this, k, {
-          get() {
-            return obj[k]
-          },
-          set(val) {
-            console.log(`${k}被改了，我要去解析模板，生成虚拟DOM.....我要开始忙了`)
-            obj[k] = val
-          }
-        })
-      })
-    }
-
-
-
-
-  </script>
-</body>
-
+        //遍历
+        keys.forEach((k) => {
+          Object.defineProperty(this, k, {
+            get() {
+              return obj[k];
+            },
+            set(val) {
+              console.log(
+                `${k}被改了，我要去解析模板，生成虚拟DOM.....我要开始忙了`
+              );
+              obj[k] = val;
+            }
+          });
+        });
+      }
+    </script>
+  </body>
 </html>

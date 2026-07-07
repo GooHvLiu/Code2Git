@@ -1,52 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../../favicon.png" type="image/x-icon" />
+    <title>08.03-姓名案例_计算属性实现</title>
+    <!-- 引入script -->
+    <script type="text/javascript" src="../../js_Tools/vue.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="../../favicon.png" type="image/x-icon">
-  <title>08.03-姓名案例_计算属性实现</title>
-  <!-- 引入script -->
-  <script type="text/javascript" src="../../js_Tools/vue.js"></script>
-</head>
+  <body>
+    <div id="root">
+      姓：<input type="text" v-model="firstName" /><br /><br />
+      名：<input type="text" v-model="lastName" /><br /><br />
+      全名：<span>{{fullName}}</span><br /><br />
+    </div>
 
-<body>
+    <script type="text/javascript">
+      Vue.config.productionTip = false; //阻止Vue在启动时生成生产提示。
 
-  <div id="root">
-    姓：<input type="text" v-model="firstName"><br><br>
-    名：<input type="text" v-model="lastName"><br><br>
-    全名：<span>{{fullName}}</span><br><br>
-  </div>
-</body>
-<script type="text/javascript">
-  Vue.config.productionTip = false //阻止Vue在启动时生成生产提示。
+      const vm = new Vue({
+        el: "#root",
+        data: {
+          firstName: "张",
+          lastName: "三"
+        },
+        computed: {
+          /* //完整写法 - 通过getter和setter来实现完整功能
+          fullName: {
+            get() {
+              return this.firstName + "-" + this.lastName;
+            },
+            set(value) {
+              const arr = value.split("-");
+              this.firstName = arr[0];
+              this.lastName = arr[1];
+            }
+          } */
 
-  const vm = new Vue({
-    el: "#root",
-    data: {
-      firstName: '张',
-      lastName: '三'
-    },
-    computed: {
-      //完整写法
-      /* // fullName: {
-      //   get() {
-      //     return this.firstName + "-" + this.lastName
-      //   },
-      //   set(value) {
-      //     const arr = value.split('-')
-      //     this.firstName = arr[0]
-      //     this.lastName = arr[1]
-      //   }
-      // }
-      */
-
-      //简写-确定只显示不修改,可以省略掉get函数
-      fullName: function () {
-        return this.firstName + "-" + this.lastName
-      }
-    }
-  })
-</script>
-
+          //简写-确定只显示不修改,可以省略掉get函数
+          fullName: function () {
+            return this.firstName + "-" + this.lastName;
+          }
+        }
+      });
+    </script>
+  </body>
 </html>

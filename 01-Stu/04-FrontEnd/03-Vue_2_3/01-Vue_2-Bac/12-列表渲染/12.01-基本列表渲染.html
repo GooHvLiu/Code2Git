@@ -1,98 +1,99 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../../favicon.png" type="image/x-icon" />
+    <title>12.01-基本列表渲染</title>
+    <!-- 引入script -->
+    <script type="text/javascript" src="../../js_Tools/vue.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="../../favicon.png" type="image/x-icon">
-  <title>12.01-基本列表渲染</title>
-  <!-- 引入script -->
-  <script type="text/javascript" src="../../js_Tools/vue.js"></script>
-</head>
-
-<body>
-  <!-- 
+  <body>
+    <!-- 
 				v-for指令:
 						1.用于展示列表数据
 						2.语法：v-for="(item, index) in xxx" :key="yyy"
 						3.可遍历：数组、对象、字符串（用的很少）、指定次数（用的很少）
 		-->
-  <!-- 准备好一个容器 -->
-  <div id="root">
-
-    <!-- 遍历数组 -->
-    <template>
-      <h2>人员名单</h2>
-      <ul>
-        <!-- 单独1个实参 -->
-        <!-- <li v-for="item in persons" :key="item.id">
+    <!-- 准备好一个容器 -->
+    <div id="root">
+      <!-- 遍历数组 -->
+      <template>
+        <h2>人员名单</h2>
+        <ul>
+          <!-- 单独1个实参 -->
+          <!-- <li v-for="item in persons" :key="item.id">
         {{item.name}}-{{item.age}}
       </li> -->
 
-        <!-- 2个实参 -->
-        <li v-for="(item,index) in persons" :key="index">
-          {{item.name}}-{{item.age}}
-        </li>
-      </ul>
-    </template>
+          <!-- 2个实参 -->
+          <li v-for="(item,index) in persons" :key="index">
+            {{item.name}}-{{item.age}}
+          </li>
+        </ul>
+      </template>
 
-    <!-- 遍历对象 -->
-    <template>
-      <h2>车辆信息</h2>
-      <ul>
-        <!-- 2个实参 -->
-        <li v-for="(val,key) in cars" :key="key">
-          {{key}}-{{val}}
-        </li>
-      </ul>
-    </template>
+      <!-- 遍历对象 -->
+      <template>
+        <h2>车辆信息</h2>
+        <ul>
+          <!-- 2个实参 -->
+          <li v-for="(val,key) in cars" :key="key">{{key}}-{{val}}</li>
+        </ul>
+      </template>
 
-    <!-- 遍历字符串（用的少） -->
-    <template>
-      <h2>测试字符串</h2>
-      <ul>
-        <!-- 2个实参 -->
-        <li v-for="(val,key) in str" :key="key">
-          {{key}}-{{val}}
-        </li>
-      </ul>
-    </template>
+      <!-- 遍历字符串（用的少） -->
+      <template>
+        <h2>测试字符串</h2>
+        <ul>
+          <!-- 2个实参 -->
+          <li v-for="(val,key) in str" :key="key">{{key}}-{{val}}</li>
+        </ul>
+      </template>
 
-    <!-- 遍历指定次数（用的少） -->
-    <template>
-      <h2>测试指定次数</h2>
-      <ul>
-        <!-- 2个实参 -->
-        <li v-for="(val,key) in 5" :key="key">
-          {{key}}-{{val}}
-        </li>
-      </ul>
-    </template>
+      <!-- 遍历指定次数（用的少） -->
+      <template>
+        <h2>测试指定次数</h2>
+        <ul>
+          <!-- 2个实参 -->
+          <li v-for="(val,key) in 5" :key="key">{{key}}-{{val}}</li>
+        </ul>
+      </template>
+    </div>
 
-  </div>
-</body>
-<script type="text/javascript">
-  Vue.config.productionTip = false //阻止Vue在启动时生成生产提示。
+    <script type="text/javascript">
+      Vue.config.productionTip = false; //阻止Vue在启动时生成生产提示。
 
-  const vm = new Vue({
-    el: '#root',
-    data: {
-      name: 'BeiJing',
-      persons: [{
-        id: '001', name: '张三', age: '18'
-      }, {
-        id: '002', name: '王五', age: '19'
-      }, {
-        id: '003', name: '赵六', age: '20'
-      }],
-      cars: {
-        name: '奥迪',
-        price: '70W',
-        address: 'SuZhou'
-      },
-      str: 'abfcdesd'
-    }
-  })
-</script>
-
+      const vm = new Vue({
+        el: "#root",
+        data: {
+          name: "BeiJing",
+          persons: [
+            {
+              id: "001",
+              name: "张三",
+              age: "18"
+            },
+            {
+              id: "002",
+              name: "王五",
+              age: "19"
+            },
+            {
+              id: "003",
+              name: "赵六",
+              age: "20"
+            }
+          ],
+          cars: {
+            name: "奥迪",
+            price: "70W",
+            address: "SuZhou"
+          },
+          str: "abfcdesd"
+        }
+      });
+    </script>
+  </body>
 </html>
