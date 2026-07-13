@@ -33,12 +33,8 @@ export default {
   },
   data() {
     return {
-      todos: [
-        { id: "001", title: "抽烟", done: true },
-        { id: "002", title: "喝酒", done: true },
-        { id: "003", title: "烫头", done: true },
-        { id: "004", title: "开车", done: false }
-      ]
+      //初始化时，从本地存储中读取数据
+      todos: JSON.parse(localStorage.getItem("todos")) || []
     };
   },
   computed: {
@@ -86,6 +82,20 @@ export default {
         this.todos = this.todos.filter((todo) => {
           return !todo.done;
         });
+      }
+    }
+  },
+  watch: {
+    /* //将用户输入数据存储在本地，使用本地存储方案，浅层监视无法实现监视对象内部属性
+    todos(newvalue) {
+      localStorage.setItem("todos", JSON.stringify(newvalue));
+    } */
+
+    //将用户输入数据存储在本地，使用本地存储方案，深度监视实现监视对象内部属性
+    todos: {
+      deep: true,
+      handler(value) {
+        localStorage.setItem("todos", JSON.stringify(value));
       }
     }
   }
