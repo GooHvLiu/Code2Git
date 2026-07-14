@@ -1,0 +1,49 @@
+// prisma/schema.prisma
+// 数据源：仅保留provider，删除url（Prisma7禁止在此写url）
+datasource db {
+  provider = "mysql"
+}
+
+// 客户端生成配置（7.x推荐指定output输出目录，不丢类型）
+generator client {
+  provider = "prisma-client-js"
+  // 生成代码输出到项目根generated文件夹，方便导入
+  output   = "../generated/prisma"
+  // 无Rust二进制引擎，适配serverless/轻量化部署
+  engineType = "client"
+}
+
+// 示例模型：用户表
+model User {
+  id        Int      @id @default(autoincrement()) // 自增主键
+  username  String   @unique                      // 唯一索引
+  email     String   @unique
+  password  String
+  nickname  String?                                // 可空字段
+  status    Int      @default(1)                   // 默认值1正常
+  createdAt DateTime @default(now())              // 创建时间自动当前
+  updatedAt DateTime @updatedAt                    // 更新时自动刷新
+  // 一对多关联：一个用户多个设备
+  devices   Device[]
+  // 映射真实数据库表名（可选，默认模型名大写User→user）
+  @@map("sys_user")
+}
+
+// 设备表（一对多关联User）
+model Device {
+  id        Int    @id @default(autoincrement())
+  deviceNo  String @unique
+  name      String
+  status    Int    @default(0)
+  userId    Int
+  // 关联用户外键
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@map("sys_device")
+}
+
+// 枚举类型（状态）
+enum DeviceStatus {
+  OFFLINE
+  RUNNING
+  ERROR
+}
