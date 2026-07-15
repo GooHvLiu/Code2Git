@@ -42,18 +42,21 @@ export default {
       return this.TotalCounts === this.isDoneCounts;
     }
   },
-
+  props: ["todos"],
   methods: {
     //全部选中或者全部取消选中
     SelectedAllOrNot(e) {
-      this.isSelectedOrNot(e.target.checked);
+      // this.isSelectedOrNot(e.target.checked);
+      // 通过自定义事件触发
+      this.$emit("isSelectedOrNot", e.target.checked);
     },
     //清除全部选中待办事项
     clearAllSelected() {
-      this.isClearAllSelected();
+      // this.isClearAllSelected();
+      // 通过自定义事件触发
+      this.$emit("isClearAllSelected");
     }
-  },
-  props: ["todos", "isSelectedOrNot", "isClearAllSelected"]
+  }
 };
 </script>
 

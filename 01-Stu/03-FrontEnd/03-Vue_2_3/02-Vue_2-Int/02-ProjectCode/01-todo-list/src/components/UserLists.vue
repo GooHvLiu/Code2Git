@@ -1,13 +1,7 @@
 <template>
   <!-- 待办事项显示 -->
   <ul class="todo-list">
-    <UserItem
-      v-for="todo in todos"
-      :key="todo.id"
-      :todo="todo"
-      :isCheckedOrNot="isCheckedOrNot"
-      :isDeletedTodo="isDeletedTodo"
-    />
+    <UserItem v-for="todo in todos" :key="todo.id" :todo="todo" />
   </ul>
 </template>
 
@@ -18,7 +12,7 @@ export default {
   components: {
     UserItem
   },
-  props: ["todos", "isCheckedOrNot", "isDeletedTodo"]
+  props: ["todos"]
 };
 </script>
 

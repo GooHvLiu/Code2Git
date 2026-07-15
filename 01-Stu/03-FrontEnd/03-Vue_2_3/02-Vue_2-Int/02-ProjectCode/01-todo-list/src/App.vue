@@ -2,16 +2,12 @@
   <div id="app">
     <div class="todo-page">
       <div class="todo-container">
-        <UserHeader :isAddTodo="isAddTodo" />
-        <UserLists
-          :todos="todos"
-          :isCheckedOrNot="isCheckedOrNot"
-          :isDeletedTodo="isDeletedTodo"
-        />
+        <UserHeader v-on:isAddTodo="isAddTodo" />
+        <UserLists :todos="todos" />
         <UserFooter
           :todos="todos"
-          :isSelectedOrNot="isSelectedOrNot"
-          :isClearAllSelected="isClearAllSelected"
+          v-on:isSelectedOrNot="isSelectedOrNot"
+          v-on:isClearAllSelected="isClearAllSelected"
           v-show="isShowOrNot"
         />
       </div>
@@ -98,6 +94,16 @@ export default {
         localStorage.setItem("todos", JSON.stringify(value));
       }
     }
+  },
+  //通过创建自定义事件，实现总线通讯
+  mounted() {
+    this.$bus.$on("isCheckedOrNot", this.isCheckedOrNot);
+    this.$bus.$on("isDeletedTodo", this.isDeletedTodo);
+  },
+  //在创建组件销毁前进行注销全局总线
+  beforeDestroy() {
+    this.$bus.$off("isCheckedOrNot");
+    this.$bus.$off("isDeletedTodo");
   }
 };
 </script>

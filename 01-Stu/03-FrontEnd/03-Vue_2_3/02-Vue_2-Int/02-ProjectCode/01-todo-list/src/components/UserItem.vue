@@ -19,15 +19,15 @@ export default {
   name: "UserItem",
   methods: {
     isChecked(todoId) {
-      this.isCheckedOrNot(todoId);
+      this.$bus.$emit("isCheckedOrNot", todoId);
     },
     deleteTodo(todoId) {
       if (confirm("确定要删除么？")) {
-        this.isDeletedTodo(todoId);
+        this.$bus.$emit("isDeletedTodo", todoId);
       }
     }
   },
-  props: ["todo", "isCheckedOrNot", "isDeletedTodo"]
+  props: ["todo"]
 };
 </script>
 
