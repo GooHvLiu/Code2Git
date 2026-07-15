@@ -1,81 +1,83 @@
 <template>
   <!-- 页脚显示 -->
-  <div class="todo-footer" v-show="todosTotal">
+  <div class="todo-footer">
     <label>
-      <input type="checkbox" name="" id="" :checked="isSelected" @change="modifySeclectedStutas">
+      <input
+        type="checkbox"
+        name=""
+        id=""
+        :checked="isAll"
+        @change="SelectedAllOrNot"
+      />
     </label>
     <span>
-      <span>已完成{{doneTotal}}</span> /全部{{todosTotal}}
-    </span>
-    <button class="btn btn-danger" @click="clearSelected">清除已完成任务</button>
+      <span>已完成 {{ isDoneCounts }} 条</span> /共 {{ TotalCounts }} 条</span
+    >
+    <button class="btn btn-danger" @click="clearAllSelected">
+      清除已完成任务
+    </button>
   </div>
 </template>
 
 <script>
-
-  export default {
-    name:'UserFooter',
-    // 如下为基础版本的引入变量
-    // props:['todos','updateTodo','clearSelectedTodos'],
-    //如下为使用自定义事件实现的功能
-    props:['todos'],
-    computed:{
-      doneTotal(){
-        let i=0
-        this.todos.forEach((todo)=>{
-          if(todo.done){
-            i++
-          }
-        })
-        return i
-      },
-      todosTotal(){
-        return this.todos.length
-      },
-      isSelected(){
-       return this.todosTotal===this.doneTotal && this.todosTotal>0
-      }
+export default {
+  name: "UserFooter",
+  computed: {
+    // 计算当前一共多少条待办事项
+    TotalCounts() {
+      return this.todos.length;
     },
-    methods:{
-      modifySeclectedStutas(e){
-        //使用常规标准方法实现的功能
-        // this.updateTodo(e.target.checked)
-        
-        //使用自定义事件实现的功能
-        this.$emit('updateTodo',e.target.checked)
-      },
-      clearSelected(){
-        //使用常规标准方法实现的功能
-        // this.clearSelectedTodos()
-
-        //使用自定义事件实现的功能
-        this.$emit('clearSelectedTodos')
-      }
+    // 计算当前一共多少条已完成待办事项
+    isDoneCounts() {
+      let todoCounts = 0;
+      this.todos.forEach((todo) => {
+        if (todo.done) {
+          todoCounts++;
+        }
+      });
+      return todoCounts;
+    },
+    // 通过checked属性进行计算赋值
+    isAll() {
+      return this.TotalCounts === this.isDoneCounts;
     }
-  }
+  },
+
+  methods: {
+    //全部选中或者全部取消选中
+    SelectedAllOrNot(e) {
+      this.isSelectedOrNot(e.target.checked);
+    },
+    //清除全部选中待办事项
+    clearAllSelected() {
+      this.isClearAllSelected();
+    }
+  },
+  props: ["todos", "isSelectedOrNot", "isClearAllSelected"]
+};
 </script>
 
-<style  scoped>
-  /*footer css sets*/
-  .todo-footer {
-    height: 40px;
-    line-height: 40px;
-    padding-left: 6px;
-    margin-top: 5px;
-  }
-  .todo-footer label {
-    display: inline-block;
-    margin-right: 20px;
-    cursor: pointer;
-  }
-  .todo-footer label input {
-    position: relative;
-    top: -1px;
-    vertical-align: middle;
-    margin-right: 5px;
-  }
-  .todo-footer button {
-    float: right;
-    margin-top: 5px;
-  }
+<style scoped>
+/*footer css sets*/
+.todo-footer {
+  height: 40px;
+  line-height: 40px;
+  padding-left: 6px;
+  margin-top: 5px;
+}
+.todo-footer label {
+  display: inline-block;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.todo-footer label input {
+  position: relative;
+  top: -1px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+.todo-footer button {
+  float: right;
+  margin-top: 5px;
+}
 </style>
