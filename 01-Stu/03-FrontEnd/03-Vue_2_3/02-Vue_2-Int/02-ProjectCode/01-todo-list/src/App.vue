@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import pubsub from "pubsub-js";
 import UserHeader from "./components/UserHeader";
 import UserFooter from "./components/UserFooter";
 import UserLists from "./components/UserLists";
@@ -59,8 +60,8 @@ export default {
         }
       });
     },
-    //todo事项 被删除
-    isDeletedTodo(todoId) {
+    //todo事项 被删除，"_"为占位符，用于消息订阅与发布使用
+    isDeletedTodo(_, todoId) {
       this.todos = this.todos.filter((todo) => {
         return todo.id != todoId;
       });
@@ -79,6 +80,14 @@ export default {
           return !todo.done;
         });
       }
+    },
+    //todo事项 被编辑
+    updateTodo(id, title) {
+      this.todos.forEach((todo) => {
+        if (todo.id === id) {
+          todo.title = title;
+        }
+      });
     }
   },
   watch: {
@@ -95,15 +104,23 @@ export default {
       }
     }
   },
-  //通过创建自定义事件，实现总线通讯
   mounted() {
+    //通过全局事件总线实现总线通讯
     this.$bus.$on("isCheckedOrNot", this.isCheckedOrNot);
-    this.$bus.$on("isDeletedTodo", this.isDeletedTodo);
+    // this.$bus.$on("isDeletedTodo", this.isDeletedTodo);
+    //通过消息订阅与发布实现
+    this.pubId = pubsub.subscribe("isDeletedTodo", this.isDeletedTodo);
+
+    //通过事件总线实现编辑功能
+    this.$bus.$on("isUpdateTitle", this.updateTodo);
   },
-  //在创建组件销毁前进行注销全局总线
+
   beforeDestroy() {
-    this.$bus.$off("isCheckedOrNot");
-    this.$bus.$off("isDeletedTodo");
+    //在组件销毁前进行注销全局总线
+    this.$bus.$off(["isCheckedOrNot", "isUpdateTitle"]);
+    // this.$bus.$off("isDeletedTodo");
+    //在组件销毁前进行注销 消息订阅与发布
+    pubsub.unsubscribe(this.pubId);
   }
 };
 </script>
@@ -145,6 +162,16 @@ ul {
 .btn-danger:hover {
   color: #fff;
   background-color: #bd362f;
+}
+.btn-edit {
+  color: #fff;
+  background-color: skyblue;
+  border: 1px solid skyblue;
+  margin-right: 5px;
+}
+.btn-edit:hover {
+  color: #fff;
+  background-color: rgb(68, 148, 179);
 }
 .todo-page {
   width: 600px;

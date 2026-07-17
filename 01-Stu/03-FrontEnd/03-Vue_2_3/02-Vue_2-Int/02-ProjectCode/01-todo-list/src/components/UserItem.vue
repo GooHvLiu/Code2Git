@@ -8,23 +8,57 @@
         :checked="todo.done"
         @change="isChecked(todo.id)"
       />
-      <span>{{ todo.title }}</span>
+      <span v-show="!todo.isEdit">{{ todo.title }}</span>
+      <input
+        v-show="todo.isEdit"
+        type="text"
+        :value="todo.title"
+        @blur="HandleBlur(todo, $event)"
+      />
     </label>
+
     <button class="btn btn-danger" @click="deleteTodo(todo.id)">删除</button>
+    <button
+      v-show="!todo.isEdit"
+      class="btn btn-danger btn-edit"
+      @click="editTodo(todo)"
+    >
+      编辑
+    </button>
   </li>
 </template>
 
 <script>
+import pubsub from "pubsub-js";
 export default {
   name: "UserItem",
   methods: {
     isChecked(todoId) {
       this.$bus.$emit("isCheckedOrNot", todoId);
     },
+    //删除按钮
     deleteTodo(todoId) {
       if (confirm("确定要删除么？")) {
-        this.$bus.$emit("isDeletedTodo", todoId);
+        //如下为使用全局事件总线实现的
+        // this.$bus.$emit("isDeletedTodo", todoId);
+        //如下为使用消息订阅与发布实现的,如下为发布
+        pubsub.publish("isDeletedTodo", todoId);
       }
+    },
+    //编辑按钮
+    editTodo(todo) {
+      if (Object.hasOwn(todo, "isEdit")) {
+        todo.isEdit = true;
+      } else {
+        this.$set(todo, "isEdit", true);
+      }
+    },
+    //失去焦点
+    HandleBlur(todo, e) {
+      todo.isEdit = false;
+      if (!e.target.value.trim()) return alert("输入不能为空");
+      //通过事件总线绑定自定义事件
+      this.$bus.$emit("isUpdateTitle", todo.id, e.target.value);
     }
   },
   props: ["todo"]
