@@ -11,6 +11,7 @@
       <span v-show="!todo.isEdit">{{ todo.title }}</span>
       <input
         v-show="todo.isEdit"
+        ref="inputTitle"
         type="text"
         :value="todo.title"
         @blur="HandleBlur(todo, $event)"
@@ -52,6 +53,9 @@ export default {
       } else {
         this.$set(todo, "isEdit", true);
       }
+      this.$nextTick(function () {
+        this.$refs.inputTitle.focus();
+      });
     },
     //失去焦点
     HandleBlur(todo, e) {
