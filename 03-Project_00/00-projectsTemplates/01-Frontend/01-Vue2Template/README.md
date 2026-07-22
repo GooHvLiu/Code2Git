@@ -144,6 +144,38 @@ import { Button } from "element-ui";
 Vue.use(Button);
 ```
 
+##### 网络请求
+
+###### axios安装
+
+```bash
+PS F:\CodingMan\Code2Git\03-Project_00\00-projectsTemplates\01-Frontend\01-Vue2Template> npm i axios
+128 packages are looking for funding
+  run `npm fund` for details
+```
+
+###### axios引入
+
+本案例已经引入`axios`请求库，并创建`/src/common/request`下两个示例供使用：
+
+`login.request.js`的源代码：
+
+```js
+import axios from "axios";
+
+// ESModule 向服务器 异步 获取 数据请求 获取验证码接口
+export async function requestCaptchaCode() {
+  const res = await axios.get("/prod-api/captchaImage");
+  return res.data;
+}
+```
+
+`index.request.js`的源代码：
+
+```js
+export { requestCaptchaCode } from "./login.request.js";
+```
+
 #### 模板使用
 
 ##### 项目名称

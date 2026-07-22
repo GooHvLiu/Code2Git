@@ -8,7 +8,17 @@ module.exports = defineConfig({
     // 启动自动打开浏览器
     open: true,
     // 允许局域网其他设备访问本机项目
-    host: "0.0.0.0"
+    host: "0.0.0.0",
+    // 配置vue服务器代理
+    proxy: {
+      "/prod-api": {
+        // 后端真实地址（仅本地开发生效）
+        target: "http://127.0.0.1:3002",
+        changeOrigin: true
+        // 路径重写：不需要则删除
+        // pathRewrite: { '^/prod-api': '' }
+      }
+    }
   },
   configureWebpack: {
     resolve: {

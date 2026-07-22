@@ -1,6 +1,2 @@
-const { validateUsername } = require("./login.validate.js");
-console.log("123");
-
-module.exports = {
-  validateUsername
-};
+// ESModule方式
+export { validateUsername } from "./login.validate.js";

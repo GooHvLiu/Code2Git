@@ -29,7 +29,8 @@
             <el-input v-model="ruleForm.captchacode"></el-input>
             <img
               height="40"
-              src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='40'><rect width='120' height='40' fill='%23f2f2f2'/><path d='M10,15 L110,25' stroke='%23666' stroke-width='1'/><path d='M20,30 L90,10' stroke='%23666' stroke-width='1'/><text x='15' y='28' font-size='26' fill='%23222' font-family='Arial'>7sK2</text></svg>"
+              :src="captchaCode.src"
+              @click="getCaptchaCode"
               style="cursor: pointer"
             />
           </div>
@@ -49,16 +50,19 @@
 
 <script>
 import { validateUsername } from "@/utils/index.validate.js";
+import { requestCaptchaCode } from "@/common/request/index.request.js";
 export default {
   name: "UserLogin",
   components: {},
   data() {
+    // 需要验证的字段定义
     return {
       ruleForm: {
         username: "",
         password: "",
         captchacode: ""
       },
+      // 字段验证规则
       rules: {
         username: [
           {
@@ -91,11 +95,17 @@ export default {
             trigger: "blur"
           }
         ]
+      },
+      // 验证码和唯一标识
+      captchaCode: {
+        src: "",
+        uuid: ""
       }
     };
   },
   computed: {},
   methods: {
+    // 点击登录提交按钮
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -111,9 +121,31 @@ export default {
           return false;
         }
       });
+    },
+    // 获取 二维码 进行
+    async getCaptchaCode() {
+      const res = await requestCaptchaCode();
+
+      try {
+        if (res.code === 200) {
+          const svgText = res.data.img;
+          this.captchaCode.src = `data:image/svg+xml;utf8,${encodeURIComponent(
+            svgText
+          )}`;
+          this.captchaCode.uuid = res.data.uuid;
+          return;
+        } else {
+          this.$message.error("已连接服务器，但获取数据失败");
+        }
+      } catch (error) {
+        this.$message.error("服务器获取数据失败，请稍后再试");
+      }
     }
   },
-  mounted() {}
+  mounted() {
+    //项目挂载就获取验证码
+    this.getCaptchaCode();
+  }
 };
 </script>
 

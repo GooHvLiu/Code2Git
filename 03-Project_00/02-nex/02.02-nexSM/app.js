@@ -6,6 +6,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
+var captchaRouter = require("./routes/captcha.route");
 
 var app = express();
 //全域开启跨域
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
+app.use("/", captchaRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
