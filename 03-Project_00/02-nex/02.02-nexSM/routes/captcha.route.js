@@ -55,4 +55,51 @@ router.get("/prod-api/captchaImage", function (req, res, next) {
   }
 });
 
+// 路由 登录
+router.post("/prod-api/login", function (req, res) {
+  const { username, password, code, uuid } = req.body;
+
+  // 1. 根据uuid查询缓存
+  const cacheInfo = captchaStore.get(uuid);
+
+  // 场景1：uuid不存在 / 已过期
+  if (!cacheInfo) {
+    return res.json({
+      code: 400,
+      msg: "验证码已失效，请重新获取验证码",
+      data: null
+    });
+  }
+
+  // 场景2：验证码不匹配
+  if (cacheInfo.code !== code.toLowerCase()) {
+    return res.json({
+      code: 400,
+      msg: "验证码输入错误",
+      data: null
+    });
+  }
+
+  // 场景3：账号密码校验（模拟）
+  if (username !== "admin" || password !== "123456") {
+    return res.json({
+      code: 400,
+      msg: "用户名或者密码错误",
+      data: null
+    });
+  }
+
+  // 验证码 校验通过，删除验证码（防止重复使用）
+  captchaStore.delete(uuid);
+
+  // 验证码&用户名&密码 全部校验成功
+  res.json({
+    code: 200,
+    msg: "登录成功",
+    data: {
+      token: "模拟token字符串"
+    }
+  });
+});
+
 module.exports = router;

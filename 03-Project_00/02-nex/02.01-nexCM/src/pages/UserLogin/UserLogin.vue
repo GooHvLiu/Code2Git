@@ -29,7 +29,7 @@
             <el-input v-model="ruleForm.captchacode"></el-input>
             <img
               height="40"
-              :src="captchaCode.src"
+              :src="captchaCodeSrc"
               @click="getCaptchaCode"
               style="cursor: pointer"
             />
@@ -50,7 +50,10 @@
 
 <script>
 import { validateUsername } from "@/utils/index.validate.js";
-import { requestCaptchaCode } from "@/common/request/index.request.js";
+import {
+  requestCaptchaCodeAPI,
+  requestLoginApi
+} from "@/common/request/index.api.js";
 export default {
   name: "UserLogin",
   components: {},
@@ -96,11 +99,8 @@ export default {
           }
         ]
       },
-      // 验证码和唯一标识
-      captchaCode: {
-        src: "",
-        uuid: ""
-      }
+      // 验证码验证
+      captchaCodeSrc: ""
     };
   },
   computed: {},
@@ -109,9 +109,17 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$message({
-            message: "恭喜你，这是一条成功消息",
-            type: "success"
+          // this.$message({
+          //   message: "恭喜你，这是一条成功消息",
+          //   type: "success"
+          // });
+
+          requestLoginApi({
+            username: this.ruleForm.username,
+            password: this.ruleForm,
+            password,
+            code: this.ruleForm.captchacode,
+            uuid: localStorage.getItem("nexCM-captcha-uuid")
           });
         } else {
           this.$message({
@@ -124,15 +132,14 @@ export default {
     },
     // 获取 二维码 进行
     async getCaptchaCode() {
-      const res = await requestCaptchaCode();
-
+      const res = await requestCaptchaCodeAPI();
       try {
         if (res.code === 200) {
           const svgText = res.data.img;
-          this.captchaCode.src = `data:image/svg+xml;utf8,${encodeURIComponent(
+          this.captchaCodeSrc = `data:image/svg+xml;utf8,${encodeURIComponent(
             svgText
           )}`;
-          this.captchaCode.uuid = res.data.uuid;
+          localStorage.setItem("nexCM-captcha-uuid", res.data.uuid);
           return;
         } else {
           this.$message.error("已连接服务器，但获取数据失败");

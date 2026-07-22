@@ -156,24 +156,67 @@ PS F:\CodingMan\Code2Git\03-Project_00\00-projectsTemplates\01-Frontend\01-Vue2T
 
 ###### axios引入
 
-本案例已经引入`axios`请求库，并创建`/src/common/request`下两个示例供使用：
+本案例已经引入`axios`请求库，并创建`/src/common/request`下三个示例供使用：
 
-`login.request.js`的源代码：
+```文本
+request/
+├── index.js          # 【核心：axios实例 + 请求/响应拦截器】
+├── login.api.js      # 【业务接口：登录相关所有请求】
+└── index.api.js      # 【汇总导出：统一入口，集中导出所有接口】
+```
+
+`index.js`的源代码：
 
 ```js
+/**
+ * axios实例 + 请求/响应拦截器
+ */
 import axios from "axios";
+const server = axios.create({
+  baseURL: "/prod-api",
+  timeout: 100000
+});
+
+// 请求拦截器
+server.interceptors.request.use(
+  (config) => {
+    return config;
+  },
+  (err) => {
+    return Promise.reject(err);
+  }
+);
+
+// 响应拦截器
+server.interceptors.response.use(
+  (res) => {
+    return res.data;
+  },
+  (err) => {
+    return Promise.reject(err);
+  }
+);
+
+export default server;
+
+```
+
+`login.api.js`的源代码：
+
+```js
+import server from "./index";
 
 // ESModule 向服务器 异步 获取 数据请求 获取验证码接口
 export async function requestCaptchaCode() {
-  const res = await axios.get("/prod-api/captchaImage");
-  return res.data;
+  const res = await server.get("/captchaImage");
+  return res;
 }
 ```
 
-`index.request.js`的源代码：
+`index.api.js`的源代码：
 
 ```js
-export { requestCaptchaCode } from "./login.request.js";
+export { requestCaptchaCode } from "./login.api.js";
 ```
 
 #### 模板使用
