@@ -1,17 +1,17 @@
-### 项目模板
+### 前端模板
+
+#### 版本说明
+
+##### <span style="color:grey;font-family:楷体" >_July 21, 2026_</span>
+
+- <span style="color:orange;font-family:楷体" >前端 Vue2.0 框架；</span>
+- <span style="color:orange;font-family:楷体" >文件夹可以设定别名;</span>
+- <span style="color:orange;font-family:楷体" >项目样式可采用 less 书写;</span>
+- <span style="color:orange;font-family:楷体" >标配`reset.css`重置样式;</span>
+- <span style="color:orange;font-family:楷体" >前端路由标配和自动挂载 UI 组件库；</span>
+- <span style="color:orange;font-family:楷体" >支持服务器端口/局域网内是否可以访问/自动打开浏览器设置修改；</span>
 
 #### 模板功能
-
-##### 版本说明
-
-###### <span style="color:grey;font-family:楷体" >_July 21, 2026_</span>
-
-- <span style="color:orange;font-family:楷体" >前端Vue2.0框架；</span>
-- <span style="color:orange;font-family:楷体" >文件夹可以设定别名;</span>
-- <span style="color:orange;font-family:楷体" >项目样式可采用less书写;</span>
-- <span style="color:orange;font-family:楷体" >标配`reset.css`重置样式;</span>
-- <span style="color:orange;font-family:楷体" >前端路由标配和自动挂载UI组件库；</span>
-- <span style="color:orange;font-family:楷体" >支持服务器端口/局域网内是否可以访问/自动打开浏览器设置修改；</span>
 
 ##### 重置样式
 
@@ -50,7 +50,7 @@ import "reset-css";
 
 ##### 样式转换
 
-通常喜欢使用less书写样式的情况下，模板自带`样式转换`，需要`less-loader`转换依赖：
+通常喜欢使用 less 书写样式的情况下，模板自带`样式转换`，需要`less-loader`转换依赖：
 
 ```bash
 PS F:\CodingMan\Code2Git\01-Stu\07-StuProject\00-Vue2Template> npm i less-loader
@@ -59,7 +59,7 @@ added 17 packages in 2s
 
 127 packages are looking for funding
   run `npm fund` for details
-  
+
 PS F:\CodingMan\Code2Git\01-Stu\07-StuProject\00-Vue2Template> npm install less -D
 
 up to date in 1s
@@ -94,7 +94,7 @@ run `npm fund` for details
 
 ##### 前端路由
 
-已经在`main.js`中挂载并应用前端路由vue-router：
+已经在`main.js`中挂载并应用前端路由 vue-router：
 
 ```js
 //全局挂载路由
@@ -133,7 +133,7 @@ export default new VueRouter({
 >
 > 3. 重定向和主页路径需要调整；
 
-##### UI组件库
+##### UI 组件库
 
 本模板`main.js`默认引入`element-ui`组件库的`Button`，并挂载到`App.vue`组件上：
 
@@ -148,14 +148,14 @@ Vue.use(Button);
 
 ##### 项目名称
 
-* 修改文件夹名称`Vue2Template`为项目名称`nexM`;
-* 修改项目内文件`package.json`内的项目名称为`nexM`，共计1处；
-* 修改项目内文件`package-lock.json`内的项目名称为`nexM`，共计2处；
+- 修改文件夹名称`Vue2Template`为项目名称`nexCM`;
+- 修改项目内文件`package.json`内的项目名称为`nexCM`，共计 1 处；
+- 修改项目内文件`package-lock.json`内的项目名称为`nexCM`，共计 2 处；
 
 ##### 项目资源
 
-* 修改`public/favicon.ico`为项目图标；
-* 修改`public/index.html`内的图标引用和项目文件名称；
+- 修改`public/favicon.ico`为项目图标；
+- 修改`public/index.html`内的图标引用和项目文件名称；
 
 ##### 前端路由
 
@@ -187,7 +187,7 @@ export default new VueRouter({
 
 ##### 安装依赖
 
-进入项目文件夹`nexM`，并执行`npm install`
+进入项目文件夹`nexCM`，并执行`npm install`
 
 ```bash
 PS F:\CodingMan\Code2Git\01-Stu\07-StuProject\nexM> npm i
@@ -204,4 +204,3 @@ added 931 packages in 17s
 ```bash
 npm run serve
 ```
-
