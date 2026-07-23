@@ -3,16 +3,15 @@ var router = express.Router();
 // 引入 生成验证码 和 唯一标识 依赖
 const svgCaptcha = require("svg-captcha");
 const { v4: uuidv4 } = require("uuid");
+// 引入jwt
+const jwt = require("jsonwebtoken");
+
 // 定义全局存储容器，放在最上方
 const captchaStore = new Map();
 
-// 路由 主页
-router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
-});
 
 // 路由 验证码
-router.get("/prod-api/captchaImage", function (req, res, next) {
+router.get("/captchaImage", function (req, res, next) {
   try {
     // 1. 生成验证码
     const cap = svgCaptcha.create({
@@ -26,10 +25,10 @@ router.get("/prod-api/captchaImage", function (req, res, next) {
     // 2. 创建唯一uuid
     const uuid = uuidv4();
 
-    // 3.1 保存验证码文本，有效期5分钟
+    // 3.1 保存验证码文本，有效期1分钟
     captchaStore.set(uuid, {
       code: cap.text.toLowerCase(),
-      expire: Date.now() + 5 * 60 * 1000
+      expire: Date.now() + 1 * 60 * 1000
     });
     // 3.2 自动清理过期验证码（简易方案）
     for (const [key, val] of captchaStore.entries()) {
@@ -56,7 +55,7 @@ router.get("/prod-api/captchaImage", function (req, res, next) {
 });
 
 // 路由 登录
-router.post("/prod-api/login", function (req, res) {
+router.post("/login", function (req, res) {
   const { username, password, code, uuid } = req.body;
   console.log(req.body);
 
@@ -93,12 +92,21 @@ router.post("/prod-api/login", function (req, res) {
   // 验证码 校验通过，删除验证码（防止重复使用）
   captchaStore.delete(uuid);
 
+  // 生成真实JWT Token,可以存放角色、用户id等非敏感信息，不要放密码！
+  const JWT_SECRET=process.env.JWT_SECRET
+  const JWT_EXPIRES=process.env.JWT_EXPIRES
+  const payload = {
+    username: username,
+    userId: 1
+  };
+  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES });
+
   // 验证码&用户名&密码 全部校验成功
   res.json({
     code: 200,
     msg: "登录成功",
-    data: {
-      token: "模拟token字符串"
+    data:{
+      token:token
     }
   });
 });

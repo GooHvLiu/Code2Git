@@ -9,10 +9,6 @@ export default new VueRouter({
       name: "login",
       path: "/login",
       component: UserLogoin
-    },
-    {
-      path: "/",
-      redirect: "/login"
     }
   ]
 });
