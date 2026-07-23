@@ -5,6 +5,9 @@ import App from "./App.vue";
 // 全局挂载路由
 import VueRouter from "vue-router";
 
+// 引入store
+import store from "./store";
+
 // 引入对应按需使用的插件名称
 import { Button } from "element-ui";
 
@@ -20,5 +23,6 @@ Vue.use(Button);
 
 new Vue({
   render: (h) => h(App),
+  store,
   router
 }).$mount("#app");

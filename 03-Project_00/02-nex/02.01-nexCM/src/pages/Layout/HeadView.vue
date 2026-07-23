@@ -1,19 +1,20 @@
 <template>
   <div class="HeadView">
     <el-button
-      icon="el-icon-s-fold"
+      icon="el-icon-s-unfold"
       v-show="!isShow"
-      @click="isShow = !isShow"
+      @click="changeShow"
     ></el-button
     ><el-button
-      icon="el-icon-s-unfold"
+      icon="el-icon-s-fold"
       v-show="isShow"
-      @click="isShow = !isShow"
+      @click="changeShow"
     ></el-button>
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   name: "HeadView",
   components: {},
@@ -23,7 +24,12 @@ export default {
     };
   },
   computed: {},
-  methods: {},
+  methods: {
+    ...mapMutations("navCollapse", ["changeIsCollapse"]),
+    changeShow() {
+      this.changeIsCollapse(), (this.isShow = !this.isShow);
+    }
+  },
   mounted() {}
 };
 </script>

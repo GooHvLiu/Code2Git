@@ -1,6 +1,7 @@
 <template>
   <div class="NavBar">
     <el-menu
+      unique-opened="true"
       default-active="1"
       class="el-menu-vertical-demo"
       @open="handleOpen"
@@ -8,6 +9,8 @@
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b"
+      :collapse="isCollapse"
+      :collapse-transition="false"
     >
       <el-submenu index="1">
         <template slot="title">
@@ -27,18 +30,35 @@
         <i class="el-icon-menu"></i>
         <span slot="title">导航二</span>
       </el-menu-item>
+      <el-submenu index="3">
+        <template slot="title">
+          <i class="el-icon-location"></i>
+          <span>导航三</span>
+        </template>
+        <el-menu-item index="3-1">选项1</el-menu-item>
+        <el-menu-item index="3-2">选项2</el-menu-item>
+        <el-menu-item index="3-3">选项3</el-menu-item>
+        <el-submenu index="3-4">
+          <template slot="title">选项4</template>
+          <el-menu-item index="3-4-1">选项4-1</el-menu-item>
+          <el-menu-item index="3-4-1">选项4-2</el-menu-item>
+        </el-submenu>
+      </el-submenu>
     </el-menu>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "NavBar",
   components: {},
   data() {
     return {};
   },
-  computed: {},
+  computed: {
+    ...mapState("navCollapse", ["isCollapse"])
+  },
   methods: {},
   mounted() {}
 };
@@ -50,5 +70,8 @@ export default {
   height: 100%;
   background-color: #304156;
   box-shadow: 6px 0 5px #eee;
+  .el-menu {
+    border: none;
+  }
 }
 </style>

@@ -3,6 +3,8 @@ import Vue from "vue";
 import App from "./App.vue";
 // 引入路由权限守卫，加载即生效
 import "./router/permission";
+//引入store
+import store from "./store/index.js";
 
 // 全局挂载路由
 import VueRouter from "vue-router";
@@ -41,5 +43,9 @@ Vue.prototype.$message = Message;
 
 new Vue({
   render: (h) => h(App),
-  router
+  store,
+  router,
+  beforeCreate() {
+    Vue.prototype.$bus = this;
+  }
 }).$mount("#app");

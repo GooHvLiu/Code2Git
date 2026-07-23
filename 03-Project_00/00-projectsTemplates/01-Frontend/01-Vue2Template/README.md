@@ -6,6 +6,7 @@
 
 - <span style="color:orange;font-family:楷体" >前端 Vue2.0 框架；</span>
 - <span style="color:orange;font-family:楷体" >文件夹可以设定别名;</span>
+- <span style="color:orange;font-family:楷体" >配置状态管理Vuex;</span>
 - <span style="color:orange;font-family:楷体" >项目样式可采用 less 书写;</span>
 - <span style="color:orange;font-family:楷体" >标配`reset.css`重置样式;</span>
 - <span style="color:orange;font-family:楷体" >前端路由标配和自动挂载 UI 组件库；</span>
@@ -133,7 +134,60 @@ export default new VueRouter({
 >
 > 3. 重定向和主页路径需要调整；
 
-##### UI 组件库
+##### 状态管理
+
+本模板`main.js`默认引入`状态管理工具Vuex`：
+
+```js
+import "reset-css";
+import Vue from "vue";
+import App from "./App.vue";
+
+// 全局挂载路由
+import VueRouter from "vue-router";
+
+// 引入store
+import store from "./store";
+
+// 引入对应按需使用的插件名称
+import { Button } from "element-ui";
+
+// 引入路由配置
+import router from "@router/index.js";
+
+Vue.config.productionTip = false;
+// 使用对应的路由
+Vue.use(VueRouter);
+
+// 使用对应的 UI库 插件
+Vue.use(Button);
+
+new Vue({
+  render: (h) => h(App),
+  store,
+  router,
+  beforeCreate() {
+    Vue.prototype.$bus = this;
+  }
+}).$mount("#app");
+```
+
+在`src/store/index.js`:
+
+```js
+import Vue from "vue";
+import Vuex from "vuex";
+Vue.use(Vuex);
+export default new Vuex.Store({
+  state: {},
+  getters: {},
+  mutations: {},
+  actions: {},
+  modules: {}
+});
+```
+
+##### UI组件库
 
 本模板`main.js`默认引入`element-ui`组件库的`Button`，并挂载到`App.vue`组件上：
 
