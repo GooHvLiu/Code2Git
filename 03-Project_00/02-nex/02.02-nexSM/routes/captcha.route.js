@@ -58,6 +58,7 @@ router.get("/prod-api/captchaImage", function (req, res, next) {
 // 路由 登录
 router.post("/prod-api/login", function (req, res) {
   const { username, password, code, uuid } = req.body;
+  console.log(req.body);
 
   // 1. 根据uuid查询缓存
   const cacheInfo = captchaStore.get(uuid);

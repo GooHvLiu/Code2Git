@@ -8,6 +8,6 @@ export async function requestCaptchaCodeAPI() {
 
 // ESModule 向服务器 异步 登录验证接口
 export async function requestLoginApi(params) {
-  const loginRes = await server.get("/login");
+  const loginRes = await server.post("/login", params);
   return loginRes;
 }

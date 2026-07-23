@@ -106,21 +106,22 @@ export default {
   computed: {},
   methods: {
     // 点击登录提交按钮
-    submitForm(formName) {
+    async submitForm(formName) {
+      const loginCode = await requestLoginApi({
+        username: this.ruleForm.username,
+        password: this.ruleForm.password,
+        code: this.ruleForm.captchacode,
+        uuid: localStorage.getItem("nexCM-captcha-uuid")
+      });
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          // this.$message({
-          //   message: "恭喜你，这是一条成功消息",
-          //   type: "success"
-          // });
-
-          requestLoginApi({
-            username: this.ruleForm.username,
-            password: this.ruleForm,
-            password,
-            code: this.ruleForm.captchacode,
-            uuid: localStorage.getItem("nexCM-captcha-uuid")
-          });
+          if (loginCode.code === 200) {
+            console.log(loginCode.msg);
+            this.getCaptchaCode();
+          } else {
+            console.log(loginCode.msg);
+            this.getCaptchaCode();
+          }
         } else {
           this.$message({
             message: "输入的信息有误，请重新输入。",
