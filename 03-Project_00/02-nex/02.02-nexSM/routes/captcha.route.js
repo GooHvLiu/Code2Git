@@ -3,9 +3,6 @@ var router = express.Router();
 // 引入 生成验证码 和 唯一标识 依赖
 const svgCaptcha = require("svg-captcha");
 const { v4: uuidv4 } = require("uuid");
-// 引入jwt
-const jwt = require("jsonwebtoken");
-
 // 定义全局存储容器，放在最上方
 const captchaStore = new Map();
 
@@ -53,62 +50,4 @@ router.get("/captchaImage", function (req, res, next) {
     });
   }
 });
-
-// 路由 登录
-router.post("/login", function (req, res) {
-  const { username, password, code, uuid } = req.body;
-  console.log(req.body);
-
-  // 1. 根据uuid查询缓存
-  const cacheInfo = captchaStore.get(uuid);
-
-  // 场景1：uuid不存在 / 已过期
-  if (!cacheInfo) {
-    return res.json({
-      code: 400,
-      msg: "验证码已失效，请重新获取验证码",
-      data: null
-    });
-  }
-
-  // 场景2：验证码不匹配
-  if (cacheInfo.code !== code.toLowerCase()) {
-    return res.json({
-      code: 400,
-      msg: "验证码输入错误",
-      data: null
-    });
-  }
-
-  // 场景3：账号密码校验（模拟）
-  if (username !== "admin" || password !== "123456") {
-    return res.json({
-      code: 400,
-      msg: "用户名或者密码错误",
-      data: null
-    });
-  }
-
-  // 验证码 校验通过，删除验证码（防止重复使用）
-  captchaStore.delete(uuid);
-
-  // 生成真实JWT Token,可以存放角色、用户id等非敏感信息，不要放密码！
-  const JWT_SECRET=process.env.JWT_SECRET
-  const JWT_EXPIRES=process.env.JWT_EXPIRES
-  const payload = {
-    username: username,
-    userId: 1
-  };
-  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES });
-
-  // 验证码&用户名&密码 全部校验成功
-  res.json({
-    code: 200,
-    msg: "登录成功",
-    data:{
-      token:token
-    }
-  });
-});
-
 module.exports = router;

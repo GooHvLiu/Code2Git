@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 import HelloWorld from "@components/HelloWorld.vue";
 //创建并暴露一个路由器
 export default new VueRouter({
+  mode: "hash",
   routes: [
     {
       name: "HelloWorld",

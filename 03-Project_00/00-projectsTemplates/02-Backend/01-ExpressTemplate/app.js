@@ -6,6 +6,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
+const tokenAuth = require("@middleware/login.token.auth.help");
 
 var app = express();
 //全域开启跨域
@@ -18,6 +19,8 @@ app.set("view engine", "ejs");
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// 注意：静态资源、跨域、body-parser之后，所有路由之前注册
+app.use(tokenAuth.checkTokenAuth);
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 

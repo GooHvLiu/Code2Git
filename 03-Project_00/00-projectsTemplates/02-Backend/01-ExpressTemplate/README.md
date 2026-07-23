@@ -290,6 +290,27 @@ changed 3 packages in 882ms
 >
 > > node app.js可以替换为实际的启动文件
 
+###### JWT鉴权
+
+该模板引入JWT鉴权，依赖包如下：
+
+```bash
+PS F:\CodingMan\Code2Git\03-Project_00\00-projectsTemplates\02-Backend\01-ExpressTemplate> npm i jsonwebtoken
+
+added 121 packages in 2s
+
+9 packages are looking for funding
+  run `npm fund` for details
+```
+
+> `app.vue`中引入JWT鉴权，可以不用在单独的路由中使用，全局鉴权：
+>
+> ```js
+> const tokenAuth = require("@middleware/login.token.auth.help");
+> // 注意：静态资源、跨域、body-parser之后，所有路由之前注册
+> app.use(tokenAuth.checkTokenAuth);
+> ```
+
 ##### 架构增强
 
 架构增强主要是针对`bin/www`和根目录文件执行的，最终封装为类进行引入使用。拷贝`01-stuProjectsMT/middleware`到该项目根目录下。
