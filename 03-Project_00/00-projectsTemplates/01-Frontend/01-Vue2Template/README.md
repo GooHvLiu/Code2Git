@@ -134,6 +134,52 @@ export default new VueRouter({
 >
 > 3. 重定向和主页路径需要调整；
 
+##### 路由守卫
+
+默认标配路由守卫，基本配置如下：
+
+```js
+// 全局路由守卫、专门处理登录权限鉴权、登录拦截、token 校验逻辑
+import router from "./index";
+
+// 白名单：不需要登录就能访问的页面，没有 token 时，仅允许直接访问 /login；其他页面强制跳登录 与 axios 的白名单完全不一样
+const whiteList = ["/login"];
+
+// 全局前置路由守卫
+router.beforeEach((to, from, next) => {
+  // 前端存储token的key保持一致
+  const token = localStorage.getItem("nexCM-authorization-token");
+
+  // 情况1：有token（已登录）
+  if (token) {
+    // 如果已经登录，还要去登录页 → 直接跳首页，防止重复进入登录页
+    if (to.path === "/login") {
+      next("/");
+    } else {
+      next();
+      /*
+      可以在这里：判断本地有没有用户信息
+      如果没有用户信息 → 请求接口 /user/info 获取用户信息、权限、菜单
+      保存到Vuex，再放行；
+      如果token过期，后端接口返回401，清除token，跳登录
+      */
+    }
+  } else {
+    // 情况2：没有token（未登录）
+    if (whiteList.includes(to.path)) {
+      // 在白名单，直接放行（访问登录页）
+      next();
+    } else {
+      // 没有登录，访问主页等受保护页面 → 强制跳转登录
+      next("/login");
+    }
+  }
+});
+
+```
+
+> 白名单需要重新设定内容、`token`的获取名需重新设定
+
 ##### 状态管理
 
 本模板`main.js`默认引入`状态管理工具Vuex`：
@@ -228,6 +274,11 @@ request/
 import axios from "axios";
 // 引入对应按需使用的插件名称
 import { Message } from "element-ui";
+
+// 不需要 token 的接口集合，即白名单，内容需要调整
+const NO_TOKEN_API = ["/login", "/captchaImage"];
+
+// axios的基本配置
 const server = axios.create({
   baseURL: "/prod-api",
   timeout: 100000
@@ -272,7 +323,9 @@ export default server;
 ```
 
 > 1. 请求拦截器配置有获取token并发送的功能
-> 2. 响应拦截器配置有对响应回来的`code`进行判断，在主体使用中通过如下代码应用：
+> 2. `axios`的基本配置内容需要调整
+> 3. 白名单内容需要调整
+> 4. 响应拦截器配置有对响应回来的`code`进行判断，在主体使用中通过如下代码应用：
 >
 > ```JS
 > if (!res) {
@@ -340,6 +393,28 @@ export default new VueRouter({
 
 > 1. 主要涉及到：`name`,`path`,`component`和组件引入关联
 > 2. 重定向和主页路由地址需要调整
+
+##### 路由守卫
+
+路由守卫仅仅做了比较简单的功能案例，主要修改如下部分：
+
+* `token`存储的key值
+* 白名单内容
+
+##### 网络请求
+
+如下两部分需要根据实际情况进行调整：
+
+```js
+// 不需要 token 的接口集合，即白名单，内容需要调整
+const NO_TOKEN_API = ["/login", "/captchaImage"];
+
+// axios的基本配置
+const server = axios.create({
+  baseURL: "/prod-api",
+  timeout: 100000
+});
+```
 
 ##### 安装依赖
 

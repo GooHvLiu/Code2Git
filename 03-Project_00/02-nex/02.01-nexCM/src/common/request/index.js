@@ -4,6 +4,11 @@
 import axios from "axios";
 // 引入对应按需使用的插件名称
 import { Message } from "element-ui";
+
+// 不需要 token 的接口集合，即白名单
+const NO_TOKEN_API = ["/login", "/captchaImage"];
+
+// axios的基本配置
 const server = axios.create({
   baseURL: "/prod-api",
   timeout: 100000
@@ -12,9 +17,11 @@ const server = axios.create({
 // 请求拦截器
 server.interceptors.request.use(
   (config) => {
-    // 从localStorage中获取token，字段需要根据实际情况修改
+    // 从localStorage中获取token
     const token = localStorage.getItem("nexCM-authorization-token");
-    if (token) {
+    // 通过白名单和即将访问的地址做对比判断，排除白名单内的地址之外，都需要token
+    const isNeedToken = !NO_TOKEN_API.some((item) => config.url.includes(item));
+    if (token && isNeedToken) {
       // 主流后台格式 Authorization: Bearer xxx
       config.headers.Authorization = `Bearer ${token}`;
     }

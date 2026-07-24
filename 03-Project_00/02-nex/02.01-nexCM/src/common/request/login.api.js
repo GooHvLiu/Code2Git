@@ -1,12 +1,12 @@
 import server from "./index";
 
-// ESModule 向服务器 异步 获取 数据请求 获取验证码接口
+// 验证码API  ESModule 向服务器 异步获取
 export async function requestCaptchaCodeAPI() {
   const captchRes = await server.get("/captchaImage");
   return captchRes;
 }
 
-// ESModule 向服务器 异步 登录验证接口
+// 登录API ESModule 向服务器 异步获取
 export async function requestLoginApi(params) {
   const loginRes = await server.post("/login", params);
   return loginRes;

@@ -1,7 +1,7 @@
 // 全局路由守卫、专门处理登录权限鉴权、登录拦截、token 校验逻辑
 import router from "./index";
 
-// 白名单：不需要登录就能访问的页面
+// 白名单：不需要登录就能访问的页面，没有 token 时，仅允许直接访问 /login；其他页面强制跳登录 与 axios 的白名单完全不一样
 const whiteList = ["/login"];
 
 // 全局前置路由守卫
