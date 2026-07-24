@@ -1,12 +1,12 @@
 <template>
   <div class="HeadView">
     <el-button
-      icon="el-icon-s-unfold"
+      icon="el-icon-s-fold"
       v-show="!isShow"
       @click="changeShow"
     ></el-button
     ><el-button
-      icon="el-icon-s-fold"
+      icon="el-icon-s-unfold"
       v-show="isShow"
       @click="changeShow"
     ></el-button>
@@ -41,8 +41,8 @@ export default {
   button {
     width: 50px;
     height: 50px;
-    margin: 0px;
-    padding: 0px;
+    margin-left: 10px;
+    padding: 0;
     font-size: 1.6rem;
     border: none;
   }
