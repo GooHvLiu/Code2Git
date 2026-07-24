@@ -43,7 +43,7 @@ mySQLV1dot0
 ###### 安装依赖
 
 ```bash
-npm i express dotenv dotenv-expand mysql2 module-alias
+npm i dotenv dotenv-expand mysql2 module-alias
 ```
 
 > module-alias是为了解决路径引入错乱问题
