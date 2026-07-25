@@ -3,7 +3,7 @@ const {
   filterSafeFields,
   buildWhereCondition,
   buildPageLimit
-} = require("@MySQL/utils/sql.util.js");
+} = require("@utils/sql.util.js");
 
 class UsersBase {
   constructor(dbName, tableName, allowFields) {

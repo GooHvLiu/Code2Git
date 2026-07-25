@@ -1,4 +1,4 @@
-const { AuthService } = require("@MySQL/services/index.js");
+const { AuthService } = require("@services/index.js");
 
 class AuthController {
   /**

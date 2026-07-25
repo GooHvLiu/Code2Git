@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const { UsersModel } = require("@MySQL/models/index.js");
+const { UsersModel } = require("@models/index.js");
 
 // 环境变量
 const JWT_SECRET = process.env.JWT_SECRET;

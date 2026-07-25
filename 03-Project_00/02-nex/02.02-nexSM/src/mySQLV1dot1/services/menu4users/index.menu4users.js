@@ -1,4 +1,4 @@
-const { Menu4UsersModel } = require("@MySQL/models/index.js");
+const { Menu4UsersModel } = require("@models/index.js");
 
 /**
  * Menu4Users业务层说明：

@@ -1,4 +1,4 @@
-const { UsersModel } = require("@MySQL/models/index.js");
+const { UsersModel } = require("@models/index.js");
 
 /**
  * 用户业务服务层 UserService

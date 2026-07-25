@@ -1,4 +1,4 @@
-const { Menu4UsersServer } = require("@MySQL/services/index.js");
+const { Menu4UsersServer } = require("@services/index.js");
 
 class Menu4UsersController {
   /**

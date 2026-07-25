@@ -1,4 +1,4 @@
-const { UsersBase } = require("@MySQL/models/base/index.js");
+const { UsersBase } = require("@models/base/index.js");
 
 // 用户表 允许字段白名单
 const USER_ALLOW_FIELDS = [

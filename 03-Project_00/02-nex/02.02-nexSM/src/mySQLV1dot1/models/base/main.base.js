@@ -1,5 +1,5 @@
 const mysql = require("mysql2/promise");
-const dbConfig = require("@MySQL/config/db.config.js");
+const dbConfig = require("@config/db.config.js");
 
 // 全局单例连接池
 const pool = mysql.createPool(dbConfig);
