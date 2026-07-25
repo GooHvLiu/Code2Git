@@ -92,11 +92,10 @@ router.post("/login", function (req, res) {
   captchaStore.delete(uuid);
 
   // 生成真实JWT Token,可以存放角色、用户id等非敏感信息，不要放密码！
-  const JWT_SECRET=process.env.JWT_SECRET
-  const JWT_EXPIRES=process.env.JWT_EXPIRES
+  const JWT_SECRET = process.env.JWT_SECRET;
+  const JWT_EXPIRES = process.env.JWT_EXPIRES;
   const payload = {
-    username: username,
-    userId: 1
+    username: username
   };
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES });
 
@@ -104,8 +103,8 @@ router.post("/login", function (req, res) {
   res.json({
     code: 200,
     msg: "登录成功",
-    data:{
-      token:token
+    data: {
+      token: token
     }
   });
 });

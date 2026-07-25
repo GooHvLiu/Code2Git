@@ -1,3 +1,6 @@
+// 引入路径优化第三方库moudle-alias
+require("module-alias/register");
+require("dotenv-expand").expand(require("dotenv").config());
 var createError = require("http-errors");
 var express = require("express");
 const cors = require("cors");
