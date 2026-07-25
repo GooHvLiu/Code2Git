@@ -7,15 +7,12 @@ const USER_ALLOW_FIELDS = [
   "password",
   "nickname",
   "status",
+  "isDelete",
   "create_time",
   "update_time"
 ];
 
-// 实例化导出单例
-const UsersModel = new UsersBase(
-  process.env.MYSQL_DEV_DBNAME,
-  process.env.MYSQL_DEV_USER_DBTABLE,
+module.exports = {
+  UsersBase,
   USER_ALLOW_FIELDS
-);
-
-module.exports = UsersModel;
+};

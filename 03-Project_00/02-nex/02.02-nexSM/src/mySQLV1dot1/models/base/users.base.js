@@ -1,4 +1,4 @@
-const { execSql } = require("@MySQL/models/base/base/index.base.js");
+const { execSql } = require("./main.base.js");
 const {
   filterSafeFields,
   buildWhereCondition,

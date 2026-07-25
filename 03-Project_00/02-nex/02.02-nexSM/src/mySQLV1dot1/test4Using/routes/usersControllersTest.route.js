@@ -5,10 +5,10 @@ const { UsersController } = require("@MySQL/controllers/index.js");
 router.get("/test", (req, res, next) => {
   console.log("已进入usersControllersTest测试");
 
-  /*   // findAll 分页查询用户列表接口
+  /* // findAll 分页查询用户列表接口
   UsersController.getUserPage(req, res, next); */
-  /* // findAll 不分页查询用户列表接口
-  UsersController.getUserAll(req, res, next); */
+  // findAll 不分页查询用户列表接口
+  UsersController.getUserAll(req, res, next);
   /* // 新增用户接口
   UsersController.addUser(req, res, next); */
 });

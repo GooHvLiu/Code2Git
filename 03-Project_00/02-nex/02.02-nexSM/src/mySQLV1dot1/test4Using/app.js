@@ -4,7 +4,7 @@ require("dotenv-expand").expand(require("dotenv").config());
 const express = require("express");
 const cors = require("cors");
 // 全局仅引入一次，自动初始化连接池，无需重复导入
-require("@MySQL/models/base/base/index.base.js").pool;
+require("@MySQL/models/base/main.base.js").pool;
 const usersControllersTestRouter = require("@MySQL/test4Using/routes/usersControllersTest.route.js");
 const errorHandler = require("@MySQL/middlewares/error.middleware.js");
 

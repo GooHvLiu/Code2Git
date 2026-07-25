@@ -1,4 +1,5 @@
 const { UsersModel } = require("@MySQL/models/index.js");
+
 /**
  * 用户业务服务层 UserService
  * 分层标准职责（大厂MVC规范）
@@ -49,7 +50,7 @@ class UsersService {
     // status区分「不传」和「传0/1」：只有完全不传才不加入条件
     // 前端传0（禁用）、1（正常）都会生成 status = ? 筛选
     if (status !== undefined) where.status = status;
-
+    where.isDelete = 0; // 只查询未删除数据
     // 调用基础Model封装好的通用分页查询方法
     // 入参顺序：查询条件对象、自定义查询字段、页码、每页条数
     return await UsersModel.pageList(where, fields, page, pageSize);
@@ -75,7 +76,7 @@ class UsersService {
     if (username) where.username = username;
     // status存在值（0/1）才加入筛选，不传则忽略
     if (status !== undefined) where.status = status;
-
+    where.isDelete = 0; // 只查询未删除数据
     // 调用Model不分页全量查询方法
     return await UsersModel.allList(where, fields);
   }
@@ -124,7 +125,7 @@ class UsersService {
     saveData.isDelete = 0; // 软删除标记，新增数据默认未删除0
 
     // 调用Model新增方法：内部自动过滤白名单合法字段、使用占位符防注入
-    return await UsersModel.create(userData);
+    return await UsersModel.create(saveData);
   }
 
   /**
