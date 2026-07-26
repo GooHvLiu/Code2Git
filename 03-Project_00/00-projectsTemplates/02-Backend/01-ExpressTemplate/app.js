@@ -1,45 +1,42 @@
+require("module-alias/register");
+require("express-async-errors");
+require("dotenv-expand").expand(require("dotenv").config());
 var createError = require("http-errors");
 var express = require("express");
 const cors = require("cors");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-
-var indexRouter = require("./routes/index");
-const tokenAuth = require("@middleware/login.token.auth.help");
-
 var app = express();
-//全域开启跨域
+// 引入鉴权中间件
+const tokenAuth = require("@middlewares/auth/token.auth.middlewares.js");
+
+//  引入全局异常处理中间件
+const errorHandler = require("@middlewares/enhance/errorHandle.js");
+
+// MySQL数据库，自动初始化连接池，无需重复导入
+require("@models/base/main.base.js").pool;
+
+// 创建路由
+app.use(tokenAuth.checkTokenAuth);
+var indexRouter = require("./routes/index");
+
 app.use(cors());
-
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
-
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// 注意：静态资源、跨域、body-parser之后，所有路由之前注册
-app.use(tokenAuth.checkTokenAuth);
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+// 使用路由
 app.use("/", indexRouter);
 
-// catch 404 and forward to error handler
+// 当路由匹配不到时进入此 404 页面
 app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
-});
+// 全局异常处理
+app.use(errorHandler);
 
 module.exports = app;

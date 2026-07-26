@@ -1,1 +1,1 @@
-export { requestCaptchaCodeAPI, requestLoginApi } from "./login.api.js";
+export { requestCaptchaCodeAPI, requestLoginApi,requestGetUserRouterMenuApi,requestGetUserInfoApi } from "./login.api.js";

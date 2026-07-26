@@ -8,6 +8,11 @@
 - <span style="color:orange;font-family:楷体" >文件夹可以设定别名;</span>
 - <span style="color:orange;font-family:楷体" >标配大量常用依赖包;</span>
 
+##### <span style="color:grey;font-family:楷体" >_July 26, 2026_</span>
+
+- <span style="color:orange;font-family:楷体" >新增MySQL V1.1模块</span>
+- <span style="color:orange;font-family:楷体" >引入权限管理/二维码生成与校验;</span>
+
 #### 模板功能
 
 ##### 依赖支持

@@ -1,6 +1,6 @@
 require("module-alias/register");
 require("dotenv-expand").expand(require("dotenv").config());
-const expend = require("@middleware/listenExpend.js");
+const expend = require("@middlewares/enhance/listenExpend.js");
 var app = require("../app");
 var debug = require("debug")("02.02-nexsm:server");
 var http = require("http");

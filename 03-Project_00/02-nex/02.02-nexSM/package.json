@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "kPort": "kill-port 3000",
-    "init": "npm run kPort && node ./middleware/dotenvInit.js",
+    "init": "npm run kPort && node ./src/middlewares/enhance/dotenvInit.js",
     "start": "npm run init && nodemon ./bin/www"
   },
   "dependencies": {
-    "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.6",
@@ -17,11 +16,11 @@
     "dotenv-expand": "^13.0.0",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "express-async-errors": "^3.1.1",
     "fs": "^0.0.1-security",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^9.0.3",
     "module-alias": "^2.3.4",
-    "mongoose": "^9.8.0",
     "morgan": "~1.9.1",
     "mysql2": "^3.23.1",
     "nodemon": "^3.1.14",
@@ -30,11 +29,15 @@
   },
   "_moduleAliases": {
     "@bin": "./bin",
-    "@middleware": "./middleware",
     "@public": "./public",
     "@routes": "./routes",
-    "@views": "./views",
     "@src": "./src",
-    "@MySQL": "./src/mySQLV1dot1"
+    "@config": "./src/config",
+    "@controllers": "./src/controllers",
+    "@middlewares": "./src/middlewares",
+    "@models": "./src/models",
+    "@services": "./src/services",
+    "@utils": "./src/utils",
+    "@views": "./views"
   }
 }

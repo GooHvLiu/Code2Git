@@ -7,12 +7,10 @@
       <span v-show="!isCollapse">nexCM 管理系统</span>
     </h1>
     <el-menu
-      unique-opened="true"
+      :unique-opened="true"
       default-active="/"
-      router="true"
+      :router="true"
       class="el-menu-vertical-demo"
-      @open="handleOpen"
-      @close="handleClose"
       background-color="#304156"
       text-color="#fff"
       active-text-color="#ffd04b"

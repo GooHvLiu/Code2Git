@@ -29,10 +29,23 @@
             <el-input v-model="ruleForm.captchacode"></el-input>
             <img
               height="40"
+              v-if="captchaCodeSrc"
               :src="captchaCodeSrc"
               @click="getCaptchaCode"
               style="cursor: pointer"
             />
+            <div
+              v-else
+              style="
+                width: 120px;
+                height: 40px;
+                background: #eee;
+                text-align: center;
+                line-height: 40px;
+              "
+            >
+              加载中
+            </div>
           </div>
         </el-form-item>
         <el-form-item style="margin-left: -55px">
@@ -42,8 +55,8 @@
             @click="submitForm('ruleForm')"
             >登录</el-button
           >
-        </el-form-item></el-form
-      >
+        </el-form-item>
+      </el-form>
     </div>
   </div>
 </template>
@@ -58,147 +71,125 @@ export default {
   name: "UserLogin",
   components: {},
   data() {
-    // 需要验证的字段定义
     return {
       ruleForm: {
         username: "",
         password: "",
         captchacode: ""
       },
-      // 字段验证规则
       rules: {
         username: [
           {
-            //必填项
             required: true,
-            //提示信息
             message: "用户名不能为空",
-            //触发时机
             trigger: "blur"
           },
           { validator: validateUsername, trigger: "blur" }
         ],
         password: [
           {
-            //必填项
             required: true,
-            //提示信息
             message: "密码不能为空",
-            //触发时机
             trigger: "blur"
           }
         ],
         captchacode: [
           {
-            //必填项
             required: true,
-            //提示信息
             message: "验证码不能为空",
-            //触发时机
             trigger: "blur"
           }
         ]
       },
-      // 验证码验证
       captchaCodeSrc: ""
     };
   },
   computed: {},
   methods: {
-    // 点击登录提交按钮
+    // 登录提交
     async submitForm(formName) {
       this.$refs[formName].validate(async (valid) => {
+        // 如果本地数据格式校验成功
         if (valid) {
-          let res = await requestLoginApi({
+          // 提交服务器校验并返回校验结果
+          const ServerValidateData = await requestLoginApi({
             username: this.ruleForm.username,
             password: this.ruleForm.password,
             code: this.ruleForm.captchacode,
             uuid: localStorage.getItem("nexCM-captcha-uuid")
           });
-          //如果没有成功，响应拦截器会将res重置为false
-          if (!res) {
-            //与服务器交互，数据有错误，代码！=200，commStatus=-1
-            this.reset("-1", res.msg, {
+          // 校验结果失败,响应拦截器将code！=200的反馈false，这里可以这样使用
+          if (!ServerValidateData) {
+            this.formReset({
               isClearUsername: false,
               isClearPassword: true,
-              isClearCode: true
+              isClearCode: true,
+              isRefreshCaptcha:true
             });
             return;
           }
-          //成功，代码=200，commStatus=1
-          this.reset("1", res.msg, {
+          // 校验结果成功
+          this.formReset({
             isClearUsername: true,
-            isClearPassword: false,
-            isClearCode: true
+            isClearPassword: true,
+            isClearCode: true,
+            isRefreshCaptcha:false
           });
-          //成功，清除localStorage里面的uuid
+          // 移除本地保存的数据
           localStorage.removeItem("nexCM-captcha-uuid");
-          localStorage.setItem("nexCM-authorization-token", res.data.token);
-          //成功，跳转主页
+          // 保存服务器给的token
+          localStorage.setItem("nexCM-authorization-token", ServerValidateData.data.token);
+          // 进入主页
           this.$router.push("/");
         } else {
-          //没有与服务器交互，commStatus=0
-          this.reset("0", "填写字段错误，请重新输入", {
+          // 本地校验失败 表单内容校验失败
+          this.formReset({
             isClearUsername: false,
             isClearPassword: true,
-            isClearCode: true
+            isClearCode: true,
+            isRefreshCaptcha:true
           });
         }
       });
     },
-    // 获取 二维码 进行
-    async getCaptchaCode() {
-      let res = await requestCaptchaCodeAPI();
 
-      if (!res) {
-        //与服务器交互，没有获取到二维码，代码！=200，commStatus=-1
-        this.reset("-1", res.msg, {
-          isClearUsername: false,
-          isClearPassword: false,
-          isClearCode: true
-        });
-        return;
+    // 获取验证码
+    async getCaptchaCode() {
+      try {
+        const res = await requestCaptchaCodeAPI();
+        // 响应拦截器将代码不是200的返回值设置为false
+        if (res) {
+          this.ruleForm.captchacode = "";
+          const svgText = res.data.img;
+          this.captchaCodeSrc = `data:image/svg+xml;utf8,${encodeURIComponent(
+            svgText
+          )}`;
+          localStorage.setItem("nexCM-captcha-uuid", res.data.uuid);
+        }
+      } catch (err) {
+        console.error("验证码异常：", err);
       }
-      this.ruleForm.captchacode = "";
-      const svgText = res.data.img;
-      this.captchaCodeSrc = `data:image/svg+xml;utf8,${encodeURIComponent(
-        svgText
-      )}`;
-      localStorage.setItem("nexCM-captcha-uuid", res.data.uuid);
     },
 
-    /**
-     * 成功/失败后进行刷新
-     * @param commStatus 11表示成功，01标识失败，00标识没有与服务器通讯
-     * @param msg 提示消息内容
-     * @param clear 是否清空对应字段的输入框内容
-     */
-    reset(commStatus, msg, clear = {}) {
-      let {
+    // 状态重置 响应拦截器已经判定不是200代码的都进行了消息弹出
+    formReset(clear = {}) {
+      // 解析字段
+      const {
         isClearUsername = false,
         isClearPassword = false,
-        isClearCode = false
+        isClearCode = false,
+        isRefreshCaptcha=false
       } = clear;
-      if (commStatus === "1") {
-        this.$message.success(msg);
-      } else if (commStatus === "0") {
-        this.$message.warning(msg);
-      }
-      this.getCaptchaCode();
-
-      if (isClearUsername) {
-        this.ruleForm.username = "";
-      }
-      if (isClearPassword) {
-        this.ruleForm.password = "";
-      }
-      if (isClearCode) {
-        this.ruleForm.captchacode = "";
-      }
+      // 根据字段的结果进行
+      if (isClearUsername) this.ruleForm.username = "";
+      if (isClearPassword) this.ruleForm.password = "";
+      if (isClearCode) this.ruleForm.captchacode = "";
+      if(isRefreshCaptcha)this.getCaptchaCode();
+      
     }
   },
   mounted() {
-    //项目挂载就获取验证码
+    // 项目被启动时，获取二维码
     this.getCaptchaCode();
   }
 };
