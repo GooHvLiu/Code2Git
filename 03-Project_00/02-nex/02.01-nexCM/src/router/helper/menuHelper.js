@@ -4,6 +4,9 @@
  * @returns {Array}
  */
 export function formatMenu(serverMenuArr) {
+  // 从服务器获取到的数据
+  console.log("@@服务器获取到的菜单@@", serverMenuArr);
+
   // 基础首页数据，无需从服务器获取
   const baseMenu = [{ title: "网站首页", path: "/", icon: "home" }];
   // 处理后端菜单数据，增加兜底防止children undefined

@@ -6,7 +6,7 @@
     </h1>
     <el-menu
       :unique-opened="true"
-      default-active="/"
+      default-active="#"
       :router="true"
       class="el-menu-vertical-demo"
       background-color="#304156"

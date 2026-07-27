@@ -6,9 +6,12 @@ import {
 } from "@/common/request/index.js";
 import { ROUTE_WHITE_LIST } from "./constants";
 import { formatMenu } from "./helper/menuHelper";
+import { buildDynamicRoutes } from "./helper/routerHelper";
 
 // 请求锁：防止多次并发请求菜单接口
 let fetchMenuLoading = false;
+// 标记：是否已经追加过动态路由，避免重复addRoutes
+let hasAddDynamicRoute = false;
 
 // 全局前置路由守卫
 router.beforeEach(async (to, from, next) => {
@@ -22,23 +25,38 @@ router.beforeEach(async (to, from, next) => {
       return next("/");
     }
     // 如果Vuex菜单为空，拉取菜单
-    if (store.state.userMenu.userMenu.length === 0 && !fetchMenuLoading) {
-      fetchMenuLoading = true;
+    if (store.state.userMenu.userMenu.length === 0 && !fetchMenuLoading && !hasAddDynamicRoute) {
+      fetchMenuLoading = true
       try {
-        // 发起请求（axios拦截器自动处理40001/40003：清token+跳转登录）
+        // 发起请求（axios拦截器自动处理40001/40003：清token+跳转登录）,后端成功返回 code:200，取出data数组
         const serverRes = await requestGetUserRouterMenuApi();
-        // 后端成功返回 code:200，取出data数组
         const rawArr = serverRes.data || [];
-        // 调用外部函数格式化菜单
+        // 1. 调用外部函数格式化菜单 js原生中修改 mutation 的方法，...map是Vue组件方法
         const newMenuList = formatMenu(rawArr);
-        // js原生中修改 mutation 的方法，...map是Vue组件方法
         store.commit("userMenu/getRouterMenus", newMenuList)
+
+        // 2. 根据后端原始菜单生成【动态路由数组】
+        const oldRoute = [{
+          name: "home",
+          path: "/home",
+          component: () => import("@pages/UserHome.vue"),
+        }];
+        let dynamicRoutes = buildDynamicRoutes(rawArr);
+        // 数组解析
+        dynamicRoutes = [...oldRoute, ...dynamicRoutes]
+        // 挂载动态路由
+        dynamicRoutes.forEach(item => {
+          router.addRoute("mainlayout", item)
+        })
+        // 标记路由已挂载
+        hasAddDynamicRoute = true;
+        //addRoutes之后必须使用 next({ ...to, replace: true }) 解决初次进入页面路由404、路由不匹配问题
+        next({ ...to, replace: true });
       } catch (err) {
         /**
          * axios拦截器已经捕获 40001 / 40003 自动清除token、跳转登录
          * 进入catch代表接口业务异常（账号禁用、密码错误等，无需额外处理，直接放行路由，拦截器已经完成跳转）
          */
-        console.error("获取用户菜单失败：", err);
       } finally {
         // 无论成功失败，释放请求锁
         fetchMenuLoading = false;
@@ -61,3 +79,7 @@ router.beforeEach(async (to, from, next) => {
     }
   }
 });
+// 退出登录时调用，重置标记，下次登录重新拉取菜单+挂载路由
+export function resetRouteState() {
+  hasAddDynamicRoute = false;
+}

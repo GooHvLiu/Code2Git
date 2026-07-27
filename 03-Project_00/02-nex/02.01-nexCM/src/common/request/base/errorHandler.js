@@ -1,5 +1,4 @@
-import { Message } from "element-ui";
-import router from "@router/index.js";
+import { Message } from "element-ui"
 import {
   TOKEN_AUTO_REDIRECT_CODES,
   CODE_TOKEN_INVALID
@@ -16,6 +15,8 @@ export function handleBusinessError(resData) {
   if (TOKEN_AUTO_REDIRECT_CODES.includes(code)) {
     Message.error(msg || "登录凭证失效，请重新登录");
     localStorage.removeItem("nexCM-authorization-token");
+    // 函数内动态导入，解决循环依赖
+    const router = require("@/router/index.js").default;
     router.replace("/login");
     return Promise.reject(resData);
   }

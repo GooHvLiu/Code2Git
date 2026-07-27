@@ -18,9 +18,52 @@ export const staticRoutes = [
     name: "mainlayout",
     path: "/",
     component: MainLayout,
+    redirect: "/home",
     meta: {
       title: "布局框架"
-    }
+    },
+    // children: [
+    //   {
+    //     name: 'home',
+    //     path: '/home',
+    //     component: () => import('@/pages/UserHome.vue')
+    //   },
+    //   {
+    //     name: 'businessAppointment',
+    //     path: '/business/appointment',
+    //     component: () => import('@/pages/business/UserAppointment.vue')
+    //   },
+    //   {
+    //     name: 'businessService',
+    //     path: '/business/service',
+    //     component: () => import('@/pages/business/UserService.vue')
+    //   },
+    //   {
+    //     name: 'businessStatement',
+    //     path: '/business/statement',
+    //     component: () => import('@/pages/business/UserStatement.vue')
+    //   },
+    //   {
+    //     name: 'customerCustomer',
+    //     path: '/customer/customer',
+    //     component: () => import('@/pages/customer/UserCustomer.vue')
+    //   },
+    //   {
+    //     name: 'customerVisit',
+    //     path: '/customer/visit',
+    //     component: () => import('@/pages/customer/UserVisit.vue')
+    //   },
+    //   {
+    //     name: 'flowApprove',
+    //     path: '/flow/approve',
+    //     component: () => import('@/pages/flow/UserApprove.vue')
+    //   },
+    //   {
+    //     name: 'flowDefinition',
+    //     path: '/flow/definition',
+    //     component: () => import('@/pages/flow/UserDefinition.vue')
+    //   },
+    // ]
   }
 ];
 // 创建路由实例

@@ -77,6 +77,7 @@ class CheckTokenAuth {
       return next();
     } catch (error) {
       // 细分错误类型打印日志 已经是我们主动抛出的业务异常，直接向外传递
+
       if (error instanceof BusinessError) {
         return next(error);
       }
