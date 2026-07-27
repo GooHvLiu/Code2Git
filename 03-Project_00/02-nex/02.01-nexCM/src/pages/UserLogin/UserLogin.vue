@@ -34,7 +34,7 @@
 
 <script>
 import { validateUsername } from "@/utils/index.validate.js";
-import { requestCaptchaCodeAPI, requestLoginApi } from "@/common/request/index.api.js";
+import { requestCaptchaCodeAPI, requestLoginApi } from "@/common/request/index.js";
 export default {
   name: "UserLogin",
   components: {},

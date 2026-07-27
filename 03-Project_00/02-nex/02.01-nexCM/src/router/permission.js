@@ -3,10 +3,10 @@ import router from "./index";
 import store from "@/store/index";
 import {
   requestGetUserRouterMenuApi
-} from "@/common/request/index.api.js";
+} from "@/common/request/index.js";
+import { ROUTE_WHITE_LIST } from "./constants";
+import { formatMenu } from "./helper/menuHelper";
 
-// 白名单：不需要登录就能访问的页面，没有 token 时，仅允许直接访问 /login；其他页面强制跳登录 与 axios 的白名单完全不一样
-const whiteList = ["/login"];
 // 请求锁：防止多次并发请求菜单接口
 let fetchMenuLoading = false;
 
@@ -17,53 +17,22 @@ router.beforeEach(async (to, from, next) => {
 
   // 情况 1：有 token（已登录）
   if (token) {
-
     // 如果已经登录，还要去登录页 → 直接跳首页，防止重复进入登录页
     if (to.path === "/login") {
       return next("/");
     }
-    // 如果不是去登录页面，那么直接去判断获取菜单
+    // 如果Vuex菜单为空，拉取菜单
     if (store.state.userMenu.userMenu.length === 0 && !fetchMenuLoading) {
       fetchMenuLoading = true;
       try {
         // 发起请求（axios拦截器自动处理40001/40003：清token+跳转登录）
-        const routerMenus = await requestGetUserRouterMenuApi();
+        const serverRes = await requestGetUserRouterMenuApi();
         // 后端成功返回 code:200，取出data数组
-        const rawMenuList = routerMenus.data || [];
-
-        // 从服务器获取的数据和Vuex中的数据结构不一致，需要进行处理
-        let newRouterMenus = [{ title: "网站首页", path: "/", icon: 'home' }]
-        // 处理后端菜单数据，增加兜底防止children undefined
-        const ret = rawMenuList.map(item => {
-          // 如果有子菜单
-          if (item.children && Array.isArray(item.children)) {
-            return {
-              title: item.meta.title,
-              path: item.path,
-              icon: item.meta.icon,
-              children: item.children.map(childrenItem => {
-                return {
-                  title: childrenItem.meta.title,
-                  path: `${item.path}/${childrenItem.path}`,
-                  icon: childrenItem.meta.icon,
-                }
-              })
-            }
-          }
-          // 如果没有子菜单
-          else {
-            return {
-              title: item.meta.title,
-              path: item.path,
-              icon: item.meta.icon
-            }
-          }
-        })
-        // 通过 ES6 的展开运算符拼接成全新的数组
-        newRouterMenus = [...newRouterMenus, ...ret]
-
+        const rawArr = serverRes.data || [];
+        // 调用外部函数格式化菜单
+        const newMenuList = formatMenu(rawArr);
         // js原生中修改 mutation 的方法，...map是Vue组件方法
-        store.commit("userMenu/getRouterMenus", newRouterMenus)
+        store.commit("userMenu/getRouterMenus", newMenuList)
       } catch (err) {
         /**
          * axios拦截器已经捕获 40001 / 40003 自动清除token、跳转登录
@@ -82,7 +51,7 @@ router.beforeEach(async (to, from, next) => {
 
   } else {
     // 情况 2：没有 token（未登录）
-    if (whiteList.includes(to.path)) {
+    if (ROUTE_WHITE_LIST.includes(to.path)) {
       // 在白名单，直接放行（访问登录页）
       return next();
     } else {
