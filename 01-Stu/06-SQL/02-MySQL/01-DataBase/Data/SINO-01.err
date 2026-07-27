@@ -1572,3 +1572,29 @@
 2026-07-25T13:36:34.465409Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
 2026-07-25T13:36:34.529706Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060
 2026-07-25T13:36:34.529745Z 0 [System] [MY-010931] [Server] C:\Program Files\MySQL\MySQL Server 9.7\bin\mysqld: ready for connections. Version: '9.7.0'  socket: ''  port: 3306  MySQL Community Server - GPL.
+2026-07-26T14:38:43.982430Z 0 [System] [MY-013105] [Server] C:\Program Files\MySQL\MySQL Server 9.7\bin\mysqld: Normal shutdown.
+2026-07-26T14:38:44.753815Z 0 [System] [MY-010910] [Server] C:\Program Files\MySQL\MySQL Server 9.7\bin\mysqld: Shutdown complete (mysqld 9.7.0)  MySQL Community Server - GPL.
+2026-07-26T14:38:44.754428Z 0 [System] [MY-015016] [Server] MySQL Server - end.
+2026-07-26T14:49:14.151512Z 0 [System] [MY-015015] [Server] MySQL Server - start.
+2026-07-26T14:49:14.508424Z 0 [System] [MY-010116] [Server] C:\Program Files\MySQL\MySQL Server 9.7\bin\mysqld (mysqld 9.7.0) starting as process 7864
+2026-07-26T14:49:14.508832Z 0 [System] [MY-015603] [Server] MySQL Server has access to 32 logical CPUs.
+2026-07-26T14:49:14.509045Z 0 [System] [MY-015603] [Server] MySQL Server has access to 68388900864 bytes of physical memory.
+2026-07-26T14:49:14.580234Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2026-07-26T14:49:15.169166Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2026-07-26T14:49:15.590934Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2026-07-26T14:49:15.592156Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2026-07-26T14:49:15.665302Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060
+2026-07-26T14:49:15.665443Z 0 [System] [MY-010931] [Server] C:\Program Files\MySQL\MySQL Server 9.7\bin\mysqld: ready for connections. Version: '9.7.0'  socket: ''  port: 3306  MySQL Community Server - GPL.
+2026-07-26T15:16:40.577116Z 0 [System] [MY-013105] [Server] C:\Program Files\MySQL\MySQL Server 9.7\bin\mysqld: Normal shutdown.
+2026-07-26T15:16:40.951810Z 0 [System] [MY-010910] [Server] C:\Program Files\MySQL\MySQL Server 9.7\bin\mysqld: Shutdown complete (mysqld 9.7.0)  MySQL Community Server - GPL.
+2026-07-26T15:16:40.952620Z 0 [System] [MY-015016] [Server] MySQL Server - end.
+2026-07-27T00:03:08.994701Z 0 [System] [MY-015015] [Server] MySQL Server - start.
+2026-07-27T00:03:09.196919Z 0 [System] [MY-010116] [Server] C:\Program Files\MySQL\MySQL Server 9.7\bin\mysqld (mysqld 9.7.0) starting as process 8876
+2026-07-27T00:03:09.197406Z 0 [System] [MY-015603] [Server] MySQL Server has access to 32 logical CPUs.
+2026-07-27T00:03:09.197582Z 0 [System] [MY-015603] [Server] MySQL Server has access to 68388900864 bytes of physical memory.
+2026-07-27T00:03:09.242776Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2026-07-27T00:03:09.555872Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2026-07-27T00:03:09.892718Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2026-07-27T00:03:09.893417Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2026-07-27T00:03:09.934835Z 0 [System] [MY-010931] [Server] C:\Program Files\MySQL\MySQL Server 9.7\bin\mysqld: ready for connections. Version: '9.7.0'  socket: ''  port: 3306  MySQL Community Server - GPL.
+2026-07-27T00:03:09.934885Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060

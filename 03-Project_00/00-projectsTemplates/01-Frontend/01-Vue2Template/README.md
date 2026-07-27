@@ -4,7 +4,7 @@
 
 ##### <span style="color:grey;font-family:楷体" >_July 21, 2026_</span>
 
-- <span style="color:orange;font-family:楷体" >前端 Vue2.0 框架；</span>
+- <span style="color:orange;font-family:楷体" >前端 Vue2.0 框架，已配置package.json，可以通过npm start运行；</span>
 - <span style="color:orange;font-family:楷体" >文件夹可以设定别名;</span>
 - <span style="color:orange;font-family:楷体" >配置状态管理Vuex;</span>
 - <span style="color:orange;font-family:楷体" >项目样式可采用 less 书写;</span>

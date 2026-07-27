@@ -4,7 +4,9 @@ export default {
     userMenu: []
   },
   mutations: {
-
+    getRouterMenus(state, payload) {
+      state.userMenu = payload
+    }
   },
   actions: {},
   getters: {}
