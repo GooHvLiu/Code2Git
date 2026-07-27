@@ -39,7 +39,7 @@ server.interceptors.response.use(
     let res_data = res.data;
     if (res_data.code !== 200) {
       //此条是利用element ui组件之后具备的错误报警
-      Message.error(res_data.ms);
+      Message.error(res_data.msg);
       // 所有接收到的响应首先判断是不是false，如果是false，则直接return
       return false;
     }

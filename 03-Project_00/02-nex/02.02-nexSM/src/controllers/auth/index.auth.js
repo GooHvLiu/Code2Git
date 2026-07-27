@@ -17,7 +17,8 @@ class AuthController {
         data: loginData
       });
     } catch (err) {
-      next(err);
+
+      return next(err);
     }
   }
 }

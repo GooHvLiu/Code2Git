@@ -1,5 +1,5 @@
--- 给admin分配全部菜单权限
-INSERT INTO nex_user_menu(user_id,menu_id)
+-- 给admin分配全部菜单权限-liuguohui
+/* INSERT INTO nex_user_menu(user_id,menu_id)
 VALUES
 (1,'_001'),
 (1,'_001_01'),
@@ -10,4 +10,15 @@ VALUES
 (1,'_002_03'),
 (1,'_003'),
 (1,'_003_01'),
-(1,'_003_02');
+(1,'_003_02'); */
+
+-- 给engineer分配全部菜单权限-wangbo
+INSERT INTO nex_user_menu(user_id,menu_id)
+VALUES
+(2,'_002'),
+(2,'_002_01'),
+(2,'_002_02'),
+(2,'_002_03'),
+(2,'_003'),
+(2,'_003_01'),
+(2,'_003_02');
