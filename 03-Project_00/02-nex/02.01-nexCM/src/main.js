@@ -1,6 +1,9 @@
 import "reset-css";
 import Vue from "vue";
 import App from "./App.vue";
+// 引入svg使用的库文
+import './assets/icons/index.js'
+
 // 引入路由权限守卫，加载即生效
 import "./router/permission";
 //引入store

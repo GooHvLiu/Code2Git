@@ -1,3 +1,4 @@
+const BusinessError = require("@utils/businessError.utils.js");
 /**
  * Token 登录鉴权中间件类
  * @class CheckTokenAuth
@@ -7,14 +8,17 @@
 const jwt = require("jsonwebtoken");
 
 class CheckTokenAuth {
+  // 构造函数：初始化一次性读取环境变量/缓存配置，避免每次请求重复读取、【Bearer 】不要手动加空格，做拼接、业务错误码、解析白名单
   constructor() {
-    // 构造函数：初始化一次性读取环境变量，缓存配置，避免每次请求重复读取
     this.UNAUTH_CODE = Number(process.env.UNAUTH_CODE) || 401;
     this.UNAUTH_MSG = process.env.UNAUTH_MSG || "登录凭证失效，请重新登录";
     this.JWT_SECRET = process.env.JWT_SECRET || "nexCM-dev-secret-key-2026";
     this.AUTH_HEADER_KEY = process.env.JWT_AUTH_HEADER_KEY || "authorization";
-    this.AUTH_PREFIX = process.env.JWT_AUTH_PREFIX || "Bearer ";
-    // 解析白名单
+    this.AUTH_PREFIX = process.env.JWT_AUTH_PREFIX || "Bearer";
+    this.AUTH_PREFIX_FULL = `${this.AUTH_PREFIX} `;
+    this.ERR_CODE_NO_TOKEN = 40001;
+    this.ERR_CODE_TOKEN_INVALID = 40002;
+    this.ERR_CODE_TOKEN_EXPIRED = 40003;
     const whiteListStr = process.env.TOKEN_WHITE_LIST || "";
     this.whiteList = whiteListStr
       .split(",")
@@ -51,7 +55,9 @@ class CheckTokenAuth {
         console.warn(
           `[Token鉴权拦截] ${req.method} ${req.originalUrl} - 未携带有效Token头`
         );
-        return this._handleUnauthorized(req, res);
+
+        // 抛出业务异常，交给全局errorHandler统一返回
+        throw new BusinessError("缺少登录凭证，请重新登录", this.ERR_CODE_NO_TOKEN);
       }
 
       // 2. 截取 Bearer 后面真实token
@@ -60,50 +66,41 @@ class CheckTokenAuth {
         console.warn(
           `[Token鉴权拦截] ${req.method} ${req.originalUrl} - Token为空`
         );
-        return this._handleUnauthorized(req, res);
+        throw new BusinessError("登录凭证不能为空", this.ERR_CODE_NO_TOKEN);
       }
 
-      // 3. 校验解析JWT
+      // 3. 校验解析JWT 挂载解析后的用户信息，后续接口直接使用 req.tokenUser
       const payload = jwt.verify(token, this.JWT_SECRET);
-
-      // 挂载解析后的用户信息，后续接口直接使用 req.tokenUser
       req.tokenUser = payload;
 
+      // 4. 放行
       return next();
     } catch (error) {
-      // 细分错误类型打印日志
-      let logMsg = "";
-      if (error.name === "TokenExpiredError") {
-        logMsg = "Token已过期";
-      } else if (error.name === "JsonWebTokenError") {
-        logMsg = "Token签名非法/被篡改";
-      } else if (error.name === "NotBeforeError") {
-        logMsg = "Token尚未生效";
-      } else {
-        logMsg = `Token校验异常: ${error.message}`;
+      // 细分错误类型打印日志 已经是我们主动抛出的业务异常，直接向外传递
+      if (error instanceof BusinessError) {
+        return next(error);
       }
-      console.error(
-        `[Token鉴权异常] ${req.method} ${req.originalUrl} - ${logMsg}`
-      );
-      return this._handleUnauthorized(req, res);
-    }
-  }
 
-  /**
-   * 统一未授权返回
-   * @private
-   * @param {import('express').Request} req
-   * @param {import('express').Response} res
-   */
-  _handleUnauthorized(req, res) {
-    // 防御：如果响应已经发送，禁止再次返回内容
-    if (res.headersSent) return;
-    // SPA单页应用：全部统一返回标准JSON，前端axios拦截器捕获401跳转登录
-    return res.json({
-      code: this.UNAUTH_CODE,
-      msg: this.UNAUTH_MSG,
-      data: null
-    });
+      // 统一抛业务异常，交给全局中间件处理
+      let errMsg = "";
+      let errCode;
+      if (error.name === "TokenExpiredError") {
+        errMsg = "登录凭证已过期，请重新登录";
+        errCode = this.ERR_CODE_TOKEN_EXPIRED;
+      } else if (error.name === "JsonWebTokenError") {
+        errMsg = "登录凭证非法或被篡改";
+        errCode = this.ERR_CODE_TOKEN_INVALID;
+      } else if (error.name === "NotBeforeError") {
+        errMsg = "登录凭证尚未生效";
+        errCode = this.ERR_CODE_TOKEN_INVALID;
+      } else {
+        errMsg = `Token校验异常: ${error.message}`;
+        errCode = this.ERR_CODE_TOKEN_INVALID;
+      }
+      console.error(`[Token鉴权异常] ${req.method} ${req.originalUrl} - ${errMsg}`);
+      const businessErr = new BusinessError(errMsg, errCode);
+      return next(businessErr);
+    }
   }
 }
 

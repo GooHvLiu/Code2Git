@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { UsersModel } = require("@models/index.js");
+const BusinessError = require("@utils/businessError.utils.js");
 
 // 环境变量
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -18,20 +19,20 @@ class AuthService {
     const user = await UsersModel.findByName(username);
 
     // 以下全部为业务逻辑，留在Service
-    if (!user) throw new Error("账号不存在");
-    if (user.status !== 1) throw new Error("账号已禁用");
+    if (!user) throw new BusinessError("账号不存在", 10001);
+    if (user.status !== 1) throw new BusinessError("账号已禁用", 10002);
 
     // 密码比对（业务安全逻辑）
     // 生成哈希的方法:密码假定为123456 const hash = bcrypt.hashSync("123456", 10);
     const pwdOk = await bcrypt.compare(password, user.password);
 
-    if (!pwdOk) throw new Error("账号或密码错误");
+    if (!pwdOk) throw new BusinessError("账号或密码错误", 10003);
 
     // JWT签发（身份业务）
-    const token = jwt.sign({ 
+    const token = jwt.sign({
       id: user.id,
       username: user.username,
-     }, JWT_SECRET, {
+    }, JWT_SECRET, {
       expiresIn: JWT_EXPIRES
     });
 

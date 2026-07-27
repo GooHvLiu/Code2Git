@@ -18,7 +18,8 @@
       <div v-for="item in menuItems" :key="item.id">
         <el-submenu :index="item.path" v-if="item.children">
           <template slot="title">
-            <i class="el-icon-location"></i>
+            <!-- <i class="el-icon-location"></i> -->
+            <svg-icon :icon-file-name="item.icon" class="svg-icon-class"></svg-icon>
             <span>{{ item.title }}</span>
           </template>
           <el-menu-item :index="childrenItem.path" v-for="childrenItem in item.children" :key="childrenItem.id">{{
@@ -26,7 +27,8 @@
           }}</el-menu-item>
         </el-submenu>
         <el-menu-item :index="item.path" v-else>
-          <i class="el-icon-menu"></i>
+          <!-- <i class="el-icon-menu"></i> -->
+          <svg-icon :icon-file-name="item.icon" class="svg-icon-class"></svg-icon>
           <span slot="title">{{ item.title }}</span>
         </el-menu-item>
       </div>
@@ -94,5 +96,11 @@ export default {
 .el-menu-vertical-demo .el-menu-item:hover,
 ::v-deep .el-submenu__title:hover {
   background-color: #444 !important;
+}
+
+// svg-icon图标样式
+.svg-icon-class {
+  margin-right: 10px;
+  margin-top: 10px;
 }
 </style>

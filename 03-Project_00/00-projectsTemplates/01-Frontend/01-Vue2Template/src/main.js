@@ -1,6 +1,8 @@
 import "reset-css";
 import Vue from "vue";
 import App from "./App.vue";
+// 引入svg使用的库文
+import './assets/icons/index.js'
 
 // 全局挂载路由
 import VueRouter from "vue-router";

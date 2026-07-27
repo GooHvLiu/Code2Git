@@ -2,27 +2,12 @@
   <div class="login-page">
     <div class="login-box">
       <h1>nexCM - 管理系统</h1>
-      <el-form
-        :model="ruleForm"
-        status-icon
-        :rules="rules"
-        ref="ruleForm"
-        label-width="100px"
-        class="demo-ruleForm"
-      >
+      <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="用户名" prop="username">
-          <el-input
-            type="text"
-            v-model="ruleForm.username"
-            autocomplete="off"
-          ></el-input>
+          <el-input type="text" v-model="ruleForm.username" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item :label="'密\xa0\xa0\xa0码'" prop="password">
-          <el-input
-            type="password"
-            v-model="ruleForm.password"
-            autocomplete="off"
-          ></el-input>
+          <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="验证码" prop="captchacode">
           <div class="catcha-box">
@@ -34,27 +19,13 @@
               @click="getCaptchaCode"
               style="cursor: pointer"
             />
-            <div
-              v-else
-              style="
-                width: 120px;
-                height: 40px;
-                background: #eee;
-                text-align: center;
-                line-height: 40px;
-              "
-            >
+            <div v-else style="width: 120px; height: 40px; background: #eee; text-align: center; line-height: 40px">
               加载中
             </div>
           </div>
         </el-form-item>
         <el-form-item style="margin-left: -55px">
-          <el-button
-            class="loginBtn-box"
-            type="primary"
-            @click="submitForm('ruleForm')"
-            >登录</el-button
-          >
+          <el-button class="loginBtn-box" type="primary" @click="submitForm('ruleForm')">登录</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -63,10 +34,7 @@
 
 <script>
 import { validateUsername } from "@/utils/index.validate.js";
-import {
-  requestCaptchaCodeAPI,
-  requestLoginApi
-} from "@/common/request/index.api.js";
+import { requestCaptchaCodeAPI, requestLoginApi } from "@/common/request/index.api.js";
 export default {
   name: "UserLogin",
   components: {},
@@ -111,43 +79,43 @@ export default {
       this.$refs[formName].validate(async (valid) => {
         // 如果本地数据格式校验成功
         if (valid) {
-          // 提交服务器校验并返回校验结果
-          const ServerValidateData = await requestLoginApi({
-            username: this.ruleForm.username,
-            password: this.ruleForm.password,
-            code: this.ruleForm.captchacode,
-            uuid: localStorage.getItem("nexCM-captcha-uuid")
-          });
-          // 校验结果失败,响应拦截器将code！=200的反馈false，这里可以这样使用
-          if (!ServerValidateData) {
+          try {
+            // 提交服务器校验并返回校验结果
+            const ServerValidateData = await requestLoginApi({
+              username: this.ruleForm.username,
+              password: this.ruleForm.password,
+              code: this.ruleForm.captchacode,
+              uuid: localStorage.getItem("nexCM-captcha-uuid")
+            });
+            // 校验结果成功
+            this.formReset({
+              isClearUsername: true,
+              isClearPassword: true,
+              isClearCode: true,
+              isRefreshCaptcha: false
+            });
+            // 移除本地保存的数据
+            localStorage.removeItem("nexCM-captcha-uuid");
+            // 保存服务器给的token
+            localStorage.setItem("nexCM-authorization-token", ServerValidateData.data.token);
+            // 进入主页
+            this.$router.push("/");
+          } catch (err) {
+            // 所有非200业务异常、网络异常全部进入catch
             this.formReset({
               isClearUsername: false,
               isClearPassword: true,
               isClearCode: true,
-              isRefreshCaptcha:true
+              isRefreshCaptcha: true
             });
-            return;
           }
-          // 校验结果成功
-          this.formReset({
-            isClearUsername: true,
-            isClearPassword: true,
-            isClearCode: true,
-            isRefreshCaptcha:false
-          });
-          // 移除本地保存的数据
-          localStorage.removeItem("nexCM-captcha-uuid");
-          // 保存服务器给的token
-          localStorage.setItem("nexCM-authorization-token", ServerValidateData.data.token);
-          // 进入主页
-          this.$router.push("/");
         } else {
           // 本地校验失败 表单内容校验失败
           this.formReset({
             isClearUsername: false,
             isClearPassword: true,
             isClearCode: true,
-            isRefreshCaptcha:true
+            isRefreshCaptcha: true
           });
         }
       });
@@ -157,35 +125,27 @@ export default {
     async getCaptchaCode() {
       try {
         const res = await requestCaptchaCodeAPI();
-        // 响应拦截器将代码不是200的返回值设置为false
-        if (res) {
-          this.ruleForm.captchacode = "";
-          const svgText = res.data.img;
-          this.captchaCodeSrc = `data:image/svg+xml;utf8,${encodeURIComponent(
-            svgText
-          )}`;
-          localStorage.setItem("nexCM-captcha-uuid", res.data.uuid);
-        }
+        // res 一定是code=200的数据，直接使用
+        this.ruleForm.captchacode = "";
+        const svgText = res.data.img;
+        this.captchaCodeSrc = `data:image/svg+xml;utf8,${encodeURIComponent(svgText)}`;
+        localStorage.setItem("nexCM-captcha-uuid", res.data.uuid);
       } catch (err) {
         console.error("验证码异常：", err);
+        // 验证码接口失败，清空旧图片
+        this.captchaCodeSrc = "";
       }
     },
 
     // 状态重置 响应拦截器已经判定不是200代码的都进行了消息弹出
     formReset(clear = {}) {
       // 解析字段
-      const {
-        isClearUsername = false,
-        isClearPassword = false,
-        isClearCode = false,
-        isRefreshCaptcha=false
-      } = clear;
+      const { isClearUsername = false, isClearPassword = false, isClearCode = false, isRefreshCaptcha = false } = clear;
       // 根据字段的结果进行
       if (isClearUsername) this.ruleForm.username = "";
       if (isClearPassword) this.ruleForm.password = "";
       if (isClearCode) this.ruleForm.captchacode = "";
-      if(isRefreshCaptcha)this.getCaptchaCode();
-      
+      if (isRefreshCaptcha) this.getCaptchaCode();
     }
   },
   mounted() {
