@@ -86,4 +86,13 @@ export default {
     }
   }
 }
+
+// 展开状态下二级菜单和一级菜单鼠标悬停背景效果rgb(38, 52, 69);
+.NavBar .el-menu-vertical-demo div .el-submenu .el-menu .el-menu-item {
+  background-color: rgb(38, 52, 69) !important ;
+}
+.el-menu-vertical-demo .el-menu-item:hover,
+::v-deep .el-submenu__title:hover {
+  background-color: #444 !important;
+}
 </style>

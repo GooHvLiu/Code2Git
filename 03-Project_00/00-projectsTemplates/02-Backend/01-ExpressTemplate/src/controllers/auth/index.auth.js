@@ -17,11 +17,7 @@ class AuthController {
         data: loginData
       });
     } catch (err) {
-      res.json({
-        code: 400,
-        msg: "登录失败",
-        data: err
-      });
+
       return next(err);
     }
   }
