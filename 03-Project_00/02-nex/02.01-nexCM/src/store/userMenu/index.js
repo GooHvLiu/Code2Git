@@ -8,6 +8,8 @@ export default {
       state.userMenu = payload
     }
   },
-  actions: {},
+  actions: {
+    // asyncChangeUserInfo({commit},payload){}
+  },
   getters: {}
 };

@@ -39,34 +39,39 @@ router.beforeEach(async (to, from, next) => {
         const oldRoute = [{
           name: "home",
           path: "/home",
+          meta: { titles: ["网站首页"] },
           component: () => import("@pages/UserHome.vue"),
         }];
         let dynamicRoutes = buildDynamicRoutes(rawArr);
         // 数组解析
         dynamicRoutes = [...oldRoute, ...dynamicRoutes]
+        // console.log("@dynamicRoutes@:", dynamicRoutes);
+
         // 挂载动态路由
         dynamicRoutes.forEach(item => {
-          router.addRoute("mainlayout", item)
+          router.addRoute("webMain", item)
         })
         // 标记路由已挂载
         hasAddDynamicRoute = true;
-        //addRoutes之后必须使用 next({ ...to, replace: true }) 解决初次进入页面路由404、路由不匹配问题
-        next({ ...to, replace: true });
+        //addRoutes之后必须使用 next({ path: to.path, replace: true }) 解决初次进入页面路由404、路由不匹配问题
+        return next({ path: to.path, replace: true });
       } catch (err) {
         /**
          * axios拦截器已经捕获 40001 / 40003 自动清除token、跳转登录
          * 进入catch代表接口业务异常（账号禁用、密码错误等，无需额外处理，直接放行路由，拦截器已经完成跳转）
          */
+        console.log("获取用户菜单失败：", err);
+        // 请求菜单接口失败，直接放行
+        return next();
       } finally {
         // 无论成功失败，释放请求锁
         fetchMenuLoading = false;
       }
-      // 菜单加载完成后，再放行路由
+    }
+    else {
+      // 菜单已存在/路由已挂载，直接放行
       return next();
     }
-    // 菜单已经存在，直接放行
-    return next();
-
   } else {
     // 情况 2：没有 token（未登录）
     if (ROUTE_WHITE_LIST.includes(to.path)) {

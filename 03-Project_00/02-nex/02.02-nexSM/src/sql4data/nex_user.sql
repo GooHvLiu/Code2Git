@@ -1,14 +1,30 @@
 CREATE TABLE nex_user (
-  id INT PRIMARY KEY AUTO_INCREMENT COMMENT '用户ID',
-  username VARCHAR(50) NOT NULL COMMENT '登录账号',
-  password VARCHAR(100) NOT NULL COMMENT '加密密码',
-  nickname VARCHAR(50) NOT NULL COMMENT '昵称，仅允许 administrator / engineer / operator',
-  status TINYINT NOT NULL DEFAULT 1 COMMENT '状态 1启用 0禁用',
-  isDelete TINYINT NOT NULL DEFAULT 0 COMMENT '软删除标记 0正常 1已删除',
+  id INT PRIMARY KEY AUTO_INCREMENT COMMENT '数据库自增主键（接口对外映射为userId）',
+  username VARCHAR(50) NOT NULL COMMENT '登录账号(唯一)',
+  password VARCHAR(100) NOT NULL COMMENT 'bcrypt加密后的密码',
+  role VARCHAR(50) NOT NULL COMMENT '岗位类别：administrator管理员 / engineer工程师 / operator操作员',
+  real_name VARCHAR(50) NOT NULL COMMENT '用户真实姓名',
+  sex TINYINT NOT NULL DEFAULT 1 COMMENT '性别 1男 2女 0未知',
+  phone VARCHAR(20) DEFAULT '' COMMENT '联系手机号',
+  email VARCHAR(100) DEFAULT '' COMMENT '邮箱地址',
+  dept_id INT DEFAULT NULL COMMENT '所属部门ID，关联nex_dept表',
+  avatar VARCHAR(255) DEFAULT '' COMMENT '头像地址',
+  login_ip VARCHAR(50) DEFAULT '' COMMENT '最后登录IP',
+  login_date DATETIME DEFAULT NULL COMMENT '最后登录时间',
+  remark VARCHAR(500) DEFAULT '' COMMENT '备注信息',
+  status TINYINT NOT NULL DEFAULT 1 COMMENT '账号状态：1启用 0禁用',
+  is_delete TINYINT NOT NULL DEFAULT 0 COMMENT '软删除：0正常 1删除',
   create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  create_by VARCHAR(50) DEFAULT '' COMMENT '创建人账号',
   update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  update_by VARCHAR(50) DEFAULT '' COMMENT '更新人账号',
+
   UNIQUE KEY uk_username (username),
-  CONSTRAINT chk_nickname CHECK (nickname IN ('administrator','engineer','operator')),
+  INDEX idx_dept (dept_id),
+  INDEX idx_status_del (status, is_delete),
+
+  CONSTRAINT chk_role CHECK (role IN ('administrator','engineer','operator')),
+  CONSTRAINT chk_sex CHECK (sex IN (0,1,2)),
   CONSTRAINT chk_status CHECK (status IN (0,1)),
-  CONSTRAINT chk_isDelete CHECK (isDelete IN (0,1))
-) COMMENT = '用户表';
+  CONSTRAINT chk_is_delete CHECK (is_delete IN (0,1))
+) COMMENT = '系统用户表 | nex 管理平台';

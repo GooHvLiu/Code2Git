@@ -11,59 +11,25 @@ export const staticRoutes = [
     path: "/login",
     component: UserLogin,
     meta: {
-      title: "登录页"
+      title: "登录页面"
     }
   },
   {
-    name: "mainlayout",
+    name: "webMain",
     path: "/",
     component: MainLayout,
     redirect: "/home",
     meta: {
-      title: "布局框架"
-    },
-    // children: [
-    //   {
-    //     name: 'home',
-    //     path: '/home',
-    //     component: () => import('@/pages/UserHome.vue')
-    //   },
-    //   {
-    //     name: 'businessAppointment',
-    //     path: '/business/appointment',
-    //     component: () => import('@/pages/business/UserAppointment.vue')
-    //   },
-    //   {
-    //     name: 'businessService',
-    //     path: '/business/service',
-    //     component: () => import('@/pages/business/UserService.vue')
-    //   },
-    //   {
-    //     name: 'businessStatement',
-    //     path: '/business/statement',
-    //     component: () => import('@/pages/business/UserStatement.vue')
-    //   },
-    //   {
-    //     name: 'customerCustomer',
-    //     path: '/customer/customer',
-    //     component: () => import('@/pages/customer/UserCustomer.vue')
-    //   },
-    //   {
-    //     name: 'customerVisit',
-    //     path: '/customer/visit',
-    //     component: () => import('@/pages/customer/UserVisit.vue')
-    //   },
-    //   {
-    //     name: 'flowApprove',
-    //     path: '/flow/approve',
-    //     component: () => import('@/pages/flow/UserApprove.vue')
-    //   },
-    //   {
-    //     name: 'flowDefinition',
-    //     path: '/flow/definition',
-    //     component: () => import('@/pages/flow/UserDefinition.vue')
-    //   },
-    // ]
+      title: "网站首页"
+    }
+  },
+  {
+    name: "errorpage",
+    path: "*",
+    component: () => import('@/pages/ErrorPage.vue'),
+    meta: {
+      title: "错误页面"
+    }
   }
 ];
 // 创建路由实例

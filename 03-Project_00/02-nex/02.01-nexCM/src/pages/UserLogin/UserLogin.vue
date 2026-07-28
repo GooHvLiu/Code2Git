@@ -87,6 +87,8 @@ export default {
               code: this.ruleForm.captchacode,
               uuid: localStorage.getItem("nexCM-captcha-uuid")
             });
+            console.log("@@ServerValidateData@@",ServerValidateData);
+            
             // 校验结果成功
             this.formReset({
               isClearUsername: true,
@@ -148,7 +150,7 @@ export default {
       if (isRefreshCaptcha) this.getCaptchaCode();
     }
   },
-  mounted() {
+  created() {
     // 项目被启动时，获取二维码
     this.getCaptchaCode();
   }

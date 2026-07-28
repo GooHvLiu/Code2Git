@@ -106,6 +106,8 @@ class UsersBase {
     // 3. 执行查询
     const res = await execSql(sql, [this.dbName, this.tableName, username]);
     // 4. 结果数组有数据返回第一条，无数据返回null
+    // console.log("查询到的用户数据：", res[0]);
+
     return res[0] || null;
   }
 

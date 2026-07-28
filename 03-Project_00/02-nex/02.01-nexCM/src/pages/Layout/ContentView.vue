@@ -1,13 +1,16 @@
 <template>
   <div class="ContentView">
-    <router-view></router-view>
+    <TransitionSlide direction="down" :duration="280" mode="out-in">
+      <router-view></router-view>
+    </TransitionSlide>
   </div>
 </template>
 
 <script>
+import { TransitionSlide } from "@morev/vue-transitions";
 export default {
   name: "ContentView",
-  components: {},
+  components: { TransitionSlide },
   data() {
     return {};
   },
