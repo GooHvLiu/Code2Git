@@ -11,6 +11,9 @@ import {
   MenuItem,
   Breadcrumb,
   BreadcrumbItem,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
   Message
 } from 'element-ui'
 
@@ -25,6 +28,9 @@ Vue.use(MenuItemGroup)
 Vue.use(MenuItem)
 Vue.use(Breadcrumb)
 Vue.use(BreadcrumbItem)
+Vue.use(Dropdown)
+Vue.use(DropdownItem)
+Vue.use(DropdownMenu)
 
 // 全局实例挂载 $message
 Vue.prototype.$message = Message

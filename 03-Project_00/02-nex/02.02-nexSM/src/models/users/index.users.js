@@ -5,11 +5,22 @@ const USER_ALLOW_FIELDS = [
   "id",
   "username",
   "password",
-  "nickname",
+  "role",
+  "real_name",
+  "sex",
+  "phone",
+  "email",
+  "dept_id",
+  "avatar",
+  "login_ip",
+  "login_date",
+  "remark",
   "status",
-  "isDelete",
+  "is_delete",
   "create_time",
-  "update_time"
+  "create_by",
+  "update_time",
+  "update_by"
 ];
 
 module.exports = {

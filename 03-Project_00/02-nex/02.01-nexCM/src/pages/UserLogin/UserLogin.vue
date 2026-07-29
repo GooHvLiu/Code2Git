@@ -35,6 +35,7 @@
 <script>
 import { validateUsername } from "@/utils/index.validate.js";
 import { requestCaptchaCodeAPI, requestLoginApi } from "@/common/request/index.js";
+import { mapActions } from "vuex";
 export default {
   name: "UserLogin",
   components: {},
@@ -74,6 +75,24 @@ export default {
   },
   computed: {},
   methods: {
+    ...mapActions("userInfo", ["asyncChangeUserInfo"]),
+
+    // 获取验证码
+    async getCaptchaCode() {
+      try {
+        const res = await requestCaptchaCodeAPI();
+        // res 一定是code=200的数据，直接使用
+        this.ruleForm.captchacode = "";
+        const svgText = res.data.img;
+        this.captchaCodeSrc = `data:image/svg+xml;utf8,${encodeURIComponent(svgText)}`;
+        localStorage.setItem("nexCM-captcha-uuid", res.data.uuid);
+      } catch (err) {
+        console.error("验证码异常：", err);
+        // 验证码接口失败，清空旧图片
+        this.captchaCodeSrc = "";
+      }
+    },
+
     // 登录提交
     async submitForm(formName) {
       this.$refs[formName].validate(async (valid) => {
@@ -87,8 +106,6 @@ export default {
               code: this.ruleForm.captchacode,
               uuid: localStorage.getItem("nexCM-captcha-uuid")
             });
-            console.log("@@ServerValidateData@@",ServerValidateData);
-            
             // 校验结果成功
             this.formReset({
               isClearUsername: true,
@@ -96,12 +113,15 @@ export default {
               isClearCode: true,
               isRefreshCaptcha: false
             });
-            // 移除本地保存的数据
+            // 移除本地保存的 二维码唯一标识 数据
             localStorage.removeItem("nexCM-captcha-uuid");
-            // 保存服务器给的token
+            // 保存服务器给的 token
             localStorage.setItem("nexCM-authorization-token", ServerValidateData.data.token);
             // 进入主页
             this.$router.push("/");
+            // 通过 VueX 将 token 对应的全部用户信息保存在 state 里面
+            this.asyncChangeUserInfo();
+
           } catch (err) {
             // 所有非200业务异常、网络异常全部进入catch
             this.formReset({
@@ -121,22 +141,6 @@ export default {
           });
         }
       });
-    },
-
-    // 获取验证码
-    async getCaptchaCode() {
-      try {
-        const res = await requestCaptchaCodeAPI();
-        // res 一定是code=200的数据，直接使用
-        this.ruleForm.captchacode = "";
-        const svgText = res.data.img;
-        this.captchaCodeSrc = `data:image/svg+xml;utf8,${encodeURIComponent(svgText)}`;
-        localStorage.setItem("nexCM-captcha-uuid", res.data.uuid);
-      } catch (err) {
-        console.error("验证码异常：", err);
-        // 验证码接口失败，清空旧图片
-        this.captchaCodeSrc = "";
-      }
     },
 
     // 状态重置 响应拦截器已经判定不是200代码的都进行了消息弹出

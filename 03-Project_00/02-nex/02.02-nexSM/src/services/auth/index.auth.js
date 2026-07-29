@@ -41,18 +41,7 @@ class AuthService {
       role: user.role,
       user: {
         username: user.username,
-        userid: user.id,
-        sex: user.sex,
-        status: user.status,
-        adatar: user.adatar,
-        create_by: user.create_by,
-        create_time: user.create_time,
-        is_delete: user.is_delete,
-        email: user.email,
-        login_date: user.login_date,
-        login_ip: user.login_ip,
-        remark: user.remark,
-        phone: user.phone,
+        userid: user.id
       }
     };
   }

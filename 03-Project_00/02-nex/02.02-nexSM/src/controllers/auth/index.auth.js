@@ -13,6 +13,8 @@ class AuthController {
       validateParams(password, "string", "登录密码不能为空");
 
       const loginData = await AuthService.login(username, password);
+      console.log("@@LOGINDATA:", loginData);
+
       res.json({
         code: 200,
         msg: "登录成功",
