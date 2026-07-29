@@ -23,16 +23,19 @@
         </el-dropdown>
       </div>
     </div>
-    <div class="headBottom"></div>
+    <div class="headBottom">
+      <UserTags></UserTags>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from "vuex";
 import HeadBreadcrumb from "@/components/Breadcrumb/HeadBreadcrumb.vue";
+import UserTags from "@/components/UserTags/UserTags.vue";
 export default {
   name: "HeadView",
-  components: { HeadBreadcrumb },
+  components: { HeadBreadcrumb, UserTags },
   data() {
     return {
       isShow: false
@@ -56,6 +59,8 @@ export default {
         localStorage.removeItem("nexCM-authorization-token");
         // 删除本地用户信息
         localStorage.removeItem("nexCM-user-information");
+        // 删除本地 Tag 缓存
+        localStorage.removeItem("nexCM-Menu-tags");
         // 到登录页
         this.$router.push("/login");
       }
@@ -68,7 +73,7 @@ export default {
 <style scoped lang="less">
 .HeadView {
   height: 84px;
-  box-shadow: 0px 5px 5px #ccc;
+  box-shadow: 8px 3px 0px #f7f7f7;
   button {
     width: 50px;
     height: 50px;
@@ -79,7 +84,7 @@ export default {
   }
   .headTop {
     height: 50px;
-    box-shadow: 0 3px 3px #eee;
+    box-shadow: 8px 3px 0 #f7f7f7;
     .floatLeft {
       float: left;
       display: flex;
@@ -96,6 +101,9 @@ export default {
         }
       }
     }
+  }
+  .headBottom {
+    align-items: center;
   }
 }
 </style>

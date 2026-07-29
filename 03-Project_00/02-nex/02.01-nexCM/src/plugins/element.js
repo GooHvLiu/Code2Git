@@ -14,6 +14,7 @@ import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
+  Tag,
   Message
 } from 'element-ui'
 
@@ -31,6 +32,7 @@ Vue.use(BreadcrumbItem)
 Vue.use(Dropdown)
 Vue.use(DropdownItem)
 Vue.use(DropdownMenu)
+Vue.use(Tag)
 
 // 全局实例挂载 $message
 Vue.prototype.$message = Message

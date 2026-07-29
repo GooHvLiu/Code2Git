@@ -5,7 +5,7 @@
  */
 export function formatMenu(serverMenuArr) {
   // 基础首页数据，无需从服务器获取
-  const baseMenu = [{ title: "网站首页", path: "/", icon: "home" }];
+  const baseMenu = [{ title: "网站首页", path: "/home", icon: "home" }];
 
   /**
    * 递归转换菜单节点
