@@ -33,7 +33,8 @@
 </template>
 
 <script>
-import { validateUsername } from "@/utils/index.validate.js";
+import { validateUsername, getLocalStorage, setLocalStorage, removeLocalStorage } from "@/common/utils/index.js";
+import { LOCALSTORAGE_KEYS } from "@/common/constants/storageKey.js";
 import { requestCaptchaCodeAPI, requestLoginApi } from "@/common/request/index.js";
 import { mapActions } from "vuex";
 export default {
@@ -85,7 +86,8 @@ export default {
         this.ruleForm.captchacode = "";
         const svgText = res.data.img;
         this.captchaCodeSrc = `data:image/svg+xml;utf8,${encodeURIComponent(svgText)}`;
-        localStorage.setItem("nexCM-captcha-uuid", res.data.uuid);
+        // 获取到验证码后写入本地 LocalStorage
+        setLocalStorage(LOCALSTORAGE_KEYS.CAPTCHA_UUID, res.data.uuid);
       } catch (err) {
         console.error("验证码异常：", err);
         // 验证码接口失败，清空旧图片
@@ -104,7 +106,7 @@ export default {
               username: this.ruleForm.username,
               password: this.ruleForm.password,
               code: this.ruleForm.captchacode,
-              uuid: localStorage.getItem("nexCM-captcha-uuid")
+              uuid: getLocalStorage(LOCALSTORAGE_KEYS.CAPTCHA_UUID)
             });
             // 校验结果成功
             this.formReset({
@@ -114,14 +116,13 @@ export default {
               isRefreshCaptcha: false
             });
             // 移除本地保存的 二维码唯一标识 数据
-            localStorage.removeItem("nexCM-captcha-uuid");
+            removeLocalStorage(LOCALSTORAGE_KEYS.CAPTCHA_UUID);
             // 保存服务器给的 token
-            localStorage.setItem("nexCM-authorization-token", ServerValidateData.data.token);
+            setLocalStorage(LOCALSTORAGE_KEYS.TOKEN, ServerValidateData.data.token);
             // 进入主页
             this.$router.push("/");
             // 通过 VueX 将 token 对应的全部用户信息保存在 state 里面
             this.asyncChangeUserInfo();
-
           } catch (err) {
             // 所有非200业务异常、网络异常全部进入catch
             this.formReset({

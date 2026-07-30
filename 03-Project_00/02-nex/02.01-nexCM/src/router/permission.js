@@ -7,6 +7,8 @@ import {
 import { ROUTE_WHITE_LIST } from "./constants";
 import { formatMenu } from "./helper/menuHelper";
 import { buildDynamicRoutes } from "./helper/routerHelper";
+import { LOCALSTORAGE_KEYS } from "@/common/constants/storageKey.js";
+import { getLocalStorage } from "@/common/utils/index.js";
 
 // 请求锁：防止多次并发请求菜单接口
 let fetchMenuLoading = false;
@@ -16,7 +18,7 @@ let hasAddDynamicRoute = false;
 // 全局前置路由守卫
 router.beforeEach(async (to, from, next) => {
   // 前端存储 token 的 key 保持一致
-  const token = localStorage.getItem("nexCM-authorization-token");
+  const token = getLocalStorage(LOCALSTORAGE_KEYS.TOKEN);
 
   // 情况 1：有 token（已登录）
   if (token) {

@@ -32,6 +32,7 @@
 <script>
 import { mapState, mapMutations } from "vuex";
 import HeadBreadcrumb from "@/components/Breadcrumb/HeadBreadcrumb.vue";
+import { clearLoginStorage } from "@/common/utils/index.js";
 import UserTags from "@/components/UserTags/UserTags.vue";
 export default {
   name: "HeadView",
@@ -55,12 +56,8 @@ export default {
 
       // 用户点击 退出登录
       if (command === "logout") {
-        // 删除本地token
-        localStorage.removeItem("nexCM-authorization-token");
-        // 删除本地用户信息
-        localStorage.removeItem("nexCM-user-information");
-        // 删除本地 Tag 缓存
-        localStorage.removeItem("nexCM-Menu-tags");
+        // 删除本地token 用户信息 Tag 缓存
+        clearLoginStorage();
         // 到登录页
         this.$router.push("/login");
       }

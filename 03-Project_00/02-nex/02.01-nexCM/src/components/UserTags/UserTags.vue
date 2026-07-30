@@ -26,13 +26,15 @@
 
 <script>
 import TagMenus from "./TagMenus/TagMenus.vue";
+import { SESSIONSTORAGE_KEYS } from "@/common/constants/storageKey.js";
+import { setSessionStorage, getSessionStorage } from "@/common/utils/index.js";
 export default {
   name: "UserTags",
   components: { TagMenus },
   data() {
     return {
       // 标签栏的数据存储
-      tagArr: JSON.parse(localStorage.getItem("nexCM-Menu-tags")) || [
+      tagArr: getSessionStorage(SESSIONSTORAGE_KEYS.TAG_LIST) || [
         {
           title: "网站首页",
           path: "/home",
@@ -115,7 +117,7 @@ export default {
 
     // 持久化标签数组方法 统一在此处理
     saveTagsCache() {
-      localStorage.setItem("nexCM-Menu-tags", JSON.stringify(this.tagArr));
+      setSessionStorage(SESSIONSTORAGE_KEYS.TAG_LIST, this.tagArr);
     }
   },
   mounted() {}

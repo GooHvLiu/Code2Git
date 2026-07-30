@@ -3,7 +3,7 @@ import {
   TOKEN_AUTO_REDIRECT_CODES,
   CODE_TOKEN_INVALID
 } from "./constants";
-
+import { clearLoginLocalStorage } from "@/common/utils/index.js"
 /**
  * 后端返回非200业务码统一处理
  * @param {Object} resData {code, msg, data}
@@ -14,7 +14,7 @@ export function handleBusinessError(resData) {
   // token缺失 / token过期：清除token + 跳转登录
   if (TOKEN_AUTO_REDIRECT_CODES.includes(code)) {
     Message.error(msg || "登录凭证失效，请重新登录");
-    localStorage.removeItem("nexCM-authorization-token");
+    clearLoginLocalStorage();
     // 函数内动态导入，解决循环依赖
     const router = require("@/router/index.js").default;
     router.replace("/login");
