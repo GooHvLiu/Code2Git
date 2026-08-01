@@ -17,7 +17,7 @@
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item disabled>{{ userInfo.username }}</el-dropdown-item>
-            <el-dropdown-item divided command="userCenter">个人中心</el-dropdown-item>
+            <el-dropdown-item divided command="profile">个人中心</el-dropdown-item>
             <el-dropdown-item command="logout" divided>退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -60,6 +60,12 @@ export default {
         clearLoginStorage();
         // 到登录页
         this.$router.push("/login");
+      }
+
+      // 用户点击 退出登录
+      if (command === "profile") {
+        // 设定路由直接跳转到 /profile
+        this.$router.push("/profile");
       }
     }
   },

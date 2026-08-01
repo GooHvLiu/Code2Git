@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import { TransitionSlide } from "@morev/vue-transitions";
 export default {
   name: "ContentView",
@@ -14,10 +15,23 @@ export default {
   data() {
     return {};
   },
-  computed: {},
+  computed: {
+    // 从state中获取到 navCollapse 变量
+    ...mapState("navCollapse", ["isCollapse"])
+  },
+  watch: {
+    isCollapse() {}
+  },
   methods: {},
   mounted() {}
 };
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.ContentView {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 10px;
+}
+</style>

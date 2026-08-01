@@ -30,11 +30,16 @@ export default {
 
 <style scoped lang="less">
 .MainLayout {
-  height: 100%;
   width: 100%;
+  height: 100vh;
   display: flex;
+  overflow: hidden; /* 全局禁止溢出 */
+
   .layout-right {
     flex: 1;
+    min-width: 0; /* flex子元素必须加，允许容器收缩，消除横向滚动条 */
+    display: flex;
+    flex-direction: column;
   }
 }
 </style>

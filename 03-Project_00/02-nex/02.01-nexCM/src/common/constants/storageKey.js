@@ -12,4 +12,5 @@ export const LOCALSTORAGE_KEYS = {
  */
 export const SESSIONSTORAGE_KEYS = {
   TAG_LIST: "nexCM-Menu-tags",
+  STORAGE_PAGE_SIZE_KEY: "nexCM_table_page_size"
 }

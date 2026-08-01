@@ -33,8 +33,14 @@
 </template>
 
 <script>
-import { validateUsername, getLocalStorage, setLocalStorage, removeLocalStorage } from "@/common/utils/index.js";
-import { LOCALSTORAGE_KEYS } from "@/common/constants/storageKey.js";
+import {
+  validateUsername,
+  getLocalStorage,
+  setLocalStorage,
+  removeLocalStorage,
+  removeSessionStorage
+} from "@/common/utils/index.js";
+import { LOCALSTORAGE_KEYS, SESSIONSTORAGE_KEYS } from "@/common/constants/storageKey.js";
 import { requestCaptchaCodeAPI, requestLoginApi } from "@/common/request/index.js";
 import { mapActions } from "vuex";
 export default {
@@ -117,6 +123,8 @@ export default {
             });
             // 移除本地保存的 二维码唯一标识 数据
             removeLocalStorage(LOCALSTORAGE_KEYS.CAPTCHA_UUID);
+            // 移除本地保存的 菜单 数据
+            removeSessionStorage(SESSIONSTORAGE_KEYS.TAG_LIST);
             // 保存服务器给的 token
             setLocalStorage(LOCALSTORAGE_KEYS.TOKEN, ServerValidateData.data.token);
             // 进入主页

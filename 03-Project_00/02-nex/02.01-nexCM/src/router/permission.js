@@ -38,12 +38,20 @@ router.beforeEach(async (to, from, next) => {
         store.commit("userMenu/getRouterMenus", newMenuList)
 
         // 2. 根据后端原始菜单生成【动态路由数组】
-        const oldRoute = [{
-          name: "home",
-          path: "/home",
-          meta: { titles: ["网站首页"] },
-          component: () => import("@pages/UserHome.vue"),
-        }];
+        const oldRoute = [
+          {
+            name: "home",
+            path: "/home",
+            meta: { titles: ["网站首页"] },
+            component: () => import("@pages/UserHome.vue"),
+          },
+          {
+            name: "profile",
+            path: "/profile",
+            meta: { titles: ["个人中心"] },
+            component: () => import("@pages/UserProfile.vue"),
+          }
+        ];
         let dynamicRoutes = buildDynamicRoutes(rawArr);
         // 数组解析
         dynamicRoutes = [...oldRoute, ...dynamicRoutes]

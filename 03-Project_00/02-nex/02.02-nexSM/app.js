@@ -1,46 +1,59 @@
 require("module-alias/register");
-require("express-async-errors");
 require("dotenv-expand").expand(require("dotenv").config());
-var createError = require("http-errors");
 var express = require("express");
 const cors = require("cors");
 var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var app = express();
-// 引入鉴权中间件
-const tokenAuth = require("@middlewares/auth/token.auth.middlewares.js");
+const app = express();
+const appConfig = require('./src/config/app.config.js');
 
-//  引入全局异常处理中间件
-const errorHandler = require("@middlewares/enhance/errorHandle.js");
+// 中间件
+const responseMiddleware = require('./src/middleware/response.middleware.js');
+const loggerMiddleware = require('./src/middleware/logger.middleware.js');
+const { errorHandler, notFoundHandler } = require('./src/middleware/error.middleware.js');
 
-// MySQL数据库，自动初始化连接池，无需重复导入
-require("@models/base/main.base.js").pool;
-
-// 创建路由
-app.use(tokenAuth.checkTokenAuth);
-var indexRouter = require("@routes/index");
-var loginRouter = require("@routes/login.route");
+// 总路由
+const router = require('@routes/router.js');
+const testRouter = require("@routes/testRouter.js");
 
 
-
+// 跨域
 app.use(cors());
-app.use(logger("dev"));
+
+// 解析JSON请求体
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: true }));
+
+// 统一响应格式
+app.use(responseMiddleware);
+
+// 请求日志
+app.use(loggerMiddleware);
+
+// 静态资源
+app.use('/public', express.static(path.join(__dirname, './public')));
+app.use('/uploads', express.static(path.join(__dirname, './uploads')));
 
 // 使用路由
-app.use("/", indexRouter);
-app.use("/prod-api", loginRouter);
+app.use("/", testRouter);
+app.use(router);
 
-// 当路由匹配不到时进入此 404 页面
-app.use(function (req, res, next) {
-  next(createError(404));
-});
 
-// 全局异常处理
+// 404 处理
+app.use(notFoundHandler);
+
+// 全局错误处理（必须放在最后）
 app.use(errorHandler);
+
+// 启动服务
+const PORT = appConfig.port;
+const HOST = appConfig.host;
+
+app.listen(PORT, HOST, () => {
+  console.log('\n========================================');
+  console.log(`🚀 服务启动成功`);
+  console.log(`📍 地址: http://${HOST}:${PORT}`);
+  console.log(`📦 环境: ${process.env.NODE_ENV || 'development'}`);
+  console.log('========================================\n');
+});
 
 module.exports = app;

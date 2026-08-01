@@ -3,7 +3,9 @@
   <div class="UserTags4Right" @click.self="$emit('close')">
     <div class="context-menu" :style="menuStyle">
       <ul class="menu-item-group">
-        <li class="menu-item" v-for="item in filterMenu" :key="item.id"><i :class="item.icon"></i>{{ item.text }}</li>
+        <li class="menu-item" @click="clickSingleTagMenu(item.id)" v-for="item in filterMenu" :key="item.id">
+          <i :class="item.icon"></i>{{ item.text }}
+        </li>
       </ul>
     </div>
   </div>
@@ -82,6 +84,7 @@ export default {
       if (totalLength === 1) {
         // 隐藏"关闭其他"（没有其他标签可关了）
         hideIds.add(3);
+        hideIds.add(6);
       }
 
       // 3.2 只有【唯二个】标签时
@@ -126,7 +129,15 @@ export default {
       };
     }
   },
-  methods: {},
+  methods: {
+    // 用户点击单一菜单的处理函数
+    clickSingleTagMenu(currentClickMenuId) {
+      // console.log("当前子组件收到的被点击的菜单ID：", currentClickMenuId);
+      this.$emit("sendSingleTagMenuClick", currentClickMenuId);
+      // 点击后关闭右键菜单
+      this.$emit("close");
+    }
+  },
   mounted() {}
 };
 </script>

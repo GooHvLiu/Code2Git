@@ -7,6 +7,10 @@ import '@/plugins/element.js';
 import './assets/icons/index.js'
 // 引入路由权限守卫，加载即生效
 import "./router/permission";
+// 引入全局过滤器
+import { formatDateFilter } from './filters/index'
+// 全局日期过滤器
+Vue.filter('formatDate', formatDateFilter)
 //引入store
 import store from "./store/index.js";
 // 全局挂载路由

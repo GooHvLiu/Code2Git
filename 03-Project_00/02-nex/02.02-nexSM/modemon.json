@@ -1,5 +1,0 @@
-{
-  "watch": ["src", "routes", "bin", "middleware", "public", "views"],
-  "ignore": ["ldb.json", "src/**/**/*.json"],
-  "exec": "node ./bin/www"
-}

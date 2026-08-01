@@ -14,6 +14,9 @@ import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
+  TableColumn,
+  Pagination,
+  Table,
   Tag,
   Message
 } from 'element-ui'
@@ -32,6 +35,9 @@ Vue.use(BreadcrumbItem)
 Vue.use(Dropdown)
 Vue.use(DropdownItem)
 Vue.use(DropdownMenu)
+Vue.use(TableColumn)
+Vue.use(Pagination)
+Vue.use(Table)
 Vue.use(Tag)
 
 // 全局实例挂载 $message

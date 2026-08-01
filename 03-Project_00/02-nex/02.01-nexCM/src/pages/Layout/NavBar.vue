@@ -1,5 +1,5 @@
 <template>
-  <div class="NavBar" :class="{ NavBarIsCollapse: isCollapse }">
+  <div class="NavBar" :class="{ NavBarIsCollapse: isCollapse }" :style="{ width: isCollapse ? '64px' : '220px' }">
     <h1 class="main-logo">
       <router-link to="/"><img :src="require('@/assets/logo.png')" alt="logo" width="30px" /></router-link>
       <span v-show="!isCollapse">nexCM 管理系统</span>
@@ -57,11 +57,12 @@ export default {
 
 <style scoped lang="less">
 .NavBar {
-  width: 220px;
   height: 100%;
   transition: all 0.3s;
   background-color: #304156;
   box-shadow: 6px 0 5px #ccc;
+  overflow-y: auto;
+  flex-shrink: 0;
   .el-menu {
     border: none;
   }
@@ -81,7 +82,6 @@ export default {
   }
 }
 .NavBarIsCollapse {
-  width: 64px;
   .el-submenu__title {
     span {
       display: none;
