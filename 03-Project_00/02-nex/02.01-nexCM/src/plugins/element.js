@@ -18,7 +18,16 @@ import {
   Pagination,
   Table,
   Tag,
-  Message
+  Message,
+  DatePicker,
+  Select,
+  Autocomplete,
+  Dialog,
+  RadioGroup,
+  Radio,
+  Option,
+  Upload,
+  Loading
 } from 'element-ui'
 
 // 注册组件
@@ -39,6 +48,15 @@ Vue.use(TableColumn)
 Vue.use(Pagination)
 Vue.use(Table)
 Vue.use(Tag)
+Vue.use(DatePicker)
+Vue.use(Autocomplete)
+Vue.use(Select)
+Vue.use(RadioGroup)
+Vue.use(Loading)
+Vue.use(Radio)
+Vue.use(Option)
+Vue.use(Dialog)
+Vue.use(Upload)
 
 // 全局实例挂载 $message
 Vue.prototype.$message = Message
