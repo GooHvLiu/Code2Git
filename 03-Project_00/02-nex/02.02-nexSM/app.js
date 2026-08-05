@@ -23,7 +23,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// 统一响应格式
+// 统一响应格式 res.success和res.error
 app.use(responseMiddleware);
 
 // 请求日志

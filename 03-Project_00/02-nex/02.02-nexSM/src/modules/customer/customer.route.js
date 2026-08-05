@@ -9,6 +9,11 @@ router.use(requireAuth);
 // 需要鉴权 获取客户全部数据
 router.get('/', CustomerController.getUserList);
 
+// 需要鉴权 更新单一客户信息
+router.put('/:id', CustomerController.updateUser);
+
+// 需要鉴权 新增客户信息
+router.put('/:id', CustomerController.createUser);
 
 /* 
 // 用户管理CRUD（RESTful风格）

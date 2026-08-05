@@ -35,6 +35,12 @@ module.exports = (req, res, next) => {
       errorCode = error;
       msg = ERROR_MESSAGE[error] || '操作失败';
     }
+    console.log("当前错误代码：", {
+      code: errorCode,
+      msg,
+      data: null,
+      timestamp: Date.now()
+    });
 
     res.json({
       code: errorCode,

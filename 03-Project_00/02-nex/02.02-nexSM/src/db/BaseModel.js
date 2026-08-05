@@ -165,13 +165,10 @@ class BaseModel {
     const safeData = this.filterFields(data);
     const fields = Object.keys(safeData);
     const values = Object.values(safeData);
-
     if (fields.length === 0) {
       return { affectedRows: 0 };
     }
-
     const setSql = fields.map(field => `${field} = ?`).join(', ');
-
     const result = await query(
       `UPDATE ${this.tableName} SET ${setSql} WHERE ${this.primaryKey} = ?`,
       [...values, id]

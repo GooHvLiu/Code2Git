@@ -5,8 +5,20 @@ const express = require('express');
 const router = express.Router();
 const userController = require('./user.controller');
 const CaptchaService = require('../captcha/captcha.controller.js');
-const { requireAuth, requireRole } = require('../../middleware/auth.middleware');
-const { USER_ROLE } = require('../../constants/statusCode');
+const { requireAuth, optionalAuth } = require('../../middleware/auth.middleware');
+
+// token验证有效性接口，公开接口,无需鉴权
+router.get('/tokenvalid', optionalAuth, (req, res) => {
+  /**
+   * req.user 存在 = token合法、未过期
+   * req.user undefined = 无token / token篡改 / token过期
+   * 验证通过，"data": { "valid": true },
+   * 验证通过，"data": { "valid": false },
+   */
+  res.success({
+    valid: !!req.user
+  })
+});
 
 // 登录接口，公开接口
 router.post('/login', CaptchaService.verifyCaptcha, userController.login);

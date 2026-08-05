@@ -46,12 +46,12 @@ class CustomerController {
    */
   async createUser(req, res, next) {
     try {
-      // 参数校验
+      /* // 参数 name 校验
       const validate = validateRequired(req.body, ['name']);
       if (!validate.valid) {
         return res.error(validate.message);
-      }
-
+      } */
+      // 参数 agent 校验 确认此agent是否在客户代表内
       const result = await CustomerService.createUser(req.body);
       res.success(result, '新增 客户 成功');
     } catch (err) {
@@ -63,12 +63,12 @@ class CustomerController {
    * 更新 客户
    */
   async updateUser(req, res, next) {
+
     try {
       const { id } = req.params;
       if (isEmpty(id)) {
         return res.error(ERROR_CODE.PARAM_MISSING);
       }
-
       await CustomerService.updateUser(id, req.body);
       res.success(null, '更新 客户 成功');
     } catch (err) {

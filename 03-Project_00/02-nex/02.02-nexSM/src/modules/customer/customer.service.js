@@ -2,6 +2,7 @@
  * 客户模块 - 业务逻辑层
  */
 const CustomerModel = require('./customer.model');
+const UserModel = require('../user/user.model');
 const { hashPassword } = require('../../utils/password');
 const { BusinessError } = require('../../middleware/error.middleware');
 const { ERROR_CODE } = require('../../constants/errorCode');
@@ -15,11 +16,31 @@ class CustomerService {
    */
   async getUserList(params) {
     const where = {};
+    // where对 status 进行挂载
     if (params.status !== undefined && params.status !== '') {
       where.status = params.status;
     }
+
+    // where对 搜索字段 进行挂载
+    if (params.keyword !== undefined && params.keyword !== '') {
+      //  前端携带过来的字段
+      const fieldOne = params.field;
+
+      // 不在联表字段内，不需要联表查询，process.env.UNION_KEY为联表字段名单
+      if (!(process.env.UNION_KEY.includes(fieldOne))) {
+        where[fieldOne] = params.keyword
+      } else {
+        // 在联表字段内，需要联表查询 fieldOne params.keyword
+        const userId = await UserModel.getByUsername(params.keyword);
+        // console.log("userId", userId.id);
+        where[process.env.UNION_VALUE] = userId.id;
+      }
+
+    }
     const result = await CustomerModel.getPageList(params, where);
     return result;
+
+
   }
 
   /**
@@ -60,10 +81,12 @@ class CustomerService {
    */
   async updateUser(id, data) {
     // 检查用户是否存在
+    // console.log("客户id：", id, "更新信息:", data);
     const user = await CustomerModel.getById(id);
     if (!user) {
       throw new BusinessError(ERROR_CODE.USER_NOT_EXIST, '客户不存在');
     }
+    // 如果传输过来的性别是女，转换为0，是男，转换为1
     await CustomerModel.update(id, data);
   }
 
