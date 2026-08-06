@@ -1,0 +1,8 @@
+/**
+ * JWT 配置
+ */
+module.exports = {
+  secret: process.env.JWT_SECRET || 'default-secret-key',
+  expiresIn: process.env.JWT_EXPIRES_IN || '24h',
+  algorithm: 'HS256'
+};
