@@ -1,74 +1,82 @@
 /**
- * vue.config.js - Vue CLI 配置文件
- * 
- * 配置内容：
- * - 开发服务器端口：9528
- * - 路径别名：@ 指向 src 目录
- * - SVG 图标处理：使用 svg-sprite-loader 处理 src/icons 下的 svg 文件
- * - 关闭生产环境 sourceMap
+ * ==========================================
+ * Vue CLI 配置文件
+ * ==========================================
  */
-'use strict'
-const path = require('path')
+const { defineConfig } = require('@vue/cli-service');
+const path = require("path");
 
-// 解析绝对路径
-function resolve(dir) {
-  return path.join(__dirname, dir)
-}
+module.exports = defineConfig({
+  transpileDependencies: true,
 
-// 页面标题
-const name = '医疗设备上位机管理系统'
-// 开发服务器端口
-const port = 9528
-
-module.exports = {
-  // 部署应用包时的基本 URL
-  publicPath: '/',
-  // 生产环境构建输出目录
-  outputDir: 'dist',
-  // 放置生成的静态资源 (js、css、img、fonts) 的目录
-  assetsDir: 'static',
-  // 开发环境下每次保存时是否通过 eslint-loader 进行 lint 检查
-  lintOnSave: process.env.NODE_ENV === 'development',
-  // 生产环境是否生成 sourceMap 文件（关闭可加速构建）
-  productionSourceMap: false,
   // 开发服务器配置
   devServer: {
-    port: port,
-    open: true, // 启动后自动打开浏览器
-    // 编译错误/警告时是否全屏覆盖
-    overlay: {
-      warnings: false,
-      errors: true
-    }
-  },
-  // webpack 配置（简单配置）
-  configureWebpack: {
-    name: name, // 用于 html-webpack-plugin 的 title
-    resolve: {
-      alias: {
-        '@': resolve('src') // @ 指向 src 目录
+    // 端口
+    port: 8082,
+    // 允许局域网其他设备访问
+    host: "0.0.0.0",
+    // 代理配置
+    proxy: {
+      // 代理前缀从环境变量读取
+      [process.env.VUE_APP_BASE_API]: {
+        // 后端真实地址从环境变量读取
+        target: process.env.VUE_APP_PROXY_TARGET || "http://127.0.0.1:3002",
+        changeOrigin: true
       }
     }
   },
-  // webpack 链式配置（高级配置）
-  chainWebpack(config) {
+
+  // Webpack 链式配置
+  chainWebpack: config => {
     // ========== SVG 图标配置 ==========
-    // 排除默认 svg 规则对 src/icons 目录的处理
+    // 排除默认 svg 规则对图标目录的处理
     config.module
       .rule('svg')
-      .exclude.add(resolve('src/icons'))
+      .exclude.add(path.join(__dirname, 'src/assets/icons/svg'))
       .end()
-    // 添加 icons 规则，使用 svg-sprite-loader 处理 src/icons 下的 svg
+
+    // 新增 icons 规则，使用 svg-sprite-loader
     config.module
       .rule('icons')
       .test(/\.svg$/)
-      .include.add(resolve('src/icons'))
+      .include.add(path.join(__dirname, 'src/assets/icons/svg'))
       .end()
-      .use('svg-sprite-loader')
+      .use('svg-sprite')
       .loader('svg-sprite-loader')
       .options({
-        symbolId: 'icon-[name]' // 生成的 symbol id 格式
+        symbolId: 'icon-[name]'
       })
       .end()
+
+    // ========== 全局注入 Less 变量和 Mixin ==========
+    // 所有 .less 文件无需手动 @import 即可使用 variables.less 和 mixin.less 中的内容
+    const oneOfsMap = config.module.rule('less').oneOfs.store
+    oneOfsMap.forEach(item => {
+      item
+        .use('style-resources-loader')
+        .loader('style-resources-loader')
+        .options({
+          patterns: [
+            path.resolve(__dirname, 'src/assets/styles/variables.less'),
+            path.resolve(__dirname, 'src/assets/styles/mixin.less')
+          ]
+        })
+        .end()
+    })
+
+    // ========== 页面标题 ==========
+    config.plugin('html').tap(args => {
+      args[0].title = 'nexCM 管理系统'
+      return args
+    })
+  },
+
+  // 路径别名
+  configureWebpack: {
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "src")
+      }
+    }
   }
-}
+});

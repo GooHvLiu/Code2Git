@@ -1,25 +1,31 @@
 /**
- * auth.js - Token 存储工具
- * 
- * 使用 js-cookie 存储 Token，Cookie 可以在页面刷新后保持登录状态
- * TokenKey 是存储在 Cookie 中的键名
+ * ==========================================
+ * Token 存取工具
+ * ==========================================
+ * 统一管理 Token 的增删查，所有需要操作 Token 的地方都从这里引入
+ * 避免直接操作 localStorage 导致 key 不一致
  */
-import Cookies from 'js-cookie'
+import { LOCALSTORAGE_KEYS } from '@/utils/storageKey'
 
-// Token 在 Cookie 中的键名
-const TokenKey = 'MCV-Auto-Token'
-
-// 获取 Token
+/**
+ * 获取 Token
+ * @returns {string|null}
+ */
 export function getToken() {
-  return Cookies.get(TokenKey)
+  return localStorage.getItem(LOCALSTORAGE_KEYS.TOKEN)
 }
 
-// 设置 Token
+/**
+ * 设置 Token
+ * @param {string} token
+ */
 export function setToken(token) {
-  return Cookies.set(TokenKey, token)
+  localStorage.setItem(LOCALSTORAGE_KEYS.TOKEN, token)
 }
 
-// 删除 Token（登出时调用）
+/**
+ * 删除 Token
+ */
 export function removeToken() {
-  return Cookies.remove(TokenKey)
+  localStorage.removeItem(LOCALSTORAGE_KEYS.TOKEN)
 }

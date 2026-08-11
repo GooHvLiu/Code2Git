@@ -1,138 +1,80 @@
 /**
- * store/modules/user.js - 用户状态模块
- * 
- * 管理：Token、用户信息、角色、权限
- * 
- * 注意：当前 getInfo 使用 mock 数据，对接后端时改为调用真实接口
+ * ==========================================
+ * User 模块 - 用户信息与权限
+ * ==========================================
+ * 管理 Token、用户信息、角色权限
  */
-import { login, logout, getInfo } from '@/api/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { requestGetUserInfoApi } from '@/api/login'
+import { getToken, removeToken } from '@/utils/auth'
+import { clearLoginStorage } from '@/utils/storage'
 import { resetRouter } from '@/router'
 
-// 获取默认状态
-const getDefaultState = () => {
-  return {
-    token: getToken(), // 从 Cookie 获取
-    name: '',
-    avatar: '',
-    introduction: '',
-    roles: [],
-    permissions: []
-  }
+const getDefaultUserInfo = () => ({
+  id: null,
+  username: null,
+  role: null,
+  avatar: null,
+  realName: null,
+  sex: null,
+  remark: null
+})
+
+const state = {
+  token: getToken(),
+  userInfo: getDefaultUserInfo(),
+  roles: []
 }
 
-const state = getDefaultState()
-
 const mutations = {
-  RESET_STATE: (state) => {
-    Object.assign(state, getDefaultState())
-  },
   SET_TOKEN: (state, token) => {
     state.token = token
   },
-  SET_NAME: (state, name) => {
-    state.name = name
-  },
-  SET_AVATAR: (state, avatar) => {
-    state.avatar = avatar
+  SET_USER_INFO: (state, userInfo) => {
+    state.userInfo = userInfo
   },
   SET_ROLES: (state, roles) => {
     state.roles = roles
   },
-  SET_PERMISSIONS: (state, permissions) => {
-    state.permissions = permissions
+  RESET_STATE: state => {
+    state.token = ''
+    state.userInfo = getDefaultUserInfo()
+    state.roles = []
   }
 }
 
 const actions = {
   /**
-   * 用户登录
-   * @param {Object} userInfo - { username, password }
-   */
-  login({ commit }, userInfo) {
-    const { username, password } = userInfo
-    return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password })
-        .then(response => {
-          const { data } = response
-          commit('SET_TOKEN', data.token)
-          setToken(data.token) // 存入 Cookie
-          resolve()
-        })
-        .catch(error => {
-          reject(error)
-        })
-    })
-  },
-
-  /**
    * 获取用户信息
-   * 
-   * 注意：当前是 mock 数据，对接后端时使用接口返回的数据
+   * 从后端拉取用户信息和角色，存入 state
    */
-  getInfo({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      // ========== Mock 数据（对接后端时删除这部分，改用真实接口） ==========
-      const mockData = {
-        token: state.token,
-        name: '管理员',
-        avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-        introduction: '系统管理员',
-        roles: ['admin'],
-        permissions: ['*']
-      }
-      commit('SET_NAME', mockData.name)
-      commit('SET_AVATAR', mockData.avatar)
-      commit('SET_ROLES', mockData.roles)
-      commit('SET_PERMISSIONS', mockData.permissions)
-      resolve(mockData)
-      // ========== Mock 结束 ==========
+  async getUserInfo({ commit }) {
+    const res = await requestGetUserInfoApi()
+    if (!res || !res.data) return
 
-      // ========== 对接后端时使用以下代码 ==========
-      // getInfo(state.token).then(response => {
-      //   const { data } = response
-      //   if (!data) {
-      //     return reject('验证失败，请重新登录')
-      //   }
-      //   const { name, avatar, roles, permissions } = data
-      //   if (!roles || roles.length <= 0) {
-      //     reject('getInfo: roles 必须是非空数组!')
-      //   }
-      //   commit('SET_NAME', name)
-      //   commit('SET_AVATAR', avatar)
-      //   commit('SET_ROLES', roles)
-      //   commit('SET_PERMISSIONS', permissions)
-      //   resolve(data)
-      // }).catch(error => {
-      //   reject(error)
-      // })
-    })
+    const { id, username, role, avatar, real_name: realName, sex, remark } = res.data
+    const userInfo = { id, username, role, avatar, realName, sex, remark }
+
+    commit('SET_USER_INFO', userInfo)
+    // role 字段可能是字符串或数组，统一转数组
+    const roles = role ? (Array.isArray(role) ? role : [role]) : []
+    commit('SET_ROLES', roles)
   },
 
   /**
-   * 登出
+   * 退出登录
+   * 清除前端状态，重置路由
    */
-  logout({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      logout(state.token).then(() => {
-        removeToken() // 删除 Cookie
-        resetRouter() // 重置路由
-        commit('RESET_STATE')
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
-    })
-  },
-
-  /**
-   * 重置 Token（Token 过期时调用）
-   */
-  resetToken({ commit }) {
+  logout({ commit }) {
     return new Promise(resolve => {
-      removeToken()
-      commit('RESET_STATE')
-      resolve()
+      try {
+        removeToken()
+        clearLoginStorage()
+        commit('RESET_STATE')
+        resetRouter()
+        resolve()
+      } catch (e) {
+        resolve()
+      }
     })
   }
 }

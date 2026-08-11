@@ -1,6 +1,7 @@
 // 引入 生成验证码 和 唯一标识 依赖 定义全局存储容器，放在最上方
 const svgCaptcha = require("svg-captcha");
 const { v4: uuidv4 } = require("uuid");
+const { ERROR_CODE } = require("../../constants/errorCode");
 const captchaStore = new Map();
 
 class CaptchaService {
@@ -46,7 +47,7 @@ class CaptchaService {
     // 场景1：uuid不存在 / 已过期
     if (!cacheInfo) {
       return {
-        code: 401,
+        code: ERROR_CODE.CAPTCHA_EXPIRED,
         msg: "验证码已失效，请重新获取验证码",
         data: null
       };
@@ -57,7 +58,7 @@ class CaptchaService {
 
     if (cacheInfo.code !== code.toLowerCase()) {
       return {
-        code: 402,
+        code: ERROR_CODE.CAPTCHA_ERROR,
         msg: "验证码输入错误",
         data: null
       };
@@ -65,7 +66,7 @@ class CaptchaService {
     // 场景3：验证码 校验通过，删除验证码（防止重复使用）
     captchaStore.delete(uuid);
     return {
-      code: 200,
+      code: ERROR_CODE.SUCCESS,
       msg: "验证码校验通过",
       data: null
     };

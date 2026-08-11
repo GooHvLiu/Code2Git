@@ -1,28 +1,24 @@
 /**
- * store/getters.js - 全局 getters
- * 
- * 统一导出各模块的 state，方便在组件中使用 mapGetters
- * 使用：this.$store.getters.token 或 ...mapGetters(['token'])
+ * ==========================================
+ * Vuex 全局 Getters
+ * ==========================================
+ * 统一出口，组件中通过 this.$store.getters.xxx 使用
+ * 避免组件中直接访问深层 state，便于维护
  */
 const getters = {
   // app 模块
-  sidebar: state => state.app.sidebar, // 侧边栏状态
-  device: state => state.app.device, // 设备类型 desktop/mobile
+  sidebar: state => state.app.sidebar,
+  device: state => state.app.device,
 
   // user 模块
-  token: state => state.user.token, // Token
-  avatar: state => state.user.avatar, // 头像
-  name: state => state.user.name, // 用户名
-  introduction: state => state.user.introduction, // 介绍
-  roles: state => state.user.roles, // 角色列表
-  permissions: state => state.user.permissions, // 权限列表
+  token: state => state.user.token,
+  userInfo: state => state.user.userInfo,
+  roles: state => state.user.roles,
 
   // permission 模块
-  permission_routes: state => state.permission.routes, // 可访问的完整路由表
-
-  // tagsView 模块
-  visitedViews: state => state.tagsView.visitedViews, // 访问过的标签页
-  cachedViews: state => state.tagsView.cachedViews // 缓存的标签页
+  routes: state => state.permission.routes,
+  addRoutes: state => state.permission.addRoutes,
+  userMenu: state => state.permission.userMenu
 }
 
 export default getters

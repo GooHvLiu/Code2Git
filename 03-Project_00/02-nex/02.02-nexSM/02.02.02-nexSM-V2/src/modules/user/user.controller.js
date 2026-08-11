@@ -1,10 +1,9 @@
 /**
  * 用户模块 - 控制器层
- * 负责参数接收、校验、调用service、返回响应
+ * 负责参数接收、调用service、返回响应
+ * 参数校验全部由 validate 中间件在路由层完成，这里不做格式校验
  */
 const userService = require('./user.service');
-const { validateRequired, isEmpty } = require('../../utils/validator');
-const { ERROR_CODE } = require('../../constants/errorCode');
 
 class UserController {
   /**
@@ -13,16 +12,8 @@ class UserController {
   async login(req, res, next) {
     try {
       const { username, password } = req.body;
-
-      // 参数校验
-      const validate = validateRequired(req.body, ['username', 'password']);
-      if (!validate.valid) {
-        return res.error(validate.message);
-      }
-
       const ip = req.ip || req.connection.remoteAddress;
       const result = await userService.login(username, password, ip);
-
       res.success(result, '登录成功');
     } catch (err) {
       next(err);
@@ -46,6 +37,7 @@ class UserController {
    */
   async getUserList(req, res, next) {
     try {
+      // req.query 已被 validate 中间件清洗，page/pageSize 都是合法数字
       const result = await userService.getUserList(req.query);
       res.success(result);
     } catch (err) {
@@ -58,12 +50,8 @@ class UserController {
    */
   async getUserDetail(req, res, next) {
     try {
-      const { id } = req.params;
-      if (isEmpty(id)) {
-        return res.error(ERROR_CODE.PARAM_MISSING);
-      }
-
-      const userInfo = await userService.getUserById(id);
+      // req.params.id 已被校验为正整数
+      const userInfo = await userService.getUserById(req.params.id);
       res.success(userInfo);
     } catch (err) {
       next(err);
@@ -75,12 +63,7 @@ class UserController {
    */
   async createUser(req, res, next) {
     try {
-      // 参数校验
-      const validate = validateRequired(req.body, ['username', 'password']);
-      if (!validate.valid) {
-        return res.error(validate.message);
-      }
-
+      // req.body 已被 validate 中间件清洗，多余字段已被 stripUnknown 剔除
       const result = await userService.createUser(req.body);
       res.success(result, '新增用户成功');
     } catch (err) {
@@ -93,12 +76,7 @@ class UserController {
    */
   async updateUser(req, res, next) {
     try {
-      const { id } = req.params;
-      if (isEmpty(id)) {
-        return res.error(ERROR_CODE.PARAM_MISSING);
-      }
-
-      await userService.updateUser(id, req.body);
+      await userService.updateUser(req.params.id, req.body);
       res.success(null, '更新用户成功');
     } catch (err) {
       next(err);
@@ -110,12 +88,7 @@ class UserController {
    */
   async deleteUser(req, res, next) {
     try {
-      const { id } = req.params;
-      if (isEmpty(id)) {
-        return res.error(ERROR_CODE.PARAM_MISSING);
-      }
-
-      await userService.deleteUser(id);
+      await userService.deleteUser(req.params.id);
       res.success(null, '删除用户成功');
     } catch (err) {
       next(err);
@@ -127,12 +100,7 @@ class UserController {
    */
   async batchDeleteUsers(req, res, next) {
     try {
-      const { ids } = req.body;
-      if (!ids || ids.length === 0) {
-        return res.error(ERROR_CODE.PARAM_MISSING);
-      }
-
-      await userService.batchDeleteUsers(ids);
+      await userService.batchDeleteUsers(req.body.ids);
       res.success(null, '批量删除成功');
     } catch (err) {
       next(err);
@@ -144,14 +112,7 @@ class UserController {
    */
   async updateUserStatus(req, res, next) {
     try {
-      const { id } = req.params;
-      const { status } = req.body;
-
-      if (isEmpty(id) || isEmpty(status)) {
-        return res.error(ERROR_CODE.PARAM_MISSING);
-      }
-
-      await userService.updateUserStatus(id, status);
+      await userService.updateUserStatus(req.params.id, req.body.status);
       res.success(null, '状态修改成功');
     } catch (err) {
       next(err);

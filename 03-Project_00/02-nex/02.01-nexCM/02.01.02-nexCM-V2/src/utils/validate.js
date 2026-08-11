@@ -1,35 +1,43 @@
 /**
- * validate.js - 表单校验工具
- * 
- * 提供常用的表单校验规则，配合 Element UI 的 el-form 使用
+ * ==========================================
+ * 表单校验工具
+ * ==========================================
  */
 
 /**
- * 用户名是否合法（示例：只允许 admin 和 editor）
+ * 用户名校验：3-16 位
  */
-export function isvalidUsername(str) {
-  const valid_map = ['admin', 'editor']
-  return valid_map.indexOf(str.trim()) >= 0
-}
-
-/**
- * 判断是否是外部链接
- */
-export function isExternal(path) {
-  return /^(https?:|mailto:|tel:)/.test(path)
-}
-
-/**
- * 手机号校验
- * 使用：<el-form-item prop="phone" :rules="[{ validator: validatePhone, trigger: 'blur' }]">
- */
-export function validatePhone(rule, value, callback) {
-  if (!value) {
-    callback()
-  } else if (!/^1[3-9]\d{9}$/.test(value)) {
-    callback(new Error('请输入正确的手机号'))
+export function validateUsername(rule, value, callback) {
+  if (value.length < 3 || value.length > 16) {
+    callback(new Error('用户名需要在3-16位之间，请重新输入！'))
   } else {
     callback()
+  }
+}
+
+/**
+ * 密码校验：6-20 位
+ */
+export function validatePassword(rule, value, callback) {
+  if (value.length < 6 || value.length > 20) {
+    callback(new Error('密码需要在6-20位之间，请重新输入！'))
+  } else {
+    callback()
+  }
+}
+
+/**
+ * 确认密码校验工厂函数
+ * @param {string} password - 需要对比的密码值
+ * @returns {Function} Element UI 校验器
+ */
+export function validateConfirmPassword(password) {
+  return function (rule, value, callback) {
+    if (value !== password) {
+      callback(new Error('两次输入的密码不一致！'))
+    } else {
+      callback()
+    }
   }
 }
 
@@ -37,11 +45,10 @@ export function validatePhone(rule, value, callback) {
  * 邮箱校验
  */
 export function validateEmail(rule, value, callback) {
-  if (!value) {
-    callback()
-  } else if (/^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(value)) {
-    callback()
+  const reg = /^[\w.-]+@[\w-]+\.[\w.-]+$/
+  if (!reg.test(value)) {
+    callback(new Error('请输入正确的邮箱地址！'))
   } else {
-    callback(new Error('请输入正确的邮箱'))
+    callback()
   }
 }

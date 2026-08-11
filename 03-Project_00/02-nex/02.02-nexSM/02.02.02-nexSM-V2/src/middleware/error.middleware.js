@@ -77,8 +77,8 @@ function errorHandler(err, req, res, next) {
  */
 function notFoundHandler(req, res, next) {
   res.status(404).json({
-    code: 404,
-    msg: '接口不存在',
+    code: ERROR_CODE.NOT_FOUND,
+    msg: ERROR_MESSAGE[ERROR_CODE.NOT_FOUND],
     data: null,
     timestamp: Date.now()
   });

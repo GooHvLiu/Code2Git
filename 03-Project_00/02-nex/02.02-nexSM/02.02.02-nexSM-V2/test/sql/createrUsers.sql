@@ -1,8 +1,8 @@
 -- 先执行这一行创建数据库
-CREATE DATABASE IF NOT EXISTS mcv_auto DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS nexsm_v2_dev DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
--- 然后选中 AMCV_AUTO 数据库，执行下面所有建表语句
-USE mcv_auto;
+-- 然后选中 nexsm_v2_dev 数据库，执行下面所有建表语句
+USE nexsm_v2_dev;
 
 -- ==================== 用户表 ====================
 DROP TABLE IF EXISTS `sys_user`;
@@ -14,7 +14,7 @@ CREATE TABLE `sys_user` (
   `phone` VARCHAR(20) COMMENT '手机号',
   `email` VARCHAR(100) COMMENT '邮箱',
   `avatar` VARCHAR(255) COMMENT '头像',
-  `role` TINYINT DEFAULT 3 COMMENT '角色：1管理员 2运维 3只读',
+  `role` TINYINT DEFAULT 3 COMMENT '角色：1管理员 2工程师 3操作员',
   `status` TINYINT DEFAULT 1 COMMENT '状态：0禁用 1启用',
   `remark` VARCHAR(255) COMMENT '备注',
   `last_login_time` DATETIME COMMENT '最后登录时间',
@@ -24,8 +24,8 @@ CREATE TABLE `sys_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
 
 INSERT INTO `sys_user` (`username`, `password`, `real_name`, `role`, `status`) VALUES
-('admin', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '系统管理员', 1, 1),
-('operator', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '运维工程师', 2, 1);
+('admin', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '管理员', 1, 1),
+('operator', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '工程师', 2, 1);
 
 -- ==================== 设备表 ====================
 DROP TABLE IF EXISTS `device`;

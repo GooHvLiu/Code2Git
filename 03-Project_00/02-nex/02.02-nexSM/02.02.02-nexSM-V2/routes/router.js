@@ -32,7 +32,7 @@ function loadAllRoutes() {
       const moduleRouter = require(routePath);
 
       // 路由前缀使用模块名，例如 user 模块 => /prod-api/user
-      router.use(`/prod-api/${moduleName}`, moduleRouter);
+      router.use(`/prod-api/v2/${moduleName}`, moduleRouter);
       console.log(`✅ 路由加载: /api/${moduleName}`);
     }
   }

@@ -15,62 +15,70 @@ const ERROR_CODE = {
   SUCCESS: 200,
 
   // ==================== 通用错误 10xxx ====================
-  // 参数错误
-  PARAM_ERROR: 10001,
-  PARAM_MISSING: 10002,
-  PARAM_INVALID: 10003,
 
-  // 鉴权错误
-  UNAUTHORIZED: 10101,
-  TOKEN_EXPIRED: 10102,
-  TOKEN_INVALID: 10103,
-  PERMISSION_DENIED: 10104,
+  PARAM_ERROR: 10001,// 参数错误
+  PARAM_MISSING: 10002,// 参数缺失
+  PARAM_INVALID: 10003,// 参数格式非法/参数无效
 
-  // 系统错误
-  SYSTEM_ERROR: 10500,
-  DATABASE_ERROR: 10501,
-  NETWORK_ERROR: 10502,
-  UNKNOWN_ERROR: 10999,
+  // ==================== 鉴权错误 ====================
+
+  UNAUTHORIZED: 10101,// 未登录/未授权
+  TOKEN_EXPIRED: 10102,// Token已过期
+  TOKEN_INVALID: 10103,// Token无效
+  PERMISSION_DENIED: 10104,// 权限不足，拒绝访问
+
+  // ==================== 验证码错误 ====================
+  CAPTCHA_EXPIRED: 10201,  // 验证码已失效/过期
+  CAPTCHA_ERROR: 10202,    // 验证码输入错误
+
+  // ==================== 资源不存在 ====================
+  NOT_FOUND: 10404,        // 接口/资源不存在
+
+  // ==================== 系统错误 ====================
+  SYSTEM_ERROR: 10500,// 服务器内部系统异常
+  DATABASE_ERROR: 10501,// 数据库操作异常
+  NETWORK_ERROR: 10502,// 网络异常
+  UNKNOWN_ERROR: 10999,// 未知异常
 
   // ==================== 用户模块 20xxx ====================
-  USER_NOT_EXIST: 20001,
-  USER_ALREADY_EXIST: 20002,
-  USER_PASSWORD_ERROR: 20003,
-  USER_DISABLED: 20004,
-  USER_REGISTER_FAIL: 20005,
+  USER_NOT_EXIST: 20001,        // 用户不存在
+  USER_ALREADY_EXIST: 20002,    // 用户已存在
+  USER_PASSWORD_ERROR: 20003,   // 密码错误
+  USER_DISABLED: 20004,         // 用户已被禁用
+  USER_REGISTER_FAIL: 20005,     // 用户注册失败
 
   // ==================== 设备模块 30xxx ====================
-  DEVICE_NOT_EXIST: 30001,
-  DEVICE_ALREADY_EXIST: 30002,
-  DEVICE_OFFLINE: 30003,
-  DEVICE_CONTROL_FAIL: 30004,
+  DEVICE_NOT_EXIST: 30001,      // 设备不存在
+  DEVICE_ALREADY_EXIST: 30002,  // 设备已存在
+  DEVICE_OFFLINE: 30003,        // 设备离线
+  DEVICE_CONTROL_FAIL: 30004,   // 设备控制失败
 
   // ==================== PLC模块 40xxx ====================
-  PLC_CONNECT_FAIL: 40001,
-  PLC_READ_FAIL: 40002,
-  PLC_WRITE_FAIL: 40003,
-  PLC_DATA_INVALID: 40004,
+  PLC_CONNECT_FAIL: 40001,      // PLC连接失败
+  PLC_READ_FAIL: 40002,         // PLC读取数据失败
+  PLC_WRITE_FAIL: 40003,        // PLC写入数据失败
+  PLC_DATA_INVALID: 40004,       // PLC返回数据无效
 
   // ==================== 报警模块 50xxx ====================
-  ALARM_NOT_EXIST: 50001,
-  ALARM_ALREADY_HANDLED: 50002,
+  ALARM_NOT_EXIST: 50001,       // 报警记录不存在
+  ALARM_ALREADY_HANDLED: 50002, // 该报警已处理完成
 
   // ==================== 工单模块 60xxx ====================
-  ORDER_NOT_EXIST: 60001,
-  ORDER_STATUS_ERROR: 60002,
-  ORDER_ASSIGN_FAIL: 60003,
+  ORDER_NOT_EXIST: 60001,       // 工单不存在
+  ORDER_STATUS_ERROR: 60002,    // 工单状态异常，不允许当前操作
+  ORDER_ASSIGN_FAIL: 60003,     // 工单分配失败
 
   // ==================== 文件上传模块 70xxx ====================
-  FILE_NOT_EXIST: 70001,
-  FILE_TOO_LARGE: 70002,
-  FILE_TYPE_NOT_ALLOWED: 70003,
-  FILE_UPLOAD_FAIL: 70004,
-  FILE_DELETE_FAIL: 70005,
-  FILE_LIMIT_EXCEEDED: 70006,
-  GITHUB_CONFIG_ERROR: 70101,
-  GITHUB_UPLOAD_FAIL: 70102,
-  GITHUB_DELETE_FAIL: 70103,
-  GITHUB_API_ERROR: 70104
+  FILE_NOT_EXIST: 70001,            // 文件不存在
+  FILE_TOO_LARGE: 70002,            // 文件大小超出限制
+  FILE_TYPE_NOT_ALLOWED: 70003,     // 文件类型不允许
+  FILE_UPLOAD_FAIL: 70004,          // 文件上传失败
+  FILE_DELETE_FAIL: 70005,          // 文件删除失败
+  FILE_LIMIT_EXCEEDED: 70006,       // 文件存储数量/容量超限
+  GITHUB_CONFIG_ERROR: 70101,       // Github配置错误
+  GITHUB_UPLOAD_FAIL: 70102,        // Github上传文件失败
+  GITHUB_DELETE_FAIL: 70103,        // Github删除文件失败
+  GITHUB_API_ERROR: 70104           // Github接口调用异常
 };
 
 // 错误码对应消息
@@ -85,6 +93,11 @@ const ERROR_MESSAGE = {
   [ERROR_CODE.TOKEN_EXPIRED]: '登录已过期，请重新登录',
   [ERROR_CODE.TOKEN_INVALID]: 'token无效',
   [ERROR_CODE.PERMISSION_DENIED]: '权限不足',
+
+  [ERROR_CODE.CAPTCHA_EXPIRED]: '验证码已失效，请重新获取',
+  [ERROR_CODE.CAPTCHA_ERROR]: '验证码输入错误',
+
+  [ERROR_CODE.NOT_FOUND]: '接口不存在',
 
   [ERROR_CODE.SYSTEM_ERROR]: '系统错误',
   [ERROR_CODE.DATABASE_ERROR]: '数据库操作失败',

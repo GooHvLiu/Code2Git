@@ -1,0 +1,189 @@
+/**
+ * ==========================================
+ * 全局 Less Mixin（可复用样式片段）
+ * ==========================================
+ * 通过 style-resources-loader 自动注入，所有 .less 文件直接调用
+ * 用法：.flex-center(); 或 .text-ellipsis();
+ */
+
+// ==================== Flex 布局 ====================
+
+/** 水平垂直居中 */
+.flex-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/** 水平居中 */
+.flex-center-h() {
+  display: flex;
+  justify-content: center;
+}
+
+/** 垂直居中 */
+.flex-center-v() {
+  display: flex;
+  align-items: center;
+}
+
+/** 两端对齐 */
+.flex-between() {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/** 两端对齐，不垂直居中 */
+.flex-between-no-align() {
+  display: flex;
+  justify-content: space-between;
+}
+
+/** 右对齐 */
+.flex-end() {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/** 横向排列，自动换行 */
+.flex-wrap() {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+// ==================== 文字省略 ====================
+
+/** 单行文本省略 */
+.text-ellipsis() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/** 多行文本省略
+ *  @lines: 显示行数，默认2行
+ */
+.text-ellipsis-lines(@lines: 2) when (isnumber(@lines)) {
+  display: -webkit-box;
+  -webkit-line-clamp: @lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-all;
+}
+
+// ==================== 滚动条样式 ====================
+
+/** 自定义滚动条（Webkit）
+ *  @width: 滚动条宽度，默认6px
+ *  @color: 滑块颜色，默认#c0c4cc
+ */
+.custom-scrollbar(@width: 6px; @color: #c0c4cc) {
+  &::-webkit-scrollbar {
+    width: @width;
+    height: @width;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: @color;
+    border-radius: @width / 2;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+// ==================== 清除浮动 ====================
+
+.clearfix() {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+// ==================== 绝对定位居中 ====================
+
+/** 绝对定位水平垂直居中 */
+.absolute-center() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/** 绝对定位水平居中 */
+.absolute-center-h() {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/** 绝对定位垂直居中 */
+.absolute-center-v() {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+// ==================== 阴影 ====================
+
+/** 卡片阴影 */
+.card-shadow() {
+  box-shadow: @shadow-base;
+}
+
+/** 悬浮阴影效果 */
+.hover-shadow() {
+  transition: box-shadow @transition-duration @transition-timing;
+  &:hover {
+    box-shadow: @shadow-md;
+  }
+}
+
+// ==================== 过渡动画 ====================
+
+/** 统一过渡 */
+.transition(@property: all) {
+  transition: @property @transition-duration @transition-timing;
+}
+
+// ==================== 响应式断点 ====================
+
+/** 手机及以下（<768px） */
+.respond-to-mobile(@content) {
+  @media screen and (max-width: @screen-xs) {
+    @content();
+  }
+}
+
+/** 平板及以下（<992px） */
+.respond-to-tablet(@content) {
+  @media screen and (max-width: @screen-sm) {
+    @content();
+  }
+}
+
+/** 桌面及以上（>=1200px） */
+.respond-to-desktop(@content) {
+  @media screen and (min-width: @screen-md) {
+    @content();
+  }
+}
+
+// ==================== 按钮 ====================
+
+/** 链接样式按钮（无边框，hover有底色） */
+.button-link() {
+  padding: @spacing-sm @spacing-md;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: @border-radius-base;
+  color: @primary-color;
+  .transition();
+  &:hover {
+    background: fade(@primary-color, 10%);
+  }
+}

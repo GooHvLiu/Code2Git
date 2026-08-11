@@ -1,5 +1,6 @@
 // 引入 生成验证码 服务层
 const CaptchaService = require("./captcha.service");
+const { ERROR_CODE } = require("../../constants/errorCode");
 
 class CaptchaController {
   // 生成 二维码 并直接响应前端
@@ -16,8 +17,8 @@ class CaptchaController {
   verifyCaptcha(req, res, next) {
     const { code, uuid } = req.body;
     const data = CaptchaService.verifyCaptcha(code, uuid);
-    if (data.code != 200) {
-      return res.error(data.msg)
+    if (data.code !== ERROR_CODE.SUCCESS) {
+      return res.error(data.msg, data.code)
     }
     console.log("二维码验证成功");
 

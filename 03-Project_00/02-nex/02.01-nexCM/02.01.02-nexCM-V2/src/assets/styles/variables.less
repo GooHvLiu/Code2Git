@@ -1,0 +1,119 @@
+/**
+ * ==========================================
+ * 全局 Less 变量定义
+ * ==========================================
+ * 所有颜色、间距、尺寸、断点、z-index 等设计 Token 统一在这里
+ * 通过 style-resources-loader 自动注入到所有 .less 文件，无需手动 @import
+ * 业务代码直接使用变量名即可，如 color: @primary-color;
+ */
+
+// ==================== 主题色 ====================
+/** 主色调 - Element UI 默认蓝 */
+@primary-color: #409eff;
+/** 成功色 */
+@success-color: #67c23a;
+/** 警告色 */
+@warning-color: #e6a23c;
+/** 危险色 */
+@danger-color: #f56c6c;
+/** 信息色 */
+@info-color: #909399;
+
+// ==================== 文字颜色 ====================
+/** 主要文字 */
+@text-primary: #303133;
+/** 常规文字 */
+@text-regular: #606266;
+/** 次要文字 */
+@text-secondary: #909399;
+/** 占位文字 */
+@text-placeholder: #c0c4cc;
+
+// ==================== 边框颜色 ====================
+@border-base: #dcdfe6;
+@border-light: #e4e7ed;
+@border-lighter: #ebeef5;
+@border-extra-light: #f2f6fc;
+
+// ==================== 背景色 ====================
+@bg-page: #f0f2f5;
+@bg-white: #ffffff;
+@bg-gray: #f5f7fa;
+
+// ==================== 侧边栏 ====================
+@sidebar-width: 220px;
+@sidebar-collapsed-width: 64px;
+@sidebar-bg: #304156;
+@sidebar-submenu-bg: #1f2d3d;
+@sidebar-text: #bfcbd9;
+@sidebar-active-text: #ffd04b;
+@sidebar-active-bg: #263445;
+
+// ==================== 顶部导航 ====================
+@navbar-height: 50px;
+@navbar-bg: #ffffff;
+@navbar-text: #5a5e66;
+@navbar-hover-text: #409eff;
+
+// ==================== 标签页 ====================
+@tagsview-height: 34px;
+@tagsview-bg: #ffffff;
+@tagsview-active-bg: #409eff;
+@tagsview-active-text: #ffffff;
+
+// ==================== 间距 ====================
+@spacing-xs: 4px;
+@spacing-sm: 8px;
+@spacing-md: 12px;
+@spacing-lg: 16px;
+@spacing-xl: 24px;
+@spacing-xxl: 32px;
+
+// ==================== 圆角 ====================
+@border-radius-sm: 2px;
+@border-radius-base: 4px;
+@border-radius-md: 8px;
+@border-radius-lg: 16px;
+
+// ==================== 字号 ====================
+@font-size-xs: 12px;
+@font-size-sm: 13px;
+@font-size-base: 14px;
+@font-size-md: 16px;
+@font-size-lg: 18px;
+@font-size-xl: 20px;
+@font-size-xxl: 24px;
+
+// ==================== 阴影 ====================
+@shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
+@shadow-base: 0 2px 8px rgba(0, 0, 0, 0.08);
+@shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+@shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+// ==================== 响应式断点 ====================
+/** 手机 */
+@screen-xs: 768px;
+/** 平板 */
+@screen-sm: 992px;
+/** 小桌面 */
+@screen-md: 1200px;
+/** 大桌面 */
+@screen-lg: 1920px;
+
+// ==================== z-index 层级管理 ====================
+/** 侧边栏 */
+@z-sidebar: 1001;
+/** 顶部导航 */
+@z-navbar: 1002;
+/** 标签页 */
+@z-tagsview: 1003;
+/** 抽屉 */
+@z-drawer: 1010;
+/** 弹窗 */
+@z-modal: 2000;
+/** 全局消息 */
+@z-message: 3000;
+
+// ==================== 过渡动画 ====================
+@transition-duration: 0.28s;
+@transition-timing: cubic-bezier(0.4, 0, 0.2, 1);

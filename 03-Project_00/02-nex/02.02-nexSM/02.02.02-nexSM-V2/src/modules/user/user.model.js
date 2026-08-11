@@ -7,6 +7,7 @@ const BaseModel = require('../../db/BaseModel');
 const TABLE_NAME = 'nex_user';
 
 // 允许操作的字段白名单（安全防护，防止超量赋值）
+// 与数据库 nex_user 表字段对齐，id/create_time 等自增/自动字段不在这里
 const ALLOW_FIELDS = [
   'username',
   'password',
@@ -17,14 +18,16 @@ const ALLOW_FIELDS = [
   'email',
   'dept_id',
   'avatar',
-  'login_data',
+  'login_ip',
+  'login_date',
   'remark',
   'status',
   'is_delete',
-  'remark',
   'create_by',
   'update_time',
-  'update_by'
+  'update_by',
+  'is_first_login',
+  'first_login_at'
 ];
 
 class UserModel extends BaseModel {
@@ -48,8 +51,8 @@ class UserModel extends BaseModel {
    */
   async updateLoginInfo(userId, ip) {
     return await this.update(userId, {
-      last_login_time: new Date(),
-      last_login_ip: ip
+      login_date: new Date(),
+      login_ip: ip
     });
   }
 }

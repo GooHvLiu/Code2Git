@@ -1,0 +1,106 @@
+/**
+ * ==========================================
+ * 全局样式入口文件
+ * ==========================================
+ * 在 main.js 中引入一次即可全局生效
+ * 引入顺序：variables → mixin → 基础重置 → 通用类
+ */
+
+// ==================== 全局基础样式 ====================
+
+html, body, #app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  font-size: @font-size-base;
+  color: @text-primary;
+  background-color: @bg-page;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// ==================== 全局滚动条 ====================
+
+* {
+  .custom-scrollbar(6px, fade(#000, 15%));
+}
+
+// ==================== 通用工具类 ====================
+
+// 清除浮动
+.clearfix {
+  .clearfix();
+}
+
+// 文字对齐
+.text-left    { text-align: left; }
+.text-center  { text-align: center; }
+.text-right   { text-align: right; }
+
+// 文字省略
+.text-ellipsis {
+  .text-ellipsis();
+}
+
+// Flex 布局
+.flex-center { .flex-center(); }
+.flex-between { .flex-between(); }
+
+// 间距快捷类
+.mt-xs { margin-top: @spacing-xs; }
+.mt-sm { margin-top: @spacing-sm; }
+.mt-md { margin-top: @spacing-md; }
+.mt-lg { margin-top: @spacing-lg; }
+.mt-xl { margin-top: @spacing-xl; }
+
+.mb-xs { margin-bottom: @spacing-xs; }
+.mb-sm { margin-bottom: @spacing-sm; }
+.mb-md { margin-bottom: @spacing-md; }
+.mb-lg { margin-bottom: @spacing-lg; }
+.mb-xl { margin-bottom: @spacing-xl; }
+
+.p-xs { padding: @spacing-xs; }
+.p-sm { padding: @spacing-sm; }
+.p-md { padding: @spacing-md; }
+.p-lg { padding: @spacing-lg; }
+.p-xl { padding: @spacing-xl; }
+
+// ==================== 页面容器 ====================
+
+.app-container {
+  padding: @spacing-lg;
+  background: @bg-white;
+  border-radius: @border-radius-base;
+  min-height: calc(100vh - @navbar-height - @tagsview-height - @spacing-lg * 2);
+}
+
+// ==================== Element UI 样式覆盖 ====================
+
+// 表格头部背景
+.el-table th.el-table__cell {
+  background-color: @bg-gray;
+}
+
+// 分页组件
+.el-pagination {
+  margin-top: @spacing-lg;
+  text-align: right;
+}
+
+// 弹窗圆角
+.el-dialog {
+  border-radius: @border-radius-md;
+}
+
+// 抽屉
+.el-drawer__header {
+  margin-bottom: 0;
+  padding: @spacing-lg;
+  border-bottom: 1px solid @border-lighter;
+}

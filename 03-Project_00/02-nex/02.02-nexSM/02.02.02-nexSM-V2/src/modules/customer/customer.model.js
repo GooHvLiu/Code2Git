@@ -12,7 +12,6 @@ const ALLOW_FIELDS = [
   'phone',
   'sex',
   'real_name',
-  'sex',
   'company_name',
   'company_address',
   'input_user_id',

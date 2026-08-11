@@ -12,6 +12,7 @@ const fileUtil = require('../../utils/file');
 const fileModel = require('./file.model');
 const { BusinessError } = require('../../middleware/error.middleware');
 const { ERROR_CODE } = require('../../constants/errorCode');
+const { FILE_STORAGE_TYPE } = require('../../constants/statusCode');
 
 // GitHub API 专用 https agent（兼容你测试代码里的 rejectUnauthorized: false）
 // 生产环境建议去掉 rejectUnauthorized，但你测试代码里用了，这里保持一致
@@ -36,7 +37,7 @@ class UploadService {
       sizeText: fileUtil.formatFileSize(file.size),
       mimeType: file.mimetype,
       extname: fileUtil.getExtname(file.originalname),
-      storageType: 'local',
+      storageType: FILE_STORAGE_TYPE.LOCAL,
       path: relativePath,
       url: fileUtil.buildLocalFileUrl(relativePath, options.host),
       uploadTime: new Date().toISOString()
@@ -115,7 +116,7 @@ class UploadService {
       sizeText: fileUtil.formatFileSize(file.size),
       mimeType: file.mimetype,
       extname: fileUtil.getExtname(file.originalname),
-      storageType: 'github',
+      storageType: FILE_STORAGE_TYPE.GITHUB,
       path: githubPath,
       objectPath: githubPath,
       url: fileUrl,
@@ -129,7 +130,7 @@ class UploadService {
         file_size: file.size,
         mime_type: file.mimetype,
         extname: fileUtil.getExtname(file.originalname),
-        storage_type: 'github',
+        storage_type: FILE_STORAGE_TYPE.GITHUB,
         file_path: githubPath,
         file_url: fileUrl,
         uploader_id: options.uploaderId || null

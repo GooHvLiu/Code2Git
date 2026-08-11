@@ -3,6 +3,7 @@
  * 负责：菜单数据查询 + 树形结构构建
  */
 const { query } = require('../../db/index');
+const { MENU_HIDDEN, MENU_ALWAYS_SHOW, MENU_NO_CACHE } = require('../../constants/statusCode');
 
 // 数据表名称
 const MENU_TABLE = 'nex_menu';
@@ -42,12 +43,12 @@ class MenuModel {
         name: row.name,
         component: row.component,
         redirect: row.redirect,
-        hidden: row.hidden === 1,
-        alwaysShow: row.always_show === 1,
+        hidden: row.hidden === MENU_HIDDEN.HIDDEN,
+        alwaysShow: row.always_show === MENU_ALWAYS_SHOW.YES,
         meta: {
           title: row.title,
           icon: row.icon,
-          noCache: row.no_cache === 1
+          noCache: row.no_cache === MENU_NO_CACHE.NO_CACHE
         },
         children: []
       };

@@ -1,79 +1,52 @@
 /**
- * store/modules/permission.js - 权限路由模块
- * 
- * 核心逻辑：根据用户角色过滤 asyncRoutes，生成可访问的路由表
+ * ==========================================
+ * Permission 模块 - 路由权限与菜单
+ * ==========================================
+ * 管理动态路由、侧边栏菜单
  */
-import { asyncRoutes, constantRoutes } from '@/router'
-
-/**
- * 判断当前路由是否有权限访问
- * @param {Array} roles - 用户角色列表
- * @param {Object} route - 路由配置
- * @returns {boolean}
- */
-function hasPermission(roles, route) {
-  if (route.meta && route.meta.roles) {
-    // 路由配置了 roles，判断用户角色是否在其中
-    return roles.some(role => route.meta.roles.includes(role))
-  } else {
-    // 没有配置 roles，默认所有人可访问
-    return true
-  }
-}
-
-/**
- * 递归过滤异步路由表
- * @param {Array} routes - asyncRoutes
- * @param {Array} roles - 用户角色
- * @returns {Array} 可访问的路由
- */
-export function filterAsyncRoutes(routes, roles) {
-  const res = []
-
-  routes.forEach(route => {
-    const tmp = { ...route }
-    if (hasPermission(roles, tmp)) {
-      // 有子路由，递归过滤
-      if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children, roles)
-      }
-      res.push(tmp)
-    }
-  })
-
-  return res
-}
+import { constantRoutes } from '@/router/constantRoutes'
+import { requestGetUserMenuApi } from '@/api/login'
+import { formatMenu } from '@/router/helper/menuHelper'
+import { buildDynamicRoutes } from '@/router/helper/routerHelper'
 
 const state = {
-  routes: [], // 完整路由表（常量 + 动态）
-  addRoutes: [] // 动态添加的路由
+  /** 侧边栏菜单数据 */
+  userMenu: [],
+  /** 完整路由表（静态 + 动态） */
+  routes: [],
+  /** 动态添加的路由 */
+  addRoutes: []
 }
 
 const mutations = {
   SET_ROUTES: (state, routes) => {
     state.addRoutes = routes
     state.routes = constantRoutes.concat(routes)
+  },
+  SET_MENU: (state, menu) => {
+    state.userMenu = menu
   }
 }
 
 const actions = {
   /**
-   * 根据角色生成路由
-   * @param {Array} roles - 用户角色列表
+   * 生成路由
+   * 从后端获取菜单数据，构建动态路由
+   * @returns {Array} 动态路由数组
    */
-  generateRoutes({ commit }, roles) {
-    return new Promise(resolve => {
-      let accessedRoutes
-      if (roles.includes('admin')) {
-        // admin 角色可以访问所有路由
-        accessedRoutes = asyncRoutes || []
-      } else {
-        // 其他角色按权限过滤
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-      }
-      commit('SET_ROUTES', accessedRoutes)
-      resolve(accessedRoutes)
-    })
+  async generateRoutes({ commit }) {
+    const res = await requestGetUserMenuApi()
+    const rawArr = res.data || []
+
+    // 格式化菜单数据（侧边栏用）
+    const menuList = formatMenu(rawArr)
+    commit('SET_MENU', menuList)
+
+    // 构建动态路由
+    const dynamicRoutes = buildDynamicRoutes(rawArr)
+
+    commit('SET_ROUTES', dynamicRoutes)
+    return dynamicRoutes
   }
 }
 
