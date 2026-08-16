@@ -8,8 +8,10 @@
  * 用法：在 Layout 组件中 mixins: [resizeMixin]
  */
 import { mapActions } from 'vuex'
+import config from '@/config'
 
-const WIDTH = 992
+// 移动端断点（与 variables.less @screen-sm 保持一致）
+const WIDTH = config.MOBILE_BREAKPOINT
 
 export default {
   data() {

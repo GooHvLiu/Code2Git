@@ -1,3 +1,5 @@
+import { HOME_TAG } from '@/router/pathConstants'
+
 /**
  * 后端原始菜单数组 → 递归转换为侧边栏可用菜单结构（支持无限层级）
  * @param {Array} serverMenuArr 后端返回 raw menu data
@@ -5,7 +7,7 @@
  */
 export function formatMenu(serverMenuArr) {
   // 基础首页数据，无需从服务器获取
-  const baseMenu = [{ title: "网站首页", path: "/home", icon: "home" }];
+  const baseMenu = [{ title: HOME_TAG.title, path: HOME_TAG.path, icon: HOME_TAG.icon }]
 
   /**
    * 递归转换菜单节点
@@ -13,28 +15,28 @@ export function formatMenu(serverMenuArr) {
    * @param {string} parentPath 父级路径
    * @returns {Array}
    */
-  function transformMenu(list, parentPath = "") {
-    if (!Array.isArray(list)) return [];
+  function transformMenu(list, parentPath = '') {
+    if (!Array.isArray(list)) return []
 
-    return list.map((item) => {
-      const currentPath = `${parentPath}/${item.path}`.replace(/\/+/g, "/");
+    return list.map(item => {
+      const currentPath = `${parentPath}/${item.path}`.replace(/\/+/g, '/')
       const menuNode = {
-        title: item.meta?.title || "",
+        title: item.meta?.title || '',
         path: currentPath,
-        icon: item.meta?.icon || "",
-      };
+        icon: item.meta?.icon || ''
+      }
 
       // 存在合法子菜单，递归处理
       if (item.children && Array.isArray(item.children) && item.children.length > 0) {
-        menuNode.children = transformMenu(item.children, currentPath);
+        menuNode.children = transformMenu(item.children, currentPath)
       }
-      return menuNode;
-    });
+      return menuNode
+    })
   }
 
   // 转换后端菜单
-  const transformedMenu = transformMenu(serverMenuArr);
+  const transformedMenu = transformMenu(serverMenuArr)
 
   // 拼接首页 + 业务菜单
-  return [...baseMenu, ...transformedMenu];
+  return [...baseMenu, ...transformedMenu]
 }

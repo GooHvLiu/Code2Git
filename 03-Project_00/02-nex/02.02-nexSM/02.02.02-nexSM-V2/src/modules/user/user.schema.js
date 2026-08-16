@@ -71,12 +71,12 @@ const statusField = Joi.number().valid(USER_STATUS.ENABLED, USER_STATUS.DISABLED
 
 // ==================== 各接口 Schema ====================
 
-/** 登录请求体 */
+/** 登录请求体 请求过来的字段必须和如下对其 */
 const loginSchema = Joi.object({
   username: usernameField,
   password: passwordField,
   uuid: Joi.string().allow('', null),        // 验证码uuid
-  captchacode: Joi.string().allow('', null)  // 验证码
+  code: Joi.string().allow('', null)  // 验证码
 }).unknown(false);
 
 /** 新增用户请求体 */

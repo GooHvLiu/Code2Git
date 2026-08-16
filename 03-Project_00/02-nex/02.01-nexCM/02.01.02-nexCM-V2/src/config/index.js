@@ -1,60 +1,24 @@
 /**
  * ==========================================
- * 系统全局配置文件
+ * 系统全局配置 - 聚合出口
  * ==========================================
- * 所有不写死的常量、配置项统一在这里管理
- * 业务代码中通过 import config from '@/config' 使用
- * 修改配置只需改这一个文件，无需全局搜索替换
+ * 所有配置按模块拆分到同目录下的文件：
+ *   - system.js   系统信息、缓存前缀
+ *   - network.js  网络请求
+ *   - ui.js       分页、侧边栏、标签页、主题色、动画、响应式、登录页文案
+ *   - messages.js 全局提示文案、表单校验提示
+ *
+ * 业务代码统一通过 import config from '@/config' 使用
+ * 修改配置只需改对应模块文件，无需全局搜索替换
  */
+import system from './system'
+import network from './network'
+import ui from './ui'
+import messages from './messages'
 
 export default {
-  // ==================== 系统信息 ====================
-  /** 系统名称 - 用于浏览器标题、侧边栏顶部、登录页等 */
-  SYSTEM_NAME: 'nexCM 管理系统',
-  /** 系统版本号 */
-  SYSTEM_VERSION: '2.0.0',
-  /** 系统 Logo 路径 */
-  SYSTEM_LOGO: require('@/assets/images/logo.png'),
-
-  // ==================== 网络请求 ====================
-  /** 请求超时时间（毫秒） */
-  REQUEST_TIMEOUT: 100000,
-  /** Token 请求头字段名 */
-  TOKEN_HEADER: 'Authorization',
-  /** Token 前缀 */
-  TOKEN_PREFIX: 'Bearer',
-
-  // ==================== 分页配置 ====================
-  /** 默认每页条数 */
-  PAGE_SIZE: 20,
-  /** 可选每页条数 */
-  PAGE_SIZES: [10, 20, 50, 100],
-
-  // ==================== 侧边栏 ====================
-  /** 侧边栏展开宽度 */
-  SIDEBAR_WIDTH: '220px',
-  /** 侧边栏折叠宽度 */
-  SIDEBAR_COLLAPSE_WIDTH: '64px',
-
-  // ==================== 标签页 ====================
-  /** 标签页最大缓存数量 */
-  TAGS_VIEW_MAX: 20,
-
-  // ==================== 主题色 ====================
-  /** 主色调 */
-  PRIMARY_COLOR: '#409eff',
-  /** 侧边栏背景色 */
-  SIDEBAR_BG: '#304156',
-  /** 侧边栏文字色 */
-  SIDEBAR_TEXT: '#bfcbd9',
-  /** 侧边栏激活文字色 */
-  SIDEBAR_ACTIVE_TEXT: '#ffd04b',
-
-  // ==================== 动画 ====================
-  /** 页面切换动画时长（毫秒） */
-  TRANSITION_DURATION: 280,
-
-  // ==================== 本地缓存 ====================
-  /** localStorage / sessionStorage key 前缀，避免多项目冲突 */
-  STORAGE_PREFIX: 'nexCM-v2-'
+  ...system,
+  ...network,
+  ...ui,
+  ...messages
 }

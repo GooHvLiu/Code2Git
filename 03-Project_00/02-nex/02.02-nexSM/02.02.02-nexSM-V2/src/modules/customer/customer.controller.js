@@ -1,24 +1,21 @@
 /**
  * 客户模块 - 控制器层
- * 负责参数接收、校验、调用service、返回响应
+ * 负责参数接收、调用service、返回响应
+ * 参数校验全部由 validate 中间件在路由层完成，这里不做格式校验
  */
 const CustomerService = require('./customer.service');
-const { idToNameMap } = require('./id2nameMap')
-const { validateRequired, isEmpty } = require('../../utils/validator');
-const { ERROR_CODE } = require('../../constants/errorCode');
+const { idToNameMap } = require('./id2nameMap');
 
 class CustomerController {
   /**
-   * 分页查询用户列表
+   * 分页查询客户列表
    */
   async getUserList(req, res, next) {
     try {
+      // req.query 已被 validate 中间件清洗
       const result = await CustomerService.getUserList(req.query);
-      // console.log("result", result);
-
-      // 通过 idToNameMap 处理，将原有只有业务员 id 的更改为实际人名
+      // 通过 idToNameMap 处理，将业务员 id 转换为实际人名
       const newResult = await idToNameMap(result);
-      // console.log("newResult", newResult);
       res.success(newResult);
     } catch (err) {
       next(err);
@@ -26,15 +23,12 @@ class CustomerController {
   }
 
   /**
-   * 获取 指定客户 详情
+   * 获取指定客户详情
    */
   async getUserDetail(req, res, next) {
     try {
-      const { id } = req.params;
-      if (isEmpty(id)) {
-        return res.error(ERROR_CODE.PARAM_MISSING);
-      }
-      const userInfo = await CustomerService.getUserById(id);
+      // req.params.id 已被校验为正整数
+      const userInfo = await CustomerService.getUserById(req.params.id);
       res.success(userInfo);
     } catch (err) {
       next(err);
@@ -42,68 +36,49 @@ class CustomerController {
   }
 
   /**
-   * 新增 客户
+   * 新增客户
    */
   async createUser(req, res, next) {
     try {
-      /* // 参数 name 校验
-      const validate = validateRequired(req.body, ['name']);
-      if (!validate.valid) {
-        return res.error(validate.message);
-      } */
-      // 参数 agent 校验 确认此agent是否在客户代表内
+      // req.body 已被 validate 中间件清洗，多余字段已被 stripUnknown 剔除
       const result = await CustomerService.createUser(req.body);
-      res.success(result, '新增 客户 成功');
+      res.success(result, '新增客户成功');
     } catch (err) {
       next(err);
     }
   }
 
   /**
-   * 更新 客户
+   * 更新客户
    */
   async updateUser(req, res, next) {
-
     try {
-      const { id } = req.params;
-      if (isEmpty(id)) {
-        return res.error(ERROR_CODE.PARAM_MISSING);
-      }
-      await CustomerService.updateUser(id, req.body);
-      res.success(null, '更新 客户 成功');
+      await CustomerService.updateUser(req.params.id, req.body);
+      res.success(null, '更新客户成功');
     } catch (err) {
       next(err);
     }
   }
 
   /**
-   * 删除 客户
+   * 删除客户
    */
   async deleteUser(req, res, next) {
     try {
-      const { id } = req.params;
-      if (isEmpty(id)) {
-        return res.error(ERROR_CODE.PARAM_MISSING);
-      }
-
-      await CustomerService.deleteUser(id);
-      res.success(null, '删除 客户 成功');
+      await CustomerService.deleteUser(req.params.id);
+      res.success(null, '删除客户成功');
     } catch (err) {
       next(err);
     }
   }
 
   /**
-   * 批量删除客户 
+   * 批量删除客户
    */
   async batchDeleteUsers(req, res, next) {
     try {
-      const { ids } = req.body;
-      if (!ids || ids.length === 0) {
-        return res.error(ERROR_CODE.PARAM_MISSING);
-      }
-
-      await CustomerService.batchDeleteUsers(ids);
+      // req.body.ids 已被校验为非空数组
+      await CustomerService.batchDeleteUsers(req.body.ids);
       res.success(null, '批量删除成功');
     } catch (err) {
       next(err);
@@ -111,18 +86,11 @@ class CustomerController {
   }
 
   /**
-   * 修改 客户 状态
+   * 修改客户状态
    */
   async updateUserStatus(req, res, next) {
     try {
-      const { id } = req.params;
-      const { status } = req.body;
-
-      if (isEmpty(id) || isEmpty(status)) {
-        return res.error(ERROR_CODE.PARAM_MISSING);
-      }
-
-      await CustomerService.updateUserStatus(id, status);
+      await CustomerService.updateUserStatus(req.params.id, req.body.status);
       res.success(null, '状态修改成功');
     } catch (err) {
       next(err);

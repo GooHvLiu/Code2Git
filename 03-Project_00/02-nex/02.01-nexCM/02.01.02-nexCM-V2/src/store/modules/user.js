@@ -22,7 +22,9 @@ const getDefaultUserInfo = () => ({
 const state = {
   token: getToken(),
   userInfo: getDefaultUserInfo(),
-  roles: []
+  roles: [],
+  /** 权限码列表（如 ['user:add', 'user:edit']），用于按钮级权限控制 */
+  permissions: []
 }
 
 const mutations = {
@@ -35,10 +37,14 @@ const mutations = {
   SET_ROLES: (state, roles) => {
     state.roles = roles
   },
+  SET_PERMISSIONS: (state, permissions) => {
+    state.permissions = permissions
+  },
   RESET_STATE: state => {
     state.token = ''
     state.userInfo = getDefaultUserInfo()
     state.roles = []
+    state.permissions = []
   }
 }
 
@@ -51,31 +57,31 @@ const actions = {
     const res = await requestGetUserInfoApi()
     if (!res || !res.data) return
 
-    const { id, username, role, avatar, real_name: realName, sex, remark } = res.data
+    const { id, username, role, avatar, real_name: realName, sex, remark, permissions } = res.data
     const userInfo = { id, username, role, avatar, realName, sex, remark }
 
     commit('SET_USER_INFO', userInfo)
     // role 字段可能是字符串或数组，统一转数组
     const roles = role ? (Array.isArray(role) ? role : [role]) : []
     commit('SET_ROLES', roles)
+    // 权限码列表，后端可能返回 permissions 字段
+    const permList = Array.isArray(permissions) ? permissions : []
+    commit('SET_PERMISSIONS', permList)
   },
 
   /**
    * 退出登录
    * 清除前端状态，重置路由
    */
-  logout({ commit }) {
-    return new Promise(resolve => {
-      try {
-        removeToken()
-        clearLoginStorage()
-        commit('RESET_STATE')
-        resetRouter()
-        resolve()
-      } catch (e) {
-        resolve()
-      }
-    })
+  async logout({ commit }) {
+    try {
+      removeToken()
+      clearLoginStorage()
+      commit('RESET_STATE')
+      resetRouter()
+    } catch (e) {
+      // 忽略清理过程中的异常，确保退出流程不中断
+    }
   }
 }
 

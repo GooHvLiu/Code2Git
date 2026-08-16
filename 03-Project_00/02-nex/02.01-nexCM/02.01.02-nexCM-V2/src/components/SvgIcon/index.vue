@@ -1,7 +1,12 @@
 <template>
   <i v-if="iconFileName.indexOf('el-icon-') === 0" :class="iconFileName"></i>
   <!-- 使用时，采用 <svg-icon icon-file-name="user" /> -->
-  <svg v-else class="svg-icon" aria-hidden="true" v-on="$listeners">
+  <svg
+    v-else
+    class="svg-icon"
+    aria-hidden="true"
+    v-on="$listeners"
+  >
     <use :xlink:href="`#icon-${iconFileName}`" rel="external nofollow" />
   </svg>
 </template>
@@ -12,9 +17,9 @@ export default {
   props: {
     iconFileName: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 
@@ -24,6 +29,5 @@ export default {
   height: 1.6em;
   overflow: hidden;
   vertical-align: -0.15em;
-  fill: currentColor;
 }
 </style>

@@ -1,7 +1,15 @@
 /**
  * ==========================================
- * 客户管理接口
+ * 客户管理接口（示例）
  * ==========================================
+ * 本文件为 RESTful API 写法示例，新增业务模块时可参考此格式
+ * 约定：
+ *   - 列表：GET /resource
+ *   - 新增：POST /resource
+ *   - 更新：PUT /resource/:id
+ *   - 删除：DELETE /resource/:id
+ *   - 导入：POST /resource/import
+ *   - 导出：GET /resource/export (responseType: 'blob')
  */
 import request from '@/utils/request'
 

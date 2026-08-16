@@ -25,7 +25,13 @@ const state = {
     withoutAnimation: false
   },
   /** 设备类型：desktop / mobile */
-  device: 'desktop'
+  device: 'desktop',
+  /**
+   * 全局 Loading 计数
+   * 多个请求并发时，计数累加，归零时才关闭 loading
+   * 避免多个请求先后完成导致 loading 闪烁
+   */
+  globalLoading: 0
 }
 
 const mutations = {
@@ -44,6 +50,20 @@ const mutations = {
   /** 切换设备类型 */
   TOGGLE_DEVICE: (state, device) => {
     state.device = device
+  },
+  /** 增加全局 Loading 计数 */
+  INC_LOADING: state => {
+    state.globalLoading++
+  },
+  /** 减少全局 Loading 计数（最小为 0） */
+  DEC_LOADING: state => {
+    if (state.globalLoading > 0) {
+      state.globalLoading--
+    }
+  },
+  /** 重置全局 Loading 计数（异常时用） */
+  RESET_LOADING: state => {
+    state.globalLoading = 0
   }
 }
 
@@ -59,6 +79,18 @@ const actions = {
   /** 切换设备类型 */
   toggleDevice({ commit }, device) {
     commit('TOGGLE_DEVICE', device)
+  },
+  /** 显示全局 Loading（计数 +1） */
+  showLoading({ commit }) {
+    commit('INC_LOADING')
+  },
+  /** 隐藏全局 Loading（计数 -1） */
+  hideLoading({ commit }) {
+    commit('DEC_LOADING')
+  },
+  /** 强制重置 Loading（路由切换/异常时调用） */
+  resetLoading({ commit }) {
+    commit('RESET_LOADING')
   }
 }
 

@@ -6,26 +6,41 @@
  * meta.titles 为面包屑层级数组，TagsView 取最后一项作为标签标题
  */
 import Layout from '@/Layout/index.vue'
+import { ROUTE_PATHS } from './pathConstants'
 
 export const constantRoutes = [
   {
-    path: '/login',
+    path: ROUTE_PATHS.LOGIN,
     name: 'Login',
     component: () => import('@/views/login/index.vue'),
     hidden: true,
     meta: { titles: ['登录'] }
   },
   {
-    path: '/404',
+    path: ROUTE_PATHS.NOT_FOUND,
     name: 'NotFound',
     component: () => import('@/views/error/404.vue'),
     hidden: true,
     meta: { titles: ['页面不存在'] }
   },
   {
-    path: '/',
+    path: ROUTE_PATHS.FORBIDDEN,
+    name: 'Forbidden',
+    component: () => import('@/views/error/403.vue'),
+    hidden: true,
+    meta: { titles: ['无权限'] }
+  },
+  {
+    path: ROUTE_PATHS.REDIRECT,
+    name: 'Redirect',
+    component: () => import('@/views/redirect/index.vue'),
+    hidden: true,
+    meta: { titles: ['重定向'] }
+  },
+  {
+    path: ROUTE_PATHS.ROOT,
     component: Layout,
-    redirect: '/home',
+    redirect: ROUTE_PATHS.HOME,
     name: 'Layout',
     children: [
       {
@@ -44,5 +59,5 @@ export const constantRoutes = [
     ]
   },
   // 404 兜底必须放最后
-  { path: '*', redirect: '/404', hidden: true }
+  { path: '*', redirect: ROUTE_PATHS.NOT_FOUND, hidden: true }
 ]

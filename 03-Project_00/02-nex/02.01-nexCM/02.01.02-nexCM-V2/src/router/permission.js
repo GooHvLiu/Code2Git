@@ -13,17 +13,22 @@
 import router from '@/router/index'
 import store from '@/store/index'
 import { ROUTE_WHITE_LIST } from '@/router/constants'
+import { ROUTE_PATHS } from '@/router/pathConstants'
 import { getToken } from '@/utils/auth'
+import { cancelAllPending } from '@/utils/request'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import config from '@/config'
 
 NProgress.configure({ showSpinner: false })
 
-const whiteList = ROUTE_WHITE_LIST || ['/login']
+const whiteList = ROUTE_WHITE_LIST || [ROUTE_PATHS.LOGIN]
 
 router.beforeEach(async (to, from, next) => {
   NProgress.start()
+
+  // 路由切换时取消所有未完成的请求，避免数据错乱
+  cancelAllPending()
 
   // 设置页面标题（取 titles 数组最后一项）
   const pageTitle = to.meta?.titles?.[to.meta.titles.length - 1]
@@ -36,12 +41,12 @@ router.beforeEach(async (to, from, next) => {
     if (whiteList.includes(to.path)) {
       return next()
     }
-    return next(`/login?redirect=${to.path}`)
+    return next(`${ROUTE_PATHS.LOGIN}?redirect=${to.path}`)
   }
 
   // 已登录，访问登录页直接跳首页
-  if (to.path === '/login') {
-    return next('/')
+  if (to.path === ROUTE_PATHS.LOGIN) {
+    return next(ROUTE_PATHS.ROOT)
   }
 
   // 已生成动态路由，直接放行
@@ -66,7 +71,7 @@ router.beforeEach(async (to, from, next) => {
   } catch (err) {
     // 获取失败，清除登录状态跳登录
     await store.dispatch('user/logout')
-    next(`/login?redirect=${to.path}`)
+    next(`${ROUTE_PATHS.LOGIN}?redirect=${to.path}`)
   }
 })
 

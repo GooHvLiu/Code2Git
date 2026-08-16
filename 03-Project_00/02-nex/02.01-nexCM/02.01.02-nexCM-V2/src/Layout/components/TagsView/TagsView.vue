@@ -33,52 +33,44 @@
 
 <script>
 import TagMenus from './TagMenus/TagMenus.vue'
-import { SESSIONSTORAGE_KEYS } from '@/utils/storageKey'
-import { setSessionStorage, getSessionStorage } from '@/utils/storage'
-
-/** 首页固定标签 */
-const HOME_TAG = { title: '网站首页', path: '/home' }
+import { mapGetters, mapActions } from 'vuex'
+import { HOME_TAG, ROUTE_PATHS } from '@/router/pathConstants'
 
 export default {
   name: 'TagsView',
   components: { TagMenus },
   data() {
     return {
-      tagArr: getSessionStorage(SESSIONSTORAGE_KEYS.TAG_LIST) || [{ ...HOME_TAG }],
       menuShow: false,
       mouseX: 0,
       mouseY: 0,
       currentRightIndex: null
     }
   },
+  computed: {
+    ...mapGetters(['visitedViews']),
+    /** 标签列表（兼容原 tagArr 命名） */
+    tagArr() {
+      return this.visitedViews
+    }
+  },
   watch: {
     $route: {
       immediate: true,
       handler(to) {
-        this.addTag(to)
+        this.addView(to)
       }
     }
   },
   methods: {
+    ...mapActions('tagsView', ['addView', 'delView', 'delOthersViews', 'delAllViews', 'delLeftViews', 'delRightViews']),
+
     /** 获取路由标题，兼容 titles 数组和 title 字符串 */
     getRouteTitle(route) {
       if (route.meta?.titles?.length) {
         return route.meta.titles[route.meta.titles.length - 1]
       }
       return route.meta?.title || '未命名'
-    },
-
-    /** 添加标签 */
-    addTag(route) {
-      if (!route.name || route.path === '/redirect') return
-      const existItem = this.tagArr.find(item => item.path === route.path)
-      if (!existItem) {
-        this.tagArr.push({
-          title: this.getRouteTitle(route),
-          path: route.path
-        })
-      }
-      this.saveTagsCache()
     },
 
     /** 首页不可关闭 */
@@ -99,16 +91,15 @@ export default {
     },
 
     /** 关闭标签 */
-    handleClose(index) {
+    async handleClose(index) {
       const delTag = this.tagArr[index]
       const isActive = delTag.path === this.$route.path
 
-      this.tagArr.splice(index, 1)
-      this.saveTagsCache()
+      const remainViews = await this.delView(delTag)
 
       // 关闭的是当前页，跳到最后一个标签
-      if (isActive && this.tagArr.length > 0) {
-        const lastItem = this.tagArr[this.tagArr.length - 1]
+      if (isActive && remainViews.length > 0) {
+        const lastItem = remainViews[remainViews.length - 1]
         this.$router.push(lastItem.path)
       }
     },
@@ -122,57 +113,53 @@ export default {
     },
 
     /** 右键菜单操作 */
-    handleMenuClick(menuId) {
+    async handleMenuClick(menuId) {
       const idx = this.currentRightIndex
-      const currentPath = this.tagArr[idx].path
+      const currentTag = this.tagArr[idx]
+      const currentPath = currentTag.path
       const isCurrentActive = currentPath === this.$route.path
 
       switch (menuId) {
-        // 刷新
-        case 1:
-          location.reload()
+        // 刷新（无刷新重载：跳转到 /redirect 再跳回，组件销毁重建）
+        case 1: {
+          const fullPath = this.$route.fullPath
+          this.$router.replace(`${ROUTE_PATHS.REDIRECT}?path=${encodeURIComponent(fullPath)}`)
           break
+        }
         // 关闭当前
         case 2:
           this.handleClose(idx)
           break
         // 关闭其他
-        case 3:
-          // 保留首页和当前标签（如果当前就是首页，只保留首页）
-          this.tagArr = idx === 0
-            ? [{ ...HOME_TAG }]
-            : [{ ...HOME_TAG }, this.tagArr[idx]]
-          this.saveTagsCache()
-          if (!isCurrentActive) this.$router.push(currentPath)
-          break
-        // 关闭左侧（首页不可关，从索引1开始删）
-        case 4:
-          this.tagArr.splice(1, idx - 1)
-          this.saveTagsCache()
-          if (!this.tagArr.find(t => t.path === this.$route.path)) {
+        case 3: {
+          const remainViews = await this.delOthersViews(currentTag)
+          if (!isCurrentActive && remainViews.length > 0) {
             this.$router.push(currentPath)
           }
           break
+        }
+        // 关闭左侧
+        case 4: {
+          const remainViews = await this.delLeftViews(currentTag)
+          if (!remainViews.find(t => t.path === this.$route.path)) {
+            this.$router.push(currentPath)
+          }
+          break
+        }
         // 关闭右侧
-        case 5:
-          this.tagArr.splice(idx + 1)
-          this.saveTagsCache()
-          if (!this.tagArr.find(t => t.path === this.$route.path)) {
+        case 5: {
+          const remainViews = await this.delRightViews(currentTag)
+          if (!remainViews.find(t => t.path === this.$route.path)) {
             this.$router.push(currentPath)
           }
           break
+        }
         // 全部关闭（只留首页）
         case 6:
-          this.tagArr = [{ ...HOME_TAG }]
-          this.saveTagsCache()
+          await this.delAllViews()
           this.$router.push(HOME_TAG.path)
           break
       }
-    },
-
-    /** 持久化 */
-    saveTagsCache() {
-      setSessionStorage(SESSIONSTORAGE_KEYS.TAG_LIST, this.tagArr)
     }
   }
 }
@@ -183,7 +170,7 @@ export default {
   height: @tagsview-height;
   background: @tagsview-bg;
   border-bottom: 1px solid @border-light;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: @tagsview-shadow;
 }
 
 .tags-view-wrap {
@@ -222,11 +209,11 @@ export default {
 
 .active-dot {
   display: none;
-  width: 8px;
-  height: 8px;
-  background: #fff;
+  width: @tagsview-active-dot-size;
+  height: @tagsview-active-dot-size;
+  background: @tagsview-active-dot-bg;
   border-radius: 50%;
-  margin-right: 4px;
+  margin-right: @spacing-xs;
   vertical-align: middle;
 }
 </style>

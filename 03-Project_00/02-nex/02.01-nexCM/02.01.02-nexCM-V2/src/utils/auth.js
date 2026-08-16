@@ -5,6 +5,7 @@
  * 统一管理 Token 的增删查，所有需要操作 Token 的地方都从这里引入
  * 避免直接操作 localStorage 导致 key 不一致
  */
+import { getLocalStorage, setLocalStorage, removeLocalStorage } from '@/utils/storage'
 import { LOCALSTORAGE_KEYS } from '@/utils/storageKey'
 
 /**
@@ -12,7 +13,7 @@ import { LOCALSTORAGE_KEYS } from '@/utils/storageKey'
  * @returns {string|null}
  */
 export function getToken() {
-  return localStorage.getItem(LOCALSTORAGE_KEYS.TOKEN)
+  return getLocalStorage(LOCALSTORAGE_KEYS.TOKEN)
 }
 
 /**
@@ -20,12 +21,12 @@ export function getToken() {
  * @param {string} token
  */
 export function setToken(token) {
-  localStorage.setItem(LOCALSTORAGE_KEYS.TOKEN, token)
+  setLocalStorage(LOCALSTORAGE_KEYS.TOKEN, token)
 }
 
 /**
  * 删除 Token
  */
 export function removeToken() {
-  localStorage.removeItem(LOCALSTORAGE_KEYS.TOKEN)
+  removeLocalStorage(LOCALSTORAGE_KEYS.TOKEN)
 }

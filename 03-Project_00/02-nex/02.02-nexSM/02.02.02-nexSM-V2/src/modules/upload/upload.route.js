@@ -7,6 +7,8 @@ const router = express.Router();
 const UploadController = require('./upload.controller');
 const uploadMiddleware = require('../../middleware/upload.middleware');
 const { requireAuth } = require('../../middleware/auth.middleware');
+const validate = require('../../middleware/validate.middleware');
+const { deleteFileSchema } = require('./upload.schema');
 
 // 需要登录的接口
 router.use(requireAuth);
@@ -30,6 +32,7 @@ router.post(
 // 删除本地文件
 router.delete(
   '/local',
+  validate(deleteFileSchema, 'body'),
   UploadController.deleteLocalFile
 );
 
@@ -52,6 +55,7 @@ router.post(
 // 删除 GitHub 文件
 router.delete(
   '/github',
+  validate(deleteFileSchema, 'body'),
   UploadController.deleteGithubFile
 );
 

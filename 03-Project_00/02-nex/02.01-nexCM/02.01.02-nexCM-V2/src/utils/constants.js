@@ -142,3 +142,30 @@ export const CODE_TEXT_MAP = {
   [CODE_GITHUB_DELETE_FAIL]: 'GitHub 图床删除失败',
   [CODE_GITHUB_API_ERROR]: 'GitHub API 调用失败'
 }
+
+// ==================== 权限角色常量 ====================
+
+/**
+ * 系统角色定义
+ * 业务页面中通过 v-permission="['admin']" 或判断 roles 控制权限
+ * 与后端返回的用户角色字段对应
+ */
+export const ROLES = {
+  /** 超级管理员 - 所有权限 */
+  ADMIN: 'admin',
+  /** 工程师 - 设备操作、参数配置 */
+  ENGINEER: 'engineer',
+  /** 操作员 - 日常生产操作 */
+  OPERATOR: 'operator',
+  /** 管理员 - 用户管理、系统配置 */
+  ADMINISTRATOR: 'administrator',
+  /** 访客 - 只读权限 */
+  GUEST: 'guest'
+}
+
+/** 设备类型（与后端字典对应，预留） */
+export const DEVICE_TYPES = {
+  FILLING: 'filling',       // 灌装机
+  STOPPER: 'stopper',       // 加塞机
+  INTEGRATED: 'integrated'  // 灌装加塞一体机
+}

@@ -2,14 +2,16 @@
  * ==========================================
  * 表单校验工具
  * ==========================================
+ * 校验提示文案统一从 config.VALIDATE 读取
  */
+import config from '@/config'
 
 /**
  * 用户名校验：3-16 位
  */
 export function validateUsername(rule, value, callback) {
   if (value.length < 3 || value.length > 16) {
-    callback(new Error('用户名需要在3-16位之间，请重新输入！'))
+    callback(new Error(config.VALIDATE.USERNAME_LENGTH))
   } else {
     callback()
   }
@@ -20,7 +22,7 @@ export function validateUsername(rule, value, callback) {
  */
 export function validatePassword(rule, value, callback) {
   if (value.length < 6 || value.length > 20) {
-    callback(new Error('密码需要在6-20位之间，请重新输入！'))
+    callback(new Error(config.VALIDATE.PASSWORD_LENGTH))
   } else {
     callback()
   }
@@ -34,7 +36,7 @@ export function validatePassword(rule, value, callback) {
 export function validateConfirmPassword(password) {
   return function (rule, value, callback) {
     if (value !== password) {
-      callback(new Error('两次输入的密码不一致！'))
+      callback(new Error(config.VALIDATE.PASSWORD_MISMATCH))
     } else {
       callback()
     }
@@ -47,7 +49,7 @@ export function validateConfirmPassword(password) {
 export function validateEmail(rule, value, callback) {
   const reg = /^[\w.-]+@[\w-]+\.[\w.-]+$/
   if (!reg.test(value)) {
-    callback(new Error('请输入正确的邮箱地址！'))
+    callback(new Error(config.VALIDATE.EMAIL_FORMAT))
   } else {
     callback()
   }

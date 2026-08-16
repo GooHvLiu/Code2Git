@@ -2,6 +2,12 @@
 node_modules
 /dist
 
+# 自动生成的主题变量文件（由 vue.config.js 从 themeVariables.js 生成）
+src/assets/styles/_theme_vars.less
+
+# 编译错误日志
+build-error.log
+
 
 # local / development / production env files
 .env.local

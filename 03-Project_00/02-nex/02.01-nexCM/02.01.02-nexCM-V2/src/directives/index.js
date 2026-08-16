@@ -4,9 +4,11 @@
  * ==========================================
  */
 import permission from './permission'
+import watermark from './watermark'
 
 const directives = {
-  permission
+  permission,
+  watermark
 }
 
 export default {

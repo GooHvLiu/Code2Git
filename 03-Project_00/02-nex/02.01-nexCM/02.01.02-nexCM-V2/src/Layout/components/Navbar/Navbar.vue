@@ -10,6 +10,10 @@
         </div>
       </div>
       <div class="navbar-right">
+        <!-- 菜单搜索 -->
+        <MenuSearch class="menu-search-wrapper" />
+        <!-- 主题颜色选择器 -->
+        <ThemePicker class="theme-picker-wrapper" />
         <el-dropdown @command="handleCommand">
           <span class="user-info">
             <svg-icon :icon-file-name="userInfo?.avatar || 'who'" class="avatar-icon" />
@@ -23,7 +27,7 @@
         </el-dropdown>
       </div>
     </div>
-    <div class="navbar-bottom">
+    <div v-if="settings.tagsView" class="navbar-bottom">
       <TagsView />
     </div>
   </div>
@@ -34,10 +38,17 @@
 import { mapState, mapActions } from 'vuex'
 import HeadBreadcrumb from '@/components/Breadcrumb/HeadBreadcrumb.vue'
 import TagsView from '@/Layout/components/TagsView/TagsView.vue'
+import ThemePicker from '@/components/ThemePicker/index.vue'
+import MenuSearch from '@/components/MenuSearch/index.vue'
+import { ROUTE_PATHS } from '@/router/pathConstants'
+import settings from '@/settings'
 
 export default {
   name: 'Navbar',
-  components: { HeadBreadcrumb, TagsView },
+  components: { HeadBreadcrumb, TagsView, ThemePicker, MenuSearch },
+  data() {
+    return { settings }
+  },
   computed: {
     ...mapState('app', ['sidebar']),
     ...mapState('user', ['userInfo'])
@@ -48,10 +59,10 @@ export default {
     async handleCommand(command) {
       if (command === 'logout') {
         await this.logout()
-        this.$router.push('/login')
+        this.$router.push(ROUTE_PATHS.LOGIN)
       }
       if (command === 'profile') {
-        this.$router.push('/profile')
+        this.$router.push(ROUTE_PATHS.PROFILE)
       }
     }
   }
@@ -60,7 +71,7 @@ export default {
 
 <style scoped lang="less">
 .navbar {
-  height: 84px;
+  height: @navbar-total-height;
   background: @navbar-bg;
 }
 
@@ -76,17 +87,20 @@ export default {
 .navbar-left {
   display: flex;
   align-items: center;
+  flex: 1;
+  min-width: 0;
 }
 
 .collapse-btn {
-  width: 40px;
-  height: 40px;
+  width: @navbar-collapse-btn-size;
+  height: @navbar-collapse-btn-size;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   border-radius: @border-radius-base;
-  font-size: 20px;
+  font-size: @navbar-collapse-icon-size;
   color: @navbar-text;
   .transition(background);
 
@@ -97,9 +111,30 @@ export default {
 
 .breadcrumb-wrap {
   margin-left: @spacing-sm;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 1;
+
+  ::v-deep .el-breadcrumb {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 .navbar-right {
+  display: flex;
+  align-items: center;
+  gap: @spacing-sm;
+  flex-shrink: 0;
+  margin-left: @spacing-sm;
+
+  .theme-picker-wrapper {
+    display: inline-flex;
+  }
+
   .user-info {
     display: flex;
     align-items: center;
@@ -108,8 +143,8 @@ export default {
     outline: none;
 
     .avatar-icon {
-      font-size: 20px;
-      margin-right: 6px;
+      font-size: @navbar-avatar-icon-size;
+      margin-right: @spacing-xs;
     }
 
     .username {
@@ -121,5 +156,19 @@ export default {
 
 .navbar-bottom {
   height: @tagsview-height;
+}
+
+/* 响应式：中等屏幕隐藏用户名，只保留头像 */
+@media (max-width: 992px) {
+  .navbar-right .username {
+    display: none;
+  }
+}
+
+/* 响应式：小屏幕隐藏面包屑 */
+@media (max-width: 576px) {
+  .breadcrumb-wrap {
+    display: none;
+  }
 }
 </style>

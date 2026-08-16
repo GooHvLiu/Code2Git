@@ -2,10 +2,12 @@
   <div class="home-page">
     <el-card shadow="never" class="welcome-card">
       <div class="welcome-content">
-        <img :src="config.SYSTEM_LOGO" alt="logo" class="welcome-logo" />
+        <!-- <img :src="config.HOME_LOGO" alt="logo" class="welcome-logo" /> -->
         <h1 class="welcome-title">{{ config.SYSTEM_NAME }}</h1>
         <p class="welcome-version">v{{ config.SYSTEM_VERSION }}</p>
-        <p class="welcome-desc">欢迎使用，{{ userInfo.realName || userInfo.username || '管理员' }}</p>
+        <p class="welcome-desc">
+          欢迎使用，{{ userInfo.realName || userInfo.username || "管理员" }}
+        </p>
       </div>
     </el-card>
   </div>
@@ -13,29 +15,29 @@
 
 <script>
 /* eslint-disable vue/multi-word-component-names */
-import { mapState } from 'vuex'
-import config from '@/config'
+import { mapState } from "vuex";
+import config from "@/config";
 
 export default {
-  name: 'Home',
+  name: "Home",
   data() {
-    return { config }
+    return { config };
   },
   computed: {
-    ...mapState('user', ['userInfo'])
-  }
-}
+    ...mapState("user", ["userInfo"]),
+  },
+};
 </script>
 
 <style scoped lang="less">
 .home-page {
   .welcome-card {
-    border-radius: 8px;
+    border-radius: @border-radius-md;
   }
 
   .welcome-content {
     text-align: center;
-    padding: 40px 0;
+    padding: @spacing-xxl 0;
   }
 
   .welcome-logo {
@@ -44,20 +46,20 @@ export default {
   }
 
   .welcome-title {
-    margin: 20px 0 8px;
-    font-size: 24px;
-    color: #303133;
+    margin: @spacing-lg 0 @spacing-xs;
+    font-size: @font-size-xxl;
+    color: @text-primary;
   }
 
   .welcome-version {
-    color: #909399;
-    font-size: 14px;
-    margin: 0 0 16px;
+    color: @text-secondary;
+    font-size: @font-size-base;
+    margin: 0 0 @spacing-md;
   }
 
   .welcome-desc {
-    color: #606266;
-    font-size: 16px;
+    color: @text-regular;
+    font-size: @font-size-md;
     margin: 0;
   }
 }

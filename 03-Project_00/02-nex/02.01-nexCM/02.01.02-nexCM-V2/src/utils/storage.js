@@ -17,11 +17,12 @@ export function clearLoginStorage() {
 }
 
 /**
- * localStorage 存储，自动 JSON 序列化
+ * localStorage 存储，统一 JSON 序列化
+ * 注意：所有值都用 JSON.stringify 包裹，确保读取时类型一致
+ * 例如字符串 '123' 存为 '"123"'，读取时还原为字符串 '123' 而非数字 123
  */
 export function setLocalStorage(key, value) {
-  const data = typeof value === 'object' ? JSON.stringify(value) : value
-  localStorage.setItem(key, data)
+  localStorage.setItem(key, JSON.stringify(value))
 }
 
 /**
@@ -44,11 +45,10 @@ export function removeLocalStorage(key) {
 }
 
 /**
- * sessionStorage 存储，自动 JSON 序列化
+ * sessionStorage 存储，统一 JSON 序列化
  */
 export function setSessionStorage(key, value) {
-  const data = typeof value === 'object' ? JSON.stringify(value) : value
-  sessionStorage.setItem(key, data)
+  sessionStorage.setItem(key, JSON.stringify(value))
 }
 
 /**

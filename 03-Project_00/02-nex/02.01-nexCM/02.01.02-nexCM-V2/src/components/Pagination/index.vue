@@ -15,6 +15,7 @@
 </template>
 
 <script>
+/* eslint-disable vue/multi-word-component-names */
 import config from '@/config'
 
 export default {
@@ -78,13 +79,13 @@ export default {
     handleSizeChange(val) {
       this.$emit('pagination', { page: this.currentPage, limit: val })
       if (this.autoScroll) {
-        scrollTo(0, 800)
+        scrollTo(0, config.SCROLL_TOP_DURATION)
       }
     },
     handleCurrentChange(val) {
       this.$emit('pagination', { page: val, limit: this.pageSize })
       if (this.autoScroll) {
-        scrollTo(0, 800)
+        scrollTo(0, config.SCROLL_TOP_DURATION)
       }
     }
   }

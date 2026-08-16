@@ -7,7 +7,7 @@
 import { constantRoutes } from '@/router/constantRoutes'
 import { requestGetUserMenuApi } from '@/api/login'
 import { formatMenu } from '@/router/helper/menuHelper'
-import { buildDynamicRoutes } from '@/router/helper/routerHelper'
+import { buildDynamicRoutes, filterRoutesByRoles } from '@/router/helper/routerHelper'
 
 const state = {
   /** 侧边栏菜单数据 */
@@ -31,10 +31,10 @@ const mutations = {
 const actions = {
   /**
    * 生成路由
-   * 从后端获取菜单数据，构建动态路由
+   * 从后端获取菜单数据，构建动态路由，按用户角色过滤
    * @returns {Array} 动态路由数组
    */
-  async generateRoutes({ commit }) {
+  async generateRoutes({ commit, rootState }) {
     const res = await requestGetUserMenuApi()
     const rawArr = res.data || []
 
@@ -43,7 +43,11 @@ const actions = {
     commit('SET_MENU', menuList)
 
     // 构建动态路由
-    const dynamicRoutes = buildDynamicRoutes(rawArr)
+    let dynamicRoutes = buildDynamicRoutes(rawArr)
+
+    // 按用户角色过滤（后端菜单 meta.roles 配置时生效）
+    const userRoles = rootState.user.roles || []
+    dynamicRoutes = filterRoutesByRoles(dynamicRoutes, userRoles)
 
     commit('SET_ROUTES', dynamicRoutes)
     return dynamicRoutes

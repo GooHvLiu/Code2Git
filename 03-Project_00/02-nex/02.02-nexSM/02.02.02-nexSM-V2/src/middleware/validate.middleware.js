@@ -14,6 +14,8 @@ const { ERROR_CODE } = require('../constants/errorCode');
 function validate(schema, source = 'body') {
   return (req, res, next) => {
     const data = req[source];
+    console.log("data:", data);
+
     const { error, value } = schema.validate(data, {
       abortEarly: true,       // 遇到第一个错误就返回，不累积
       stripUnknown: true,     // 自动剔除schema以外的多余字段，防止脏数据

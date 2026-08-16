@@ -39,8 +39,8 @@ export default {
 
 <style scoped lang="less">
 .menu-icon {
-  margin-right: 8px;
-  font-size: 16px;
+  margin-right: @sidebar-menu-icon-margin;
+  font-size: @sidebar-menu-icon-size;
   vertical-align: middle;
 }
 </style>

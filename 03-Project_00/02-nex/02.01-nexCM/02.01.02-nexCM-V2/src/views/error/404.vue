@@ -16,9 +16,10 @@
 </template>
 
 <script>
-import { TransitionScale } from "@morev/vue-transitions";
+import { TransitionScale } from '@morev/vue-transitions'
+import { ROUTE_PATHS } from '@/router/pathConstants'
 export default {
-  name: "ErrorPage",
+  name: 'NotFound',
   components: {
     TransitionScale
   },
@@ -26,42 +27,42 @@ export default {
     return {
       show: true,
       countDown: 3,
-      dotText: "",
+      dotText: '',
       timerCount: null,
       timerDot: null
-    };
+    }
   },
   mounted() {
-    this.startCountDown();
-    this.startDotAnimation();
+    this.startCountDown()
+    this.startDotAnimation()
   },
   beforeDestroy() {
-    clearInterval(this.timerCount);
-    clearInterval(this.timerDot);
+    clearInterval(this.timerCount)
+    clearInterval(this.timerDot)
   },
   methods: {
     startCountDown() {
       this.timerCount = setInterval(() => {
-        this.countDown--;
+        this.countDown--
         if (this.countDown <= 0) {
-          clearInterval(this.timerCount);
-          this.goHome();
+          clearInterval(this.timerCount)
+          this.goHome()
         }
-      }, 1000);
+      }, 1000)
     },
     startDotAnimation() {
-      const dotList = ["", ".", "..", "..."];
-      let index = 0;
+      const dotList = ['', '.', '..', '...']
+      let index = 0
       this.timerDot = setInterval(() => {
-        index = (index + 1) % dotList.length;
-        this.dotText = dotList[index];
-      }, 400);
+        index = (index + 1) % dotList.length
+        this.dotText = dotList[index]
+      }, 400)
     },
     goHome() {
-      this.$router.replace("/");
+      this.$router.replace(ROUTE_PATHS.ROOT)
     }
   }
-};
+}
 </script>
 
 <style scoped lang="less">
@@ -71,27 +72,27 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #f5f7fa 0%, #eef2f7 100%);
+  background: linear-gradient(135deg, @bg-gray 0%, @bg-page 100%);
 
   .content-box {
     position: relative;
     width: 350px;
     text-align: center;
-    padding: 60px 80px;
-    background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(64, 158, 255, 0.08);
+    padding: @spacing-xxl @spacing-xxl;
+    background: @bg-white;
+    border-radius: @border-radius-lg;
+    box-shadow: 0 8px 30px fade(@primary-color, 8%);
 
     .decor-line-wrap {
       position: relative;
       width: 80px;
       height: 4px;
-      margin: 0 auto 24px;
+      margin: 0 auto @spacing-lg;
 
       .decor-line {
         width: 100%;
         height: 4px;
-        background: #409eff;
+        background: @primary-color;
         border-radius: 2px;
       }
 
@@ -102,30 +103,30 @@ export default {
         width: 12px;
         height: 12px;
         border-radius: 50%;
-        background: #409eff;
+        background: @primary-color;
         animation: ballMove 2.2s ease-in-out infinite alternate;
       }
     }
 
     .code {
       font-size: 96px;
-      color: #409eff;
-      margin: 0 0 16px;
+      color: @primary-color;
+      margin: 0 0 @spacing-md;
       font-weight: 700;
       letter-spacing: 4px;
     }
 
     .title {
-      font-size: 22px;
-      color: #303133;
-      margin: 0 0 20px;
+      font-size: @font-size-lg;
+      color: @text-primary;
+      margin: 0 0 @spacing-lg;
       font-weight: 500;
     }
 
     .tip {
-      font-size: 16px;
-      color: #606266;
-      margin-bottom: 36px;
+      font-size: @font-size-md;
+      color: @text-regular;
+      margin-bottom: @spacing-xxl;
     }
   }
 }

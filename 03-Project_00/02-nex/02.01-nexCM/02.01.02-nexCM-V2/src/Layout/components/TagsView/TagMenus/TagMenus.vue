@@ -17,6 +17,10 @@
 </template>
 
 <script>
+// 右键菜单尺寸（与 variables.less 中 @context-menu-width / @context-menu-estimated-height 保持一致）
+const MENU_WIDTH = 120
+const MENU_ESTIMATED_HEIGHT = 240
+
 export default {
   name: 'TagMenus',
   props: {
@@ -68,16 +72,14 @@ export default {
 
     /** 菜单位置，防止溢出视口 */
     menuStyle() {
-      const menuWidth = 120
-      const menuHeight = 240
       const winW = window.innerWidth
       const winH = window.innerHeight
 
       let x = this.mouseX
       let y = this.mouseY
 
-      if (x + menuWidth > winW) x = x - menuWidth
-      if (y + menuHeight > winH) y = y - menuHeight
+      if (x + MENU_WIDTH > winW) x = x - MENU_WIDTH
+      if (y + MENU_ESTIMATED_HEIGHT > winH) y = y - MENU_ESTIMATED_HEIGHT
 
       return { left: `${x}px`, top: `${y}px` }
     }
@@ -98,24 +100,24 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 9997;
+  z-index: @z-context-menu-mask;
 
   .context-menu {
-    width: 120px;
+    width: @context-menu-width;
     position: fixed;
-    background-color: #fff;
+    background-color: @context-menu-bg;
     border: 1px solid @border-light;
     border-radius: @border-radius-base;
     box-shadow: @shadow-base;
-    z-index: 9999;
+    z-index: @z-context-menu;
 
     .menu-item-group {
       .menu-item {
         font-size: @font-size-sm;
-        padding: 10px 12px;
+        padding: @context-menu-item-padding;
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: @context-menu-item-gap;
         cursor: pointer;
         color: @text-regular;
 
