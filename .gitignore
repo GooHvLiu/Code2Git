@@ -31,3 +31,15 @@ coverage/
 # 临时文件
 *.tmp
 *.temp
+
+# MySQL data 运行时目录，禁止git追踪
+01-Stu/06-SQL/02-MySQL/01-DataBase/Data/
+
+# innodb系统文件
+*.dblwr
+#ib_*
+*.ibd
+*.ibt
+redo*
+undo_*
+*.log
