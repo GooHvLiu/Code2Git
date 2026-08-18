@@ -1,0 +1,48 @@
+{
+  "name": "express-mvc",
+  "version": "1.0.0",
+  "description": "企业级 Express + MySQL MVC 架构模板",
+  "main": "app.js",
+  "scripts": {
+    "kPort": "kill-port 3000",
+    "init": "npm run kPort && node ./src/middleware/dotenvInit.middleware.js",
+    "dev": "npm run init && nodemon app.js",
+    "start": "node app.js",
+    "test": "jest",
+    "gen": "node scripts/generate.js"
+  },
+  "keywords": [
+    "express",
+    "mysql",
+    "mvc",
+    "nodejs"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.19.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.10",
+    "dotenv": "^16.3.1",
+    "dotenv-expand": "^1000.0.0",
+    "express": "^4.18.2",
+    "joi": "^18.2.3",
+    "jsonwebtoken": "^9.0.3",
+    "module-alias": "^2.3.4",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.6.5",
+    "svg-captcha": "^1.4.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.2"
+  },
+  "_moduleAliases": {
+    "@root": "./",
+    "@bin": "./bin",
+    "@public": "./public",
+    "@routes": "./routes",
+    "@src": "./src"
+  }
+}

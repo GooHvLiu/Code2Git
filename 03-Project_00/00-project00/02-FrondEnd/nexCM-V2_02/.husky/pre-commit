@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# 切换到项目根目录（.husky 的父目录）
+# 因为 git 仓库根目录在上层，lint-staged 需要在项目目录执行才能找到 package.json
+cd "$(dirname -- "$0")/.."
+
+# 提交前对暂存区的代码执行 lint-staged
+# 自动修复可修复的 ESLint 问题，无法修复的会阻止提交
+# npx lint-staged

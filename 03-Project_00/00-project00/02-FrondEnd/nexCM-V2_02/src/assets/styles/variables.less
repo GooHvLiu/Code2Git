@@ -1,0 +1,205 @@
+/**
+ * ==========================================
+ * 全局 Less 变量定义
+ * ==========================================
+ * 所有颜色、间距、尺寸、断点、z-index 等设计 Token 统一在这里
+ * 通过 style-resources-loader 自动注入到所有 .less 文件，无需手动 @import
+ * 业务代码直接使用变量名即可，如 color: @primary-color;
+ */
+
+// ==================== 主题色 ====================
+/** 主色调 - Element UI 默认蓝 */
+@primary-color: #409eff;
+/** 成功色 */
+@success-color: #67c23a;
+/** 警告色 */
+@warning-color: #e6a23c;
+/** 危险色 */
+@danger-color: #f56c6c;
+/** 信息色 */
+@info-color: #909399;
+
+// ==================== 文字颜色 ====================
+/** 主要文字 */
+@text-primary: #303133;
+/** 常规文字 */
+@text-regular: #606266;
+/** 次要文字 */
+@text-secondary: #909399;
+/** 占位文字 */
+@text-placeholder: #c0c4cc;
+
+// ==================== 边框颜色 ====================
+@border-base: #dcdfe6;
+@border-light: #e4e7ed;
+@border-lighter: #ebeef5;
+@border-extra-light: #f2f6fc;
+
+// ==================== 背景色 ====================
+@bg-page: #f0f2f5;
+@bg-white: #ffffff;
+@bg-gray: #f5f7fa;
+
+// ==================== 侧边栏 ====================
+@sidebar-width: 220px;
+@sidebar-collapsed-width: 64px;
+@sidebar-bg: #fcf7f1;
+@sidebar-submenu-bg: #1f2d3d;
+@sidebar-text: #bfcbd9;
+@sidebar-active-text: #ffd04b;
+@sidebar-active-bg: #263445;
+
+// ==================== 顶部导航 ====================
+@navbar-height: 50px;
+@navbar-bg: #ffffff;
+@navbar-text: #5a5e66;
+@navbar-hover-text: #409eff;
+
+// ==================== 标签页 ====================
+@tagsview-height: 34px;
+@tagsview-bg: #ffffff;
+@tagsview-active-bg: #409eff;
+@tagsview-active-text: #ffffff;
+
+// ==================== 间距 ====================
+@spacing-xs: 4px;
+@spacing-sm: 8px;
+@spacing-md: 12px;
+@spacing-lg: 16px;
+@spacing-xl: 24px;
+@spacing-xxl: 32px;
+
+// ==================== 圆角 ====================
+@border-radius-sm: 2px;
+@border-radius-base: 4px;
+@border-radius-md: 8px;
+@border-radius-lg: 16px;
+
+// ==================== 字号 ====================
+@font-size-xs: 12px;
+@font-size-sm: 13px;
+@font-size-base: 14px;
+@font-size-md: 16px;
+@font-size-lg: 18px;
+@font-size-xl: 20px;
+@font-size-xxl: 24px;
+
+// ==================== 阴影 ====================
+@shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
+@shadow-base: 0 2px 8px rgba(0, 0, 0, 0.08);
+@shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+@shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+// ==================== 响应式断点 ====================
+/** 手机 */
+@screen-xs: 768px;
+/** 平板 */
+@screen-sm: 992px;
+/** 小桌面 */
+@screen-md: 1200px;
+/** 大桌面 */
+@screen-lg: 1920px;
+
+// ==================== z-index 层级管理 ====================
+/** 侧边栏 */
+@z-sidebar: 1001;
+/** 顶部导航 */
+@z-navbar: 1002;
+/** 标签页 */
+@z-tagsview: 1003;
+/** 抽屉 */
+@z-drawer: 1010;
+/** 弹窗 */
+@z-modal: 2000;
+/** 全局消息 */
+@z-message: 3000;
+
+// ==================== 过渡动画 ====================
+@transition-duration: 0.28s;
+@transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+
+// ==================== 登录/注册页 ====================
+/** 卡片宽度 */
+@auth-card-width: 800px;
+/** 卡片最小高度 */
+@auth-card-height: 520px;
+/** 卡片圆角 */
+@auth-card-radius: 12px;
+/** 卡片阴影 */
+@auth-card-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+/** 表单区域左右内边距 */
+@auth-padding: 40px;
+/** 面板切换动画时长 */
+@auth-transition-duration: 0.6s;
+/** 覆盖层渐变背景 */
+@auth-overlay-gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+/** 覆盖层描述文字颜色 */
+@auth-overlay-text: rgba(255, 255, 255, 0.6);
+/** 覆盖层提示文字颜色 */
+@auth-overlay-tip: rgba(255, 255, 255, 0.8);
+/** 覆盖层切换按钮圆角 */
+@auth-ghost-radius: 20px;
+/** 覆盖层层级 */
+@auth-z-overlay: 100;
+/** 超小屏断点（手机竖屏） */
+@screen-xxs: 480px;
+
+// ==================== 侧边栏补充 ====================
+/** Logo 区域背景色（比侧边栏主背景略深） */
+@sidebar-logo-bg: #fcf7f1;
+/** Logo 文字颜色 */
+@sidebar-logo-text: #ffffff;
+/** Logo 图片尺寸 */
+@sidebar-logo-img-size: 30px;
+/** Logo 文字字号 */
+@sidebar-logo-text-size: 15px;
+/** 菜单图标尺寸 */
+@sidebar-menu-icon-size: 16px;
+/** 菜单图标右边距 */
+@sidebar-menu-icon-margin: 8px;
+
+// ==================== 顶部导航补充 ====================
+/** 导航栏总高度（顶部 + 标签页） */
+@navbar-total-height: calc(@navbar-height + @tagsview-height);
+/** 折叠按钮尺寸 */
+@navbar-collapse-btn-size: 40px;
+/** 折叠按钮图标尺寸 */
+@navbar-collapse-icon-size: 20px;
+/** 用户头像图标尺寸 */
+@navbar-avatar-icon-size: 12px;
+
+// ==================== 标签页补充 ====================
+/** 标签页底部阴影 */
+@tagsview-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+/** 激活标签左侧圆点颜色 */
+@tagsview-active-dot-bg: #ffffff;
+/** 激活标签左侧圆点尺寸 */
+@tagsview-active-dot-size: 8px;
+
+// ==================== 内容区 ====================
+/** 主内容区内边距 */
+@app-main-padding: @spacing-md;
+/** 主内容区背景色 */
+@app-main-bg: @bg-page;
+
+// ==================== 遮罩层 ====================
+/** 通用遮罩背景色 */
+@mask-bg: rgba(0, 0, 0, 0.3);
+/** 遮罩层层级 */
+@z-mask: 999;
+
+// ==================== 右键菜单 ====================
+/** 右键菜单遮罩层级 */
+@z-context-menu-mask: 9997;
+/** 右键菜单内容层级 */
+@z-context-menu: 9999;
+/** 右键菜单宽度 */
+@context-menu-width: 120px;
+/** 右键菜单预估高度（用于溢出视口判断） */
+@context-menu-estimated-height: 240px;
+/** 右键菜单背景色 */
+@context-menu-bg: @bg-white;
+/** 右键菜单项内边距 */
+@context-menu-item-padding: 10px 12px;
+/** 右键菜单项间距 */
+@context-menu-item-gap: 8px;
