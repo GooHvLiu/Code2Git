@@ -78,6 +78,9 @@ const actions = {
       removeToken()
       clearLoginStorage()
       commit('RESET_STATE')
+      // 重置权限模块的路由生成标志，确保重新登录时重新生成路由
+      commit('permission/SET_ROUTES_GENERATED', false, { root: true })
+      commit('permission/SET_ROUTES', [], { root: true })
       resetRouter()
     } catch (e) {
       // 忽略清理过程中的异常，确保退出流程不中断

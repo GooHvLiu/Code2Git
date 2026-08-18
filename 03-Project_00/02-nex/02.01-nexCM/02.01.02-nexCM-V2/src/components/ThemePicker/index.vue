@@ -20,7 +20,7 @@
       <div v-show="visible" class="quick-panel" @click.stop>
         <!-- ========== 第一层：菜单列表 ========== -->
         <div v-if="!activePanel" class="menu-list">
-          <div class="panel-title">快捷菜单</div>
+          <div class="panel-title">{{ $t('theme.quickMenu') }}</div>
 
           <div
             v-for="item in menuItems"
@@ -29,9 +29,12 @@
             @click="openPanel(item.key)"
           >
             <span class="menu-icon" :style="{ color: item.color }">
-              <i :class="item.icon"></i>
+              <span v-if="item.key === 'language'" class="menu-emoji">🌐</span>
+              <i v-else :class="item.icon"></i>
             </span>
-            <span class="menu-label">{{ item.label }}</span>
+            <span class="menu-label">
+              {{ item.key === 'language' ? currentLangAutonym : item.label }}
+            </span>
             <i class="el-icon-arrow-right menu-arrow"></i>
           </div>
 
@@ -45,11 +48,11 @@
               class="el-icon-arrow-left back-btn"
               @click="activePanel = null"
             ></i>
-            <span class="panel-title">主题调色</span>
+            <span class="panel-title">{{ $t('theme.palette') }}</span>
             <i
               class="el-icon-refresh reset-btn"
               @click="handleResetAll"
-              title="恢复全部默认"
+              :title="$t('theme.resetAll')"
             ></i>
           </div>
 
@@ -61,7 +64,7 @@
               class="field-group"
             >
               <div class="field-label">
-                <span>{{ field.label }}</span>
+                <span>{{ $t('theme.' + field.key) }}</span>
                 <span class="field-actions">
                   <span
                     class="color-preview"
@@ -70,7 +73,7 @@
                   <i
                     class="el-icon-refresh field-reset"
                     @click="handleResetField(field.key)"
-                    title="恢复默认"
+                    :title="$t('theme.reset')"
                   ></i>
                 </span>
               </div>
@@ -94,7 +97,7 @@
 
               <!-- 自定义颜色 -->
               <div class="custom-color">
-                <span>自定义</span>
+                <span>{{ $t('theme.custom') }}</span>
                 <input
                   type="color"
                   class="color-input"
@@ -103,6 +106,33 @@
                 />
                 <span class="color-hex">{{ getFieldValue(field.key) }}</span>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========== 语言切换面板 ========== -->
+        <div v-else-if="activePanel === 'language'" class="language-panel">
+          <div class="panel-header">
+            <i
+              class="el-icon-arrow-left back-btn"
+              @click="activePanel = null"
+            ></i>
+            <span class="panel-title">{{ $t('theme.language') }}</span>
+          </div>
+          <div class="language-list">
+            <div
+              v-for="lang in languages"
+              :key="lang.value"
+              class="language-item"
+              :class="{ active: currentLang === lang.value }"
+              @click="handleSwitchLang(lang.value)"
+            >
+              <span class="lang-flag">{{ lang.flag }}</span>
+              <span class="lang-label">{{ lang.autonym }}</span>
+              <i
+                v-if="currentLang === lang.value"
+                class="el-icon-check lang-check"
+              ></i>
             </div>
           </div>
         </div>
@@ -127,9 +157,38 @@ import {
   resetAllTheme,
   resetThemeField,
 } from "@/utils/theme";
+import { LANGUAGES, setLanguage } from "@/i18n";
 
 export default {
   name: "ThemePicker",
+  computed: {
+    /** 当前语言 */
+    currentLang() {
+      return this.$i18n.locale
+    },
+    /** 当前语言的 autonym（该语言自己的写法，如"简体中文"/"English"） */
+    currentLangAutonym() {
+      const lang = this.languages.find(l => l.value === this.$i18n.locale)
+      return lang ? lang.autonym : ''
+    },
+    /** 快捷菜单配置（国际化） */
+    menuItems() {
+      return [
+        {
+          key: "palette",
+          label: this.$t('theme.palette'),
+          icon: "el-icon-brush",
+          color: "#409eff",
+        },
+        {
+          key: "language",
+          label: this.$t('theme.language'),
+          icon: "el-icon-service",
+          color: "#e6a23c",
+        },
+      ]
+    }
+  },
   data() {
     return {
       /** 面板显示状态 */
@@ -140,25 +199,11 @@ export default {
       themeFields: THEME_FIELDS,
       /** 响应式存储当前颜色（解决 localStorage 变化不触发渲染的问题） */
       currentColors: {},
-      /**
-       * 快捷菜单配置
-       * key: 面板标识，对应 activePanel
-       * label: 菜单显示文字
-       * icon: 图标类名
-       * color: 图标颜色
-       * 后续增加功能只需在此数组中加项，并在模板中增加对应面板
-       */
-      menuItems: [
-        {
-          key: "palette",
-          label: "主题调色",
-          icon: "el-icon-brush",
-          color: "#409eff",
-        },
-        // 后续功能示例：
-        // { key: 'layout', label: '布局设置', icon: 'el-icon-setting', color: '#67c23a' },
-        // { key: 'language', label: '语言切换', icon: 'el-icon-language', color: '#e6a23c' }
-      ],
+      /** 语言列表（带国旗emoji，autonym 为该语言自己的写法） */
+      languages: LANGUAGES.map(l => ({
+        ...l,
+        flag: l.value === 'zh-CN' ? '🇨🇳' : '🇺🇸'
+      })),
       /** 预设颜色列表（统一小写便于比较） */
       presetColors: [
         "#faf7f2",
@@ -231,6 +276,15 @@ export default {
         this.visible = false;
         this.activePanel = null;
       }
+    },
+    /** 切换语言 */
+    handleSwitchLang(lang) {
+      setLanguage(lang);
+      this.$message.success(lang === 'zh-CN' ? this.$t('theme.switchedToZh') : this.$t('theme.switchedToEn'));
+      // 切换语言后刷新页面，重新获取对应语言的菜单
+      setTimeout(() => {
+        window.location.reload();
+      }, 300);
     },
   },
 };
@@ -313,6 +367,11 @@ export default {
       justify-content: center;
       margin-right: @spacing-sm;
       font-size: 16px;
+
+      .menu-emoji {
+        font-size: 16px;
+        line-height: 1;
+      }
     }
 
     .menu-label {
@@ -488,4 +547,46 @@ export default {
   opacity: 0;
   transform: translateY(-4px);
 }
+
+  // ---------- 语言切换面板 ----------
+  .language-panel {
+    width: 220px;
+  }
+
+  .language-list {
+    padding: @spacing-xs 0;
+  }
+
+  .language-item {
+    display: flex;
+    align-items: center;
+    padding: @spacing-sm @spacing-md;
+    cursor: pointer;
+    transition: background-color @transition-duration;
+
+    &:hover {
+      background-color: @bg-gray;
+    }
+
+    &.active {
+      background-color: rgba(64, 158, 255, 0.08);
+      color: var(--color-primary);
+    }
+
+    .lang-flag {
+      font-size: 20px;
+      margin-right: @spacing-sm;
+      line-height: 1;
+    }
+
+    .lang-label {
+      flex: 1;
+      font-size: @font-size-base;
+    }
+
+    .lang-check {
+      color: var(--color-primary);
+      font-size: 14px;
+    }
+  }
 </style>

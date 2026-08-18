@@ -1,4 +1,5 @@
 import { HOME_TAG } from '@/router/pathConstants'
+import i18n from '@/i18n'
 
 /**
  * 后端原始菜单数组 → 递归转换为侧边栏可用菜单结构（支持无限层级）
@@ -6,8 +7,8 @@ import { HOME_TAG } from '@/router/pathConstants'
  * @returns {Array}
  */
 export function formatMenu(serverMenuArr) {
-  // 基础首页数据，无需从服务器获取
-  const baseMenu = [{ title: HOME_TAG.title, path: HOME_TAG.path, icon: HOME_TAG.icon }]
+  // 基础首页数据，无需从服务器获取（标题国际化）
+  const baseMenu = [{ title: i18n.t('layout.home'), path: HOME_TAG.path, icon: HOME_TAG.icon }]
 
   /**
    * 递归转换菜单节点

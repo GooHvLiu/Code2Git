@@ -1,0 +1,24 @@
+{
+  "name": "nex-theme-picker",
+  "version": "1.0.0",
+  "description": "Vue 2 + Element UI 侧边栏主题调色板组件，支持多维度颜色配置、运行时切换、localStorage 持久化",
+  "main": "index.js",
+  "keywords": [
+    "vue",
+    "vue2",
+    "element-ui",
+    "theme",
+    "color-picker",
+    "sidebar",
+    "less"
+  ],
+  "author": "nexCM",
+  "license": "MIT",
+  "peerDependencies": {
+    "vue": "^2.6.0",
+    "element-ui": "^2.15.0",
+    "less": "^3.0.0 || ^4.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

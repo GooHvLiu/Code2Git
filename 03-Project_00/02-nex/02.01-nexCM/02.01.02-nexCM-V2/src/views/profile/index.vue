@@ -1,9 +1,9 @@
 <template>
   <div class="profile-page">
     <el-card shadow="never">
-      <div slot="header">个人中心</div>
-      <p>用户名：{{ userInfo.username || '--' }}</p>
-      <p>姓名：{{ userInfo.realName || '--' }}</p>
+      <div slot="header">{{ $t('profile.title') }}</div>
+      <p>{{ $t('profile.username') }}：{{ userInfo.username || '--' }}</p>
+      <p>{{ $t('profile.realName') }}：{{ userInfo.realName || '--' }}</p>
     </el-card>
   </div>
 </template>

@@ -1,0 +1,12 @@
+{
+  "name": "nex-svg-icon",
+  "version": "1.0.0",
+  "description": "Vue 2 SVG 图标组件，配合 svg-sprite-loader 使用，支持字体图标和 SVG 图标",
+  "main": "index.js",
+  "keywords": ["vue", "vue2", "svg", "icon", "svg-sprite"],
+  "author": "nexCM",
+  "license": "MIT",
+  "peerDependencies": {
+    "vue": "^2.6.0"
+  }
+}

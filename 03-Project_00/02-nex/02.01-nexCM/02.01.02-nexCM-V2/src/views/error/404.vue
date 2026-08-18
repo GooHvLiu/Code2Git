@@ -7,9 +7,9 @@
           <div class="ball"></div>
         </div>
         <h1 class="code">404</h1>
-        <h2 class="title">页面不存在</h2>
-        <p class="tip">页面将在 {{ countDown }} 秒后自动返回首页{{ dotText }}</p>
-        <el-button type="primary" size="medium" @click="goHome"> 立即前往首页 </el-button>
+        <h2 class="title">{{ $t('error.notFound') }}</h2>
+        <p class="tip">{{ $t('error.countdown', { count: countDown }) }}{{ dotText }}</p>
+        <el-button type="primary" size="medium" @click="goHome">{{ $t('error.backHome') }}</el-button>
       </div>
     </TransitionScale>
   </div>

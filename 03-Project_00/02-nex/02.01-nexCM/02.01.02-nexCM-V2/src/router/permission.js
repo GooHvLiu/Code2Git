@@ -49,9 +49,8 @@ router.beforeEach(async (to, from, next) => {
     return next(ROUTE_PATHS.ROOT)
   }
 
-  // 已生成动态路由，直接放行
-  const hasRoutes = store.getters.addRoutes && store.getters.addRoutes.length > 0
-  if (hasRoutes) {
+  // 已生成动态路由，直接放行（用 routesGenerated 标志，避免空菜单死循环）
+  if (store.state.permission.routesGenerated) {
     return next()
   }
 

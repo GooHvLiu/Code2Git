@@ -9,12 +9,12 @@
           ref="registerFormRef"
           class="auth-form"
         >
-          <h2 class="form-title">注册账号</h2>
+          <h2 class="form-title">{{ $t('login.registerTitle') }}</h2>
           <el-form-item prop="username">
             <el-input
               v-model="registerForm.username"
               prefix-icon="el-icon-user"
-              placeholder="用户名"
+              :placeholder="$t('login.username')"
               autocomplete="off"
             />
           </el-form-item>
@@ -22,7 +22,7 @@
             <el-input
               v-model="registerForm.email"
               prefix-icon="el-icon-message"
-              placeholder="邮箱"
+              :placeholder="$t('login.email')"
               autocomplete="off"
             />
           </el-form-item>
@@ -31,7 +31,7 @@
               v-model="registerForm.password"
               type="password"
               prefix-icon="el-icon-lock"
-              placeholder="密码"
+              :placeholder="$t('login.password')"
               show-password
             />
           </el-form-item>
@@ -40,7 +40,7 @@
               v-model="registerForm.confirmPassword"
               type="password"
               prefix-icon="el-icon-lock"
-              placeholder="确认密码"
+              :placeholder="$t('login.confirmPassword')"
               show-password
             />
           </el-form-item>
@@ -49,7 +49,7 @@
               <el-input
                 v-model="registerForm.captchacode"
                 prefix-icon="el-icon-key"
-                placeholder="验证码"
+                :placeholder="$t('login.captcha')"
               />
               <img
                 v-if="captchaCodeSrc"
@@ -62,8 +62,8 @@
               </div>
             </div>
           </el-form-item>
-          <el-button class="submit-btn" type="primary" @click="handleRegister"
-            >注 册</el-button
+          <el-button class="submit-btn" type="primary" :loading="loading" @click="handleRegister"
+            >{{ $t('login.registerBtn') }}</el-button
           >
         </el-form>
       </div>
@@ -77,14 +77,14 @@
           ref="ruleForm"
           class="auth-form"
         >
-          <h2 class="form-title">欢迎登录</h2>
+          <h2 class="form-title">{{ $t('login.title') }}</h2>
           <el-form-item prop="username">
             <el-input
               v-model="ruleForm.username"
               type="text"
               autocomplete="off"
               prefix-icon="el-icon-user"
-              placeholder="用户名"
+              :placeholder="$t('login.username')"
             />
           </el-form-item>
           <el-form-item prop="password">
@@ -93,7 +93,7 @@
               type="password"
               autocomplete="off"
               prefix-icon="el-icon-lock"
-              placeholder="密码"
+              :placeholder="$t('login.password')"
             />
           </el-form-item>
           <el-form-item prop="captchacode">
@@ -101,7 +101,7 @@
               <el-input
                 v-model="ruleForm.captchacode"
                 prefix-icon="el-icon-key"
-                placeholder="验证码"
+                :placeholder="$t('login.captcha')"
               />
               <img
                 v-if="captchaCodeSrc"
@@ -119,7 +119,7 @@
             type="primary"
             :loading="loading"
             @click="submitForm('ruleForm')"
-            >登 录</el-button
+            >{{ $t('login.loginBtn') }}</el-button
           >
         </el-form>
       </div>
@@ -136,9 +136,9 @@
             />
             <h1 class="overlay-title">{{ config.SYSTEM_NAME }}</h1>
             <p class="overlay-desc">{{ config.SYSTEM_DESC }}</p>
-            <p class="overlay-tip">已有账号？</p>
+            <p class="overlay-tip">{{ $t('login.hasAccount') }}</p>
             <button class="ghost-btn" @click="switchPanel('login')">
-              立即登录
+              {{ $t('login.loginNow') }}
             </button>
           </div>
           <!-- 右侧覆盖面板（登录状态显示） -->
@@ -150,9 +150,9 @@
             />
             <h1 class="overlay-title">{{ config.SYSTEM_NAME }}</h1>
             <p class="overlay-desc">{{ config.SYSTEM_DESC }}</p>
-            <p class="overlay-tip">还没有账号？</p>
+            <p class="overlay-tip">{{ $t('login.noAccount') }}</p>
             <button class="ghost-btn" @click="switchPanel('register')">
-              立即注册
+              {{ $t('login.registerNow') }}
             </button>
           </div>
         </div>
@@ -162,10 +162,10 @@
     <!-- 移动端底部切换链接 -->
     <div class="mobile-switch">
       <span v-if="!isRegister"
-        >还没有账号？<a @click="switchPanel('register')">立即注册</a></span
+        >{{ $t('login.noAccount') }}<a @click="switchPanel('register')">{{ $t('login.registerNow') }}</a></span
       >
       <span v-else
-        >已有账号？<a @click="switchPanel('login')">立即登录</a></span
+        >{{ $t('login.hasAccount') }}<a @click="switchPanel('login')">{{ $t('login.loginNow') }}</a></span
       >
     </div>
   </div>
@@ -186,7 +186,7 @@ import {
   removeSessionStorage,
 } from "@/utils/storage";
 import { LOCALSTORAGE_KEYS, SESSIONSTORAGE_KEYS } from "@/utils/storageKey";
-import { requestCaptchaCodeApi, requestLoginApi } from "@/api/login";
+import { requestCaptchaCodeApi, requestLoginApi, requestRegisterApi } from "@/api/login";
 import { setToken } from "@/utils/auth";
 import config from "@/config";
 
@@ -205,20 +205,8 @@ export default {
         password: "",
         captchacode: "",
       },
-      rules: {
-        username: [
-          { required: true, message: "用户名不能为空", trigger: "blur" },
-          { validator: validateUsername, trigger: "blur" },
-        ],
-        password: [
-          { required: true, message: "密码不能为空", trigger: "blur" },
-        ],
-        captchacode: [
-          { required: true, message: "验证码不能为空", trigger: "blur" },
-        ],
-      },
 
-      // ========== 注册表单（UI 先行，功能后续加） ==========
+      // ========== 注册表单 ==========
       registerForm: {
         username: "",
         email: "",
@@ -226,21 +214,43 @@ export default {
         confirmPassword: "",
         captchacode: "",
       },
-      registerRules: {
+
+      captchaCodeSrc: "",
+    };
+  },
+  computed: {
+    /** 登录表单校验规则（国际化） */
+    rules() {
+      return {
         username: [
-          { required: true, message: "用户名不能为空", trigger: "blur" },
+          { required: true, message: this.$t('login.usernameRequired'), trigger: "blur" },
+          { validator: validateUsername, trigger: "blur" },
+        ],
+        password: [
+          { required: true, message: this.$t('login.passwordRequired'), trigger: "blur" },
+        ],
+        captchacode: [
+          { required: true, message: this.$t('login.captchaRequired'), trigger: "blur" },
+        ],
+      };
+    },
+    /** 注册表单校验规则（国际化） */
+    registerRules() {
+      return {
+        username: [
+          { required: true, message: this.$t('login.usernameRequired'), trigger: "blur" },
           { validator: validateUsername, trigger: "blur" },
         ],
         email: [
-          { required: true, message: "邮箱不能为空", trigger: "blur" },
+          { required: true, message: this.$t('login.emailRequired'), trigger: "blur" },
           { validator: validateEmail, trigger: "blur" },
         ],
         password: [
-          { required: true, message: "密码不能为空", trigger: "blur" },
+          { required: true, message: this.$t('login.passwordRequired'), trigger: "blur" },
           { validator: validatePassword, trigger: "blur" },
         ],
         confirmPassword: [
-          { required: true, message: "请再次输入密码", trigger: "blur" },
+          { required: true, message: this.$t('login.confirmPasswordRequired'), trigger: "blur" },
           {
             validator: (rule, value, callback) => {
               validateConfirmPassword(this.registerForm.password)(
@@ -253,12 +263,10 @@ export default {
           },
         ],
         captchacode: [
-          { required: true, message: "验证码不能为空", trigger: "blur" },
+          { required: true, message: this.$t('login.captchaRequired'), trigger: "blur" },
         ],
-      },
-
-      captchaCodeSrc: "",
-    };
+      };
+    },
   },
   methods: {
     /** 切换登录/注册面板 */
@@ -336,11 +344,35 @@ export default {
       });
     },
 
-    /** 注册提交（功能后续实现，先提示） */
+    /** 注册提交 */
     handleRegister() {
-      this.$refs.registerFormRef.validate((valid) => {
+      this.$refs.registerFormRef.validate(async (valid) => {
         if (!valid) return;
-        this.$message.info(config.LOGIN.REGISTER_DEVELOPING);
+        this.loading = true;
+        try {
+          await requestRegisterApi({
+            username: this.registerForm.username,
+            password: this.registerForm.password,
+            email: this.registerForm.email,
+            code: this.registerForm.captchacode,
+            uuid: getLocalStorage(LOCALSTORAGE_KEYS.CAPTCHA_UUID),
+          });
+          this.$message.success(this.$t('login.registerSuccess'));
+          // 清空注册表单，切换到登录面板
+          this.registerForm = {
+            username: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+            captchacode: "",
+          };
+          this.switchPanel("login");
+        } catch (err) {
+          // 注册失败，刷新验证码
+          this.getCaptchaCode();
+        } finally {
+          this.loading = false;
+        }
       });
     },
 

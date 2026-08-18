@@ -7,11 +7,11 @@
   <div class="error-page">
     <div class="error-content">
       <div class="error-code">403</div>
-      <div class="error-title">抱歉，您没有访问权限</div>
-      <div class="error-desc">该页面需要特定权限才能访问，请联系管理员</div>
+      <div class="error-title">{{ $t('error.forbidden') }}</div>
+      <div class="error-desc">{{ $t('error.forbiddenDesc') }}</div>
       <div class="error-actions">
-        <el-button type="primary" @click="goHome">返回首页</el-button>
-        <el-button @click="goBack">返回上一页</el-button>
+        <el-button type="primary" @click="goHome">{{ $t('error.backHome') }}</el-button>
+        <el-button @click="goBack">{{ $t('error.back') }}</el-button>
       </div>
     </div>
   </div>

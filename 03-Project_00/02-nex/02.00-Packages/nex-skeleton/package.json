@@ -1,0 +1,12 @@
+{
+  "name": "nex-skeleton",
+  "version": "1.0.0",
+  "description": "Vue 2 骨架屏组件，支持头像、标题、段落占位和微光扫过动画",
+  "main": "index.js",
+  "keywords": ["vue", "vue2", "skeleton", "loading", "placeholder"],
+  "author": "nexCM",
+  "license": "MIT",
+  "peerDependencies": {
+    "vue": "^2.6.0"
+  }
+}

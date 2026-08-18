@@ -7,11 +7,17 @@
  */
 import { setSessionStorage, getSessionStorage } from '@/utils/storage'
 import { SESSIONSTORAGE_KEYS } from '@/utils/storageKey'
-import { HOME_TAG } from '@/router/pathConstants'
+import { HOME_TAG, ROUTE_PATHS } from '@/router/pathConstants'
+import i18n from '@/i18n'
+
+/** 获取国际化的首页标签 */
+function getHomeTag() {
+  return { ...HOME_TAG, title: i18n.t('layout.home') }
+}
 
 const state = {
   /** 已访问的标签页列表 */
-  visitedViews: getSessionStorage(SESSIONSTORAGE_KEYS.TAG_LIST) || [HOME_TAG],
+  visitedViews: getSessionStorage(SESSIONSTORAGE_KEYS.TAG_LIST) || [getHomeTag()],
   /** 已缓存的组件名列表（用于 keep-alive include） */
   cachedViews: []
 }
@@ -20,10 +26,11 @@ const mutations = {
   /** 添加标签页（已存在则不重复添加） */
   ADD_VIEW(state, view) {
     if (state.visitedViews.some(v => v.path === view.path)) return
+    const rawTitle = view.meta?.titles?.[view.meta.titles.length - 1] || view.meta?.title || 'no-name'
     state.visitedViews.push({
       name: view.name,
       path: view.path,
-      title: view.meta?.titles?.[view.meta.titles.length - 1] || 'no-name',
+      title: i18n.t(rawTitle),
       fullPath: view.fullPath
     })
     setSessionStorage(SESSIONSTORAGE_KEYS.TAG_LIST, state.visitedViews)
@@ -65,7 +72,7 @@ const mutations = {
 
   /** 关闭全部标签页（保留首页） */
   DEL_ALL_VIEWS(state) {
-    state.visitedViews = [HOME_TAG]
+    state.visitedViews = [getHomeTag()]
     setSessionStorage(SESSIONSTORAGE_KEYS.TAG_LIST, state.visitedViews)
   },
 

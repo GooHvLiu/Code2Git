@@ -79,6 +79,16 @@ const loginSchema = Joi.object({
   code: Joi.string().allow('', null)  // 验证码
 }).unknown(false);
 
+/** 注册请求体（公开接口，字段比 createUser 少） */
+const registerSchema = Joi.object({
+  username: usernameField,
+  password: passwordField,
+  email: Joi.string().email({ tlds: { allow: false } }).max(100).required()
+    .messages({ 'string.email': '邮箱格式不正确', 'string.max': '邮箱最大100个字符', 'any.required': '邮箱不能为空' }),
+  uuid: Joi.string().allow('', null),
+  code: Joi.string().allow('', null)
+}).unknown(false);
+
 /** 新增用户请求体 */
 const createUserSchema = Joi.object({
   username: usernameField,
@@ -152,6 +162,7 @@ const queryUserListSchema = Joi.object({
 
 module.exports = {
   loginSchema,
+  registerSchema,
   createUserSchema,
   updateUserSchema,
   idParamSchema,

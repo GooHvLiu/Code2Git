@@ -14,28 +14,28 @@ export const constantRoutes = [
     name: 'Login',
     component: () => import('@/views/login/index.vue'),
     hidden: true,
-    meta: { titles: ['登录'] }
+    meta: { titles: ['login.title'] }
   },
   {
     path: ROUTE_PATHS.NOT_FOUND,
     name: 'NotFound',
     component: () => import('@/views/error/404.vue'),
     hidden: true,
-    meta: { titles: ['页面不存在'] }
+    meta: { titles: ['error.notFound'] }
   },
   {
     path: ROUTE_PATHS.FORBIDDEN,
     name: 'Forbidden',
     component: () => import('@/views/error/403.vue'),
     hidden: true,
-    meta: { titles: ['无权限'] }
+    meta: { titles: ['error.forbiddenTitle'] }
   },
   {
     path: ROUTE_PATHS.REDIRECT,
     name: 'Redirect',
     component: () => import('@/views/redirect/index.vue'),
     hidden: true,
-    meta: { titles: ['重定向'] }
+    meta: { titles: ['redirect'] }
   },
   {
     path: ROUTE_PATHS.ROOT,
@@ -47,14 +47,14 @@ export const constantRoutes = [
         path: 'home',
         name: 'Home',
         component: () => import('@/views/home/index.vue'),
-        meta: { titles: ['网站首页'], icon: 'home', affix: true }
+        meta: { titles: ['layout.home'], icon: 'home', affix: true }
       },
       {
         path: 'profile',
         name: 'Profile',
         component: () => import('@/views/profile/index.vue'),
         hidden: true,
-        meta: { titles: ['个人中心'] }
+        meta: { titles: ['layout.profile'] }
       }
     ]
   },

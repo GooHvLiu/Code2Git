@@ -70,7 +70,7 @@ export default {
       if (route.meta?.titles?.length) {
         return route.meta.titles[route.meta.titles.length - 1]
       }
-      return route.meta?.title || '未命名'
+      return route.meta?.title || this.$t('common.untitled')
     },
 
     /** 首页不可关闭 */

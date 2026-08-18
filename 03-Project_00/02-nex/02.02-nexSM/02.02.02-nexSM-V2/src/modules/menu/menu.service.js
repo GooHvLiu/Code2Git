@@ -7,21 +7,25 @@ const { ERROR_CODE } = require('../../constants/errorCode');
 
 class MenuService {
   /**
-   * 获取用户菜单树
-   * @param {number} userId 用户ID
-   * @returns {Promise<Array>} 树形菜单数组
+   * 获取菜单最新版本号
+   * @returns {Promise<string|null>}
    */
-  async getUserMenuTree(userId) {
-    // 1. 参数校验
+  async getMenuVersion() {
+    return await menuModel.getMenuVersion();
+  }
+
+  /**
+   * 带版本号的菜单查询
+   * @param {number} userId 用户ID
+   * @param {string} version 前端缓存的版本号
+   * @param {string} lang 语言代码
+   * @returns {Promise<{tree: Array, version: string}|null>}
+   */
+  async getUserMenuTreeWithVersion(userId, version, lang = 'zh-CN') {
     if (!userId) {
       throw new BusinessError(ERROR_CODE.PARAM_MISSING, '用户ID不能为空');
     }
-
-    // 2. 调用 Model 层获取数据
-    const menuTree = await menuModel.findUserMenuTree(userId);
-
-    // 3. 返回结果
-    return menuTree;
+    return await menuModel.findUserMenuTreeWithVersion(userId, version, lang);
   }
 }
 

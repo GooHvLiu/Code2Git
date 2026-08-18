@@ -1,0 +1,14 @@
+{
+  "name": "nex-utils",
+  "version": "1.0.0",
+  "description": "Vue 2 后台管理系统通用工具集合：storage、date、validate、message 防重复",
+  "main": "index.js",
+  "keywords": ["vue", "vue2", "utils", "storage", "date", "validate", "message"],
+  "author": "nexCM",
+  "license": "MIT",
+  "peerDependencies": {
+    "vue": "^2.6.0",
+    "element-ui": "^2.15.0",
+    "dayjs": "^1.0.0"
+  }
+}

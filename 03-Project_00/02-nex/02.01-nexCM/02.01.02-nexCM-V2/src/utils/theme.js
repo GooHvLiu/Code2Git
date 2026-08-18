@@ -22,6 +22,7 @@
  * getThemeField('sidebarBg')                 // 获取侧边栏背景色
  */
 import themeVariables from '@/config/themeVariables'
+import i18n from '@/i18n'
 
 /**
  * 可配置的主题字段列表
@@ -34,31 +35,31 @@ import themeVariables from '@/config/themeVariables'
 export const THEME_FIELDS = [
   {
     key: 'sidebarBg',
-    label: '侧边栏背景颜色',
+    get label() { return i18n.t('theme.sidebarBg') },
     varName: '--sidebar-bg',
     default: themeVariables['sidebar-bg']
   },
   {
     key: 'sidebarHoverText',
-    label: '侧边栏悬停文字',
+    get label() { return i18n.t('theme.sidebarHoverText') },
     varName: '--sidebar-hover-text',
     default: themeVariables['sidebar-hover-text']
   },
   {
     key: 'sidebarHoverBg',
-    label: '侧边栏悬停背景',
+    get label() { return i18n.t('theme.sidebarHoverBg') },
     varName: '--sidebar-hover-bg',
     default: themeVariables['sidebar-hover-bg']
   },
   {
     key: 'sidebarIconColor',
-    label: '侧边栏图标颜色',
+    get label() { return i18n.t('theme.sidebarIconColor') },
     varName: '--sidebar-icon-color',
     default: themeVariables['sidebar-icon-color']
   },
   {
     key: 'sidebarActiveBg',
-    label: '选中菜单背景',
+    get label() { return i18n.t('theme.sidebarActiveBg') },
     varName: '--sidebar-active-bg',
     default: themeVariables['sidebar-active-bg']
   }

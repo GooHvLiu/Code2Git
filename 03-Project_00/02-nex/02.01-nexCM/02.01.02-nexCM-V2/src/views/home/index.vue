@@ -3,10 +3,10 @@
     <el-card shadow="never" class="welcome-card">
       <div class="welcome-content">
         <!-- <img :src="config.HOME_LOGO" alt="logo" class="welcome-logo" /> -->
-        <h1 class="welcome-title">{{ config.SYSTEM_NAME }}</h1>
+        <h1 class="welcome-title">{{ $t('common.systemName') }}</h1>
         <p class="welcome-version">v{{ config.SYSTEM_VERSION }}</p>
         <p class="welcome-desc">
-          欢迎使用，{{ userInfo.realName || userInfo.username || "管理员" }}
+          {{ $t('home.welcome') }}，{{ userInfo.realName || userInfo.username || $t('home.admin') }}
         </p>
       </div>
     </el-card>

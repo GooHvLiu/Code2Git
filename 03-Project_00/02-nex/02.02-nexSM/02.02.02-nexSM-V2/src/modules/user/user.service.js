@@ -6,7 +6,8 @@ const { hashPassword, comparePassword } = require('../../utils/password');
 const { generateToken } = require('../../utils/jwt');
 const { BusinessError } = require('../../middleware/error.middleware');
 const { ERROR_CODE } = require('../../constants/errorCode');
-const { USER_STATUS } = require('../../constants/statusCode');
+const { USER_STATUS, USER_ROLE } = require('../../constants/statusCode');
+const CaptchaService = require('../captcha/captcha.service');
 
 class UserService {
   /**
@@ -52,6 +53,30 @@ class UserService {
       token,
       userInfo
     };
+  }
+
+  /**
+   * 用户注册（公开接口）
+   * @param {Object} data { username, password, email, code, uuid }
+   * @returns {Promise<Object>} { id }
+   */
+  async register(data) {
+    // 1. 校验验证码
+    if (data.code && data.uuid) {
+      const captchaResult = CaptchaService.verifyCaptcha(data.code, data.uuid);
+      if (captchaResult.code !== ERROR_CODE.SUCCESS) {
+        throw new BusinessError(captchaResult.code, captchaResult.msg);
+      }
+    }
+
+    // 2. 调用 createUser（默认角色 operator，状态启用）
+    return await this.createUser({
+      username: data.username,
+      password: data.password,
+      email: data.email,
+      role: USER_ROLE.OPERATOR,
+      status: USER_STATUS.ENABLED
+    });
   }
 
   /**

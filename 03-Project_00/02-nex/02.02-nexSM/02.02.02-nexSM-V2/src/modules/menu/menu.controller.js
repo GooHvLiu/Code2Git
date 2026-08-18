@@ -3,24 +3,42 @@
  * 负责：参数接收、调用service、返回响应
  */
 const menuService = require('./menu.service');
+const { ERROR_CODE } = require('../../constants/errorCode');
 
 class MenuController {
   /**
-   * 获取登录用户的动态菜单路由
-   * 接口：GET /api/menu/getRouters
+   * 获取登录用户的动态菜单路由（支持版本号缓存 + 多语言）
+   * 接口：GET /api/menu/getRouters?version=xxx&lang=en-US
    */
   async getRouters(req, res, next) {
     try {
-      // 从鉴权中间件挂载的 req.user 中获取用户ID
       const userId = req.user.id;
+      const version = req.query.version;
+      const lang = req.query.lang || 'zh-CN';
 
-      // 调用业务层获取菜单树
-      const menuTree = await menuService.getUserMenuTree(userId);
+      const result = await menuService.getUserMenuTreeWithVersion(userId, version, lang);
 
-      // 统一成功响应
-      res.success(menuTree, '获取成功');
+      // 菜单未变更，返回 10304
+      if (result === null) {
+        return res.success(null, '菜单未变更', ERROR_CODE.MENU_NOT_MODIFIED);
+      }
+
+      // 返回菜单树 + 最新版本号
+      res.success({ menu: result.tree, version: result.version }, '获取成功');
     } catch (err) {
-      // 异常交给全局错误中间件处理
+      next(err);
+    }
+  }
+
+  /**
+   * 获取菜单最新版本号
+   * 接口：GET /api/menu/version
+   */
+  async getVersion(req, res, next) {
+    try {
+      const version = await menuService.getMenuVersion();
+      res.success({ version }, '获取成功');
+    } catch (err) {
       next(err);
     }
   }

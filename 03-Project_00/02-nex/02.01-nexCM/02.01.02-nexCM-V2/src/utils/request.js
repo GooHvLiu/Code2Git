@@ -16,6 +16,7 @@ import {
   CODE_SUCCESS,
   TOKEN_AUTO_REDIRECT_CODES,
   CODE_PERMISSION_DENIED,
+  CODE_MENU_NOT_MODIFIED,
   NO_TOKEN_API
 } from '@/utils/constants'
 
@@ -146,6 +147,11 @@ service.interceptors.response.use(
 
     // 业务成功
     if (res.code === CODE_SUCCESS) {
+      return res
+    }
+
+    // 菜单未变更（缓存命中）：不弹错误，直接返回，由调用方处理
+    if (res.code === CODE_MENU_NOT_MODIFIED) {
       return res
     }
 

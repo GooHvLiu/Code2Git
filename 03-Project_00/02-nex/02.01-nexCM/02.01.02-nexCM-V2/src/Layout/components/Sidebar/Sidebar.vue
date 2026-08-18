@@ -15,7 +15,7 @@
         <!-- <img :src="config.SYSTEM_LOGO" alt="logo" class="logo-img" /> -->
         <svg-icon icon-file-name="logo" class="logo-svg" />
         <span v-show="sidebar.opened" class="logo-text">{{
-          config.SYSTEM_NAME
+          $t('common.systemName')
         }}</span>
       </router-link>
     </div>

@@ -1,0 +1,112 @@
+/**
+ * ==========================================
+ * nex-theme-picker 运行时样式
+ * ==========================================
+ * 在全局样式中引入：@import '~nex-theme-picker/src/styles/runtime.less';
+ *
+ * 包含：
+ * 1. :root CSS 变量定义（默认值）
+ * 2. 侧边栏运行时颜色覆盖（透明方案，让 CSS 变量生效）
+ * 3. 选中菜单右侧竖线
+ * 4. 标签页颜色覆盖
+ */
+
+/* ========== 1. CSS 变量默认值 ========== */
+:root {
+  --sidebar-bg: @sidebar-bg;
+  --sidebar-text: @sidebar-text;
+  --sidebar-icon-color: @sidebar-icon-color;
+  --sidebar-hover-bg: @sidebar-hover-bg;
+  --sidebar-hover-text: @sidebar-hover-text;
+  --sidebar-active-bg: @sidebar-active-bg;
+  --tag-active-bg: @tag-active-bg;
+  --tag-border: @tag-border;
+  --tag-close-color: @tag-close-color;
+  --app-main-bg: @app-main-bg;
+}
+
+/* ========== 2. 侧边栏运行时覆盖 ========== */
+.sidebar {
+  background-color: var(--sidebar-bg) !important;
+
+  /* el-menu 背景透明，透出 .sidebar 的背景色 */
+  .el-menu,
+  .el-menu-item,
+  .el-submenu__title,
+  .el-menu--inline {
+    background-color: transparent !important;
+  }
+
+  /* 菜单文字颜色 */
+  .el-menu-item,
+  .el-submenu__title {
+    color: var(--sidebar-text) !important;
+  }
+
+  /* 图标颜色（SVG 图标直接用 fill） */
+  .el-menu-item,
+  .el-submenu__title {
+    .menu-icon,
+    .svg-icon {
+      fill: var(--sidebar-icon-color) !important;
+    }
+  }
+
+  /* 菜单项 hover（选中项排除） */
+  .el-menu-item:not(.is-active):hover,
+  .el-submenu__title:hover {
+    background-color: var(--sidebar-hover-bg) !important;
+    color: var(--sidebar-hover-text) !important;
+  }
+
+  /* hover 时子菜单箭头颜色 */
+  .el-submenu__title:hover .el-submenu__icon-arrow {
+    color: var(--sidebar-hover-text) !important;
+  }
+
+  /* 选中菜单背景色 */
+  .el-menu-item.is-active {
+    background-color: var(--sidebar-active-bg) !important;
+  }
+
+  /* 选中菜单右侧竖线 */
+  .el-menu-item.is-active::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 60%;
+    background-color: var(--sidebar-icon-color);
+    border-radius: 2px 0 0 2px;
+  }
+
+  /* Logo 文字颜色 */
+  .logo-text {
+    color: var(--sidebar-text) !important;
+  }
+}
+
+/* ========== 3. 主内容区背景 ========== */
+.app-main {
+  background: var(--app-main-bg) !important;
+}
+
+/* ========== 4. 标签页颜色覆盖 ========== */
+.tags-view-container {
+  .tags-view-item.active {
+    background-color: var(--tag-active-bg) !important;
+    border-color: var(--tag-active-bg) !important;
+    color: #fff !important;
+  }
+
+  .tags-view-item:not(.active) {
+    border-color: var(--tag-border) !important;
+    color: var(--tag-border) !important;
+
+    .el-icon-close {
+      color: var(--tag-close-color) !important;
+    }
+  }
+}

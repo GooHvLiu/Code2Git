@@ -17,12 +17,12 @@
         <el-dropdown @command="handleCommand">
           <span class="user-info">
             <svg-icon :icon-file-name="userInfo?.avatar || 'who'" class="avatar-icon" />
-            <span class="username">{{ userInfo.username || '用户' }}</span>
+            <span class="username">{{ userInfo.username || $t('layout.user') }}</span>
             <i class="el-icon-arrow-down"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="profile">个人中心</el-dropdown-item>
-            <el-dropdown-item command="logout" divided>退出登录</el-dropdown-item>
+            <el-dropdown-item command="profile">{{ $t('layout.profile') }}</el-dropdown-item>
+            <el-dropdown-item command="logout" divided>{{ $t('layout.logout') }}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>

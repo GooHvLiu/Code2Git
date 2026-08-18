@@ -1,0 +1,13 @@
+{
+  "name": "nex-request",
+  "version": "1.0.0",
+  "description": "Vue 2 + Axios 请求统一封装，支持拦截器、Token注入、错误处理、请求重试、防重复请求、Loading计数",
+  "main": "index.js",
+  "keywords": ["vue", "vue2", "axios", "request", "http", "interceptor"],
+  "author": "nexCM",
+  "license": "MIT",
+  "peerDependencies": {
+    "axios": "^0.21.0 || ^1.0.0",
+    "vue": "^2.6.0"
+  }
+}

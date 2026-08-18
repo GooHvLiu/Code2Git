@@ -21,10 +21,15 @@ import enUS from './langs/en-US'
 
 Vue.use(VueI18n)
 
-/** 支持的语言列表（可用于语言切换下拉框） */
+/**
+ * 支持的语言列表
+ * label: 当前语言下的显示名（用于界面翻译）
+ * autonym: 该语言自己的写法（永远不变，用户总能找到自己的语言）
+ * short: 简短代码（用于菜单显示）
+ */
 export const LANGUAGES = [
-  { label: '简体中文', value: 'zh-CN' },
-  { label: 'English', value: 'en-US' }
+  { label: '简体中文', value: 'zh-CN', autonym: '简体中文', short: '中' },
+  { label: 'English', value: 'en-US', autonym: 'English', short: 'EN' }
 ]
 
 /** localStorage 存储 key */

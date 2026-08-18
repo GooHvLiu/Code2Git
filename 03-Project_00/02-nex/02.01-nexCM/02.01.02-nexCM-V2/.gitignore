@@ -29,3 +29,13 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# MySQL data dir 禁止纳入git版本控制
+01-Stu/06-SQL/02-MySQL/01-DataBase/Data/
+*.dblwr
+*.ibd
+*.frm
+*.ib_logfile*
+# mysql锁文件
+#ib_*
+

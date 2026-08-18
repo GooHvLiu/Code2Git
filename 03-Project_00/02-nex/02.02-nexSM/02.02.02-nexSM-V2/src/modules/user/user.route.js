@@ -8,6 +8,7 @@ const { requireAuth, optionalAuth } = require('../../middleware/auth.middleware'
 const validate = require('../../middleware/validate.middleware');
 const {
   loginSchema,
+  registerSchema,
   createUserSchema,
   updateUserSchema,
   idParamSchema,
@@ -25,8 +26,11 @@ router.get('/tokenvalid', optionalAuth, (req, res) => {
   res.success({ valid: !!req.user });
 });
 
-// 登录接口（公开）—— 插入登录schema校验
+// 登录接口（公开）
 router.post('/login', validate(loginSchema, 'body'), userController.login);
+
+// 注册接口（公开）
+router.post('/register', validate(registerSchema, 'body'), userController.register);
 
 // 需要登录的接口
 router.use(requireAuth);

@@ -11,19 +11,21 @@ const USER_MENU_TABLE = 'nex_user_menu';
 
 class MenuModel {
   /**
-   * 根据用户ID联查菜单原始扁平数据（多表JOIN）
+   * 根据用户ID联查菜单原始扁平数据（多表JOIN，支持多语言）
    * @param {number} userId 用户ID
+   * @param {string} lang 语言代码，如 'zh-CN' / 'en-US'
    * @returns {Promise<Array>} 数据库原始菜单数组
    */
-  async findMenuListByUserId(userId) {
+  async findMenuListByUserId(userId, lang = 'zh-CN') {
     const sql = `
-      SELECT m.*
+      SELECT m.*,
+        CASE WHEN ? = 'en-US' THEN IFNULL(m.title_en, m.title) ELSE m.title END as title
       FROM ${MENU_TABLE} m
       INNER JOIN ${USER_MENU_TABLE} um ON m.id = um.menu_id
       WHERE um.user_id = ?
       ORDER BY m.sort ASC
     `;
-    const rows = await query(sql, [userId]);
+    const rows = await query(sql, [lang, userId]);
     return rows;
   }
 
@@ -69,13 +71,37 @@ class MenuModel {
   }
 
   /**
-   * 获取用户菜单树（对外统一方法）
-   * @param {number} userId 用户ID
-   * @returns {Promise<Array>} 树形菜单数组
+   * 获取菜单最新版本号（取最大 update_time）
+   * @returns {Promise<string|null>} 版本号（时间字符串）
    */
-  async findUserMenuTree(userId) {
-    const rawList = await this.findMenuListByUserId(userId);
-    return this.buildMenuTree(rawList);
+  async getMenuVersion() {
+    const sql = `SELECT MAX(update_time) as version FROM ${MENU_TABLE}`;
+    const rows = await query(sql);
+    return rows[0]?.version || null;
+  }
+
+  /**
+   * 带版本号的菜单查询
+   * @param {number} userId 用户ID
+   * @param {string} version 前端缓存的版本号
+   * @param {string} lang 语言代码
+   * @returns {Promise<{tree: Array, version: string}|null>} 版本未变返回 null
+   */
+  async findUserMenuTreeWithVersion(userId, version, lang = 'zh-CN') {
+    const currentVersion = await this.getMenuVersion();
+
+    // 版本一致，返回 null 表示未变更
+    if (version && currentVersion) {
+      const cachedTime = new Date(version).getTime();
+      const currentTime = new Date(currentVersion).getTime();
+      if (cachedTime === currentTime) {
+        return null;
+      }
+    }
+
+    const rawList = await this.findMenuListByUserId(userId, lang);
+    const tree = this.buildMenuTree(rawList);
+    return { tree, version: currentVersion };
   }
 }
 

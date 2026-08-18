@@ -29,6 +29,12 @@ export const CODE_TOKEN_EXPIRED = 10102      // Token已过期
 export const CODE_TOKEN_INVALID = 10103      // Token无效
 export const CODE_PERMISSION_DENIED = 10104  // 权限不足，拒绝访问
 
+// ==================== 资源不存在 ====================
+export const CODE_NOT_FOUND = 10404           // 接口/资源不存在
+
+// ==================== 菜单模块 ====================
+export const CODE_MENU_NOT_MODIFIED = 10304   // 菜单未变更（缓存命中）
+
 // ==================== 系统错误 105xx ====================
 export const CODE_SYSTEM_ERROR = 10500       // 服务器内部系统异常
 export const CODE_DATABASE_ERROR = 10501     // 数据库操作异常

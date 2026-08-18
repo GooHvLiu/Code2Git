@@ -2,20 +2,20 @@
   <div class="user-management">
     <!-- ==================== 搜索表单 ==================== -->
     <search-form :form="queryParams" @search="handleQuery" @reset="handleReset">
-      <el-form-item label="用户名" prop="username">
-        <el-input v-model="queryParams.username" placeholder="请输入用户名" clearable />
+      <el-form-item :label="$t('user.username')" prop="username">
+        <el-input v-model="queryParams.username" :placeholder="$t('user.username')" clearable />
       </el-form-item>
-      <el-form-item label="状态" prop="status">
-        <el-select v-model="queryParams.status" placeholder="请选择状态" clearable style="width: 160px">
-          <el-option label="正常" value="1" />
-          <el-option label="禁用" value="0" />
+      <el-form-item :label="$t('user.status')" prop="status">
+        <el-select v-model="queryParams.status" :placeholder="$t('user.status')" clearable style="width: 160px">
+          <el-option :label="$t('user.enable')" value="1" />
+          <el-option :label="$t('user.disable')" value="0" />
         </el-select>
       </el-form-item>
     </search-form>
 
     <!-- ==================== 表格工具栏 ==================== -->
     <table-toolbar
-      title="用户列表"
+      :title="$t('user.title')"
       show-add
       show-export
       show-refresh
@@ -32,7 +32,7 @@
           size="small"
           @click="handleBatchDelete"
         >
-          批量删除({{ selectedIds.length }})
+          {{ $t('common.delete') }}({{ selectedIds.length }})
         </el-button>
       </template>
     </table-toolbar>
@@ -47,27 +47,27 @@
       @sort-change="handleSortChange"
     >
       <el-table-column type="selection" width="50" align="center" />
-      <el-table-column label="序号" type="index" width="60" align="center" />
-      <el-table-column label="用户名" prop="username" min-width="120" />
-      <el-table-column label="姓名" prop="realName" min-width="100" />
-      <el-table-column label="邮箱" prop="email" min-width="160" />
-      <el-table-column label="手机号" prop="phone" min-width="120" />
-      <el-table-column label="角色" prop="role" min-width="80" align="center">
+      <el-table-column :label="$t('common.index')" type="index" width="60" align="center" />
+      <el-table-column :label="$t('user.username')" prop="username" min-width="120" />
+      <el-table-column :label="$t('user.realName')" prop="realName" min-width="100" />
+      <el-table-column :label="$t('user.email')" prop="email" min-width="160" />
+      <el-table-column :label="$t('user.phone')" prop="phone" min-width="120" />
+      <el-table-column :label="$t('user.role')" prop="role" min-width="80" align="center">
         <template slot-scope="{ row }">
           <el-tag size="small">{{ roleMap[row.role] || row.role }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="状态" prop="status" width="80" align="center">
+      <el-table-column :label="$t('user.status')" prop="status" width="80" align="center">
         <template slot-scope="{ row }">
           <dict-tag :options="statusOptions" :value="row.status" />
         </template>
       </el-table-column>
-      <el-table-column label="创建时间" prop="createTime" min-width="160" sortable="custom" />
-      <el-table-column label="操作" width="200" align="center" fixed="right">
+      <el-table-column :label="$t('user.createTime')" prop="createTime" min-width="160" sortable="custom" />
+      <el-table-column :label="$t('common.operation')" width="200" align="center" fixed="right">
         <template slot-scope="{ row }">
-          <el-button type="text" size="small" @click="handleEdit(row)">编辑</el-button>
-          <el-button type="text" size="small" @click="handleResetPwd(row)">重置密码</el-button>
-          <el-button type="text" size="small" style="color: #f56c6c" @click="handleDelete(row)">删除</el-button>
+          <el-button type="text" size="small" @click="handleEdit(row)">{{ $t('common.edit') }}</el-button>
+          <el-button type="text" size="small" @click="handleResetPwd(row)">{{ $t('user.resetPassword') }}</el-button>
+          <el-button type="text" size="small" style="color: #f56c6c" @click="handleDelete(row)">{{ $t('common.delete') }}</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -133,18 +133,24 @@ export default {
       /** 选中的ID列表 */
       selectedIds: [],
       /** 导出加载状态 */
-      exportLoading: false,
-      /** 角色映射 */
-      roleMap: {
-        admin: '管理员',
-        engineer: '工程师',
-        operator: '操作员',
-        guest: '访客'
-      },
-      /** 状态字典（本地静态字典示例） */
-      statusOptions: [
-        { label: '正常', value: '1', type: 'success' },
-        { label: '禁用', value: '0', type: 'danger' }
+      exportLoading: false
+    }
+  },
+  computed: {
+    /** 角色映射（国际化） */
+    roleMap() {
+      return {
+        admin: this.$t('user.roleAdmin'),
+        engineer: this.$t('user.roleEngineer'),
+        operator: this.$t('user.roleOperator'),
+        guest: this.$t('user.roleGuest')
+      }
+    },
+    /** 状态字典（国际化） */
+    statusOptions() {
+      return [
+        { label: this.$t('user.enable'), value: '1', type: 'success' },
+        { label: this.$t('user.disable'), value: '0', type: 'danger' }
       ]
     }
   },
@@ -166,26 +172,26 @@ export default {
 
     /** 删除 */
     handleDelete(row) {
-      this.$confirm(`确认删除用户「${row.username}」吗？`, '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm(this.$t('user.deleteConfirm', { name: row.username }), this.$t('common.tip'), {
+        confirmButtonText: this.$t('common.confirm'),
+        cancelButtonText: this.$t('common.cancel'),
         type: 'warning'
       }).then(async () => {
         await requestDeleteUserApi(row.id)
-        this.$message.success('删除成功')
+        this.$message.success(this.$t('user.deleteSuccess'))
         this.refreshList()
       }).catch(() => {})
     },
 
     /** 批量删除 */
     handleBatchDelete() {
-      this.$confirm(`确认删除选中的 ${this.selectedIds.length} 个用户吗？`, '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm(this.$t('user.batchDeleteConfirm', { count: this.selectedIds.length }), this.$t('common.tip'), {
+        confirmButtonText: this.$t('common.confirm'),
+        cancelButtonText: this.$t('common.cancel'),
         type: 'warning'
       }).then(async () => {
         await requestBatchDeleteUserApi(this.selectedIds)
-        this.$message.success('批量删除成功')
+        this.$message.success(this.$t('user.batchDeleteSuccess'))
         this.selectedIds = []
         this.refreshList()
       }).catch(() => {})
@@ -196,7 +202,7 @@ export default {
       this.exportLoading = true
       try {
         const res = await requestExportUserApi(this.queryParams)
-        downloadFile(res, `用户列表_${Date.now()}.xlsx`)
+        downloadFile(res, `${this.$t('user.exportFileName')}_${Date.now()}.xlsx`)
       } catch (e) {
         // 错误已统一处理
       } finally {
@@ -206,14 +212,14 @@ export default {
 
     /** 重置密码 */
     handleResetPwd(row) {
-      this.$prompt('请输入新密码', '重置密码', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$prompt(this.$t('user.resetPasswordPlaceholder'), this.$t('user.resetPasswordTitle'), {
+        confirmButtonText: this.$t('common.confirm'),
+        cancelButtonText: this.$t('common.cancel'),
         inputPattern: /^.{6,20}$/,
-        inputErrorMessage: '密码长度 6-20 位'
+        inputErrorMessage: this.$t('user.resetPasswordError')
       }).then(async ({ value }) => {
         await requestResetUserPwdApi(row.id, value)
-        this.$message.success('密码重置成功')
+        this.$message.success(this.$t('user.resetPasswordSuccess'))
       }).catch(() => {})
     }
   }

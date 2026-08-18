@@ -30,18 +30,20 @@ export default {
     totalTagArr: { type: Number, required: true }
   },
   data() {
-    return {
-      tagMenu: [
-        { id: 1, icon: 'el-icon-refresh-right', text: '刷新页面' },
-        { id: 2, icon: 'el-icon-close', text: '关闭当前' },
-        { id: 3, icon: 'el-icon-circle-close', text: '关闭其他' },
-        { id: 4, icon: 'el-icon-back', text: '关闭左侧' },
-        { id: 5, icon: 'el-icon-right', text: '关闭右侧' },
-        { id: 6, icon: 'el-icon-circle-close', text: '全部关闭' }
-      ]
-    }
+    return {}
   },
   computed: {
+    /** 右键菜单项（国际化） */
+    tagMenu() {
+      return [
+        { id: 1, icon: 'el-icon-refresh-right', text: this.$t('layout.tagsView.refresh') },
+        { id: 2, icon: 'el-icon-close', text: this.$t('layout.tagsView.close') },
+        { id: 3, icon: 'el-icon-circle-close', text: this.$t('layout.tagsView.closeOthers') },
+        { id: 4, icon: 'el-icon-back', text: this.$t('layout.tagsView.closeLeft') },
+        { id: 5, icon: 'el-icon-right', text: this.$t('layout.tagsView.closeRight') },
+        { id: 6, icon: 'el-icon-circle-close', text: this.$t('layout.tagsView.closeAll') }
+      ]
+    },
     /** 根据当前右键位置和标签总数，过滤不可用的菜单项 */
     filterMenu() {
       const totalLength = this.totalTagArr

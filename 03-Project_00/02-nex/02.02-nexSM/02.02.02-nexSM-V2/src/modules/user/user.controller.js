@@ -21,6 +21,18 @@ class UserController {
   }
 
   /**
+   * 用户注册（公开接口）
+   */
+  async register(req, res, next) {
+    try {
+      const result = await userService.register(req.body);
+      res.success(result, '注册成功');
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  /**
    * 获取当前登录用户信息
    */
   async getCurrentUser(req, res, next) {
