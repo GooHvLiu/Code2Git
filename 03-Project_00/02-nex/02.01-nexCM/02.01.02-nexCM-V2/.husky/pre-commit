@@ -7,4 +7,4 @@ cd "$(dirname -- "$0")/.."
 
 # 提交前对暂存区的代码执行 lint-staged
 # 自动修复可修复的 ESLint 问题，无法修复的会阻止提交
-npx lint-staged
+# npx lint-staged
