@@ -15,6 +15,9 @@ const { errorHandler, notFoundHandler } = require('./src/middleware/error.middle
 const router = require('@routes/router.js');
 const testRouter = require("@routes/testRouter.js");
 
+// PLC 模块初始化
+const plcModule = require('./src/plc/index')
+const { manager, pollTask, plcSetting, plcTagMap } = plcModule
 
 // 跨域
 app.use(cors());
@@ -48,6 +51,35 @@ app.use(errorHandler);
 const PORT = appConfig.port;
 const HOST = appConfig.host;
 
+// PLC 模块初始化：注册默认设备、连接、开启轮询
+async function initPlcModule() {
+  try {
+    // 初始化配置的多设备
+    plcModule.initDevices()
+
+    // 如果没有配置多设备，注册默认设备（单设备兼容模式）
+    if (manager.size === 0) {
+      manager.registerDevice('default', plcSetting, plcTagMap)
+    }
+
+    // 连接所有设备
+    const results = await manager.connectAll()
+    const connectedCount = Object.values(results).filter(r => r.success).length
+
+    // 开启轮询
+    if (plcSetting.enablePoll) {
+      pollTask.start()
+    }
+
+    console.log(`✅ PLC模块初始化完成，设备数: ${manager.size}，已连接: ${connectedCount}`)
+  } catch (err) {
+    console.error('❌ PLC初始化失败：', err.message)
+    console.log('   提示：请检查 .env 中的 PLC_HOST / PLC_PORT 配置，或确认PLC已开机')
+  }
+}
+initPlcModule()
+
+// 网络监听
 app.listen(PORT, HOST, () => {
   console.log('\n========================================');
   console.log(`🚀 服务启动成功`);
