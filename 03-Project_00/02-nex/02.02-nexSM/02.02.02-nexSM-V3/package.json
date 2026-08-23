@@ -1,0 +1,56 @@
+{
+  "name": "nexsm-v3_00",
+  "version": "1.0.0",
+  "description": "企业级 Express + MySQL MVC 架构模板",
+  "main": "app.js",
+  "scripts": {
+    "kPort": "kill-port 3000",
+    "init": "npm run kPort && node ./src/middleware/dotenvInit.middleware.js",
+    "dev": "npm run init && nodemon app.js",
+    "start": "node app.js",
+    "test": "jest",
+    "gen": "node scripts/generate.js"
+  },
+  "keywords": [
+    "express",
+    "mysql",
+    "mvc",
+    "nodejs"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.19.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.23",
+    "dotenv": "^16.3.1",
+    "dotenv-expand": "^1000.0.0",
+    "express": "^4.18.2",
+    "joi": "^18.2.3",
+    "jsonwebtoken": "^9.0.3",
+    "lodash": "^4.18.1",
+    "modbus-serial": "^8.0.25",
+    "module-alias": "^2.3.4",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.6.5",
+    "node-opcua": "^2.177.0",
+    "node-snap7": "^1.0.9",
+    "svg-captcha": "^1.4.0",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-express": "^5.0.1",
+    "uuid": "^14.0.2",
+    "ws": "^8.21.3"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.2"
+  },
+  "_moduleAliases": {
+    "@root": "./",
+    "@bin": "./bin",
+    "@public": "./public",
+    "@routes": "./routes",
+    "@src": "./src"
+  }
+}

@@ -1,0 +1,532 @@
+/**
+ * ==========================================
+ * 全局样式入口文件
+ * ==========================================
+ * 在 main.js 中引入一次即可全局生效
+ * 引入顺序：variables → mixin → 基础重置 → 通用类
+ */
+
+// ==================== CSS 变量（运行时主题切换用） ====================
+// 与 variables.less 中的 less 变量对应，可通过 JS 动态修改
+// setThemeField 会设置对应变量，hasLight 字段会自动计算浅色变体
+:root {
+  // 主题色
+  --color-primary: @primary-color;
+  --color-primary-light: lighten(@primary-color, 10%);
+  --color-primary-lighter: lighten(@primary-color, 20%);
+  --color-primary-dark: darken(@primary-color, 10%);
+  --color-success: @success-color;
+  --color-warning: @warning-color;
+  --color-danger: @danger-color;
+  --color-info: @info-color;
+  // 侧边栏
+  --sidebar-bg: @sidebar-bg;
+  --sidebar-text: @sidebar-text;
+  --sidebar-icon-color: @sidebar-icon-color;
+  --sidebar-hover-text: @sidebar-hover-text;
+  --sidebar-hover-bg: @sidebar-hover-bg;
+  --sidebar-active-bg: @sidebar-active-bg;
+  // 标签
+  --tag-active-bg: @tag-active-bg;
+  --tag-border: @tag-border;
+  --tag-close-color: @tag-close-color;
+}
+
+// ==================== 全局基础样式 ====================
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", sans-serif;
+  font-size: @font-size-base;
+  color: @text-primary;
+  background-color: @bg-page;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// ==================== 全局滚动条 ====================
+
+* {
+  .custom-scrollbar(6px, fade(#000, 15%));
+}
+
+// ==================== 通用工具类 ====================
+
+// 清除浮动
+.clearfix {
+  .clearfix();
+}
+
+// 文字对齐
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+
+// 文字省略
+.text-ellipsis {
+  .text-ellipsis();
+}
+
+// Flex 布局
+.flex-center {
+  .flex-center();
+}
+.flex-between {
+  .flex-between();
+}
+
+// 间距快捷类
+.mt-xs {
+  margin-top: @spacing-xs;
+}
+.mt-sm {
+  margin-top: @spacing-sm;
+}
+.mt-md {
+  margin-top: @spacing-md;
+}
+.mt-lg {
+  margin-top: @spacing-lg;
+}
+.mt-xl {
+  margin-top: @spacing-xl;
+}
+
+.mb-xs {
+  margin-bottom: @spacing-xs;
+}
+.mb-sm {
+  margin-bottom: @spacing-sm;
+}
+.mb-md {
+  margin-bottom: @spacing-md;
+}
+.mb-lg {
+  margin-bottom: @spacing-lg;
+}
+.mb-xl {
+  margin-bottom: @spacing-xl;
+}
+
+.p-xs {
+  padding: @spacing-xs;
+}
+.p-sm {
+  padding: @spacing-sm;
+}
+.p-md {
+  padding: @spacing-md;
+}
+.p-lg {
+  padding: @spacing-lg;
+}
+.p-xl {
+  padding: @spacing-xl;
+}
+
+// ==================== 页面容器 ====================
+
+.app-container {
+  padding: @spacing-lg;
+  background: @bg-white;
+  border-radius: @border-radius-base;
+  min-height: calc(100vh - @navbar-height - @tagsview-height - @spacing-lg * 2);
+}
+
+// ==================== Element UI 样式覆盖 ====================
+
+// 表格头部背景
+.el-table th.el-table__cell {
+  background-color: @bg-gray;
+}
+
+// 分页组件
+.el-pagination {
+  margin-top: @spacing-lg;
+  text-align: right;
+}
+
+// 弹窗圆角
+.el-dialog {
+  border-radius: @border-radius-md;
+}
+
+// 抽屉
+.el-drawer__header {
+  margin-bottom: 0;
+  padding: @spacing-lg;
+  border-bottom: 1px solid @border-lighter;
+}
+
+// ==================== 主题色运行时覆盖（配合 CSS 变量） ====================
+// Element UI 的颜色是 Less 编译时确定的，此处用 CSS 变量覆盖关键组件
+// 使 setThemeColor() 运行时切换主题色生效
+
+// ---------- 按钮 ----------
+.el-button--primary {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+
+  &:hover,
+  &:focus {
+    background-color: var(--color-primary-light) !important;
+    border-color: var(--color-primary-light) !important;
+  }
+
+  &:active {
+    background-color: var(--color-primary-dark) !important;
+    border-color: var(--color-primary-dark) !important;
+  }
+
+  &.is-plain {
+    background-color: var(--color-primary-lighter) !important;
+    border-color: var(--color-primary-light) !important;
+    color: var(--color-primary) !important;
+
+    &:hover,
+    &:focus {
+      background-color: var(--color-primary) !important;
+      border-color: var(--color-primary) !important;
+      color: #fff !important;
+    }
+  }
+}
+
+// 文字按钮
+.el-button--text {
+  color: var(--color-primary) !important;
+}
+
+// ---------- 链接 ----------
+.el-link.el-link--primary {
+  color: var(--color-primary) !important;
+
+  &:hover {
+    color: var(--color-primary-light) !important;
+  }
+}
+
+// ---------- 单选框 ----------
+.el-radio__input.is-checked .el-radio__inner {
+  border-color: var(--color-primary) !important;
+  background-color: var(--color-primary) !important;
+}
+
+.el-radio__input.is-checked + .el-radio__label {
+  color: var(--color-primary) !important;
+}
+
+.el-radio-button__original-radio:checked + .el-radio-button__inner {
+  color: #fff !important;
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  box-shadow: -1px 0 0 0 var(--color-primary) !important;
+}
+
+// ---------- 复选框 ----------
+.el-checkbox__input.is-checked .el-checkbox__inner,
+.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.el-checkbox__input.is-checked + .el-checkbox__label {
+  color: var(--color-primary) !important;
+}
+
+// ---------- 开关 ----------
+.el-switch.is-checked .el-switch__core {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+// ---------- 输入框 / 文本域 聚焦 ----------
+.el-input__inner:focus,
+.el-textarea__inner:focus {
+  border-color: var(--color-primary) !important;
+}
+
+// ---------- 文本域统一：禁止拖拽、固定最大高度、内容过多显示滚动条 ----------
+.el-textarea__inner {
+  resize: none !important;
+  max-height: 120px !important;
+  overflow-y: auto;
+}
+
+// ---------- 表格操作列按钮垂直居中 ----------
+.el-table .cell .el-button {
+  vertical-align: middle;
+}
+.el-table .cell .el-button + .el-button {
+  margin-left: 8px;
+}
+
+// ---------- 下拉框选中项 ----------
+.el-select-dropdown__item.selected {
+  color: var(--color-primary) !important;
+  font-weight: 600 !important;
+}
+
+// ---------- 级联选择器 ----------
+.el-cascader-node.in-active-path,
+.el-cascader-node.is-active,
+.el-cascader-node.is-selectable.in-checked-path {
+  color: var(--color-primary) !important;
+}
+
+// ---------- 菜单激活 ----------
+.el-menu-item.is-active {
+  color: var(--color-primary) !important;
+}
+
+// 横向菜单 hover / 激活下边框
+.el-menu--horizontal > .el-menu-item:hover,
+.el-menu--horizontal > .el-submenu:hover .el-submenu__title {
+  color: var(--color-primary) !important;
+}
+
+.el-menu--horizontal > .el-menu-item.is-active {
+  border-bottom-color: var(--color-primary) !important;
+}
+
+// ---------- 分页 ----------
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: var(--color-primary) !important;
+}
+
+.el-pagination.is-background .el-pager li:not(.disabled):hover {
+  color: var(--color-primary) !important;
+}
+
+.el-pagination .el-pager li.active {
+  color: var(--color-primary) !important;
+}
+
+.el-pagination button:hover,
+.el-pagination .btn-prev:hover,
+.el-pagination .btn-next:hover {
+  color: var(--color-primary) !important;
+}
+
+// ---------- Tab 标签页 ----------
+.el-tabs__active-bar {
+  background-color: var(--color-primary) !important;
+}
+
+.el-tabs__item:hover,
+.el-tabs__item.is-active {
+  color: var(--color-primary) !important;
+}
+
+.el-tabs--card > .el-tabs__header .el-tabs__item.is-active {
+  border-bottom-color: #fff !important;
+}
+
+// ---------- 日期选择器 ----------
+.el-date-table td.today .el-date-table-cell__text {
+  color: var(--color-primary) !important;
+}
+
+.el-date-table td.current:not(.disabled) .el-date-table-cell__text {
+  background-color: var(--color-primary) !important;
+}
+
+.el-picker-panel__icon-btn:hover {
+  color: var(--color-primary) !important;
+}
+
+// ---------- 时间选择器 ----------
+.el-time-spinner__item.active:not(.disabled) {
+  color: var(--color-primary) !important;
+}
+
+// ---------- 进度条 ----------
+.el-progress-bar__inner {
+  background-color: var(--color-primary) !important;
+}
+
+// ---------- 步骤条 ----------
+.el-step__head.is-process,
+.el-step__head.is-success {
+  color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.el-step__title.is-process,
+.el-step__title.is-success {
+  color: var(--color-primary) !important;
+}
+
+// ---------- Loading 动画 ----------
+.el-loading-spinner .path {
+  stroke: var(--color-primary) !important;
+}
+
+.el-loading-spinner .el-loading-text {
+  color: var(--color-primary) !important;
+}
+
+// ---------- 消息框关闭按钮 ----------
+.el-message-box__headerbtn:hover .el-message-box__close {
+  color: var(--color-primary) !important;
+}
+
+// ---------- 标签 Tag（primary 类型） ----------
+.el-tag--primary {
+  background-color: var(--color-primary-lighter) !important;
+  border-color: var(--color-primary-light) !important;
+  color: var(--color-primary) !important;
+}
+
+// ---------- 时间线 ----------
+.el-timeline-item__node--primary {
+  background-color: var(--color-primary) !important;
+}
+
+// ---------- 树形控件选中 ----------
+.el-tree-node.is-current > .el-tree-node__content {
+  background-color: var(--color-primary-lighter) !important;
+}
+
+// ---------- 下拉菜单 ----------
+.el-dropdown-menu__item:focus,
+.el-dropdown-menu__item:not(.is-disabled):hover {
+  color: var(--color-primary) !important;
+  background-color: var(--color-primary-lighter) !important;
+}
+
+// ---------- 颜色选择器 ----------
+.el-color-dropdown__btn:hover {
+  color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+// ---------- 滑块 ----------
+.el-slider__runway {
+  .el-slider__bar {
+    background-color: var(--color-primary) !important;
+  }
+}
+
+.el-slider__button {
+  border-color: var(--color-primary) !important;
+
+  &:hover,
+  &:focus {
+    box-shadow: 0 0 0 3px var(--color-primary-lighter) !important;
+  }
+}
+
+.el-slider__marks-text.active {
+  color: var(--color-primary) !important;
+}
+
+// ==================== 侧边栏颜色运行时覆盖 ====================
+// 覆盖 Sidebar 中 el-menu 的内联样式，使调色板可动态调整
+
+.sidebar {
+  background-color: var(--sidebar-bg) !important;
+
+  // logo 区域和菜单背景透明，透出 .sidebar 的背景色，实现运行时动态切换
+  .sidebar-logo,
+  .el-menu,
+  .el-menu-item,
+  .el-submenu__title,
+  .el-menu--inline {
+    background-color: transparent !important;
+  }
+
+  // 正常显示的文字颜色由 el-menu text-color 控制
+  // 图标颜色可单独设置，不跟随文字颜色（直接设 fill，不依赖 currentColor 继承链）
+  .el-menu-item,
+  .el-submenu__title {
+    .menu-icon,
+    .svg-icon {
+      fill: var(--sidebar-icon-color) !important;
+    }
+  }
+
+  // 子菜单展开箭头（字体图标）
+  .el-submenu__icon-arrow {
+    color: var(--sidebar-icon-color) !important;
+  }
+
+  // 菜单项 hover：背景 + 文字颜色（选中项排除，悬停时不变化）
+  .el-menu-item:not(.is-active):hover,
+  .el-submenu__title:hover {
+    background-color: var(--sidebar-hover-bg) !important;
+    color: var(--sidebar-hover-text) !important;
+  }
+
+  // hover 时子菜单箭头颜色
+  .el-submenu__title:hover .el-submenu__icon-arrow {
+    color: var(--sidebar-hover-text) !important;
+  }
+
+  // 选中菜单项背景色（悬停时不变化）+ 右侧指示竖线
+  .el-menu-item.is-active {
+    position: relative;
+    background-color: var(--sidebar-active-bg) !important;
+
+    // 右侧选中指示竖线
+    &::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 60%;
+      background-color: var(--sidebar-icon-color);
+      border-radius: 2px 0 0 2px;
+    }
+  }
+
+  // 子菜单背景已在上面统一设为透明
+}
+
+// ==================== 标签项运行时覆盖 ====================
+// 未选中标签：白色背景 + 自定义边框/文字颜色
+// 选中标签：自定义背景色 + 白色文字
+// 叉号：未选中用自定义颜色，选中用白色
+
+.tags-view-container {
+  .tag-item {
+    // 未选中标签
+    background-color: #ffffff !important;
+    border-color: var(--tag-border) !important;
+    color: var(--tag-border) !important;
+
+    &.active {
+      // 选中标签
+      background-color: var(--tag-active-bg) !important;
+      border-color: var(--tag-active-bg) !important;
+      color: #ffffff !important;
+    }
+
+    // 叉号颜色
+    .el-tag__close {
+      color: var(--tag-close-color) !important;
+    }
+
+    &.active .el-tag__close {
+      color: #ffffff !important;
+    }
+  }
+}

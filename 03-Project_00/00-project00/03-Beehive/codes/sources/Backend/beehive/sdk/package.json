@@ -1,0 +1,9 @@
+{
+  "name": "beehive-license-sdk",
+  "version": "1.0.0",
+  "description": "BeehiveTools 授权验证 SDK - 供被保护项目集成使用",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^1.5.0"
+  }
+}

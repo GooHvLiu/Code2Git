@@ -10,6 +10,7 @@ node_modules/
 logs/
 *.log
 npm-debug.log*
+*.jsonl
 
 # 上传文件
 uploads/
@@ -61,7 +62,27 @@ pnpm-debug.log*
 *.frm
 *.ib_logfile*
 
+# 加密工具之Data (密钥和授权文件不入库)
+03-Project_00/00-project00/03-Beehive/server/data/keys/
+03-Project_00/00-project00/03-Beehive/server/data/licenses/
+03-Project_00/00-project00/03-Beehive/server/data/projects.json
+*.lic
+.timeguard
+
+# 加密工具之Build output
+03-Project_00/00-project00/03-Beehive/web/dist/
+03-Project_00/00-project00/03-Beehive/web/dist-ssr/
+
+# 加密工具之Logs
+03-Project_00/00-project00/03-Beehive/logs/
+*.log
+npm-debug.log*
+
 #备份压缩包
 *.zip
 *.rar
 *.7z
+
+# Temp
+tmp/
+temp/
