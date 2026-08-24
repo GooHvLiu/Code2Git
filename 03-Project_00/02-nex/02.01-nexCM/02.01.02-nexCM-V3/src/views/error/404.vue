@@ -7,62 +7,66 @@
           <div class="ball"></div>
         </div>
         <h1 class="code">404</h1>
-        <h2 class="title">{{ $t('error.notFound') }}</h2>
-        <p class="tip">{{ $t('error.countdown', { count: countDown }) }}{{ dotText }}</p>
-        <el-button type="primary" size="medium" @click="goHome">{{ $t('error.backHome') }}</el-button>
+        <h2 class="title">{{ $t("error.notFound") }}</h2>
+        <p class="tip">
+          {{ $t("error.countdown", { count: countDown }) }}{{ dotText }}
+        </p>
+        <el-button type="primary" size="medium" @click="goHome">{{
+          $t("error.backHome")
+        }}</el-button>
       </div>
     </TransitionScale>
   </div>
 </template>
 
 <script>
-import { TransitionScale } from '@morev/vue-transitions'
-import { ROUTE_PATHS } from '@/router/pathConstants'
+import { TransitionScale } from "@morev/vue-transitions";
+import { ROUTE_PATHS } from "@/router/constant/pathConstants";
 export default {
-  name: 'NotFound',
+  name: "NotFound",
   components: {
-    TransitionScale
+    TransitionScale,
   },
   data() {
     return {
       show: true,
       countDown: 3,
-      dotText: '',
+      dotText: "",
       timerCount: null,
-      timerDot: null
-    }
+      timerDot: null,
+    };
   },
   mounted() {
-    this.startCountDown()
-    this.startDotAnimation()
+    this.startCountDown();
+    this.startDotAnimation();
   },
   beforeDestroy() {
-    clearInterval(this.timerCount)
-    clearInterval(this.timerDot)
+    clearInterval(this.timerCount);
+    clearInterval(this.timerDot);
   },
   methods: {
     startCountDown() {
       this.timerCount = setInterval(() => {
-        this.countDown--
+        this.countDown--;
         if (this.countDown <= 0) {
-          clearInterval(this.timerCount)
-          this.goHome()
+          clearInterval(this.timerCount);
+          this.goHome();
         }
-      }, 1000)
+      }, 1000);
     },
     startDotAnimation() {
-      const dotList = ['', '.', '..', '...']
-      let index = 0
+      const dotList = ["", ".", "..", "..."];
+      let index = 0;
       this.timerDot = setInterval(() => {
-        index = (index + 1) % dotList.length
-        this.dotText = dotList[index]
-      }, 400)
+        index = (index + 1) % dotList.length;
+        this.dotText = dotList[index];
+      }, 400);
     },
     goHome() {
-      this.$router.replace(ROUTE_PATHS.ROOT)
-    }
-  }
-}
+      this.$router.replace(ROUTE_PATHS.ROOT);
+    },
+  },
+};
 </script>
 
 <style scoped lang="less">

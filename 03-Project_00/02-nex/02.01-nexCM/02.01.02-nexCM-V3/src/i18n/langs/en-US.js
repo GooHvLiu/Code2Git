@@ -88,19 +88,48 @@ export default {
 
   // ==================== Layout ====================
   layout: {
+    // 网站首页
     home: 'Home',
-    profile: 'Profile',
-    userManagement: 'UserData',
-    auditLog: 'AuditLog',
+    homeOverview: 'Overview',
+    homeDashboard: 'Dashboard',
+    homeData: 'DataView',
+
+    // 设备管理
+    deviceManagement: 'Device',
+    deviceState: 'DevState',
+    alarmLog: 'AlarmLog',
+    partLife: 'PartLife',
+
+    // 生产管理
+    productionManagement: 'Production',
+    recipeManagement: 'RecipeDB',
+    orderManagement: 'OrderLog',
+
+    // 系统配置
     systemSettings: 'Settings',
-    systemConfig: 'ConfData',
     dictManagement: 'DictData',
     roleManagement: 'UserRole',
     deptManagement: 'DeptInfo',
+    userManagement: 'UserData',
+    auditLog: 'AuditLog',
+    systemConfig: 'ConfData',
+
+    // 个人中心
+    profile: 'Profile',
+
+    // 通知中心
     notificationCenter: 'NotifLog',
+
+    // 退出登录
     logout: 'Logout',
+
+    // 用户
     user: 'User',
+
+    // 搜索
     searchMenu: 'Search menu...',
+
+    // 面包屑
     tagsView: {
       refresh: 'Refresh',
       close: 'Close',

@@ -12,8 +12,8 @@
  */
 import router from '@/router'
 import store from '@/store'
-import { ROUTE_WHITE_LIST } from '@/router/constants'
-import { ROUTE_PATHS } from '@/router/pathConstants'
+import { ROUTE_WHITE_LIST } from '@/router/constant/constants'
+import { ROUTE_PATHS } from '@/router/constant/pathConstants'
 import { getToken } from '@/utils/auth'
 import { cancelAllPending } from '@/utils/request'
 import { getLicenseStatus } from '@/api'

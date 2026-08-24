@@ -7,12 +7,12 @@
  */
 import { setSessionStorage, getSessionStorage } from '@/utils/storage'
 import { SESSIONSTORAGE_KEYS } from '@/utils/storageKey'
-import { HOME_TAG } from '@/router/pathConstants'
+import { HOME_TAG } from '@/router/constant/pathConstants'
 import i18n from '@/i18n'
 
 /** 获取国际化的首页标签 */
 function getHomeTag() {
-  return { ...HOME_TAG, title: i18n.t('layout.home') }
+  return { ...HOME_TAG, title: i18n.t('layout.homeOverview') }
 }
 
 const state = {

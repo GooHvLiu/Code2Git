@@ -193,7 +193,7 @@
 
 <script>
 import { getLicenseStatus, importLicense } from "@/api";
-import { ROUTE_PATHS } from "@/router/pathConstants";
+import { ROUTE_PATHS } from "@/router/constant/pathConstants";
 import { resetLicenseCache } from "@/router/permission";
 
 export default {

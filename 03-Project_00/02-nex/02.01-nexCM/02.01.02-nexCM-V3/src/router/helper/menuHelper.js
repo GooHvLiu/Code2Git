@@ -1,4 +1,4 @@
-import { HOME_TAG } from '@/router/pathConstants'
+import { HOME_TAG } from '@/router/constant/pathConstants'
 import i18n from '@/i18n'
 import { hasRole } from '@/utils/permission'
 
@@ -9,7 +9,18 @@ import { hasRole } from '@/utils/permission'
  */
 export function formatMenu(serverMenuArr) {
   // 基础首页数据，无需从服务器获取（标题国际化）
-  const baseMenu = [{ title: i18n.t('layout.home'), path: HOME_TAG.path, icon: HOME_TAG.icon }]
+  const baseMenu = [
+    {
+      title: i18n.t('layout.home'),
+      path: HOME_TAG.path,
+      icon: HOME_TAG.icon,
+      children: [
+        { title: i18n.t('layout.homeOverview'), path: '/home/overview' },
+        { title: i18n.t('layout.homeDashboard'), path: '/home/dashboard' },
+        { title: i18n.t('layout.homeData'), path: '/home/data' },
+      ]
+    },
+  ]
 
   /**
    * 递归转换菜单节点

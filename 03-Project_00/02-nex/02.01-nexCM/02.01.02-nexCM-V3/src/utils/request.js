@@ -10,7 +10,7 @@ import axios from 'axios'
 import { showError, showWarning } from './message'
 import config from '@/config'
 import { getToken } from './auth'
-import { ROUTE_PATHS } from '@/router/pathConstants'
+import { ROUTE_PATHS } from '@/router/constant/pathConstants'
 import {
   CODE_SUCCESS,
   TOKEN_AUTO_REDIRECT_CODES,

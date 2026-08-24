@@ -88,19 +88,48 @@ export default {
 
   // ==================== 布局 ====================
   layout: {
+    // 网站首页
     home: '网站首页',
-    profile: '个人中心',
-    userManagement: '用户管理',
-    auditLog: '审计追踪',
+    homeOverview: '概况预览',
+    homeDashboard: '数据看板',
+    homeData: '数据管理',
+
+    // 设备管理
+    deviceManagement: '设备管理',
+    deviceState: '设备状态',
+    alarmLog: '报警统计',
+    partLife: '部件寿命',
+
+    // 生产管理
+    productionManagement: '生产管理',
+    recipeManagement: '配方管理',
+    orderManagement: '订单管理',
+
+    // 系统配置 
     systemSettings: '系统设置',
-    systemConfig: '参数配置',
     dictManagement: '数据字典',
     roleManagement: '角色管理',
     deptManagement: '部门管理',
+    userManagement: '用户管理',
+    auditLog: '审计追踪',
+    systemConfig: '参数配置',
+
+    // 个人中心
+    profile: '个人中心',
+
+    // 通知中心
     notificationCenter: '通知中心',
+
+    // 退出登录
     logout: '退出登录',
+
+    // 用户
     user: '用户',
+
+    // 搜索
     searchMenu: '搜索菜单...',
+
+    // 面包屑
     tagsView: {
       refresh: '刷新',
       close: '关闭',

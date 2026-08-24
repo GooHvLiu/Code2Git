@@ -23,12 +23,19 @@ export const ROUTE_PATHS = {
   /** 路由重定向页（无刷新重载用） */
   REDIRECT: '/redirect',
   /** 授权导入页（软件授权失效时跳转，无需登录） */
-  LICENSE_IMPORT: '/license/import'
+  LICENSE_IMPORT: '/license/import',
+  /** 首页 - 概况预览 */
+  HOME_OVERVIEW: '/home/overview',
+  /** 首页 - 数据看板 */
+  HOME_DASHBOARD: '/home/dashboard',
+  /** 首页 - 数据管理 */
+  HOME_DATA: '/home/data'
+
 }
 
 /** 首页固定标签（TagsView 首页不可关闭） */
 export const HOME_TAG = {
   title: '网站首页',
-  path: ROUTE_PATHS.HOME,
+  path: ROUTE_PATHS.HOME_OVERVIEW,
   icon: 'home'
 }

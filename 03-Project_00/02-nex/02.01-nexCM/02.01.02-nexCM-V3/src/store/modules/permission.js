@@ -4,7 +4,7 @@
  * ==========================================
  * 支持菜单缓存（localStorage + 版本号检测 + 多语言）
  */
-import { constantRoutes } from '@/router/constantRoutes'
+import { constantRoutes } from '@/router/constant/constantRoutes'
 import { requestGetUserMenuApi, getMenuVersionApi } from '@/api'
 import { formatMenu } from '@/router/helper/menuHelper'
 import { buildDynamicRoutes, filterRoutesByRoles } from '@/router/helper/routerHelper'

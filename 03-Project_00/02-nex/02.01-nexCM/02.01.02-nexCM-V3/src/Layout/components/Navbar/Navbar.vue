@@ -3,7 +3,9 @@
     <div class="navbar-top">
       <div class="navbar-left">
         <div class="collapse-btn" @click="toggleSideBar">
-          <i :class="sidebar.opened ? 'el-icon-s-fold' : 'el-icon-s-unfold'"></i>
+          <i
+            :class="sidebar.opened ? 'el-icon-s-fold' : 'el-icon-s-unfold'"
+          ></i>
         </div>
         <div class="breadcrumb-wrap">
           <HeadBreadcrumb />
@@ -20,13 +22,22 @@
         <HeartbeatIndicator class="heartbeat-indicator-wrapper" />
         <el-dropdown @command="handleCommand">
           <span class="user-info">
-            <svg-icon :icon-file-name="userInfo?.avatar || 'who'" class="avatar-icon" />
-            <span class="username">{{ userInfo.username || $t('layout.user') }}</span>
+            <svg-icon
+              :icon-file-name="userInfo?.avatar || 'who'"
+              class="avatar-icon"
+            />
+            <span class="username">{{
+              userInfo.username || $t("layout.user")
+            }}</span>
             <i class="el-icon-arrow-down"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="profile">{{ $t('layout.profile') }}</el-dropdown-item>
-            <el-dropdown-item command="logout" divided>{{ $t('layout.logout') }}</el-dropdown-item>
+            <el-dropdown-item command="profile">{{
+              $t("layout.profile")
+            }}</el-dropdown-item>
+            <el-dropdown-item command="logout" divided>{{
+              $t("layout.logout")
+            }}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -39,45 +50,52 @@
 
 <script>
 /* eslint-disable vue/multi-word-component-names */
-import { mapState, mapActions } from 'vuex'
-import { hasRole } from '@/utils/permission'
-import HeadBreadcrumb from '@/components/Breadcrumb/HeadBreadcrumb.vue'
-import TagsView from '@/Layout/components/TagsView/TagsView.vue'
-import ThemePicker from '@/components/ThemePicker/index.vue'
-import MenuSearch from '@/components/MenuSearch/index.vue'
-import NotificationBell from '@/components/NotificationBell/index.vue'
-import HeartbeatIndicator from '@/components/HeartbeatIndicator/index.vue'
-import { ROUTE_PATHS } from '@/router/pathConstants'
-import settings from '@/settings'
+import { mapState, mapActions } from "vuex";
+import { hasRole } from "@/utils/permission";
+import HeadBreadcrumb from "@/components/Breadcrumb/HeadBreadcrumb.vue";
+import TagsView from "@/Layout/components/TagsView/TagsView.vue";
+import ThemePicker from "@/components/ThemePicker/index.vue";
+import MenuSearch from "@/components/MenuSearch/index.vue";
+import NotificationBell from "@/components/NotificationBell/index.vue";
+import HeartbeatIndicator from "@/components/HeartbeatIndicator/index.vue";
+import { ROUTE_PATHS } from "@/router/constant/pathConstants";
+import settings from "@/settings";
 
 export default {
-  name: 'Navbar',
-  components: { HeadBreadcrumb, TagsView, ThemePicker, MenuSearch, NotificationBell, HeartbeatIndicator },
+  name: "Navbar",
+  components: {
+    HeadBreadcrumb,
+    TagsView,
+    ThemePicker,
+    MenuSearch,
+    NotificationBell,
+    HeartbeatIndicator,
+  },
   data() {
-    return { settings }
+    return { settings };
   },
   computed: {
-    ...mapState('app', ['sidebar']),
-    ...mapState('user', ['userInfo']),
+    ...mapState("app", ["sidebar"]),
+    ...mapState("user", ["userInfo"]),
     /** 是否管理员（仅 administrator 角色可见用户管理） */
     isAdmin() {
-      return hasRole('administrator')
-    }
+      return hasRole("administrator");
+    },
   },
   methods: {
-    ...mapActions('app', ['toggleSideBar']),
-    ...mapActions('user', ['logout']),
+    ...mapActions("app", ["toggleSideBar"]),
+    ...mapActions("user", ["logout"]),
     async handleCommand(command) {
-      if (command === 'logout') {
-        await this.logout()
-        this.$router.push(ROUTE_PATHS.LOGIN)
+      if (command === "logout") {
+        await this.logout();
+        this.$router.push(ROUTE_PATHS.LOGIN);
       }
-      if (command === 'profile') {
-        this.$router.push(ROUTE_PATHS.PROFILE)
+      if (command === "profile") {
+        this.$router.push(ROUTE_PATHS.PROFILE);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped lang="less">

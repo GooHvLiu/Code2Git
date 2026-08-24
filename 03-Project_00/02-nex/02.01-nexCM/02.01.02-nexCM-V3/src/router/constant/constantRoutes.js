@@ -53,8 +53,29 @@ export const constantRoutes = [
       {
         path: 'home',
         name: 'Home',
-        component: () => import('@/views/home/index.vue'),
-        meta: { titles: ['layout.home'], icon: 'home', affix: true }
+        component: { render: h => h('router-view') },
+        meta: { titles: ['layout.home'], icon: 'home' },
+        redirect: ROUTE_PATHS.HOME_OVERVIEW,
+        children: [
+          {
+            path: 'overview',
+            name: 'HomeView',
+            component: () => import('@/views/home/overview/index.vue'),
+            meta: { titles: ['layout.home', 'layout.homeOverview'], affix: true }
+          },
+          {
+            path: 'dashboard',
+            name: 'DashView',
+            component: () => import('@/views/home/dashboard/index.vue'),
+            meta: { titles: ['layout.home', 'layout.homeDashboard'] }
+          },
+          {
+            path: 'data',
+            name: 'DataView',
+            component: () => import('@/views/home/data/index.vue'),
+            meta: { titles: ['layout.home', 'layout.homeData'] }
+          },
+        ]
       },
       {
         path: 'profile',

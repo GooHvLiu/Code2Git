@@ -15,7 +15,7 @@
         <!-- <img :src="config.SYSTEM_LOGO" alt="logo" class="logo-img" /> -->
         <svg-icon icon-file-name="logo" class="logo-svg" />
         <span v-show="sidebar.opened" class="logo-text">{{
-          $t('common.systemName')
+          $t("common.systemName")
         }}</span>
       </router-link>
     </div>
@@ -44,7 +44,7 @@ import { mapState } from "vuex";
 import config from "@/config";
 import settings from "@/settings";
 import SidebarItem from "./SidebarItem.vue";
-import { ROUTE_PATHS } from "@/router/pathConstants";
+import { ROUTE_PATHS } from "@/router/constant/pathConstants.js";
 
 export default {
   name: "Sidebar",

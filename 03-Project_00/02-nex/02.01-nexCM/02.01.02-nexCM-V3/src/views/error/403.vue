@@ -7,11 +7,13 @@
   <div class="error-page">
     <div class="error-content">
       <div class="error-code">403</div>
-      <div class="error-title">{{ $t('error.forbidden') }}</div>
-      <div class="error-desc">{{ $t('error.forbiddenDesc') }}</div>
+      <div class="error-title">{{ $t("error.forbidden") }}</div>
+      <div class="error-desc">{{ $t("error.forbiddenDesc") }}</div>
       <div class="error-actions">
-        <el-button type="primary" @click="goHome">{{ $t('error.backHome') }}</el-button>
-        <el-button @click="goBack">{{ $t('error.back') }}</el-button>
+        <el-button type="primary" @click="goHome">{{
+          $t("error.backHome")
+        }}</el-button>
+        <el-button @click="goBack">{{ $t("error.back") }}</el-button>
       </div>
     </div>
   </div>
@@ -19,25 +21,25 @@
 
 <script>
 /* eslint-disable vue/multi-word-component-names */
-import { ROUTE_PATHS } from '@/router/pathConstants'
+import { ROUTE_PATHS } from "@/router/constant/pathConstants";
 
 export default {
-  name: 'Forbidden',
+  name: "Forbidden",
   methods: {
     /** 返回首页 */
     goHome() {
-      this.$router.push(ROUTE_PATHS.HOME)
+      this.$router.push(ROUTE_PATHS.HOME);
     },
     /** 返回上一页 */
     goBack() {
       if (window.history.length > 1) {
-        this.$router.back()
+        this.$router.back();
       } else {
-        this.goHome()
+        this.goHome();
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped lang="less">

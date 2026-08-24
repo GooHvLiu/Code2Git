@@ -7,7 +7,7 @@
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { constantRoutes } from './constantRoutes'
+import { constantRoutes } from './constant/constantRoutes'
 
 Vue.use(VueRouter)
 
