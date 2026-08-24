@@ -21,7 +21,7 @@
       <!-- 左侧分类导航 -->
       <div class="config-sidebar">
         <div
-          v-for="item in menuList"
+          v-for="item in filteredMenuList"
           :key="item.key"
           class="menu-item"
           :class="{ active: activeMenu === item.key }"
@@ -593,6 +593,22 @@ export default {
     isAdmin() {
       return this.$store?.state?.user?.userInfo?.role === "administrator";
     },
+    /**
+     * 根据角色权限过滤后的菜单列表
+     * - 系统设置、连接设置：任何角色都能查看和设置
+     * - 安全设置、设备连接、导出设置：只有管理员有权限
+     * - 授权管理：所有人能看
+     */
+    filteredMenuList() {
+      // 需要管理员权限的分类
+      const adminOnlyKeys = ["security", "plc", "export"];
+      return this.menuList.filter((item) => {
+        if (adminOnlyKeys.includes(item.key)) {
+          return this.isAdmin;
+        }
+        return true;
+      });
+    },
   },
   created() {
     // 初始化菜单标题（国际化）
@@ -602,6 +618,11 @@ export default {
     this.menuList[3].title = this.$t("systemConfig.export.title");
     this.menuList[4].title = this.$t("systemConfig.connection.title");
     this.menuList[5].title = this.$t("license.manageTitle");
+    // 确保当前激活的菜单有权限访问（非管理员时，默认跳转到系统设置）
+    const adminOnlyKeys = ["security", "plc", "export"];
+    if (!this.isAdmin && adminOnlyKeys.includes(this.activeMenu)) {
+      this.activeMenu = "system";
+    }
     // 加载配置
     this.loadConfigs();
     // 加载授权数据
