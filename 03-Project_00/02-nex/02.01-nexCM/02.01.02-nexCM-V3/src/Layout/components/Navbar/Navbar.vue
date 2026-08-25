@@ -22,10 +22,7 @@
         <HeartbeatIndicator class="heartbeat-indicator-wrapper" />
         <el-dropdown @command="handleCommand">
           <span class="user-info">
-            <svg-icon
-              :icon-file-name="userInfo?.avatar || 'who'"
-              class="avatar-icon"
-            />
+            <svg-icon :icon-file-name="avatarIcon" class="avatar-icon" />
             <span class="username">{{
               userInfo.username || $t("layout.user")
             }}</span>
@@ -80,6 +77,26 @@ export default {
     /** 是否管理员（仅 administrator 角色可见用户管理） */
     isAdmin() {
       return hasRole("administrator");
+    },
+    /**
+     * 根据角色确定头像图标
+     * 角色 → 图标映射：
+     *   administrator → administrator.svg
+     *   operator      → operator.svg
+     *   engineer      → engineer.svg
+     *   其他/未匹配    → who.svg（默认）
+     */
+    avatarIcon() {
+      const roleMap = {
+        administrator: "administrator",
+        operator: "operator",
+        engineer: "engineer",
+        user: "user",
+      };
+      const role = this.userInfo?.role;
+      // role 可能是字符串或数组，取第一个
+      const roleCode = Array.isArray(role) ? role[0] : role;
+      return roleMap[roleCode] || "who";
     },
   },
   methods: {
