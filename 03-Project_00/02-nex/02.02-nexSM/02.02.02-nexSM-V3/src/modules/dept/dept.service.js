@@ -10,6 +10,7 @@
  */
 const BaseService = require('../../services/BaseService')
 const deptModel = require('./dept.model')
+const userModel = require('../user/user.model')
 const { BusinessError } = require('../../middleware/error.middleware')
 const { ERROR_CODE } = require('../../constants/errorCode')
 
@@ -22,7 +23,7 @@ class DeptService extends BaseService {
   constructor() {
     super(deptModel, {
       name: '部门',
-      langFields: ['dept_name']
+      langFields: []
     })
   }
 
@@ -38,8 +39,7 @@ class DeptService extends BaseService {
    */
   async getDeptTree(lang = 'zh-CN') {
     const allDepts = await deptModel.getAllDepts()
-    const processedDepts = this.processLangFields(allDepts, lang)
-    return this.buildTree(processedDepts, 0)
+    return this.buildTree(allDepts, 0)
   }
 
   /**
@@ -71,7 +71,7 @@ class DeptService extends BaseService {
     if (!dept) {
       throw new BusinessError(ERROR_CODE.NOT_FOUND, '部门不存在')
     }
-    return this.processLangFields(dept, lang)
+    return dept
   }
 
   /**
@@ -90,9 +90,7 @@ class DeptService extends BaseService {
    * @returns {Promise<Object>} { insertId, affectedRows }
    */
   async createDept(data) {
-    // 处理多语言字段（字符串转 JSON 对象）
-    const processedData = this.convertLangFieldsToJson(data)
-    return await deptModel.create(processedData)
+    return await deptModel.create(data)
   }
 
   /**
@@ -113,9 +111,7 @@ class DeptService extends BaseService {
     if (data.parent_id && data.parent_id === id) {
       throw new BusinessError(ERROR_CODE.PARAM_INVALID, '上级部门不能设置为自己')
     }
-    // 处理多语言字段（字符串转 JSON 对象）
-    const processedData = this.convertLangFieldsToJson(data)
-    return await deptModel.update(id, processedData)
+    return await deptModel.update(id, data)
   }
 
   /**
@@ -133,6 +129,11 @@ class DeptService extends BaseService {
     const children = await deptModel.getByParentId(id)
     if (children.length > 0) {
       throw new BusinessError(ERROR_CODE.PARAM_INVALID, '存在子部门，无法删除')
+    }
+    // 检查是否有用户使用该部门
+    const userCount = await userModel.countByDeptId(id)
+    if (userCount > 0) {
+      throw new BusinessError(ERROR_CODE.PARAM_INVALID, `该部门下有 ${userCount} 个用户，无法删除`)
     }
     return await deptModel.delete(id)
   }

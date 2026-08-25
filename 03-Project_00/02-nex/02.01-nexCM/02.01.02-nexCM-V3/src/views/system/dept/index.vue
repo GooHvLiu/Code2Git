@@ -60,12 +60,10 @@
           />
         </el-form-item>
         <el-form-item :label="$t('dept.deptName')" prop="dept_name">
-          <i18n-input
+          <el-input
             v-model="form.dept_name"
-            type="input"
-            :zh-label="'中文'"
-            :en-label="'English'"
             :maxlength="50"
+            :placeholder="$t('dept.deptNamePlaceholder')"
           />
         </el-form-item>
         <el-form-item :label="$t('dept.orderNum')" prop="order_num">

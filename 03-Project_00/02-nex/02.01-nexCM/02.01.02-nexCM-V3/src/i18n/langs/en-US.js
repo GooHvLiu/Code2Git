@@ -108,8 +108,8 @@ export default {
     // 系统配置
     systemSettings: 'Settings',
     dictManagement: 'DictData',
+    deptManagement: 'OrgMgmt',
     roleManagement: 'UserRole',
-    deptManagement: 'DeptInfo',
     userManagement: 'UserData',
     auditLog: 'AuditLog',
     systemConfig: 'ConfData',
@@ -183,9 +183,9 @@ export default {
     deleteConfirm: 'Delete this role?'
   },
 
-  // ==================== Department Management ====================
+  // ==================== Organization Management ====================
   dept: {
-    title: 'Department Management',
+    title: 'Organization Management',
     deptName: 'Department Name',
     orderNum: 'Sort',
     leader: 'Leader',

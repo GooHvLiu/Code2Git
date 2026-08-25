@@ -59,8 +59,8 @@ export function formatMenu(serverMenuArr) {
     // 仅管理员可见的菜单
     ...(isAdmin ? [
       { title: i18n.t('layout.dictManagement'), path: '/system/dict' },
-      { title: i18n.t('layout.roleManagement'), path: '/system/role' },
       { title: i18n.t('layout.deptManagement'), path: '/system/dept' },
+      { title: i18n.t('layout.roleManagement'), path: '/system/role' },
       { title: i18n.t('layout.userManagement'), path: '/system/user' }
     ] : []),
     // 审计追踪：所有人可见（非管理员只看自己的数据）

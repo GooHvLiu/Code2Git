@@ -2,8 +2,12 @@
  * 通用控制器基类
  * 所有业务 Controller 继承此类，封装通用 CRUD 接口
  * 子类可以重写方法以实现特殊业务逻辑
+ *
+ * 构造函数中自动包装所有异步方法，捕获错误并传递给 Express 的 next()
+ * 避免未处理的 Promise rejection 导致进程崩溃
  */
 const { getLangFromRequest } = require('../utils/i18n')
+const { asyncHandler } = require('../utils/asyncHandler')
 
 class BaseController {
   /**
@@ -12,6 +16,15 @@ class BaseController {
    */
   constructor(service) {
     this.service = service
+    // 自动包装原型链上的所有异步方法（排除构造函数）
+    const proto = Object.getPrototypeOf(this)
+    const methodNames = Object.getOwnPropertyNames(proto).filter(
+      name => name !== 'constructor' && typeof proto[name] === 'function'
+    )
+    methodNames.forEach(name => {
+      const originalMethod = proto[name]
+      this[name] = asyncHandler(originalMethod.bind(this))
+    })
   }
 
   /**

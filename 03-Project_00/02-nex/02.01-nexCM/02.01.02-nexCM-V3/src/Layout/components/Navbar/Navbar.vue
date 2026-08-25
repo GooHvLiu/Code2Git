@@ -24,7 +24,7 @@
           <span class="user-info">
             <svg-icon :icon-file-name="avatarIcon" class="avatar-icon" />
             <span class="username">{{
-              userInfo.username || $t("layout.user")
+              userInfo.real_name || $t("layout.user")
             }}</span>
             <i class="el-icon-arrow-down"></i>
           </span>

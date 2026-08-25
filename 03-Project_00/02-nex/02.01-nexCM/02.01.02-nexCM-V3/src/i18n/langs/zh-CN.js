@@ -108,8 +108,8 @@ export default {
     // 系统配置 
     systemSettings: '系统设置',
     dictManagement: '数据字典',
+    deptManagement: '架构管理',
     roleManagement: '角色管理',
-    deptManagement: '部门管理',
     userManagement: '用户管理',
     auditLog: '审计追踪',
     systemConfig: '参数配置',
@@ -183,9 +183,9 @@ export default {
     deleteConfirm: '确定删除该角色吗？'
   },
 
-  // ==================== 部门管理 ====================
+  // ==================== 架构管理 ====================
   dept: {
-    title: '部门管理',
+    title: '架构管理',
     deptName: '部门名称',
     orderNum: '排序',
     leader: '负责人',

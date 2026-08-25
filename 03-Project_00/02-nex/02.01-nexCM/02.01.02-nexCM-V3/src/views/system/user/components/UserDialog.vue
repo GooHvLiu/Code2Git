@@ -58,7 +58,7 @@
           clearable
         >
           <el-option
-            v-for="item in deptTree"
+            v-for="item in flatDeptList"
             :key="item.id"
             :label="item.dept_name"
             :value="item.id"
@@ -136,6 +136,21 @@ export default {
         label: item.role_name || item.role_code,
         value: item.role_code
       }))
+    },
+    /** 扁平化的部门列表（树形结构转扁平，用于下拉选择） */
+    flatDeptList() {
+      const result = []
+      const flatten = (list) => {
+        if (!Array.isArray(list)) return
+        list.forEach(item => {
+          result.push({ id: item.id, dept_name: item.dept_name })
+          if (item.children && item.children.length > 0) {
+            flatten(item.children)
+          }
+        })
+      }
+      flatten(this.deptTree)
+      return result
     },
     /** 性别选项（从数据字典获取） */
     sexOptions() {

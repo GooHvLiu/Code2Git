@@ -128,10 +128,9 @@ class UserModel extends BaseModel {
     `;
     const list = await query(listSql, queryParams);
 
-    // 处理多语言 JSON 字段
+    // 处理多语言 JSON 字段（role_name 仍需多语言，dept_name 已改为普通字符串）
     const processedList = list.map(item => ({
       ...item,
-      dept_name: getLangValue(item.dept_name, lang, '-'),
       role_name: getLangValue(item.role_name, lang, item.role)
     }));
 
@@ -160,12 +159,22 @@ class UserModel extends BaseModel {
     `;
     const rows = await query(sql, [id]);
     if (!rows[0]) return null;
-    // 处理多语言 JSON 字段
+    // 处理多语言 JSON 字段（role_name 仍需多语言，dept_name 已改为普通字符串）
     return {
       ...rows[0],
-      dept_name: getLangValue(rows[0].dept_name, lang, '-'),
       role_name: getLangValue(rows[0].role_name, lang, rows[0].role)
     };
+  }
+
+  /**
+   * 根据部门ID统计该部门下的用户数量（用于删除部门前的校验）
+   * @param {number} deptId - 部门ID
+   * @returns {Promise<number>} 用户数量
+   */
+  async countByDeptId(deptId) {
+    const sql = `SELECT COUNT(*) as total FROM ${TABLE_NAME} WHERE dept_id = ? AND is_delete = 0`;
+    const rows = await query(sql, [deptId]);
+    return rows[0]?.total || 0;
   }
 }
 
