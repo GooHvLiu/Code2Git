@@ -5,6 +5,7 @@
  * 管理 WebSocket 连接状态、心跳状态、最后心跳时间等
  * 供 HeartbeatIndicator 等组件使用
  */
+import i18n from '@/i18n'
 
 const state = {
   /** 是否连接成功 */
@@ -214,11 +215,11 @@ const getters = {
    * @returns {string}
    */
   lastHeartbeatText: state => {
-    if (!state.lastHeartbeat) return '从未'
+    if (!state.lastHeartbeat) return i18n.t('heartbeat.timeNever')
     const diff = Math.floor((Date.now() - state.lastHeartbeat) / 1000)
-    if (diff < 60) return `${diff}秒前`
-    if (diff < 3600) return `${Math.floor(diff / 60)}分钟前`
-    return `${Math.floor(diff / 3600)}小时前`
+    if (diff < 60) return i18n.t('heartbeat.timeSecondsAgo', { n: diff })
+    if (diff < 3600) return i18n.t('heartbeat.timeMinutesAgo', { n: Math.floor(diff / 60) })
+    return i18n.t('heartbeat.timeHoursAgo', { n: Math.floor(diff / 3600) })
   },
 
   /**
@@ -238,20 +239,20 @@ const getters = {
     // 1. 服务器未连接
     if (!state.connected) {
       if (state.reconnectAttempts > 0) {
-        return `重连中(${state.reconnectAttempts})`
+        return i18n.t('heartbeat.statusReconnecting', { count: state.reconnectAttempts })
       }
-      return '离线'
+      return i18n.t('heartbeat.statusOffline')
     }
     // 2. 服务器已连接但未认证
     if (!state.authenticated) {
-      return '认证中...'
+      return i18n.t('heartbeat.statusAuthenticating')
     }
     // 3. 服务器已连接且认证，但设备未连接
     if (!state.plcConnected) {
-      return '设备未连接'
+      return i18n.t('heartbeat.statusDeviceDisconnected')
     }
     // 4. 服务器已连接且认证 + PLC 已连接
-    return '在线'
+    return i18n.t('heartbeat.statusOnline')
   },
 
   /**

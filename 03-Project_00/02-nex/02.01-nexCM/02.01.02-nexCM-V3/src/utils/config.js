@@ -38,7 +38,19 @@ const DEFAULT_CONFIG = {
   pdfWatermarkEnabled: true,
   pdfWatermarkText: '',
   // 连接设置
-  heartbeatInterval: 25000
+  heartbeatInterval: 25000,
+  // 订单设置
+  allowNoOrderProduction: false,
+  noOrderProductionHighlight: false,
+  showOperatorName: true,
+  showAlarmCount: true,
+  showRuntime: true,
+  reportIncludeAlarmDetail: true,
+  reportIncludeOperatorDetail: true,
+  reportIncludeDownloadCount: true,
+  allowRunningOrderDownload: false,
+  autoArchiveCompleted: true,
+  orderSwitchConfirm: true
 }
 
 /**

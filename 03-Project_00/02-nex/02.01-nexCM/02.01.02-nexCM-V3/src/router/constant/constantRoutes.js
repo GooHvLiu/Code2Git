@@ -135,7 +135,7 @@ export const constantRoutes = [
         meta: { titles: ['layout.notificationCenter'] }
       }
     ]
-  },
-  // 404 兜底必须放最后
-  { path: '*', redirect: ROUTE_PATHS.NOT_FOUND, hidden: true }
+  }
+  // 注意：404 兜底路由不在此静态定义，改为在动态路由加载完成后通过 addRoute 动态添加，
+  // 否则刷新页面时 404 会比动态路由先匹配，导致业务页面刷新跳 404
 ]

@@ -1,5 +1,6 @@
 <template>
   <div ref="dashboardRef" class="dashboard-container" :class="{ fullscreen: isFullscreen }">
+    <div class="dashboard-stage" :style="stageStyle">
     <!-- 科技感装饰背景 -->
     <div class="tech-bg">
       <div class="tech-grid"></div>
@@ -386,6 +387,7 @@
         </div>
       </el-col>
     </el-row>
+    </div>
   </div>
 </template>
 
@@ -404,6 +406,10 @@ export default {
   data() {
     return {
       isFullscreen: false,
+      scale: 1,
+      // 设计稿尺寸（16:9 标准大屏），全屏时按此尺寸等比缩放
+      DESIGN_WIDTH: 1920,
+      DESIGN_HEIGHT: 1080,
       currentTime: '',
       currentDate: '',
       timer: null,
@@ -425,6 +431,17 @@ export default {
     }
   },
   computed: {
+    // 全屏等比缩放样式：固定设计尺寸，按 scale 缩放，居中
+    stageStyle() {
+      if (!this.isFullscreen) return {}
+      return {
+        width: this.DESIGN_WIDTH + 'px',
+        height: this.DESIGN_HEIGHT + 'px',
+        transform: 'scale(' + this.scale + ')',
+        transformOrigin: 'center center',
+        flexShrink: 0
+      }
+    },
     // ===== 原始数据：从 store 统一获取 =====
     ...mapGetters({
       storeProduction: 'productionStats',
@@ -753,6 +770,25 @@ export default {
         this.mapChart.resize()
       }
     },
+    /**
+     * 计算等比缩放比例（contain 模式）
+     * 取宽高缩放比的较小值，确保内容完整显示在屏幕内，短边留白
+     */
+    updateScale() {
+      if (!this.isFullscreen) {
+        this.scale = 1
+        return
+      }
+      const screenW = window.innerWidth
+      const screenH = window.innerHeight
+      const scaleX = screenW / this.DESIGN_WIDTH
+      const scaleY = screenH / this.DESIGN_HEIGHT
+      this.scale = Math.min(scaleX, scaleY)
+      // 缩放后延迟调整地图大小，确保布局计算完成
+      this.$nextTick(() => {
+        this.handleMapResize()
+      })
+    },
     toggleFullscreen() {
       const el = this.$refs.dashboardRef
       if (!this.isFullscreen) {
@@ -774,6 +810,8 @@ export default {
     },
     handleFullscreenChange() {
       this.isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement)
+      // 全屏切换后计算等比缩放比例
+      this.updateScale()
       // 全屏切换后延迟调整地图大小，确保 flex 布局计算完成
       setTimeout(() => {
         this.handleMapResize()
@@ -781,8 +819,6 @@ export default {
     }
   },
   mounted() {
-    // 确保设备数据已加载
-    this.$store.dispatch('device/fetchAllData')
     this.updateTime()
     this.timer = setInterval(() => {
       this.updateTime()
@@ -791,6 +827,8 @@ export default {
     document.addEventListener('webkitfullscreenchange', this.handleFullscreenChange)
     document.addEventListener('mozfullscreenchange', this.handleFullscreenChange)
     document.addEventListener('MSFullscreenChange', this.handleFullscreenChange)
+    // 窗口大小变化时重新计算等比缩放比例
+    window.addEventListener('resize', this.updateScale)
     
     // 初始化地图（延迟确保 DOM 渲染完成）
     this.$nextTick(() => {
@@ -806,6 +844,7 @@ export default {
     document.removeEventListener('mozfullscreenchange', this.handleFullscreenChange)
     document.removeEventListener('MSFullscreenChange', this.handleFullscreenChange)
     window.removeEventListener('resize', this.handleMapResize)
+    window.removeEventListener('resize', this.updateScale)
     if (this.mapChart) {
       this.mapChart.dispose()
       this.mapChart = null
@@ -830,14 +869,26 @@ export default {
   &.fullscreen,
   &:fullscreen,
   &:-webkit-full-screen {
-    padding: 12px;
+    padding: 0;
     height: 100vh;
     min-height: 100vh;
+    width: 100vw;
     overflow: hidden;
+    // 居中显示等比缩放后的 stage，短边留白用背景色填充
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    justify-content: center;
+    align-items: center;
     background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 30%, #f0f4f8 70%, #eaf0f7 100%);
+
+    // stage 内部用 flex 按比例分配高度（设计尺寸 1920x1080）
+    .dashboard-stage {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 12px;
+      box-sizing: border-box;
+    }
 
     // 顶部标题栏固定高度
     .dashboard-header {

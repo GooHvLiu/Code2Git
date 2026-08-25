@@ -201,6 +201,236 @@ const state = {
     plannedStop: 0.5 // 计划停机
   },
 
+  // ---------- 配方列表 ----------
+  recipes: [
+    {
+      id: 1,
+      code: 'RCP-001',
+      name: '卡式瓶3.2ml',
+      productType: '卡式瓶',
+      fillVolume: 3.2,
+      // 轴位参数（单位：度/脉冲）
+      fillAngle: 45,           // 灌装角度
+      suckBackAngle: 15,       // 回吸角度
+      fillAxisInit: 0,          // 灌装轴初始位
+      fillAxisReach: 1200,      // 灌装轴到达位
+      fixAxisInit: 0,           // 固定轴初始位
+      fixAxisReach: 800,        // 固定轴到达位
+      fixAxisPreLift: 400,      // 固定轴预升位
+      stopperAxisInit: 0,       // 加塞轴初始位
+      stopperAxisPrePress: 600, // 加塞轴预压位
+      stopperAxisReach: 1000,   // 加塞轴到达位
+      // 速度参数（单位：脉冲/秒）
+      fillAxisInitSpeed: 500,    // 灌装轴初始位速度
+      fillAxisReachSpeed: 800,   // 灌装轴到达位速度
+      fixAxisInitSpeed: 400,     // 固定轴初始位速度
+      fixAxisReachSpeed: 600,    // 固定轴到达位速度
+      fixAxisPreLiftSpeed: 300,  // 固定轴预升位速度
+      stopperAxisInitSpeed: 450, // 加塞轴初始位速度
+      stopperAxisPrePressSpeed: 350, // 加塞轴预压位速度
+      stopperAxisReachSpeed: 550,    // 加塞轴到达位速度
+      // 延时参数（单位：ms）
+      fillDelay: 50,       // 灌装延时
+      vacuumDelay: 30,     // 真空延时
+      // 工艺速度
+      fillSpeed: 1200,     // 灌装速度（瓶/h）
+      suckBackSpeed: 600,  // 回吸速度
+      // 智能分析
+      usageCount: 1256,    // 使用次数
+      faultRate: 1.2,      // 故障率（%）
+      avgQualifiedRate: 98.8, // 平均合格率（%）
+      lastUsedTime: '2026-08-24 14:30:00',
+      isActive: true        // 当前使用中
+    },
+    {
+      id: 2,
+      code: 'RCP-002',
+      name: '卡式瓶3.0ml',
+      productType: '卡式瓶',
+      fillVolume: 3.0,
+      fillAngle: 42,
+      suckBackAngle: 12,
+      fillAxisInit: 0,
+      fillAxisReach: 1150,
+      fixAxisInit: 0,
+      fixAxisReach: 780,
+      fixAxisPreLift: 380,
+      stopperAxisInit: 0,
+      stopperAxisPrePress: 580,
+      stopperAxisReach: 980,
+      fillAxisInitSpeed: 480,
+      fillAxisReachSpeed: 780,
+      fixAxisInitSpeed: 380,
+      fixAxisReachSpeed: 580,
+      fixAxisPreLiftSpeed: 280,
+      stopperAxisInitSpeed: 430,
+      stopperAxisPrePressSpeed: 330,
+      stopperAxisReachSpeed: 530,
+      fillDelay: 45,
+      vacuumDelay: 28,
+      fillSpeed: 1300,
+      suckBackSpeed: 650,
+      usageCount: 892,
+      faultRate: 0.8,
+      avgQualifiedRate: 99.1,
+      lastUsedTime: '2026-08-23 10:15:00',
+      isActive: false
+    },
+    {
+      id: 3,
+      code: 'RCP-003',
+      name: '预充针2.5ml',
+      productType: '预充针',
+      fillVolume: 2.5,
+      fillAngle: 38,
+      suckBackAngle: 10,
+      fillAxisInit: 0,
+      fillAxisReach: 1050,
+      fixAxisInit: 0,
+      fixAxisReach: 720,
+      fixAxisPreLift: 350,
+      stopperAxisInit: 0,
+      stopperAxisPrePress: 520,
+      stopperAxisReach: 900,
+      fillAxisInitSpeed: 450,
+      fillAxisReachSpeed: 750,
+      fixAxisInitSpeed: 350,
+      fixAxisReachSpeed: 550,
+      fixAxisPreLiftSpeed: 250,
+      stopperAxisInitSpeed: 400,
+      stopperAxisPrePressSpeed: 300,
+      stopperAxisReachSpeed: 500,
+      fillDelay: 40,
+      vacuumDelay: 25,
+      fillSpeed: 1500,
+      suckBackSpeed: 700,
+      usageCount: 2341,
+      faultRate: 1.5,
+      avgQualifiedRate: 98.2,
+      lastUsedTime: '2026-08-22 16:45:00',
+      isActive: false
+    }
+  ],
+
+  // ---------- 订单列表 ----------
+  orders: {
+    // 完成订单
+    completed: [
+      {
+        id: 'ORD-20260824001',
+        orderNo: 'PO-20260824-001',
+        productName: '卡式瓶3.2ml灌装',
+        recipeId: 1,
+        recipeName: '卡式瓶3.2ml',
+        batchNo: 'B20260824001',
+        targetQty: 5000,
+        completedQty: 5000,
+        qualifiedQty: 4925,
+        unqualifiedQty: 75,
+        qualifiedRate: 98.5,
+        operator: '张三',
+        startTime: '2026-08-24 08:00:00',
+        endTime: '2026-08-24 12:30:00',
+        runtime: 4.5,
+        alarmCount: 3,
+        status: 'completed',
+        downloadCount: 2
+      },
+      {
+        id: 'ORD-20260823002',
+        orderNo: 'PO-20260823-002',
+        productName: '预充针2.5ml灌装',
+        recipeId: 3,
+        recipeName: '预充针2.5ml',
+        batchNo: 'B20260823002',
+        targetQty: 8000,
+        completedQty: 8000,
+        qualifiedQty: 7856,
+        unqualifiedQty: 144,
+        qualifiedRate: 98.2,
+        operator: '李四',
+        startTime: '2026-08-23 08:00:00',
+        endTime: '2026-08-23 14:20:00',
+        runtime: 6.3,
+        alarmCount: 5,
+        status: 'completed',
+        downloadCount: 1
+      }
+    ],
+    // 进行中订单
+    running: [
+      {
+        id: 'ORD-20260825001',
+        orderNo: 'PO-20260825-001',
+        productName: '卡式瓶3.2ml灌装',
+        recipeId: 1,
+        recipeName: '卡式瓶3.2ml',
+        batchNo: 'B20260825001',
+        targetQty: 6000,
+        completedQty: 3240,
+        qualifiedQty: 3192,
+        unqualifiedQty: 48,
+        qualifiedRate: 98.5,
+        operator: '张三',
+        startTime: '2026-08-25 08:00:00',
+        endTime: null,
+        runtime: 3.2,
+        alarmCount: 1,
+        status: 'running',
+        progress: 54.0,
+        estimatedEnd: '2026-08-25 14:30:00',
+        downloadCount: 0
+      }
+    ],
+    // 计划订单（排队）
+    planned: [
+      {
+        id: 'ORD-20260825002',
+        orderNo: 'PO-20260825-002',
+        productName: '卡式瓶3.0ml灌装',
+        recipeId: 2,
+        recipeName: '卡式瓶3.0ml',
+        batchNo: 'B20260825002',
+        targetQty: 4000,
+        completedQty: 0,
+        qualifiedQty: 0,
+        unqualifiedQty: 0,
+        qualifiedRate: 0,
+        operator: '李四',
+        startTime: null,
+        endTime: null,
+        runtime: 0,
+        alarmCount: 0,
+        status: 'planned',
+        priority: 'normal',
+        queuePosition: 1,
+        downloadCount: 0
+      },
+      {
+        id: 'ORD-20260825003',
+        orderNo: 'PO-20260825-003',
+        productName: '预充针2.5ml灌装',
+        recipeId: 3,
+        recipeName: '预充针2.5ml',
+        batchNo: 'B20260825003',
+        targetQty: 10000,
+        completedQty: 0,
+        qualifiedQty: 0,
+        unqualifiedQty: 0,
+        qualifiedRate: 0,
+        operator: '王五',
+        startTime: null,
+        endTime: null,
+        runtime: 0,
+        alarmCount: 0,
+        status: 'planned',
+        priority: 'high',
+        queuePosition: 2,
+        downloadCount: 0
+      }
+    ]
+  },
+
   // ---------- 元数据 ----------
   /** 数据最后更新时间戳 */
   lastUpdateTime: null,
@@ -333,6 +563,45 @@ const mutations = {
   // ---------- 运行统计 ----------
   SET_RUNTIME_STATS(state, stats) {
     state.runtimeStats = { ...state.runtimeStats, ...stats }
+  },
+
+  // ---------- 配方管理 ----------
+  SET_RECIPES(state, recipes) {
+    state.recipes = recipes
+  },
+  UPDATE_RECIPE(state, { id, patch }) {
+    const index = state.recipes.findIndex(r => r.id === id)
+    if (index > -1) {
+      state.recipes.splice(index, 1, { ...state.recipes[index], ...patch })
+    }
+  },
+  SET_ACTIVE_RECIPE(state, id) {
+    state.recipes.forEach(r => { r.isActive = r.id === id })
+  },
+
+  // ---------- 订单管理 ----------
+  SET_ORDERS(state, { type, orders }) {
+    if (state.orders[type]) {
+      state.orders[type] = orders
+    }
+  },
+  UPDATE_ORDER(state, { type, id, patch }) {
+    const list = state.orders[type]
+    if (list) {
+      const index = list.findIndex(o => o.id === id)
+      if (index > -1) {
+        list.splice(index, 1, { ...list[index], ...patch })
+      }
+    }
+  },
+  INCREMENT_ORDER_DOWNLOAD(state, { type, id }) {
+    const list = state.orders[type]
+    if (list) {
+      const order = list.find(o => o.id === id)
+      if (order) {
+        order.downloadCount = (order.downloadCount || 0) + 1
+      }
+    }
   },
 
   // ---------- 元数据 ----------
@@ -697,7 +966,55 @@ const getters = {
       text: state.statusText,
       duration: `${h}小时${m}分钟`
     }
-  }
+  },
+
+  // ---------- 配方管理 ----------
+  /** 配方列表 */
+  recipeList: state => state.recipes,
+  /** 当前使用的配方 */
+  activeRecipe: state => state.recipes.find(r => r.isActive) || state.recipes[0],
+  /** 配方使用统计（按使用次数排序） */
+  recipeUsageStats: state => {
+    return [...state.recipes].sort((a, b) => b.usageCount - a.usageCount).map((r, i) => ({
+      rank: i + 1,
+      id: r.id,
+      name: r.name,
+      usageCount: r.usageCount,
+      faultRate: r.faultRate,
+      avgQualifiedRate: r.avgQualifiedRate,
+      isActive: r.isActive
+    }))
+  },
+
+  // ---------- 订单管理 ----------
+  /** 完成订单列表 */
+  completedOrders: state => state.orders.completed,
+  /** 进行中订单列表 */
+  runningOrders: state => state.orders.running,
+  /** 计划订单列表 */
+  plannedOrders: state => state.orders.planned,
+  /** 当前进行中的订单 */
+  currentOrder: state => state.orders.running[0] || null,
+  /** 订单统计概览 */
+  orderStats: state => {
+    const completed = state.orders.completed
+    const running = state.orders.running
+    const planned = state.orders.planned
+    const totalCompleted = completed.reduce((sum, o) => sum + o.completedQty, 0)
+    const totalTarget = completed.reduce((sum, o) => sum + o.targetQty, 0)
+    return {
+      completedCount: completed.length,
+      runningCount: running.length,
+      plannedCount: planned.length,
+      totalCompletedQty: totalCompleted,
+      totalTargetQty: totalTarget,
+      avgQualifiedRate: completed.length > 0
+        ? (completed.reduce((sum, o) => sum + o.qualifiedRate, 0) / completed.length).toFixed(1)
+        : 0
+    }
+  },
+  /** 根据配方ID获取配方信息 */
+  getRecipeById: state => id => state.recipes.find(r => r.id === id)
 }
 
 export default {

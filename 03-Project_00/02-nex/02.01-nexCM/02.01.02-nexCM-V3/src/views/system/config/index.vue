@@ -209,6 +209,155 @@
           </el-form>
         </div>
 
+        <!-- 订单设置 -->
+        <div v-show="activeMenu === 'order'" class="config-panel">
+          <h3 class="panel-title">{{ $t("systemConfig.order.title") }}</h3>
+
+          <!-- 生产控制区域 -->
+          <div class="config-section">
+            <div class="section-title">
+              <i class="el-icon-cpu"></i>
+              <span>{{ $t("systemConfig.order.productionControl") }}</span>
+            </div>
+            <el-form :model="form" label-width="250px" label-position="right">
+              <el-form-item
+                :label="$t('systemConfig.order.allowNoOrderProduction')"
+              >
+                <el-switch
+                  v-model="form.allowNoOrderProduction"
+                  active-color="#13ce66"
+                  inactive-color="#c0c4cc"
+                />
+                <span class="form-tip">{{
+                  $t("systemConfig.order.allowNoOrderProductionTip")
+                }}</span>
+              </el-form-item>
+
+              <el-form-item
+                :label="$t('systemConfig.order.noOrderProductionHighlight')"
+              >
+                <el-switch
+                  v-model="form.noOrderProductionHighlight"
+                  :disabled="!form.allowNoOrderProduction"
+                  active-color="#e6a23c"
+                  inactive-color="#c0c4cc"
+                />
+                <span
+                  class="form-tip"
+                  :class="{ disabled: !form.allowNoOrderProduction }"
+                >
+                  {{ $t("systemConfig.order.noOrderProductionHighlightTip") }}
+                </span>
+              </el-form-item>
+
+              <el-form-item
+                :label="$t('systemConfig.order.orderSwitchConfirm')"
+              >
+                <el-switch
+                  v-model="form.orderSwitchConfirm"
+                  active-color="#13ce66"
+                  inactive-color="#c0c4cc"
+                />
+              </el-form-item>
+
+              <el-form-item
+                :label="$t('systemConfig.order.autoArchiveCompleted')"
+              >
+                <el-switch
+                  v-model="form.autoArchiveCompleted"
+                  active-color="#13ce66"
+                  inactive-color="#c0c4cc"
+                />
+              </el-form-item>
+            </el-form>
+          </div>
+
+          <!-- 统计展示区域 -->
+          <div class="config-section">
+            <div class="section-title">
+              <i class="el-icon-data-line"></i>
+              <span>{{ $t("systemConfig.order.statDisplay") }}</span>
+            </div>
+            <el-form :model="form" label-width="250px" label-position="right">
+              <el-form-item :label="$t('systemConfig.order.showOperatorName')">
+                <el-switch
+                  v-model="form.showOperatorName"
+                  active-color="#13ce66"
+                  inactive-color="#c0c4cc"
+                />
+              </el-form-item>
+
+              <el-form-item :label="$t('systemConfig.order.showAlarmCount')">
+                <el-switch
+                  v-model="form.showAlarmCount"
+                  active-color="#13ce66"
+                  inactive-color="#c0c4cc"
+                />
+              </el-form-item>
+
+              <el-form-item :label="$t('systemConfig.order.showRuntime')">
+                <el-switch
+                  v-model="form.showRuntime"
+                  active-color="#13ce66"
+                  inactive-color="#c0c4cc"
+                />
+              </el-form-item>
+            </el-form>
+          </div>
+
+          <!-- 报告设置区域 -->
+          <div class="config-section">
+            <div class="section-title">
+              <i class="el-icon-document"></i>
+              <span>{{ $t("systemConfig.order.reportConfig") }}</span>
+            </div>
+            <el-form :model="form" label-width="250px" label-position="right">
+              <el-form-item
+                :label="$t('systemConfig.order.reportIncludeAlarmDetail')"
+              >
+                <el-switch
+                  v-model="form.reportIncludeAlarmDetail"
+                  active-color="#13ce66"
+                  inactive-color="#c0c4cc"
+                />
+              </el-form-item>
+
+              <el-form-item
+                :label="$t('systemConfig.order.reportIncludeOperatorDetail')"
+              >
+                <el-switch
+                  v-model="form.reportIncludeOperatorDetail"
+                  active-color="#13ce66"
+                  inactive-color="#c0c4cc"
+                />
+              </el-form-item>
+
+              <el-form-item
+                :label="$t('systemConfig.order.reportIncludeDownloadCount')"
+              >
+                <el-switch
+                  v-model="form.reportIncludeDownloadCount"
+                  active-color="#13ce66"
+                  inactive-color="#c0c4cc"
+                />
+              </el-form-item>
+
+              <el-form-item
+                :label="$t('systemConfig.order.allowRunningOrderDownload')"
+              >
+                <el-switch
+                  v-model="form.allowRunningOrderDownload"
+                  active-color="#e6a23c"
+                  inactive-color="#c0c4cc"
+                />
+                <span class="form-tip">{{
+                  $t("systemConfig.order.allowRunningOrderDownloadTip")
+                }}</span>
+              </el-form-item>
+            </el-form>
+          </div>
+        </div>
+
         <!-- 授权管理 -->
         <div
           v-show="activeMenu === 'license'"
@@ -308,56 +457,100 @@
             <el-collapse-item :title="$t('license.detailTitle')" name="detail">
               <div class="license-detail-grid">
                 <div class="detail-item">
-                  <div class="detail-label">{{ $t('license.licenseId') }}</div>
-                  <div class="detail-value mono-text">{{ licenseData.licenseId || '-' }}</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">{{ $t('license.projectId') }}</div>
-                  <div class="detail-value mono-text">{{ licenseData.projectId || '-' }}</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">{{ $t('license.projectName') }}</div>
-                  <div class="detail-value">{{ licenseData.projectName || '-' }}</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">{{ $t('license.licenseType') }}</div>
-                  <div class="detail-value">
-                    <el-tag size="mini" :type="licenseTypeTag(licenseData.licenseType)">{{ licenseTypeLabel(licenseData.licenseType) }}</el-tag>
+                  <div class="detail-label">{{ $t("license.licenseId") }}</div>
+                  <div class="detail-value mono-text">
+                    {{ licenseData.licenseId || "-" }}
                   </div>
                 </div>
                 <div class="detail-item">
-                  <div class="detail-label">{{ $t('license.issuedAt') }}</div>
-                  <div class="detail-value">{{ formatLicenseTime(licenseData.issuedAt) }}</div>
+                  <div class="detail-label">{{ $t("license.projectId") }}</div>
+                  <div class="detail-value mono-text">
+                    {{ licenseData.projectId || "-" }}
+                  </div>
                 </div>
                 <div class="detail-item">
-                  <div class="detail-label">{{ $t('license.expireTime') }}</div>
-                  <div class="detail-value">{{ formatLicenseTime(licenseData.expiresAt) }}</div>
+                  <div class="detail-label">
+                    {{ $t("license.projectName") }}
+                  </div>
+                  <div class="detail-value">
+                    {{ licenseData.projectName || "-" }}
+                  </div>
                 </div>
                 <div class="detail-item">
-                  <div class="detail-label">{{ $t('license.customerName') }}</div>
-                  <div class="detail-value">{{ licenseData.customer?.name || '-' }}</div>
+                  <div class="detail-label">
+                    {{ $t("license.licenseType") }}
+                  </div>
+                  <div class="detail-value">
+                    <el-tag
+                      size="mini"
+                      :type="licenseTypeTag(licenseData.licenseType)"
+                      >{{ licenseTypeLabel(licenseData.licenseType) }}</el-tag
+                    >
+                  </div>
                 </div>
                 <div class="detail-item">
-                  <div class="detail-label">{{ $t('license.contact') }}</div>
-                  <div class="detail-value">{{ licenseData.customer?.contact || '-' }}</div>
+                  <div class="detail-label">{{ $t("license.issuedAt") }}</div>
+                  <div class="detail-value">
+                    {{ formatLicenseTime(licenseData.issuedAt) }}
+                  </div>
                 </div>
                 <div class="detail-item">
-                  <div class="detail-label">{{ $t('license.phone') }}</div>
-                  <div class="detail-value">{{ licenseData.customer?.phone || '-' }}</div>
+                  <div class="detail-label">{{ $t("license.expireTime") }}</div>
+                  <div class="detail-value">
+                    {{ formatLicenseTime(licenseData.expiresAt) }}
+                  </div>
                 </div>
                 <div class="detail-item">
-                  <div class="detail-label">{{ $t('license.email') }}</div>
-                  <div class="detail-value">{{ licenseData.customer?.email || '-' }}</div>
+                  <div class="detail-label">
+                    {{ $t("license.customerName") }}
+                  </div>
+                  <div class="detail-value">
+                    {{ licenseData.customer?.name || "-" }}
+                  </div>
                 </div>
                 <div class="detail-item">
-                  <div class="detail-label">{{ $t('license.maxUsers') }}</div>
-                  <div class="detail-value">{{ licenseData.maxUsers || $t('common.all') }}</div>
+                  <div class="detail-label">{{ $t("license.contact") }}</div>
+                  <div class="detail-value">
+                    {{ licenseData.customer?.contact || "-" }}
+                  </div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">{{ $t("license.phone") }}</div>
+                  <div class="detail-value">
+                    {{ licenseData.customer?.phone || "-" }}
+                  </div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">{{ $t("license.email") }}</div>
+                  <div class="detail-value">
+                    {{ licenseData.customer?.email || "-" }}
+                  </div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">{{ $t("license.maxUsers") }}</div>
+                  <div class="detail-value">
+                    {{ licenseData.maxUsers || $t("common.all") }}
+                  </div>
                 </div>
                 <div class="detail-item detail-item-full">
-                  <div class="detail-label">{{ $t('license.features') }}</div>
+                  <div class="detail-label">{{ $t("license.features") }}</div>
                   <div class="detail-value">
-                    <el-tag v-for="f in (licenseData.features || [])" :key="f" size="mini" effect="plain" style="margin-right: 6px; margin-bottom: 4px;">{{ f }}</el-tag>
-                    <span v-if="!licenseData.features || licenseData.features.length === 0" class="text-muted">{{ $t('license.allFeatures') }}</span>
+                    <el-tag
+                      v-for="f in licenseData.features || []"
+                      :key="f"
+                      size="mini"
+                      effect="plain"
+                      style="margin-right: 6px; margin-bottom: 4px"
+                      >{{ f }}</el-tag
+                    >
+                    <span
+                      v-if="
+                        !licenseData.features ||
+                        licenseData.features.length === 0
+                      "
+                      class="text-muted"
+                      >{{ $t("license.allFeatures") }}</span
+                    >
                   </div>
                 </div>
               </div>
@@ -471,20 +664,32 @@
             >
               <div v-if="licenseData.licenseFile" class="license-detail-grid">
                 <div class="detail-item detail-item-full">
-                  <div class="detail-label">{{ $t('license.filePath') }}</div>
-                  <div class="detail-value mono-text">{{ licenseData.licenseFile.path }}</div>
+                  <div class="detail-label">{{ $t("license.filePath") }}</div>
+                  <div class="detail-value mono-text">
+                    {{ licenseData.licenseFile.path }}
+                  </div>
                 </div>
                 <div class="detail-item">
-                  <div class="detail-label">{{ $t('license.fileName') }}</div>
-                  <div class="detail-value">{{ licenseData.licenseFile.fileName }}</div>
+                  <div class="detail-label">{{ $t("license.fileName") }}</div>
+                  <div class="detail-value">
+                    {{ licenseData.licenseFile.fileName }}
+                  </div>
                 </div>
                 <div class="detail-item">
-                  <div class="detail-label">{{ $t('license.fileSize') }}</div>
-                  <div class="detail-value">{{ licenseData.licenseFile.sizeFormatted }}</div>
+                  <div class="detail-label">{{ $t("license.fileSize") }}</div>
+                  <div class="detail-value">
+                    {{ licenseData.licenseFile.sizeFormatted }}
+                  </div>
                 </div>
                 <div class="detail-item detail-item-full">
-                  <div class="detail-label">{{ $t('license.lastModified') }}</div>
-                  <div class="detail-value">{{ formatLicenseTime(licenseData.licenseFile.lastModified) }}</div>
+                  <div class="detail-label">
+                    {{ $t("license.lastModified") }}
+                  </div>
+                  <div class="detail-value">
+                    {{
+                      formatLicenseTime(licenseData.licenseFile.lastModified)
+                    }}
+                  </div>
                 </div>
               </div>
               <div v-else class="empty-state">
@@ -562,6 +767,7 @@ export default {
         { key: "plc", icon: "el-icon-cpu", title: "" },
         { key: "export", icon: "el-icon-document", title: "" },
         { key: "connection", icon: "el-icon-connection", title: "" },
+        { key: "order", icon: "el-icon-s-order", title: "" },
         { key: "license", icon: "el-icon-key", title: "" },
       ],
       // 表单数据
@@ -586,6 +792,18 @@ export default {
         pdfWatermarkText: "",
         // 连接设置
         heartbeatInterval: 25000,
+        // 订单设置
+        allowNoOrderProduction: false, // 是否允许无订单生产
+        noOrderProductionHighlight: false, // 无订单生产统计高亮显示
+        showOperatorName: true, // 订单统计展示操作人员名字
+        showAlarmCount: true, // 订单统计展示报警总次数
+        showRuntime: true, // 订单统计展示总运行时间
+        reportIncludeAlarmDetail: true, // 订单报告包含详细报警信息
+        reportIncludeOperatorDetail: true, // 订单报告包含详细操作人罗列
+        reportIncludeDownloadCount: true, // 订单报告包含已下载次数
+        allowRunningOrderDownload: false, // 进行中订单支持下载报告
+        autoArchiveCompleted: true, // 完成订单自动归档
+        orderSwitchConfirm: true, // 订单切换时需要确认
       },
     };
   },
@@ -601,7 +819,7 @@ export default {
      */
     filteredMenuList() {
       // 需要管理员权限的分类
-      const adminOnlyKeys = ["security", "plc", "export"];
+      const adminOnlyKeys = ["security", "plc", "export", "order"];
       return this.menuList.filter((item) => {
         if (adminOnlyKeys.includes(item.key)) {
           return this.isAdmin;
@@ -617,7 +835,8 @@ export default {
     this.menuList[2].title = this.$t("systemConfig.plc.title");
     this.menuList[3].title = this.$t("systemConfig.export.title");
     this.menuList[4].title = this.$t("systemConfig.connection.title");
-    this.menuList[5].title = this.$t("license.manageTitle");
+    this.menuList[5].title = this.$t("systemConfig.order.title");
+    this.menuList[6].title = this.$t("license.manageTitle");
     // 确保当前激活的菜单有权限访问（非管理员时，默认跳转到系统设置）
     const adminOnlyKeys = ["security", "plc", "export"];
     if (!this.isAdmin && adminOnlyKeys.includes(this.activeMenu)) {
@@ -824,6 +1043,43 @@ export default {
           margin-left: 10px;
           font-size: 13px;
           color: #909399;
+        }
+
+        // 分区域配置
+        .config-section {
+          margin-bottom: 30px;
+          padding: 20px;
+          background: #fafbfc;
+          border-radius: 8px;
+          border: 1px solid #ebeef5;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        .section-title {
+          display: flex;
+          align-items: center;
+          margin-bottom: 18px;
+          font-size: 14px;
+          font-weight: 600;
+          color: #409eff;
+
+          i {
+            margin-right: 8px;
+            font-size: 16px;
+          }
+        }
+
+        .form-tip {
+          margin-left: 12px;
+          font-size: 12px;
+          color: #909399;
+
+          &.disabled {
+            color: #c0c4cc;
+          }
         }
       }
     }

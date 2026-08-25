@@ -269,10 +269,6 @@ export default {
       const line = this.trendPoints.map((p, i) => (i === 0 ? `M${p.x},${p.y}` : `L${p.x},${p.y}`)).join(' ')
       return `${line} L800,200 L0,200 Z`
     }
-  },
-  mounted() {
-    // 确保设备数据已加载
-    this.$store.dispatch('device/fetchAllData')
   }
 }
 </script>

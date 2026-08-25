@@ -145,6 +145,9 @@ router.beforeEach(async (to, from, next) => {
       router.addRoute('Layout', route)
     })
 
+    // 5. 动态路由添加完成后，再添加 404 兜底路由（必须在最后，否则会拦截动态路由）
+    router.addRoute({ path: '*', redirect: ROUTE_PATHS.NOT_FOUND, hidden: true })
+
     // 3. addRoute 后必须 next({ ...to, replace: true }) 重新匹配
     // 角色校验：首次进入时也检查目标路由权限
     if (!checkRouteRoles(to)) {

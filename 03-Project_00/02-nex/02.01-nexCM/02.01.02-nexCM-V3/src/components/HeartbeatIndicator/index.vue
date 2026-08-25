@@ -60,23 +60,23 @@ export default {
 
       // 服务器状态
       if (this.isWsOnline) {
-        lines.push('服务器: 已连接')
+        lines.push(this.$t('heartbeat.serverConnected'))
       } else if (state.connected) {
-        lines.push('服务器: 认证中')
+        lines.push(this.$t('heartbeat.serverAuthenticating'))
       } else if (state.reconnectAttempts > 0) {
-        lines.push(`服务器: 重连中(第${state.reconnectAttempts}次)`)
+        lines.push(this.$t('heartbeat.serverReconnecting', { count: state.reconnectAttempts }))
       } else {
-        lines.push('服务器: 未连接')
+        lines.push(this.$t('heartbeat.serverDisconnected'))
       }
 
       // 设备状态（只有服务器连接后才显示）
       if (this.isWsOnline) {
         if (this.isPlcOnline) {
-          lines.push('设备: 已连接')
+          lines.push(this.$t('heartbeat.deviceConnected'))
         } else {
-          lines.push('设备: 未连接')
+          lines.push(this.$t('heartbeat.deviceDisconnected'))
         }
-        lines.push(`最后心跳: ${this.lastHeartbeatText}`)
+        lines.push(this.$t('heartbeat.detailLastHeartbeat', { time: this.lastHeartbeatText }))
       }
 
       return lines.join(' | ')
@@ -92,31 +92,31 @@ export default {
 
       // 服务器状态
       if (this.isWsOnline) {
-        lines.push('服务器状态: 已连接 ✓')
+        lines.push(this.$t('heartbeat.detailServerConnected'))
       } else if (state.connected) {
-        lines.push('服务器状态: 认证中...')
+        lines.push(this.$t('heartbeat.detailServerAuthenticating'))
       } else if (state.reconnectAttempts > 0) {
-        lines.push(`服务器状态: 重连中 (第 ${state.reconnectAttempts} 次)`)
+        lines.push(this.$t('heartbeat.detailServerReconnecting', { count: state.reconnectAttempts }))
       } else {
-        lines.push('服务器状态: 未连接 ✗')
+        lines.push(this.$t('heartbeat.detailServerDisconnected'))
       }
 
       // 设备状态
       if (this.isPlcOnline) {
-        lines.push('设备状态: 已连接 ✓')
+        lines.push(this.$t('heartbeat.detailDeviceConnected'))
       } else {
-        lines.push('设备状态: 未连接 ✗')
+        lines.push(this.$t('heartbeat.detailDeviceDisconnected'))
       }
 
       // 其他信息
-      lines.push(`最后心跳: ${this.lastHeartbeatText}`)
-      lines.push(`心跳间隔: ${(state.heartbeatInterval / 1000).toFixed(0)}秒`)
+      lines.push(this.$t('heartbeat.detailLastHeartbeat', { time: this.lastHeartbeatText }))
+      lines.push(this.$t('heartbeat.detailHeartbeatInterval', { seconds: (state.heartbeatInterval / 1000).toFixed(0) }))
 
       const detail = lines.join('\n')
       const type = this.isOnline ? 'success' : (this.isWsOnline ? 'warning' : 'error')
 
-      this.$alert(detail, '连接状态详情', {
-        confirmButtonText: '确定',
+      this.$alert(detail, this.$t('heartbeat.detailTitle'), {
+        confirmButtonText: this.$t('heartbeat.confirm'),
         type
       })
     }

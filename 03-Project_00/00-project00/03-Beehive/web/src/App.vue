@@ -2,7 +2,7 @@
   <el-container class="layout-container">
     <el-aside :width="isCollapse ? '64px' : '210px'" class="layout-sidebar">
       <div class="sidebar-logo">
-        <div class="logo-badge"><img src="/honeycomb.svg" alt="Beehive" class="logo-icon" /></div>
+        <div class="logo-badge"><img src="./assets/honeycomb.svg" alt="Beehive" class="logo-icon" /></div>
         <transition name="fade">
           <div v-if="!isCollapse" class="logo-info">
             <div class="logo-title">Beehive</div>
@@ -149,8 +149,8 @@ body {
   flex-shrink: 0;
 }
 .sidebar-logo .logo-badge .logo-icon {
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   display: block;
   margin-left: -8px;
 }

@@ -576,8 +576,6 @@ export default {
     }
   },
   created() {
-    // 确保设备数据已加载
-    this.$store.dispatch('device/fetchAllData')
     this.loadData('output')
   },
   methods: {

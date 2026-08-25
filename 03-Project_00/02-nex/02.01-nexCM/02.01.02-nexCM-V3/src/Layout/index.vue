@@ -44,6 +44,12 @@ export default {
     // 监听系统配置变化：水印配置改变时更新
     window.addEventListener('watermarkConfigChanged', this.handleWatermarkConfigChanged)
   },
+  mounted() {
+    // 应用启动时统一启动设备数据同步
+    // 内部会：1. 首次拉取全量数据 2. WebSocket推送更新 3. 轮询兜底（5秒）
+    // 各业务页面只需从 store 读取数据，无需主动 fetch
+    this.$store.dispatch('device/startDataSync')
+  },
   beforeDestroy() {
     // 移除事件监听
     window.removeEventListener('watermarkConfigChanged', this.handleWatermarkConfigChanged)

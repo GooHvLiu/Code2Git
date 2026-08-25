@@ -407,10 +407,6 @@ export default {
       ]
     }
   },
-  mounted() {
-    // 确保设备数据已加载
-    this.$store.dispatch('device/fetchAllData')
-  },
   methods: {
     generateMockData() {
       const levels = ['critical', 'major', 'minor', 'info']

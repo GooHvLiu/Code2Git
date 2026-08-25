@@ -220,9 +220,6 @@ export default {
       return Math.max(...this.productionTrend.map(item => item.value), 1)
     }
   },
-  mounted() {
-    this.$store.dispatch('device/fetchAllData')
-  },
   methods: {
     formatNumber(num) {
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
