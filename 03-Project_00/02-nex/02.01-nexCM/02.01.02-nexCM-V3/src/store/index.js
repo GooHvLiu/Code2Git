@@ -14,6 +14,7 @@ import permission from './modules/permission'
 import tagsView from './modules/tagsView'
 import errorLog from './modules/errorLog'
 import websocket from './modules/websocket'
+import device from './modules/device'
 
 Vue.use(Vuex)
 
@@ -24,7 +25,8 @@ export default new Vuex.Store({
     permission,
     tagsView,
     errorLog,
-    websocket
+    websocket,
+    device
   },
   getters
 })

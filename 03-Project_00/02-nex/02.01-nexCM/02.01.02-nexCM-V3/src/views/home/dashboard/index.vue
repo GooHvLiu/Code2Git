@@ -391,17 +391,13 @@
 
 <script>
 import * as echarts from 'echarts'
+import { mapGetters } from 'vuex'
 
 /**
  * 数据看板页面 - 大屏展示版（浅色科技感主题 + ECharts 世界地图）
- * 
+ *
  * 功能定位：生产车间大屏展示，用于客户参观、实时监控
- * 布局：
- * 1. 顶部：标题 + 时间 + 状态 + 全屏
- * 2. 第一行：4个核心指标卡片
- * 3. 第二行：ECharts世界地图（设备分布）+ 产能趋势
- * 4. 第三行：设备运行状态 + 批次完成 + 实时数据
- * 5. 第四行：报警统计 + 质量检测
+ * 数据来源：统一从 Vuex device 模块获取原始数据，页面特有格式在 computed 中转换
  */
 export default {
   name: 'Dashboard',
@@ -419,79 +415,86 @@ export default {
         { label: '日', value: 'day' },
         { label: '月', value: 'month' }
       ],
-      deviceStatus: {
-        status: 'running',
-        text: '运行中'
-      },
-      metrics: {
-        todayOutput: 8560,
-        todayTarget: 12000,
-        todayRate: 71,
-        shiftOutput: 3240,
-        shiftTarget: 5000,
-        shiftName: '白班',
-        currentSpeed: 1200,
-        targetSpeed: 1500
-      },
-      oeeData: {
-        value: 85,
-        availability: 92.8,
-        performance: 94.2,
-        quality: 97.5
-      },
-      productionTrend: [
-        { hour: '00', value: 0 }, { hour: '02', value: 0 }, { hour: '04', value: 0 },
-        { hour: '06', value: 120 }, { hour: '08', value: 850 }, { hour: '10', value: 1200 },
-        { hour: '12', value: 1100 }, { hour: '14', value: 1350 }, { hour: '16', value: 1280 },
-        { hour: '18', value: 660 }, { hour: '20', value: 0 }, { hour: '22', value: 0 }
-      ],
-      runtimeStats: {
-        running: 6.5,
-        idle: 0.3,
-        fault: 0.2,
-        runningRate: 92.8,
-        idleRate: 4.3,
-        faultRate: 2.9
-      },
-      batchInfo: {
-        batchNo: 'B20260824001',
-        productName: '卡式瓶灌装',
-        fillVolume: 2.0,
-        startTime: '08:00:00',
-        estimatedEnd: '18:00:00',
-        produced: 3240,
-        target: 5000,
-        progress: 64.8,
-        estimatedTime: '2小时28分',
-        qualifiedRate: 98.5
-      },
       realtimeData: [
         { time: '14:30:00', speed: 1200, output: 8560, fillVolume: 2.0, status: '正常' },
         { time: '14:25:00', speed: 1180, output: 8460, fillVolume: 2.0, status: '正常' },
         { time: '14:20:00', speed: 1210, output: 8360, fillVolume: 2.0, status: '正常' },
         { time: '14:15:00', speed: 1150, output: 8260, fillVolume: 2.0, status: '波动' },
         { time: '14:10:00', speed: 1200, output: 8160, fillVolume: 2.0, status: '正常' }
-      ],
-      alarmStats: {
-        total: 12,
-        maxCount: 5,
-        list: [
-          { name: '位置异动报警', count: 5, color: '#f56c6c' },
-          { name: '真空异常报警', count: 3, color: '#e6a23c' },
-          { name: '伺服使能报警', count: 2, color: '#409eff' },
-          { name: '超时报警', count: 2, color: '#909399' }
-        ]
-      },
-      qualityData: {
-        qualifiedRate: 98.5,
-        total: 8560,
-        qualified: 8432,
-        unqualified: 128,
-        scrapRate: 1.5
-      }
+      ]
     }
   },
   computed: {
+    // ===== 原始数据：从 store 统一获取 =====
+    ...mapGetters({
+      storeProduction: 'productionStats',
+      storeParams: 'realtimeParams',
+      storeTrend: 'trendData',
+      storeRuntime: 'runtimeStats',
+      batchInfo: 'currentBatch',
+      alarmStats: 'alarmStats'
+    }),
+    // ===== 页面特有格式转换（基于 store 原始数据） =====
+    deviceStatus() {
+      return {
+        status: this.$store.getters.deviceStatus,
+        text: this.$store.getters.deviceStatusText
+      }
+    },
+    metrics() {
+      return {
+        todayOutput: this.storeProduction.todayOutput,
+        todayTarget: this.storeProduction.todayTarget,
+        todayRate: this.storeProduction.todayRate,
+        shiftOutput: this.storeProduction.shiftOutput,
+        shiftTarget: this.storeProduction.shiftTarget,
+        shiftName: this.storeProduction.shiftName,
+        currentSpeed: this.storeParams.speed,
+        targetSpeed: 1500
+      }
+    },
+    oeeData() {
+      return {
+        value: this.storeProduction.oee,
+        availability: this.storeProduction.availability,
+        performance: this.storeProduction.performance,
+        quality: this.storeProduction.quality
+      }
+    },
+    productionTrend() {
+      if (this.storeTrend && this.storeTrend.speed && this.storeTrend.speed.length > 0) {
+        return this.storeTrend.speed.map(item => ({ hour: item.time.slice(0, 2), value: item.value }))
+      }
+      return [
+        { hour: '00', value: 0 }, { hour: '02', value: 0 }, { hour: '04', value: 0 },
+        { hour: '06', value: 120 }, { hour: '08', value: 850 }, { hour: '10', value: 1200 },
+        { hour: '12', value: 1100 }, { hour: '14', value: 1350 }, { hour: '16', value: 1280 },
+        { hour: '18', value: 660 }, { hour: '20', value: 0 }, { hour: '22', value: 0 }
+      ]
+    },
+    runtimeStats() {
+      const rt = this.storeRuntime
+      const total = rt.running + rt.idle + rt.fault + rt.plannedStop
+      return {
+        running: rt.running,
+        idle: rt.idle,
+        fault: rt.fault,
+        runningRate: total ? Math.round(rt.running / total * 1000) / 10 : 0,
+        idleRate: total ? Math.round(rt.idle / total * 1000) / 10 : 0,
+        faultRate: total ? Math.round(rt.fault / total * 1000) / 10 : 0
+      }
+    },
+    qualityData() {
+      const prod = this.storeProduction
+      return {
+        qualifiedRate: prod.qualifiedRate,
+        total: prod.todayOutput,
+        qualified: Math.round(prod.todayOutput * prod.qualifiedRate / 100),
+        unqualified: Math.round(prod.todayOutput * (100 - prod.qualifiedRate) / 100),
+        scrapRate: (100 - prod.qualifiedRate).toFixed(1)
+      }
+    },
+    // ===== 原有计算属性 =====
     metricList() {
       return [
         {
@@ -778,6 +781,8 @@ export default {
     }
   },
   mounted() {
+    // 确保设备数据已加载
+    this.$store.dispatch('device/fetchAllData')
     this.updateTime()
     this.timer = setInterval(() => {
       this.updateTime()

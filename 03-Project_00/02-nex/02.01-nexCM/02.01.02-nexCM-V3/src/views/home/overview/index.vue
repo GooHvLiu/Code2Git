@@ -154,45 +154,74 @@
  * - 产量趋势：需要后端定时采集D4004并存储历史数据
  * - 实时报警：D4012 + M4000-M4110
  */
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Overview',
   data() {
-    return {
-      // 设备运行状态
-      deviceStatus: {
-        status: 'running',
-        text: '运行中',
-        icon: 'el-icon-video-play',
-        duration: '6小时32分钟'
-      },
-      // 产能指标
-      metrics: {
-        currentSpeed: 1200,
+    return {}
+  },
+  computed: {
+    // 通用数据：从 store 获取
+    ...mapGetters(['runtimeStats', 'trendData', 'currentAlarms']),
+    // 设备运行状态（基于 store 通用对象 + 页面特有 icon）
+    deviceStatus() {
+      const obj = this.$store.getters['device/deviceStatusObj'] || {}
+      return {
+        status: this.$store.getters.deviceStatus,
+        text: this.$store.getters.deviceStatusText,
+        duration: obj.duration || '0小时0分钟',
+        icon: this.$store.getters.deviceStatus === 'running' ? 'el-icon-video-play' : 'el-icon-video-pause'
+      }
+    },
+    // 产能指标（页面特有格式）
+    metrics() {
+      const prod = this.$store.getters.productionStats
+      const params = this.$store.getters.realtimeParams
+      return {
+        currentSpeed: params.speed,
         targetSpeed: 1500,
-        todayOutput: 8560,
-        todayRate: 71,
-        shiftOutput: 3240,
-        shiftTarget: 5000,
-        shiftName: '白班'
-      },
-      // 24小时产能趋势
-      productionTrend: [
+        todayOutput: prod.todayOutput,
+        todayRate: prod.todayRate,
+        shiftOutput: prod.shiftOutput,
+        shiftTarget: prod.shiftTarget,
+        shiftName: prod.shiftName
+      }
+    },
+    // 24小时产能趋势（页面特有格式转换）
+    productionTrend() {
+      if (this.trendData && this.trendData.speed && this.trendData.speed.length > 0) {
+        return this.trendData.speed.map(item => ({ hour: item.time.slice(0, 2), value: item.value }))
+      }
+      return [
         { hour: '00', value: 0 }, { hour: '02', value: 0 }, { hour: '04', value: 0 },
         { hour: '06', value: 120 }, { hour: '08', value: 850 }, { hour: '10', value: 1200 },
         { hour: '12', value: 1100 }, { hour: '14', value: 1350 }, { hour: '16', value: 1280 },
         { hour: '18', value: 660 }, { hour: '20', value: 0 }, { hour: '22', value: 0 }
-      ],
-      // 实时报警
-      activeAlarms: [
+      ]
+    },
+    // 实时报警（页面特有格式转换）
+    activeAlarms() {
+      if (this.currentAlarms && this.currentAlarms.length > 0) {
+        return this.currentAlarms.slice(0, 5).map(a => ({
+          level: a.level || 'warning',
+          icon: a.level === 'danger' ? 'el-icon-error' : 'el-icon-warning',
+          title: a.message || a.title,
+          code: a.code || '',
+          time: a.time || ''
+        }))
+      }
+      return [
         { level: 'warning', icon: 'el-icon-warning', title: '灌装轴位置异动报警', code: 'M4068', time: '14:23' },
         { level: 'info', icon: 'el-icon-info', title: '真空异常预警', code: 'M4020', time: '14:15' }
       ]
-    }
-  },
-  computed: {
+    },
     maxTrendValue() {
       return Math.max(...this.productionTrend.map(item => item.value), 1)
     }
+  },
+  mounted() {
+    this.$store.dispatch('device/fetchAllData')
   },
   methods: {
     formatNumber(num) {
