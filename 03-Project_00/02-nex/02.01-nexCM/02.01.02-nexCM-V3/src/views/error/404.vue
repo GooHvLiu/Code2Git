@@ -7,12 +7,12 @@
           <div class="ball"></div>
         </div>
         <h1 class="code">404</h1>
-        <h2 class="title">{{ $t("error.notFound") }}</h2>
+        <h2 class="title">{{ $t("errorPage.notFound") }}</h2>
         <p class="tip">
-          {{ $t("error.countdown", { count: countDown }) }}{{ dotText }}
+          {{ $t("errorPage.countdown", { count: countDown }) }}{{ dotText }}
         </p>
         <el-button type="primary" size="medium" @click="goHome">{{
-          $t("error.backHome")
+          $t("errorPage.backHome")
         }}</el-button>
       </div>
     </TransitionScale>

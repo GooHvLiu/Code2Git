@@ -1,13 +1,13 @@
 /**
  * 审计日志模块 - 业务逻辑层
- * 
+ *
  * GMP 21CFR Part 11 电子记录合规
  * 特性：哈希链防篡改、只增不改不删
  * 继承 BaseService，重写 update/delete 方法抛出错误（审计日志不允许修改和删除）
- * 
+ *
  * @author nexCM Team
  * @date 2026-01-01
- * @lastModified 2026-08-22
+ * @lastModified 2026-08-26
  */
 const BaseService = require('../../services/BaseService')
 const auditModel = require('./audit.model')
@@ -31,9 +31,9 @@ class AuditService extends BaseService {
 
   /**
    * 创建审计日志（自动计算哈希链）
-   * 
+   *
    * 审计日志写入失败不影响主业务，但会记录错误
-   * 
+   *
    * @param {Object} log - 日志信息
    * @param {number} [log.userId=0] - 操作人 ID
    * @param {string} [log.userName=''] - 操作人姓名
@@ -72,7 +72,7 @@ class AuditService extends BaseService {
 
   /**
    * 分页查询审计日志
-   * 
+   *
    * @param {Object} [params={}] - 查询参数
    * @param {number} [params.page=1] - 页码
    * @param {number} [params.pageSize=10] - 每页数量
@@ -89,7 +89,7 @@ class AuditService extends BaseService {
 
   /**
    * 查询指定用户的操作记录
-   * 
+   *
    * @param {number} userId - 用户 ID
    * @param {Object} [params={}] - 查询参数
    * @returns {Promise<Object>} { list, total, page, pageSize }
@@ -100,7 +100,7 @@ class AuditService extends BaseService {
 
   /**
    * 查询指定操作类型的记录
-   * 
+   *
    * @param {string} action - 操作类型
    * @param {Object} [params={}] - 查询参数
    * @returns {Promise<Object>} { list, total, page, pageSize }
@@ -111,9 +111,9 @@ class AuditService extends BaseService {
 
   /**
    * 校验哈希链完整性（GMP 合规要求）
-   * 
+   *
    * 验证所有审计日志是否被篡改，返回校验结果和被篡改的记录列表
-   * 
+   *
    * @returns {Promise<Object>} { valid, totalCount, tamperedCount, tamperedRecords }
    */
   async verifyIntegrity() {
@@ -124,35 +124,35 @@ class AuditService extends BaseService {
 
   /**
    * 更新审计日志（不允许）
-   * 
+   *
    * 审计日志只增不改不删，符合 GMP 21CFR Part 11 要求
-   * 
+   *
    * @throws {BusinessError} 审计日志不允许修改
    */
   async update() {
-    throw new BusinessError(ERROR_CODE.PARAM_INVALID, '审计日志不允许修改')
+    throw new BusinessError(ERROR_CODE.AUDIT_NOT_MODIFIABLE, '审计日志不允许修改')
   }
 
   /**
    * 删除审计日志（不允许）
-   * 
+   *
    * 审计日志只增不改不删，符合 GMP 21CFR Part 11 要求
-   * 
+   *
    * @throws {BusinessError} 审计日志不允许删除
    */
   async delete() {
-    throw new BusinessError(ERROR_CODE.PARAM_INVALID, '审计日志不允许删除')
+    throw new BusinessError(ERROR_CODE.AUDIT_NOT_DELETABLE, '审计日志不允许删除')
   }
 
   /**
    * 批量删除审计日志（不允许）
-   * 
+   *
    * 审计日志只增不改不删，符合 GMP 21CFR Part 11 要求
-   * 
+   *
    * @throws {BusinessError} 审计日志不允许删除
    */
   async batchDelete() {
-    throw new BusinessError(ERROR_CODE.PARAM_INVALID, '审计日志不允许删除')
+    throw new BusinessError(ERROR_CODE.AUDIT_NOT_DELETABLE, '审计日志不允许删除')
   }
 }
 

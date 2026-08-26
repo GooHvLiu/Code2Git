@@ -226,7 +226,7 @@ export default {
   },
 
   // ==================== 错误页 ====================
-  error: {
+  errorPage: {
     notFound: '页面不存在',
     backHome: '返回首页',
     back: '返回上一页',
@@ -669,5 +669,70 @@ export default {
     timeSecondsAgo: '{n}秒前',
     timeMinutesAgo: '{n}分钟前',
     timeHoursAgo: '{n}小时前'
+  },
+
+  // ==================== 错误消息（后端错误码国际化） ====================
+  error: {
+    // 通用错误
+    PARAM_ERROR: '参数错误',
+    PARAM_MISSING: '缺少必填参数',
+    PARAM_INVALID: '参数格式不正确',
+    NOT_FOUND: '{name}不存在',
+    SYSTEM_ERROR: '系统错误',
+    DATABASE_ERROR: '数据库操作失败',
+    NETWORK_ERROR: '网络错误',
+    UNKNOWN_ERROR: '未知错误',
+    // 鉴权错误
+    UNAUTHORIZED: '未登录，请先登录',
+    TOKEN_EXPIRED: '登录已过期，请重新登录',
+    TOKEN_INVALID: '登录状态无效',
+    PERMISSION_DENIED: '权限不足',
+    // 验证码错误
+    CAPTCHA_EXPIRED: '验证码已失效，请重新获取',
+    CAPTCHA_ERROR: '验证码输入错误',
+    // 部门模块
+    DEPT_NOT_FOUND: '部门不存在',
+    DEPT_PARENT_INVALID: '上级部门不能设置为自己',
+    DEPT_HAS_CHILDREN: '存在子部门，无法删除',
+    DEPT_HAS_USERS: '该部门下有 {count} 个用户，无法删除',
+    // 角色模块
+    ROLE_NOT_FOUND: '角色不存在',
+    ROLE_CODE_EXISTS: '角色编码已存在',
+    // 用户模块
+    USER_NOT_FOUND: '用户不存在',
+    USER_USERNAME_EXISTS: '用户名已存在',
+    USER_PASSWORD_ERROR: '用户名或密码错误',
+    USER_DISABLED: '账号已被禁用',
+    USER_LOCKED: '账户已锁定，请 {minutes} 分钟后再试',
+    USER_REGISTER_FAIL: '注册失败',
+    // 字典模块
+    DICT_TYPE_NOT_FOUND: '字典类型不存在',
+    DICT_TYPE_CODE_EXISTS: '字典类型编码已存在',
+    DICT_ITEM_NOT_FOUND: '字典项不存在',
+    DICT_ITEM_VALUE_DUPLICATE: '同一字典类型下值不能重复',
+    // 审计模块
+    AUDIT_NOT_MODIFIABLE: '审计日志不允许修改',
+    AUDIT_NOT_DELETABLE: '审计日志不允许删除',
+    // 通知模块
+    NOTIFICATION_NOT_FOUND: '通知不存在',
+    // 客户模块
+    CUSTOMER_NOT_FOUND: '客户不存在',
+    // 菜单模块
+    MENU_USER_ID_REQUIRED: '用户ID不能为空',
+    // 文件上传模块
+    FILE_NOT_EXIST: '请选择要上传的文件',
+    FILE_PATH_EMPTY: '文件路径不能为空',
+    FILE_PATH_INVALID: '非法的文件路径',
+    FILE_TOO_LARGE: '文件大小超出限制',
+    FILE_TYPE_NOT_ALLOWED: '不支持的文件类型',
+    FILE_UPLOAD_FAIL: '文件上传失败',
+    FILE_DELETE_FAIL: '文件删除失败',
+    FILE_LIMIT_EXCEEDED: '上传文件数量超出限制',
+    FILE_UNEXPECTED_FIELD: '意外的文件字段：{field}',
+    // GitHub 图床模块
+    GITHUB_CONFIG_ERROR: 'GitHub 图床配置不完整',
+    GITHUB_UPLOAD_FAIL: 'GitHub 上传失败：{msg}',
+    GITHUB_DELETE_FAIL: 'GitHub 文件删除失败：{msg}',
+    GITHUB_API_ERROR: 'GitHub API 调用失败'
   }
 }

@@ -152,13 +152,19 @@ export default {
       flatten(this.deptTree)
       return result
     },
-    /** 性别选项（从数据字典获取） */
+    /** 性别选项（从数据字典获取，统一转换为数字类型） */
     sexOptions() {
-      return this.dict.user_sex || []
+      return (this.dict.user_sex || []).map(item => ({
+        ...item,
+        value: Number(item.value)
+      }))
     },
-    /** 状态选项（从数据字典获取） */
+    /** 状态选项（从数据字典获取，统一转换为数字类型） */
     statusOptions() {
-      return this.dict.user_status || []
+      return (this.dict.user_status || []).map(item => ({
+        ...item,
+        value: Number(item.value)
+      }))
     },
     /**
      * 字段配置数组（驱动表单渲染）- 动态从字典/角色/部门获取
@@ -229,7 +235,8 @@ export default {
           label: 'user.status',
           type: 'radio',
           required: false,
-          options: this.statusOptions
+          options: this.statusOptions,
+          show: (isEdit) => isEdit
         },
         {
           prop: 'remark',

@@ -1,13 +1,13 @@
 /**
  * 数据字典模块 - 业务逻辑层
- * 
+ *
  * 处理数据字典的增删改查，包含字典类型和字典项两个子模块
  * 支持根据字典类型编码获取字典项（前端 DictTag 组件用）
  * 继承 BaseService，以字典类型（DictTypeModel）为主模型
- * 
+ *
  * @author nexCM Team
  * @date 2026-01-01
- * @lastModified 2026-08-22
+ * @lastModified 2026-08-26
  */
 const BaseService = require('../../services/BaseService')
 const { DictTypeModel, DictItemModel } = require('./dict.model')
@@ -32,7 +32,7 @@ class DictService extends BaseService {
 
   /**
    * 分页查询字典类型列表
-   * 
+   *
    * @param {Object} params - 查询参数
    * @param {number} [params.page=1] - 页码
    * @param {number} [params.pageSize=10] - 每页数量
@@ -47,7 +47,7 @@ class DictService extends BaseService {
 
   /**
    * 获取字典类型详情
-   * 
+   *
    * @param {number} id - 字典类型 ID
    * @param {string} [lang='zh-CN'] - 语言代码
    * @returns {Promise<Object>} 字典类型详情
@@ -56,16 +56,16 @@ class DictService extends BaseService {
   async getTypeById(id, lang = 'zh-CN') {
     const dictType = await DictTypeModel.getById(id)
     if (!dictType) {
-      throw new BusinessError(ERROR_CODE.NOT_FOUND, '字典类型不存在')
+      throw new BusinessError(ERROR_CODE.DICT_TYPE_NOT_FOUND, '字典类型不存在', { name: '字典类型' })
     }
     return processLangFields(dictType, ['dict_name', 'description'], lang)
   }
 
   /**
    * 创建字典类型
-   * 
+   *
    * 检查编码是否已存在，处理多语言字段
-   * 
+   *
    * @param {Object} data - 字典类型数据
    * @param {string} data.dict_name - 字典类型名称（支持多语言对象或字符串）
    * @param {string} data.dict_code - 字典类型编码（唯一）
@@ -79,7 +79,7 @@ class DictService extends BaseService {
     // 检查编码是否已存在
     const exist = await DictTypeModel.getByCode(data.dict_code)
     if (exist) {
-      throw new BusinessError(ERROR_CODE.PARAM_INVALID, '字典类型编码已存在')
+      throw new BusinessError(ERROR_CODE.DICT_TYPE_CODE_EXISTS, '字典类型编码已存在')
     }
     // 处理多语言字段（字符串转 JSON 对象）
     const processedData = this.convertLangFieldsToJson(data)
@@ -88,9 +88,9 @@ class DictService extends BaseService {
 
   /**
    * 更新字典类型
-   * 
+   *
    * 处理多语言字段
-   * 
+   *
    * @param {number} id - 字典类型 ID
    * @param {Object} data - 更新数据
    * @param {string} [data.dict_name] - 字典类型名称（支持多语言对象或字符串）
@@ -107,9 +107,9 @@ class DictService extends BaseService {
 
   /**
    * 删除字典类型（同时删除关联的字典项）
-   * 
+   *
    * 删除字典类型前先删除所有关联的字典项
-   * 
+   *
    * @param {number} id - 字典类型 ID
    * @returns {Promise<Object>} { affectedRows }
    * @throws {BusinessError} 字典类型不存在
@@ -130,9 +130,9 @@ class DictService extends BaseService {
 
   /**
    * 分页查询字典项列表
-   * 
+   *
    * 支持按字典类型 ID 筛选
-   * 
+   *
    * @param {Object} params - 查询参数
    * @param {number} [params.page=1] - 页码
    * @param {number} [params.pageSize=10] - 每页数量
@@ -152,7 +152,7 @@ class DictService extends BaseService {
 
   /**
    * 根据字典类型编码获取字典项列表（前端 DictTag 组件用）
-   * 
+   *
    * @param {string} typeCode - 字典类型编码
    * @param {string} [lang='zh-CN'] - 语言代码
    * @returns {Promise<Array>} 字典项列表
@@ -164,7 +164,7 @@ class DictService extends BaseService {
 
   /**
    * 批量获取多个字典类型的字典项（前端一次性加载）
-   * 
+   *
    * @param {Array<string>} typeCodes - 字典类型编码数组
    * @param {string} [lang='zh-CN'] - 语言代码
    * @returns {Promise<Object>} { [typeCode]: 字典项列表 }
@@ -179,7 +179,7 @@ class DictService extends BaseService {
 
   /**
    * 获取字典项详情
-   * 
+   *
    * @param {number} id - 字典项 ID
    * @param {string} [lang='zh-CN'] - 语言代码
    * @returns {Promise<Object>} 字典项详情
@@ -188,16 +188,16 @@ class DictService extends BaseService {
   async getItemById(id, lang = 'zh-CN') {
     const item = await DictItemModel.getById(id)
     if (!item) {
-      throw new BusinessError(ERROR_CODE.NOT_FOUND, '字典项不存在')
+      throw new BusinessError(ERROR_CODE.DICT_ITEM_NOT_FOUND, '字典项不存在', { name: '字典项' })
     }
     return processLangFields(item, ['label'], lang)
   }
 
   /**
    * 创建字典项
-   * 
+   *
    * 检查同一类型下值是否重复，处理多语言字段
-   * 
+   *
    * @param {Object} data - 字典项数据
    * @param {number} data.type_id - 字典类型 ID
    * @param {string} data.label - 字典标签（支持多语言对象或字符串）
@@ -214,7 +214,7 @@ class DictService extends BaseService {
     // 检查同一类型下值是否重复
     const exist = await DictItemModel.findOne({ type_id: data.type_id, value: data.value })
     if (exist) {
-      throw new BusinessError(ERROR_CODE.PARAM_INVALID, '同一字典类型下值不能重复')
+      throw new BusinessError(ERROR_CODE.DICT_ITEM_VALUE_DUPLICATE, '同一字典类型下值不能重复')
     }
     // 处理多语言字段（字符串转 JSON 对象）
     if (typeof data.label === 'string') {
@@ -225,9 +225,9 @@ class DictService extends BaseService {
 
   /**
    * 更新字典项
-   * 
+   *
    * 处理多语言字段
-   * 
+   *
    * @param {number} id - 字典项 ID
    * @param {Object} data - 更新数据
    * @param {string} [data.label] - 字典标签（支持多语言对象或字符串）
@@ -245,7 +245,7 @@ class DictService extends BaseService {
 
   /**
    * 删除字典项
-   * 
+   *
    * @param {number} id - 字典项 ID
    * @returns {Promise<Object>} { affectedRows }
    * @throws {BusinessError} 字典项不存在

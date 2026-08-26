@@ -226,7 +226,7 @@ export default {
   },
 
   // ==================== Error Page ====================
-  error: {
+  errorPage: {
     notFound: 'Page Not Found',
     backHome: 'Back Home',
     back: 'Go Back',
@@ -668,5 +668,70 @@ export default {
     timeSecondsAgo: '{n}s ago',
     timeMinutesAgo: '{n}m ago',
     timeHoursAgo: '{n}h ago'
+  },
+
+  // ==================== Error Messages (Backend Error Code i18n) ====================
+  error: {
+    // Common errors
+    PARAM_ERROR: 'Parameter error',
+    PARAM_MISSING: 'Missing required parameter',
+    PARAM_INVALID: 'Invalid parameter format',
+    NOT_FOUND: '{name} not found',
+    SYSTEM_ERROR: 'System error',
+    DATABASE_ERROR: 'Database operation failed',
+    NETWORK_ERROR: 'Network error',
+    UNKNOWN_ERROR: 'Unknown error',
+    // Auth errors
+    UNAUTHORIZED: 'Please login first',
+    TOKEN_EXPIRED: 'Session expired, please login again',
+    TOKEN_INVALID: 'Invalid session',
+    PERMISSION_DENIED: 'Permission denied',
+    // Captcha errors
+    CAPTCHA_EXPIRED: 'Captcha expired, please refresh',
+    CAPTCHA_ERROR: 'Incorrect captcha',
+    // Department module
+    DEPT_NOT_FOUND: 'Department not found',
+    DEPT_PARENT_INVALID: 'Cannot set parent to itself',
+    DEPT_HAS_CHILDREN: 'Cannot delete: department has children',
+    DEPT_HAS_USERS: 'Cannot delete: {count} user(s) in this department',
+    // Role module
+    ROLE_NOT_FOUND: 'Role not found',
+    ROLE_CODE_EXISTS: 'Role code already exists',
+    // User module
+    USER_NOT_FOUND: 'User not found',
+    USER_USERNAME_EXISTS: 'Username already exists',
+    USER_PASSWORD_ERROR: 'Invalid username or password',
+    USER_DISABLED: 'Account disabled',
+    USER_LOCKED: 'Account locked, try again in {minutes} minutes',
+    USER_REGISTER_FAIL: 'Registration failed',
+    // Dictionary module
+    DICT_TYPE_NOT_FOUND: 'Dictionary type not found',
+    DICT_TYPE_CODE_EXISTS: 'Dictionary type code already exists',
+    DICT_ITEM_NOT_FOUND: 'Dictionary item not found',
+    DICT_ITEM_VALUE_DUPLICATE: 'Value already exists in this dictionary type',
+    // Audit module
+    AUDIT_NOT_MODIFIABLE: 'Audit logs cannot be modified',
+    AUDIT_NOT_DELETABLE: 'Audit logs cannot be deleted',
+    // Notification module
+    NOTIFICATION_NOT_FOUND: 'Notification not found',
+    // Customer module
+    CUSTOMER_NOT_FOUND: 'Customer not found',
+    // Menu module
+    MENU_USER_ID_REQUIRED: 'User ID is required',
+    // File upload module
+    FILE_NOT_EXIST: 'Please select a file to upload',
+    FILE_PATH_EMPTY: 'File path cannot be empty',
+    FILE_PATH_INVALID: 'Invalid file path',
+    FILE_TOO_LARGE: 'File size exceeds limit',
+    FILE_TYPE_NOT_ALLOWED: 'File type not allowed',
+    FILE_UPLOAD_FAIL: 'File upload failed',
+    FILE_DELETE_FAIL: 'File delete failed',
+    FILE_LIMIT_EXCEEDED: 'Upload limit exceeded',
+    FILE_UNEXPECTED_FIELD: 'Unexpected file field: {field}',
+    // GitHub module
+    GITHUB_CONFIG_ERROR: 'GitHub config incomplete',
+    GITHUB_UPLOAD_FAIL: 'GitHub upload failed: {msg}',
+    GITHUB_DELETE_FAIL: 'GitHub delete failed: {msg}',
+    GITHUB_API_ERROR: 'GitHub API call failed'
   }
 }

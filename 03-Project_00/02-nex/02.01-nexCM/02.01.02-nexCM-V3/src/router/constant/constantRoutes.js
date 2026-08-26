@@ -28,14 +28,14 @@ export const constantRoutes = [
     name: 'NotFound',
     component: () => import('@/views/error/404.vue'),
     hidden: true,
-    meta: { titles: ['error.notFound'] }
+    meta: { titles: ['errorPage.notFound'] }
   },
   {
     path: ROUTE_PATHS.FORBIDDEN,
     name: 'Forbidden',
     component: () => import('@/views/error/403.vue'),
     hidden: true,
-    meta: { titles: ['error.forbiddenTitle'] }
+    meta: { titles: ['errorPage.forbiddenTitle'] }
   },
   {
     path: ROUTE_PATHS.REDIRECT,

@@ -7,10 +7,17 @@ const { ERROR_CODE, ERROR_MESSAGE } = require('../constants/errorCode');
 
 // 业务错误类
 class BusinessError extends Error {
-  constructor(code, message) {
+  /**
+   * 构造函数
+   * @param {string|number} code - 错误码
+   * @param {string} message - 错误消息（调试用，中文）
+   * @param {Object|null} data - 动态参数（前端国际化填充模板用）
+   */
+  constructor(code, message, data = null) {
     super(message);
     this.name = 'BusinessError';
     this.code = code;
+    this.data = data;
   }
 }
 
@@ -25,7 +32,7 @@ function errorHandler(err, req, res, next) {
     return res.json({
       code: err.code,
       msg: err.message,
-      data: null,
+      data: err.data,
       timestamp: Date.now()
     });
   }

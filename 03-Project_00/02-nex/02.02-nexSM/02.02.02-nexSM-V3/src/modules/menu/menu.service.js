@@ -23,7 +23,7 @@ class MenuService {
    */
   async getUserMenuTreeWithVersion(userId, version, lang = 'zh-CN') {
     if (!userId) {
-      throw new BusinessError(ERROR_CODE.PARAM_MISSING, '用户ID不能为空');
+      throw new BusinessError(ERROR_CODE.MENU_USER_ID_REQUIRED, '用户ID不能为空');
     }
     return await menuModel.findUserMenuTreeWithVersion(userId, version, lang);
   }

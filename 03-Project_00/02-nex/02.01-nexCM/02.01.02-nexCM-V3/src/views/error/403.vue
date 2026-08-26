@@ -7,13 +7,13 @@
   <div class="error-page">
     <div class="error-content">
       <div class="error-code">403</div>
-      <div class="error-title">{{ $t("error.forbidden") }}</div>
-      <div class="error-desc">{{ $t("error.forbiddenDesc") }}</div>
+      <div class="error-title">{{ $t("errorPage.forbidden") }}</div>
+      <div class="error-desc">{{ $t("errorPage.forbiddenDesc") }}</div>
       <div class="error-actions">
         <el-button type="primary" @click="goHome">{{
-          $t("error.backHome")
+          $t("errorPage.backHome")
         }}</el-button>
-        <el-button @click="goBack">{{ $t("error.back") }}</el-button>
+        <el-button @click="goBack">{{ $t("errorPage.back") }}</el-button>
       </div>
     </div>
   </div>

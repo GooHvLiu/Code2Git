@@ -64,7 +64,7 @@ class UserService extends BaseService {
     const locked = loginAttempts.get(lockKey)
     if (locked && locked.until > Date.now()) {
       const remainMin = Math.ceil((locked.until - Date.now()) / 60000)
-      throw new BusinessError(ERROR_CODE.USER_DISABLED, `账户已锁定，请 ${remainMin} 分钟后再试`)
+      throw new BusinessError(ERROR_CODE.USER_LOCKED, `账户已锁定，请 ${remainMin} 分钟后再试`, { minutes: remainMin })
     }
 
     // 1. 查询用户（关联角色表获取 data_scope）
@@ -77,7 +77,7 @@ class UserService extends BaseService {
         result: 'failed',
         reason: '用户不存在'
       })
-      throw new BusinessError(ERROR_CODE.USER_NOT_EXIST, '用户不存在')
+      throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, '用户不存在')
     }
 
     // 2. 校验状态
@@ -113,7 +113,7 @@ class UserService extends BaseService {
         result: 'failed',
         reason
       })
-      throw new BusinessError(ERROR_CODE.USER_PASSWORD_ERROR, reason)
+      throw new BusinessError(ERROR_CODE.USER_PASSWORD_ERROR, reason, { reason: reason })
     }
 
     // 登录成功，清除失败记录
@@ -243,7 +243,7 @@ class UserService extends BaseService {
   async getUserById(id, lang = 'zh-CN') {
     const user = await userModel.getByIdWithDept(id, lang)
     if (!user) {
-      throw new BusinessError(ERROR_CODE.USER_NOT_EXIST, '用户不存在')
+      throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, '用户不存在')
     }
     const { password, ...userInfo } = user
     return userInfo
@@ -286,7 +286,7 @@ class UserService extends BaseService {
     // 检查用户名是否存在
     const existUser = await userModel.getByUsername(data.username)
     if (existUser) {
-      throw new BusinessError(ERROR_CODE.USER_ALREADY_EXIST, '用户名已存在')
+      throw new BusinessError(ERROR_CODE.USER_USERNAME_EXISTS, '用户名已存在')
     }
 
     // 加密密码
@@ -320,7 +320,7 @@ class UserService extends BaseService {
     // 检查用户是否存在
     const user = await userModel.getById(id)
     if (!user) {
-      throw new BusinessError(ERROR_CODE.USER_NOT_EXIST, '用户不存在')
+      throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, '用户不存在')
     }
 
     // 如果修改密码，需要加密
@@ -341,7 +341,7 @@ class UserService extends BaseService {
   async deleteUser(id) {
     const user = await userModel.getById(id)
     if (!user) {
-      throw new BusinessError(ERROR_CODE.USER_NOT_EXIST, '用户不存在')
+      throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, '用户不存在')
     }
 
     await userModel.delete(id)
@@ -356,7 +356,7 @@ class UserService extends BaseService {
    */
   async batchDeleteUsers(ids) {
     if (!ids || ids.length === 0) {
-      throw new BusinessError(ERROR_CODE.PARAM_ERROR, '请选择要删除的用户')
+      throw new BusinessError(ERROR_CODE.PARAM_MISSING, '请选择要删除的用户')
     }
     await userModel.batchDelete(ids)
   }
@@ -372,7 +372,7 @@ class UserService extends BaseService {
   async updateUserStatus(id, status) {
     const user = await userModel.getById(id)
     if (!user) {
-      throw new BusinessError(ERROR_CODE.USER_NOT_EXIST, '用户不存在')
+      throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, '用户不存在')
     }
 
     await userModel.update(id, { status })

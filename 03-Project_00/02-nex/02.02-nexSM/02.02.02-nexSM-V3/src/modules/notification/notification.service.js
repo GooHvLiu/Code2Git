@@ -1,13 +1,13 @@
 /**
  * 通知中心模块 - 业务逻辑层
- * 
+ *
  * 处理通知的增删改查、未读数量统计、标记已读、WebSocket 实时推送等业务逻辑
  * 用户只能查看和操作自己的通知
  * 继承 BaseService，复用通用 CRUD 操作
- * 
+ *
  * @author nexCM Team
  * @date 2026-01-01
- * @lastModified 2026-08-22
+ * @lastModified 2026-08-26
  */
 const BaseService = require('../../services/BaseService')
 const notificationModel = require('./notification.model')
@@ -32,9 +32,9 @@ class NotificationService extends BaseService {
 
   /**
    * 获取用户通知列表
-   * 
+   *
    * 用户只能查看自己的通知
-   * 
+   *
    * @param {number} userId - 用户 ID
    * @param {Object} params - 查询参数
    * @param {number} [params.page=1] - 页码
@@ -49,7 +49,7 @@ class NotificationService extends BaseService {
 
   /**
    * 获取未读通知数量
-   * 
+   *
    * @param {number} userId - 用户 ID
    * @returns {Promise<Object>} { count }
    */
@@ -60,9 +60,9 @@ class NotificationService extends BaseService {
 
   /**
    * 获取通知详情
-   * 
+   *
    * 用户只能查看自己的通知，查看时自动标记为已读
-   * 
+   *
    * @param {number} id - 通知 ID
    * @param {number} userId - 用户 ID（用于权限校验）
    * @returns {Promise<Object>} 通知详情
@@ -71,7 +71,7 @@ class NotificationService extends BaseService {
   async getNotificationById(id, userId) {
     const notification = await notificationModel.getById(id)
     if (!notification || notification.user_id !== userId) {
-      throw new BusinessError(ERROR_CODE.NOT_FOUND, '通知不存在')
+      throw new BusinessError(ERROR_CODE.NOTIFICATION_NOT_FOUND, '通知不存在', { name: '通知' })
     }
     // 自动标记为已读
     if (!notification.is_read) {
@@ -83,7 +83,7 @@ class NotificationService extends BaseService {
 
   /**
    * 标记通知为已读
-   * 
+   *
    * @param {number} id - 通知 ID
    * @param {number} userId - 用户 ID（用于权限校验）
    * @returns {Promise<void>}
@@ -94,7 +94,7 @@ class NotificationService extends BaseService {
 
   /**
    * 标记所有通知为已读
-   * 
+   *
    * @param {number} userId - 用户 ID
    * @returns {Promise<void>}
    */
@@ -104,9 +104,9 @@ class NotificationService extends BaseService {
 
   /**
    * 删除通知
-   * 
+   *
    * 用户只能删除自己的通知
-   * 
+   *
    * @param {number} id - 通知 ID
    * @param {number} userId - 用户 ID（用于权限校验）
    * @returns {Promise<void>}
@@ -117,9 +117,9 @@ class NotificationService extends BaseService {
 
   /**
    * 发送通知（系统内部调用）
-   * 
+   *
    * 保存到数据库并通过 WebSocket 实时推送给用户
-   * 
+   *
    * @param {Object} params - 通知参数
    * @param {number} params.userId - 接收用户 ID
    * @param {string} params.title - 通知标题
@@ -161,9 +161,9 @@ class NotificationService extends BaseService {
 
   /**
    * 批量发送通知
-   * 
+   *
    * 给多个用户发送相同的通知
-   * 
+   *
    * @param {Array<number>} userIds - 用户 ID 数组
    * @param {Object} params - 通知参数（同 sendNotification，不含 userId）
    * @returns {Promise<Array>} 创建结果数组

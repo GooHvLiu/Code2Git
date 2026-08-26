@@ -200,8 +200,15 @@ service.interceptors.response.use(
       return Promise.reject(res)
     }
 
-    // 其他业务错误：弹 Message 提示（防重复）
-    showError(res.msg || config.MESSAGES.UNKNOWN_ERROR)
+    // 其他业务错误：根据错误码做国际化，用 data 中的动态参数填充模板
+    const i18n = require('@/i18n').default
+    let message
+    if (res.code && i18n.te(`error.${res.code}`)) {
+      message = i18n.t(`error.${res.code}`, res.data || {})
+    } else {
+      message = res.msg || config.MESSAGES.UNKNOWN_ERROR
+    }
+    showError(message)
     return Promise.reject(res)
   },
   error => {
