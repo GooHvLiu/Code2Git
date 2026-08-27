@@ -1097,6 +1097,8 @@ async function loadConfigs() {
       await nextTick();
       form.deviceRegion = parsedRegion;
       form.deviceInstallDate = parsedDate;
+      // defaultLanguage 同步为当前界面语言，避免保存其他配置时语言被意外切换
+      form.defaultLanguage = locale.value;
     }
   } catch (err) {
     // eslint-disable-next-line no-console
@@ -1157,7 +1159,9 @@ function handleReset() {
           form.partLifeReminderEnabled === "true" ||
           form.partLifeReminderEnabled === 1 ||
           form.partLifeReminderEnabled === "1";
-        applyConfig(res.data);
+        // defaultLanguage 同步为当前界面语言，避免重置配置时语言被意外切换
+        form.defaultLanguage = locale.value;
+        applyConfig(form);
       }
     })
     .catch(() => {});

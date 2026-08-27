@@ -247,7 +247,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed } from "vue";
 import { Message } from "element-ui";
 import store from "@/store";
 import { generateOrderReport } from "@/utils/orderReport";

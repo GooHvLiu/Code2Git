@@ -23,8 +23,7 @@
  */
 
 import * as XLSX from 'xlsx'
-import jsPDF from 'jspdf'
-import html2canvas from 'html2canvas'
+import { createPdfContainer, createWatermarkLayer, generatePdfFromElement, cleanupPdfContainer } from './pdfGenerator'
 import { showSuccess, showError, showWarning } from './message'
 
 /**
@@ -57,47 +56,6 @@ function formatNow() {
   const now = new Date()
   const pad = n => String(n).padStart(2, '0')
   return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`
-}
-
-/**
- * 生成水印层（平铺旋转文字，覆盖整个容器）
- * @param {String} text 水印文字
- * @returns {HTMLElement} 水印容器
- */
-function createWatermarkLayer(text) {
-  const layer = document.createElement('div')
-  layer.style.position = 'absolute'
-  layer.style.top = '0'
-  layer.style.left = '0'
-  layer.style.width = '100%'
-  layer.style.height = '100%'
-  layer.style.overflow = 'hidden'
-  layer.style.pointerEvents = 'none'
-  layer.style.zIndex = '10'
-
-  // 平铺水印 - 浮在内容之上，透明度低，不影响阅读
-  const cols = 5
-  const rows = 12
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      const item = document.createElement('div')
-      item.style.position = 'absolute'
-      item.style.left = `${c * 20 + 2}%`
-      item.style.top = `${r * 8 + 2}%`
-      item.style.fontSize = '15px'
-      item.style.color = '#909399'
-      item.style.opacity = '0.12'
-      item.style.transform = 'rotate(-30deg)'
-      item.style.transformOrigin = 'center center'
-      item.style.whiteSpace = 'nowrap'
-      item.style.fontWeight = '600'
-      item.style.letterSpacing = '2px'
-      item.textContent = text
-      layer.appendChild(item)
-    }
-  }
-
-  return layer
 }
 
 /**
@@ -183,28 +141,17 @@ export function exportPdf(data, columns, options = {}) {
     return
   }
 
-  // 外层容器：fixed 定位隐藏在视口外
-  const outer = document.createElement('div')
-  outer.style.position = 'fixed'
-  outer.style.left = '-9999px'
-  outer.style.top = '0'
-  outer.style.zIndex = '-1'
-
-  // 内层容器：relative 定位，设 A4 最小高度，水印覆盖整页
-  // A4 比例 210:297，宽度 1100px 时高度约 1556px
-  const container = document.createElement('div')
-  container.style.position = 'relative'
-  container.style.width = '1100px'
-  container.style.minHeight = '1556px'
-  container.style.background = '#fff'
-  container.style.padding = '40px 30px'
-  container.style.boxSizing = 'border-box'
-  container.style.fontFamily = '"Microsoft YaHei", "PingFang SC", Arial, sans-serif'
+  // 使用通用工具创建 PDF 容器
+  const { outer, container } = createPdfContainer({
+    width: 1100,
+    minHeight: 1556,
+    padding: '40px 30px'
+  })
 
   // 水印层（覆盖整个内层容器）
   if (watermark) {
     const wmText = watermarkText || exporter || 'NEX'
-    container.appendChild(createWatermarkLayer(wmText))
+    container.appendChild(createWatermarkLayer(wmText, { rows: 12, fontSize: '15px', opacity: '0.12' }))
   }
 
   // 内容层（在水印之上）
@@ -284,45 +231,17 @@ export function exportPdf(data, columns, options = {}) {
   content.appendChild(table)
 
   container.appendChild(content)
-  outer.appendChild(container)
-  document.body.appendChild(outer)
 
-  // 使用 html2canvas 转为图片（截取内层 container）
-  html2canvas(container, {
-    scale: 2,
-    useCORS: true,
-    backgroundColor: '#ffffff'
-  }).then(canvas => {
-    document.body.removeChild(outer)
-
-    const imgData = canvas.toDataURL('image/png')
-    const imgWidth = 210 // A4 宽度（mm）
-    const pageHeight = 297 // A4 高度（mm）
-    const imgHeight = (canvas.height * imgWidth) / canvas.width
-    let heightLeft = imgHeight
-    let position = 0
-
-    const pdf = new jsPDF('p', 'mm', 'a4')
-
-    // 第一页
-    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
-    heightLeft -= pageHeight
-
-    // 分页
-    while (heightLeft > 0) {
-      position = heightLeft - imgHeight
-      pdf.addPage()
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
-      heightLeft -= pageHeight
+  // 使用通用工具生成 PDF
+  generatePdfFromElement(container, {
+    filename,
+    successMessage: `成功导出 ${data.length} 条数据`,
+    errorMessage: 'PDF 导出失败，请重试',
+    onBeforeCleanup: () => {
+      cleanupPdfContainer(outer)
     }
-
-    pdf.save(`${filename}.pdf`)
-    showSuccess(`成功导出 ${data.length} 条数据`)
   }).catch(() => {
-    if (outer.parentNode) {
-      document.body.removeChild(outer)
-    }
-    showError('PDF 导出失败，请重试')
+    cleanupPdfContainer(outer)
   })
 }
 

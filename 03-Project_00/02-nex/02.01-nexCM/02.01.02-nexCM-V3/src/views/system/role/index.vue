@@ -103,7 +103,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, nextTick, watch } from 'vue'
+import { ref, reactive, computed, nextTick } from 'vue'
 import { useTable } from '@/composables/useTable'
 import TableToolbar from '@/components/TableToolbar/index.vue'
 import Pagination from '@/components/Pagination/index.vue'

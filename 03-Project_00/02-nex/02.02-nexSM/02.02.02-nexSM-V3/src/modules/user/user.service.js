@@ -18,6 +18,7 @@ const { ERROR_CODE } = require('../../constants/errorCode')
 const { USER_STATUS, USER_ROLE } = require('../../constants/statusCode')
 const CaptchaService = require('../captcha/captcha.service')
 const auditLogger = require('../audit/auditLogger')
+const { triggerNotification } = require('../../services/notificationTrigger.service')
 
 // 登录失败锁定配置
 const MAX_LOGIN_ATTEMPTS = 5       // 最大失败次数
@@ -173,13 +174,20 @@ class UserService extends BaseService {
     }
 
     // 2. 调用 createUser（默认角色 operator，状态启用）
-    return await this.createUser({
+    const result = await this.createUser({
       username: data.username,
       password: data.password,
       email: data.email,
       role: USER_ROLE.OPERATOR,
       status: USER_STATUS.ENABLED
     })
+
+    // 3. 触发通知：新用户注册（通知管理员）
+    triggerNotification('user.register', { username: data.username }, result.id).catch(err => {
+      console.error('[用户注册] 触发通知失败:', err)
+    })
+
+    return result
   }
 
   /**

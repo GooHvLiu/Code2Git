@@ -198,28 +198,165 @@ export default {
 
   // ==================== Notification Center ====================
   notification: {
+    // Page title
     title: 'Notification Center',
     center: 'Notifications',
     viewAll: 'View All',
+    notificationSettings: 'Notification Settings',
+
+    // General
     type: 'Type',
     content: 'Content',
+    refresh: 'Refresh',
+    export: 'Export',
+    empty: 'No notifications',
+
+    // Action buttons
     markAllRead: 'Mark All Read',
+    markRead: 'Mark Read',
+    delete: 'Delete',
+    archive: 'Archive',
+    unarchive: 'Restore',
+    batchMarkRead: 'Batch Mark Read',
+    batchArchive: 'Batch Archive',
+    batchUnarchive: 'Batch Restore',
+    batchDelete: 'Batch Delete',
+    clearSelection: 'Clear Selection',
+    selectedCount: '{count} items selected',
+
+    // Status
     all: 'All',
     unread: 'Unread',
     read: 'Read',
-    markRead: 'Mark Read',
-    empty: 'No notifications',
-    typeSystem: 'System',
-    typePlc: 'PLC',
-    typeUser: 'User',
-    typeAudit: 'Audit',
+
+    // Archive
+    unarchived: 'Unarchived',
+    archived: 'Archived',
+
+    // Priority
+    priority: 'Priority',
+    priorityHigh: 'High Priority',
+    priorityMedium: 'Medium Priority',
+    priorityLow: 'Low Priority',
+
+    // Time range
+    timeRange: 'Time Range',
+    today: 'Today',
+    thisWeek: 'This Week',
+    thisMonth: 'This Month',
+    custom: 'Custom',
+    startDate: 'Start Date',
+    endDate: 'End Date',
+    to: 'to',
+
+    // Search
+    searchPlaceholder: 'Search notification title or content',
+    search: 'Search',
+    reset: 'Reset',
+
+    // Notification type names
+    typeSystem: 'System Settings',
+    typePlc: 'Device Management',
+    typeUser: 'User Management',
+    typeAudit: 'Audit Trail',
+    typeDevice: 'Device Parameters',
+    typeConnection: 'Connection Config',
+
+    // Success/failure messages
     markReadSuccess: 'Marked as read',
     markAllSuccess: 'All marked as read',
+    deleteSuccess: 'Deleted successfully',
+    batchDeleteSuccess: 'Batch deleted successfully',
+    archiveSuccess: 'Archived successfully',
+    batchArchiveSuccess: 'Batch archived successfully',
+    unarchiveSuccess: 'Restored successfully',
+    batchUnarchiveSuccess: 'Batch restored successfully',
+    operationFailed: 'Operation failed',
+
+    // Confirm dialogs
     deleteConfirm: 'Delete this notification?',
+    batchDeleteConfirm: 'Delete {count} selected notifications?',
+    markAllConfirm: 'Mark all notifications as read?',
+    deleteWarning: 'This cannot be undone',
+
+    // Time display
     justNow: 'just now',
     minutesAgo: ' min ago',
     hoursAgo: ' hours ago',
-    daysAgo: ' days ago'
+    daysAgo: ' days ago',
+    createdAt: 'Created At',
+
+    // ==================== Notification content templates (i18n key + dynamic params) ====================
+    // User related
+    user: {
+      register: {
+        title: 'New User Registered',
+        content: 'User {username} has registered, please review promptly'
+      },
+      profileUpdate: {
+        title: 'User Profile Updated',
+        content: 'User {username} modified their profile'
+      }
+    },
+
+    // System config related
+    config: {
+      systemUpdate: {
+        title: 'System Config Updated',
+        content: 'User {username} modified {count} system config(s)'
+      },
+      plcConnectionUpdate: {
+        title: 'Device Connection Config Updated',
+        content: 'User {username} modified {count} device connection config(s)'
+      },
+      connectionUpdate: {
+        title: 'Connection Config Updated',
+        content: 'User {username} modified {count} connection config(s)'
+      },
+      deviceParamsUpdate: {
+        title: 'Device Parameter Config Updated',
+        content: 'User {username} modified {count} device parameter config(s)'
+      }
+    },
+
+    // PLC related
+    plc: {
+      alarm: {
+        title: 'Device Alarm',
+        content: 'Device alarm: {alarmMessage}'
+      },
+      connectionLost: {
+        title: 'Device Connection Lost',
+        content: 'Device connection lost: {deviceName}'
+      },
+      connectionRestored: {
+        title: 'Device Connection Restored',
+        content: 'Device connection restored: {deviceName}'
+      }
+    },
+
+    // ==================== Notification Settings ====================
+    settings: {
+      title: 'Notification Settings',
+      notificationTypes: 'Notification Types',
+      typeEnabled: 'Enabled',
+      doNotDisturb: 'Do Not Disturb',
+      doNotDisturbEnabled: 'Enable Do Not Disturb',
+      startTime: 'Start Time',
+      endTime: 'End Time',
+      reminderMethods: 'Reminder Methods',
+      reminderMethodsDesc: 'Customize notification reminder methods',
+      soundEnabled: 'Notification Sound',
+      popupEnabled: 'Popup Reminder',
+      save: 'Save Settings',
+      saveSuccess: 'Settings saved successfully',
+      system: 'System Settings Notifications',
+      plc: 'Device Management Notifications',
+      user: 'User Management Notifications',
+      audit: 'Audit Trail Notifications',
+      device: 'Device Parameter Notifications',
+      connection: 'Connection Config Notifications'
+    }
   },
 
   // ==================== Error Page ====================

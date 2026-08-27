@@ -18,7 +18,6 @@ async function initConfig() {
   // 清空缓存
   configCache = null;
   cacheTime = 0;
-  console.log('✅ 系统配置初始化完成');
 }
 
 /**

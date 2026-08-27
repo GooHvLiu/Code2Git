@@ -11,12 +11,8 @@ const path = require("path");
 const os = require("os");
 // 主函数
 function setupEnv() {
-  console.log("🔧 开始配置环境变量...");
-
   // 获取局域网IP
   const localIP = getLocalIP();
-  console.log(`🌐 检测到局域网IP: ${localIP}`);
-
   // 读取现有 .env 文件
   const envContent = readEnvFile();
 
@@ -25,9 +21,6 @@ function setupEnv() {
 
   // 写入 .env 文件
   writeEnvFile(updatedContent);
-
-  console.log("✅ 环境变量配置完成！");
-  console.log(`💡 LOCAL_IP = ${localIP}`);
 }
 
 // 获取局域网IP地址
@@ -86,7 +79,6 @@ function updateEnvContent(content, key, value) {
 function writeEnvFile(content) {
   const envPath = path.join(__dirname, "../../.env");
   fs.writeFileSync(envPath, content, "utf8");
-  console.log(`✅ .env 文件已更新: ${envPath}`);
 }
 
 // 执行配置

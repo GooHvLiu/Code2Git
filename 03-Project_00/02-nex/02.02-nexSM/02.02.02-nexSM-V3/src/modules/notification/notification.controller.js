@@ -170,6 +170,87 @@ class NotificationController extends BaseController {
 
     res.success({ id: result.insertId }, '通知发送成功')
   }
+
+  // ==================== 批量操作接口 ====================
+
+  /**
+   * 批量标记为已读
+   * Body: { ids: [1, 2, 3] }
+   */
+  async batchMarkAsRead(req, res) {
+    const { ids } = req.body
+    await notificationService.batchMarkAsRead(req.user.id, ids)
+    res.success(null, '批量标记成功')
+  }
+
+  /**
+   * 批量删除通知
+   * Body: { ids: [1, 2, 3] }
+   */
+  async batchDelete(req, res) {
+    const { ids } = req.body
+    await notificationService.batchDelete(req.user.id, ids)
+    res.success(null, '批量删除成功')
+  }
+
+  /**
+   * 全部删除（清空所有通知）
+   * Body: { includeArchived: false }
+   */
+  async deleteAll(req, res) {
+    const { includeArchived } = req.body
+    await notificationService.deleteAll(req.user.id, includeArchived)
+    res.success(null, '全部删除成功')
+  }
+
+  // ==================== 通知归档接口 ====================
+
+  /**
+   * 归档通知
+   * Body: { ids: [1, 2, 3] }
+   */
+  async archive(req, res) {
+    const { ids } = req.body
+    await notificationService.archive(req.user.id, ids)
+    res.success(null, '归档成功')
+  }
+
+  /**
+   * 恢复已归档的通知
+   * Body: { ids: [1, 2, 3] }
+   */
+  async unarchive(req, res) {
+    const { ids } = req.body
+    await notificationService.unarchive(req.user.id, ids)
+    res.success(null, '恢复成功')
+  }
+
+  /**
+   * 获取各类型通知数量统计
+   */
+  async getTypeStats(req, res) {
+    const result = await notificationService.getTypeStats(req.user.id)
+    res.success(result)
+  }
+
+  // ==================== 用户通知设置接口 ====================
+
+  /**
+   * 获取用户通知设置
+   */
+  async getSettings(req, res) {
+    const result = await notificationService.getSettings(req.user.id)
+    res.success(result)
+  }
+
+  /**
+   * 更新用户通知设置
+   * Body: { typeEnabled: {...}, doNotDisturb: {...}, soundEnabled: true, popupEnabled: true }
+   */
+  async updateSettings(req, res) {
+    await notificationService.updateSettings(req.user.id, req.body)
+    res.success(null, '设置更新成功')
+  }
 }
 
 module.exports = new NotificationController()

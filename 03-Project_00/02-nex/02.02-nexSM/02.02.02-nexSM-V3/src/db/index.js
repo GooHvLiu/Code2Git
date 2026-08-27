@@ -48,7 +48,6 @@ async function transaction(callback) {
 (async () => {
   try {
     const connection = await pool.getConnection();
-    console.log('✅ MySQL 数据库连接成功');
     connection.release();
   } catch (err) {
     console.error('❌ MySQL 数据库连接失败:', err.message);

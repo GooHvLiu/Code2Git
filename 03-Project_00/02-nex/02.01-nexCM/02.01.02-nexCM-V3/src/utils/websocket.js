@@ -56,16 +56,6 @@ class WebSocketClient {
   }
 
   /**
-   * 输出心跳日志（根据配置决定是否显示）
-   * @param {string} message - 日志消息
-   */
-  heartbeatLog(message) {
-    if (this.isHeartbeatLogEnabled()) {
-      console.log(`[WS] ${message}`)
-    }
-  }
-
-  /**
    * 获取 WebSocket 地址
    */
   getWsUrl() {
@@ -85,7 +75,6 @@ class WebSocketClient {
    */
   connect(userId) {
     if (this.ws && (this.ws.readyState === WebSocket.OPEN || this.ws.readyState === WebSocket.CONNECTING)) {
-      console.log('[WS] 已连接或正在连接，跳过')
       return
     }
 
@@ -94,11 +83,9 @@ class WebSocketClient {
 
     try {
       const url = this.getWsUrl()
-      console.log('[WS] 正在连接:', url)
       this.ws = new WebSocket(url)
 
       this.ws.onopen = () => {
-        console.log('[WS] 连接成功')
         this.connected = true
         this.reconnectAttempts = 0
         // 同步状态到 Vuex
@@ -113,8 +100,7 @@ class WebSocketClient {
         this.handleMessage(event.data)
       }
 
-      this.ws.onclose = (event) => {
-        console.log('[WS] 连接关闭:', event.code, event.reason)
+      this.ws.onclose = () => {
         this.connected = false
         this.authenticated = false
         this.stopHeartbeat()
@@ -153,7 +139,6 @@ class WebSocketClient {
   handleMessage(data) {
     try {
       const message = JSON.parse(data)
-      this.heartbeatLog(`收到消息: ${message.type}`)
 
       // 同步消息时间到 Vuex
       store.dispatch('websocket/onMessage')
@@ -161,7 +146,6 @@ class WebSocketClient {
       switch (message.type) {
         case 'auth_success':
           this.authenticated = true
-          console.log('[WS] 认证成功')
           // 同步认证状态到 Vuex
           store.dispatch('websocket/onAuthenticated')
           break
@@ -171,13 +155,11 @@ class WebSocketClient {
         case 'pong':
           // 心跳响应，同步心跳时间到 Vuex
           store.dispatch('websocket/onHeartbeat')
-          this.heartbeatLog('收到心跳响应: pong')
           break
         case 'plc_status': {
           // 设备连接状态变化
           const deviceConnected = message.data?.connected ?? message.connected ?? false
           store.dispatch('websocket/onPlcStatusChanged', deviceConnected)
-          console.log(`[WS] 设备连接状态: ${deviceConnected ? '已连接' : '已断开'}`)
           break
         }
         default:
@@ -211,7 +193,6 @@ class WebSocketClient {
     this.heartbeatInterval = setInterval(() => {
       if (this.ws && this.ws.readyState === WebSocket.OPEN) {
         this.send({ type: 'ping' })
-        this.heartbeatLog('发送心跳: ping')
       }
     }, interval)
   }
@@ -241,7 +222,6 @@ class WebSocketClient {
 
     const delay = this.reconnectDelay * Math.pow(2, this.reconnectAttempts)
     this.reconnectAttempts++
-    console.log(`[WS] ${delay / 1000}秒后第 ${this.reconnectAttempts} 次重连`)
     // 同步重连状态到 Vuex
     store.dispatch('websocket/onReconnecting', this.reconnectAttempts)
 
@@ -305,7 +285,6 @@ class WebSocketClient {
     }
     this.connected = false
     this.authenticated = false
-    console.log('[WS] 已断开连接')
   }
 
   /**

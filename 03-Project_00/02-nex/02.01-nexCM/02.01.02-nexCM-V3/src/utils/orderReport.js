@@ -2,7 +2,7 @@
  * ==========================================
  * 订单生产报告 PDF 生成工具
  * ==========================================
- * 基于 html2canvas + jsPDF 生成专业的订单生产报告
+ * 基于通用 PDF 生成工具生成专业的订单生产报告
  * 支持根据系统配置动态包含/排除报告内容
  *
  * 用法：
@@ -10,46 +10,7 @@
  * await generateOrderReport(order, config, t)
  */
 
-import jsPDF from 'jspdf'
-import html2canvas from 'html2canvas'
-import { showSuccess, showError } from './message'
-
-/**
- * 生成水印层
- */
-function createWatermarkLayer(text) {
-  const layer = document.createElement('div')
-  layer.style.position = 'absolute'
-  layer.style.top = '0'
-  layer.style.left = '0'
-  layer.style.width = '100%'
-  layer.style.height = '100%'
-  layer.style.overflow = 'hidden'
-  layer.style.pointerEvents = 'none'
-  layer.style.zIndex = '10'
-
-  const cols = 5
-  const rows = 14
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      const item = document.createElement('div')
-      item.style.position = 'absolute'
-      item.style.left = `${c * 20 + 2}%`
-      item.style.top = `${r * 7 + 2}%`
-      item.style.fontSize = '14px'
-      item.style.color = '#909399'
-      item.style.opacity = '0.1'
-      item.style.transform = 'rotate(-30deg)'
-      item.style.transformOrigin = 'center center'
-      item.style.whiteSpace = 'nowrap'
-      item.style.fontWeight = '600'
-      item.style.letterSpacing = '2px'
-      item.textContent = text
-      layer.appendChild(item)
-    }
-  }
-  return layer
-}
+import { createPdfContainer, createWatermarkLayer, generatePdfFromElement, cleanupPdfContainer } from './pdfGenerator'
 
 /**
  * 生成模拟报警明细数据
@@ -109,22 +70,14 @@ export function generateOrderReport(order, config = {}, t = (key) => key) {
         includeDownloadCount = true
       } = config
 
-      outer = document.createElement('div')
-      outer.style.position = 'fixed'
-      outer.style.left = '-9999px'
-      outer.style.top = '0'
-      outer.style.zIndex = '-1'
-
-      // 内层报告容器（A4 比例）
-      const container = document.createElement('div')
-      container.style.position = 'relative'
-      container.style.width = '1100px'
-      container.style.minHeight = '1556px'
-      container.style.background = '#fff'
-      container.style.padding = '40px 35px'
-      container.style.boxSizing = 'border-box'
-      container.style.fontFamily = '"Microsoft YaHei", "PingFang SC", Arial, sans-serif'
-      container.style.color = '#303133'
+      // 使用通用工具创建 PDF 容器
+      const containerResult = createPdfContainer({
+        width: 1100,
+        minHeight: 1556,
+        padding: '40px 35px'
+      })
+      outer = containerResult.outer
+      const container = containerResult.container
 
       // 水印层
       if (watermark) {
@@ -388,69 +341,27 @@ export function generateOrderReport(order, config = {}, t = (key) => key) {
       content.appendChild(footer)
 
       container.appendChild(content)
-      outer.appendChild(container)
-      document.body.appendChild(outer)
 
-      // 生成 PDF
-      html2canvas(container, {
-        scale: 2,
-        useCORS: true,
-        backgroundColor: '#ffffff'
-      }).then(canvas => {
-        try {
-          // 清理 DOM
-          if (outer.parentNode) {
-            document.body.removeChild(outer)
-          }
-
-          const imgData = canvas.toDataURL('image/png')
-          const imgWidth = 210 // A4 宽度（mm）
-          const pageHeight = 297 // A4 高度（mm）
-          const imgHeight = (canvas.height * imgWidth) / canvas.width
-          let heightLeft = imgHeight
-          let position = 0
-
-          const pdf = new jsPDF('p', 'mm', 'a4')
-          pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
-          heightLeft -= pageHeight
-
-          while (heightLeft > 0) {
-            position = heightLeft - imgHeight
-            pdf.addPage()
-            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
-            heightLeft -= pageHeight
-          }
-
-          const filename = `${t('order.orderReport') || '订单生产报告'}_${order.orderNo}.pdf`
-          pdf.save(filename)
-          showSuccess(`${order.orderNo} 报告生成成功`)
-          resolve()
-        } catch (innerErr) {
-          // eslint-disable-next-line no-console
-          console.error('[订单报告] PDF生成阶段异常:', innerErr)
-          if (outer.parentNode) {
-            document.body.removeChild(outer)
-          }
-          showError('订单报告生成失败')
-          reject(innerErr)
+      // 使用通用工具生成 PDF
+      const filename = `${t('order.orderReport') || '订单生产报告'}_${order.orderNo}`
+      generatePdfFromElement(container, {
+        filename,
+        successMessage: `${order.orderNo} 报告生成成功`,
+        errorMessage: '订单报告生成失败',
+        onBeforeCleanup: () => {
+          cleanupPdfContainer(outer)
         }
+      }).then(() => {
+        resolve()
       }).catch(err => {
-        // eslint-disable-next-line no-console
-        console.error('[订单报告] html2canvas渲染失败:', err)
-        if (outer.parentNode) {
-          document.body.removeChild(outer)
-        }
-        showError('订单报告生成失败')
+        console.error('[订单报告] PDF生成失败:', err)
+        cleanupPdfContainer(outer)
         reject(err)
       })
     } catch (err) {
-      // eslint-disable-next-line no-console
       console.error('[订单报告] 初始化阶段异常:', err)
       // 清理可能已添加的 DOM
-      if (outer && outer.parentNode) {
-        document.body.removeChild(outer)
-      }
-      showError('订单报告生成异常')
+      cleanupPdfContainer(outer)
       reject(err)
     }
   })

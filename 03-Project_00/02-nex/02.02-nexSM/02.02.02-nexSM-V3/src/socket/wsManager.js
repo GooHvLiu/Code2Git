@@ -31,8 +31,6 @@ class WsManager {
     this.wss = new WebSocket.Server({ server, path: '/ws' })
 
     this.wss.on('connection', (ws, req) => {
-      console.log('[WS] 新连接建立')
-
       // 初始状态
       ws.isAlive = true
       ws.userId = null
@@ -55,7 +53,6 @@ class WsManager {
       // 连接关闭
       ws.on('close', () => {
         this.removeConnection(ws)
-        console.log('[WS] 连接关闭')
       })
 
       // 连接错误
@@ -66,8 +63,6 @@ class WsManager {
 
     // 心跳检测
     this.startHeartbeat()
-
-    console.log('✅ WebSocket 服务已启动，路径: /ws')
   }
 
   /**
@@ -83,8 +78,13 @@ class WsManager {
         // 心跳
         ws.send(JSON.stringify({ type: 'pong', timestamp: Date.now() }))
         break
+      case 'update_poll_interval':
+        // 更新轮询间隔（前端修改配置后发送，后端通过配置接口已处理，此处仅确认）
+        ws.send(JSON.stringify({ type: 'update_poll_interval_ack', message: '已收到' }))
+        break
       default:
-        console.log('[WS] 未知消息类型:', data.type)
+        // 未知消息类型静默处理，不打印警告（避免日志刷屏）
+        // console.log('[WS] 未知消息类型:', data.type)
     }
   }
 
@@ -96,7 +96,6 @@ class WsManager {
     if (data.userId) {
       ws.userId = data.userId
       this.addConnection(data.userId, ws)
-      console.log(`[WS] 用户 ${data.userId} 认证成功`)
       // 发送认证成功响应
       ws.send(JSON.stringify({ type: 'auth_success', message: '认证成功' }))
       // 发送当前 PLC 连接状态给该用户

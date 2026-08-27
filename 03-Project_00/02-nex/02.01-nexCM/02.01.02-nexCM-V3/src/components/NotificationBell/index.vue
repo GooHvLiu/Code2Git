@@ -1,10 +1,8 @@
 <template>
   <div class="notification-bell">
-    <el-badge :value="badgeText" :hidden="!hasUnread" class="badge-wrapper">
-      <div class="bell-btn" @click.stop="togglePanel">
-        <i class="el-icon-bell"></i>
-      </div>
-    </el-badge>
+    <div class="bell-btn" :class="{ 'bell-ringing': hasUnread }" @click.stop="togglePanel">
+      <i class="el-icon-bell bell-icon"></i>
+    </div>
 
     <!-- 下拉面板 -->
     <transition name="fade">
@@ -29,15 +27,23 @@
             v-for="item in notifications"
             :key="item.id"
             class="notification-item"
-            :class="{ unread: !item.is_read }"
+            :class="{ unread: !item.is_read, read: item.is_read }"
             @click="handleItemClick(item)"
+            @dblclick="goToNotificationPage"
           >
+            <div class="item-status">
+              <span v-if="!item.is_read" class="status-dot unread-dot"></span>
+            </div>
             <div class="item-icon" :class="'type-' + (item.type || 'system')">
               <i :class="getTypeIcon(item.type)"></i>
             </div>
             <div class="item-content">
-              <div class="item-title">{{ item.title }}</div>
-              <div class="item-desc">{{ item.content }}</div>
+              <div class="item-title-row">
+                <span class="item-title">{{ getDisplayTitle(item) }}</span>
+                <el-tag v-if="!item.is_read" size="mini" type="danger" effect="dark" class="status-tag">{{ $t('notification.unread') }}</el-tag>
+                <el-tag v-else size="mini" type="info" effect="plain" class="status-tag">{{ $t('notification.read') }}</el-tag>
+              </div>
+              <div class="item-desc">{{ getDisplayContent(item) }}</div>
               <div class="item-time">{{ formatTime(item.created_at) }}</div>
             </div>
           </div>
@@ -63,6 +69,8 @@ import {
 } from '@/api'
 import ws from '@/utils/websocket'
 import router from '@/router'
+import store from '@/store'
+import { getToken } from '@/utils/auth'
 import { useI18n } from '@/composables/useI18n'
 
 const { t: $t } = useI18n()
@@ -70,22 +78,26 @@ const { t: $t } = useI18n()
 // ===== 响应式数据 =====
 const showPanel = ref(false)
 const loading = ref(false)
-const unreadCount = ref(0)
 const notifications = ref([])
 
 // ===== 计算属性 =====
+// 未读数量从 Vuex 中获取，实现全局状态同步
+const unreadCount = computed(() => store.state.notification.unreadCount)
 const hasUnread = computed(() => unreadCount.value > 0)
-const badgeText = computed(() => {
-  if (unreadCount.value > 9) return '...'
-  return unreadCount.value
-})
 
 // ===== 方法 =====
 /** 获取未读数量 */
 async function fetchUnreadCount() {
+  // 未登录时不请求未读数量，避免退出登录后出现参数错误
+  if (!getToken()) {
+    store.commit('notification/CLEAR_UNREAD_COUNT')
+    return
+  }
   try {
     const res = await requestGetUnreadCountApi()
-    unreadCount.value = res.data?.count || 0
+    const count = res.data?.count || 0
+    // 保存到 Vuex 中，实现全局状态同步
+    store.commit('notification/SET_UNREAD_COUNT', count)
   } catch (e) {
     // 静默失败
   }
@@ -93,6 +105,11 @@ async function fetchUnreadCount() {
 
 /** 获取通知列表（下拉面板显示最近5条） */
 async function fetchNotifications() {
+  // 未登录时不请求通知列表
+  if (!getToken()) {
+    notifications.value = []
+    return
+  }
   loading.value = true
   try {
     const res = await requestGetNotificationListApi({ page: 1, pageSize: 5 })
@@ -118,7 +135,9 @@ async function handleItemClick(item) {
     try {
       await requestMarkAsReadApi(item.id)
       item.is_read = 1
-      unreadCount.value = Math.max(0, unreadCount.value - 1)
+      // 更新 Vuex 中的未读数量
+      store.commit('notification/DECREMENT_UNREAD_COUNT', 1)
+      broadcastUnreadCountChange()
     } catch (e) {
       // 静默失败
     }
@@ -130,8 +149,12 @@ async function handleMarkAllRead() {
   try {
     await requestMarkAllAsReadApi()
     notifications.value.forEach(item => { item.is_read = 1 })
-    unreadCount.value = 0
+    // 清零 Vuex 中的未读数量
+    store.commit('notification/CLEAR_UNREAD_COUNT')
     Message.success($t('notification.markAllSuccess'))
+    // 广播给其他标签页
+    broadcastUnreadCountChange()
+    broadcastNotificationUpdated()
   } catch (e) {
     Message.error($t('common.operationFailed'))
   }
@@ -157,6 +180,30 @@ function getTypeIcon(type) {
   return iconMap[type] || 'el-icon-message'
 }
 
+/** 解析动态参数（JSON 字符串转对象） */
+function parseParams(paramsStr) {
+  if (!paramsStr) return {}
+  try {
+    return typeof paramsStr === 'string' ? JSON.parse(paramsStr) : paramsStr
+  } catch (e) {
+    return {}
+  }
+}
+
+/** 获取显示标题：使用国际化 key + 动态参数 */
+function getDisplayTitle(item) {
+  if (!item) return ''
+  const params = parseParams(item.title_params)
+  return $t(item.title_key, params)
+}
+
+/** 获取显示内容：使用国际化 key + 动态参数 */
+function getDisplayContent(item) {
+  if (!item) return ''
+  const params = parseParams(item.content_params)
+  return $t(item.content_key, params)
+}
+
 /** 格式化时间 */
 function formatTime(time) {
   if (!time) return ''
@@ -180,29 +227,105 @@ function handleClickOutside() {
 }
 
 /** WebSocket 收到新通知 */
-function handleWsNotification(data) {
-  // eslint-disable-next-line no-console
-  console.log('[通知铃铛] 收到新通知:', data)
-  unreadCount.value++
+function handleWsNotification() {
+  // 更新 Vuex 中的未读数量
+  store.commit('notification/INCREMENT_UNREAD_COUNT', 1)
   // 如果面板打开着，刷新列表
   if (showPanel.value) {
     fetchNotifications()
   }
+  // 广播给其他标签页
+  broadcastUnreadCountChange()
 }
 
 // ===== 生命周期 =====
+let afterEachUnsubscribe = null
+let broadcastChannel = null
+
 onMounted(() => {
   // 初始获取未读数量
   fetchUnreadCount()
-  // 监听 WebSocket 新通知（实时推送，无需轮询）
+  // 监听 WebSocket 新通知（实时推送）
   ws.on('notification', handleWsNotification)
   // 点击外部关闭
   document.addEventListener('click', handleClickOutside)
+  // 监听路由变化，在路由切换时获取未读数量
+  afterEachUnsubscribe = router.afterEach(() => {
+    fetchUnreadCount()
+  })
+
+  // 多标签页未读数同步
+  if ('BroadcastChannel' in window) {
+    broadcastChannel = new BroadcastChannel('notification-center')
+    broadcastChannel.onmessage = (event) => {
+      if (event.data.type === 'unread-count-changed') {
+        // 更新 Vuex 中的未读数量
+        store.commit('notification/SET_UNREAD_COUNT', event.data.count)
+      } else if (event.data.type === 'notification-updated') {
+        fetchUnreadCount()
+        if (showPanel.value) {
+          fetchNotifications()
+        }
+      }
+    }
+  } else {
+    // 兼容不支持 BroadcastChannel 的浏览器，使用 localStorage
+    window.addEventListener('storage', handleStorageChange)
+  }
 })
+
+// localStorage 变化监听（兼容旧浏览器）
+function handleStorageChange(event) {
+  if (event.key === 'notification_unread_count') {
+    // 更新 Vuex 中的未读数量
+    store.commit('notification/SET_UNREAD_COUNT', Number(event.newValue) || 0)
+  } else if (event.key === 'notification_updated') {
+    fetchUnreadCount()
+    if (showPanel.value) {
+      fetchNotifications()
+    }
+  }
+}
+
+// 广播未读数变化
+function broadcastUnreadCountChange() {
+  if (broadcastChannel) {
+    broadcastChannel.postMessage({ type: 'unread-count-changed', count: unreadCount.value })
+  }
+  // 同时使用 localStorage 兼容旧浏览器
+  try {
+    localStorage.setItem('notification_unread_count', String(unreadCount.value))
+  } catch (e) {
+    // localStorage 可能被禁用或达到配额限制，静默失败
+  }
+}
+
+// 广播通知更新
+function broadcastNotificationUpdated() {
+  if (broadcastChannel) {
+    broadcastChannel.postMessage({ type: 'notification-updated' })
+  }
+  try {
+    localStorage.setItem('notification_updated', String(Date.now()))
+  } catch (e) {
+    // localStorage 可能被禁用或达到配额限制，静默失败
+  }
+}
 
 onBeforeUnmount(() => {
   ws.off('notification', handleWsNotification)
   document.removeEventListener('click', handleClickOutside)
+  // 取消路由监听
+  if (afterEachUnsubscribe) {
+    afterEachUnsubscribe()
+    afterEachUnsubscribe = null
+  }
+  // 关闭 BroadcastChannel
+  if (broadcastChannel) {
+    broadcastChannel.close()
+    broadcastChannel = null
+  }
+  window.removeEventListener('storage', handleStorageChange)
 })
 </script>
 
@@ -214,34 +337,48 @@ onBeforeUnmount(() => {
 }
 
 .bell-btn {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 20px;
   color: #606266;
   transition: background 0.15s, color 0.15s;
+  position: relative;
 
   &:hover {
     background: #f5f7fa;
     color: #409eff;
   }
+
+  /* 铃铛摇晃动画 */
+  &.bell-ringing {
+    .bell-icon {
+      display: inline-block;
+      transform-origin: top center;
+      animation: bell-shake 1.5s ease-in-out infinite;
+    }
+  }
+
+  /* 有未读消息时，铃铛颜色变化 */
+  &.bell-ringing .bell-icon {
+    color: #f56c6c;
+  }
 }
 
-.badge-wrapper {
-  display: inline-flex;
-
-  /* 调整角标大小和位置 */
-  ::v-deep .el-badge__content {
-    font-size: 10px;
-    line-height: 16px;
-    min-height: 16px;
-    padding: 0 4px;
-    top: 4px;
-    right: 2px;
+/* 铃铛摇晃动画关键帧 */
+@keyframes bell-shake {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: rotate(-12deg);
+  }
+  20%, 40%, 60%, 80% {
+    transform: rotate(12deg);
   }
 }
 
@@ -314,10 +451,11 @@ onBeforeUnmount(() => {
 
 .notification-item {
   display: flex;
+  align-items: flex-start;
   padding: 12px 16px;
   border-bottom: 1px solid #f5f7fa;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: all 0.15s ease;
   position: relative;
 
   &:last-child {
@@ -326,6 +464,7 @@ onBeforeUnmount(() => {
 
   &:hover {
     background: #f5f7fa;
+    transform: translateX(2px);
   }
 
   /* 未读项左侧蓝色竖条 */
@@ -337,6 +476,44 @@ onBeforeUnmount(() => {
     bottom: 0;
     width: 3px;
     background: #409eff;
+  }
+
+  /* 已读项半透明效果 */
+  &.read {
+    opacity: 0.7;
+  }
+
+  /* 状态点 */
+  .item-status {
+    display: flex;
+    align-items: center;
+    padding-top: 8px;
+    margin-right: 8px;
+    flex-shrink: 0;
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .unread-dot {
+      background: #f56c6c;
+      box-shadow: 0 0 6px rgba(245, 108, 108, 0.6);
+      animation: dot-pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes dot-pulse {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.6;
+        transform: scale(1.2);
+      }
+    }
   }
 
   .item-icon {
@@ -390,14 +567,27 @@ onBeforeUnmount(() => {
     flex: 1;
     min-width: 0;
 
-    .item-title {
-      font-size: 13px;
-      font-weight: 500;
-      color: #303133;
+    .item-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       margin-bottom: 4px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+
+      .item-title {
+        flex: 1;
+        font-size: 13px;
+        font-weight: 500;
+        color: #303133;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .status-tag {
+        flex-shrink: 0;
+        transform: scale(0.85);
+        transform-origin: right center;
+      }
     }
 
     .item-desc {

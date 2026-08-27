@@ -15,6 +15,7 @@ import tagsView from './modules/tagsView'
 import errorLog from './modules/errorLog'
 import websocket from './modules/websocket'
 import device from './modules/device'
+import notification from './modules/notification'
 
 Vue.use(Vuex)
 
@@ -26,7 +27,8 @@ export default new Vuex.Store({
     tagsView,
     errorLog,
     websocket,
-    device
+    device,
+    notification
   },
   getters
 })

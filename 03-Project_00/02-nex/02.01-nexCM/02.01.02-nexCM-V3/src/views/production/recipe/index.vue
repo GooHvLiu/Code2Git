@@ -180,8 +180,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import { Message } from 'element-ui'
+import { ref, computed } from 'vue'
 import store from '@/store'
 import { exportTable } from '@/utils/exportTable'
 import { getConfig } from '@/utils/config'

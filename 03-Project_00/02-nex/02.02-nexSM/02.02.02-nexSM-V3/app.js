@@ -95,6 +95,20 @@ async function initSystemConfig() {
 }
 initSystemConfig();
 
+// 通知模块初始化：创建表 + 添加字段
+const notificationModel = require('./src/modules/notification/notification.model');
+const notificationSettingModel = require('./src/modules/notification/notificationSetting.model');
+async function initNotificationModule() {
+  try {
+    await notificationModel.ensureTable();
+    await notificationSettingModel.ensureTable();
+    console.log('✅ 通知模块初始化完成');
+  } catch (err) {
+    console.error('❌ 通知模块初始化失败:', err.message);
+  }
+}
+initNotificationModule();
+
 // PLC 模块初始化：注册默认设备、连接、开启轮询
 async function initPlcModule() {
   try {

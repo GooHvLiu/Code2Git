@@ -21,10 +21,6 @@ module.exports = (req, res, next) => {
     } else if (statusCode >= 500) {
       statusColor = '\x1b[31m'; // 红色 服务端错误
     }
-
-    console.log(
-      `[${timestamp}] ${method} ${url} ${statusColor}${statusCode}\x1b[0m - ${duration}ms - ${ip}`
-    );
   });
 
   next();

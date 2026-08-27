@@ -66,8 +66,6 @@ class PlcPollTask {
     if (device.connected === connected) return
 
     device.connected = connected
-    console.log(`[PLC] 设备 ${deviceName} 连接状态: ${connected ? '已连接 ✓' : '已断开 ✗'}`)
-
     // 通知所有前端用户
     plcManager.notifyPlcStatusChanged(plcManager.isAllConnected(), deviceName)
   }
@@ -89,8 +87,6 @@ class PlcPollTask {
 
     device._reconnecting = true
     device._reconnectAttempts = 0
-    console.log(`[PLC] 设备 ${deviceName} 启动自动重连流程`)
-
     this._doReconnect(deviceName)
   }
 
@@ -103,8 +99,6 @@ class PlcPollTask {
     if (!device) return
 
     device._reconnectAttempts++
-    console.log(`[PLC] 设备 ${deviceName} 第 ${device._reconnectAttempts} 次重连尝试...`)
-
     try {
       // 等待一小段时间，确保 Modbus Slave 准备好接受新连接
       await this._sleep(500)
@@ -113,7 +107,6 @@ class PlcPollTask {
       // 原因：connect() 内部会先关闭旧连接再创建新连接
       // 直接调用 disconnect() 可能导致 PLC 锁死锁
       // 注意：给 connect() 整体加上超时保护，防止内部 close() 卡住导致永远等待
-      console.log(`[PLC] 设备 ${deviceName} 正在连接...`)
       await withTimeout(
         device.client.connect(),
         15000,
@@ -124,7 +117,6 @@ class PlcPollTask {
       device._reconnecting = false
       device._reconnectAttempts = 0
       device.consecutiveErrors = 0
-      console.log(`[PLC] 设备 ${deviceName} 重连成功 ✓`)
       this.updateConnectionStatus(deviceName, true)
     } catch (err) {
       // 重连失败，调度下一次
@@ -221,7 +213,6 @@ class PlcPollTask {
 
       // 达到错误阈值，启动重连流程
       if (device.consecutiveErrors >= this.maxConsecutiveErrors && !device._reconnecting) {
-        console.log(`[PLC] 设备 ${deviceName} 连续失败 ${device.consecutiveErrors} 次，启动重连`)
         this.startReconnect(deviceName)
       }
     } else {
@@ -257,7 +248,6 @@ class PlcPollTask {
       this.startDevice(name)
     }
     plcStorage.start()
-    console.log(`[PLC] 轮询任务已启动，设备数: ${deviceNames.length}`)
   }
 
   /**
@@ -289,7 +279,6 @@ class PlcPollTask {
       this.stopDevice(name)
     }
     await plcStorage.stop()
-    console.log('[PLC] 轮询任务已停止')
   }
 
   /**

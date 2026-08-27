@@ -16,6 +16,7 @@ const BaseController = require('../../controllers/BaseController')
 const userService = require('./user.service')
 const auditLogger = require('../audit/auditLogger')
 const { getLangFromRequest } = require('../../utils/i18n')
+const { triggerNotification } = require('../../services/notificationTrigger.service')
 
 class UserController extends BaseController {
   /**
@@ -205,6 +206,17 @@ class UserController extends BaseController {
       const oldValueText = oldUser ? `角色: ${oldUser.role}, 姓名: ${oldUser.real_name || ''}, 状态: ${oldStatusText}` : ''
       const newValueText = `角色: ${req.body.role || '未变更'}, 姓名: ${req.body.real_name || '未变更'}, 状态: ${newStatusText}`
       await auditLogger.logUserUpdate(req, oldUser?.username || req.params.id, oldValueText, newValueText)
+
+      // 触发通知：用户信息修改（通知管理员）
+      const isSelfUpdate = req.user.id === Number(req.params.id)
+      const eventType = isSelfUpdate ? 'user.profile.update' : 'user.profile.update'
+      triggerNotification(eventType, {
+        username: oldUser?.username || req.params.id,
+        operator: req.user.username
+      }, req.user.id).catch(err => {
+        console.error('[用户更新] 触发通知失败:', err)
+      })
+
       res.success(null, '更新用户成功')
     } catch (err) {
       next(err)

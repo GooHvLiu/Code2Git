@@ -38,8 +38,6 @@ function initPlcSocket(io) {
       timestamp: Date.now()
     })
   })
-
-  console.log('[PLC] WebSocket 推送已初始化')
 }
 
 module.exports = { initPlcSocket }

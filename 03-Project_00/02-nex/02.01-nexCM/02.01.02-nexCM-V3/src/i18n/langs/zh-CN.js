@@ -198,28 +198,165 @@ export default {
 
   // ==================== 通知中心 ====================
   notification: {
+    // 页面标题
     title: '通知中心',
     center: '通知中心',
     viewAll: '查看全部',
+    notificationSettings: '通知设置',
+
+    // 通用
     type: '类型',
     content: '内容',
+    refresh: '刷新',
+    export: '导出',
+    empty: '暂无通知',
+
+    // 操作按钮
     markAllRead: '全部已读',
+    markRead: '标记已读',
+    delete: '删除',
+    archive: '归档',
+    unarchive: '恢复',
+    batchMarkRead: '批量标记已读',
+    batchArchive: '批量归档',
+    batchUnarchive: '批量恢复',
+    batchDelete: '批量删除',
+    clearSelection: '取消选择',
+    selectedCount: '已选择 {count} 项',
+
+    // 状态
     all: '全部',
     unread: '未读',
     read: '已读',
-    markRead: '标记已读',
-    empty: '暂无通知',
-    typeSystem: '系统通知',
-    typePlc: 'PLC通知',
-    typeUser: '用户通知',
-    typeAudit: '审计通知',
+
+    // 归档
+    unarchived: '未归档',
+    archived: '已归档',
+
+    // 优先级
+    priority: '优先级',
+    priorityHigh: '高优先级',
+    priorityMedium: '中优先级',
+    priorityLow: '低优先级',
+
+    // 时间范围
+    timeRange: '时间范围',
+    today: '今天',
+    thisWeek: '本周',
+    thisMonth: '本月',
+    custom: '自定义',
+    startDate: '开始日期',
+    endDate: '结束日期',
+    to: '至',
+
+    // 搜索
+    searchPlaceholder: '搜索通知标题或内容',
+    search: '搜索',
+    reset: '重置',
+
+    // 通知类型名称
+    typeSystem: '系统设置',
+    typePlc: '设备管理',
+    typeUser: '用户管理',
+    typeAudit: '审计追踪',
+    typeDevice: '设备参数',
+    typeConnection: '连接配置',
+
+    // 成功/失败提示
     markReadSuccess: '标记成功',
     markAllSuccess: '全部标记成功',
+    deleteSuccess: '删除成功',
+    batchDeleteSuccess: '批量删除成功',
+    archiveSuccess: '归档成功',
+    batchArchiveSuccess: '批量归档成功',
+    unarchiveSuccess: '恢复成功',
+    batchUnarchiveSuccess: '批量恢复成功',
+    operationFailed: '操作失败',
+
+    // 确认对话框
     deleteConfirm: '确定删除该通知吗？',
+    batchDeleteConfirm: '确定删除选中的 {count} 条通知吗？',
+    markAllConfirm: '确定将所有通知标记为已读吗？',
+    deleteWarning: '删除后无法恢复',
+
+    // 时间显示
     justNow: '刚刚',
     minutesAgo: '分钟前',
     hoursAgo: '小时前',
-    daysAgo: '天前'
+    daysAgo: '天前',
+    createdAt: '创建时间',
+
+    // ==================== 通知内容模板（国际化 key + 动态参数）====================
+    // 用户相关
+    user: {
+      register: {
+        title: '新用户注册',
+        content: '用户 {username} 已注册，请及时审核'
+      },
+      profileUpdate: {
+        title: '用户信息修改',
+        content: '用户 {username} 修改了个人信息'
+      }
+    },
+
+    // 系统配置相关
+    config: {
+      systemUpdate: {
+        title: '系统配置修改',
+        content: '用户 {username} 修改了 {count} 项系统配置'
+      },
+      plcConnectionUpdate: {
+        title: '设备连接配置修改',
+        content: '用户 {username} 修改了 {count} 项设备连接配置'
+      },
+      connectionUpdate: {
+        title: '连接配置修改',
+        content: '用户 {username} 修改了 {count} 项连接配置'
+      },
+      deviceParamsUpdate: {
+        title: '设备参数配置修改',
+        content: '用户 {username} 修改了 {count} 项设备参数配置'
+      }
+    },
+
+    // PLC相关
+    plc: {
+      alarm: {
+        title: '设备报警',
+        content: '设备报警：{alarmMessage}'
+      },
+      connectionLost: {
+        title: '设备连接断开',
+        content: '设备连接断开：{deviceName}'
+      },
+      connectionRestored: {
+        title: '设备连接恢复',
+        content: '设备连接恢复：{deviceName}'
+      }
+    },
+
+    // ==================== 通知设置 ====================
+    settings: {
+      title: '通知设置',
+      notificationTypes: '通知类型',
+      typeEnabled: '启用',
+      doNotDisturb: '免打扰时间段',
+      doNotDisturbEnabled: '启用免打扰',
+      startTime: '开始时间',
+      endTime: '结束时间',
+      reminderMethods: '提醒方式',
+      reminderMethodsDesc: '自定义通知提醒方式',
+      soundEnabled: '通知声音',
+      popupEnabled: '弹窗提醒',
+      save: '保存设置',
+      saveSuccess: '设置保存成功',
+      system: '系统设置通知',
+      plc: '设备管理通知',
+      user: '用户管理通知',
+      audit: '审计追踪通知',
+      device: '设备参数通知',
+      connection: '连接配置通知'
+    }
   },
 
   // ==================== 错误页 ====================
