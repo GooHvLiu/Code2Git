@@ -19,54 +19,56 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { TransitionScale } from "@morev/vue-transitions";
 import { ROUTE_PATHS } from "@/router/constant/pathConstants";
-export default {
-  name: "NotFound",
-  components: {
-    TransitionScale,
-  },
-  data() {
-    return {
-      show: true,
-      countDown: 3,
-      dotText: "",
-      timerCount: null,
-      timerDot: null,
-    };
-  },
-  mounted() {
-    this.startCountDown();
-    this.startDotAnimation();
-  },
-  beforeDestroy() {
-    clearInterval(this.timerCount);
-    clearInterval(this.timerDot);
-  },
-  methods: {
-    startCountDown() {
-      this.timerCount = setInterval(() => {
-        this.countDown--;
-        if (this.countDown <= 0) {
-          clearInterval(this.timerCount);
-          this.goHome();
-        }
-      }, 1000);
-    },
-    startDotAnimation() {
-      const dotList = ["", ".", "..", "..."];
-      let index = 0;
-      this.timerDot = setInterval(() => {
-        index = (index + 1) % dotList.length;
-        this.dotText = dotList[index];
-      }, 400);
-    },
-    goHome() {
-      this.$router.replace(ROUTE_PATHS.ROOT);
-    },
-  },
-};
+import router from '@/router'
+import { useI18n } from '@/composables/useI18n'
+
+const { t: $t } = useI18n()
+
+// ===== 响应式数据 =====
+const show = ref(true)
+const countDown = ref(3)
+const dotText = ref('')
+let timerCount = null
+let timerDot = null
+
+// ===== 方法 =====
+function startCountDown() {
+  timerCount = setInterval(() => {
+    countDown.value--
+    if (countDown.value <= 0) {
+      clearInterval(timerCount)
+      goHome()
+    }
+  }, 1000)
+}
+
+function startDotAnimation() {
+  const dotList = ["", ".", "..", "..."]
+  let index = 0
+  timerDot = setInterval(() => {
+    index = (index + 1) % dotList.length
+    dotText.value = dotList[index]
+  }, 400)
+}
+
+function goHome() {
+  router.replace(ROUTE_PATHS.ROOT)
+}
+
+// ===== 生命周期 =====
+onMounted(() => {
+  startCountDown()
+  startDotAnimation()
+})
+
+onBeforeUnmount(() => {
+  clearInterval(timerCount)
+  clearInterval(timerDot)
+})
 </script>
 
 <style scoped lang="less">

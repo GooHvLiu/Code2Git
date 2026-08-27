@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="part-life-page">
     <!-- 顶部概览卡片 -->
     <el-row :gutter="12" class="overview-row">
@@ -123,54 +123,6 @@
             </div>
           </div>
         </div>
-
-        <!-- 寿命提醒设置 -->
-        <div class="panel" style="margin-top: 12px;">
-          <div class="panel-header">
-            <span class="panel-title"><i class="el-icon-bell"></i> 寿命提醒设置</span>
-          </div>
-          <div class="panel-body">
-            <div class="reminder-settings">
-              <div class="setting-item">
-                <div class="setting-label">
-                  <span>提前提醒阈值</span>
-                  <span class="setting-desc">剩余寿命达到此比例时开始提醒</span>
-                </div>
-                <el-select v-model="reminderConfig.threshold" style="width: 120px">
-                  <el-option label="10%" value="10" />
-                  <el-option label="20%" value="20" />
-                  <el-option label="30%" value="30" />
-                  <el-option label="50%" value="50" />
-                </el-select>
-              </div>
-              <div class="setting-item">
-                <div class="setting-label">
-                  <span>提醒方式</span>
-                  <span class="setting-desc">达到寿命时的通知方式</span>
-                </div>
-                <el-checkbox-group v-model="reminderConfig.methods">
-                  <el-checkbox value="system">系统通知</el-checkbox>
-                  <el-checkbox value="email">邮件</el-checkbox>
-                  <el-checkbox value="sms">短信</el-checkbox>
-                </el-checkbox-group>
-              </div>
-              <div class="setting-item">
-                <div class="setting-label">
-                  <span>定时提醒频率</span>
-                  <span class="setting-desc">寿命到期后定时提醒的间隔</span>
-                </div>
-                <el-select v-model="reminderConfig.interval" style="width: 120px">
-                  <el-option label="每小时" value="hour" />
-                  <el-option label="每班次" value="shift" />
-                  <el-option label="每天" value="day" />
-                </el-select>
-              </div>
-              <div class="setting-actions">
-                <el-button type="primary" size="small" @click="saveReminderConfig">保存设置</el-button>
-              </div>
-            </div>
-          </div>
-        </div>
       </el-col>
     </el-row>
 
@@ -228,219 +180,223 @@
   </div>
 </template>
 
-<script>
-import { mapGetters } from 'vuex'
+<script setup>
+import { ref, reactive, computed } from 'vue'
+import { Message } from 'element-ui'
+import store from '@/store'
 
 /**
  * 部件寿命管理页面
- * 功能：部件寿命监控、更换录入（编码验证）、更换记录、提醒设置
+ * 功能：部件寿命监控、更换录入（编码验证）、更换记录
  * 数据来源：部件列表从 Vuex device 模块获取，更换记录后续对接后端接口
  */
-export default {
-  name: 'PartLife',
-  data() {
-    return {
-      replaceDialogVisible: false,
-      verifying: false,
-      verifyResult: null,
-      replaceForm: {
-        partCode: '',
-        partName: '',
-        newCode: '',
-        reason: '',
-        remark: ''
-      },
-      replaceRules: {
-        partCode: [{ required: true, message: '请选择部件', trigger: 'change' }],
-        newCode: [{ required: true, message: '请输入新物料编码', trigger: 'blur' }],
-        reason: [{ required: true, message: '请选择更换原因', trigger: 'change' }]
-      },
-      reminderConfig: {
-        threshold: '20',
-        methods: ['system'],
-        interval: 'shift'
-      },
-      // 部件图标映射（页面特有，store 中不存 icon）
-      partIcons: {
-        '灌装针组件': 'el-icon-aim',
-        '灌装管组件': 'el-icon-s-operation',
-        '加塞杆': 'el-icon-top-right',
-        '真空组件': 'el-icon-download'
-      },
-      // ===== 以下为模拟数据，后续对接后端接口 =====
-      recentRecords: [
-        {
-          partName: '灌装针组件',
-          oldCode: 'FILL-NEEDLE-001',
-          newCode: 'FILL-NEEDLE-002',
-          operator: '张三',
-          time: '2026-07-15 09:30:00',
-          status: 'success'
-        },
-        {
-          partName: '真空组件',
-          oldCode: 'VACUUM-UNIT-001',
-          newCode: 'VACUUM-UNIT-002',
-          operator: '李四',
-          time: '2026-07-01 14:20:00',
-          status: 'success'
-        },
-        {
-          partName: '加塞杆',
-          oldCode: 'STOPPER-ROD-001',
-          newCode: 'INVALID-CODE',
-          operator: '王五',
-          time: '2026-06-20 10:15:00',
-          status: 'failed'
-        },
-        {
-          partName: '灌装管组件',
-          oldCode: 'FILL-TUBE-001',
-          newCode: 'FILL-TUBE-002',
-          operator: '张三',
-          time: '2026-08-01 08:45:00',
-          status: 'success'
-        }
-      ]
-    }
+
+// ===== 响应式数据 =====
+const replaceDialogVisible = ref(false)
+const verifying = ref(false)
+const verifyResult = ref(null)
+const replaceFormRef = ref(null)
+
+const replaceForm = reactive({
+  partCode: '',
+  partName: '',
+  newCode: '',
+  reason: '',
+  remark: ''
+})
+
+const replaceRules = {
+  partCode: [{ required: true, message: '请选择部件', trigger: 'change' }],
+  newCode: [{ required: true, message: '请输入新物料编码', trigger: 'blur' }],
+  reason: [{ required: true, message: '请选择更换原因', trigger: 'change' }]
+}
+
+// 部件图标映射（页面特有，store 中不存 icon）
+const partIcons = {
+  '灌装针组件': 'el-icon-aim',
+  '灌装管组件': 'el-icon-s-operation',
+  '加塞杆': 'el-icon-top-right',
+  '真空组件': 'el-icon-download'
+}
+
+// ===== 以下为模拟数据，后续对接后端接口 =====
+const recentRecords = ref([
+  {
+    partName: '灌装针组件',
+    oldCode: 'FILL-NEEDLE-001',
+    newCode: 'FILL-NEEDLE-002',
+    operator: '张三',
+    time: '2026-07-15 09:30:00',
+    status: 'success'
   },
-  computed: {
-    // 从 store 获取部件列表，补充页面特有 icon 字段
-    ...mapGetters(['partsList']),
-    parts() {
-      return this.partsList.map(part => ({
-        ...part,
-        icon: this.partIcons[part.name] || 'el-icon-cpu'
-      }))
-    }
+  {
+    partName: '真空组件',
+    oldCode: 'VACUUM-UNIT-001',
+    newCode: 'VACUUM-UNIT-002',
+    operator: '李四',
+    time: '2026-07-01 14:20:00',
+    status: 'success'
   },
-  methods: {
-    getPartStatus(part) {
-      const percent = part.used / part.total
-      if (percent >= 1) return 'expired'
-      if (percent >= 0.8) return 'warning'
-      if (percent >= 0.6) return 'notice'
-      return 'normal'
-    },
-    getPartStatusTag(part) {
-      const status = this.getPartStatus(part)
-      const map = { normal: 'success', notice: 'info', warning: 'warning', expired: 'danger' }
-      return map[status]
-    },
-    getPartStatusText(part) {
-      const status = this.getPartStatus(part)
-      const map = { normal: '正常', notice: '注意', warning: '预警', expired: '到期' }
-      return map[status]
-    },
-    getRemainingClass(part) {
-      const status = this.getPartStatus(part)
-      if (status === 'expired') return 'text-danger'
-      if (status === 'warning') return 'text-warning'
-      return ''
-    },
-    getCurrentPartCode() {
-      const part = this.parts.find(p => p.code === this.replaceForm.partCode)
-      return part ? part.code : ''
-    },
-    handlePartChange(code) {
-      const part = this.parts.find(p => p.code === code)
-      if (part) {
-        this.replaceForm.partName = part.name
-      }
-      this.verifyResult = null
-    },
-    handleReplace(part) {
-      this.replaceForm = {
-        partCode: part.code,
-        partName: part.name,
-        newCode: '',
-        reason: '',
-        remark: ''
-      }
-      this.verifyResult = null
-      this.replaceDialogVisible = true
-    },
-    handleAddReplace() {
-      this.replaceForm = {
-        partCode: '',
-        partName: '',
-        newCode: '',
-        reason: '',
-        remark: ''
-      }
-      this.verifyResult = null
-      this.replaceDialogVisible = true
-    },
-    handleHistory(part) {
-      this.$message.info(`查看 ${part.name} 的更换记录`)
-    },
-    handleViewAll() {
-      this.$message.info('查看全部更换记录')
-    },
-    handleDialogClosed() {
-      this.$refs.replaceForm && this.$refs.replaceForm.resetFields()
-      this.verifyResult = null
-    },
-    async verifyCode() {
-      if (!this.replaceForm.newCode) {
-        this.$message.warning('请输入新物料编码')
+  {
+    partName: '加塞杆',
+    oldCode: 'STOPPER-ROD-001',
+    newCode: 'INVALID-CODE',
+    operator: '王五',
+    time: '2026-06-20 10:15:00',
+    status: 'failed'
+  },
+  {
+    partName: '灌装管组件',
+    oldCode: 'FILL-TUBE-001',
+    newCode: 'FILL-TUBE-002',
+    operator: '张三',
+    time: '2026-08-01 08:45:00',
+    status: 'success'
+  }
+])
+
+// ===== 计算属性 =====
+// 从 store 获取部件列表，补充页面特有 icon 字段
+const partsList = computed(() => store.getters.partsList)
+const parts = computed(() => partsList.value.map(part => ({
+  ...part,
+  icon: partIcons[part.name] || 'el-icon-cpu'
+})))
+
+// ===== 方法 =====
+function getPartStatus(part) {
+  const percent = part.used / part.total
+  if (percent >= 1) return 'expired'
+  if (percent >= 0.8) return 'warning'
+  if (percent >= 0.6) return 'notice'
+  return 'normal'
+}
+
+function getPartStatusTag(part) {
+  const status = getPartStatus(part)
+  const map = { normal: 'success', notice: 'info', warning: 'warning', expired: 'danger' }
+  return map[status]
+}
+
+function getPartStatusText(part) {
+  const status = getPartStatus(part)
+  const map = { normal: '正常', notice: '注意', warning: '预警', expired: '到期' }
+  return map[status]
+}
+
+function getRemainingClass(part) {
+  const status = getPartStatus(part)
+  if (status === 'expired') return 'text-danger'
+  if (status === 'warning') return 'text-warning'
+  return ''
+}
+
+function getCurrentPartCode() {
+  const part = parts.value.find(p => p.code === replaceForm.partCode)
+  return part ? part.code : ''
+}
+
+function handlePartChange(code) {
+  const part = parts.value.find(p => p.code === code)
+  if (part) {
+    replaceForm.partName = part.name
+  }
+  verifyResult.value = null
+}
+
+function handleReplace(part) {
+  Object.assign(replaceForm, {
+    partCode: part.code,
+    partName: part.name,
+    newCode: '',
+    reason: '',
+    remark: ''
+  })
+  verifyResult.value = null
+  replaceDialogVisible.value = true
+}
+
+function handleAddReplace() {
+  Object.assign(replaceForm, {
+    partCode: '',
+    partName: '',
+    newCode: '',
+    reason: '',
+    remark: ''
+  })
+  verifyResult.value = null
+  replaceDialogVisible.value = true
+}
+
+function handleHistory(part) {
+  Message.info(`查看 ${part.name} 的更换记录`)
+}
+
+function handleViewAll() {
+  Message.info('查看全部更换记录')
+}
+
+function handleDialogClosed() {
+  replaceFormRef.value && replaceFormRef.value.resetFields()
+  verifyResult.value = null
+}
+
+async function verifyCode() {
+  if (!replaceForm.newCode) {
+    Message.warning('请输入新物料编码')
+    return
+  }
+  verifying.value = true
+  // 模拟与服务器编码验证
+  await new Promise(resolve => setTimeout(resolve, 1000))
+
+  // 模拟验证结果（以 VALID 开头的编码验证通过）
+  if (replaceForm.newCode.startsWith('VALID') || replaceForm.newCode.length >= 8) {
+    verifyResult.value = {
+      status: 'success',
+      name: replaceForm.partName || '灌装针组件',
+      spec: '2.0mL 标准型',
+      batch: 'BATCH20260824001',
+      life: '10000次'
+    }
+    Message.success('物料编码验证通过')
+  } else {
+    verifyResult.value = {
+      status: 'failed',
+      name: '未知物料',
+      spec: '-',
+      batch: '-',
+      life: '-'
+    }
+    Message.error('物料编码验证失败，请检查编码是否正确')
+  }
+  verifying.value = false
+}
+
+function confirmReplace() {
+  replaceFormRef.value.validate(valid => {
+    if (valid) {
+      if (!verifyResult.value || verifyResult.value.status !== 'success') {
+        Message.error('请先验证新物料编码')
         return
       }
-      this.verifying = true
-      // 模拟与服务器编码验证
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      // 模拟验证结果（以 VALID 开头的编码验证通过）
-      if (this.replaceForm.newCode.startsWith('VALID') || this.replaceForm.newCode.length >= 8) {
-        this.verifyResult = {
-          status: 'success',
-          name: this.replaceForm.partName || '灌装针组件',
-          spec: '2.0mL 标准型',
-          batch: 'BATCH20260824001',
-          life: '10000次'
-        }
-        this.$message.success('物料编码验证通过')
-      } else {
-        this.verifyResult = {
-          status: 'failed',
-          name: '未知物料',
-          spec: '-',
-          batch: '-',
-          life: '-'
-        }
-        this.$message.error('物料编码验证失败，请检查编码是否正确')
+      Message.success('部件更换成功')
+      replaceDialogVisible.value = false
+      // 模拟更新部件数据
+      const part = parts.value.find(p => p.code === replaceForm.partCode)
+      if (part) {
+        part.used = 0
+        part.installDate = new Date().toISOString().split('T')[0]
       }
-      this.verifying = false
-    },
-    confirmReplace() {
-      this.$refs.replaceForm.validate(valid => {
-        if (valid) {
-          if (!this.verifyResult || this.verifyResult.status !== 'success') {
-            this.$message.error('请先验证新物料编码')
-            return
-          }
-          this.$message.success('部件更换成功')
-          this.replaceDialogVisible = false
-          // 模拟更新部件数据
-          const part = this.parts.find(p => p.code === this.replaceForm.partCode)
-          if (part) {
-            part.used = 0
-            part.installDate = new Date().toISOString().split('T')[0]
-          }
-        }
-      })
-    },
-    saveReminderConfig() {
-      this.$message.success('提醒设置已保存')
     }
-  }
+  })
 }
 </script>
 
 <style scoped lang="less">
 .part-life-page {
   padding: 12px;
-  background: #f5f7fa;
+  background: #fff;
   min-height: calc(100vh - 84px);
 }
 
@@ -509,7 +465,7 @@ export default {
       .progress-bar {
         flex: 1;
         height: 8px;
-        background: #f0f2f5;
+        background: #fff;
         border-radius: 4px;
         overflow: hidden;
         margin-right: 10px;
@@ -566,7 +522,7 @@ export default {
 .table-progress {
   .tp-bar {
     height: 6px;
-    background: #f0f2f5;
+    background: #fff;
     border-radius: 3px;
     overflow: hidden;
     margin-bottom: 4px;
@@ -636,28 +592,6 @@ export default {
         color: #c0c4cc;
       }
     }
-  }
-}
-
-// 提醒设置
-.reminder-settings {
-  .setting-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 10px 0;
-    border-bottom: 1px solid #f5f7fa;
-    &:last-of-type { border-bottom: none; }
-    .setting-label {
-      flex: 1;
-      padding-right: 16px;
-      span:first-child { font-size: 13px; color: #303133; font-weight: 500; display: block; }
-      .setting-desc { font-size: 11px; color: #909399; margin-top: 2px; display: block; }
-    }
-  }
-  .setting-actions {
-    padding-top: 12px;
-    text-align: right;
   }
 }
 

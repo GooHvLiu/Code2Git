@@ -93,7 +93,7 @@
               </el-table-column>
               <el-table-column prop="avgSpeed" label="平均速度(瓶/h)" width="130" align="center" />
               <el-table-column prop="startTime" label="开始时间" width="160" align="center" />
-              <el-table-column prop="endTime" label="结束时间" width="160" align="center" />
+              <el-table-column prop="endTime" label="结束时间" min-width="160" align="center" />
             </el-table>
           </div>
 
@@ -463,333 +463,332 @@
   </div>
 </template>
 
-<script>
+<script setup>
 /**
  * 数据管理页面 - 详细数据查询管理
- * 
+ *
  * 功能定位：对生产相关数据进行详细查询、筛选、搜索、下载、预览
  * 页签分类：
  * 1. 产能数据：按小时/日/周/月/班次统计的产能数据
  * 2. 稼动率数据：OEE综合效率、可用率、性能率、合格率
  * 3. 生产数据：批次生产详细数据
  * 4. 报警数据：报警历史记录
- * 
+ *
  * 功能特点：
  * - 每个页签独立的搜索筛选条件
  * - 复用 ExportDropdown 组件，支持 PDF/Excel 导出
  * - 支持全部导出和选中导出
  * - 支持分页、查看详情
- * 
+ *
  * 数据来源：
  * - 产能数据：后端从数据库查询（基于PLC实时数据采集存储）
  * - 稼动率数据：后端计算（运行时间D4020 / 停机时间D4022）
  * - 生产数据：批次表 + PLC实时数据
  * - 报警数据：报警历史表（基于M4000-M4110 + D4012）
  */
+import { ref, reactive, computed, onMounted } from 'vue'
+import { Message } from 'element-ui'
+import store from '@/store'
 import ExportDropdown from '@/components/ExportDropdown'
-import { mapState } from 'vuex'
 
-export default {
-  name: 'DataView',
-  components: { ExportDropdown },
-  data() {
-    return {
-      activeTab: 'output',
-      selectedRows: [],
-      currentPage: 1,
-      pageSize: 20,
-      total: 0,
-      detailDialogVisible: false,
-      currentRow: null,
-      // 各页签搜索表单
-      searchForms: {
-        output: { type: '', dateRange: [], productName: '' },
-        oee: { type: '', dateRange: [] },
-        production: { batchNo: '', productName: '', status: '', dateRange: [] },
-        alarm: { code: '', type: '', level: '', dateRange: [] }
-      },
-      // 各页签表格数据
-      tableData: {
-        output: [],
-        oee: [],
-        production: [],
-        alarm: []
-      },
-      // 各页签导出列配置
-      exportColumns: {
-        output: [
-          { prop: 'period', label: '统计周期' },
-          { prop: 'productName', label: '产品名称' },
-          { prop: 'targetQty', label: '目标数量' },
-          { prop: 'actualQty', label: '实际产量' },
-          { prop: 'qualifiedQty', label: '合格数' },
-          { prop: 'completionRate', label: '完成率(%)' },
-          { prop: 'qualifiedRate', label: '合格率(%)' },
-          { prop: 'avgSpeed', label: '平均速度(瓶/h)' },
-          { prop: 'startTime', label: '开始时间' },
-          { prop: 'endTime', label: '结束时间' }
-        ],
-        oee: [
-          { prop: 'period', label: '统计周期' },
-          { prop: 'planTime', label: '计划时间(h)' },
-          { prop: 'runTime', label: '运行时间(h)' },
-          { prop: 'idleTime', label: '空闲时间(h)' },
-          { prop: 'faultTime', label: '故障时间(h)' },
-          { prop: 'availability', label: '可用率(%)' },
-          { prop: 'performance', label: '性能率(%)' },
-          { prop: 'quality', label: '合格率(%)' },
-          { prop: 'oee', label: 'OEE(%)' },
-          { prop: 'faultCount', label: '故障次数' },
-          { prop: 'remark', label: '备注' }
-        ],
-        production: [
-          { prop: 'batchNo', label: '批次号' },
-          { prop: 'productName', label: '产品名称' },
-          { prop: 'fillVolume', label: '填充量(ml)' },
-          { prop: 'targetQty', label: '目标数量' },
-          { prop: 'producedQty', label: '已生产' },
-          { prop: 'qualifiedQty', label: '合格数' },
-          { prop: 'qualifiedRate', label: '合格率(%)' },
-          { prop: 'avgSpeed', label: '平均速度(瓶/h)' },
-          { prop: 'statusText', label: '状态' },
-          { prop: 'startTime', label: '开始时间' },
-          { prop: 'endTime', label: '结束时间' }
-        ],
-        alarm: [
-          { prop: 'alarmCode', label: '报警代码' },
-          { prop: 'alarmName', label: '报警名称' },
-          { prop: 'alarmType', label: '报警类型' },
-          { prop: 'levelText', label: '报警级别' },
-          { prop: 'startTime', label: '发生时间' },
-          { prop: 'endTime', label: '恢复时间' },
-          { prop: 'duration', label: '持续时间' },
-          { prop: 'operator', label: '处理人' },
-          { prop: 'remark', label: '处理备注' }
-        ]
-      }
-    }
-  },
-  computed: {
-    ...mapState('user', ['userInfo']),
-    currentUsername() {
-      return this.userInfo?.realName || this.userInfo?.username || ''
-    }
-  },
-  created() {
-    this.loadData('output')
-  },
-  methods: {
-    /**
-     * 加载数据（模拟数据，实际项目中调用后端接口）
-     */
-    loadData(tab) {
-      // 根据不同页签生成模拟数据
-      const mockData = this.generateMockData(tab)
-      this.tableData[tab] = mockData
-      this.total = mockData.length
-    },
 
-    /**
-     * 生成模拟数据
-     */
-    generateMockData(tab) {
-      const data = []
-      const products = ['卡式瓶灌装', '西林瓶灌装', '安瓿瓶灌装']
-      const statuses = ['completed', 'running', 'paused', 'fault']
-      const statusTexts = { completed: '已完成', running: '生产中', paused: '已暂停', fault: '异常' }
-      const alarmTypes = ['位置异动', '真空异常', '伺服使能', '超时报警', '限位报警']
-      const levels = ['critical', 'warning', 'info']
-      const levelTexts = { critical: '紧急', warning: '警告', info: '提示' }
+// ===== 响应式数据 =====
+const activeTab = ref('output')
+const selectedRows = ref([])
+const currentPage = ref(1)
+const pageSize = ref(20)
+const total = ref(0)
+const detailDialogVisible = ref(false)
+const currentRow = ref(null)
 
-      for (let i = 1; i <= 30; i++) {
-        const date = new Date(2026, 7, 24 - Math.floor(i / 3), 8 + Math.floor(Math.random() * 8), Math.floor(Math.random() * 60))
-        const pad = n => String(n).padStart(2, '0')
-        const timeStr = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:00`
+// 各页签搜索表单
+const searchForms = reactive({
+  output: { type: '', dateRange: [], productName: '' },
+  oee: { type: '', dateRange: [] },
+  production: { batchNo: '', productName: '', status: '', dateRange: [] },
+  alarm: { code: '', type: '', level: '', dateRange: [] }
+})
 
-        if (tab === 'output') {
-          const target = 5000 + Math.floor(Math.random() * 5000)
-          const actual = Math.floor(target * (0.7 + Math.random() * 0.3))
-          const qualified = Math.floor(actual * (0.95 + Math.random() * 0.049))
-          data.push({
-            id: i,
-            period: `2026-08-${pad(24 - Math.floor(i / 3))} ${['白班', '夜班'][i % 2]}`,
-            productName: products[Math.floor(Math.random() * products.length)],
-            targetQty: target,
-            actualQty: actual,
-            qualifiedQty: qualified,
-            completionRate: ((actual / target) * 100).toFixed(1),
-            qualifiedRate: ((qualified / actual) * 100).toFixed(1),
-            avgSpeed: 1000 + Math.floor(Math.random() * 500),
-            startTime: timeStr,
-            endTime: `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours() + 4)}:${pad(date.getMinutes())}:00`
-          })
-        } else if (tab === 'oee') {
-          const plan = 8
-          const run = +(plan * (0.85 + Math.random() * 0.12)).toFixed(1)
-          const idle = +((plan - run) * 0.6).toFixed(1)
-          const fault = +(plan - run - idle).toFixed(1)
-          const availability = ((run / plan) * 100).toFixed(1)
-          const performance = (90 + Math.random() * 9).toFixed(1)
-          const quality = (96 + Math.random() * 3.9).toFixed(1)
-          const oee = ((availability * performance * quality) / 10000).toFixed(1)
-          data.push({
-            id: i,
-            period: `2026-08-${pad(24 - Math.floor(i / 3))}`,
-            planTime: plan,
-            runTime: run,
-            idleTime: idle,
-            faultTime: fault,
-            availability,
-            performance,
-            quality,
-            oee,
-            faultCount: Math.floor(Math.random() * 5),
-            remark: fault > 0.5 ? '设备故障停机' : '正常运行'
-          })
-        } else if (tab === 'production') {
-          const status = statuses[Math.floor(Math.random() * statuses.length)]
-          const target = 5000 + Math.floor(Math.random() * 5000)
-          const produced = status === 'completed' ? target : Math.floor(target * (0.3 + Math.random() * 0.6))
-          const qualified = Math.floor(produced * (0.95 + Math.random() * 0.049))
-          data.push({
-            id: i,
-            batchNo: `B202608${pad(24 - Math.floor(i / 3))}${String(i).padStart(3, '0')}`,
-            productName: products[Math.floor(Math.random() * products.length)],
-            fillVolume: (1.5 + Math.random() * 2).toFixed(1),
-            targetQty: target,
-            producedQty: produced,
-            qualifiedQty: qualified,
-            qualifiedRate: ((qualified / produced) * 100).toFixed(1),
-            avgSpeed: 1000 + Math.floor(Math.random() * 500),
-            status,
-            statusText: statusTexts[status],
-            startTime: timeStr,
-            endTime: status === 'completed' ? `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours() + 4)}:${pad(date.getMinutes())}:00` : '',
-            remark: ''
-          })
-        } else if (tab === 'alarm') {
-          const level = levels[Math.floor(Math.random() * levels.length)]
-          const duration = Math.floor(Math.random() * 300) + 10
-          data.push({
-            id: i,
-            alarmCode: `M${4000 + Math.floor(Math.random() * 120)}`,
-            alarmName: ['灌装轴位置异动报警', '真空异常报警', '伺服使能报警', '回原点超时报警', '正限位报警'][Math.floor(Math.random() * 5)],
-            alarmType: alarmTypes[Math.floor(Math.random() * alarmTypes.length)],
-            level,
-            levelText: levelTexts[level],
-            startTime: timeStr,
-            endTime: `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes() + Math.floor(duration / 60))}:${pad(duration % 60)}`,
-            duration: `${Math.floor(duration / 60)}分${duration % 60}秒`,
-            operator: ['张三', '李四', '王五', ''][Math.floor(Math.random() * 4)],
-            remark: level === 'critical' ? '紧急处理，已更换部件' : level === 'warning' ? '已复位，继续观察' : '自动恢复'
-          })
-        }
-      }
-      return data
-    },
+// 各页签表格数据
+const tableData = reactive({
+  output: [],
+  oee: [],
+  production: [],
+  alarm: []
+})
 
-    /**
-     * 页签切换
-     */
-    handleTabChange(tab) {
-      this.activeTab = tab.name
-      this.currentPage = 1
-      this.selectedRows = []
-      this.loadData(tab.name)
-    },
+// 各页签导出列配置
+const exportColumns = reactive({
+  output: [
+    { prop: 'period', label: '统计周期' },
+    { prop: 'productName', label: '产品名称' },
+    { prop: 'targetQty', label: '目标数量' },
+    { prop: 'actualQty', label: '实际产量' },
+    { prop: 'qualifiedQty', label: '合格数' },
+    { prop: 'completionRate', label: '完成率(%)' },
+    { prop: 'qualifiedRate', label: '合格率(%)' },
+    { prop: 'avgSpeed', label: '平均速度(瓶/h)' },
+    { prop: 'startTime', label: '开始时间' },
+    { prop: 'endTime', label: '结束时间' }
+  ],
+  oee: [
+    { prop: 'period', label: '统计周期' },
+    { prop: 'planTime', label: '计划时间(h)' },
+    { prop: 'runTime', label: '运行时间(h)' },
+    { prop: 'idleTime', label: '空闲时间(h)' },
+    { prop: 'faultTime', label: '故障时间(h)' },
+    { prop: 'availability', label: '可用率(%)' },
+    { prop: 'performance', label: '性能率(%)' },
+    { prop: 'quality', label: '合格率(%)' },
+    { prop: 'oee', label: 'OEE(%)' },
+    { prop: 'faultCount', label: '故障次数' },
+    { prop: 'remark', label: '备注' }
+  ],
+  production: [
+    { prop: 'batchNo', label: '批次号' },
+    { prop: 'productName', label: '产品名称' },
+    { prop: 'fillVolume', label: '填充量(ml)' },
+    { prop: 'targetQty', label: '目标数量' },
+    { prop: 'producedQty', label: '已生产' },
+    { prop: 'qualifiedQty', label: '合格数' },
+    { prop: 'qualifiedRate', label: '合格率(%)' },
+    { prop: 'avgSpeed', label: '平均速度(瓶/h)' },
+    { prop: 'statusText', label: '状态' },
+    { prop: 'startTime', label: '开始时间' },
+    { prop: 'endTime', label: '结束时间' }
+  ],
+  alarm: [
+    { prop: 'alarmCode', label: '报警代码' },
+    { prop: 'alarmName', label: '报警名称' },
+    { prop: 'alarmType', label: '报警类型' },
+    { prop: 'levelText', label: '报警级别' },
+    { prop: 'startTime', label: '发生时间' },
+    { prop: 'endTime', label: '恢复时间' },
+    { prop: 'duration', label: '持续时间' },
+    { prop: 'operator', label: '处理人' },
+    { prop: 'remark', label: '处理备注' }
+  ]
+})
 
-    /**
-     * 搜索
-     */
-    handleSearch() {
-      this.currentPage = 1
-      this.$message.success('搜索条件已应用')
-    },
+// ===== 计算属性 =====
+const userInfo = computed(() => store.state.user.userInfo)
+const currentUsername = computed(() => userInfo.value?.realName || userInfo.value?.username || '')
 
-    /**
-     * 重置
-     */
-    handleReset(tab) {
-      if (tab === 'output') {
-        this.searchForms.output = { type: '', dateRange: [], productName: '' }
-      } else if (tab === 'oee') {
-        this.searchForms.oee = { type: '', dateRange: [] }
-      } else if (tab === 'production') {
-        this.searchForms.production = { batchNo: '', productName: '', status: '', dateRange: [] }
-      } else if (tab === 'alarm') {
-        this.searchForms.alarm = { code: '', type: '', level: '', dateRange: [] }
-      }
-      this.currentPage = 1
-      this.loadData(tab)
-    },
+// ===== 方法 =====
+/**
+ * 加载数据（模拟数据，实际项目中调用后端接口）
+ */
+function loadData(tab) {
+  // 根据不同页签生成模拟数据
+  const mockData = generateMockData(tab)
+  tableData[tab] = mockData
+  total.value = mockData.length
+}
 
-    /**
-     * 刷新
-     */
-    handleRefresh() {
-      this.loadData(this.activeTab)
-      this.$message.success('数据已刷新')
-    },
+/**
+ * 生成模拟数据
+ */
+function generateMockData(tab) {
+  const data = []
+  const products = ['卡式瓶灌装', '西林瓶灌装', '安瓿瓶灌装']
+  const statuses = ['completed', 'running', 'paused', 'fault']
+  const statusTexts = { completed: '已完成', running: '生产中', paused: '已暂停', fault: '异常' }
+  const alarmTypes = ['位置异动', '真空异常', '伺服使能', '超时报警', '限位报警']
+  const levels = ['critical', 'warning', 'info']
+  const levelTexts = { critical: '紧急', warning: '警告', info: '提示' }
 
-    /**
-     * 选中行变化
-     */
-    handleSelectionChange(rows) {
-      this.selectedRows = rows
-    },
+  for (let i = 1; i <= 30; i++) {
+    const date = new Date(2026, 7, 24 - Math.floor(i / 3), 8 + Math.floor(Math.random() * 8), Math.floor(Math.random() * 60))
+    const pad = n => String(n).padStart(2, '0')
+    const timeStr = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:00`
 
-    /**
-     * 分页大小变化
-     */
-    handleSizeChange(size) {
-      this.pageSize = size
-    },
-
-    /**
-     * 页码变化
-     */
-    handlePageChange(page) {
-      this.currentPage = page
-    },
-
-    /**
-     * 查看详情
-     */
-    handleView(row) {
-      this.currentRow = row
-      this.detailDialogVisible = true
-    },
-
-    /**
-     * 导出单条
-     */
-    handleExportOne(row) {
-      this.$message.info(`导出批次：${row.batchNo}`)
-    },
-
-    /**
-     * 获取状态类型
-     */
-    getStatusType(status) {
-      const map = { completed: 'success', running: 'primary', paused: 'warning', fault: 'danger' }
-      return map[status] || 'info'
-    },
-
-    /**
-     * 获取状态文本
-     */
-    getStatusText(status) {
-      const map = { completed: '已完成', running: '生产中', paused: '已暂停', fault: '异常' }
-      return map[status] || status
+    if (tab === 'output') {
+      const target = 5000 + Math.floor(Math.random() * 5000)
+      const actual = Math.floor(target * (0.7 + Math.random() * 0.3))
+      const qualified = Math.floor(actual * (0.95 + Math.random() * 0.049))
+      data.push({
+        id: i,
+        period: `2026-08-${pad(24 - Math.floor(i / 3))} ${['白班', '夜班'][i % 2]}`,
+        productName: products[Math.floor(Math.random() * products.length)],
+        targetQty: target,
+        actualQty: actual,
+        qualifiedQty: qualified,
+        completionRate: ((actual / target) * 100).toFixed(1),
+        qualifiedRate: ((qualified / actual) * 100).toFixed(1),
+        avgSpeed: 1000 + Math.floor(Math.random() * 500),
+        startTime: timeStr,
+        endTime: `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours() + 4)}:${pad(date.getMinutes())}:00`
+      })
+    } else if (tab === 'oee') {
+      const plan = 8
+      const run = +(plan * (0.85 + Math.random() * 0.12)).toFixed(1)
+      const idle = +((plan - run) * 0.6).toFixed(1)
+      const fault = +(plan - run - idle).toFixed(1)
+      const availability = ((run / plan) * 100).toFixed(1)
+      const performance = (90 + Math.random() * 9).toFixed(1)
+      const quality = (96 + Math.random() * 3.9).toFixed(1)
+      const oee = ((availability * performance * quality) / 10000).toFixed(1)
+      data.push({
+        id: i,
+        period: `2026-08-${pad(24 - Math.floor(i / 3))}`,
+        planTime: plan,
+        runTime: run,
+        idleTime: idle,
+        faultTime: fault,
+        availability,
+        performance,
+        quality,
+        oee,
+        faultCount: Math.floor(Math.random() * 5),
+        remark: fault > 0.5 ? '设备故障停机' : '正常运行'
+      })
+    } else if (tab === 'production') {
+      const status = statuses[Math.floor(Math.random() * statuses.length)]
+      const target = 5000 + Math.floor(Math.random() * 5000)
+      const produced = status === 'completed' ? target : Math.floor(target * (0.3 + Math.random() * 0.6))
+      const qualified = Math.floor(produced * (0.95 + Math.random() * 0.049))
+      data.push({
+        id: i,
+        batchNo: `B202608${pad(24 - Math.floor(i / 3))}${String(i).padStart(3, '0')}`,
+        productName: products[Math.floor(Math.random() * products.length)],
+        fillVolume: (1.5 + Math.random() * 2).toFixed(1),
+        targetQty: target,
+        producedQty: produced,
+        qualifiedQty: qualified,
+        qualifiedRate: ((qualified / produced) * 100).toFixed(1),
+        avgSpeed: 1000 + Math.floor(Math.random() * 500),
+        status,
+        statusText: statusTexts[status],
+        startTime: timeStr,
+        endTime: status === 'completed' ? `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours() + 4)}:${pad(date.getMinutes())}:00` : '',
+        remark: ''
+      })
+    } else if (tab === 'alarm') {
+      const level = levels[Math.floor(Math.random() * levels.length)]
+      const duration = Math.floor(Math.random() * 300) + 10
+      data.push({
+        id: i,
+        alarmCode: `M${4000 + Math.floor(Math.random() * 120)}`,
+        alarmName: ['灌装轴位置异动报警', '真空异常报警', '伺服使能报警', '回原点超时报警', '正限位报警'][Math.floor(Math.random() * 5)],
+        alarmType: alarmTypes[Math.floor(Math.random() * alarmTypes.length)],
+        level,
+        levelText: levelTexts[level],
+        startTime: timeStr,
+        endTime: `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes() + Math.floor(duration / 60))}:${pad(duration % 60)}`,
+        duration: `${Math.floor(duration / 60)}分${duration % 60}秒`,
+        operator: ['张三', '李四', '王五', ''][Math.floor(Math.random() * 4)],
+        remark: level === 'critical' ? '紧急处理，已更换部件' : level === 'warning' ? '已复位，继续观察' : '自动恢复'
+      })
     }
   }
+  return data
 }
+
+/**
+ * 页签切换
+ */
+function handleTabChange(tab) {
+  activeTab.value = tab.name
+  currentPage.value = 1
+  selectedRows.value = []
+  loadData(tab.name)
+}
+
+/**
+ * 搜索
+ */
+function handleSearch() {
+  currentPage.value = 1
+  Message.success('搜索条件已应用')
+}
+
+/**
+ * 重置
+ */
+function handleReset(tab) {
+  if (tab === 'output') {
+    searchForms.output = { type: '', dateRange: [], productName: '' }
+  } else if (tab === 'oee') {
+    searchForms.oee = { type: '', dateRange: [] }
+  } else if (tab === 'production') {
+    searchForms.production = { batchNo: '', productName: '', status: '', dateRange: [] }
+  } else if (tab === 'alarm') {
+    searchForms.alarm = { code: '', type: '', level: '', dateRange: [] }
+  }
+  currentPage.value = 1
+  loadData(tab)
+}
+
+/**
+ * 刷新
+ */
+function handleRefresh() {
+  loadData(activeTab.value)
+  Message.success('数据已刷新')
+}
+
+/**
+ * 选中行变化
+ */
+function handleSelectionChange(rows) {
+  selectedRows.value = rows
+}
+
+/**
+ * 分页大小变化
+ */
+function handleSizeChange(size) {
+  pageSize.value = size
+}
+
+/**
+ * 页码变化
+ */
+function handlePageChange(page) {
+  currentPage.value = page
+}
+
+/**
+ * 查看详情
+ */
+function handleView(row) {
+  currentRow.value = row
+  detailDialogVisible.value = true
+}
+
+/**
+ * 导出单条
+ */
+function handleExportOne(row) {
+  Message.info(`导出批次：${row.batchNo}`)
+}
+
+/**
+ * 获取状态类型
+ */
+function getStatusType(status) {
+  const map = { completed: 'success', running: 'primary', paused: 'warning', fault: 'danger' }
+  return map[status] || 'info'
+}
+
+/**
+ * 获取状态文本
+ */
+function getStatusText(status) {
+  const map = { completed: '已完成', running: '生产中', paused: '已暂停', fault: '异常' }
+  return map[status] || status
+}
+
+// ===== 生命周期 =====
+onMounted(() => {
+  loadData('output')
+})
 </script>
 
 <style scoped lang="less">
 .data-management-container {
   padding: 16px;
-  background: #f0f2f5;
+  background: #fff;
   min-height: calc(100vh - 84px);
 }
 
@@ -800,7 +799,9 @@ export default {
     background: #fff;
     padding: 0 16px;
     border-radius: 8px 8px 0 0;
-    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.05);
+    border: 1px solid #ebeef5;
+    border-bottom: none;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
   }
   /deep/ .el-tabs__item {
     height: 48px;
@@ -815,15 +816,19 @@ export default {
 .tab-content {
   background: #fff;
   border-radius: 0 0 8px 8px;
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.05);
+  border: 1px solid #ebeef5;
+  border-top: none;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
   padding: 16px;
 }
 
 // 搜索区域
 .search-section {
-  background: #f5f7fa;
+  background: #fff;
   padding: 12px 16px 0;
   border-radius: 6px;
+  border: 1px solid #ebeef5;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
   margin-bottom: 12px;
   .search-form {
     /deep/ .el-form-item {

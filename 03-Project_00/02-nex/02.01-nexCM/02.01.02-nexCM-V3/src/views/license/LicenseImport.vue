@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="license-import-page">
     <div class="license-bg"></div>
 
@@ -191,200 +191,203 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import { Message } from 'element-ui'
 import { getLicenseStatus, importLicense } from "@/api";
 import { ROUTE_PATHS } from "@/router/constant/pathConstants";
 import { resetLicenseCache } from "@/router/permission";
+import store from '@/store'
+import router from '@/router'
+import { useI18n } from '@/composables/useI18n'
 
-export default {
-  name: "LicenseImport",
-  data() {
-    return {
-      licenseStatus: null,
-      selectedFile: null,
-      importing: false,
-      importedLicense: null,
-      currentMachineId: "",
-      copyingMachineId: false,
-      statusLoading: true,
+const { t: $t } = useI18n()
+
+// ===== 响应式数据 =====
+const licenseStatus = ref(null)
+const selectedFile = ref(null)
+const importing = ref(false)
+const importedLicense = ref(null)
+const currentMachineId = ref('')
+const copyingMachineId = ref(false)
+const statusLoading = ref(true)
+
+// ===== 方法 =====
+/**
+ * 加载当前授权状态
+ */
+async function loadStatus() {
+  statusLoading.value = true;
+  try {
+    const res = await getLicenseStatus();
+    licenseStatus.value = res.data;
+    // 从授权状态数据中获取机器码
+    currentMachineId.value = res.data?.machineId || "";
+  } catch (e) {
+    licenseStatus.value = {
+      valid: false,
+      reason: $t("license.cannotGetStatus"),
     };
-  },
-  created() {
-    this.loadStatus();
-  },
-  methods: {
-    /**
-     * 加载当前授权状态
-     */
-    async loadStatus() {
-      this.statusLoading = true;
-      try {
-        const res = await getLicenseStatus();
-        this.licenseStatus = res.data;
-        // 从授权状态数据中获取机器码
-        this.currentMachineId = res.data?.machineId || "";
-      } catch (e) {
-        this.licenseStatus = {
-          valid: false,
-          reason: this.$t("license.cannotGetStatus"),
-        };
-      } finally {
-        this.statusLoading = false;
-      }
-    },
+  } finally {
+    statusLoading.value = false;
+  }
+}
 
-    /**
-     * 刷新授权状态
-     */
-    handleRefreshStatus() {
-      this.importedLicense = null;
-      this.loadStatus();
-    },
+/**
+ * 刷新授权状态
+ */
+function handleRefreshStatus() {
+  importedLicense.value = null;
+  loadStatus();
+}
 
-    /**
-     * 文件选择变化
-     */
-    handleFileChange(file) {
-      this.selectedFile = file.raw;
-      this.importedLicense = null;
-    },
+/**
+ * 文件选择变化
+ */
+function handleFileChange(file) {
+  selectedFile.value = file.raw;
+  importedLicense.value = null;
+}
 
-    /**
-     * 清除已选择的文件
-     */
-    clearSelectedFile() {
-      this.selectedFile = null;
-      this.importedLicense = null;
-    },
+/**
+ * 清除已选择的文件
+ */
+function clearSelectedFile() {
+  selectedFile.value = null;
+  importedLicense.value = null;
+}
 
-    /**
-     * 格式化文件大小
-     */
-    formatFileSize(bytes) {
-      if (bytes < 1024) return bytes + " B";
-      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(2) + " KB";
-      return (bytes / (1024 * 1024)).toFixed(2) + " MB";
-    },
+/**
+ * 格式化文件大小
+ */
+function formatFileSize(bytes) {
+  if (bytes < 1024) return bytes + " B";
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(2) + " KB";
+  return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+}
 
-    /**
-     * 导入授权文件
-     */
-    async handleImport() {
-      if (!this.selectedFile) {
-        this.$message.warning(this.$t("license.pleaseSelectFile"));
-        return;
-      }
+/**
+ * 导入授权文件
+ */
+async function handleImport() {
+  if (!selectedFile.value) {
+    Message.warning($t("license.pleaseSelectFile"));
+    return;
+  }
 
-      this.importing = true;
-      try {
-        const res = await importLicense(this.selectedFile);
-        this.importedLicense = res.data;
-        this.$message.success(this.$t("license.importSuccess"));
-        // 重置授权缓存，下次路由跳转时重新检查
-        resetLicenseCache();
-        // 刷新状态
-        await this.loadStatus();
-      } catch (e) {
-        // 错误已在拦截器提示
-      } finally {
-        this.importing = false;
-      }
-    },
+  importing.value = true;
+  try {
+    const res = await importLicense(selectedFile.value);
+    importedLicense.value = res.data;
+    Message.success($t("license.importSuccess"));
+    // 重置授权缓存，下次路由跳转时重新检查
+    resetLicenseCache();
+    // 刷新状态
+    await loadStatus();
+  } catch (e) {
+    // 错误已在拦截器提示
+  } finally {
+    importing.value = false;
+  }
+}
 
-    /**
-     * 进入系统（跳转到首页或登录页）
-     */
-    handleGoHome() {
-      // 如果有 token 跳首页，没有跳登录
-      const token = this.$store?.state?.user?.token;
-      if (token) {
-        this.$router.push(ROUTE_PATHS.HOME);
-      } else {
-        this.$router.push(ROUTE_PATHS.LOGIN);
-      }
-    },
+/**
+ * 进入系统（跳转到首页或登录页）
+ */
+function handleGoHome() {
+  // 如果有 token 跳首页，没有跳登录
+  const token = store?.state?.user?.token;
+  if (token) {
+    router.push(ROUTE_PATHS.HOME);
+  } else {
+    router.push(ROUTE_PATHS.LOGIN);
+  }
+}
 
-    /**
-     * 格式化时间
-     */
-    formatTime(timestamp) {
-      if (!timestamp) return this.$t("license.permanentValid");
-      const d = new Date(timestamp);
-      const pad = (n) => String(n).padStart(2, "0");
-      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(
-        d.getDate()
-      )} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
-    },
+/**
+ * 格式化时间
+ */
+function formatTime(timestamp) {
+  if (!timestamp) return $t("license.permanentValid");
+  const d = new Date(timestamp);
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(
+    d.getDate()
+  )} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+}
 
-    /**
-     * 授权类型标签
-     */
-    licenseTypeLabel(type) {
-      const map = {
-        trial: this.$t("license.typeTrial"),
-        standard: this.$t("license.typeStandard"),
-        enterprise: this.$t("license.typeEnterprise"),
-        perpetual: this.$t("license.typePerpetual"),
-      };
-      return map[type] || type;
-    },
+/**
+ * 授权类型标签
+ */
+function licenseTypeLabel(type) {
+  const map = {
+    trial: $t("license.typeTrial"),
+    standard: $t("license.typeStandard"),
+    enterprise: $t("license.typeEnterprise"),
+    perpetual: $t("license.typePerpetual"),
+  };
+  return map[type] || type;
+}
 
-    /**
-     * 格式化授权失效原因（国际化映射）
-     * 根据后端返回的中文 reason 关键词，映射成国际化文案
-     */
-    formatLicenseReason(reason) {
-      if (!reason) return this.$t("license.reasonUnknown");
-      // 根据关键词匹配
-      if (reason.includes("不存在") || reason.includes("验证失败")) {
-        return this.$t("license.reasonFileNotFound");
-      }
-      if (reason.includes("项目不匹配")) {
-        return this.$t("license.reasonProjectMismatch");
-      }
-      if (reason.includes("机器不匹配") || reason.includes("硬件绑定")) {
-        return this.$t("license.reasonMachineMismatch");
-      }
-      if (reason.includes("已过期")) {
-        return this.$t("license.reasonExpired");
-      }
-      if (reason.includes("缺少功能") || reason.includes("功能授权")) {
-        return this.$t("license.reasonMissingFeatures");
-      }
-      if (reason.includes("时间回退") || reason.includes("回退")) {
-        return this.$t("license.reasonTimeRollback");
-      }
-      if (reason.includes("联网校准失败") || reason.includes("校准失败")) {
-        return this.$t("license.reasonNetworkSyncFailed");
-      }
-      // 未知原因，返回原文
-      return reason;
-    },
+/**
+ * 格式化授权失效原因（国际化映射）
+ * 根据后端返回的中文 reason 关键词，映射成国际化文案
+ */
+function formatLicenseReason(reason) {
+  if (!reason) return $t("license.reasonUnknown");
+  // 根据关键词匹配
+  if (reason.includes("不存在") || reason.includes("验证失败")) {
+    return $t("license.reasonFileNotFound");
+  }
+  if (reason.includes("项目不匹配")) {
+    return $t("license.reasonProjectMismatch");
+  }
+  if (reason.includes("机器不匹配") || reason.includes("硬件绑定")) {
+    return $t("license.reasonMachineMismatch");
+  }
+  if (reason.includes("已过期")) {
+    return $t("license.reasonExpired");
+  }
+  if (reason.includes("缺少功能") || reason.includes("功能授权")) {
+    return $t("license.reasonMissingFeatures");
+  }
+  if (reason.includes("时间回退") || reason.includes("回退")) {
+    return $t("license.reasonTimeRollback");
+  }
+  if (reason.includes("联网校准失败") || reason.includes("校准失败")) {
+    return $t("license.reasonNetworkSyncFailed");
+  }
+  // 未知原因，返回原文
+  return reason;
+}
 
-    /**
-     * 复制机器码到剪贴板
-     */
-    async copyMachineId() {
-      if (!this.currentMachineId) return;
-      this.copyingMachineId = true;
-      try {
-        const textarea = document.createElement("textarea");
-        textarea.value = this.currentMachineId;
-        textarea.style.position = "fixed";
-        textarea.style.opacity = "0";
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand("copy");
-        document.body.removeChild(textarea);
-        this.$message.success(this.$t("license.copySuccess"));
-      } catch (e) {
-        this.$message.error(this.$t("license.copyFailed"));
-      } finally {
-        this.copyingMachineId = false;
-      }
-    },
-  },
-};
+/**
+ * 复制机器码到剪贴板
+ */
+async function copyMachineId() {
+  if (!currentMachineId.value) return;
+  copyingMachineId.value = true;
+  try {
+    const textarea = document.createElement("textarea");
+    textarea.value = currentMachineId.value;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+    Message.success($t("license.copySuccess"));
+  } catch (e) {
+    Message.error($t("license.copyFailed"));
+  } finally {
+    copyingMachineId.value = false;
+  }
+}
+
+// ===== 生命周期 =====
+onMounted(() => {
+  loadStatus();
+})
 </script>
 
 <style lang="less" scoped>

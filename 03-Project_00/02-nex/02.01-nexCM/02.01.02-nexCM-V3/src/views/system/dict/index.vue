@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="dict-management">
     <el-row :gutter="20">
       <!-- 左侧：字典类型列表 -->
@@ -160,7 +160,9 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, reactive, computed, onMounted } from 'vue'
+import { Message, MessageBox } from 'element-ui'
 import ExportDropdown from '@/components/ExportDropdown/index.vue'
 import {
   requestGetDictTypeListApi,
@@ -172,179 +174,190 @@ import {
   requestUpdateDictItemApi,
   requestDeleteDictItemApi
 } from '@/api'
+import { useI18n } from '@/composables/useI18n'
 
-export default {
-  name: 'DictManagement',
-  components: { ExportDropdown },
-  data() {
-    return {
-      typeLoading: false,
-      itemLoading: false,
-      typeList: [],
-      itemList: [],
-      currentType: null,
-      typeDialog: { visible: false, title: '', isEdit: false },
-      itemDialog: { visible: false, title: '', isEdit: false },
-      typeForm: { dict_name: {}, dict_code: '', description: {}, status: 1, sort: 0 },
-      itemForm: { label: {}, value: '', status: 1, sort: 0, remark: '' },
-      typeRules: {
-        dict_name: [{ required: true, message: this.$t('dict.typeNameRequired'), trigger: 'blur' }],
-        dict_code: [{ required: true, message: this.$t('dict.typeCodeRequired'), trigger: 'blur' }]
-      },
-      itemRules: {
-        label: [{ required: true, message: this.$t('dict.itemLabelRequired'), trigger: 'blur' }],
-        value: [{ required: true, message: this.$t('dict.itemValueRequired'), trigger: 'blur' }]
-      }
-    }
+const { t: $t } = useI18n()
+
+// ===== 响应式数据 =====
+const typeLoading = ref(false)
+const itemLoading = ref(false)
+const typeList = ref([])
+const itemList = ref([])
+const currentType = ref(null)
+const typeFormRef = ref(null)
+const itemFormRef = ref(null)
+
+const typeDialog = reactive({ visible: false, title: '', isEdit: false })
+const itemDialog = reactive({ visible: false, title: '', isEdit: false })
+
+const typeForm = reactive({ dict_name: {}, dict_code: '', description: {}, status: 1, sort: 0 })
+const itemForm = reactive({ label: {}, value: '', status: 1, sort: 0, remark: '' })
+
+const typeRules = {
+  dict_name: [{ required: true, message: $t('dict.typeNameRequired'), trigger: 'blur' }],
+  dict_code: [{ required: true, message: $t('dict.typeCodeRequired'), trigger: 'blur' }]
+}
+
+const itemRules = {
+  label: [{ required: true, message: $t('dict.itemLabelRequired'), trigger: 'blur' }],
+  value: [{ required: true, message: $t('dict.itemValueRequired'), trigger: 'blur' }]
+}
+
+// ===== 计算属性 =====
+const exportColumns = computed(() => [
+  { label: $t('dict.itemLabel'), prop: 'label', width: 150 },
+  { label: $t('dict.itemValue'), prop: 'value', width: 150 },
+  {
+    label: $t('dict.itemStatus'),
+    prop: 'status',
+    width: 80,
+    formatter: row => (row.status === 1 ? $t('common.enable') : $t('common.disable'))
   },
-  computed: {
-    exportColumns() {
-      return [
-        { label: this.$t('dict.itemLabel'), prop: 'label', width: 150 },
-        { label: this.$t('dict.itemValue'), prop: 'value', width: 150 },
-        {
-          label: this.$t('dict.itemStatus'),
-          prop: 'status',
-          width: 80,
-          formatter: row => (row.status === 1 ? this.$t('common.enable') : this.$t('common.disable'))
-        },
-        { label: this.$t('common.sort'), prop: 'sort', width: 80 },
-        { label: this.$t('common.remark'), prop: 'remark', width: 200 }
-      ]
-    },
-    exportTitle() {
-      return this.currentType
-        ? `${this.currentType.dict_name} - ${this.$t('dict.itemList')}`
-        : this.$t('dict.itemList')
+  { label: $t('common.sort'), prop: 'sort', width: 80 },
+  { label: $t('common.remark'), prop: 'remark', width: 200 }
+])
+
+const exportTitle = computed(() => currentType.value
+  ? `${currentType.value.dict_name} - ${$t('dict.itemList')}`
+  : $t('dict.itemList'))
+
+// ===== 方法 =====
+// 加载字典类型列表
+async function loadTypeList() {
+  typeLoading.value = true
+  try {
+    const res = await requestGetDictTypeListApi({ page: 1, pageSize: 100 })
+    typeList.value = res.data?.list || []
+    if (typeList.value.length > 0 && !currentType.value) {
+      currentType.value = typeList.value[0]
+      loadItemList()
     }
-  },
-  created() {
-    this.loadTypeList()
-  },
-  methods: {
-    // 加载字典类型列表
-    async loadTypeList() {
-      this.typeLoading = true
-      try {
-        const res = await requestGetDictTypeListApi({ page: 1, pageSize: 100 })
-        this.typeList = res.data?.list || []
-        if (this.typeList.length > 0 && !this.currentType) {
-          this.currentType = this.typeList[0]
-          this.loadItemList()
-        }
-      } finally {
-        this.typeLoading = false
-      }
-    },
-    // 加载字典项列表
-    async loadItemList() {
-      if (!this.currentType) return
-      this.itemLoading = true
-      try {
-        const res = await requestGetDictItemListApi({ type_id: this.currentType.id, page: 1, pageSize: 100 })
-        this.itemList = res.data?.list || []
-      } finally {
-        this.itemLoading = false
-      }
-    },
-    // 切换字典类型
-    handleTypeChange(row) {
-      this.currentType = row
-      this.loadItemList()
-    },
-    // 新增字典类型
-    handleAddType() {
-      this.typeDialog = { visible: true, title: this.$t('dict.addType'), isEdit: false }
-      this.typeForm = { dict_name: {}, dict_code: '', description: {}, status: 1, sort: 0 }
-    },
-    // 编辑字典类型
-    handleEditType(row) {
-      this.typeDialog = { visible: true, title: this.$t('dict.editType'), isEdit: true }
-      // I18nInput 组件直接绑定 JSON 对象，无需转换
-      this.typeForm = { ...row }
-    },
-    // 提交字典类型表单
-    submitTypeForm() {
-      this.$refs.typeForm.validate(async valid => {
-        if (!valid) return
-        try {
-          // I18nInput 组件已自动处理 JSON 转换，直接提交
-          if (this.typeDialog.isEdit) {
-            await requestUpdateDictTypeApi(this.typeForm.id, this.typeForm)
-            this.$message.success(this.$t('common.updateSuccess'))
-          } else {
-            await requestCreateDictTypeApi(this.typeForm)
-            this.$message.success(this.$t('common.createSuccess'))
-          }
-          this.typeDialog.visible = false
-          this.loadTypeList()
-        } catch (e) {
-          this.$message.error(e.msg || this.$t('common.operationFailed'))
-        }
-      })
-    },
-    // 删除字典类型
-    handleDeleteType(row) {
-      this.$confirm(this.$t('dict.deleteTypeConfirm'), this.$t('common.tip'), {
-        confirmButtonText: this.$t('common.confirm'),
-        cancelButtonText: this.$t('common.cancel'),
-        type: 'warning'
-      }).then(async () => {
-        await requestDeleteDictTypeApi(row.id)
-        this.$message.success(this.$t('common.deleteSuccess'))
-        if (this.currentType?.id === row.id) {
-          this.currentType = null
-          this.itemList = []
-        }
-        this.loadTypeList()
-      }).catch(() => {})
-    },
-    // 新增字典项
-    handleAddItem() {
-      this.itemDialog = { visible: true, title: this.$t('dict.addItem'), isEdit: false }
-      this.itemForm = { label: {}, value: '', status: 1, sort: 0, remark: '' }
-    },
-    // 编辑字典项
-    handleEditItem(row) {
-      this.itemDialog = { visible: true, title: this.$t('dict.editItem'), isEdit: true }
-      // I18nInput 组件直接绑定 JSON 对象，无需转换
-      this.itemForm = { ...row }
-    },
-    // 提交字典项表单
-    submitItemForm() {
-      this.$refs.itemForm.validate(async valid => {
-        if (!valid) return
-        try {
-          // I18nInput 组件已自动处理 JSON 转换，直接提交
-          const data = { ...this.itemForm, type_id: this.currentType.id }
-          if (this.itemDialog.isEdit) {
-            await requestUpdateDictItemApi(this.itemForm.id, data)
-            this.$message.success(this.$t('common.updateSuccess'))
-          } else {
-            await requestCreateDictItemApi(data)
-            this.$message.success(this.$t('common.createSuccess'))
-          }
-          this.itemDialog.visible = false
-          this.loadItemList()
-        } catch (e) {
-          this.$message.error(e.msg || this.$t('common.operationFailed'))
-        }
-      })
-    },
-    // 删除字典项
-    handleDeleteItem(row) {
-      this.$confirm(this.$t('dict.deleteItemConfirm'), this.$t('common.tip'), {
-        confirmButtonText: this.$t('common.confirm'),
-        cancelButtonText: this.$t('common.cancel'),
-        type: 'warning'
-      }).then(async () => {
-        await requestDeleteDictItemApi(row.id)
-        this.$message.success(this.$t('common.deleteSuccess'))
-        this.loadItemList()
-      }).catch(() => {})
-    }
+  } finally {
+    typeLoading.value = false
   }
 }
+
+// 加载字典项列表
+async function loadItemList() {
+  if (!currentType.value) return
+  itemLoading.value = true
+  try {
+    const res = await requestGetDictItemListApi({ type_id: currentType.value.id, page: 1, pageSize: 100 })
+    itemList.value = res.data?.list || []
+  } finally {
+    itemLoading.value = false
+  }
+}
+
+// 切换字典类型
+function handleTypeChange(row) {
+  currentType.value = row
+  loadItemList()
+}
+
+// 新增字典类型
+function handleAddType() {
+  Object.assign(typeDialog, { visible: true, title: $t('dict.addType'), isEdit: false })
+  Object.assign(typeForm, { dict_name: {}, dict_code: '', description: {}, status: 1, sort: 0 })
+}
+
+// 编辑字典类型
+function handleEditType(row) {
+  Object.assign(typeDialog, { visible: true, title: $t('dict.editType'), isEdit: true })
+  // I18nInput 组件直接绑定 JSON 对象，无需转换
+  Object.assign(typeForm, { ...row })
+}
+
+// 提交字典类型表单
+function submitTypeForm() {
+  typeFormRef.value.validate(async valid => {
+    if (!valid) return
+    try {
+      // I18nInput 组件已自动处理 JSON 转换，直接提交
+      if (typeDialog.isEdit) {
+        await requestUpdateDictTypeApi(typeForm.id, typeForm)
+        Message.success($t('common.updateSuccess'))
+      } else {
+        await requestCreateDictTypeApi(typeForm)
+        Message.success($t('common.createSuccess'))
+      }
+      typeDialog.visible = false
+      loadTypeList()
+    } catch (e) {
+      Message.error(e.msg || $t('common.operationFailed'))
+    }
+  })
+}
+
+// 删除字典类型
+function handleDeleteType(row) {
+  MessageBox.confirm($t('dict.deleteTypeConfirm'), $t('common.tip'), {
+    confirmButtonText: $t('common.confirm'),
+    cancelButtonText: $t('common.cancel'),
+    type: 'warning'
+  }).then(async () => {
+    await requestDeleteDictTypeApi(row.id)
+    Message.success($t('common.deleteSuccess'))
+    if (currentType.value?.id === row.id) {
+      currentType.value = null
+      itemList.value = []
+    }
+    loadTypeList()
+  }).catch(() => {})
+}
+
+// 新增字典项
+function handleAddItem() {
+  Object.assign(itemDialog, { visible: true, title: $t('dict.addItem'), isEdit: false })
+  Object.assign(itemForm, { label: {}, value: '', status: 1, sort: 0, remark: '' })
+}
+
+// 编辑字典项
+function handleEditItem(row) {
+  Object.assign(itemDialog, { visible: true, title: $t('dict.editItem'), isEdit: true })
+  // I18nInput 组件直接绑定 JSON 对象，无需转换
+  Object.assign(itemForm, { ...row })
+}
+
+// 提交字典项表单
+function submitItemForm() {
+  itemFormRef.value.validate(async valid => {
+    if (!valid) return
+    try {
+      // I18nInput 组件已自动处理 JSON 转换，直接提交
+      const data = { ...itemForm, type_id: currentType.value.id }
+      if (itemDialog.isEdit) {
+        await requestUpdateDictItemApi(itemForm.id, data)
+        Message.success($t('common.updateSuccess'))
+      } else {
+        await requestCreateDictItemApi(data)
+        Message.success($t('common.createSuccess'))
+      }
+      itemDialog.visible = false
+      loadItemList()
+    } catch (e) {
+      Message.error(e.msg || $t('common.operationFailed'))
+    }
+  })
+}
+
+// 删除字典项
+function handleDeleteItem(row) {
+  MessageBox.confirm($t('dict.deleteItemConfirm'), $t('common.tip'), {
+    confirmButtonText: $t('common.confirm'),
+    cancelButtonText: $t('common.cancel'),
+    type: 'warning'
+  }).then(async () => {
+    await requestDeleteDictItemApi(row.id)
+    Message.success($t('common.deleteSuccess'))
+    loadItemList()
+  }).catch(() => {})
+}
+
+// ===== 生命周期 =====
+onMounted(() => {
+  loadTypeList()
+})
 </script>
 
 <style scoped lang="less">

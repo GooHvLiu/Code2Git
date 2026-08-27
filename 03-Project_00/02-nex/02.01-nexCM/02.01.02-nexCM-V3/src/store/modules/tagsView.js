@@ -7,7 +7,7 @@
  */
 import { setSessionStorage, getSessionStorage } from '@/utils/storage'
 import { SESSIONSTORAGE_KEYS } from '@/utils/storageKey'
-import { HOME_TAG } from '@/router/constant/pathConstants'
+import { HOME_TAG, ROUTE_PATHS } from '@/router/constant/pathConstants'
 import i18n from '@/i18n'
 
 /** 获取国际化的首页标签 */
@@ -15,9 +15,29 @@ function getHomeTag() {
   return { ...HOME_TAG, title: i18n.t('layout.homeOverview') }
 }
 
+/** 从 sessionStorage 读取并过滤掉无效标签（登录页、404等 hidden 路由） */
+function getValidVisitedViews() {
+  const saved = getSessionStorage(SESSIONSTORAGE_KEYS.TAG_LIST)
+  if (!Array.isArray(saved)) return [getHomeTag()]
+  // 过滤掉登录页等不应该出现在标签栏的路由（路径过滤）
+  const invalidPaths = [ROUTE_PATHS.LOGIN, ROUTE_PATHS.NOT_FOUND, ROUTE_PATHS.FORBIDDEN, ROUTE_PATHS.REDIRECT, ROUTE_PATHS.LICENSE_IMPORT]
+  // 过滤掉标题包含登录页标题的标签（双重保险，处理旧数据）
+  const invalidTitles = ['欢迎登录', 'login.title']
+  const filtered = saved.filter(v => {
+    if (invalidPaths.includes(v.path)) return false
+    if (invalidTitles.some(t => v.title && v.title.includes(t))) return false
+    return true
+  })
+  // 确保首页标签存在
+  if (!filtered.some(v => v.path === HOME_TAG.path)) {
+    filtered.unshift(getHomeTag())
+  }
+  return filtered
+}
+
 const state = {
   /** 已访问的标签页列表 */
-  visitedViews: getSessionStorage(SESSIONSTORAGE_KEYS.TAG_LIST) || [getHomeTag()],
+  visitedViews: getValidVisitedViews(),
   /** 已缓存的组件名列表（用于 keep-alive include） */
   cachedViews: []
 }
@@ -25,12 +45,21 @@ const state = {
 const mutations = {
   /** 添加标签页（已存在则不重复添加） */
   ADD_VIEW(state, view) {
+    // 过滤掉 hidden 路由（登录页、404、403、重定向等），不显示在标签栏
+    // Vue Router 3 中 hidden 属性在 matched 数组的路由记录中，不在 route 对象上
+    const isHiddenRoute = view.hidden === true ||
+      (Array.isArray(view.matched) && view.matched.some(r => r.hidden === true)) ||
+      (view.meta && view.meta.hidden === true)
+    if (isHiddenRoute) return
+    // 额外路径过滤（双重保险）
+    const invalidPaths = [ROUTE_PATHS.LOGIN, ROUTE_PATHS.NOT_FOUND, ROUTE_PATHS.FORBIDDEN, ROUTE_PATHS.REDIRECT, ROUTE_PATHS.LICENSE_IMPORT]
+    if (invalidPaths.includes(view.path)) return
     if (state.visitedViews.some(v => v.path === view.path)) return
     const rawTitle = view.meta?.titles?.[view.meta.titles.length - 1] || view.meta?.title || 'no-name'
     state.visitedViews.push({
       name: view.name,
       path: view.path,
-      title: i18n.t(rawTitle),
+      title: i18n.te(rawTitle) ? i18n.t(rawTitle) : rawTitle,
       fullPath: view.fullPath
     })
     setSessionStorage(SESSIONSTORAGE_KEYS.TAG_LIST, state.visitedViews)

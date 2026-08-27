@@ -52,7 +52,9 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { Message } from 'element-ui'
 import {
   requestGetUnreadCountApi,
   requestGetNotificationListApi,
@@ -60,142 +62,148 @@ import {
   requestMarkAllAsReadApi
 } from '@/api'
 import ws from '@/utils/websocket'
+import router from '@/router'
+import { useI18n } from '@/composables/useI18n'
 
-export default {
-  name: 'NotificationBell',
-  data() {
-    return {
-      showPanel: false,
-      loading: false,
-      unreadCount: 0,
-      notifications: []
-    }
-  },
-  computed: {
-    hasUnread() {
-      return this.unreadCount > 0
-    },
-    /** 角标显示：>9 显示 "..." */
-    badgeText() {
-      if (this.unreadCount > 9) return '...'
-      return this.unreadCount
-    }
-  },
-  methods: {
-    /** 获取未读数量 */
-    async fetchUnreadCount() {
-      try {
-        const res = await requestGetUnreadCountApi()
-        this.unreadCount = res.data?.count || 0
-      } catch (e) {
-        // 静默失败
-      }
-    },
-    /** 获取通知列表（下拉面板显示最近5条） */
-    async fetchNotifications() {
-      this.loading = true
-      try {
-        const res = await requestGetNotificationListApi({ page: 1, pageSize: 5 })
-        this.notifications = res.data?.list || []
-      } catch (e) {
-        this.notifications = []
-      } finally {
-        this.loading = false
-      }
-    },
-    /** 切换面板 */
-    togglePanel() {
-      this.showPanel = !this.showPanel
-      if (this.showPanel) {
-        this.fetchNotifications()
-      }
-    },
-    /** 点击单条通知：标记已读 */
-    async handleItemClick(item) {
-      if (!item.is_read) {
-        try {
-          await requestMarkAsReadApi(item.id)
-          item.is_read = 1
-          this.unreadCount = Math.max(0, this.unreadCount - 1)
-        } catch (e) {
-          // 静默失败
-        }
-      }
-    },
-    /** 全部已读 */
-    async handleMarkAllRead() {
-      try {
-        await requestMarkAllAsReadApi()
-        this.notifications.forEach(item => { item.is_read = 1 })
-        this.unreadCount = 0
-        this.$message.success(this.$t('notification.markAllSuccess'))
-      } catch (e) {
-        this.$message.error(this.$t('common.operationFailed'))
-      }
-    },
-    /** 跳转到通知中心完整页面 */
-    goToNotificationPage() {
-      this.showPanel = false
-      this.$router.push('/notification')
-    },
-    /** 获取通知类型图标 */
-    getTypeIcon(type) {
-      const iconMap = {
-        system: 'el-icon-message',
-        plc: 'el-icon-cpu',
-        user: 'el-icon-user',
-        audit: 'el-icon-document',
-        warning: 'el-icon-warning',
-        info: 'el-icon-info',
-        success: 'el-icon-success'
-      }
-      return iconMap[type] || 'el-icon-message'
-    },
-    /** 格式化时间 */
-    formatTime(time) {
-      if (!time) return ''
-      const date = new Date(time)
-      const now = new Date()
-      const diff = now - date
-      const minutes = Math.floor(diff / 60000)
-      const hours = Math.floor(diff / 3600000)
-      const days = Math.floor(diff / 86400000)
+const { t: $t } = useI18n()
 
-      if (minutes < 1) return this.$t('notification.justNow') || '刚刚'
-      if (minutes < 60) return `${minutes}${this.$t('notification.minutesAgo') || '分钟前'}`
-      if (hours < 24) return `${hours}${this.$t('notification.hoursAgo') || '小时前'}`
-      if (days < 7) return `${days}${this.$t('notification.daysAgo') || '天前'}`
-      return date.toLocaleDateString()
-    },
-    /** 点击外部关闭面板 */
-    handleClickOutside() {
-      this.showPanel = false
-    },
-    /** WebSocket 收到新通知 */
-    handleWsNotification(data) {
-      // eslint-disable-next-line no-console
-      console.log('[通知铃铛] 收到新通知:', data)
-      this.unreadCount++
-      // 如果面板打开着，刷新列表
-      if (this.showPanel) {
-        this.fetchNotifications()
-      }
-      // 可选：播放提示音或显示桌面通知
-    }
-  },
-  mounted() {
-    // 初始获取未读数量
-    this.fetchUnreadCount()
-    // 监听 WebSocket 新通知（实时推送，无需轮询）
-    ws.on('notification', this.handleWsNotification)
-    // 点击外部关闭
-    document.addEventListener('click', this.handleClickOutside)
-  },
-  beforeDestroy() {
-    ws.off('notification', this.handleWsNotification)
-    document.removeEventListener('click', this.handleClickOutside)
+// ===== 响应式数据 =====
+const showPanel = ref(false)
+const loading = ref(false)
+const unreadCount = ref(0)
+const notifications = ref([])
+
+// ===== 计算属性 =====
+const hasUnread = computed(() => unreadCount.value > 0)
+const badgeText = computed(() => {
+  if (unreadCount.value > 9) return '...'
+  return unreadCount.value
+})
+
+// ===== 方法 =====
+/** 获取未读数量 */
+async function fetchUnreadCount() {
+  try {
+    const res = await requestGetUnreadCountApi()
+    unreadCount.value = res.data?.count || 0
+  } catch (e) {
+    // 静默失败
   }
 }
+
+/** 获取通知列表（下拉面板显示最近5条） */
+async function fetchNotifications() {
+  loading.value = true
+  try {
+    const res = await requestGetNotificationListApi({ page: 1, pageSize: 5 })
+    notifications.value = res.data?.list || []
+  } catch (e) {
+    notifications.value = []
+  } finally {
+    loading.value = false
+  }
+}
+
+/** 切换面板 */
+function togglePanel() {
+  showPanel.value = !showPanel.value
+  if (showPanel.value) {
+    fetchNotifications()
+  }
+}
+
+/** 点击单条通知：标记已读 */
+async function handleItemClick(item) {
+  if (!item.is_read) {
+    try {
+      await requestMarkAsReadApi(item.id)
+      item.is_read = 1
+      unreadCount.value = Math.max(0, unreadCount.value - 1)
+    } catch (e) {
+      // 静默失败
+    }
+  }
+}
+
+/** 全部已读 */
+async function handleMarkAllRead() {
+  try {
+    await requestMarkAllAsReadApi()
+    notifications.value.forEach(item => { item.is_read = 1 })
+    unreadCount.value = 0
+    Message.success($t('notification.markAllSuccess'))
+  } catch (e) {
+    Message.error($t('common.operationFailed'))
+  }
+}
+
+/** 跳转到通知中心完整页面 */
+function goToNotificationPage() {
+  showPanel.value = false
+  router.push('/notification')
+}
+
+/** 获取通知类型图标 */
+function getTypeIcon(type) {
+  const iconMap = {
+    system: 'el-icon-message',
+    plc: 'el-icon-cpu',
+    user: 'el-icon-user',
+    audit: 'el-icon-document',
+    warning: 'el-icon-warning',
+    info: 'el-icon-info',
+    success: 'el-icon-success'
+  }
+  return iconMap[type] || 'el-icon-message'
+}
+
+/** 格式化时间 */
+function formatTime(time) {
+  if (!time) return ''
+  const date = new Date(time)
+  const now = new Date()
+  const diff = now - date
+  const minutes = Math.floor(diff / 60000)
+  const hours = Math.floor(diff / 3600000)
+  const days = Math.floor(diff / 86400000)
+
+  if (minutes < 1) return $t('notification.justNow') || '刚刚'
+  if (minutes < 60) return `${minutes}${$t('notification.minutesAgo') || '分钟前'}`
+  if (hours < 24) return `${hours}${$t('notification.hoursAgo') || '小时前'}`
+  if (days < 7) return `${days}${$t('notification.daysAgo') || '天前'}`
+  return date.toLocaleDateString()
+}
+
+/** 点击外部关闭面板 */
+function handleClickOutside() {
+  showPanel.value = false
+}
+
+/** WebSocket 收到新通知 */
+function handleWsNotification(data) {
+  // eslint-disable-next-line no-console
+  console.log('[通知铃铛] 收到新通知:', data)
+  unreadCount.value++
+  // 如果面板打开着，刷新列表
+  if (showPanel.value) {
+    fetchNotifications()
+  }
+}
+
+// ===== 生命周期 =====
+onMounted(() => {
+  // 初始获取未读数量
+  fetchUnreadCount()
+  // 监听 WebSocket 新通知（实时推送，无需轮询）
+  ws.on('notification', handleWsNotification)
+  // 点击外部关闭
+  document.addEventListener('click', handleClickOutside)
+})
+
+onBeforeUnmount(() => {
+  ws.off('notification', handleWsNotification)
+  document.removeEventListener('click', handleClickOutside)
+})
 </script>
 
 <style scoped lang="less">

@@ -75,7 +75,7 @@
           :model="ruleForm"
           status-icon
           :rules="rules"
-          ref="ruleForm"
+          ref="ruleFormRef"
           class="auth-form"
         >
           <h2 class="form-title">{{ $t('login.title') }}</h2>
@@ -173,8 +173,10 @@
   </div>
 </template>
 
-<script>
+<script setup>
 /* eslint-disable vue/multi-word-component-names */
+import { ref, reactive, computed, onMounted } from 'vue'
+import { Message } from 'element-ui'
 import {
   validateUsername,
   validatePassword,
@@ -191,211 +193,209 @@ import { LOCALSTORAGE_KEYS, SESSIONSTORAGE_KEYS } from "@/utils/storageKey";
 import { requestCaptchaCodeApi, requestLoginApi, requestRegisterApi } from "@/api/login";
 import { setToken } from "@/utils/auth";
 import config from "@/config";
+import router from '@/router'
+import { useI18n } from '@/composables/useI18n'
 
-export default {
-  name: "Login",
-  data() {
-    return {
-      config,
-      // 是否注册面板
-      isRegister: false,
-      loading: false,
+const { t: $t } = useI18n()
 
-      // ========== 登录表单（原有逻辑不动） ==========
-      ruleForm: {
-        username: "",
-        password: "",
-        captchacode: "",
+// ===== 响应式数据 =====
+const isRegister = ref(false)
+const loading = ref(false)
+const captchaCodeSrc = ref('')
+
+// 登录表单
+const ruleForm = reactive({
+  username: "",
+  password: "",
+  captchacode: "",
+})
+
+// 注册表单
+const registerForm = reactive({
+  username: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+  captchacode: "",
+})
+
+const ruleFormRef = ref(null)
+const registerFormRef = ref(null)
+
+// ===== 计算属性 =====
+/** 登录表单校验规则（国际化） */
+const rules = computed(() => ({
+  username: [
+    { required: true, message: $t('login.usernameRequired'), trigger: "blur" },
+    { validator: validateUsername, trigger: "blur" },
+  ],
+  password: [
+    { required: true, message: $t('login.passwordRequired'), trigger: "blur" },
+  ],
+  captchacode: [
+    { required: true, message: $t('login.captchaRequired'), trigger: "blur" },
+  ],
+}))
+
+/** 注册表单校验规则（国际化） */
+const registerRules = computed(() => ({
+  username: [
+    { required: true, message: $t('login.usernameRequired'), trigger: "blur" },
+    { validator: validateUsername, trigger: "blur" },
+  ],
+  email: [
+    { required: true, message: $t('login.emailRequired'), trigger: "blur" },
+    { validator: validateEmail, trigger: "blur" },
+  ],
+  password: [
+    { required: true, message: $t('login.passwordRequired'), trigger: "blur" },
+    { validator: validatePassword, trigger: "blur" },
+  ],
+  confirmPassword: [
+    { required: true, message: $t('login.confirmPasswordRequired'), trigger: "blur" },
+    {
+      validator: (rule, value, callback) => {
+        validateConfirmPassword(registerForm.password)(
+          rule,
+          value,
+          callback
+        );
       },
+      trigger: "blur",
+    },
+  ],
+  captchacode: [
+    { required: true, message: $t('login.captchaRequired'), trigger: "blur" },
+  ],
+}))
 
-      // ========== 注册表单 ==========
-      registerForm: {
+// ===== 方法 =====
+/** 切换登录/注册面板 */
+function switchPanel(type) {
+  isRegister.value = type === "register";
+  // 切换浏览器标签页标题
+  const pageName = isRegister.value
+    ? $t('login.registerTitle')
+    : $t('login.title');
+  document.title = `${pageName} - ${config.SYSTEM_NAME}`;
+}
+
+/** 获取验证码（登录注册共用） */
+async function getCaptchaCode() {
+  try {
+    const res = await requestCaptchaCodeApi();
+    ruleForm.captchacode = "";
+    registerForm.captchacode = "";
+    const svgText = res.data.img;
+    captchaCodeSrc.value = `data:image/svg+xml;utf8,${encodeURIComponent(
+      svgText
+    )}`;
+    setLocalStorage(LOCALSTORAGE_KEYS.CAPTCHA_UUID, res.data.uuid);
+  } catch (err) {
+    captchaCodeSrc.value = "";
+  }
+}
+
+/** 登录提交（原有逻辑不动） */
+function submitForm(formName) {
+  const formRef = formName === 'ruleForm' ? ruleFormRef.value : registerFormRef.value
+  formRef.validate(async (valid) => {
+    if (!valid) {
+      formReset({
+        isClearUsername: false,
+        isClearPassword: true,
+        isClearCode: true,
+        isRefreshCaptcha: true,
+      });
+      return;
+    }
+
+    loading.value = true;
+    try {
+      const res = await requestLoginApi({
+        username: ruleForm.username,
+        password: ruleForm.password,
+        code: ruleForm.captchacode,
+        uuid: getLocalStorage(LOCALSTORAGE_KEYS.CAPTCHA_UUID),
+      });
+
+      formReset({
+        isClearUsername: true,
+        isClearPassword: true,
+        isClearCode: true,
+        isRefreshCaptcha: false,
+      });
+      removeLocalStorage(LOCALSTORAGE_KEYS.CAPTCHA_UUID);
+      removeSessionStorage(SESSIONSTORAGE_KEYS.TAG_LIST);
+      setToken(res.data.token);
+
+      // 跳转：优先 redirect 参数，否则首页
+      // 用户信息和动态路由由路由守卫统一获取
+      const redirect = router.currentRoute.query.redirect || "/";
+      router.push(redirect);
+    } catch (err) {
+      formReset({
+        isClearUsername: false,
+        isClearPassword: true,
+        isClearCode: true,
+        isRefreshCaptcha: true,
+      });
+    } finally {
+      loading.value = false;
+    }
+  });
+}
+
+/** 注册提交 */
+function handleRegister() {
+  registerFormRef.value.validate(async (valid) => {
+    if (!valid) return;
+    loading.value = true;
+    try {
+      await requestRegisterApi({
+        username: registerForm.username,
+        password: registerForm.password,
+        email: registerForm.email,
+        code: registerForm.captchacode,
+        uuid: getLocalStorage(LOCALSTORAGE_KEYS.CAPTCHA_UUID),
+      });
+      Message.success($t('login.registerSuccess'));
+      // 清空注册表单，切换到登录面板
+      Object.assign(registerForm, {
         username: "",
         email: "",
         password: "",
         confirmPassword: "",
         captchacode: "",
-      },
-
-      captchaCodeSrc: "",
-    };
-  },
-  computed: {
-    /** 登录表单校验规则（国际化） */
-    rules() {
-      return {
-        username: [
-          { required: true, message: this.$t('login.usernameRequired'), trigger: "blur" },
-          { validator: validateUsername, trigger: "blur" },
-        ],
-        password: [
-          { required: true, message: this.$t('login.passwordRequired'), trigger: "blur" },
-        ],
-        captchacode: [
-          { required: true, message: this.$t('login.captchaRequired'), trigger: "blur" },
-        ],
-      };
-    },
-    /** 注册表单校验规则（国际化） */
-    registerRules() {
-      return {
-        username: [
-          { required: true, message: this.$t('login.usernameRequired'), trigger: "blur" },
-          { validator: validateUsername, trigger: "blur" },
-        ],
-        email: [
-          { required: true, message: this.$t('login.emailRequired'), trigger: "blur" },
-          { validator: validateEmail, trigger: "blur" },
-        ],
-        password: [
-          { required: true, message: this.$t('login.passwordRequired'), trigger: "blur" },
-          { validator: validatePassword, trigger: "blur" },
-        ],
-        confirmPassword: [
-          { required: true, message: this.$t('login.confirmPasswordRequired'), trigger: "blur" },
-          {
-            validator: (rule, value, callback) => {
-              validateConfirmPassword(this.registerForm.password)(
-                rule,
-                value,
-                callback
-              );
-            },
-            trigger: "blur",
-          },
-        ],
-        captchacode: [
-          { required: true, message: this.$t('login.captchaRequired'), trigger: "blur" },
-        ],
-      };
-    },
-  },
-  methods: {
-    /** 切换登录/注册面板 */
-    switchPanel(type) {
-      this.isRegister = type === "register";
-      // 切换浏览器标签页标题
-      const pageName = this.isRegister
-        ? this.$t('login.registerTitle')
-        : this.$t('login.title');
-      document.title = `${pageName} - ${config.SYSTEM_NAME}`;
-    },
-
-    /** 获取验证码（登录注册共用） */
-    async getCaptchaCode() {
-      try {
-        const res = await requestCaptchaCodeApi();
-        this.ruleForm.captchacode = "";
-        this.registerForm.captchacode = "";
-        const svgText = res.data.img;
-        this.captchaCodeSrc = `data:image/svg+xml;utf8,${encodeURIComponent(
-          svgText
-        )}`;
-        setLocalStorage(LOCALSTORAGE_KEYS.CAPTCHA_UUID, res.data.uuid);
-      } catch (err) {
-        this.captchaCodeSrc = "";
-      }
-    },
-
-    /** 登录提交（原有逻辑不动） */
-    submitForm(formName) {
-      this.$refs[formName].validate(async (valid) => {
-        if (!valid) {
-          this.formReset({
-            isClearUsername: false,
-            isClearPassword: true,
-            isClearCode: true,
-            isRefreshCaptcha: true,
-          });
-          return;
-        }
-
-        this.loading = true;
-        try {
-          const res = await requestLoginApi({
-            username: this.ruleForm.username,
-            password: this.ruleForm.password,
-            code: this.ruleForm.captchacode,
-            uuid: getLocalStorage(LOCALSTORAGE_KEYS.CAPTCHA_UUID),
-          });
-
-          this.formReset({
-            isClearUsername: true,
-            isClearPassword: true,
-            isClearCode: true,
-            isRefreshCaptcha: false,
-          });
-          removeLocalStorage(LOCALSTORAGE_KEYS.CAPTCHA_UUID);
-          removeSessionStorage(SESSIONSTORAGE_KEYS.TAG_LIST);
-          setToken(res.data.token);
-
-          // 跳转：优先 redirect 参数，否则首页
-          // 用户信息和动态路由由路由守卫统一获取
-          const redirect = this.$route.query.redirect || "/";
-          this.$router.push(redirect);
-        } catch (err) {
-          this.formReset({
-            isClearUsername: false,
-            isClearPassword: true,
-            isClearCode: true,
-            isRefreshCaptcha: true,
-          });
-        } finally {
-          this.loading = false;
-        }
       });
-    },
+      switchPanel("login");
+    } catch (err) {
+      // 注册失败，刷新验证码
+      getCaptchaCode();
+    } finally {
+      loading.value = false;
+    }
+  });
+}
 
-    /** 注册提交 */
-    handleRegister() {
-      this.$refs.registerFormRef.validate(async (valid) => {
-        if (!valid) return;
-        this.loading = true;
-        try {
-          await requestRegisterApi({
-            username: this.registerForm.username,
-            password: this.registerForm.password,
-            email: this.registerForm.email,
-            code: this.registerForm.captchacode,
-            uuid: getLocalStorage(LOCALSTORAGE_KEYS.CAPTCHA_UUID),
-          });
-          this.$message.success(this.$t('login.registerSuccess'));
-          // 清空注册表单，切换到登录面板
-          this.registerForm = {
-            username: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
-            captchacode: "",
-          };
-          this.switchPanel("login");
-        } catch (err) {
-          // 注册失败，刷新验证码
-          this.getCaptchaCode();
-        } finally {
-          this.loading = false;
-        }
-      });
-    },
+/** 表单重置（原有逻辑不动） */
+function formReset(clear = {}) {
+  const {
+    isClearUsername = false,
+    isClearPassword = false,
+    isClearCode = false,
+    isRefreshCaptcha = false,
+  } = clear;
+  if (isClearUsername) ruleForm.username = "";
+  if (isClearPassword) ruleForm.password = "";
+  if (isClearCode) ruleForm.captchacode = "";
+  if (isRefreshCaptcha) getCaptchaCode();
+}
 
-    /** 表单重置（原有逻辑不动） */
-    formReset(clear = {}) {
-      const {
-        isClearUsername = false,
-        isClearPassword = false,
-        isClearCode = false,
-        isRefreshCaptcha = false,
-      } = clear;
-      if (isClearUsername) this.ruleForm.username = "";
-      if (isClearPassword) this.ruleForm.password = "";
-      if (isClearCode) this.ruleForm.captchacode = "";
-      if (isRefreshCaptcha) this.getCaptchaCode();
-    },
-  },
-  created() {
-    this.getCaptchaCode();
-  },
-};
+// ===== 生命周期 =====
+onMounted(() => {
+  getCaptchaCode();
+})
 </script>
 
 <style scoped lang="less">

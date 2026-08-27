@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="notification-page">
     <!-- 工具栏 -->
     <div class="toolbar">
@@ -22,7 +22,7 @@
 
     <!-- 筛选标签 -->
     <div class="filter-tabs">
-      <el-radio-group v-model="filterType" size="small" @change="getList">
+      <el-radio-group v-model="filterType" size="small" @change="handleFilterChange">
         <el-radio-button label="">{{ $t('notification.all') }}</el-radio-button>
         <el-radio-button label="0">{{ $t('notification.unread') }}</el-radio-button>
         <el-radio-button label="1">{{ $t('notification.read') }}</el-radio-button>
@@ -67,11 +67,13 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, reactive, computed } from 'vue'
+import { useTable } from '@/composables/useTable'
+import { useDict } from '@/composables/useDict'
 import Pagination from '@/components/Pagination/index.vue'
 import DictTag from '@/components/DictTag/index.vue'
 import ExportDropdown from '@/components/ExportDropdown/index.vue'
-import dictMixin from '@/mixins/dict'
 import { formatDate } from '@/utils/date'
 import {
   requestGetNotificationListApi,
@@ -80,88 +82,98 @@ import {
   requestDeleteNotificationApi
 } from '@/api'
 
-export default {
-  name: 'NotificationPage',
-  components: { Pagination, DictTag, ExportDropdown },
-  mixins: [dictMixin],
-  data() {
-    return {
-      loading: false,
-      tableData: [],
-      total: 0,
-      pageNum: 1,
-      pageSize: 20,
-      filterType: '',
-      /** 需要加载的字典编码 */
-      dictCodes: ['notification_type', 'notification_priority']
-    }
-  },
-  computed: {
-    exportColumns() {
-      return [
-        { label: this.$t('notification.type'), prop: 'type', width: 100, formatter: row => this.typeMap[row.type] || row.type },
-        { label: this.$t('notification.title'), prop: 'title', width: 200 },
-        { label: this.$t('notification.content'), prop: 'content', width: 300 },
-        {
-          label: this.$t('notification.read'),
-          prop: 'is_read',
-          width: 80,
-          formatter: row => (row.is_read === 1 ? this.$t('notification.read') : this.$t('notification.unread'))
-        },
-        { label: this.$t('common.createTime'), prop: 'created_at', width: 170, formatter: row => formatDate(row.created_at) }
-      ]
-    }
-  },
-  created() {
-    this.getList()
-  },
-  methods: {
-    async getList() {
-      this.loading = true
-      try {
-        const params = { page: this.pageNum, pageSize: this.pageSize }
-        if (this.filterType !== '') {
-          params.isRead = this.filterType
-        }
-        const res = await requestGetNotificationListApi(params)
-        this.tableData = res.data?.list || []
-        this.total = res.data?.total || 0
-      } finally {
-        this.loading = false
-      }
-    },
-    async handleMarkRead(item) {
-      await requestMarkAsReadApi(item.id)
-      item.is_read = 1
-      this.$message.success(this.$t('notification.markReadSuccess'))
-    },
-    async handleMarkAll() {
-      await requestMarkAllAsReadApi()
-      this.$message.success(this.$t('notification.markAllSuccess'))
-      this.getList()
-    },
-    handleDetail(item) {
-      if (!item.is_read) {
-        this.handleMarkRead(item)
-      }
-    },
-    handleDelete(item) {
-      this.$confirm(this.$t('notification.deleteConfirm'), this.$t('common.tip'), {
-        confirmButtonText: this.$t('common.confirm'),
-        cancelButtonText: this.$t('common.cancel'),
-        type: 'warning'
-      }).then(async () => {
-        await requestDeleteNotificationApi(item.id)
-        this.$message.success(this.$t('common.deleteSuccess'))
-        this.getList()
-      }).catch(() => {})
-    },
-    formatTime(time) {
-      if (!time) return ''
-      const date = new Date(time)
-      return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
-    }
+// 预加载字典数据（dict-tag 组件会自动使用）
+useDict(['notification_type', 'notification_priority'])
+
+// 筛选类型
+const filterType = ref('')
+
+// 搜索参数
+const queryParams = reactive({
+  isRead: ''
+})
+
+// 请求前参数转换
+function beforeFetch(params) {
+  const { pageNum, isRead, ...rest } = params
+  const result = { page: pageNum, ...rest }
+  if (isRead !== '') {
+    result.isRead = isRead
   }
+  return result
+}
+
+// 使用 useTable 组合式函数
+const {
+  loading,
+  tableData,
+  total,
+  pageNum,
+  pageSize,
+  getList
+} = useTable(requestGetNotificationListApi, queryParams, { beforeFetch })
+
+
+// 筛选改变
+function handleFilterChange() {
+  queryParams.isRead = filterType.value
+  pageNum.value = 1
+  getList()
+}
+
+// 优先级映射
+const priorityMap = computed(() => ({
+  high: 'danger',
+  medium: 'warning',
+  low: 'info'
+}))
+
+// 导出列配置
+const exportColumns = computed(() => [
+  { label: '类型', prop: 'type', width: 100 },
+  { label: '标题', prop: 'title', width: 200 },
+  { label: '内容', prop: 'content', width: 300 },
+  {
+    label: '是否已读',
+    prop: 'is_read',
+    width: 80,
+    formatter: row => (row.is_read === 1 ? '已读' : '未读')
+  },
+  { label: '创建时间', prop: 'created_at', width: 170, formatter: row => formatDate(row.created_at) }
+])
+
+// 标记为已读
+async function handleMarkRead(item) {
+  await requestMarkAsReadApi(item.id)
+  item.is_read = 1
+}
+
+// 全部标记为已读
+async function handleMarkAll() {
+  await requestMarkAllAsReadApi()
+  getList()
+}
+
+// 查看详情
+function handleDetail(item) {
+  if (!item.is_read) {
+    handleMarkRead(item)
+  }
+}
+
+// 删除
+function handleDelete(item) {
+  // 确认删除逻辑
+  requestDeleteNotificationApi(item.id).then(() => {
+    getList()
+  }).catch(() => {})
+}
+
+// 格式化时间
+function formatTime(time) {
+  if (!time) return ''
+  const date = new Date(time)
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
 }
 </script>
 

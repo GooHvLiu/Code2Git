@@ -21,28 +21,29 @@
   </el-menu-item>
 </template>
 
-<script>
-export default {
-  name: 'SidebarItem',
-  props: {
-    item: {
-      type: Object,
-      required: true
-    }
-  },
-  computed: {
-    /** 只有一个子节点时不显示展开箭头，直接当菜单项 */
-    hasChildren() {
-      return this.item.children && this.item.children.length > 0
-    },
-    /** 显示标题：判断是否是 i18n key，是就翻译，不是就直接显示 */
-    displayTitle() {
-      const title = this.item.title
-      if (!title) return ''
-      return this.$te(title) ? this.$t(title) : title
-    }
+<script setup>
+import { computed } from 'vue'
+import { useI18n } from '@/composables/useI18n'
+
+const { t: $t, te: $te } = useI18n()
+
+const props = defineProps({
+  item: {
+    type: Object,
+    required: true
   }
-}
+})
+
+// ===== 计算属性 =====
+/** 只有一个子节点时不显示展开箭头，直接当菜单项 */
+const hasChildren = computed(() => props.item.children && props.item.children.length > 0)
+
+/** 显示标题：判断是否是 i18n key，是就翻译，不是就直接显示 */
+const displayTitle = computed(() => {
+  const title = props.item.title
+  if (!title) return ''
+  return $te(title) ? $t(title) : title
+})
 </script>
 
 <style scoped lang="less">

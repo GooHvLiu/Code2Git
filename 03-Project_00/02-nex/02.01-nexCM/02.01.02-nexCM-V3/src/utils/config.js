@@ -9,6 +9,7 @@ import { requestGetAllConfigsApi } from '@/api'
 import store from '@/store'
 import ws from '@/utils/websocket'
 import { setLanguage } from '@/i18n'
+import { getCoordsByValues, getCityByCode } from '@/utils/worldCities'
 
 // 配置缓存
 let configCache = {}
@@ -50,7 +51,17 @@ const DEFAULT_CONFIG = {
   reportIncludeDownloadCount: true,
   allowRunningOrderDownload: false,
   autoArchiveCompleted: true,
-  orderSwitchConfirm: true
+  orderSwitchConfirm: true,
+  // 设备参数
+  deviceName: 'nexCM-灌装机-001',
+  deviceCode: 'NEXCM-001',
+  deviceRegion: ['CN', 'CN-WX'], // 所在地区（级联选择器值）
+  deviceInstallDate: '2024-01-01',
+  // 部件寿命提醒设置
+  partLifeReminderEnabled: true,
+  partLifeThreshold: '20',
+  partLifeRemindInterval: 'day',
+  partLifeSnoozeInterval: '10'
 }
 
 /**
@@ -78,11 +89,15 @@ export async function loadConfig(forceRefresh = false) {
         configCache = { ...DEFAULT_CONFIG }
       }
       loaded = true
+      // 配置加载完成后，同步设备参数到 device store
+      syncDeviceInfoToStore()
       return { ...configCache }
     } catch (err) {
       console.error('[配置管理] 加载配置失败:', err)
       configCache = { ...DEFAULT_CONFIG }
       loaded = true
+      // 即使加载失败，也同步默认设备参数
+      syncDeviceInfoToStore()
       return { ...configCache }
     } finally {
       loadingPromise = null
@@ -111,6 +126,71 @@ export function getConfig(key, defaultValue = null) {
  */
 export function updateConfigCache(configs) {
   configCache = { ...configCache, ...configs }
+}
+
+/**
+ * 解析 deviceRegion 为数组格式（兼容多种后端存储格式）
+ */
+function parseDeviceRegion(value) {
+  if (Array.isArray(value)) return value
+  if (typeof value === 'string') {
+    // JSON 字符串格式：'["CN","CN-WX"]'
+    try {
+      const parsed = JSON.parse(value)
+      if (Array.isArray(parsed)) return parsed
+    } catch (e) {
+      // 不是 JSON，继续尝试其他格式
+    }
+    // 逗号分隔格式：'CN,CN-WX'
+    if (value.includes(',')) {
+      return value.split(',').map(s => s.trim())
+    }
+  }
+  return null
+}
+
+/**
+ * 同步设备参数到 device store（配置加载后自动调用）
+ * 把配置中的设备名称、编号、所在地区、投用日期等同步到 device store
+ */
+function syncDeviceInfoToStore() {
+  try {
+    const deviceName = configCache.deviceName
+    const deviceCode = configCache.deviceCode
+    const deviceRegion = parseDeviceRegion(configCache.deviceRegion)
+    const deviceInstallDate = configCache.deviceInstallDate
+
+    const deviceInfo = {}
+
+    if (deviceName !== undefined) deviceInfo.name = deviceName
+    if (deviceCode !== undefined) deviceInfo.code = deviceCode
+    if (deviceInstallDate !== undefined) deviceInfo.installDate = deviceInstallDate
+
+    // 处理所在地区：级联选择器值 → 城市名称 + 经纬度
+    if (Array.isArray(deviceRegion) && deviceRegion.length >= 2) {
+      const cityCode = deviceRegion[deviceRegion.length - 1]
+      const city = getCityByCode(cityCode)
+      const coords = getCoordsByValues(deviceRegion)
+
+      if (city) {
+        // 城市名称格式：国家 · 城市（如：中国 · 无锡）
+        const countryName = city.countryNameZh || city.countryName || ''
+        const cityName = city.nameZh || city.name || ''
+        deviceInfo.location = countryName ? `${countryName} · ${cityName}` : cityName
+      }
+
+      if (coords) {
+        deviceInfo.locationCode = deviceRegion
+        deviceInfo.locationCoords = { lng: coords.lng, lat: coords.lat }
+      }
+    }
+
+    if (Object.keys(deviceInfo).length > 0) {
+      store.commit('device/SET_DEVICE_INFO', deviceInfo)
+    }
+  } catch (e) {
+    console.error('[配置管理] 同步设备参数到 store 失败:', e)
+  }
 }
 
 /**
@@ -223,6 +303,26 @@ export function applyConfig(configs) {
       }
     } catch (e) {
       console.error('[配置管理] 更新轮询间隔失败:', e)
+    }
+  }
+
+  // 9. 设备参数：同步到 device store（设备信息卡片、地图等使用）
+  if (configs.deviceName !== undefined ||
+      configs.deviceCode !== undefined ||
+      configs.deviceRegion !== undefined ||
+      configs.deviceInstallDate !== undefined) {
+    syncDeviceInfoToStore()
+  }
+
+  // 10. 部件寿命提醒开关：发送事件通知 Layout 组件
+  if (configs.partLifeReminderEnabled !== undefined) {
+    try {
+      const event = new CustomEvent('partLifeReminderEnabledChanged', {
+        detail: { enabled: configs.partLifeReminderEnabled }
+      })
+      window.dispatchEvent(event)
+    } catch (e) {
+      console.error('[配置管理] 更新部件寿命提醒开关失败:', e)
     }
   }
 }

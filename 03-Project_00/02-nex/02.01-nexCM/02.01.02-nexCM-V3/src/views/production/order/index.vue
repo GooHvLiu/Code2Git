@@ -246,238 +246,231 @@
   </div>
 </template>
 
-<script>
-import { mapGetters } from "vuex";
+<script setup>
+import { ref, computed, onMounted } from "vue";
+import { Message } from "element-ui";
+import store from "@/store";
 import { generateOrderReport } from "@/utils/orderReport";
 import { getConfig } from "@/utils/config";
+import { useI18n } from "@/composables/useI18n";
 
-export default {
-  name: "OrderLog",
-  data() {
+const { t: $t } = useI18n();
+
+// ===== 响应式数据 =====
+const activeTab = ref("completed");
+const selectedOrders = ref([]);
+const selectedRowKeys = ref([]);
+
+// ===== 计算属性 =====
+const completedOrders = computed(() => store.getters["device/completedOrders"]);
+const runningOrders = computed(() => store.getters["device/runningOrders"]);
+const plannedOrders = computed(() => store.getters["device/plannedOrders"]);
+const orderStats = computed(() => store.getters["device/orderStats"]);
+
+// 当前Tab的订单列表
+const currentOrders = computed(() => {
+  switch (activeTab.value) {
+    case "completed":
+      return completedOrders.value;
+    case "running":
+      return runningOrders.value;
+    case "planned":
+      return plannedOrders.value;
+    default:
+      return [];
+  }
+});
+
+// 订单设置配置（从系统配置读取）
+const orderConfig = computed(() => ({
+  allowNoOrderProduction: getConfig("allowNoOrderProduction", false),
+  noOrderProductionHighlight: getConfig("noOrderProductionHighlight", false),
+  showOperatorName: getConfig("showOperatorName", true),
+  showAlarmCount: getConfig("showAlarmCount", true),
+  showRuntime: getConfig("showRuntime", true),
+  reportIncludeAlarmDetail: getConfig("reportIncludeAlarmDetail", true),
+  reportIncludeOperatorDetail: getConfig("reportIncludeOperatorDetail", true),
+  reportIncludeDownloadCount: getConfig("reportIncludeDownloadCount", true),
+  allowRunningOrderDownload: getConfig("allowRunningOrderDownload", false),
+}));
+
+// 是否显示无订单生产提示
+const showNoOrderTip = computed(
+  () =>
+    orderConfig.value.allowNoOrderProduction &&
+    orderConfig.value.noOrderProductionHighlight &&
+    runningOrders.value.length === 0
+);
+
+// 当前Tab是否可以下载
+const canDownload = computed(() => {
+  if (activeTab.value === "planned") return false;
+  if (
+    activeTab.value === "running" &&
+    !orderConfig.value.allowRunningOrderDownload
+  )
+    return false;
+  return selectedOrders.value.length > 0;
+});
+
+const canDownloadAll = computed(() => {
+  if (activeTab.value === "planned") return false;
+  if (
+    activeTab.value === "running" &&
+    !orderConfig.value.allowRunningOrderDownload
+  )
+    return false;
+  return currentOrders.value.length > 0;
+});
+
+// 当前用户名（导出人）
+const exporter = computed(
+  () => store?.state?.user?.userInfo?.username || "admin"
+);
+
+// PDF水印设置
+const pdfWatermark = computed(() => getConfig("pdfWatermarkEnabled", true));
+const pdfWatermarkText = computed(
+  () => getConfig("pdfWatermarkText", "") || exporter.value
+);
+
+// ===== 方法 =====
+function handleTabClick() {
+  selectedOrders.value = [];
+  selectedRowKeys.value = [];
+}
+
+function handleSelectionChange(selection) {
+  selectedOrders.value = selection;
+  selectedRowKeys.value = selection.map((item) => item.orderNo);
+}
+
+/**
+ * 单元格样式 —— 选中行用内联样式设置背景色和文字颜色，优先级最高
+ * @param {Object} param { row, column, rowIndex, columnIndex }
+ */
+function cellStyle({ row }) {
+  if (selectedRowKeys.value.includes(row.orderNo)) {
     return {
-      activeTab: "completed",
-      selectedOrders: [],
-      selectedRowKeys: [],
+      backgroundColor: "#ecf5ff",
+      color: "#303133",
     };
-  },
-  computed: {
-    ...mapGetters("device", [
-      "completedOrders",
-      "runningOrders",
-      "plannedOrders",
-      "orderStats",
-    ]),
-    // 当前Tab的订单列表
-    currentOrders() {
-      switch (this.activeTab) {
-        case "completed":
-          return this.completedOrders;
-        case "running":
-          return this.runningOrders;
-        case "planned":
-          return this.plannedOrders;
-        default:
-          return [];
-      }
-    },
-    // 订单设置配置（从系统配置读取）
-    orderConfig() {
-      return {
-        allowNoOrderProduction: getConfig("allowNoOrderProduction", false),
-        noOrderProductionHighlight: getConfig(
-          "noOrderProductionHighlight",
-          false
-        ),
-        showOperatorName: getConfig("showOperatorName", true),
-        showAlarmCount: getConfig("showAlarmCount", true),
-        showRuntime: getConfig("showRuntime", true),
-        reportIncludeAlarmDetail: getConfig("reportIncludeAlarmDetail", true),
-        reportIncludeOperatorDetail: getConfig(
-          "reportIncludeOperatorDetail",
-          true
-        ),
-        reportIncludeDownloadCount: getConfig(
-          "reportIncludeDownloadCount",
-          true
-        ),
-        allowRunningOrderDownload: getConfig(
-          "allowRunningOrderDownload",
-          false
-        ),
-      };
-    },
-    // 是否显示无订单生产提示
-    showNoOrderTip() {
-      return (
-        this.orderConfig.allowNoOrderProduction &&
-        this.orderConfig.noOrderProductionHighlight &&
-        this.runningOrders.length === 0
-      );
-    },
-    // 当前Tab是否可以下载
-    canDownload() {
-      if (this.activeTab === "planned") return false;
-      if (
-        this.activeTab === "running" &&
-        !this.orderConfig.allowRunningOrderDownload
-      )
-        return false;
-      return this.selectedOrders.length > 0;
-    },
-    canDownloadAll() {
-      if (this.activeTab === "planned") return false;
-      if (
-        this.activeTab === "running" &&
-        !this.orderConfig.allowRunningOrderDownload
-      )
-        return false;
-      return this.currentOrders.length > 0;
-    },
-    // 当前用户名（导出人）
-    exporter() {
-      return this.$store?.state?.user?.userInfo?.username || "admin";
-    },
-    // PDF水印设置
-    pdfWatermark() {
-      return getConfig("pdfWatermarkEnabled", true);
-    },
-    pdfWatermarkText() {
-      return getConfig("pdfWatermarkText", "") || this.exporter;
-    },
-  },
-  methods: {
-    handleTabClick() {
-      this.selectedOrders = [];
-      this.selectedRowKeys = [];
-    },
-    handleSelectionChange(selection) {
-      this.selectedOrders = selection;
-      this.selectedRowKeys = selection.map((item) => item.orderNo);
-    },
-    /**
-     * 单元格样式 —— 选中行用内联样式设置背景色和文字颜色，优先级最高
-     * @param {Object} param { row, column, rowIndex, columnIndex }
-     */
-    cellStyle({ row }) {
-      if (this.selectedRowKeys.includes(row.orderNo)) {
-        return {
-          backgroundColor: "#ecf5ff",
-          color: "#303133",
-        };
-      }
-      return {};
-    },
-    // 检查行是否可选中（计划订单不可选中下载）
-    checkSelectable(row) {
-      return this.canDownloadOrder(row);
-    },
-    // 检查订单是否可下载
-    canDownloadOrder(row) {
-      if (row.status === "planned") return false;
-      if (
-        row.status === "running" &&
-        !this.orderConfig.allowRunningOrderDownload
-      )
-        return false;
-      return true;
-    },
-    statusType(status) {
-      switch (status) {
-        case "completed":
-          return "success";
-        case "running":
-          return "primary";
-        case "planned":
-          return "warning";
-        default:
-          return "info";
-      }
-    },
-    statusText(status) {
-      switch (status) {
-        case "completed":
-          return this.$t("order.statusCompleted");
-        case "running":
-          return this.$t("order.statusRunning");
-        case "planned":
-          return this.$t("order.statusPlanned");
-        default:
-          return status;
-      }
-    },
-    // 下载单个订单报告
-    handleDownloadSingle(order) {
-      if (!this.canDownloadOrder(order)) {
-        if (order.status === "planned") {
-          this.$message.warning(this.$t("order.plannedNoDownload"));
-        } else if (order.status === "running") {
-          this.$message.warning(this.$t("order.runningNoDownload"));
-        }
-        return;
-      }
-      this.generateAndDownload([order]);
-    },
-    // 下载选中订单报告
-    handleDownloadSelected() {
-      if (this.selectedOrders.length === 0) {
-        this.$message.warning(this.$t("order.selectOrderTip"));
-        return;
-      }
-      this.generateAndDownload(this.selectedOrders);
-    },
-    // 下载全部订单报告
-    handleDownloadAll() {
-      this.generateAndDownload(this.currentOrders);
-    },
-    // 生成并下载订单报告（每个订单一个PDF文件）
-    async generateAndDownload(orders) {
-      const config = {
-        exporter: this.exporter,
-        watermark: this.pdfWatermark,
-        watermarkText: this.pdfWatermarkText,
-        includeAlarmDetail: this.orderConfig.reportIncludeAlarmDetail,
-        includeOperatorDetail: this.orderConfig.reportIncludeOperatorDetail,
-        includeDownloadCount: this.orderConfig.reportIncludeDownloadCount,
-      };
+  }
+  return {};
+}
 
-      let successCount = 0;
-      let failCount = 0;
+// 检查行是否可选中（计划订单不可选中下载）
+function checkSelectable(row) {
+  return canDownloadOrder(row);
+}
 
-      for (const order of orders) {
-        try {
-          await generateOrderReport(order, config, (key) => this.$t(key));
-          // 增加下载次数
-          this.$store.commit("device/INCREMENT_ORDER_DOWNLOAD", {
-            type: this.activeTab,
-            id: order.id,
-          });
-          successCount++;
-        } catch (e) {
-          console.error("订单报告生成失败:", e);
-          failCount++;
-        }
-      }
+// 检查订单是否可下载
+function canDownloadOrder(row) {
+  if (row.status === "planned") return false;
+  if (row.status === "running" && !orderConfig.value.allowRunningOrderDownload)
+    return false;
+  return true;
+}
 
-      if (failCount === 0) {
-        this.$message.success(`成功生成 ${successCount} 份订单报告`);
-      } else if (successCount === 0) {
-        this.$message.error(
-          `全部 ${failCount} 份订单报告生成失败，请查看控制台详情`
-        );
-      } else {
-        this.$message.warning(
-          `成功 ${successCount} 份，失败 ${failCount} 份，请查看控制台详情`
-        );
-      }
-    },
-  },
-};
+function statusType(status) {
+  switch (status) {
+    case "completed":
+      return "success";
+    case "running":
+      return "primary";
+    case "planned":
+      return "warning";
+    default:
+      return "info";
+  }
+}
+
+function statusText(status) {
+  switch (status) {
+    case "completed":
+      return $t("order.statusCompleted");
+    case "running":
+      return $t("order.statusRunning");
+    case "planned":
+      return $t("order.statusPlanned");
+    default:
+      return status;
+  }
+}
+
+// 下载单个订单报告
+function handleDownloadSingle(order) {
+  if (!canDownloadOrder(order)) {
+    if (order.status === "planned") {
+      Message.warning($t("order.plannedNoDownload"));
+    } else if (order.status === "running") {
+      Message.warning($t("order.runningNoDownload"));
+    }
+    return;
+  }
+  generateAndDownload([order]);
+}
+
+// 下载选中订单报告
+function handleDownloadSelected() {
+  if (selectedOrders.value.length === 0) {
+    Message.warning($t("order.selectOrderTip"));
+    return;
+  }
+  generateAndDownload(selectedOrders.value);
+}
+
+// 下载全部订单报告
+function handleDownloadAll() {
+  generateAndDownload(currentOrders.value);
+}
+
+// 生成并下载订单报告（每个订单一个PDF文件）
+async function generateAndDownload(orders) {
+  const config = {
+    exporter: exporter.value,
+    watermark: pdfWatermark.value,
+    watermarkText: pdfWatermarkText.value,
+    includeAlarmDetail: orderConfig.value.reportIncludeAlarmDetail,
+    includeOperatorDetail: orderConfig.value.reportIncludeOperatorDetail,
+    includeDownloadCount: orderConfig.value.reportIncludeDownloadCount,
+  };
+
+  let successCount = 0;
+  let failCount = 0;
+
+  for (const order of orders) {
+    try {
+      await generateOrderReport(order, config, (key) => $t(key));
+      // 增加下载次数
+      store.commit("device/INCREMENT_ORDER_DOWNLOAD", {
+        type: activeTab.value,
+        id: order.id,
+      });
+      successCount++;
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error("订单报告生成失败:", e);
+      failCount++;
+    }
+  }
+
+  if (failCount === 0) {
+    Message.success(`成功生成 ${successCount} 份订单报告`);
+  } else if (successCount === 0) {
+    Message.error(`全部 ${failCount} 份订单报告生成失败，请查看控制台详情`);
+  } else {
+    Message.warning(
+      `成功 ${successCount} 份，失败 ${failCount} 份，请查看控制台详情`
+    );
+  }
+}
 </script>
 
 <style scoped lang="less">
 .order-container {
   padding: 16px;
-  background: #f0f2f5;
+  background: #fff;
   min-height: calc(100vh - 84px);
 }
 
@@ -494,8 +487,15 @@ export default {
     gap: 14px;
     background: #fff;
     border-radius: 8px;
+    border: 1px solid #ebeef5;
     padding: 18px 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s;
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      border-color: #dcdfe6;
+    }
 
     .stat-icon {
       width: 48px;
@@ -553,10 +553,24 @@ export default {
       margin: 0;
       border: none;
     }
+    ::v-deep .el-tabs--card > .el-tabs__header .el-tabs__nav {
+      border: none; /* 或者你想要的样式 */
+    }
+
     ::v-deep .el-tabs--card > .el-tabs__header .el-tabs__item {
       border: 1px solid #dcdfe6;
       border-radius: 4px;
       padding: 0 18px;
+      margin-right: 12px;
+      white-space: nowrap;
+      overflow: visible;
+      text-overflow: clip;
+      height: 36px;
+      line-height: 34px;
+
+      &:last-child {
+        margin-right: 0;
+      }
 
       &.is-active {
         background: #409eff;
@@ -570,7 +584,7 @@ export default {
     }
     .tab-badge {
       display: inline-block;
-      background: #f0f2f5;
+      background: #fff;
       color: #606266;
       border-radius: 10px;
       padding: 0 8px;
@@ -650,7 +664,7 @@ html
   body
   .order-table-wrapper
   .el-table__body-wrapper::-webkit-scrollbar-track {
-  background: #f5f7fa;
+  background: #fff;
   border-radius: 3px;
 }
 html
@@ -667,6 +681,6 @@ html
   body
   .order-table-wrapper
   .el-table__body-wrapper::-webkit-scrollbar-corner {
-  background: #f5f7fa;
+  background: #fff;
 }
 </style>

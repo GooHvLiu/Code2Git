@@ -28,6 +28,8 @@ const state = {
     code: 'NEXCM-FILL-2026-001',
     model: 'nexCM-V2 全自动灌装机',
     location: '中国 · 江苏无锡 · 生产车间A区',
+    locationCode: ['CN', 'CN-WX'], // [国家编码, 城市编码]
+    locationCoords: { lng: 120.30, lat: 31.57 }, // 城市经纬度
     installDate: '2026-01-15',
     manufacturer: 'nexCM 科技',
     ip: '192.168.1.100'
@@ -135,8 +137,22 @@ const state = {
       { time: '16:00', value: 1280 }, { time: '18:00', value: 660 },
       { time: '20:00', value: 0 }, { time: '22:00', value: 0 }
     ],
-    fillVolume: [],
-    vacuum: [],
+    fillVolume: [
+      { time: '00:00', value: 0 }, { time: '02:00', value: 0 },
+      { time: '04:00', value: 0 }, { time: '06:00', value: 1.8 },
+      { time: '08:00', value: 2.0 }, { time: '10:00', value: 2.0 },
+      { time: '12:00', value: 2.1 }, { time: '14:00', value: 2.0 },
+      { time: '16:00', value: 1.9 }, { time: '18:00', value: 2.0 },
+      { time: '20:00', value: 0 }, { time: '22:00', value: 0 }
+    ],
+    vacuum: [
+      { time: '00:00', value: 0 }, { time: '02:00', value: 0 },
+      { time: '04:00', value: 0 }, { time: '06:00', value: -0.07 },
+      { time: '08:00', value: -0.085 }, { time: '10:00', value: -0.088 },
+      { time: '12:00', value: -0.082 }, { time: '14:00', value: -0.09 },
+      { time: '16:00', value: -0.086 }, { time: '18:00', value: -0.075 },
+      { time: '20:00', value: 0 }, { time: '22:00', value: 0 }
+    ],
     temperature: [],
     output: []
   },
@@ -681,7 +697,7 @@ const actions = {
   },
 
   /** 获取趋势数据 */
-  async fetchTrendData({ commit }, { key = 'speed', range = '24h' } = {}) {
+  async fetchTrendData({ commit }) {
     // TODO: 对接后端接口 GET /api/device/trend?key=xxx&range=24h
     commit('UPDATE_LAST_UPDATE_TIME')
   },
@@ -706,7 +722,7 @@ const actions = {
    *   message.type: 'status' | 'params' | 'production' | 'alarm' | 'batch' | 'part'
    *   message.data: 对应的数据
    */
-  onWebSocketMessage({ commit, dispatch }, message) {
+  onWebSocketMessage({ commit }, message) {
     if (!message || !message.type) return
 
     switch (message.type) {
@@ -908,11 +924,12 @@ const getters = {
 
   /**
    * 实时参数列表（带状态判断和百分比）
+   * 只展示运行速度、灌装量、真空度三个核心参数
    */
   realtimeParamsList: state => {
     const params = state.params
     const config = state.paramsConfig
-    const keys = ['speed', 'fillVolume', 'vacuum', 'temperature', 'pressure', 'vibration']
+    const keys = ['speed', 'fillVolume', 'vacuum']
     return keys.map(key => {
       const cfg = config[key]
       const value = params[key]

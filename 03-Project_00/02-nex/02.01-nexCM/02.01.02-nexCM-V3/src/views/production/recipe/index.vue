@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <!-- 主体：左侧配方列表 + 右侧详情 -->
+    <!-- 主体：左侧配方列表 + 中间分隔 + 右侧详情 -->
     <div class="recipe-body">
       <!-- 左侧配方列表 -->
       <div class="recipe-list">
@@ -43,7 +43,20 @@
             <span class="stat" :class="{ danger: recipe.faultRate > 1 }"><i class="el-icon-warning"></i> {{ recipe.faultRate }}%</span>
             <span class="stat"><i class="el-icon-circle-check"></i> {{ recipe.avgQualifiedRate }}%</span>
           </div>
+          <!-- 选中时的连接箭头 -->
+          <div v-if="selectedId === recipe.id" class="card-connector">
+            <i class="el-icon-arrow-right"></i>
+          </div>
         </div>
+      </div>
+
+      <!-- 中间视觉分隔条 -->
+      <div class="recipe-divider">
+        <div class="divider-line"></div>
+        <div class="divider-badge">
+          <i class="el-icon-d-arrow-right"></i>
+        </div>
+        <div class="divider-line"></div>
       </div>
 
       <!-- 右侧配方详情 -->
@@ -51,20 +64,7 @@
         <!-- 详情头部 -->
         <div class="detail-header">
           <div class="detail-title">
-            <template v-if="editing">
-              <el-input
-                v-model="editName"
-                size="small"
-                style="width: 240px"
-                :placeholder="$t('recipe.namePlaceholder')"
-              />
-              <el-button type="text" icon="el-icon-check" @click="saveName"></el-button>
-              <el-button type="text" icon="el-icon-close" @click="cancelEdit"></el-button>
-            </template>
-            <template v-else>
-              <h3>{{ currentRecipe.name }}</h3>
-              <el-button type="text" icon="el-icon-edit" @click="startEdit" size="mini"></el-button>
-            </template>
+            <h3>{{ currentRecipe.name }}</h3>
           </div>
           <div class="detail-actions">
             <el-tag size="small" :type="currentRecipe.isActive ? 'success' : 'info'">
@@ -96,21 +96,37 @@
         <!-- 轴位参数 -->
         <div class="detail-section">
           <div class="section-title"><i class="el-icon-position"></i>{{ $t("recipe.axisParams") }}</div>
-          <el-table :data="axisParams" border size="small" :show-header="true">
-            <el-table-column prop="label" :label="$t('recipe.paramName')" width="180" />
-            <el-table-column prop="value" :label="$t('recipe.paramValue')" width="120" align="center" />
-            <el-table-column prop="unit" :label="$t('recipe.paramUnit')" width="100" align="center" />
-          </el-table>
+          <div class="param-card-grid">
+            <div
+              v-for="(param, index) in axisParams"
+              :key="index"
+              class="param-card"
+            >
+              <div class="param-card-label">{{ param.label }}</div>
+              <div class="param-card-value">
+                <span class="param-card-number">{{ param.value }}</span>
+                <span class="param-card-unit">{{ param.unit }}</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- 速度参数 -->
         <div class="detail-section">
           <div class="section-title"><i class="el-icon-odometer"></i>{{ $t("recipe.speedParams") }}</div>
-          <el-table :data="speedParams" border size="small">
-            <el-table-column prop="label" :label="$t('recipe.paramName')" width="180" />
-            <el-table-column prop="value" :label="$t('recipe.paramValue')" width="120" align="center" />
-            <el-table-column prop="unit" :label="$t('recipe.paramUnit')" width="100" align="center" />
-          </el-table>
+          <div class="param-card-grid">
+            <div
+              v-for="(param, index) in speedParams"
+              :key="index"
+              class="param-card"
+            >
+              <div class="param-card-label">{{ param.label }}</div>
+              <div class="param-card-value">
+                <span class="param-card-number">{{ param.value }}</span>
+                <span class="param-card-unit">{{ param.unit }}</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- 延时与工艺参数 -->
@@ -163,140 +179,119 @@
   </div>
 </template>
 
-<script>
-import { mapGetters } from 'vuex'
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+import { Message } from 'element-ui'
+import store from '@/store'
 import { exportTable } from '@/utils/exportTable'
 import { getConfig } from '@/utils/config'
+import { useI18n } from '@/composables/useI18n'
 
-export default {
-  name: 'RecipeDB',
-  data() {
-    return {
-      selectedId: 1,
-      editing: false,
-      editName: ''
-    }
-  },
-  computed: {
-    ...mapGetters('device', ['recipeList', 'getRecipeById']),
-    currentRecipe() {
-      return this.getRecipeById(this.selectedId) || this.recipeList[0]
-    },
-    // 轴位参数列表
-    axisParams() {
-      const r = this.currentRecipe
-      if (!r) return []
-      return [
-        { label: this.$t('recipe.fillAngle'), value: r.fillAngle, unit: '度' },
-        { label: this.$t('recipe.suckBackAngle'), value: r.suckBackAngle, unit: '度' },
-        { label: this.$t('recipe.fillAxisInit'), value: r.fillAxisInit, unit: '脉冲' },
-        { label: this.$t('recipe.fillAxisReach'), value: r.fillAxisReach, unit: '脉冲' },
-        { label: this.$t('recipe.fixAxisInit'), value: r.fixAxisInit, unit: '脉冲' },
-        { label: this.$t('recipe.fixAxisReach'), value: r.fixAxisReach, unit: '脉冲' },
-        { label: this.$t('recipe.fixAxisPreLift'), value: r.fixAxisPreLift, unit: '脉冲' },
-        { label: this.$t('recipe.stopperAxisInit'), value: r.stopperAxisInit, unit: '脉冲' },
-        { label: this.$t('recipe.stopperAxisPrePress'), value: r.stopperAxisPrePress, unit: '脉冲' },
-        { label: this.$t('recipe.stopperAxisReach'), value: r.stopperAxisReach, unit: '脉冲' }
-      ]
-    },
-    // 速度参数列表
-    speedParams() {
-      const r = this.currentRecipe
-      if (!r) return []
-      return [
-        { label: this.$t('recipe.fillAxisInitSpeed'), value: r.fillAxisInitSpeed, unit: '脉冲/s' },
-        { label: this.$t('recipe.fillAxisReachSpeed'), value: r.fillAxisReachSpeed, unit: '脉冲/s' },
-        { label: this.$t('recipe.fixAxisInitSpeed'), value: r.fixAxisInitSpeed, unit: '脉冲/s' },
-        { label: this.$t('recipe.fixAxisReachSpeed'), value: r.fixAxisReachSpeed, unit: '脉冲/s' },
-        { label: this.$t('recipe.fixAxisPreLiftSpeed'), value: r.fixAxisPreLiftSpeed, unit: '脉冲/s' },
-        { label: this.$t('recipe.stopperAxisInitSpeed'), value: r.stopperAxisInitSpeed, unit: '脉冲/s' },
-        { label: this.$t('recipe.stopperAxisPrePressSpeed'), value: r.stopperAxisPrePressSpeed, unit: '脉冲/s' },
-        { label: this.$t('recipe.stopperAxisReachSpeed'), value: r.stopperAxisReachSpeed, unit: '脉冲/s' }
-      ]
-    },
-    // 导出列配置
-    exportColumns() {
-      return [
-        { label: this.$t('recipe.recipeCode'), prop: 'code', width: 120 },
-        { label: this.$t('recipe.recipeName'), prop: 'name', width: 140 },
-        { label: this.$t('recipe.productType'), prop: 'productType', width: 100 },
-        { label: this.$t('recipe.fillVolume'), prop: 'fillVolume', width: 80 },
-        { label: this.$t('recipe.fillAngle'), prop: 'fillAngle', width: 80 },
-        { label: this.$t('recipe.suckBackAngle'), prop: 'suckBackAngle', width: 80 },
-        { label: this.$t('recipe.fillSpeed'), prop: 'fillSpeed', width: 80 },
-        { label: this.$t('recipe.usageCount'), prop: 'usageCount', width: 80 },
-        { label: this.$t('recipe.faultRate'), prop: 'faultRate', width: 80 },
-        { label: this.$t('recipe.avgQualifiedRate'), prop: 'avgQualifiedRate', width: 100 }
-      ]
-    },
-    // 当前用户名（导出人）
-    exporter() {
-      return this.$store?.state?.user?.userInfo?.username || 'admin'
-    },
-    // PDF水印设置（从系统配置读取）
-    pdfWatermark() {
-      return getConfig('pdfWatermarkEnabled', true)
-    },
-    pdfWatermarkText() {
-      return getConfig('pdfWatermarkText', '') || this.exporter
-    }
-  },
-  methods: {
-    selectRecipe(id) {
-      this.selectedId = id
-      this.editing = false
-    },
-    startEdit() {
-      this.editName = this.currentRecipe.name
-      this.editing = true
-    },
-    cancelEdit() {
-      this.editing = false
-      this.editName = ''
-    },
-    saveName() {
-      if (!this.editName.trim()) {
-        this.$message.warning(this.$t('recipe.nameNotEmpty'))
-        return
-      }
-      this.$store.commit('device/UPDATE_RECIPE', { id: this.selectedId, patch: { name: this.editName.trim() } })
-      this.$message.success(this.$t('recipe.nameUpdateSuccess'))
-      this.editing = false
-    },
-    // 下载单个配方
-    handleDownloadSingle(format, recipe) {
-      exportTable({
-        data: [recipe],
-        columns: this.exportColumns,
-        title: `${this.$t('recipe.recipe')} - ${recipe.name}`,
-        filename: `${this.$t('recipe.recipe')}_${recipe.name}`,
-        format,
-        exporter: this.exporter,
-        watermark: this.pdfWatermark,
-        watermarkText: this.pdfWatermarkText
-      })
-    },
-    // 下载全部配方
-    handleDownloadAll(format) {
-      exportTable({
-        data: this.recipeList,
-        columns: this.exportColumns,
-        title: this.$t('recipe.recipeList'),
-        filename: this.$t('recipe.recipeList'),
-        format,
-        exporter: this.exporter,
-        watermark: this.pdfWatermark,
-        watermarkText: this.pdfWatermarkText
-      })
-    }
-  }
+const { t: $t } = useI18n()
+
+// ===== 响应式数据 =====
+const selectedId = ref(1)
+
+// ===== 计算属性 =====
+const recipeList = computed(() => store.getters['device/recipeList'])
+const getRecipeById = computed(() => store.getters['device/getRecipeById'])
+
+const currentRecipe = computed(() => getRecipeById.value(selectedId.value) || recipeList.value[0])
+
+// 轴位参数列表
+const axisParams = computed(() => {
+  const r = currentRecipe.value
+  if (!r) return []
+  return [
+    { label: $t('recipe.fillAngle'), value: r.fillAngle, unit: '度' },
+    { label: $t('recipe.suckBackAngle'), value: r.suckBackAngle, unit: '度' },
+    { label: $t('recipe.fillAxisInit'), value: r.fillAxisInit, unit: '脉冲' },
+    { label: $t('recipe.fillAxisReach'), value: r.fillAxisReach, unit: '脉冲' },
+    { label: $t('recipe.fixAxisInit'), value: r.fixAxisInit, unit: '脉冲' },
+    { label: $t('recipe.fixAxisReach'), value: r.fixAxisReach, unit: '脉冲' },
+    { label: $t('recipe.fixAxisPreLift'), value: r.fixAxisPreLift, unit: '脉冲' },
+    { label: $t('recipe.stopperAxisInit'), value: r.stopperAxisInit, unit: '脉冲' },
+    { label: $t('recipe.stopperAxisPrePress'), value: r.stopperAxisPrePress, unit: '脉冲' },
+    { label: $t('recipe.stopperAxisReach'), value: r.stopperAxisReach, unit: '脉冲' }
+  ]
+})
+
+// 速度参数列表
+const speedParams = computed(() => {
+  const r = currentRecipe.value
+  if (!r) return []
+  return [
+    { label: $t('recipe.fillAxisInitSpeed'), value: r.fillAxisInitSpeed, unit: '脉冲/s' },
+    { label: $t('recipe.fillAxisReachSpeed'), value: r.fillAxisReachSpeed, unit: '脉冲/s' },
+    { label: $t('recipe.fixAxisInitSpeed'), value: r.fixAxisInitSpeed, unit: '脉冲/s' },
+    { label: $t('recipe.fixAxisReachSpeed'), value: r.fixAxisReachSpeed, unit: '脉冲/s' },
+    { label: $t('recipe.fixAxisPreLiftSpeed'), value: r.fixAxisPreLiftSpeed, unit: '脉冲/s' },
+    { label: $t('recipe.stopperAxisInitSpeed'), value: r.stopperAxisInitSpeed, unit: '脉冲/s' },
+    { label: $t('recipe.stopperAxisPrePressSpeed'), value: r.stopperAxisPrePressSpeed, unit: '脉冲/s' },
+    { label: $t('recipe.stopperAxisReachSpeed'), value: r.stopperAxisReachSpeed, unit: '脉冲/s' }
+  ]
+})
+
+// 导出列配置
+const exportColumns = computed(() => [
+  { label: $t('recipe.recipeCode'), prop: 'code', width: 120 },
+  { label: $t('recipe.recipeName'), prop: 'name', width: 140 },
+  { label: $t('recipe.productType'), prop: 'productType', width: 100 },
+  { label: $t('recipe.fillVolume'), prop: 'fillVolume', width: 80 },
+  { label: $t('recipe.fillAngle'), prop: 'fillAngle', width: 80 },
+  { label: $t('recipe.suckBackAngle'), prop: 'suckBackAngle', width: 80 },
+  { label: $t('recipe.fillSpeed'), prop: 'fillSpeed', width: 80 },
+  { label: $t('recipe.usageCount'), prop: 'usageCount', width: 80 },
+  { label: $t('recipe.faultRate'), prop: 'faultRate', width: 80 },
+  { label: $t('recipe.avgQualifiedRate'), prop: 'avgQualifiedRate', width: 100 }
+])
+
+// 当前用户名（导出人）
+const exporter = computed(() => store?.state?.user?.userInfo?.username || 'admin')
+
+// PDF水印设置（从系统配置读取）
+const pdfWatermark = computed(() => getConfig('pdfWatermarkEnabled', true))
+const pdfWatermarkText = computed(() => getConfig('pdfWatermarkText', '') || exporter.value)
+
+// ===== 方法 =====
+function selectRecipe(id) {
+  selectedId.value = id
 }
+
+// 下载单个配方
+function handleDownloadSingle(format, recipe) {
+  exportTable({
+    data: [recipe],
+    columns: exportColumns.value,
+    title: `${$t('recipe.recipe')} - ${recipe.name}`,
+    filename: `${$t('recipe.recipe')}_${recipe.name}`,
+    format,
+    exporter: exporter.value,
+    watermark: pdfWatermark.value,
+    watermarkText: pdfWatermarkText.value
+  })
+}
+
+// 下载全部配方
+function handleDownloadAll(format) {
+  exportTable({
+    data: recipeList.value,
+    columns: exportColumns.value,
+    title: $t('recipe.recipeList'),
+    filename: $t('recipe.recipeList'),
+    format,
+    exporter: exporter.value,
+    watermark: pdfWatermark.value,
+    watermarkText: pdfWatermarkText.value
+  })
+}
+
 </script>
 
 <style scoped lang="less">
 .recipe-container {
   padding: 16px;
-  background: #f0f2f5;
+  background: #fff;
   min-height: calc(100vh - 84px);
 }
 
@@ -321,8 +316,9 @@ export default {
 
 .recipe-body {
   display: flex;
-  gap: 16px;
+  gap: 0;
   height: calc(100vh - 160px);
+  align-items: stretch;
 }
 
 // 左侧配方列表
@@ -330,24 +326,30 @@ export default {
   width: 280px;
   flex-shrink: 0;
   overflow-y: auto;
+  overflow-x: visible;
+  padding-right: 12px;
 
   .recipe-card {
+    position: relative;
     background: #fff;
     border-radius: 8px;
     padding: 14px;
     margin-bottom: 12px;
     cursor: pointer;
-    border: 2px solid transparent;
+    border: 1px solid #ebeef5;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     transition: all 0.2s;
 
     &:hover {
-      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
       transform: translateY(-1px);
+      border-color: #dcdfe6;
     }
 
     &.active {
       border-color: #409eff;
       box-shadow: 0 2px 12px rgba(64,158,255,0.2);
+      background: linear-gradient(135deg, #f0f7ff 0%, #fff 100%);
     }
 
     &.in-use {
@@ -395,7 +397,69 @@ export default {
         color: #f56c6c;
       }
     }
+
+    // 选中时的连接箭头
+    .card-connector {
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      background: #409eff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 12px;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(64,158,255,0.4);
+      animation: connectorPulse 2s infinite;
+    }
   }
+}
+
+@keyframes connectorPulse {
+  0%, 100% { box-shadow: 0 2px 8px rgba(64,158,255,0.4); }
+  50% { box-shadow: 0 2px 16px rgba(64,158,255,0.7); }
+}
+
+// 中间视觉分隔条
+.recipe-divider {
+  width: 48px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .divider-line {
+    flex: 1;
+    width: 2px;
+    background: linear-gradient(180deg, transparent 0%, #dcdfe6 20%, #dcdfe6 80%, transparent 100%);
+  }
+
+  .divider-badge {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #409eff 0%, #66b1ff 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 16px;
+    margin: 12px 0;
+    box-shadow: 0 4px 12px rgba(64,158,255,0.3);
+    animation: badgeFloat 3s ease-in-out infinite;
+  }
+}
+
+@keyframes badgeFloat {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
 }
 
 // 右侧详情
@@ -451,6 +515,74 @@ export default {
       i {
         font-size: 16px;
       }
+    }
+  }
+
+  // 参数卡片网格
+  .param-card-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+
+  .param-card {
+    background: #f8f9fc;
+    border: 1px solid #ebeef5;
+    border-radius: 8px;
+    padding: 14px 16px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #fff;
+      border-color: #409eff;
+      box-shadow: 0 2px 12px rgba(64, 158, 255, 0.15);
+      transform: translateY(-2px);
+    }
+  }
+
+  .param-card-label {
+    font-size: 12px;
+    color: #909399;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .param-card-value {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .param-card-number {
+    font-size: 22px;
+    font-weight: 700;
+    color: #303133;
+    line-height: 1.2;
+  }
+
+  .param-card-unit {
+    font-size: 12px;
+    color: #909399;
+  }
+
+  // 响应式：小屏幕减少列数
+  @media (max-width: 1200px) {
+    .param-card-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .param-card-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .param-card-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 

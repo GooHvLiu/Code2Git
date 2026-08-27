@@ -9,118 +9,92 @@
   </div>
 </template>
 
-<script>
+<script setup>
 /**
  * 心跳指示器组件
  * 用于显示 WebSocket 连接状态和 PLC 连接状态
  * 从 Vuex websocket 模块获取实时状态
- *
- * 状态判断逻辑：
- * 1. 连接服务器是基础，没有连接服务器就不考虑设备状态
- * 2. 连接服务器后，再判断设备连接状态
- * 3. 只有同时满足连接服务器 + 连接设备，才算"在线"
- *
- * 状态优先级（从低到高）：
- * 1. 服务器未连接 → 离线 / 重连中
- * 2. 服务器已连接但未认证 → 认证中
- * 3. 服务器已连接且认证，但设备未连接 → 设备未连接
- * 4. 服务器已连接且认证 + 设备已连接 → 在线
  */
-import { mapGetters } from 'vuex'
+import { computed } from 'vue'
+import { MessageBox } from 'element-ui'
+import store from '@/store'
+import { useI18n } from '@/composables/useI18n'
 
-export default {
-  name: 'HeartbeatIndicator',
-  computed: {
-    ...mapGetters('websocket', [
-      'isOnline',
-      'isWsOnline',
-      'isPlcOnline',
-      'lastHeartbeatText',
-      'connectionStatusText',
-      'connectionStatusType'
-    ]),
-    /**
-     * 状态文本
-     */
-    statusText() {
-      return this.connectionStatusText
-    },
-    /**
-     * 状态样式类
-     */
-    statusClass() {
-      return this.connectionStatusType
-    },
-    /**
-     * 提示文本
-     */
-    tooltipText() {
-      const state = this.$store.state.websocket
-      const lines = []
+const { t: $t } = useI18n()
 
-      // 服务器状态
-      if (this.isWsOnline) {
-        lines.push(this.$t('heartbeat.serverConnected'))
-      } else if (state.connected) {
-        lines.push(this.$t('heartbeat.serverAuthenticating'))
-      } else if (state.reconnectAttempts > 0) {
-        lines.push(this.$t('heartbeat.serverReconnecting', { count: state.reconnectAttempts }))
-      } else {
-        lines.push(this.$t('heartbeat.serverDisconnected'))
-      }
+// ===== 计算属性（从 store 获取） =====
+const isOnline = computed(() => store.getters['websocket/isOnline'])
+const isWsOnline = computed(() => store.getters['websocket/isWsOnline'])
+const isPlcOnline = computed(() => store.getters['websocket/isPlcOnline'])
+const lastHeartbeatText = computed(() => store.getters['websocket/lastHeartbeatText'])
+const connectionStatusText = computed(() => store.getters['websocket/connectionStatusText'])
+const connectionStatusType = computed(() => store.getters['websocket/connectionStatusType'])
 
-      // 设备状态（只有服务器连接后才显示）
-      if (this.isWsOnline) {
-        if (this.isPlcOnline) {
-          lines.push(this.$t('heartbeat.deviceConnected'))
-        } else {
-          lines.push(this.$t('heartbeat.deviceDisconnected'))
-        }
-        lines.push(this.$t('heartbeat.detailLastHeartbeat', { time: this.lastHeartbeatText }))
-      }
+const statusText = computed(() => connectionStatusText.value)
+const statusClass = computed(() => connectionStatusType.value)
 
-      return lines.join(' | ')
-    }
-  },
-  methods: {
-    /**
-     * 点击显示详细信息
-     */
-    showDetail() {
-      const state = this.$store.state.websocket
-      const lines = []
+const tooltipText = computed(() => {
+  const state = store.state.websocket
+  const lines = []
 
-      // 服务器状态
-      if (this.isWsOnline) {
-        lines.push(this.$t('heartbeat.detailServerConnected'))
-      } else if (state.connected) {
-        lines.push(this.$t('heartbeat.detailServerAuthenticating'))
-      } else if (state.reconnectAttempts > 0) {
-        lines.push(this.$t('heartbeat.detailServerReconnecting', { count: state.reconnectAttempts }))
-      } else {
-        lines.push(this.$t('heartbeat.detailServerDisconnected'))
-      }
-
-      // 设备状态
-      if (this.isPlcOnline) {
-        lines.push(this.$t('heartbeat.detailDeviceConnected'))
-      } else {
-        lines.push(this.$t('heartbeat.detailDeviceDisconnected'))
-      }
-
-      // 其他信息
-      lines.push(this.$t('heartbeat.detailLastHeartbeat', { time: this.lastHeartbeatText }))
-      lines.push(this.$t('heartbeat.detailHeartbeatInterval', { seconds: (state.heartbeatInterval / 1000).toFixed(0) }))
-
-      const detail = lines.join('\n')
-      const type = this.isOnline ? 'success' : (this.isWsOnline ? 'warning' : 'error')
-
-      this.$alert(detail, this.$t('heartbeat.detailTitle'), {
-        confirmButtonText: this.$t('heartbeat.confirm'),
-        type
-      })
-    }
+  // 服务器状态
+  if (isWsOnline.value) {
+    lines.push($t('heartbeat.serverConnected'))
+  } else if (state.connected) {
+    lines.push($t('heartbeat.serverAuthenticating'))
+  } else if (state.reconnectAttempts > 0) {
+    lines.push($t('heartbeat.serverReconnecting', { count: state.reconnectAttempts }))
+  } else {
+    lines.push($t('heartbeat.serverDisconnected'))
   }
+
+  // 设备状态（只有服务器连接后才显示）
+  if (isWsOnline.value) {
+    if (isPlcOnline.value) {
+      lines.push($t('heartbeat.deviceConnected'))
+    } else {
+      lines.push($t('heartbeat.deviceDisconnected'))
+    }
+    lines.push($t('heartbeat.detailLastHeartbeat', { time: lastHeartbeatText.value }))
+  }
+
+  return lines.join(' | ')
+})
+
+// ===== 方法 =====
+function showDetail() {
+  const state = store.state.websocket
+  const lines = []
+
+  // 服务器状态
+  if (isWsOnline.value) {
+    lines.push($t('heartbeat.detailServerConnected'))
+  } else if (state.connected) {
+    lines.push($t('heartbeat.detailServerAuthenticating'))
+  } else if (state.reconnectAttempts > 0) {
+    lines.push($t('heartbeat.detailServerReconnecting', { count: state.reconnectAttempts }))
+  } else {
+    lines.push($t('heartbeat.detailServerDisconnected'))
+  }
+
+  // 设备状态
+  if (isPlcOnline.value) {
+    lines.push($t('heartbeat.detailDeviceConnected'))
+  } else {
+    lines.push($t('heartbeat.detailDeviceDisconnected'))
+  }
+
+  // 其他信息
+  lines.push($t('heartbeat.detailLastHeartbeat', { time: lastHeartbeatText.value }))
+  lines.push($t('heartbeat.detailHeartbeatInterval', { seconds: (state.heartbeatInterval / 1000).toFixed(0) }))
+
+  const detail = lines.join('\n')
+  const type = isOnline.value ? 'success' : (isWsOnline.value ? 'warning' : 'error')
+
+  MessageBox.alert(detail, $t('heartbeat.detailTitle'), {
+    confirmButtonText: $t('heartbeat.confirm'),
+    type
+  })
 }
 </script>
 

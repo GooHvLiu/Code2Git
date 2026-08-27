@@ -47,7 +47,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 /**
  * 表格工具栏组件
  * 左侧标题/批量操作，右侧新增/导出/刷新按钮
@@ -70,46 +70,45 @@
  *   </template>
  * </table-toolbar>
  */
-export default {
-  name: 'TableToolbar',
-  props: {
-    /** 标题 */
-    title: {
-      type: String,
-      default: ''
-    },
-    /** 显示新增按钮 */
-    showAdd: {
-      type: Boolean,
-      default: false
-    },
-    /** 新增按钮文字 */
-    addText: {
-      type: String,
-      default: ''
-    },
-    /** 显示导出按钮 */
-    showExport: {
-      type: Boolean,
-      default: false
-    },
-    /** 导出按钮文字 */
-    exportText: {
-      type: String,
-      default: ''
-    },
-    /** 导出加载状态 */
-    exportLoading: {
-      type: Boolean,
-      default: false
-    },
-    /** 显示刷新按钮 */
-    showRefresh: {
-      type: Boolean,
-      default: false
-    }
+defineProps({
+  /** 标题 */
+  title: {
+    type: String,
+    default: ''
+  },
+  /** 显示新增按钮 */
+  showAdd: {
+    type: Boolean,
+    default: false
+  },
+  /** 新增按钮文字 */
+  addText: {
+    type: String,
+    default: ''
+  },
+  /** 显示导出按钮 */
+  showExport: {
+    type: Boolean,
+    default: false
+  },
+  /** 导出按钮文字 */
+  exportText: {
+    type: String,
+    default: ''
+  },
+  /** 导出加载状态 */
+  exportLoading: {
+    type: Boolean,
+    default: false
+  },
+  /** 显示刷新按钮 */
+  showRefresh: {
+    type: Boolean,
+    default: false
   }
-}
+})
+
+defineEmits(['add', 'export', 'refresh'])
 </script>
 
 <style scoped lang="less">

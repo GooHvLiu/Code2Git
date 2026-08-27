@@ -38,31 +38,46 @@
   </div>
 </template>
 
-<script>
+<script setup>
 /* eslint-disable vue/multi-word-component-names */
-import { mapState } from "vuex";
+import { computed, ref, onMounted, onBeforeUnmount } from "vue";
 import config from "@/config";
 import settings from "@/settings";
 import SidebarItem from "./SidebarItem.vue";
 import { ROUTE_PATHS } from "@/router/constant/pathConstants.js";
+import store from '@/store'
+import router from '@/router'
+import { useI18n } from '@/composables/useI18n'
 
-export default {
-  name: "Sidebar",
-  components: { SidebarItem },
-  data() {
-    return { config, settings, routePaths: ROUTE_PATHS };
-  },
-  computed: {
-    ...mapState("app", ["sidebar"]),
-    ...mapState("permission", { menuItems: "userMenu" }),
-    /** 当前激活菜单（解决子路由高亮父菜单问题） */
-    activeMenu() {
-      const { meta, path } = this.$route;
-      if (meta?.activeMenu) return meta.activeMenu;
-      return path;
-    },
-  },
-};
+const { t: $t } = useI18n()
+
+const routePaths = ROUTE_PATHS
+
+// ===== 响应式数据 =====
+// router.currentRoute 不是响应式的，用 afterEach 监听更新
+const currentRoute = ref(router.currentRoute)
+let afterEachHook = null
+onMounted(() => {
+  afterEachHook = router.afterEach((to) => {
+    currentRoute.value = to
+  })
+})
+onBeforeUnmount(() => {
+  if (typeof afterEachHook === 'function') {
+    afterEachHook()
+  }
+})
+
+// ===== 计算属性 =====
+const sidebar = computed(() => store.state.app.sidebar)
+const menuItems = computed(() => store.state.permission.userMenu)
+
+/** 当前激活菜单（解决子路由高亮父菜单问题） */
+const activeMenu = computed(() => {
+  const { meta, path } = currentRoute.value
+  if (meta?.activeMenu) return meta.activeMenu
+  return path
+})
 </script>
 
 <style scoped lang="less">

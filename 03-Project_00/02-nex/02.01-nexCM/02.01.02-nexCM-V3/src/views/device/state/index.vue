@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="device-state-page">
     <!-- 设备信息头部 -->
     <div class="device-header">
@@ -43,10 +43,9 @@
       </el-col>
     </el-row>
 
-    <!-- 实时参数 + 智能分析 -->
+    <!-- 实时运行参数 -->
     <el-row :gutter="12" class="main-row">
-      <!-- 实时参数 -->
-      <el-col :span="16">
+      <el-col :span="24">
         <div class="panel">
           <div class="panel-header">
             <span class="panel-title"><i class="el-icon-data-line"></i> 实时运行参数</span>
@@ -54,7 +53,7 @@
           </div>
           <div class="panel-body">
             <el-row :gutter="12">
-              <el-col :span="8" v-for="(param, index) in realtimeParams" :key="index">
+              <el-col :span="4" v-for="(param, index) in realtimeParams" :key="index">
                 <div class="param-card" :class="{ warning: param.status === 'warning', danger: param.status === 'danger' }">
                   <div class="param-header">
                     <span class="param-name">{{ param.name }}</span>
@@ -75,58 +74,6 @@
                 </div>
               </el-col>
             </el-row>
-          </div>
-        </div>
-      </el-col>
-
-      <!-- 智能分析 -->
-      <el-col :span="8">
-        <div class="panel">
-          <div class="panel-header">
-            <span class="panel-title"><i class="el-icon-lightbulb"></i> 智能分析</span>
-          </div>
-          <div class="panel-body analysis-body">
-            <div class="analysis-item">
-              <div class="analysis-label">综合设备效率 (OEE)</div>
-              <div class="analysis-ring">
-                <svg viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="40" fill="none" stroke="#f0f2f5" stroke-width="8"/>
-                  <circle cx="50" cy="50" r="40" fill="none" stroke="#67c23a" stroke-width="8"
-                    :stroke-dasharray="(analysis.oee / 100) * 251.3 + ' 251.3'"
-                    transform="rotate(-90 50 50)" stroke-linecap="round"/>
-                </svg>
-                <div class="ring-center">
-                  <span class="ring-value">{{ analysis.oee }}%</span>
-                  <span class="ring-label">良好</span>
-                </div>
-              </div>
-              <div class="oee-breakdown">
-                <div class="breakdown-item">
-                  <span class="bd-label">可用率</span>
-                  <span class="bd-value">{{ analysis.availability }}%</span>
-                </div>
-                <div class="breakdown-item">
-                  <span class="bd-label">性能率</span>
-                  <span class="bd-value">{{ analysis.performance }}%</span>
-                </div>
-                <div class="breakdown-item">
-                  <span class="bd-label">合格率</span>
-                  <span class="bd-value">{{ analysis.quality }}%</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="analysis-divider"></div>
-
-            <div class="analysis-suggestions">
-              <div class="suggestion-title">优化建议</div>
-              <div class="suggestion-list">
-                <div class="suggestion-item" v-for="(item, index) in suggestions" :key="index">
-                  <span class="suggestion-icon" :class="item.level"><i :class="item.icon"></i></span>
-                  <span class="suggestion-text">{{ item.text }}</span>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </el-col>
@@ -208,75 +155,86 @@
   </div>
 </template>
 
-<script>
-import { mapGetters } from 'vuex'
+<script setup>
+import { ref, computed } from 'vue'
+import store from '@/store'
 
 /**
  * 设备状态页面
  * 功能：展示设备实时运行参数、智能分析、趋势图、运行统计
  * 数据来源：统一从 Vuex device 模块获取，不单独请求后端
  */
-export default {
-  name: 'DevState',
-  data() {
-    return {
-      activeTrend: 'speed',
-      trendTabs: [
-        { label: '运行速度', value: 'speed' },
-        { label: '灌装量', value: 'fillVolume' },
-        { label: '真空度', value: 'vacuum' },
-        { label: '温度', value: 'temperature' }
-      ],
-      suggestions: [
-        { level: 'info', icon: 'el-icon-info', text: '设备运行状态良好，建议保持当前参数设置' },
-        { level: 'warning', icon: 'el-icon-warning', text: '灌装针组件已使用85%寿命，建议近期安排更换' },
-        { level: 'success', icon: 'el-icon-circle-check', text: '近7天无重大故障，设备稳定性优秀' }
-      ]
-    }
-  },
-  computed: {
-    // 统一从 store device 模块获取（别名映射，保持模板变量名不变）
-    ...mapGetters('device', {
-      deviceInfo: 'deviceInfo',
-      deviceStatus: 'deviceStatusObj',
-      coreMetrics: 'coreMetrics',
-      realtimeParams: 'realtimeParamsList',
-      analysis: 'oeeAnalysis',
-      todayStats: 'todayStats',
-      trendData: 'trendData'
-    }),
-    // 页面特有：趋势图相关计算
-    trendLabels() {
-      return this.trendData[this.activeTrend]?.map(item => item.time) || []
-    },
-    trendPoints() {
-      const data = this.trendData[this.activeTrend]?.map(item => item.value) || []
-      if (data.length === 0) return []
-      const maxVal = Math.max(...data)
-      const minVal = Math.min(...data)
-      const range = maxVal - minVal || 1
-      return data.map((val, index) => ({
-        x: (index / (data.length - 1)) * 800,
-        y: 180 - ((val - minVal) / range) * 150
-      }))
-    },
-    trendLinePath() {
-      if (this.trendPoints.length === 0) return ''
-      return this.trendPoints.map((p, i) => (i === 0 ? `M${p.x},${p.y}` : `L${p.x},${p.y}`)).join(' ')
-    },
-    trendAreaPath() {
-      if (this.trendPoints.length === 0) return ''
-      const line = this.trendPoints.map((p, i) => (i === 0 ? `M${p.x},${p.y}` : `L${p.x},${p.y}`)).join(' ')
-      return `${line} L800,200 L0,200 Z`
-    }
+
+// ===== 响应式数据 =====
+const activeTrend = ref('speed')
+const trendTabs = ref([
+  { label: '运行速度', value: 'speed' },
+  { label: '灌装量', value: 'fillVolume' },
+  { label: '真空度', value: 'vacuum' }
+])
+
+// ===== 计算属性 =====
+// 统一从 store device 模块获取
+const deviceInfo = computed(() => store.getters['device/deviceInfo'])
+const deviceStatus = computed(() => store.getters['device/deviceStatusObj'])
+const coreMetrics = computed(() => store.getters['device/coreMetrics'])
+const realtimeParams = computed(() => store.getters['device/realtimeParamsList'])
+const todayStats = computed(() => store.getters['device/todayStats'])
+const trendData = computed(() => store.getters['device/trendData'])
+
+// 页面特有：趋势图相关计算
+const trendLabels = computed(() => trendData.value[activeTrend.value]?.map(item => item.time) || [])
+const trendPoints = computed(() => {
+  const rawData = trendData.value[activeTrend.value] || []
+  if (rawData.length === 0) return []
+  // 过滤掉全为0的停机时段，只展示有数据的部分，避免图表被压缩
+  const data = rawData.map(item => item.value)
+  const hasNonZero = data.some(v => v !== 0)
+  if (!hasNonZero) return []
+
+  let maxVal = Math.max(...data)
+  let minVal = Math.min(...data)
+
+  // 对于真空度（负数），反转显示：绝对值越大越靠上
+  if (activeTrend.value === 'vacuum') {
+    const absData = data.map(v => Math.abs(v))
+    maxVal = Math.max(...absData)
+    minVal = Math.min(...absData.filter(v => v > 0))
+    if (minVal === undefined) minVal = 0
+    const range = maxVal - minVal || 1
+    return data.map((val, index) => ({
+      x: (index / (data.length - 1)) * 800,
+      y: val === 0 ? 180 : 180 - ((Math.abs(val) - minVal) / range) * 150
+    }))
   }
-}
+
+  // 对于其他参数，过滤掉0值后计算范围，让有数据的部分更明显
+  const nonZeroData = data.filter(v => v > 0)
+  if (nonZeroData.length > 0) {
+    maxVal = Math.max(...nonZeroData)
+    minVal = Math.min(...nonZeroData)
+  }
+  const range = maxVal - minVal || 1
+  return data.map((val, index) => ({
+    x: (index / (data.length - 1)) * 800,
+    y: val === 0 ? 180 : 180 - ((val - minVal) / range) * 150
+  }))
+})
+const trendLinePath = computed(() => {
+  if (trendPoints.value.length === 0) return ''
+  return trendPoints.value.map((p, i) => (i === 0 ? `M${p.x},${p.y}` : `L${p.x},${p.y}`)).join(' ')
+})
+const trendAreaPath = computed(() => {
+  if (trendPoints.value.length === 0) return ''
+  const line = trendPoints.value.map((p, i) => (i === 0 ? `M${p.x},${p.y}` : `L${p.x},${p.y}`)).join(' ')
+  return `${line} L800,200 L0,200 Z`
+})
 </script>
 
 <style scoped lang="less">
 .device-state-page {
   padding: 12px;
-  background: #f5f7fa;
+  background: #fff;
   min-height: calc(100vh - 84px);
 }
 
@@ -488,29 +446,64 @@ export default {
   }
 }
 
-.main-row { margin-bottom: 12px; }
+.main-row {
+  margin-bottom: 12px;
+}
 
 // 实时参数
 .param-card {
-  background: #fafbfc;
-  border: 1px solid #e4e7ed;
-  border-radius: 6px;
-  padding: 12px;
+  background: #fff;
+  border: 1px solid #ebeef5;
+  border-radius: 8px;
+  padding: 14px 12px;
   margin-bottom: 12px;
-  transition: all 0.3s;
-  &:hover { border-color: #409eff; box-shadow: 0 2px 8px rgba(64,158,255,0.1); }
-  &.warning { border-color: #e6a23c; background: #fdf6ec; }
-  &.danger { border-color: #f56c6c; background: #fef0f0; }
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: #409eff;
+  }
+
+  &:hover {
+    border-color: #409eff;
+    box-shadow: 0 4px 12px rgba(64,158,255,0.12);
+    transform: translateY(-2px);
+  }
+
+  &.warning {
+    border-color: #e6a23c;
+    &::before { background: #e6a23c; }
+    &:hover { box-shadow: 0 4px 12px rgba(230,162,60,0.12); }
+  }
+
+  &.danger {
+    border-color: #f56c6c;
+    &::before { background: #f56c6c; }
+    &:hover { box-shadow: 0 4px 12px rgba(245,108,108,0.12); }
+  }
+
   .param-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
-    .param-name { font-size: 12px; color: #606266; font-weight: 500; }
+    margin-bottom: 10px;
+    .param-name {
+      font-size: 12px;
+      color: #909399;
+      font-weight: 500;
+    }
     .param-status {
       font-size: 10px;
-      padding: 1px 6px;
-      border-radius: 8px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 500;
       &.normal { background: #f0f9eb; color: #67c23a; }
       &.warning { background: #fdf6ec; color: #e6a23c; }
       &.danger { background: #fef0f0; color: #f56c6c; }
@@ -519,30 +512,35 @@ export default {
   .param-value {
     display: flex;
     align-items: baseline;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     .value {
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 700;
       color: #303133;
-      font-family: 'Courier New', monospace;
+      font-family: 'DIN Alternate', 'Courier New', monospace;
+      line-height: 1.2;
     }
-    .unit { font-size: 12px; color: #909399; margin-left: 4px; }
+    .unit {
+      font-size: 12px;
+      color: #909399;
+      margin-left: 4px;
+    }
   }
   .param-range {
     font-size: 10px;
     color: #c0c4cc;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
   .param-bar {
     .bar-bg {
       height: 4px;
-      background: #e4e7ed;
+      background: #fff;
       border-radius: 2px;
       overflow: hidden;
       .bar-fill {
         height: 100%;
         border-radius: 2px;
-        transition: width 0.5s;
+        transition: width 0.5s ease;
         &.normal { background: linear-gradient(90deg, #409eff, #66b1ff); }
         &.warning { background: linear-gradient(90deg, #e6a23c, #f0c78a); }
         &.danger { background: linear-gradient(90deg, #f56c6c, #f89898); }
@@ -555,8 +553,10 @@ export default {
 .analysis-body {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   .analysis-item {
     text-align: center;
+    flex-shrink: 0;
     .analysis-label {
       font-size: 12px;
       color: #909399;
@@ -598,17 +598,25 @@ export default {
   }
   .analysis-divider {
     height: 1px;
-    background: #f0f2f5;
+    background: #fff;
     margin: 12px 0;
   }
   .analysis-suggestions {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     .suggestion-title {
       font-size: 12px;
       color: #909399;
       margin-bottom: 8px;
       font-weight: 500;
+      flex-shrink: 0;
     }
     .suggestion-list {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
       .suggestion-item {
         display: flex;
         align-items: flex-start;
@@ -670,10 +678,15 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   .stat-item {
     display: flex;
     align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f2f5;
+    &:last-child {
+      border-bottom: none;
+    }
     .stat-icon {
       width: 36px;
       height: 36px;
@@ -692,21 +705,28 @@ export default {
     .stat-info {
       flex: 1;
       min-width: 0;
-      .stat-label { font-size: 12px; color: #909399; }
+      .stat-label { 
+        font-size: 12px; 
+        color: #909399; 
+        line-height: 1.4;
+        margin-bottom: 2px;
+      }
       .stat-value {
         font-size: 18px;
         font-weight: 700;
         color: #303133;
         font-family: 'Courier New', monospace;
+        line-height: 1.4;
         .stat-unit { font-size: 11px; color: #909399; margin-left: 2px; font-weight: normal; }
       }
     }
     .stat-bar {
       width: 60px;
       height: 6px;
-      background: #f0f2f5;
+      background: #fff;
       border-radius: 3px;
       overflow: hidden;
+      flex-shrink: 0;
       .stat-bar-fill {
         height: 100%;
         border-radius: 3px;
@@ -719,5 +739,7 @@ export default {
   }
 }
 
-.bottom-row { margin-bottom: 0; }
+.bottom-row { 
+  margin-bottom: 0; 
+}
 </style>

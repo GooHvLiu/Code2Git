@@ -4,13 +4,9 @@
   </div>
 </template>
 
-<script>
-import { mapGetters } from 'vuex'
+<script setup>
+import { computed } from 'vue'
+import store from '@/store'
 
-export default {
-  name: 'App',
-  computed: {
-    ...mapGetters(['globalLoading'])
-  }
-}
+const globalLoading = computed(() => store.getters.globalLoading)
 </script>

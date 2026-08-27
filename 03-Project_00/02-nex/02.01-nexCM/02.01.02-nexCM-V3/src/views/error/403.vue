@@ -19,27 +19,24 @@
   </div>
 </template>
 
-<script>
+<script setup>
 /* eslint-disable vue/multi-word-component-names */
 import { ROUTE_PATHS } from "@/router/constant/pathConstants";
+import router from '@/router'
 
-export default {
-  name: "Forbidden",
-  methods: {
-    /** 返回首页 */
-    goHome() {
-      this.$router.push(ROUTE_PATHS.HOME);
-    },
-    /** 返回上一页 */
-    goBack() {
-      if (window.history.length > 1) {
-        this.$router.back();
-      } else {
-        this.goHome();
-      }
-    },
-  },
-};
+/** 返回首页 */
+function goHome() {
+  router.push(ROUTE_PATHS.HOME)
+}
+
+/** 返回上一页 */
+function goBack() {
+  if (window.history.length > 1) {
+    router.back()
+  } else {
+    goHome()
+  }
+}
 </script>
 
 <style scoped lang="less">

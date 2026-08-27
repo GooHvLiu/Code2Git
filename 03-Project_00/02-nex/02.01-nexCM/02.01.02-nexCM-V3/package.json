@@ -1,5 +1,5 @@
 {
-  "name": "nexcm-v3_00",
+  "name": "nexcm-v3_03",
   "version": "0.1.0",
   "description": "nexCM V3版本",
   "author": "GooHv",
@@ -26,7 +26,7 @@
     "less-loader": "^13.0.0",
     "nprogress": "^0.2.0",
     "reset-css": "^5.0.2",
-    "vue": "^2.6.14",
+    "vue": "^2.7.16",
     "vue-i18n": "^8.28.2",
     "vue-router": "^3.6.5",
     "vuex": "^3.6.2",
@@ -45,7 +45,7 @@
     "lint-staged": "^13.2.3",
     "style-resources-loader": "^1.5.0",
     "svg-sprite-loader": "^6.0.11",
-    "vue-template-compiler": "^2.6.14"
+    "vue-template-compiler": "^2.7.16"
   },
   "lint-staged": {
     "src/**/*.{js,vue}": [
@@ -56,7 +56,8 @@
   "eslintConfig": {
     "root": true,
     "env": {
-      "node": true
+      "node": true,
+      "browser": true
     },
     "extends": [
       "plugin:vue/essential",
@@ -65,11 +66,20 @@
     "parserOptions": {
       "parser": "@babel/eslint-parser"
     },
+    "globals": {
+      "defineProps": "readonly",
+      "defineEmits": "readonly",
+      "defineExpose": "readonly",
+      "withDefaults": "readonly",
+      "defineOptions": "readonly",
+      "defineSlots": "readonly"
+    },
     "rules": {
       "no-console": "warn",
       "no-unused-vars": "warn",
       "no-debugger": "warn",
-      "vue/multi-word-component-names": "off"
+      "vue/multi-word-component-names": "off",
+      "vue/script-setup-uses-vars": "error"
     }
   },
   "browserslist": [

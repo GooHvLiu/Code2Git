@@ -66,9 +66,9 @@ router.beforeEach(async (to, from, next) => {
   // 路由切换时取消所有未完成的请求，避免数据错乱
   cancelAllPending()
 
-  // 设置页面标题（取 titles 数组最后一项，i18n key 需翻译）
+  // 设置页面标题（取 titles 数组最后一项，i18n key 需翻译，中文原文直接显示）
   const pageTitleKey = to.meta?.titles?.[to.meta.titles.length - 1]
-  const pageTitle = pageTitleKey ? i18n.t(pageTitleKey) : ''
+  const pageTitle = pageTitleKey ? (i18n.te(pageTitleKey) ? i18n.t(pageTitleKey) : pageTitleKey) : ''
   const systemName = i18n.t('common.systemName')
   document.title = pageTitle ? `${pageTitle} - ${systemName}` : systemName
 

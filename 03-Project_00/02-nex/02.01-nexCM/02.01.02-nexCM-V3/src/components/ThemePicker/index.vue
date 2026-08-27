@@ -148,8 +148,10 @@
   </div>
 </template>
 
-<script>
+<script setup>
 /* eslint-disable vue/multi-word-component-names */
+import { ref, reactive, computed, onMounted, onBeforeUnmount, getCurrentInstance } from 'vue'
+import { Message } from 'element-ui'
 import {
   THEME_FIELDS,
   setThemeField,
@@ -158,142 +160,122 @@ import {
   resetThemeField,
 } from "@/utils/theme";
 import { LANGUAGES, setLanguage } from "@/i18n";
+import { useI18n } from '@/composables/useI18n'
 
-export default {
-  name: "ThemePicker",
-  computed: {
-    /** 当前语言 */
-    currentLang() {
-      return this.$i18n.locale
-    },
-    /** 当前语言的 autonym（该语言自己的写法，如"简体中文"/"English"） */
-    currentLangAutonym() {
-      const lang = this.languages.find(l => l.value === this.$i18n.locale)
-      return lang ? lang.autonym : ''
-    },
-    /** 快捷菜单配置（国际化） */
-    menuItems() {
-      return [
-        {
-          key: "palette",
-          label: this.$t('theme.palette'),
-          icon: "el-icon-brush",
-          color: "#409eff",
-        },
-        {
-          key: "language",
-          label: this.$t('theme.language'),
-          icon: "el-icon-service",
-          color: "#e6a23c",
-        },
-      ]
-    }
+const { t: $t, i18n } = useI18n()
+const { proxy } = getCurrentInstance()
+const emit = defineEmits(['change', 'reset', 'reset-field'])
+
+// ===== 响应式数据 =====
+const visible = ref(false)
+const activePanel = ref(null)
+const themeFields = THEME_FIELDS
+const currentColors = reactive({})
+const languages = LANGUAGES.map(l => ({
+  ...l,
+  flag: l.value === 'zh-CN' ? '🇨🇳' : '🇺🇸'
+}))
+const presetColors = [
+  "#faf7f2",
+  "#ffffff",
+  "#808080",
+  "#49c3ce",
+  "#67c23a",
+  "#e6a23c",
+  "#f56c6c",
+  "#9c27b0",
+]
+
+// ===== 计算属性 =====
+const currentLang = computed(() => i18n.locale)
+const currentLangAutonym = computed(() => {
+  const lang = languages.find(l => l.value === i18n.locale)
+  return lang ? lang.autonym : ''
+})
+const menuItems = computed(() => [
+  {
+    key: "palette",
+    label: $t('theme.palette'),
+    icon: "el-icon-brush",
+    color: "#409eff",
   },
-  data() {
-    return {
-      /** 面板显示状态 */
-      visible: false,
-      /** 当前激活的子面板（null 表示菜单列表） */
-      activePanel: null,
-      /** 可配置的主题字段（从 theme.js 统一导入） */
-      themeFields: THEME_FIELDS,
-      /** 响应式存储当前颜色（解决 localStorage 变化不触发渲染的问题） */
-      currentColors: {},
-      /** 语言列表（带国旗emoji，autonym 为该语言自己的写法） */
-      languages: LANGUAGES.map(l => ({
-        ...l,
-        flag: l.value === 'zh-CN' ? '🇨🇳' : '🇺🇸'
-      })),
-      /** 预设颜色列表（统一小写便于比较） */
-      presetColors: [
-        "#faf7f2",
-        "#ffffff",
-        "#808080",
-        "#49c3ce",
-        "#67c23a",
-        "#e6a23c",
-        "#f56c6c",
-        "#9c27b0",
-      ],
-    };
+  {
+    key: "language",
+    label: $t('theme.language'),
+    icon: "el-icon-service",
+    color: "#e6a23c",
   },
-  mounted() {
-    // 初始化响应式颜色状态
-    this.themeFields.forEach((field) => {
-      this.$set(this.currentColors, field.key, getThemeField(field.key));
-    });
-    document.addEventListener("click", this.handleClickOutside);
-  },
-  beforeDestroy() {
-    document.removeEventListener("click", this.handleClickOutside);
-  },
-  methods: {
-    /** 切换菜单显示 */
-    toggleMenu() {
-      this.visible = !this.visible;
-      // 关闭时重置到菜单列表
-      if (!this.visible) {
-        this.activePanel = null;
-      }
-    },
-    /** 打开子面板 */
-    openPanel(key) {
-      this.activePanel = key;
-    },
-    /** 获取字段当前颜色值 */
-    /** 获取字段当前颜色值（从响应式状态读取） */
-    getFieldValue(key) {
-      return this.currentColors[key] || "";
-    },
-    /** 选择颜色 */
-    /** 选择颜色 */
-    handlePick(key, color) {
-      setThemeField(key, color);
-      this.$set(this.currentColors, key, color.toLowerCase());
-      this.$emit("change", { key, color });
-    },
-    /** 恢复全部默认 */
-    /** 恢复全部默认 */
-    handleResetAll() {
-      resetAllTheme();
-      this.themeFields.forEach((field) => {
-        this.$set(this.currentColors, field.key, field.default.toLowerCase());
-      });
-      this.$emit("reset");
-    },
-    /** 恢复单个字段默认 */
-    handleResetField(key) {
-      resetThemeField(key);
-      const field = this.themeFields.find((f) => f.key === key);
-      if (field) {
-        this.$set(this.currentColors, key, field.default.toLowerCase());
-      }
-      this.$emit("reset-field", key);
-    },
-    /** 点击外部关闭 */
-    handleClickOutside(e) {
-      if (!this.$el.contains(e.target)) {
-        this.visible = false;
-        this.activePanel = null;
-      }
-    },
-    /** 切换语言 */
-    handleSwitchLang(lang) {
-      // 切换语言前清除所有菜单缓存（含版本号），确保刷新后重新获取对应语言的菜单
-      Object.keys(localStorage)
-        .filter(key => key.startsWith('nex_menu_cache_') || key === 'nex_menu_version')
-        .forEach(key => localStorage.removeItem(key))
-      setLanguage(lang);
-      const msg = lang === 'zh-CN' ? this.$t('theme.switchedToZh') : this.$t('theme.switchedToEn');
-      this.$message.success(msg);
-      // 切换语言后刷新页面，重新获取对应语言的菜单
-      // 延迟 800ms，让提示有足够时间显示
-      setTimeout(() => {
-        window.location.reload();
-      }, 800);
-    },
-  },
-};
+])
+
+// ===== 方法 =====
+function toggleMenu() {
+  visible.value = !visible.value
+  if (!visible.value) {
+    activePanel.value = null
+  }
+}
+
+function openPanel(key) {
+  activePanel.value = key
+}
+
+function getFieldValue(key) {
+  return currentColors[key] || ""
+}
+
+function handlePick(key, color) {
+  setThemeField(key, color)
+  currentColors[key] = color.toLowerCase()
+  emit("change", { key, color })
+}
+
+function handleResetAll() {
+  resetAllTheme()
+  themeFields.forEach((field) => {
+    currentColors[field.key] = field.default.toLowerCase()
+  })
+  emit("reset")
+}
+
+function handleResetField(key) {
+  resetThemeField(key)
+  const field = themeFields.find((f) => f.key === key)
+  if (field) {
+    currentColors[key] = field.default.toLowerCase()
+  }
+  emit("reset-field", key)
+}
+
+function handleClickOutside(e) {
+  if (!proxy.$el.contains(e.target)) {
+    visible.value = false
+    activePanel.value = null
+  }
+}
+
+function handleSwitchLang(lang) {
+  Object.keys(localStorage)
+    .filter(key => key.startsWith('nex_menu_cache_') || key === 'nex_menu_version')
+    .forEach(key => localStorage.removeItem(key))
+  setLanguage(lang)
+  const msg = lang === 'zh-CN' ? $t('theme.switchedToZh') : $t('theme.switchedToEn')
+  Message.success(msg)
+  setTimeout(() => {
+    window.location.reload()
+  }, 800)
+}
+
+// ===== 生命周期 =====
+onMounted(() => {
+  themeFields.forEach((field) => {
+    currentColors[field.key] = getThemeField(field.key)
+  })
+  document.addEventListener("click", handleClickOutside)
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener("click", handleClickOutside)
+})
 </script>
 
 <style scoped lang="less">

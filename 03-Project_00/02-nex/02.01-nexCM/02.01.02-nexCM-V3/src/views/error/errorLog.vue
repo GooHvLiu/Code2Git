@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <!--
     错误日志查看页面
     展示 store/modules/errorLog.js 收集到的前端错误
@@ -45,43 +45,42 @@
   </div>
 </template>
 
-<script>
-import { mapGetters, mapActions } from 'vuex'
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+import { MessageBox } from 'element-ui'
+import store from '@/store'
 import { formatDate } from '@/utils/date'
 
-export default {
-  name: 'ErrorLog',
-  data() {
-    return {
-      /** 展开的堆栈索引 */
-      expandedIndex: -1
-    }
-  },
-  computed: {
-    ...mapGetters(['errorLogs'])
-  },
-  methods: {
-    ...mapActions('errorLog', ['clearErrorLog']),
-    /** 格式化时间 */
-    formatTime(time) {
-      return formatDate(time, 'YYYY-MM-DD HH:mm:ss')
-    },
-    /** 切换堆栈展开 */
-    toggleExpand(index) {
-      this.expandedIndex = this.expandedIndex === index ? -1 : index
-    },
-    /** 清空日志 */
-    async handleClear() {
-      const ok = await this.$confirm('确定要清空所有错误日志吗？', '提示', {
-        type: 'warning'
-      }).catch(() => false)
-      if (ok) {
-        this.clearErrorLog()
-        this.expandedIndex = -1
-      }
-    }
+
+// ===== 响应式数据 =====
+/** 展开的堆栈索引 */
+const expandedIndex = ref(-1)
+
+// ===== 计算属性 =====
+const errorLogs = computed(() => store.getters.errorLogs)
+
+// ===== 方法 =====
+/** 格式化时间 */
+function formatTime(time) {
+  return formatDate(time, 'YYYY-MM-DD HH:mm:ss')
+}
+
+/** 切换堆栈展开 */
+function toggleExpand(index) {
+  expandedIndex.value = expandedIndex.value === index ? -1 : index
+}
+
+/** 清空日志 */
+async function handleClear() {
+  const ok = await MessageBox.confirm('确定要清空所有错误日志吗？', '提示', {
+    type: 'warning'
+  }).catch(() => false)
+  if (ok) {
+    store.dispatch('errorLog/clearErrorLog')
+    expandedIndex.value = -1
   }
 }
+
 </script>
 
 <style scoped lang="less">

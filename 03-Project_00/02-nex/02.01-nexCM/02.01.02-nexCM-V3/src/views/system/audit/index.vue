@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="audit-log">
     <!-- ==================== 搜索表单 ==================== -->
     <search-form :form="queryParams" @search="handleQuery" @reset="handleReset">
@@ -83,14 +83,10 @@
   </div>
 </template>
 
-<script>
-/**
- * 审计追踪页面
- * - 管理员：可查看全部用户的审计日志，支持按用户名/操作类型/操作对象/时间范围筛选
- * - 普通用户：只能查看自己的审计日志，无删除/修改权限
- */
-import tableMixin from '@/mixins/table'
-import dictMixin from '@/mixins/dict'
+<script setup>
+import { reactive, computed } from 'vue'
+import { useTable } from '@/composables/useTable'
+import { useDict } from '@/composables/useDict'
 import SearchForm from '@/components/SearchForm/index.vue'
 import TableToolbar from '@/components/TableToolbar/index.vue'
 import Pagination from '@/components/Pagination/index.vue'
@@ -100,93 +96,83 @@ import { formatDate } from '@/utils/date'
 import { hasRole } from '@/utils/permission'
 import { requestGetAuditListApi, requestGetMyAuditListApi } from '@/api'
 
-export default {
-  name: 'AuditLog',
-  components: { SearchForm, TableToolbar, Pagination, DictTag, ExportDropdown },
-  mixins: [tableMixin, dictMixin],
-  data() {
-    return {
-      listApi: requestGetAuditListApi,
-      /** 需要加载的字典编码 */
-      dictCodes: ['audit_action', 'audit_result'],
-      tableData: [],
-      queryParams: {
-        userName: '',
-        action: '',
-        target: '',
-        timeRange: []
-      }
-    }
-  },
-  computed: {
-    /** 是否管理员 */
-    isAdmin() {
-      return hasRole('administrator')
-    },
-    /** 导出列配置 */
-    exportColumns() {
-      const cols = []
-      if (this.isAdmin) {
-        cols.push({ label: this.$t('audit.userName'), prop: 'user_name', width: 120 })
-      }
-      cols.push(
-        { label: this.$t('audit.action'), prop: 'action', width: 140 },
-        { label: this.$t('audit.target'), prop: 'target', width: 200 },
-        { label: this.$t('audit.oldValue'), prop: 'old_value', width: 150 },
-        { label: this.$t('audit.newValue'), prop: 'new_value', width: 150 },
-        {
-          label: this.$t('audit.result'),
-          prop: 'result',
-          width: 80,
-          formatter: row => (row.result === 'success' ? this.$t('audit.success') : this.$t('audit.failed'))
-        },
-        { label: this.$t('audit.ip'), prop: 'ip', width: 130 },
-        {
-          label: this.$t('audit.createdAt'),
-          prop: 'created_at',
-          width: 170,
-          formatter: row => formatDate(row.created_at)
-        }
-      )
-      return cols
-    }
-  },
-  methods: {
-    /** 格式化日期时间（模板中使用） */
-    formatDateTime(date) {
-      return formatDate(date)
-    },
+// 字典数据
+const { dict } = useDict(['audit_action', 'audit_result'])
 
-    /**
-     * 请求前参数转换
-     */
-    beforeFetch(params) {
-      const { pageNum, timeRange, ...rest } = params
-      const result = { page: pageNum, ...rest }
-      // 时间范围转换
-      if (timeRange && timeRange.length === 2) {
-        result.startTime = timeRange[0]
-        result.endTime = timeRange[1]
-      }
-      // 普通用户只看自己的，调用 /audit/my 接口
-      if (!this.isAdmin) {
-        this.listApi = requestGetMyAuditListApi
-      } else {
-        this.listApi = requestGetAuditListApi
-      }
-      return result
-    },
+// 搜索参数
+const queryParams = reactive({
+  userName: '',
+  action: '',
+  target: '',
+  timeRange: []
+})
 
-    /** 操作类型标签颜色 */
-    actionTagType(action) {
-      if (!action) return 'info'
-      if (action.includes('修改')) return 'warning'
-      if (action.includes('删除')) return 'danger'
-      if (action.includes('登录') || action.includes('导出')) return 'success'
-      return 'info'
-    }
+// 是否管理员
+const isAdmin = computed(() => hasRole('administrator'))
+
+// 请求前参数转换
+function beforeFetch(params) {
+  const { pageNum, timeRange, ...rest } = params
+  const result = { page: pageNum, ...rest }
+  // 时间范围转换
+  if (timeRange && timeRange.length === 2) {
+    result.startTime = timeRange[0]
+    result.endTime = timeRange[1]
   }
+  return result
 }
+
+// 根据角色选择 API
+const listApi = computed(() => {
+  return isAdmin.value ? requestGetAuditListApi : requestGetMyAuditListApi
+})
+
+// 使用 useTable 组合式函数
+const {
+  loading,
+  tableData,
+  total,
+  pageNum,
+  pageSize,
+  getList,
+  handleQuery,
+  handleReset,
+  refreshList
+} = useTable(listApi.value, queryParams, { beforeFetch })
+
+
+// 格式化日期时间
+function formatDateTime(date) {
+  return formatDate(date)
+}
+
+// 导出列配置
+const exportColumns = computed(() => {
+  const cols = []
+  if (isAdmin.value) {
+    cols.push({ label: '用户名', prop: 'user_name', width: 120 })
+  }
+  cols.push(
+    { label: '操作类型', prop: 'action', width: 140 },
+    { label: '操作对象', prop: 'target', width: 200 },
+    { label: '旧值', prop: 'old_value', width: 150 },
+    { label: '新值', prop: 'new_value', width: 150 },
+    {
+      label: '结果',
+      prop: 'result',
+      width: 80,
+      formatter: row => (row.result === 'success' ? '成功' : '失败')
+    },
+    { label: 'IP地址', prop: 'ip', width: 130 },
+    {
+      label: '创建时间',
+      prop: 'created_at',
+      width: 170,
+      formatter: row => formatDate(row.created_at)
+    }
+  )
+  return cols
+})
 </script>
 
 <style scoped lang="less">

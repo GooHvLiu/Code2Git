@@ -6,7 +6,7 @@
   <span v-else>--</span>
 </template>
 
-<script>
+<script setup>
 /**
  * 字典标签组件
  * 支持两种方式：
@@ -16,108 +16,55 @@
  * options 格式：[{ label: '正常', value: '1', type: 'success' }]
  * type 可选：success / warning / danger / info / primary
  */
-import { requestGetDictItemsByCodeApi } from '@/api'
+import { ref, computed, watch } from 'vue'
+import { getDict, clearDictCache } from '@/utils/dict'
 
-// 字典数据缓存（全局共享，避免重复请求）
-const dictCache = {}
-// 字典请求中状态（全局共享，避免并发重复请求）
-const dictLoading = {}
-// 字典请求等待队列（全局共享，并发请求等待第一个请求返回）
-const dictWaitQueue = {}
+const props = defineProps({
+  /** 字典选项列表（手动传入） */
+  options: {
+    type: Array,
+    default: () => []
+  },
+  /** 字典类型编码（从后端自动加载） */
+  dictCode: {
+    type: String,
+    default: ''
+  },
+  /** 当前值 */
+  value: {
+    type: [String, Number],
+    default: ''
+  }
+})
 
-export default {
-  name: 'DictTag',
-  props: {
-    /** 字典选项列表（手动传入） */
-    options: {
-      type: Array,
-      default: () => []
-    },
-    /** 字典类型编码（从后端自动加载） */
-    dictCode: {
-      type: String,
-      default: ''
-    },
-    /** 当前值 */
-    value: {
-      type: [String, Number],
-      default: ''
-    }
-  },
-  data() {
-    return {
-      loadedOptions: [] // 从后端加载的字典选项
-    }
-  },
-  computed: {
-    /** 最终使用的字典选项列表 */
-    finalOptions() {
-      return this.options.length > 0 ? this.options : this.loadedOptions
-    },
-    dictItem() {
-      return this.finalOptions.find(item => String(item.value) === String(this.value))
-    }
-  },
-  watch: {
-    dictCode: {
-      immediate: true,
-      handler(code) {
-        if (code) {
-          this.loadDictData(code)
-        }
-      }
-    }
-  },
-  methods: {
-    /** 加载字典数据（带缓存 + 并发请求合并） */
-    async loadDictData(code) {
-      // 命中缓存
-      if (dictCache[code]) {
-        this.loadedOptions = dictCache[code]
-        return
-      }
-      // 如果有相同请求正在加载，等待第一个请求返回
-      if (dictLoading[code]) {
-        await new Promise(resolve => {
-          if (!dictWaitQueue[code]) dictWaitQueue[code] = []
-          dictWaitQueue[code].push(resolve)
-        })
-        if (dictCache[code]) {
-          this.loadedOptions = dictCache[code]
-        }
-        return
-      }
-      // 标记为加载中
-      dictLoading[code] = true
-      try {
-        const res = await requestGetDictItemsByCodeApi(code)
-        this.loadedOptions = res.data || []
-        dictCache[code] = this.loadedOptions
-        // 通知等待的请求
-        if (dictWaitQueue[code]) {
-          dictWaitQueue[code].forEach(resolve => resolve())
-          delete dictWaitQueue[code]
-        }
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.warn(`[DictTag] 加载字典数据失败: ${code}`, e)
-        // 通知等待的请求（失败也通知，避免一直等待）
-        if (dictWaitQueue[code]) {
-          dictWaitQueue[code].forEach(resolve => resolve())
-          delete dictWaitQueue[code]
-        }
-      } finally {
-        delete dictLoading[code]
-      }
-    },
-    /** 清除字典缓存（修改字典后调用） */
-    clearCache(code) {
-      if (code) {
-        delete dictCache[code]
-      } else {
-        Object.keys(dictCache).forEach(key => delete dictCache[key])
-      }
-    }
+const loadedOptions = ref([])
+
+const finalOptions = computed(() => props.options.length > 0 ? props.options : loadedOptions.value)
+const dictItem = computed(() => finalOptions.value.find(item => String(item.value) === String(props.value)))
+
+/** 加载字典数据（使用全局缓存 + 并发请求合并） */
+async function loadDictData(code) {
+  if (!code) return
+  try {
+    const list = await getDict(code)
+    loadedOptions.value = list
+  } catch (e) {
+    // 被取消的请求或其他错误静默处理，getDict 内部已处理
   }
 }
+
+/** 清除字典缓存（修改字典后调用） */
+function clearCache(code) {
+  clearDictCache(code)
+}
+
+// 暴露方法给父组件
+defineExpose({ clearCache })
+
+// 监听 dictCode 变化
+watch(() => props.dictCode, (code) => {
+  if (code) {
+    loadDictData(code)
+  }
+}, { immediate: true })
 </script>

@@ -139,7 +139,9 @@
               />
             </el-form-item>
 
-            <el-divider content-position="left">轮询设置</el-divider>
+            <el-divider content-position="left">{{
+              $t("systemConfig.plc.pollSettings")
+            }}</el-divider>
 
             <el-form-item :label="$t('systemConfig.plc.pollFast')">
               <el-input-number
@@ -205,6 +207,136 @@
                 controls-position="right"
               />
               <span class="unit-text">ms</span>
+            </el-form-item>
+          </el-form>
+        </div>
+
+        <!-- 设备参数 -->
+        <div v-show="activeMenu === 'device'" class="config-panel">
+          <h3 class="panel-title">{{ $t("systemConfig.device.title") }}</h3>
+          <el-form :model="form" label-width="160px" label-position="right">
+            <el-form-item :label="$t('systemConfig.device.deviceName')">
+              <el-input
+                v-model="form.deviceName"
+                :placeholder="$t('systemConfig.device.deviceName')"
+                clearable
+                style="width: 300px"
+              />
+            </el-form-item>
+            <el-form-item :label="$t('systemConfig.device.deviceCode')">
+              <el-input
+                v-model="form.deviceCode"
+                :placeholder="$t('systemConfig.device.deviceCode')"
+                clearable
+                style="width: 300px"
+              />
+            </el-form-item>
+            <el-form-item :label="$t('systemConfig.device.deviceRegion')">
+              <el-cascader
+                v-model="form.deviceRegion"
+                :options="regionOptions"
+                :props="{ expandTrigger: 'hover' }"
+                :placeholder="$t('systemConfig.device.deviceRegion')"
+                clearable
+                filterable
+                popper-class="device-region-cascader"
+                style="width: 300px"
+              />
+            </el-form-item>
+            <el-form-item :label="$t('systemConfig.device.deviceInstallDate')">
+              <el-date-picker
+                v-model="form.deviceInstallDate"
+                type="date"
+                :placeholder="$t('systemConfig.device.deviceInstallDate')"
+                value-format="yyyy-MM-dd"
+                style="width: 300px"
+              />
+            </el-form-item>
+          </el-form>
+
+          <!-- 部件寿命提醒设置 -->
+          <h3 class="panel-title" style="margin-top: 24px">
+            {{ $t("systemConfig.device.partLifeSettingsTitle") }}
+          </h3>
+          <el-form :model="form" label-width="160px" label-position="right">
+            <el-form-item
+              :label="$t('systemConfig.device.partLifeReminderEnabled')"
+            >
+              <el-switch v-model="form.partLifeReminderEnabled" />
+              <div class="form-tip">
+                {{ $t("systemConfig.device.partLifeReminderEnabledTip") }}
+              </div>
+            </el-form-item>
+            <el-form-item :label="$t('systemConfig.device.partLifeThreshold')">
+              <el-select
+                v-model="form.partLifeThreshold"
+                style="width: 200px"
+                :disabled="!form.partLifeReminderEnabled"
+              >
+                <el-option label="10%" value="10" />
+                <el-option label="20%" value="20" />
+                <el-option label="30%" value="30" />
+                <el-option label="50%" value="50" />
+              </el-select>
+              <div class="form-tip">
+                {{ $t("systemConfig.device.partLifeThresholdTip") }}
+              </div>
+            </el-form-item>
+            <el-form-item
+              :label="$t('systemConfig.device.partLifeRemindInterval')"
+            >
+              <el-select
+                v-model="form.partLifeRemindInterval"
+                style="width: 200px"
+                :disabled="!form.partLifeReminderEnabled"
+              >
+                <el-option
+                  :label="$t('systemConfig.device.intervalHour')"
+                  value="hour"
+                />
+                <el-option
+                  :label="$t('systemConfig.device.intervalShift')"
+                  value="shift"
+                />
+                <el-option
+                  :label="$t('systemConfig.device.intervalDay')"
+                  value="day"
+                />
+              </el-select>
+              <div class="form-tip">
+                {{ $t("systemConfig.device.partLifeRemindIntervalTip") }}
+              </div>
+            </el-form-item>
+            <el-form-item :label="$t('systemConfig.device.snoozeInterval')">
+              <el-select
+                v-model="form.partLifeSnoozeInterval"
+                style="width: 200px"
+                :disabled="!form.partLifeReminderEnabled"
+              >
+                <el-option
+                  :label="$t('systemConfig.device.snooze5min')"
+                  value="5"
+                />
+                <el-option
+                  :label="$t('systemConfig.device.snooze10min')"
+                  value="10"
+                />
+                <el-option
+                  :label="$t('systemConfig.device.snooze30min')"
+                  value="30"
+                />
+                <el-option
+                  :label="$t('systemConfig.device.snooze1hour')"
+                  value="60"
+                />
+                <el-option
+                  :label="$t('systemConfig.device.snooze2hour')"
+                  value="120"
+                />
+              </el-select>
+              <div class="form-tip">
+                {{ $t("systemConfig.device.snoozeIntervalTip") }}
+              </div>
             </el-form-item>
           </el-form>
         </div>
@@ -643,7 +775,7 @@
                   }}</span>
                 </div>
                 <div class="time-row">
-                  <span class="time-label">操作</span>
+                  <span class="time-label">{{ $t("license.operation") }}</span>
                   <el-button
                     type="primary"
                     size="mini"
@@ -745,187 +877,320 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, reactive, computed, onMounted } from "vue";
+import store from "@/store";
+import { Message } from "element-ui";
 import {
   requestGetAllConfigsApi,
   requestUpdateConfigsApi,
   requestResetConfigsApi,
 } from "@/api";
 import { applyConfig } from "@/utils/config";
-import licenseMixin from "@/mixins/licenseMixin";
+import { useLicense } from "@/composables/useLicense";
+import { useI18n } from "@/composables/useI18n";
+import { getCascaderOptions, getCoordsByValues } from "@/utils/worldCities";
+import { nextTick } from "vue";
 
-export default {
-  name: "SystemConfig",
-  mixins: [licenseMixin],
-  data() {
-    return {
-      loading: false,
-      activeMenu: "system",
-      menuList: [
-        { key: "system", icon: "el-icon-setting", title: "" },
-        { key: "security", icon: "el-icon-lock", title: "" },
-        { key: "plc", icon: "el-icon-cpu", title: "" },
-        { key: "export", icon: "el-icon-document", title: "" },
-        { key: "connection", icon: "el-icon-connection", title: "" },
-        { key: "order", icon: "el-icon-s-order", title: "" },
-        { key: "license", icon: "el-icon-key", title: "" },
-      ],
-      // 表单数据
-      form: {
-        // 系统设置
-        sessionTimeout: 30,
-        defaultPageSize: 20,
-        defaultLanguage: "zh-CN",
-        dateFormat: "YYYY-MM-DD",
-        // 安全设置
-        watermarkEnabled: false,
-        watermarkText: "",
-        // PLC 设置
-        plcProtocol: "ModbusTcp",
-        plcHost: "127.0.0.1",
-        plcPort: 502,
-        plcUnitId: 1,
-        pollFastInterval: 200,
-        pollSlowInterval: 1000,
-        // 导出设置
-        pdfWatermarkEnabled: true,
-        pdfWatermarkText: "",
-        // 连接设置
-        heartbeatInterval: 25000,
-        // 订单设置
-        allowNoOrderProduction: false, // 是否允许无订单生产
-        noOrderProductionHighlight: false, // 无订单生产统计高亮显示
-        showOperatorName: true, // 订单统计展示操作人员名字
-        showAlarmCount: true, // 订单统计展示报警总次数
-        showRuntime: true, // 订单统计展示总运行时间
-        reportIncludeAlarmDetail: true, // 订单报告包含详细报警信息
-        reportIncludeOperatorDetail: true, // 订单报告包含详细操作人罗列
-        reportIncludeDownloadCount: true, // 订单报告包含已下载次数
-        allowRunningOrderDownload: false, // 进行中订单支持下载报告
-        autoArchiveCompleted: true, // 完成订单自动归档
-        orderSwitchConfirm: true, // 订单切换时需要确认
-      },
-    };
+// 使用 useI18n 获取响应式的当前语言和 t 函数
+const { locale, t } = useI18n();
+
+// 全球城市级联选择器数据（根据当前语言，响应式更新）
+const regionOptions = computed(() => getCascaderOptions(locale.value));
+
+// 菜单列表（响应式，根据语言自动更新）
+const menuList = computed(() => [
+  {
+    key: "system",
+    icon: "el-icon-setting",
+    title: t("systemConfig.system.title"),
   },
-  computed: {
-    isAdmin() {
-      return this.$store?.state?.user?.userInfo?.role === "administrator";
-    },
-    /**
-     * 根据角色权限过滤后的菜单列表
-     * - 系统设置、连接设置：任何角色都能查看和设置
-     * - 安全设置、设备连接、导出设置：只有管理员有权限
-     * - 授权管理：所有人能看
-     */
-    filteredMenuList() {
-      // 需要管理员权限的分类
-      const adminOnlyKeys = ["security", "plc", "export", "order"];
-      return this.menuList.filter((item) => {
-        if (adminOnlyKeys.includes(item.key)) {
-          return this.isAdmin;
-        }
-        return true;
+  {
+    key: "security",
+    icon: "el-icon-lock",
+    title: t("systemConfig.security.title"),
+  },
+  { key: "plc", icon: "el-icon-cpu", title: t("systemConfig.plc.title") },
+  {
+    key: "export",
+    icon: "el-icon-document",
+    title: t("systemConfig.export.title"),
+  },
+  {
+    key: "connection",
+    icon: "el-icon-connection",
+    title: t("systemConfig.connection.title"),
+  },
+  { key: "device", icon: "el-icon-cpu", title: t("systemConfig.device.title") },
+  {
+    key: "order",
+    icon: "el-icon-s-order",
+    title: t("systemConfig.order.title"),
+  },
+  { key: "license", icon: "el-icon-key", title: t("license.manageTitle") },
+]);
+const {
+  licenseData,
+  licenseLoading,
+  licenseSyncing,
+  licenseImporting,
+  showLicenseImport,
+  selectedLicenseFile,
+  licenseCountdown,
+  licenseActiveNames,
+  loadLicenseData,
+  handleLicenseFileChange,
+  handleImportLicense,
+  handleDownloadLicense,
+  handleSyncLicenseTime,
+  copyMachineId,
+  formatLicenseTime,
+  licenseTypeTag,
+  licenseTypeLabel,
+} = useLicense();
+
+// 加载状态
+const loading = ref(false);
+// 当前激活的菜单
+const activeMenu = ref("system");
+
+// 表单数据
+const form = reactive({
+  // 系统设置
+  sessionTimeout: 30,
+  defaultPageSize: 20,
+  defaultLanguage: "zh-CN",
+  dateFormat: "YYYY-MM-DD",
+  // 安全设置
+  watermarkEnabled: false,
+  watermarkText: "",
+  // PLC 设置
+  plcProtocol: "ModbusTcp",
+  plcHost: "127.0.0.1",
+  plcPort: 502,
+  plcUnitId: 1,
+  pollFastInterval: 200,
+  pollSlowInterval: 1000,
+  // 导出设置
+  pdfWatermarkEnabled: true,
+  pdfWatermarkText: "",
+  // 连接设置
+  heartbeatInterval: 25000,
+  // 设备参数
+  deviceName: "nexCM-灌装机-001",
+  deviceCode: "NEXCM-FILL-2026-001",
+  deviceRegion: ["CN", "CN-WX"], // [国家编码, 城市编码]
+  deviceInstallDate: "2026-01-15",
+  // 部件寿命提醒设置
+  partLifeReminderEnabled: true,
+  partLifeThreshold: "20",
+  partLifeRemindInterval: "day",
+  partLifeSnoozeInterval: "10", // 稍后提醒间隔（分钟）
+  // 订单设置
+  allowNoOrderProduction: false,
+  noOrderProductionHighlight: false,
+  showOperatorName: true,
+  showAlarmCount: true,
+  showRuntime: true,
+  reportIncludeAlarmDetail: true,
+  reportIncludeOperatorDetail: true,
+  reportIncludeDownloadCount: true,
+  allowRunningOrderDownload: false,
+  autoArchiveCompleted: true,
+  orderSwitchConfirm: true,
+});
+
+// 是否管理员
+const isAdmin = computed(() => {
+  return store?.state?.user?.userInfo?.role === "administrator";
+});
+
+/**
+ * 根据角色权限过滤后的菜单列表
+ * - 系统设置、连接设置：任何角色都能查看和设置
+ * - 安全设置、设备连接、导出设置、订单设置：只有管理员有权限
+ * - 授权管理：所有人能看
+ */
+const filteredMenuList = computed(() => {
+  const adminOnlyKeys = ["security", "plc", "export", "order"];
+  return menuList.value.filter((item) => {
+    if (adminOnlyKeys.includes(item.key)) {
+      return isAdmin.value;
+    }
+    return true;
+  });
+});
+
+/**
+ * 解析 deviceRegion 为数组格式（兼容多种后端存储格式）
+ */
+function parseDeviceRegion(value) {
+  if (Array.isArray(value)) return value;
+  if (typeof value === "string") {
+    // JSON 字符串格式：'["CN","CN-WX"]'
+    try {
+      const parsed = JSON.parse(value);
+      if (Array.isArray(parsed)) return parsed;
+    } catch (e) {
+      // 不是 JSON，继续尝试其他格式
+    }
+    // 逗号分隔格式：'CN,CN-WX'
+    if (value.includes(",")) {
+      return value.split(",").map((s) => s.trim());
+    }
+  }
+  return [];
+}
+
+/**
+ * 解析日期为 YYYY-MM-DD 字符串格式（兼容 Date 对象、时间戳、各种字符串格式）
+ */
+function parseDate(value) {
+  if (!value) return "";
+  if (value instanceof Date) {
+    if (isNaN(value.getTime())) return "";
+    const y = value.getFullYear();
+    const m = String(value.getMonth() + 1).padStart(2, "0");
+    const d = String(value.getDate()).padStart(2, "0");
+    return `${y}-${m}-${d}`;
+  }
+  if (typeof value === "number") {
+    // 时间戳（毫秒或秒）
+    const ts = value < 1e12 ? value * 1000 : value;
+    return parseDate(new Date(ts));
+  }
+  if (typeof value === "string") {
+    // 已经是 YYYY-MM-DD 格式，直接返回
+    if (/^\d{4}-\d{2}-\d{2}$/.test(value)) return value;
+    // 其他字符串格式，尝试转成 Date 再格式化
+    const date = new Date(value);
+    if (!isNaN(date.getTime())) {
+      return parseDate(date);
+    }
+    return value;
+  }
+  return "";
+}
+
+/**
+ * 加载配置
+ */
+async function loadConfigs() {
+  loading.value = true;
+  try {
+    const res = await requestGetAllConfigsApi();
+    if (res.code === 200 && res.data) {
+      Object.assign(form, res.data);
+      // partLifeReminderEnabled 兼容数据库存储的字符串 'true'/'false'，统一转为布尔值
+      form.partLifeReminderEnabled =
+        form.partLifeReminderEnabled === true ||
+        form.partLifeReminderEnabled === "true" ||
+        form.partLifeReminderEnabled === 1 ||
+        form.partLifeReminderEnabled === "1";
+      // deviceRegion 兼容多种后端存储格式，统一转为数组
+      const parsedRegion = parseDeviceRegion(form.deviceRegion);
+      // deviceInstallDate 兼容多种日期格式，统一转为 YYYY-MM-DD 字符串
+      const parsedDate = parseDate(form.deviceInstallDate);
+      // 先清空，再用 nextTick 赋值，强制 el-cascader/el-date-picker 重新计算
+      form.deviceRegion = [];
+      form.deviceInstallDate = "";
+      await nextTick();
+      form.deviceRegion = parsedRegion;
+      form.deviceInstallDate = parsedDate;
+    }
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error("[参数配置] 加载配置失败:", err);
+  } finally {
+    loading.value = false;
+  }
+}
+
+/**
+ * 保存配置
+ */
+async function handleSave() {
+  loading.value = true;
+  try {
+    const res = await requestUpdateConfigsApi(form);
+    if (res.code === 200) {
+      // 实时生效配置（包含语言切换、心跳间隔、水印等）
+      applyConfig(res.data || form);
+
+      // 同步更新 device store 中的设备信息
+      const cityInfo = getCoordsByValues(form.deviceRegion);
+      store.commit("device/SET_DEVICE_INFO", {
+        name: form.deviceName,
+        code: form.deviceCode,
+        location: cityInfo
+          ? `${cityInfo.countryNameZh}·${cityInfo.nameZh}`
+          : "",
+        locationCode: form.deviceRegion, // [国家编码, 城市编码]
+        locationCoords: cityInfo
+          ? { lng: cityInfo.lng, lat: cityInfo.lat }
+          : null,
+        installDate: form.deviceInstallDate,
       });
-    },
-  },
-  created() {
-    // 初始化菜单标题（国际化）
-    this.menuList[0].title = this.$t("systemConfig.system.title");
-    this.menuList[1].title = this.$t("systemConfig.security.title");
-    this.menuList[2].title = this.$t("systemConfig.plc.title");
-    this.menuList[3].title = this.$t("systemConfig.export.title");
-    this.menuList[4].title = this.$t("systemConfig.connection.title");
-    this.menuList[5].title = this.$t("systemConfig.order.title");
-    this.menuList[6].title = this.$t("license.manageTitle");
-    // 确保当前激活的菜单有权限访问（非管理员时，默认跳转到系统设置）
-    const adminOnlyKeys = ["security", "plc", "export"];
-    if (!this.isAdmin && adminOnlyKeys.includes(this.activeMenu)) {
-      this.activeMenu = "system";
+
+      Message.success("保存成功");
     }
-    // 加载配置
-    this.loadConfigs();
-    // 加载授权数据
-    this.loadLicenseData();
-  },
-  beforeDestroy() {
-    if (this.licenseCountdownTimer) {
-      clearInterval(this.licenseCountdownTimer);
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error("[参数配置] 保存配置失败:", err);
+  } finally {
+    loading.value = false;
+  }
+}
+
+/**
+ * 重置配置
+ */
+function handleReset() {
+  // 确认重置逻辑
+  requestResetConfigsApi()
+    .then((res) => {
+      if (res.code === 200 && res.data) {
+        Object.assign(form, res.data);
+        // partLifeReminderEnabled 兼容数据库存储的字符串 'true'/'false'，统一转为布尔值
+        form.partLifeReminderEnabled =
+          form.partLifeReminderEnabled === true ||
+          form.partLifeReminderEnabled === "true" ||
+          form.partLifeReminderEnabled === 1 ||
+          form.partLifeReminderEnabled === "1";
+        applyConfig(res.data);
+      }
+    })
+    .catch(() => {});
+}
+
+onMounted(() => {
+  // 从 device store 读取设备信息，同步到表单
+  const deviceInfo = store.state.device.info;
+  if (deviceInfo) {
+    form.deviceName = deviceInfo.name || form.deviceName;
+    form.deviceCode = deviceInfo.code || form.deviceCode;
+    // 优先使用 locationCode（[国家编码, 城市编码]），否则保持默认
+    if (
+      Array.isArray(deviceInfo.locationCode) &&
+      deviceInfo.locationCode.length === 2
+    ) {
+      form.deviceRegion = deviceInfo.locationCode;
     }
-  },
-  methods: {
-    /**
-     * 加载配置
-     */
-    async loadConfigs() {
-      this.loading = true;
-      try {
-        const res = await requestGetAllConfigsApi();
-        if (res.code === 200 && res.data) {
-          this.form = { ...this.form, ...res.data };
-        }
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.error("[参数配置] 加载配置失败:", err);
-        this.$message.error(this.$t("systemConfig.loadFailed"));
-      } finally {
-        this.loading = false;
-      }
-    },
-    /**
-     * 保存配置
-     */
-    async handleSave() {
-      this.loading = true;
-      try {
-        const res = await requestUpdateConfigsApi(this.form);
-        if (res.code === 200) {
-          this.$message.success(this.$t("systemConfig.saveSuccess"));
-          // 实时生效配置（包含语言切换、心跳间隔、水印等）
-          applyConfig(res.data || this.form);
-        }
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.error("[参数配置] 保存配置失败:", err);
-        this.$message.error(this.$t("systemConfig.saveFailed"));
-      } finally {
-        this.loading = false;
-      }
-    },
-    /**
-     * 重置配置
-     */
-    handleReset() {
-      this.$confirm(
-        this.$t("systemConfig.resetConfirm"),
-        this.$t("common.tip"),
-        {
-          confirmButtonText: this.$t("common.confirm"),
-          cancelButtonText: this.$t("common.cancel"),
-          type: "warning",
-        }
-      )
-        .then(async () => {
-          this.loading = true;
-          try {
-            const res = await requestResetConfigsApi();
-            if (res.code === 200 && res.data) {
-              this.form = { ...this.form, ...res.data };
-              this.$message.success(this.$t("systemConfig.resetSuccess"));
-              // 实时生效配置（包含语言切换、心跳间隔、水印等）
-              applyConfig(res.data);
-            }
-          } catch (err) {
-            // eslint-disable-next-line no-console
-            console.error("[参数配置] 重置配置失败:", err);
-            this.$message.error(this.$t("systemConfig.resetFailed"));
-          } finally {
-            this.loading = false;
-          }
-        })
-        .catch(() => {});
-    },
-  },
-};
+    // 日期统一转为 YYYY-MM-DD 字符串，避免 el-date-picker 报错
+    form.deviceInstallDate =
+      parseDate(deviceInfo.installDate) || form.deviceInstallDate;
+  }
+
+  // 确保当前激活的菜单有权限访问（非管理员时，默认跳转到系统设置）
+  const adminOnlyKeys = ["security", "plc", "export"];
+  if (!isAdmin.value && adminOnlyKeys.includes(activeMenu.value)) {
+    activeMenu.value = "system";
+  }
+
+  // 加载配置和授权数据
+  loadConfigs();
+  loadLicenseData();
+});
 </script>
 
 <style scoped lang="less">
@@ -1042,6 +1307,12 @@ export default {
         .unit-text {
           margin-left: 10px;
           font-size: 13px;
+          color: #909399;
+        }
+
+        .form-tip {
+          margin-left: 10px;
+          font-size: 12px;
           color: #909399;
         }
 
@@ -1374,5 +1645,35 @@ export default {
     color: #67c23a;
     font-weight: 500;
   }
+}
+</style>
+
+<!-- 全局样式：设备所在地区级联选择器下拉面板 -->
+<style>
+.device-region-cascader {
+  max-height: 420px !important;
+  overflow: hidden !important;
+}
+
+.device-region-cascader .el-cascader-panel {
+  max-height: 420px !important;
+}
+
+.device-region-cascader .el-cascader-menu {
+  max-height: 380px !important;
+  overflow-y: auto !important;
+}
+
+.device-region-cascader .el-cascader-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.device-region-cascader .el-cascader-menu::-webkit-scrollbar-thumb {
+  background: #c0c4cc;
+  border-radius: 3px;
+}
+
+.device-region-cascader .el-cascader-menu::-webkit-scrollbar-track {
+  background: #f5f7fa;
 }
 </style>

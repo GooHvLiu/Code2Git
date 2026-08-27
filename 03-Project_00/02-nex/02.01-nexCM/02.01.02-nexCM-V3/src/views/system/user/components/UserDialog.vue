@@ -70,7 +70,7 @@
             v-for="opt in field.options"
             :key="opt.value"
             :label="opt.value"
-          >{{ $t(opt.label) }}</el-radio>
+          >{{ opt.label }}</el-radio>
         </el-radio-group>
         <!-- 文本域 -->
         <el-input
@@ -90,281 +90,309 @@
   </el-dialog>
 </template>
 
-<script>
-/**
- * 用户新增/编辑弹窗 - 配置数组驱动
- *
- * 字段配置与后端 user.schema.js 的 Joi 校验规则对齐：
- * - required: true 对应后端 .required()
- * - 字段类型对应后端的 Joi.string()/Joi.number() 等
- * - 选项值对应后端的 USER_ROLE / USER_STATUS / USER_SEX 枚举
- *
- * 新增字段只需在 fieldConfig 数组中添加一项，无需修改模板
- */
-import dialogMixin from '@/mixins/dialog'
-import dictMixin from '@/mixins/dict'
+<script setup>
+import { ref, reactive, computed, onMounted, nextTick } from 'vue'
+import { useDict } from '@/composables/useDict'
 import { requestAddUserApi, requestUpdateUserApi } from '@/api'
 import { requestGetRoleAllApi } from '@/api'
 import { requestGetDeptTreeApi } from '@/api'
 import { withCache } from '@/utils/cache'
 
-export default {
-  name: 'UserDialog',
-  mixins: [dialogMixin, dictMixin],
-  data() {
-    return {
-      /** 需要加载的字典编码 */
-      dictCodes: ['user_status', 'user_sex', 'user_role'],
-      /** 角色列表（从角色管理接口获取） */
-      roleList: [],
-      /** 部门树（从部门管理接口获取） */
-      deptTree: [],
-      /** 表单数据 */
-      form: this.getDefaultForm(),
-      /** 表单默认值（用于重置） */
-      defaultForm: this.getDefaultForm()
-    }
-  },
-  created() {
-    this.loadRoleList()
-    this.loadDeptTree()
-  },
-  computed: {
-    /** 角色选项（从角色管理接口获取） */
-    roleOptions() {
-      return this.roleList.map(item => ({
-        label: item.role_name || item.role_code,
-        value: item.role_code
-      }))
-    },
-    /** 扁平化的部门列表（树形结构转扁平，用于下拉选择） */
-    flatDeptList() {
-      const result = []
-      const flatten = (list) => {
-        if (!Array.isArray(list)) return
-        list.forEach(item => {
-          result.push({ id: item.id, dept_name: item.dept_name })
-          if (item.children && item.children.length > 0) {
-            flatten(item.children)
-          }
-        })
-      }
-      flatten(this.deptTree)
-      return result
-    },
-    /** 性别选项（从数据字典获取，统一转换为数字类型） */
-    sexOptions() {
-      return (this.dict.user_sex || []).map(item => ({
-        ...item,
-        value: Number(item.value)
-      }))
-    },
-    /** 状态选项（从数据字典获取，统一转换为数字类型） */
-    statusOptions() {
-      return (this.dict.user_status || []).map(item => ({
-        ...item,
-        value: Number(item.value)
-      }))
-    },
-    /**
-     * 字段配置数组（驱动表单渲染）- 动态从字典/角色/部门获取
-     */
-    fieldConfig() {
-      return [
-        {
-          prop: 'username',
-          label: 'user.username',
-          type: 'input',
-          placeholder: 'user.usernamePlaceholder',
-          required: true,
-          disabledEdit: true
-        },
-        {
-          prop: 'password',
-          label: 'user.password',
-          type: 'password',
-          placeholder: 'user.passwordPlaceholder',
-          required: true,
-          show: (isEdit) => !isEdit // 仅新增时显示密码
-        },
-        {
-          prop: 'real_name',
-          label: 'user.realName',
-          type: 'input',
-          placeholder: 'user.realNamePlaceholder',
-          required: false
-        },
-        {
-          prop: 'sex',
-          label: 'user.sex',
-          type: 'radio',
-          required: false,
-          options: this.sexOptions
-        },
-        {
-          prop: 'phone',
-          label: 'user.phone',
-          type: 'input',
-          placeholder: 'user.phonePlaceholder',
-          required: false
-        },
-        {
-          prop: 'email',
-          label: 'user.email',
-          type: 'input',
-          placeholder: 'user.emailPlaceholder',
-          required: false
-        },
-        {
-          prop: 'dept_id',
-          label: 'user.dept',
-          type: 'treeselect',
-          placeholder: 'user.deptPlaceholder',
-          required: false
-        },
-        {
-          prop: 'role',
-          label: 'user.role',
-          type: 'select',
-          placeholder: 'user.rolePlaceholder',
-          required: false,
-          options: this.roleOptions
-        },
-        {
-          prop: 'status',
-          label: 'user.status',
-          type: 'radio',
-          required: false,
-          options: this.statusOptions,
-          show: (isEdit) => isEdit
-        },
-        {
-          prop: 'remark',
-          label: 'user.remark',
-          type: 'textarea',
-          placeholder: 'user.remarkPlaceholder',
-          required: false
-        }
-      ]
-    },
-    /** 是否编辑模式 */
-    isEdit() {
-      return !!this.form.id
-    },
-    /** 弹窗标题（国际化） */
-    dialogTitle: {
-      get() {
-        return this.isEdit ? this.$t('user.editUser') : this.$t('user.addUser')
-      },
-      set() {
-        // dialogMixin 的 open 方法会尝试赋值，这里忽略，由 getter 根据 isEdit 动态计算
-      }
-    },
-    /** 根据显示条件过滤后的字段列表 */
-    visibleFields() {
-      return this.fieldConfig.filter(field => {
-        if (typeof field.show === 'function') {
-          return field.show(this.isEdit)
-        }
-        return true
-      })
-    },
-    /** 表单校验规则（从 fieldConfig 动态生成） */
-    rules() {
-      const rules = {}
-      this.fieldConfig.forEach(field => {
-        if (field.required) {
-          rules[field.prop] = [
-            { required: true, message: this.$t(field.placeholder || field.label), trigger: 'blur' }
-          ]
-        }
-        // 邮箱格式校验
-        if (field.prop === 'email') {
-          rules[field.prop] = [
-            { type: 'email', message: this.$t('user.emailInvalid'), trigger: 'blur' }
-          ]
-        }
-        // 用户名长度校验
-        if (field.prop === 'username') {
-          rules[field.prop] = [
-            { required: true, message: this.$t('user.usernamePlaceholder'), trigger: 'blur' },
-            { min: 2, max: 50, message: this.$t('user.usernameLength'), trigger: 'blur' }
-          ]
-        }
-        // 密码长度校验（仅新增时）
-        if (field.prop === 'password' && !this.isEdit) {
-          rules[field.prop] = [
-            { required: true, message: this.$t('user.passwordPlaceholder'), trigger: 'blur' },
-            { min: 6, max: 32, message: this.$t('user.passwordLength'), trigger: 'blur' }
-          ]
-        }
-      })
-      return rules
-    }
-  },
-  methods: {
-    /** 加载角色列表（从角色管理接口，带缓存） */
-    async loadRoleList() {
-      try {
-        const res = await withCache('user_roleList', () => requestGetRoleAllApi())
-        this.roleList = res.data || []
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.warn('[UserDialog] 加载角色列表失败:', e)
-      }
-    },
-    /** 加载部门树（从部门管理接口，带缓存） */
-    async loadDeptTree() {
-      try {
-        const res = await withCache('user_deptTree', () => requestGetDeptTreeApi())
-        this.deptTree = res.data || []
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.warn('[UserDialog] 加载部门树失败:', e)
-      }
-    },
-    /** 获取默认表单值 */
-    getDefaultForm() {
-      return {
-        id: null,
-        username: '',
-        password: '',
-        real_name: '',
-        sex: 0,
-        phone: '',
-        email: '',
-        dept_id: null,
-        role: 'operator',
-        status: 1,
-        remark: ''
-      }
-    },
-    /**
-     * 提交 API（dialogMixin 调用）
-     * 只提交后端允许的字段，过滤掉 create_time/login_ip 等只读字段
-     */
-    submitApi(form) {
-      // 后端 updateUserSchema 允许的字段白名单
-      const ALLOWED_FIELDS = ['username', 'password', 'role', 'real_name', 'sex', 'phone', 'email', 'dept_id', 'avatar', 'remark', 'status']
-      const cleanData = {}
-      ALLOWED_FIELDS.forEach(key => {
-        if (form[key] !== undefined) {
-          cleanData[key] = form[key]
-        }
-      })
-      if (form.id) {
-        cleanData.id = form.id
-      }
-      return form.id ? requestUpdateUserApi(cleanData) : requestAddUserApi(cleanData)
-    },
-    /**
-     * 提交成功回调
-     */
-    onSubmitSuccess() {
-      this.$emit('success')
-    }
+const emit = defineEmits(['success'])
+
+// 字典数据
+const { dict } = useDict(['user_status', 'user_sex', 'user_role'])
+
+// 弹窗状态
+const dialogVisible = ref(false)
+const submitLoading = ref(false)
+
+// 表单 ref
+const formRef = ref(null)
+
+// 角色列表（从角色管理接口获取）
+const roleList = ref([])
+// 部门树（从部门管理接口获取）
+const deptTree = ref([])
+
+// 获取默认表单值
+function getDefaultForm() {
+  return {
+    id: null,
+    username: '',
+    password: '',
+    real_name: '',
+    sex: 0,
+    phone: '',
+    email: '',
+    dept_id: null,
+    role: 'operator',
+    status: 1,
+    remark: ''
   }
 }
+
+// 表单数据
+const form = reactive(getDefaultForm())
+// 表单默认值（用于重置）
+const defaultForm = getDefaultForm()
+
+// 是否编辑模式
+const isEdit = computed(() => !!form.id)
+
+// 弹窗标题（国际化）
+const dialogTitle = computed(() => {
+  return isEdit.value ? '编辑用户' : '新增用户'
+})
+
+// 角色选项（从角色管理接口获取）
+const roleOptions = computed(() => {
+  return roleList.value.map(item => ({
+    label: item.role_name || item.role_code,
+    value: item.role_code
+  }))
+})
+
+// 扁平化的部门列表（树形结构转扁平，用于下拉选择）
+const flatDeptList = computed(() => {
+  const result = []
+  const flatten = (list) => {
+    if (!Array.isArray(list)) return
+    list.forEach(item => {
+      result.push({ id: item.id, dept_name: item.dept_name })
+      if (item.children && item.children.length > 0) {
+        flatten(item.children)
+      }
+    })
+  }
+  flatten(deptTree.value)
+  return result
+})
+
+// 性别选项（从数据字典获取，统一转换为数字类型）
+const sexOptions = computed(() => {
+  return (dict.value.user_sex || []).map(item => ({
+    ...item,
+    value: Number(item.value)
+  }))
+})
+
+// 状态选项（从数据字典获取，统一转换为数字类型）
+const statusOptions = computed(() => {
+  return (dict.value.user_status || []).map(item => ({
+    ...item,
+    value: Number(item.value)
+  }))
+})
+
+// 字段配置数组（驱动表单渲染）
+const fieldConfig = computed(() => [
+  {
+    prop: 'username',
+    label: 'user.username',
+    type: 'input',
+    placeholder: 'user.usernamePlaceholder',
+    required: true,
+    disabledEdit: true
+  },
+  {
+    prop: 'password',
+    label: 'user.password',
+    type: 'password',
+    placeholder: 'user.passwordPlaceholder',
+    required: true,
+    show: (isEdit) => !isEdit
+  },
+  {
+    prop: 'real_name',
+    label: 'user.realName',
+    type: 'input',
+    placeholder: 'user.realNamePlaceholder',
+    required: false
+  },
+  {
+    prop: 'sex',
+    label: 'user.sex',
+    type: 'radio',
+    required: false,
+    options: sexOptions.value
+  },
+  {
+    prop: 'phone',
+    label: 'user.phone',
+    type: 'input',
+    placeholder: 'user.phonePlaceholder',
+    required: false
+  },
+  {
+    prop: 'email',
+    label: 'user.email',
+    type: 'input',
+    placeholder: 'user.emailPlaceholder',
+    required: false
+  },
+  {
+    prop: 'dept_id',
+    label: 'user.dept',
+    type: 'treeselect',
+    placeholder: 'user.deptPlaceholder',
+    required: false
+  },
+  {
+    prop: 'role',
+    label: 'user.role',
+    type: 'select',
+    placeholder: 'user.rolePlaceholder',
+    required: false,
+    options: roleOptions.value
+  },
+  {
+    prop: 'status',
+    label: 'user.status',
+    type: 'radio',
+    required: false,
+    options: statusOptions.value,
+    show: (isEdit) => isEdit
+  },
+  {
+    prop: 'remark',
+    label: 'user.remark',
+    type: 'textarea',
+    placeholder: 'user.remarkPlaceholder',
+    required: false
+  }
+])
+
+// 根据显示条件过滤后的字段列表
+const visibleFields = computed(() => {
+  return fieldConfig.value.filter(field => {
+    if (typeof field.show === 'function') {
+      return field.show(isEdit.value)
+    }
+    return true
+  })
+})
+
+// 表单校验规则（从 fieldConfig 动态生成）
+const rules = computed(() => {
+  const rules = {}
+  fieldConfig.value.forEach(field => {
+    if (field.required) {
+      rules[field.prop] = [
+        { required: true, message: field.placeholder || field.label, trigger: 'blur' }
+      ]
+    }
+    // 邮箱格式校验
+    if (field.prop === 'email') {
+      rules[field.prop] = [
+        { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
+      ]
+    }
+    // 用户名长度校验
+    if (field.prop === 'username') {
+      rules[field.prop] = [
+        { required: true, message: '请输入用户名', trigger: 'blur' },
+        { min: 2, max: 50, message: '用户名长度为2-50个字符', trigger: 'blur' }
+      ]
+    }
+    // 密码长度校验（仅新增时）
+    if (field.prop === 'password' && !isEdit.value) {
+      rules[field.prop] = [
+        { required: true, message: '请输入密码', trigger: 'blur' },
+        { min: 6, max: 32, message: '密码长度为6-32个字符', trigger: 'blur' }
+      ]
+    }
+  })
+  return rules
+})
+
+// 加载角色列表（从角色管理接口，带缓存）
+async function loadRoleList() {
+  try {
+    const res = await withCache('user_roleList', () => requestGetRoleAllApi())
+    roleList.value = res.data || []
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('[UserDialog] 加载角色列表失败:', e)
+  }
+}
+
+// 加载部门树（从部门管理接口，带缓存）
+async function loadDeptTree() {
+  try {
+    const res = await withCache('user_deptTree', () => requestGetDeptTreeApi())
+    deptTree.value = res.data || []
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('[UserDialog] 加载部门树失败:', e)
+  }
+}
+
+// 打开弹窗
+function open(row) {
+  dialogVisible.value = true
+  nextTick(() => {
+    if (row) {
+      // 编辑：回填数据
+      Object.assign(form, defaultForm, row)
+    } else {
+      // 新增：重置表单
+      Object.assign(form, defaultForm)
+    }
+    // 清除表单校验
+    formRef.value && formRef.value.clearValidate()
+  })
+}
+
+// 关闭弹窗
+function close() {
+  dialogVisible.value = false
+  Object.assign(form, defaultForm)
+  formRef.value && formRef.value.clearValidate()
+}
+
+// 提交 API（过滤只读字段）
+function submitApi(formData) {
+  const ALLOWED_FIELDS = ['username', 'password', 'role', 'real_name', 'sex', 'phone', 'email', 'dept_id', 'avatar', 'remark', 'status']
+  const cleanData = {}
+  ALLOWED_FIELDS.forEach(key => {
+    if (formData[key] !== undefined) {
+      cleanData[key] = formData[key]
+    }
+  })
+  if (formData.id) {
+    cleanData.id = formData.id
+  }
+  return formData.id ? requestUpdateUserApi(cleanData) : requestAddUserApi(cleanData)
+}
+
+// 提交表单
+function handleSubmit() {
+  formRef.value.validate(async valid => {
+    if (!valid) return
+    submitLoading.value = true
+    try {
+      await submitApi(form)
+      close()
+      emit('success')
+    } catch (e) {
+      // 错误已由 request 拦截器统一处理
+    } finally {
+      submitLoading.value = false
+    }
+  })
+}
+
+onMounted(() => {
+  loadRoleList()
+  loadDeptTree()
+})
+
+// 暴露方法给父组件
+defineExpose({
+  open,
+  close
+})
 </script>
 
 <style scoped lang="less">
@@ -374,5 +402,16 @@ export default {
   min-height: 80px !important;
   max-height: 80px !important;
   overflow-y: auto;
+}
+
+/* el-select 选中文字完整显示，不截断 */
+/deep/ .el-select .el-select__tags-text {
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+  max-width: none;
+}
+/deep/ .el-select .el-input__inner {
+  text-overflow: clip;
 }
 </style>

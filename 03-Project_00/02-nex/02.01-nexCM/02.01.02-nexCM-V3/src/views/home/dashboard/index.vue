@@ -110,34 +110,34 @@
             </div>
           </div>
           <div class="panel-body map-body">
-            <div ref="mapChart" class="map-chart"></div>
+            <div ref="mapChartRef" class="map-chart"></div>
             <!-- 设备信息浮层 -->
             <div class="device-info-card">
               <div class="info-header">
                 <span class="info-dot"></span>
                 <span class="info-title">设备信息</span>
-                <el-tag size="mini" type="success" effect="plain">在线</el-tag>
+                <el-tag size="mini" :type="deviceStatus.status === 'running' ? 'success' : 'warning'" effect="plain">{{ deviceStatus.text }}</el-tag>
               </div>
               <div class="info-body">
                 <div class="info-row">
                   <span class="info-label">设备名称</span>
-                  <span class="info-value">nexCM-灌装机-001</span>
+                  <span class="info-value">{{ deviceInfo.name || '-' }}</span>
                 </div>
                 <div class="info-row">
                   <span class="info-label">所在地区</span>
-                  <span class="info-value">中国 · 江苏无锡</span>
+                  <span class="info-value">{{ deviceInfo.location || '-' }}</span>
                 </div>
                 <div class="info-row">
                   <span class="info-label">经纬度</span>
-                  <span class="info-value">120.30°E, 31.57°N</span>
+                  <span class="info-value">{{ deviceInfo.locationCoords ? deviceInfo.locationCoords.lng + '°E, ' + deviceInfo.locationCoords.lat + '°N' : '-' }}</span>
                 </div>
                 <div class="info-row">
                   <span class="info-label">设备IP</span>
-                  <span class="info-value">192.168.1.100</span>
+                  <span class="info-value">{{ deviceInfo.ip || '-' }}</span>
                 </div>
                 <div class="info-row">
                   <span class="info-label">运行时长</span>
-                  <span class="info-value highlight">6小时32分钟</span>
+                  <span class="info-value highlight">{{ storeRuntime.running }}小时</span>
                 </div>
               </div>
             </div>
@@ -391,9 +391,12 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import * as echarts from 'echarts'
-import { mapGetters } from 'vuex'
+import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import store from '@/store'
+import { Message } from 'element-ui'
+import { getCoordsByValues } from '@/utils/worldCities'
 
 /**
  * 数据看板页面 - 大屏展示版（浅色科技感主题 + ECharts 世界地图）
@@ -401,271 +404,319 @@ import { mapGetters } from 'vuex'
  * 功能定位：生产车间大屏展示，用于客户参观、实时监控
  * 数据来源：统一从 Vuex device 模块获取原始数据，页面特有格式在 computed 中转换
  */
-export default {
-  name: 'Dashboard',
-  data() {
-    return {
-      isFullscreen: false,
-      scale: 1,
-      // 设计稿尺寸（16:9 标准大屏），全屏时按此尺寸等比缩放
-      DESIGN_WIDTH: 1920,
-      DESIGN_HEIGHT: 1080,
-      currentTime: '',
-      currentDate: '',
-      timer: null,
-      mapChart: null,
-      mapLoaded: false,
-      trendType: 'hour',
-      trendTabs: [
-        { label: '小时', value: 'hour' },
-        { label: '日', value: 'day' },
-        { label: '月', value: 'month' }
-      ],
-      realtimeData: [
-        { time: '14:30:00', speed: 1200, output: 8560, fillVolume: 2.0, status: '正常' },
-        { time: '14:25:00', speed: 1180, output: 8460, fillVolume: 2.0, status: '正常' },
-        { time: '14:20:00', speed: 1210, output: 8360, fillVolume: 2.0, status: '正常' },
-        { time: '14:15:00', speed: 1150, output: 8260, fillVolume: 2.0, status: '波动' },
-        { time: '14:10:00', speed: 1200, output: 8160, fillVolume: 2.0, status: '正常' }
-      ]
-    }
+
+// ===== 响应式数据 =====
+const isFullscreen = ref(false)
+const scale = ref(1)
+// 设计稿尺寸（16:9 标准大屏），全屏时按此尺寸等比缩放
+const DESIGN_WIDTH = 1920
+const DESIGN_HEIGHT = 1080
+const currentTime = ref('')
+const currentDate = ref('')
+let timer = null
+const mapChart = ref(null)
+const mapLoaded = ref(false)
+const trendType = ref('hour')
+const trendTabs = ref([
+  { label: '小时', value: 'hour' },
+  { label: '日', value: 'day' },
+  { label: '月', value: 'month' }
+])
+const realtimeData = ref([
+  { time: '14:30:00', speed: 1200, output: 8560, fillVolume: 2.0, status: '正常' },
+  { time: '14:25:00', speed: 1180, output: 8460, fillVolume: 2.0, status: '正常' },
+  { time: '14:20:00', speed: 1210, output: 8360, fillVolume: 2.0, status: '正常' },
+  { time: '14:15:00', speed: 1150, output: 8260, fillVolume: 2.0, status: '波动' },
+  { time: '14:10:00', speed: 1200, output: 8160, fillVolume: 2.0, status: '正常' }
+])
+
+// DOM 引用
+const mapChartRef = ref(null)
+const dashboardRef = ref(null)
+
+// ===== 计算属性 =====
+// 全屏等比缩放样式：固定设计尺寸，按 scale 缩放，居中
+const stageStyle = computed(() => {
+  if (!isFullscreen.value) return {}
+  return {
+    width: DESIGN_WIDTH + 'px',
+    height: DESIGN_HEIGHT + 'px',
+    transform: 'scale(' + scale.value + ')',
+    transformOrigin: 'center center',
+    flexShrink: 0
+  }
+})
+
+// ===== 原始数据：从 store 统一获取 =====
+const storeProduction = computed(() => store.getters.productionStats)
+const storeParams = computed(() => store.getters.realtimeParams)
+const storeTrend = computed(() => store.getters.trendData)
+const storeRuntime = computed(() => store.getters.runtimeStats)
+const batchInfo = computed(() => store.getters.currentBatch)
+const alarmStats = computed(() => store.getters.alarmStats)
+const deviceInfo = computed(() => store.state.device.info || {})
+
+// ===== 页面特有格式转换（基于 store 原始数据） =====
+const deviceStatus = computed(() => ({
+  status: store.getters.deviceStatus,
+  text: store.getters.deviceStatusText
+}))
+
+const metrics = computed(() => ({
+  todayOutput: storeProduction.value.todayOutput,
+  todayTarget: storeProduction.value.todayTarget,
+  todayRate: storeProduction.value.todayRate,
+  shiftOutput: storeProduction.value.shiftOutput,
+  shiftTarget: storeProduction.value.shiftTarget,
+  shiftName: storeProduction.value.shiftName,
+  currentSpeed: storeParams.value.speed,
+  targetSpeed: 1500
+}))
+
+const oeeData = computed(() => ({
+  value: storeProduction.value.oee,
+  availability: storeProduction.value.availability,
+  performance: storeProduction.value.performance,
+  quality: storeProduction.value.quality
+}))
+
+const productionTrend = computed(() => {
+  if (storeTrend.value && storeTrend.value.speed && storeTrend.value.speed.length > 0) {
+    return storeTrend.value.speed.map(item => ({ hour: item.time.slice(0, 2), value: item.value }))
+  }
+  return [
+    { hour: '00', value: 0 }, { hour: '02', value: 0 }, { hour: '04', value: 0 },
+    { hour: '06', value: 120 }, { hour: '08', value: 850 }, { hour: '10', value: 1200 },
+    { hour: '12', value: 1100 }, { hour: '14', value: 1350 }, { hour: '16', value: 1280 },
+    { hour: '18', value: 660 }, { hour: '20', value: 0 }, { hour: '22', value: 0 }
+  ]
+})
+
+const runtimeStats = computed(() => {
+  const rt = storeRuntime.value
+  const total = rt.running + rt.idle + rt.fault + rt.plannedStop
+  return {
+    running: rt.running,
+    idle: rt.idle,
+    fault: rt.fault,
+    runningRate: total ? Math.round(rt.running / total * 1000) / 10 : 0,
+    idleRate: total ? Math.round(rt.idle / total * 1000) / 10 : 0,
+    faultRate: total ? Math.round(rt.fault / total * 1000) / 10 : 0
+  }
+})
+
+const qualityData = computed(() => {
+  const prod = storeProduction.value
+  return {
+    qualifiedRate: prod.qualifiedRate,
+    total: prod.todayOutput,
+    qualified: Math.round(prod.todayOutput * prod.qualifiedRate / 100),
+    unqualified: Math.round(prod.todayOutput * (100 - prod.qualifiedRate) / 100),
+    scrapRate: (100 - prod.qualifiedRate).toFixed(1)
+  }
+})
+
+const metricList = computed(() => [
+  {
+    type: 'today',
+    icon: 'el-icon-box',
+    label: '今日产能',
+    value: formatNumber(metrics.value.todayOutput),
+    unit: '瓶',
+    subLeft: `目标 ${formatNumber(metrics.value.todayTarget)}`,
+    subRight: `完成率 ${metrics.value.todayRate}%`,
+    progress: metrics.value.todayRate
   },
-  computed: {
-    // 全屏等比缩放样式：固定设计尺寸，按 scale 缩放，居中
-    stageStyle() {
-      if (!this.isFullscreen) return {}
-      return {
-        width: this.DESIGN_WIDTH + 'px',
-        height: this.DESIGN_HEIGHT + 'px',
-        transform: 'scale(' + this.scale + ')',
-        transformOrigin: 'center center',
-        flexShrink: 0
-      }
-    },
-    // ===== 原始数据：从 store 统一获取 =====
-    ...mapGetters({
-      storeProduction: 'productionStats',
-      storeParams: 'realtimeParams',
-      storeTrend: 'trendData',
-      storeRuntime: 'runtimeStats',
-      batchInfo: 'currentBatch',
-      alarmStats: 'alarmStats'
-    }),
-    // ===== 页面特有格式转换（基于 store 原始数据） =====
-    deviceStatus() {
-      return {
-        status: this.$store.getters.deviceStatus,
-        text: this.$store.getters.deviceStatusText
-      }
-    },
-    metrics() {
-      return {
-        todayOutput: this.storeProduction.todayOutput,
-        todayTarget: this.storeProduction.todayTarget,
-        todayRate: this.storeProduction.todayRate,
-        shiftOutput: this.storeProduction.shiftOutput,
-        shiftTarget: this.storeProduction.shiftTarget,
-        shiftName: this.storeProduction.shiftName,
-        currentSpeed: this.storeParams.speed,
-        targetSpeed: 1500
-      }
-    },
-    oeeData() {
-      return {
-        value: this.storeProduction.oee,
-        availability: this.storeProduction.availability,
-        performance: this.storeProduction.performance,
-        quality: this.storeProduction.quality
-      }
-    },
-    productionTrend() {
-      if (this.storeTrend && this.storeTrend.speed && this.storeTrend.speed.length > 0) {
-        return this.storeTrend.speed.map(item => ({ hour: item.time.slice(0, 2), value: item.value }))
-      }
-      return [
-        { hour: '00', value: 0 }, { hour: '02', value: 0 }, { hour: '04', value: 0 },
-        { hour: '06', value: 120 }, { hour: '08', value: 850 }, { hour: '10', value: 1200 },
-        { hour: '12', value: 1100 }, { hour: '14', value: 1350 }, { hour: '16', value: 1280 },
-        { hour: '18', value: 660 }, { hour: '20', value: 0 }, { hour: '22', value: 0 }
-      ]
-    },
-    runtimeStats() {
-      const rt = this.storeRuntime
-      const total = rt.running + rt.idle + rt.fault + rt.plannedStop
-      return {
-        running: rt.running,
-        idle: rt.idle,
-        fault: rt.fault,
-        runningRate: total ? Math.round(rt.running / total * 1000) / 10 : 0,
-        idleRate: total ? Math.round(rt.idle / total * 1000) / 10 : 0,
-        faultRate: total ? Math.round(rt.fault / total * 1000) / 10 : 0
-      }
-    },
-    qualityData() {
-      const prod = this.storeProduction
-      return {
-        qualifiedRate: prod.qualifiedRate,
-        total: prod.todayOutput,
-        qualified: Math.round(prod.todayOutput * prod.qualifiedRate / 100),
-        unqualified: Math.round(prod.todayOutput * (100 - prod.qualifiedRate) / 100),
-        scrapRate: (100 - prod.qualifiedRate).toFixed(1)
-      }
-    },
-    // ===== 原有计算属性 =====
-    metricList() {
-      return [
-        {
-          type: 'today',
-          icon: 'el-icon-box',
-          label: '今日产能',
-          value: this.formatNumber(this.metrics.todayOutput),
-          unit: '瓶',
-          subLeft: `目标 ${this.formatNumber(this.metrics.todayTarget)}`,
-          subRight: `完成率 ${this.metrics.todayRate}%`,
-          progress: this.metrics.todayRate
-        },
-        {
-          type: 'shift',
-          icon: 'el-icon-time',
-          label: '本班产能',
-          value: this.formatNumber(this.metrics.shiftOutput),
-          unit: '瓶',
-          subLeft: this.metrics.shiftName,
-          subRight: `目标 ${this.formatNumber(this.metrics.shiftTarget)}`,
-          progress: (this.metrics.shiftOutput / this.metrics.shiftTarget * 100).toFixed(1)
-        },
-        {
-          type: 'speed',
-          icon: 'el-icon-speed',
-          label: '运行速度',
-          value: this.metrics.currentSpeed,
-          unit: '瓶/h',
-          subLeft: `目标 ${this.metrics.targetSpeed} 瓶/h`,
-          subRight: `效率 ${Math.round(this.metrics.currentSpeed / this.metrics.targetSpeed * 100)}%`,
-          progress: (this.metrics.currentSpeed / this.metrics.targetSpeed * 100).toFixed(1)
-        },
-        {
-          type: 'oee',
-          icon: 'el-icon-data-line',
-          label: '综合稼动率 OEE',
-          value: this.oeeData.value,
-          unit: '%',
-          subLeft: `可用 ${this.oeeData.availability}%`,
-          subRight: `性能 ${this.oeeData.performance}% 合格 ${this.oeeData.quality}%`,
-          progress: null
-        }
-      ]
-    },
-    legendList() {
-      return [
-        { type: 'running', name: '运行', time: this.runtimeStats.running, rate: this.runtimeStats.runningRate },
-        { type: 'idle', name: '空闲', time: this.runtimeStats.idle, rate: this.runtimeStats.idleRate },
-        { type: 'fault', name: '故障', time: this.runtimeStats.fault, rate: this.runtimeStats.faultRate }
-      ]
-    },
-    batchInfoList() {
-      return [
-        { label: '产品名称', value: this.batchInfo.productName },
-        { label: '填充量', value: `${this.batchInfo.fillVolume} ml` },
-        { label: '开始时间', value: this.batchInfo.startTime },
-        { label: '预计完成', value: this.batchInfo.estimatedEnd }
-      ]
-    },
-    batchStatsList() {
-      return [
-        { value: this.formatNumber(this.batchInfo.produced), label: '已生产' },
-        { value: this.formatNumber(this.batchInfo.target - this.batchInfo.produced), label: '剩余' },
-        { value: this.batchInfo.estimatedTime, label: '预计剩余' },
-        { value: `${this.batchInfo.qualifiedRate}%`, label: '合格率' }
-      ]
-    },
-    qualityStatsList() {
-      return [
-        { label: '总检测', value: this.formatNumber(this.qualityData.total), type: '' },
-        { label: '合格数', value: this.formatNumber(this.qualityData.qualified), type: 'success' },
-        { label: '不合格', value: this.formatNumber(this.qualityData.unqualified), type: 'danger' },
-        { label: '废品率', value: `${this.qualityData.scrapRate}%`, type: '' }
-      ]
-    },
-    chartPoints() {
-      const maxVal = Math.max(...this.productionTrend.map(item => item.value), 1)
-      return this.productionTrend.map((item, index) => ({
-        x: (index / (this.productionTrend.length - 1)) * 400,
-        y: 170 - (item.value / maxVal) * 150
-      }))
-    },
-    linePath() {
-      if (this.chartPoints.length === 0) return ''
-      return this.chartPoints.map((p, i) => (i === 0 ? `M${p.x},${p.y}` : `L${p.x},${p.y}`)).join(' ')
-    },
-    areaPath() {
-      if (this.chartPoints.length === 0) return ''
-      const line = this.chartPoints.map((p, i) => (i === 0 ? `M${p.x},${p.y}` : `L${p.x},${p.y}`)).join(' ')
-      return `${line} L400,180 L0,180 Z`
-    }
+  {
+    type: 'shift',
+    icon: 'el-icon-time',
+    label: '本班产能',
+    value: formatNumber(metrics.value.shiftOutput),
+    unit: '瓶',
+    subLeft: metrics.value.shiftName,
+    subRight: `目标 ${formatNumber(metrics.value.shiftTarget)}`,
+    progress: (metrics.value.shiftOutput / metrics.value.shiftTarget * 100).toFixed(1)
   },
-  methods: {
-    formatNumber(num) {
-      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-    },
-    updateTime() {
-      const now = new Date()
-      const pad = n => String(n).padStart(2, '0')
-      this.currentTime = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`
-      const weekDays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
-      this.currentDate = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${weekDays[now.getDay()]}`
-    },
-    /**
-     * 初始化 ECharts 世界地图
-     */
-    async initMap() {
-      if (!this.$refs.mapChart) return
-      
-      try {
-        // 加载世界地图 GeoJSON（本地静态资源，不依赖网络）
-        const response = await fetch('/map/world.json')
-        if (!response.ok) throw new Error('地图数据加载失败')
-        const worldJson = await response.json()
-        
-        // 注册地图
-        echarts.registerMap('world', worldJson)
-        
-        // 初始化 ECharts 实例
-        this.mapChart = echarts.init(this.$refs.mapChart)
-        
-        // 设备位置数据（中国无锡）
-        const deviceData = [
-          {
-            name: 'nexCM-灌装机-001',
-            value: [120.30, 31.57, 100],
-            itemStyle: { color: '#409eff' }
-          }
-        ]
-        
-        // 配置项
-        const option = {
-          backgroundColor: 'transparent',
-          tooltip: {
-            trigger: 'item',
-            backgroundColor: 'rgba(255,255,255,0.95)',
-            borderColor: 'rgba(64,158,255,0.3)',
-            borderWidth: 1,
-            textStyle: { color: '#303133', fontSize: 12 },
-            formatter: function(params) {
-              if (params.seriesType === 'effectScatter') {
-                return `<div style="font-weight:600;margin-bottom:4px;">${params.name}</div>
-                        <div>位置：中国 · 江苏无锡</div>
+  {
+    type: 'speed',
+    icon: 'el-icon-speed',
+    label: '运行速度',
+    value: metrics.value.currentSpeed,
+    unit: '瓶/h',
+    subLeft: `目标 ${metrics.value.targetSpeed} 瓶/h`,
+    subRight: `效率 ${Math.round(metrics.value.currentSpeed / metrics.value.targetSpeed * 100)}%`,
+    progress: (metrics.value.currentSpeed / metrics.value.targetSpeed * 100).toFixed(1)
+  },
+  {
+    type: 'oee',
+    icon: 'el-icon-data-line',
+    label: '综合稼动率 OEE',
+    value: oeeData.value.value,
+    unit: '%',
+    subLeft: `可用 ${oeeData.value.availability}%`,
+    subRight: `性能 ${oeeData.value.performance}% 合格 ${oeeData.value.quality}%`,
+    progress: null
+  }
+])
+
+const legendList = computed(() => [
+  { type: 'running', name: '运行', time: runtimeStats.value.running, rate: runtimeStats.value.runningRate },
+  { type: 'idle', name: '空闲', time: runtimeStats.value.idle, rate: runtimeStats.value.idleRate },
+  { type: 'fault', name: '故障', time: runtimeStats.value.fault, rate: runtimeStats.value.faultRate }
+])
+
+const batchInfoList = computed(() => [
+  { label: '产品名称', value: batchInfo.value.productName },
+  { label: '填充量', value: `${batchInfo.value.fillVolume} ml` },
+  { label: '开始时间', value: batchInfo.value.startTime },
+  { label: '预计完成', value: batchInfo.value.estimatedEnd }
+])
+
+const batchStatsList = computed(() => [
+  { value: formatNumber(batchInfo.value.produced), label: '已生产' },
+  { value: formatNumber(batchInfo.value.target - batchInfo.value.produced), label: '剩余' },
+  { value: batchInfo.value.estimatedTime, label: '预计剩余' },
+  { value: `${batchInfo.value.qualifiedRate}%`, label: '合格率' }
+])
+
+const qualityStatsList = computed(() => [
+  { label: '总检测', value: formatNumber(qualityData.value.total), type: '' },
+  { label: '合格数', value: formatNumber(qualityData.value.qualified), type: 'success' },
+  { label: '不合格', value: formatNumber(qualityData.value.unqualified), type: 'danger' },
+  { label: '废品率', value: `${qualityData.value.scrapRate}%`, type: '' }
+])
+
+const chartPoints = computed(() => {
+  const maxVal = Math.max(...productionTrend.value.map(item => item.value), 1)
+  return productionTrend.value.map((item, index) => ({
+    x: (index / (productionTrend.value.length - 1)) * 400,
+    y: 170 - (item.value / maxVal) * 150
+  }))
+})
+
+const linePath = computed(() => {
+  if (chartPoints.value.length === 0) return ''
+  return chartPoints.value.map((p, i) => (i === 0 ? `M${p.x},${p.y}` : `L${p.x},${p.y}`)).join(' ')
+})
+
+const areaPath = computed(() => {
+  if (chartPoints.value.length === 0) return ''
+  const line = chartPoints.value.map((p, i) => (i === 0 ? `M${p.x},${p.y}` : `L${p.x},${p.y}`)).join(' ')
+  return `${line} L400,180 L0,180 Z`
+})
+
+// ===== 方法 =====
+function formatNumber(num) {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+
+function updateTime() {
+  const now = new Date()
+  const pad = n => String(n).padStart(2, '0')
+  currentTime.value = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`
+  const weekDays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+  currentDate.value = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${weekDays[now.getDay()]}`
+}
+
+/**
+ * 初始化 ECharts 世界地图
+ */
+async function initMap() {
+  if (!mapChartRef.value) return
+
+  try {
+    // 加载世界地图 GeoJSON（本地静态资源，不依赖网络）
+    const response = await fetch('/map/world.json')
+    if (!response.ok) throw new Error('地图数据加载失败')
+    const worldJson = await response.json()
+
+    // 注册地图
+    echarts.registerMap('world', worldJson)
+
+    // 初始化 ECharts 实例
+    mapChart.value = echarts.init(mapChartRef.value)
+
+    // 从 device store 读取设备信息
+    const deviceInfo = store.state.device.info || {}
+    const deviceName = deviceInfo.name || 'nexCM-灌装机-001'
+    const deviceLocation = deviceInfo.location || ''
+
+    // 获取设备经纬度：优先使用 device store 中已有的 locationCoords，
+    // 否则根据 locationCode 从全球城市数据中查找，默认显示无锡
+    let deviceCoords = [120.30, 31.57]
+    if (deviceInfo.locationCoords && deviceInfo.locationCoords.lng && deviceInfo.locationCoords.lat) {
+      deviceCoords = [deviceInfo.locationCoords.lng, deviceInfo.locationCoords.lat]
+    } else if (Array.isArray(deviceInfo.locationCode) && deviceInfo.locationCode.length === 2) {
+      const cityInfo = getCoordsByValues(deviceInfo.locationCode)
+      if (cityInfo) {
+        deviceCoords = [cityInfo.lng, cityInfo.lat]
+      }
+    }
+
+    // 设备位置数据
+    const deviceData = [
+      {
+        name: deviceName,
+        value: [deviceCoords[0], deviceCoords[1], 100],
+        itemStyle: { color: '#409eff' }
+      }
+    ]
+
+    // 配置项
+    const option = {
+      backgroundColor: 'transparent',
+      tooltip: {
+        trigger: 'item',
+        backgroundColor: 'rgba(255,255,255,0.95)',
+        borderColor: 'rgba(64,158,255,0.3)',
+        borderWidth: 1,
+        textStyle: { color: '#303133', fontSize: 12 },
+        formatter: function(params) {
+          if (params.seriesType === 'effectScatter') {
+            return `<div style="font-weight:600;margin-bottom:4px;">${params.name}</div>
+                        <div>位置：${deviceLocation || '中国·江苏无锡'}</div>
                         <div>经纬度：${params.value[0]}°E, ${params.value[1]}°N</div>
                         <div>状态：<span style="color:#67c23a;">在线</span></div>`
-              }
-              return params.name
-            }
+          }
+          return params.name
+        }
+      },
+      geo: {
+        map: 'world',
+        roam: false,
+        zoom: 1.2,
+        center: [60, 25],
+        itemStyle: {
+          areaColor: {
+            type: 'radial',
+            x: 0.5,
+            y: 0.5,
+            r: 0.8,
+            colorStops: [
+              { offset: 0, color: '#e8f4fd' },
+              { offset: 1, color: '#c6e2ff' }
+            ]
           },
-          geo: {
-            map: 'world',
-            roam: false,
-            zoom: 1.2,
-            center: [60, 25],
+          borderColor: '#7ab8f5',
+          borderWidth: 0.5,
+          shadowColor: 'rgba(64,158,255,0.2)',
+          shadowBlur: 10,
+          shadowOffsetX: 2,
+          shadowOffsetY: 2
+        },
+        emphasis: {
+          itemStyle: {
+            areaColor: '#a8d4ff',
+            borderColor: '#409eff',
+            borderWidth: 1
+          },
+          label: {
+            show: false
+          }
+        },
+        regions: [
+          {
+            name: 'China',
             itemStyle: {
               areaColor: {
                 type: 'radial',
@@ -673,188 +724,164 @@ export default {
                 y: 0.5,
                 r: 0.8,
                 colorStops: [
-                  { offset: 0, color: '#e8f4fd' },
-                  { offset: 1, color: '#c6e2ff' }
+                  { offset: 0, color: '#d4edda' },
+                  { offset: 1, color: '#a8d5b5' }
                 ]
               },
-              borderColor: '#7ab8f5',
-              borderWidth: 0.5,
-              shadowColor: 'rgba(64,158,255,0.2)',
-              shadowBlur: 10,
-              shadowOffsetX: 2,
-              shadowOffsetY: 2
-            },
-            emphasis: {
-              itemStyle: {
-                areaColor: '#a8d4ff',
-                borderColor: '#409eff',
-                borderWidth: 1
-              },
-              label: {
-                show: false
-              }
-            },
-            regions: [
-              {
-                name: 'China',
-                itemStyle: {
-                  areaColor: {
-                    type: 'radial',
-                    x: 0.5,
-                    y: 0.5,
-                    r: 0.8,
-                    colorStops: [
-                      { offset: 0, color: '#d4edda' },
-                      { offset: 1, color: '#a8d5b5' }
-                    ]
-                  },
-                  borderColor: '#67c23a',
-                  borderWidth: 1
-                }
-              }
-            ]
-          },
-          series: [
-            {
-              name: '设备位置',
-              type: 'effectScatter',
-              coordinateSystem: 'geo',
-              data: deviceData,
-              symbolSize: function(val) {
-                return val[2] / 8 + 8
-              },
-              showEffectOn: 'render',
-              rippleEffect: {
-                brushType: 'stroke',
-                scale: 4,
-                period: 3
-              },
-              hoverAnimation: true,
-              label: {
-                show: true,
-                position: 'right',
-                formatter: '{b}',
-                color: '#409eff',
-                fontSize: 11,
-                fontWeight: 600,
-                backgroundColor: 'rgba(255,255,255,0.8)',
-                padding: [2, 6],
-                borderRadius: 3
-              },
-              itemStyle: {
-                color: '#409eff',
-                shadowBlur: 10,
-                shadowColor: '#409eff'
-              },
-              zlevel: 1
+              borderColor: '#67c23a',
+              borderWidth: 1
             }
-          ]
+          }
+        ]
+      },
+      series: [
+        {
+          name: '设备位置',
+          type: 'effectScatter',
+          coordinateSystem: 'geo',
+          data: deviceData,
+          symbolSize: function(val) {
+            return val[2] / 8 + 8
+          },
+          showEffectOn: 'render',
+          rippleEffect: {
+            brushType: 'stroke',
+            scale: 4,
+            period: 3
+          },
+          hoverAnimation: true,
+          label: {
+            show: true,
+            position: 'right',
+            formatter: '{b}',
+            color: '#409eff',
+            fontSize: 11,
+            fontWeight: 600,
+            backgroundColor: 'rgba(255,255,255,0.8)',
+            padding: [2, 6],
+            borderRadius: 3
+          },
+          itemStyle: {
+            color: '#409eff',
+            shadowBlur: 10,
+            shadowColor: '#409eff'
+          },
+          zlevel: 1
         }
-        
-        this.mapChart.setOption(option)
-        this.mapLoaded = true
-        
-        // 监听窗口大小变化
-        window.addEventListener('resize', this.handleMapResize)
-        
-      } catch (error) {
-        console.error('地图初始化失败:', error)
-        // 降级：显示提示
-        if (this.$refs.mapChart) {
-          this.$refs.mapChart.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#909399;font-size:13px;">地图数据加载中...</div>'
-        }
-      }
-    },
-    handleMapResize() {
-      if (this.mapChart) {
-        this.mapChart.resize()
-      }
-    },
-    /**
-     * 计算等比缩放比例（contain 模式）
-     * 取宽高缩放比的较小值，确保内容完整显示在屏幕内，短边留白
-     */
-    updateScale() {
-      if (!this.isFullscreen) {
-        this.scale = 1
-        return
-      }
-      const screenW = window.innerWidth
-      const screenH = window.innerHeight
-      const scaleX = screenW / this.DESIGN_WIDTH
-      const scaleY = screenH / this.DESIGN_HEIGHT
-      this.scale = Math.min(scaleX, scaleY)
-      // 缩放后延迟调整地图大小，确保布局计算完成
-      this.$nextTick(() => {
-        this.handleMapResize()
-      })
-    },
-    toggleFullscreen() {
-      const el = this.$refs.dashboardRef
-      if (!this.isFullscreen) {
-        const requestMethod = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen
-        if (requestMethod) {
-          requestMethod.call(el).catch(err => {
-            console.error('全屏失败:', err)
-            this.$message.error('全屏失败，请检查浏览器权限')
-          })
-        } else {
-          this.$message.error('当前浏览器不支持全屏')
-        }
-      } else {
-        const exitMethod = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen
-        if (exitMethod) {
-          exitMethod.call(document)
-        }
-      }
-    },
-    handleFullscreenChange() {
-      this.isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement)
-      // 全屏切换后计算等比缩放比例
-      this.updateScale()
-      // 全屏切换后延迟调整地图大小，确保 flex 布局计算完成
-      setTimeout(() => {
-        this.handleMapResize()
-      }, 100)
+      ]
     }
-  },
-  mounted() {
-    this.updateTime()
-    this.timer = setInterval(() => {
-      this.updateTime()
-    }, 1000)
-    document.addEventListener('fullscreenchange', this.handleFullscreenChange)
-    document.addEventListener('webkitfullscreenchange', this.handleFullscreenChange)
-    document.addEventListener('mozfullscreenchange', this.handleFullscreenChange)
-    document.addEventListener('MSFullscreenChange', this.handleFullscreenChange)
-    // 窗口大小变化时重新计算等比缩放比例
-    window.addEventListener('resize', this.updateScale)
-    
-    // 初始化地图（延迟确保 DOM 渲染完成）
-    this.$nextTick(() => {
-      this.initMap()
-    })
-  },
-  beforeDestroy() {
-    if (this.timer) {
-      clearInterval(this.timer)
-    }
-    document.removeEventListener('fullscreenchange', this.handleFullscreenChange)
-    document.removeEventListener('webkitfullscreenchange', this.handleFullscreenChange)
-    document.removeEventListener('mozfullscreenchange', this.handleFullscreenChange)
-    document.removeEventListener('MSFullscreenChange', this.handleFullscreenChange)
-    window.removeEventListener('resize', this.handleMapResize)
-    window.removeEventListener('resize', this.updateScale)
-    if (this.mapChart) {
-      this.mapChart.dispose()
-      this.mapChart = null
-    }
-    if (document.fullscreenElement || document.webkitFullscreenElement) {
-      const exitMethod = document.exitFullscreen || document.webkitExitFullscreen
-      if (exitMethod) exitMethod.call(document)
+
+    mapChart.value.setOption(option)
+    mapLoaded.value = true
+
+    // 监听窗口大小变化
+    window.addEventListener('resize', handleMapResize)
+
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('地图初始化失败:', error)
+    // 降级：显示提示
+    if (mapChartRef.value) {
+      mapChartRef.value.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#909399;font-size:13px;">地图数据加载中...</div>'
     }
   }
 }
+
+function handleMapResize() {
+  if (mapChart.value) {
+    mapChart.value.resize()
+  }
+}
+
+/**
+ * 计算等比缩放比例（contain 模式）
+ * 取宽高缩放比的较小值，确保内容完整显示在屏幕内，短边留白
+ */
+function updateScale() {
+  if (!isFullscreen.value) {
+    scale.value = 1
+    return
+  }
+  const screenW = window.innerWidth
+  const screenH = window.innerHeight
+  const scaleX = screenW / DESIGN_WIDTH
+  const scaleY = screenH / DESIGN_HEIGHT
+  scale.value = Math.min(scaleX, scaleY)
+  // 缩放后延迟调整地图大小，确保布局计算完成
+  nextTick(() => {
+    handleMapResize()
+  })
+}
+
+function toggleFullscreen() {
+  const el = dashboardRef.value
+  if (!isFullscreen.value) {
+    const requestMethod = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen
+    if (requestMethod) {
+      requestMethod.call(el).catch(err => {
+        // eslint-disable-next-line no-console
+        console.error('全屏失败:', err)
+        Message.error('全屏失败，请检查浏览器权限')
+      })
+    } else {
+      Message.error('当前浏览器不支持全屏')
+    }
+  } else {
+    const exitMethod = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen
+    if (exitMethod) {
+      exitMethod.call(document)
+    }
+  }
+}
+
+function handleFullscreenChange() {
+  isFullscreen.value = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement)
+  // 全屏切换后计算等比缩放比例
+  updateScale()
+  // 全屏切换后延迟调整地图大小，确保 flex 布局计算完成
+  setTimeout(() => {
+    handleMapResize()
+  }, 100)
+}
+
+// ===== 生命周期 =====
+onMounted(() => {
+  updateTime()
+  timer = setInterval(() => {
+    updateTime()
+  }, 1000)
+  document.addEventListener('fullscreenchange', handleFullscreenChange)
+  document.addEventListener('webkitfullscreenchange', handleFullscreenChange)
+  document.addEventListener('mozfullscreenchange', handleFullscreenChange)
+  document.addEventListener('MSFullscreenChange', handleFullscreenChange)
+  // 窗口大小变化时重新计算等比缩放比例
+  window.addEventListener('resize', updateScale)
+
+  // 初始化地图（延迟确保 DOM 渲染完成）
+  nextTick(() => {
+    initMap()
+  })
+})
+
+onBeforeUnmount(() => {
+  if (timer) {
+    clearInterval(timer)
+  }
+  document.removeEventListener('fullscreenchange', handleFullscreenChange)
+  document.removeEventListener('webkitfullscreenchange', handleFullscreenChange)
+  document.removeEventListener('mozfullscreenchange', handleFullscreenChange)
+  document.removeEventListener('MSFullscreenChange', handleFullscreenChange)
+  window.removeEventListener('resize', handleMapResize)
+  window.removeEventListener('resize', updateScale)
+  if (mapChart.value && typeof mapChart.value.dispose === 'function') {
+    mapChart.value.dispose()
+    mapChart.value = null
+  }
+  if (document.fullscreenElement || document.webkitFullscreenElement) {
+    const exitMethod = document.exitFullscreen || document.webkitExitFullscreen
+    if (exitMethod) exitMethod.call(document)
+  }
+})
 </script>
 
 <style scoped lang="less">
@@ -862,7 +889,7 @@ export default {
   position: relative;
   padding: 12px;
   min-height: calc(100vh - 84px);
-  background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 30%, #f0f4f8 70%, #eaf0f7 100%);
+  background: #fff;
   overflow: hidden;
   transition: all 0.3s;
 

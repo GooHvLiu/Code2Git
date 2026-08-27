@@ -24,6 +24,8 @@ export const ROUTE_PATHS = {
   REDIRECT: '/redirect',
   /** 授权导入页（软件授权失效时跳转，无需登录） */
   LICENSE_IMPORT: '/license/import',
+  /** 授权管理页 */
+  LICENSE_MANAGE: '/license/manage',
   /** 首页 - 概况预览 */
   HOME_OVERVIEW: '/home/overview',
   /** 首页 - 数据看板 */

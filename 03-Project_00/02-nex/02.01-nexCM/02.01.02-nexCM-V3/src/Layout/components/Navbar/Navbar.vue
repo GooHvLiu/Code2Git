@@ -45,10 +45,9 @@
   </div>
 </template>
 
-<script>
+<script setup>
 /* eslint-disable vue/multi-word-component-names */
-import { mapState, mapActions } from "vuex";
-import { hasRole } from "@/utils/permission";
+import { computed } from "vue";
 import HeadBreadcrumb from "@/components/Breadcrumb/HeadBreadcrumb.vue";
 import TagsView from "@/Layout/components/TagsView/TagsView.vue";
 import ThemePicker from "@/components/ThemePicker/index.vue";
@@ -57,62 +56,51 @@ import NotificationBell from "@/components/NotificationBell/index.vue";
 import HeartbeatIndicator from "@/components/HeartbeatIndicator/index.vue";
 import { ROUTE_PATHS } from "@/router/constant/pathConstants";
 import settings from "@/settings";
+import store from '@/store'
+import router from '@/router'
+import { useI18n } from '@/composables/useI18n'
 
-export default {
-  name: "Navbar",
-  components: {
-    HeadBreadcrumb,
-    TagsView,
-    ThemePicker,
-    MenuSearch,
-    NotificationBell,
-    HeartbeatIndicator,
-  },
-  data() {
-    return { settings };
-  },
-  computed: {
-    ...mapState("app", ["sidebar"]),
-    ...mapState("user", ["userInfo"]),
-    /** 是否管理员（仅 administrator 角色可见用户管理） */
-    isAdmin() {
-      return hasRole("administrator");
-    },
-    /**
-     * 根据角色确定头像图标
-     * 角色 → 图标映射：
-     *   administrator → administrator.svg
-     *   operator      → operator.svg
-     *   engineer      → engineer.svg
-     *   其他/未匹配    → who.svg（默认）
-     */
-    avatarIcon() {
-      const roleMap = {
-        administrator: "administrator",
-        operator: "operator",
-        engineer: "engineer",
-        user: "user",
-      };
-      const role = this.userInfo?.role;
-      // role 可能是字符串或数组，取第一个
-      const roleCode = Array.isArray(role) ? role[0] : role;
-      return roleMap[roleCode] || "who";
-    },
-  },
-  methods: {
-    ...mapActions("app", ["toggleSideBar"]),
-    ...mapActions("user", ["logout"]),
-    async handleCommand(command) {
-      if (command === "logout") {
-        await this.logout();
-        this.$router.push(ROUTE_PATHS.LOGIN);
-      }
-      if (command === "profile") {
-        this.$router.push(ROUTE_PATHS.PROFILE);
-      }
-    },
-  },
-};
+const { t: $t } = useI18n()
+
+// ===== 计算属性 =====
+const sidebar = computed(() => store.state.app.sidebar)
+const userInfo = computed(() => store.state.user.userInfo)
+
+/**
+ * 根据角色确定头像图标
+ * 角色 → 图标映射：
+ *   administrator → administrator.svg
+ *   operator      → operator.svg
+ *   engineer      → engineer.svg
+ *   其他/未匹配    → who.svg（默认）
+ */
+const avatarIcon = computed(() => {
+  const roleMap = {
+    administrator: "administrator",
+    operator: "operator",
+    engineer: "engineer",
+    user: "user",
+  };
+  const role = userInfo.value?.role;
+  // role 可能是字符串或数组，取第一个
+  const roleCode = Array.isArray(role) ? role[0] : role;
+  return roleMap[roleCode] || "who";
+})
+
+// ===== 方法 =====
+function toggleSideBar() {
+  store.dispatch('app/toggleSideBar')
+}
+
+async function handleCommand(command) {
+  if (command === "logout") {
+    await store.dispatch('user/logout');
+    router.push(ROUTE_PATHS.LOGIN);
+  }
+  if (command === "profile") {
+    router.push(ROUTE_PATHS.PROFILE);
+  }
+}
 </script>
 
 <style scoped lang="less">

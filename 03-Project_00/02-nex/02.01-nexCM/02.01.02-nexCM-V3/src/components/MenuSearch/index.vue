@@ -34,71 +34,70 @@
   </div>
 </template>
 
-<script>
-import { mapState } from 'vuex'
+<script setup>
+import { ref, computed, watch } from 'vue'
+import store from '@/store'
+import router from '@/router'
 import { flattenMenu } from '@/router/helper/menuHelper'
 
-export default {
-  name: 'MenuSearch',
-  data() {
-    return {
-      keyword: '',
-      showDropdown: false,
-      activeIndex: 0
-    }
-  },
-  computed: {
-    ...mapState('permission', { menuItems: 'userMenu' }),
-    /** 扁平化所有菜单（统一使用 menuHelper.js 的工具函数） */
-    flatMenus() {
-      return flattenMenu(this.menuItems)
-    },
-    /** 过滤后的菜单 */
-    filteredMenus() {
-      if (!this.keyword.trim()) return this.flatMenus.slice(0, 20)
-      const kw = this.keyword.trim().toLowerCase()
-      return this.flatMenus
-        .filter(item => item.title.toLowerCase().includes(kw))
-        .slice(0, 20)
-    }
-  },
-  watch: {
-    filteredMenus() {
-      this.activeIndex = 0
-    }
-  },
-  methods: {
-    handleInput() {
-      this.showDropdown = true
-      this.activeIndex = 0
-    },
-    handleBlur() {
-      // 延迟关闭，让 mousedown 先触发
-      setTimeout(() => {
-        this.showDropdown = false
-      }, 200)
-    },
-    handleKeyUp() {
-      if (this.activeIndex > 0) {
-        this.activeIndex--
-      }
-    },
-    handleKeyDown() {
-      if (this.activeIndex < this.filteredMenus.length - 1) {
-        this.activeIndex++
-      }
-    },
-    handleEnter() {
-      if (this.filteredMenus[this.activeIndex]) {
-        this.selectMenu(this.filteredMenus[this.activeIndex])
-      }
-    },
-    selectMenu(item) {
-      this.$router.push(item.path)
-      this.keyword = ''
-      this.showDropdown = false
-    }
+// ===== 响应式数据 =====
+const keyword = ref('')
+const showDropdown = ref(false)
+const activeIndex = ref(0)
+
+// ===== 计算属性 =====
+const menuItems = computed(() => store.state.permission.userMenu)
+/** 扁平化所有菜单（统一使用 menuHelper.js 的工具函数） */
+const flatMenus = computed(() => flattenMenu(menuItems.value))
+/** 过滤后的菜单 */
+const filteredMenus = computed(() => {
+  if (!keyword.value.trim()) return flatMenus.value.slice(0, 20)
+  const kw = keyword.value.trim().toLowerCase()
+  return flatMenus.value
+    .filter(item => item.title.toLowerCase().includes(kw))
+    .slice(0, 20)
+})
+
+// ===== 监听 =====
+watch(filteredMenus, () => {
+  activeIndex.value = 0
+})
+
+// ===== 方法 =====
+function handleInput() {
+  showDropdown.value = true
+  activeIndex.value = 0
+}
+
+function handleBlur() {
+  // 延迟关闭，让 mousedown 先触发
+  setTimeout(() => {
+    showDropdown.value = false
+  }, 200)
+}
+
+function handleKeyUp() {
+  if (activeIndex.value > 0) {
+    activeIndex.value--
   }
+}
+
+function handleKeyDown() {
+  if (activeIndex.value < filteredMenus.value.length - 1) {
+    activeIndex.value++
+  }
+}
+
+function handleEnter() {
+  if (filteredMenus.value[activeIndex.value]) {
+    selectMenu(filteredMenus.value[activeIndex.value])
+  }
+}
+
+function selectMenu(item) {
+  router.push(item.path)
+  keyword.value = ''
+  showDropdown.value = false
 }
 </script>
 

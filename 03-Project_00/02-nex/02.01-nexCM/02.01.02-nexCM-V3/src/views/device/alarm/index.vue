@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="alarm-log-page">
     <el-tabs v-model="activeTab" class="alarm-tabs">
       <!-- 统计看板 -->
@@ -298,221 +298,230 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, reactive, computed } from 'vue'
+import { Message } from 'element-ui'
+import store from '@/store'
 import ExportDropdown from '@/components/ExportDropdown/index.vue'
-import { mapGetters } from 'vuex'
 
 /**
  * 报警统计页面
  * 功能：统计看板（类别分布、趋势、级别、TOP5）+ 详细记录（筛选、搜索、导出）
  * 数据来源：统计数据从 Vuex device 模块获取，详细记录后续对接后端接口
  */
-export default {
-  name: 'AlarmLog',
-  components: { ExportDropdown },
-  data() {
-    return {
-      activeTab: 'dashboard',
-      currentUsername: 'admin',
-      // 搜索
-      searchForm: {
-        level: '',
-        category: '',
-        status: '',
-        dateRange: [],
-        keyword: ''
-      },
-      // 分页
-      currentPage: 1,
-      pageSize: 20,
-      selectedRows: [],
-      // ===== 以下为页面特有格式模拟数据，后续对接后端接口 =====
-      categoryData: [
-        { name: '位置异动', count: 35, percent: 29.2, color: '#f56c6c' },
-        { name: '真空异常', count: 28, percent: 23.3, color: '#e6a23c' },
-        { name: '伺服使能', count: 22, percent: 18.3, color: '#409eff' },
-        { name: '超时报警', count: 18, percent: 15.0, color: '#909399' },
-        { name: '温度异常', count: 10, percent: 8.3, color: '#67c23a' },
-        { name: '其他', count: 7, percent: 5.9, color: '#c0c4cc' }
-      ],
-      levelData: [
-        { name: '紧急', count: 8, percent: 6.7, type: 'critical' },
-        { name: '重要', count: 32, percent: 26.7, type: 'major' },
-        { name: '一般', count: 58, percent: 48.3, type: 'minor' },
-        { name: '提示', count: 22, percent: 18.3, type: 'info' }
-      ],
-      trendData: [8, 12, 6, 15, 10, 12, 8],
-      trendLabels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-      topAlarms: [
-        { name: '位置异动报警', desc: '灌装工位位置偏差超过阈值', count: 35, trend: 15 },
-        { name: '真空度异常', desc: '真空系统压力不达标', count: 28, trend: -8 },
-        { name: '伺服使能失败', desc: '伺服驱动器无法正常使能', count: 22, trend: 10 },
-        { name: '动作超时', desc: '机构动作时间超过设定值', count: 18, trend: -5 },
-        { name: '温度异常', desc: '灌装温度超出允许范围', count: 10, trend: 0 }
-      ],
-      tableData: this.generateMockData()
-    }
-  },
-  computed: {
-    // 从 store 获取报警数据
-    ...mapGetters(['currentAlarms']),
-    // 统计卡片（基于 store 转换）
-    alarmStats() {
-      const s = this.$store.getters.alarmStats
-      return [
-        { label: '今日报警', value: s.todayCount || 12, icon: 'el-icon-warning', type: 'danger', trend: 20 },
-        { label: '紧急报警', value: s.criticalCount || 2, icon: 'el-icon-error', type: 'critical', trend: -33.3 },
-        { label: '未处理', value: s.pendingCount || 5, icon: 'el-icon-time', type: 'warning', trend: 25 },
-        { label: '平均处理时长', value: '1.5', icon: 'el-icon-alarm-clock', type: 'info', trend: -10 }
-      ]
-    },
-    totalAlarms() {
-      return this.categoryData.reduce((sum, item) => sum + item.count, 0)
-    },
-    total() {
-      return this.tableData.length
-    },
-    pagedData() {
-      const start = (this.currentPage - 1) * this.pageSize
-      return this.tableData.slice(start, start + this.pageSize)
-    },
-    trendPoints() {
-      const maxVal = Math.max(...this.trendData)
-      return this.trendData.map((val, index) => ({
-        x: (index / (this.trendData.length - 1)) * 500,
-        y: 170 - (val / maxVal) * 140
-      }))
-    },
-    trendLinePath() {
-      if (this.trendPoints.length === 0) return ''
-      return this.trendPoints.map((p, i) => (i === 0 ? `M${p.x},${p.y}` : `L${p.x},${p.y}`)).join(' ')
-    },
-    trendAreaPath() {
-      if (this.trendPoints.length === 0) return ''
-      const line = this.trendPoints.map((p, i) => (i === 0 ? `M${p.x},${p.y}` : `L${p.x},${p.y}`)).join(' ')
-      return `${line} L500,180 L0,180 Z`
-    },
-    exportColumns() {
-      return [
-        { prop: 'alarmNo', label: '报警编号' },
-        { prop: 'alarmTime', label: '报警时间' },
-        { prop: 'levelText', label: '报警级别' },
-        { prop: 'categoryText', label: '报警类别' },
-        { prop: 'alarmCode', label: '报警代码' },
-        { prop: 'description', label: '报警描述' },
-        { prop: 'deviceCode', label: '设备编号' },
-        { prop: 'statusText', label: '处理状态' },
-        { prop: 'handler', label: '处理人' },
-        { prop: 'resolveTime', label: '处理时间' }
-      ]
-    }
-  },
-  methods: {
-    generateMockData() {
-      const levels = ['critical', 'major', 'minor', 'info']
-      const categories = ['position', 'vacuum', 'servo', 'timeout', 'temperature', 'pressure']
-      const statuses = ['pending', 'processing', 'resolved']
-      const handlers = ['张三', '李四', '王五', '赵六', '']
-      const descs = [
-        '灌装工位位置偏差超过阈值',
-        '真空系统压力不达标',
-        '伺服驱动器无法正常使能',
-        '机构动作时间超过设定值',
-        '灌装温度超出允许范围',
-        '加塞压力异常',
-        '设备振动超标',
-        '气源压力不足'
-      ]
-      const data = []
-      for (let i = 1; i <= 56; i++) {
-        const level = levels[Math.floor(Math.random() * levels.length)]
-        const category = categories[Math.floor(Math.random() * categories.length)]
-        const status = statuses[Math.floor(Math.random() * statuses.length)]
-        const date = new Date(2026, 7, 24 - Math.floor(Math.random() * 7), Math.floor(Math.random() * 24), Math.floor(Math.random() * 60))
-        data.push({
-          id: i,
-          alarmNo: 'ALM202608' + String(i).padStart(4, '0'),
-          alarmTime: this.formatDate(date),
-          level,
-          levelText: this.getLevelText(level),
-          category,
-          categoryText: this.getCategoryText(category),
-          alarmCode: 'E' + String(1000 + i),
-          description: descs[Math.floor(Math.random() * descs.length)],
-          deviceCode: 'NEXCM-FILL-2026-001',
-          status,
-          statusText: this.getStatusText(status),
-          handler: status === 'pending' ? '' : handlers[Math.floor(Math.random() * (handlers.length - 1))],
-          resolveTime: status === 'resolved' ? this.formatDate(new Date(date.getTime() + Math.random() * 3600000)) : ''
-        })
-      }
-      return data.sort((a, b) => new Date(b.alarmTime) - new Date(a.alarmTime))
-    },
-    formatDate(date) {
-      const pad = n => String(n).padStart(2, '0')
-      return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`
-    },
-    getCategoryOffset(index) {
-      let offset = 0
-      for (let i = 0; i < index; i++) {
-        offset += (this.categoryData[i].percent / 100) * 219.9
-      }
-      return -offset
-    },
-    getLevelType(level) {
-      const map = { critical: 'danger', major: 'warning', minor: 'info', info: 'success' }
-      return map[level] || 'info'
-    },
-    getLevelText(level) {
-      const map = { critical: '紧急', major: '重要', minor: '一般', info: '提示' }
-      return map[level] || level
-    },
-    getCategoryText(category) {
-      const map = { position: '位置异动', vacuum: '真空异常', servo: '伺服使能', timeout: '超时报警', temperature: '温度异常', pressure: '压力异常' }
-      return map[category] || category
-    },
-    getStatusType(status) {
-      const map = { pending: 'danger', processing: 'warning', resolved: 'success' }
-      return map[status] || 'info'
-    },
-    getStatusText(status) {
-      const map = { pending: '未处理', processing: '处理中', resolved: '已处理' }
-      return map[status] || status
-    },
-    handleSearch() {
-      this.$message.success('搜索功能待对接后端接口')
-    },
-    handleReset() {
-      this.searchForm = { level: '', category: '', status: '', dateRange: [], keyword: '' }
-      this.currentPage = 1
-    },
-    handleRefresh() {
-      this.$message.success('刷新成功')
-    },
-    handleSelectionChange(selection) {
-      this.selectedRows = selection
-    },
-    handleSizeChange(size) {
-      this.pageSize = size
-      this.currentPage = 1
-    },
-    handlePageChange(page) {
-      this.currentPage = page
-    },
-    handleDetail(row) {
-      this.$message.info(`查看报警详情：${row.alarmNo}`)
-    },
-    handleResolve(row) {
-      this.$message.info(`处理报警：${row.alarmNo}`)
-    }
+
+// ===== 响应式数据 =====
+const activeTab = ref('dashboard')
+const currentUsername = ref('admin')
+
+// 搜索
+const searchForm = reactive({
+  level: '',
+  category: '',
+  status: '',
+  dateRange: [],
+  keyword: ''
+})
+
+// 分页
+const currentPage = ref(1)
+const pageSize = ref(20)
+const selectedRows = ref([])
+
+// ===== 以下为页面特有格式模拟数据，后续对接后端接口 =====
+const categoryData = ref([
+  { name: '位置异动', count: 35, percent: 29.2, color: '#f56c6c' },
+  { name: '真空异常', count: 28, percent: 23.3, color: '#e6a23c' },
+  { name: '伺服使能', count: 22, percent: 18.3, color: '#409eff' },
+  { name: '超时报警', count: 18, percent: 15.0, color: '#909399' },
+  { name: '温度异常', count: 10, percent: 8.3, color: '#67c23a' },
+  { name: '其他', count: 7, percent: 5.9, color: '#c0c4cc' }
+])
+const levelData = ref([
+  { name: '紧急', count: 8, percent: 6.7, type: 'critical' },
+  { name: '重要', count: 32, percent: 26.7, type: 'major' },
+  { name: '一般', count: 58, percent: 48.3, type: 'minor' },
+  { name: '提示', count: 22, percent: 18.3, type: 'info' }
+])
+const trendData = ref([8, 12, 6, 15, 10, 12, 8])
+const trendLabels = ref(['周一', '周二', '周三', '周四', '周五', '周六', '周日'])
+const topAlarms = ref([
+  { name: '位置异动报警', desc: '灌装工位位置偏差超过阈值', count: 35, trend: 15 },
+  { name: '真空度异常', desc: '真空系统压力不达标', count: 28, trend: -8 },
+  { name: '伺服使能失败', desc: '伺服驱动器无法正常使能', count: 22, trend: 10 },
+  { name: '动作超时', desc: '机构动作时间超过设定值', count: 18, trend: -5 },
+  { name: '温度异常', desc: '灌装温度超出允许范围', count: 10, trend: 0 }
+])
+const tableData = ref(generateMockData())
+
+// ===== 计算属性 =====
+// 统计卡片（基于 store 转换）
+const alarmStats = computed(() => {
+  const s = store.getters.alarmStats
+  return [
+    { label: '今日报警', value: s.todayCount || 12, icon: 'el-icon-warning', type: 'danger', trend: 20 },
+    { label: '紧急报警', value: s.criticalCount || 2, icon: 'el-icon-error', type: 'critical', trend: -33.3 },
+    { label: '未处理', value: s.pendingCount || 5, icon: 'el-icon-time', type: 'warning', trend: 25 },
+    { label: '平均处理时长', value: '1.5', icon: 'el-icon-alarm-clock', type: 'info', trend: -10 }
+  ]
+})
+
+const totalAlarms = computed(() => categoryData.value.reduce((sum, item) => sum + item.count, 0))
+const total = computed(() => tableData.value.length)
+const pagedData = computed(() => {
+  const start = (currentPage.value - 1) * pageSize.value
+  return tableData.value.slice(start, start + pageSize.value)
+})
+
+const trendPoints = computed(() => {
+  const maxVal = Math.max(...trendData.value)
+  return trendData.value.map((val, index) => ({
+    x: (index / (trendData.value.length - 1)) * 500,
+    y: 170 - (val / maxVal) * 140
+  }))
+})
+const trendLinePath = computed(() => {
+  if (trendPoints.value.length === 0) return ''
+  return trendPoints.value.map((p, i) => (i === 0 ? `M${p.x},${p.y}` : `L${p.x},${p.y}`)).join(' ')
+})
+const trendAreaPath = computed(() => {
+  if (trendPoints.value.length === 0) return ''
+  const line = trendPoints.value.map((p, i) => (i === 0 ? `M${p.x},${p.y}` : `L${p.x},${p.y}`)).join(' ')
+  return `${line} L500,180 L0,180 Z`
+})
+
+const exportColumns = computed(() => [
+  { prop: 'alarmNo', label: '报警编号' },
+  { prop: 'alarmTime', label: '报警时间' },
+  { prop: 'levelText', label: '报警级别' },
+  { prop: 'categoryText', label: '报警类别' },
+  { prop: 'alarmCode', label: '报警代码' },
+  { prop: 'description', label: '报警描述' },
+  { prop: 'deviceCode', label: '设备编号' },
+  { prop: 'statusText', label: '处理状态' },
+  { prop: 'handler', label: '处理人' },
+  { prop: 'resolveTime', label: '处理时间' }
+])
+
+// ===== 方法 =====
+function generateMockData() {
+  const levels = ['critical', 'major', 'minor', 'info']
+  const categories = ['position', 'vacuum', 'servo', 'timeout', 'temperature', 'pressure']
+  const statuses = ['pending', 'processing', 'resolved']
+  const handlers = ['张三', '李四', '王五', '赵六', '']
+  const descs = [
+    '灌装工位位置偏差超过阈值',
+    '真空系统压力不达标',
+    '伺服驱动器无法正常使能',
+    '机构动作时间超过设定值',
+    '灌装温度超出允许范围',
+    '加塞压力异常',
+    '设备振动超标',
+    '气源压力不足'
+  ]
+  const data = []
+  for (let i = 1; i <= 56; i++) {
+    const level = levels[Math.floor(Math.random() * levels.length)]
+    const category = categories[Math.floor(Math.random() * categories.length)]
+    const status = statuses[Math.floor(Math.random() * statuses.length)]
+    const date = new Date(2026, 7, 24 - Math.floor(Math.random() * 7), Math.floor(Math.random() * 24), Math.floor(Math.random() * 60))
+    data.push({
+      id: i,
+      alarmNo: 'ALM202608' + String(i).padStart(4, '0'),
+      alarmTime: formatDate(date),
+      level,
+      levelText: getLevelText(level),
+      category,
+      categoryText: getCategoryText(category),
+      alarmCode: 'E' + String(1000 + i),
+      description: descs[Math.floor(Math.random() * descs.length)],
+      deviceCode: 'NEXCM-FILL-2026-001',
+      status,
+      statusText: getStatusText(status),
+      handler: status === 'pending' ? '' : handlers[Math.floor(Math.random() * (handlers.length - 1))],
+      resolveTime: status === 'resolved' ? formatDate(new Date(date.getTime() + Math.random() * 3600000)) : ''
+    })
   }
+  return data.sort((a, b) => new Date(b.alarmTime) - new Date(a.alarmTime))
+}
+
+function formatDate(date) {
+  const pad = n => String(n).padStart(2, '0')
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`
+}
+
+function getCategoryOffset(index) {
+  let offset = 0
+  for (let i = 0; i < index; i++) {
+    offset += (categoryData.value[i].percent / 100) * 219.9
+  }
+  return -offset
+}
+
+function getLevelType(level) {
+  const map = { critical: 'danger', major: 'warning', minor: 'info', info: 'success' }
+  return map[level] || 'info'
+}
+
+function getLevelText(level) {
+  const map = { critical: '紧急', major: '重要', minor: '一般', info: '提示' }
+  return map[level] || level
+}
+
+function getCategoryText(category) {
+  const map = { position: '位置异动', vacuum: '真空异常', servo: '伺服使能', timeout: '超时报警', temperature: '温度异常', pressure: '压力异常' }
+  return map[category] || category
+}
+
+function getStatusType(status) {
+  const map = { pending: 'danger', processing: 'warning', resolved: 'success' }
+  return map[status] || 'info'
+}
+
+function getStatusText(status) {
+  const map = { pending: '未处理', processing: '处理中', resolved: '已处理' }
+  return map[status] || status
+}
+
+function handleSearch() {
+  Message.success('搜索功能待对接后端接口')
+}
+
+function handleReset() {
+  Object.assign(searchForm, { level: '', category: '', status: '', dateRange: [], keyword: '' })
+  currentPage.value = 1
+}
+
+function handleRefresh() {
+  Message.success('刷新成功')
+}
+
+function handleSelectionChange(selection) {
+  selectedRows.value = selection
+}
+
+function handleSizeChange(size) {
+  pageSize.value = size
+  currentPage.value = 1
+}
+
+function handlePageChange(page) {
+  currentPage.value = page
+}
+
+function handleDetail(row) {
+  Message.info(`查看报警详情：${row.alarmNo}`)
+}
+
+function handleResolve(row) {
+  Message.info(`处理报警：${row.alarmNo}`)
 }
 </script>
 
 <style scoped lang="less">
 .alarm-log-page {
   padding: 12px;
-  background: #f5f7fa;
+  background: #fff;
   min-height: calc(100vh - 84px);
 }
 
@@ -694,7 +703,7 @@ export default {
     }
     .level-bar {
       height: 6px;
-      background: #f0f2f5;
+      background: #fff;
       border-radius: 3px;
       overflow: hidden;
       margin-bottom: 2px;
@@ -746,7 +755,7 @@ export default {
     .top-bar {
       flex: 1;
       height: 8px;
-      background: #f0f2f5;
+      background: #fff;
       border-radius: 4px;
       overflow: hidden;
       margin-right: 14px;

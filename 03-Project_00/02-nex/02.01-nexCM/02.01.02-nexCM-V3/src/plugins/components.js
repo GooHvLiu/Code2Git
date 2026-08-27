@@ -24,7 +24,6 @@ import DictTag from '@/components/DictTag/index.vue'
 import SearchForm from '@/components/SearchForm/index.vue'
 import TableToolbar from '@/components/TableToolbar/index.vue'
 import UploadImage from '@/components/UploadImage/index.vue'
-import Skeleton from '@/components/Skeleton/index.vue'
 import ElectronicSignature from '@/components/ElectronicSignature/index.vue'
 import I18nInput from '@/components/I18nInput/index.vue'
 
@@ -39,7 +38,6 @@ const components = [
   SearchForm,
   TableToolbar,
   UploadImage,
-  Skeleton,
   ElectronicSignature,
   I18nInput
 ]

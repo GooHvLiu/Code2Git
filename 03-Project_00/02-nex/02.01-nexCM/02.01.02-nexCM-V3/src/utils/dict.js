@@ -22,6 +22,9 @@ import { requestGetDictItemsByCodeApi } from '@/api'
 /** 字典缓存 Map */
 const dictCache = new Map()
 
+/** 正在请求中的 Promise 缓存（避免并发重复请求） */
+const pendingRequests = new Map()
+
 /**
  * 设置字典数据（手动设置，用于本地静态字典）
  * @param {string} code - 字典编码
@@ -34,6 +37,7 @@ export function setDict(code, list) {
 /**
  * 获取字典数据
  * 优先从缓存读取，缓存没有则调用后端接口
+ * 并发请求同一个字典时，共享同一个 Promise，避免重复请求
  * @param {string} code - 字典编码
  * @returns {Promise<Array>} 字典列表
  */
@@ -42,15 +46,31 @@ export async function getDict(code) {
   if (dictCache.has(code)) {
     return dictCache.get(code)
   }
-  // 从后端获取
-  try {
-    const res = await requestGetDictItemsByCodeApi(code)
-    const list = res.data || []
-    dictCache.set(code, list)
-    return list
-  } catch (e) {
-    return []
+  // 如果有正在进行的请求，复用该 Promise
+  if (pendingRequests.has(code)) {
+    return pendingRequests.get(code)
   }
+  // 创建请求 Promise 并缓存
+  const requestPromise = (async () => {
+    try {
+      const res = await requestGetDictItemsByCodeApi(code)
+      const list = res.data || []
+      dictCache.set(code, list)
+      return list
+    } catch (e) {
+      // 被取消的请求不视为错误，返回空数组
+      if (e?.code === 'ERR_CANCELED' || e?.message?.includes('CanceledError')) {
+        return []
+      }
+      return []
+    } finally {
+      // 请求完成后移除 pending 缓存
+      pendingRequests.delete(code)
+    }
+  })()
+  
+  pendingRequests.set(code, requestPromise)
+  return requestPromise
 }
 
 /**

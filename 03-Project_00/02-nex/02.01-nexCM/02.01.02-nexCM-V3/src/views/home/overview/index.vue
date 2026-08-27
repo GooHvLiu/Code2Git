@@ -133,10 +133,10 @@
   </div>
 </template>
 
-<script>
+<script setup>
 /**
  * 概况预览页面 - 精简版，只展示最核心的6个指标
- * 
+ *
  * 功能定位：给客户/管理层快速查看设备运行核心指标
  * 展示内容：
  * 1. 设备运行状态
@@ -145,7 +145,7 @@
  * 4. 本班产能
  * 5. 24小时产能趋势
  * 6. 实时报警
- * 
+ *
  * 数据来源（PLC地址映射）：
  * - 设备状态：M5001(运行) / M5002(空闲) / M5003(故障)
  * - 当前运行速度：D4010（瓶/小时）
@@ -154,84 +154,86 @@
  * - 产量趋势：需要后端定时采集D4004并存储历史数据
  * - 实时报警：D4012 + M4000-M4110
  */
-import { mapGetters } from 'vuex'
+import { computed } from 'vue'
+import store from '@/store'
 
-export default {
-  name: 'Overview',
-  data() {
-    return {}
-  },
-  computed: {
-    // 通用数据：从 store 获取
-    ...mapGetters(['runtimeStats', 'trendData', 'currentAlarms']),
-    // 设备运行状态（基于 store 通用对象 + 页面特有 icon）
-    deviceStatus() {
-      const obj = this.$store.getters['device/deviceStatusObj'] || {}
-      return {
-        status: this.$store.getters.deviceStatus,
-        text: this.$store.getters.deviceStatusText,
-        duration: obj.duration || '0小时0分钟',
-        icon: this.$store.getters.deviceStatus === 'running' ? 'el-icon-video-play' : 'el-icon-video-pause'
-      }
-    },
-    // 产能指标（页面特有格式）
-    metrics() {
-      const prod = this.$store.getters.productionStats
-      const params = this.$store.getters.realtimeParams
-      return {
-        currentSpeed: params.speed,
-        targetSpeed: 1500,
-        todayOutput: prod.todayOutput,
-        todayRate: prod.todayRate,
-        shiftOutput: prod.shiftOutput,
-        shiftTarget: prod.shiftTarget,
-        shiftName: prod.shiftName
-      }
-    },
-    // 24小时产能趋势（页面特有格式转换）
-    productionTrend() {
-      if (this.trendData && this.trendData.speed && this.trendData.speed.length > 0) {
-        return this.trendData.speed.map(item => ({ hour: item.time.slice(0, 2), value: item.value }))
-      }
-      return [
-        { hour: '00', value: 0 }, { hour: '02', value: 0 }, { hour: '04', value: 0 },
-        { hour: '06', value: 120 }, { hour: '08', value: 850 }, { hour: '10', value: 1200 },
-        { hour: '12', value: 1100 }, { hour: '14', value: 1350 }, { hour: '16', value: 1280 },
-        { hour: '18', value: 660 }, { hour: '20', value: 0 }, { hour: '22', value: 0 }
-      ]
-    },
-    // 实时报警（页面特有格式转换）
-    activeAlarms() {
-      if (this.currentAlarms && this.currentAlarms.length > 0) {
-        return this.currentAlarms.slice(0, 5).map(a => ({
-          level: a.level || 'warning',
-          icon: a.level === 'danger' ? 'el-icon-error' : 'el-icon-warning',
-          title: a.message || a.title,
-          code: a.code || '',
-          time: a.time || ''
-        }))
-      }
-      return [
-        { level: 'warning', icon: 'el-icon-warning', title: '灌装轴位置异动报警', code: 'M4068', time: '14:23' },
-        { level: 'info', icon: 'el-icon-info', title: '真空异常预警', code: 'M4020', time: '14:15' }
-      ]
-    },
-    maxTrendValue() {
-      return Math.max(...this.productionTrend.map(item => item.value), 1)
-    }
-  },
-  methods: {
-    formatNumber(num) {
-      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-    }
+
+// 通用数据：从 store 获取
+const trendData = computed(() => store.getters.trendData)
+const currentAlarms = computed(() => store.getters.currentAlarms)
+
+// 设备运行状态（基于 store 通用对象 + 页面特有 icon）
+const deviceStatus = computed(() => {
+  const obj = store.getters['device/deviceStatusObj'] || {}
+  return {
+    status: store.getters.deviceStatus,
+    text: store.getters.deviceStatusText,
+    duration: obj.duration || '0小时0分钟',
+    icon: store.getters.deviceStatus === 'running' ? 'el-icon-video-play' : 'el-icon-video-pause'
   }
+})
+
+// 产能指标（页面特有格式）
+const metrics = computed(() => {
+  const prod = store.getters.productionStats
+  const params = store.getters.realtimeParams
+  return {
+    currentSpeed: params.speed,
+    targetSpeed: 1500,
+    todayOutput: prod.todayOutput,
+    todayRate: prod.todayRate,
+    shiftOutput: prod.shiftOutput,
+    shiftTarget: prod.shiftTarget,
+    shiftName: prod.shiftName
+  }
+})
+
+// 24小时产能趋势（页面特有格式转换）
+const productionTrend = computed(() => {
+  if (trendData.value && trendData.value.speed && trendData.value.speed.length > 0) {
+    return trendData.value.speed.map(item => ({ hour: item.time.slice(0, 2), value: item.value }))
+  }
+  return [
+    { hour: '00', value: 0 }, { hour: '02', value: 0 }, { hour: '04', value: 0 },
+    { hour: '06', value: 120 }, { hour: '08', value: 850 }, { hour: '10', value: 1200 },
+    { hour: '12', value: 1100 }, { hour: '14', value: 1350 }, { hour: '16', value: 1280 },
+    { hour: '18', value: 660 }, { hour: '20', value: 0 }, { hour: '22', value: 0 }
+  ]
+})
+
+// 实时报警（页面特有格式转换）
+const activeAlarms = computed(() => {
+  if (currentAlarms.value && currentAlarms.value.length > 0) {
+    return currentAlarms.value.slice(0, 5).map(a => ({
+      level: a.level || 'warning',
+      icon: a.level === 'danger' ? 'el-icon-error' : 'el-icon-warning',
+      title: a.message || a.title,
+      code: a.code || '',
+      time: a.time || ''
+    }))
+  }
+  return [
+    { level: 'warning', icon: 'el-icon-warning', title: '灌装轴位置异动报警', code: 'M4068', time: '14:23' },
+    { level: 'info', icon: 'el-icon-info', title: '真空异常预警', code: 'M4020', time: '14:15' }
+  ]
+})
+
+// 趋势最大值
+const maxTrendValue = computed(() => {
+  return Math.max(...productionTrend.value.map(item => item.value), 1)
+})
+
+// 格式化数字
+function formatNumber(num) {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
+
 </script>
 
 <style scoped lang="less">
 .overview-container {
   padding: 16px;
-  background: #f0f2f5;
+  background: #fff;
 }
 
 // ========== 通用卡片样式 ==========
@@ -239,6 +241,19 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  padding-left: 12px;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 16px;
+    background: #409eff;
+    border-radius: 2px;
+  }
   .header-title {
     font-size: 15px;
     font-weight: 600;
@@ -281,6 +296,7 @@ export default {
   color: #fff;
   overflow: hidden;
   transition: all 0.3s;
+  border: 1px solid transparent;
 
   &.running { background: linear-gradient(135deg, #67c23a 0%, #529b2e 100%); }
   &.idle { background: linear-gradient(135deg, #909399 0%, #606266 100%); }
@@ -336,13 +352,27 @@ export default {
   padding: 16px;
   display: flex;
   align-items: center;
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.05);
+  border: 1px solid #ebeef5;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
   transition: all 0.3s;
   overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+  }
+  &.speed::before { background: linear-gradient(180deg, #409eff 0%, #337ecc 100%); }
+  &.today::before { background: linear-gradient(180deg, #67c23a 0%, #529b2e 100%); }
+  &.shift::before { background: linear-gradient(180deg, #e6a23c 0%, #b88230 100%); }
 
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 16px 0 rgba(0,0,0,0.08);
+    border-color: #dcdfe6;
   }
 
   .card-icon {
@@ -397,9 +427,26 @@ export default {
 .bottom-row {
   .chart-card, .alarm-card {
     height: 300px;
+    border-radius: 8px;
+    border: 1px solid #ebeef5;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
+    transition: all 0.3s;
+    &:hover {
+      box-shadow: 0 4px 16px 0 rgba(0,0,0,0.08);
+      border-color: #dcdfe6;
+    }
+    /deep/ .el-card__header {
+      padding: 14px 16px;
+      border-bottom: 1px solid #f0f2f5;
+    }
     /deep/ .el-card__body {
       height: calc(100% - 57px);
       padding: 16px;
+    }
+  }
+  .alarm-card {
+    .card-header::before {
+      background: #f56c6c;
     }
   }
 }

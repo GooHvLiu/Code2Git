@@ -97,7 +97,9 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, reactive, computed, onMounted } from 'vue'
+import { Message, MessageBox } from 'element-ui'
 import TableToolbar from '@/components/TableToolbar/index.vue'
 import ExportDropdown from '@/components/ExportDropdown/index.vue'
 import {
@@ -106,128 +108,134 @@ import {
   requestUpdateDeptApi,
   requestDeleteDeptApi
 } from '@/api'
+import { useI18n } from '@/composables/useI18n'
 
-export default {
-  name: 'DeptManagement',
-  components: { TableToolbar, ExportDropdown },
-  data() {
-    return {
-      loading: false,
-      tableData: [],
-      deptTree: [],
-      dialog: { visible: false, title: '', isEdit: false },
-      form: { parent_id: 0, dept_name: '', order_num: 0, leader: '', phone: '', email: '', status: 1 },
-      rules: {
-        dept_name: [{ required: true, message: this.$t('dept.deptNameRequired'), trigger: 'blur' }]
+const { t: $t } = useI18n()
+
+// ===== 响应式数据 =====
+const loading = ref(false)
+const tableData = ref([])
+const deptTree = ref([])
+const formRef = ref(null)
+
+const dialog = reactive({ visible: false, title: '', isEdit: false })
+const form = reactive({ parent_id: 0, dept_name: '', order_num: 0, leader: '', phone: '', email: '', status: 1 })
+
+const rules = {
+  dept_name: [{ required: true, message: $t('dept.deptNameRequired'), trigger: 'blur' }]
+}
+
+// ===== 计算属性 =====
+/** 扁平化的部门列表（用于上级部门下拉选择） */
+const flatDeptOptions = computed(() => {
+  const result = [{ id: 0, dept_name: '顶级部门' }]
+  const flatten = (list) => {
+    if (!Array.isArray(list)) return
+    list.forEach(item => {
+      result.push({ id: item.id, dept_name: item.dept_name })
+      if (item.children && item.children.length > 0) {
+        flatten(item.children)
       }
-    }
+    })
+  }
+  flatten(tableData.value)
+  return result
+})
+
+/** 扁平化树形数据用于导出 */
+const flatTableData = computed(() => {
+  const result = []
+  const flatten = (list, level = 0) => {
+    list.forEach(item => {
+      result.push({ ...item, _level: level })
+      if (item.children && item.children.length > 0) {
+        flatten(item.children, level + 1)
+      }
+    })
+  }
+  flatten(tableData.value)
+  return result
+})
+
+const exportColumns = computed(() => [
+  {
+    label: $t('dept.deptName'),
+    prop: 'dept_name',
+    width: 200,
+    formatter: row => '  '.repeat(row._level || 0) + row.dept_name
   },
-  computed: {
-    /** 扁平化的部门列表（用于上级部门下拉选择） */
-    flatDeptOptions() {
-      const result = [{ id: 0, dept_name: '顶级部门' }]
-      const flatten = (list) => {
-        if (!Array.isArray(list)) return
-        list.forEach(item => {
-          result.push({ id: item.id, dept_name: item.dept_name })
-          if (item.children && item.children.length > 0) {
-            flatten(item.children)
-          }
-        })
-      }
-      flatten(this.tableData)
-      return result
-    },
-    /** 扁平化树形数据用于导出 */
-    flatTableData() {
-      const result = []
-      const flatten = (list, level = 0) => {
-        list.forEach(item => {
-          result.push({ ...item, _level: level })
-          if (item.children && item.children.length > 0) {
-            flatten(item.children, level + 1)
-          }
-        })
-      }
-      flatten(this.tableData)
-      return result
-    },
-    exportColumns() {
-      return [
-        {
-          label: this.$t('dept.deptName'),
-          prop: 'dept_name',
-          width: 200,
-          formatter: row => '  '.repeat(row._level || 0) + row.dept_name
-        },
-        { label: this.$t('dept.orderNum'), prop: 'order_num', width: 100 },
-        { label: this.$t('dept.leader'), prop: 'leader', width: 120 },
-        { label: this.$t('dept.phone'), prop: 'phone', width: 150 },
-        { label: this.$t('dept.email'), prop: 'email', width: 200 },
-        {
-          label: this.$t('common.status'),
-          prop: 'status',
-          width: 80,
-          formatter: row => (row.status === 1 ? this.$t('common.enable') : this.$t('common.disable'))
-        }
-      ]
-    }
-  },
-  created() {
-    this.getList()
-  },
-  methods: {
-    async getList() {
-      this.loading = true
-      try {
-        const res = await requestGetDeptTreeApi()
-        this.tableData = res.data || []
-        this.deptTree = [{ id: 0, dept_name: '顶级部门', children: res || [] }]
-      } finally {
-        this.loading = false
-      }
-    },
-    handleAdd() {
-      this.dialog = { visible: true, title: this.$t('dept.addDept'), isEdit: false }
-      this.form = { parent_id: 0, dept_name: '', order_num: 0, leader: '', phone: '', email: '', status: 1 }
-    },
-    handleAddChild(row) {
-      this.dialog = { visible: true, title: this.$t('dept.addChild'), isEdit: false }
-      this.form = { parent_id: row.id, dept_name: '', order_num: 0, leader: '', phone: '', email: '', status: 1 }
-    },
-    handleEdit(row) {
-      this.dialog = { visible: true, title: this.$t('dept.editDept'), isEdit: true }
-      this.form = { ...row }
-    },
-    submitForm() {
-      this.$refs.form.validate(async valid => {
-        if (!valid) return
-        try {
-          if (this.dialog.isEdit) {
-            await requestUpdateDeptApi(this.form.id, this.form)
-            this.$message.success(this.$t('common.updateSuccess'))
-          } else {
-            await requestCreateDeptApi(this.form)
-            this.$message.success(this.$t('common.createSuccess'))
-          }
-          this.dialog.visible = false
-          this.getList()
-        } catch (e) {
-          this.$message.error(e.msg || this.$t('common.operationFailed'))
-        }
-      })
-    },
-    handleDelete(row) {
-      this.$confirm(this.$t('dept.deleteConfirm'), this.$t('common.tip'), {
-        confirmButtonText: this.$t('common.confirm'),
-        cancelButtonText: this.$t('common.cancel'),
-        type: 'warning'
-      }).then(async () => {
-        await requestDeleteDeptApi(row.id)
-        this.$message.success(this.$t('common.deleteSuccess'))
-        this.getList()
-      }).catch(() => {})
-    }
+  { label: $t('dept.orderNum'), prop: 'order_num', width: 100 },
+  { label: $t('dept.leader'), prop: 'leader', width: 120 },
+  { label: $t('dept.phone'), prop: 'phone', width: 150 },
+  { label: $t('dept.email'), prop: 'email', width: 200 },
+  {
+    label: $t('common.status'),
+    prop: 'status',
+    width: 80,
+    formatter: row => (row.status === 1 ? $t('common.enable') : $t('common.disable'))
+  }
+])
+
+// ===== 方法 =====
+async function getList() {
+  loading.value = true
+  try {
+    const res = await requestGetDeptTreeApi()
+    tableData.value = res.data || []
+    deptTree.value = [{ id: 0, dept_name: '顶级部门', children: res || [] }]
+  } finally {
+    loading.value = false
   }
 }
+
+function handleAdd() {
+  Object.assign(dialog, { visible: true, title: $t('dept.addDept'), isEdit: false })
+  Object.assign(form, { parent_id: 0, dept_name: '', order_num: 0, leader: '', phone: '', email: '', status: 1 })
+}
+
+function handleAddChild(row) {
+  Object.assign(dialog, { visible: true, title: $t('dept.addChild'), isEdit: false })
+  Object.assign(form, { parent_id: row.id, dept_name: '', order_num: 0, leader: '', phone: '', email: '', status: 1 })
+}
+
+function handleEdit(row) {
+  Object.assign(dialog, { visible: true, title: $t('dept.editDept'), isEdit: true })
+  Object.assign(form, { ...row })
+}
+
+function submitForm() {
+  formRef.value.validate(async valid => {
+    if (!valid) return
+    try {
+      if (dialog.isEdit) {
+        await requestUpdateDeptApi(form.id, form)
+        Message.success($t('common.updateSuccess'))
+      } else {
+        await requestCreateDeptApi(form)
+        Message.success($t('common.createSuccess'))
+      }
+      dialog.visible = false
+      getList()
+    } catch (e) {
+      Message.error(e.msg || $t('common.operationFailed'))
+    }
+  })
+}
+
+function handleDelete(row) {
+  MessageBox.confirm($t('dept.deleteConfirm'), $t('common.tip'), {
+    confirmButtonText: $t('common.confirm'),
+    cancelButtonText: $t('common.cancel'),
+    type: 'warning'
+  }).then(async () => {
+    await requestDeleteDeptApi(row.id)
+    Message.success($t('common.deleteSuccess'))
+    getList()
+  }).catch(() => {})
+}
+
+// ===== 生命周期 =====
+onMounted(() => {
+  getList()
+})
 </script>

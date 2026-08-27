@@ -426,6 +426,7 @@ export function generateOrderReport(order, config = {}, t = (key) => key) {
           showSuccess(`${order.orderNo} 报告生成成功`)
           resolve()
         } catch (innerErr) {
+          // eslint-disable-next-line no-console
           console.error('[订单报告] PDF生成阶段异常:', innerErr)
           if (outer.parentNode) {
             document.body.removeChild(outer)
@@ -434,6 +435,7 @@ export function generateOrderReport(order, config = {}, t = (key) => key) {
           reject(innerErr)
         }
       }).catch(err => {
+        // eslint-disable-next-line no-console
         console.error('[订单报告] html2canvas渲染失败:', err)
         if (outer.parentNode) {
           document.body.removeChild(outer)
@@ -442,6 +444,7 @@ export function generateOrderReport(order, config = {}, t = (key) => key) {
         reject(err)
       })
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error('[订单报告] 初始化阶段异常:', err)
       // 清理可能已添加的 DOM
       if (outer && outer.parentNode) {

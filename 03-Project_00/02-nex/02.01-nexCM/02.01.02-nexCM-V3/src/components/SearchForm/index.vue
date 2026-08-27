@@ -24,29 +24,31 @@
   </div>
 </template>
 
-<script>
+<script setup>
 /**
  * 搜索表单组件
  * 封装搜索/重置按钮
  * 外层 flex 布局，与 TableToolbar 保持一致
  */
-export default {
-  name: 'SearchForm',
-  props: {
-    form: {
-      type: Object,
-      required: true
-    }
-  },
-  methods: {
-    handleSearch() {
-      this.$emit('search', this.form)
-    },
-    handleReset() {
-      this.$refs.searchForm && this.$refs.searchForm.resetFields()
-      this.$emit('reset', this.form)
-    }
+import { ref } from 'vue'
+
+const props = defineProps({
+  form: {
+    type: Object,
+    required: true
   }
+})
+
+const emit = defineEmits(['search', 'reset'])
+const searchFormRef = ref(null)
+
+function handleSearch() {
+  emit('search', props.form)
+}
+
+function handleReset() {
+  searchFormRef.value && searchFormRef.value.resetFields()
+  emit('reset', props.form)
 }
 </script>
 

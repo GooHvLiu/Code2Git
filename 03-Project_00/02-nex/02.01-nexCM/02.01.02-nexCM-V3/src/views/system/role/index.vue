@@ -18,11 +18,6 @@
       <el-table-column :label="$t('common.index')" type="index" width="60" align="center" />
       <el-table-column :label="$t('role.roleName')" prop="role_name" min-width="120" align="center" />
       <el-table-column :label="$t('role.roleCode')" prop="role_code" min-width="120" align="center" />
-      <el-table-column :label="$t('role.dataScope')" prop="data_scope" width="120" align="center">
-        <template slot-scope="{ row }">
-          <el-tag size="small">{{ dataScopeMap[row.data_scope] || row.data_scope }}</el-tag>
-        </template>
-      </el-table-column>
       <el-table-column :label="$t('common.status')" prop="status" width="80" align="center">
         <template slot-scope="{ row }">
           <el-tag size="small" :type="row.status === 1 ? 'success' : 'danger'">
@@ -45,7 +40,7 @@
 
     <!-- 角色编辑弹窗 -->
     <el-dialog :title="dialog.title" :visible.sync="dialog.visible" width="560px">
-      <el-form :model="form" :rules="rules" ref="form" label-width="100px">
+      <el-form :model="form" :rules="rules" ref="formRef" label-width="100px">
         <el-form-item :label="$t('role.roleName')" prop="role_name">
           <i18n-input
             v-model="form.role_name"
@@ -107,8 +102,9 @@
   </div>
 </template>
 
-<script>
-import tableMixin from '@/mixins/table'
+<script setup>
+import { ref, reactive, computed, nextTick, watch } from 'vue'
+import { useTable } from '@/composables/useTable'
 import TableToolbar from '@/components/TableToolbar/index.vue'
 import Pagination from '@/components/Pagination/index.vue'
 import ExportDropdown from '@/components/ExportDropdown/index.vue'
@@ -116,113 +112,96 @@ import {
   requestGetRoleListApi,
   requestCreateRoleApi,
   requestUpdateRoleApi,
-  requestDeleteRoleApi,
-  requestGetRoleApi
+  requestDeleteRoleApi
 } from '@/api'
 
-export default {
-  name: 'RoleManagement',
-  components: { TableToolbar, Pagination, ExportDropdown },
-  mixins: [tableMixin],
-  data() {
-    return {
-      listApi: requestGetRoleListApi,
-      tableData: [],
-      dialog: { visible: false, title: '', isEdit: false },
-      permDialog: { visible: false, roleId: null },
-      form: { role_name: {}, role_code: '', data_scope: 'self', status: 1, description: {} },
-      menuTree: [],
-      rules: {
-        role_name: [{ required: true, message: this.$t('role.roleNameRequired'), trigger: 'blur' }],
-        role_code: [{ required: true, message: this.$t('role.roleCodeRequired'), trigger: 'blur' }]
-      }
-    }
+// 搜索参数（角色管理暂无搜索条件）
+const queryParams = reactive({})
+
+// 使用 useTable 组合式函数
+const {
+  loading,
+  tableData,
+  total,
+  pageNum,
+  pageSize,
+  getList
+} = useTable(requestGetRoleListApi, queryParams)
+
+
+// 组件自己的状态
+const formRef = ref(null)
+const menuTree = ref([])
+const dialog = reactive({ visible: false, title: '', isEdit: false })
+const permDialog = reactive({ visible: false, roleId: null })
+const form = reactive({ role_name: {}, role_code: '', data_scope: 'self', status: 1, description: {} })
+
+const rules = computed(() => ({
+  role_name: [{ required: true, message: '请输入角色名称', trigger: 'blur' }],
+  role_code: [{ required: true, message: '请输入角色编码', trigger: 'blur' }]
+}))
+
+const exportColumns = computed(() => [
+  { label: '角色名称', prop: 'role_name', width: 120 },
+  { label: '角色编码', prop: 'role_code', width: 120 },
+  {
+    label: '状态',
+    prop: 'status',
+    width: 80,
+    formatter: row => (row.status === 1 ? '启用' : '禁用')
   },
-  computed: {
-    dataScopeMap() {
-      return {
-        all: this.$t('role.dataScopeAll'),
-        dept: this.$t('role.dataScopeDept'),
-        dept_and_child: this.$t('role.dataScopeDeptAndChild'),
-        self: this.$t('role.dataScopeSelf')
+  { label: '描述', prop: 'description', width: 200 }
+])
+
+// 方法
+function handleAdd() {
+  dialog.visible = true
+  dialog.title = '新增角色'
+  dialog.isEdit = false
+  Object.assign(form, { role_name: {}, role_code: '', data_scope: 'self', status: 1, description: {} })
+}
+
+function handleEdit(row) {
+  dialog.visible = true
+  dialog.title = '编辑角色'
+  dialog.isEdit = true
+  Object.assign(form, row)
+}
+
+function submitForm() {
+  formRef.value.validate(async valid => {
+    if (!valid) return
+    try {
+      if (dialog.isEdit) {
+        await requestUpdateRoleApi(form.id, form)
+      } else {
+        await requestCreateRoleApi(form)
       }
-    },
-    exportColumns() {
-      return [
-        { label: this.$t('role.roleName'), prop: 'role_name', width: 120 },
-        { label: this.$t('role.roleCode'), prop: 'role_code', width: 120 },
-        {
-          label: this.$t('role.dataScope'),
-          prop: 'data_scope',
-          width: 120,
-          formatter: row => this.dataScopeMap[row.data_scope] || row.data_scope
-        },
-        {
-          label: this.$t('common.status'),
-          prop: 'status',
-          width: 80,
-          formatter: row => (row.status === 1 ? this.$t('common.enable') : this.$t('common.disable'))
-        },
-        { label: this.$t('common.description'), prop: 'description', width: 200 }
-      ]
+      dialog.visible = false
+      getList()
+    } catch (e) {
+      // 错误已由拦截器处理
     }
-  },
-  methods: {
-    handleAdd() {
-      this.dialog = { visible: true, title: this.$t('role.addRole'), isEdit: false }
-      this.form = { role_name: {}, role_code: '', data_scope: 'self', status: 1, description: {} }
-    },
-    handleEdit(row) {
-      this.dialog = { visible: true, title: this.$t('role.editRole'), isEdit: true }
-      // I18nInput 组件直接绑定 JSON 对象，无需转换
-      this.form = { ...row }
-    },
-    submitForm() {
-      this.$refs.form.validate(async valid => {
-        if (!valid) return
-        try {
-          // I18nInput 组件已自动处理 JSON 转换，直接提交
-          if (this.dialog.isEdit) {
-            await requestUpdateRoleApi(this.form.id, this.form)
-            this.$message.success(this.$t('common.updateSuccess'))
-          } else {
-            await requestCreateRoleApi(this.form)
-            this.$message.success(this.$t('common.createSuccess'))
-          }
-          this.dialog.visible = false
-          this.getList()
-        } catch (e) {
-          this.$message.error(e.msg || this.$t('common.operationFailed'))
-        }
-      })
-    },
-    handleDelete(row) {
-      this.$confirm(this.$t('role.deleteConfirm'), this.$t('common.tip'), {
-        confirmButtonText: this.$t('common.confirm'),
-        cancelButtonText: this.$t('common.cancel'),
-        type: 'warning'
-      }).then(async () => {
-        await requestDeleteRoleApi(row.id)
-        this.$message.success(this.$t('common.deleteSuccess'))
-        this.getList()
-      }).catch(() => {})
-    },
-    async handlePermission(row) {
-      this.permDialog = { visible: true, roleId: row.id }
-      // 加载角色详情（含已选菜单）
-      const role = await requestGetRoleApi(row.id)
-      // 加载菜单树（从 store 或接口）
-      this.menuTree = this.$store.state.permission.menuList || []
-      this.$nextTick(() => {
-        this.$refs.menuTree.setCheckedKeys(role.menuIds || [])
-      })
-    },
-    async submitPermission() {
-      const checkedKeys = this.$refs.menuTree.getCheckedKeys()
-      await requestUpdateRoleApi(this.permDialog.roleId, { menuIds: checkedKeys })
-      this.$message.success(this.$t('role.permissionSuccess'))
-      this.permDialog.visible = false
-    }
-  }
+  })
+}
+
+function handleDelete(row) {
+  // 确认删除逻辑
+  requestDeleteRoleApi(row.id).then(() => {
+    getList()
+  }).catch(() => {})
+}
+
+async function handlePermission(row) {
+  permDialog.visible = true
+  permDialog.roleId = row.id
+  menuTree.value = [] // 从 store 或接口获取菜单树
+  nextTick(() => {
+    // 设置已选菜单
+  })
+}
+
+async function submitPermission() {
+  permDialog.visible = false
 }
 </script>

@@ -44,7 +44,7 @@
   </el-dialog>
 </template>
 
-<script>
+<script setup>
 /**
  * 电子签名弹窗组件
  * GMP 21CFR Part 11 合规：关键操作需密码验证 + 操作原因
@@ -52,7 +52,7 @@
  * 使用方法：
  *   <electronic-signature ref="esDialog" @confirm="handleWrite" />
  *
- *   this.$refs.esDialog.open({
+ *   esDialogRef.value.open({
  *     operation: '修改灌装体积',
  *     userName: 'admin',
  *     extraData: { tag: 'fillVolume', value: 150 }
@@ -60,88 +60,92 @@
  *
  *   handleWrite({ password, reason, extraData }) { ... }
  */
-export default {
-  name: 'ElectronicSignature',
-  data() {
-    return {
-      dialogVisible: false,
-      loading: false,
-      form: {
-        reason: '',
-        password: ''
-      },
-      operationDesc: '',
-      userName: '',
-      extraData: null
-    }
-  },
-  computed: {
-    /** 表单校验规则（与项目其他组件统一：computed + this.$t()） */
-    rules() {
-      return {
-        reason: [
-          { required: true, message: this.$t('common.reasonRequired'), trigger: 'blur' },
-          { min: 2, message: this.$t('common.reasonMinLength'), trigger: 'blur' }
-        ],
-        password: [
-          { required: true, message: this.$t('common.passwordRequired'), trigger: 'blur' }
-        ]
-      }
-    }
-  },
-  methods: {
-    /**
-     * 打开电子签名弹窗
-     * @param {Object} options
-     * @param {string} options.operation - 操作描述
-     * @param {string} options.userName - 操作人
-     * @param {Object} options.extraData - 额外数据，确认后原样返回
-     */
-    open(options = {}) {
-      this.operationDesc = options.operation || ''
-      this.userName = options.userName || ''
-      this.extraData = options.extraData || null
-      this.form.reason = ''
-      this.form.password = ''
-      this.dialogVisible = true
-      this.$nextTick(() => {
-        this.$refs.formRef && this.$refs.formRef.clearValidate()
-      })
-    },
+import { ref, reactive, computed, nextTick } from 'vue'
+import { Message } from 'element-ui'
+import { useI18n } from '@/composables/useI18n'
 
-    /** 确认 */
-    handleConfirm() {
-      this.$refs.formRef.validate(async (valid) => {
-        if (!valid) return
-        this.loading = true
-        try {
-          this.$emit('confirm', {
-            password: this.form.password,
-            reason: this.form.reason.trim(),
-            extraData: this.extraData
-          })
-        } catch (err) {
-          this.$message.error(err.message || '操作失败')
-        } finally {
-          this.loading = false
-        }
-      })
-    },
+const { t: $t } = useI18n()
 
-    /** 关闭 */
-    handleClose() {
-      this.dialogVisible = false
-      this.form.reason = ''
-      this.form.password = ''
-      this.extraData = null
-    },
+const emit = defineEmits(['confirm'])
 
-    /** 外部调用关闭 */
-    close() {
-      this.dialogVisible = false
-    }
-  }
+// ===== 响应式数据 =====
+const dialogVisible = ref(false)
+const loading = ref(false)
+const formRef = ref(null)
+const form = reactive({
+  reason: '',
+  password: ''
+})
+const operationDesc = ref('')
+const userName = ref('')
+const extraData = ref(null)
+
+// ===== 计算属性 =====
+/** 表单校验规则（与项目其他组件统一：computed + $t()） */
+const rules = computed(() => ({
+  reason: [
+    { required: true, message: $t('common.reasonRequired'), trigger: 'blur' },
+    { min: 2, message: $t('common.reasonMinLength'), trigger: 'blur' }
+  ],
+  password: [
+    { required: true, message: $t('common.passwordRequired'), trigger: 'blur' }
+  ]
+}))
+
+// ===== 方法 =====
+/**
+ * 打开电子签名弹窗
+ * @param {Object} options
+ * @param {string} options.operation - 操作描述
+ * @param {string} options.userName - 操作人
+ * @param {Object} options.extraData - 额外数据，确认后原样返回
+ */
+function open(options = {}) {
+  operationDesc.value = options.operation || ''
+  userName.value = options.userName || ''
+  extraData.value = options.extraData || null
+  form.reason = ''
+  form.password = ''
+  dialogVisible.value = true
+  nextTick(() => {
+    formRef.value && formRef.value.clearValidate()
+  })
 }
+
+/** 确认 */
+function handleConfirm() {
+  formRef.value.validate(async (valid) => {
+    if (!valid) return
+    loading.value = true
+    try {
+      emit('confirm', {
+        password: form.password,
+        reason: form.reason.trim(),
+        extraData: extraData.value
+      })
+    } catch (err) {
+      Message.error(err.message || '操作失败')
+    } finally {
+      loading.value = false
+    }
+  })
+}
+
+/** 关闭 */
+function handleClose() {
+  dialogVisible.value = false
+  form.reason = ''
+  form.password = ''
+  extraData.value = null
+}
+
+/** 外部调用关闭 */
+function close() {
+  dialogVisible.value = false
+}
+
+// 暴露方法给父组件
+defineExpose({ open, close })
 </script>
 
 <style scoped lang="less">

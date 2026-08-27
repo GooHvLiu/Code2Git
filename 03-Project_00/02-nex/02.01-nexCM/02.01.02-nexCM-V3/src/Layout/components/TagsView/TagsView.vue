@@ -31,147 +31,135 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import TagMenus from "./TagMenus/TagMenus.vue";
-import { mapGetters, mapActions } from "vuex";
 import { HOME_TAG, ROUTE_PATHS } from "@/router/constant/pathConstants.js";
+import store from '@/store'
+import router from '@/router'
 
-export default {
-  name: "TagsView",
-  components: { TagMenus },
-  data() {
-    return {
-      menuShow: false,
-      mouseX: 0,
-      mouseY: 0,
-      currentRightIndex: null,
-    };
-  },
-  computed: {
-    ...mapGetters(["visitedViews"]),
-    /** 标签列表（兼容原 tagArr 命名） */
-    tagArr() {
-      return this.visitedViews;
-    },
-  },
-  watch: {
-    $route: {
-      immediate: true,
-      handler(to) {
-        this.addView(to);
-      },
-    },
-  },
-  methods: {
-    ...mapActions("tagsView", [
-      "addView",
-      "delView",
-      "delOthersViews",
-      "delAllViews",
-      "delLeftViews",
-      "delRightViews",
-    ]),
+// ===== 响应式数据 =====
+const menuShow = ref(false)
+const mouseX = ref(0)
+const mouseY = ref(0)
+const currentRightIndex = ref(null)
+// 当前路由路径（响应式，用于标签激活状态判断）
+const currentPath = ref(router.currentRoute.path)
 
-    /** 获取路由标题，兼容 titles 数组和 title 字符串 */
-    getRouteTitle(route) {
-      if (route.meta?.titles?.length) {
-        return route.meta.titles[route.meta.titles.length - 1];
+// ===== 计算属性 =====
+const visitedViews = computed(() => store.getters.visitedViews)
+/** 标签列表（兼容原 tagArr 命名） */
+const tagArr = computed(() => visitedViews.value)
+
+// ===== 监听路由变化 =====
+// router.currentRoute 不是响应式的，必须用 afterEach 监听
+let afterEachHook = null
+onMounted(() => {
+  // 初始化时添加当前路由
+  store.dispatch('tagsView/addView', router.currentRoute)
+  // 监听路由变化
+  afterEachHook = router.afterEach((to) => {
+    currentPath.value = to.path
+    store.dispatch('tagsView/addView', to)
+  })
+})
+onBeforeUnmount(() => {
+  if (typeof afterEachHook === 'function') {
+    afterEachHook()
+  }
+})
+
+// ===== 方法 =====
+/** 首页不可关闭 */
+function isClosable(path) {
+  return path !== HOME_TAG.path;
+}
+
+/** 是否当前激活 */
+function isTagActive(item) {
+  return item.path === currentPath.value;
+}
+
+/** 点击标签跳转 */
+function clickTag(path) {
+  if (currentPath.value !== path) {
+    router.push(path);
+  }
+}
+
+/** 关闭标签 */
+async function handleClose(index) {
+  const delTag = tagArr.value[index];
+  const isActive = delTag.path === currentPath.value;
+
+  const remainViews = await store.dispatch('tagsView/delView', delTag);
+
+  // 关闭的是当前页，跳到最后一个标签
+  if (isActive && remainViews.length > 0) {
+    const lastItem = remainViews[remainViews.length - 1];
+    router.push(lastItem.path);
+  }
+}
+
+/** 右键菜单 */
+function openContentMenu(e, index) {
+  mouseX.value = e.clientX;
+  mouseY.value = e.clientY;
+  currentRightIndex.value = index;
+  menuShow.value = true;
+}
+
+/** 右键菜单操作 */
+async function handleMenuClick(menuId) {
+  const idx = currentRightIndex.value;
+  const currentTag = tagArr.value[idx];
+  const tagPath = currentTag.path;
+  const isCurrentActive = tagPath === currentPath.value;
+
+  switch (menuId) {
+    // 刷新（无刷新重载：跳转到 /redirect 再跳回，组件销毁重建）
+    case 1: {
+      const fullPath = router.currentRoute.fullPath;
+      router.replace(
+        `${ROUTE_PATHS.REDIRECT}?path=${encodeURIComponent(fullPath)}`
+      );
+      break;
+    }
+    // 关闭当前
+    case 2:
+      handleClose(idx);
+      break;
+    // 关闭其他
+    case 3: {
+      const remainViews = await store.dispatch('tagsView/delOthersViews', currentTag);
+      if (!isCurrentActive && remainViews.length > 0) {
+        router.push(tagPath);
       }
-      return route.meta?.title || this.$t("common.untitled");
-    },
-
-    /** 首页不可关闭 */
-    isClosable(path) {
-      return path !== HOME_TAG.path;
-    },
-
-    /** 是否当前激活 */
-    isTagActive(item) {
-      return item.path === this.$route.path;
-    },
-
-    /** 点击标签跳转 */
-    clickTag(path) {
-      if (this.$route.path !== path) {
-        this.$router.push(path);
+      break;
+    }
+    // 关闭左侧
+    case 4: {
+      const remainViews = await store.dispatch('tagsView/delLeftViews', currentTag);
+      if (!remainViews.find((t) => t.path === currentPath.value)) {
+        router.push(tagPath);
       }
-    },
-
-    /** 关闭标签 */
-    async handleClose(index) {
-      const delTag = this.tagArr[index];
-      const isActive = delTag.path === this.$route.path;
-
-      const remainViews = await this.delView(delTag);
-
-      // 关闭的是当前页，跳到最后一个标签
-      if (isActive && remainViews.length > 0) {
-        const lastItem = remainViews[remainViews.length - 1];
-        this.$router.push(lastItem.path);
+      break;
+    }
+    // 关闭右侧
+    case 5: {
+      const remainViews = await store.dispatch('tagsView/delRightViews', currentTag);
+      if (!remainViews.find((t) => t.path === currentPath.value)) {
+        router.push(tagPath);
       }
-    },
-
-    /** 右键菜单 */
-    openContentMenu(e, index) {
-      this.mouseX = e.clientX;
-      this.mouseY = e.clientY;
-      this.currentRightIndex = index;
-      this.menuShow = true;
-    },
-
-    /** 右键菜单操作 */
-    async handleMenuClick(menuId) {
-      const idx = this.currentRightIndex;
-      const currentTag = this.tagArr[idx];
-      const currentPath = currentTag.path;
-      const isCurrentActive = currentPath === this.$route.path;
-
-      switch (menuId) {
-        // 刷新（无刷新重载：跳转到 /redirect 再跳回，组件销毁重建）
-        case 1: {
-          const fullPath = this.$route.fullPath;
-          this.$router.replace(
-            `${ROUTE_PATHS.REDIRECT}?path=${encodeURIComponent(fullPath)}`
-          );
-          break;
-        }
-        // 关闭当前
-        case 2:
-          this.handleClose(idx);
-          break;
-        // 关闭其他
-        case 3: {
-          const remainViews = await this.delOthersViews(currentTag);
-          if (!isCurrentActive && remainViews.length > 0) {
-            this.$router.push(currentPath);
-          }
-          break;
-        }
-        // 关闭左侧
-        case 4: {
-          const remainViews = await this.delLeftViews(currentTag);
-          if (!remainViews.find((t) => t.path === this.$route.path)) {
-            this.$router.push(currentPath);
-          }
-          break;
-        }
-        // 关闭右侧
-        case 5: {
-          const remainViews = await this.delRightViews(currentTag);
-          if (!remainViews.find((t) => t.path === this.$route.path)) {
-            this.$router.push(currentPath);
-          }
-          break;
-        }
-        // 全部关闭（只留首页）
-        case 6:
-          await this.delAllViews();
-          this.$router.push(HOME_TAG.path);
-          break;
-      }
-    },
-  },
-};
+      break;
+    }
+    // 全部关闭（只留首页）
+    case 6:
+      await store.dispatch('tagsView/delAllViews');
+      router.push(HOME_TAG.path);
+      break;
+  }
+}
 </script>
 
 <style scoped lang="less">

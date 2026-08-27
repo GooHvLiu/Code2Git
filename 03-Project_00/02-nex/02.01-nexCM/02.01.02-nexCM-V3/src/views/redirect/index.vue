@@ -1,4 +1,4 @@
-<script>
+<script setup>
 /* eslint-disable vue/multi-word-component-names */
 /**
  * ==========================================
@@ -10,16 +10,11 @@
  *   3. 由于路由变化，目标组件会被销毁重建，实现无白屏刷新
  * 比 location.reload() 体验更好，不会整页白屏
  */
-export default {
-  name: 'Redirect',
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      const path = to.query.path || '/'
-      vm.$router.replace(path)
-    })
-  },
-  render(h) {
-    return h()
-  }
-}
+import { onMounted } from 'vue'
+import router from '@/router'
+
+onMounted(() => {
+  const path = router.currentRoute.query.path || '/'
+  router.replace(path)
+})
 </script>

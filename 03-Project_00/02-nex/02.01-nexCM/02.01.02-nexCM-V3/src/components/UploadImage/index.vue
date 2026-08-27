@@ -66,187 +66,183 @@
   </div>
 </template>
 
-<script>
+<script setup>
 /* eslint-disable vue/multi-word-component-names */
+import { ref, computed } from 'vue'
 import { validateImage, validateFileSize } from '@/utils/upload'
 import { showError, showSuccess } from '@/utils/message'
 
-export default {
-  name: 'UploadImage',
-  props: {
-    /** 绑定值（单图传字符串，多图传数组） */
-    value: {
-      type: [String, Array],
-      default: ''
-    },
-    /** 上传地址 */
-    uploadUrl: {
-      type: String,
-      required: true
-    },
-    /** 是否多图 */
-    multiple: {
-      type: Boolean,
-      default: false
-    },
-    /** 最大上传数量 */
-    limit: {
-      type: Number,
-      default: 9
-    },
-    /** 最大文件大小（MB） */
-    maxSize: {
-      type: Number,
-      default: 5
-    },
-    /** 接受的文件类型 */
-    accept: {
-      type: String,
-      default: 'image/jpeg,image/png,image/gif,image/webp'
-    },
-    /** 文件字段名 */
-    fieldName: {
-      type: String,
-      default: 'file'
-    },
-    /** 额外请求头 */
-    headers: {
-      type: Object,
-      default: () => ({})
-    },
-    /** 是否拖拽上传 */
-    drag: {
-      type: Boolean,
-      default: false
-    },
-    /** 提示文字 */
-    tipText: {
-      type: String,
-      default: '上传图片'
-    },
-    /** 上传成功后从响应中取图片 URL 的字段路径 */
-    urlField: {
-      type: String,
-      default: 'data.url'
-    }
+const props = defineProps({
+  /** 绑定值（单图传字符串，多图传数组） */
+  value: {
+    type: [String, Array],
+    default: ''
   },
-  data() {
-    return {
-      /** 是否正在上传 */
-      uploading: false,
-      /** 上传进度百分比 */
-      uploadPercent: 0,
-      /** 预览弹窗显示 */
-      previewVisible: false,
-      /** 预览图片地址 */
-      previewUrl: ''
-    }
+  /** 上传地址 */
+  uploadUrl: {
+    type: String,
+    required: true
   },
-  computed: {
-    /** 展示用的图片列表（统一转数组） */
-    displayList() {
-      if (Array.isArray(this.value)) {
-        return this.value.map(item => {
-          return typeof item === 'string' ? { url: item } : item
-        })
-      }
-      return this.value ? [{ url: this.value }] : []
-    },
-    /** el-upload 需要的 file-list（空数组，因为用自定义预览） */
-    fileList() {
-      return []
-    }
+  /** 是否多图 */
+  multiple: {
+    type: Boolean,
+    default: false
   },
-  methods: {
-    /**
-     * 上传前校验
-     */
-    handleBeforeUpload(file) {
-      if (!validateImage(file)) return false
-      const maxSizeBytes = this.maxSize * 1024 * 1024
-      if (!validateFileSize(file, maxSizeBytes)) return false
-      return true
-    },
-
-    /**
-     * 上传进度
-     */
-    handleProgress(event) {
-      this.uploading = true
-      this.uploadPercent = Math.round(event.percent)
-    },
-
-    /**
-     * 上传成功
-     */
-    handleSuccess(response) {
-      this.uploading = false
-      this.uploadPercent = 0
-
-      const url = this.getNestedValue(response, this.urlField)
-      if (!url) {
-        showError('上传成功但未获取到图片地址')
-        return
-      }
-
-      if (this.multiple) {
-        const list = [...(this.value || []), url]
-        this.$emit('input', list)
-      } else {
-        this.$emit('input', url)
-      }
-      showSuccess('上传成功')
-      this.$emit('success', response, url)
-    },
-
-    /**
-     * 上传失败
-     */
-    handleError(err) {
-      this.uploading = false
-      this.uploadPercent = 0
-      showError('上传失败，请重试')
-      this.$emit('error', err)
-    },
-
-    /**
-     * 超出数量限制
-     */
-    handleExceed() {
-      showError(`最多只能上传 ${this.limit} 张图片`)
-    },
-
-    /**
-     * 删除图片
-     */
-    handleRemove(index) {
-      if (this.multiple) {
-        const list = [...this.value]
-        list.splice(index, 1)
-        this.$emit('input', list)
-      } else {
-        this.$emit('input', '')
-      }
-      this.$emit('remove', index)
-    },
-
-    /**
-     * 预览图片
-     */
-    handlePreview(item) {
-      this.previewUrl = item.url || item
-      this.previewVisible = true
-    },
-
-    /**
-     * 从嵌套对象中取值，支持 'data.url' 这种路径
-     */
-    getNestedValue(obj, path) {
-      return path.split('.').reduce((acc, key) => {
-        return acc && acc[key] !== undefined ? acc[key] : undefined
-      }, obj)
-    }
+  /** 最大上传数量 */
+  limit: {
+    type: Number,
+    default: 9
+  },
+  /** 最大文件大小（MB） */
+  maxSize: {
+    type: Number,
+    default: 5
+  },
+  /** 接受的文件类型 */
+  accept: {
+    type: String,
+    default: 'image/jpeg,image/png,image/gif,image/webp'
+  },
+  /** 文件字段名 */
+  fieldName: {
+    type: String,
+    default: 'file'
+  },
+  /** 额外请求头 */
+  headers: {
+    type: Object,
+    default: () => ({})
+  },
+  /** 是否拖拽上传 */
+  drag: {
+    type: Boolean,
+    default: false
+  },
+  /** 提示文字 */
+  tipText: {
+    type: String,
+    default: '上传图片'
+  },
+  /** 上传成功后从响应中取图片 URL 的字段路径 */
+  urlField: {
+    type: String,
+    default: 'data.url'
   }
+})
+
+const emit = defineEmits(['input', 'success', 'error', 'remove'])
+
+// ===== 响应式数据 =====
+/** 是否正在上传 */
+const uploading = ref(false)
+/** 上传进度百分比 */
+const uploadPercent = ref(0)
+/** 预览弹窗显示 */
+const previewVisible = ref(false)
+/** 预览图片地址 */
+const previewUrl = ref('')
+
+// ===== 计算属性 =====
+/** 展示用的图片列表（统一转数组） */
+const displayList = computed(() => {
+  if (Array.isArray(props.value)) {
+    return props.value.map(item => {
+      return typeof item === 'string' ? { url: item } : item
+    })
+  }
+  return props.value ? [{ url: props.value }] : []
+})
+/** el-upload 需要的 file-list（空数组，因为用自定义预览） */
+const fileList = computed(() => [])
+
+// ===== 方法 =====
+/**
+ * 上传前校验
+ */
+function handleBeforeUpload(file) {
+  if (!validateImage(file)) return false
+  const maxSizeBytes = props.maxSize * 1024 * 1024
+  if (!validateFileSize(file, maxSizeBytes)) return false
+  return true
+}
+
+/**
+ * 上传进度
+ */
+function handleProgress(event) {
+  uploading.value = true
+  uploadPercent.value = Math.round(event.percent)
+}
+
+/**
+ * 上传成功
+ */
+function handleSuccess(response) {
+  uploading.value = false
+  uploadPercent.value = 0
+
+  const url = getNestedValue(response, props.urlField)
+  if (!url) {
+    showError('上传成功但未获取到图片地址')
+    return
+  }
+
+  if (props.multiple) {
+    const list = [...(props.value || []), url]
+    emit('input', list)
+  } else {
+    emit('input', url)
+  }
+  showSuccess('上传成功')
+  emit('success', response, url)
+}
+
+/**
+ * 上传失败
+ */
+function handleError(err) {
+  uploading.value = false
+  uploadPercent.value = 0
+  showError('上传失败，请重试')
+  emit('error', err)
+}
+
+/**
+ * 超出数量限制
+ */
+function handleExceed() {
+  showError(`最多只能上传 ${props.limit} 张图片`)
+}
+
+/**
+ * 删除图片
+ */
+function handleRemove(index) {
+  if (props.multiple) {
+    const list = [...props.value]
+    list.splice(index, 1)
+    emit('input', list)
+  } else {
+    emit('input', '')
+  }
+  emit('remove', index)
+}
+
+/**
+ * 预览图片
+ */
+function handlePreview(item) {
+  previewUrl.value = item.url || item
+  previewVisible.value = true
+}
+
+/**
+ * 从嵌套对象中取值，支持 'data.url' 这种路径
+ */
+function getNestedValue(obj, path) {
+  return path.split('.').reduce((acc, key) => {
+    return acc && acc[key] !== undefined ? acc[key] : undefined
+  }, obj)
 }
 </script>
 
