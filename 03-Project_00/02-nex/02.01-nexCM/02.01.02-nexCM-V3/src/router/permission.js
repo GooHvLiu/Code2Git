@@ -113,6 +113,10 @@ router.beforeEach(async (to, from, next) => {
     if (!checkRouteRoles(to)) {
       return next(ROUTE_PATHS.FORBIDDEN)
     }
+    // 根路径重定向到首页
+    if (to.path === ROUTE_PATHS.ROOT) {
+      return next(ROUTE_PATHS.HOME)
+    }
     return next()
   }
 
@@ -152,6 +156,10 @@ router.beforeEach(async (to, from, next) => {
     // 角色校验：首次进入时也检查目标路由权限
     if (!checkRouteRoles(to)) {
       return next(ROUTE_PATHS.FORBIDDEN)
+    }
+    // 根路径重定向到首页
+    if (to.path === ROUTE_PATHS.ROOT) {
+      return next(ROUTE_PATHS.HOME)
     }
     next({ ...to, replace: true })
   } catch (err) {

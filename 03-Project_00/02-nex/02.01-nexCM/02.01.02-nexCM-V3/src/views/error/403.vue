@@ -19,6 +19,12 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'Forbidden'
+}
+</script>
+
 <script setup>
 /* eslint-disable vue/multi-word-component-names */
 import { ROUTE_PATHS } from "@/router/constant/pathConstants";

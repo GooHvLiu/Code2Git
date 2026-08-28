@@ -3,6 +3,7 @@
  * 静态路由（无需权限，所有人可访问）
  * ==========================================
  * 登录页、404、主布局等基础路由
+ * 注意：业务菜单全部从后端服务器动态获取，前端不再硬编码
  * meta.titles 为面包屑层级数组，TagsView 取最后一项作为标签标题
  */
 import Layout from '@/Layout/index.vue'
@@ -47,36 +48,9 @@ export const constantRoutes = [
   {
     path: ROUTE_PATHS.ROOT,
     component: Layout,
-    redirect: ROUTE_PATHS.HOME,
     name: 'Layout',
     children: [
-      {
-        path: 'home',
-        name: 'Home',
-        component: { render: h => h('router-view') },
-        meta: { titles: ['layout.home'], icon: 'home' },
-        redirect: ROUTE_PATHS.HOME_OVERVIEW,
-        children: [
-          {
-            path: 'overview',
-            name: 'HomeView',
-            component: () => import('@/views/home/overview/index.vue'),
-            meta: { titles: ['layout.home', 'layout.homeOverview'], affix: true }
-          },
-          {
-            path: 'dashboard',
-            name: 'DashView',
-            component: () => import('@/views/home/dashboard/index.vue'),
-            meta: { titles: ['layout.home', 'layout.homeDashboard'] }
-          },
-          {
-            path: 'data',
-            name: 'DataView',
-            component: () => import('@/views/home/data/index.vue'),
-            meta: { titles: ['layout.home', 'layout.homeData'] }
-          },
-        ]
-      },
+      // 个人中心（隐藏路由，不显示在菜单中，但可通过路由访问）
       {
         path: 'profile',
         name: 'Profile',
@@ -84,49 +58,7 @@ export const constantRoutes = [
         hidden: true,
         meta: { titles: ['layout.profile'] }
       },
-      {
-        path: 'system/user',
-        name: 'SystemUser',
-        component: () => import('@/views/system/user/index.vue'),
-        hidden: true,
-        meta: { titles: ['layout.systemSettings', 'layout.userManagement'], roles: ['administrator'] }
-      },
-      {
-        path: 'system/audit',
-        name: 'SystemAudit',
-        component: () => import('@/views/system/audit/index.vue'),
-        hidden: true,
-        meta: { titles: ['layout.systemSettings', 'layout.auditLog'] }
-      },
-      {
-        path: 'system/config',
-        name: 'SystemConfig',
-        component: () => import('@/views/system/config/index.vue'),
-        hidden: true,
-        meta: { titles: ['layout.systemSettings', 'layout.systemConfig'] }
-      },
-      // ========== 系统设置（本地固定菜单，侧边栏最后一项） ==========
-      {
-        path: 'system/dict',
-        name: 'SystemDict',
-        component: () => import('@/views/system/dict/index.vue'),
-        hidden: true,
-        meta: { titles: ['layout.systemSettings', 'layout.dictManagement'], roles: ['administrator'] }
-      },
-      {
-        path: 'system/role',
-        name: 'SystemRole',
-        component: () => import('@/views/system/role/index.vue'),
-        hidden: true,
-        meta: { titles: ['layout.systemSettings', 'layout.roleManagement'], roles: ['administrator'] }
-      },
-      {
-        path: 'system/dept',
-        name: 'SystemDept',
-        component: () => import('@/views/system/dept/index.vue'),
-        hidden: true,
-        meta: { titles: ['layout.systemSettings', 'layout.deptManagement'], roles: ['administrator'] }
-      },
+      // 通知中心（隐藏路由，不显示在菜单中，但可通过通知铃铛跳转）
       {
         path: 'notification',
         name: 'Notification',

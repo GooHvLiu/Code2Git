@@ -44,7 +44,7 @@
 
 <script setup>
 import { computed, getCurrentInstance } from 'vue'
-import { NOTIFICATION_TYPE_MAP, PRIORITY_MAP } from '@/composables/useNotification'
+import { PRIORITY_MAP } from '@/composables/useNotification'
 
 const props = defineProps({
   item: {

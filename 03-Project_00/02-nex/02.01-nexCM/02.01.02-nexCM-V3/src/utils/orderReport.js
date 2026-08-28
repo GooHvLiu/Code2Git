@@ -354,11 +354,13 @@ export function generateOrderReport(order, config = {}, t = (key) => key) {
       }).then(() => {
         resolve()
       }).catch(err => {
+        // eslint-disable-next-line no-console
         console.error('[订单报告] PDF生成失败:', err)
         cleanupPdfContainer(outer)
         reject(err)
       })
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error('[订单报告] 初始化阶段异常:', err)
       // 清理可能已添加的 DOM
       cleanupPdfContainer(outer)

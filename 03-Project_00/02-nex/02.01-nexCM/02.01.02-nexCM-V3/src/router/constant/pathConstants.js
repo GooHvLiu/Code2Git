@@ -26,13 +26,8 @@ export const ROUTE_PATHS = {
   LICENSE_IMPORT: '/license/import',
   /** 授权管理页 */
   LICENSE_MANAGE: '/license/manage',
-  /** 首页 - 概况预览 */
-  HOME_OVERVIEW: '/home/overview',
-  /** 首页 - 数据看板 */
-  HOME_DASHBOARD: '/home/dashboard',
-  /** 首页 - 数据管理 */
-  HOME_DATA: '/home/data'
-
+  /** 首页 - 概况预览（用于首页固定标签） */
+  HOME_OVERVIEW: '/home/overview'
 }
 
 /** 首页固定标签（TagsView 首页不可关闭） */

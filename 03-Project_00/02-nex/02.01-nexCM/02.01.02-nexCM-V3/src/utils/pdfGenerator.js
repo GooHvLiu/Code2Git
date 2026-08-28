@@ -208,6 +208,7 @@ export function generatePdfFromElement(element, options = {}) {
 
           resolve()
         } catch (innerErr) {
+          // eslint-disable-next-line no-console
           console.error('[PDF生成器] PDF生成阶段异常:', innerErr)
           if (config.errorMessage) {
             showError(config.errorMessage)
@@ -215,6 +216,7 @@ export function generatePdfFromElement(element, options = {}) {
           reject(innerErr)
         }
       }).catch(err => {
+        // eslint-disable-next-line no-console
         console.error('[PDF生成器] html2canvas渲染失败:', err)
         if (config.errorMessage) {
           showError(config.errorMessage)
@@ -222,6 +224,7 @@ export function generatePdfFromElement(element, options = {}) {
         reject(err)
       })
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error('[PDF生成器] 初始化阶段异常:', err)
       if (config.errorMessage) {
         showError(config.errorMessage)

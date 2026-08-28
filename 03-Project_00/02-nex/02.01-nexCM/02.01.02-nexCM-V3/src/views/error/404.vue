@@ -19,6 +19,12 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'NotFound'
+}
+</script>
+
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { TransitionScale } from "@morev/vue-transitions";

@@ -7,11 +7,10 @@ const { MENU_HIDDEN, MENU_ALWAYS_SHOW, MENU_NO_CACHE } = require('../../constant
 
 // 数据表名称
 const MENU_TABLE = 'nex_menu';
-const USER_MENU_TABLE = 'nex_user_menu';
 
 class MenuModel {
   /**
-   * 根据用户ID联查菜单原始扁平数据（多表JOIN，支持多语言）
+   * 根据用户ID联查菜单原始扁平数据（通过角色-菜单关联表，支持多语言）
    * @param {number} userId 用户ID
    * @param {string} lang 语言代码，如 'zh-CN' / 'en-US'
    * @returns {Promise<Array>} 数据库原始菜单数组
@@ -21,8 +20,10 @@ class MenuModel {
       SELECT m.*,
         CASE WHEN ? = 'en-US' THEN IFNULL(m.title_en, m.title) ELSE m.title END as title
       FROM ${MENU_TABLE} m
-      INNER JOIN ${USER_MENU_TABLE} um ON m.id = um.menu_id
-      WHERE um.user_id = ?
+      INNER JOIN nex_role_menu rm ON m.id = rm.menu_id
+      INNER JOIN nex_role r ON rm.role_id = r.id
+      INNER JOIN nex_user u ON r.role_code = u.role
+      WHERE u.id = ?
       ORDER BY m.sort ASC
     `;
     const rows = await query(sql, [lang, userId]);

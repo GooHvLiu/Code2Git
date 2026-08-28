@@ -106,6 +106,10 @@ const actions = {
       commit('RESET_STATE')
       // 清除标签页缓存，避免切换用户后残留上一个用户的页面
       dispatch('tagsView/delAllViews', null, { root: true })
+      // 清除菜单缓存，避免重新登录后使用旧的菜单缓存导致 404
+      Object.keys(localStorage)
+        .filter(key => key.startsWith('nex_menu_'))
+        .forEach(key => localStorage.removeItem(key))
       // 重置权限模块的路由生成标志，确保重新登录时重新生成路由
       commit('permission/SET_ROUTES_GENERATED', false, { root: true })
       commit('permission/SET_ROUTES', [], { root: true })

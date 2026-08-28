@@ -1,27 +1,10 @@
-import { HOME_TAG } from '@/router/constant/pathConstants'
-import i18n from '@/i18n'
-import { hasRole } from '@/utils/permission'
-
 /**
  * 后端原始菜单数组 → 递归转换为侧边栏可用菜单结构（支持无限层级）
+ * 所有菜单（包括网站首页、系统设置）都从数据库获取，不再硬编码
  * @param {Array} serverMenuArr 后端返回 raw menu data
  * @returns {Array}
  */
 export function formatMenu(serverMenuArr) {
-  // 基础首页数据，无需从服务器获取（标题国际化）
-  const baseMenu = [
-    {
-      title: i18n.t('layout.home'),
-      path: HOME_TAG.path,
-      icon: HOME_TAG.icon,
-      children: [
-        { title: i18n.t('layout.homeOverview'), path: '/home/overview' },
-        { title: i18n.t('layout.homeDashboard'), path: '/home/dashboard' },
-        { title: i18n.t('layout.homeData'), path: '/home/data' },
-      ]
-    },
-  ]
-
   /**
    * 递归转换菜单节点
    * @param {Array} list 待处理菜单数组
@@ -47,38 +30,8 @@ export function formatMenu(serverMenuArr) {
     })
   }
 
-  // 转换后端菜单
-  const transformedMenu = transformMenu(serverMenuArr)
-
-  // 系统设置子菜单（根据角色过滤）
-  // 注意：通知中心已移至 Navbar 铃铛图标，不在侧边栏菜单中显示
-  // 权限：数据字典/角色管理/部门管理/用户管理 仅管理员可见，审计追踪所有人可见
-  // 二级菜单不显示图标
-  const isAdmin = hasRole('administrator')
-  const systemChildren = [
-    // 仅管理员可见的菜单
-    ...(isAdmin ? [
-      { title: i18n.t('layout.dictManagement'), path: '/system/dict' },
-      { title: i18n.t('layout.deptManagement'), path: '/system/dept' },
-      { title: i18n.t('layout.roleManagement'), path: '/system/role' },
-      { title: i18n.t('layout.userManagement'), path: '/system/user' }
-    ] : []),
-    // 审计追踪：所有人可见（非管理员只看自己的数据）
-    { title: i18n.t('layout.auditLog'), path: '/system/audit' },
-    // 参数配置：所有人可见
-    { title: i18n.t('layout.systemConfig'), path: '/system/config' }
-  ]
-
-  // 系统设置菜单（国际化标题）
-  const systemSettings = {
-    title: i18n.t('layout.systemSettings'),
-    path: '/system',
-    icon: 'systemSetting',
-    children: systemChildren
-  }
-
-  // 拼接：首页 + 业务菜单 + 系统设置
-  return [...baseMenu, ...transformedMenu, systemSettings]
+  // 转换后端菜单（所有菜单都从数据库获取）
+  return transformMenu(serverMenuArr)
 }
 
 /**
