@@ -1,10 +1,28 @@
 /**
  * 后端原始菜单数组 → 递归转换为侧边栏可用菜单结构（支持无限层级）
  * 所有菜单（包括网站首页、系统设置）都从数据库获取，不再硬编码
+ * 只渲染 type='menu'（目录/菜单），过滤掉 type='button'（按钮）和 type='param'（参数）
+ * 使用 resolveMenuTitle 统一处理国际化（与侧边栏、面包屑、标签页保持一致）
  * @param {Array} serverMenuArr 后端返回 raw menu data
  * @returns {Array}
  */
+import { resolveMenuTitle } from './menuTitle'
+
 export function formatMenu(serverMenuArr) {
+  /**
+   * 判断节点是否为可见菜单（目录或菜单，非按钮/参数）
+   * @param {Object} item 菜单节点
+   * @returns {boolean}
+   */
+  function isVisibleMenu(item) {
+    // type 可能在顶层，也可能在 meta 里
+    const type = item.type ?? item.meta?.type
+    // 未设置 type 时默认可见（兼容旧数据）
+    if (type === undefined || type === null) return true
+    // 只显示 menu（目录/菜单），过滤 button（按钮）和 param（参数）
+    return type === 'menu'
+  }
+
   /**
    * 递归转换菜单节点
    * @param {Array} list 待处理菜单数组
@@ -14,20 +32,25 @@ export function formatMenu(serverMenuArr) {
   function transformMenu(list, parentPath = '') {
     if (!Array.isArray(list)) return []
 
-    return list.map(item => {
-      const currentPath = `${parentPath}/${item.path}`.replace(/\/+/g, '/')
-      const menuNode = {
-        title: item.meta?.title || '',
-        path: currentPath,
-        icon: item.meta?.icon || ''
-      }
+    return list
+      .filter(isVisibleMenu)
+      .map(item => {
+        const currentPath = `${parentPath}/${item.path}`.replace(/\/+/g, '/')
+        const menuNode = {
+          title: resolveMenuTitle(item.meta?.title || ''),
+          path: currentPath,
+          icon: item.meta?.icon || ''
+        }
 
-      // 存在合法子菜单，递归处理
-      if (item.children && Array.isArray(item.children) && item.children.length > 0) {
-        menuNode.children = transformMenu(item.children, currentPath)
-      }
-      return menuNode
-    })
+        // 存在合法子菜单，递归处理
+        if (item.children && Array.isArray(item.children) && item.children.length > 0) {
+          const children = transformMenu(item.children, currentPath)
+          if (children.length > 0) {
+            menuNode.children = children
+          }
+        }
+        return menuNode
+      })
   }
 
   // 转换后端菜单（所有菜单都从数据库获取）

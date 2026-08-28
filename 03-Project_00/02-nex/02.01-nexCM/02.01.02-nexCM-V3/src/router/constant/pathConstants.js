@@ -32,7 +32,7 @@ export const ROUTE_PATHS = {
 
 /** 首页固定标签（TagsView 首页不可关闭） */
 export const HOME_TAG = {
-  title: '网站首页',
+  title: 'layout.homeOverview',
   path: ROUTE_PATHS.HOME_OVERVIEW,
   icon: 'home'
 }

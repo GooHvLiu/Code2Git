@@ -20,7 +20,6 @@ const getters = {
 
   // permission 模块
   routes: state => state.permission.routes,
-  addRoutes: state => state.permission.addRoutes,
   userMenu: state => state.permission.userMenu,
 
   // tagsView 模块

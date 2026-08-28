@@ -329,6 +329,14 @@ function submitForm(formName) {
       removeSessionStorage(SESSIONSTORAGE_KEYS.TAG_LIST);
       setToken(res.data.token);
 
+      // 存储权限码列表和权限版本号（用于按钮/参数权限判断）
+      if (Array.isArray(res.data.permissions)) {
+        setLocalStorage(LOCALSTORAGE_KEYS.PERMISSIONS, res.data.permissions);
+      }
+      if (res.data.permissionVersion) {
+        setLocalStorage(LOCALSTORAGE_KEYS.PERMISSION_VERSION, res.data.permissionVersion);
+      }
+
       // 跳转：优先 redirect 参数，否则首页
       // 用户信息和动态路由由路由守卫统一获取
       const redirect = router.currentRoute.query.redirect || "/";

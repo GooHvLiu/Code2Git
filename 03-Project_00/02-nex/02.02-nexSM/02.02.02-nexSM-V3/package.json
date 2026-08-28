@@ -34,6 +34,7 @@
     "module-alias": "^2.3.4",
     "multer": "^1.4.5-lts.1",
     "mysql2": "^3.6.5",
+    "node-cache": "^5.1.2",
     "node-opcua": "^2.177.0",
     "node-snap7": "^1.0.9",
     "svg-captcha": "^1.4.0",

@@ -30,6 +30,20 @@ export function buildDynamicRoutes(serverMenuList) {
   const resultRoutes = []
 
   /**
+   * 判断节点是否为可路由菜单（目录或菜单，非按钮/参数）
+   * @param {Object} item 菜单节点
+   * @returns {boolean}
+   */
+  function isRoutableMenu(item) {
+    // type 可能在顶层，也可能在 meta 里
+    const type = item.type ?? item.meta?.type
+    // 未设置 type 时默认可路由（兼容旧数据）
+    if (type === undefined || type === null) return true
+    // 只处理 menu（目录/菜单），过滤 button（按钮）和 param（参数）
+    return type === 'menu'
+  }
+
+  /**
    * 获取第一个叶子节点的完整路径（用于父菜单重定向）
    * @param {Object} menu 菜单节点
    * @param {string} parentPath 父级路径
@@ -40,7 +54,12 @@ export function buildDynamicRoutes(serverMenuList) {
     if (!menu.children || menu.children.length === 0) {
       return currentPath
     }
-    return getFirstLeafPath(menu.children[0], currentPath)
+    // 只在可路由的子菜单中找第一个叶子节点
+    const routableChildren = menu.children.filter(isRoutableMenu)
+    if (routableChildren.length === 0) {
+      return currentPath
+    }
+    return getFirstLeafPath(routableChildren[0], currentPath)
   }
 
   /**
@@ -52,17 +71,24 @@ export function buildDynamicRoutes(serverMenuList) {
   function travelMenu(list, parentPath = '', titleStack = []) {
     if (!Array.isArray(list)) return
 
-    list.forEach(item => {
+    // 先过滤掉按钮和参数权限
+    const routableList = list.filter(isRoutableMenu)
+
+    routableList.forEach(item => {
       const currentStack = [...titleStack, item.meta?.title || '']
       const currentPath = parentPath ? `${parentPath}/${item.path}` : item.path
 
-      // 无 children 代表是页面，生成路由
-      if (!item.children || item.children.length === 0) {
+      // 关键：先过滤掉按钮和参数，只保留可路由的子菜单
+      const routableChildren = (item.children || []).filter(isRoutableMenu)
+
+      // 过滤后无子菜单 → 当作页面路由
+      if (routableChildren.length === 0) {
         // 组件加载唯一途径：后端数据库的 component 字段
         const componentPath = item.component
 
         // 如果 component 字段为 null 或空，不生成路由，并在控制台打印警告
         if (!componentPath || componentPath.trim() === '') {
+          // eslint-disable-next-line no-console
           console.warn(`[路由构建] 菜单 "${item.meta?.title || currentPath}" 的 component 字段为空，跳过该路由`)
           return
         }
@@ -70,6 +96,7 @@ export function buildDynamicRoutes(serverMenuList) {
         // 从预加载的组件映射表中查找组件
         const componentModule = componentMap[componentPath]
         if (!componentModule) {
+          // eslint-disable-next-line no-console
           console.error(`[路由构建] 菜单 "${item.meta?.title || currentPath}" 的组件路径 "${componentPath}" 不存在，请检查数据库配置`)
           return
         }
@@ -88,7 +115,7 @@ export function buildDynamicRoutes(serverMenuList) {
           }
         })
       } else {
-        // 有子菜单，先生成父路由（重定向到第一个子页面），再递归处理子菜单
+        // 有可路由子菜单 → 生成父路由（重定向到第一个子页面），再递归处理子菜单
         const firstLeafPath = getFirstLeafPath(item, parentPath)
         resultRoutes.push({
           name: currentPath.replace(/\//g, '_'),

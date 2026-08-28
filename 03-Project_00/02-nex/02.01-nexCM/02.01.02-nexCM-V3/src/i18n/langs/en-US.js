@@ -61,7 +61,98 @@ export default {
     password: 'Password',
     passwordPlaceholder: 'Enter password for electronic signature',
     passwordRequired: 'Please enter password',
-    sessionTimeout: 'Session timed out, please login again'
+    sessionTimeout: 'Session timed out, please login again',
+    // Permission related common buttons
+    download: 'Download',
+    print: 'Print',
+    viewDetail: 'View Detail',
+    statusChange: 'Status Change',
+    refreshCache: 'Refresh Cache'
+  },
+
+  // ==================== Menu (for permission system, backend returns i18n key) ====================
+  menu: {
+    // Home
+    home: {
+      default: 'HomeDash',
+      overview: 'Overview',
+      dashboard: 'Dashboard',
+      data: 'DataView'
+    },
+    // Device
+    device: {
+      default: 'DeviceMg',
+      state: {
+        default: 'DevState',
+        control: 'Device Control'
+      },
+      alarm: 'AlarmLog',
+      part: 'PartLife'
+    },
+    // Production
+    production: {
+      default: 'ProdMgmt',
+      recipe: 'RecipeDB',
+      order: 'OrderLog'
+    },
+    // System
+    system: {
+      default: 'SysSetup',
+      dict: 'DictData',
+      dept: 'OrgMgmt',
+      role: {
+        default: 'UserRole',
+        assignPermission: 'Assign Permission'
+      },
+      user: {
+        default: 'UserData',
+        resetPassword: 'Reset Password'
+      },
+      audit: {
+        default: 'AuditLog',
+        hashVerify: 'Hash Verify'
+      },
+      config: 'ConfData',
+      permission: 'AuthMgmt'
+    }
+  },
+
+  // ==================== Parameter Permission (for permission system, backend returns i18n key) ====================
+  config: {
+    system: {
+      sessionTimeout: {
+        view: 'Session Timeout - View',
+        edit: 'Session Timeout - Edit'
+      },
+      defaultPageSize: {
+        view: 'Default Page Size - View',
+        edit: 'Default Page Size - Edit'
+      },
+      defaultLanguage: {
+        view: 'Default Language - View',
+        edit: 'Default Language - Edit'
+      }
+    },
+    security: {
+      watermarkEnabled: {
+        view: 'Watermark Switch - View',
+        edit: 'Watermark Switch - Edit'
+      },
+      watermarkText: {
+        view: 'Watermark Text - View',
+        edit: 'Watermark Text - Edit'
+      }
+    },
+    plc: {
+      plcHost: {
+        view: 'Device IP - View',
+        edit: 'Device IP - Edit'
+      },
+      plcPort: {
+        view: 'Device Port - View',
+        edit: 'Device Port - Edit'
+      }
+    }
   },
 
   // ==================== Login ====================
@@ -848,6 +939,31 @@ export default {
     timeSecondsAgo: '{n}s ago',
     timeMinutesAgo: '{n}m ago',
     timeHoursAgo: '{n}h ago'
+  },
+
+  // ==================== Permission Configuration ====================
+  permission: {
+    title: 'Permission Configuration',
+    desc: 'Configure menu, button, and parameter permissions for roles',
+    roleList: 'Role List',
+    current: 'Current',
+    noRole: 'No roles',
+    permissionTree: 'Permission Tree',
+    all: 'All',
+    menu: 'Menu',
+    button: 'Button',
+    param: 'Parameter',
+    searchPlaceholder: 'Search permission name',
+    selected: 'Selected',
+    expandAll: 'Expand All',
+    collapseAll: 'Collapse All',
+    selectRoleTip: 'Please select a role first',
+    unsavedChangeTip: 'There are unsaved changes for the current role. Switching will discard these changes. Continue?',
+    confirmSwitch: 'Continue',
+    resetConfirm: 'Are you sure you want to reset the permission configuration for this role?',
+    saveSuccess: 'Permission configuration saved successfully',
+    refreshSuccess: 'Refreshed successfully',
+    resetSuccess: 'Reset successfully'
   },
 
   // ==================== Error Messages (Backend Error Code i18n) ====================

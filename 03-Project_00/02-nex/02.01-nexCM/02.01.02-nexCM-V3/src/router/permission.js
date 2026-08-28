@@ -19,6 +19,7 @@ import { cancelAllPending } from '@/utils/request'
 import { getLicenseStatus } from '@/api'
 import ws from '@/utils/websocket'
 import i18n, { applySystemDefaultLanguage } from '@/i18n'
+import { resolveMenuTitle } from '@/router/helper/menuTitle'
 import { loadConfig } from '@/utils/config'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -66,9 +67,9 @@ router.beforeEach(async (to, from, next) => {
   // 路由切换时取消所有未完成的请求，避免数据错乱
   cancelAllPending()
 
-  // 设置页面标题（取 titles 数组最后一项，i18n key 需翻译，中文原文直接显示）
+  // 设置页面标题（取 titles 数组最后一项，使用统一的 resolveMenuTitle 处理国际化）
   const pageTitleKey = to.meta?.titles?.[to.meta.titles.length - 1]
-  const pageTitle = pageTitleKey ? (i18n.te(pageTitleKey) ? i18n.t(pageTitleKey) : pageTitleKey) : ''
+  const pageTitle = resolveMenuTitle(pageTitleKey)
   const systemName = i18n.t('common.systemName')
   document.title = pageTitle ? `${pageTitle} - ${systemName}` : systemName
 
@@ -152,7 +153,7 @@ router.beforeEach(async (to, from, next) => {
     // 5. 动态路由添加完成后，再添加 404 兜底路由（必须在最后，否则会拦截动态路由）
     router.addRoute({ path: '*', redirect: ROUTE_PATHS.NOT_FOUND, hidden: true })
 
-    // 3. addRoute 后必须 next({ ...to, replace: true }) 重新匹配
+    // 6. addRoute 后必须 next({ ...to, replace: true }) 重新匹配
     // 角色校验：首次进入时也检查目标路由权限
     if (!checkRouteRoles(to)) {
       return next(ROUTE_PATHS.FORBIDDEN)

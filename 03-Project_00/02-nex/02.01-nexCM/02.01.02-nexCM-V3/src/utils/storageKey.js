@@ -21,7 +21,11 @@ export const LOCALSTORAGE_KEYS = {
   /** 验证码 UUID */
   CAPTCHA_UUID: `${PREFIX}captcha-uuid`,
   /** 侧边栏展开状态 */
-  SIDEBAR_STATUS: `${PREFIX}sidebar-status`
+  SIDEBAR_STATUS: `${PREFIX}sidebar-status`,
+  /** 用户权限码列表 */
+  PERMISSIONS: `${PREFIX}user-permissions`,
+  /** 权限版本号 */
+  PERMISSION_VERSION: `${PREFIX}permission-version`
 }
 
 /**

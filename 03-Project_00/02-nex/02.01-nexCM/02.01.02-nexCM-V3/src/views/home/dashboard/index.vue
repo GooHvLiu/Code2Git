@@ -749,7 +749,9 @@ async function initMap() {
             scale: 4,
             period: 3
           },
-          hoverAnimation: true,
+          emphasis: {
+            scale: true
+          },
           label: {
             show: true,
             position: 'right',

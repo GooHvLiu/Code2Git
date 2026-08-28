@@ -7,10 +7,21 @@
         <p class="page-desc">{{ $t("systemConfig.desc") }}</p>
       </div>
       <div class="header-right">
-        <el-button type="primary" icon="el-icon-check" @click="handleSave">
+        <el-button
+          type="primary"
+          icon="el-icon-check"
+          @click="handleSave"
+          :disabled="configStatus !== 'ready'"
+          :loading="loading"
+        >
           {{ $t("systemConfig.save") }}
         </el-button>
-        <el-button icon="el-icon-refresh-left" @click="handleReset">
+        <el-button
+          icon="el-icon-refresh-left"
+          @click="handleReset"
+          :disabled="configStatus !== 'ready'"
+          :loading="loading"
+        >
           {{ $t("systemConfig.reset") }}
         </el-button>
       </div>
@@ -34,6 +45,59 @@
 
       <!-- 右侧配置内容 -->
       <div class="config-content">
+        <!-- 加载中状态 -->
+        <div v-if="configStatus === 'loading'" class="config-status-wrapper">
+          <div class="config-status-loading">
+            <i class="el-icon-loading status-icon"></i>
+            <p class="status-text">配置加载中，请稍候...</p>
+          </div>
+        </div>
+
+        <!-- 加载失败状态 -->
+        <div v-else-if="configStatus === 'error'" class="config-status-wrapper">
+          <div class="config-status-error">
+            <i class="el-icon-warning-outline status-icon error-icon"></i>
+            <h3 class="status-title">配置加载失败</h3>
+            <p class="status-desc">请检查网络连接或联系管理员</p>
+            <el-button type="primary" icon="el-icon-refresh" @click="loadConfigs">
+              重新加载
+            </el-button>
+          </div>
+        </div>
+
+        <!-- 配置不完整状态 -->
+        <div v-else-if="configStatus === 'incomplete'" class="config-status-wrapper">
+          <div class="config-status-incomplete">
+            <el-alert
+              title="配置不完整"
+              type="warning"
+              :closable="false"
+              show-icon
+              class="incomplete-alert"
+            >
+              <template #default>
+                <p class="incomplete-desc">
+                  检测到 <b>{{ missingConfigKeys.length }}</b> 个未初始化的配置项，当前页面禁止编辑和保存。
+                </p>
+                <div class="missing-keys-list">
+                  <p class="missing-keys-title">缺失的配置项：</p>
+                  <ul>
+                    <li v-for="key in missingConfigKeys" :key="key">{{ key }}</li>
+                  </ul>
+                </div>
+                <p class="incomplete-tip">请联系管理员执行配置初始化 SQL，或点击下方按钮重新加载。</p>
+              </template>
+            </el-alert>
+            <div class="incomplete-actions">
+              <el-button type="primary" icon="el-icon-refresh" @click="loadConfigs">
+                重新加载
+              </el-button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 正常配置内容（只有 ready 状态才显示） -->
+        <div v-else class="config-panels-wrapper">
         <!-- 系统设置 -->
         <div v-show="activeMenu === 'system'" class="config-panel">
           <h3 class="panel-title">{{ $t("systemConfig.system.title") }}</h3>
@@ -262,7 +326,11 @@
             <el-form-item
               :label="$t('systemConfig.device.partLifeReminderEnabled')"
             >
-              <el-switch v-model="form.partLifeReminderEnabled" />
+              <el-switch
+                v-model="form.partLifeReminderEnabled"
+                :active-value="true"
+                :inactive-value="false"
+              />
               <div class="form-tip">
                 {{ $t("systemConfig.device.partLifeReminderEnabledTip") }}
               </div>
@@ -831,6 +899,7 @@
             </el-collapse-item>
           </el-collapse>
         </div>
+        </div>
       </div>
     </div>
 
@@ -954,51 +1023,49 @@ const loading = ref(false);
 // 当前激活的菜单
 const activeMenu = ref("system");
 
-// 表单数据
-const form = reactive({
+/**
+ * 配置状态：
+ * - loading: 加载中
+ * - ready: 加载完成，数据完整
+ * - incomplete: 加载完成，但数据不完整（有缺失配置项）
+ * - error: 加载失败
+ */
+const configStatus = ref("loading");
+// 缺失的配置项列表
+const missingConfigKeys = ref([]);
+
+/**
+ * 必需的配置项清单（所有应该存在的配置项）
+ * 与后端 initDefaultData 保持一致
+ */
+const REQUIRED_CONFIG_KEYS = [
   // 系统设置
-  sessionTimeout: 30,
-  defaultPageSize: 20,
-  defaultLanguage: "zh-CN",
-  dateFormat: "YYYY-MM-DD",
+  "sessionTimeout", "defaultPageSize", "defaultLanguage", "dateFormat",
   // 安全设置
-  watermarkEnabled: false,
-  watermarkText: "",
+  "watermarkEnabled", "watermarkText",
   // PLC 设置
-  plcProtocol: "ModbusTcp",
-  plcHost: "127.0.0.1",
-  plcPort: 502,
-  plcUnitId: 1,
-  pollFastInterval: 200,
-  pollSlowInterval: 1000,
+  "plcProtocol", "plcHost", "plcPort", "plcUnitId", "pollFastInterval", "pollSlowInterval",
   // 导出设置
-  pdfWatermarkEnabled: true,
-  pdfWatermarkText: "",
+  "pdfWatermarkEnabled", "pdfWatermarkText",
   // 连接设置
-  heartbeatInterval: 25000,
+  "heartbeatInterval",
   // 设备参数
-  deviceName: "nexCM-灌装机-001",
-  deviceCode: "NEXCM-FILL-2026-001",
-  deviceRegion: ["CN", "CN-WX"], // [国家编码, 城市编码]
-  deviceInstallDate: "2026-01-15",
+  "deviceName", "deviceCode", "deviceRegion", "deviceInstallDate",
   // 部件寿命提醒设置
-  partLifeReminderEnabled: true,
-  partLifeThreshold: "20",
-  partLifeRemindInterval: "day",
-  partLifeSnoozeInterval: "10", // 稍后提醒间隔（分钟）
+  "partLifeReminderEnabled", "partLifeThreshold", "partLifeRemindInterval", "partLifeSnoozeInterval",
   // 订单设置
-  allowNoOrderProduction: false,
-  noOrderProductionHighlight: false,
-  showOperatorName: true,
-  showAlarmCount: true,
-  showRuntime: true,
-  reportIncludeAlarmDetail: true,
-  reportIncludeOperatorDetail: true,
-  reportIncludeDownloadCount: true,
-  allowRunningOrderDownload: false,
-  autoArchiveCompleted: true,
-  orderSwitchConfirm: true,
+  "allowNoOrderProduction", "noOrderProductionHighlight", "showOperatorName",
+  "showAlarmCount", "showRuntime", "reportIncludeAlarmDetail",
+  "reportIncludeOperatorDetail", "reportIncludeDownloadCount",
+  "allowRunningOrderDownload", "autoArchiveCompleted", "orderSwitchConfirm"
+];
+
+// 表单数据（先创建普通对象包含所有属性，再创建 reactive 对象，解决 Vue2 无法检测动态添加属性的问题；所有数据来自后端）
+const initialForm = {};
+REQUIRED_CONFIG_KEYS.forEach((key) => {
+  initialForm[key] = undefined;
 });
+const form = reactive(initialForm);
 
 // 是否管理员
 const isAdmin = computed(() => {
@@ -1073,36 +1140,87 @@ function parseDate(value) {
 }
 
 /**
+ * 逐个赋值到 form（避免删除属性后再添加导致 Vue2 响应式丢失）
+ */
+function assignFormData(data) {
+  REQUIRED_CONFIG_KEYS.forEach((key) => {
+    if (data && key in data) {
+      form[key] = data[key];
+    }
+  });
+}
+
+/**
+ * 校验配置数据完整性
+ * @param {Object} data 后端返回的配置数据
+ * @returns {Array} 缺失的配置项列表
+ */
+function checkConfigCompleteness(data) {
+  if (!data || typeof data !== "object") return REQUIRED_CONFIG_KEYS;
+  return REQUIRED_CONFIG_KEYS.filter((key) => !(key in data));
+}
+
+/**
  * 加载配置
  */
 async function loadConfigs() {
   loading.value = true;
+  configStatus.value = "loading";
+  missingConfigKeys.value = [];
+
   try {
     const res = await requestGetAllConfigsApi();
     if (res.code === 200 && res.data) {
-      Object.assign(form, res.data);
-      // partLifeReminderEnabled 兼容数据库存储的字符串 'true'/'false'，统一转为布尔值
-      form.partLifeReminderEnabled =
-        form.partLifeReminderEnabled === true ||
-        form.partLifeReminderEnabled === "true" ||
-        form.partLifeReminderEnabled === 1 ||
-        form.partLifeReminderEnabled === "1";
-      // deviceRegion 兼容多种后端存储格式，统一转为数组
-      const parsedRegion = parseDeviceRegion(form.deviceRegion);
-      // deviceInstallDate 兼容多种日期格式，统一转为 YYYY-MM-DD 字符串
-      const parsedDate = parseDate(form.deviceInstallDate);
-      // 先清空，再用 nextTick 赋值，强制 el-cascader/el-date-picker 重新计算
-      form.deviceRegion = [];
-      form.deviceInstallDate = "";
-      await nextTick();
-      form.deviceRegion = parsedRegion;
-      form.deviceInstallDate = parsedDate;
-      // defaultLanguage 同步为当前界面语言，避免保存其他配置时语言被意外切换
-      form.defaultLanguage = locale.value;
+      // 校验数据完整性
+      const missingKeys = checkConfigCompleteness(res.data);
+
+      if (missingKeys.length > 0) {
+        // 数据不完整：设置状态，禁止编辑保存
+        configStatus.value = "incomplete";
+        missingConfigKeys.value = missingKeys;
+        // 逐个赋值（避免删除属性后再添加导致 Vue2 响应式丢失）
+        assignFormData(res.data);
+        Message.warning(
+          `检测到 ${missingKeys.length} 个未配置项，请联系管理员初始化配置`
+        );
+      } else {
+        // 数据完整：正常加载
+        configStatus.value = "ready";
+        // 逐个赋值（避免删除属性后再添加导致 Vue2 响应式丢失）
+        assignFormData(res.data);
+
+        // partLifeReminderEnabled 兼容数据库存储的字符串 'true'/'false'，统一转为布尔值
+        form.partLifeReminderEnabled =
+          form.partLifeReminderEnabled === true ||
+          form.partLifeReminderEnabled === "true" ||
+          form.partLifeReminderEnabled === 1 ||
+          form.partLifeReminderEnabled === "1";
+
+        // deviceRegion 兼容多种后端存储格式，统一转为数组
+        const parsedRegion = parseDeviceRegion(form.deviceRegion);
+        // deviceInstallDate 兼容多种日期格式，统一转为 YYYY-MM-DD 字符串
+        const parsedDate = parseDate(form.deviceInstallDate);
+        // 先清空，再用 nextTick 赋值，强制 el-cascader/el-date-picker 重新计算
+        form.deviceRegion = [];
+        form.deviceInstallDate = "";
+        await nextTick();
+        form.deviceRegion = parsedRegion;
+        form.deviceInstallDate = parsedDate;
+
+        // defaultLanguage 同步为当前界面语言，避免保存其他配置时语言被意外切换
+        form.defaultLanguage = locale.value;
+      }
+    } else {
+      // 加载失败：后端返回异常
+      configStatus.value = "error";
+      Message.error("配置加载失败，后端返回数据异常，请刷新页面重试");
     }
   } catch (err) {
+    // 加载失败：网络或其他错误
+    configStatus.value = "error";
     // eslint-disable-next-line no-console
     console.error("[参数配置] 加载配置失败:", err);
+    Message.error("配置加载失败，请检查网络连接或联系管理员");
   } finally {
     loading.value = false;
   }
@@ -1112,6 +1230,26 @@ async function loadConfigs() {
  * 保存配置
  */
 async function handleSave() {
+  // 状态校验：只有 ready 状态才能保存
+  if (configStatus.value !== "ready") {
+    const statusMsg = {
+      loading: "配置加载中，请稍候...",
+      incomplete: "配置不完整，存在未初始化项，无法保存，请联系管理员",
+      error: "配置加载失败，无法保存，请刷新页面重试",
+    };
+    Message.error(statusMsg[configStatus.value] || "配置状态异常，无法保存");
+    return;
+  }
+
+  // 数据完整性校验
+  const missingKeys = checkConfigCompleteness(form);
+  if (missingKeys.length > 0) {
+    Message.error(
+      `存在 ${missingKeys.length} 个未配置项，无法保存：${missingKeys.join(", ")}`
+    );
+    return;
+  }
+
   loading.value = true;
   try {
     const res = await requestUpdateConfigsApi(form);
@@ -1135,10 +1273,13 @@ async function handleSave() {
       });
 
       Message.success("保存成功");
+    } else {
+      Message.error("保存失败，请重试");
     }
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error("[参数配置] 保存配置失败:", err);
+    Message.error("保存失败，请检查网络连接");
   } finally {
     loading.value = false;
   }
@@ -1148,11 +1289,31 @@ async function handleSave() {
  * 重置配置
  */
 function handleReset() {
+  // 状态校验：只有 ready 状态才能重置
+  if (configStatus.value !== "ready") {
+    Message.warning("当前配置状态不允许重置，请刷新页面后重试");
+    return;
+  }
+
   // 确认重置逻辑
   requestResetConfigsApi()
     .then((res) => {
       if (res.code === 200 && res.data) {
-        Object.assign(form, res.data);
+        // 校验重置后的数据完整性
+        const missingKeys = checkConfigCompleteness(res.data);
+        if (missingKeys.length > 0) {
+          configStatus.value = "incomplete";
+          missingConfigKeys.value = missingKeys;
+          Message.warning(
+            `重置后检测到 ${missingKeys.length} 个未配置项，请联系管理员`
+          );
+          return;
+        }
+
+        // 数据完整，正常重置
+        configStatus.value = "ready";
+        // 逐个赋值（避免删除属性后再添加导致 Vue2 响应式丢失）
+        assignFormData(res.data);
         // partLifeReminderEnabled 兼容数据库存储的字符串 'true'/'false'，统一转为布尔值
         form.partLifeReminderEnabled =
           form.partLifeReminderEnabled === true ||
@@ -1162,36 +1323,26 @@ function handleReset() {
         // defaultLanguage 同步为当前界面语言，避免重置配置时语言被意外切换
         form.defaultLanguage = locale.value;
         applyConfig(form);
+        Message.success("重置成功");
+      } else {
+        Message.error("重置失败，请重试");
       }
     })
-    .catch(() => {});
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.error("[参数配置] 重置配置失败:", err);
+      Message.error("重置失败，请检查网络连接");
+    });
 }
 
 onMounted(() => {
-  // 从 device store 读取设备信息，同步到表单
-  const deviceInfo = store.state.device.info;
-  if (deviceInfo) {
-    form.deviceName = deviceInfo.name || form.deviceName;
-    form.deviceCode = deviceInfo.code || form.deviceCode;
-    // 优先使用 locationCode（[国家编码, 城市编码]），否则保持默认
-    if (
-      Array.isArray(deviceInfo.locationCode) &&
-      deviceInfo.locationCode.length === 2
-    ) {
-      form.deviceRegion = deviceInfo.locationCode;
-    }
-    // 日期统一转为 YYYY-MM-DD 字符串，避免 el-date-picker 报错
-    form.deviceInstallDate =
-      parseDate(deviceInfo.installDate) || form.deviceInstallDate;
-  }
-
   // 确保当前激活的菜单有权限访问（非管理员时，默认跳转到系统设置）
   const adminOnlyKeys = ["security", "plc", "export"];
   if (!isAdmin.value && adminOnlyKeys.includes(activeMenu.value)) {
     activeMenu.value = "system";
   }
 
-  // 加载配置和授权数据
+  // 加载配置和授权数据（所有配置数据来自后端，不使用前端默认值）
   loadConfigs();
   loadLicenseData();
 });
@@ -1288,6 +1439,101 @@ onMounted(() => {
       padding: 30px 40px;
       box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.05);
       overflow-y: auto;
+
+      // 状态显示容器（加载中/失败/不完整）
+      .config-status-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 400px;
+        height: 100%;
+      }
+
+      // 加载中状态
+      .config-status-loading {
+        text-align: center;
+        .status-icon {
+          font-size: 48px;
+          color: #409eff;
+          animation: rotating 2s linear infinite;
+        }
+        .status-text {
+          margin-top: 16px;
+          font-size: 14px;
+          color: #606266;
+        }
+      }
+
+      // 加载失败状态
+      .config-status-error {
+        text-align: center;
+        .status-icon {
+          font-size: 56px;
+          margin-bottom: 16px;
+        }
+        .error-icon {
+          color: #f56c6c;
+        }
+        .status-title {
+          font-size: 18px;
+          font-weight: 600;
+          color: #303133;
+          margin: 0 0 8px 0;
+        }
+        .status-desc {
+          font-size: 14px;
+          color: #909399;
+          margin: 0 0 24px 0;
+        }
+      }
+
+      // 配置不完整状态
+      .config-status-incomplete {
+        width: 100%;
+        max-width: 700px;
+        .incomplete-alert {
+          margin-bottom: 20px;
+          ::v-deep .el-alert__description {
+            margin-top: 12px;
+          }
+          .incomplete-desc {
+            font-size: 14px;
+            color: #606266;
+            margin: 0 0 12px 0;
+          }
+          .missing-keys-list {
+            background: #fdf6ec;
+            border: 1px solid #faecd8;
+            border-radius: 4px;
+            padding: 12px 16px;
+            margin: 12px 0;
+            .missing-keys-title {
+              font-size: 13px;
+              font-weight: 600;
+              color: #e6a23c;
+              margin: 0 0 8px 0;
+            }
+            ul {
+              margin: 0;
+              padding-left: 20px;
+              li {
+                font-size: 13px;
+                color: #606266;
+                line-height: 1.8;
+                font-family: Consolas, Monaco, monospace;
+              }
+            }
+          }
+          .incomplete-tip {
+            font-size: 13px;
+            color: #909399;
+            margin: 12px 0 0 0;
+          }
+        }
+        .incomplete-actions {
+          text-align: center;
+        }
+      }
 
       .config-panel {
         .panel-title {

@@ -4,10 +4,11 @@
  * ==========================================
  * 管理 Token、用户信息、角色权限
  */
-import { requestGetUserInfoApi } from '@/api'
+import { requestGetUserInfoApi, requestGetMyPermissionsApi } from '@/api'
 import { getToken, removeToken } from '@/utils/auth'
 import ws from '@/utils/websocket'
-import { clearLoginStorage } from '@/utils/storage'
+import { clearLoginStorage, getLocalStorage, setLocalStorage } from '@/utils/storage'
+import { LOCALSTORAGE_KEYS } from '@/utils/storageKey'
 import { resetRouter } from '@/router'
 
 const getDefaultUserInfo = () => ({
@@ -37,7 +38,9 @@ const state = {
   userInfo: getDefaultUserInfo(),
   roles: [],
   /** 权限码列表（如 ['user:add', 'user:edit']），用于按钮级权限控制 */
-  permissions: []
+  permissions: getLocalStorage(LOCALSTORAGE_KEYS.PERMISSIONS) || [],
+  /** 权限版本号，用于检测权限是否变更 */
+  permissionVersion: getLocalStorage(LOCALSTORAGE_KEYS.PERMISSION_VERSION) || null
 }
 
 const mutations = {
@@ -52,12 +55,18 @@ const mutations = {
   },
   SET_PERMISSIONS: (state, permissions) => {
     state.permissions = permissions
+    setLocalStorage(LOCALSTORAGE_KEYS.PERMISSIONS, permissions)
+  },
+  SET_PERMISSION_VERSION: (state, version) => {
+    state.permissionVersion = version
+    setLocalStorage(LOCALSTORAGE_KEYS.PERMISSION_VERSION, version)
   },
   RESET_STATE: state => {
     state.token = ''
     state.userInfo = getDefaultUserInfo()
     state.roles = []
     state.permissions = []
+    state.permissionVersion = null
   }
 }
 
@@ -88,9 +97,35 @@ const actions = {
     // role 字段可能是字符串或数组，统一转数组
     const roles = data.role ? (Array.isArray(data.role) ? data.role : [data.role]) : []
     commit('SET_ROLES', roles)
-    // 权限码列表，后端可能返回 permissions 字段
-    const permList = Array.isArray(data.permissions) ? data.permissions : []
-    commit('SET_PERMISSIONS', permList)
+    // 权限码列表，后端可能返回 permissions 字段；如果没有，保持 localStorage 中的值
+    if (Array.isArray(data.permissions)) {
+      commit('SET_PERMISSIONS', data.permissions)
+    }
+    if (data.permissionVersion) {
+      commit('SET_PERMISSION_VERSION', data.permissionVersion)
+    }
+  },
+
+  /**
+   * 从后端重新获取当前用户的权限码列表
+   * 权限变更后调用，更新本地权限缓存
+   */
+  async refreshPermissions({ commit }) {
+    try {
+      const res = await requestGetMyPermissionsApi()
+      if (res && res.data) {
+        const permissions = Array.isArray(res.data.permissions) ? res.data.permissions : []
+        const permissionVersion = res.data.permissionVersion || null
+        commit('SET_PERMISSIONS', permissions)
+        commit('SET_PERMISSION_VERSION', permissionVersion)
+        return permissions
+      }
+      return []
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('[user] 刷新权限失败:', err)
+      return []
+    }
   },
 
   /**

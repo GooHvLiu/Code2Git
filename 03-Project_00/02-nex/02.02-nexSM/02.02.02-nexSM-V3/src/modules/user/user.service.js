@@ -19,6 +19,7 @@ const { USER_STATUS, USER_ROLE } = require('../../constants/statusCode')
 const CaptchaService = require('../captcha/captcha.service')
 const auditLogger = require('../audit/auditLogger')
 const { triggerNotification } = require('../../services/notificationTrigger.service')
+const permissionService = require('../permission/permission.service')
 
 // 登录失败锁定配置
 const MAX_LOGIN_ATTEMPTS = 5       // 最大失败次数
@@ -144,9 +145,15 @@ class UserService extends BaseService {
     // 7. 返回用户信息（去掉密码）
     const { password: _, ...userInfo } = user
 
+    // 8. 查询用户权限码列表和权限版本号
+    const permissions = await permissionService.getUserPermissions(user.id)
+    const permissionVersion = await permissionService.getUserPermissionVersion(user.id)
+
     return {
       token,
-      userInfo
+      userInfo,
+      permissions,
+      permissionVersion
     }
   }
 

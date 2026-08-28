@@ -55,7 +55,29 @@ async function initDefaultData() {
     { key: 'pdfWatermarkEnabled', value: 'true', type: 'boolean', desc: 'PDF导出水印开关', category: 'export', sort: 1 },
     { key: 'pdfWatermarkText', value: '', type: 'string', desc: 'PDF水印文字（为空时使用当前用户名）', category: 'export', sort: 2 },
     // 连接设置
-    { key: 'heartbeatInterval', value: '25000', type: 'number', desc: 'WebSocket心跳间隔（ms）', category: 'connection', sort: 1 }
+    { key: 'heartbeatInterval', value: '25000', type: 'number', desc: 'WebSocket心跳间隔（ms）', category: 'connection', sort: 1 },
+    // 设备参数
+    { key: 'deviceName', value: 'nexCM-灌装机-001', type: 'string', desc: '设备名称', category: 'device', sort: 1 },
+    { key: 'deviceCode', value: 'NEXCM-FILL-2026-001', type: 'string', desc: '设备编号', category: 'device', sort: 2 },
+    { key: 'deviceRegion', value: '["CN","CN-WX"]', type: 'json', desc: '设备所在地区（国家编码,城市编码）', category: 'device', sort: 3 },
+    { key: 'deviceInstallDate', value: '2026-01-15', type: 'string', desc: '设备安装日期', category: 'device', sort: 4 },
+    // 部件寿命提醒设置
+    { key: 'partLifeReminderEnabled', value: 'true', type: 'boolean', desc: '部件寿命提醒开关', category: 'device', sort: 5 },
+    { key: 'partLifeThreshold', value: '20', type: 'string', desc: '部件寿命提醒阈值（%）', category: 'device', sort: 6 },
+    { key: 'partLifeRemindInterval', value: 'day', type: 'string', desc: '部件寿命提醒频率（hour/shift/day）', category: 'device', sort: 7 },
+    { key: 'partLifeSnoozeInterval', value: '10', type: 'number', desc: '稍后提醒间隔（分钟）', category: 'device', sort: 8 },
+    // 订单设置
+    { key: 'allowNoOrderProduction', value: 'false', type: 'boolean', desc: '允许无订单生产', category: 'order', sort: 1 },
+    { key: 'noOrderProductionHighlight', value: 'false', type: 'boolean', desc: '无订单生产高亮提示', category: 'order', sort: 2 },
+    { key: 'showOperatorName', value: 'true', type: 'boolean', desc: '显示操作员姓名', category: 'order', sort: 3 },
+    { key: 'showAlarmCount', value: 'true', type: 'boolean', desc: '显示报警数量', category: 'order', sort: 4 },
+    { key: 'showRuntime', value: 'true', type: 'boolean', desc: '显示运行时长', category: 'order', sort: 5 },
+    { key: 'reportIncludeAlarmDetail', value: 'true', type: 'boolean', desc: '报表包含报警详情', category: 'order', sort: 6 },
+    { key: 'reportIncludeOperatorDetail', value: 'true', type: 'boolean', desc: '报表包含操作员详情', category: 'order', sort: 7 },
+    { key: 'reportIncludeDownloadCount', value: 'true', type: 'boolean', desc: '报表包含下载次数', category: 'order', sort: 8 },
+    { key: 'allowRunningOrderDownload', value: 'false', type: 'boolean', desc: '允许运行中订单下载', category: 'order', sort: 9 },
+    { key: 'autoArchiveCompleted', value: 'true', type: 'boolean', desc: '自动归档已完成订单', category: 'order', sort: 10 },
+    { key: 'orderSwitchConfirm', value: 'true', type: 'boolean', desc: '订单切换确认', category: 'order', sort: 11 }
   ];
 
   for (const config of defaultConfigs) {
@@ -99,16 +121,17 @@ async function getConfigByKey(key) {
 
 /**
  * 批量更新配置
+ * 使用 INSERT ... ON DUPLICATE KEY UPDATE，配置项不存在时自动插入
  * @param {Object} configs 配置对象 { key: value }
  */
 async function updateConfigs(configs) {
   for (const [key, value] of Object.entries(configs)) {
     const sql = `
-      UPDATE nex_system_config
-      SET config_value = ?
-      WHERE config_key = ?
+      INSERT INTO nex_system_config (config_key, config_value, config_type, description, category, sort)
+      VALUES (?, ?, 'string', '', 'system', 0)
+      ON DUPLICATE KEY UPDATE config_value = VALUES(config_value)
     `;
-    await db.query(sql, [String(value), key]);
+    await db.query(sql, [key, String(value)]);
   }
 }
 

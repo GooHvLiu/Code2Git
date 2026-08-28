@@ -1,0 +1,207 @@
+/**
+ * ==========================================
+ * 权限模块 - 数据模型层
+ * ==========================================
+ * 负责：权限码查询、角色权限分配、权限列表查询
+ * 权限码覆盖：菜单权限、按钮权限、参数权限
+ */
+const { query } = require('../../db/index')
+
+// 数据表名称
+const MENU_TABLE = 'nex_menu'
+const ROLE_MENU_TABLE = 'nex_role_menu'
+const ROLE_TABLE = 'nex_role'
+const USER_TABLE = 'nex_user'
+
+class PermissionModel {
+  /**
+   * 根据用户ID查询该用户拥有的所有权限码
+   * 通过用户角色 → 角色-菜单关联 → 菜单表，聚合所有 permission_code
+   * @param {number} userId - 用户ID
+   * @returns {Promise<Array<string>>} 权限码数组
+   */
+  async getPermissionCodesByUserId(userId) {
+    const sql = `
+      SELECT DISTINCT m.permission_code
+      FROM ${MENU_TABLE} m
+      INNER JOIN ${ROLE_MENU_TABLE} rm ON m.id = rm.menu_id
+      INNER JOIN ${ROLE_TABLE} r ON rm.role_id = r.id
+      INNER JOIN ${USER_TABLE} u ON r.role_code = u.role
+      WHERE u.id = ?
+        AND m.permission_code IS NOT NULL
+        AND m.permission_code != ''
+    `
+    const rows = await query(sql, [userId])
+    return rows.map(row => row.permission_code)
+  }
+
+  /**
+   * 根据角色ID查询该角色拥有的所有权限码
+   * @param {number} roleId - 角色ID
+   * @returns {Promise<Array<string>>} 权限码数组
+   */
+  async getPermissionCodesByRoleId(roleId) {
+    const sql = `
+      SELECT DISTINCT m.permission_code
+      FROM ${MENU_TABLE} m
+      INNER JOIN ${ROLE_MENU_TABLE} rm ON m.id = rm.menu_id
+      WHERE rm.role_id = ?
+        AND m.permission_code IS NOT NULL
+        AND m.permission_code != ''
+    `
+    const rows = await query(sql, [roleId])
+    return rows.map(row => row.permission_code)
+  }
+
+  /**
+   * 获取所有权限列表（用于权限配置界面展示）
+   * 按菜单层级组织，包含菜单、按钮、参数
+   * title 字段统一返回 i18n key（如 'menu.home'、'common.add'），由前端负责翻译
+   * @returns {Promise<Array>} 权限列表（树形结构）
+   */
+  async getAllPermissions() {
+    const sql = `
+      SELECT id, parent_id, title, permission_code, type, path, sort
+      FROM ${MENU_TABLE}
+      WHERE permission_code IS NOT NULL
+        AND permission_code != ''
+      ORDER BY sort ASC
+    `
+    const rows = await query(sql)
+    return this.buildPermissionTree(rows)
+  }
+
+  /**
+   * 扁平权限列表 → 树形结构
+   * @param {Array} list - 扁平数据
+   * @returns {Array} 树形结构
+   */
+  buildPermissionTree(list) {
+    const treeMap = {}
+    const resultTree = []
+
+    // 第一遍：构建节点映射
+    list.forEach(row => {
+      treeMap[row.id] = {
+        id: row.id,
+        parentId: row.parent_id,
+        title: row.title,
+        permissionCode: row.permission_code,
+        type: row.type,
+        path: row.path,
+        sort: row.sort,
+        children: []
+      }
+    })
+
+    // 第二遍：组装父子关系
+    list.forEach(row => {
+      const currentNode = treeMap[row.id]
+      if (row.parent_id && treeMap[row.parent_id]) {
+        treeMap[row.parent_id].children.push(currentNode)
+      } else {
+        resultTree.push(currentNode)
+      }
+    })
+
+    return resultTree
+  }
+
+  /**
+   * 保存角色权限分配（全量覆盖）
+   * 先删除该角色的所有权限关联，再批量插入新的权限关联
+   * @param {number} roleId - 角色ID
+   * @param {Array<number>} menuIds - 菜单ID数组（包含菜单、按钮、参数）
+   * @returns {Promise<boolean>} 是否保存成功
+   */
+  async saveRolePermissions(roleId, menuIds) {
+    // 开启事务
+    const beginSql = 'START TRANSACTION'
+    await query(beginSql)
+
+    try {
+      // 1. 删除该角色的所有权限关联
+      const deleteSql = `DELETE FROM ${ROLE_MENU_TABLE} WHERE role_id = ?`
+      await query(deleteSql, [roleId])
+
+      // 2. 批量插入新的权限关联
+      if (menuIds && menuIds.length > 0) {
+        // menu_id 是 varchar 类型，需要用引号包裹
+        const values = menuIds.map(menuId => `(${roleId}, '${menuId}')`).join(', ')
+        const insertSql = `INSERT INTO ${ROLE_MENU_TABLE} (role_id, menu_id) VALUES ${values}`
+        await query(insertSql)
+      }
+
+      // 提交事务
+      await query('COMMIT')
+      return true
+    } catch (error) {
+      // 回滚事务
+      await query('ROLLBACK')
+      throw error
+    }
+  }
+
+  /**
+   * 根据角色ID获取已分配的菜单ID列表
+   * @param {number} roleId - 角色ID
+   * @returns {Promise<Array<number>>} 菜单ID数组
+   */
+  async getRoleMenuIds(roleId) {
+    const sql = `
+      SELECT menu_id
+      FROM ${ROLE_MENU_TABLE}
+      WHERE role_id = ?
+    `
+    const rows = await query(sql, [roleId])
+    return rows.map(row => row.menu_id)
+  }
+
+  /**
+   * 更新用户权限版本号
+   * 权限变更时调用，使前端缓存失效
+   * @param {number} userId - 用户ID
+   * @returns {Promise<boolean>} 是否更新成功
+   */
+  async updateUserPermissionVersion(userId) {
+    const sql = `
+      UPDATE ${USER_TABLE}
+      SET permission_version = NOW()
+      WHERE id = ?
+    `
+    const result = await query(sql, [userId])
+    return result.affectedRows > 0
+  }
+
+  /**
+   * 根据角色编码更新该角色下所有用户的权限版本号
+   * @param {string} roleCode - 角色编码
+   * @returns {Promise<boolean>} 是否更新成功
+   */
+  async updatePermissionVersionByRoleCode(roleCode) {
+    const sql = `
+      UPDATE ${USER_TABLE}
+      SET permission_version = NOW()
+      WHERE role = ?
+    `
+    const result = await query(sql, [roleCode])
+    return result.affectedRows > 0
+  }
+
+  /**
+   * 获取用户权限版本号
+   * @param {number} userId - 用户ID
+   * @returns {Promise<string|null>} 权限版本号
+   */
+  async getUserPermissionVersion(userId) {
+    const sql = `
+      SELECT permission_version
+      FROM ${USER_TABLE}
+      WHERE id = ?
+    `
+    const rows = await query(sql, [userId])
+    return rows[0]?.permission_version || null
+  }
+}
+
+module.exports = new PermissionModel()

@@ -43,10 +43,10 @@ function getCachedMenu(lang) {
 
 /** 提交菜单和路由 */
 function commitMenuAndRoutes(commit, rootState, rawArr, version) {
-  const userRole = rootState.user?.userInfo?.role || ''
-  commit('SET_MENU', formatMenu(rawArr, userRole))
+  commit('SET_MENU', formatMenu(rawArr))
   commit('SET_MENU_VERSION', version)
   let routes = buildDynamicRoutes(rawArr)
+  // 前端角色过滤（双重校验，后端已过滤，此处作为兜底）
   routes = filterRoutesByRoles(routes, rootState.user.roles || [])
   commit('SET_ROUTES', routes)
   return routes
@@ -55,14 +55,12 @@ function commitMenuAndRoutes(commit, rootState, rawArr, version) {
 const state = {
   userMenu: [],
   routes: [],
-  addRoutes: [],
   menuVersion: null,
   routesGenerated: false
 }
 
 const mutations = {
   SET_ROUTES: (state, routes) => {
-    state.addRoutes = routes
     state.routes = constantRoutes.concat(routes)
   },
   SET_MENU: (state, menu) => { state.userMenu = menu },

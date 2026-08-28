@@ -10,15 +10,15 @@ const MENU_TABLE = 'nex_menu';
 
 class MenuModel {
   /**
-   * 根据用户ID联查菜单原始扁平数据（通过角色-菜单关联表，支持多语言）
+   * 根据用户ID联查菜单原始扁平数据（通过角色-菜单关联表）
+   * 注意：title 字段统一返回 i18n key（如 'menu.home'），由前端负责翻译
    * @param {number} userId 用户ID
-   * @param {string} lang 语言代码，如 'zh-CN' / 'en-US'
+   * @param {string} lang 语言代码（保留参数兼容调用方，实际不使用，翻译由前端处理）
    * @returns {Promise<Array>} 数据库原始菜单数组
    */
   async findMenuListByUserId(userId, lang = 'zh-CN') {
     const sql = `
-      SELECT m.*,
-        CASE WHEN ? = 'en-US' THEN IFNULL(m.title_en, m.title) ELSE m.title END as title
+      SELECT m.*
       FROM ${MENU_TABLE} m
       INNER JOIN nex_role_menu rm ON m.id = rm.menu_id
       INNER JOIN nex_role r ON rm.role_id = r.id
@@ -26,7 +26,7 @@ class MenuModel {
       WHERE u.id = ?
       ORDER BY m.sort ASC
     `;
-    const rows = await query(sql, [lang, userId]);
+    const rows = await query(sql, [userId]);
     return rows;
   }
 
@@ -51,7 +51,8 @@ class MenuModel {
         meta: {
           title: row.title,
           icon: row.icon,
-          noCache: row.no_cache === MENU_NO_CACHE.NO_CACHE
+          noCache: row.no_cache === MENU_NO_CACHE.NO_CACHE,
+          type: row.type  // 菜单类型：1=目录，2=菜单，3=按钮，4=参数
         },
         children: []
       };

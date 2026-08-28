@@ -61,7 +61,98 @@ export default {
     password: '密码',
     passwordPlaceholder: '请输入密码进行电子签名',
     passwordRequired: '请输入密码',
-    sessionTimeout: '会话超时，请重新登录'
+    sessionTimeout: '会话超时，请重新登录',
+    // 权限相关通用按钮
+    download: '下载',
+    print: '打印',
+    viewDetail: '查看详情',
+    statusChange: '状态切换',
+    refreshCache: '刷新缓存'
+  },
+
+  // ==================== 菜单（权限系统用，后端返回 i18n key） ====================
+  menu: {
+    // 网站首页
+    home: {
+      default: '网站首页',
+      overview: '概况预览',
+      dashboard: '数据看板',
+      data: '数据管理'
+    },
+    // 设备管理
+    device: {
+      default: '设备管理',
+      state: {
+        default: '设备状态',
+        control: '设备控制'
+      },
+      alarm: '报警统计',
+      part: '部件寿命'
+    },
+    // 生产管理
+    production: {
+      default: '生产管理',
+      recipe: '配方管理',
+      order: '订单管理'
+    },
+    // 系统设置
+    system: {
+      default: '系统设置',
+      dict: '字典管理',
+      dept: '架构管理',
+      role: {
+        default: '角色管理',
+        assignPermission: '分配权限'
+      },
+      user: {
+        default: '用户管理',
+        resetPassword: '重置密码'
+      },
+      audit: {
+        default: '审计追踪',
+        hashVerify: '哈希校验'
+      },
+      config: '参数配置',
+      permission: '权限配置'
+    }
+  },
+
+  // ==================== 参数权限（权限系统用，后端返回 i18n key） ====================
+  config: {
+    system: {
+      sessionTimeout: {
+        view: '会话超时时间-可见',
+        edit: '会话超时时间-可编辑'
+      },
+      defaultPageSize: {
+        view: '默认每页条数-可见',
+        edit: '默认每页条数-可编辑'
+      },
+      defaultLanguage: {
+        view: '默认语言-可见',
+        edit: '默认语言-可编辑'
+      }
+    },
+    security: {
+      watermarkEnabled: {
+        view: '水印开关-可见',
+        edit: '水印开关-可编辑'
+      },
+      watermarkText: {
+        view: '水印文字-可见',
+        edit: '水印文字-可编辑'
+      }
+    },
+    plc: {
+      plcHost: {
+        view: '设备IP-可见',
+        edit: '设备IP-可编辑'
+      },
+      plcPort: {
+        view: '设备端口-可见',
+        edit: '设备端口-可编辑'
+      }
+    }
   },
 
   // ==================== 登录页 ====================
@@ -849,6 +940,31 @@ export default {
     timeSecondsAgo: '{n}秒前',
     timeMinutesAgo: '{n}分钟前',
     timeHoursAgo: '{n}小时前'
+  },
+
+  // ==================== 权限配置 ====================
+  permission: {
+    title: '权限配置',
+    desc: '配置角色的菜单、按钮、参数权限，实现细粒度权限管控',
+    roleList: '角色列表',
+    current: '当前',
+    noRole: '暂无角色',
+    permissionTree: '权限树',
+    all: '全部',
+    menu: '菜单',
+    button: '按钮',
+    param: '参数',
+    searchPlaceholder: '搜索权限名称',
+    selected: '已选中',
+    expandAll: '展开全部',
+    collapseAll: '折叠全部',
+    selectRoleTip: '请先选择一个角色',
+    unsavedChangeTip: '当前角色的权限配置有未保存的修改，切换角色将丢失这些修改，是否继续？',
+    confirmSwitch: '继续切换',
+    resetConfirm: '确定要重置当前角色的权限配置吗？',
+    saveSuccess: '权限配置保存成功',
+    refreshSuccess: '刷新成功',
+    resetSuccess: '已重置'
   },
 
   // ==================== 错误消息（后端错误码国际化） ====================

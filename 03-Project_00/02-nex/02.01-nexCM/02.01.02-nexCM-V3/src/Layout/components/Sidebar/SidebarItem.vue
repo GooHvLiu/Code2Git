@@ -23,9 +23,6 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useI18n } from '@/composables/useI18n'
-
-const { t: $t, te: $te } = useI18n()
 
 const props = defineProps({
   item: {
@@ -38,12 +35,8 @@ const props = defineProps({
 /** 只有一个子节点时不显示展开箭头，直接当菜单项 */
 const hasChildren = computed(() => props.item.children && props.item.children.length > 0)
 
-/** 显示标题：判断是否是 i18n key，是就翻译，不是就直接显示 */
-const displayTitle = computed(() => {
-  const title = props.item.title
-  if (!title) return ''
-  return $te(title) ? $t(title) : title
-})
+/** 显示标题：formatMenu 已通过 resolveMenuTitle 转换，直接使用 */
+const displayTitle = computed(() => props.item.title || '')
 </script>
 
 <style scoped lang="less">

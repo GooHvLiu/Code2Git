@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <!--
     错误日志查看页面
     展示 store/modules/errorLog.js 收集到的前端错误
@@ -46,7 +46,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { MessageBox } from 'element-ui'
 import store from '@/store'
 import { formatDate } from '@/utils/date'

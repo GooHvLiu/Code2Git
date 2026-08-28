@@ -13,6 +13,8 @@ import { LOCALSTORAGE_KEYS, SESSIONSTORAGE_KEYS } from '@/utils/storageKey'
 export function clearLoginStorage() {
   localStorage.removeItem(LOCALSTORAGE_KEYS.TOKEN)
   localStorage.removeItem(LOCALSTORAGE_KEYS.USER_INFO)
+  localStorage.removeItem(LOCALSTORAGE_KEYS.PERMISSIONS)
+  localStorage.removeItem(LOCALSTORAGE_KEYS.PERMISSION_VERSION)
   sessionStorage.removeItem(SESSIONSTORAGE_KEYS.TAG_LIST)
 }
 

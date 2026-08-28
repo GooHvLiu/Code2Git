@@ -231,7 +231,6 @@
 import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue'
 import { Message } from 'element-ui'
 import { getLicenseStatus, importLicense, syncLicenseTime, downloadLicense } from '@/api'
-import licenseConfig from '@/config/license.config'
 import store from '@/store'
 
 

@@ -9,6 +9,7 @@ import { setSessionStorage, getSessionStorage } from '@/utils/storage'
 import { SESSIONSTORAGE_KEYS } from '@/utils/storageKey'
 import { HOME_TAG, ROUTE_PATHS } from '@/router/constant/pathConstants'
 import i18n from '@/i18n'
+import { resolveMenuTitle } from '@/router/helper/menuTitle'
 
 /** 获取国际化的首页标签 */
 function getHomeTag() {
@@ -25,7 +26,9 @@ function getValidVisitedViews() {
   const invalidTitles = ['欢迎登录', 'login.title']
   const filtered = saved.filter(v => {
     if (invalidPaths.includes(v.path)) return false
-    if (invalidTitles.some(t => v.title && v.title.includes(t))) return false
+    // title 不是字符串的旧数据直接过滤掉（兼容历史数据）
+    if (typeof v.title !== 'string') return false
+    if (invalidTitles.some(t => v.title.includes(t))) return false
     return true
   })
   // 确保首页标签存在
@@ -59,7 +62,7 @@ const mutations = {
     state.visitedViews.push({
       name: view.name,
       path: view.path,
-      title: i18n.te(rawTitle) ? i18n.t(rawTitle) : rawTitle,
+      title: resolveMenuTitle(rawTitle),
       fullPath: view.fullPath
     })
     setSessionStorage(SESSIONSTORAGE_KEYS.TAG_LIST, state.visitedViews)
