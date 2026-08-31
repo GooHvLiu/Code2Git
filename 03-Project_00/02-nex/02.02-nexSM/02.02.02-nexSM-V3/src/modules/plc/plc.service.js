@@ -1,4 +1,4 @@
-/**
+﻿/**
  * PLC 服务层
  * 支持多设备模式和单设备兼容模式
  *
@@ -6,7 +6,7 @@
  * 单设备模式：不传 deviceName，使用默认设备
  */
 const { manager, getPlcInstance, getTagConfig, plcSetting, plcTagMap } = require('../../plc/index')
-const auditLogger = require('../audit/auditLogger')
+const audit = require('../../utils/audit')
 
 // 默认设备名（单设备模式使用）
 const DEFAULT_DEVICE = 'default'
@@ -158,8 +158,8 @@ async function writePlcTag(tagName, newValue, operatorInfo, deviceName) {
 
   // GMP 审计追踪
   if (plcSetting.enableWriteAudit) {
-    await auditLogger.log(operatorInfo, {
-      action: auditLogger.ACTION.PLC_WRITE,
+    await audit.log(operatorInfo, {
+      action: audit.ACTION.PLC_WRITE,
       target: `${tagConf.tag} (${tagConf.desc})`,
       oldValue: String(oldVal),
       newValue: String(newValue),

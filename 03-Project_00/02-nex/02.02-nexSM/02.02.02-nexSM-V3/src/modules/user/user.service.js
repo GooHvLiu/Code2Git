@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 用户管理模块 - 业务逻辑层
  * 
  * 处理用户的登录、注册、增删改查、密码重置、状态变更等业务逻辑
@@ -17,8 +17,8 @@ const { BusinessError } = require('../../middleware/error.middleware')
 const { ERROR_CODE } = require('../../constants/errorCode')
 const { USER_STATUS, USER_ROLE } = require('../../constants/statusCode')
 const CaptchaService = require('../captcha/captcha.service')
-const auditLogger = require('../audit/auditLogger')
-const { triggerNotification } = require('../../services/notificationTrigger.service')
+const audit = require('../../utils/audit')
+const { triggerNotification } = require('../../utils/notification')
 const permissionService = require('../permission/permission.service')
 const wsManager = require('../../socket/wsManager')
 const notificationService = require('../notification/notification.service')
@@ -95,8 +95,8 @@ class UserService extends BaseService {
     const user = await userModel.getByUsernameWithRole(username, lang)
     if (!user) {
       // 记录登录失败审计
-      await auditLogger.log({ userId: 0, userName: username, ip, userAgent }, {
-        action: auditLogger.ACTION.USER_LOGIN_FAILED,
+      await audit.log({ userId: 0, userName: username, ip, userAgent }, {
+        action: audit.ACTION.USER_LOGIN_FAILED,
         target: '系统登录',
         result: 'failed',
         reason: '用户不存在'
@@ -106,8 +106,8 @@ class UserService extends BaseService {
 
     // 2. 校验状态
     if (user.status === USER_STATUS.DISABLED) {
-      await auditLogger.log({ userId: user.id, userName: user.username, ip, userAgent }, {
-        action: auditLogger.ACTION.USER_LOGIN_FAILED,
+      await audit.log({ userId: user.id, userName: user.username, ip, userAgent }, {
+        action: audit.ACTION.USER_LOGIN_FAILED,
         target: '系统登录',
         result: 'failed',
         reason: '账号已禁用'
@@ -131,8 +131,8 @@ class UserService extends BaseService {
         reason = `密码错误 ${attempts} 次，账户已锁定 30 分钟`
       }
 
-      await auditLogger.log({ userId: user.id, userName: user.username, ip, userAgent }, {
-        action: auditLogger.ACTION.USER_LOGIN_FAILED,
+      await audit.log({ userId: user.id, userName: user.username, ip, userAgent }, {
+        action: audit.ACTION.USER_LOGIN_FAILED,
         target: '系统登录',
         result: 'failed',
         reason
@@ -267,8 +267,8 @@ class UserService extends BaseService {
     }
 
     // 6. 记录登录成功审计
-    await auditLogger.log({ userId: user.id, userName: user.username, ip, userAgent }, {
-      action: auditLogger.ACTION.USER_LOGIN,
+    await audit.log({ userId: user.id, userName: user.username, ip, userAgent }, {
+      action: audit.ACTION.USER_LOGIN,
       target: '系统登录',
       result: 'success'
     })

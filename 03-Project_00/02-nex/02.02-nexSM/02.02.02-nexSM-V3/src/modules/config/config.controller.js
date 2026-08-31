@@ -1,10 +1,10 @@
-/**
+﻿/**
  * 系统配置控制器
  * 处理系统配置相关的 HTTP 请求
  */
 const configService = require('./config.service');
 const configModel = require('./config.model');
-const { triggerNotification } = require('../../services/notificationTrigger.service');
+const { triggerNotification } = require('../../utils/notification');
 const deviceStatusManager = require('../../socket/deviceStatusManager');
 
 /**

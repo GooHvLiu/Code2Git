@@ -1,18 +1,27 @@
 /**
  * ==========================================
- * 通知触发服务
+ * 消息通知工具（统一入口）
  * ==========================================
- * 统一的通知触发入口，各业务模块通过此服务触发通知
+ * 统一的通知触发入口，各业务模块通过此工具触发通知
  * 自动根据通知规则配置，确定通知对象和内容
  *
- * 使用方式：
- * const { triggerNotification } = require('../../services/notificationTrigger.service')
+ * 【设计原则】
+ * 1. 业务模块只依赖本文件，不直接引用 notification.service
+ * 2. 自动根据事件类型匹配通知规则，确定通知对象
+ * 3. 使用国际化 key + 动态参数的方式，前端使用 $t(key, params) 渲染
+ *
+ * 【用法】
+ * const { triggerNotification } = require('./notification')
+ *
+ * // 一行代码触发通知
  * await triggerNotification('user.register', { username: 'zhangsan' }, operatorId)
+ *
+ * // 事件类型在 notificationRules.config.js 中配置
+ * // 通知角色也在配置文件中定义
  */
 
 const notificationService = require('../modules/notification/notification.service')
 const notificationRules = require('../config/notificationRules.config')
-const userModel = require('../modules/user/user.model')
 const { query } = require('../db/index')
 
 /**
@@ -27,7 +36,7 @@ async function getUserIdsByRoles(roles) {
   // 注意：不限制 status，因为不同系统状态字段值可能不同（0/1/active/enabled等）
   const sql = `SELECT DISTINCT id, username, role, status FROM nex_user WHERE role IN (${placeholders})`
   const rows = await query(sql, roles)
-  console.log(`[通知触发服务] 根据角色查询用户, 角色: ${JSON.stringify(roles)}, 查询结果: ${JSON.stringify(rows)}`)
+  console.log(`[通知工具] 根据角色查询用户, 角色: ${JSON.stringify(roles)}, 查询结果数量: ${rows.length}`)
   return rows.map(row => row.id)
 }
 
@@ -90,7 +99,7 @@ async function triggerNotification(eventType, variables = {}, operatorId = null)
       rule
     }
   } catch (error) {
-    console.error('[通知触发服务] 触发通知失败:', error)
+    console.error('[通知工具] 触发通知失败:', error)
     return {
       success: false,
       notifiedCount: 0,
@@ -99,7 +108,61 @@ async function triggerNotification(eventType, variables = {}, operatorId = null)
   }
 }
 
+/**
+ * 直接发送通知给指定用户（不经过规则匹配）
+ * 适用于需要精确控制通知对象的场景
+ *
+ * @param {number} userId - 接收用户ID
+ * @param {Object} params - 通知参数
+ * @param {string} params.titleKey - 通知标题国际化key
+ * @param {string} params.contentKey - 通知内容国际化key
+ * @param {Object} [params.variables={}] - 模板变量
+ * @param {string} [params.type='system'] - 通知类型 system/plc/user/audit
+ * @param {string} [params.priority='normal'] - 优先级 high/normal/low
+ * @param {string} [params.link=''] - 跳转链接
+ * @returns {Promise<Object>}
+ */
+async function sendToUser(userId, params = {}) {
+  const {
+    titleKey,
+    contentKey,
+    variables = {},
+    type = 'system',
+    priority = 'normal',
+    link = ''
+  } = params
+
+  return await notificationService.sendNotification({
+    userId,
+    titleKey,
+    contentKey,
+    titleParams: JSON.stringify(variables),
+    contentParams: JSON.stringify(variables),
+    type,
+    priority,
+    link
+  })
+}
+
+/**
+ * 批量发送通知给指定用户列表（不经过规则匹配）
+ *
+ * @param {Array<number>} userIds - 用户ID列表
+ * @param {Object} params - 通知参数（同 sendToUser）
+ * @returns {Promise<Array>}
+ */
+async function sendToUsers(userIds, params = {}) {
+  const results = []
+  for (const userId of userIds) {
+    const result = await sendToUser(userId, params)
+    results.push(result)
+  }
+  return results
+}
+
 module.exports = {
   triggerNotification,
-  getUserIdsByRoles
+  getUserIdsByRoles,
+  sendToUser,
+  sendToUsers
 }

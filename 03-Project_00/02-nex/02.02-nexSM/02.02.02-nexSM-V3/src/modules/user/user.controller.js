@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 用户管理模块 - 控制器层
  * 
  * 负责参数接收、调用 Service 层、返回统一响应
@@ -14,9 +14,9 @@
  */
 const BaseController = require('../../controllers/BaseController')
 const userService = require('./user.service')
-const auditLogger = require('../audit/auditLogger')
+const audit = require('../../utils/audit')
 const { getLangFromRequest } = require('../../utils/i18n')
-const { triggerNotification } = require('../../services/notificationTrigger.service')
+const { triggerNotification } = require('../../utils/notification')
 
 class UserController extends BaseController {
   /**
@@ -75,7 +75,7 @@ class UserController extends BaseController {
     try {
       const result = await userService.register(req.body)
       // 记录注册审计
-      await auditLogger.logUserRegister(req, '系统注册', `用户名: ${req.body.username || ''}`)
+      await audit.logUserRegister(req, '系统注册', `用户名: ${req.body.username || ''}`)
       res.success(result, '注册成功')
     } catch (err) {
       next(err)
@@ -174,7 +174,7 @@ class UserController extends BaseController {
       // 记录审计（易读文本格式，避免密码等敏感信息泄露）
       const statusText = req.body.status === 0 ? '禁用' : '启用'
       const newValueText = `用户名: ${req.body.username}, 角色: ${req.body.role}, 姓名: ${req.body.real_name || ''}, 状态: ${statusText}`
-      await auditLogger.logUserCreate(req, req.body.username || '', newValueText)
+      await audit.logUserCreate(req, req.body.username || '', newValueText)
       res.success(result, '新增用户成功')
     } catch (err) {
       next(err)
@@ -205,7 +205,7 @@ class UserController extends BaseController {
       const newStatusText = req.body.status !== undefined ? (req.body.status === 0 ? '禁用' : '启用') : '未变更'
       const oldValueText = oldUser ? `角色: ${oldUser.role}, 姓名: ${oldUser.real_name || ''}, 状态: ${oldStatusText}` : ''
       const newValueText = `角色: ${req.body.role || '未变更'}, 姓名: ${req.body.real_name || '未变更'}, 状态: ${newStatusText}`
-      await auditLogger.logUserUpdate(req, oldUser?.username || req.params.id, oldValueText, newValueText)
+      await audit.logUserUpdate(req, oldUser?.username || req.params.id, oldValueText, newValueText)
 
       // 触发通知：用户信息修改（通知管理员）
       const isSelfUpdate = req.user.id === Number(req.params.id)
@@ -257,7 +257,7 @@ class UserController extends BaseController {
       // 记录审计（易读文本格式，避免密码等敏感信息泄露）
       const statusText = oldUser?.status === 0 ? '禁用' : '启用'
       const oldValueText = oldUser ? `用户名: ${oldUser.username}, 角色: ${oldUser.role}, 姓名: ${oldUser.real_name || ''}, 状态: ${statusText}` : ''
-      await auditLogger.logUserDelete(req, oldUser?.username || req.params.id, oldValueText)
+      await audit.logUserDelete(req, oldUser?.username || req.params.id, oldValueText)
       res.success(null, '删除用户成功')
     } catch (err) {
       next(err)
@@ -293,7 +293,7 @@ class UserController extends BaseController {
 
       await userService.batchDeleteUsers(req.body.ids)
       // 记录审计
-      await auditLogger.logUserBatchDelete(req, `ID: ${(req.body.ids || []).join(', ')}`, '')
+      await audit.logUserBatchDelete(req, `ID: ${(req.body.ids || []).join(', ')}`, '')
       res.success(null, '批量删除成功')
     } catch (err) {
       next(err)
@@ -320,7 +320,7 @@ class UserController extends BaseController {
       const oldUser = await userService.getUserById(req.params.id, lang).catch(() => null)
       await userService.updateUserStatus(req.params.id, req.body.status)
       // 记录审计
-      await auditLogger.logUserStatusChange(
+      await audit.logUserStatusChange(
         req,
         oldUser?.username || req.params.id,
         oldUser?.status !== undefined ? String(oldUser.status) : '',
