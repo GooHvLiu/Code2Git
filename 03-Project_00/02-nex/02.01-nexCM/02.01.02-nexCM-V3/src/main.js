@@ -24,9 +24,9 @@ Vue.use(directives)
 // 权限判断工具（挂载 $hasRole / $hasPermission / $checkPermission）
 import permissionUtil from '@/utils/permission'
 Vue.use(permissionUtil)
-// 全局 Message 防重复封装（挂载 $msg）
-import messageUtil from '@/utils/message'
-Vue.use(messageUtil)
+// 全局用户反馈工具（消息提示 + 确认弹窗，挂载 $msg / $confirm）
+import feedbackUtil from '@/utils/feedback'
+Vue.use(feedbackUtil)
 
 // Vuex Store
 import store from '@/store/index.js'
@@ -36,6 +36,41 @@ import router from '@/router/index.js'
 import '@/router/permission.js'
 // 国际化
 import i18n from '@/i18n'
+// WebSocket 单点登录被踢下线监听
+import ws from '@/utils/websocket'
+import { showWarning } from '@/utils/feedback'
+import { ROUTE_PATHS } from '@/router/constant/pathConstants'
+
+/**
+ * 初始化单点登录被踢下线监听
+ * 收到 kicked_out 消息后，清除 token，跳转登录页
+ */
+function initKickOutListener() {
+  ws.on('kicked_out', (data) => {
+    // 防止重复处理
+    if (window.__kickedOutHandled) return
+    window.__kickedOutHandled = true
+
+    const message = data?.message || '您已在其他设备登录，当前设备已下线'
+    showWarning(message)
+
+    // 清除登录状态并跳转登录页
+    store.dispatch('user/logout').then(() => {
+      // 断开 WebSocket 连接
+      ws.disconnect()
+      // 跳转登录页
+      router.push(`${ROUTE_PATHS.LOGIN}?redirect=${router.currentRoute.fullPath}`)
+    }).finally(() => {
+      // 延迟重置标志，避免跳转前重复触发
+      setTimeout(() => {
+        window.__kickedOutHandled = false
+      }, 3000)
+    })
+  })
+}
+
+// 初始化被踢下线监听
+initKickOutListener()
 
 Vue.config.productionTip = false
 

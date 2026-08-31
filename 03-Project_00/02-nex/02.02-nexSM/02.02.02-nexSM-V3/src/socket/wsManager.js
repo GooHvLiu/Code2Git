@@ -28,7 +28,7 @@ class WsManager {
    * @param {http.Server} server - HTTP 服务器实例
    */
   init(server) {
-    this.wss = new WebSocket.Server({ server, path: '/ws' })
+    this.wss = new WebSocket.Server({ server, path: '/ws-api' })
 
     this.wss.on('connection', (ws, req) => {
       // 初始状态
@@ -44,7 +44,9 @@ class WsManager {
       ws.on('message', (message) => {
         try {
           const data = JSON.parse(message.toString())
-          this.handleMessage(ws, data)
+          this.handleMessage(ws, data).catch(err => {
+            console.error('[WS] 消息处理失败:', err.message)
+          })
         } catch (e) {
           console.error('[WS] 消息解析失败:', e.message)
         }
@@ -52,7 +54,9 @@ class WsManager {
 
       // 连接关闭
       ws.on('close', () => {
-        this.removeConnection(ws)
+        this.removeConnection(ws).catch(err => {
+          console.error('[WS] 移除连接失败:', err.message)
+        })
       })
 
       // 连接错误
@@ -68,7 +72,7 @@ class WsManager {
   /**
    * 处理客户端消息
    */
-  handleMessage(ws, data) {
+  async handleMessage(ws, data) {
     switch (data.type) {
       case 'auth':
         // 客户端认证：{ type: 'auth', token: 'xxx', userId: 1 }
@@ -77,6 +81,15 @@ class WsManager {
       case 'ping':
         // 心跳
         ws.send(JSON.stringify({ type: 'pong', timestamp: Date.now() }))
+        // 客户端授权：更新设备最后活跃时间（如果 deviceId 存在）
+        if (ws.userId && ws.deviceId) {
+          try {
+            const userDeviceService = require('../modules/user/userDevice.service')
+            await userDeviceService.updateLastActiveTime(ws.userId, ws.deviceId)
+          } catch (err) {
+            // 静默失败，不影响心跳响应
+          }
+        }
         break
       case 'update_poll_interval':
         // 更新轮询间隔（前端修改配置后发送，后端通过配置接口已处理，此处仅确认）
@@ -91,13 +104,32 @@ class WsManager {
   /**
    * 客户端认证
    */
-  authConnection(ws, data) {
+  async authConnection(ws, data) {
     // 简单认证：验证 userId（生产环境应验证 JWT token）
     if (data.userId) {
       ws.userId = data.userId
+      ws.deviceId = data.deviceId || null
       this.addConnection(data.userId, ws)
       // 发送认证成功响应
       ws.send(JSON.stringify({ type: 'auth_success', message: '认证成功' }))
+
+      // 客户端授权：更新设备状态为在线（如果 deviceId 存在）
+      if (data.deviceId) {
+        try {
+          const userDeviceService = require('../modules/user/userDevice.service')
+          await userDeviceService.upsertDevice({
+            userId: data.userId,
+            deviceId: data.deviceId,
+            deviceName: data.deviceName || '',
+            ip: ws._socket?.remoteAddress || '',
+            userAgent: ''
+          })
+          console.log(`[WS-认证] 用户 ${data.userId} 设备 ${data.deviceId} 状态已更新为在线`)
+        } catch (err) {
+          console.error('[WS-认证] 更新设备状态失败:', err.message)
+        }
+      }
+
       // 发送当前 PLC 连接状态给该用户
       try {
         // 延迟导入，避免循环依赖（PlcManager → wsManager → PlcManager）
@@ -131,7 +163,7 @@ class WsManager {
   /**
    * 移除用户连接
    */
-  removeConnection(ws) {
+  async removeConnection(ws) {
     if (ws.userId && this.userConnections.has(ws.userId)) {
       const connections = this.userConnections.get(ws.userId)
       const index = connections.indexOf(ws)
@@ -140,6 +172,17 @@ class WsManager {
       }
       if (connections.length === 0) {
         this.userConnections.delete(ws.userId)
+      }
+
+      // 客户端授权：更新设备状态为离线（如果 deviceId 存在）
+      if (ws.deviceId) {
+        try {
+          const userDeviceService = require('../modules/user/userDevice.service')
+          await userDeviceService.setDeviceOffline(ws.userId, ws.deviceId)
+          console.log(`[WS-断开] 用户 ${ws.userId} 设备 ${ws.deviceId} 状态已更新为离线`)
+        } catch (err) {
+          console.error('[WS-断开] 更新设备状态失败:', err.message)
+        }
       }
     }
   }
@@ -197,6 +240,16 @@ class WsManager {
    */
   getOnlineUserIds() {
     return Array.from(this.userConnections.keys())
+  }
+
+  /**
+   * 获取指定用户的在线连接数
+   * @param {number} userId - 用户ID
+   * @returns {number} 在线连接数
+   */
+  getUserConnectionCount(userId) {
+    const connections = this.userConnections.get(userId)
+    return connections ? connections.length : 0
   }
 
   /**

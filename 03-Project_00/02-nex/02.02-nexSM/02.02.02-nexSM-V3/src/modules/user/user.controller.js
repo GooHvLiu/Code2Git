@@ -44,11 +44,11 @@ class UserController extends BaseController {
    */
   async login(req, res, next) {
     try {
-      const { username, password } = req.body
+      const { username, password, deviceId, deviceName } = req.body
       const ip = req.ip || req.connection.remoteAddress
       const userAgent = req.headers['user-agent'] || ''
       const lang = getLangFromRequest(req)
-      const result = await userService.login(username, password, ip, userAgent, lang)
+      const result = await userService.login(username, password, ip, userAgent, lang, deviceId, deviceName)
       res.success(result, '登录成功')
     } catch (err) {
       next(err)

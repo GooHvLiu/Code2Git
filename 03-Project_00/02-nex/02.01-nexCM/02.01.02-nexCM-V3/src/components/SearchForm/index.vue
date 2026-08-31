@@ -5,7 +5,7 @@
       ref="searchForm"
       :model="form"
       :inline="true"
-      label-width="auto"
+      label-width="90px"
       class="search-form"
       size="small"
     >

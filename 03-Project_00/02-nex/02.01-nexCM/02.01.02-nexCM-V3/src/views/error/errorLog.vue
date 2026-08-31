@@ -7,9 +7,9 @@
   <div class="error-log-page">
     <!-- 工具栏 -->
     <div class="toolbar">
-      <span class="total">共 {{ errorLogs.length }} 条错误</span>
+      <span class="total">{{ $t('errorLog.total', { count: errorLogs.length }) }}</span>
       <el-button type="danger" size="small" @click="handleClear" :disabled="errorLogs.length === 0">
-        清空日志
+        {{ $t('errorLog.clear') }}
       </el-button>
     </div>
 
@@ -17,7 +17,7 @@
     <div class="error-list" v-loading="false">
       <div v-if="errorLogs.length === 0" class="empty">
         <i class="el-icon-circle-check"></i>
-        <span>暂无错误日志</span>
+        <span>{{ $t('errorLog.empty') }}</span>
       </div>
 
       <div
@@ -30,13 +30,13 @@
           <span class="error-time">{{ formatTime(log.time) }}</span>
         </div>
         <div class="error-info" v-if="log.info">
-          <span class="label">触发位置：</span>{{ log.info }}
+          <span class="label">{{ $t('errorLog.triggerLocation') }}</span>{{ log.info }}
         </div>
         <div class="error-url" v-if="log.url">
-          <span class="label">页面地址：</span>{{ log.url }}
+          <span class="label">{{ $t('errorLog.pageUrl') }}</span>{{ log.url }}
         </div>
         <div class="error-stack" v-if="log.stack" @click="toggleExpand(index)">
-          <span class="label">堆栈信息</span>
+          <span class="label">{{ $t('errorLog.stackInfo') }}</span>
           <i :class="expandedIndex === index ? 'el-icon-arrow-up' : 'el-icon-arrow-down'"></i>
           <pre v-show="expandedIndex === index">{{ log.stack }}</pre>
         </div>
@@ -50,6 +50,9 @@ import { ref, computed } from 'vue'
 import { MessageBox } from 'element-ui'
 import store from '@/store'
 import { formatDate } from '@/utils/date'
+import { useI18n } from '@/composables/useI18n'
+
+const { t } = useI18n()
 
 
 // ===== 响应式数据 =====
@@ -72,7 +75,7 @@ function toggleExpand(index) {
 
 /** 清空日志 */
 async function handleClear() {
-  const ok = await MessageBox.confirm('确定要清空所有错误日志吗？', '提示', {
+  const ok = await MessageBox.confirm(t('errorLog.clearConfirm'), t('errorLog.title'), {
     type: 'warning'
   }).catch(() => false)
   if (ok) {

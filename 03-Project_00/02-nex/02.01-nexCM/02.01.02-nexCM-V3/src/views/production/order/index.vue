@@ -6,28 +6,36 @@
         <div class="stat-icon green"><i class="el-icon-circle-check"></i></div>
         <div class="stat-info">
           <div class="stat-value">{{ orderStats.completedCount }}</div>
-          <div class="stat-label">{{ $t("order.completed") }}</div>
+          <div class="stat-label">
+            {{ $t("menu.production.order.page.completed") }}
+          </div>
         </div>
       </div>
       <div class="stat-card">
         <div class="stat-icon blue"><i class="el-icon-video-play"></i></div>
         <div class="stat-info">
           <div class="stat-value">{{ orderStats.runningCount }}</div>
-          <div class="stat-label">{{ $t("order.running") }}</div>
+          <div class="stat-label">
+            {{ $t("menu.production.order.page.running") }}
+          </div>
         </div>
       </div>
       <div class="stat-card">
         <div class="stat-icon orange"><i class="el-icon-time"></i></div>
         <div class="stat-info">
           <div class="stat-value">{{ orderStats.plannedCount }}</div>
-          <div class="stat-label">{{ $t("order.planned") }}</div>
+          <div class="stat-label">
+            {{ $t("menu.production.order.page.planned") }}
+          </div>
         </div>
       </div>
       <div class="stat-card">
         <div class="stat-icon purple"><i class="el-icon-data-line"></i></div>
         <div class="stat-info">
           <div class="stat-value">{{ orderStats.avgQualifiedRate }}%</div>
-          <div class="stat-label">{{ $t("order.qualifiedRate") }}</div>
+          <div class="stat-label">
+            {{ $t("menu.production.order.page.qualifiedRate") }}
+          </div>
         </div>
       </div>
     </div>
@@ -38,39 +46,53 @@
         <el-tabs v-model="activeTab" type="card" @tab-click="handleTabClick">
           <el-tab-pane name="completed">
             <span slot="label" class="tab-label">
-              {{ $t("order.completed") }}
+              {{ $t("menu.production.order.page.completed") }}
               <span class="tab-badge">{{ completedOrders.length }}</span>
             </span>
           </el-tab-pane>
           <el-tab-pane name="running">
             <span slot="label" class="tab-label">
-              {{ $t("order.running") }}
+              {{ $t("menu.production.order.page.running") }}
               <span class="tab-badge running">{{ runningOrders.length }}</span>
             </span>
           </el-tab-pane>
           <el-tab-pane name="planned">
             <span slot="label" class="tab-label">
-              {{ $t("order.planned") }}
+              {{ $t("menu.production.order.page.planned") }}
               <span class="tab-badge planned">{{ plannedOrders.length }}</span>
             </span>
           </el-tab-pane>
         </el-tabs>
       </div>
       <div class="toolbar-right">
+        <!-- 计划订单标签下显示新增按钮 -->
         <el-button
+          v-if="activeTab === 'planned'"
+          v-permission="'production:order:add'"
+          type="primary"
+          icon="el-icon-plus"
+          @click="handleAdd"
+        >
+          {{ $t("menu.production.order.page.add") }}
+        </el-button>
+        <el-button
+          v-permission="'production:order:download'"
           type="primary"
           icon="el-icon-download"
           :disabled="!canDownload"
           @click="handleDownloadSelected"
         >
-          {{ $t("order.downloadSelected") }} ({{ selectedOrders.length }})
+          {{ $t("menu.production.order.page.downloadSelected") }} ({{
+            selectedOrders.length
+          }})
         </el-button>
         <el-button
+          v-permission="'production:order:download'"
           icon="el-icon-document"
           :disabled="!canDownloadAll"
           @click="handleDownloadAll"
         >
-          {{ $t("order.downloadAll") }}
+          {{ $t("menu.production.order.page.downloadAll") }}
         </el-button>
       </div>
     </div>
@@ -78,7 +100,7 @@
     <!-- 无订单生产提示 -->
     <el-alert
       v-if="showNoOrderTip"
-      :title="$t('order.noOrderProduction')"
+      :title="$t('menu.production.order.page.noOrderProduction')"
       type="warning"
       :closable="false"
       show-icon
@@ -91,6 +113,12 @@
         :data="currentOrders"
         border
         stripe
+        :header-cell-style="{
+          background: '#f5f7fa',
+          color: '#606266',
+          fontWeight: 'bold',
+          textAlign: 'center',
+        }"
         highlight-current-row
         :cell-style="cellStyle"
         @selection-change="handleSelectionChange"
@@ -100,35 +128,36 @@
           type="selection"
           width="50"
           :selectable="checkSelectable"
+          align="center"
         />
         <el-table-column
-          :label="$t('order.orderNo')"
+          :label="$t('menu.production.order.page.orderNo')"
           prop="orderNo"
           width="170"
         />
         <el-table-column
-          :label="$t('order.productName')"
+          :label="$t('menu.production.order.page.productName')"
           prop="productName"
           width="140"
         />
         <el-table-column
-          :label="$t('order.recipeName')"
+          :label="$t('menu.production.order.page.recipeName')"
           prop="recipeName"
           width="120"
         />
         <el-table-column
-          :label="$t('order.batchNo')"
+          :label="$t('menu.production.order.page.batchNo')"
           prop="batchNo"
           width="140"
         />
         <el-table-column
-          :label="$t('order.targetQty')"
+          :label="$t('menu.production.order.page.targetQty')"
           prop="targetQty"
           width="90"
           align="center"
         />
         <el-table-column
-          :label="$t('order.completedQty')"
+          :label="$t('menu.production.order.page.completedQty')"
           width="110"
           align="center"
         >
@@ -146,7 +175,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('order.qualifiedRate')"
+          :label="$t('menu.production.order.page.qualifiedRate')"
           width="90"
           align="center"
         >
@@ -167,14 +196,14 @@
         </el-table-column>
         <el-table-column
           v-if="orderConfig.showOperatorName"
-          :label="$t('order.operator')"
+          :label="$t('menu.production.order.page.operator')"
           prop="operator"
           width="90"
           align="center"
         />
         <el-table-column
           v-if="orderConfig.showAlarmCount"
-          :label="$t('order.alarmCount')"
+          :label="$t('menu.production.order.page.alarmCount')"
           prop="alarmCount"
           width="80"
           align="center"
@@ -188,7 +217,7 @@
         </el-table-column>
         <el-table-column
           v-if="orderConfig.showRuntime"
-          :label="$t('order.runtime')"
+          :label="$t('menu.production.order.page.runtime')"
           width="80"
           align="center"
         >
@@ -197,12 +226,12 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('order.startTime')"
+          :label="$t('menu.production.order.page.startTime')"
           prop="startTime"
           width="150"
         />
         <el-table-column
-          :label="$t('order.endTime')"
+          :label="$t('menu.production.order.page.endTime')"
           prop="endTime"
           width="150"
         >
@@ -213,7 +242,11 @@
             }}
           </template>
         </el-table-column>
-        <el-table-column :label="$t('order.status')" width="90" align="center">
+        <el-table-column
+          :label="$t('menu.production.order.page.status')"
+          width="90"
+          align="center"
+        >
           <template slot-scope="scope">
             <el-tag
               :type="statusType(scope.row.status)"
@@ -225,30 +258,168 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('common.operation') || '操作'"
-          width="90"
+          :label="$t('common.operation')"
+          :min-width="activeTab === 'planned' ? 150 : 90"
           align="center"
         >
           <template slot-scope="scope">
+            <!-- 计划订单标签下显示编辑和删除按钮 -->
+            <template v-if="activeTab === 'planned'">
+              <el-button
+                v-permission="'production:order:edit'"
+                type="text"
+                size="mini"
+                icon="el-icon-edit"
+                @click="handleEdit(scope.row)"
+              >
+                {{ $t("menu.production.order.page.edit") }}
+              </el-button>
+              <el-button
+                v-permission="'production:order:delete'"
+                type="text"
+                size="mini"
+                icon="el-icon-delete"
+                style="color: #f56c6c"
+                @click="handleDelete(scope.row)"
+              >
+                {{ $t("menu.production.order.page.delete") }}
+              </el-button>
+            </template>
+            <!-- 其他标签下只显示下载按钮 -->
             <el-button
+              v-else
+              v-permission="'production:order:download'"
               type="text"
               size="mini"
               icon="el-icon-download"
               :disabled="!canDownloadOrder(scope.row)"
               @click="handleDownloadSingle(scope.row)"
             >
-              {{ $t("order.download") }}
+              {{ $t("menu.production.order.page.download") }}
             </el-button>
           </template>
         </el-table-column>
       </el-table>
     </div>
+
+    <!-- 新增/编辑订单弹窗 -->
+    <el-dialog
+      :title="dialogTitle"
+      :visible.sync="dialogVisible"
+      width="600px"
+      :close-on-click-modal="false"
+      @closed="resetForm"
+    >
+      <el-form
+        ref="orderForm"
+        :model="orderForm"
+        :rules="formRules"
+        label-width="100px"
+      >
+        <el-form-item
+          :label="$t('menu.production.order.page.orderNo')"
+          prop="orderNo"
+        >
+          <el-input
+            v-model="orderForm.orderNo"
+            :placeholder="$t('menu.production.order.page.orderNoPlaceholder')"
+            :disabled="isEdit"
+          />
+        </el-form-item>
+        <el-form-item
+          :label="$t('menu.production.order.page.productName')"
+          prop="productName"
+        >
+          <el-input
+            v-model="orderForm.productName"
+            :placeholder="
+              $t('menu.production.order.page.productNamePlaceholder')
+            "
+          />
+        </el-form-item>
+        <el-form-item
+          :label="$t('menu.production.order.page.recipeName')"
+          prop="recipeName"
+        >
+          <el-select
+            v-model="orderForm.recipeName"
+            :placeholder="
+              $t('menu.production.order.page.recipeNamePlaceholder')
+            "
+            style="width: 100%"
+          >
+            <el-option
+              v-for="recipe in recipeList"
+              :key="recipe.id"
+              :label="recipe.name"
+              :value="recipe.name"
+            />
+          </el-select>
+        </el-form-item>
+        <el-form-item
+          :label="$t('menu.production.order.page.batchNo')"
+          prop="batchNo"
+        >
+          <el-input
+            v-model="orderForm.batchNo"
+            :placeholder="$t('menu.production.order.page.batchNoPlaceholder')"
+          />
+        </el-form-item>
+        <el-form-item
+          :label="$t('menu.production.order.page.targetQty')"
+          prop="targetQty"
+        >
+          <el-input-number
+            v-model="orderForm.targetQty"
+            :min="1"
+            :max="99999"
+            style="width: 100%"
+          />
+        </el-form-item>
+        <el-form-item
+          :label="$t('menu.production.order.page.startTime')"
+          prop="startTime"
+        >
+          <el-date-picker
+            v-model="orderForm.startTime"
+            type="datetime"
+            :placeholder="$t('menu.production.order.page.startTimePlaceholder')"
+            style="width: 100%"
+          />
+        </el-form-item>
+        <el-form-item
+          :label="$t('menu.production.order.page.estimatedEnd')"
+          prop="estimatedEnd"
+        >
+          <el-date-picker
+            v-model="orderForm.estimatedEnd"
+            type="datetime"
+            :placeholder="
+              $t('menu.production.order.page.estimatedEndPlaceholder')
+            "
+            style="width: 100%"
+          />
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">{{
+          $t("common.cancel")
+        }}</el-button>
+        <el-button
+          type="primary"
+          :loading="submitLoading"
+          @click="handleSubmit"
+        >
+          {{ $t("common.confirm") }}
+        </el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
-import { Message } from "element-ui";
+import { ref, computed, reactive } from "vue";
+import { Message, MessageBox } from "element-ui";
 import store from "@/store";
 import { generateOrderReport } from "@/utils/orderReport";
 import { getConfig } from "@/utils/config";
@@ -261,11 +432,44 @@ const activeTab = ref("completed");
 const selectedOrders = ref([]);
 const selectedRowKeys = ref([]);
 
+// 新增/编辑订单弹窗
+const dialogVisible = ref(false);
+const isEdit = ref(false);
+const submitLoading = ref(false);
+const currentEditOrder = ref(null);
+
+// 订单表单
+const orderForm = reactive({
+  orderNo: "",
+  productName: "",
+  recipeName: "",
+  batchNo: "",
+  targetQty: 100,
+  startTime: "",
+  estimatedEnd: "",
+});
+
+// 表单验证规则
+const formRules = {
+  orderNo: [{ required: true, message: "请输入订单编号", trigger: "blur" }],
+  productName: [{ required: true, message: "请输入产品名称", trigger: "blur" }],
+  recipeName: [{ required: true, message: "请选择配方", trigger: "change" }],
+  targetQty: [{ required: true, message: "请输入目标数量", trigger: "blur" }],
+};
+
 // ===== 计算属性 =====
 const completedOrders = computed(() => store.getters["device/completedOrders"]);
 const runningOrders = computed(() => store.getters["device/runningOrders"]);
 const plannedOrders = computed(() => store.getters["device/plannedOrders"]);
 const orderStats = computed(() => store.getters["device/orderStats"]);
+const recipeList = computed(() => store.getters["device/recipeList"]);
+
+// 弹窗标题
+const dialogTitle = computed(() => {
+  return isEdit.value
+    ? $t("menu.production.order.page.edit")
+    : $t("menu.production.order.page.add");
+});
 
 // 当前Tab的订单列表
 const currentOrders = computed(() => {
@@ -324,9 +528,7 @@ const canDownloadAll = computed(() => {
 });
 
 // 当前用户名（导出人）
-const exporter = computed(
-  () => store?.state?.user?.userInfo?.username || "admin"
-);
+const exporter = computed(() => store?.state?.user?.userInfo?.username);
 
 // PDF水印设置
 const pdfWatermark = computed(() => getConfig("pdfWatermarkEnabled", true));
@@ -388,11 +590,11 @@ function statusType(status) {
 function statusText(status) {
   switch (status) {
     case "completed":
-      return $t("order.statusCompleted");
+      return $t("menu.production.order.page.statusCompleted");
     case "running":
-      return $t("order.statusRunning");
+      return $t("menu.production.order.page.statusRunning");
     case "planned":
-      return $t("order.statusPlanned");
+      return $t("menu.production.order.page.statusPlanned");
     default:
       return status;
   }
@@ -402,9 +604,9 @@ function statusText(status) {
 function handleDownloadSingle(order) {
   if (!canDownloadOrder(order)) {
     if (order.status === "planned") {
-      Message.warning($t("order.plannedNoDownload"));
+      Message.warning($t("menu.production.order.page.plannedNoDownload"));
     } else if (order.status === "running") {
-      Message.warning($t("order.runningNoDownload"));
+      Message.warning($t("menu.production.order.page.runningNoDownload"));
     }
     return;
   }
@@ -414,7 +616,7 @@ function handleDownloadSingle(order) {
 // 下载选中订单报告
 function handleDownloadSelected() {
   if (selectedOrders.value.length === 0) {
-    Message.warning($t("order.selectOrderTip"));
+    Message.warning($t("menu.production.order.page.selectOrderTip"));
     return;
   }
   generateAndDownload(selectedOrders.value);
@@ -464,6 +666,93 @@ async function generateAndDownload(orders) {
       `成功 ${successCount} 份，失败 ${failCount} 份，请查看控制台详情`
     );
   }
+}
+
+// ===== 计划订单管理方法 =====
+
+// 新增订单
+function handleAdd() {
+  isEdit.value = false;
+  currentEditOrder.value = null;
+  resetForm();
+  dialogVisible.value = true;
+}
+
+// 编辑订单
+function handleEdit(order) {
+  isEdit.value = true;
+  currentEditOrder.value = order;
+  // 填充表单
+  orderForm.orderNo = order.orderNo || "";
+  orderForm.productName = order.productName || "";
+  orderForm.recipeName = order.recipeName || "";
+  orderForm.batchNo = order.batchNo || "";
+  orderForm.targetQty = order.targetQty || 100;
+  orderForm.startTime = order.startTime || "";
+  orderForm.estimatedEnd = order.estimatedEnd || "";
+  dialogVisible.value = true;
+}
+
+// 删除订单
+function handleDelete(order) {
+  MessageBox.confirm(
+    `确定要删除订单「${order.orderNo}」吗？此操作不可恢复。`,
+    "删除确认",
+    {
+      confirmButtonText: "确定",
+      cancelButtonText: "取消",
+      type: "warning",
+    }
+  )
+    .then(() => {
+      // TODO: 调用后端API删除订单
+      Message.success("订单删除成功");
+    })
+    .catch(() => {
+      // 用户取消
+    });
+}
+
+// 提交表单
+function handleSubmit() {
+  const form = document.querySelector(".el-form");
+  if (!form) return;
+
+  // 简单验证
+  if (
+    !orderForm.orderNo ||
+    !orderForm.productName ||
+    !orderForm.recipeName ||
+    !orderForm.targetQty
+  ) {
+    Message.warning("请填写完整的订单信息");
+    return;
+  }
+
+  submitLoading.value = true;
+
+  setTimeout(() => {
+    if (isEdit.value) {
+      // TODO: 调用后端API编辑订单
+      Message.success("订单编辑成功");
+    } else {
+      // TODO: 调用后端API新增订单
+      Message.success("订单新增成功");
+    }
+    submitLoading.value = false;
+    dialogVisible.value = false;
+  }, 500);
+}
+
+// 重置表单
+function resetForm() {
+  orderForm.orderNo = "";
+  orderForm.productName = "";
+  orderForm.recipeName = "";
+  orderForm.batchNo = "";
+  orderForm.targetQty = 100;
+  orderForm.startTime = "";
+  orderForm.estimatedEnd = "";
 }
 </script>
 

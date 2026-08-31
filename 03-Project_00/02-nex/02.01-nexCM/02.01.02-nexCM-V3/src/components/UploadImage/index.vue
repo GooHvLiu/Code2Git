@@ -70,7 +70,7 @@
 /* eslint-disable vue/multi-word-component-names */
 import { ref, computed } from 'vue'
 import { validateImage, validateFileSize } from '@/utils/upload'
-import { showError, showSuccess } from '@/utils/message'
+import { showError, showSuccess } from '@/utils/feedback'
 
 const props = defineProps({
   /** 绑定值（单图传字符串，多图传数组） */

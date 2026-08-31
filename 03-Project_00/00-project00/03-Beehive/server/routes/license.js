@@ -46,6 +46,7 @@ router.post('/generate', (req, res) => {
       validDays,
       features,
       maxUsers,
+      maxDevices,
       customer
     } = req.body;
 
@@ -65,6 +66,7 @@ router.post('/generate', (req, res) => {
       validDays: parseInt(validDays) || 365,
       features: features || [],
       maxUsers: parseInt(maxUsers) || 0,
+      maxDevices: parseInt(maxDevices) || 0,
       customer: customer || {}
     });
 

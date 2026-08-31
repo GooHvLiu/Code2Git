@@ -25,6 +25,7 @@ const ERROR_CODE = {
   UNAUTHORIZED: 'UNAUTHORIZED',         // 未登录/未授权
   TOKEN_EXPIRED: 'TOKEN_EXPIRED',       // Token已过期
   TOKEN_INVALID: 'TOKEN_INVALID',       // Token无效
+  TOKEN_KICKED_OUT: 'TOKEN_KICKED_OUT', // Token被踢下线（在其他设备登录）
   PERMISSION_DENIED: 'PERMISSION_DENIED', // 权限不足
 
   // ==================== 验证码错误 ====================
@@ -57,6 +58,7 @@ const ERROR_CODE = {
   USER_DISABLED: 'USER_DISABLED',               // 账号已被禁用
   USER_LOCKED: 'USER_LOCKED',                   // 账户已锁定
   USER_REGISTER_FAIL: 'USER_REGISTER_FAIL',     // 用户注册失败
+  DEVICE_LIMIT_EXCEEDED: 'DEVICE_LIMIT_EXCEEDED', // 在线设备数已达上限
 
   // ==================== 字典模块 ====================
   DICT_TYPE_NOT_FOUND: 'DICT_TYPE_NOT_FOUND',     // 字典类型不存在

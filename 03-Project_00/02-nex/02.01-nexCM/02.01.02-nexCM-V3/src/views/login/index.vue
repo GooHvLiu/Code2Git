@@ -195,6 +195,8 @@ import { setToken } from "@/utils/auth";
 import config from "@/config";
 import router from '@/router'
 import { useI18n } from '@/composables/useI18n'
+import ws from '@/utils/websocket'
+import store from '@/store'
 
 const { t: $t } = useI18n()
 
@@ -317,6 +319,8 @@ function submitForm(formName) {
         password: ruleForm.password,
         code: ruleForm.captchacode,
         uuid: getLocalStorage(LOCALSTORAGE_KEYS.CAPTCHA_UUID),
+        deviceId: ws.deviceId,
+        deviceName: navigator.userAgent
       });
 
       formReset({
@@ -332,6 +336,8 @@ function submitForm(formName) {
       // 存储权限码列表和权限版本号（用于按钮/参数权限判断）
       if (Array.isArray(res.data.permissions)) {
         setLocalStorage(LOCALSTORAGE_KEYS.PERMISSIONS, res.data.permissions);
+        // 关键修复：同时更新 store 中的 permissions，否则 v-permission 指令获取不到权限
+        store.commit('user/SET_PERMISSIONS', res.data.permissions)
       }
       if (res.data.permissionVersion) {
         setLocalStorage(LOCALSTORAGE_KEYS.PERMISSION_VERSION, res.data.permissionVersion);

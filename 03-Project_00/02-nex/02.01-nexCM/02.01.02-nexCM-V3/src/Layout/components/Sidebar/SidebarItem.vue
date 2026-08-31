@@ -43,7 +43,8 @@ const displayTitle = computed(() => props.item.title || '')
 .menu-icon {
   margin-right: @sidebar-menu-icon-margin;
   font-size: @sidebar-menu-icon-size;
-  vertical-align: middle;
+  vertical-align: -0.15em;
+  margin-top: 2px;
 }
 
 /* 无图标时的占位元素，保持与有图标时一致的左边距 */
@@ -51,6 +52,7 @@ const displayTitle = computed(() => props.item.title || '')
   display: inline-block;
   width: @sidebar-menu-icon-size;
   margin-right: @sidebar-menu-icon-margin;
-  vertical-align: middle;
+  vertical-align: -0.15em;
+  margin-top: 2px;
 }
 </style>

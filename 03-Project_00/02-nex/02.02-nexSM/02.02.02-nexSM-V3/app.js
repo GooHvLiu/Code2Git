@@ -145,6 +145,10 @@ const server = http.createServer(app);
 const wsManager = require('./src/socket/wsManager');
 wsManager.init(server);
 
+// 设备状态管理初始化（服务端启动时清理所有设备状态）
+const deviceStatusManager = require('./src/socket/deviceStatusManager');
+deviceStatusManager.init();
+
 // WebSocket 服务初始化后，发送一次当前 PLC 连接状态
 // 因为 PLC 模块初始化在 WebSocket 之前，所以需要手动发送一次
 setTimeout(() => {

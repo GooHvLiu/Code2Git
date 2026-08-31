@@ -6,7 +6,7 @@
  * Keep structure consistent with zh-CN.js
  */
 export default {
-  // ==================== Common ====================
+  // common
   common: {
     confirm: 'Confirm',
     cancel: 'Cancel',
@@ -21,13 +21,6 @@ export default {
     exportPdf: 'Export PDF',
     selected: 'Selected',
     import: 'Import',
-    // Export PDF subtitle labels
-    exportLabels: {
-      exporter: 'Exporter',
-      time: 'Export Time',
-      countPrefix: 'Total',
-      countSuffix: 'records'
-    },
     refresh: 'Refresh',
     operation: 'Action',
     status: 'Status',
@@ -67,17 +60,32 @@ export default {
     print: 'Print',
     viewDetail: 'View Detail',
     statusChange: 'Status Change',
-    refreshCache: 'Refresh Cache'
+    refreshCache: 'Refresh Cache',
+    // Export PDF subtitle labels
+    exportLabels: {
+      exporter: 'Exporter',
+      time: 'Export Time',
+      countPrefix: 'Total',
+      countSuffix: 'records'
+    },
   },
-
-  // ==================== Menu (for permission system, backend returns i18n key) ====================
+  // Menu (for permission system, backend returns i18n key)
   menu: {
     // Home
     home: {
-      default: 'HomeDash',
-      overview: 'Overview',
-      dashboard: 'Dashboard',
-      data: 'DataView'
+      default: 'HomeView',
+      overview: {
+        default: 'OverView'
+      },
+      dashboard: {
+        default: 'DashBoard'
+      },
+      dataview: {
+        default: 'DataView',
+        export: 'Export',
+        detail: 'Detail',
+        view: 'View Details'
+      }
     },
     // Device
     device: {
@@ -86,828 +94,790 @@ export default {
         default: 'DevState',
         control: 'Device Control'
       },
-      alarm: 'AlarmLog',
-      part: 'PartLife'
+      alarm: {
+        default: 'AlarmLog',
+        export: 'Export',
+        detail: 'Detail',
+        handle: 'Handle'
+      },
+      part: {
+        default: 'PartLife',
+        operate: 'Operate',
+        viewAll: 'View All'
+      }
     },
     // Production
     production: {
       default: 'ProdMgmt',
-      recipe: 'RecipeDB',
-      order: 'OrderLog'
+      recipe: {
+        default: 'RecipeDB',
+        download: 'Download',
+        page: {
+          desc: 'Production recipe management and parameter configuration',
+          recipe: 'Recipe',
+          recipeList: 'Recipe List',
+          recipeCode: 'Recipe Code',
+          recipeName: 'Recipe Name',
+          productType: 'Product Type',
+          fillVolume: 'Fill Volume',
+          inUse: 'In Use',
+          notInUse: 'Not In Use',
+          download: 'Download',
+          downloadAll: 'Download All',
+          exportExcel: 'Export Excel',
+          exportPdf: 'Export PDF',
+          basicInfo: 'Basic Information',
+          axisParams: 'Axis Parameters',
+          speedParams: 'Speed Parameters',
+          delayParams: 'Delay and Process Parameters',
+          analysis: 'Intelligent Analysis',
+          fillAngle: 'Fill Angle',
+          suckBackAngle: 'Suck-back Angle',
+          fillAxisInit: 'Fill Axis Init',
+          fillAxisReach: 'Fill Axis Reach',
+          fixAxisInit: 'Fix Axis Init',
+          fixAxisReach: 'Fix Axis Reach',
+          fixAxisPreLift: 'Fix Axis Pre-lift',
+          stopperAxisInit: 'Stopper Axis Init',
+          stopperAxisPrePress: 'Stopper Axis Pre-press',
+          stopperAxisReach: 'Stopper Axis Reach',
+          fillAxisInitSpeed: 'Fill Axis Init Speed',
+          fillAxisReachSpeed: 'Fill Axis Reach Speed',
+          fixAxisInitSpeed: 'Fix Axis Init Speed',
+          fixAxisReachSpeed: 'Fix Axis Reach Speed',
+          fixAxisPreLiftSpeed: 'Fix Axis Pre-lift Speed',
+          stopperAxisInitSpeed: 'Stopper Axis Init Speed',
+          stopperAxisPrePressSpeed: 'Stopper Axis Pre-press Speed',
+          stopperAxisReachSpeed: 'Stopper Axis Reach Speed',
+          fillDelay: 'Fill Delay',
+          vacuumDelay: 'Vacuum Delay',
+          fillSpeed: 'Fill Speed',
+          suckBackSpeed: 'Suck-back Speed',
+          usageCount: 'Usage Count',
+          faultRate: 'Fault Rate',
+          avgQualifiedRate: 'Avg Qualified Rate',
+          lastUsed: 'Last Used'
+        }
+      },
+      order: {
+        default: 'OrderLog',
+        add: 'Add',
+        edit: 'Edit',
+        delete: 'Delete',
+        download: 'Download',
+        export: 'Export',
+        print: 'Print',
+        page: {
+          desc: 'Production order management and report export',
+          completed: 'Completed',
+          running: 'In Progress',
+          planned: 'Planned',
+          orderNo: 'Order No.',
+          productName: 'Product Name',
+          recipeName: 'Recipe',
+          batchNo: 'Batch No.',
+          targetQty: 'Target Qty',
+          completedQty: 'Completed Qty',
+          qualifiedQty: 'Qualified Qty',
+          unqualifiedQty: 'Unqualified Qty',
+          qualifiedRate: 'Qualified Rate',
+          operator: 'Operator',
+          startTime: 'Start Time',
+          endTime: 'End Time',
+          runtime: 'Runtime',
+          alarmCount: 'Alarm Count',
+          status: 'Status',
+          progress: 'Progress',
+          estimatedEnd: 'Est. End',
+          priority: 'Priority',
+          queuePosition: 'Queue Pos.',
+          downloadCount: 'Download Count',
+          download: 'Download Report',
+          downloadSelected: 'Download Selected',
+          downloadAll: 'Download All',
+          exportPdf: 'Export PDF Report',
+          noOrderProduction: 'No-Order Production',
+          orderReport: 'Production Order Report',
+          reportBasicInfo: 'Basic Information',
+          reportProductionStats: 'Production Statistics',
+          reportQualityStats: 'Quality Statistics',
+          reportAlarmDetail: 'Alarm Details',
+          reportOperatorDetail: 'Operator Details',
+          reportGeneratedBy: 'Generated By',
+          reportGeneratedAt: 'Generated At',
+          high: 'High',
+          normal: 'Normal',
+          low: 'Low',
+          statusCompleted: 'Completed',
+          statusRunning: 'In Production',
+          statusPlanned: 'Pending',
+          selectOrderTip: 'Please select orders to download',
+          plannedNoDownload: 'Planned orders do not support report download',
+          runningNoDownload: 'Running orders do not support report download yet (enable in system settings)',
+          // Add/Edit Order
+          add: 'Add Order',
+          edit: 'Edit Order',
+          delete: 'Delete',
+          orderNoPlaceholder: 'Enter order number',
+          productNamePlaceholder: 'Enter product name',
+          recipeNamePlaceholder: 'Select recipe',
+          batchNoPlaceholder: 'Enter batch number',
+          startTimePlaceholder: 'Select start time',
+          estimatedEndPlaceholder: 'Select estimated end time',
+          addSuccess: 'Order added successfully',
+          editSuccess: 'Order updated successfully',
+          deleteSuccess: 'Order deleted successfully',
+          deleteConfirm: 'Are you sure you want to delete order "{orderNo}"? This action cannot be undone.',
+          formRequired: 'Please fill in the complete order information'
+        }
+      },
     },
     // System
     system: {
       default: 'SysSetup',
-      dict: 'DictData',
-      dept: 'OrgMgmt',
+      dict: {
+        default: 'DictData',
+        page: {
+          typeList: 'Dictionary Type List',
+          typeName: 'Dictionary Name',
+          typeCode: 'Dictionary Code',
+          itemLabelRequired: 'Please enter item label',
+          itemValueRequired: 'Please enter item value',
+          typeCodePlaceholder: 'Please enter dictionary code',
+          typeNameRequired: 'Please enter dictionary name',
+          typeCodeRequired: 'Please enter dictionary code',
+          itemList: 'Dictionary Item List',
+          itemLabel: 'Dictionary Label',
+          itemValue: 'Dictionary Value',
+          itemValuePlaceholder: 'Please enter dictionary value',
+          itemStatus: 'Status'
+        }
+      },
+      dept: {
+        default: 'DeptMgmt',
+        page: {
+          title: 'Department Management',
+          deptName: 'Department Name',
+          deptNamePlaceholder: 'Please enter department name',
+          deptNameRequired: 'Please enter department name',
+          orderNum: 'Display Order',
+          leader: 'Leader',
+          phone: 'Phone',
+          email: 'Email',
+          addChild: 'Add Child Department',
+          parentDept: 'Parent Department',
+          parentDeptPlaceholder: 'Select parent department'
+        }
+      },
       role: {
-        default: 'UserRole',
-        assignPermission: 'Assign Permission'
+        default: 'RoleMgmt',
+        page: {
+          title: 'Role Management',
+          roleName: 'Role Name',
+          roleCode: 'Role Code',
+          permission: 'Permission',
+          permissionTitle: 'Menu Permission Assignment',
+          dataScope: 'Data Scope',
+          dataScopeAll: 'All Data',
+          dataScopeDept: 'Department Data',
+          dataScopeDeptAndChild: 'Department and Child Data',
+          dataScopeSelf: 'Self Data'
+        }
       },
       user: {
-        default: 'UserData',
-        resetPassword: 'Reset Password'
+        default: 'UserMgmt',
+        page: {
+          title: 'User Management',
+          username: 'Username',
+          usernamePlaceholder: 'Please enter username',
+          realName: 'Real Name',
+          realNamePlaceholder: 'Please enter real name',
+          email: 'Email',
+          emailPlaceholder: 'Please enter email',
+          phone: 'Phone',
+          phonePlaceholder: 'Please enter phone number',
+          role: 'Role',
+          rolePlaceholder: 'Please select role',
+          dept: 'Department',
+          deptPlaceholder: 'Please select department',
+          status: 'Status',
+          createTime: 'Create Time',
+          password: 'Password',
+          passwordPlaceholder: 'Please enter password',
+          confirmPassword: 'Confirm Password',
+          confirmPasswordRequired: 'Please enter confirm password',
+          sex: 'Sex',
+          remark: 'Remark',
+          remarkPlaceholder: 'Please enter remark',
+          add: 'Add User',
+          edit: 'Edit User',
+          resetPassword: 'Reset Password',
+          import: 'Import',
+          export: 'Export'
+        }
       },
       audit: {
         default: 'AuditLog',
-        hashVerify: 'Hash Verify'
+        search: 'Search/Reset/Refresh',
+        export: 'Export',
+        detail: 'Detail',
+        page: {
+          title: 'Audit Log',
+          myTitle: 'My Operation Log',
+          userName: 'Username',
+          action: 'Action Type',
+          target: 'Operation Target',
+          timeRange: 'Time Range',
+          startTime: 'Start Time',
+          endTime: 'End Time',
+          oldValue: 'Old Value',
+          newValue: 'New Value',
+          result: 'Operation Result',
+          ip: 'IP Address',
+          createdAt: 'Create Time',
+          detail: 'Detail',
+          verify: 'Verify'
+        }
       },
-      config: 'ConfData',
-      permission: 'AuthMgmt'
+      config: {
+        default: 'ParamConfig',
+        edit: 'Edit',
+        export: 'Export',
+        refresh: 'Refresh Cache',
+        param: {
+          sessionTimeout: {
+            view: 'Session Timeout - View',
+            edit: 'Session Timeout - Edit'
+          },
+          defaultPageSize: {
+            view: 'Default Page Size - View',
+            edit: 'Default Page Size - Edit'
+          },
+          defaultLanguage: {
+            view: 'Default Language - View',
+            edit: 'Default Language - Edit'
+          },
+          watermarkEnabled: {
+            view: 'Watermark Enabled - View',
+            edit: 'Watermark Enabled - Edit'
+          },
+          watermarkText: {
+            view: 'Watermark Text - View',
+            edit: 'Watermark Text - Edit'
+          },
+          plcHost: {
+            view: 'PLC Host - View',
+            edit: 'PLC Host - Edit'
+          },
+          plcPort: {
+            view: 'PLC Port - View',
+            edit: 'PLC Port - Edit'
+          }
+        },
+        childrenMenu: {
+          title: 'System Config',
+          desc: 'System parameter configuration management',
+          save: 'Save',
+          reset: 'Reset',
+          loading: 'Configuration loading, please wait...',
+          loadError: 'Configuration load failed',
+          loadErrorDesc: 'Please check network connection or contact administrator',
+          reload: 'Reload',
+          incomplete: 'Configuration incomplete',
+          incompleteDesc: 'Detected {count} uninitialized configuration items, editing and saving are prohibited on this page.',
+          missingKeys: 'Missing configuration items:',
+          incompleteTip: 'Please contact administrator to execute configuration initialization SQL, or click the button below to reload.',
+          system: {
+            title: 'System Settings',
+            sessionTimeout: 'Session Timeout',
+            minutes: 'minutes',
+            defaultPageSize: 'Default Page Size',
+            defaultLanguage: 'Default Language',
+            dateFormat: 'Date Format'
+          },
+          security: {
+            title: 'Security Settings',
+            watermarkEnabled: 'Enable Watermark',
+            watermarkText: 'Watermark Text',
+            watermarkPlaceholder: 'Please enter watermark text'
+          },
+          plc: {
+            title: 'PLC Settings',
+            protocol: 'Communication Protocol',
+            host: 'PLC Address',
+            port: 'Port',
+            unitId: 'Unit ID',
+            timeout: 'Timeout',
+            retryCount: 'Retry Count',
+            pollSettings: 'Poll Settings',
+            pollFast: 'Fast Poll Interval',
+            pollSlow: 'Slow Poll Interval'
+          },
+          export: {
+            title: 'Export Settings',
+            format: 'Export Format',
+            filename: 'Filename Prefix',
+            pdfWatermarkEnabled: 'Enable PDF Watermark',
+            pdfWatermarkText: 'PDF Watermark Text',
+            pdfWatermarkPlaceholder: 'Please enter PDF watermark text'
+          },
+          connection: {
+            title: 'Connection Settings',
+            heartbeatInterval: 'Heartbeat Interval',
+            deviceStatusCheckInterval: 'Device Status Check Interval',
+            deviceOfflineThreshold: 'Device Offline Threshold',
+            unitSecond: 's'
+          },
+          device: {
+            title: 'Device Settings',
+            maxOnlineDevices: 'Max Online Devices',
+            deviceName: 'Device Name',
+            deviceCode: 'Device Code',
+            deviceRegion: 'Device Region',
+            deviceInstallDate: 'Install Date',
+            partLifeSettingsTitle: 'Part Life Reminder Settings',
+            partLifeReminderEnabled: 'Enable Part Life Reminder',
+            partLifeReminderEnabledTip: 'When enabled, automatic reminders will be sent when part life is below the threshold',
+            partLifeThreshold: 'Life Reminder Threshold',
+            partLifeThresholdTip: 'Trigger reminder when remaining part life is below this threshold',
+            partLifeRemindInterval: 'Reminder Interval',
+            intervalHour: 'Every Hour',
+            intervalShift: 'Every Shift',
+            intervalDay: 'Every Day',
+            partLifeRemindIntervalTip: 'Set the repeat interval for part life reminders',
+            snoozeInterval: 'Snooze Interval',
+            snooze5min: '5 minutes',
+            snooze10min: '10 minutes',
+            snooze30min: '30 minutes',
+            snooze1hour: '1 hour',
+            snooze2hour: '2 hours',
+            snoozeIntervalTip: 'Set the delay time for the "Snooze" function'
+          },
+          order: {
+            title: 'Order Settings',
+            autoComplete: 'Auto Complete',
+            productionControl: 'Production Control',
+            allowNoOrderProduction: 'Allow No-Order Production',
+            allowNoOrderProductionTip: 'When enabled, operators can start production without a production order',
+            noOrderProductionHighlight: 'Highlight No-Order Production',
+            noOrderProductionHighlightTip: 'When enabled, no-order production records will be highlighted in orange',
+            orderSwitchConfirm: 'Order Switch Confirmation',
+            autoArchiveCompleted: 'Auto Archive Completed Orders',
+            statDisplay: 'Statistics Display',
+            showOperatorName: 'Show Operator Name',
+            showAlarmCount: 'Show Alarm Count',
+            showRuntime: 'Show Runtime',
+            reportConfig: 'Report Config',
+            reportIncludeAlarmDetail: 'Report Include Alarm Details',
+            reportIncludeOperatorDetail: 'Report Include Operator Details',
+            reportIncludeDownloadCount: 'Report Include Download Count',
+            allowRunningOrderDownload: 'Allow Running Order Download',
+            allowRunningOrderDownloadTip: 'When enabled, reports can be downloaded for running orders'
+          },
+          license: {
+            manageTitle: 'License Management',
+            refresh: 'Refresh',
+            importLicense: 'Import License',
+            download: 'Download License',
+            statusValid: 'License Valid',
+            statusInvalid: 'License Invalid',
+            expireTime: 'Expire Time',
+            remaining: 'Remaining Time',
+            projectName: 'Project Name',
+            customerName: 'Customer Name',
+            detailTitle: 'License Details',
+            licenseId: 'License ID',
+            projectId: 'Project ID',
+            licenseKey: 'License Key',
+            licenseType: 'License Type',
+            maxDevices: 'Max Devices',
+            maxUsers: 'Max Users',
+            createdAt: 'Created At',
+            activatedAt: 'Activated At',
+            issuedAt: 'Issued At',
+            contact: 'Contact',
+            phone: 'Phone',
+            email: 'Email',
+            unlimited: 'Unlimited',
+            features: 'Features',
+            allFeatures: 'All Features',
+            machineBind: 'Machine Binding',
+            currentMachineId: 'Current Machine ID',
+            boundMachineId: 'Bound Machine ID',
+            notBoundAny: 'Not Bound',
+            matchStatus: 'Match Status',
+            matched: 'Matched',
+            notMatched: 'Not Matched',
+            timeGuard: 'Time Guard',
+            timeGuardStatus: 'Time Guard Status',
+            enabled: 'Enabled',
+            notInitialized: 'Not Initialized',
+            lastVerified: 'Last Verified',
+            serverTime: 'Server Time',
+            operation: 'Operation',
+            networkDiagnosis: 'Network Diagnosis',
+            fileInfo: 'License File Info',
+            filePath: 'File Path',
+            fileName: 'File Name',
+            fileSize: 'File Size',
+            lastModified: 'Last Modified',
+            noLicenseFile: 'No License File',
+            importDialogTitle: 'Import License',
+            importTip: 'Please select a .lic format license file',
+            dragUpload: 'Drag the file here, or click to upload',
+            cancel: 'Cancel',
+            confirmImport: 'Confirm Import',
+            licenseManager: {
+              // Brand Info
+              brandTitle: 'License Management System',
+              brandDesc: 'Secure, stable and reliable software licensing solution',
+
+              // Features
+              featureRsa: 'RSA Asymmetric Encryption',
+              featureTimeGuard: 'Anti-Tamper Time Protection',
+              featureMachineBind: 'Machine Code Hardware Binding',
+
+              // Form Title
+              importFormTitle: 'Import License File',
+
+              // License Status
+              statusValid: 'License Valid',
+              statusInvalid: 'License Invalid',
+              expireTime: 'Expire Time',
+              permanentValid: 'Permanent Valid',
+
+              // Machine ID
+              currentMachineId: 'Current Machine ID',
+              copy: 'Copy',
+              copySuccess: 'Copied successfully',
+              copyFailed: 'Copy failed',
+              machineIdTip: 'Please send this machine ID to the vendor to generate a license file',
+
+              // Upload Area
+              dragUploadTip: 'Drag the .lic license file here, or click to upload',
+              fileSizeTip: 'Only .lic format license files are supported',
+              remove: 'Remove',
+              pleaseSelectFile: 'Please select a license file first',
+
+              // Import Success
+              importSuccessTitle: 'License Imported Successfully',
+              importSuccess: 'License file imported successfully',
+              licenseId: 'License ID',
+              project: 'Project Name',
+              licenseType: 'License Type',
+              issuedAt: 'Issued At',
+              maxUsers: 'Max Users',
+              unlimited: 'Unlimited',
+
+              // Action Buttons
+              importLicense: 'Import License',
+              enterSystem: 'Enter System',
+              refreshStatus: 'Refresh Status',
+              cannotGetStatus: 'Unable to get license status',
+
+              // License Types
+              typeTrial: 'Trial',
+              typeStandard: 'Standard',
+              typeEnterprise: 'Enterprise',
+              typePerpetual: 'Perpetual',
+
+              // License Invalid Reasons
+              reasonUnknown: 'Unknown reason',
+              reasonFileNotFound: 'License file not found or verification failed',
+              reasonProjectMismatch: 'Project mismatch',
+              reasonMachineMismatch: 'Machine code mismatch (hardware binding)',
+              reasonExpired: 'License expired',
+              reasonMissingFeatures: 'Missing feature authorization',
+              reasonTimeRollback: 'System time rollback detected',
+              reasonNetworkSyncFailed: 'Network time synchronization failed'
+            }
+          },
+        }
+      },
+      permission: {
+        default: 'PermConfig',
+        save: 'Save',
+        reset: 'Reset',
+        refresh: 'Refresh Cache',
+        page: {
+          title: 'Permission Config',
+          desc: 'Role permission configuration management',
+          expandAll: 'Expand All',
+          collapseAll: 'Collapse All',
+          roleList: 'Role List',
+          current: 'Current',
+          noRole: 'No Role',
+          permissionTree: 'Permission Tree',
+          all: 'All',
+          menu: 'Menu',
+          button: 'Button',
+          param: 'Param',
+          searchPlaceholder: 'Search permission...',
+          selectRoleTip: 'Please select a role on the left to configure permissions',
+          save: 'Save',
+          selected: 'Selected',
+          reset: 'Reset',
+          saveSuccess: 'Permission saved successfully',
+          saveFailed: 'Permission save failed',
+          confirmReset: 'Are you sure you want to reset permissions?',
+          resetSuccess: 'Permission reset successfully',
+          selectedCount: 'Selected {count} items',
+          halfSelectedCount: 'Half selected {count} items',
+          totalCount: 'Total {count} items'
+        }
+      },
+      device: {
+        default: 'OnlineMgmt',
+        kick: 'Kick Device',
+        delete: 'Delete Device',
+        page: {
+          pageDesc: 'Online device and user management',
+          onlineDevices: 'Online Devices',
+          unlimited: 'Unlimited',
+          maxDevices: 'Max Devices',
+          onlineUsers: 'Online Users',
+          usageRate: 'Usage Rate',
+          searchPlaceholder: 'Search device or user...',
+          filterStatus: 'Status Filter',
+          statusOnline: 'Online',
+          statusOffline: 'Offline',
+          deviceName: 'Device Name',
+          deviceInfo: 'Device Info',
+          user: 'User',
+          ip: 'IP Address',
+          loginTime: 'Login Time',
+          lastActive: 'Last Active Time',
+          lastActiveTime: 'Last Active Time',
+          status: 'Status',
+          operation: 'Operation',
+          kick: 'Kick',
+          kickConfirm: 'Are you sure you want to kick this device?',
+          kickConfirmTitle: 'Kick Device Confirmation',
+          kickWarningTitle: 'Kick Device Warning',
+          kickWarningDesc: 'Are you sure you want to kick device {deviceName}?',
+          kickSuccess: 'Device kicked successfully',
+          kickFailed: 'Failed to kick device',
+          delete: 'Delete',
+          deleteConfirm: 'Are you sure you want to delete this offline device?',
+          deleteConfirmTitle: 'Delete Device Confirmation',
+          deleteWarningTitle: 'Delete Device Warning',
+          deleteWarningDesc: 'Are you sure you want to delete offline device {deviceName}?',
+          deleteSuccess: 'Device deleted successfully',
+          deleteFailed: 'Failed to delete device',
+          fetchFailed: 'Failed to fetch device list',
+          unknownDevice: 'Unknown Device',
+          currentDevice: 'Current Device',
+          refresh: 'Refresh',
+          refreshStatus: 'Refresh Status',
+          refreshSuccess: 'Status refreshed successfully',
+          refreshStatusSuccess: 'Status refresh successful',
+          refreshStatusFailed: 'Status refresh failed',
+          noData: 'No Data',
+          loading: 'Loading...'
+        }
+      }
     }
   },
-
-  // ==================== Parameter Permission (for permission system, backend returns i18n key) ====================
-  config: {
-    system: {
-      sessionTimeout: {
-        view: 'Session Timeout - View',
-        edit: 'Session Timeout - Edit'
-      },
-      defaultPageSize: {
-        view: 'Default Page Size - View',
-        edit: 'Default Page Size - Edit'
-      },
-      defaultLanguage: {
-        view: 'Default Language - View',
-        edit: 'Default Language - Edit'
-      }
-    },
-    security: {
-      watermarkEnabled: {
-        view: 'Watermark Switch - View',
-        edit: 'Watermark Switch - Edit'
-      },
-      watermarkText: {
-        view: 'Watermark Text - View',
-        edit: 'Watermark Text - Edit'
-      }
-    },
-    plc: {
-      plcHost: {
-        view: 'Device IP - View',
-        edit: 'Device IP - Edit'
-      },
-      plcPort: {
-        view: 'Device Port - View',
-        edit: 'Device Port - Edit'
-      }
-    }
+  // tags Page
+  tagsview: {
+    refresh: 'Refresh Page',
+    close: 'Close Page',
+    closeOthers: 'Close Others',
+    closeLeft: 'Close Left',
+    closeRight: 'Close Right',
+    closeAll: 'Close All'
   },
-
-  // ==================== Login ====================
+  // Login / Register
   login: {
-    title: 'Welcome',
+    title: 'System Login',
     username: 'Username',
     password: 'Password',
     captcha: 'Captcha',
     loginBtn: 'Login',
     registerBtn: 'Register',
-    registerTitle: 'Register',
-    email: 'Email',
-    confirmPassword: 'Confirm Password',
-    hasAccount: 'Already have an account?',
-    loginNow: 'Login Now',
+    rememberMe: 'Remember me',
+    forgotPassword: 'Forgot password?',
     noAccount: "Don't have an account?",
+    hasAccount: 'Already have an account?',
+    goLogin: 'Go to login',
+    goRegister: 'Go to register',
+    loginNow: 'Login Now',
     registerNow: 'Register Now',
-    usernameRequired: 'Username is required',
-    passwordRequired: 'Password is required',
-    captchaRequired: 'Captcha is required',
-    emailRequired: 'Email is required',
-    confirmPasswordRequired: 'Please confirm your password',
-    registerSuccess: 'Registration successful, please login'
-  },
-
-  // ==================== Layout ====================
-  layout: {
-    // 网站首页
-    home: 'Home',
-    homeOverview: 'Overview',
-    homeDashboard: 'Dashboard',
-    homeData: 'DataView',
-
-    // 设备管理
-    deviceManagement: 'Device',
-    deviceState: 'DevState',
-    alarmLog: 'AlarmLog',
-    partLife: 'PartLife',
-
-    // 生产管理
-    productionManagement: 'Production',
-    recipeManagement: 'RecipeDB',
-    orderManagement: 'OrderLog',
-
-    // 系统配置
-    systemSettings: 'Settings',
-    dictManagement: 'DictData',
-    deptManagement: 'OrgMgmt',
-    roleManagement: 'UserRole',
-    userManagement: 'UserData',
-    auditLog: 'AuditLog',
-    systemConfig: 'ConfData',
-
-    // 个人中心
-    profile: 'Profile',
-
-    // 通知中心
-    notificationCenter: 'NotifLog',
-
-    // 退出登录
-    logout: 'Logout',
-
-    // 用户
-    user: 'User',
-
-    // 搜索
-    searchMenu: 'Search menu...',
-
-    // 面包屑
-    tagsView: {
-      refresh: 'Refresh',
-      close: 'Close',
-      closeOthers: 'Close Others',
-      closeLeft: 'Close Left',
-      closeRight: 'Close Right',
-      closeAll: 'Close All'
-    }
-  },
-
-  // ==================== Data Dictionary ====================
-  dict: {
-    typeList: 'Dictionary Types',
-    itemList: 'Dictionary Items',
-    typeName: 'Type Name',
-    typeCode: 'Type Code',
-    typeCodePlaceholder: 'Start with letter, e.g. user_status',
-    itemLabel: 'Label',
-    itemValue: 'Value',
-    itemValuePlaceholder: 'e.g. 1/0',
-    itemStatus: 'Status',
-    addType: 'Add Dictionary Type',
-    editType: 'Edit Dictionary Type',
-    addItem: 'Add Dictionary Item',
-    editItem: 'Edit Dictionary Item',
-    typeNameRequired: 'Please enter dictionary type name',
-    typeCodeRequired: 'Please enter dictionary type code',
-    itemLabelRequired: 'Please enter dictionary item label',
-    itemValueRequired: 'Please enter dictionary item value',
-    deleteTypeConfirm: 'Delete this dictionary type? All items will be deleted too.',
-    deleteItemConfirm: 'Delete this dictionary item?'
-  },
-
-  // ==================== Role Management ====================
-  role: {
-    title: 'Role Management',
-    roleName: 'Role Name',
-    roleCode: 'Role Code',
-    dataScope: 'Data Scope',
-    dataScopeAll: 'All Data Scope',
-    dataScopeDept: 'Department Data Scope',
-    dataScopeDeptAndChild: 'Department and Sub-departments Data Scope',
-    dataScopeSelf: 'Self Data Scope Only',
-    dataScopeCustom: 'Custom Data Scope',
-    permission: 'Permission',
-    permissionTitle: 'Menu Permission',
-    permissionSuccess: 'Permission updated successfully',
-    addRole: 'Add Role',
-    editRole: 'Edit Role',
-    roleNameRequired: 'Please enter role name',
-    roleCodeRequired: 'Please enter role code',
-    deleteConfirm: 'Delete this role?'
-  },
-
-  // ==================== Organization Management ====================
-  dept: {
-    title: 'Organization Management',
-    deptName: 'Department Name',
-    deptNamePlaceholder: 'Please enter department name',
-    orderNum: 'Sort',
-    leader: 'Leader',
-    phone: 'Phone',
+    usernameRequired: 'Please enter username',
+    passwordRequired: 'Please enter password',
+    captchaRequired: 'Please enter captcha',
+    emailRequired: 'Please enter email',
+    usernamePlaceholder: 'Enter username',
+    passwordPlaceholder: 'Enter password',
+    captchaPlaceholder: 'Enter captcha',
+    loginSuccess: 'Login successful',
+    loginFailed: 'Login failed',
+    logoutSuccess: 'Logout successful',
+    logoutConfirm: 'Are you sure you want to logout?',
+    // Register
+    registerTitle: 'User Registration',
+    realName: 'Real Name',
     email: 'Email',
-    parentDept: 'Parent Dept',
-    addChild: 'Add Child Dept',
-    addDept: 'Add Department',
-    editDept: 'Edit Department',
-    deptNameRequired: 'Please enter department name',
-    deleteConfirm: 'Delete this department?'
+    phone: 'Phone',
+    confirmPassword: 'Confirm Password',
+    registerSuccess: 'Registration successful, please login',
+    // Single Sign-On
+    deviceLimitExceeded: 'Maximum number of online devices reached (max {maxDevices} devices), please contact administrator to kick other devices',
+    kickedOffline: 'Your account has been logged in on another device, you have been kicked offline',
+    kickNotice: 'Kick Notice',
+    kickReason: 'Your account has been logged in on another device',
+    // First Login
+    firstLoginTitle: 'First Login',
+    firstLoginDesc: 'Detected that you are logging in for the first time, please change your initial password',
+    oldPassword: 'Old Password',
+    newPassword: 'New Password',
+    modifyPassword: 'Change Password',
+    passwordStrength: 'Password Strength',
+    passwordWeak: 'Weak',
+    passwordMedium: 'Medium',
+    passwordStrong: 'Strong',
+    passwordTips: 'Password length 8-20 characters, including uppercase and lowercase letters, numbers and special characters'
   },
-
-  // ==================== Notification Center ====================
-  notification: {
-    // Page title
-    title: 'Notification Center',
-    center: 'Notifications',
-    viewAll: 'View All',
-    notificationSettings: 'Notification Settings',
-
-    // General
-    type: 'Type',
-    content: 'Content',
-    refresh: 'Refresh',
-    export: 'Export',
-    empty: 'No notifications',
-
-    // Action buttons
-    markAllRead: 'Mark All Read',
-    markRead: 'Mark Read',
-    delete: 'Delete',
-    archive: 'Archive',
-    unarchive: 'Restore',
-    batchMarkRead: 'Batch Mark Read',
-    batchArchive: 'Batch Archive',
-    batchUnarchive: 'Batch Restore',
-    batchDelete: 'Batch Delete',
-    clearSelection: 'Clear Selection',
-    selectedCount: '{count} items selected',
-
-    // Status
-    all: 'All',
-    unread: 'Unread',
-    read: 'Read',
-
-    // Archive
-    unarchived: 'Unarchived',
-    archived: 'Archived',
-
-    // Priority
-    priority: 'Priority',
-    priorityHigh: 'High Priority',
-    priorityMedium: 'Medium Priority',
-    priorityLow: 'Low Priority',
-
-    // Time range
-    timeRange: 'Time Range',
-    today: 'Today',
-    thisWeek: 'This Week',
-    thisMonth: 'This Month',
-    custom: 'Custom',
-    startDate: 'Start Date',
-    endDate: 'End Date',
-    to: 'to',
-
-    // Search
-    searchPlaceholder: 'Search notification title or content',
-    search: 'Search',
-    reset: 'Reset',
-
-    // Notification type names
-    typeSystem: 'System Settings',
-    typePlc: 'Device Management',
-    typeUser: 'User Management',
-    typeAudit: 'Audit Trail',
-    typeDevice: 'Device Parameters',
-    typeConnection: 'Connection Config',
-
-    // Success/failure messages
-    markReadSuccess: 'Marked as read',
-    markAllSuccess: 'All marked as read',
-    deleteSuccess: 'Deleted successfully',
-    batchDeleteSuccess: 'Batch deleted successfully',
-    archiveSuccess: 'Archived successfully',
-    batchArchiveSuccess: 'Batch archived successfully',
-    unarchiveSuccess: 'Restored successfully',
-    batchUnarchiveSuccess: 'Batch restored successfully',
-    operationFailed: 'Operation failed',
-
-    // Confirm dialogs
-    deleteConfirm: 'Delete this notification?',
-    batchDeleteConfirm: 'Delete {count} selected notifications?',
-    markAllConfirm: 'Mark all notifications as read?',
-    deleteWarning: 'This cannot be undone',
-
-    // Time display
-    justNow: 'just now',
-    minutesAgo: ' min ago',
-    hoursAgo: ' hours ago',
-    daysAgo: ' days ago',
-    createdAt: 'Created At',
-
-    // ==================== Notification content templates (i18n key + dynamic params) ====================
-    // User related
-    user: {
-      register: {
-        title: 'New User Registered',
-        content: 'User {username} has registered, please review promptly'
-      },
-      profileUpdate: {
-        title: 'User Profile Updated',
-        content: 'User {username} modified their profile'
-      }
-    },
-
-    // System config related
-    config: {
-      systemUpdate: {
-        title: 'System Config Updated',
-        content: 'User {username} modified {count} system config(s)'
-      },
-      plcConnectionUpdate: {
-        title: 'Device Connection Config Updated',
-        content: 'User {username} modified {count} device connection config(s)'
-      },
-      connectionUpdate: {
-        title: 'Connection Config Updated',
-        content: 'User {username} modified {count} connection config(s)'
-      },
-      deviceParamsUpdate: {
-        title: 'Device Parameter Config Updated',
-        content: 'User {username} modified {count} device parameter config(s)'
-      }
-    },
-
-    // PLC related
-    plc: {
-      alarm: {
-        title: 'Device Alarm',
-        content: 'Device alarm: {alarmMessage}'
-      },
-      connectionLost: {
-        title: 'Device Connection Lost',
-        content: 'Device connection lost: {deviceName}'
-      },
-      connectionRestored: {
-        title: 'Device Connection Restored',
-        content: 'Device connection restored: {deviceName}'
-      }
-    },
-
-    // ==================== Notification Settings ====================
-    settings: {
-      title: 'Notification Settings',
-      notificationTypes: 'Notification Types',
-      typeEnabled: 'Enabled',
-      doNotDisturb: 'Do Not Disturb',
-      doNotDisturbEnabled: 'Enable Do Not Disturb',
-      startTime: 'Start Time',
-      endTime: 'End Time',
-      reminderMethods: 'Reminder Methods',
-      reminderMethodsDesc: 'Customize notification reminder methods',
-      soundEnabled: 'Notification Sound',
-      popupEnabled: 'Popup Reminder',
-      save: 'Save Settings',
-      saveSuccess: 'Settings saved successfully',
-      system: 'System Settings Notifications',
-      plc: 'Device Management Notifications',
-      user: 'User Management Notifications',
-      audit: 'Audit Trail Notifications',
-      device: 'Device Parameter Notifications',
-      connection: 'Connection Config Notifications'
-    }
+  // Layout
+  layout: {
+    // Top navigation
+    user: 'User',
+    fullscreen: 'Fullscreen',
+    exitFullscreen: 'Exit Fullscreen',
+    searchMenu: 'Search Menu',
+    // User menu
+    profile: 'Profile',
+    settings: 'System Settings',
+    logout: 'Logout',
+    notificationCenter: 'Notification Center',
+    // Sidebar
+    collapse: 'Collapse',
+    expand: 'Expand'
   },
-
-  // ==================== Error Page ====================
-  errorPage: {
-    notFound: 'Page Not Found',
-    backHome: 'Back Home',
-    back: 'Go Back',
-    countdown: 'Returning home in {count}s',
-    forbidden: 'Sorry, you do not have access',
-    forbiddenDesc: 'This page requires specific permissions, please contact the administrator',
-    forbiddenTitle: 'Forbidden'
-  },
-
-  // ==================== Home ====================
-  home: {
-    welcome: 'Welcome',
-    admin: 'Administrator'
-  },
-
-  // ==================== Theme Settings ====================
-  theme: {
-    quickMenu: 'Quick Menu',
-    palette: 'Theme Palette',
-    language: 'Language',
-    resetAll: 'Reset All',
-    reset: 'Reset',
-    custom: 'Custom',
-    switchedToZh: '已切换为中文',
-    switchedToEn: 'Switched to English',
-    sidebarBg: 'Sidebar Background Color',
-    sidebarHoverText: 'Sidebar Hover Text',
-    sidebarHoverBg: 'Sidebar Hover Background',
-    sidebarIconColor: 'Sidebar Icon Color',
-    sidebarActiveBg: 'Active Menu Background'
-  },
-
-  // ==================== Profile ====================
+  // Profile
   profile: {
     title: 'Profile',
     basicInfo: 'Basic Info',
     username: 'Username',
     realName: 'Real Name',
-    sex: 'Gender',
-    email: 'Email',
-    phone: 'Phone',
-    role: 'Role',
-    status: 'Status',
-    createTime: 'Create Time',
-    sexMale: 'Male',
-    sexFemale: 'Female',
-    sexUnknown: 'Unknown',
-    roleAdministrator: 'Administrator',
-    roleEngineer: 'Engineer',
-    roleOperator: 'Operator',
-    statusEnabled: 'Enabled',
-    statusDisabled: 'Disabled',
-    changePassword: 'Change Password',
-    oldPassword: 'Old Password',
-    newPassword: 'New Password',
-    confirmPassword: 'Confirm Password'
-  },
-
-  // ==================== User Management ====================
-  user: {
-    title: 'User Management',
-    username: 'Username',
-    password: 'Password',
-    realName: 'Real Name',
-    sex: 'Gender',
-    sexUnknown: 'Unknown',
-    sexMale: 'Male',
-    sexFemale: 'Female',
-    email: 'Email',
-    phone: 'Phone',
-    role: 'Role',
-    dept: 'Department',
-    status: 'Status',
-    createTime: 'Create Time',
-    operation: 'Action',
-    addUser: 'Add User',
-    editUser: 'Edit User',
-    enable: 'Enable',
-    disable: 'Disable',
-    resetPassword: 'Reset Password',
-    remark: 'Remark',
-    roleAdministrator: 'Administrator',
-    roleEngineer: 'Engineer',
-    roleOperator: 'Operator',
-    usernamePlaceholder: 'Enter username',
-    passwordPlaceholder: 'Enter password',
-    realNamePlaceholder: 'Enter real name',
-    emailPlaceholder: 'Enter email',
-    phonePlaceholder: 'Enter phone',
-    rolePlaceholder: 'Select role',
-    deptPlaceholder: 'Select department',
-    remarkPlaceholder: 'Enter remark',
-    usernameLength: 'Length between 2 and 50 characters',
-    passwordLength: 'Length between 6 and 32 characters',
-    emailInvalid: 'Please enter a valid email address',
-    deleteConfirm: 'Are you sure to delete user "{name}"?',
-    batchDeleteConfirm: 'Are you sure to delete {count} selected users?',
-    deleteSuccess: 'Deleted successfully',
-    batchDeleteSuccess: 'Batch deleted successfully',
-    exportFileName: 'UserList',
-    resetPasswordTitle: 'Reset Password',
-    resetPasswordPlaceholder: 'Enter new password',
-    resetPasswordError: 'Password length 6-20 characters',
-    resetPasswordSuccess: 'Password reset successfully'
-  },
-
-  // ==================== Audit Log ====================
-  audit: {
-    title: 'Audit Log',
-    myTitle: 'My Activity',
-    userName: 'Operator',
-    action: 'Action',
-    target: 'Target',
-    oldValue: 'Old Value',
-    newValue: 'New Value',
-    result: 'Result',
-    success: 'Success',
-    failed: 'Failed',
-    ip: 'IP Address',
-    createdAt: 'Time',
-    timeRange: 'Time Range',
-    startTime: 'Start Time',
-    endTime: 'End Time'
-  },
-
-  // ==================== System Config ====================
-  systemConfig: {
-    title: 'System Configuration',
-    desc: 'Customize system parameters, including system settings, security settings, device connection, export configuration, etc.',
-    save: 'Save',
-    reset: 'Reset',
-    saveSuccess: 'Configuration saved successfully',
-    resetSuccess: 'Configuration reset to default',
-    resetConfirm: 'Are you sure to reset to default configuration?',
-    loadFailed: 'Failed to load configuration',
-    saveFailed: 'Failed to save configuration',
-    resetFailed: 'Failed to reset configuration',
-    system: {
-      title: 'System Config',
-      sessionTimeout: 'Session Timeout',
-      minutes: 'minutes',
-      defaultPageSize: 'Default Page Size',
-      defaultLanguage: 'Default Language',
-      dateFormat: 'Date Format'
-    },
-    security: {
-      title: 'Security Config',
-      watermarkEnabled: 'Enable Watermark',
-      watermarkText: 'Watermark Text',
-      watermarkPlaceholder: 'Use current username if empty'
-    },
-    plc: {
-      title: 'Device Connect',
-      protocol: 'Protocol',
-      host: 'Device IP Address',
-      port: 'Device Port',
-      unitId: 'Unit ID',
-      pollSettings: 'Poll Settings',
-      pollFast: 'Fast Poll Interval',
-      pollSlow: 'Slow Poll Interval'
-    },
-    export: {
-      title: 'Export Config',
-      pdfWatermarkEnabled: 'PDF Export Watermark',
-      pdfWatermarkText: 'PDF Watermark Text',
-      pdfWatermarkPlaceholder: 'Use current username if empty'
-    },
-    connection: {
-      title: 'Network Config',
-      heartbeatInterval: 'Heartbeat Interval'
-    },
-    device: {
-      title: 'Device Config',
-      deviceName: 'Device Name',
-      deviceCode: 'Device Code',
-      deviceRegion: 'Location',
-      deviceInstallDate: 'Install Date',
-      partLifeSettingsTitle: 'Part Life Reminder Settings',
-      partLifeReminderEnabled: 'Part Life Reminder',
-      partLifeReminderEnabledTip: 'When enabled, automatically pop up reminder when part life reaches threshold',
-      partLifeThreshold: 'Reminder Threshold',
-      partLifeThresholdTip: 'Remind when remaining life reaches this percentage',
-      partLifeRemindInterval: 'Reminder Interval',
-      partLifeRemindIntervalTip: 'After life expires, pop up warning at this interval. The popup is draggable and closable.',
-      snoozeInterval: 'Snooze Interval',
-      snoozeIntervalTip: 'After clicking "Remind Later", pop up again after this interval.',
-      snooze5min: '5 Minutes',
-      snooze10min: '10 Minutes',
-      snooze30min: '30 Minutes',
-      snooze1hour: '1 Hour',
-      snooze2hour: '2 Hours',
-      intervalHour: 'Every Hour',
-      intervalShift: 'Every Shift',
-      intervalDay: 'Every Day',
-      // 警告弹窗相关
-      reminderTitle: 'Part Life Reminder',
-      reminderClose: 'Close',
-      reminderRemindLater: 'Remind Later',
-      reminderViewDetail: 'View Details',
-      reminderContent: 'The following parts have reached the reminder threshold, please replace them in time:',
-      reminderNoData: 'No parts need to be reminded currently'
-    },
-    order: {
-      title: 'Order Config',
-      productionControl: 'Production Control',
-      statDisplay: 'Statistics Display',
-      reportConfig: 'Report Settings',
-      allowNoOrderProduction: 'Allow Production Without Order',
-      allowNoOrderProductionTip: 'When disabled, equipment cannot run without an order',
-      noOrderProductionHighlight: 'Highlight No-Order Production',
-      noOrderProductionHighlightTip: 'Requires "Allow Production Without Order" enabled',
-      orderSwitchConfirm: 'Confirm Before Switching Order',
-      autoArchiveCompleted: 'Auto Archive Completed Orders',
-      showOperatorName: 'Show Operator Name',
-      showAlarmCount: 'Show Total Alarm Count',
-      showRuntime: 'Show Total Runtime',
-      reportIncludeAlarmDetail: 'Include Alarm Details in Report',
-      reportIncludeOperatorDetail: 'Include Operator Details in Report',
-      reportIncludeDownloadCount: 'Include Download Count in Report',
-      allowRunningOrderDownload: 'Allow Download for Running Orders',
-      allowRunningOrderDownloadTip: 'Running order data is incomplete, enable with caution'
-    }
-  },
-
-  // ==================== License ====================
-  license: {
-    importTitle: 'License Import',
-    manageTitle: 'License Mgmt',
-    statusValid: 'License Valid',
-    statusInvalid: 'License Invalid',
-    statusChecking: 'Checking License',
-    statusCheckingTip: 'Please wait...',
-    statusTrial: 'Trial License',
-    statusFormal: 'Formal License',
-    statusPermanent: 'Permanent License',
-    licenseFile: 'License File',
-    importLicense: 'Import License',
-    importSuccess: 'License imported successfully',
-    importFailed: 'License import failed',
-    selectFile: 'Select License File',
-    dragFileHere: 'Drag license file here, or',
-    clickUpload: 'click to upload',
-    fileFormatTip: 'Only .lic license files are supported',
-    noLicense: 'No license file imported yet',
-    licenseInfo: 'License Info',
-    customerName: 'Customer Name',
-    projectName: 'Project Name',
-    licenseType: 'License Type',
-    expireTime: 'Expire Time',
-    machineId: 'Machine ID',
-    machineBind: 'Machine Binding',
-    timeGuard: 'Time Protection',
-    syncTime: 'Sync Time',
-    syncTimeSuccess: 'Time synced successfully',
-    syncTimeFailed: 'Time sync failed',
-    downloadLicense: 'Download License',
-    downloadFailed: 'Download failed',
-    copyMachineId: 'Copy Machine ID',
-    copySuccess: 'Copied successfully',
-    features: 'Features',
-    issuedAt: 'Issued At',
-    notBound: 'Not Bound',
-    refresh: 'Refresh',
-    download: 'Download',
-    remaining: 'Remaining',
-    detailTitle: 'License Details',
-    licenseId: 'License ID',
-    projectId: 'Project ID',
-    contact: 'Contact',
+    role: 'User Role',
+    sex: 'User Sex',
     phone: 'Phone',
     email: 'Email',
-    maxUsers: 'Max Users',
-    allFeatures: 'All Features',
-    currentMachineId: 'Current Machine ID',
-    boundMachineId: 'Bound Machine ID',
-    notBoundAny: 'Not Bound (Any Machine)',
-    matchStatus: 'Match Status',
-    matched: 'Matched',
-    notMatched: 'Not Matched',
-    timeGuardStatus: 'Time Guard',
-    enabled: 'Enabled',
-    notInitialized: 'Not Initialized',
-    lastVerified: 'Last Verified',
-    serverTime: 'Server Time',
-    operation: 'Operation',
-    networkDiagnosis: 'Network Diagnosis',
-    fileInfo: 'License File Info',
-    adminOnly: 'Admin Only',
-    filePath: 'File Path',
-    fileName: 'File Name',
-    fileSize: 'File Size',
-    lastModified: 'Last Modified',
-    noLicenseFile: 'License file not found, please import first',
-    importDialogTitle: 'Import License File',
-    importTip: 'Please upload a .lic license file issued by Beehive License Manager',
-    dragUpload: 'Drag .lic file here, or click to upload',
-    cancel: 'Cancel',
-    confirmImport: 'Confirm Import',
-    networkDiagnosisSuccess: 'Network diagnosis successful',
-    networkDiagnosisFailed: 'Network diagnosis failed, please check network',
-    unknownReason: 'Unknown reason',
-    timeRemaining: 'Time Remaining',
-    expireAt: 'Expire At',
-    licenseStatus: 'License Status',
-    expired: 'Expired',
-    importNewLicense: 'Please import a new license file',
-    // License import page
-    brandTitle: 'Software License Manager',
-    brandDesc: 'Beehive License Manager',
-    featureRsa: 'RSA Asymmetric Signature',
-    featureTimeGuard: 'Anti-Time Rollback',
-    featureMachineBind: 'Machine Fingerprint Binding',
-    importFormTitle: 'Import License File',
-    dragUploadTip: 'Drag .lic license file here, or click to upload',
-    fileSizeTip: 'Only .lic license files supported, max 1MB',
-    remove: 'Remove',
-    importSuccessTitle: 'License Imported Successfully',
-    project: 'Project',
-    unlimited: 'Unlimited',
-    enterSystem: 'Enter System',
-    refreshStatus: 'Refresh Status',
-    cannotGetStatus: 'Cannot get license status, please check backend service',
-    pleaseSelectFile: 'Please select a license file first',
-    permanentValid: 'Permanent Valid',
-    typeTrial: 'Trial',
-    typeStandard: 'Standard',
-    typeEnterprise: 'Enterprise',
-    typePerpetual: 'Perpetual',
-    // License invalid reasons
-    reasonFileNotFound: 'License file not found or verification failed',
-    reasonProjectMismatch: 'License project mismatch',
-    reasonMachineMismatch: 'License does not match current machine (hardware binding)',
-    reasonExpired: 'License has expired',
-    reasonMissingFeatures: 'Missing feature authorization',
-    reasonTimeRollback: 'Time rollback detected, please calibrate system time',
-    reasonNetworkSyncFailed: 'Network calibration failed, please check network connection',
-    reasonUnknown: 'License verification failed',
-    // Machine ID
-    copy: 'Copy',
-    copyFailed: 'Copy failed',
-    machineIdTip: 'For authorization, please provide this machine ID to the supplier'
-  },
-
-  // ==================== Recipe Management ====================
-  recipe: {
-    title: 'Recipe Management',
-    desc: 'Equipment recipe parameter management and intelligent analysis',
-    recipe: 'Recipe',
-    recipeList: 'Recipe List',
-    inUse: 'In Use',
-    notInUse: 'Not In Use',
-    download: 'Download',
-    downloadAll: 'Download All',
-    exportExcel: 'Export Excel',
-    exportPdf: 'Export PDF',
-    basicInfo: 'Basic Info',
-    axisParams: 'Axis Parameters',
-    speedParams: 'Speed Parameters',
-    delayParams: 'Delay & Process Parameters',
-    analysis: 'Intelligent Analysis',
-    recipeCode: 'Recipe Code',
-    recipeName: 'Recipe Name',
-    namePlaceholder: 'Enter recipe name',
-    nameNotEmpty: 'Recipe name cannot be empty',
-    nameUpdateSuccess: 'Recipe name updated successfully',
-    productType: 'Product Type',
-    fillVolume: 'Fill Volume',
-    lastUsed: 'Last Used',
-    paramName: 'Parameter',
-    paramValue: 'Value',
-    paramUnit: 'Unit',
-    fillAngle: 'Fill Angle',
-    suckBackAngle: 'Suck-back Angle',
-    fillAxisInit: 'Fill Axis Init Pos',
-    fillAxisReach: 'Fill Axis Reach Pos',
-    fixAxisInit: 'Fix Axis Init Pos',
-    fixAxisReach: 'Fix Axis Reach Pos',
-    fixAxisPreLift: 'Fix Axis Pre-lift Pos',
-    stopperAxisInit: 'Stopper Axis Init Pos',
-    stopperAxisPrePress: 'Stopper Axis Pre-press Pos',
-    stopperAxisReach: 'Stopper Axis Reach Pos',
-    fillAxisInitSpeed: 'Fill Axis Init Speed',
-    fillAxisReachSpeed: 'Fill Axis Reach Speed',
-    fixAxisInitSpeed: 'Fix Axis Init Speed',
-    fixAxisReachSpeed: 'Fix Axis Reach Speed',
-    fixAxisPreLiftSpeed: 'Fix Axis Pre-lift Speed',
-    stopperAxisInitSpeed: 'Stopper Axis Init Speed',
-    stopperAxisPrePressSpeed: 'Stopper Axis Pre-press Speed',
-    stopperAxisReachSpeed: 'Stopper Axis Reach Speed',
-    fillDelay: 'Fill Delay',
-    vacuumDelay: 'Vacuum Delay',
-    fillSpeed: 'Fill Speed',
-    suckBackSpeed: 'Suck-back Speed',
-    usageCount: 'Usage Count',
-    faultRate: 'Fault Rate',
-    avgQualifiedRate: 'Avg Qualified Rate'
-  },
-
-  // ==================== Order Management ====================
-  order: {
-    title: 'Order Management',
-    desc: 'Production order management and report export',
-    completed: 'Completed',
-    running: 'In Progress',
-    planned: 'Planned',
-    orderNo: 'Order No.',
-    productName: 'Product Name',
-    recipeName: 'Recipe',
-    batchNo: 'Batch No.',
-    targetQty: 'Target Qty',
-    completedQty: 'Completed Qty',
-    qualifiedQty: 'Qualified Qty',
-    unqualifiedQty: 'Unqualified Qty',
-    qualifiedRate: 'Qualified Rate',
-    operator: 'Operator',
-    startTime: 'Start Time',
-    endTime: 'End Time',
-    runtime: 'Runtime',
-    alarmCount: 'Alarm Count',
     status: 'Status',
-    progress: 'Progress',
-    estimatedEnd: 'Est. End',
+    createTime: 'Create Time'
+  },
+  // quick menu
+  quickMenu: {
+    title: 'Quick Menu',
+    // Theme Settings
+    theme: {
+      palette: 'Theme Palette',
+      resetAll: 'Reset All',
+      reset: 'Reset',
+      custom: 'Custom',
+      sidebarBg: 'Sidebar Background',
+      sidebarHoverText: 'Sidebar Hover Text',
+      sidebarHoverBg: 'Sidebar Hover Background',
+      sidebarIconColor: 'Sidebar Icon Color',
+      sidebarActiveBg: 'Sidebar Active Background'
+    },
+    // language
+    language: {
+      title: 'Language',
+      switchedToZh: 'Switched to Chinese',
+      switchedToEn: 'Switched to English'
+    },
+  },
+  // Notification
+  notification: {
+    title: 'Notification Center',
+    center: 'Notification Center',
+    empty: 'No notifications',
+    viewAll: 'View All',
+    notificationSettings: 'Notification Settings',
+    markAllRead: 'Mark All Read',
+    markAllConfirm: 'Are you sure you want to mark all notifications as read?',
+    markAllSuccess: 'All notifications marked as read',
+    delete: 'Delete',
+    deleteConfirm: 'Are you sure you want to delete this notification?',
+    deleteSuccess: 'Notification deleted',
+    batchDelete: 'Batch Delete',
+    batchDeleteConfirm: 'Are you sure you want to delete the selected {count} notifications?',
+    batchDeleteSuccess: 'Selected notifications deleted',
+    type: 'Notification Type',
+    content: 'Notification Content',
+    read: 'Read',
+    unread: 'Unread',
+    createdAt: 'Created At',
+    // Archive
+    unarchived: 'Unarchived',
+    archived: 'Archived',
+    archive: 'Archive',
+    unarchive: 'Unarchive',
+    batchArchive: 'Batch Archive',
+    batchUnarchive: 'Batch Unarchive',
+    // Filter
+    all: 'All',
+    typeSystem: 'System',
+    typePlc: 'PLC',
+    typeUser: 'User',
+    typeAudit: 'Audit',
+    typeDevice: 'Device',
+    typeConnection: 'Connection',
+    typeSecurity: 'Security',
     priority: 'Priority',
-    queuePosition: 'Queue Pos.',
-    downloadCount: 'Download Count',
-    download: 'Download Report',
-    downloadSelected: 'Download Selected',
-    downloadAll: 'Download All',
-    exportPdf: 'Export PDF Report',
-    noOrderProduction: 'No-Order Production',
-    orderReport: 'Production Order Report',
-    reportBasicInfo: 'Basic Information',
-    reportProductionStats: 'Production Statistics',
-    reportQualityStats: 'Quality Statistics',
-    reportAlarmDetail: 'Alarm Details',
-    reportOperatorDetail: 'Operator Details',
-    reportGeneratedBy: 'Generated By',
-    reportGeneratedAt: 'Generated At',
-    high: 'High',
-    normal: 'Normal',
-    low: 'Low',
-    statusCompleted: 'Completed',
-    statusRunning: 'In Production',
-    statusPlanned: 'Pending',
-    selectOrderTip: 'Please select orders to download',
-    plannedNoDownload: 'Planned orders do not support report download',
-    runningNoDownload: 'Running orders do not support report download yet (enable in system settings)'
-  },
+    priorityHigh: 'High',
+    priorityMedium: 'Medium',
+    priorityLow: 'Low',
+    timeRange: 'Time Range',
+    today: 'Today',
+    thisWeek: 'This Week',
+    thisMonth: 'This Month',
+    custom: 'Custom',
+    to: 'To',
+    startDate: 'Start Date',
+    endDate: 'End Date',
+    searchPlaceholder: 'Search notifications...',
+    reset: 'Reset',
+    // Actions
+    markRead: 'Mark Read',
+    batchMarkRead: 'Batch Mark Read',
+    selectedCount: '{count} selected',
+    clearSelection: 'Clear Selection',
+    // Time
+    justNow: 'Just now',
+    minutesAgo: ' minutes ago',
+    hoursAgo: ' hours ago',
+    daysAgo: ' days ago',
+    // Notification title and content (example)
+    userLoginTitle: 'User Login',
+    userLoginContent: 'User {username} logged in to the system',
+    // Kick out notification
+    kickOutTitle: 'Offline Notification',
+    kickOutContent: 'Your account has been logged in on another device',
+    // Notification settings page
+    settings: {
+      title: 'Notification Settings',
+      notificationTypes: 'Notification Types',
+      typeEnabled: 'Enabled',
+      system: 'System Notification',
+      plc: 'PLC Notification',
+      user: 'User Notification',
+      audit: 'Audit Notification',
+      device: 'Device Notification',
+      connection: 'Connection Notification',
+      doNotDisturb: 'Do Not Disturb',
+      doNotDisturbEnabled: 'Enable DND',
+      reminderMethods: 'Reminder Methods',
+      reminderMethodsDesc: 'Select how to receive notifications',
+      soundEnabled: 'Sound Reminder',
+      popupEnabled: 'Popup Reminder',
+      save: 'Save',
+    },
 
-  // ==================== Heartbeat / Connection Status ====================
+  },
+  // Heartbeat
   heartbeat: {
     // Status text (shown in navbar)
     statusOnline: 'Online',
@@ -941,93 +911,4 @@ export default {
     timeHoursAgo: '{n}h ago'
   },
 
-  // ==================== Permission Configuration ====================
-  permission: {
-    title: 'Permission Configuration',
-    desc: 'Configure menu, button, and parameter permissions for roles',
-    roleList: 'Role List',
-    current: 'Current',
-    noRole: 'No roles',
-    permissionTree: 'Permission Tree',
-    all: 'All',
-    menu: 'Menu',
-    button: 'Button',
-    param: 'Parameter',
-    searchPlaceholder: 'Search permission name',
-    selected: 'Selected',
-    expandAll: 'Expand All',
-    collapseAll: 'Collapse All',
-    selectRoleTip: 'Please select a role first',
-    unsavedChangeTip: 'There are unsaved changes for the current role. Switching will discard these changes. Continue?',
-    confirmSwitch: 'Continue',
-    resetConfirm: 'Are you sure you want to reset the permission configuration for this role?',
-    saveSuccess: 'Permission configuration saved successfully',
-    refreshSuccess: 'Refreshed successfully',
-    resetSuccess: 'Reset successfully'
-  },
-
-  // ==================== Error Messages (Backend Error Code i18n) ====================
-  error: {
-    // Common errors
-    PARAM_ERROR: 'Parameter error',
-    PARAM_MISSING: 'Missing required parameter',
-    PARAM_INVALID: 'Invalid parameter format',
-    NOT_FOUND: '{name} not found',
-    SYSTEM_ERROR: 'System error',
-    DATABASE_ERROR: 'Database operation failed',
-    NETWORK_ERROR: 'Network error',
-    UNKNOWN_ERROR: 'Unknown error',
-    // Auth errors
-    UNAUTHORIZED: 'Please login first',
-    TOKEN_EXPIRED: 'Session expired, please login again',
-    TOKEN_INVALID: 'Invalid session',
-    PERMISSION_DENIED: 'Permission denied',
-    // Captcha errors
-    CAPTCHA_EXPIRED: 'Captcha expired, please refresh',
-    CAPTCHA_ERROR: 'Incorrect captcha',
-    // Department module
-    DEPT_NOT_FOUND: 'Department not found',
-    DEPT_PARENT_INVALID: 'Cannot set parent to itself',
-    DEPT_HAS_CHILDREN: 'Cannot delete: department has children',
-    DEPT_HAS_USERS: 'Cannot delete: {count} user(s) in this department',
-    // Role module
-    ROLE_NOT_FOUND: 'Role not found',
-    ROLE_CODE_EXISTS: 'Role code already exists',
-    // User module
-    USER_NOT_FOUND: 'User not found',
-    USER_USERNAME_EXISTS: 'Username already exists',
-    USER_PASSWORD_ERROR: 'Invalid username or password',
-    USER_DISABLED: 'Account disabled',
-    USER_LOCKED: 'Account locked, try again in {minutes} minutes',
-    USER_REGISTER_FAIL: 'Registration failed',
-    // Dictionary module
-    DICT_TYPE_NOT_FOUND: 'Dictionary type not found',
-    DICT_TYPE_CODE_EXISTS: 'Dictionary type code already exists',
-    DICT_ITEM_NOT_FOUND: 'Dictionary item not found',
-    DICT_ITEM_VALUE_DUPLICATE: 'Value already exists in this dictionary type',
-    // Audit module
-    AUDIT_NOT_MODIFIABLE: 'Audit logs cannot be modified',
-    AUDIT_NOT_DELETABLE: 'Audit logs cannot be deleted',
-    // Notification module
-    NOTIFICATION_NOT_FOUND: 'Notification not found',
-    // Customer module
-    CUSTOMER_NOT_FOUND: 'Customer not found',
-    // Menu module
-    MENU_USER_ID_REQUIRED: 'User ID is required',
-    // File upload module
-    FILE_NOT_EXIST: 'Please select a file to upload',
-    FILE_PATH_EMPTY: 'File path cannot be empty',
-    FILE_PATH_INVALID: 'Invalid file path',
-    FILE_TOO_LARGE: 'File size exceeds limit',
-    FILE_TYPE_NOT_ALLOWED: 'File type not allowed',
-    FILE_UPLOAD_FAIL: 'File upload failed',
-    FILE_DELETE_FAIL: 'File delete failed',
-    FILE_LIMIT_EXCEEDED: 'Upload limit exceeded',
-    FILE_UNEXPECTED_FIELD: 'Unexpected file field: {field}',
-    // GitHub module
-    GITHUB_CONFIG_ERROR: 'GitHub config incomplete',
-    GITHUB_UPLOAD_FAIL: 'GitHub upload failed: {msg}',
-    GITHUB_DELETE_FAIL: 'GitHub delete failed: {msg}',
-    GITHUB_API_ERROR: 'GitHub API call failed'
-  }
 }

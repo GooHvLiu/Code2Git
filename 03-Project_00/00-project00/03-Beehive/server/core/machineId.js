@@ -1,28 +1,19 @@
 /**
  * 机器指纹生成模块
- * 基于 CPU + 主板 + MAC 地址 + 硬盘序列号 生成唯一机器ID
+ * 基于 CPU + 内存 + 硬盘序列号 + 平台 + 架构 生成唯一机器ID
  * 用于授权文件与硬件绑定，防止授权文件拷贝到其他机器使用
  *
  * 注意：本模块同时被服务端（生成授权时录入）和客户端SDK（验证时比对）使用
  * 算法必须保持一致
  *
  * 稳定性设计：
- * - MAC地址：取所有物理网卡（排除虚拟网卡），排序后拼接，避免枚举顺序变化导致机器码变化
+ * - 不使用MAC地址：MAC地址会因换网络、睡眠唤醒、VPN、虚拟网卡等情况变化，不稳定
  * - 硬盘：取系统盘（Index=0）序列号，避免多硬盘顺序变化
  * - 所有获取失败的字段返回空字符串而非固定值，避免降低唯一性
  */
 const os = require('os');
 const crypto = require('crypto');
 const { execSync } = require('child_process');
-
-// 虚拟网卡关键词（用于排除）
-const VIRTUAL_ADAPTER_KEYWORDS = [
-  'vmware', 'virtualbox', 'virtual', 'docker', 'wsl',
-  'vethernet', 'loopback', 'tap', 'tunnel', 'ppp',
-  'hamachi', 'zerotier', 'tailscale', 'wireguard',
-  'bluetooth', 'wi-fi direct', 'microsoft wi-fi direct',
-  'wan miniport', 'remote ndis', 'usb tethering'
-];
 
 class MachineId {
   /**
@@ -35,7 +26,6 @@ class MachineId {
       arch: os.arch(),
       cpus: this._getCpuInfo(),
       totalMem: os.totalmem(),
-      macAddress: this._getMacAddress(),
       diskSerial: this._getDiskSerial()
     };
     return info;
@@ -47,11 +37,10 @@ class MachineId {
    */
   getMachineId() {
     const info = this.getMachineInfo();
-    // 组合关键硬件信息（排除可能变化的字段如hostname）
+    // 组合关键硬件信息（排除可能变化的字段如hostname、MAC地址）
     const raw = [
       info.cpus,
       info.totalMem,
-      info.macAddress,
       info.diskSerial,
       info.platform,
       info.arch
@@ -70,45 +59,6 @@ class MachineId {
       }
     } catch (e) {}
     return '';
-  }
-
-  /**
-   * 获取MAC地址（所有物理网卡，排序后拼接）
-   * 关键改进：不再取第一个网卡，而是取所有物理网卡，排序后拼接
-   * 这样即使网卡枚举顺序变化，排序后结果一致
-   */
-  _getMacAddress() {
-    try {
-      const interfaces = os.networkInterfaces();
-      const macList = [];
-
-      for (const name of Object.keys(interfaces)) {
-        const iface = interfaces[name];
-        // 排除虚拟网卡（基于名称判断）
-        if (this._isVirtualAdapter(name)) {
-          continue;
-        }
-        for (const item of iface) {
-          if (!item.internal && item.mac && item.mac !== '00:00:00:00:00:00') {
-            macList.push(item.mac);
-          }
-        }
-      }
-
-      if (macList.length > 0) {
-        // 排序后拼接，确保顺序稳定
-        return macList.sort().join(',');
-      }
-    } catch (e) {}
-    return '';
-  }
-
-  /**
-   * 判断是否为虚拟网卡
-   */
-  _isVirtualAdapter(name) {
-    const lowerName = name.toLowerCase();
-    return VIRTUAL_ADAPTER_KEYWORDS.some(keyword => lowerName.includes(keyword));
   }
 
   /**

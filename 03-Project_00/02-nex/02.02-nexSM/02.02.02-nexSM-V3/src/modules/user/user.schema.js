@@ -75,7 +75,9 @@ const loginSchema = Joi.object({
   username: usernameField,
   password: passwordField,
   uuid: Joi.string().allow('', null),        // 验证码uuid
-  code: Joi.string().allow('', null)  // 验证码
+  code: Joi.string().allow('', null),  // 验证码
+  deviceId: Joi.string().max(100).allow('', null),  // 设备唯一标识
+  deviceName: Joi.string().max(255).allow('', null)  // 设备名称
 }).unknown(false);
 
 /** 注册请求体（公开接口，字段比 createUser 少） */

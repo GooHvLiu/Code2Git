@@ -49,7 +49,8 @@ class LicenseCore {
    * @param {string} [options.machineId] 机器指纹（不填则不绑定硬件）
    * @param {number} [options.validDays] 有效天数（perpetual忽略）
    * @param {string[]} [options.features] 授权功能列表
-   * @param {number} [options.maxUsers] 最大用户数
+   * @param {number} [options.maxUsers] 最大用户数（服务器端，0表示不限制）
+   * @param {number} [options.maxDevices] 最大客户端在线数（0表示不限制）
    * @param {Object} [options.customer] 客户信息
    * @returns {Object} { licenseId, filePath, licenseData }
    */
@@ -76,6 +77,7 @@ class LicenseCore {
       expiresAt,
       features: options.features || [],
       maxUsers: options.maxUsers || 0,
+      maxDevices: options.maxDevices || 0,
       customer: options.customer || {}
     };
 

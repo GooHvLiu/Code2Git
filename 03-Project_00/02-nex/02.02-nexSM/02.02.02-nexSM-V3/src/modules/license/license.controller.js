@@ -141,6 +141,7 @@ class LicenseController {
         expiresAt: lic.expiresAt,
         features: lic.features,
         maxUsers: lic.maxUsers,
+        maxDevices: lic.maxDevices || 0,
         customer: lic.customer
       }, '授权文件导入成功');
 
@@ -180,6 +181,7 @@ class LicenseController {
           expiresAt: lic.expiresAt,
           features: lic.features,
           maxUsers: lic.maxUsers,
+          maxDevices: lic.maxDevices || 0,
           customer: lic.customer,
           // 机器绑定信息
           machineId: currentMachineId,

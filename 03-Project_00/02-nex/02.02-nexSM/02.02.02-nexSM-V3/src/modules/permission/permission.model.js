@@ -5,7 +5,7 @@
  * 负责：权限码查询、角色权限分配、权限列表查询
  * 权限码覆盖：菜单权限、按钮权限、参数权限
  */
-const { query } = require('../../db/index')
+const { query, transaction } = require('../../db/index')
 
 // 数据表名称
 const MENU_TABLE = 'nex_menu'
@@ -114,30 +114,58 @@ class PermissionModel {
    * @param {Array<number>} menuIds - 菜单ID数组（包含菜单、按钮、参数）
    * @returns {Promise<boolean>} 是否保存成功
    */
+  /**
+   * 保存角色权限分配（全量覆盖）
+   * 使用数据库事务，确保删除和插入的原子性
+   * @param {number} roleId - 角色ID
+   * @param {Array<string>} menuIds - 菜单ID数组（包含菜单、按钮、参数）
+   * @returns {Promise<boolean>} 是否保存成功
+   */
   async saveRolePermissions(roleId, menuIds) {
-    // 开启事务
-    const beginSql = 'START TRANSACTION'
-    await query(beginSql)
+    console.log('[权限保存] 开始保存，roleId:', roleId, 'menuIds数量:', menuIds ? menuIds.length : 0)
+    console.log('[权限保存] menuIds内容:', JSON.stringify(menuIds))
 
     try {
-      // 1. 删除该角色的所有权限关联
-      const deleteSql = `DELETE FROM ${ROLE_MENU_TABLE} WHERE role_id = ?`
-      await query(deleteSql, [roleId])
+      const result = await transaction(async (connection) => {
+        // 1. 删除该角色的所有权限关联
+        const deleteSql = `DELETE FROM ${ROLE_MENU_TABLE} WHERE role_id = ?`
+        console.log('[权限保存] 执行删除SQL:', deleteSql, '参数:', [roleId])
+        const [deleteResult] = await connection.execute(deleteSql, [roleId])
+        console.log('[权限保存] 删除结果:', deleteResult.affectedRows, '行')
 
-      // 2. 批量插入新的权限关联
-      if (menuIds && menuIds.length > 0) {
-        // menu_id 是 varchar 类型，需要用引号包裹
-        const values = menuIds.map(menuId => `(${roleId}, '${menuId}')`).join(', ')
-        const insertSql = `INSERT INTO ${ROLE_MENU_TABLE} (role_id, menu_id) VALUES ${values}`
-        await query(insertSql)
-      }
+        // 2. 批量插入新的权限关联
+        if (menuIds && menuIds.length > 0) {
+          // 转义 menuId 中的单引号，防止 SQL 语法错误
+          const escapedMenuIds = menuIds.map(menuId => {
+            if (typeof menuId === 'string') {
+              return menuId.replace(/\'/g, "\'\'")
+            }
+            return String(menuId)
+          })
 
-      // 提交事务
-      await query('COMMIT')
-      return true
+          // 批量插入，使用 INSERT INTO ... VALUES 语法
+          const values = escapedMenuIds.map(menuId => `(${roleId}, '${menuId}')`).join(', ')
+          const insertSql = `INSERT INTO ${ROLE_MENU_TABLE} (role_id, menu_id) VALUES ${values}`
+          
+          console.log('[权限保存] 执行插入SQL长度:', insertSql.length)
+          console.log('[权限保存] 插入SQL前200字符:', insertSql.substring(0, 200))
+          
+          const [insertResult] = await connection.execute(insertSql)
+          console.log('[权限保存] 插入结果:', insertResult.affectedRows, '行')
+        } else {
+          console.log('[权限保存] menuIds为空，跳过插入')
+        }
+
+        return true
+      })
+      
+      console.log('[权限保存] 事务提交成功')
+      return result
     } catch (error) {
-      // 回滚事务
-      await query('ROLLBACK')
+      console.error('[权限保存失败] 错误信息:', error.message)
+      console.error('[权限保存失败] 错误代码:', error.code)
+      console.error('[权限保存失败] SQL状态:', error.sqlState)
+      console.error('[权限保存失败] 错误堆栈:', error.stack ? error.stack.substring(0, 500) : '无')
       throw error
     }
   }
@@ -164,12 +192,14 @@ class PermissionModel {
    * @returns {Promise<boolean>} 是否更新成功
    */
   async updateUserPermissionVersion(userId) {
+    // 使用10位秒级时间戳作为权限版本号，兼容 int 类型字段（MySQL int 最大 2147483647）
+    const now = String(Math.floor(Date.now() / 1000))
     const sql = `
       UPDATE ${USER_TABLE}
-      SET permission_version = NOW()
+      SET permission_version = ?
       WHERE id = ?
     `
-    const result = await query(sql, [userId])
+    const result = await query(sql, [now, userId])
     return result.affectedRows > 0
   }
 
@@ -179,12 +209,14 @@ class PermissionModel {
    * @returns {Promise<boolean>} 是否更新成功
    */
   async updatePermissionVersionByRoleCode(roleCode) {
+    // 使用10位秒级时间戳作为权限版本号，兼容 int 类型字段（MySQL int 最大 2147483647）
+    const now = String(Math.floor(Date.now() / 1000))
     const sql = `
       UPDATE ${USER_TABLE}
-      SET permission_version = NOW()
+      SET permission_version = ?
       WHERE role = ?
     `
-    const result = await query(sql, [roleCode])
+    const result = await query(sql, [now, roleCode])
     return result.affectedRows > 0
   }
 

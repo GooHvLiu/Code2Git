@@ -1,14 +1,37 @@
 /**
  * JWT 鉴权中间件
  * 验证token有效性，解析用户信息挂载到 req.user
+ * 支持单点登录：验证 token_version，旧 token 自动失效
  */
 const { verifyToken } = require('../utils/jwt');
 const { ERROR_CODE } = require('../constants/errorCode');
+const userModel = require('../modules/user/user.model');
+const cache = require('../utils/cache');
+
+// Token 版本号缓存前缀和过期时间（5分钟）
+const TOKEN_VERSION_CACHE_PREFIX = 'token_version:';
+const TOKEN_VERSION_CACHE_TTL = 5 * 60;
+
+/**
+ * 获取用户的 Token 版本号（带缓存）
+ * @param {number} userId - 用户ID
+ * @returns {Promise<number>} Token 版本号
+ */
+async function getUserTokenVersion(userId) {
+  const cacheKey = TOKEN_VERSION_CACHE_PREFIX + userId;
+  const cached = cache.get(cacheKey);
+  if (cached !== undefined) {
+    return cached;
+  }
+  const version = await userModel.getTokenVersion(userId);
+  cache.set(cacheKey, version, TOKEN_VERSION_CACHE_TTL);
+  return version;
+}
 
 /**
  * 必须登录鉴权
  */
-function requireAuth(req, res, next) {
+async function requireAuth(req, res, next) {
 
   const authHeader = req.headers.authorization;
 
@@ -27,6 +50,20 @@ function requireAuth(req, res, next) {
   // 检查是否过期（verifyToken 内部已处理，这里双重保险）
   if (decoded.exp && Date.now() >= decoded.exp * 1000) {
     return res.error(ERROR_CODE.TOKEN_EXPIRED);
+  }
+
+  // 单点登录：验证 token_version，旧 token 自动失效
+  if (decoded.token_version !== undefined) {
+    try {
+      const currentVersion = await getUserTokenVersion(decoded.id);
+      if (decoded.token_version !== currentVersion) {
+        // Token 版本号不一致，说明已在其他设备登录，当前 token 已失效
+        return res.error(ERROR_CODE.TOKEN_KICKED_OUT, '您已在其他设备登录，当前设备已下线');
+      }
+    } catch (err) {
+      console.error('[鉴权] 验证 token_version 失败:', err.message);
+      // 验证失败不拦截，避免数据库故障导致无法使用
+    }
   }
 
   // 挂载用户信息到请求对象

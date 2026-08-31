@@ -1336,3 +1336,365 @@ applyConfig({ heartbeatInterval: 30000 })
 
 其他配置项（如 PLC 连接参数）需要重新连接设备后生效。
 
+
+
+---
+
+## WebSocket 实时通信
+
+### 什么是 WebSocket？
+
+WebSocket 是一种**双向实时通信**的网络协议。客户端和服务器之间建立一条"永久连接"，双方可以随时互相发消息，不需要每次都重新建立连接。
+
+### 和 HTTP 的区别
+
+| 特性 | HTTP | WebSocket |
+|------|------|-----------|
+| 通信模式 | 一问一答（客户端主动问，服务器才能答） | 双向通话（双方随时互相发消息） |
+| 连接状态 | 每次请求后断开 | 连接一直保持 |
+| 服务器推送 | 不支持（只能客户端轮询） | 支持（服务器可主动推送） |
+| 资源消耗 | 高（每次都要建立连接） | 低（一次建立，持续使用） |
+
+### 生活中的类比
+
+- **HTTP** = 发短信：你发一条，对方回一条，每次都要重新建立联系
+- **WebSocket** = 打电话：接通后一直保持通话，双方可以随时说话
+- **轮询（定时刷新）** = 每隔1分钟打一次电话问"有新消息吗？"，浪费电话费
+- **WebSocket推送** = 有新消息时对方主动告诉你，节省资源且实时
+
+### 本项目中 WebSocket 的应用场景
+
+#### 1. 单点登录（踢人下线）
+
+```
+用户A在浏览器登录 → WebSocket连接建立
+用户B在另一个浏览器登录 → 服务器主动推送消息给用户A
+→ 用户A的页面立刻显示"您的账号已在其他地方登录"
+→ 用户A被踢下线
+```
+
+如果没有 WebSocket：用户A的页面不会知道用户B登录了，直到用户A刷新页面或主动请求。
+
+#### 2. 消息通知实时推送
+
+```
+服务器：有新的系统通知！→ 主动推送给所有在线用户
+→ 用户页面右上角的消息铃铛立刻显示红点
+→ 用户点击就能看到新消息
+```
+
+如果没有 WebSocket：需要用户刷新页面才能看到新消息，或者每隔几秒轮询一次（浪费资源）。
+
+#### 3. PLC 设备连接状态实时监控
+
+```
+PLC设备断开连接 → 服务器立刻感知 → 主动推送给所有在线用户
+→ 用户页面的设备状态立刻从"已连接"变成"已断开"
+```
+
+如果没有 WebSocket：用户需要刷新页面才能看到设备状态变化。
+
+#### 4. 客户端授权（在线人数限制）
+
+```
+用户登录 → 检查当前在线设备数
+→ 如果达到上限，服务器主动推送"在线设备数已达上限"
+→ 用户页面立刻显示提示，拒绝登录
+```
+
+### WebSocket 连接配置
+
+#### 连接路径
+
+- **开发环境**：直连后端 `ws://localhost:3002/ws-api`（避免 webpack-dev-server 代理问题）
+- **生产环境**：使用当前 host `ws://你的域名/ws-api`（通过 Nginx 反向代理）
+
+#### 核心文件
+
+| 文件 | 说明 |
+|------|------|
+| `src/utils/websocket.js` | 前端 WebSocket 客户端封装（连接、认证、心跳、重连、消息分发） |
+| `src/store/modules/websocket.js` | WebSocket 状态管理（连接状态、认证状态、心跳时间、最后消息时间） |
+| 后端 `src/socket/wsManager.js` | 后端 WebSocket 服务管理（连接管理、认证、消息处理、用户连接映射） |
+
+#### 消息类型
+
+| 消息类型 | 方向 | 说明 |
+|----------|------|------|
+| `auth` | 前端 → 后端 | 客户端认证（携带 userId、deviceId、deviceName） |
+| `auth_success` | 后端 → 前端 | 认证成功 |
+| `auth_failed` | 后端 → 前端 | 认证失败 |
+| `ping` | 前端 → 后端 | 心跳检测 |
+| `pong` | 后端 → 前端 | 心跳响应 |
+| `plc_status` | 后端 → 前端 | PLC 设备连接状态变化 |
+| `notification` | 后端 → 前端 | 系统通知推送 |
+| `kick_off` | 后端 → 前端 | 踢人下线通知 |
+
+---
+
+## 生产环境部署指南
+
+### 1. 前端构建
+
+```bash
+# 进入前端项目目录
+cd 02.01-nexCM/02.01.02-nexCM-V3
+
+# 安装依赖（如果需要）
+npm install
+
+# 构建生产环境
+npm run build
+```
+
+构建完成后，会生成 `dist` 目录，这就是前端的静态文件。
+
+### 2. 后端部署
+
+```bash
+# 进入后端项目目录
+cd 02.02-nexSM/02.02.02-nexSM-V3
+
+# 安装依赖（如果需要）
+npm install --production
+
+# 配置环境变量
+cp .env.example .env
+# 编辑 .env，配置数据库、端口、授权文件路径等
+
+# 启动服务（推荐使用 pm2 进行进程管理）
+npm install -g pm2
+pm2 start src/app.js --name nexSM
+
+# 或者直接启动
+npm start
+```
+
+默认端口：3002
+
+### 3. Nginx 配置（关键！）
+
+在 Nginx 配置文件中添加以下配置，**特别是 WebSocket 反向代理**：
+
+```nginx
+server {
+    listen 80;
+    server_name 你的域名;
+
+    # 前端静态文件
+    location / {
+        root /path/to/frontend/dist;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+    }
+
+    # API 接口反向代理
+    location /api/ {
+        proxy_pass http://127.0.0.1:3002;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    # WebSocket 反向代理（关键！）
+    location /ws-api {
+        proxy_pass http://127.0.0.1:3002;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        
+        # WebSocket 超时设置（长连接需要较长超时）
+        proxy_read_timeout 86400;
+        proxy_send_timeout 86400;
+    }
+}
+```
+
+#### WebSocket 代理配置说明
+
+| 配置项 | 说明 | 是否必须 |
+|--------|------|----------|
+| `proxy_http_version 1.1` | 使用 HTTP/1.1（WebSocket 要求） | ✅ 必须 |
+| `proxy_set_header Upgrade $http_upgrade` | 传递 Upgrade 头（协议升级） | ✅ 必须 |
+| `proxy_set_header Connection "upgrade"` | 传递 Connection 头（连接升级） | ✅ 必须 |
+| `proxy_read_timeout 86400` | 读取超时（24小时，长连接需要） | 建议配置 |
+| `proxy_send_timeout 86400` | 发送超时（24小时，长连接需要） | 建议配置 |
+
+### 4. 环境变量配置
+
+#### 前端环境变量（`.env.production`）
+
+```
+# API 基础路径
+VUE_APP_BASE_API=/api
+
+# 后端代理目标（构建时不需要，运行时由 Nginx 处理）
+# VUE_APP_PROXY_TARGET=http://127.0.0.1:3002
+```
+
+#### 后端环境变量（`.env`）
+
+```
+# 服务端口
+PORT=3002
+
+# 运行环境
+NODE_ENV=production
+
+# 数据库配置
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_USER=your_username
+DB_PASSWORD=your_password
+DB_NAME=your_database
+
+# 授权文件路径
+LICENSE_FILE=/path/to/license.lic
+
+# JWT 密钥
+JWT_SECRET=your_jwt_secret
+```
+
+### 5. 部署验证步骤
+
+部署完成后，按以下步骤验证：
+
+#### 第一步：验证前端页面访问
+
+1. 打开浏览器访问你的域名
+2. 确认页面正常加载，没有 404 或白屏
+3. 按 F12 打开开发者工具，查看 Console 是否有报错
+
+#### 第二步：验证 API 接口
+
+1. 登录系统
+2. 打开开发者工具 → Network → Fetch/XHR
+3. 确认 API 请求正常返回（状态码 200）
+4. 确认请求地址是 `/api/xxx`（通过 Nginx 代理）
+
+#### 第三步：验证 WebSocket 连接（关键！）
+
+1. 打开开发者工具 → Network → WS
+2. 确认有 `/ws-api` 的 WebSocket 连接
+3. 确认连接状态是 **101 Switching Protocols**（协议升级成功）
+4. 确认连接持续保持（不会自动断开）
+5. 查看 Messages 标签，确认有消息收发（auth、ping、pong 等）
+
+#### 第四步：验证实时功能
+
+1. **单点登录测试**：在两个浏览器登录同一个账号，确认先登录的会被踢下线，并收到通知
+2. **消息通知测试**：触发一个系统通知，确认页面右上角铃铛立刻显示红点
+3. **设备状态测试**：断开/连接 PLC 设备，确认页面设备状态实时更新
+4. **在线人数测试**：如果配置了客户端数量限制，测试超过上限时的提示
+
+### 6. 常见问题排查
+
+#### 问题1：WebSocket 连接失败（404 或 400）
+
+**可能原因**：Nginx 没有配置 WebSocket 反向代理，或者配置错误
+
+**解决方案**：
+1. 检查 Nginx 配置中是否有 `location /ws-api`
+2. 检查是否配置了 `Upgrade` 和 `Connection` 头
+3. 检查 `proxy_pass` 地址是否正确
+4. 重启 Nginx：`nginx -s reload`
+
+#### 问题2：WebSocket 连接后立刻断开
+
+**可能原因**：Nginx 超时设置太短，或者后端 WebSocket 服务异常
+
+**解决方案**：
+1. 检查 Nginx 的 `proxy_read_timeout` 和 `proxy_send_timeout` 设置（建议 86400）
+2. 检查后端服务是否正常运行
+3. 查看后端日志，确认 WebSocket 连接建立和认证是否成功
+
+#### 问题3：收不到服务器推送的消息
+
+**可能原因**：WebSocket 连接建立但认证失败，或者消息类型不匹配
+
+**解决方案**：
+1. 打开开发者工具 → Network → WS → Messages，确认是否收到消息
+2. 确认前端认证消息（`auth`）是否发送成功
+3. 确认后端是否返回 `auth_success`
+4. 检查前端消息处理逻辑是否匹配消息类型
+
+#### 问题4：开发环境正常，生产环境异常
+
+**可能原因**：生产环境 Nginx 配置问题，或者环境变量配置错误
+
+**解决方案**：
+1. 对比开发环境和生产环境的配置差异
+2. 检查 Nginx 错误日志：`/var/log/nginx/error.log`
+3. 检查后端日志，确认请求是否到达后端
+4. 确认前端构建时的环境变量是否正确
+
+### 7. 生产环境优化建议
+
+#### 启用 HTTPS
+
+生产环境建议启用 HTTPS，WebSocket 会自动使用 `wss://`（加密连接）：
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name 你的域名;
+
+    ssl_certificate /path/to/cert.pem;
+    ssl_certificate_key /path/to/key.pem;
+
+    # 其他配置同上...
+}
+```
+
+#### 启用 Gzip 压缩
+
+```nginx
+gzip on;
+gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+gzip_min_length 1024;
+```
+
+#### 配置静态资源缓存
+
+```nginx
+location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ {
+    expires 30d;
+    add_header Cache-Control "public, immutable";
+}
+```
+
+#### 使用 pm2 管理后端进程
+
+```bash
+# 启动
+pm2 start src/app.js --name nexSM
+
+# 查看状态
+pm2 status
+
+# 查看日志
+pm2 logs nexSM
+
+# 重启
+pm2 restart nexSM
+
+# 停止
+pm2 stop nexSM
+
+# 设置开机自启
+pm2 startup
+pm2 save
+```
+
+---
+
+## 总结
+
+WebSocket 是本项目实现**实时双向通信**的核心技术，主要用于单点登录、消息通知、设备状态监控、客户端授权等场景。
+
+生产环境部署时，**Nginx 的 WebSocket 反向代理配置是关键**，必须正确配置 `Upgrade` 和 `Connection` 头，否则 WebSocket 无法正常连接。
+
+开发环境使用直连后端方式（`ws://localhost:3002/ws-api`），生产环境自动切换到当前 host 方式（通过 Nginx 反向代理），无需手动修改代码。

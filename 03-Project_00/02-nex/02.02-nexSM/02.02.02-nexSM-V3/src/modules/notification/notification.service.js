@@ -91,6 +91,8 @@ class NotificationService extends BaseService {
    */
   async markAsRead(id, userId) {
     await notificationModel.markAsRead(id, userId)
+    // 实时同步：推送已读通知给该用户的其他在线设备
+    this._syncReadStatus(userId, [id], false)
   }
 
   /**
@@ -101,6 +103,8 @@ class NotificationService extends BaseService {
    */
   async markAllAsRead(userId) {
     await notificationModel.markAllAsRead(userId)
+    // 实时同步：推送全部已读通知给该用户的其他在线设备
+    this._syncReadStatus(userId, [], true)
   }
 
   /**
@@ -195,6 +199,32 @@ class NotificationService extends BaseService {
     return results
   }
 
+  /**
+   * 实时同步已读状态给该用户的其他在线设备
+   *
+   * @param {number} userId - 用户 ID
+   * @param {Array<number>} notificationIds - 已读的通知 ID 列表
+   * @param {boolean} markAll - 是否是全部标记已读
+   * @private
+   */
+  async _syncReadStatus(userId, notificationIds, markAll) {
+    try {
+      // 获取最新的未读数量
+      const unreadCount = await notificationModel.getUnreadCount(userId)
+      // 通过 WebSocket 推送给该用户的其他在线设备
+      wsManager.sendToUser(userId, {
+        type: 'notification_read',
+        data: {
+          notificationIds: notificationIds || [],
+          unreadCount: unreadCount,
+          markAll: markAll || false
+        }
+      })
+    } catch (err) {
+      console.error('[通知同步] 推送已读状态失败:', err.message)
+    }
+  }
+
   // ==================== 批量操作 ====================
 
   /**
@@ -206,7 +236,9 @@ class NotificationService extends BaseService {
     if (!ids || !Array.isArray(ids) || ids.length === 0) {
       throw new BusinessError(ERROR_CODE.PARAM_ERROR, '通知ID列表不能为空')
     }
-    return await notificationModel.batchMarkAsRead(userId, ids)
+    await notificationModel.batchMarkAsRead(userId, ids)
+    // 实时同步：推送批量已读通知给该用户的其他在线设备
+    this._syncReadStatus(userId, ids, false)
   }
 
   /**

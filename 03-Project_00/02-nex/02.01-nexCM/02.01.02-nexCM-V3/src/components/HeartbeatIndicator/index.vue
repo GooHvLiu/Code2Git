@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="heartbeat-indicator" :class="statusClass" @click="showDetail">
     <div class="heartbeat-dot">
       <div class="pulse-ring" v-if="isOnline"></div>
@@ -11,9 +11,9 @@
 
 <script setup>
 /**
- * 心跳指示器组件
- * 用于显示 WebSocket 连接状态和 PLC 连接状态
- * 从 Vuex websocket 模块获取实时状态
+ * 蹇冭烦鎸囩ず鍣ㄧ粍浠?
+ * 鐢ㄤ簬鏄剧ず WebSocket 杩炴帴鐘舵€佸拰 PLC 杩炴帴鐘舵€?
+ * 浠?Vuex websocket 妯″潡鑾峰彇瀹炴椂鐘舵€?
  */
 import { computed } from 'vue'
 import { MessageBox } from 'element-ui'
@@ -22,7 +22,7 @@ import { useI18n } from '@/composables/useI18n'
 
 const { t: $t } = useI18n()
 
-// ===== 计算属性（从 store 获取） =====
+// ===== 璁＄畻灞炴€э紙浠?store 鑾峰彇锛?=====
 const isOnline = computed(() => store.getters['websocket/isOnline'])
 const isWsOnline = computed(() => store.getters['websocket/isWsOnline'])
 const isPlcOnline = computed(() => store.getters['websocket/isPlcOnline'])
@@ -37,7 +37,7 @@ const tooltipText = computed(() => {
   const state = store.state.websocket
   const lines = []
 
-  // 服务器状态
+  // 鏈嶅姟鍣ㄧ姸鎬?
   if (isWsOnline.value) {
     lines.push($t('heartbeat.serverConnected'))
   } else if (state.connected) {
@@ -48,7 +48,7 @@ const tooltipText = computed(() => {
     lines.push($t('heartbeat.serverDisconnected'))
   }
 
-  // 设备状态（只有服务器连接后才显示）
+  // 璁惧鐘舵€侊紙鍙湁鏈嶅姟鍣ㄨ繛鎺ュ悗鎵嶆樉绀猴級
   if (isWsOnline.value) {
     if (isPlcOnline.value) {
       lines.push($t('heartbeat.deviceConnected'))
@@ -61,12 +61,12 @@ const tooltipText = computed(() => {
   return lines.join(' | ')
 })
 
-// ===== 方法 =====
+// ===== 鏂规硶 =====
 function showDetail() {
   const state = store.state.websocket
   const lines = []
 
-  // 服务器状态
+  // 鏈嶅姟鍣ㄧ姸鎬?
   if (isWsOnline.value) {
     lines.push($t('heartbeat.detailServerConnected'))
   } else if (state.connected) {
@@ -77,14 +77,14 @@ function showDetail() {
     lines.push($t('heartbeat.detailServerDisconnected'))
   }
 
-  // 设备状态
+  // 璁惧鐘舵€?
   if (isPlcOnline.value) {
     lines.push($t('heartbeat.detailDeviceConnected'))
   } else {
     lines.push($t('heartbeat.detailDeviceDisconnected'))
   }
 
-  // 其他信息
+  // 鍏朵粬淇℃伅
   lines.push($t('heartbeat.detailLastHeartbeat', { time: lastHeartbeatText.value }))
   lines.push($t('heartbeat.detailHeartbeatInterval', { seconds: (state.heartbeatInterval / 1000).toFixed(0) }))
 
@@ -94,7 +94,7 @@ function showDetail() {
   MessageBox.alert(detail, $t('heartbeat.detailTitle'), {
     confirmButtonText: $t('heartbeat.confirm'),
     type
-  })
+  }).catch(() => {})
 }
 </script>
 
@@ -144,7 +144,7 @@ function showDetail() {
     }
   }
 
-  // 在线状态：绿色
+  // 鍦ㄧ嚎鐘舵€侊細缁胯壊
   &.online {
     .heartbeat-dot::before {
       background: #67c23a;
@@ -154,7 +154,7 @@ function showDetail() {
     }
   }
 
-  // 警告状态：橙色（服务器在线但 PLC 未连接）
+  // 璀﹀憡鐘舵€侊細姗欒壊锛堟湇鍔″櫒鍦ㄧ嚎浣?PLC 鏈繛鎺ワ級
   &.warning {
     .heartbeat-dot::before {
       background: #e6a23c;
@@ -164,7 +164,7 @@ function showDetail() {
     }
   }
 
-  // 离线状态：红色
+  // 绂荤嚎鐘舵€侊細绾㈣壊
   &.offline {
     .heartbeat-dot::before {
       background: #f56c6c;

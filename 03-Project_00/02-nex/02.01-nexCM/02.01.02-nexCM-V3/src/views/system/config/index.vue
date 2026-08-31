@@ -3,8 +3,12 @@
     <!-- 页面标题 -->
     <div class="page-header">
       <div class="header-left">
-        <h2 class="page-title">{{ $t("systemConfig.title") }}</h2>
-        <p class="page-desc">{{ $t("systemConfig.desc") }}</p>
+        <h2 class="page-title">
+          {{ $t("menu.system.config.childrenMenu.title") }}
+        </h2>
+        <p class="page-desc">
+          {{ $t("menu.system.config.childrenMenu.desc") }}
+        </p>
       </div>
       <div class="header-right">
         <el-button
@@ -14,7 +18,7 @@
           :disabled="configStatus !== 'ready'"
           :loading="loading"
         >
-          {{ $t("systemConfig.save") }}
+          {{ $t("menu.system.config.childrenMenu.save") }}
         </el-button>
         <el-button
           icon="el-icon-refresh-left"
@@ -22,7 +26,7 @@
           :disabled="configStatus !== 'ready'"
           :loading="loading"
         >
-          {{ $t("systemConfig.reset") }}
+          {{ $t("menu.system.config.childrenMenu.reset") }}
         </el-button>
       </div>
     </div>
@@ -59,14 +63,21 @@
             <i class="el-icon-warning-outline status-icon error-icon"></i>
             <h3 class="status-title">配置加载失败</h3>
             <p class="status-desc">请检查网络连接或联系管理员</p>
-            <el-button type="primary" icon="el-icon-refresh" @click="loadConfigs">
+            <el-button
+              type="primary"
+              icon="el-icon-refresh"
+              @click="loadConfigs"
+            >
               重新加载
             </el-button>
           </div>
         </div>
 
         <!-- 配置不完整状态 -->
-        <div v-else-if="configStatus === 'incomplete'" class="config-status-wrapper">
+        <div
+          v-else-if="configStatus === 'incomplete'"
+          class="config-status-wrapper"
+        >
           <div class="config-status-incomplete">
             <el-alert
               title="配置不完整"
@@ -77,19 +88,29 @@
             >
               <template #default>
                 <p class="incomplete-desc">
-                  检测到 <b>{{ missingConfigKeys.length }}</b> 个未初始化的配置项，当前页面禁止编辑和保存。
+                  检测到
+                  <b>{{ missingConfigKeys.length }}</b>
+                  个未初始化的配置项，当前页面禁止编辑和保存。
                 </p>
                 <div class="missing-keys-list">
                   <p class="missing-keys-title">缺失的配置项：</p>
                   <ul>
-                    <li v-for="key in missingConfigKeys" :key="key">{{ key }}</li>
+                    <li v-for="key in missingConfigKeys" :key="key">
+                      {{ key }}
+                    </li>
                   </ul>
                 </div>
-                <p class="incomplete-tip">请联系管理员执行配置初始化 SQL，或点击下方按钮重新加载。</p>
+                <p class="incomplete-tip">
+                  请联系管理员执行配置初始化 SQL，或点击下方按钮重新加载。
+                </p>
               </template>
             </el-alert>
             <div class="incomplete-actions">
-              <el-button type="primary" icon="el-icon-refresh" @click="loadConfigs">
+              <el-button
+                type="primary"
+                icon="el-icon-refresh"
+                @click="loadConfigs"
+              >
                 重新加载
               </el-button>
             </div>
@@ -98,821 +119,1201 @@
 
         <!-- 正常配置内容（只有 ready 状态才显示） -->
         <div v-else class="config-panels-wrapper">
-        <!-- 系统设置 -->
-        <div v-show="activeMenu === 'system'" class="config-panel">
-          <h3 class="panel-title">{{ $t("systemConfig.system.title") }}</h3>
-          <el-form :model="form" label-width="160px" label-position="right">
-            <el-form-item :label="$t('systemConfig.system.sessionTimeout')">
-              <el-input-number
-                v-model="form.sessionTimeout"
-                :min="5"
-                :max="120"
-                :step="5"
-                controls-position="right"
-              />
-              <span class="unit-text">{{
-                $t("systemConfig.system.minutes")
-              }}</span>
-            </el-form-item>
-
-            <el-form-item :label="$t('systemConfig.system.defaultPageSize')">
-              <el-select v-model="form.defaultPageSize" style="width: 200px">
-                <el-option :label="10" :value="10" />
-                <el-option :label="20" :value="20" />
-                <el-option :label="50" :value="50" />
-                <el-option :label="100" :value="100" />
-              </el-select>
-            </el-form-item>
-
-            <el-form-item :label="$t('systemConfig.system.defaultLanguage')">
-              <el-select v-model="form.defaultLanguage" style="width: 200px">
-                <el-option label="简体中文" value="zh-CN" />
-                <el-option label="English" value="en-US" />
-              </el-select>
-            </el-form-item>
-
-            <el-form-item :label="$t('systemConfig.system.dateFormat')">
-              <el-select v-model="form.dateFormat" style="width: 200px">
-                <el-option label="YYYY-MM-DD" value="YYYY-MM-DD" />
-                <el-option label="YYYY/MM/DD" value="YYYY/MM/DD" />
-                <el-option label="DD-MM-YYYY" value="DD-MM-YYYY" />
-                <el-option label="DD/MM/YYYY" value="DD/MM/YYYY" />
-              </el-select>
-            </el-form-item>
-          </el-form>
-        </div>
-
-        <!-- 安全设置 -->
-        <div v-show="activeMenu === 'security'" class="config-panel">
-          <h3 class="panel-title">{{ $t("systemConfig.security.title") }}</h3>
-          <el-form :model="form" label-width="160px" label-position="right">
-            <el-form-item :label="$t('systemConfig.security.watermarkEnabled')">
-              <el-switch
-                v-model="form.watermarkEnabled"
-                active-color="#13ce66"
-                inactive-color="#c0c4cc"
-              />
-            </el-form-item>
-
-            <el-form-item :label="$t('systemConfig.security.watermarkText')">
-              <el-input
-                v-model="form.watermarkText"
-                :placeholder="$t('systemConfig.security.watermarkPlaceholder')"
-                clearable
-                style="width: 300px"
-              />
-            </el-form-item>
-          </el-form>
-        </div>
-
-        <!-- 设备连接设置 -->
-        <div v-show="activeMenu === 'plc'" class="config-panel">
-          <h3 class="panel-title">{{ $t("systemConfig.plc.title") }}</h3>
-          <el-form :model="form" label-width="160px" label-position="right">
-            <el-form-item :label="$t('systemConfig.plc.protocol')">
-              <el-select v-model="form.plcProtocol" style="width: 200px">
-                <el-option label="Modbus TCP" value="ModbusTcp" />
-                <el-option label="S7" value="S7" />
-                <el-option label="OPC UA" value="OpcUa" />
-              </el-select>
-            </el-form-item>
-
-            <el-form-item :label="$t('systemConfig.plc.host')">
-              <el-input
-                v-model="form.plcHost"
-                placeholder="192.168.1.100"
-                style="width: 250px"
-              />
-            </el-form-item>
-
-            <el-form-item :label="$t('systemConfig.plc.port')">
-              <el-input-number
-                v-model="form.plcPort"
-                :min="1"
-                :max="65535"
-                controls-position="right"
-              />
-            </el-form-item>
-
-            <el-form-item :label="$t('systemConfig.plc.unitId')">
-              <el-input-number
-                v-model="form.plcUnitId"
-                :min="1"
-                :max="255"
-                controls-position="right"
-              />
-            </el-form-item>
-
-            <el-divider content-position="left">{{
-              $t("systemConfig.plc.pollSettings")
-            }}</el-divider>
-
-            <el-form-item :label="$t('systemConfig.plc.pollFast')">
-              <el-input-number
-                v-model="form.pollFastInterval"
-                :min="50"
-                :max="5000"
-                :step="50"
-                controls-position="right"
-              />
-              <span class="unit-text">ms</span>
-            </el-form-item>
-
-            <el-form-item :label="$t('systemConfig.plc.pollSlow')">
-              <el-input-number
-                v-model="form.pollSlowInterval"
-                :min="100"
-                :max="10000"
-                :step="100"
-                controls-position="right"
-              />
-              <span class="unit-text">ms</span>
-            </el-form-item>
-          </el-form>
-        </div>
-
-        <!-- 导出设置 -->
-        <div v-show="activeMenu === 'export'" class="config-panel">
-          <h3 class="panel-title">{{ $t("systemConfig.export.title") }}</h3>
-          <el-form :model="form" label-width="160px" label-position="right">
-            <el-form-item
-              :label="$t('systemConfig.export.pdfWatermarkEnabled')"
-            >
-              <el-switch
-                v-model="form.pdfWatermarkEnabled"
-                active-color="#13ce66"
-                inactive-color="#c0c4cc"
-              />
-            </el-form-item>
-
-            <el-form-item :label="$t('systemConfig.export.pdfWatermarkText')">
-              <el-input
-                v-model="form.pdfWatermarkText"
-                :placeholder="$t('systemConfig.export.pdfWatermarkPlaceholder')"
-                clearable
-                style="width: 300px"
-              />
-            </el-form-item>
-          </el-form>
-        </div>
-
-        <!-- 连接设置 -->
-        <div v-show="activeMenu === 'connection'" class="config-panel">
-          <h3 class="panel-title">{{ $t("systemConfig.connection.title") }}</h3>
-          <el-form :model="form" label-width="160px" label-position="right">
-            <el-form-item
-              :label="$t('systemConfig.connection.heartbeatInterval')"
-            >
-              <el-input-number
-                v-model="form.heartbeatInterval"
-                :min="5000"
-                :max="60000"
-                :step="1000"
-                controls-position="right"
-              />
-              <span class="unit-text">ms</span>
-            </el-form-item>
-          </el-form>
-        </div>
-
-        <!-- 设备参数 -->
-        <div v-show="activeMenu === 'device'" class="config-panel">
-          <h3 class="panel-title">{{ $t("systemConfig.device.title") }}</h3>
-          <el-form :model="form" label-width="160px" label-position="right">
-            <el-form-item :label="$t('systemConfig.device.deviceName')">
-              <el-input
-                v-model="form.deviceName"
-                :placeholder="$t('systemConfig.device.deviceName')"
-                clearable
-                style="width: 300px"
-              />
-            </el-form-item>
-            <el-form-item :label="$t('systemConfig.device.deviceCode')">
-              <el-input
-                v-model="form.deviceCode"
-                :placeholder="$t('systemConfig.device.deviceCode')"
-                clearable
-                style="width: 300px"
-              />
-            </el-form-item>
-            <el-form-item :label="$t('systemConfig.device.deviceRegion')">
-              <el-cascader
-                v-model="form.deviceRegion"
-                :options="regionOptions"
-                :props="{ expandTrigger: 'hover' }"
-                :placeholder="$t('systemConfig.device.deviceRegion')"
-                clearable
-                filterable
-                popper-class="device-region-cascader"
-                style="width: 300px"
-              />
-            </el-form-item>
-            <el-form-item :label="$t('systemConfig.device.deviceInstallDate')">
-              <el-date-picker
-                v-model="form.deviceInstallDate"
-                type="date"
-                :placeholder="$t('systemConfig.device.deviceInstallDate')"
-                value-format="yyyy-MM-dd"
-                style="width: 300px"
-              />
-            </el-form-item>
-          </el-form>
-
-          <!-- 部件寿命提醒设置 -->
-          <h3 class="panel-title" style="margin-top: 24px">
-            {{ $t("systemConfig.device.partLifeSettingsTitle") }}
-          </h3>
-          <el-form :model="form" label-width="160px" label-position="right">
-            <el-form-item
-              :label="$t('systemConfig.device.partLifeReminderEnabled')"
-            >
-              <el-switch
-                v-model="form.partLifeReminderEnabled"
-                :active-value="true"
-                :inactive-value="false"
-              />
-              <div class="form-tip">
-                {{ $t("systemConfig.device.partLifeReminderEnabledTip") }}
-              </div>
-            </el-form-item>
-            <el-form-item :label="$t('systemConfig.device.partLifeThreshold')">
-              <el-select
-                v-model="form.partLifeThreshold"
-                style="width: 200px"
-                :disabled="!form.partLifeReminderEnabled"
-              >
-                <el-option label="10%" value="10" />
-                <el-option label="20%" value="20" />
-                <el-option label="30%" value="30" />
-                <el-option label="50%" value="50" />
-              </el-select>
-              <div class="form-tip">
-                {{ $t("systemConfig.device.partLifeThresholdTip") }}
-              </div>
-            </el-form-item>
-            <el-form-item
-              :label="$t('systemConfig.device.partLifeRemindInterval')"
-            >
-              <el-select
-                v-model="form.partLifeRemindInterval"
-                style="width: 200px"
-                :disabled="!form.partLifeReminderEnabled"
-              >
-                <el-option
-                  :label="$t('systemConfig.device.intervalHour')"
-                  value="hour"
-                />
-                <el-option
-                  :label="$t('systemConfig.device.intervalShift')"
-                  value="shift"
-                />
-                <el-option
-                  :label="$t('systemConfig.device.intervalDay')"
-                  value="day"
-                />
-              </el-select>
-              <div class="form-tip">
-                {{ $t("systemConfig.device.partLifeRemindIntervalTip") }}
-              </div>
-            </el-form-item>
-            <el-form-item :label="$t('systemConfig.device.snoozeInterval')">
-              <el-select
-                v-model="form.partLifeSnoozeInterval"
-                style="width: 200px"
-                :disabled="!form.partLifeReminderEnabled"
-              >
-                <el-option
-                  :label="$t('systemConfig.device.snooze5min')"
-                  value="5"
-                />
-                <el-option
-                  :label="$t('systemConfig.device.snooze10min')"
-                  value="10"
-                />
-                <el-option
-                  :label="$t('systemConfig.device.snooze30min')"
-                  value="30"
-                />
-                <el-option
-                  :label="$t('systemConfig.device.snooze1hour')"
-                  value="60"
-                />
-                <el-option
-                  :label="$t('systemConfig.device.snooze2hour')"
-                  value="120"
-                />
-              </el-select>
-              <div class="form-tip">
-                {{ $t("systemConfig.device.snoozeIntervalTip") }}
-              </div>
-            </el-form-item>
-          </el-form>
-        </div>
-
-        <!-- 订单设置 -->
-        <div v-show="activeMenu === 'order'" class="config-panel">
-          <h3 class="panel-title">{{ $t("systemConfig.order.title") }}</h3>
-
-          <!-- 生产控制区域 -->
-          <div class="config-section">
-            <div class="section-title">
-              <i class="el-icon-cpu"></i>
-              <span>{{ $t("systemConfig.order.productionControl") }}</span>
-            </div>
-            <el-form :model="form" label-width="250px" label-position="right">
+          <!-- 系统设置 -->
+          <div v-if="activeMenu === 'system'" class="config-panel">
+            <h3 class="panel-title">
+              {{ $t("menu.system.config.childrenMenu.system.title") }}
+            </h3>
+            <el-form :model="form" label-width="160px" label-position="right">
               <el-form-item
-                :label="$t('systemConfig.order.allowNoOrderProduction')"
-              >
-                <el-switch
-                  v-model="form.allowNoOrderProduction"
-                  active-color="#13ce66"
-                  inactive-color="#c0c4cc"
-                />
-                <span class="form-tip">{{
-                  $t("systemConfig.order.allowNoOrderProductionTip")
-                }}</span>
-              </el-form-item>
-
-              <el-form-item
-                :label="$t('systemConfig.order.noOrderProductionHighlight')"
-              >
-                <el-switch
-                  v-model="form.noOrderProductionHighlight"
-                  :disabled="!form.allowNoOrderProduction"
-                  active-color="#e6a23c"
-                  inactive-color="#c0c4cc"
-                />
-                <span
-                  class="form-tip"
-                  :class="{ disabled: !form.allowNoOrderProduction }"
-                >
-                  {{ $t("systemConfig.order.noOrderProductionHighlightTip") }}
-                </span>
-              </el-form-item>
-
-              <el-form-item
-                :label="$t('systemConfig.order.orderSwitchConfirm')"
-              >
-                <el-switch
-                  v-model="form.orderSwitchConfirm"
-                  active-color="#13ce66"
-                  inactive-color="#c0c4cc"
-                />
-              </el-form-item>
-
-              <el-form-item
-                :label="$t('systemConfig.order.autoArchiveCompleted')"
-              >
-                <el-switch
-                  v-model="form.autoArchiveCompleted"
-                  active-color="#13ce66"
-                  inactive-color="#c0c4cc"
-                />
-              </el-form-item>
-            </el-form>
-          </div>
-
-          <!-- 统计展示区域 -->
-          <div class="config-section">
-            <div class="section-title">
-              <i class="el-icon-data-line"></i>
-              <span>{{ $t("systemConfig.order.statDisplay") }}</span>
-            </div>
-            <el-form :model="form" label-width="250px" label-position="right">
-              <el-form-item :label="$t('systemConfig.order.showOperatorName')">
-                <el-switch
-                  v-model="form.showOperatorName"
-                  active-color="#13ce66"
-                  inactive-color="#c0c4cc"
-                />
-              </el-form-item>
-
-              <el-form-item :label="$t('systemConfig.order.showAlarmCount')">
-                <el-switch
-                  v-model="form.showAlarmCount"
-                  active-color="#13ce66"
-                  inactive-color="#c0c4cc"
-                />
-              </el-form-item>
-
-              <el-form-item :label="$t('systemConfig.order.showRuntime')">
-                <el-switch
-                  v-model="form.showRuntime"
-                  active-color="#13ce66"
-                  inactive-color="#c0c4cc"
-                />
-              </el-form-item>
-            </el-form>
-          </div>
-
-          <!-- 报告设置区域 -->
-          <div class="config-section">
-            <div class="section-title">
-              <i class="el-icon-document"></i>
-              <span>{{ $t("systemConfig.order.reportConfig") }}</span>
-            </div>
-            <el-form :model="form" label-width="250px" label-position="right">
-              <el-form-item
-                :label="$t('systemConfig.order.reportIncludeAlarmDetail')"
-              >
-                <el-switch
-                  v-model="form.reportIncludeAlarmDetail"
-                  active-color="#13ce66"
-                  inactive-color="#c0c4cc"
-                />
-              </el-form-item>
-
-              <el-form-item
-                :label="$t('systemConfig.order.reportIncludeOperatorDetail')"
-              >
-                <el-switch
-                  v-model="form.reportIncludeOperatorDetail"
-                  active-color="#13ce66"
-                  inactive-color="#c0c4cc"
-                />
-              </el-form-item>
-
-              <el-form-item
-                :label="$t('systemConfig.order.reportIncludeDownloadCount')"
-              >
-                <el-switch
-                  v-model="form.reportIncludeDownloadCount"
-                  active-color="#13ce66"
-                  inactive-color="#c0c4cc"
-                />
-              </el-form-item>
-
-              <el-form-item
-                :label="$t('systemConfig.order.allowRunningOrderDownload')"
-              >
-                <el-switch
-                  v-model="form.allowRunningOrderDownload"
-                  active-color="#e6a23c"
-                  inactive-color="#c0c4cc"
-                />
-                <span class="form-tip">{{
-                  $t("systemConfig.order.allowRunningOrderDownloadTip")
-                }}</span>
-              </el-form-item>
-            </el-form>
-          </div>
-        </div>
-
-        <!-- 授权管理 -->
-        <div
-          v-show="activeMenu === 'license'"
-          class="config-panel license-panel"
-        >
-          <!-- 顶部操作栏 -->
-          <div class="license-toolbar">
-            <div class="toolbar-title">
-              <i class="el-icon-key"></i>
-              <span>{{ $t("license.manageTitle") }}</span>
-            </div>
-            <div class="toolbar-actions">
-              <el-button
-                size="mini"
-                icon="el-icon-refresh"
-                @click="loadLicenseData"
-                :loading="licenseLoading"
-                >{{ $t("license.refresh") }}</el-button
-              >
-              <el-button
-                size="mini"
-                type="primary"
-                icon="el-icon-upload2"
-                @click="showLicenseImport = true"
-                >{{ $t("license.importLicense") }}</el-button
-              >
-              <el-button
-                v-if="isAdmin"
-                size="mini"
-                icon="el-icon-download"
-                @click="handleDownloadLicense"
-                >{{ $t("license.download") }}</el-button
-              >
-            </div>
-          </div>
-
-          <!-- 授权状态卡片 -->
-          <div
-            class="license-status-card"
-            :class="{ valid: licenseData.valid, invalid: !licenseData.valid }"
-          >
-            <div class="status-left">
-              <i
-                :class="
-                  licenseData.valid
-                    ? 'el-icon-circle-check'
-                    : 'el-icon-warning-outline'
+                :label="
+                  $t('menu.system.config.childrenMenu.system.sessionTimeout')
                 "
-              ></i>
-              <div class="status-text">
-                <div class="status-main">
+              >
+                <el-input-number
+                  v-model="form.sessionTimeout"
+                  :min="5"
+                  :max="120"
+                  :step="5"
+                  controls-position="right"
+                />
+                <span class="unit-text">{{
+                  $t("menu.system.config.childrenMenu.system.minutes")
+                }}</span>
+              </el-form-item>
+
+              <el-form-item
+                :label="
+                  $t('menu.system.config.childrenMenu.system.defaultPageSize')
+                "
+              >
+                <el-select v-model="form.defaultPageSize" style="width: 200px">
+                  <el-option :label="10" :value="10" />
+                  <el-option :label="20" :value="20" />
+                  <el-option :label="50" :value="50" />
+                  <el-option :label="100" :value="100" />
+                </el-select>
+              </el-form-item>
+
+              <el-form-item
+                :label="
+                  $t('menu.system.config.childrenMenu.system.defaultLanguage')
+                "
+              >
+                <el-select v-model="form.defaultLanguage" style="width: 200px">
+                  <el-option label="简体中文" value="zh-CN" />
+                  <el-option label="English" value="en-US" />
+                </el-select>
+              </el-form-item>
+
+              <el-form-item
+                :label="$t('menu.system.config.childrenMenu.system.dateFormat')"
+              >
+                <el-select v-model="form.dateFormat" style="width: 200px">
+                  <el-option label="YYYY-MM-DD" value="YYYY-MM-DD" />
+                  <el-option label="YYYY/MM/DD" value="YYYY/MM/DD" />
+                  <el-option label="DD-MM-YYYY" value="DD-MM-YYYY" />
+                  <el-option label="DD/MM/YYYY" value="DD/MM/YYYY" />
+                </el-select>
+              </el-form-item>
+            </el-form>
+          </div>
+
+          <!-- 安全设置 -->
+          <div v-if="activeMenu === 'security'" class="config-panel">
+            <h3 class="panel-title">
+              {{ $t("menu.system.config.childrenMenu.security.title") }}
+            </h3>
+            <el-form :model="form" label-width="160px" label-position="right">
+              <el-form-item
+                :label="
+                  $t(
+                    'menu.system.config.childrenMenu.security.watermarkEnabled'
+                  )
+                "
+              >
+                <el-switch
+                  v-model="form.watermarkEnabled"
+                  active-color="#13ce66"
+                  inactive-color="#c0c4cc"
+                />
+              </el-form-item>
+
+              <el-form-item
+                :label="
+                  $t('menu.system.config.childrenMenu.security.watermarkText')
+                "
+              >
+                <el-input
+                  v-model="form.watermarkText"
+                  :placeholder="
+                    $t(
+                      'menu.system.config.childrenMenu.security.watermarkPlaceholder'
+                    )
+                  "
+                  clearable
+                  style="width: 300px"
+                />
+              </el-form-item>
+            </el-form>
+          </div>
+
+          <!-- 设备连接设置 -->
+          <div v-if="activeMenu === 'plc'" class="config-panel">
+            <h3 class="panel-title">
+              {{ $t("menu.system.config.childrenMenu.plc.title") }}
+            </h3>
+            <el-form :model="form" label-width="160px" label-position="right">
+              <el-form-item
+                :label="$t('menu.system.config.childrenMenu.plc.protocol')"
+              >
+                <el-select v-model="form.plcProtocol" style="width: 200px">
+                  <el-option label="Modbus TCP" value="ModbusTcp" />
+                  <el-option label="S7" value="S7" />
+                  <el-option label="OPC UA" value="OpcUa" />
+                </el-select>
+              </el-form-item>
+
+              <el-form-item
+                :label="$t('menu.system.config.childrenMenu.plc.host')"
+              >
+                <el-input
+                  v-model="form.plcHost"
+                  placeholder="192.168.1.100"
+                  style="width: 250px"
+                />
+              </el-form-item>
+
+              <el-form-item
+                :label="$t('menu.system.config.childrenMenu.plc.port')"
+              >
+                <el-input-number
+                  v-model="form.plcPort"
+                  :min="1"
+                  :max="65535"
+                  controls-position="right"
+                />
+              </el-form-item>
+
+              <el-form-item
+                :label="$t('menu.system.config.childrenMenu.plc.unitId')"
+              >
+                <el-input-number
+                  v-model="form.plcUnitId"
+                  :min="1"
+                  :max="255"
+                  controls-position="right"
+                />
+              </el-form-item>
+
+              <el-divider content-position="left">{{
+                $t("menu.system.config.childrenMenu.plc.pollSettings")
+              }}</el-divider>
+
+              <el-form-item
+                :label="$t('menu.system.config.childrenMenu.plc.pollFast')"
+              >
+                <el-input-number
+                  v-model="form.pollFastInterval"
+                  :min="50"
+                  :max="5000"
+                  :step="50"
+                  controls-position="right"
+                />
+                <span class="unit-text">ms</span>
+              </el-form-item>
+
+              <el-form-item
+                :label="$t('menu.system.config.childrenMenu.plc.pollSlow')"
+              >
+                <el-input-number
+                  v-model="form.pollSlowInterval"
+                  :min="100"
+                  :max="10000"
+                  :step="100"
+                  controls-position="right"
+                />
+                <span class="unit-text">ms</span>
+              </el-form-item>
+            </el-form>
+          </div>
+
+          <!-- 导出设置 -->
+          <div v-if="activeMenu === 'export'" class="config-panel">
+            <h3 class="panel-title">
+              {{ $t("menu.system.config.childrenMenu.export.title") }}
+            </h3>
+            <el-form :model="form" label-width="160px" label-position="right">
+              <el-form-item
+                :label="
+                  $t(
+                    'menu.system.config.childrenMenu.export.pdfWatermarkEnabled'
+                  )
+                "
+              >
+                <el-switch
+                  v-model="form.pdfWatermarkEnabled"
+                  active-color="#13ce66"
+                  inactive-color="#c0c4cc"
+                />
+              </el-form-item>
+
+              <el-form-item
+                :label="
+                  $t('menu.system.config.childrenMenu.export.pdfWatermarkText')
+                "
+              >
+                <el-input
+                  v-model="form.pdfWatermarkText"
+                  :placeholder="
+                    $t(
+                      'menu.system.config.childrenMenu.export.pdfWatermarkPlaceholder'
+                    )
+                  "
+                  clearable
+                  style="width: 300px"
+                />
+              </el-form-item>
+            </el-form>
+          </div>
+
+          <!-- 连接设置 -->
+          <div v-if="activeMenu === 'connection'" class="config-panel">
+            <h3 class="panel-title">
+              {{ $t("menu.system.config.childrenMenu.connection.title") }}
+            </h3>
+            <el-form :model="form" label-width="160px" label-position="right">
+              <el-form-item
+                :label="
+                  $t(
+                    'menu.system.config.childrenMenu.connection.heartbeatInterval'
+                  )
+                "
+              >
+                <el-input-number
+                  v-model="form.heartbeatInterval"
+                  :min="5000"
+                  :max="60000"
+                  :step="1000"
+                  controls-position="right"
+                />
+                <span class="unit-text">ms</span>
+              </el-form-item>
+              <el-form-item
+                :label="
+                  $t(
+                    'menu.system.config.childrenMenu.connection.deviceStatusCheckInterval'
+                  )
+                "
+              >
+                <el-input-number
+                  v-model="form.deviceStatusCheckInterval"
+                  :min="60"
+                  :max="3600"
+                  :step="60"
+                  controls-position="right"
+                />
+                <span class="unit-text">{{
+                  $t("menu.system.config.childrenMenu.connection.unitSecond")
+                }}</span>
+              </el-form-item>
+              <el-form-item
+                :label="
+                  $t(
+                    'menu.system.config.childrenMenu.connection.deviceOfflineThreshold'
+                  )
+                "
+              >
+                <el-input-number
+                  v-model="form.deviceOfflineThreshold"
+                  :min="120"
+                  :max="7200"
+                  :step="60"
+                  controls-position="right"
+                />
+                <span class="unit-text">{{
+                  $t("menu.system.config.childrenMenu.connection.unitSecond")
+                }}</span>
+              </el-form-item>
+            </el-form>
+          </div>
+
+          <!-- 设备参数 -->
+          <div v-if="activeMenu === 'device'" class="config-panel">
+            <h3 class="panel-title">
+              {{ $t("menu.system.config.childrenMenu.device.title") }}
+            </h3>
+            <el-form :model="form" label-width="160px" label-position="right">
+              <el-form-item
+                :label="$t('menu.system.config.childrenMenu.device.deviceName')"
+              >
+                <el-input
+                  v-model="form.deviceName"
+                  :placeholder="
+                    $t('menu.system.config.childrenMenu.device.deviceName')
+                  "
+                  clearable
+                  style="width: 300px"
+                />
+              </el-form-item>
+              <el-form-item
+                :label="$t('menu.system.config.childrenMenu.device.deviceCode')"
+              >
+                <el-input
+                  v-model="form.deviceCode"
+                  :placeholder="
+                    $t('menu.system.config.childrenMenu.device.deviceCode')
+                  "
+                  clearable
+                  style="width: 300px"
+                />
+              </el-form-item>
+              <el-form-item
+                :label="
+                  $t('menu.system.config.childrenMenu.device.deviceRegion')
+                "
+              >
+                <el-cascader
+                  v-model="form.deviceRegion"
+                  :options="regionOptions"
+                  :props="{ expandTrigger: 'hover' }"
+                  :placeholder="
+                    $t('menu.system.config.childrenMenu.device.deviceRegion')
+                  "
+                  clearable
+                  filterable
+                  popper-class="device-region-cascader"
+                  style="width: 300px"
+                />
+              </el-form-item>
+              <el-form-item
+                :label="
+                  $t('menu.system.config.childrenMenu.device.deviceInstallDate')
+                "
+              >
+                <el-date-picker
+                  v-model="form.deviceInstallDate"
+                  type="date"
+                  :placeholder="
+                    $t(
+                      'menu.system.config.childrenMenu.device.deviceInstallDate'
+                    )
+                  "
+                  value-format="yyyy-MM-dd"
+                  style="width: 300px"
+                />
+              </el-form-item>
+            </el-form>
+
+            <!-- 部件寿命提醒设置 -->
+            <h3 class="panel-title" style="margin-top: 24px">
+              {{
+                $t(
+                  "menu.system.config.childrenMenu.device.partLifeSettingsTitle"
+                )
+              }}
+            </h3>
+            <el-form :model="form" label-width="160px" label-position="right">
+              <el-form-item
+                :label="
+                  $t(
+                    'menu.system.config.childrenMenu.device.partLifeReminderEnabled'
+                  )
+                "
+              >
+                <el-switch
+                  v-model="form.partLifeReminderEnabled"
+                  :active-value="true"
+                  :inactive-value="false"
+                />
+                <div class="form-tip">
                   {{
-                    licenseData.valid
-                      ? $t("license.statusValid")
-                      : $t("license.statusInvalid")
+                    $t(
+                      "menu.system.config.childrenMenu.device.partLifeReminderEnabledTip"
+                    )
                   }}
                 </div>
-                <div class="status-type">
-                  <el-tag
-                    size="mini"
-                    :type="licenseTypeTag(licenseData.licenseType)"
-                    effect="dark"
-                    >{{ licenseTypeLabel(licenseData.licenseType) }}</el-tag
-                  >
+              </el-form-item>
+              <el-form-item
+                :label="
+                  $t('menu.system.config.childrenMenu.device.partLifeThreshold')
+                "
+              >
+                <el-select
+                  v-model="form.partLifeThreshold"
+                  style="width: 200px"
+                  :disabled="!form.partLifeReminderEnabled"
+                >
+                  <el-option label="10%" value="10" />
+                  <el-option label="20%" value="20" />
+                  <el-option label="30%" value="30" />
+                  <el-option label="50%" value="50" />
+                </el-select>
+                <div class="form-tip">
+                  {{
+                    $t(
+                      "menu.system.config.childrenMenu.device.partLifeThresholdTip"
+                    )
+                  }}
                 </div>
+              </el-form-item>
+              <el-form-item
+                :label="
+                  $t(
+                    'menu.system.config.childrenMenu.device.partLifeRemindInterval'
+                  )
+                "
+              >
+                <el-select
+                  v-model="form.partLifeRemindInterval"
+                  style="width: 200px"
+                  :disabled="!form.partLifeReminderEnabled"
+                >
+                  <el-option
+                    :label="
+                      $t('menu.system.config.childrenMenu.device.intervalHour')
+                    "
+                    value="hour"
+                  />
+                  <el-option
+                    :label="
+                      $t('menu.system.config.childrenMenu.device.intervalShift')
+                    "
+                    value="shift"
+                  />
+                  <el-option
+                    :label="
+                      $t('menu.system.config.childrenMenu.device.intervalDay')
+                    "
+                    value="day"
+                  />
+                </el-select>
+                <div class="form-tip">
+                  {{
+                    $t(
+                      "menu.system.config.childrenMenu.device.partLifeRemindIntervalTip"
+                    )
+                  }}
+                </div>
+              </el-form-item>
+              <el-form-item
+                :label="
+                  $t('menu.system.config.childrenMenu.device.snoozeInterval')
+                "
+              >
+                <el-select
+                  v-model="form.partLifeSnoozeInterval"
+                  style="width: 200px"
+                  :disabled="!form.partLifeReminderEnabled"
+                >
+                  <el-option
+                    :label="
+                      $t('menu.system.config.childrenMenu.device.snooze5min')
+                    "
+                    value="5"
+                  />
+                  <el-option
+                    :label="
+                      $t('menu.system.config.childrenMenu.device.snooze10min')
+                    "
+                    value="10"
+                  />
+                  <el-option
+                    :label="
+                      $t('menu.system.config.childrenMenu.device.snooze30min')
+                    "
+                    value="30"
+                  />
+                  <el-option
+                    :label="
+                      $t('menu.system.config.childrenMenu.device.snooze1hour')
+                    "
+                    value="60"
+                  />
+                  <el-option
+                    :label="
+                      $t('menu.system.config.childrenMenu.device.snooze2hour')
+                    "
+                    value="120"
+                  />
+                </el-select>
+                <div class="form-tip">
+                  {{
+                    $t(
+                      "menu.system.config.childrenMenu.device.snoozeIntervalTip"
+                    )
+                  }}
+                </div>
+              </el-form-item>
+            </el-form>
+          </div>
+
+          <!-- 订单设置 -->
+          <div v-if="activeMenu === 'order'" class="config-panel">
+            <h3 class="panel-title">
+              {{ $t("menu.system.config.childrenMenu.order.title") }}
+            </h3>
+
+            <!-- 生产控制区域 -->
+            <div class="config-section">
+              <div class="section-title">
+                <i class="el-icon-cpu"></i>
+                <span>{{
+                  $t("menu.system.config.childrenMenu.order.productionControl")
+                }}</span>
               </div>
+              <el-form :model="form" label-width="250px" label-position="right">
+                <el-form-item
+                  :label="
+                    $t(
+                      'menu.system.config.childrenMenu.order.allowNoOrderProduction'
+                    )
+                  "
+                >
+                  <el-switch
+                    v-model="form.allowNoOrderProduction"
+                    active-color="#13ce66"
+                    inactive-color="#c0c4cc"
+                  />
+                  <span class="form-tip">{{
+                    $t(
+                      "menu.system.config.childrenMenu.order.allowNoOrderProductionTip"
+                    )
+                  }}</span>
+                </el-form-item>
+
+                <el-form-item
+                  :label="
+                    $t(
+                      'menu.system.config.childrenMenu.order.noOrderProductionHighlight'
+                    )
+                  "
+                >
+                  <el-switch
+                    v-model="form.noOrderProductionHighlight"
+                    :disabled="!form.allowNoOrderProduction"
+                    active-color="#e6a23c"
+                    inactive-color="#c0c4cc"
+                  />
+                  <span
+                    class="form-tip"
+                    :class="{ disabled: !form.allowNoOrderProduction }"
+                  >
+                    {{
+                      $t(
+                        "menu.system.config.childrenMenu.order.noOrderProductionHighlightTip"
+                      )
+                    }}
+                  </span>
+                </el-form-item>
+
+                <el-form-item
+                  :label="
+                    $t(
+                      'menu.system.config.childrenMenu.order.orderSwitchConfirm'
+                    )
+                  "
+                >
+                  <el-switch
+                    v-model="form.orderSwitchConfirm"
+                    active-color="#13ce66"
+                    inactive-color="#c0c4cc"
+                  />
+                </el-form-item>
+
+                <el-form-item
+                  :label="
+                    $t(
+                      'menu.system.config.childrenMenu.order.autoArchiveCompleted'
+                    )
+                  "
+                >
+                  <el-switch
+                    v-model="form.autoArchiveCompleted"
+                    active-color="#13ce66"
+                    inactive-color="#c0c4cc"
+                  />
+                </el-form-item>
+              </el-form>
             </div>
-            <div class="status-right">
-              <div class="status-item">
-                <span class="item-label">{{ $t("license.expireTime") }}</span>
-                <span class="item-value">{{
-                  formatLicenseTime(licenseData.expiresAt)
+
+            <!-- 统计展示区域 -->
+            <div class="config-section">
+              <div class="section-title">
+                <i class="el-icon-data-line"></i>
+                <span>{{
+                  $t("menu.system.config.childrenMenu.order.statDisplay")
                 }}</span>
               </div>
-              <div class="status-item">
-                <span class="item-label">{{ $t("license.remaining") }}</span>
-                <span class="item-value countdown">{{ licenseCountdown }}</span>
-              </div>
-              <div class="status-item">
-                <span class="item-label">{{ $t("license.projectName") }}</span>
-                <span class="item-value">{{
-                  licenseData.projectName || "-"
+              <el-form :model="form" label-width="250px" label-position="right">
+                <el-form-item
+                  :label="
+                    $t('menu.system.config.childrenMenu.order.showOperatorName')
+                  "
+                >
+                  <el-switch
+                    v-model="form.showOperatorName"
+                    active-color="#13ce66"
+                    inactive-color="#c0c4cc"
+                  />
+                </el-form-item>
+
+                <el-form-item
+                  :label="
+                    $t('menu.system.config.childrenMenu.order.showAlarmCount')
+                  "
+                >
+                  <el-switch
+                    v-model="form.showAlarmCount"
+                    active-color="#13ce66"
+                    inactive-color="#c0c4cc"
+                  />
+                </el-form-item>
+
+                <el-form-item
+                  :label="
+                    $t('menu.system.config.childrenMenu.order.showRuntime')
+                  "
+                >
+                  <el-switch
+                    v-model="form.showRuntime"
+                    active-color="#13ce66"
+                    inactive-color="#c0c4cc"
+                  />
+                </el-form-item>
+              </el-form>
+            </div>
+
+            <!-- 报告设置区域 -->
+            <div class="config-section">
+              <div class="section-title">
+                <i class="el-icon-document"></i>
+                <span>{{
+                  $t("menu.system.config.childrenMenu.order.reportConfig")
                 }}</span>
               </div>
-              <div class="status-item">
-                <span class="item-label">{{ $t("license.customerName") }}</span>
-                <span class="item-value">{{
-                  licenseData.customer?.name || "-"
-                }}</span>
-              </div>
+              <el-form :model="form" label-width="250px" label-position="right">
+                <el-form-item
+                  :label="
+                    $t(
+                      'menu.system.config.childrenMenu.order.reportIncludeAlarmDetail'
+                    )
+                  "
+                >
+                  <el-switch
+                    v-model="form.reportIncludeAlarmDetail"
+                    active-color="#13ce66"
+                    inactive-color="#c0c4cc"
+                  />
+                </el-form-item>
+
+                <el-form-item
+                  :label="
+                    $t(
+                      'menu.system.config.childrenMenu.order.reportIncludeOperatorDetail'
+                    )
+                  "
+                >
+                  <el-switch
+                    v-model="form.reportIncludeOperatorDetail"
+                    active-color="#13ce66"
+                    inactive-color="#c0c4cc"
+                  />
+                </el-form-item>
+
+                <el-form-item
+                  :label="
+                    $t(
+                      'menu.system.config.childrenMenu.order.reportIncludeDownloadCount'
+                    )
+                  "
+                >
+                  <el-switch
+                    v-model="form.reportIncludeDownloadCount"
+                    active-color="#13ce66"
+                    inactive-color="#c0c4cc"
+                  />
+                </el-form-item>
+
+                <el-form-item
+                  :label="
+                    $t(
+                      'menu.system.config.childrenMenu.order.allowRunningOrderDownload'
+                    )
+                  "
+                >
+                  <el-switch
+                    v-model="form.allowRunningOrderDownload"
+                    active-color="#e6a23c"
+                    inactive-color="#c0c4cc"
+                  />
+                  <span class="form-tip">{{
+                    $t(
+                      "menu.system.config.childrenMenu.order.allowRunningOrderDownloadTip"
+                    )
+                  }}</span>
+                </el-form-item>
+              </el-form>
             </div>
           </div>
 
-          <!-- 折叠面板：详细信息 -->
-          <el-collapse v-model="licenseActiveNames" class="license-collapse">
-            <!-- 授权详细信息 -->
-            <el-collapse-item :title="$t('license.detailTitle')" name="detail">
-              <div class="license-detail-grid">
-                <div class="detail-item">
-                  <div class="detail-label">{{ $t("license.licenseId") }}</div>
-                  <div class="detail-value mono-text">
-                    {{ licenseData.licenseId || "-" }}
+          <!-- 授权管理 -->
+          <div
+            v-if="activeMenu === 'license'"
+            class="config-panel license-panel"
+          >
+            <!-- 顶部操作栏 -->
+            <div class="license-toolbar">
+              <div class="toolbar-title">
+                <i class="el-icon-key"></i>
+                <span>{{
+                  $t("menu.system.config.childrenMenu.license.manageTitle")
+                }}</span>
+              </div>
+              <div class="toolbar-actions">
+                <el-button
+                  size="mini"
+                  icon="el-icon-refresh"
+                  @click="loadLicenseData"
+                  :loading="licenseLoading"
+                  >{{
+                    $t("menu.system.config.childrenMenu.license.refresh")
+                  }}</el-button
+                >
+                <el-button
+                  size="mini"
+                  type="primary"
+                  icon="el-icon-upload2"
+                  @click="showLicenseImport = true"
+                  >{{
+                    $t("menu.system.config.childrenMenu.license.importLicense")
+                  }}</el-button
+                >
+                <el-button
+                  v-if="isAdmin"
+                  size="mini"
+                  icon="el-icon-download"
+                  @click="handleDownloadLicense"
+                  >{{
+                    $t("menu.system.config.childrenMenu.license.download")
+                  }}</el-button
+                >
+              </div>
+            </div>
+
+            <!-- 授权状态卡片 -->
+            <div
+              class="license-status-card"
+              :class="{ valid: licenseData.valid, invalid: !licenseData.valid }"
+            >
+              <div class="status-left">
+                <i
+                  :class="
+                    licenseData.valid
+                      ? 'el-icon-circle-check'
+                      : 'el-icon-warning-outline'
+                  "
+                ></i>
+                <div class="status-text">
+                  <div class="status-main">
+                    {{
+                      licenseData.valid
+                        ? $t(
+                            "menu.system.config.childrenMenu.license.statusValid"
+                          )
+                        : $t(
+                            "menu.system.config.childrenMenu.license.statusInvalid"
+                          )
+                    }}
                   </div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">{{ $t("license.projectId") }}</div>
-                  <div class="detail-value mono-text">
-                    {{ licenseData.projectId || "-" }}
-                  </div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">
-                    {{ $t("license.projectName") }}
-                  </div>
-                  <div class="detail-value">
-                    {{ licenseData.projectName || "-" }}
-                  </div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">
-                    {{ $t("license.licenseType") }}
-                  </div>
-                  <div class="detail-value">
+                  <div class="status-type">
                     <el-tag
                       size="mini"
                       :type="licenseTypeTag(licenseData.licenseType)"
+                      effect="dark"
                       >{{ licenseTypeLabel(licenseData.licenseType) }}</el-tag
                     >
                   </div>
                 </div>
-                <div class="detail-item">
-                  <div class="detail-label">{{ $t("license.issuedAt") }}</div>
-                  <div class="detail-value">
-                    {{ formatLicenseTime(licenseData.issuedAt) }}
-                  </div>
+              </div>
+              <div class="status-right">
+                <div class="status-item">
+                  <span class="item-label">{{
+                    $t("menu.system.config.childrenMenu.license.expireTime")
+                  }}</span>
+                  <span class="item-value">{{
+                    formatLicenseTime(licenseData.expiresAt)
+                  }}</span>
                 </div>
-                <div class="detail-item">
-                  <div class="detail-label">{{ $t("license.expireTime") }}</div>
-                  <div class="detail-value">
-                    {{ formatLicenseTime(licenseData.expiresAt) }}
-                  </div>
+                <div class="status-item">
+                  <span class="item-label">{{
+                    $t("menu.system.config.childrenMenu.license.remaining")
+                  }}</span>
+                  <span class="item-value countdown">{{
+                    licenseCountdown
+                  }}</span>
                 </div>
-                <div class="detail-item">
-                  <div class="detail-label">
-                    {{ $t("license.customerName") }}
-                  </div>
-                  <div class="detail-value">
-                    {{ licenseData.customer?.name || "-" }}
-                  </div>
+                <div class="status-item">
+                  <span class="item-label">{{
+                    $t("menu.system.config.childrenMenu.license.projectName")
+                  }}</span>
+                  <span class="item-value">{{
+                    licenseData.projectName || "-"
+                  }}</span>
                 </div>
-                <div class="detail-item">
-                  <div class="detail-label">{{ $t("license.contact") }}</div>
-                  <div class="detail-value">
-                    {{ licenseData.customer?.contact || "-" }}
-                  </div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">{{ $t("license.phone") }}</div>
-                  <div class="detail-value">
-                    {{ licenseData.customer?.phone || "-" }}
-                  </div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">{{ $t("license.email") }}</div>
-                  <div class="detail-value">
-                    {{ licenseData.customer?.email || "-" }}
-                  </div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">{{ $t("license.maxUsers") }}</div>
-                  <div class="detail-value">
-                    {{ licenseData.maxUsers || $t("common.all") }}
-                  </div>
-                </div>
-                <div class="detail-item detail-item-full">
-                  <div class="detail-label">{{ $t("license.features") }}</div>
-                  <div class="detail-value">
-                    <el-tag
-                      v-for="f in licenseData.features || []"
-                      :key="f"
-                      size="mini"
-                      effect="plain"
-                      style="margin-right: 6px; margin-bottom: 4px"
-                      >{{ f }}</el-tag
-                    >
-                    <span
-                      v-if="
-                        !licenseData.features ||
-                        licenseData.features.length === 0
-                      "
-                      class="text-muted"
-                      >{{ $t("license.allFeatures") }}</span
-                    >
-                  </div>
+                <div class="status-item">
+                  <span class="item-label">{{
+                    $t("menu.system.config.childrenMenu.license.customerName")
+                  }}</span>
+                  <span class="item-value">{{
+                    licenseData.customer?.name || "-"
+                  }}</span>
                 </div>
               </div>
-            </el-collapse-item>
+            </div>
 
-            <!-- 机器绑定信息 -->
-            <el-collapse-item :title="$t('license.machineBind')" name="machine">
-              <div class="machine-info">
-                <div class="machine-row">
-                  <span class="machine-label">{{
-                    $t("license.currentMachineId")
-                  }}</span>
-                  <div class="machine-value-wrap">
+            <!-- 折叠面板：详细信息 -->
+            <el-collapse v-model="licenseActiveNames" class="license-collapse">
+              <!-- 授权详细信息 -->
+              <el-collapse-item
+                :title="
+                  $t('menu.system.config.childrenMenu.license.detailTitle')
+                "
+                name="detail"
+              >
+                <div class="license-detail-grid">
+                  <div class="detail-item">
+                    <div class="detail-label">
+                      {{
+                        $t("menu.system.config.childrenMenu.license.licenseId")
+                      }}
+                    </div>
+                    <div class="detail-value mono-text">
+                      {{ licenseData.licenseId || "-" }}
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">
+                      {{
+                        $t("menu.system.config.childrenMenu.license.projectId")
+                      }}
+                    </div>
+                    <div class="detail-value mono-text">
+                      {{ licenseData.projectId || "-" }}
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">
+                      {{
+                        $t(
+                          "menu.system.config.childrenMenu.license.projectName"
+                        )
+                      }}
+                    </div>
+                    <div class="detail-value">
+                      {{ licenseData.projectName || "-" }}
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">
+                      {{
+                        $t(
+                          "menu.system.config.childrenMenu.license.licenseType"
+                        )
+                      }}
+                    </div>
+                    <div class="detail-value">
+                      <el-tag
+                        size="mini"
+                        :type="licenseTypeTag(licenseData.licenseType)"
+                        >{{ licenseTypeLabel(licenseData.licenseType) }}</el-tag
+                      >
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">
+                      {{
+                        $t("menu.system.config.childrenMenu.license.issuedAt")
+                      }}
+                    </div>
+                    <div class="detail-value">
+                      {{ formatLicenseTime(licenseData.issuedAt) }}
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">
+                      {{
+                        $t("menu.system.config.childrenMenu.license.expireTime")
+                      }}
+                    </div>
+                    <div class="detail-value">
+                      {{ formatLicenseTime(licenseData.expiresAt) }}
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">
+                      {{
+                        $t(
+                          "menu.system.config.childrenMenu.license.customerName"
+                        )
+                      }}
+                    </div>
+                    <div class="detail-value">
+                      {{ licenseData.customer?.name || "-" }}
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">
+                      {{
+                        $t("menu.system.config.childrenMenu.license.contact")
+                      }}
+                    </div>
+                    <div class="detail-value">
+                      {{ licenseData.customer?.contact || "-" }}
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">
+                      {{ $t("menu.system.config.childrenMenu.license.phone") }}
+                    </div>
+                    <div class="detail-value">
+                      {{ licenseData.customer?.phone || "-" }}
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">
+                      {{ $t("menu.system.config.childrenMenu.license.email") }}
+                    </div>
+                    <div class="detail-value">
+                      {{ licenseData.customer?.email || "-" }}
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">
+                      {{
+                        $t("menu.system.config.childrenMenu.license.maxUsers")
+                      }}
+                    </div>
+                    <div class="detail-value">
+                      {{
+                        licenseData.maxUsers ||
+                        $t("menu.system.config.childrenMenu.license.unlimited")
+                      }}
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">
+                      {{
+                        $t("menu.system.config.childrenMenu.license.maxDevices")
+                      }}
+                    </div>
+                    <div class="detail-value">
+                      {{
+                        licenseData.maxDevices ||
+                        $t("menu.system.config.childrenMenu.license.unlimited")
+                      }}
+                    </div>
+                  </div>
+                  <div class="detail-item detail-item-full">
+                    <div class="detail-label">
+                      {{
+                        $t("menu.system.config.childrenMenu.license.features")
+                      }}
+                    </div>
+                    <div class="detail-value">
+                      <el-tag
+                        v-for="f in licenseData.features || []"
+                        :key="f"
+                        size="mini"
+                        effect="plain"
+                        style="margin-right: 6px; margin-bottom: 4px"
+                        >{{ f }}</el-tag
+                      >
+                      <span
+                        v-if="
+                          !licenseData.features ||
+                          licenseData.features.length === 0
+                        "
+                        class="text-muted"
+                        >{{
+                          $t(
+                            "menu.system.config.childrenMenu.license.allFeatures"
+                          )
+                        }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </el-collapse-item>
+
+              <!-- 机器绑定信息 -->
+              <el-collapse-item
+                :title="
+                  $t('menu.system.config.childrenMenu.license.machineBind')
+                "
+                name="machine"
+              >
+                <div class="machine-info">
+                  <div class="machine-row">
+                    <span class="machine-label">{{
+                      $t(
+                        "menu.system.config.childrenMenu.license.currentMachineId"
+                      )
+                    }}</span>
+                    <div class="machine-value-wrap">
+                      <span class="machine-id mono-text">{{
+                        licenseData.machineId || "-"
+                      }}</span>
+                      <el-button
+                        v-if="licenseData.machineId"
+                        type="text"
+                        size="mini"
+                        icon="el-icon-document-copy"
+                        @click="copyMachineId"
+                      ></el-button>
+                    </div>
+                  </div>
+                  <div class="machine-row">
+                    <span class="machine-label">{{
+                      $t(
+                        "menu.system.config.childrenMenu.license.boundMachineId"
+                      )
+                    }}</span>
                     <span class="machine-id mono-text">{{
-                      licenseData.machineId || "-"
+                      licenseData.boundMachineId ||
+                      $t("menu.system.config.childrenMenu.license.notBoundAny")
+                    }}</span>
+                  </div>
+                  <div class="machine-row">
+                    <span class="machine-label">{{
+                      $t("menu.system.config.childrenMenu.license.matchStatus")
+                    }}</span>
+                    <el-tag
+                      :type="licenseData.machineMatched ? 'success' : 'danger'"
+                      size="mini"
+                    >
+                      <i
+                        :class="
+                          licenseData.machineMatched
+                            ? 'el-icon-circle-check'
+                            : 'el-icon-circle-close'
+                        "
+                        style="margin-right: 2px"
+                      ></i>
+                      {{
+                        licenseData.machineMatched
+                          ? $t(
+                              "menu.system.config.childrenMenu.license.matched"
+                            )
+                          : $t(
+                              "menu.system.config.childrenMenu.license.notMatched"
+                            )
+                      }}
+                    </el-tag>
+                  </div>
+                </div>
+              </el-collapse-item>
+
+              <!-- 时间防护信息 -->
+              <el-collapse-item
+                :title="$t('menu.system.config.childrenMenu.license.timeGuard')"
+                name="time"
+              >
+                <div class="time-info">
+                  <div class="time-row">
+                    <span class="time-label">{{
+                      $t(
+                        "menu.system.config.childrenMenu.license.timeGuardStatus"
+                      )
+                    }}</span>
+                    <el-tag
+                      :type="licenseData.timeGuard?.exists ? 'success' : 'info'"
+                      size="mini"
+                    >
+                      {{
+                        licenseData.timeGuard?.exists
+                          ? $t(
+                              "menu.system.config.childrenMenu.license.enabled"
+                            )
+                          : $t(
+                              "menu.system.config.childrenMenu.license.notInitialized"
+                            )
+                      }}
+                    </el-tag>
+                  </div>
+                  <div class="time-row">
+                    <span class="time-label">{{
+                      $t("menu.system.config.childrenMenu.license.lastVerified")
+                    }}</span>
+                    <span class="time-value">{{
+                      formatLicenseTime(licenseData.timeGuard?.lastVerifiedAt)
+                    }}</span>
+                  </div>
+                  <div class="time-row">
+                    <span class="time-label">{{
+                      $t("menu.system.config.childrenMenu.license.serverTime")
+                    }}</span>
+                    <span class="time-value">{{
+                      formatLicenseTime(licenseData.serverTime)
+                    }}</span>
+                  </div>
+                  <div class="time-row">
+                    <span class="time-label">{{
+                      $t("menu.system.config.childrenMenu.license.operation")
                     }}</span>
                     <el-button
-                      v-if="licenseData.machineId"
-                      type="text"
+                      type="primary"
                       size="mini"
-                      icon="el-icon-document-copy"
-                      @click="copyMachineId"
-                    ></el-button>
+                      icon="el-icon-refresh"
+                      @click="handleSyncLicenseTime"
+                      :loading="licenseSyncing"
+                      >{{
+                        $t(
+                          "menu.system.config.childrenMenu.license.networkDiagnosis"
+                        )
+                      }}</el-button
+                    >
                   </div>
                 </div>
-                <div class="machine-row">
-                  <span class="machine-label">{{
-                    $t("license.boundMachineId")
-                  }}</span>
-                  <span class="machine-id mono-text">{{
-                    licenseData.boundMachineId || $t("license.notBoundAny")
-                  }}</span>
-                </div>
-                <div class="machine-row">
-                  <span class="machine-label">{{
-                    $t("license.matchStatus")
-                  }}</span>
-                  <el-tag
-                    :type="licenseData.machineMatched ? 'success' : 'danger'"
-                    size="mini"
-                  >
-                    <i
-                      :class="
-                        licenseData.machineMatched
-                          ? 'el-icon-circle-check'
-                          : 'el-icon-circle-close'
-                      "
-                      style="margin-right: 2px"
-                    ></i>
-                    {{
-                      licenseData.machineMatched
-                        ? $t("license.matched")
-                        : $t("license.notMatched")
-                    }}
-                  </el-tag>
-                </div>
-              </div>
-            </el-collapse-item>
+              </el-collapse-item>
 
-            <!-- 时间防护信息 -->
-            <el-collapse-item :title="$t('license.timeGuard')" name="time">
-              <div class="time-info">
-                <div class="time-row">
-                  <span class="time-label">{{
-                    $t("license.timeGuardStatus")
+              <!-- 授权文件信息（仅管理员） -->
+              <el-collapse-item
+                v-if="isAdmin"
+                :title="$t('menu.system.config.childrenMenu.license.fileInfo')"
+                name="file"
+              >
+                <div v-if="licenseData.licenseFile" class="license-detail-grid">
+                  <div class="detail-item detail-item-full">
+                    <div class="detail-label">
+                      {{
+                        $t("menu.system.config.childrenMenu.license.filePath")
+                      }}
+                    </div>
+                    <div class="detail-value mono-text">
+                      {{ licenseData.licenseFile.path }}
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">
+                      {{
+                        $t("menu.system.config.childrenMenu.license.fileName")
+                      }}
+                    </div>
+                    <div class="detail-value">
+                      {{ licenseData.licenseFile.fileName }}
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">
+                      {{
+                        $t("menu.system.config.childrenMenu.license.fileSize")
+                      }}
+                    </div>
+                    <div class="detail-value">
+                      {{ licenseData.licenseFile.sizeFormatted }}
+                    </div>
+                  </div>
+                  <div class="detail-item detail-item-full">
+                    <div class="detail-label">
+                      {{
+                        $t(
+                          "menu.system.config.childrenMenu.license.lastModified"
+                        )
+                      }}
+                    </div>
+                    <div class="detail-value">
+                      {{
+                        formatLicenseTime(licenseData.licenseFile.lastModified)
+                      }}
+                    </div>
+                  </div>
+                </div>
+                <div v-else class="empty-state">
+                  <i class="el-icon-document-delete"></i>
+                  <span>{{
+                    $t("menu.system.config.childrenMenu.license.noLicenseFile")
                   }}</span>
-                  <el-tag
-                    :type="licenseData.timeGuard?.exists ? 'success' : 'info'"
-                    size="mini"
-                  >
-                    {{
-                      licenseData.timeGuard?.exists
-                        ? $t("license.enabled")
-                        : $t("license.notInitialized")
-                    }}
-                  </el-tag>
                 </div>
-                <div class="time-row">
-                  <span class="time-label">{{
-                    $t("license.lastVerified")
-                  }}</span>
-                  <span class="time-value">{{
-                    formatLicenseTime(licenseData.timeGuard?.lastVerifiedAt)
-                  }}</span>
-                </div>
-                <div class="time-row">
-                  <span class="time-label">{{ $t("license.serverTime") }}</span>
-                  <span class="time-value">{{
-                    formatLicenseTime(licenseData.serverTime)
-                  }}</span>
-                </div>
-                <div class="time-row">
-                  <span class="time-label">{{ $t("license.operation") }}</span>
-                  <el-button
-                    type="primary"
-                    size="mini"
-                    icon="el-icon-refresh"
-                    @click="handleSyncLicenseTime"
-                    :loading="licenseSyncing"
-                    >{{ $t("license.networkDiagnosis") }}</el-button
-                  >
-                </div>
-              </div>
-            </el-collapse-item>
-
-            <!-- 授权文件信息（仅管理员） -->
-            <el-collapse-item
-              v-if="isAdmin"
-              :title="$t('license.fileInfo')"
-              name="file"
-            >
-              <div v-if="licenseData.licenseFile" class="license-detail-grid">
-                <div class="detail-item detail-item-full">
-                  <div class="detail-label">{{ $t("license.filePath") }}</div>
-                  <div class="detail-value mono-text">
-                    {{ licenseData.licenseFile.path }}
-                  </div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">{{ $t("license.fileName") }}</div>
-                  <div class="detail-value">
-                    {{ licenseData.licenseFile.fileName }}
-                  </div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">{{ $t("license.fileSize") }}</div>
-                  <div class="detail-value">
-                    {{ licenseData.licenseFile.sizeFormatted }}
-                  </div>
-                </div>
-                <div class="detail-item detail-item-full">
-                  <div class="detail-label">
-                    {{ $t("license.lastModified") }}
-                  </div>
-                  <div class="detail-value">
-                    {{
-                      formatLicenseTime(licenseData.licenseFile.lastModified)
-                    }}
-                  </div>
-                </div>
-              </div>
-              <div v-else class="empty-state">
-                <i class="el-icon-document-delete"></i>
-                <span>{{ $t("license.noLicenseFile") }}</span>
-              </div>
-            </el-collapse-item>
-          </el-collapse>
-        </div>
+              </el-collapse-item>
+            </el-collapse>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- 授权导入弹窗 -->
     <el-dialog
-      :title="$t('license.importDialogTitle')"
+      :title="$t('menu.system.config.childrenMenu.license.importDialogTitle')"
       :visible.sync="showLicenseImport"
       width="500px"
       :close-on-click-modal="false"
     >
       <div class="import-tip">
         <i class="el-icon-info"></i>
-        <span>{{ $t("license.importTip") }}</span>
+        <span>{{
+          $t("menu.system.config.childrenMenu.license.importTip")
+        }}</span>
       </div>
       <el-upload
         class="import-upload"
@@ -924,7 +1325,9 @@
         accept=".lic"
       >
         <i class="el-icon-upload"></i>
-        <div class="el-upload__text">{{ $t("license.dragUpload") }}</div>
+        <div class="el-upload__text">
+          {{ $t("menu.system.config.childrenMenu.license.dragUpload") }}
+        </div>
       </el-upload>
       <div v-if="selectedLicenseFile" class="selected-file-info">
         <i class="el-icon-document-checked"></i>
@@ -932,14 +1335,16 @@
       </div>
       <div slot="footer">
         <el-button @click="showLicenseImport = false">{{
-          $t("license.cancel")
+          $t("menu.system.config.childrenMenu.license.cancel")
         }}</el-button>
         <el-button
           type="primary"
           :loading="licenseImporting"
           :disabled="!selectedLicenseFile"
           @click="handleImportLicense"
-          >{{ $t("license.confirmImport") }}</el-button
+          >{{
+            $t("menu.system.config.childrenMenu.license.confirmImport")
+          }}</el-button
         >
       </div>
     </el-dialog>
@@ -972,31 +1377,43 @@ const menuList = computed(() => [
   {
     key: "system",
     icon: "el-icon-setting",
-    title: t("systemConfig.system.title"),
+    title: t("menu.system.config.childrenMenu.system.title"),
   },
   {
     key: "security",
     icon: "el-icon-lock",
-    title: t("systemConfig.security.title"),
+    title: t("menu.system.config.childrenMenu.security.title"),
   },
-  { key: "plc", icon: "el-icon-cpu", title: t("systemConfig.plc.title") },
+  {
+    key: "plc",
+    icon: "el-icon-cpu",
+    title: t("menu.system.config.childrenMenu.plc.title"),
+  },
   {
     key: "export",
     icon: "el-icon-document",
-    title: t("systemConfig.export.title"),
+    title: t("menu.system.config.childrenMenu.export.title"),
   },
   {
     key: "connection",
     icon: "el-icon-connection",
-    title: t("systemConfig.connection.title"),
+    title: t("menu.system.config.childrenMenu.connection.title"),
   },
-  { key: "device", icon: "el-icon-cpu", title: t("systemConfig.device.title") },
+  {
+    key: "device",
+    icon: "el-icon-cpu",
+    title: t("menu.system.config.childrenMenu.device.title"),
+  },
   {
     key: "order",
     icon: "el-icon-s-order",
-    title: t("systemConfig.order.title"),
+    title: t("menu.system.config.childrenMenu.order.title"),
   },
-  { key: "license", icon: "el-icon-key", title: t("license.manageTitle") },
+  {
+    key: "license",
+    icon: "el-icon-key",
+    title: t("menu.system.config.childrenMenu.license.manageTitle"),
+  },
 ]);
 const {
   licenseData,
@@ -1040,24 +1457,49 @@ const missingConfigKeys = ref([]);
  */
 const REQUIRED_CONFIG_KEYS = [
   // 系统设置
-  "sessionTimeout", "defaultPageSize", "defaultLanguage", "dateFormat",
+  "sessionTimeout",
+  "defaultPageSize",
+  "defaultLanguage",
+  "dateFormat",
   // 安全设置
-  "watermarkEnabled", "watermarkText",
+  "watermarkEnabled",
+  "watermarkText",
   // PLC 设置
-  "plcProtocol", "plcHost", "plcPort", "plcUnitId", "pollFastInterval", "pollSlowInterval",
+  "plcProtocol",
+  "plcHost",
+  "plcPort",
+  "plcUnitId",
+  "pollFastInterval",
+  "pollSlowInterval",
   // 导出设置
-  "pdfWatermarkEnabled", "pdfWatermarkText",
+  "pdfWatermarkEnabled",
+  "pdfWatermarkText",
   // 连接设置
   "heartbeatInterval",
+  "deviceStatusCheckInterval",
+  "deviceOfflineThreshold",
   // 设备参数
-  "deviceName", "deviceCode", "deviceRegion", "deviceInstallDate",
+  "deviceName",
+  "deviceCode",
+  "deviceRegion",
+  "deviceInstallDate",
   // 部件寿命提醒设置
-  "partLifeReminderEnabled", "partLifeThreshold", "partLifeRemindInterval", "partLifeSnoozeInterval",
+  "partLifeReminderEnabled",
+  "partLifeThreshold",
+  "partLifeRemindInterval",
+  "partLifeSnoozeInterval",
   // 订单设置
-  "allowNoOrderProduction", "noOrderProductionHighlight", "showOperatorName",
-  "showAlarmCount", "showRuntime", "reportIncludeAlarmDetail",
-  "reportIncludeOperatorDetail", "reportIncludeDownloadCount",
-  "allowRunningOrderDownload", "autoArchiveCompleted", "orderSwitchConfirm"
+  "allowNoOrderProduction",
+  "noOrderProductionHighlight",
+  "showOperatorName",
+  "showAlarmCount",
+  "showRuntime",
+  "reportIncludeAlarmDetail",
+  "reportIncludeOperatorDetail",
+  "reportIncludeDownloadCount",
+  "allowRunningOrderDownload",
+  "autoArchiveCompleted",
+  "orderSwitchConfirm",
 ];
 
 // 表单数据（先创建普通对象包含所有属性，再创建 reactive 对象，解决 Vue2 无法检测动态添加属性的问题；所有数据来自后端）
@@ -1245,7 +1687,9 @@ async function handleSave() {
   const missingKeys = checkConfigCompleteness(form);
   if (missingKeys.length > 0) {
     Message.error(
-      `存在 ${missingKeys.length} 个未配置项，无法保存：${missingKeys.join(", ")}`
+      `存在 ${missingKeys.length} 个未配置项，无法保存：${missingKeys.join(
+        ", "
+      )}`
     );
     return;
   }

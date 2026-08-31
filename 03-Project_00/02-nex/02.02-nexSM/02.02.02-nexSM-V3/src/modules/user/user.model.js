@@ -4,6 +4,10 @@
 const BaseModel = require('../../db/BaseModel');
 const { query } = require('../../db/index');
 const { getLangValue, processLangFields } = require('../../utils/i18n');
+const cache = require('../../utils/cache');
+
+// Token 版本号缓存前缀（与 auth.middleware.js 保持一致）
+const TOKEN_VERSION_CACHE_PREFIX = 'token_version:';
 
 // 数据表名称
 const TABLE_NAME = 'nex_user';
@@ -56,6 +60,49 @@ class UserModel extends BaseModel {
       login_date: new Date(),
       login_ip: ip
     });
+  }
+
+  /**
+   * 原子递增 Token 版本号（用于单点登录踢人）
+   * 每次登录时调用，旧 Token 中的 token_version 与数据库不一致即失效
+   * @param {number} userId - 用户ID
+   * @returns {Promise<number>} 递增后的新版本号
+   */
+  async incrementTokenVersion(userId) {
+    const sql = `UPDATE ${TABLE_NAME} SET token_version = token_version + 1 WHERE id = ?`;
+    await query(sql, [userId]);
+    // 查询递增后的值
+    const rows = await query(`SELECT token_version FROM ${TABLE_NAME} WHERE id = ?`, [userId]);
+    const newVersion = rows[0]?.token_version || 0;
+    // 清除缓存，确保下次请求从数据库获取最新版本号
+    cache.del(TOKEN_VERSION_CACHE_PREFIX + userId);
+    return newVersion;
+  }
+
+  /**
+   * 获取用户的 Token 版本号
+   * @param {number} userId - 用户ID
+   * @returns {Promise<number>} Token 版本号
+   */
+  async getTokenVersion(userId) {
+    const rows = await query(`SELECT token_version FROM ${TABLE_NAME} WHERE id = ?`, [userId]);
+    return rows[0]?.token_version || 0;
+  }
+
+  /**
+   * 获取所有管理员用户ID列表（用于推送安全通知）
+   * @param {number} [excludeUserId] - 排除的用户ID（可选）
+   * @returns {Promise<number[]>} 管理员用户ID数组
+   */
+  async getAdminUserIds(excludeUserId = null) {
+    let sql = `SELECT id FROM ${TABLE_NAME} WHERE role = 'administrator' AND status = 1 AND is_delete = 0`;
+    const params = [];
+    if (excludeUserId) {
+      sql += ' AND id != ?';
+      params.push(excludeUserId);
+    }
+    const rows = await query(sql, params);
+    return rows.map(r => r.id);
   }
 
   /**

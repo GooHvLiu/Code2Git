@@ -6,12 +6,7 @@
     :close-on-click-modal="false"
     @close="close"
   >
-    <el-form
-      ref="formRef"
-      :model="form"
-      :rules="rules"
-      label-width="90px"
-    >
+    <el-form v-if="dialogVisible" ref="formRef" :model="form" :rules="rules" label-width="90px">
       <el-form-item
         v-for="field in visibleFields"
         :key="field.prop"
@@ -65,12 +60,16 @@
           />
         </el-select>
         <!-- 单选按钮 -->
-        <el-radio-group v-if="field.type === 'radio'" v-model="form[field.prop]">
+        <el-radio-group
+          v-if="field.type === 'radio'"
+          v-model="form[field.prop]"
+        >
           <el-radio
             v-for="opt in field.options"
             :key="opt.value"
             :label="opt.value"
-          >{{ opt.label }}</el-radio>
+            >{{ opt.label }}</el-radio
+          >
         </el-radio-group>
         <!-- 文本域 -->
         <el-input
@@ -84,315 +83,338 @@
       </el-form-item>
     </el-form>
     <div slot="footer">
-      <el-button @click="close">{{ $t('common.cancel') }}</el-button>
-      <el-button type="primary" :loading="submitLoading" @click="handleSubmit">{{ $t('common.confirm') }}</el-button>
+      <el-button @click="close">{{ $t("common.cancel") }}</el-button>
+      <el-button
+        type="primary"
+        :loading="submitLoading"
+        @click="handleSubmit"
+        >{{ $t("common.confirm") }}</el-button
+      >
     </div>
   </el-dialog>
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted, nextTick } from 'vue'
-import { useDict } from '@/composables/useDict'
-import { requestAddUserApi, requestUpdateUserApi } from '@/api'
-import { requestGetRoleAllApi } from '@/api'
-import { requestGetDeptTreeApi } from '@/api'
-import { withCache } from '@/utils/cache'
+import { ref, reactive, computed, onMounted, nextTick } from "vue";
+import { useDict } from "@/composables/useDict";
+import { requestAddUserApi, requestUpdateUserApi } from "@/api";
+import { requestGetRoleAllApi } from "@/api";
+import { requestGetDeptTreeApi } from "@/api";
+import { withCache } from "@/utils/cache";
 
-const emit = defineEmits(['success'])
+const emit = defineEmits(["success"]);
 
 // 字典数据
-const { dict } = useDict(['user_status', 'user_sex', 'user_role'])
+const { dict } = useDict(["user_status", "user_sex", "user_role"]);
 
 // 弹窗状态
-const dialogVisible = ref(false)
-const submitLoading = ref(false)
+const dialogVisible = ref(false);
+const submitLoading = ref(false);
 
 // 表单 ref
-const formRef = ref(null)
+const formRef = ref(null);
 
 // 角色列表（从角色管理接口获取）
-const roleList = ref([])
+const roleList = ref([]);
 // 部门树（从部门管理接口获取）
-const deptTree = ref([])
+const deptTree = ref([]);
 
 // 获取默认表单值
 function getDefaultForm() {
   return {
     id: null,
-    username: '',
-    password: '',
-    real_name: '',
+    username: "",
+    password: "",
+    real_name: "",
     sex: 0,
-    phone: '',
-    email: '',
+    phone: "",
+    email: "",
     dept_id: null,
-    role: 'operator',
+    role: "operator",
     status: 1,
-    remark: ''
-  }
+    remark: "",
+  };
 }
 
 // 表单数据
-const form = reactive(getDefaultForm())
+const form = reactive(getDefaultForm());
 // 表单默认值（用于重置）
-const defaultForm = getDefaultForm()
+const defaultForm = getDefaultForm();
 
 // 是否编辑模式
-const isEdit = computed(() => !!form.id)
+const isEdit = computed(() => !!form.id);
 
 // 弹窗标题（国际化）
 const dialogTitle = computed(() => {
-  return isEdit.value ? '编辑用户' : '新增用户'
-})
+  return isEdit.value ? "编辑用户" : "新增用户";
+});
 
 // 角色选项（从角色管理接口获取）
 const roleOptions = computed(() => {
-  return roleList.value.map(item => ({
+  return roleList.value.map((item) => ({
     label: item.role_name || item.role_code,
-    value: item.role_code
-  }))
-})
+    value: item.role_code,
+  }));
+});
 
 // 扁平化的部门列表（树形结构转扁平，用于下拉选择）
 const flatDeptList = computed(() => {
-  const result = []
+  const result = [];
   const flatten = (list) => {
-    if (!Array.isArray(list)) return
-    list.forEach(item => {
-      result.push({ id: item.id, dept_name: item.dept_name })
+    if (!Array.isArray(list)) return;
+    list.forEach((item) => {
+      result.push({ id: item.id, dept_name: item.dept_name });
       if (item.children && item.children.length > 0) {
-        flatten(item.children)
+        flatten(item.children);
       }
-    })
-  }
-  flatten(deptTree.value)
-  return result
-})
+    });
+  };
+  flatten(deptTree.value);
+  return result;
+});
 
 // 性别选项（从数据字典获取，统一转换为数字类型）
 const sexOptions = computed(() => {
-  return (dict.value.user_sex || []).map(item => ({
+  return (dict.value.user_sex || []).map((item) => ({
     ...item,
-    value: Number(item.value)
-  }))
-})
+    value: Number(item.value),
+  }));
+});
 
 // 状态选项（从数据字典获取，统一转换为数字类型）
 const statusOptions = computed(() => {
-  return (dict.value.user_status || []).map(item => ({
+  return (dict.value.user_status || []).map((item) => ({
     ...item,
-    value: Number(item.value)
-  }))
-})
+    value: Number(item.value),
+  }));
+});
 
 // 字段配置数组（驱动表单渲染）
 const fieldConfig = computed(() => [
   {
-    prop: 'username',
-    label: 'user.username',
-    type: 'input',
-    placeholder: 'user.usernamePlaceholder',
+    prop: "username",
+    label: "menu.system.user.page.username",
+    type: "input",
+    placeholder: "menu.system.user.page.usernamePlaceholder",
     required: true,
-    disabledEdit: true
+    disabledEdit: true,
   },
   {
-    prop: 'password',
-    label: 'user.password',
-    type: 'password',
-    placeholder: 'user.passwordPlaceholder',
+    prop: "password",
+    label: "menu.system.user.page.password",
+    type: "password",
+    placeholder: "menu.system.user.page.passwordPlaceholder",
     required: true,
-    show: (isEdit) => !isEdit
+    show: (isEdit) => !isEdit,
   },
   {
-    prop: 'real_name',
-    label: 'user.realName',
-    type: 'input',
-    placeholder: 'user.realNamePlaceholder',
-    required: false
-  },
-  {
-    prop: 'sex',
-    label: 'user.sex',
-    type: 'radio',
+    prop: "real_name",
+    label: "menu.system.user.page.realName",
+    type: "input",
+    placeholder: "menu.system.user.page.realNamePlaceholder",
     required: false,
-    options: sexOptions.value
   },
   {
-    prop: 'phone',
-    label: 'user.phone',
-    type: 'input',
-    placeholder: 'user.phonePlaceholder',
-    required: false
-  },
-  {
-    prop: 'email',
-    label: 'user.email',
-    type: 'input',
-    placeholder: 'user.emailPlaceholder',
-    required: false
-  },
-  {
-    prop: 'dept_id',
-    label: 'user.dept',
-    type: 'treeselect',
-    placeholder: 'user.deptPlaceholder',
-    required: false
-  },
-  {
-    prop: 'role',
-    label: 'user.role',
-    type: 'select',
-    placeholder: 'user.rolePlaceholder',
+    prop: "sex",
+    label: "menu.system.user.page.sex",
+    type: "radio",
     required: false,
-    options: roleOptions.value
+    options: sexOptions.value,
   },
   {
-    prop: 'status',
-    label: 'user.status',
-    type: 'radio',
+    prop: "phone",
+    label: "menu.system.user.page.phone",
+    type: "input",
+    placeholder: "menu.system.user.page.phonePlaceholder",
+    required: false,
+  },
+  {
+    prop: "email",
+    label: "menu.system.user.page.email",
+    type: "input",
+    placeholder: "menu.system.user.page.emailPlaceholder",
+    required: false,
+  },
+  {
+    prop: "dept_id",
+    label: "menu.system.user.page.dept",
+    type: "treeselect",
+    placeholder: "menu.system.user.page.deptPlaceholder",
+    required: false,
+  },
+  {
+    prop: "role",
+    label: "menu.system.user.page.role",
+    type: "select",
+    placeholder: "menu.system.user.page.rolePlaceholder",
+    required: false,
+    options: roleOptions.value,
+  },
+  {
+    prop: "status",
+    label: "menu.system.user.page.status",
+    type: "radio",
     required: false,
     options: statusOptions.value,
-    show: (isEdit) => isEdit
+    show: (isEdit) => isEdit,
   },
   {
-    prop: 'remark',
-    label: 'user.remark',
-    type: 'textarea',
-    placeholder: 'user.remarkPlaceholder',
-    required: false
-  }
-])
+    prop: "remark",
+    label: "menu.system.user.page.remark",
+    type: "textarea",
+    placeholder: "menu.system.user.page.remarkPlaceholder",
+    required: false,
+  },
+]);
 
 // 根据显示条件过滤后的字段列表
 const visibleFields = computed(() => {
-  return fieldConfig.value.filter(field => {
-    if (typeof field.show === 'function') {
-      return field.show(isEdit.value)
+  return fieldConfig.value.filter((field) => {
+    if (typeof field.show === "function") {
+      return field.show(isEdit.value);
     }
-    return true
-  })
-})
+    return true;
+  });
+});
 
 // 表单校验规则（从 fieldConfig 动态生成）
 const rules = computed(() => {
-  const rules = {}
-  fieldConfig.value.forEach(field => {
+  const rules = {};
+  fieldConfig.value.forEach((field) => {
     if (field.required) {
       rules[field.prop] = [
-        { required: true, message: field.placeholder || field.label, trigger: 'blur' }
-      ]
+        {
+          required: true,
+          message: field.placeholder || field.label,
+          trigger: "blur",
+        },
+      ];
     }
     // 邮箱格式校验
-    if (field.prop === 'email') {
+    if (field.prop === "email") {
       rules[field.prop] = [
-        { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
-      ]
+        { type: "email", message: "邮箱格式不正确", trigger: "blur" },
+      ];
     }
     // 用户名长度校验
-    if (field.prop === 'username') {
+    if (field.prop === "username") {
       rules[field.prop] = [
-        { required: true, message: '请输入用户名', trigger: 'blur' },
-        { min: 2, max: 50, message: '用户名长度为2-50个字符', trigger: 'blur' }
-      ]
+        { required: true, message: "请输入用户名", trigger: "blur" },
+        { min: 2, max: 50, message: "用户名长度为2-50个字符", trigger: "blur" },
+      ];
     }
     // 密码长度校验（仅新增时）
-    if (field.prop === 'password' && !isEdit.value) {
+    if (field.prop === "password" && !isEdit.value) {
       rules[field.prop] = [
-        { required: true, message: '请输入密码', trigger: 'blur' },
-        { min: 6, max: 32, message: '密码长度为6-32个字符', trigger: 'blur' }
-      ]
+        { required: true, message: "请输入密码", trigger: "blur" },
+        { min: 6, max: 32, message: "密码长度为6-32个字符", trigger: "blur" },
+      ];
     }
-  })
-  return rules
-})
+  });
+  return rules;
+});
 
 // 加载角色列表（从角色管理接口，带缓存）
 async function loadRoleList() {
   try {
-    const res = await withCache('user_roleList', () => requestGetRoleAllApi())
-    roleList.value = res.data || []
+    const res = await withCache("user_roleList", () => requestGetRoleAllApi());
+    roleList.value = res.data || [];
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.warn('[UserDialog] 加载角色列表失败:', e)
+    console.warn("[UserDialog] 加载角色列表失败:", e);
   }
 }
 
 // 加载部门树（从部门管理接口，带缓存）
 async function loadDeptTree() {
   try {
-    const res = await withCache('user_deptTree', () => requestGetDeptTreeApi())
-    deptTree.value = res.data || []
+    const res = await withCache("user_deptTree", () => requestGetDeptTreeApi());
+    deptTree.value = res.data || [];
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.warn('[UserDialog] 加载部门树失败:', e)
+    console.warn("[UserDialog] 加载部门树失败:", e);
   }
 }
 
 // 打开弹窗
 function open(row) {
-  dialogVisible.value = true
+  dialogVisible.value = true;
   nextTick(() => {
     if (row) {
       // 编辑：回填数据
-      Object.assign(form, defaultForm, row)
+      Object.assign(form, defaultForm, row);
     } else {
       // 新增：重置表单
-      Object.assign(form, defaultForm)
+      Object.assign(form, defaultForm);
     }
     // 清除表单校验
-    formRef.value && formRef.value.clearValidate()
-  })
+    formRef.value && formRef.value.clearValidate();
+  });
 }
 
 // 关闭弹窗
 function close() {
-  dialogVisible.value = false
-  Object.assign(form, defaultForm)
-  formRef.value && formRef.value.clearValidate()
+  dialogVisible.value = false;
+  Object.assign(form, defaultForm);
+  formRef.value && formRef.value.clearValidate();
 }
 
 // 提交 API（过滤只读字段）
 function submitApi(formData) {
-  const ALLOWED_FIELDS = ['username', 'password', 'role', 'real_name', 'sex', 'phone', 'email', 'dept_id', 'avatar', 'remark', 'status']
-  const cleanData = {}
-  ALLOWED_FIELDS.forEach(key => {
+  const ALLOWED_FIELDS = [
+    "username",
+    "password",
+    "role",
+    "real_name",
+    "sex",
+    "phone",
+    "email",
+    "dept_id",
+    "avatar",
+    "remark",
+    "status",
+  ];
+  const cleanData = {};
+  ALLOWED_FIELDS.forEach((key) => {
     if (formData[key] !== undefined) {
-      cleanData[key] = formData[key]
+      cleanData[key] = formData[key];
     }
-  })
+  });
   if (formData.id) {
-    cleanData.id = formData.id
+    cleanData.id = formData.id;
   }
-  return formData.id ? requestUpdateUserApi(cleanData) : requestAddUserApi(cleanData)
+  return formData.id
+    ? requestUpdateUserApi(cleanData)
+    : requestAddUserApi(cleanData);
 }
 
 // 提交表单
 function handleSubmit() {
-  formRef.value.validate(async valid => {
-    if (!valid) return
-    submitLoading.value = true
+  formRef.value.validate(async (valid) => {
+    if (!valid) return;
+    submitLoading.value = true;
     try {
-      await submitApi(form)
-      close()
-      emit('success')
+      await submitApi(form);
+      close();
+      emit("success");
     } catch (e) {
       // 错误已由 request 拦截器统一处理
     } finally {
-      submitLoading.value = false
+      submitLoading.value = false;
     }
-  })
+  });
 }
 
 onMounted(() => {
-  loadRoleList()
-  loadDeptTree()
-})
+  loadRoleList();
+  loadDeptTree();
+});
 
 // 暴露方法给父组件
 defineExpose({
   open,
-  close
-})
+  close,
+});
 </script>
 
 <style scoped lang="less">

@@ -56,6 +56,8 @@ async function initDefaultData() {
     { key: 'pdfWatermarkText', value: '', type: 'string', desc: 'PDF水印文字（为空时使用当前用户名）', category: 'export', sort: 2 },
     // 连接设置
     { key: 'heartbeatInterval', value: '25000', type: 'number', desc: 'WebSocket心跳间隔（ms）', category: 'connection', sort: 1 },
+    { key: 'deviceStatusCheckInterval', value: '300', type: 'number', desc: '设备状态检查间隔（秒）', category: 'connection', sort: 2 },
+    { key: 'deviceOfflineThreshold', value: '600', type: 'number', desc: '设备离线阈值（秒）', category: 'connection', sort: 3 },
     // 设备参数
     { key: 'deviceName', value: 'nexCM-灌装机-001', type: 'string', desc: '设备名称', category: 'device', sort: 1 },
     { key: 'deviceCode', value: 'NEXCM-FILL-2026-001', type: 'string', desc: '设备编号', category: 'device', sort: 2 },

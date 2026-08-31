@@ -144,7 +144,8 @@ function handleDoubleClick(item) {
     user: '/system/user',
     audit: '/system/audit',
     device: '/system/config',
-    connection: '/system/config'
+    connection: '/system/config',
+    security: '/system/user'
   }
   const targetRoute = routeMap[item.type]
   if (targetRoute) {

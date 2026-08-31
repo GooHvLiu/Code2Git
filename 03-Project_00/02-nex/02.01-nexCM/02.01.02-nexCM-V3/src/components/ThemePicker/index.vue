@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <!--
     快捷设置入口（原 ThemePicker 扩展）
     结构：加号按钮 → 下拉菜单 → 各功能面板（当前只有调色板，后续可扩展）
@@ -20,7 +20,7 @@
       <div v-show="visible" class="quick-panel" @click.stop>
         <!-- ========== 第一层：菜单列表 ========== -->
         <div v-if="!activePanel" class="menu-list">
-          <div class="panel-title">{{ $t('theme.quickMenu') }}</div>
+          <div class="panel-title">{{ $t("quickMenu.title") }}</div>
 
           <div
             v-for="item in menuItems"
@@ -33,7 +33,7 @@
               <i v-else :class="item.icon"></i>
             </span>
             <span class="menu-label">
-              {{ item.key === 'language' ? currentLangAutonym : item.label }}
+              {{ item.key === "language" ? currentLangAutonym : item.label }}
             </span>
             <i class="el-icon-arrow-right menu-arrow"></i>
           </div>
@@ -48,11 +48,11 @@
               class="el-icon-arrow-left back-btn"
               @click="activePanel = null"
             ></i>
-            <span class="panel-title">{{ $t('theme.palette') }}</span>
+            <span class="panel-title">{{ $t("quickMenu.theme.palette") }}</span>
             <i
               class="el-icon-refresh reset-btn"
               @click="handleResetAll"
-              :title="$t('theme.resetAll')"
+              :title="$t('quickMenu.theme.resetAll')"
             ></i>
           </div>
 
@@ -64,16 +64,16 @@
               class="field-group"
             >
               <div class="field-label">
-                <span>{{ $t('theme.' + field.key) }}</span>
+                <span>{{ $t("quickMenu.theme." + field.key) }}</span>
                 <span class="field-actions">
                   <span
                     class="color-preview"
-                    :style="{ background: getFieldValue(field.key) }"
+                    :style="{ background: currentColors[field.key] }"
                   ></span>
                   <i
                     class="el-icon-refresh field-reset"
                     @click="handleResetField(field.key)"
-                    :title="$t('theme.reset')"
+                    :title="$t('quickMenu.theme.reset')"
                   ></i>
                 </span>
               </div>
@@ -85,11 +85,13 @@
                   :key="color"
                   class="color-item"
                   :style="{ background: color }"
-                  :class="{ active: getFieldValue(field.key) === color }"
+                  :class="{
+                    active: currentColors[field.key] === color.toLowerCase(),
+                  }"
                   @click="handlePick(field.key, color)"
                 >
                   <i
-                    v-if="getFieldValue(field.key) === color"
+                    v-if="currentColors[field.key] === color.toLowerCase()"
                     class="el-icon-check"
                   ></i>
                 </div>
@@ -97,14 +99,14 @@
 
               <!-- 自定义颜色 -->
               <div class="custom-color">
-                <span>{{ $t('theme.custom') }}</span>
+                <span>{{ $t("quickMenu.theme.custom") }}</span>
                 <input
                   type="color"
                   class="color-input"
-                  :value="getFieldValue(field.key)"
+                  :value="currentColors[field.key]"
                   @input="handlePick(field.key, $event.target.value)"
                 />
-                <span class="color-hex">{{ getFieldValue(field.key) }}</span>
+                <span class="color-hex">{{ currentColors[field.key] }}</span>
               </div>
             </div>
           </div>
@@ -117,7 +119,9 @@
               class="el-icon-arrow-left back-btn"
               @click="activePanel = null"
             ></i>
-            <span class="panel-title">{{ $t('theme.language') }}</span>
+            <span class="panel-title">{{
+              $t("quickMenu.language.title")
+            }}</span>
           </div>
           <div class="language-list">
             <div
@@ -150,8 +154,15 @@
 
 <script setup>
 /* eslint-disable vue/multi-word-component-names */
-import { ref, reactive, computed, onMounted, onBeforeUnmount, getCurrentInstance } from 'vue'
-import { Message } from 'element-ui'
+import {
+  ref,
+  reactive,
+  computed,
+  onMounted,
+  onBeforeUnmount,
+  getCurrentInstance,
+} from "vue";
+import { Message } from "element-ui";
 import {
   THEME_FIELDS,
   setThemeField,
@@ -160,21 +171,23 @@ import {
   resetThemeField,
 } from "@/utils/theme";
 import { LANGUAGES, setLanguage } from "@/i18n";
-import { useI18n } from '@/composables/useI18n'
+import { useI18n } from "@/composables/useI18n";
 
-const { t: $t, i18n } = useI18n()
-const { proxy } = getCurrentInstance()
-const emit = defineEmits(['change', 'reset', 'reset-field'])
+const { t: $t, i18n } = useI18n();
+const { proxy } = getCurrentInstance();
+const emit = defineEmits(["change", "reset", "reset-field"]);
 
 // ===== 响应式数据 =====
-const visible = ref(false)
-const activePanel = ref(null)
-const themeFields = THEME_FIELDS
-const currentColors = reactive({})
-const languages = LANGUAGES.map(l => ({
+const visible = ref(false);
+const activePanel = ref(null);
+const themeFields = THEME_FIELDS;
+const currentColors = reactive(
+  Object.fromEntries(themeFields.map((f) => [f.key, ""]))
+);
+const languages = LANGUAGES.map((l) => ({
   ...l,
-  flag: l.value === 'zh-CN' ? '🇨🇳' : '🇺🇸'
-}))
+  flag: l.value === "zh-CN" ? "🇨🇳" : "🇺🇸",
+}));
 const presetColors = [
   "#faf7f2",
   "#ffffff",
@@ -184,98 +197,99 @@ const presetColors = [
   "#e6a23c",
   "#f56c6c",
   "#9c27b0",
-]
+];
 
 // ===== 计算属性 =====
-const currentLang = computed(() => i18n.locale)
+const currentLang = computed(() => i18n.locale);
 const currentLangAutonym = computed(() => {
-  const lang = languages.find(l => l.value === i18n.locale)
-  return lang ? lang.autonym : ''
-})
+  const lang = languages.find((l) => l.value === i18n.locale);
+  return lang ? lang.autonym : "";
+});
 const menuItems = computed(() => [
   {
     key: "palette",
-    label: $t('theme.palette'),
+    label: $t("quickMenu.theme.palette"),
     icon: "el-icon-brush",
     color: "#409eff",
   },
   {
     key: "language",
-    label: $t('theme.language'),
+    label: $t("quickMenu.language.title"),
     icon: "el-icon-service",
     color: "#e6a23c",
   },
-])
+]);
 
 // ===== 方法 =====
 function toggleMenu() {
-  visible.value = !visible.value
+  visible.value = !visible.value;
   if (!visible.value) {
-    activePanel.value = null
+    activePanel.value = null;
   }
 }
 
 function openPanel(key) {
-  activePanel.value = key
-}
-
-function getFieldValue(key) {
-  return currentColors[key] || ""
+  activePanel.value = key;
 }
 
 function handlePick(key, color) {
-  setThemeField(key, color)
-  currentColors[key] = color.toLowerCase()
-  emit("change", { key, color })
+  setThemeField(key, color);
+  currentColors[key] = color.toLowerCase();
+  emit("change", { key, color });
 }
 
 function handleResetAll() {
-  resetAllTheme()
+  resetAllTheme();
   themeFields.forEach((field) => {
-    currentColors[field.key] = field.default.toLowerCase()
-  })
-  emit("reset")
+    currentColors[field.key] = field.default.toLowerCase();
+  });
+  emit("reset");
 }
 
 function handleResetField(key) {
-  resetThemeField(key)
-  const field = themeFields.find((f) => f.key === key)
+  resetThemeField(key);
+  const field = themeFields.find((f) => f.key === key);
   if (field) {
-    currentColors[key] = field.default.toLowerCase()
+    currentColors[key] = field.default.toLowerCase();
   }
-  emit("reset-field", key)
+  emit("reset-field", key);
 }
 
 function handleClickOutside(e) {
   if (!proxy.$el.contains(e.target)) {
-    visible.value = false
-    activePanel.value = null
+    visible.value = false;
+    activePanel.value = null;
   }
 }
 
 function handleSwitchLang(lang) {
   Object.keys(localStorage)
-    .filter(key => key.startsWith('nex_menu_cache_') || key === 'nex_menu_version')
-    .forEach(key => localStorage.removeItem(key))
-  setLanguage(lang)
-  const msg = lang === 'zh-CN' ? $t('theme.switchedToZh') : $t('theme.switchedToEn')
-  Message.success(msg)
+    .filter(
+      (key) => key.startsWith("nex_menu_cache_") || key === "nex_menu_version"
+    )
+    .forEach((key) => localStorage.removeItem(key));
+  setLanguage(lang);
+  const msg =
+    lang === "zh-CN"
+      ? $t("quickMenu.language.switchedToZh")
+      : $t("quickMenu.language.switchedToEn");
+  Message.success(msg);
   setTimeout(() => {
-    window.location.reload()
-  }, 800)
+    window.location.reload();
+  }, 800);
 }
 
 // ===== 生命周期 =====
 onMounted(() => {
   themeFields.forEach((field) => {
-    currentColors[field.key] = getThemeField(field.key)
-  })
-  document.addEventListener("click", handleClickOutside)
-})
+    currentColors[field.key] = (getThemeField(field.key) || "").toLowerCase();
+  });
+  document.addEventListener("click", handleClickOutside);
+});
 
 onBeforeUnmount(() => {
-  document.removeEventListener("click", handleClickOutside)
-})
+  document.removeEventListener("click", handleClickOutside);
+});
 </script>
 
 <style scoped lang="less">
@@ -536,45 +550,45 @@ onBeforeUnmount(() => {
   transform: translateY(-4px);
 }
 
-  // ---------- 语言切换面板 ----------
-  .language-panel {
-    width: 220px;
+// ---------- 语言切换面板 ----------
+.language-panel {
+  width: 220px;
+}
+
+.language-list {
+  padding: @spacing-xs 0;
+}
+
+.language-item {
+  display: flex;
+  align-items: center;
+  padding: @spacing-sm @spacing-md;
+  cursor: pointer;
+  transition: background-color @transition-duration;
+
+  &:hover {
+    background-color: @bg-gray;
   }
 
-  .language-list {
-    padding: @spacing-xs 0;
+  &.active {
+    background-color: rgba(64, 158, 255, 0.08);
+    color: var(--color-primary);
   }
 
-  .language-item {
-    display: flex;
-    align-items: center;
-    padding: @spacing-sm @spacing-md;
-    cursor: pointer;
-    transition: background-color @transition-duration;
-
-    &:hover {
-      background-color: @bg-gray;
-    }
-
-    &.active {
-      background-color: rgba(64, 158, 255, 0.08);
-      color: var(--color-primary);
-    }
-
-    .lang-flag {
-      font-size: 20px;
-      margin-right: @spacing-sm;
-      line-height: 1;
-    }
-
-    .lang-label {
-      flex: 1;
-      font-size: @font-size-base;
-    }
-
-    .lang-check {
-      color: var(--color-primary);
-      font-size: 14px;
-    }
+  .lang-flag {
+    font-size: 20px;
+    margin-right: @spacing-sm;
+    line-height: 1;
   }
+
+  .lang-label {
+    flex: 1;
+    font-size: @font-size-base;
+  }
+
+  .lang-check {
+    color: var(--color-primary);
+    font-size: 14px;
+  }
+}
 </style>

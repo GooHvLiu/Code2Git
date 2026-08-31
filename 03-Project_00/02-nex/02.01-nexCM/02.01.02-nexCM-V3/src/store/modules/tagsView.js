@@ -13,7 +13,7 @@ import { resolveMenuTitle } from '@/router/helper/menuTitle'
 
 /** 获取国际化的首页标签 */
 function getHomeTag() {
-  return { ...HOME_TAG, title: i18n.t('layout.homeOverview') }
+  return { ...HOME_TAG, title: i18n.t('menu.home.overview.default') }
 }
 
 /** 从 sessionStorage 读取并过滤掉无效标签（登录页、404等 hidden 路由） */

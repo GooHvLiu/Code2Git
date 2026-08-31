@@ -24,10 +24,62 @@
 
 import store from '@/store'
 
+
+/**
+ * 解析 User-Agent，提取浏览器和操作系统信息
+ * @param {string} userAgent - User-Agent 字符串
+ * @returns {string} 精简的设备名称，如 "Chrome 150 · Windows 10"
+ */
+function parseUserAgent(userAgent) {
+  if (!userAgent) return 'Unknown Device'
+
+  // 解析浏览器
+  let browser = 'Unknown'
+  let browserVersion = ''
+  if (userAgent.includes('Edg/')) {
+    browser = 'Edge'
+    browserVersion = userAgent.match(/Edg\/([\d.]+)/)?.[1] || ''
+  } else if (userAgent.includes('Chrome/')) {
+    browser = 'Chrome'
+    browserVersion = userAgent.match(/Chrome\/([\d.]+)/)?.[1] || ''
+  } else if (userAgent.includes('Firefox/')) {
+    browser = 'Firefox'
+    browserVersion = userAgent.match(/Firefox\/([\d.]+)/)?.[1] || ''
+  } else if (userAgent.includes('Safari/')) {
+    browser = 'Safari'
+    browserVersion = userAgent.match(/Version\/([\d.]+)/)?.[1] || ''
+  }
+
+  // 解析操作系统
+  let os = 'Unknown'
+  if (userAgent.includes('Windows NT 10')) {
+    os = 'Windows 10'
+  } else if (userAgent.includes('Windows NT 6.3')) {
+    os = 'Windows 8.1'
+  } else if (userAgent.includes('Windows NT 6.2')) {
+    os = 'Windows 8'
+  } else if (userAgent.includes('Windows NT 6.1')) {
+    os = 'Windows 7'
+  } else if (userAgent.includes('Mac OS X')) {
+    os = 'macOS'
+  } else if (userAgent.includes('Linux')) {
+    os = 'Linux'
+  } else if (userAgent.includes('Android')) {
+    os = 'Android'
+  } else if (userAgent.includes('iPhone') || userAgent.includes('iPad')) {
+    os = 'iOS'
+  }
+
+  // 组合结果
+  const browserStr = browserVersion ? browser + ' ' + browserVersion.split('.')[0] : browser
+  return browserStr + ' · ' + os
+}
+
 class WebSocketClient {
   constructor() {
     this.ws = null
     this.userId = null
+    this.deviceId = this.getOrCreateDeviceId() // 设备唯一标识（存储在 localStorage）
     this.connected = false
     this.authenticated = false
     this.listeners = {} // { type: [callback1, callback2, ...] }
@@ -37,6 +89,26 @@ class WebSocketClient {
     this.heartbeatInterval = null
     this.reconnectTimer = null
     this.manualClose = false
+  }
+
+  /**
+   * 获取或创建设备唯一标识
+   * 设备ID存储在 localStorage，同一浏览器的多个标签页共享同一个设备ID
+   * @returns {string} 设备唯一标识
+   */
+  getOrCreateDeviceId() {
+    try {
+      let deviceId = localStorage.getItem('nex_device_id')
+      if (!deviceId) {
+        // 生成 UUID（简化版）
+        deviceId = 'device_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
+        localStorage.setItem('nex_device_id', deviceId)
+      }
+      return deviceId
+    } catch (e) {
+      // localStorage 可能被禁用，使用内存中的临时ID
+      return 'device_temp_' + Date.now()
+    }
   }
 
   /**
@@ -60,13 +132,12 @@ class WebSocketClient {
    */
   getWsUrl() {
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
-    const host = window.location.hostname
-    const port = process.env.VUE_APP_WS_PORT || '3002'
-    // 如果是开发环境，使用后端端口；生产环境使用当前 host
-    if (process.env.NODE_ENV === 'development') {
-      return `${protocol}//${host}:${port}/ws`
-    }
-    return `${protocol}//${host}/ws`
+    // 开发环境直连后端，避免 webpack-dev-server 代理问题
+    // 生产环境使用当前 host，通过 Nginx 反向代理
+    const host = process.env.NODE_ENV === 'development'
+      ? 'localhost:3002'
+      : window.location.host
+    return `${protocol}//${host}/ws-api`
   }
 
   /**
@@ -113,7 +184,7 @@ class WebSocketClient {
       }
 
       this.ws.onerror = (error) => {
-        console.error('[WS] 连接错误:', error)
+        console.error('[WS] WebSocket 连接错误:', error)
       }
     } catch (e) {
       console.error('[WS] 连接失败:', e.message)
@@ -128,7 +199,9 @@ class WebSocketClient {
     if (this.ws && this.ws.readyState === WebSocket.OPEN && this.userId) {
       this.send({
         type: 'auth',
-        userId: this.userId
+        userId: this.userId,
+        deviceId: this.deviceId,
+        deviceName: parseUserAgent(navigator.userAgent)
       })
     }
   }
@@ -296,4 +369,6 @@ class WebSocketClient {
 }
 
 // 导出单例
+// 导出单例和工具函数
+export { parseUserAgent }
 export default new WebSocketClient()

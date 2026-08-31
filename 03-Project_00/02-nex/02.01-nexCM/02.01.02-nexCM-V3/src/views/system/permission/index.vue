@@ -5,19 +5,38 @@
       <div class="header-left">
         <h2 class="page-title">
           <i class="el-icon-s-tools title-icon" />
-          {{ $t('permission.title') }}
+          {{ $t("menu.system.permission.page.title") }}
         </h2>
-        <p class="page-desc">{{ $t('permission.desc') }}</p>
+        <p class="page-desc">{{ $t("menu.system.permission.page.desc") }}</p>
       </div>
       <div class="header-right">
-        <el-tooltip :content="$t('permission.expandAll')" placement="bottom">
-          <el-button icon="el-icon-arrow-down" circle @click="handleExpandAll" />
+        <el-tooltip
+          :content="$t('menu.system.permission.page.expandAll')"
+          placement="bottom"
+        >
+          <el-button
+            icon="el-icon-arrow-down"
+            circle
+            @click="handleExpandAll"
+          />
         </el-tooltip>
-        <el-tooltip :content="$t('permission.collapseAll')" placement="bottom">
-          <el-button icon="el-icon-arrow-right" circle @click="handleCollapseAll" />
+        <el-tooltip
+          :content="$t('menu.system.permission.page.collapseAll')"
+          placement="bottom"
+        >
+          <el-button
+            icon="el-icon-arrow-right"
+            circle
+            @click="handleCollapseAll"
+          />
         </el-tooltip>
         <el-tooltip :content="$t('common.refresh')" placement="bottom">
-          <el-button icon="el-icon-refresh" circle @click="handleRefresh" :loading="loading" />
+          <el-button
+            icon="el-icon-refresh"
+            circle
+            @click="handleRefresh"
+            :loading="loading"
+          />
         </el-tooltip>
       </div>
     </div>
@@ -29,7 +48,7 @@
         <div class="panel-header">
           <span class="panel-title">
             <i class="el-icon-user-solid" />
-            {{ $t('permission.roleList') }}
+            {{ $t("menu.system.permission.page.roleList") }}
           </span>
           <el-tag size="mini" type="info">{{ roleList.length }}</el-tag>
         </div>
@@ -41,7 +60,10 @@
             :class="{ active: currentRole?.id === role.id }"
             @click="handleSelectRole(role)"
           >
-            <svg-icon :icon-file-name="getRoleAvatarIcon(role)" class="role-avatar-icon" />
+            <svg-icon
+              :icon-file-name="getRoleAvatarIcon(role)"
+              class="role-avatar-icon"
+            />
             <div class="role-info">
               <div class="role-name">{{ getRoleName(role) }}</div>
               <div class="role-code">{{ role.role_code }}</div>
@@ -52,12 +74,14 @@
               type="success"
               effect="dark"
             >
-              {{ $t('permission.current') }}
+              {{ $t("menu.system.permission.page.current") }}
             </el-tag>
           </div>
           <div v-if="!roleLoading && roleList.length === 0" class="empty-tip">
             <i class="el-icon-user-solid empty-icon" />
-            <p class="empty-text">{{ $t('permission.noRole') }}</p>
+            <p class="empty-text">
+              {{ $t("menu.system.permission.page.noRole") }}
+            </p>
           </div>
         </div>
       </div>
@@ -67,23 +91,35 @@
         <div class="panel-header">
           <div class="panel-title">
             <i class="el-icon-menu" />
-            {{ $t('permission.permissionTree') }}
+            {{ $t("menu.system.permission.page.permissionTree") }}
             <span v-if="currentRole" class="current-role-name">
               - {{ getRoleName(currentRole) }}
             </span>
           </div>
           <div class="panel-actions">
             <!-- 类型筛选 -->
-            <el-radio-group v-model="filterType" size="small" @change="handleFilterType">
-              <el-radio-button label="all">{{ $t('permission.all') }}</el-radio-button>
-              <el-radio-button label="menu">{{ $t('permission.menu') }}</el-radio-button>
-              <el-radio-button label="button">{{ $t('permission.button') }}</el-radio-button>
-              <el-radio-button label="param">{{ $t('permission.param') }}</el-radio-button>
+            <el-radio-group
+              v-model="filterType"
+              size="small"
+              @change="handleFilterType"
+            >
+              <el-radio-button label="all">{{
+                $t("menu.system.permission.page.all")
+              }}</el-radio-button>
+              <el-radio-button label="menu">{{
+                $t("menu.system.permission.page.menu")
+              }}</el-radio-button>
+              <el-radio-button label="button">{{
+                $t("menu.system.permission.page.button")
+              }}</el-radio-button>
+              <el-radio-button label="param">{{
+                $t("menu.system.permission.page.param")
+              }}</el-radio-button>
             </el-radio-group>
             <!-- 搜索框 -->
             <el-input
               v-model="searchKeyword"
-              :placeholder="$t('permission.searchPlaceholder')"
+              :placeholder="$t('menu.system.permission.page.searchPlaceholder')"
               prefix-icon="el-icon-search"
               size="small"
               clearable
@@ -97,7 +133,9 @@
         <div class="permission-tree-wrapper" v-loading="loading">
           <div v-if="!currentRole" class="empty-tip empty-tip-large">
             <i class="el-icon-menu empty-icon" />
-            <p class="empty-text">{{ $t('permission.selectRoleTip') }}</p>
+            <p class="empty-text">
+              {{ $t("menu.system.permission.page.selectRoleTip") }}
+            </p>
           </div>
           <el-tree
             v-else
@@ -106,6 +144,7 @@
             :props="treeProps"
             :node-key="treeProps.id"
             show-checkbox
+            :check-strictly="true"
             :default-expand-all="false"
             :expand-on-click-node="false"
             :check-on-click-node="false"
@@ -121,7 +160,11 @@
               <span class="node-type-tag" :class="`tag-${data.type}`">
                 {{ getTypeName(data.type) }}
               </span>
-              <span v-if="data.permissionCode" class="node-code" :title="data.permissionCode">
+              <span
+                v-if="data.permissionCode"
+                class="node-code"
+                :title="data.permissionCode"
+              >
                 {{ data.permissionCode }}
               </span>
             </span>
@@ -133,29 +176,38 @@
           <div class="stats-info">
             <span class="stat-item">
               <i class="el-icon-s-check" />
-              {{ $t('permission.selected') }}: <b>{{ checkedCount }}</b>
+              {{ $t("menu.system.permission.page.selected") }}:
+              <b>{{ checkedCount }}</b>
             </span>
             <span class="stat-item stat-menu">
               <i class="el-icon-menu" />
-              {{ $t('permission.menu') }}: <b>{{ menuCheckedCount }}</b>
+              {{ $t("menu.system.permission.page.menu") }}:
+              <b>{{ menuCheckedCount }}</b>
             </span>
             <span class="stat-item stat-button">
               <i class="el-icon-thumb" />
-              {{ $t('permission.button') }}: <b>{{ buttonCheckedCount }}</b>
+              {{ $t("menu.system.permission.page.button") }}:
+              <b>{{ buttonCheckedCount }}</b>
             </span>
             <span class="stat-item stat-param">
               <i class="el-icon-setting" />
-              {{ $t('permission.param') }}: <b>{{ paramCheckedCount }}</b>
+              {{ $t("menu.system.permission.page.param") }}:
+              <b>{{ paramCheckedCount }}</b>
             </span>
           </div>
           <div class="footer-actions">
             <el-button @click="handleReset" :disabled="!hasChanges">
               <i class="el-icon-refresh-left" />
-              {{ $t('common.reset') }}
+              {{ $t("common.reset") }}
             </el-button>
-            <el-button type="primary" @click="handleSave" :loading="saving" :disabled="!hasChanges">
+            <el-button
+              type="primary"
+              @click="handleSave"
+              :loading="saving"
+              :disabled="!hasChanges"
+            >
               <i class="el-icon-check" />
-              {{ $t('common.save') }}
+              {{ $t("common.save") }}
             </el-button>
           </div>
         </div>
@@ -165,114 +217,118 @@
 </template>
 
 <script setup>
-import { ref, computed, nextTick } from 'vue'
-import { Message, MessageBox } from 'element-ui'
-import { resolveMenuTitle } from '@/router/helper/menuTitle'
-import i18n from '@/i18n'
+import { ref, computed, nextTick } from "vue";
+import { Message, MessageBox } from "element-ui";
+import { resolveMenuTitle } from "@/router/helper/menuTitle";
+import i18n from "@/i18n";
 import {
   requestGetRoleAllApi,
   requestGetAllPermissionsApi,
   requestGetRoleMenuIdsApi,
-  requestSaveRolePermissionsApi
-} from '@/api'
+  requestSaveRolePermissionsApi,
+} from "@/api";
 
 // ===== 响应式数据 =====
-const loading = ref(false)
-const saving = ref(false)
-const roleLoading = ref(false)
+const loading = ref(false);
+const saving = ref(false);
+const roleLoading = ref(false);
 
 // 角色列表
-const roleList = ref([])
-const currentRole = ref(null)
+const roleList = ref([]);
+const currentRole = ref(null);
 
 // 权限树
-const permissionTree = ref(null)
-const allPermissions = ref([])
-const originalCheckedKeys = ref([]) // 原始已选 keys（用于判断是否有修改）
-const searchKeyword = ref('')
-const filterType = ref('all')
+const permissionTree = ref(null);
+const allPermissions = ref([]);
+const originalCheckedKeys = ref([]); // 原始已选 keys（用于判断是否有修改）
+const searchKeyword = ref("");
+const filterType = ref("all");
 
 // 树形配置
 const treeProps = {
-  id: 'id',
-  label: 'name',
-  children: 'children'
-}
+  id: "id",
+  label: "name",
+  children: "children",
+};
 
 // ===== 计算属性 =====
 
 /** 过滤后的树形数据（根据类型筛选） */
 const filteredTreeData = computed(() => {
-  if (filterType.value === 'all') return allPermissions.value
-  return filterTreeByType(allPermissions.value, filterType.value)
-})
+  if (filterType.value === "all") return allPermissions.value;
+  return filterTreeByType(allPermissions.value, filterType.value);
+});
 
 /** 已选中的节点数量（包含半选父节点的所有子节点） */
 const checkedCount = computed(() => {
-  if (!permissionTree.value) return 0
-  const checked = permissionTree.value.getCheckedKeys() || []
-  const halfChecked = permissionTree.value.getHalfCheckedKeys() || []
-  return checked.length + halfChecked.length
-})
+  if (!permissionTree.value) return 0;
+  const checked = permissionTree.value.getCheckedKeys() || [];
+  const halfChecked = permissionTree.value.getHalfCheckedKeys() || [];
+  return checked.length + halfChecked.length;
+});
 
 /** 按类型统计已选中数量 */
-const menuCheckedCount = computed(() => countCheckedByType('menu'))
-const buttonCheckedCount = computed(() => countCheckedByType('button'))
-const paramCheckedCount = computed(() => countCheckedByType('param'))
+const menuCheckedCount = computed(() => countCheckedByType("menu"));
+const buttonCheckedCount = computed(() => countCheckedByType("button"));
+const paramCheckedCount = computed(() => countCheckedByType("param"));
 
 /** 是否有修改 */
 const hasChanges = computed(() => {
-  if (!permissionTree.value) return false
-  const currentChecked = permissionTree.value.getCheckedKeys() || []
-  if (currentChecked.length !== originalCheckedKeys.value.length) return true
-  return !currentChecked.every(key => originalCheckedKeys.value.includes(key))
-})
+  if (!permissionTree.value) return false;
+  const currentChecked = permissionTree.value.getCheckedKeys() || [];
+  if (currentChecked.length !== originalCheckedKeys.value.length) return true;
+  return !currentChecked.every((key) =>
+    originalCheckedKeys.value.includes(key)
+  );
+});
 
 // ===== 方法 =====
 
 /** 按类型过滤树形数据 */
 function filterTreeByType(tree, type) {
-  if (!Array.isArray(tree)) return []
+  if (!Array.isArray(tree)) return [];
   return tree
-    .map(node => {
-      const children = node.children ? filterTreeByType(node.children, type) : []
+    .map((node) => {
+      const children = node.children
+        ? filterTreeByType(node.children, type)
+        : [];
       // 如果当前节点类型匹配，或者有子节点匹配，则保留
       if (node.type === type || children.length > 0) {
-        return { ...node, children }
+        return { ...node, children };
       }
-      return null
+      return null;
     })
-    .filter(Boolean)
+    .filter(Boolean);
 }
 
 /** 统计指定类型的已选中数量 */
 function countCheckedByType(type) {
-  if (!permissionTree.value) return 0
-  const checked = permissionTree.value.getCheckedKeys() || []
-  const halfChecked = permissionTree.value.getHalfCheckedKeys() || []
-  const allKeys = [...checked, ...halfChecked]
+  if (!permissionTree.value) return 0;
+  const checked = permissionTree.value.getCheckedKeys() || [];
+  const halfChecked = permissionTree.value.getHalfCheckedKeys() || [];
+  const allKeys = [...checked, ...halfChecked];
   // 遍历所有节点，统计类型匹配且已选中的数量
-  return countNodesByType(allPermissions.value, type, allKeys)
+  return countNodesByType(allPermissions.value, type, allKeys);
 }
 
 function countNodesByType(nodes, type, keys) {
-  let count = 0
-  nodes.forEach(node => {
-    if (node.type === type && keys.includes(node.id)) count++
+  let count = 0;
+  nodes.forEach((node) => {
+    if (node.type === type && keys.includes(node.id)) count++;
     if (node.children && node.children.length > 0) {
-      count += countNodesByType(node.children, type, keys)
+      count += countNodesByType(node.children, type, keys);
     }
-  })
-  return count
+  });
+  return count;
 }
 
 /** 获取角色名称（支持多语言） */
 function getRoleName(role) {
-  if (!role) return ''
-  if (typeof role.role_name === 'object') {
-    return role.role_name['zh-CN'] || role.role_name['en-US'] || ''
+  if (!role) return "";
+  if (typeof role.role_name === "object") {
+    return role.role_name["zh-CN"] || role.role_name["en-US"] || "";
   }
-  return role.role_name || ''
+  return role.role_name || "";
 }
 
 /**
@@ -286,80 +342,108 @@ function getRoleName(role) {
  */
 function getRoleAvatarIcon(role) {
   const roleMap = {
-    administrator: 'administrator',
-    operator: 'operator',
-    engineer: 'engineer',
-    user: 'user',
-    viewer: 'user'
-  }
-  const code = role?.role_code || ''
-  return roleMap[code] || 'who'
+    administrator: "administrator",
+    operator: "operator",
+    engineer: "engineer",
+    user: "user",
+    viewer: "user",
+  };
+  const code = role?.role_code || "";
+  return roleMap[code] || "who";
 }
 
 /** 获取节点图标 */
 function getNodeIcon(data) {
   switch (data.type) {
-    case 'menu': return 'el-icon-folder'
-    case 'button': return 'el-icon-thumb'
-    case 'param': return 'el-icon-setting'
-    default: return 'el-icon-document'
+    case "menu":
+      return "el-icon-folder";
+    case "button":
+      return "el-icon-thumb";
+    case "param":
+      return "el-icon-setting";
+    default:
+      return "el-icon-document";
   }
 }
 
 /** 获取节点图标样式类 */
 function getNodeIconClass(data) {
-  return `icon-${data.type || 'default'}`
+  return `icon-${data.type || "default"}`;
 }
 
 /** 获取类型名称 */
 function getTypeName(type) {
   const map = {
-    menu: i18n.t('permission.menu'),
-    button: i18n.t('permission.button'),
-    param: i18n.t('permission.param')
-  }
-  return map[type] || type
+    menu: i18n.t("menu.system.permission.page.menu"),
+    button: i18n.t("menu.system.permission.page.button"),
+    param: i18n.t("menu.system.permission.page.param"),
+  };
+  return map[type] || type;
 }
 
 /** 加载角色列表 */
 async function loadRoleList() {
-  roleLoading.value = true
+  roleLoading.value = true;
   try {
-    const res = await requestGetRoleAllApi()
-    roleList.value = Array.isArray(res.data) ? res.data : []
+    const res = await requestGetRoleAllApi();
+    roleList.value = Array.isArray(res.data) ? res.data : [];
     // 默认选中第一个角色
     if (roleList.value.length > 0 && !currentRole.value) {
-      await handleSelectRole(roleList.value[0])
+      await handleSelectRole(roleList.value[0]);
     }
   } catch (e) {
     // 错误已由拦截器处理
   } finally {
-    roleLoading.value = false
+    roleLoading.value = false;
   }
 }
 
 /** 加载所有权限列表 */
 async function loadAllPermissions() {
-  loading.value = true
+  loading.value = true;
   try {
-    const res = await requestGetAllPermissionsApi()
-    allPermissions.value = res.data?.permissions || []
+    const res = await requestGetAllPermissionsApi();
+    allPermissions.value = res.data?.permissions || [];
   } catch (e) {
     // 错误已由拦截器处理
   } finally {
-    loading.value = false
+    loading.value = false;
   }
 }
 
 /** 加载角色已分配的权限 */
+/** 加载角色已分配的权限 */
+/** 加载角色已分配的权限 */
 async function loadRolePermissions(roleId) {
   try {
-    const res = await requestGetRoleMenuIdsApi(roleId)
-    const menuIds = res.data?.menuIds || []
-    originalCheckedKeys.value = [...menuIds]
-    await nextTick()
+    const res = await requestGetRoleMenuIdsApi(roleId);
+    const menuIds = res.data?.menuIds || [];
+
+    originalCheckedKeys.value = [...menuIds];
+    await nextTick();
     if (permissionTree.value) {
-      permissionTree.value.setCheckedKeys(menuIds)
+      // 关键修复：先禁用父子节点关联，精确设置每个节点的选中状态
+      // 否则如果父节点被选中，tree 组件会自动选中所有子节点
+      const treeEl = permissionTree.value;
+      const oldCheckStrictly = treeEl.store.checkStrictly;
+      treeEl.store.checkStrictly = true;
+
+      // 先清空所有选中状态
+      treeEl.setCheckedKeys([]);
+
+      // 逐个设置节点的选中状态，确保精确控制
+      menuIds.forEach((id) => {
+        const node = treeEl.store.nodesMap[id];
+        if (node) {
+          treeEl.setChecked(node, true, false);
+        }
+      });
+
+      // 恢复父子节点关联
+      treeEl.store.checkStrictly = oldCheckStrictly;
+
+      // 确保 DOM 更新完成
+      await nextTick();
     }
   } catch (e) {
     // 错误已由拦截器处理
@@ -367,28 +451,12 @@ async function loadRolePermissions(roleId) {
 }
 
 /** 选择角色 */
+/** 选择角色 */
 async function handleSelectRole(role) {
-  // 如果有未保存的修改，提示确认
-  if (hasChanges.value && currentRole.value) {
-    try {
-      await MessageBox.confirm(
-        i18n.t('permission.unsavedChangeTip'),
-        i18n.t('common.tip'),
-        {
-          confirmButtonText: i18n.t('permission.confirmSwitch'),
-          cancelButtonText: i18n.t('common.cancel'),
-          type: 'warning'
-        }
-      )
-    } catch (e) {
-      return // 用户取消
-    }
-  }
-
-  currentRole.value = role
-  searchKeyword.value = ''
-  filterType.value = 'all'
-  await loadRolePermissions(role.id)
+  currentRole.value = role;
+  searchKeyword.value = "";
+  filterType.value = "all";
+  await loadRolePermissions(role.id);
 }
 
 /** 勾选变化 */
@@ -398,19 +466,19 @@ function handleCheckChange() {
 
 /** 搜索 */
 function handleSearch(value) {
-  if (!permissionTree.value) return
-  permissionTree.value.filter(value)
+  if (!permissionTree.value) return;
+  permissionTree.value.filter(value);
   // 搜索时自动展开匹配的节点
   if (value) {
     nextTick(() => {
-      const nodes = permissionTree.value.store.nodesMap
-      Object.keys(nodes).forEach(key => {
-        const node = nodes[key]
+      const nodes = permissionTree.value.store.nodesMap;
+      Object.keys(nodes).forEach((key) => {
+        const node = nodes[key];
         if (node.visible !== false) {
-          node.expanded = true
+          node.expanded = true;
         }
-      })
-    })
+      });
+    });
   }
 }
 
@@ -421,77 +489,83 @@ function handleFilterType() {
 
 /** 展开全部 */
 function handleExpandAll() {
-  if (!permissionTree.value) return
-  const nodes = permissionTree.value.store.nodesMap
-  Object.keys(nodes).forEach(key => {
-    nodes[key].expanded = true
-  })
+  if (!permissionTree.value) return;
+  const nodes = permissionTree.value.store.nodesMap;
+  Object.keys(nodes).forEach((key) => {
+    nodes[key].expanded = true;
+  });
 }
 
 /** 折叠全部 */
 function handleCollapseAll() {
-  if (!permissionTree.value) return
-  const nodes = permissionTree.value.store.nodesMap
-  Object.keys(nodes).forEach(key => {
-    nodes[key].expanded = false
-  })
+  if (!permissionTree.value) return;
+  const nodes = permissionTree.value.store.nodesMap;
+  Object.keys(nodes).forEach((key) => {
+    nodes[key].expanded = false;
+  });
 }
 
 /** 刷新 */
 async function handleRefresh() {
-  await loadAllPermissions()
+  await loadAllPermissions();
   if (currentRole.value) {
-    await loadRolePermissions(currentRole.value.id)
+    await loadRolePermissions(currentRole.value.id);
   }
-  Message.success(i18n.t('permission.refreshSuccess'))
+  Message.success(i18n.t("menu.system.permission.page.refreshSuccess"));
 }
 
 /** 重置 */
 async function handleReset() {
-  if (!currentRole.value) return
+  if (!currentRole.value) return;
   try {
-    await MessageBox.confirm(i18n.t('permission.resetConfirm'), i18n.t('common.tip'), {
-      confirmButtonText: i18n.t('common.confirm'),
-      cancelButtonText: i18n.t('common.cancel'),
-      type: 'warning'
-    })
-    await loadRolePermissions(currentRole.value.id)
-    Message.success(i18n.t('permission.resetSuccess'))
+    await MessageBox.confirm(
+      i18n.t("menu.system.permission.page.resetConfirm"),
+      i18n.t("common.tip"),
+      {
+        confirmButtonText: i18n.t("common.confirm"),
+        cancelButtonText: i18n.t("common.cancel"),
+        type: "warning",
+      }
+    );
+    await loadRolePermissions(currentRole.value.id);
+    Message.success(i18n.t("menu.system.permission.page.resetSuccess"));
   } catch (e) {
     // 用户取消
   }
 }
 
 /** 保存 */
+/** 保存 */
 async function handleSave() {
-  if (!currentRole.value) return
-  if (!permissionTree.value) return
+  if (!currentRole.value) return;
+  if (!permissionTree.value) return;
 
-  // 获取所有已勾选的节点（包括半选父节点的子节点）
-  const checkedKeys = permissionTree.value.getCheckedKeys() || []
-  const halfCheckedKeys = permissionTree.value.getHalfCheckedKeys() || []
+  const checkedKeys = permissionTree.value.getCheckedKeys() || [];
+  const halfCheckedKeys = permissionTree.value.getHalfCheckedKeys() || [];
   // 半选的父节点也需要保存（因为它的子节点被选中了）
-  const allCheckedKeys = [...checkedKeys, ...halfCheckedKeys]
+  const allCheckedKeys = [...checkedKeys, ...halfCheckedKeys];
 
-  saving.value = true
+  // [调试] 打印保存的权限信息
+
+  saving.value = true;
   try {
     await requestSaveRolePermissionsApi({
       roleId: currentRole.value.id,
       roleCode: currentRole.value.role_code,
-      menuIds: allCheckedKeys
-    })
-    originalCheckedKeys.value = [...allCheckedKeys]
-    Message.success(i18n.t('permission.saveSuccess'))
+      menuIds: allCheckedKeys,
+    });
+    originalCheckedKeys.value = [...allCheckedKeys];
+    Message.success(i18n.t("menu.system.permission.page.saveSuccess"));
   } catch (e) {
     // 错误已由拦截器处理
   } finally {
-    saving.value = false
+    saving.value = false;
   }
 }
 
 // ===== 初始化 =====
-loadRoleList()
-loadAllPermissions()
+loadRoleList();
+loadAllPermissions();
 </script>
 
 <style scoped lang="less">
@@ -781,7 +855,7 @@ loadAllPermissions()
       .node-code {
         font-size: 11px;
         color: #c0c4cc;
-        font-family: 'Consolas', 'Monaco', monospace;
+        font-family: "Consolas", "Monaco", monospace;
         background: #f5f7fa;
         padding: 1px 6px;
         border-radius: 3px;
@@ -819,9 +893,15 @@ loadAllPermissions()
           font-weight: 600;
         }
 
-        &.stat-menu i { color: #409eff; }
-        &.stat-button i { color: #67c23a; }
-        &.stat-param i { color: #e6a23c; }
+        &.stat-menu i {
+          color: #409eff;
+        }
+        &.stat-button i {
+          color: #67c23a;
+        }
+        &.stat-param i {
+          color: #e6a23c;
+        }
       }
     }
 

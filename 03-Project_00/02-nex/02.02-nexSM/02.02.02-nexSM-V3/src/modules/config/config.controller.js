@@ -5,6 +5,7 @@
 const configService = require('./config.service');
 const configModel = require('./config.model');
 const { triggerNotification } = require('../../services/notificationTrigger.service');
+const deviceStatusManager = require('../../socket/deviceStatusManager');
 
 /**
  * 根据配置分类确定通知事件类型
@@ -166,8 +167,20 @@ async function updateConfigs(req, res) {
       console.error('[系统配置] 触发通知失败:', err);
     });
 
+
+    // 8. 如果变化的配置项包含设备状态相关的配置，动态调整定时任务间隔
+    const deviceStatusConfigKeys = ['deviceStatusCheckInterval', 'deviceOfflineThreshold'];
+    const hasDeviceStatusConfigChanged = changedKeys.some(key => deviceStatusConfigKeys.includes(key));
+    if (hasDeviceStatusConfigChanged) {
+      console.log('[系统配置] 设备状态相关配置已变化，重启定时任务');
+      deviceStatusManager.restartFromConfig().catch(err => {
+        console.error('[系统配置] 重启设备状态定时任务失败:', err.message);
+      });
+    }
+
     res.json({
       code: 200,
+
       message: '配置更新成功',
       data: updatedConfigs
     });

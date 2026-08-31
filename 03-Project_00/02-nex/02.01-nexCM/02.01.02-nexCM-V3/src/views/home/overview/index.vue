@@ -13,7 +13,10 @@
             <div class="card-value">{{ deviceStatus.text }}</div>
             <div class="card-sub">已运行 {{ deviceStatus.duration }}</div>
           </div>
-          <div class="status-pulse" v-if="deviceStatus.status === 'running'"></div>
+          <div
+            class="status-pulse"
+            v-if="deviceStatus.status === 'running'"
+          ></div>
         </div>
       </el-col>
 
@@ -25,7 +28,9 @@
           </div>
           <div class="card-content">
             <div class="card-label">运行速度</div>
-            <div class="card-value">{{ metrics.currentSpeed }}<span class="card-unit">瓶/h</span></div>
+            <div class="card-value">
+              {{ metrics.currentSpeed }}<span class="card-unit">瓶/h</span>
+            </div>
             <div class="card-sub">目标：{{ metrics.targetSpeed }} 瓶/h</div>
           </div>
         </div>
@@ -39,10 +44,19 @@
           </div>
           <div class="card-content">
             <div class="card-label">今日产能</div>
-            <div class="card-value">{{ formatNumber(metrics.todayOutput) }}<span class="card-unit">瓶</span></div>
+            <div class="card-value">
+              {{ formatNumber(metrics.todayOutput)
+              }}<span class="card-unit">瓶</span>
+            </div>
             <div class="card-sub">完成率 {{ metrics.todayRate }}%</div>
           </div>
-          <el-progress :percentage="metrics.todayRate" :show-text="false" :stroke-width="4" color="#67c23a" class="card-progress" />
+          <el-progress
+            :percentage="metrics.todayRate"
+            :show-text="false"
+            :stroke-width="4"
+            color="#67c23a"
+            class="card-progress"
+          />
         </div>
       </el-col>
 
@@ -54,8 +68,14 @@
           </div>
           <div class="card-content">
             <div class="card-label">本班产能</div>
-            <div class="card-value">{{ formatNumber(metrics.shiftOutput) }}<span class="card-unit">瓶</span></div>
-            <div class="card-sub">{{ metrics.shiftName }} · 目标 {{ formatNumber(metrics.shiftTarget) }} 瓶</div>
+            <div class="card-value">
+              {{ formatNumber(metrics.shiftOutput)
+              }}<span class="card-unit">瓶</span>
+            </div>
+            <div class="card-sub">
+              {{ metrics.shiftName }} · 目标
+              {{ formatNumber(metrics.shiftTarget) }} 瓶
+            </div>
           </div>
         </div>
       </el-col>
@@ -67,32 +87,43 @@
       <el-col :span="16">
         <el-card shadow="never" class="chart-card">
           <div slot="header" class="card-header">
-            <span class="header-title"><i class="el-icon-line-chart"></i> 24小时产能趋势</span>
+            <span class="header-title"
+              ><i class="el-icon-line-chart"></i> 24小时产能趋势</span
+            >
             <el-tag size="small" type="success" class="live-tag">
               <span class="live-dot"></span>实时
             </el-tag>
           </div>
           <div class="chart-body">
             <div class="bar-chart">
-              <div 
-                v-for="(item, index) in productionTrend" 
-                :key="index" 
+              <div
+                v-for="(item, index) in productionTrend"
+                :key="index"
                 class="bar-item"
               >
-                <div class="bar-tooltip">{{ item.hour }}时：{{ formatNumber(item.value) }}瓶</div>
+                <div class="bar-tooltip">
+                  {{ item.hour }}时：{{ formatNumber(item.value) }}瓶
+                </div>
                 <div class="bar-wrapper">
-                  <div 
-                    class="bar" 
-                    :style="{ height: (item.value / maxTrendValue * 100) + '%' }"
-                    :class="{ 'current': index === productionTrend.length - 1 }"
+                  <div
+                    class="bar"
+                    :style="{
+                      height: (item.value / maxTrendValue) * 100 + '%',
+                    }"
+                    :class="{ current: index === productionTrend.length - 1 }"
                   ></div>
                 </div>
                 <div class="bar-label">{{ item.hour }}</div>
               </div>
             </div>
             <div class="chart-summary">
-              <span>今日总计：<b>{{ formatNumber(metrics.todayOutput) }}</b> 瓶</span>
-              <span>峰值：<b>{{ formatNumber(maxTrendValue) }}</b> 瓶/小时</span>
+              <span
+                >今日总计：<b>{{ formatNumber(metrics.todayOutput) }}</b>
+                瓶</span
+              >
+              <span
+                >峰值：<b>{{ formatNumber(maxTrendValue) }}</b> 瓶/小时</span
+              >
             </div>
           </div>
         </el-card>
@@ -102,15 +133,19 @@
       <el-col :span="8">
         <el-card shadow="never" class="alarm-card">
           <div slot="header" class="card-header">
-            <span class="header-title"><i class="el-icon-warning-outline"></i> 实时报警</span>
-            <el-tag size="small" type="danger" v-if="activeAlarms.length > 0">{{ activeAlarms.length }} 条</el-tag>
+            <span class="header-title"
+              ><i class="el-icon-warning-outline"></i> 实时报警</span
+            >
+            <el-tag size="small" type="danger" v-if="activeAlarms.length > 0"
+              >{{ activeAlarms.length }} 条</el-tag
+            >
             <el-tag size="small" type="success" v-else>正常</el-tag>
           </div>
           <div class="alarm-body">
             <div class="alarm-list">
-              <div 
-                v-for="(alarm, index) in activeAlarms" 
-                :key="index" 
+              <div
+                v-for="(alarm, index) in activeAlarms"
+                :key="index"
                 class="alarm-item"
                 :class="alarm.level"
               >
@@ -154,29 +189,31 @@
  * - 产量趋势：需要后端定时采集D4004并存储历史数据
  * - 实时报警：D4012 + M4000-M4110
  */
-import { computed } from 'vue'
-import store from '@/store'
-
+import { computed } from "vue";
+import store from "@/store";
 
 // 通用数据：从 store 获取
-const trendData = computed(() => store.getters.trendData)
-const currentAlarms = computed(() => store.getters.currentAlarms)
+const trendData = computed(() => store.getters.trendData);
+const currentAlarms = computed(() => store.getters.currentAlarms);
 
 // 设备运行状态（基于 store 通用对象 + 页面特有 icon）
 const deviceStatus = computed(() => {
-  const obj = store.getters['device/deviceStatusObj'] || {}
+  const obj = store.getters["device/deviceStatusObj"] || {};
   return {
     status: store.getters.deviceStatus,
     text: store.getters.deviceStatusText,
-    duration: obj.duration || '0小时0分钟',
-    icon: store.getters.deviceStatus === 'running' ? 'el-icon-video-play' : 'el-icon-video-pause'
-  }
-})
+    duration: obj.duration || "0小时0分钟",
+    icon:
+      store.getters.deviceStatus === "running"
+        ? "el-icon-video-play"
+        : "el-icon-video-pause",
+  };
+});
 
 // 产能指标（页面特有格式）
 const metrics = computed(() => {
-  const prod = store.getters.productionStats
-  const params = store.getters.realtimeParams
+  const prod = store.getters.productionStats;
+  const params = store.getters.realtimeParams;
   return {
     currentSpeed: params.speed,
     targetSpeed: 1500,
@@ -184,50 +221,76 @@ const metrics = computed(() => {
     todayRate: prod.todayRate,
     shiftOutput: prod.shiftOutput,
     shiftTarget: prod.shiftTarget,
-    shiftName: prod.shiftName
-  }
-})
+    shiftName: prod.shiftName,
+  };
+});
 
 // 24小时产能趋势（页面特有格式转换）
 const productionTrend = computed(() => {
-  if (trendData.value && trendData.value.speed && trendData.value.speed.length > 0) {
-    return trendData.value.speed.map(item => ({ hour: item.time.slice(0, 2), value: item.value }))
+  if (
+    trendData.value &&
+    trendData.value.speed &&
+    trendData.value.speed.length > 0
+  ) {
+    return trendData.value.speed.map((item) => ({
+      hour: item.time.slice(0, 2),
+      value: item.value,
+    }));
   }
   return [
-    { hour: '00', value: 0 }, { hour: '02', value: 0 }, { hour: '04', value: 0 },
-    { hour: '06', value: 120 }, { hour: '08', value: 850 }, { hour: '10', value: 1200 },
-    { hour: '12', value: 1100 }, { hour: '14', value: 1350 }, { hour: '16', value: 1280 },
-    { hour: '18', value: 660 }, { hour: '20', value: 0 }, { hour: '22', value: 0 }
-  ]
-})
+    { hour: "00", value: 0 },
+    { hour: "02", value: 0 },
+    { hour: "04", value: 0 },
+    { hour: "06", value: 120 },
+    { hour: "08", value: 850 },
+    { hour: "10", value: 1200 },
+    { hour: "12", value: 1100 },
+    { hour: "14", value: 1350 },
+    { hour: "16", value: 1280 },
+    { hour: "18", value: 660 },
+    { hour: "20", value: 0 },
+    { hour: "22", value: 0 },
+  ];
+});
 
 // 实时报警（页面特有格式转换）
 const activeAlarms = computed(() => {
   if (currentAlarms.value && currentAlarms.value.length > 0) {
-    return currentAlarms.value.slice(0, 5).map(a => ({
-      level: a.level || 'warning',
-      icon: a.level === 'danger' ? 'el-icon-error' : 'el-icon-warning',
+    return currentAlarms.value.slice(0, 5).map((a) => ({
+      level: a.level || "warning",
+      icon: a.level === "danger" ? "el-icon-error" : "el-icon-warning",
       title: a.message || a.title,
-      code: a.code || '',
-      time: a.time || ''
-    }))
+      code: a.code || "",
+      time: a.time || "",
+    }));
   }
   return [
-    { level: 'warning', icon: 'el-icon-warning', title: '灌装轴位置异动报警', code: 'M4068', time: '14:23' },
-    { level: 'info', icon: 'el-icon-info', title: '真空异常预警', code: 'M4020', time: '14:15' }
-  ]
-})
+    {
+      level: "warning",
+      icon: "el-icon-warning",
+      title: "灌装轴位置异动报警",
+      code: "M4068",
+      time: "14:23",
+    },
+    {
+      level: "info",
+      icon: "el-icon-info",
+      title: "真空异常预警",
+      code: "M4020",
+      time: "14:15",
+    },
+  ];
+});
 
 // 趋势最大值
 const maxTrendValue = computed(() => {
-  return Math.max(...productionTrend.value.map(item => item.value), 1)
-})
+  return Math.max(...productionTrend.value.map((item) => item.value), 1);
+});
 
 // 格式化数字
 function formatNumber(num) {
-  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
 </script>
 
 <style scoped lang="less">
@@ -244,7 +307,7 @@ function formatNumber(num) {
   position: relative;
   padding-left: 12px;
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     top: 50%;
@@ -258,7 +321,10 @@ function formatNumber(num) {
     font-size: 15px;
     font-weight: 600;
     color: #303133;
-    i { margin-right: 6px; color: #409eff; }
+    i {
+      margin-right: 6px;
+      color: #409eff;
+    }
   }
   .live-tag {
     display: flex;
@@ -276,8 +342,13 @@ function formatNumber(num) {
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
 }
 
 // ========== 第一行：指标卡片 ==========
@@ -298,9 +369,15 @@ function formatNumber(num) {
   transition: all 0.3s;
   border: 1px solid transparent;
 
-  &.running { background: linear-gradient(135deg, #67c23a 0%, #529b2e 100%); }
-  &.idle { background: linear-gradient(135deg, #909399 0%, #606266 100%); }
-  &.fault { background: linear-gradient(135deg, #f56c6c 0%, #c45656 100%); }
+  &.running {
+    background: linear-gradient(135deg, #67c23a 0%, #529b2e 100%);
+  }
+  &.idle {
+    background: linear-gradient(135deg, #909399 0%, #606266 100%);
+  }
+  &.fault {
+    background: linear-gradient(135deg, #f56c6c 0%, #c45656 100%);
+  }
 
   .card-icon {
     font-size: 40px;
@@ -338,9 +415,15 @@ function formatNumber(num) {
 }
 
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.7); }
-  70% { box-shadow: 0 0 0 12px rgba(255,255,255,0); }
-  100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
 }
 
 // 普通指标卡片
@@ -353,25 +436,31 @@ function formatNumber(num) {
   display: flex;
   align-items: center;
   border: 1px solid #ebeef5;
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.04);
   transition: all 0.3s;
   overflow: hidden;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     top: 0;
     bottom: 0;
     width: 3px;
   }
-  &.speed::before { background: linear-gradient(180deg, #409eff 0%, #337ecc 100%); }
-  &.today::before { background: linear-gradient(180deg, #67c23a 0%, #529b2e 100%); }
-  &.shift::before { background: linear-gradient(180deg, #e6a23c 0%, #b88230 100%); }
+  &.speed::before {
+    background: linear-gradient(180deg, #409eff 0%, #337ecc 100%);
+  }
+  &.today::before {
+    background: linear-gradient(180deg, #67c23a 0%, #529b2e 100%);
+  }
+  &.shift::before {
+    background: linear-gradient(180deg, #e6a23c 0%, #b88230 100%);
+  }
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px 0 rgba(0,0,0,0.08);
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
     border-color: #dcdfe6;
   }
 
@@ -386,9 +475,15 @@ function formatNumber(num) {
     color: #fff;
     margin-right: 14px;
   }
-  &.speed .card-icon { background: linear-gradient(135deg, #409eff 0%, #337ecc 100%); }
-  &.today .card-icon { background: linear-gradient(135deg, #67c23a 0%, #529b2e 100%); }
-  &.shift .card-icon { background: linear-gradient(135deg, #e6a23c 0%, #b88230 100%); }
+  &.speed .card-icon {
+    background: linear-gradient(135deg, #409eff 0%, #337ecc 100%);
+  }
+  &.today .card-icon {
+    background: linear-gradient(135deg, #67c23a 0%, #529b2e 100%);
+  }
+  &.shift .card-icon {
+    background: linear-gradient(135deg, #e6a23c 0%, #b88230 100%);
+  }
 
   .card-content {
     flex: 1;
@@ -425,14 +520,15 @@ function formatNumber(num) {
 
 // ========== 第二行：图表 + 报警 ==========
 .bottom-row {
-  .chart-card, .alarm-card {
+  .chart-card,
+  .alarm-card {
     height: 300px;
     border-radius: 8px;
     border: 1px solid #ebeef5;
-    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.04);
     transition: all 0.3s;
     &:hover {
-      box-shadow: 0 4px 16px 0 rgba(0,0,0,0.08);
+      box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
       border-color: #dcdfe6;
     }
     /deep/ .el-card__header {
@@ -442,6 +538,8 @@ function formatNumber(num) {
     /deep/ .el-card__body {
       height: calc(100% - 57px);
       padding: 16px;
+      overflow: visible !important; /* 新增：防止内容被截断 */
+      box-sizing: border-box !important; /* 新增：让 padding 包含在高度内 */
     }
   }
   .alarm-card {
@@ -485,7 +583,9 @@ function formatNumber(num) {
         transition: opacity 0.3s;
         z-index: 10;
       }
-      &:hover .bar-tooltip { opacity: 1; }
+      &:hover .bar-tooltip {
+        opacity: 1;
+      }
       .bar-wrapper {
         flex: 1;
         width: 100%;
@@ -497,8 +597,12 @@ function formatNumber(num) {
           border-radius: 4px 4px 0 0;
           transition: all 0.3s;
           min-height: 2px;
-          &:hover { background: linear-gradient(180deg, #337ecc 0%, #409eff 100%); }
-          &.current { background: linear-gradient(180deg, #67c23a 0%, #85ce61 100%); }
+          &:hover {
+            background: linear-gradient(180deg, #337ecc 0%, #409eff 100%);
+          }
+          &.current {
+            background: linear-gradient(180deg, #67c23a 0%, #85ce61 100%);
+          }
         }
       }
       .bar-label {
@@ -514,7 +618,10 @@ function formatNumber(num) {
     padding-top: 12px;
     font-size: 13px;
     color: #606266;
-    b { color: #409eff; font-size: 15px; }
+    b {
+      color: #409eff;
+      font-size: 15px;
+    }
   }
 }
 
@@ -532,10 +639,27 @@ function formatNumber(num) {
       margin-bottom: 8px;
       background: #f5f7fa;
       transition: all 0.3s;
-      &:hover { background: #ecf5ff; }
-      &.danger { border-left: 4px solid #f56c6c; .alarm-icon { color: #f56c6c; } }
-      &.warning { border-left: 4px solid #e6a23c; .alarm-icon { color: #e6a23c; } }
-      &.info { border-left: 4px solid #409eff; .alarm-icon { color: #409eff; } }
+      &:hover {
+        background: #ecf5ff;
+      }
+      &.danger {
+        border-left: 4px solid #f56c6c;
+        .alarm-icon {
+          color: #f56c6c;
+        }
+      }
+      &.warning {
+        border-left: 4px solid #e6a23c;
+        .alarm-icon {
+          color: #e6a23c;
+        }
+      }
+      &.info {
+        border-left: 4px solid #409eff;
+        .alarm-icon {
+          color: #409eff;
+        }
+      }
       .alarm-icon {
         font-size: 20px;
         margin-right: 12px;

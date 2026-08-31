@@ -20,6 +20,28 @@ const CaptchaService = require('../captcha/captcha.service')
 const auditLogger = require('../audit/auditLogger')
 const { triggerNotification } = require('../../services/notificationTrigger.service')
 const permissionService = require('../permission/permission.service')
+const wsManager = require('../../socket/wsManager')
+const notificationService = require('../notification/notification.service')
+const userDeviceService = require('./userDevice.service')
+const fs = require('fs')
+const { LicenseGuard } = require('../../../beehive/sdk')
+const licenseConfig = require('../../config/license.config')
+
+// 创建授权验证实例（用于获取授权文件中的 maxDevices）
+let licenseGuardInstance = null
+function getLicenseGuard() {
+  if (!licenseGuardInstance) {
+    licenseGuardInstance = new LicenseGuard({
+      projectId: licenseConfig.projectId,
+      publicKey: fs.readFileSync(licenseConfig.publicKeyPath, 'utf8'),
+      licensePath: licenseConfig.licensePath,
+      timeGuardPath: licenseConfig.timeGuardPath,
+      licenseServerUrl: licenseConfig.licenseServerUrl,
+      strictMode: licenseConfig.strictMode
+    })
+  }
+  return licenseGuardInstance
+}
 
 // 登录失败锁定配置
 const MAX_LOGIN_ATTEMPTS = 5       // 最大失败次数
@@ -60,7 +82,7 @@ class UserService extends BaseService {
    * console.log(result.token) // JWT Token
    * console.log(result.userInfo) // 用户信息（不含密码）
    */
-  async login(username, password, ip, userAgent = '', lang = 'zh-CN') {
+  async login(username, password, ip, userAgent = '', lang = 'zh-CN', deviceId = '', deviceName = '') {
     // 0. 检查账户是否被锁定
     const lockKey = `lock:${username}`
     const locked = loginAttempts.get(lockKey)
@@ -122,18 +144,127 @@ class UserService extends BaseService {
     loginAttempts.delete(`attempt:${username}`)
     loginAttempts.delete(`lock:${username}`)
 
-    // 4. 生成token（包含 data_scope 和 dept_id，用于数据权限中间件）
+    // 3.4 单点登录：先把当前用户的所有旧设备设置为离线（确保设备数检查准确）
+    try {
+      await userDeviceService.setAllDevicesOffline(user.id)
+      console.log(`[登录-单点登录] 用户 ${user.username} (ID: ${user.id}) 的所有旧设备已设置为离线`)
+    } catch (err) {
+      console.error('[登录-单点登录] 设置旧设备离线失败:', err.message)
+    }
+
+    // 3.5 客户端授权：检查整个系统在线设备数是否达到上限
+    // 最大在线设备数从授权文件 license.lic 中读取（0表示不限制）
+    let maxDevices = 0
+    try {
+      const guard = getLicenseGuard()
+      const licenseResult = await guard.check()
+      if (licenseResult.valid && licenseResult.licenseData) {
+        maxDevices = Number(licenseResult.licenseData.maxDevices) || 0
+      }
+    } catch (err) {
+      console.error('[登录-客户端授权] 读取授权文件失败:', err.message)
+    }
+    const loginCheck = await userDeviceService.checkLoginAllowed(maxDevices)
+    console.log(`[登录-客户端授权] 用户 ${user.username} (ID: ${user.id}) 系统在线设备数: ${loginCheck.currentCount}/${loginCheck.maxDevices || '不限'}, 是否允许: ${loginCheck.allowed}`)
+    if (!loginCheck.allowed) {
+      throw new BusinessError(
+        ERROR_CODE.DEVICE_LIMIT_EXCEEDED,
+        `在线设备数已达上限（最多 ${loginCheck.maxDevices} 台），请联系管理员踢掉其他设备`,
+        { currentCount: loginCheck.currentCount, maxDevices: loginCheck.maxDevices }
+      )
+    }
+
+    // 4. 原子递增 Token 版本号（单点登录：旧 Token 立即失效）
+    const tokenVersion = await userModel.incrementTokenVersion(user.id)
+
+    // 5. 生成token（包含 token_version，用于单点登录踢人校验）
     const token = generateToken({
       id: user.id,
       username: user.username,
       realName: user.real_name,
       role: user.role,
       data_scope: user.data_scope || 'self',
-      dept_id: user.dept_id || null
+      dept_id: user.dept_id || null,
+      token_version: tokenVersion
     })
 
-    // 5. 更新登录信息
+    // 5.1 单点登录：推送被踢下线通知给该用户的其他在线设备（旧 Token 立即失效）
+    // 同时创建通知记录到通知中心
+    // 只有当该用户有其他在线连接时，才推送被踢下线通知和创建通知记录
+    const loginTime = new Date().toISOString()
+    const onlineConnectionCount = wsManager.getUserConnectionCount(user.id)
+    console.log(`[登录-单点登录] 用户 ${user.username} (ID: ${user.id}) 当前在线连接数: ${onlineConnectionCount}`)
+    if (onlineConnectionCount > 0) {
+      try {
+        // WebSocket 实时推送 kicked_out 消息（用于前端立即跳转登录页）
+        wsManager.sendToUser(user.id, {
+          type: 'kicked_out',
+          message: '您已在其他设备登录，当前设备已下线',
+          data: {
+            userId: user.id,
+            username: user.username,
+            loginIp: ip,
+            loginTime: loginTime
+          }
+        })
+
+        // 创建通知记录到通知中心（被踢下线通知）
+        await notificationService.sendNotification({
+          userId: user.id,
+          titleKey: 'notification.kickedOutTitle',
+          contentKey: 'notification.kickedOutContent',
+          contentParams: JSON.stringify({ time: loginTime, ip: ip }),
+          type: 'security',
+          priority: 'high'
+        })
+        console.log(`[登录-单点登录] 用户 ${user.username} 有 ${onlineConnectionCount} 个其他在线连接，已推送被踢下线通知`)
+      } catch (err) {
+        console.error('[登录] 推送被踢通知/创建通知记录失败:', err.message)
+      }
+    } else {
+      console.log(`[登录-单点登录] 用户 ${user.username} 没有其他在线连接，跳过被踢下线通知`)
+    }
+
+    // 5.2 安全通知：给所有管理员创建用户登录通知记录（包括管理员自己的其他在线设备）
+    try {
+      const adminUserIds = await userModel.getAdminUserIds()
+      if (adminUserIds.length > 0) {
+        await notificationService.sendBatchNotifications(adminUserIds, {
+          titleKey: 'notification.userLoginTitle',
+          contentKey: 'notification.userLoginContent',
+          contentParams: JSON.stringify({
+            username: user.username,
+            role: user.role,
+            time: loginTime,
+            ip: ip
+          }),
+          type: 'security',
+          priority: 'normal'
+        })
+      }
+    } catch (err) {
+      console.error('[登录] 创建管理员登录通知失败:', err.message)
+    }
+
+    // 6. 更新登录信息
     await userModel.updateLoginInfo(user.id, ip)
+
+    // 6.1 客户端授权：记录设备信息（用于在线设备管理和限制）
+    // 只有当 deviceId 存在时才记录（前端会生成 deviceId 并存储在 localStorage）
+    if (deviceId) {
+      try {
+        await userDeviceService.upsertDevice({
+          userId: user.id,
+          deviceId: deviceId,
+          deviceName: deviceName || '',
+          ip: ip,
+          userAgent: userAgent
+        })
+        console.log(`[登录-客户端授权] 用户 ${user.username} (ID: ${user.id}) 设备信息已记录，deviceId: ${deviceId}`)
+      } catch (err) {
+        console.error('[登录-客户端授权] 记录设备信息失败:', err.message)
+      }
+    }
 
     // 6. 记录登录成功审计
     await auditLogger.log({ userId: user.id, userName: user.username, ip, userAgent }, {
@@ -142,10 +273,10 @@ class UserService extends BaseService {
       result: 'success'
     })
 
-    // 7. 返回用户信息（去掉密码）
+    // 8. 返回用户信息（去掉密码）
     const { password: _, ...userInfo } = user
 
-    // 8. 查询用户权限码列表和权限版本号
+    // 9. 查询用户权限码列表和权限版本号
     const permissions = await permissionService.getUserPermissions(user.id)
     const permissionVersion = await permissionService.getUserPermissionVersion(user.id)
 

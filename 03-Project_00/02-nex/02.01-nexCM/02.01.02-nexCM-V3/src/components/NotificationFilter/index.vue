@@ -113,7 +113,8 @@ const typeList = {
   user: 'notification.typeUser',
   audit: 'notification.typeAudit',
   device: 'notification.typeDevice',
-  connection: 'notification.typeConnection'
+  connection: 'notification.typeConnection',
+  security: 'notification.typeSecurity'
 }
 
 const localArchiveTab = ref(props.archiveTab)

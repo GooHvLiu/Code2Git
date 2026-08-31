@@ -18,7 +18,7 @@ class MenuModel {
    */
   async findMenuListByUserId(userId, lang = 'zh-CN') {
     const sql = `
-      SELECT m.*
+      SELECT DISTINCT m.*
       FROM ${MENU_TABLE} m
       INNER JOIN nex_role_menu rm ON m.id = rm.menu_id
       INNER JOIN nex_role r ON rm.role_id = r.id

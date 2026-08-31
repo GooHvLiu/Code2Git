@@ -238,6 +238,34 @@ function handleWsNotification() {
   broadcastUnreadCountChange()
 }
 
+/** WebSocket 收到已读同步消息（其他设备标记已读） */
+function handleWsNotificationRead(data) {
+  if (!data) return
+  // 更新 Vuex 中的未读数量为最新值
+  if (data?.unreadCount !== undefined) {
+    store.commit('notification/SET_UNREAD_COUNT', data.unreadCount)
+  }
+  // 如果面板打开着，直接更新本地通知列表的已读状态（不重新获取，避免显示 loading）
+  if (showPanel.value) {
+    if (data.markAll) {
+      // 全部标记已读
+      notifications.value.forEach(item => {
+        item.is_read = 1
+      })
+    } else if (data.notificationIds && data.notificationIds.length > 0) {
+      // 批量标记已读
+      const idSet = new Set(data.notificationIds)
+      notifications.value.forEach(item => {
+        if (idSet.has(item.id)) {
+          item.is_read = 1
+        }
+      })
+    }
+  }
+  // 广播给其他标签页
+  broadcastUnreadCountChange()
+}
+
 // ===== 生命周期 =====
 let afterEachUnsubscribe = null
 let broadcastChannel = null
@@ -247,6 +275,8 @@ onMounted(() => {
   fetchUnreadCount()
   // 监听 WebSocket 新通知（实时推送）
   ws.on('notification', handleWsNotification)
+  // 监听 WebSocket 已读同步消息（其他设备标记已读）
+  ws.on('notification_read', handleWsNotificationRead)
   // 点击外部关闭
   document.addEventListener('click', handleClickOutside)
   // 监听路由变化，在路由切换时获取未读数量
@@ -314,6 +344,7 @@ function broadcastNotificationUpdated() {
 
 onBeforeUnmount(() => {
   ws.off('notification', handleWsNotification)
+  ws.off('notification_read', handleWsNotificationRead)
   document.removeEventListener('click', handleClickOutside)
   // 取消路由监听
   if (afterEachUnsubscribe) {

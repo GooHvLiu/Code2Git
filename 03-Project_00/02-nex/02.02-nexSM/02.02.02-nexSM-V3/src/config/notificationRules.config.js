@@ -20,8 +20,8 @@ module.exports = {
 
   // 通知规则列表
   rules: [
-    // ==================== 用户相关事件 ====================
     {
+      // 用户注册
       eventType: 'user.register',
       titleKey: 'notification.user.register.title',
       contentKey: 'notification.user.register.content',
@@ -31,6 +31,7 @@ module.exports = {
       enabled: true
     },
     {
+      // 用户资料更新
       eventType: 'user.profile.update',
       titleKey: 'notification.user.profileUpdate.title',
       contentKey: 'notification.user.profileUpdate.content',
@@ -39,9 +40,8 @@ module.exports = {
       type: 'user',
       enabled: true
     },
-
-    // ==================== 系统配置相关事件 ====================
     {
+      // 系统配置更新
       eventType: 'config.system.update',
       titleKey: 'notification.config.systemUpdate.title',
       contentKey: 'notification.config.systemUpdate.content',
@@ -50,9 +50,8 @@ module.exports = {
       type: 'system',
       enabled: true
     },
-
-    // ==================== 设备连接相关事件（通知工程师+管理员）====================
     {
+      // PLC 连接配置更新
       eventType: 'config.plc.connection.update',
       titleKey: 'notification.config.plcConnectionUpdate.title',
       contentKey: 'notification.config.plcConnectionUpdate.content',
@@ -62,6 +61,7 @@ module.exports = {
       enabled: true
     },
     {
+      // 连接配置更新
       eventType: 'config.connection.update',
       titleKey: 'notification.config.connectionUpdate.title',
       contentKey: 'notification.config.connectionUpdate.content',
@@ -71,6 +71,7 @@ module.exports = {
       enabled: true
     },
     {
+      // 设备参数更新
       eventType: 'config.device.params.update',
       titleKey: 'notification.config.deviceParamsUpdate.title',
       contentKey: 'notification.config.deviceParamsUpdate.content',
@@ -79,9 +80,8 @@ module.exports = {
       type: 'plc',
       enabled: true
     },
-
-    // ==================== PLC相关事件 ====================
     {
+      // PLC 报警
       eventType: 'plc.alarm',
       titleKey: 'notification.plc.alarm.title',
       contentKey: 'notification.plc.alarm.content',
@@ -91,6 +91,7 @@ module.exports = {
       enabled: true
     },
     {
+      // PLC 连接断开
       eventType: 'plc.connection.lost',
       titleKey: 'notification.plc.connectionLost.title',
       contentKey: 'notification.plc.connectionLost.content',
@@ -100,6 +101,7 @@ module.exports = {
       enabled: true
     },
     {
+      // PLC 连接恢复
       eventType: 'plc.connection.restored',
       titleKey: 'notification.plc.connectionRestored.title',
       contentKey: 'notification.plc.connectionRestored.content',

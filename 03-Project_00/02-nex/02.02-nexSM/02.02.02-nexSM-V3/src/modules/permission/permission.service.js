@@ -21,6 +21,11 @@ class PermissionService {
    * @param {number} userId - 用户ID
    * @returns {Promise<Array<string>>} 权限码数组
    */
+  /**
+   * 获取用户权限码列表（带缓存）
+   * @param {number} userId - 用户ID
+   * @returns {Promise<Array<string>>} 权限码数组
+   */
   async getUserPermissions(userId) {
     if (!userId) {
       throw new BusinessError(ERROR_CODE.PARAM_ERROR, '用户ID不能为空')

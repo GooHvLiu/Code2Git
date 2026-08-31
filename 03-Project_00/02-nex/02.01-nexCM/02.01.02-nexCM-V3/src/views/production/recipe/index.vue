@@ -3,17 +3,26 @@
     <!-- 顶部操作栏 -->
     <div class="page-header">
       <div class="header-left">
-        <h2 class="page-title">{{ $t("recipe.title") }}</h2>
-        <p class="page-desc">{{ $t("recipe.desc") }}</p>
+        <h2 class="page-title">{{ $t("menu.production.recipe.default") }}</h2>
+        <p class="page-desc">{{ $t("menu.production.recipe.page.desc") }}</p>
       </div>
       <div class="header-right">
-        <el-dropdown @command="handleDownloadAll" trigger="click">
+        <el-dropdown
+          v-permission="'production:recipe:download'"
+          @command="handleDownloadAll"
+          trigger="click"
+        >
           <el-button type="primary" icon="el-icon-download">
-            {{ $t("recipe.downloadAll") }}<i class="el-icon-arrow-down el-icon--right"></i>
+            {{ $t("menu.production.recipe.page.downloadAll")
+            }}<i class="el-icon-arrow-down el-icon--right"></i>
           </el-button>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="excel">{{ $t("recipe.exportExcel") }}</el-dropdown-item>
-            <el-dropdown-item command="pdf">{{ $t("recipe.exportPdf") }}</el-dropdown-item>
+            <el-dropdown-item command="excel">{{
+              $t("menu.production.recipe.page.exportExcel")
+            }}</el-dropdown-item>
+            <el-dropdown-item command="pdf">{{
+              $t("menu.production.recipe.page.exportPdf")
+            }}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -27,21 +36,41 @@
           v-for="recipe in recipeList"
           :key="recipe.id"
           class="recipe-card"
-          :class="{ active: selectedId === recipe.id, 'in-use': recipe.isActive }"
+          :class="{
+            active: selectedId === recipe.id,
+            'in-use': recipe.isActive,
+          }"
           @click="selectRecipe(recipe.id)"
         >
           <div class="card-header">
             <span class="recipe-name">{{ recipe.name }}</span>
-            <el-tag v-if="recipe.isActive" size="mini" type="success" effect="dark">{{ $t("recipe.inUse") }}</el-tag>
+            <el-tag
+              v-if="recipe.isActive"
+              size="mini"
+              type="success"
+              effect="dark"
+              >{{ $t("menu.production.recipe.page.inUse") }}</el-tag
+            >
           </div>
           <div class="card-info">
-            <span class="info-item"><i class="el-icon-goods"></i> {{ recipe.productType }}</span>
-            <span class="info-item"><i class="el-icon-water-cup"></i> {{ recipe.fillVolume }}ml</span>
+            <span class="info-item"
+              ><i class="el-icon-goods"></i> {{ recipe.productType }}</span
+            >
+            <span class="info-item"
+              ><i class="el-icon-water-cup"></i> {{ recipe.fillVolume }}ml</span
+            >
           </div>
           <div class="card-stats">
-            <span class="stat"><i class="el-icon-view"></i> {{ recipe.usageCount }}</span>
-            <span class="stat" :class="{ danger: recipe.faultRate > 1 }"><i class="el-icon-warning"></i> {{ recipe.faultRate }}%</span>
-            <span class="stat"><i class="el-icon-circle-check"></i> {{ recipe.avgQualifiedRate }}%</span>
+            <span class="stat"
+              ><i class="el-icon-view"></i> {{ recipe.usageCount }}</span
+            >
+            <span class="stat" :class="{ danger: recipe.faultRate > 1 }"
+              ><i class="el-icon-warning"></i> {{ recipe.faultRate }}%</span
+            >
+            <span class="stat"
+              ><i class="el-icon-circle-check"></i>
+              {{ recipe.avgQualifiedRate }}%</span
+            >
           </div>
           <!-- 选中时的连接箭头 -->
           <div v-if="selectedId === recipe.id" class="card-connector">
@@ -67,16 +96,32 @@
             <h3>{{ currentRecipe.name }}</h3>
           </div>
           <div class="detail-actions">
-            <el-tag size="small" :type="currentRecipe.isActive ? 'success' : 'info'">
-              {{ currentRecipe.isActive ? $t("recipe.inUse") : $t("recipe.notInUse") }}
+            <el-tag
+              size="small"
+              :type="currentRecipe.isActive ? 'success' : 'info'"
+            >
+              {{
+                currentRecipe.isActive
+                  ? $t("menu.production.recipe.page.inUse")
+                  : $t("menu.production.recipe.page.notInUse")
+              }}
             </el-tag>
-            <el-dropdown @command="cmd => handleDownloadSingle(cmd, currentRecipe)" trigger="click">
+            <el-dropdown
+              v-permission="'production:recipe:download'"
+              @command="(cmd) => handleDownloadSingle(cmd, currentRecipe)"
+              trigger="click"
+            >
               <el-button size="small" icon="el-icon-download">
-                {{ $t("recipe.download") }}<i class="el-icon-arrow-down el-icon--right"></i>
+                {{ $t("menu.production.recipe.page.download")
+                }}<i class="el-icon-arrow-down el-icon--right"></i>
               </el-button>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="excel">{{ $t("recipe.exportExcel") }}</el-dropdown-item>
-                <el-dropdown-item command="pdf">{{ $t("recipe.exportPdf") }}</el-dropdown-item>
+                <el-dropdown-item command="excel">{{
+                  $t("menu.production.recipe.page.exportExcel")
+                }}</el-dropdown-item>
+                <el-dropdown-item command="pdf">{{
+                  $t("menu.production.recipe.page.exportPdf")
+                }}</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
@@ -84,18 +129,44 @@
 
         <!-- 基本信息 -->
         <div class="detail-section">
-          <div class="section-title"><i class="el-icon-info"></i>{{ $t("recipe.basicInfo") }}</div>
+          <div class="section-title">
+            <i class="el-icon-info"></i
+            >{{ $t("menu.production.recipe.page.basicInfo") }}
+          </div>
           <div class="info-grid">
-            <div class="info-cell"><span class="label">{{ $t("recipe.recipeCode") }}</span><span class="value">{{ currentRecipe.code }}</span></div>
-            <div class="info-cell"><span class="label">{{ $t("recipe.productType") }}</span><span class="value">{{ currentRecipe.productType }}</span></div>
-            <div class="info-cell"><span class="label">{{ $t("recipe.fillVolume") }}</span><span class="value">{{ currentRecipe.fillVolume }} ml</span></div>
-            <div class="info-cell"><span class="label">{{ $t("recipe.lastUsed") }}</span><span class="value">{{ currentRecipe.lastUsedTime }}</span></div>
+            <div class="info-cell">
+              <span class="label">{{
+                $t("menu.production.recipe.page.recipeCode")
+              }}</span
+              ><span class="value">{{ currentRecipe.code }}</span>
+            </div>
+            <div class="info-cell">
+              <span class="label">{{
+                $t("menu.production.recipe.page.productType")
+              }}</span
+              ><span class="value">{{ currentRecipe.productType }}</span>
+            </div>
+            <div class="info-cell">
+              <span class="label">{{
+                $t("menu.production.recipe.page.fillVolume")
+              }}</span
+              ><span class="value">{{ currentRecipe.fillVolume }} ml</span>
+            </div>
+            <div class="info-cell">
+              <span class="label">{{
+                $t("menu.production.recipe.page.lastUsed")
+              }}</span
+              ><span class="value">{{ currentRecipe.lastUsedTime }}</span>
+            </div>
           </div>
         </div>
 
         <!-- 轴位参数 -->
         <div class="detail-section">
-          <div class="section-title"><i class="el-icon-position"></i>{{ $t("recipe.axisParams") }}</div>
+          <div class="section-title">
+            <i class="el-icon-position"></i
+            >{{ $t("menu.production.recipe.page.axisParams") }}
+          </div>
           <div class="param-card-grid">
             <div
               v-for="(param, index) in axisParams"
@@ -113,7 +184,10 @@
 
         <!-- 速度参数 -->
         <div class="detail-section">
-          <div class="section-title"><i class="el-icon-odometer"></i>{{ $t("recipe.speedParams") }}</div>
+          <div class="section-title">
+            <i class="el-icon-odometer"></i
+            >{{ $t("menu.production.recipe.page.speedParams") }}
+          </div>
           <div class="param-card-grid">
             <div
               v-for="(param, index) in speedParams"
@@ -131,45 +205,92 @@
 
         <!-- 延时与工艺参数 -->
         <div class="detail-section">
-          <div class="section-title"><i class="el-icon-timer"></i>{{ $t("recipe.delayParams") }}</div>
+          <div class="section-title">
+            <i class="el-icon-timer"></i
+            >{{ $t("menu.production.recipe.page.delayParams") }}
+          </div>
           <div class="info-grid">
-            <div class="info-cell"><span class="label">{{ $t("recipe.fillDelay") }}</span><span class="value">{{ currentRecipe.fillDelay }} ms</span></div>
-            <div class="info-cell"><span class="label">{{ $t("recipe.vacuumDelay") }}</span><span class="value">{{ currentRecipe.vacuumDelay }} ms</span></div>
-            <div class="info-cell"><span class="label">{{ $t("recipe.fillSpeed") }}</span><span class="value">{{ currentRecipe.fillSpeed }} 瓶/h</span></div>
-            <div class="info-cell"><span class="label">{{ $t("recipe.suckBackSpeed") }}</span><span class="value">{{ currentRecipe.suckBackSpeed }} 瓶/h</span></div>
+            <div class="info-cell">
+              <span class="label">{{
+                $t("menu.production.recipe.page.fillDelay")
+              }}</span
+              ><span class="value">{{ currentRecipe.fillDelay }} ms</span>
+            </div>
+            <div class="info-cell">
+              <span class="label">{{
+                $t("menu.production.recipe.page.vacuumDelay")
+              }}</span
+              ><span class="value">{{ currentRecipe.vacuumDelay }} ms</span>
+            </div>
+            <div class="info-cell">
+              <span class="label">{{
+                $t("menu.production.recipe.page.fillSpeed")
+              }}</span
+              ><span class="value">{{ currentRecipe.fillSpeed }} 瓶/h</span>
+            </div>
+            <div class="info-cell">
+              <span class="label">{{
+                $t("menu.production.recipe.page.suckBackSpeed")
+              }}</span
+              ><span class="value">{{ currentRecipe.suckBackSpeed }} 瓶/h</span>
+            </div>
           </div>
         </div>
 
         <!-- 智能分析 -->
         <div class="detail-section analysis-section">
-          <div class="section-title"><i class="el-icon-data-analysis"></i>{{ $t("recipe.analysis") }}</div>
+          <div class="section-title">
+            <i class="el-icon-data-analysis"></i
+            >{{ $t("menu.production.recipe.page.analysis") }}
+          </div>
           <div class="analysis-grid">
             <div class="analysis-card">
               <div class="analysis-icon blue"><i class="el-icon-view"></i></div>
               <div class="analysis-content">
                 <div class="analysis-value">{{ currentRecipe.usageCount }}</div>
-                <div class="analysis-label">{{ $t("recipe.usageCount") }}</div>
+                <div class="analysis-label">
+                  {{ $t("menu.production.recipe.page.usageCount") }}
+                </div>
               </div>
             </div>
             <div class="analysis-card">
-              <div class="analysis-icon" :class="currentRecipe.faultRate > 1 ? 'red' : 'green'"><i class="el-icon-warning"></i></div>
+              <div
+                class="analysis-icon"
+                :class="currentRecipe.faultRate > 1 ? 'red' : 'green'"
+              >
+                <i class="el-icon-warning"></i>
+              </div>
               <div class="analysis-content">
                 <div class="analysis-value">{{ currentRecipe.faultRate }}%</div>
-                <div class="analysis-label">{{ $t("recipe.faultRate") }}</div>
+                <div class="analysis-label">
+                  {{ $t("menu.production.recipe.page.faultRate") }}
+                </div>
               </div>
             </div>
             <div class="analysis-card">
-              <div class="analysis-icon green"><i class="el-icon-circle-check"></i></div>
+              <div class="analysis-icon green">
+                <i class="el-icon-circle-check"></i>
+              </div>
               <div class="analysis-content">
-                <div class="analysis-value">{{ currentRecipe.avgQualifiedRate }}%</div>
-                <div class="analysis-label">{{ $t("recipe.avgQualifiedRate") }}</div>
+                <div class="analysis-value">
+                  {{ currentRecipe.avgQualifiedRate }}%
+                </div>
+                <div class="analysis-label">
+                  {{ $t("menu.production.recipe.page.avgQualifiedRate") }}
+                </div>
               </div>
             </div>
             <div class="analysis-card">
-              <div class="analysis-icon orange"><i class="el-icon-time"></i></div>
+              <div class="analysis-icon orange">
+                <i class="el-icon-time"></i>
+              </div>
               <div class="analysis-content">
-                <div class="analysis-value-sm">{{ currentRecipe.lastUsedTime }}</div>
-                <div class="analysis-label">{{ $t("recipe.lastUsed") }}</div>
+                <div class="analysis-value-sm">
+                  {{ currentRecipe.lastUsedTime }}
+                </div>
+                <div class="analysis-label">
+                  {{ $t("menu.production.recipe.page.lastUsed") }}
+                </div>
               </div>
             </div>
           </div>
@@ -180,81 +301,199 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import store from '@/store'
-import { exportTable } from '@/utils/exportTable'
-import { getConfig } from '@/utils/config'
-import { useI18n } from '@/composables/useI18n'
+import { ref, computed } from "vue";
+import store from "@/store";
+import { exportTable } from "@/utils/exportTable";
+import { getConfig } from "@/utils/config";
+import { useI18n } from "@/composables/useI18n";
 
-const { t: $t } = useI18n()
+const { t: $t } = useI18n();
 
 // ===== 响应式数据 =====
-const selectedId = ref(1)
+const selectedId = ref(1);
 
 // ===== 计算属性 =====
-const recipeList = computed(() => store.getters['device/recipeList'])
-const getRecipeById = computed(() => store.getters['device/getRecipeById'])
+const recipeList = computed(() => store.getters["device/recipeList"]);
+const getRecipeById = computed(() => store.getters["device/getRecipeById"]);
 
-const currentRecipe = computed(() => getRecipeById.value(selectedId.value) || recipeList.value[0])
+const currentRecipe = computed(
+  () => getRecipeById.value(selectedId.value) || recipeList.value[0]
+);
 
 // 轴位参数列表
 const axisParams = computed(() => {
-  const r = currentRecipe.value
-  if (!r) return []
+  const r = currentRecipe.value;
+  if (!r) return [];
   return [
-    { label: $t('recipe.fillAngle'), value: r.fillAngle, unit: '度' },
-    { label: $t('recipe.suckBackAngle'), value: r.suckBackAngle, unit: '度' },
-    { label: $t('recipe.fillAxisInit'), value: r.fillAxisInit, unit: '脉冲' },
-    { label: $t('recipe.fillAxisReach'), value: r.fillAxisReach, unit: '脉冲' },
-    { label: $t('recipe.fixAxisInit'), value: r.fixAxisInit, unit: '脉冲' },
-    { label: $t('recipe.fixAxisReach'), value: r.fixAxisReach, unit: '脉冲' },
-    { label: $t('recipe.fixAxisPreLift'), value: r.fixAxisPreLift, unit: '脉冲' },
-    { label: $t('recipe.stopperAxisInit'), value: r.stopperAxisInit, unit: '脉冲' },
-    { label: $t('recipe.stopperAxisPrePress'), value: r.stopperAxisPrePress, unit: '脉冲' },
-    { label: $t('recipe.stopperAxisReach'), value: r.stopperAxisReach, unit: '脉冲' }
-  ]
-})
+    {
+      label: $t("menu.production.recipe.page.fillAngle"),
+      value: r.fillAngle,
+      unit: "度",
+    },
+    {
+      label: $t("menu.production.recipe.page.suckBackAngle"),
+      value: r.suckBackAngle,
+      unit: "度",
+    },
+    {
+      label: $t("menu.production.recipe.page.fillAxisInit"),
+      value: r.fillAxisInit,
+      unit: "脉冲",
+    },
+    {
+      label: $t("menu.production.recipe.page.fillAxisReach"),
+      value: r.fillAxisReach,
+      unit: "脉冲",
+    },
+    {
+      label: $t("menu.production.recipe.page.fixAxisInit"),
+      value: r.fixAxisInit,
+      unit: "脉冲",
+    },
+    {
+      label: $t("menu.production.recipe.page.fixAxisReach"),
+      value: r.fixAxisReach,
+      unit: "脉冲",
+    },
+    {
+      label: $t("menu.production.recipe.page.fixAxisPreLift"),
+      value: r.fixAxisPreLift,
+      unit: "脉冲",
+    },
+    {
+      label: $t("menu.production.recipe.page.stopperAxisInit"),
+      value: r.stopperAxisInit,
+      unit: "脉冲",
+    },
+    {
+      label: $t("menu.production.recipe.page.stopperAxisPrePress"),
+      value: r.stopperAxisPrePress,
+      unit: "脉冲",
+    },
+    {
+      label: $t("menu.production.recipe.page.stopperAxisReach"),
+      value: r.stopperAxisReach,
+      unit: "脉冲",
+    },
+  ];
+});
 
 // 速度参数列表
 const speedParams = computed(() => {
-  const r = currentRecipe.value
-  if (!r) return []
+  const r = currentRecipe.value;
+  if (!r) return [];
   return [
-    { label: $t('recipe.fillAxisInitSpeed'), value: r.fillAxisInitSpeed, unit: '脉冲/s' },
-    { label: $t('recipe.fillAxisReachSpeed'), value: r.fillAxisReachSpeed, unit: '脉冲/s' },
-    { label: $t('recipe.fixAxisInitSpeed'), value: r.fixAxisInitSpeed, unit: '脉冲/s' },
-    { label: $t('recipe.fixAxisReachSpeed'), value: r.fixAxisReachSpeed, unit: '脉冲/s' },
-    { label: $t('recipe.fixAxisPreLiftSpeed'), value: r.fixAxisPreLiftSpeed, unit: '脉冲/s' },
-    { label: $t('recipe.stopperAxisInitSpeed'), value: r.stopperAxisInitSpeed, unit: '脉冲/s' },
-    { label: $t('recipe.stopperAxisPrePressSpeed'), value: r.stopperAxisPrePressSpeed, unit: '脉冲/s' },
-    { label: $t('recipe.stopperAxisReachSpeed'), value: r.stopperAxisReachSpeed, unit: '脉冲/s' }
-  ]
-})
+    {
+      label: $t("menu.production.recipe.page.fillAxisInitSpeed"),
+      value: r.fillAxisInitSpeed,
+      unit: "脉冲/s",
+    },
+    {
+      label: $t("menu.production.recipe.page.fillAxisReachSpeed"),
+      value: r.fillAxisReachSpeed,
+      unit: "脉冲/s",
+    },
+    {
+      label: $t("menu.production.recipe.page.fixAxisInitSpeed"),
+      value: r.fixAxisInitSpeed,
+      unit: "脉冲/s",
+    },
+    {
+      label: $t("menu.production.recipe.page.fixAxisReachSpeed"),
+      value: r.fixAxisReachSpeed,
+      unit: "脉冲/s",
+    },
+    {
+      label: $t("menu.production.recipe.page.fixAxisPreLiftSpeed"),
+      value: r.fixAxisPreLiftSpeed,
+      unit: "脉冲/s",
+    },
+    {
+      label: $t("menu.production.recipe.page.stopperAxisInitSpeed"),
+      value: r.stopperAxisInitSpeed,
+      unit: "脉冲/s",
+    },
+    {
+      label: $t("menu.production.recipe.page.stopperAxisPrePressSpeed"),
+      value: r.stopperAxisPrePressSpeed,
+      unit: "脉冲/s",
+    },
+    {
+      label: $t("menu.production.recipe.page.stopperAxisReachSpeed"),
+      value: r.stopperAxisReachSpeed,
+      unit: "脉冲/s",
+    },
+  ];
+});
 
 // 导出列配置
 const exportColumns = computed(() => [
-  { label: $t('recipe.recipeCode'), prop: 'code', width: 120 },
-  { label: $t('recipe.recipeName'), prop: 'name', width: 140 },
-  { label: $t('recipe.productType'), prop: 'productType', width: 100 },
-  { label: $t('recipe.fillVolume'), prop: 'fillVolume', width: 80 },
-  { label: $t('recipe.fillAngle'), prop: 'fillAngle', width: 80 },
-  { label: $t('recipe.suckBackAngle'), prop: 'suckBackAngle', width: 80 },
-  { label: $t('recipe.fillSpeed'), prop: 'fillSpeed', width: 80 },
-  { label: $t('recipe.usageCount'), prop: 'usageCount', width: 80 },
-  { label: $t('recipe.faultRate'), prop: 'faultRate', width: 80 },
-  { label: $t('recipe.avgQualifiedRate'), prop: 'avgQualifiedRate', width: 100 }
-])
+  {
+    label: $t("menu.production.recipe.page.recipeCode"),
+    prop: "code",
+    width: 120,
+  },
+  {
+    label: $t("menu.production.recipe.page.recipeName"),
+    prop: "name",
+    width: 140,
+  },
+  {
+    label: $t("menu.production.recipe.page.productType"),
+    prop: "productType",
+    width: 100,
+  },
+  {
+    label: $t("menu.production.recipe.page.fillVolume"),
+    prop: "fillVolume",
+    width: 80,
+  },
+  {
+    label: $t("menu.production.recipe.page.fillAngle"),
+    prop: "fillAngle",
+    width: 80,
+  },
+  {
+    label: $t("menu.production.recipe.page.suckBackAngle"),
+    prop: "suckBackAngle",
+    width: 80,
+  },
+  {
+    label: $t("menu.production.recipe.page.fillSpeed"),
+    prop: "fillSpeed",
+    width: 80,
+  },
+  {
+    label: $t("menu.production.recipe.page.usageCount"),
+    prop: "usageCount",
+    width: 80,
+  },
+  {
+    label: $t("menu.production.recipe.page.faultRate"),
+    prop: "faultRate",
+    width: 80,
+  },
+  {
+    label: $t("menu.production.recipe.page.avgQualifiedRate"),
+    prop: "avgQualifiedRate",
+    width: 100,
+  },
+]);
 
 // 当前用户名（导出人）
-const exporter = computed(() => store?.state?.user?.userInfo?.username || 'admin')
+const exporter = computed(
+  () => store?.state?.user?.userInfo?.username || "admin"
+);
 
 // PDF水印设置（从系统配置读取）
-const pdfWatermark = computed(() => getConfig('pdfWatermarkEnabled', true))
-const pdfWatermarkText = computed(() => getConfig('pdfWatermarkText', '') || exporter.value)
+const pdfWatermark = computed(() => getConfig("pdfWatermarkEnabled", true));
+const pdfWatermarkText = computed(
+  () => getConfig("pdfWatermarkText", "") || exporter.value
+);
 
 // ===== 方法 =====
 function selectRecipe(id) {
-  selectedId.value = id
+  selectedId.value = id;
 }
 
 // 下载单个配方
@@ -262,13 +501,13 @@ function handleDownloadSingle(format, recipe) {
   exportTable({
     data: [recipe],
     columns: exportColumns.value,
-    title: `${$t('recipe.recipe')} - ${recipe.name}`,
-    filename: `${$t('recipe.recipe')}_${recipe.name}`,
+    title: `${$t("menu.production.recipe.page.recipe")} - ${recipe.name}`,
+    filename: `${$t("menu.production.recipe.page.recipe")}_${recipe.name}`,
     format,
     exporter: exporter.value,
     watermark: pdfWatermark.value,
-    watermarkText: pdfWatermarkText.value
-  })
+    watermarkText: pdfWatermarkText.value,
+  });
 }
 
 // 下载全部配方
@@ -276,15 +515,14 @@ function handleDownloadAll(format) {
   exportTable({
     data: recipeList.value,
     columns: exportColumns.value,
-    title: $t('recipe.recipeList'),
-    filename: $t('recipe.recipeList'),
+    title: $t("menu.production.recipe.page.recipeList"),
+    filename: $t("menu.production.recipe.page.recipeList"),
     format,
     exporter: exporter.value,
     watermark: pdfWatermark.value,
-    watermarkText: pdfWatermarkText.value
-  })
+    watermarkText: pdfWatermarkText.value,
+  });
 }
-
 </script>
 
 <style scoped lang="less">
@@ -336,18 +574,18 @@ function handleDownloadAll(format) {
     margin-bottom: 12px;
     cursor: pointer;
     border: 1px solid #ebeef5;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     transition: all 0.2s;
 
     &:hover {
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
       transform: translateY(-1px);
       border-color: #dcdfe6;
     }
 
     &.active {
       border-color: #409eff;
-      box-shadow: 0 2px 12px rgba(64,158,255,0.2);
+      box-shadow: 0 2px 12px rgba(64, 158, 255, 0.2);
       background: linear-gradient(135deg, #f0f7ff 0%, #fff 100%);
     }
 
@@ -413,15 +651,20 @@ function handleDownloadAll(format) {
       color: #fff;
       font-size: 12px;
       z-index: 10;
-      box-shadow: 0 2px 8px rgba(64,158,255,0.4);
+      box-shadow: 0 2px 8px rgba(64, 158, 255, 0.4);
       animation: connectorPulse 2s infinite;
     }
   }
 }
 
 @keyframes connectorPulse {
-  0%, 100% { box-shadow: 0 2px 8px rgba(64,158,255,0.4); }
-  50% { box-shadow: 0 2px 16px rgba(64,158,255,0.7); }
+  0%,
+  100% {
+    box-shadow: 0 2px 8px rgba(64, 158, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 2px 16px rgba(64, 158, 255, 0.7);
+  }
 }
 
 // 中间视觉分隔条
@@ -437,7 +680,13 @@ function handleDownloadAll(format) {
   .divider-line {
     flex: 1;
     width: 2px;
-    background: linear-gradient(180deg, transparent 0%, #dcdfe6 20%, #dcdfe6 80%, transparent 100%);
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      #dcdfe6 20%,
+      #dcdfe6 80%,
+      transparent 100%
+    );
   }
 
   .divider-badge {
@@ -451,14 +700,19 @@ function handleDownloadAll(format) {
     color: #fff;
     font-size: 16px;
     margin: 12px 0;
-    box-shadow: 0 4px 12px rgba(64,158,255,0.3);
+    box-shadow: 0 4px 12px rgba(64, 158, 255, 0.3);
     animation: badgeFloat 3s ease-in-out infinite;
   }
 }
 
 @keyframes badgeFloat {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(4px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
 }
 
 // 右侧详情
@@ -637,10 +891,18 @@ function handleDownloadAll(format) {
           color: #fff;
           flex-shrink: 0;
 
-          &.blue { background: linear-gradient(135deg, #409eff, #66b1ff); }
-          &.green { background: linear-gradient(135deg, #67c23a, #85ce61); }
-          &.red { background: linear-gradient(135deg, #f56c6c, #f78989); }
-          &.orange { background: linear-gradient(135deg, #e6a23c, #ebb563); }
+          &.blue {
+            background: linear-gradient(135deg, #409eff, #66b1ff);
+          }
+          &.green {
+            background: linear-gradient(135deg, #67c23a, #85ce61);
+          }
+          &.red {
+            background: linear-gradient(135deg, #f56c6c, #f78989);
+          }
+          &.orange {
+            background: linear-gradient(135deg, #e6a23c, #ebb563);
+          }
         }
 
         .analysis-content {

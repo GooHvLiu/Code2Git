@@ -28,6 +28,7 @@ export const CODE_UNAUTHORIZED = 10101       // 未登录/未授权
 export const CODE_TOKEN_EXPIRED = 10102      // Token已过期
 export const CODE_TOKEN_INVALID = 10103      // Token无效
 export const CODE_PERMISSION_DENIED = 10104  // 权限不足，拒绝访问
+export const CODE_TOKEN_KICKED_OUT = 10105   // Token被踢下线（在其他设备登录）
 
 // ==================== 资源不存在 ====================
 export const CODE_NOT_FOUND = 10404           // 接口/资源不存在
@@ -47,6 +48,7 @@ export const CODE_USER_ALREADY_EXIST = 20002  // 用户已存在
 export const CODE_USER_PASSWORD_ERROR = 20003 // 密码错误
 export const CODE_USER_DISABLED = 20004       // 用户已被禁用
 export const CODE_USER_REGISTER_FAIL = 20005  // 用户注册失败
+export const CODE_DEVICE_LIMIT_EXCEEDED = 20006 // 在线设备数已达上限
 
 // ==================== 设备模块 30xxx ====================
 export const CODE_DEVICE_NOT_EXIST = 30001       // 设备不存在
@@ -87,7 +89,8 @@ export const CODE_GITHUB_API_ERROR = 70104           // Github接口调用异常
 export const TOKEN_AUTO_REDIRECT_CODES = [
   CODE_UNAUTHORIZED,
   CODE_TOKEN_EXPIRED,
-  CODE_TOKEN_INVALID
+  CODE_TOKEN_INVALID,
+  CODE_TOKEN_KICKED_OUT
 ]
 
 /** 不需要 token 的接口白名单 */

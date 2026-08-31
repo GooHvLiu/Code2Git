@@ -70,6 +70,12 @@ module.exports = defineConfig({
     port: process.env.VUE_APP_PORT || 8082,
     // 允许局域网其他设备访问
     host: '0.0.0.0',
+    // 修改 webpack 热更新 WebSocket 路径，避免和业务 WebSocket 的 /ws 冲突
+    client: {
+      webSocketURL: {
+        pathname: '/sockjs-node'
+      }
+    },
     // 代理配置
     proxy: {
       // 代理前缀从环境变量读取
@@ -77,6 +83,12 @@ module.exports = defineConfig({
         // 后端真实地址从环境变量读取
         target: process.env.VUE_APP_PROXY_TARGET || 'http://127.0.0.1:3002',
         changeOrigin: true
+      },
+      // WebSocket 代理
+      '/ws-api': {
+        target: process.env.VUE_APP_PROXY_TARGET || 'http://127.0.0.1:3002',
+        changeOrigin: true,
+        ws: true
       }
     }
   },

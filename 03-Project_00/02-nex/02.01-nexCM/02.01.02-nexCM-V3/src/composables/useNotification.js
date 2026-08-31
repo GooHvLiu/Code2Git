@@ -28,8 +28,9 @@
  *   unreadCount, fetchUnreadCount
  * } = useNotification()
  */
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, onUnmounted } from 'vue'
 import store from '@/store'
+import ws from '@/utils/websocket'
 import {
   requestGetNotificationListApi,
   requestGetUnreadCountApi,
@@ -450,6 +451,40 @@ export function useNotification(options = {}) {
   if (options.autoFetchUnreadCount !== false) {
     fetchUnreadCount()
   }
+
+  // ==================== WebSocket 已读同步 ====================
+  // 监听其他设备标记已读的消息，实时同步本地列表状态
+  function handleWsNotificationRead(data) {
+    if (!data) return
+    // 更新未读数量为最新值
+    if (data.unreadCount !== undefined) {
+      unreadCount.value = data.unreadCount
+      store.commit('notification/SET_UNREAD_COUNT', data.unreadCount)
+    }
+    // 更新本地通知列表的已读状态
+    if (data.markAll) {
+      // 全部标记已读
+      list.value.forEach(item => {
+        item.is_read = 1
+      })
+    } else if (data.notificationIds && data.notificationIds.length > 0) {
+      // 批量标记已读
+      const idSet = new Set(data.notificationIds)
+      list.value.forEach(item => {
+        if (idSet.has(item.id)) {
+          item.is_read = 1
+        }
+      })
+    }
+  }
+
+  // 注册 WebSocket 监听
+  ws.on('notification_read', handleWsNotificationRead)
+
+  // 组件卸载时取消监听
+  onUnmounted(() => {
+    ws.off('notification_read', handleWsNotificationRead)
+  })
 
   return {
     // 列表数据

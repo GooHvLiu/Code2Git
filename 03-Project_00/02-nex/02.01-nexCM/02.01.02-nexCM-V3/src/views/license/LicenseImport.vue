@@ -6,20 +6,44 @@
       <!-- 左侧：品牌信息 -->
       <div class="brand-panel">
         <div class="brand-logo">🔐</div>
-        <h1 class="brand-title">{{ $t("license.brandTitle") }}</h1>
-        <p class="brand-desc">{{ $t("license.brandDesc") }}</p>
+        <h1 class="brand-title">
+          {{
+            $t(
+              "menu.system.config.childrenMenu.license.licenseManager.brandTitle"
+            )
+          }}
+        </h1>
+        <p class="brand-desc">
+          {{
+            $t(
+              "menu.system.config.childrenMenu.license.licenseManager.brandDesc"
+            )
+          }}
+        </p>
         <div class="brand-features">
           <div class="feature-item">
             <i class="el-icon-lock"></i>
-            <span>{{ $t("license.featureRsa") }}</span>
+            <span>{{
+              $t(
+                "menu.system.config.childrenMenu.license.licenseManager.featureRsa"
+              )
+            }}</span>
           </div>
           <div class="feature-item">
             <i class="el-icon-time"></i>
-            <span>{{ $t("license.featureTimeGuard") }}</span>
+            <span>{{
+              $t(
+                "menu.system.config.childrenMenu.license.licenseManager.featureTimeGuard"
+              )
+            }}</span>
           </div>
           <div class="feature-item">
             <i class="el-icon-monitor"></i>
-            <span>{{ $t("license.featureMachineBind") }}</span>
+            <span>{{
+              $t(
+                "menu.system.config.childrenMenu.license.licenseManager.featureMachineBind"
+              )
+            }}</span>
           </div>
         </div>
       </div>
@@ -28,7 +52,11 @@
       <div class="form-panel">
         <h2 class="form-title">
           <i class="el-icon-document-checked"></i>
-          {{ $t("license.importFormTitle") }}
+          {{
+            $t(
+              "menu.system.config.childrenMenu.license.licenseManager.importFormTitle"
+            )
+          }}
         </h2>
 
         <!-- 当前授权状态 -->
@@ -51,14 +79,20 @@
             <div class="status-label">
               {{
                 licenseStatus?.valid
-                  ? $t("license.statusValid")
-                  : $t("license.statusInvalid")
+                  ? $t(
+                      "menu.system.config.childrenMenu.license.licenseManager.statusValid"
+                    )
+                  : $t(
+                      "menu.system.config.childrenMenu.license.licenseManager.statusInvalid"
+                    )
               }}
             </div>
             <div v-if="licenseStatus?.valid" class="status-detail">
-              {{ $t("license.expireTime") }}：{{
-                formatTime(licenseStatus.expiresAt)
-              }}
+              {{
+                $t(
+                  "menu.system.config.childrenMenu.license.licenseManager.expireTime"
+                )
+              }}：{{ formatTime(licenseStatus.expiresAt) }}
             </div>
             <div v-else class="status-detail error">
               {{ formatLicenseReason(licenseStatus?.reason) }}
@@ -71,7 +105,9 @@
           <div class="machine-id-header">
             <i class="el-icon-cpu"></i>
             <span class="machine-id-title">{{
-              $t("license.currentMachineId")
+              $t(
+                "menu.system.config.childrenMenu.license.licenseManager.currentMachineId"
+              )
             }}</span>
           </div>
           <div class="machine-id-content">
@@ -85,12 +121,20 @@
               @click="copyMachineId"
               :loading="copyingMachineId"
             >
-              {{ $t("license.copy") }}
+              {{
+                $t(
+                  "menu.system.config.childrenMenu.license.licenseManager.copy"
+                )
+              }}
             </el-button>
           </div>
           <div class="machine-id-tip">
             <i class="el-icon-info"></i>
-            <span>{{ $t("license.machineIdTip") }}</span>
+            <span>{{
+              $t(
+                "menu.system.config.childrenMenu.license.licenseManager.machineIdTip"
+              )
+            }}</span>
           </div>
         </div>
 
@@ -106,10 +150,18 @@
         >
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">
-            {{ $t("license.dragUploadTip") }}
+            {{
+              $t(
+                "menu.system.config.childrenMenu.license.licenseManager.dragUploadTip"
+              )
+            }}
           </div>
           <div class="el-upload__tip" slot="tip">
-            {{ $t("license.fileSizeTip") }}
+            {{
+              $t(
+                "menu.system.config.childrenMenu.license.licenseManager.fileSizeTip"
+              )
+            }}
           </div>
         </el-upload>
 
@@ -128,7 +180,11 @@
             type="text"
             icon="el-icon-close"
             @click="clearSelectedFile"
-            >{{ $t("license.remove") }}</el-button
+            >{{
+              $t(
+                "menu.system.config.childrenMenu.license.licenseManager.remove"
+              )
+            }}</el-button
           >
         </div>
 
@@ -136,7 +192,11 @@
         <div v-if="importedLicense" class="license-info-card">
           <div class="info-header">
             <i class="el-icon-circle-check"></i>
-            <span>{{ $t("license.importSuccessTitle") }}</span>
+            <span>{{
+              $t(
+                "menu.system.config.childrenMenu.license.licenseManager.importSuccessTitle"
+              )
+            }}</span>
           </div>
           <el-descriptions :column="1" size="small" border>
             <el-descriptions-item :label="$t('license.licenseId')">{{
@@ -155,7 +215,10 @@
               formatTime(importedLicense.expiresAt)
             }}</el-descriptions-item>
             <el-descriptions-item :label="$t('license.maxUsers')">{{
-              importedLicense.maxUsers || $t("license.unlimited")
+              importedLicense.maxUsers ||
+              $t(
+                "menu.system.config.childrenMenu.license.licenseManager.unlimited"
+              )
             }}</el-descriptions-item>
           </el-descriptions>
         </div>
@@ -170,7 +233,11 @@
             @click="handleImport"
           >
             <i class="el-icon-upload2"></i>
-            {{ $t("license.importLicense") }}
+            {{
+              $t(
+                "menu.system.config.childrenMenu.license.licenseManager.importLicense"
+              )
+            }}
           </el-button>
           <el-button
             v-if="importedLicense"
@@ -179,11 +246,19 @@
             @click="handleGoHome"
           >
             <i class="el-icon-house"></i>
-            {{ $t("license.enterSystem") }}
+            {{
+              $t(
+                "menu.system.config.childrenMenu.license.licenseManager.enterSystem"
+              )
+            }}
           </el-button>
           <el-button size="medium" @click="handleRefreshStatus">
             <i class="el-icon-refresh"></i>
-            {{ $t("license.refreshStatus") }}
+            {{
+              $t(
+                "menu.system.config.childrenMenu.license.licenseManager.refreshStatus"
+              )
+            }}
           </el-button>
         </div>
       </div>
@@ -192,25 +267,25 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { Message } from 'element-ui'
+import { ref, onMounted } from "vue";
+import { Message } from "element-ui";
 import { getLicenseStatus, importLicense } from "@/api";
 import { ROUTE_PATHS } from "@/router/constant/pathConstants";
 import { resetLicenseCache } from "@/router/permission";
-import store from '@/store'
-import router from '@/router'
-import { useI18n } from '@/composables/useI18n'
+import store from "@/store";
+import router from "@/router";
+import { useI18n } from "@/composables/useI18n";
 
-const { t: $t } = useI18n()
+const { t: $t } = useI18n();
 
 // ===== 响应式数据 =====
-const licenseStatus = ref(null)
-const selectedFile = ref(null)
-const importing = ref(false)
-const importedLicense = ref(null)
-const currentMachineId = ref('')
-const copyingMachineId = ref(false)
-const statusLoading = ref(true)
+const licenseStatus = ref(null);
+const selectedFile = ref(null);
+const importing = ref(false);
+const importedLicense = ref(null);
+const currentMachineId = ref("");
+const copyingMachineId = ref(false);
+const statusLoading = ref(true);
 
 // ===== 方法 =====
 /**
@@ -226,7 +301,9 @@ async function loadStatus() {
   } catch (e) {
     licenseStatus.value = {
       valid: false,
-      reason: $t("license.cannotGetStatus"),
+      reason: $t(
+        "menu.system.config.childrenMenu.license.licenseManager.cannotGetStatus"
+      ),
     };
   } finally {
     statusLoading.value = false;
@@ -271,7 +348,11 @@ function formatFileSize(bytes) {
  */
 async function handleImport() {
   if (!selectedFile.value) {
-    Message.warning($t("license.pleaseSelectFile"));
+    Message.warning(
+      $t(
+        "menu.system.config.childrenMenu.license.licenseManager.pleaseSelectFile"
+      )
+    );
     return;
   }
 
@@ -279,7 +360,9 @@ async function handleImport() {
   try {
     const res = await importLicense(selectedFile.value);
     importedLicense.value = res.data;
-    Message.success($t("license.importSuccess"));
+    Message.success(
+      $t("menu.system.config.childrenMenu.license.licenseManager.importSuccess")
+    );
     // 重置授权缓存，下次路由跳转时重新检查
     resetLicenseCache();
     // 刷新状态
@@ -308,12 +391,15 @@ function handleGoHome() {
  * 格式化时间
  */
 function formatTime(timestamp) {
-  if (!timestamp) return $t("license.permanentValid");
+  if (!timestamp)
+    return $t(
+      "menu.system.config.childrenMenu.license.licenseManager.permanentValid"
+    );
   const d = new Date(timestamp);
   const pad = (n) => String(n).padStart(2, "0");
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(
-    d.getDate()
-  )} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(
+    d.getHours()
+  )}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 }
 
 /**
@@ -321,10 +407,18 @@ function formatTime(timestamp) {
  */
 function licenseTypeLabel(type) {
   const map = {
-    trial: $t("license.typeTrial"),
-    standard: $t("license.typeStandard"),
-    enterprise: $t("license.typeEnterprise"),
-    perpetual: $t("license.typePerpetual"),
+    trial: $t(
+      "menu.system.config.childrenMenu.license.licenseManager.typeTrial"
+    ),
+    standard: $t(
+      "menu.system.config.childrenMenu.license.licenseManager.typeStandard"
+    ),
+    enterprise: $t(
+      "menu.system.config.childrenMenu.license.licenseManager.typeEnterprise"
+    ),
+    perpetual: $t(
+      "menu.system.config.childrenMenu.license.licenseManager.typePerpetual"
+    ),
   };
   return map[type] || type;
 }
@@ -334,28 +428,45 @@ function licenseTypeLabel(type) {
  * 根据后端返回的中文 reason 关键词，映射成国际化文案
  */
 function formatLicenseReason(reason) {
-  if (!reason) return $t("license.reasonUnknown");
+  if (!reason)
+    return $t(
+      "menu.system.config.childrenMenu.license.licenseManager.reasonUnknown"
+    );
   // 根据关键词匹配
   if (reason.includes("不存在") || reason.includes("验证失败")) {
-    return $t("license.reasonFileNotFound");
+    return $t(
+      "menu.system.config.childrenMenu.license.licenseManager.reasonFileNotFound"
+    );
   }
   if (reason.includes("项目不匹配")) {
-    return $t("license.reasonProjectMismatch");
+    return $t(
+      "menu.system.config.childrenMenu.license.licenseManager.reasonProjectMismatch"
+    );
   }
   if (reason.includes("机器不匹配") || reason.includes("硬件绑定")) {
-    return $t("license.reasonMachineMismatch");
+    return $t(
+      "menu.system.config.childrenMenu.license.licenseManager.reasonMachineMismatch"
+    );
   }
   if (reason.includes("已过期")) {
-    return $t("license.reasonExpired");
+    return $t(
+      "menu.system.config.childrenMenu.license.licenseManager.reasonExpired"
+    );
   }
   if (reason.includes("缺少功能") || reason.includes("功能授权")) {
-    return $t("license.reasonMissingFeatures");
+    return $t(
+      "menu.system.config.childrenMenu.license.licenseManager.reasonMissingFeatures"
+    );
   }
   if (reason.includes("时间回退") || reason.includes("回退")) {
-    return $t("license.reasonTimeRollback");
+    return $t(
+      "menu.system.config.childrenMenu.license.licenseManager.reasonTimeRollback"
+    );
   }
   if (reason.includes("联网校准失败") || reason.includes("校准失败")) {
-    return $t("license.reasonNetworkSyncFailed");
+    return $t(
+      "menu.system.config.childrenMenu.license.licenseManager.reasonNetworkSyncFailed"
+    );
   }
   // 未知原因，返回原文
   return reason;
@@ -376,9 +487,13 @@ async function copyMachineId() {
     textarea.select();
     document.execCommand("copy");
     document.body.removeChild(textarea);
-    Message.success($t("license.copySuccess"));
+    Message.success(
+      $t("menu.system.config.childrenMenu.license.licenseManager.copySuccess")
+    );
   } catch (e) {
-    Message.error($t("license.copyFailed"));
+    Message.error(
+      $t("menu.system.config.childrenMenu.license.licenseManager.copyFailed")
+    );
   } finally {
     copyingMachineId.value = false;
   }
@@ -387,7 +502,7 @@ async function copyMachineId() {
 // ===== 生命周期 =====
 onMounted(() => {
   loadStatus();
-})
+});
 </script>
 
 <style lang="less" scoped>
