@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 审计日志模块 - 业务逻辑层
  *
  * GMP 21CFR Part 11 电子记录合规
@@ -130,7 +130,7 @@ class AuditService extends BaseService {
    * @throws {BusinessError} 审计日志不允许修改
    */
   async update() {
-    throw new BusinessError(ERROR_CODE.AUDIT_NOT_MODIFIABLE, '审计日志不允许修改')
+    throw new BusinessError(ERROR_CODE.AUDIT_NOT_MODIFIABLE, null)
   }
 
   /**
@@ -141,7 +141,7 @@ class AuditService extends BaseService {
    * @throws {BusinessError} 审计日志不允许删除
    */
   async delete() {
-    throw new BusinessError(ERROR_CODE.AUDIT_NOT_DELETABLE, '审计日志不允许删除')
+    throw new BusinessError(ERROR_CODE.AUDIT_NOT_DELETABLE, null)
   }
 
   /**
@@ -152,7 +152,7 @@ class AuditService extends BaseService {
    * @throws {BusinessError} 审计日志不允许删除
    */
   async batchDelete() {
-    throw new BusinessError(ERROR_CODE.AUDIT_NOT_DELETABLE, '审计日志不允许删除')
+    throw new BusinessError(ERROR_CODE.AUDIT_NOT_DELETABLE, null)
   }
 }
 

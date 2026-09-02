@@ -1,14 +1,50 @@
-﻿<template>
+<template>
   <div class="part-life-page">
+    <!-- 顶部操作栏 -->
+    <div class="page-toolbar">
+      <div class="toolbar-left">
+        <el-input
+          v-model="searchKeyword"
+          :placeholder="$t('menu.device.part.page.searchPlaceholder')"
+          clearable
+          style="width: 280px"
+          @clear="loadPartList"
+          @keyup.enter.native="loadPartList"
+        >
+          <el-button
+            slot="append"
+            icon="el-icon-search"
+            @click="loadPartList"
+          ></el-button>
+        </el-input>
+      </div>
+      <div class="toolbar-right">
+        <el-button
+          v-permission="'device:part:add'"
+          type="primary"
+          icon="el-icon-plus"
+          @click="handleAdd"
+          >{{ $t("menu.device.part.page.addBtn") }}</el-button
+        >
+        <el-button icon="el-icon-refresh" @click="loadPartList">{{
+          $t("menu.device.part.page.refreshBtn")
+        }}</el-button>
+      </div>
+    </div>
+
     <!-- 顶部概览卡片 -->
     <el-row :gutter="12" class="overview-row">
-      <el-col :span="6" v-for="(part, index) in parts" :key="index">
+      <el-col
+        :span="6"
+        v-for="(part, index) in filteredParts"
+        :key="part.id || index"
+      >
         <div class="part-card" :class="getPartStatus(part)">
           <div class="card-header">
             <div class="part-icon"><i :class="part.icon"></i></div>
             <div class="part-info">
-              <div class="part-name">{{ part.name }}</div>
-              <div class="part-code">{{ part.code }}</div>
+              <div class="part-name">{{ getPartDisplayName(part) }}</div>
+              <div class="part-code">{{ part.part_code || part.code }}</div>
             </div>
             <el-tag
               :type="getPartStatusTag(part)"
@@ -20,24 +56,36 @@
           <div class="card-body">
             <div class="life-info">
               <div class="life-item">
-                <span class="life-label">已使用</span>
+                <span class="life-label">{{
+                  $t("menu.device.part.page.form.usedLife")
+                }}</span>
                 <span class="life-value"
-                  >{{ part.used
-                  }}<span class="life-unit">{{ part.unit }}</span></span
+                  >{{ part.used_life || part.used
+                  }}<span class="life-unit">{{
+                    $t("menu.device.part.page.unit.times")
+                  }}</span></span
                 >
               </div>
               <div class="life-item">
-                <span class="life-label">额定寿命</span>
+                <span class="life-label">{{
+                  $t("menu.device.part.page.form.ratedLife")
+                }}</span>
                 <span class="life-value"
-                  >{{ part.total
-                  }}<span class="life-unit">{{ part.unit }}</span></span
+                  >{{ part.rated_life || part.total
+                  }}<span class="life-unit">{{
+                    $t("menu.device.part.page.unit.times")
+                  }}</span></span
                 >
               </div>
               <div class="life-item">
-                <span class="life-label">剩余</span>
+                <span class="life-label">{{
+                  $t("menu.device.part.page.message.remaining")
+                }}</span>
                 <span class="life-value" :class="getRemainingClass(part)"
-                  >{{ part.total - part.used
-                  }}<span class="life-unit">{{ part.unit }}</span></span
+                  >{{ getRemaining(part)
+                  }}<span class="life-unit">{{
+                    $t("menu.device.part.page.unit.times")
+                  }}</span></span
                 >
               </div>
             </div>
@@ -45,52 +93,75 @@
               <div class="progress-bar">
                 <div
                   class="progress-fill"
-                  :style="{ width: (part.used / part.total) * 100 + '%' }"
+                  :style="{ width: getLifePercent(part) + '%' }"
                   :class="getPartStatus(part)"
                 ></div>
               </div>
               <div class="progress-text">
-                {{ ((part.used / part.total) * 100).toFixed(1) }}%
+                {{ getLifePercent(part).toFixed(1) }}%
               </div>
             </div>
             <div class="card-footer">
-              <span class="install-date">安装日期：{{ part.installDate }}</span>
-              <el-button
-                v-permission="'device:part:operate'"
-                type="text"
-                size="small"
-                @click="handleReplace(part)"
-                >更换录入</el-button
+              <span class="install-date"
+                >{{ $t("menu.device.part.page.form.installDate") }}：{{
+                  part.install_date || part.installDate
+                    ? formatDate(part.install_date || part.installDate, getGlobalDateFormat())
+                    : "-"
+                }}</span
               >
+              <div class="card-actions">
+                <el-button
+                  v-permission="'device:part:edit'"
+                  type="text"
+                  size="small"
+                  @click="handleEdit(part)"
+                  >{{ $t("menu.device.part.page.editBtn") }}</el-button
+                >
+                <el-button
+                  v-permission="'device:part:operate'"
+                  type="text"
+                  size="small"
+                  @click="handleReplace(part)"
+                  >{{ $t("menu.device.part.page.replaceBtn") }}</el-button
+                >
+                <el-button
+                  v-permission="'device:part:delete'"
+                  type="text"
+                  size="small"
+                  class="delete-btn"
+                  @click="handleDelete(part)"
+                  >{{ $t("menu.device.part.page.deleteBtn") }}</el-button
+                >
+              </div>
             </div>
           </div>
         </div>
       </el-col>
     </el-row>
 
+    <!-- 空数据提示 -->
+    <div v-if="filteredParts.length === 0 && !loading" class="empty-tip">
+      <i class="el-icon-box"></i>
+      <p>{{ $t("menu.device.part.page.message.noData") }}</p>
+    </div>
+
     <!-- 详细信息 + 更换记录 -->
-    <el-row :gutter="12" class="detail-row">
+    <el-row :gutter="12" class="detail-row" v-if="filteredParts.length > 0">
       <!-- 部件详细列表 -->
       <el-col :span="14">
         <div class="panel">
           <div class="panel-header">
             <span class="panel-title"
-              ><i class="el-icon-s-tools"></i> 部件详细信息</span
-            >
-            <el-button
-              v-permission="'device:part:operate'"
-              type="primary"
-              size="small"
-              icon="el-icon-plus"
-              @click="handleAddReplace"
-              >批量更换录入</el-button
+              ><i class="el-icon-s-tools"></i>
+              {{ $t("menu.device.part.page.title") }}</span
             >
           </div>
           <div class="panel-body">
             <el-table
-              :data="parts"
+              :data="filteredParts"
               border
               stripe
+              v-loading="loading"
               :header-cell-style="{
                 background: '#f5f7fa',
                 color: '#606266',
@@ -100,8 +171,7 @@
               style="width: 100%"
             >
               <el-table-column
-                prop="name"
-                label="部件名称"
+                :label="$t('menu.device.part.page.form.partName')"
                 width="120"
                 align="center"
               >
@@ -110,49 +180,68 @@
                     :class="scope.row.icon"
                     style="margin-right: 6px; color: #409eff"
                   ></i>
-                  {{ scope.row.name }}
+                  {{ getPartDisplayName(scope.row) }}
                 </template>
               </el-table-column>
               <el-table-column
-                prop="code"
-                label="部件编码"
+                :label="$t('menu.device.part.page.form.partCode')"
                 width="140"
                 align="center"
-              />
+              >
+                <template slot-scope="scope">
+                  {{ scope.row.part_code || scope.row.code }}
+                </template>
+              </el-table-column>
               <el-table-column
-                prop="spec"
-                label="规格型号"
+                :label="$t('menu.device.part.page.form.specModel')"
                 width="120"
                 align="center"
-              />
-              <el-table-column label="寿命进度" min-width="180">
+              >
+                <template slot-scope="scope">
+                  {{ scope.row.spec_model || scope.row.spec || "-" }}
+                </template>
+              </el-table-column>
+              <el-table-column
+                :label="$t('menu.device.part.page.table.lifeProgress')"
+                min-width="180"
+              >
                 <template slot-scope="scope">
                   <div class="table-progress">
                     <div class="tp-bar">
                       <div
                         class="tp-fill"
                         :style="{
-                          width: (scope.row.used / scope.row.total) * 100 + '%',
+                          width: getLifePercent(scope.row) + '%',
                         }"
                         :class="getPartStatus(scope.row)"
                       ></div>
                     </div>
                     <span class="tp-text"
-                      >{{ scope.row.used }}/{{ scope.row.total }}
-                      {{ scope.row.unit }}</span
+                      >{{ scope.row.used_life || scope.row.used }}/{{
+                        scope.row.rated_life || scope.row.total
+                      }}
+                      {{ $t("menu.device.part.page.unit.times") }}</span
                     >
                   </div>
                 </template>
               </el-table-column>
-              <el-table-column label="剩余寿命" width="110" align="center">
+              <el-table-column
+                :label="$t('menu.device.part.page.table.remainingLife')"
+                width="110"
+                align="center"
+              >
                 <template slot-scope="scope">
                   <span :class="getRemainingClass(scope.row)"
-                    >{{ scope.row.total - scope.row.used }}
-                    {{ scope.row.unit }}</span
+                    >{{ getRemaining(scope.row) }}
+                    {{ $t("menu.device.part.page.unit.times") }}</span
                   >
                 </template>
               </el-table-column>
-              <el-table-column label="状态" width="80" align="center">
+              <el-table-column
+                :label="$t('menu.device.part.page.table.status')"
+                width="80"
+                align="center"
+              >
                 <template slot-scope="scope">
                   <el-tag :type="getPartStatusTag(scope.row)" size="mini">{{
                     getPartStatusText(scope.row)
@@ -160,31 +249,45 @@
                 </template>
               </el-table-column>
               <el-table-column
-                prop="installDate"
-                label="安装日期"
+                :label="$t('menu.device.part.page.form.installDate')"
                 width="110"
                 align="center"
-              />
+              >
+                <template slot-scope="scope">
+                  {{ scope.row.install_date || scope.row.installDate
+                    ? formatDate(scope.row.install_date || scope.row.installDate, getGlobalDateFormat())
+                    : "-"
+                  }}
+                </template>
+              </el-table-column>
               <el-table-column
-                label="操作"
-                width="100"
+                :label="$t('menu.device.part.page.table.operation')"
+                width="150"
                 align="center"
                 fixed="right"
               >
                 <template slot-scope="scope">
                   <el-button
-                    v-permission="'device:part:operate'"
+                    v-permission="'device:part:edit'"
                     type="text"
                     size="small"
-                    @click="handleReplace(scope.row)"
-                    >更换</el-button
+                    @click="handleEdit(scope.row)"
+                    >{{ $t("menu.device.part.page.editBtn") }}</el-button
                   >
                   <el-button
                     v-permission="'device:part:operate'"
                     type="text"
                     size="small"
-                    @click="handleHistory(scope.row)"
-                    >记录</el-button
+                    @click="handleReplace(scope.row)"
+                    >{{ $t("menu.device.part.page.replaceBtn") }}</el-button
+                  >
+                  <el-button
+                    v-permission="'device:part:delete'"
+                    type="text"
+                    size="small"
+                    class="delete-btn"
+                    @click="handleDelete(scope.row)"
+                    >{{ $t("menu.device.part.page.deleteBtn") }}</el-button
                   >
                 </template>
               </el-table-column>
@@ -198,14 +301,10 @@
         <div class="panel">
           <div class="panel-header">
             <span class="panel-title"
-              ><i class="el-icon-document"></i> 近期更换记录</span
-            >
-            <el-button
-              v-permission="'device:part:viewAll'"
-              type="text"
-              size="small"
-              @click="handleViewAll"
-              >查看全部</el-button
+              ><i class="el-icon-document"></i>
+              {{
+                $t("menu.device.part.page.message.recentReplaceRecords")
+              }}</span
             >
           </div>
           <div class="panel-body">
@@ -213,7 +312,7 @@
               <div
                 class="timeline-item"
                 v-for="(record, index) in recentRecords"
-                :key="index"
+                :key="record.id || index"
               >
                 <div class="timeline-dot" :class="record.status"></div>
                 <div
@@ -222,38 +321,177 @@
                 ></div>
                 <div class="timeline-content">
                   <div class="tl-header">
-                    <span class="tl-part">{{ record.partName }}</span>
+                    <span class="tl-part">{{
+                      record.part_name || record.partName
+                    }}</span>
                     <el-tag
                       :type="record.status === 'success' ? 'success' : 'danger'"
                       size="mini"
                       >{{
-                        record.status === "success" ? "成功" : "失败"
+                        record.status === "success"
+                          ? $t("menu.device.part.page.message.statusSuccess")
+                          : $t("menu.device.part.page.message.statusFailed")
                       }}</el-tag
                     >
                   </div>
                   <div class="tl-detail">
-                    <span>旧编码：{{ record.oldCode }}</span>
-                    <span>新编码：{{ record.newCode }}</span>
+                    <span
+                      >{{ $t("menu.device.part.page.message.oldCode") }}：{{
+                        record.old_code || record.oldCode
+                      }}</span
+                    >
+                    <span
+                      >{{ $t("menu.device.part.page.message.newCode") }}：{{
+                        record.new_code || record.newCode
+                      }}</span
+                    >
                   </div>
                   <div class="tl-footer">
                     <span class="tl-operator"
-                      >操作人：{{ record.operator }}</span
+                      >{{ $t("menu.device.part.page.message.operator") }}：{{
+                        record.operator_name || record.operator
+                      }}</span
                     >
-                    <span class="tl-time">{{ record.time }}</span>
+                    <span class="tl-time">{{
+                      record.replace_time || record.time
+                    }}</span>
                   </div>
                 </div>
               </div>
+            </div>
+            <div v-if="recentRecords.length === 0" class="empty-tip-small">
+              暂无更换记录
             </div>
           </div>
         </div>
       </el-col>
     </el-row>
 
+    <!-- 添加/编辑部件弹窗 -->
+    <el-dialog
+      :title="
+        isEdit
+          ? $t('menu.device.part.page.editBtn')
+          : $t('menu.device.part.page.addBtn')
+      "
+      :visible.sync="partDialogVisible"
+      width="560px"
+      :close-on-click-modal="false"
+      @closed="handlePartDialogClosed"
+    >
+      <el-form
+        :model="partForm"
+        :rules="partRules"
+        ref="partFormRef"
+        label-width="110px"
+        class="part-dialog-form"
+      >
+        <el-form-item
+          :label="$t('menu.device.part.page.form.template')"
+          prop="template_id"
+        >
+          <el-select
+            v-model="partForm.template_id"
+            :placeholder="
+              $t('menu.device.part.page.placeholder.selectTemplate')
+            "
+            style="width: 100%"
+            :disabled="isEdit"
+            @change="handleTemplateChange"
+          >
+            <el-option
+              v-for="template in templates"
+              :key="template.id"
+              :label="getTemplateName(template)"
+              :value="template.id"
+            />
+          </el-select>
+        </el-form-item>
+        <el-form-item
+          :label="$t('menu.device.part.page.form.partName')"
+          prop="part_name"
+        >
+          <el-input
+            v-model="partForm.part_name"
+            :placeholder="$t('menu.device.part.page.placeholder.partName')"
+            disabled
+          />
+        </el-form-item>
+        <el-form-item
+          :label="$t('menu.device.part.page.form.partCode')"
+          prop="part_code"
+        >
+          <el-input
+            v-model="partForm.part_code"
+            :placeholder="$t('menu.device.part.page.placeholder.partCode')"
+          />
+        </el-form-item>
+        <el-form-item
+          :label="$t('menu.device.part.page.form.specModel')"
+          prop="spec_model"
+        >
+          <el-input
+            v-model="partForm.spec_model"
+            :placeholder="$t('menu.device.part.page.placeholder.specModel')"
+          />
+        </el-form-item>
+        <el-form-item
+          :label="$t('menu.device.part.page.form.ratedLife')"
+          prop="rated_life"
+        >
+          <div class="rated-life-input">
+            <el-input-number
+              v-model="partForm.rated_life"
+              :min="1"
+              :max="9999999"
+              :step="1000"
+              controls-position="right"
+              style="width: 100%"
+            />
+            <span class="rated-life-unit">{{
+              $t("menu.device.part.page.unit.times")
+            }}</span>
+          </div>
+        </el-form-item>
+        <el-form-item
+          :label="$t('menu.device.part.page.form.installDate')"
+          prop="install_date"
+        >
+          <el-date-picker
+            v-model="partForm.install_date"
+            type="date"
+            :placeholder="$t('menu.device.part.page.placeholder.installDate')"
+            value-format="yyyy-MM-dd"
+            style="width: 100%"
+          />
+        </el-form-item>
+        <el-form-item :label="$t('menu.device.part.page.form.remark')">
+          <el-input
+            v-model="partForm.remark"
+            type="textarea"
+            :rows="2"
+            :placeholder="$t('menu.device.part.page.placeholder.remark')"
+          />
+        </el-form-item>
+      </el-form>
+      <div slot="footer">
+        <el-button @click="partDialogVisible = false">{{
+          $t("menu.device.part.page.message.cancelBtn")
+        }}</el-button>
+        <el-button
+          type="primary"
+          :loading="partDialogLoading"
+          @click="confirmPart"
+          >{{ $t("menu.device.part.page.message.confirmBtn") }}</el-button
+        >
+      </div>
+    </el-dialog>
+
     <!-- 更换录入弹窗 -->
     <el-dialog
-      title="部件更换录入"
+      :title="$t('menu.device.part.page.message.replaceDialogTitle')"
       :visible.sync="replaceDialogVisible"
-      width="520px"
+      width="560px"
       :close-on-click-modal="false"
       @closed="handleDialogClosed"
     >
@@ -261,87 +499,90 @@
         :model="replaceForm"
         :rules="replaceRules"
         ref="replaceForm"
-        label-width="100px"
+        label-width="110px"
+        class="part-dialog-form"
       >
-        <el-form-item label="更换部件" prop="partName">
+        <el-form-item
+          :label="$t('menu.device.part.page.form.replacePart')"
+          prop="partCode"
+        >
+          <el-input
+            :value="
+              currentReplacePart
+                ? currentReplacePart.part_name || currentReplacePart.name
+                : ''
+            "
+            disabled
+          />
+        </el-form-item>
+        <el-form-item
+          :label="$t('menu.device.part.page.form.currentCode')"
+          v-if="currentReplacePart"
+        >
+          <el-input
+            :value="currentReplacePart.part_code || currentReplacePart.code"
+            disabled
+          />
+        </el-form-item>
+        <el-form-item
+          :label="$t('menu.device.part.page.form.newCode')"
+          prop="newCode"
+        >
+          <el-input
+            v-model="replaceForm.newCode"
+            :placeholder="$t('menu.device.part.page.placeholder.newCode')"
+            clearable
+          />
+        </el-form-item>
+        <el-form-item
+          :label="$t('menu.device.part.page.form.replaceReason')"
+          prop="reason"
+        >
           <el-select
-            v-model="replaceForm.partCode"
-            placeholder="请选择部件"
+            v-model="replaceForm.reason"
+            :placeholder="$t('menu.device.part.page.placeholder.replaceReason')"
             style="width: 100%"
-            @change="handlePartChange"
           >
             <el-option
-              v-for="part in parts"
-              :key="part.code"
-              :label="part.name + ' (' + part.code + ')'"
-              :value="part.code"
+              :label="$t('menu.device.part.page.replaceReason.life')"
+              value="life"
+            />
+            <el-option
+              :label="$t('menu.device.part.page.replaceReason.damage')"
+              value="damage"
+            />
+            <el-option
+              :label="$t('menu.device.part.page.replaceReason.maintenance')"
+              value="maintenance"
+            />
+            <el-option
+              :label="$t('menu.device.part.page.replaceReason.changeover')"
+              value="changeover"
+            />
+            <el-option
+              :label="$t('menu.device.part.page.replaceReason.other')"
+              value="other"
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="当前编码" v-if="replaceForm.partCode">
-          <el-input :value="getCurrentPartCode()" disabled />
-        </el-form-item>
-        <el-form-item label="新物料编码" prop="newCode">
-          <el-input
-            v-model="replaceForm.newCode"
-            placeholder="请输入新物料编码"
-            clearable
-          >
-            <el-button
-              slot="append"
-              icon="el-icon-search"
-              @click="verifyCode"
-              :loading="verifying"
-              >验证</el-button
-            >
-          </el-input>
-        </el-form-item>
-        <el-form-item label="验证结果" v-if="verifyResult">
-          <div class="verify-result" :class="verifyResult.status">
-            <i
-              :class="
-                verifyResult.status === 'success'
-                  ? 'el-icon-success'
-                  : 'el-icon-error'
-              "
-            ></i>
-            <div class="verify-info">
-              <div class="verify-name">{{ verifyResult.name }}</div>
-              <div class="verify-spec">规格：{{ verifyResult.spec }}</div>
-              <div class="verify-batch">批次：{{ verifyResult.batch }}</div>
-              <div class="verify-life">额定寿命：{{ verifyResult.life }}</div>
-            </div>
-          </div>
-        </el-form-item>
-        <el-form-item label="更换原因" prop="reason">
-          <el-select
-            v-model="replaceForm.reason"
-            placeholder="请选择更换原因"
-            style="width: 100%"
-          >
-            <el-option label="达到使用寿命" value="life" />
-            <el-option label="损坏故障" value="damage" />
-            <el-option label="定期维护" value="maintenance" />
-            <el-option label="产品换型" value="changeover" />
-            <el-option label="其他" value="other" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="备注">
+        <el-form-item :label="$t('menu.device.part.page.form.remark')">
           <el-input
             v-model="replaceForm.remark"
             type="textarea"
             :rows="2"
-            placeholder="请输入备注信息"
+            :placeholder="$t('menu.device.part.page.placeholder.remark')"
           />
         </el-form-item>
       </el-form>
       <div slot="footer">
-        <el-button @click="replaceDialogVisible = false">取消</el-button>
+        <el-button @click="replaceDialogVisible = false">{{
+          $t("menu.device.part.page.message.cancelBtn")
+        }}</el-button>
         <el-button
           type="primary"
+          :loading="replaceLoading"
           @click="confirmReplace"
-          :disabled="!verifyResult || verifyResult.status !== 'success'"
-          >确认更换</el-button
+          >{{ $t("menu.device.part.page.form.confirmReplace") }}</el-button
         >
       </div>
     </el-dialog>
@@ -349,20 +590,82 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from "vue";
-import { Message } from "element-ui";
-import store from "@/store";
+import { ref, reactive, computed, onMounted, getCurrentInstance } from "vue";
+import { Message, MessageBox } from "element-ui";
+import {
+  getPartList,
+  getPartTemplates,
+  addPart,
+  updatePart,
+  deletePart,
+  replacePart,
+  getReplaceRecords,
+} from "@/api/devicePart";
+import { formatDate, getGlobalDateFormat } from "@/utils/date";
+
+// 获取当前实例，用于访问 $t 和 $store
+const { proxy } = getCurrentInstance();
+const $t = proxy.$t.bind(proxy);
+const store = proxy.$store;
 
 /**
  * 部件寿命管理页面
- * 功能：部件寿命监控、更换录入（编码验证）、更换记录
- * 数据来源：部件列表从 Vuex device 模块获取，更换记录后续对接后端接口
+ * 功能：部件寿命监控、增删改、更换录入、更换记录
+ * 数据来源：后端接口
  */
 
 // ===== 响应式数据 =====
+const loading = ref(false);
+const searchKeyword = ref("");
+const parts = ref([]);
+const templates = ref([]);
+const recentRecords = ref([]);
+
+// 添加/编辑部件弹窗
+const partDialogVisible = ref(false);
+const partDialogLoading = ref(false);
+const isEdit = ref(false);
+const currentEditPart = ref(null);
+const partFormRef = ref(null);
+
+const partForm = reactive({
+  template_id: null,
+  part_name: "",
+  part_code: "",
+  spec_model: "",
+  rated_life: 10000,
+  install_date: "",
+  remark: "",
+});
+
+const partRules = {
+  template_id: [
+    {
+      required: true,
+      message: $t("menu.device.part.page.placeholder.selectTemplate"),
+      trigger: "change",
+    },
+  ],
+  part_code: [
+    {
+      required: true,
+      message: $t("menu.device.part.page.placeholder.partCode"),
+      trigger: "blur",
+    },
+  ],
+  rated_life: [
+    {
+      required: true,
+      message: $t("menu.device.part.page.placeholder.ratedLife"),
+      trigger: "blur",
+    },
+  ],
+};
+
+// 更换录入弹窗
 const replaceDialogVisible = ref(false);
-const verifying = ref(false);
-const verifyResult = ref(null);
+const replaceLoading = ref(false);
+const currentReplacePart = ref(null);
 const replaceFormRef = ref(null);
 
 const replaceForm = reactive({
@@ -374,68 +677,79 @@ const replaceForm = reactive({
 });
 
 const replaceRules = {
-  partCode: [{ required: true, message: "请选择部件", trigger: "change" }],
-  newCode: [{ required: true, message: "请输入新物料编码", trigger: "blur" }],
-  reason: [{ required: true, message: "请选择更换原因", trigger: "change" }],
+  newCode: [
+    {
+      required: true,
+      message: $t("menu.device.part.page.placeholder.newCode"),
+      trigger: "blur",
+    },
+  ],
+  reason: [
+    {
+      required: true,
+      message: $t("menu.device.part.page.placeholder.replaceReason"),
+      trigger: "change",
+    },
+  ],
 };
 
-// 部件图标映射（页面特有，store 中不存 icon）
+// 部件图标映射
 const partIcons = {
-  灌装针组件: "el-icon-aim",
-  灌装管组件: "el-icon-s-operation",
-  加塞杆: "el-icon-top-right",
-  真空组件: "el-icon-download",
+  fill_needle: "el-icon-aim",
+  fill_tube: "el-icon-s-operation",
+  stopper_rod: "el-icon-top-right",
+  vacuum_unit: "el-icon-download",
 };
-
-// ===== 以下为模拟数据，后续对接后端接口 =====
-const recentRecords = ref([
-  {
-    partName: "灌装针组件",
-    oldCode: "FILL-NEEDLE-001",
-    newCode: "FILL-NEEDLE-002",
-    operator: "张三",
-    time: "2026-07-15 09:30:00",
-    status: "success",
-  },
-  {
-    partName: "真空组件",
-    oldCode: "VACUUM-UNIT-001",
-    newCode: "VACUUM-UNIT-002",
-    operator: "李四",
-    time: "2026-07-01 14:20:00",
-    status: "success",
-  },
-  {
-    partName: "加塞杆",
-    oldCode: "STOPPER-ROD-001",
-    newCode: "INVALID-CODE",
-    operator: "王五",
-    time: "2026-06-20 10:15:00",
-    status: "failed",
-  },
-  {
-    partName: "灌装管组件",
-    oldCode: "FILL-TUBE-001",
-    newCode: "FILL-TUBE-002",
-    operator: "张三",
-    time: "2026-08-01 08:45:00",
-    status: "success",
-  },
-]);
 
 // ===== 计算属性 =====
-// 从 store 获取部件列表，补充页面特有 icon 字段
-const partsList = computed(() => store.getters.partsList);
-const parts = computed(() =>
-  partsList.value.map((part) => ({
-    ...part,
-    icon: partIcons[part.name] || "el-icon-cpu",
-  }))
-);
+const filteredParts = computed(() => {
+  if (!searchKeyword.value) return parts.value;
+  const keyword = searchKeyword.value.toLowerCase();
+  return parts.value.filter(
+    (part) =>
+      (part.part_name || part.name || "").toLowerCase().includes(keyword) ||
+      (part.part_code || part.code || "").toLowerCase().includes(keyword)
+  );
+});
 
 // ===== 方法 =====
+function getTemplateName(template) {
+  // 支持多种字段名：name_key（后端）、template_name、name
+  const nameKey =
+    template.name_key || template.template_name || template.name || "";
+  // 如果是国际化 key（如 menu.device.part.page.template.fill_needle），用 $t 解析
+  if (nameKey && nameKey.startsWith("menu.")) {
+    return $t(nameKey);
+  }
+  return nameKey;
+}
+
+/**
+ * 获取部件显示名称
+ * 优先级：part_name > 模板名称 > 部件编码
+ */
+function getPartDisplayName(part) {
+  // 1. 如果部件本身有名称，直接使用
+  if (part.part_name || part.name) {
+    return part.part_name || part.name;
+  }
+  // 2. 否则根据 template_key 或 template_id 从模板列表中查找模板名称
+  const template = templates.value.find(
+    (t) =>
+      t.template_key === part.template_key ||
+      t.id === part.template_id
+  );
+  if (template) {
+    return getTemplateName(template);
+  }
+  // 3. 兜底：返回部件编码
+  return part.part_code || part.code || "";
+}
+
 function getPartStatus(part) {
-  const percent = part.used / part.total;
+  const used = Number(part.used_life || part.used || 0);
+  const total = Number(part.rated_life || part.total || 1);
+  const percent = used / total;
   if (percent >= 1) return "expired";
   if (percent >= 0.8) return "warning";
   if (percent >= 0.6) return "notice";
@@ -450,454 +764,679 @@ function getPartStatusTag(part) {
     warning: "warning",
     expired: "danger",
   };
-  return map[status];
+  return map[status] || "info";
 }
 
 function getPartStatusText(part) {
   const status = getPartStatus(part);
   const map = {
-    normal: "正常",
-    notice: "注意",
-    warning: "预警",
-    expired: "到期",
+    normal: $t("menu.device.part.page.status.normal"),
+    notice: $t("menu.device.part.page.status.warning"),
+    warning: $t("menu.device.part.page.status.critical"),
+    expired: $t("menu.device.part.page.status.expired"),
   };
-  return map[status];
+  return map[status] || $t("menu.device.part.page.status.normal");
+}
+
+function getLifePercent(part) {
+  const used = Number(part.used_life || part.used || 0);
+  const total = Number(part.rated_life || part.total || 1);
+  return Math.min((used / total) * 100, 100);
+}
+
+function getRemaining(part) {
+  const used = Number(part.used_life || part.used || 0);
+  const total = Number(part.rated_life || part.total || 0);
+  return Math.max(total - used, 0);
 }
 
 function getRemainingClass(part) {
-  const status = getPartStatus(part);
-  if (status === "expired") return "text-danger";
-  if (status === "warning") return "text-warning";
-  return "";
+  const remaining = getRemaining(part);
+  const total = Number(part.rated_life || part.total || 1);
+  const percent = remaining / total;
+  if (percent <= 0) return "text-danger";
+  if (percent <= 0.2) return "text-warning";
+  return "text-success";
 }
 
-function getCurrentPartCode() {
-  const part = parts.value.find((p) => p.code === replaceForm.partCode);
-  return part ? part.code : "";
-}
-
-function handlePartChange(code) {
-  const part = parts.value.find((p) => p.code === code);
-  if (part) {
-    replaceForm.partName = part.name;
+// ===== 数据加载 =====
+async function loadPartList() {
+  loading.value = true;
+  try {
+    const res = await getPartList();
+    if (res.code === 200) {
+      const list = res.data || [];
+      // 补充 icon 字段
+      parts.value = list.map((part) => ({
+        ...part,
+        icon:
+          partIcons[part.template_key] ||
+          partIcons[part.template_id] ||
+          "el-icon-cpu",
+      }));
+    } else {
+      Message.error(
+        res.message || $t("menu.device.part.page.message.loadFailed")
+      );
+    }
+  } catch (err) {
+    Message.error($t("menu.device.part.page.message.loadFailed"));
+  } finally {
+    loading.value = false;
   }
-  verifyResult.value = null;
 }
 
+async function loadTemplates() {
+  try {
+    const res = await getPartTemplates();
+    if (res.code === 200) {
+      templates.value = res.data || [];
+    }
+  } catch (err) {
+    // 静默失败，不影响页面显示
+  }
+}
+
+async function loadReplaceRecords() {
+  try {
+    const res = await getReplaceRecords({ page: 1, pageSize: 10 });
+    if (res.code === 200) {
+      recentRecords.value = res.data?.list || res.data || [];
+    }
+  } catch (err) {
+    // 静默失败，不影响页面显示
+  }
+}
+
+// ===== 添加/编辑部件 =====
+function handleAdd() {
+  isEdit.value = false;
+  currentEditPart.value = null;
+  Object.assign(partForm, {
+    template_id: null,
+    part_name: "",
+    part_code: "",
+    spec_model: "",
+    rated_life: 10000,
+    install_date: "",
+    remark: "",
+  });
+  partDialogVisible.value = true;
+}
+
+function handleEdit(part) {
+  isEdit.value = true;
+  currentEditPart.value = part;
+  Object.assign(partForm, {
+    template_id: part.template_id,
+    part_name: part.part_name || part.name,
+    part_code: part.part_code || part.code,
+    spec_model: part.spec_model || part.spec || "",
+    rated_life: Number(part.rated_life || part.total || 10000),
+    install_date: part.install_date || part.installDate || "",
+    remark: part.remark || "",
+  });
+  partDialogVisible.value = true;
+}
+
+function handleTemplateChange(templateId) {
+  const template = templates.value.find((t) => t.id === templateId);
+  if (template) {
+    // 支持多种字段名：name_key（后端）、template_name、name
+    const nameKey =
+      template.name_key || template.template_name || template.name || "";
+    partForm.part_name = nameKey.startsWith("menu.") ? $t(nameKey) : nameKey;
+    // 支持多种字段名：default_rated_life（后端）、default_life、rated_life
+    partForm.rated_life = Number(
+      template.default_rated_life ||
+        template.default_life ||
+        template.rated_life ||
+        10000
+    );
+    // 自动生成编码前缀
+    if (!partForm.part_code && template.code_prefix) {
+      partForm.part_code = template.code_prefix + "-001";
+    }
+  }
+}
+
+function handlePartDialogClosed() {
+  if (partFormRef.value) {
+    partFormRef.value.clearValidate();
+  }
+}
+
+async function confirmPart() {
+  if (!partFormRef.value) return;
+  try {
+    await partFormRef.value.validate();
+  } catch (err) {
+    return;
+  }
+
+  partDialogLoading.value = true;
+  try {
+    const data = {
+      template_id: partForm.template_id,
+      part_name: partForm.part_name,
+      part_code: partForm.part_code,
+      spec_model: partForm.spec_model,
+      rated_life: partForm.rated_life,
+      install_date: partForm.install_date,
+      remark: partForm.remark,
+    };
+
+    if (isEdit.value && currentEditPart.value) {
+      const res = await updatePart(currentEditPart.value.id, data);
+      if (res.code === 200) {
+        Message.success($t("menu.device.part.page.message.updateSuccess"));
+        partDialogVisible.value = false;
+        loadPartList();
+      } else {
+        Message.error(
+          res.message || $t("menu.device.part.page.message.updateFailed")
+        );
+      }
+    } else {
+      const res = await addPart(data);
+      if (res.code === 200) {
+        Message.success($t("menu.device.part.page.message.addSuccess"));
+        partDialogVisible.value = false;
+        loadPartList();
+      } else {
+        Message.error(
+          res.message || $t("menu.device.part.page.message.addFailed")
+        );
+      }
+    }
+  } catch (err) {
+    Message.error($t("menu.device.part.page.message.saveFailed"));
+  } finally {
+    partDialogLoading.value = false;
+  }
+}
+
+// ===== 删除部件 =====
+function handleDelete(part) {
+  MessageBox.confirm(
+    $t("menu.device.part.page.message.deleteConfirm"),
+    $t("menu.device.part.page.message.deleteConfirmTitle"),
+    {
+      confirmButtonText: $t("menu.device.part.page.message.confirmBtn"),
+      cancelButtonText: $t("menu.device.part.page.message.cancelBtn"),
+      type: "warning",
+    }
+  )
+    .then(async () => {
+      try {
+        const res = await deletePart(part.id);
+        if (res.code === 200) {
+          Message.success($t("menu.device.part.page.message.deleteSuccess"));
+          loadPartList();
+        } else {
+          Message.error(
+            res.message || $t("menu.device.part.page.message.deleteFailed")
+          );
+        }
+      } catch (err) {
+        Message.error($t("menu.device.part.page.message.deleteFailedCatch"));
+      }
+    })
+    .catch(() => {});
+}
+
+// ===== 更换录入 =====
 function handleReplace(part) {
+  currentReplacePart.value = part;
   Object.assign(replaceForm, {
-    partCode: part.code,
-    partName: part.name,
+    partCode: part.part_code || part.code,
+    partName: part.part_name || part.name,
     newCode: "",
     reason: "",
     remark: "",
   });
-  verifyResult.value = null;
   replaceDialogVisible.value = true;
-}
-
-function handleAddReplace() {
-  Object.assign(replaceForm, {
-    partCode: "",
-    partName: "",
-    newCode: "",
-    reason: "",
-    remark: "",
-  });
-  verifyResult.value = null;
-  replaceDialogVisible.value = true;
-}
-
-function handleHistory(part) {
-  Message.info(`查看 ${part.name} 的更换记录`);
-}
-
-function handleViewAll() {
-  Message.info("查看全部更换记录");
 }
 
 function handleDialogClosed() {
-  replaceFormRef.value && replaceFormRef.value.resetFields();
-  verifyResult.value = null;
+  if (replaceFormRef.value) {
+    replaceFormRef.value.clearValidate();
+  }
 }
 
-async function verifyCode() {
-  if (!replaceForm.newCode) {
-    Message.warning("请输入新物料编码");
+async function confirmReplace() {
+  if (!replaceFormRef.value) return;
+  try {
+    await replaceFormRef.value.validate();
+  } catch (err) {
     return;
   }
-  verifying.value = true;
-  // 模拟与服务器编码验证
-  await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  // 模拟验证结果（以 VALID 开头的编码验证通过）
-  if (
-    replaceForm.newCode.startsWith("VALID") ||
-    replaceForm.newCode.length >= 8
-  ) {
-    verifyResult.value = {
-      status: "success",
-      name: replaceForm.partName || "灌装针组件",
-      spec: "2.0mL 标准型",
-      batch: "BATCH20260824001",
-      life: "10000次",
-    };
-    Message.success("物料编码验证通过");
-  } else {
-    verifyResult.value = {
-      status: "failed",
-      name: "未知物料",
-      spec: "-",
-      batch: "-",
-      life: "-",
-    };
-    Message.error("物料编码验证失败，请检查编码是否正确");
-  }
-  verifying.value = false;
-}
+  if (!currentReplacePart.value) return;
 
-function confirmReplace() {
-  replaceFormRef.value.validate((valid) => {
-    if (valid) {
-      if (!verifyResult.value || verifyResult.value.status !== "success") {
-        Message.error("请先验证新物料编码");
-        return;
-      }
-      Message.success("部件更换成功");
+  replaceLoading.value = true;
+  try {
+    const data = {
+      new_code: replaceForm.newCode,
+      reason: replaceForm.reason,
+      remark: replaceForm.remark,
+    };
+
+    const res = await replacePart(currentReplacePart.value.id, data);
+    if (res.code === 200) {
+      Message.success($t("menu.device.part.page.message.replaceSuccess"));
       replaceDialogVisible.value = false;
-      // 模拟更新部件数据
-      const part = parts.value.find((p) => p.code === replaceForm.partCode);
-      if (part) {
-        part.used = 0;
-        part.installDate = new Date().toISOString().split("T")[0];
-      }
+      loadPartList();
+      loadReplaceRecords();
+    } else {
+      Message.error(
+        res.message || $t("menu.device.part.page.message.replaceFailed")
+      );
     }
-  });
+  } catch (err) {
+    Message.error($t("menu.device.part.page.message.replaceFailed"));
+  } finally {
+    replaceLoading.value = false;
+  }
 }
+
+// ===== 生命周期 =====
+onMounted(() => {
+  loadTemplates();
+  loadPartList();
+  loadReplaceRecords();
+});
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .part-life-page {
-  padding: 12px;
-  background: #fff;
-  min-height: calc(100vh - 84px);
+  padding: 16px;
 }
 
-// 概览卡片
-.overview-row {
-  margin-bottom: 12px;
+/* 弹窗表单样式优化 - 统一输入框宽度，左右边距协调 */
+.part-dialog-form {
+  margin-left: 20px;
 }
+
+.part-dialog-form .el-form-item__content .el-input,
+.part-dialog-form .el-form-item__content .el-select,
+.part-dialog-form .el-form-item__content .el-date-editor {
+  width: 280px !important;
+}
+
+/* 额定寿命输入框 - 输入框和单位在同一行 */
+.rated-life-input {
+  display: flex;
+  align-items: center;
+  width: 280px !important;
+  gap: 10px;
+}
+
+.el-textarea {
+  width: 280px !important;
+}
+
+.rated-life-input .el-input-number {
+  flex: 1;
+  min-width: 0;
+}
+
+.rated-life-unit {
+  color: #909399;
+  font-size: 14px;
+  white-space: nowrap;
+  /* 单位占据右边的间距位置 */
+  margin-right: -40px;
+  width: 32px;
+  text-align: left;
+}
+
+.page-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.toolbar-left,
+.toolbar-right {
+  display: flex;
+  gap: 8px;
+}
+
+.overview-row {
+  margin-bottom: 16px;
+}
+
 .part-card {
   background: #fff;
-  border: 1px solid #e4e7ed;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid #67c23a;
   transition: all 0.3s;
-  overflow: hidden;
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  }
-  &.warning {
-    border-left: 3px solid #e6a23c;
-  }
-  &.expired {
-    border-left: 3px solid #f56c6c;
-  }
-  &.notice {
-    border-left: 3px solid #409eff;
-  }
-  &.normal {
-    border-left: 3px solid #67c23a;
-  }
-
-  .card-header {
-    display: flex;
-    align-items: center;
-    padding: 12px 14px;
-    border-bottom: 1px solid #f0f2f5;
-    .part-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: #ecf5ff;
-      color: #409eff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      margin-right: 10px;
-    }
-    .part-info {
-      flex: 1;
-      .part-name {
-        font-size: 14px;
-        font-weight: 600;
-        color: #303133;
-      }
-      .part-code {
-        font-size: 11px;
-        color: #909399;
-        margin-top: 2px;
-      }
-    }
-  }
-  .card-body {
-    padding: 12px 14px;
-    .life-info {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      .life-item {
-        text-align: center;
-        .life-label {
-          font-size: 10px;
-          color: #909399;
-          display: block;
-          margin-bottom: 2px;
-        }
-        .life-value {
-          font-size: 16px;
-          font-weight: 700;
-          color: #303133;
-          font-family: "Courier New", monospace;
-          .life-unit {
-            font-size: 10px;
-            color: #909399;
-            font-weight: normal;
-            margin-left: 2px;
-          }
-          &.text-danger {
-            color: #f56c6c;
-          }
-          &.text-warning {
-            color: #e6a23c;
-          }
-        }
-      }
-    }
-    .life-progress {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-      .progress-bar {
-        flex: 1;
-        height: 8px;
-        background: #fff;
-        border-radius: 4px;
-        overflow: hidden;
-        margin-right: 10px;
-        .progress-fill {
-          height: 100%;
-          border-radius: 4px;
-          transition: width 0.5s;
-          &.normal {
-            background: linear-gradient(90deg, #67c23a, #95d475);
-          }
-          &.notice {
-            background: linear-gradient(90deg, #409eff, #66b1ff);
-          }
-          &.warning {
-            background: linear-gradient(90deg, #e6a23c, #f0c78a);
-          }
-          &.expired {
-            background: linear-gradient(90deg, #f56c6c, #f89898);
-          }
-        }
-      }
-      .progress-text {
-        font-size: 12px;
-        font-weight: 600;
-        color: #303133;
-        width: 45px;
-        text-align: right;
-      }
-    }
-    .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 8px;
-      border-top: 1px dashed #f0f2f5;
-      .install-date {
-        font-size: 11px;
-        color: #909399;
-      }
-    }
-  }
 }
 
-// 通用面板
-.panel {
-  background: #fff;
-  border: 1px solid #e4e7ed;
+.part-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.part-card.normal {
+  border-left-color: #67c23a;
+}
+
+.part-card.notice {
+  border-left-color: #909399;
+}
+
+.part-card.warning {
+  border-left-color: #e6a23c;
+}
+
+.part-card.expired {
+  border-left-color: #f56c6c;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.part-icon {
+  width: 40px;
+  height: 40px;
+  background: #ecf5ff;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  .panel-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px;
-    border-bottom: 1px solid #f0f2f5;
-    .panel-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: #303133;
-      i {
-        margin-right: 6px;
-        color: #409eff;
-      }
-    }
-  }
-  .panel-body {
-    padding: 16px;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #409eff;
+  margin-right: 12px;
 }
 
-.detail-row {
-  margin-bottom: 0;
+.part-info {
+  flex: 1;
 }
 
-// 表格进度
-.table-progress {
-  .tp-bar {
-    height: 6px;
-    background: #fff;
-    border-radius: 3px;
-    overflow: hidden;
-    margin-bottom: 4px;
-    .tp-fill {
-      height: 100%;
-      border-radius: 3px;
-      &.normal {
-        background: #67c23a;
-      }
-      &.notice {
-        background: #409eff;
-      }
-      &.warning {
-        background: #e6a23c;
-      }
-      &.expired {
-        background: #f56c6c;
-      }
-    }
-  }
-  .tp-text {
-    font-size: 11px;
-    color: #606266;
-  }
+.part-name {
+  font-size: 15px;
+  font-weight: bold;
+  color: #303133;
+  margin-bottom: 2px;
+}
+
+.part-code {
+  font-size: 12px;
+  color: #909399;
+}
+
+.life-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.life-item {
+  text-align: center;
+}
+
+.life-label {
+  display: block;
+  font-size: 12px;
+  color: #909399;
+  margin-bottom: 4px;
+}
+
+.life-value {
+  font-size: 18px;
+  font-weight: bold;
+  color: #303133;
+}
+
+.life-unit {
+  font-size: 12px;
+  color: #909399;
+  margin-left: 2px;
+  font-weight: normal;
+}
+
+.text-success {
+  color: #67c23a;
+}
+
+.text-warning {
+  color: #e6a23c;
 }
 
 .text-danger {
   color: #f56c6c;
 }
-.text-warning {
-  color: #e6a23c;
+
+.life-progress {
+  margin-bottom: 12px;
 }
 
-// 时间线
+.progress-bar {
+  height: 8px;
+  background: #f0f2f5;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s;
+}
+
+.progress-fill.normal {
+  background: linear-gradient(90deg, #67c23a, #85ce61);
+}
+
+.progress-fill.notice {
+  background: linear-gradient(90deg, #909399, #a6a9ad);
+}
+
+.progress-fill.warning {
+  background: linear-gradient(90deg, #e6a23c, #ebb563);
+}
+
+.progress-fill.expired {
+  background: linear-gradient(90deg, #f56c6c, #f78989);
+}
+
+.progress-text {
+  text-align: right;
+  font-size: 12px;
+  color: #909399;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px solid #f0f2f5;
+}
+
+.install-date {
+  font-size: 12px;
+  color: #909399;
+}
+
+.card-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.delete-btn {
+  color: #f56c6c !important;
+}
+
+.detail-row {
+  margin-top: 16px;
+}
+
+.panel {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.panel-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f2f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #303133;
+}
+
+.panel-body {
+  padding: 16px;
+}
+
+.table-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tp-bar {
+  flex: 1;
+  height: 6px;
+  background: #f0f2f5;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.tp-fill {
+  height: 100%;
+  border-radius: 3px;
+}
+
+.tp-fill.normal {
+  background: #67c23a;
+}
+
+.tp-fill.notice {
+  background: #909399;
+}
+
+.tp-fill.warning {
+  background: #e6a23c;
+}
+
+.tp-fill.expired {
+  background: #f56c6c;
+}
+
+.tp-text {
+  font-size: 12px;
+  color: #606266;
+  white-space: nowrap;
+}
+
 .timeline {
   position: relative;
-  .timeline-item {
-    position: relative;
-    padding-left: 24px;
-    padding-bottom: 16px;
-    &:last-child {
-      padding-bottom: 0;
-    }
-    .timeline-dot {
-      position: absolute;
-      left: 0;
-      top: 4px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      border: 2px solid #fff;
-      box-shadow: 0 0 0 2px #e4e7ed;
-      &.success {
-        background: #67c23a;
-        box-shadow: 0 0 0 2px #c2e7b0;
-      }
-      &.failed {
-        background: #f56c6c;
-        box-shadow: 0 0 0 2px #fbc4c4;
-      }
-    }
-    .timeline-line {
-      position: absolute;
-      left: 5px;
-      top: 18px;
-      bottom: -2px;
-      width: 2px;
-      background: #e4e7ed;
-    }
-    .timeline-content {
-      .tl-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 4px;
-        .tl-part {
-          font-size: 13px;
-          font-weight: 600;
-          color: #303133;
-        }
-      }
-      .tl-detail {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-        font-size: 11px;
-        color: #909399;
-        margin-bottom: 4px;
-      }
-      .tl-footer {
-        display: flex;
-        justify-content: space-between;
-        font-size: 11px;
-        color: #c0c4cc;
-      }
-    }
-  }
+  padding-left: 20px;
 }
 
-// 验证结果
-.verify-result {
-  display: flex;
-  align-items: flex-start;
-  padding: 12px;
+.timeline-item {
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -20px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #67c23a;
+}
+
+.timeline-dot.success {
+  background: #67c23a;
+}
+
+.timeline-dot.failed,
+.timeline-dot.fail {
+  background: #f56c6c;
+}
+
+.timeline-line {
+  position: absolute;
+  left: -15px;
+  top: 20px;
+  width: 2px;
+  height: calc(100% - 16px);
+  background: #e4e7ed;
+}
+
+.timeline-content {
+  background: #f8f9fa;
   border-radius: 6px;
-  &.success {
-    background: #f0f9eb;
-    border: 1px solid #c2e7b0;
-  }
-  &.failed {
-    background: #fef0f0;
-    border: 1px solid #fbc4c4;
-  }
-  i {
-    font-size: 24px;
-    margin-right: 12px;
-    .success & {
-      color: #67c23a;
-    }
-    .failed & {
-      color: #f56c6c;
-    }
-  }
-  .verify-info {
-    .verify-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: #303133;
-      margin-bottom: 4px;
-    }
-    div {
-      font-size: 12px;
-      color: #606266;
-      margin-bottom: 2px;
-    }
-  }
+  padding: 10px 12px;
+}
+
+.tl-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.tl-part {
+  font-size: 13px;
+  font-weight: bold;
+  color: #303133;
+}
+
+.tl-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12px;
+  color: #606266;
+  margin-bottom: 6px;
+}
+
+.tl-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #909399;
+}
+
+.empty-tip {
+  text-align: center;
+  padding: 60px 20px;
+  color: #909399;
+}
+
+.empty-tip i {
+  font-size: 48px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.empty-tip-small {
+  text-align: center;
+  padding: 30px 20px;
+  color: #909399;
+  font-size: 13px;
 }
 </style>

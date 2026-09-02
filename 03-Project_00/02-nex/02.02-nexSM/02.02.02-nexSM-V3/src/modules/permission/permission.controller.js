@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ==========================================
  * 权限模块 - 控制器层
  * ==========================================
@@ -7,6 +7,7 @@
  */
 const permissionService = require('./permission.service')
 const { getLangFromRequest } = require('../../utils/i18n')
+const { triggerNotification } = require('../../utils/notification')
 
 class PermissionController {
   /**
@@ -24,7 +25,7 @@ class PermissionController {
       const userId = req.user.id
       const permissions = await permissionService.getUserPermissions(userId)
       const permissionVersion = await permissionService.getUserPermissionVersion(userId)
-      res.success({ permissions, permissionVersion }, '获取成功')
+      res.success({ permissions, permissionVersion })
     } catch (err) {
       next(err)
     }
@@ -42,7 +43,7 @@ class PermissionController {
     try {
       const lang = getLangFromRequest(req)
       const permissions = await permissionService.getAllPermissions()
-      res.success({ permissions, lang }, '获取成功')
+      res.success({ permissions, lang })
     } catch (err) {
       next(err)
     }
@@ -62,7 +63,7 @@ class PermissionController {
     try {
       const roleId = parseInt(req.params.roleId)
       const menuIds = await permissionService.getRoleMenuIds(roleId)
-      res.success({ roleId, menuIds }, '获取成功')
+      res.success({ roleId, menuIds })
     } catch (err) {
       next(err)
     }
@@ -84,7 +85,17 @@ class PermissionController {
     try {
       const { roleId, roleCode, menuIds } = req.body
       const result = await permissionService.saveRolePermissions(roleId, menuIds, roleCode)
-      res.success({ success: result }, '权限分配保存成功')
+
+      // 触发通知：权限配置变更（通知管理员）
+      triggerNotification('permission.change', {
+        roleId: roleId,
+        roleCode: roleCode,
+        permissionCount: menuIds.length,
+        operator: req.user?.username || '未知用户'
+      }, req.user?.id).catch(err => {
+        console.error('[权限配置变更] 触发通知失败:', err)
+      })
+      res.success({ success: result })
     } catch (err) {
       next(err)
     }
@@ -104,7 +115,7 @@ class PermissionController {
     try {
       const { userId } = req.body
       const result = permissionService.clearUserCache(userId)
-      res.success({ success: result }, '缓存清除成功')
+      res.success({ success: result })
     } catch (err) {
       next(err)
     }
@@ -121,7 +132,7 @@ class PermissionController {
   async clearAllCache(req, res, next) {
     try {
       const result = permissionService.clearAllCache()
-      res.success({ success: result }, '所有权限缓存清除成功')
+      res.success({ success: result })
     } catch (err) {
       next(err)
     }

@@ -17,6 +17,7 @@ const userService = require('./user.service')
 const audit = require('../../utils/audit')
 const { getLangFromRequest } = require('../../utils/i18n')
 const { triggerNotification } = require('../../utils/notification')
+const { ERROR_CODE } = require('../../constants/errorCode')
 
 class UserController extends BaseController {
   /**
@@ -49,7 +50,7 @@ class UserController extends BaseController {
       const userAgent = req.headers['user-agent'] || ''
       const lang = getLangFromRequest(req)
       const result = await userService.login(username, password, ip, userAgent, lang, deviceId, deviceName)
-      res.success(result, '登录成功')
+      res.success(result)
     } catch (err) {
       next(err)
     }
@@ -76,7 +77,14 @@ class UserController extends BaseController {
       const result = await userService.register(req.body)
       // 记录注册审计
       await audit.logUserRegister(req, '系统注册', `用户名: ${req.body.username || ''}`)
-      res.success(result, '注册成功')
+      // 触发通知：新用户注册（通知管理员）
+      triggerNotification('user.register', {
+        username: req.body.username || '',
+        operator: req.body.username || '系统'
+      }, result.id || null).catch(err => {
+        console.error('[用户注册] 触发通知失败:', err)
+      })
+      res.success(result)
     } catch (err) {
       next(err)
     }
@@ -175,7 +183,14 @@ class UserController extends BaseController {
       const statusText = req.body.status === 0 ? '禁用' : '启用'
       const newValueText = `用户名: ${req.body.username}, 角色: ${req.body.role}, 姓名: ${req.body.real_name || ''}, 状态: ${statusText}`
       await audit.logUserCreate(req, req.body.username || '', newValueText)
-      res.success(result, '新增用户成功')
+      // 触发通知：管理员创建用户（通知管理员）
+      triggerNotification('user.create', {
+        username: req.body.username || '',
+        operator: req.user.username
+      }, req.user.id).catch(err => {
+        console.error('[创建用户] 触发通知失败:', err)
+      })
+      res.success(result)
     } catch (err) {
       next(err)
     }
@@ -209,7 +224,7 @@ class UserController extends BaseController {
 
       // 触发通知：用户信息修改（通知管理员）
       const isSelfUpdate = req.user.id === Number(req.params.id)
-      const eventType = isSelfUpdate ? 'user.profile.update' : 'user.profile.update'
+      const eventType = isSelfUpdate ? 'user.update' : 'user.update'
       triggerNotification(eventType, {
         username: oldUser?.username || req.params.id,
         operator: req.user.username
@@ -217,7 +232,19 @@ class UserController extends BaseController {
         console.error('[用户更新] 触发通知失败:', err)
       })
 
-      res.success(null, '更新用户成功')
+
+      // 触发通知：用户角色变更（如果角色发生变化）
+      if (oldUser && req.body.role && oldUser.role !== req.body.role) {
+        triggerNotification('user.role.change', {
+          username: oldUser.username,
+          oldRole: oldUser.role,
+          newRole: req.body.role,
+          operator: req.user.username
+        }, req.user.id).catch(err => {
+          console.error('[用户角色变更] 触发通知失败:', err)
+        })
+      }
+      res.success(null)
     } catch (err) {
       next(err)
     }
@@ -245,11 +272,11 @@ class UserController extends BaseController {
       // 电子签名：验证当前用户密码
       const { password } = req.body
       if (!password) {
-        return res.error('电子签名：请输入密码确认')
+        return res.error(ERROR_CODE.E_SIGNATURE_PASSWORD_REQUIRED)
       }
       const passwordValid = await userService.verifyPassword(req.user.id, password)
       if (!passwordValid) {
-        return res.error('电子签名失败：密码错误')
+        return res.error(ERROR_CODE.E_SIGNATURE_FAILED)
       }
 
       const oldUser = await userService.getUserById(req.params.id, lang).catch(() => null)
@@ -258,7 +285,7 @@ class UserController extends BaseController {
       const statusText = oldUser?.status === 0 ? '禁用' : '启用'
       const oldValueText = oldUser ? `用户名: ${oldUser.username}, 角色: ${oldUser.role}, 姓名: ${oldUser.real_name || ''}, 状态: ${statusText}` : ''
       await audit.logUserDelete(req, oldUser?.username || req.params.id, oldValueText)
-      res.success(null, '删除用户成功')
+      res.success(null)
     } catch (err) {
       next(err)
     }
@@ -284,17 +311,17 @@ class UserController extends BaseController {
       // 电子签名：验证当前用户密码
       const { password } = req.body
       if (!password) {
-        return res.error('电子签名：请输入密码确认')
+        return res.error(ERROR_CODE.E_SIGNATURE_PASSWORD_REQUIRED)
       }
       const passwordValid = await userService.verifyPassword(req.user.id, password)
       if (!passwordValid) {
-        return res.error('电子签名失败：密码错误')
+        return res.error(ERROR_CODE.E_SIGNATURE_FAILED)
       }
 
       await userService.batchDeleteUsers(req.body.ids)
       // 记录审计
       await audit.logUserBatchDelete(req, `ID: ${(req.body.ids || []).join(', ')}`, '')
-      res.success(null, '批量删除成功')
+      res.success(null)
     } catch (err) {
       next(err)
     }
@@ -326,11 +353,104 @@ class UserController extends BaseController {
         oldUser?.status !== undefined ? String(oldUser.status) : '',
         String(req.body.status)
       )
-      res.success(null, '状态修改成功')
+      // 触发通知：用户状态变更（通知管理员）
+      triggerNotification('user.status.change', {
+        username: oldUser?.username || req.params.id,
+        status: req.body.status === 1 ? '启用' : '禁用',
+        operator: req.user.username
+      }, req.user.id).catch(err => {
+        console.error('[用户状态变更] 触发通知失败:', err)
+      })
+      res.success(null)
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  // ==================== 密码重置功能 ====================
+
+  /**
+   * 管理员重置用户密码
+   * POST /user/:id/reset-password
+   */
+  async resetPassword(req, res, next) {
+    try {
+      const { id } = req.params
+      const { newPassword } = req.body
+      const lang = getLangFromRequest(req)
+      const result = await userService.resetPassword(id, newPassword, lang, req.user)
+      await audit.logPasswordReset(req, result.username, '管理员重置')
+      triggerNotification('user.password.reset', {
+        username: result.username,
+        email: result.email,
+        operator: req.user.username,
+        resetType: '管理员重置'
+      }, req.user.id).catch(err => {
+        console.error('[密码重置] 触发通知失败:', err)
+      })
+      res.success(null)
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  /**
+   * 发送忘记密码验证码（公开接口）
+   * POST /user/forgot-password/send-code
+   */
+  async sendResetCode(req, res, next) {
+    try {
+      const { username, email } = req.body
+      const lang = getLangFromRequest(req)
+      await userService.sendResetPasswordCode(username, email, lang)
+      res.success(null)
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  /**
+   * 验证验证码并重置密码（公开接口）
+   * POST /user/forgot-password/reset
+   */
+  async resetPasswordByCode(req, res, next) {
+    try {
+      const { username, email, code, newPassword } = req.body
+      const lang = getLangFromRequest(req)
+      const result = await userService.resetPasswordByCode(username, email, code, newPassword, lang)
+      await audit.logPasswordReset(req, result.username, '自助重置')
+      triggerNotification('user.password.reset', {
+        username: result.username,
+        email: result.email,
+        operator: result.username,
+        resetType: '自助重置'
+      }, result.id).catch(err => {
+        console.error('[密码重置] 触发通知失败:', err)
+      })
+      res.success(null)
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  /**
+   * 管理员解锁用户
+   * POST /user/unlock/:id
+   */
+  async unlockUser(req, res, next) {
+    try {
+      const userId = parseInt(req.params.id)
+      const operator = {
+        id: req.user.id,
+        username: req.user.username,
+        ip: req.ip,
+        userAgent: req.headers['user-agent'] || ''
+      }
+      const result = await userService.unlockUser(userId, operator)
+      res.success(result)
     } catch (err) {
       next(err)
     }
   }
 }
-
 module.exports = new UserController()

@@ -1,4 +1,4 @@
-// 引入 生成验证码 服务层
+﻿// 引入 生成验证码 服务层
 const CaptchaService = require("./captcha.service");
 const { ERROR_CODE } = require("../../constants/errorCode");
 
@@ -7,7 +7,7 @@ class CaptchaController {
   generateCaptcha(req, res, next) {
     try {
       const data = CaptchaService.generateCaptcha();
-      return res.success(data, "获取验证码 - 操作成功")
+      return res.success(data)
     } catch (err) {
       next(err);
     }

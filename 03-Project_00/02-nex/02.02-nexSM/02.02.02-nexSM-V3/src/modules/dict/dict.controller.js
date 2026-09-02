@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 数据字典模块 - 控制器层
  * 
  * 负责参数接收、调用 Service 层、返回统一响应
@@ -65,7 +65,7 @@ class DictController extends BaseController {
    */
   async createType(req, res) {
     const result = await dictService.createType(req.body)
-    res.success(result, '创建成功')
+    res.success(result)
   }
 
   /**
@@ -80,7 +80,7 @@ class DictController extends BaseController {
    */
   async updateType(req, res) {
     await dictService.updateType(req.params.id, req.body)
-    res.success(null, '更新成功')
+    res.success(null)
   }
 
   /**
@@ -94,7 +94,7 @@ class DictController extends BaseController {
    */
   async deleteType(req, res) {
     await dictService.deleteType(req.params.id)
-    res.success(null, '删除成功')
+    res.success(null)
   }
 
   // ==================== 字典项 ====================
@@ -174,7 +174,7 @@ class DictController extends BaseController {
    */
   async createItem(req, res) {
     const result = await dictService.createItem(req.body)
-    res.success(result, '创建成功')
+    res.success(result)
   }
 
   /**
@@ -189,7 +189,7 @@ class DictController extends BaseController {
    */
   async updateItem(req, res) {
     await dictService.updateItem(req.params.id, req.body)
-    res.success(null, '更新成功')
+    res.success(null)
   }
 
   /**
@@ -203,7 +203,7 @@ class DictController extends BaseController {
    */
   async deleteItem(req, res) {
     await dictService.deleteItem(req.params.id)
-    res.success(null, '删除成功')
+    res.success(null)
   }
 }
 

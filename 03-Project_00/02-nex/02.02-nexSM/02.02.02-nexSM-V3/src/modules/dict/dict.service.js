@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 数据字典模块 - 业务逻辑层
  *
  * 处理数据字典的增删改查，包含字典类型和字典项两个子模块
@@ -56,7 +56,7 @@ class DictService extends BaseService {
   async getTypeById(id, lang = 'zh-CN') {
     const dictType = await DictTypeModel.getById(id)
     if (!dictType) {
-      throw new BusinessError(ERROR_CODE.DICT_TYPE_NOT_FOUND, '字典类型不存在', { name: '字典类型' })
+      throw new BusinessError(ERROR_CODE.DICT_TYPE_NOT_FOUND, null, { name: '字典类型' })
     }
     return processLangFields(dictType, ['dict_name', 'description'], lang)
   }
@@ -79,7 +79,7 @@ class DictService extends BaseService {
     // 检查编码是否已存在
     const exist = await DictTypeModel.getByCode(data.dict_code)
     if (exist) {
-      throw new BusinessError(ERROR_CODE.DICT_TYPE_CODE_EXISTS, '字典类型编码已存在')
+      throw new BusinessError(ERROR_CODE.DICT_TYPE_CODE_EXISTS, null)
     }
     // 处理多语言字段（字符串转 JSON 对象）
     const processedData = this.convertLangFieldsToJson(data)
@@ -188,7 +188,7 @@ class DictService extends BaseService {
   async getItemById(id, lang = 'zh-CN') {
     const item = await DictItemModel.getById(id)
     if (!item) {
-      throw new BusinessError(ERROR_CODE.DICT_ITEM_NOT_FOUND, '字典项不存在', { name: '字典项' })
+      throw new BusinessError(ERROR_CODE.DICT_ITEM_NOT_FOUND, null, { name: '字典项' })
     }
     return processLangFields(item, ['label'], lang)
   }
@@ -214,7 +214,7 @@ class DictService extends BaseService {
     // 检查同一类型下值是否重复
     const exist = await DictItemModel.findOne({ type_id: data.type_id, value: data.value })
     if (exist) {
-      throw new BusinessError(ERROR_CODE.DICT_ITEM_VALUE_DUPLICATE, '同一字典类型下值不能重复')
+      throw new BusinessError(ERROR_CODE.DICT_ITEM_VALUE_DUPLICATE, null)
     }
     // 处理多语言字段（字符串转 JSON 对象）
     if (typeof data.label === 'string') {

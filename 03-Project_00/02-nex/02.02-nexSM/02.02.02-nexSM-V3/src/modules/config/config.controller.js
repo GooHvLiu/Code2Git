@@ -1,4 +1,4 @@
-﻿/**
+/**
  * 系统配置控制器
  * 处理系统配置相关的 HTTP 请求
  */
@@ -6,6 +6,8 @@ const configService = require('./config.service');
 const configModel = require('./config.model');
 const { triggerNotification } = require('../../utils/notification');
 const deviceStatusManager = require('../../socket/deviceStatusManager');
+const plcPollTask = require('../../plc/task/PlcPollTask');
+const maintenanceTaskManager = require('../../socket/maintenanceTaskManager');
 
 /**
  * 根据配置分类确定通知事件类型
@@ -18,8 +20,8 @@ function getNotificationEventType(category) {
     'connection': 'config.connection.update',
     'device': 'config.device.params.update',
     'system': 'config.system.update',
-    'security': 'config.system.update',
-    'export': 'config.system.update'
+    'security': 'config.security.update',
+    'export': 'config.export.update'
   };
   return eventMap[category] || 'config.system.update';
 }
@@ -175,6 +177,36 @@ async function updateConfigs(req, res) {
       console.log('[系统配置] 设备状态相关配置已变化，重启定时任务');
       deviceStatusManager.restartFromConfig().catch(err => {
         console.error('[系统配置] 重启设备状态定时任务失败:', err.message);
+      });
+    }
+
+    // 9. 如果变化的配置项包含PLC轮询相关的配置，动态调整轮询间隔
+    const plcPollConfigKeys = ['pollFastInterval', 'pollSlowInterval'];
+    const hasPlcPollConfigChanged = changedKeys.some(key => plcPollConfigKeys.includes(key));
+    if (hasPlcPollConfigChanged) {
+      console.log('[系统配置] PLC轮询相关配置已变化，重启轮询任务');
+      plcPollTask.restartFromConfig().catch(err => {
+        console.error('[系统配置] 重启PLC轮询任务失败:', err.message);
+      });
+    }
+
+    // 10. 如果变化的配置项包含维护检查间隔，动态调整维护任务间隔
+    const maintenanceConfigKeys = ['maintenanceCheckInterval'];
+    const hasMaintenanceConfigChanged = changedKeys.some(key => maintenanceConfigKeys.includes(key));
+    if (hasMaintenanceConfigChanged) {
+      console.log('[系统配置] 维护检查间隔配置已变化，重启维护任务');
+      maintenanceTaskManager.restartFromConfig().catch(err => {
+        console.error('[系统配置] 重启维护任务失败:', err.message);
+      });
+    }
+
+    // 11. 如果变化的配置项包含部件寿命统计间隔，动态调整使用寿命统计任务间隔
+    const partLifeStatConfigKeys = ['partLifeStatInterval'];
+    const hasPartLifeStatConfigChanged = changedKeys.some(key => partLifeStatConfigKeys.includes(key));
+    if (hasPartLifeStatConfigChanged) {
+      console.log('[系统配置] 部件寿命统计间隔配置已变化，重启使用寿命统计任务');
+      maintenanceTaskManager.restartPartLifeStatsFromConfig().catch(err => {
+        console.error('[系统配置] 重启使用寿命统计任务失败:', err.message);
       });
     }
 

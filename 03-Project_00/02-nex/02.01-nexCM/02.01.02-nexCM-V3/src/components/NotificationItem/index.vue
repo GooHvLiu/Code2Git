@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div
     class="notification-item"
     :class="{ unread: !item.is_read, read: item.is_read, selected: selected }"
@@ -109,7 +109,11 @@ const typeName = computed(() => {
     user: 'notification.typeUser',
     audit: 'notification.typeAudit',
     device: 'notification.typeDevice',
-    connection: 'notification.typeConnection'
+    connection: 'notification.typeConnection',
+    security: 'notification.typeSecurity',
+    production: 'notification.typeProduction',
+    config: 'notification.typeConfig',
+    license: 'notification.typeLicense',
   }
   const key = typeKeyMap[props.item.type]
   return key ? $t(key) : (props.item.type || '')

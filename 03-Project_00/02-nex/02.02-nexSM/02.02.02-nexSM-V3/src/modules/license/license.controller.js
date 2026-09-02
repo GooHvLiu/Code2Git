@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 授权模块 - 控制器层
  * 负责授权文件导入、授权状态查询、机器ID查询、时间校准
  */
@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const { LicenseGuard } = require('../../../beehive/sdk');
 const licenseConfig = require('../../config/license.config');
+const { ERROR_CODE } = require('../../constants/errorCode');
 
 /**
  * 创建授权验证实例
@@ -92,7 +93,7 @@ class LicenseController {
   async importLicense(req, res, next) {
     try {
       if (!req.file) {
-        return res.error('请上传授权文件');
+        return res.error(ERROR_CODE.PARAM_MISSING);
       }
 
       // 检查文件扩展名
@@ -143,7 +144,7 @@ class LicenseController {
         maxUsers: lic.maxUsers,
         maxDevices: lic.maxDevices || 0,
         customer: lic.customer
-      }, '授权文件导入成功');
+      });
 
     } catch (err) {
       next(err);
@@ -254,7 +255,7 @@ class LicenseController {
           drift: result.drift || 0,
           serverTime: result.serverTime || null,
           message: result.reason || '时间校准成功'
-        }, '时间校准成功');
+        });
       } else {
         return res.error(`时间校准失败: ${result.reason}`);
       }
@@ -270,7 +271,7 @@ class LicenseController {
   async downloadLicense(req, res, next) {
     try {
       if (!fs.existsSync(licenseConfig.licensePath)) {
-        return res.error('授权文件不存在');
+        return res.error(ERROR_CODE.NOT_FOUND);
       }
       const fileName = path.basename(licenseConfig.licensePath);
       res.download(licenseConfig.licensePath, fileName);

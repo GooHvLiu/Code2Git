@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 菜单模块 - 控制器层
  * 负责：参数接收、调用service、返回响应
  */
@@ -20,11 +20,11 @@ class MenuController {
 
       // 菜单未变更，返回 10304
       if (result === null) {
-        return res.success(null, '菜单未变更', ERROR_CODE.MENU_NOT_MODIFIED);
+        return res.success(null, null, ERROR_CODE.MENU_NOT_MODIFIED);
       }
 
       // 返回菜单树 + 最新版本号
-      res.success({ menu: result.tree, version: result.version }, '获取成功');
+      res.success({ menu: result.tree, version: result.version });
     } catch (err) {
       next(err);
     }
@@ -37,7 +37,7 @@ class MenuController {
   async getVersion(req, res, next) {
     try {
       const version = await menuService.getMenuVersion();
-      res.success({ version }, '获取成功');
+      res.success({ version });
     } catch (err) {
       next(err);
     }

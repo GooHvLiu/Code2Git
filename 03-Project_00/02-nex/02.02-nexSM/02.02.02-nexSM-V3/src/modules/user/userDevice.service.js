@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 用户在线设备模块 - 业务逻辑层
  *
  * 用于客户端授权（限制在线人数）和设备管理
@@ -126,7 +126,7 @@ class UserDeviceService extends BaseService {
   async kickDevice(id, operator) {
     const device = await userDeviceModel.getById(id)
     if (!device) {
-      throw new BusinessError(ERROR_CODE.NOT_FOUND, '设备不存在', { name: '设备' })
+      throw new BusinessError(ERROR_CODE.NOT_FOUND, null, { name: '设备' })
     }
 
     // 通过 device_id 找到对应的 WebSocket 连接，推送 kicked_out 消息
@@ -177,12 +177,12 @@ class UserDeviceService extends BaseService {
   async deleteDevice(id, operator) {
     const device = await userDeviceModel.getById(id)
     if (!device) {
-      throw new BusinessError(ERROR_CODE.NOT_FOUND, '设备不存在', { name: '设备' })
+      throw new BusinessError(ERROR_CODE.NOT_FOUND, null, { name: '设备' })
     }
 
     // 检查设备是否在线
     if (device.status === 1) {
-      throw new BusinessError(ERROR_CODE.BAD_REQUEST, '设备在线，无法删除，请先踢下线', { name: '设备' })
+      throw new BusinessError(ERROR_CODE.BAD_REQUEST, null, { name: '设备' })
     }
 
     // 删除设备记录

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ==========================================
  * 权限模块 - 业务逻辑层
  * ==========================================
@@ -28,7 +28,7 @@ class PermissionService {
    */
   async getUserPermissions(userId) {
     if (!userId) {
-      throw new BusinessError(ERROR_CODE.PARAM_ERROR, '用户ID不能为空')
+      throw new BusinessError(ERROR_CODE.PARAM_ERROR, null)
     }
 
     const cacheKey = CACHE_PREFIX + userId
@@ -81,7 +81,7 @@ class PermissionService {
    */
   async getRolePermissions(roleId) {
     if (!roleId) {
-      throw new BusinessError(ERROR_CODE.PARAM_ERROR, '角色ID不能为空')
+      throw new BusinessError(ERROR_CODE.PARAM_ERROR, null)
     }
     return await permissionModel.getPermissionCodesByRoleId(roleId)
   }
@@ -101,7 +101,7 @@ class PermissionService {
    */
   async getRoleMenuIds(roleId) {
     if (!roleId) {
-      throw new BusinessError(ERROR_CODE.PARAM_ERROR, '角色ID不能为空')
+      throw new BusinessError(ERROR_CODE.PARAM_ERROR, null)
     }
     return await permissionModel.getRoleMenuIds(roleId)
   }
@@ -116,10 +116,10 @@ class PermissionService {
    */
   async saveRolePermissions(roleId, menuIds, roleCode) {
     if (!roleId) {
-      throw new BusinessError(ERROR_CODE.PARAM_ERROR, '角色ID不能为空')
+      throw new BusinessError(ERROR_CODE.PARAM_ERROR, null)
     }
     if (!Array.isArray(menuIds)) {
-      throw new BusinessError(ERROR_CODE.PARAM_ERROR, '菜单ID数组格式不正确')
+      throw new BusinessError(ERROR_CODE.PARAM_ERROR, null)
     }
 
     // 1. 保存角色权限分配

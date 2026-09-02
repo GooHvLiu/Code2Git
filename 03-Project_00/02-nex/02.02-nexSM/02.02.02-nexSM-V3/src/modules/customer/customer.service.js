@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 客户模块 - 业务逻辑层
  */
 const CustomerModel = require('./customer.model');
@@ -50,7 +50,7 @@ class CustomerService {
   async getUserById(id) {
     const user = await CustomerModel.getById(id);
     if (!user) {
-      throw new BusinessError(ERROR_CODE.CUSTOMER_NOT_FOUND, '客户不存在', { name: '客户' })
+      throw new BusinessError(ERROR_CODE.CUSTOMER_NOT_FOUND, null, { name: '客户' })
     }
     return user;
   }
@@ -82,7 +82,7 @@ class CustomerService {
     // 检查用户是否存在
     const user = await CustomerModel.getById(id);
     if (!user) {
-      throw new BusinessError(ERROR_CODE.CUSTOMER_NOT_FOUND, '客户不存在', { name: '客户' })
+      throw new BusinessError(ERROR_CODE.CUSTOMER_NOT_FOUND, null, { name: '客户' })
     }
     // 如果传输过来的性别是女，转换为0，是男，转换为1
     await CustomerModel.update(id, data);
@@ -96,7 +96,7 @@ class CustomerService {
   async deleteUser(id) {
     const user = await CustomerModel.getById(id);
     if (!user) {
-      throw new BusinessError(ERROR_CODE.CUSTOMER_NOT_FOUND, '客户不存在', { name: '客户' })
+      throw new BusinessError(ERROR_CODE.CUSTOMER_NOT_FOUND, null, { name: '客户' })
     }
 
     await CustomerModel.delete(id);
@@ -109,7 +109,7 @@ class CustomerService {
    */
   async batchDeleteUsers(ids) {
     if (!ids || ids.length === 0) {
-      throw new BusinessError(ERROR_CODE.PARAM_MISSING, '请选择要删除的信息')
+      throw new BusinessError(ERROR_CODE.PARAM_MISSING, null)
     }
     await CustomerModel.batchDelete(ids);
   }
@@ -123,7 +123,7 @@ class CustomerService {
   async updateUserStatus(id, status) {
     const user = await CustomerModel.getById(id);
     if (!user) {
-      throw new BusinessError(ERROR_CODE.CUSTOMER_NOT_FOUND, '客户不存在', { name: '客户' })
+      throw new BusinessError(ERROR_CODE.CUSTOMER_NOT_FOUND, null, { name: '客户' })
     }
 
     await CustomerModel.update(id, { status });

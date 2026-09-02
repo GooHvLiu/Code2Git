@@ -4,8 +4,7 @@
     <div class="page-header">
       <div class="header-left">
         <h2 class="page-title">
-          <i class="el-icon-monitor title-icon"></i>
-          {{ $t("menu.system.device.default") }}
+          {{ $t("menu.system.device.page.title") }}
         </h2>
         <p class="page-desc">{{ $t("menu.system.device.page.pageDesc") }}</p>
       </div>

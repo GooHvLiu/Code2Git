@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="auth-page">
     <div class="auth-container" :class="{ 'right-panel-active': isRegister }">
       <!-- ==================== 注册表单 ==================== -->
@@ -123,6 +123,9 @@
             @click="submitForm('ruleForm')"
             >{{ $t('login.loginBtn') }}</el-button
           >
+          <div class="forgot-password-link">
+            <a @click="showForgotPasswordDialog = true">{{ $t('login.forgotPassword') }}</a>
+          </div>
         </el-form>
       </div>
 
@@ -170,6 +173,66 @@
         >{{ $t('login.hasAccount') }}<a @click="switchPanel('login')">{{ $t('login.loginNow') }}</a></span
       >
     </div>
+
+    <!-- ==================== 忘记密码对话框 ==================== -->
+    <el-dialog
+      title="忘记密码"
+      :visible.sync="showForgotPasswordDialog"
+      width="420px"
+      @close="resetForgotPasswordForm"
+    >
+      <el-steps :active="forgotStep" finish-status="success" align-center>
+        <el-step title="验证身份" />
+        <el-step title="重置密码" />
+        <el-step title="完成" />
+      </el-steps>
+
+      <!-- 第一步：输入用户名和邮箱，发送验证码 -->
+      <div v-if="forgotStep === 0" style="margin-top: 30px">
+        <el-form :model="forgotForm" label-width="80px">
+          <el-form-item label="用户名">
+            <el-input v-model="forgotForm.username" placeholder="请输入用户名" />
+          </el-form-item>
+          <el-form-item label="邮箱">
+            <el-input v-model="forgotForm.email" placeholder="请输入注册邮箱" />
+          </el-form-item>
+          <el-form-item label="验证码">
+            <div style="display: flex; gap: 10px; width: 100%">
+              <el-input v-model="forgotForm.code" placeholder="请输入验证码" style="flex: 1" />
+              <el-button :disabled="codeCountdown > 0" @click="handleSendResetCode">
+                {{ codeCountdown > 0 ? codeCountdown + 's后重发' : '发送验证码' }}
+              </el-button>
+            </div>
+          </el-form-item>
+        </el-form>
+      </div>
+
+      <!-- 第二步：输入新密码 -->
+      <div v-if="forgotStep === 1" style="margin-top: 30px">
+        <el-form :model="forgotForm" label-width="80px">
+          <el-form-item label="新密码">
+            <el-input v-model="forgotForm.newPassword" type="password" placeholder="请输入新密码（至少8位）" show-password />
+          </el-form-item>
+          <el-form-item label="确认密码">
+            <el-input v-model="forgotForm.confirmPassword" type="password" placeholder="请再次输入新密码" show-password />
+          </el-form-item>
+        </el-form>
+      </div>
+
+      <!-- 第三步：完成 -->
+      <div v-if="forgotStep === 2" style="margin-top: 30px; text-align: center">
+        <i class="el-icon-success" style="font-size: 48px; color: #67c23a"></i>
+        <p style="margin-top: 15px; font-size: 16px">密码重置成功！</p>
+        <p style="color: #909399">请使用新密码登录</p>
+      </div>
+
+      <span slot="footer">
+        <el-button v-if="forgotStep < 2" @click="showForgotPasswordDialog = false">取 消</el-button>
+        <el-button v-if="forgotStep === 0" type="primary" @click="handleVerifyCode">下一步</el-button>
+        <el-button v-if="forgotStep === 1" type="primary" @click="handleResetPassword">确认重置</el-button>
+        <el-button v-if="forgotStep === 2" type="primary" @click="handleForgotPasswordComplete">去登录</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -190,7 +253,8 @@ import {
   removeSessionStorage,
 } from "@/utils/storage";
 import { LOCALSTORAGE_KEYS, SESSIONSTORAGE_KEYS } from "@/utils/storageKey";
-import { requestCaptchaCodeApi, requestLoginApi, requestRegisterApi } from "@/api/login";
+import { requestCaptchaCodeApi, requestLoginApi, requestRegisterApi } from "@/api/login"
+import { requestSendResetCodeApi, requestResetPasswordByCodeApi } from "@/api/user";
 import { setToken } from "@/utils/auth";
 import config from "@/config";
 import router from '@/router'
@@ -223,6 +287,19 @@ const registerForm = reactive({
 
 const ruleFormRef = ref(null)
 const registerFormRef = ref(null)
+
+// ===== 忘记密码相关 =====
+const showForgotPasswordDialog = ref(false)
+const forgotStep = ref(0)
+const codeCountdown = ref(0)
+let codeTimer = null
+const forgotForm = reactive({
+  username: '',
+  email: '',
+  code: '',
+  newPassword: '',
+  confirmPassword: ''
+})
 
 // ===== 计算属性 =====
 /** 登录表单校验规则（国际化） */
@@ -410,9 +487,96 @@ function formReset(clear = {}) {
 onMounted(() => {
   getCaptchaCode();
 })
+
+// ===== 忘记密码相关方法 =====
+function resetForgotPasswordForm() {
+  forgotStep.value = 0
+  forgotForm.username = ''
+  forgotForm.email = ''
+  forgotForm.code = ''
+  forgotForm.newPassword = ''
+  forgotForm.confirmPassword = ''
+  if (codeTimer) {
+    clearInterval(codeTimer)
+    codeTimer = null
+  }
+  codeCountdown.value = 0
+}
+
+async function handleSendResetCode() {
+  if (!forgotForm.username) {
+    Message.warning('请输入用户名')
+    return
+  }
+  if (!forgotForm.email) {
+    Message.warning('请输入邮箱')
+    return
+  }
+  try {
+    await requestSendResetCodeApi({ username: forgotForm.username, email: forgotForm.email })
+    Message.success('验证码已发送，请查收邮件')
+    codeCountdown.value = 60
+    codeTimer = setInterval(() => {
+      codeCountdown.value--
+      if (codeCountdown.value <= 0) {
+        clearInterval(codeTimer)
+        codeTimer = null
+      }
+    }, 1000)
+  } catch (err) {
+    Message.error('操作失败')
+  }
+}
+
+function handleVerifyCode() {
+  if (!forgotForm.username || !forgotForm.email || !forgotForm.code) {
+    Message.warning('请填写完整信息')
+    return
+  }
+  forgotStep.value = 1
+}
+
+async function handleResetPassword() {
+  if (!forgotForm.newPassword || forgotForm.newPassword.length < 8) {
+    Message.warning('密码长度不能少于8位')
+    return
+  }
+  if (forgotForm.newPassword !== forgotForm.confirmPassword) {
+    Message.warning('两次输入的密码不一致')
+    return
+  }
+  try {
+    await requestResetPasswordByCodeApi({
+      username: forgotForm.username,
+      email: forgotForm.email,
+      code: forgotForm.code,
+      newPassword: forgotForm.newPassword
+    })
+    forgotStep.value = 2
+  } catch (err) {
+    Message.error('操作失败')
+  }
+}
+
+function handleForgotPasswordComplete() {
+  showForgotPasswordDialog.value = false
+  resetForgotPasswordForm()
+}
 </script>
 
 <style scoped lang="less">
+.forgot-password-link {
+  text-align: right;
+  margin-top: 10px;
+  a {
+    color: #409eff;
+    cursor: pointer;
+    font-size: 14px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
 // ==================== 页面背景 ====================
 .auth-page {
   display: flex;

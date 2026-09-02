@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 业务错误码常量
  *
  * 编码规则：
@@ -57,7 +57,10 @@ const ERROR_CODE = {
   USER_PASSWORD_ERROR: 'USER_PASSWORD_ERROR',   // 密码错误
   USER_DISABLED: 'USER_DISABLED',               // 账号已被禁用
   USER_LOCKED: 'USER_LOCKED',                   // 账户已锁定
+  USER_NOT_LOCKED: 'USER_NOT_LOCKED',           // 用户未被锁定
   USER_REGISTER_FAIL: 'USER_REGISTER_FAIL',     // 用户注册失败
+  E_SIGNATURE_PASSWORD_REQUIRED: 'E_SIGNATURE_PASSWORD_REQUIRED', // 电子签名：请输入密码确认
+  E_SIGNATURE_FAILED: 'E_SIGNATURE_FAILED',     // 电子签名失败：密码错误
   DEVICE_LIMIT_EXCEEDED: 'DEVICE_LIMIT_EXCEEDED', // 在线设备数已达上限
 
   // ==================== 字典模块 ====================
@@ -72,6 +75,8 @@ const ERROR_CODE = {
 
   // ==================== 通知模块 ====================
   NOTIFICATION_NOT_FOUND: 'NOTIFICATION_NOT_FOUND', // 通知不存在
+  NOTIFICATION_TITLE_CONTENT_REQUIRED: 'NOTIFICATION_TITLE_CONTENT_REQUIRED', // 标题和内容不能为空
+  NOTIFICATION_USER_ID_REQUIRED: 'NOTIFICATION_USER_ID_REQUIRED', // userId不能为空（或使用 broadcast: true 广播）
 
   // ==================== 客户模块 ====================
   CUSTOMER_NOT_FOUND: 'CUSTOMER_NOT_FOUND', // 客户不存在
@@ -95,6 +100,26 @@ const ERROR_CODE = {
   GITHUB_UPLOAD_FAIL: 'GITHUB_UPLOAD_FAIL',       // GitHub 上传失败
   GITHUB_DELETE_FAIL: 'GITHUB_DELETE_FAIL',       // GitHub 文件删除失败
   GITHUB_API_ERROR: 'GITHUB_API_ERROR',           // GitHub API 调用失败
+
+  // ==================== 邮箱模块 ====================
+  EMAIL_CONFIG_NOT_FOUND: 'EMAIL_CONFIG_NOT_FOUND',                     // 邮箱配置不存在
+  EMAIL_CONFIG_NAME_EXISTS: 'EMAIL_CONFIG_NAME_EXISTS',                 // 配置名称已存在
+  EMAIL_CONFIG_DEFAULT_CANNOT_DELETE: 'EMAIL_CONFIG_DEFAULT_CANNOT_DELETE', // 默认配置不能删除
+  EMAIL_CONFIG_SYSTEM_CANNOT_DELETE: 'EMAIL_CONFIG_SYSTEM_CANNOT_DELETE',   // 系统内置配置不能删除
+  EMAIL_CONFIG_DEFAULT_CANNOT_DISABLE: 'EMAIL_CONFIG_DEFAULT_CANNOT_DISABLE', // 默认配置不能禁用
+  EMAIL_CONFIG_ONLY_ENABLED_CAN_DEFAULT: 'EMAIL_CONFIG_ONLY_ENABLED_CAN_DEFAULT', // 只能将启用的配置设为默认
+  EMAIL_NAME_REQUIRED: 'EMAIL_NAME_REQUIRED',                           // 配置名称不能为空
+  EMAIL_PROVIDER_REQUIRED: 'EMAIL_PROVIDER_REQUIRED',                   // 服务商不能为空
+  EMAIL_HOST_REQUIRED: 'EMAIL_HOST_REQUIRED',                           // SMTP服务器地址不能为空
+  EMAIL_PORT_REQUIRED: 'EMAIL_PORT_REQUIRED',                           // SMTP端口不能为空
+  EMAIL_USERNAME_REQUIRED: 'EMAIL_USERNAME_REQUIRED',                   // 邮箱账号不能为空
+  EMAIL_PASSWORD_REQUIRED: 'EMAIL_PASSWORD_REQUIRED',                   // 邮箱授权码不能为空
+  EMAIL_CONFIG_ID_REQUIRED: 'EMAIL_CONFIG_ID_REQUIRED',                 // 配置ID不能为空
+  EMAIL_TO_EMAIL_REQUIRED: 'EMAIL_TO_EMAIL_REQUIRED',                   // 测试收件人邮箱不能为空
+  EMAIL_STATUS_REQUIRED: 'EMAIL_STATUS_REQUIRED',                       // 状态不能为空
+  EMAIL_FORMAT_INVALID: 'EMAIL_FORMAT_INVALID',                         // 邮箱格式不正确
+  EMAIL_VALIDATION_FAILED: 'EMAIL_VALIDATION_FAILED',                   // 配置校验失败
+  EMAIL_TEST_SEND_FAILED: 'EMAIL_TEST_SEND_FAILED',                     // 测试邮件发送失败
 };
 
 // 错误码对应消息（调试用，中文，开发环境看日志方便）
@@ -108,6 +133,7 @@ const ERROR_MESSAGE = {
   [ERROR_CODE.UNAUTHORIZED]: '未登录，请先登录',
   [ERROR_CODE.TOKEN_EXPIRED]: '登录已过期，请重新登录',
   [ERROR_CODE.TOKEN_INVALID]: 'token无效',
+  [ERROR_CODE.TOKEN_KICKED_OUT]: '您已在其他设备登录，当前设备已下线',
   [ERROR_CODE.PERMISSION_DENIED]: '权限不足',
 
   [ERROR_CODE.CAPTCHA_EXPIRED]: '验证码已失效，请重新获取',
@@ -132,8 +158,12 @@ const ERROR_MESSAGE = {
   [ERROR_CODE.USER_USERNAME_EXISTS]: '用户名已存在',
   [ERROR_CODE.USER_PASSWORD_ERROR]: '密码错误',
   [ERROR_CODE.USER_DISABLED]: '账号已被禁用',
-  [ERROR_CODE.USER_LOCKED]: '账户已锁定',
+  [ERROR_CODE.USER_LOCKED]: '账户已锁定，请 {minutes} 分钟后再试',
+  [ERROR_CODE.USER_NOT_LOCKED]: '该用户未被锁定',
   [ERROR_CODE.USER_REGISTER_FAIL]: '注册失败',
+  [ERROR_CODE.E_SIGNATURE_PASSWORD_REQUIRED]: '电子签名：请输入密码确认',
+  [ERROR_CODE.E_SIGNATURE_FAILED]: '电子签名失败：密码错误',
+  [ERROR_CODE.DEVICE_LIMIT_EXCEEDED]: '在线设备数已达上限（最多 {maxDevices} 台），请联系管理员踢掉其他设备',
 
   [ERROR_CODE.DICT_TYPE_NOT_FOUND]: '字典类型不存在',
   [ERROR_CODE.DICT_TYPE_CODE_EXISTS]: '字典类型编码已存在',
@@ -144,6 +174,8 @@ const ERROR_MESSAGE = {
   [ERROR_CODE.AUDIT_NOT_DELETABLE]: '审计日志不允许删除',
 
   [ERROR_CODE.NOTIFICATION_NOT_FOUND]: '通知不存在',
+  [ERROR_CODE.NOTIFICATION_TITLE_CONTENT_REQUIRED]: '标题和内容不能为空',
+  [ERROR_CODE.NOTIFICATION_USER_ID_REQUIRED]: 'userId不能为空（或使用 broadcast: true 广播）',
 
   [ERROR_CODE.CUSTOMER_NOT_FOUND]: '客户不存在',
 
@@ -163,6 +195,26 @@ const ERROR_MESSAGE = {
   [ERROR_CODE.GITHUB_UPLOAD_FAIL]: 'GitHub 上传失败',
   [ERROR_CODE.GITHUB_DELETE_FAIL]: 'GitHub 文件删除失败',
   [ERROR_CODE.GITHUB_API_ERROR]: 'GitHub API 调用失败',
+
+  // ==================== 邮箱模块 ====================
+  [ERROR_CODE.EMAIL_CONFIG_NOT_FOUND]: '邮箱配置不存在',
+  [ERROR_CODE.EMAIL_CONFIG_NAME_EXISTS]: '配置名称已存在',
+  [ERROR_CODE.EMAIL_CONFIG_DEFAULT_CANNOT_DELETE]: '默认配置不能删除，请先将其他配置设为默认',
+  [ERROR_CODE.EMAIL_CONFIG_SYSTEM_CANNOT_DELETE]: '系统内置配置不能删除',
+  [ERROR_CODE.EMAIL_CONFIG_DEFAULT_CANNOT_DISABLE]: '默认配置不能禁用，请先将其他配置设为默认',
+  [ERROR_CODE.EMAIL_CONFIG_ONLY_ENABLED_CAN_DEFAULT]: '只能将启用的配置设为默认',
+  [ERROR_CODE.EMAIL_NAME_REQUIRED]: '配置名称不能为空',
+  [ERROR_CODE.EMAIL_PROVIDER_REQUIRED]: '服务商不能为空',
+  [ERROR_CODE.EMAIL_HOST_REQUIRED]: 'SMTP服务器地址不能为空',
+  [ERROR_CODE.EMAIL_PORT_REQUIRED]: 'SMTP端口不能为空',
+  [ERROR_CODE.EMAIL_USERNAME_REQUIRED]: '邮箱账号不能为空',
+  [ERROR_CODE.EMAIL_PASSWORD_REQUIRED]: '邮箱授权码不能为空',
+  [ERROR_CODE.EMAIL_CONFIG_ID_REQUIRED]: '配置ID不能为空',
+  [ERROR_CODE.EMAIL_TO_EMAIL_REQUIRED]: '测试收件人邮箱不能为空',
+  [ERROR_CODE.EMAIL_STATUS_REQUIRED]: '状态不能为空',
+  [ERROR_CODE.EMAIL_FORMAT_INVALID]: '邮箱格式不正确',
+  [ERROR_CODE.EMAIL_VALIDATION_FAILED]: '配置校验失败',
+  [ERROR_CODE.EMAIL_TEST_SEND_FAILED]: '测试邮件发送失败',
 };
 
 module.exports = {

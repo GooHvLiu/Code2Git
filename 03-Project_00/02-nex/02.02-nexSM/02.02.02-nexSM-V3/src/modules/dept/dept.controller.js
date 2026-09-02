@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 部门管理模块 - 控制器层
  * 
  * 负责参数接收、调用 Service 层、返回统一响应
@@ -65,7 +65,7 @@ class DeptController extends BaseController {
    */
   async createDept(req, res) {
     const result = await deptService.createDept(req.body)
-    res.success(result, '创建成功')
+    res.success(result)
   }
 
   /**
@@ -80,7 +80,7 @@ class DeptController extends BaseController {
    */
   async updateDept(req, res) {
     await deptService.updateDept(req.params.id, req.body)
-    res.success(null, '更新成功')
+    res.success(null)
   }
 
   /**
@@ -94,7 +94,7 @@ class DeptController extends BaseController {
    */
   async deleteDept(req, res) {
     await deptService.deleteDept(req.params.id)
-    res.success(null, '删除成功')
+    res.success(null)
   }
 }
 

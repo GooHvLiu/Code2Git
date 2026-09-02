@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 文件上传服务层
  * 本地存储 + GitHub 图床
  */
@@ -26,7 +26,7 @@ class UploadService {
    */
   buildLocalFileInfo(file, options = {}) {
     if (!file) {
-      throw new BusinessError(ERROR_CODE.FILE_NOT_EXIST, '请选择要上传的文件');
+      throw new BusinessError(ERROR_CODE.FILE_NOT_EXIST, null);
     }
     const dateDir = options.dateDir || fileUtil.generateDateDir('day');
     const relativePath = `${dateDir}/${file.filename}`;
@@ -46,7 +46,7 @@ class UploadService {
 
   buildLocalFileList(files, options = {}) {
     if (!files || files.length === 0) {
-      throw new BusinessError(ERROR_CODE.FILE_NOT_EXIST, '请选择要上传的文件');
+      throw new BusinessError(ERROR_CODE.FILE_NOT_EXIST, null);
     }
     return files.map(file => this.buildLocalFileInfo(file, options));
   }
@@ -61,10 +61,10 @@ class UploadService {
    */
   async uploadToGithub(file, options = {}) {
     if (!file) {
-      throw new BusinessError(ERROR_CODE.FILE_NOT_EXIST, '请选择要上传的文件');
+      throw new BusinessError(ERROR_CODE.FILE_NOT_EXIST, null);
     }
     if (!uploadConfig.github.enabled) {
-      throw new BusinessError(ERROR_CODE.GITHUB_CONFIG_ERROR, 'GitHub 图床配置不完整，请检查环境变量');
+      throw new BusinessError(ERROR_CODE.GITHUB_CONFIG_ERROR, null);
     }
 
     const { token, owner, repo, branch, pathPrefix, apiBaseUrl } = uploadConfig.github;
@@ -102,7 +102,7 @@ class UploadService {
     } catch (err) {
       const githubMsg = err.response?.data?.message || err.message;
       console.error('[GitHub 上传失败]', githubMsg);
-      throw new BusinessError(ERROR_CODE.GITHUB_UPLOAD_FAIL, `GitHub 上传失败：${githubMsg}`);
+      throw new BusinessError(ERROR_CODE.GITHUB_UPLOAD_FAIL, null);
     }
 
     // 4. 拼接访问 URL
@@ -149,7 +149,7 @@ class UploadService {
    */
   async uploadBatchToGithub(files, options = {}) {
     if (!files || files.length === 0) {
-      throw new BusinessError(ERROR_CODE.FILE_NOT_EXIST, '请选择要上传的文件');
+      throw new BusinessError(ERROR_CODE.FILE_NOT_EXIST, null);
     }
     // 并发上传
     const promises = files.map(file => this.uploadToGithub(file, options));
@@ -163,13 +163,13 @@ class UploadService {
    */
   deleteLocalFile(relativePath) {
     if (!relativePath) {
-      throw new BusinessError(ERROR_CODE.FILE_NOT_EXIST, '文件路径不能为空');
+      throw new BusinessError(ERROR_CODE.FILE_NOT_EXIST, null);
     }
     // 防目录遍历
     const safePath = path.normalize(relativePath).replace(/^(\.\.[/\\])+/, '');
     const fullPath = path.join(uploadConfig.local.dir, safePath);
     if (!fullPath.startsWith(path.resolve(uploadConfig.local.dir))) {
-      throw new BusinessError(ERROR_CODE.PARAM_INVALID, '非法的文件路径');
+      throw new BusinessError(ERROR_CODE.PARAM_INVALID, null);
     }
     try {
       if (fs.existsSync(fullPath)) {
@@ -178,7 +178,7 @@ class UploadService {
       return true;
     } catch (err) {
       console.error('[本地文件删除失败]', err);
-      throw new BusinessError(ERROR_CODE.FILE_DELETE_FAIL, `文件删除失败：${err.message}`);
+      throw new BusinessError(ERROR_CODE.FILE_DELETE_FAIL, null);
     }
   }
 
@@ -188,10 +188,10 @@ class UploadService {
    */
   async deleteGithubFile(objectPath) {
     if (!objectPath) {
-      throw new BusinessError(ERROR_CODE.FILE_NOT_EXIST, '文件路径不能为空');
+      throw new BusinessError(ERROR_CODE.FILE_NOT_EXIST, null);
     }
     if (!uploadConfig.github.enabled) {
-      throw new BusinessError(ERROR_CODE.GITHUB_CONFIG_ERROR, 'GitHub 图床配置不完整');
+      throw new BusinessError(ERROR_CODE.GITHUB_CONFIG_ERROR, null);
     }
 
     const { token, owner, repo, branch, apiBaseUrl } = uploadConfig.github;
@@ -230,7 +230,7 @@ class UploadService {
     } catch (err) {
       const githubMsg = err.response?.data?.message || err.message;
       console.error('[GitHub 文件删除失败]', githubMsg);
-      throw new BusinessError(ERROR_CODE.GITHUB_DELETE_FAIL, `GitHub 文件删除失败：${githubMsg}`);
+      throw new BusinessError(ERROR_CODE.GITHUB_DELETE_FAIL, null);
     }
   }
 }

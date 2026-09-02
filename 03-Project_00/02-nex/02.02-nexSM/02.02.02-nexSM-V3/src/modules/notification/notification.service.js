@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 通知中心模块 - 业务逻辑层
  *
  * 处理通知的增删改查、未读数量统计、标记已读、WebSocket 实时推送等业务逻辑
@@ -72,7 +72,7 @@ class NotificationService extends BaseService {
   async getNotificationById(id, userId) {
     const notification = await notificationModel.getById(id)
     if (!notification || notification.user_id !== userId) {
-      throw new BusinessError(ERROR_CODE.NOTIFICATION_NOT_FOUND, '通知不存在', { name: '通知' })
+      throw new BusinessError(ERROR_CODE.NOTIFICATION_NOT_FOUND, null, { name: '通知' })
     }
     // 自动标记为已读
     if (!notification.is_read) {
@@ -234,7 +234,7 @@ class NotificationService extends BaseService {
    */
   async batchMarkAsRead(userId, ids) {
     if (!ids || !Array.isArray(ids) || ids.length === 0) {
-      throw new BusinessError(ERROR_CODE.PARAM_ERROR, '通知ID列表不能为空')
+      throw new BusinessError(ERROR_CODE.PARAM_ERROR, null)
     }
     await notificationModel.batchMarkAsRead(userId, ids)
     // 实时同步：推送批量已读通知给该用户的其他在线设备
@@ -248,7 +248,7 @@ class NotificationService extends BaseService {
    */
   async batchDelete(userId, ids) {
     if (!ids || !Array.isArray(ids) || ids.length === 0) {
-      throw new BusinessError(ERROR_CODE.PARAM_ERROR, '通知ID列表不能为空')
+      throw new BusinessError(ERROR_CODE.PARAM_ERROR, null)
     }
     return await notificationModel.batchDelete(userId, ids)
   }
@@ -271,7 +271,7 @@ class NotificationService extends BaseService {
    */
   async archive(userId, ids) {
     if (!ids || !Array.isArray(ids) || ids.length === 0) {
-      throw new BusinessError(ERROR_CODE.PARAM_ERROR, '通知ID列表不能为空')
+      throw new BusinessError(ERROR_CODE.PARAM_ERROR, null)
     }
     return await notificationModel.archive(userId, ids)
   }
@@ -283,7 +283,7 @@ class NotificationService extends BaseService {
    */
   async unarchive(userId, ids) {
     if (!ids || !Array.isArray(ids) || ids.length === 0) {
-      throw new BusinessError(ERROR_CODE.PARAM_ERROR, '通知ID列表不能为空')
+      throw new BusinessError(ERROR_CODE.PARAM_ERROR, null)
     }
     return await notificationModel.unarchive(userId, ids)
   }
@@ -313,7 +313,7 @@ class NotificationService extends BaseService {
    */
   async updateSettings(userId, settings) {
     if (!settings || typeof settings !== 'object') {
-      throw new BusinessError(ERROR_CODE.PARAM_ERROR, '设置参数不能为空')
+      throw new BusinessError(ERROR_CODE.PARAM_ERROR, null)
     }
     return await notificationSettingModel.update(userId, settings)
   }

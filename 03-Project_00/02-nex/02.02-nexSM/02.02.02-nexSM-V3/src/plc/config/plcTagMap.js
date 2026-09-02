@@ -103,5 +103,39 @@ module.exports = [
     rate: 'slow',
     rw: 'read',
     desc: '当前批次号'
+  },
+
+  // ========== 部件寿命计数器类（slow 低频轮询，用于部件寿命统计） ==========
+  {
+    tag: 'fillNeedleSuccessCount',
+    address: 40300,
+    type: 'uint32',
+    rate: 'slow',
+    rw: 'read',
+    desc: '灌装针模块运行成功次数（灌装针组件寿命统计）'
+  },
+  {
+    tag: 'fillMotorRotationCount',
+    address: 40302,
+    type: 'uint32',
+    rate: 'slow',
+    rw: 'read',
+    desc: '灌装电机旋转圈数（灌装管组件寿命统计）'
+  },
+  {
+    tag: 'stopperSuccessCount',
+    address: 40304,
+    type: 'uint32',
+    rate: 'slow',
+    rw: 'read',
+    desc: '加塞模块运行成功次数（加塞杆部件寿命统计）'
+  },
+  {
+    tag: 'vacuumHoldSuccessCount',
+    address: 40306,
+    type: 'uint32',
+    rate: 'slow',
+    rw: 'read',
+    desc: '真空保持模块运行成功次数（真空组件寿命统计）'
   }
 ]

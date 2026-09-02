@@ -36,7 +36,6 @@ async function getUserIdsByRoles(roles) {
   // 注意：不限制 status，因为不同系统状态字段值可能不同（0/1/active/enabled等）
   const sql = `SELECT DISTINCT id, username, role, status FROM nex_user WHERE role IN (${placeholders})`
   const rows = await query(sql, roles)
-  console.log(`[通知工具] 根据角色查询用户, 角色: ${JSON.stringify(roles)}, 查询结果数量: ${rows.length}`)
   return rows.map(row => row.id)
 }
 

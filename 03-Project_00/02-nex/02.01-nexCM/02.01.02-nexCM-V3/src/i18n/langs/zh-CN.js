@@ -6,7 +6,6 @@
  * 结构与 en-US.js 保持一致
  */
 export default {
-  // 通用
   common: {
     confirm: '确定',
     cancel: '取消',
@@ -28,6 +27,11 @@ export default {
     sort: '排序',
     description: '描述',
     remark: '备注',
+    newCode: '新物料编码',
+    replaceReason: '更换原因',
+    confirmReplace: '确认更换',
+    replacePart: '更换部件',
+    currentCode: '当前编码',
     enable: '启用',
     all: '全部',
     disable: '禁用',
@@ -55,23 +59,23 @@ export default {
     passwordPlaceholder: '请输入密码进行电子签名',
     passwordRequired: '请输入密码',
     sessionTimeout: '会话超时，请重新登录',
-    // 权限相关通用按钮
     download: '下载',
     print: '打印',
     viewDetail: '查看详情',
     statusChange: '状态切换',
     refreshCache: '刷新缓存',
-    // 导出 PDF 副标题标签
     exportLabels: {
       exporter: '导出人',
       time: '导出时间',
       countPrefix: '共',
       countSuffix: '条记录'
     },
+    createSuccess: '创建成功',
+    deleteSuccess: '删除成功',
+    operationFailed: '操作失败',
+    updateSuccess: '更新成功'
   },
-  // 菜单（权限系统用，后端返回 i18n key） 
   menu: {
-    // 网站首页
     home: {
       default: '网站首页',
       overview: {
@@ -87,7 +91,6 @@ export default {
         view: '详情'
       }
     },
-    // 设备管理
     device: {
       default: '设备管理',
       state: {
@@ -103,10 +106,98 @@ export default {
       part: {
         default: '部件寿命',
         operate: '操作',
-        viewAll: '查看全部'
+        viewAll: '查看全部',
+        page: {
+          title: '部件寿命管理',
+          addBtn: '添加部件',
+          editBtn: '编辑',
+          deleteBtn: '删除',
+          replaceBtn: '更换录入',
+          refreshBtn: '刷新',
+          searchPlaceholder: '搜索部件名称/编码',
+          form: {
+            template: '部件模板',
+            partName: '部件名称',
+            partCode: '部件编码',
+            specModel: '规格型号',
+            ratedLife: '额定寿命',
+            usedLife: '使用寿命',
+            installDate: '安装日期',
+            remark: '备注',
+            newCode: '新物料编码',
+            replaceReason: '更换原因',
+            confirmReplace: '确认更换',
+            replacePart: '更换部件',
+            currentCode: '当前编码'
+          },
+          status: {
+            normal: '正常',
+            warning: '提醒',
+            critical: '警告',
+            expired: '已过期'
+          },
+          template: {
+            fillNeedle: '灌装针组件',
+            fillTube: '灌装管组件',
+            stopperRod: '加塞杆部件',
+            vacuumUnit: '真空组件'
+          },
+          unit: {
+            times: '次'
+          },
+          message: {
+            addSuccess: '部件添加成功',
+            updateSuccess: '部件更新成功',
+            deleteSuccess: '部件删除成功',
+            replaceSuccess: '部件更换记录成功',
+            deleteConfirm: '确定要删除该部件吗？删除后历史记录仍保留。',
+            loadFailed: '加载部件列表失败',
+            noData: '暂无部件数据',
+            updateFailed: '部件更新失败',
+            addFailed: '部件添加失败',
+            saveFailed: '保存部件失败',
+            deleteFailed: '部件删除失败',
+            deleteFailedCatch: '删除部件失败',
+            replaceFailed: '部件更换失败',
+            deleteConfirmTitle: '删除确认',
+            confirmBtn: '确定',
+            cancelBtn: '取消',
+            remaining: '剩余',
+            recentReplaceRecords: '近期更换记录',
+            statusSuccess: '成功',
+            statusFailed: '失败',
+            oldCode: '旧编码',
+            newCode: '新编码',
+            operator: '操作人',
+            replaceDialogTitle: '部件更换录入'
+          },
+          placeholder: {
+            selectTemplate: '请选择部件模板',
+            partName: '请输入部件名称',
+            partCode: '请输入部件编码（如 FILL-NEEDLE-001）',
+            specModel: '请输入规格型号',
+            installDate: '选择安装日期',
+            remark: '请输入备注信息',
+            newCode: '请输入新物料编码',
+            replaceReason: '请选择更换原因',
+            ratedLife: '请输入额定寿命'
+          },
+          replaceReason: {
+            life: '达到使用寿命',
+            damage: '损坏故障',
+            maintenance: '定期维护',
+            changeover: '产品换型',
+            other: '其他'
+          },
+          table: {
+            lifeProgress: '寿命进度',
+            remainingLife: '剩余寿命',
+            status: '状态',
+            operation: '操作'
+          }
+        }
       }
     },
-    // 生产管理
     production: {
       default: '生产管理',
       recipe: {
@@ -214,7 +305,6 @@ export default {
           selectOrderTip: '请选择要下载的订单',
           plannedNoDownload: '计划订单不支持下载报告',
           runningNoDownload: '进行中订单暂不支持下载报告（可在系统设置中开启）',
-          // 新增/编辑订单
           add: '新增订单',
           edit: '编辑订单',
           delete: '删除',
@@ -232,7 +322,6 @@ export default {
         }
       }
     },
-    // 系统设置
     system: {
       default: '系统设置',
       dict: {
@@ -250,7 +339,13 @@ export default {
           itemLabel: '字典标签',
           itemValue: '字典键值',
           itemValuePlaceholder: '请输入字典键值',
-          itemStatus: '状态'
+          itemStatus: '状态',
+          addItem: '新增字典项',
+          addType: '新增字典类型',
+          deleteItemConfirm: '确定要删除该字典项吗？',
+          deleteTypeConfirm: '确定要删除该字典类型吗？',
+          editItem: '编辑字典项',
+          editType: '编辑字典类型'
         }
       },
       dept: {
@@ -266,7 +361,10 @@ export default {
           email: '邮箱',
           addChild: '新增子部门',
           parentDept: '上级部门',
-          parentDeptPlaceholder: '选择上级部门'
+          parentDeptPlaceholder: '选择上级部门',
+          addDept: '新增部门',
+          deleteConfirm: '确定要删除该部门吗？',
+          editDept: '编辑部门'
         }
       },
       role: {
@@ -311,8 +409,13 @@ export default {
           add: '新增用户',
           edit: '编辑用户',
           resetPassword: '重置密码',
+          unlock: '解锁',
+          unlockConfirm: '确定要解锁该用户吗？',
+          unlockSuccess: '用户解锁成功',
           import: '导入',
-          export: '导出'
+          export: '导出',
+          passwordMismatch: '两次输入的密码不一致',
+          resetPasswordSuccess: '密码重置成功'
         }
       },
       audit: {
@@ -387,91 +490,231 @@ export default {
           missingKeys: '缺失的配置项：',
           incompleteTip: '请联系管理员执行配置初始化 SQL，或点击下方按钮重新加载。',
           system: {
-            title: '系统设置',
+            title: '系统配置',
             sessionTimeout: '会话超时时间',
             minutes: '分钟',
             defaultPageSize: '默认分页大小',
             defaultLanguage: '默认语言',
-            dateFormat: '日期格式'
+            dateFormat: '日期格式',
+            sessionTimeoutTip: '用户登录后，多长时间无操作会自动退出登录',
+            defaultPageSizeTip: '列表页面默认每页显示多少条数据',
+            defaultLanguageTip: '系统默认显示的语言（中文/英文）',
+            dateFormatTip: '系统中日期的显示格式（如 YYYY-MM-DD）'
           },
           security: {
             title: '安全设置',
             watermarkEnabled: '启用水印',
             watermarkText: '水印文字',
-            watermarkPlaceholder: '请输入水印文字'
+            watermarkPlaceholder: '请输入水印文字',
+            watermarkTextTip: '水印显示的文字（为空时使用当前用户名）',
+            loginFailedThreshold: '登录失败次数阈值',
+            loginFailedThresholdTip: '连续登录失败达到该次数时，触发通知和账户锁定',
+            lockDurationMinutes: '账户锁定时长',
+            lockDurationMinutesTip: '账户被锁定后，多长时间后自动解锁',
+            watermarkEnabledTip: '是否在页面上显示水印（防止截图泄露）'
           },
           plc: {
-            title: 'PLC 设置',
+            title: 'PLC 通讯',
             protocol: '通讯协议',
+            protocolTip: '与PLC通讯的协议类型',
             host: 'PLC 地址',
+            hostTip: 'PLC设备的IP地址',
             port: '端口',
+            portTip: 'PLC通讯端口，Modbus默认502',
             unitId: '单元 ID',
+            unitIdTip: 'PLC站号/单元ID，通常为1',
             timeout: '超时时间',
             retryCount: '重试次数',
             pollSettings: '轮询设置',
             pollFast: '快速轮询间隔',
-            pollSlow: '慢速轮询间隔'
+            pollFastTip: '高频数据采集间隔',
+            pollSlow: '慢速轮询间隔',
+            pollSlowTip: '低频数据采集间隔',
+            plcProtocolTip: 'PLC通信使用的协议（如 ModbusTcp）',
+            plcHostTip: 'PLC设备的IP地址',
+            plcPortTip: 'PLC设备的端口号',
+            plcUnitIdTip: 'Modbus通信的单元ID/从站地址',
+            pollFastIntervalTip: '快速轮询模式下，读取PLC数据的间隔时间',
+            pollSlowIntervalTip: '慢速轮询模式下，读取PLC数据的间隔时间'
           },
           export: {
             title: '导出设置',
             format: '导出格式',
             filename: '文件名前缀',
             pdfWatermarkEnabled: 'PDF 启用水印',
+            pdfWatermarkEnabledTip: '导出PDF时，是否在PDF中添加水印',
             pdfWatermarkText: 'PDF 水印文字',
-            pdfWatermarkPlaceholder: '请输入 PDF 水印文字'
+            pdfWatermarkPlaceholder: '请输入 PDF 水印文字',
+            pdfWatermarkTextTip: 'PDF中显示的水印文字（为空时使用当前用户名）'
           },
           connection: {
             title: '连接设置',
             heartbeatInterval: '心跳间隔',
-            deviceStatusCheckInterval: '设备状态检查间隔',
-            deviceOfflineThreshold: '设备离线阈值',
-            unitSecond: '秒'
+            heartbeatIntervalTip: 'WebSocket连接的心跳包发送间隔，用于保持连接',
+            deviceStatusCheckInterval: '在线状态检查间隔',
+            deviceStatusCheckIntervalTip: '定时检查设备在线/离线状态的间隔时间',
+            deviceOfflineThreshold: '在线状态离线阈值',
+            deviceOfflineThresholdTip: '设备多长时间无响应后，判定为离线',
+            unitSecond: '秒',
+            maintenanceCheckInterval: '维护检查间隔',
+            maintenanceCheckIntervalTip: '定时检查设备维护状态、部件寿命、授权到期的间隔时间',
+            unitHour: '小时',
+            partLifeStatInterval: '部件寿命统计',
+            partLifeStatIntervalTip: '定时从PLC读取计数器数据，更新部件使用寿命的间隔时间',
+            unitMinute: '分钟'
           },
           device: {
             title: '设备设置',
             maxOnlineDevices: '最大在线设备数',
             deviceName: '设备名称',
+            deviceNameTip: '设备的显示名称，用于页面展示和通知',
             deviceCode: '设备编码',
+            deviceCodeTip: '设备的唯一编号，用于标识设备',
             deviceRegion: '设备区域',
+            deviceRegionTip: '设备所在的国家/城市，用于时区和本地化',
             deviceInstallDate: '安装日期',
+            deviceInstallDateTip: '设备的安装日期，用于计算设备使用年限',
             partLifeSettingsTitle: '部件寿命提醒设置',
             partLifeReminderEnabled: '启用部件寿命提醒',
-            partLifeReminderEnabledTip: '启用后，当部件寿命低于阈值时将自动提醒',
+            partLifeReminderEnabledTip: '是否启用部件寿命到期提醒',
             partLifeThreshold: '寿命提醒阈值',
-            partLifeThresholdTip: '当部件剩余寿命低于该阈值时触发提醒',
+            partLifeThresholdTip: '部件剩余寿命低于该百分比时，触发提醒',
             partLifeRemindInterval: '提醒间隔',
             intervalHour: '每小时',
             intervalShift: '每班次',
             intervalDay: '每天',
-            partLifeRemindIntervalTip: '设置部件寿命提醒的重复间隔',
+            partLifeRemindIntervalTip: '部件寿命提醒的重复频率（每小时/每班次/每天）',
             snoozeInterval: '稍后提醒间隔',
             snooze5min: '5分钟',
             snooze10min: '10分钟',
             snooze30min: '30分钟',
             snooze1hour: '1小时',
             snooze2hour: '2小时',
-            snoozeIntervalTip: '设置"稍后提醒"功能的延迟时间'
+            snoozeIntervalTip: '设置"稍后提醒"功能的延迟时间',
+            partLifeSnoozeIntervalTip: '用户点击"稍后提醒"后，多长时间后再次提醒'
           },
           order: {
             title: '订单设置',
             autoComplete: '自动完成',
             productionControl: '生产控制',
             allowNoOrderProduction: '允许无订单生产',
-            allowNoOrderProductionTip: '启用后，操作员可以在没有生产订单的情况下开始生产',
+            allowNoOrderProductionTip: '是否允许在没有生产订单的情况下启动生产',
             noOrderProductionHighlight: '无订单生产高亮显示',
-            noOrderProductionHighlightTip: '启用后，无订单生产的记录将以橙色高亮显示',
+            noOrderProductionHighlightTip: '无订单生产时，是否在页面上高亮提示',
             orderSwitchConfirm: '订单切换确认',
+            orderSwitchConfirmTip: '切换生产订单时，是否需要确认',
             autoArchiveCompleted: '自动归档已完成订单',
+            autoArchiveCompletedTip: '订单完成后，是否自动归档',
             statDisplay: '统计展示',
             showOperatorName: '显示操作员姓名',
+            showOperatorNameTip: '订单列表和详情中是否显示操作员姓名',
             showAlarmCount: '显示报警数量',
+            showAlarmCountTip: '订单列表和详情中是否显示报警数量',
             showRuntime: '显示运行时长',
+            showRuntimeTip: '订单列表和详情中是否显示运行时长',
             reportConfig: '报告配置',
             reportIncludeAlarmDetail: '报告包含报警详情',
+            reportIncludeAlarmDetailTip: '导出订单报表时，是否包含报警详情',
             reportIncludeOperatorDetail: '报告包含操作员详情',
+            reportIncludeOperatorDetailTip: '导出订单报表时，是否包含操作员详情',
             reportIncludeDownloadCount: '报告包含下载次数',
+            reportIncludeDownloadCountTip: '导出订单报表时，是否包含下载次数',
             allowRunningOrderDownload: '允许运行中订单下载',
-            allowRunningOrderDownloadTip: '启用后，正在运行的订单也可以下载报告'
+            allowRunningOrderDownloadTip: '是否允许下载正在运行中的订单报表'
+          },
+          email: {
+            title: '邮箱配置',
+            addBtn: '新增配置',
+            refreshBtn: '刷新',
+            configName: '配置名称',
+            provider: '服务商',
+            smtpHost: 'SMTP服务器',
+            smtpPort: '端口',
+            portTip: 'PLC通讯端口，Modbus默认502',
+            emailAccount: '邮箱账号',
+            senderName: '发件人名称',
+            isDefault: '是否默认',
+            default: '默认',
+            status: '状态',
+            operations: '操作',
+            addTitle: '新增邮箱配置',
+            editTitle: '编辑邮箱配置',
+            editBtn: '编辑',
+            deleteBtn: '删除',
+            testBtn: '测试',
+            setDefaultBtn: '设为默认',
+            configNamePlaceholder: '请输入配置名称',
+            searchPlaceholder: '搜索配置名称或邮箱账号',
+            useSSL: '使用SSL',
+            authCode: '授权码',
+            authCodePlaceholder: '请输入邮箱授权码',
+            authCodePlaceholderEdit: '留空表示不修改',
+            authCodeTip: 'QQ邮箱需在设置中开启SMTP服务并获取授权码',
+            senderNamePlaceholder: '请输入发件人名称',
+            remark: '备注',
+            cancelBtn: '取消',
+            saveBtn: '保存',
+            confirmBtn: '确定',
+            testEmailTitle: '发送测试邮件',
+            testConfigName: '配置名称',
+            testReceiver: '收件人邮箱',
+            sendTestBtn: '发送测试邮件',
+            testReceiverRequired: '请输入测试收件人邮箱',
+            configNameRequired: '请输入配置名称',
+            providerRequired: '请选择服务商',
+            smtpHostRequired: '请输入SMTP服务器地址',
+            smtpPortRequired: '请输入SMTP端口',
+            emailAccountRequired: '请输入邮箱账号',
+            emailFormatError: '邮箱格式不正确',
+            authCodeRequired: '请输入邮箱授权码',
+            loadFailed: '加载邮箱配置列表失败',
+            addSuccess: '新增成功',
+            updateSuccess: '更新成功',
+            deleteSuccess: '删除成功',
+            setDefaultSuccess: '已设为默认配置',
+            enableSuccess: '已启用',
+            disableSuccess: '已禁用',
+            testSendSuccess: '测试邮件发送成功，请查收',
+            deleteTitle: '删除确认',
+            deleteConfirm: '确定要删除该邮箱配置吗？'
+          },
+          emailLog: {
+            title: '邮件日志',
+            searchPlaceholder: '搜索收件人/主题/配置名',
+            statusFilter: '状态筛选',
+            statusSending: '发送中',
+            statusSuccess: '成功',
+            statusFailed: '失败',
+            configFilter: '配置筛选',
+            batchDelete: '批量删除',
+            refreshBtn: '刷新',
+            configName: '配置名称',
+            recipient: '收件人',
+            subject: '邮件主题',
+            template: '使用模板',
+            exportBtn: '导出',
+            deleteBtn: '删除',
+            status: '状态',
+            retryCount: '重试次数',
+            duration: '发送耗时',
+            errorMsg: '错误信息',
+            sendTime: '发送时间',
+            operations: '操作',
+            viewDetail: '详情',
+            delete: '删除',
+            detailTitle: '邮件日志详情',
+            logId: '日志ID',
+            cc: '抄送',
+            ip: 'IP地址',
+            emailContent: '邮件内容',
+            close: '关闭',
+            loadFailed: '加载邮件日志失败',
+            detailFailed: '加载日志详情失败',
+            deleteConfirm: '确定要删除这条日志吗？',
+            deleteTitle: '删除确认',
+            deleteSuccess: '删除成功',
+            batchDeleteConfirm: '确定要删除选中的 {count} 条日志吗？',
+            batchDeleteSuccess: '批量删除成功'
           },
           license: {
             manageTitle: '授权管理',
@@ -527,38 +770,25 @@ export default {
             cancel: '取消',
             confirmImport: '确认导入',
             licenseManager: {
-              // 品牌信息
               brandTitle: '授权管理系统',
               brandDesc: '安全、稳定、可靠的软件授权解决方案',
-
-              // 功能特性
               featureRsa: 'RSA 非对称加密',
               featureTimeGuard: '时间防回退保护',
               featureMachineBind: '机器码硬件绑定',
-
-              // 表单标题
               importFormTitle: '授权文件导入',
-
-              // 授权状态
               statusValid: '授权有效',
               statusInvalid: '授权无效',
               expireTime: '过期时间',
               permanentValid: '永久有效',
-
-              // 机器码
               currentMachineId: '当前机器码',
               copy: '复制',
               copySuccess: '复制成功',
               copyFailed: '复制失败',
               machineIdTip: '请将此机器码发送给供应商以生成授权文件',
-
-              // 上传区域
               dragUploadTip: '将 .lic 授权文件拖到此处，或点击上传',
               fileSizeTip: '仅支持 .lic 格式的授权文件',
               remove: '移除',
               pleaseSelectFile: '请先选择授权文件',
-
-              // 导入成功
               importSuccessTitle: '授权导入成功',
               importSuccess: '授权文件导入成功',
               licenseId: '授权ID',
@@ -567,20 +797,14 @@ export default {
               issuedAt: '签发时间',
               maxUsers: '最大用户数',
               unlimited: '无限制',
-
-              // 操作按钮
               importLicense: '导入授权',
               enterSystem: '进入系统',
               refreshStatus: '刷新状态',
               cannotGetStatus: '无法获取授权状态',
-
-              // 授权类型
               typeTrial: '试用版',
               typeStandard: '标准版',
               typeEnterprise: '企业版',
               typePerpetual: '永久版',
-
-              // 授权失效原因
               reasonUnknown: '未知原因',
               reasonFileNotFound: '授权文件不存在或验证失败',
               reasonProjectMismatch: '项目不匹配',
@@ -590,9 +814,8 @@ export default {
               reasonTimeRollback: '检测到系统时间回退',
               reasonNetworkSyncFailed: '联网时间校准失败'
             }
-          },
+          }
         }
-
       },
       permission: {
         default: '权限配置',
@@ -631,6 +854,7 @@ export default {
         kick: '踢掉设备',
         delete: '删除设备',
         page: {
+          title: '在线管理',
           pageDesc: '在线设备和用户管理',
           onlineDevices: '在线设备',
           unlimited: '无限制',
@@ -642,6 +866,7 @@ export default {
           statusOnline: '在线',
           statusOffline: '离线',
           deviceName: '设备名称',
+          deviceNameTip: '设备显示名称',
           deviceInfo: '设备信息',
           user: '用户',
           ip: 'IP地址',
@@ -678,7 +903,6 @@ export default {
       }
     }
   },
-  // 标签页
   tagsview: {
     refresh: '刷新页面',
     close: '关闭页面',
@@ -687,7 +911,6 @@ export default {
     closeRight: '关闭右侧',
     closeAll: '关闭全部'
   },
-  // 登录 / 注册
   login: {
     title: '系统登录',
     username: '用户名',
@@ -714,7 +937,6 @@ export default {
     loginFailed: '登录失败',
     logoutSuccess: '退出成功',
     logoutConfirm: '确定要退出登录吗？',
-    // 注册
     registerTitle: '用户注册',
     realName: '真实姓名',
     email: '邮箱',
@@ -722,12 +944,10 @@ export default {
     confirmPassword: '确认密码',
     confirmPasswordRequired: '请输入确认密码',
     registerSuccess: '注册成功，请登录',
-    // 单点登录
     deviceLimitExceeded: '在线设备数已达上限（最多 {maxDevices} 台），请联系管理员踢掉其他设备',
     kickedOffline: '您的账号已在其他设备登录，您已被踢下线',
     kickNotice: '下线通知',
     kickReason: '您的账号已在其他设备登录',
-    // 首次登录
     firstLoginTitle: '首次登录',
     firstLoginDesc: '检测到您是首次登录，请修改初始密码',
     oldPassword: '原密码',
@@ -739,23 +959,18 @@ export default {
     passwordStrong: '强',
     passwordTips: '密码长度8-20位，包含大小写字母、数字和特殊字符'
   },
-  // 布局
   layout: {
-    // 顶部导航
     user: '用户',
     fullscreen: '全屏',
     exitFullscreen: '退出全屏',
     searchMenu: '搜索菜单',
-    // 用户菜单
     profile: '个人中心',
     settings: '系统设置',
     logout: '退出登录',
     notificationCenter: '通知中心',
-    // 侧边栏
     collapse: '收起',
     expand: '展开'
   },
-  // 个人中心
   profile: {
     title: '个人中心',
     basicInfo: '基本信息',
@@ -768,10 +983,8 @@ export default {
     status: '用户状态',
     createTime: '创建时间'
   },
-  // 快捷菜单
   quickMenu: {
     title: '快捷菜单',
-    // 主题调色
     theme: {
       palette: '主题调色',
       resetAll: '重置全部',
@@ -783,14 +996,12 @@ export default {
       sidebarIconColor: '侧边栏图标颜色',
       sidebarActiveBg: '侧边栏激活背景'
     },
-    // 语言
     language: {
       title: '语言',
       switchedToZh: '已切换为中文',
       switchedToEn: '已切换为英文'
-    },
+    }
   },
-  // 通知中心
   notification: {
     title: '通知中心',
     center: '通知中心',
@@ -811,22 +1022,23 @@ export default {
     read: '已读',
     unread: '未读',
     createdAt: '创建时间',
-    // 归档
     unarchived: '未归档',
     archived: '已归档',
     archive: '归档',
     unarchive: '取消归档',
     batchArchive: '批量归档',
     batchUnarchive: '批量取消归档',
-    // 筛选
     all: '全部',
-    typeSystem: '系统',
-    typePlc: 'PLC',
-    typeUser: '用户',
-    typeAudit: '审计',
-    typeDevice: '设备',
-    typeConnection: '连接',
-    typeSecurity: '安全',
+    typeSystem: '系统通知',
+    typePlc: 'PLC通知',
+    typeUser: '用户通知',
+    typeAudit: '审计通知',
+    typeDevice: '设备通知',
+    typeConnection: '连接通知',
+    typeSecurity: '安全通知',
+    typeProduction: '生产通知',
+    typeConfig: '配置通知',
+    typeLicense: '授权通知',
     priority: '优先级',
     priorityHigh: '高',
     priorityMedium: '中',
@@ -841,23 +1053,158 @@ export default {
     endDate: '结束日期',
     searchPlaceholder: '搜索通知...',
     reset: '重置',
-    // 操作
     markRead: '标记已读',
     batchMarkRead: '批量标记已读',
     selectedCount: '已选择 {count} 项',
     clearSelection: '取消选择',
-    // 时间
     justNow: '刚刚',
     minutesAgo: '分钟前',
     hoursAgo: '小时前',
     daysAgo: '天前',
-    // 通知标题和内容（示例）
     userLoginTitle: '用户登录',
     userLoginContent: '用户 {username} 登录系统',
-    // 踢下线通知
     kickOutTitle: '下线通知',
     kickOutContent: '您的账号已在其他设备登录',
-    // 通知设置页面
+    kickedOutTitle: '账号被踢下线',
+    kickedOutContent: '您的账号已于 {time} 在IP {ip} 的设备上登录，当前设备已下线',
+    deviceKickedTitle: '设备被踢下线',
+    deviceKickedContent: '您的设备 {deviceName} 已于 {time} 被管理员 {operator} 踢下线',
+    deviceKickedAdminTitle: '设备被踢下线（管理员通知）',
+    deviceKickedAdminContent: '管理员 {operator} 已于 {time} 将用户 {userId} 的设备 {deviceName} 踢下线',
+    system: {
+      backupSuccess: {
+        title: '数据备份成功',
+        content: '系统数据备份已成功完成'
+      },
+      backupFailed: {
+        title: '数据备份失败',
+        content: '系统数据备份失败，请检查备份配置'
+      }
+    },
+    license: {
+      expiring: {
+        title: '授权即将到期',
+        content: '系统授权将在30天内到期，请及时续费'
+      },
+      expired: {
+        title: '授权已过期',
+        content: '系统授权已过期，部分功能已受限'
+      }
+    },
+    user: {
+      register: {
+        title: '新用户注册',
+        content: '用户 {username} 已注册成功'
+      },
+      create: {
+        title: '用户创建',
+        content: '管理员创建了用户 {username}'
+      },
+      update: {
+        title: '用户信息变更',
+        content: '用户 {username} 的信息已更新'
+      },
+      statusChange: {
+        title: '用户状态变更',
+        content: '用户 {username} 的状态已变更为 {status}'
+      },
+      passwordReset: {
+        title: '密码重置',
+        content: '用户 {username} 的密码已被重置'
+      },
+      loginFailed: {
+        title: '用户登录失败',
+        content: '用户 {username} 连续登录失败 {count} 次，请关注'
+      },
+      roleChange: {
+        title: '用户角色变更',
+        content: '用户 {username} 的角色已变更为 {role}'
+      }
+    },
+    device: {
+      paramChange: {
+        title: '设备参数变更',
+        content: '设备参数 {tag} 已由 {operator} 修改'
+      },
+      maintenanceReminder: {
+        title: '设备维护提醒',
+        content: '设备 {deviceName} 即将到达维护时间，请及时安排维护'
+      },
+      partLifeWarning: {
+        title: '配件寿命预警',
+        content: '配件 {partName} 使用寿命即将到期，请及时更换'
+      }
+    },
+    production: {
+      orderCreate: {
+        title: '生产订单创建',
+        content: '生产订单 {orderNo} 已创建'
+      },
+      orderUpdate: {
+        title: '生产订单变更',
+        content: '生产订单 {orderNo} 已更新'
+      },
+      orderComplete: {
+        title: '生产订单完成',
+        content: '生产订单 {orderNo} 已完成'
+      },
+      batchComplete: {
+        title: '批次完成',
+        content: '批次 {batchNo} 已完成生产'
+      }
+    },
+    config: {
+      systemUpdate: {
+        title: '系统配置变更',
+        content: '系统配置已由 {username} 修改'
+      },
+      plcConnectionUpdate: {
+        title: 'PLC连接配置变更',
+        content: 'PLC连接配置已由 {username} 修改'
+      },
+      connectionUpdate: {
+        title: '连接配置变更',
+        content: '连接配置已由 {username} 修改'
+      },
+      deviceParamsUpdate: {
+        title: '设备参数配置变更',
+        content: '设备参数配置已由 {username} 修改'
+      },
+      exportUpdate: {
+        title: '导出配置变更',
+        content: '导出配置已由 {username} 修改'
+      },
+      securityUpdate: {
+        title: '安全配置变更',
+        content: '安全配置已由 {username} 修改'
+      }
+    },
+    audit: {
+      logExport: {
+        title: '审计日志导出',
+        content: '用户 {username} 导出了审计日志'
+      },
+      logView: {
+        title: '审计日志查看',
+        content: '用户 {username} 查看了审计日志'
+      }
+    },
+    permission: {
+      change: {
+        title: '权限配置变更',
+        content: '角色 {roleName} 的权限配置已由 {operator} 修改'
+      }
+    },
+    data: {
+      export: {
+        title: '敏感数据导出',
+        content: '用户 {username} 导出了敏感数据'
+      },
+      delete: {
+        title: '数据删除操作',
+        content: '用户 {username} 删除了数据'
+      }
+    },
     settings: {
       title: '通知设置',
       notificationTypes: '通知类型',
@@ -875,25 +1222,24 @@ export default {
       soundEnabled: '声音提醒',
       popupEnabled: '弹窗提醒',
       save: '保存',
-    }
+      endTime: '结束时间',
+      saveSuccess: '保存成功',
+      startTime: '开始时间'
+    },
+    operationFailed: '操作失败'
   },
-  // 心跳指示器
   heartbeat: {
-    // 状态文本（导航栏显示）
     statusOnline: '在线',
     statusOffline: '离线',
     statusAuthenticating: '认证中...',
     statusDeviceDisconnected: '设备未连接',
     statusReconnecting: '重连中({count})',
-    // 服务器状态
     serverConnected: '服务器: 已连接',
     serverDisconnected: '服务器: 未连接',
     serverAuthenticating: '服务器: 认证中',
     serverReconnecting: '服务器: 重连中(第{count}次)',
-    // 设备状态
     deviceConnected: '设备: 已连接',
     deviceDisconnected: '设备: 未连接',
-    // 详情弹窗
     detailTitle: '连接状态详情',
     detailServerConnected: '服务器状态: 已连接 ✓',
     detailServerDisconnected: '服务器状态: 未连接 ✗',
@@ -904,11 +1250,220 @@ export default {
     detailLastHeartbeat: '最后心跳: {time}',
     detailHeartbeatInterval: '心跳间隔: {seconds}秒',
     confirm: '确定',
-    // 相对时间
     timeNever: '从未',
     timeSecondsAgo: '{n}秒前',
     timeMinutesAgo: '{n}分钟前',
     timeHoursAgo: '{n}小时前'
   },
-
+  emailLog: {
+    title: '邮件日志',
+    searchPlaceholder: '搜索收件人/主题/配置名',
+    statusFilter: '状态筛选',
+    statusSending: '发送中',
+    statusSuccess: '成功',
+    statusFailed: '失败',
+    configFilter: '配置筛选',
+    batchDelete: '批量删除',
+    refreshBtn: '刷新',
+    configName: '配置名称',
+    recipient: '收件人',
+    subject: '邮件主题',
+    template: '使用模板',
+    status: '状态',
+    retryCount: '重试次数',
+    duration: '发送耗时',
+    errorMsg: '错误信息',
+    sendTime: '发送时间',
+    operations: '操作',
+    viewDetail: '详情',
+    delete: '删除',
+    detailTitle: '邮件日志详情',
+    logId: '日志ID',
+    cc: '抄送',
+    ip: 'IP地址',
+    emailContent: '邮件内容',
+    close: '关闭',
+    loadFailed: '加载邮件日志失败',
+    detailFailed: '加载日志详情失败',
+    deleteConfirm: '确定要删除这条日志吗？',
+    deleteTitle: '删除确认',
+    deleteSuccess: '删除成功',
+    batchDeleteConfirm: '确定要删除选中的 {count} 条日志吗？',
+    batchDeleteSuccess: '批量删除成功'
+  },
+  error: {
+    PARAM_ERROR: '参数错误',
+    PARAM_MISSING: '缺少必填参数',
+    PARAM_INVALID: {
+      default: '参数格式不正确',
+      password: {
+        string_min: '密码最少{limit}个字符',
+        string_max: '密码最多{limit}个字符',
+        string_empty: '密码不能为空',
+        any_required: '密码不能为空'
+      },
+      username: {
+        string_min: '用户名最少{limit}个字符',
+        string_max: '用户名最多{limit}个字符',
+        string_empty: '用户名不能为空',
+        any_required: '用户名不能为空'
+      },
+      email: {
+        string_email: '邮箱格式不正确',
+        string_empty: '邮箱不能为空',
+        any_required: '邮箱不能为空'
+      },
+      string_min: '{field}最少{limit}个字符',
+      string_max: '{field}最多{limit}个字符',
+      string_empty: '{field}不能为空',
+      any_required: '{field}不能为空',
+      string_base: '{field}必须是字符串',
+      number_base: '{field}必须是数字'
+    },
+    UNAUTHORIZED: '未登录，请先登录',
+    TOKEN_EXPIRED: '登录已过期，请重新登录',
+    TOKEN_INVALID: 'Token无效',
+    TOKEN_KICKED_OUT: '您已在其他设备登录，当前设备已下线',
+    PERMISSION_DENIED: '权限不足',
+    CAPTCHA_EXPIRED: '验证码已失效，请重新获取',
+    CAPTCHA_ERROR: '验证码输入错误',
+    NOT_FOUND: '接口不存在',
+    SYSTEM_ERROR: '系统错误',
+    DATABASE_ERROR: '数据库操作失败',
+    NETWORK_ERROR: '网络错误',
+    UNKNOWN_ERROR: '未知错误',
+    DEPT_NOT_FOUND: '部门不存在',
+    DEPT_PARENT_INVALID: '上级部门不能设置为自己',
+    DEPT_HAS_CHILDREN: '存在子部门，无法删除',
+    DEPT_HAS_USERS: '该部门下有用户，无法删除',
+    ROLE_NOT_FOUND: '角色不存在',
+    ROLE_CODE_EXISTS: '角色编码已存在',
+    USER_NOT_FOUND: '用户不存在',
+    USER_USERNAME_EXISTS: '用户名已存在',
+    USER_PASSWORD_ERROR: '密码错误',
+    USER_DISABLED: '账号已被禁用',
+    USER_LOCKED: '账户已锁定',
+    USER_REGISTER_FAIL: '注册失败',
+    DEVICE_LIMIT_EXCEEDED: '在线设备数已达上限（最多 {maxDevices} 台），请联系管理员踢掉其他设备',
+    DICT_TYPE_NOT_FOUND: '字典类型不存在',
+    DICT_TYPE_CODE_EXISTS: '字典类型编码已存在',
+    DICT_ITEM_NOT_FOUND: '字典项不存在',
+    DICT_ITEM_VALUE_DUPLICATE: '同一字典类型下值不能重复',
+    AUDIT_NOT_MODIFIABLE: '审计日志不允许修改',
+    AUDIT_NOT_DELETABLE: '审计日志不允许删除',
+    NOTIFICATION_NOT_FOUND: '通知不存在',
+    CUSTOMER_NOT_FOUND: '客户不存在',
+    MENU_USER_ID_REQUIRED: '用户ID不能为空',
+    FILE_NOT_EXIST: '请选择要上传的文件',
+    FILE_PATH_EMPTY: '文件路径不能为空',
+    FILE_PATH_INVALID: '非法的文件路径',
+    FILE_TOO_LARGE: '文件大小超出限制',
+    FILE_TYPE_NOT_ALLOWED: '不支持的文件类型',
+    FILE_UPLOAD_FAIL: '文件上传失败',
+    FILE_DELETE_FAIL: '文件删除失败',
+    FILE_LIMIT_EXCEEDED: '上传文件数量超出限制',
+    FILE_UNEXPECTED_FIELD: '意外的文件字段',
+    GITHUB_CONFIG_ERROR: 'GitHub 图床配置不完整',
+    GITHUB_UPLOAD_FAIL: 'GitHub 上传失败',
+    GITHUB_DELETE_FAIL: 'GitHub 文件删除失败',
+    GITHUB_API_ERROR: 'GitHub API 调用失败',
+    E_SIGNATURE_PASSWORD_REQUIRED: '电子签名：请输入密码确认',
+    E_SIGNATURE_FAILED: '电子签名失败：密码错误',
+    NOTIFICATION_TITLE_CONTENT_REQUIRED: '标题和内容不能为空',
+    NOTIFICATION_USER_ID_REQUIRED: 'userId不能为空（或使用 broadcast: true 广播）',
+    EMAIL_CONFIG_NOT_FOUND: '邮箱配置不存在',
+    EMAIL_CONFIG_NAME_EXISTS: '配置名称已存在',
+    EMAIL_CONFIG_DEFAULT_CANNOT_DELETE: '默认配置不能删除，请先将其他配置设为默认',
+    EMAIL_CONFIG_SYSTEM_CANNOT_DELETE: '系统内置配置不能删除',
+    EMAIL_CONFIG_DEFAULT_CANNOT_DISABLE: '默认配置不能禁用，请先将其他配置设为默认',
+    EMAIL_CONFIG_ONLY_ENABLED_CAN_DEFAULT: '只能将启用的配置设为默认',
+    EMAIL_NAME_REQUIRED: '配置名称不能为空',
+    EMAIL_PROVIDER_REQUIRED: '服务商不能为空',
+    EMAIL_HOST_REQUIRED: 'SMTP服务器地址不能为空',
+    EMAIL_PORT_REQUIRED: 'SMTP端口不能为空',
+    EMAIL_USERNAME_REQUIRED: '邮箱账号不能为空',
+    EMAIL_PASSWORD_REQUIRED: '邮箱授权码不能为空',
+    EMAIL_CONFIG_ID_REQUIRED: '配置ID不能为空',
+    EMAIL_TO_EMAIL_REQUIRED: '测试收件人邮箱不能为空',
+    EMAIL_STATUS_REQUIRED: '状态不能为空',
+    EMAIL_FORMAT_INVALID: '邮箱格式不正确',
+    EMAIL_VALIDATION_FAILED: '配置校验失败：{errors}',
+    EMAIL_TEST_SEND_FAILED: '测试邮件发送失败：{error}'
+  },
+  errorLog: {
+    clear: '清空',
+    empty: '暂无错误日志',
+    pageUrl: '页面地址',
+    stackInfo: '堆栈信息',
+    triggerLocation: '触发位置'
+  },
+  errorPage: {
+    back: '返回',
+    backHome: '返回首页',
+    forbidden: '403 - 禁止访问',
+    forbiddenDesc: '抱歉，您没有权限访问此页面',
+    notFound: '404 - 页面不存在'
+  },
+  license: {
+    adminOnly: '仅管理员可操作',
+    brandDesc: '品牌描述',
+    cancel: '取消',
+    confirmImport: '确认导入',
+    contact: '联系方式',
+    customerName: '客户名称',
+    detailTitle: '授权详情',
+    download: '下载',
+    dragUpload: '将授权文件拖到此处，或点击上传',
+    email: '邮箱',
+    enabled: '已启用',
+    expireAt: '到期时间',
+    expireTime: '过期时间',
+    expired: '已过期',
+    features: '功能特性',
+    fileInfo: '文件信息',
+    fileName: '文件名',
+    filePath: '文件路径',
+    fileSize: '文件大小',
+    importDialogTitle: '导入授权',
+    importLicense: '导入授权',
+    importNewLicense: '导入新授权',
+    importTip: '请选择 .lic 格式的授权文件',
+    issuedAt: '签发时间',
+    lastModified: '最后修改时间',
+    lastVerified: '最后验证时间',
+    licenseId: '授权ID',
+    licenseStatus: '授权状态',
+    licenseType: '授权类型',
+    manageTitle: '授权管理',
+    matchStatus: '匹配状态',
+    matched: '已匹配',
+    maxDevices: '最大设备数',
+    maxUsers: '最大用户数',
+    noLicenseFile: '未找到授权文件',
+    notInitialized: '未初始化',
+    notMatched: '未匹配',
+    phone: '电话',
+    project: '项目',
+    projectId: '项目ID',
+    projectName: '项目名称',
+    refresh: '刷新',
+    serverTime: '服务器时间',
+    statusInvalid: '状态无效',
+    statusValid: '状态有效',
+    syncTime: '同步时间',
+    timeGuard: '时间守护',
+    timeGuardStatus: '时间守护状态',
+    timeRemaining: '剩余时间',
+    unknownReason: '未知原因',
+    unlimited: '无限制'
+  },
+  systemConfig: {
+    device: {
+      reminderContent: '提醒内容',
+      reminderNoData: '暂无提醒数据',
+      reminderRemindLater: '稍后提醒',
+      reminderTitle: '部件寿命提醒',
+      reminderViewDetail: '查看详情'
+    }
+  }
 }

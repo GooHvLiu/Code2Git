@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 角色管理模块 - 业务逻辑层
  * 
  * 处理角色的增删改查、角色菜单权限关联、多语言字段处理等业务逻辑
@@ -69,7 +69,7 @@ class RoleService extends BaseService {
   async getRoleById(id, lang = 'zh-CN') {
     const role = await RoleModel.getById(id)
     if (!role) {
-      throw new BusinessError(ERROR_CODE.ROLE_NOT_FOUND, '角色不存在')
+      throw new BusinessError(ERROR_CODE.ROLE_NOT_FOUND, null)
     }
     // 查询角色菜单权限
     const menuIds = await RoleMenuModel.getMenuIdsByRoleId(id)
@@ -96,7 +96,7 @@ class RoleService extends BaseService {
     // 检查编码是否已存在
     const exist = await RoleModel.getByCode(data.role_code)
     if (exist) {
-      throw new BusinessError(ERROR_CODE.ROLE_CODE_EXISTS, '角色编码已存在')
+      throw new BusinessError(ERROR_CODE.ROLE_CODE_EXISTS, null)
     }
     // 处理多语言字段（字符串转 JSON 对象）
     const processedData = this.convertLangFieldsToJson(data)

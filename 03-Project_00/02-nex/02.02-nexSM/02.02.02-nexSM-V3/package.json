@@ -37,6 +37,7 @@
     "node-cache": "^5.1.2",
     "node-opcua": "^2.177.0",
     "node-snap7": "^1.0.9",
+    "nodemailer": "^9.1.0",
     "svg-captcha": "^1.4.0",
     "swagger-jsdoc": "^6.3.0",
     "swagger-ui-express": "^5.0.1",

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * JWT 鉴权中间件
  * 验证token有效性，解析用户信息挂载到 req.user
  * 支持单点登录：验证 token_version，旧 token 自动失效
@@ -58,7 +58,7 @@ async function requireAuth(req, res, next) {
       const currentVersion = await getUserTokenVersion(decoded.id);
       if (decoded.token_version !== currentVersion) {
         // Token 版本号不一致，说明已在其他设备登录，当前 token 已失效
-        return res.error(ERROR_CODE.TOKEN_KICKED_OUT, '您已在其他设备登录，当前设备已下线');
+        return res.error(ERROR_CODE.TOKEN_KICKED_OUT);
       }
     } catch (err) {
       console.error('[鉴权] 验证 token_version 失败:', err.message);

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 通知中心模块 - 控制器层
  * 
  * 负责参数接收、调用 Service 层、返回统一响应
@@ -11,6 +11,7 @@
  */
 const BaseController = require('../../controllers/BaseController')
 const notificationService = require('./notification.service')
+const { ERROR_CODE } = require('../../constants/errorCode')
 
 class NotificationController extends BaseController {
   /**
@@ -85,7 +86,7 @@ class NotificationController extends BaseController {
    */
   async markAsRead(req, res) {
     await notificationService.markAsRead(req.params.id, req.user.id)
-    res.success(null, '标记成功')
+    res.success(null)
   }
 
   /**
@@ -99,7 +100,7 @@ class NotificationController extends BaseController {
    */
   async markAllAsRead(req, res) {
     await notificationService.markAllAsRead(req.user.id)
-    res.success(null, '全部标记成功')
+    res.success(null)
   }
 
   /**
@@ -117,7 +118,7 @@ class NotificationController extends BaseController {
    */
   async delete(req, res) {
     await notificationService.deleteNotification(req.params.id, req.user.id)
-    res.success(null, '删除成功')
+    res.success(null)
   }
 
   /**
@@ -142,7 +143,7 @@ class NotificationController extends BaseController {
     const { userId, title, content, type, priority, link, broadcast } = req.body
 
     if (!title || !content) {
-      return res.error('标题和内容不能为空')
+      return res.error(ERROR_CODE.NOTIFICATION_TITLE_CONTENT_REQUIRED)
     }
 
     if (broadcast) {
@@ -152,11 +153,11 @@ class NotificationController extends BaseController {
         type: 'notification',
         data: { title, content, type: type || 'system', priority: priority || 'normal', created_at: new Date().toISOString() }
       })
-      return res.success(null, '广播推送成功')
+      return res.success(null)
     }
 
     if (!userId) {
-      return res.error('userId 不能为空（或使用 broadcast: true 广播）')
+      return res.error(ERROR_CODE.NOTIFICATION_USER_ID_REQUIRED)
     }
 
     const result = await notificationService.sendNotification({
@@ -168,7 +169,7 @@ class NotificationController extends BaseController {
       link: link || ''
     })
 
-    res.success({ id: result.insertId }, '通知发送成功')
+    res.success({ id: result.insertId })
   }
 
   // ==================== 批量操作接口 ====================
@@ -180,7 +181,7 @@ class NotificationController extends BaseController {
   async batchMarkAsRead(req, res) {
     const { ids } = req.body
     await notificationService.batchMarkAsRead(req.user.id, ids)
-    res.success(null, '批量标记成功')
+    res.success(null)
   }
 
   /**
@@ -190,7 +191,7 @@ class NotificationController extends BaseController {
   async batchDelete(req, res) {
     const { ids } = req.body
     await notificationService.batchDelete(req.user.id, ids)
-    res.success(null, '批量删除成功')
+    res.success(null)
   }
 
   /**
@@ -200,7 +201,7 @@ class NotificationController extends BaseController {
   async deleteAll(req, res) {
     const { includeArchived } = req.body
     await notificationService.deleteAll(req.user.id, includeArchived)
-    res.success(null, '全部删除成功')
+    res.success(null)
   }
 
   // ==================== 通知归档接口 ====================
@@ -212,7 +213,7 @@ class NotificationController extends BaseController {
   async archive(req, res) {
     const { ids } = req.body
     await notificationService.archive(req.user.id, ids)
-    res.success(null, '归档成功')
+    res.success(null)
   }
 
   /**
@@ -222,7 +223,7 @@ class NotificationController extends BaseController {
   async unarchive(req, res) {
     const { ids } = req.body
     await notificationService.unarchive(req.user.id, ids)
-    res.success(null, '恢复成功')
+    res.success(null)
   }
 
   /**
@@ -249,7 +250,7 @@ class NotificationController extends BaseController {
    */
   async updateSettings(req, res) {
     await notificationService.updateSettings(req.user.id, req.body)
-    res.success(null, '设置更新成功')
+    res.success(null)
   }
 }
 

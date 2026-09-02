@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 部门管理模块 - 业务逻辑层
  * 
  * 处理部门的增删改查、部门树形结构构建、多语言字段处理等业务逻辑
@@ -69,7 +69,7 @@ class DeptService extends BaseService {
   async getDeptById(id, lang = 'zh-CN') {
     const dept = await deptModel.getById(id)
     if (!dept) {
-      throw new BusinessError(ERROR_CODE.DEPT_NOT_FOUND, '部门不存在')
+      throw new BusinessError(ERROR_CODE.DEPT_NOT_FOUND, null)
     }
     return dept
   }
@@ -109,7 +109,7 @@ class DeptService extends BaseService {
     await this.getDeptById(id)
     // 防止将父部门设置为自己或子部门
     if (data.parent_id && data.parent_id === id) {
-      throw new BusinessError(ERROR_CODE.DEPT_PARENT_INVALID, '上级部门不能设置为自己')
+      throw new BusinessError(ERROR_CODE.DEPT_PARENT_INVALID, null)
     }
     return await deptModel.update(id, data)
   }
@@ -128,12 +128,12 @@ class DeptService extends BaseService {
     // 检查是否有子部门
     const children = await deptModel.getByParentId(id)
     if (children.length > 0) {
-      throw new BusinessError(ERROR_CODE.DEPT_HAS_CHILDREN, '存在子部门，无法删除')
+      throw new BusinessError(ERROR_CODE.DEPT_HAS_CHILDREN, null)
     }
     // 检查是否有用户使用该部门
     const userCount = await userModel.countByDeptId(id)
     if (userCount > 0) {
-      throw new BusinessError(ERROR_CODE.DEPT_HAS_USERS, `该部门下有 ${userCount} 个用户，无法删除`, { count: userCount })
+      throw new BusinessError(ERROR_CODE.DEPT_HAS_USERS, null, { count: userCount })
     }
     return await deptModel.delete(id)
   }

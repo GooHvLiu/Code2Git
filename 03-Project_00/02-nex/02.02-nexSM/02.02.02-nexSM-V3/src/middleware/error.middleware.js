@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 全局错误处理中间件
  * 捕获所有异常，统一返回格式
  * 必须放在所有路由之后注册
@@ -29,9 +29,19 @@ function errorHandler(err, req, res, next) {
 
   // 业务错误
   if (err instanceof BusinessError) {
+    // 如果没有传入消息，从 ERROR_MESSAGE 中获取，并用 data 中的参数填充模板
+    let msg = err.message;
+    if (!msg && ERROR_MESSAGE[err.code]) {
+      msg = ERROR_MESSAGE[err.code];
+      if (err.data && typeof err.data === 'object') {
+        Object.keys(err.data).forEach(key => {
+          msg = msg.replace(new RegExp('\\{' + key + '\\}', 'g'), err.data[key]);
+        });
+      }
+    }
     return res.json({
       code: err.code,
-      msg: err.message,
+      msg: msg,
       data: err.data,
       timestamp: Date.now()
     });

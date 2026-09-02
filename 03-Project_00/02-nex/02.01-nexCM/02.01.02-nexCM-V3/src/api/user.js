@@ -58,10 +58,40 @@ export function requestBatchDeleteUserApi(ids, password) {
 }
 
 /**
- * 重置用户密码
+ * 重置用户密码（管理员）
  * @param {number|string} id - 用户ID
- * @param {string} password - 新密码
+ * @param {string} newPassword - 新密码
  */
-export function requestResetUserPwdApi(id, password) {
-  return request({ url: `/user/${id}`, method: 'put', data: { id, password } })
+export function requestResetUserPwdApi(id, newPassword) {
+  return request({ url: `/user/${id}/reset-password`, method: 'post', data: { newPassword } })
+}
+
+/**
+ * 解锁用户（管理员）
+ * @param {number|string} id - 用户ID
+ */
+export function requestUnlockUserApi(id) {
+  return request({ url: `/user/${id}/unlock`, method: 'post' })
+}
+
+/**
+ * 发送忘记密码验证码
+ * @param {Object} data - 请求数据
+ * @param {string} data.username - 用户名
+ * @param {string} data.email - 邮箱
+ */
+export function requestSendResetCodeApi(data) {
+  return request({ url: '/user/forgot-password/send-code', method: 'post', data })
+}
+
+/**
+ * 验证验证码并重置密码
+ * @param {Object} data - 请求数据
+ * @param {string} data.username - 用户名
+ * @param {string} data.email - 邮箱
+ * @param {string} data.code - 验证码
+ * @param {string} data.newPassword - 新密码
+ */
+export function requestResetPasswordByCodeApi(data) {
+  return request({ url: '/user/forgot-password/reset', method: 'post', data })
 }

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 用户模块 - 数据模型层
  */
 const BaseModel = require('../../db/BaseModel');
@@ -222,6 +222,50 @@ class UserModel extends BaseModel {
     const sql = `SELECT COUNT(*) as total FROM ${TABLE_NAME} WHERE dept_id = ? AND is_delete = 0`;
     const rows = await query(sql, [deptId]);
     return rows[0]?.total || 0;
+  }
+
+  /**
+   * 更新用户锁定状态
+   * @param {number} userId - 用户ID
+   * @param {Date|null} lockUntil - 锁定到期时间，null表示解锁
+   * @param {string|null} lockReason - 锁定原因
+   * @returns {Promise<void>}
+   */
+  async updateLockStatus(userId, lockUntil, lockReason = null) {
+    const sql = 'UPDATE ' + TABLE_NAME + ' SET lock_until = ?, lock_reason = ? WHERE id = ?';
+    await query(sql, [lockUntil, lockReason, userId]);
+  }
+
+  /**
+   * 原子递增用户登录失败次数
+   * @param {number} userId - 用户ID
+   * @returns {Promise<number>} 递增后的失败次数
+   */
+  async incrementFailedAttempts(userId) {
+    const sql = 'UPDATE ' + TABLE_NAME + ' SET failed_attempts = failed_attempts + 1 WHERE id = ?';
+    await query(sql, [userId]);
+    const rows = await query('SELECT failed_attempts FROM ' + TABLE_NAME + ' WHERE id = ?', [userId]);
+    return rows[0]?.failed_attempts || 0;
+  }
+
+  /**
+   * 清除用户登录失败次数和锁定状态
+   * @param {number} userId - 用户ID
+   * @returns {Promise<void>}
+   */
+  async clearFailedAttemptsAndLock(userId) {
+    const sql = 'UPDATE ' + TABLE_NAME + ' SET failed_attempts = 0, lock_until = NULL, lock_reason = NULL WHERE id = ?';
+    await query(sql, [userId]);
+  }
+
+  /**
+   * 解锁用户（管理员手动解锁）
+   * @param {number} userId - 用户ID
+   * @returns {Promise<void>}
+   */
+  async unlockUser(userId) {
+    const sql = 'UPDATE ' + TABLE_NAME + ' SET failed_attempts = 0, lock_until = NULL, lock_reason = NULL WHERE id = ?';
+    await query(sql, [userId]);
   }
 }
 

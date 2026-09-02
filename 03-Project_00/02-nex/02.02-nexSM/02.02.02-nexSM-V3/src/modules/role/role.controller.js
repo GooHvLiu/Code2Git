@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 角色管理模块 - 控制器层
  * 
  * 负责参数接收、调用 Service 层、返回统一响应
@@ -83,7 +83,7 @@ class RoleController extends BaseController {
    */
   async createRole(req, res) {
     const result = await roleService.createRole(req.body)
-    res.success(result, '创建成功')
+    res.success(result)
   }
 
   /**
@@ -98,7 +98,7 @@ class RoleController extends BaseController {
    */
   async updateRole(req, res) {
     await roleService.updateRole(req.params.id, req.body)
-    res.success(null, '更新成功')
+    res.success(null)
   }
 
   /**
@@ -112,7 +112,7 @@ class RoleController extends BaseController {
    */
   async deleteRole(req, res) {
     await roleService.deleteRole(req.params.id)
-    res.success(null, '删除成功')
+    res.success(null)
   }
 }
 

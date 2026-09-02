@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 审计日志模块 - 控制器层
  * 
  * 负责参数接收、调用 Service 层、返回统一响应
@@ -10,6 +10,8 @@
  */
 const BaseController = require('../../controllers/BaseController')
 const auditService = require('./audit.service')
+const { ERROR_CODE } = require('../../constants/errorCode')
+const { triggerNotification } = require('../../utils/notification')
 
 class AuditController extends BaseController {
   /**
@@ -36,7 +38,15 @@ class AuditController extends BaseController {
   async getList(req, res, next) {
     try {
       const result = await auditService.query(req.query)
-      res.success(result, '查询成功')
+
+      // 触发通知：审计日志被查看（通知管理员）
+      triggerNotification('audit.log.view', {
+        username: req.user?.username || '未知用户',
+        query: JSON.stringify(req.query)
+      }, req.user?.id).catch(err => {
+        console.error('[审计日志查看] 触发通知失败:', err)
+      })
+      res.success(result)
     } catch (err) {
       next(err)
     }
@@ -59,7 +69,7 @@ class AuditController extends BaseController {
     try {
       const userId = req.user?.id || req.user?.userId
       const result = await auditService.queryByUser(userId, req.query)
-      res.success(result, '查询成功')
+      res.success(result)
     } catch (err) {
       next(err)
     }
@@ -79,7 +89,7 @@ class AuditController extends BaseController {
   async verifyIntegrity(req, res, next) {
     try {
       const result = await auditService.verifyIntegrity()
-      res.success(result, result.valid ? '哈希链完整，数据未被篡改' : '检测到数据被篡改')
+      res.success(result)
     } catch (err) {
       next(err)
     }
@@ -97,7 +107,7 @@ class AuditController extends BaseController {
    * @returns {Promise<void>}
    */
   async create(req, res) {
-    res.error('审计日志创建接口不对外暴露')
+    res.error(ERROR_CODE.AUDIT_NOT_MODIFIABLE)
   }
 
   /**
@@ -108,7 +118,7 @@ class AuditController extends BaseController {
    * @returns {Promise<void>}
    */
   async update(req, res) {
-    res.error('审计日志不允许修改')
+    res.error(ERROR_CODE.AUDIT_NOT_MODIFIABLE)
   }
 
   /**
@@ -119,7 +129,7 @@ class AuditController extends BaseController {
    * @returns {Promise<void>}
    */
   async delete(req, res) {
-    res.error('审计日志不允许删除')
+    res.error(ERROR_CODE.AUDIT_NOT_DELETABLE)
   }
 }
 

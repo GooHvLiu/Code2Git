@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 通用业务逻辑基类
  * 所有业务 Service 继承此类，封装通用 CRUD 操作
  * 子类可以重写方法以实现特殊业务逻辑
@@ -54,7 +54,7 @@ class BaseService {
   async getById(id, lang = 'zh-CN') {
     const data = await this.model.getById(id)
     if (!data) {
-      throw new BusinessError(ERROR_CODE.NOT_FOUND, `${this.name}不存在`, { name: this.name })
+      throw new BusinessError(ERROR_CODE.NOT_FOUND, null, { name: this.name })
     }
     return this.processLangFields(data, lang)
   }
@@ -98,7 +98,7 @@ class BaseService {
    */
   async batchDelete(ids = []) {
     if (!Array.isArray(ids) || ids.length === 0) {
-      throw new BusinessError(ERROR_CODE.PARAM_MISSING, '请选择要删除的数据')
+      throw new BusinessError(ERROR_CODE.PARAM_MISSING, null)
     }
     return await this.model.batchDelete(ids)
   }

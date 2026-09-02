@@ -1,4 +1,4 @@
-require("module-alias/register");
+﻿require("module-alias/register");
 require("dotenv-expand").expand(require("dotenv").config());
 var express = require("express");
 const cors = require("cors");
@@ -124,9 +124,9 @@ async function initPlcModule() {
     const results = await manager.connectAll()
     const connectedCount = Object.values(results).filter(r => r.success).length
 
-    // 开启轮询
+    // 开启轮询（从数据库系统配置读取轮询间隔）
     if (plcSetting.enablePoll) {
-      pollTask.start()
+      pollTask.startFromConfig()
     }
 
     console.log(`✅ PLC模块初始化完成，设备数: ${manager.size}，已连接: ${connectedCount}`)
@@ -148,6 +148,10 @@ wsManager.init(server);
 // 设备状态管理初始化（服务端启动时清理所有设备状态）
 const deviceStatusManager = require('./src/socket/deviceStatusManager');
 deviceStatusManager.init();
+
+// 维护任务管理初始化（授权到期检查、配件寿命预警等定时任务）
+const maintenanceTaskManager = require('./src/socket/maintenanceTaskManager');
+maintenanceTaskManager.init();
 
 // WebSocket 服务初始化后，发送一次当前 PLC 连接状态
 // 因为 PLC 模块初始化在 WebSocket 之前，所以需要手动发送一次

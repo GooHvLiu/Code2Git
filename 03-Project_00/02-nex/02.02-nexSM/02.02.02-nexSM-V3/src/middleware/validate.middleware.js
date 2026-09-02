@@ -22,8 +22,23 @@ function validate(schema, source = 'body') {
     });
 
     if (error) {
-      // 校验失败，返回参数非法错误码 + joi的友好提示
-      return res.error(error.details[0].message, ERROR_CODE.PARAM_INVALID);
+      // 校验失败，返回参数非法错误码 + 结构化的错误数据（前端用于国际化解析）
+      const detail = error.details[0];
+      const field = detail.path.join('.');           // 字段名，如 'password'
+      const type = detail.type;                        // 错误类型，如 'string.min'
+      const context = detail.context || {};           // 错误参数，如 { limit: 6 }
+      
+      return res.json({
+        code: ERROR_CODE.PARAM_INVALID,
+        msg: detail.message,                           // 原始错误信息（调试用，前端兜底）
+        data: {
+          field,
+          type,
+          ...context,
+          message: detail.message                      // 原始错误信息（兜底）
+        },
+        timestamp: Date.now()
+      });
     }
 
     // 把清洗后的数据挂回 req，controller 拿到的就是干净数据

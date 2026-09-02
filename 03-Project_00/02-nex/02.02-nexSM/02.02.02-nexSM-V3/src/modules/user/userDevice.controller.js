@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 用户在线设备模块 - 控制器层
  *
  * 负责参数接收、调用 Service 层、返回统一响应
@@ -112,7 +112,7 @@ class UserDeviceController extends BaseController {
       console.error('[设备管理] 推送管理员通知失败:', err.message)
     }
 
-    res.success(null, '设备已踢下线')
+    res.success(null)
   }
 
   /**
@@ -135,7 +135,7 @@ class UserDeviceController extends BaseController {
     // 删除设备
     const device = await userDeviceService.deleteDevice(deviceId, operator)
 
-    res.success(null, '设备已删除')
+    res.success(null)
   }
 
   /**
@@ -151,7 +151,7 @@ class UserDeviceController extends BaseController {
     const deviceStatusManager = require('../../socket/deviceStatusManager')
     const offlineThreshold = req.body?.offlineThreshold
     const result = await deviceStatusManager.checkAndCleanOfflineDevices(offlineThreshold)
-    res.success(result, '设备状态已刷新')
+    res.success(result)
   }
 }
 

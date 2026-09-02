@@ -31,12 +31,12 @@ async function initTable() {
  * 初始化默认配置数据（如果表为空）
  */
 async function initDefaultData() {
-  const countSql = 'SELECT COUNT(*) as count FROM nex_system_config';
-  const [result] = await db.query(countSql);
-  if (result.count > 0) return;
+  // 查询已存在的配置键，只插入缺失的配置（自动补全新增参数）
+  const existingKeysResult = await db.query('SELECT config_key FROM nex_system_config');
+  const existingKeys = new Set(existingKeysResult.map(item => item.config_key));
+  console.log('[配置初始化] 已存在配置项数量:', existingKeys.size);
 
   const defaultConfigs = [
-    // 系统设置
     { key: 'sessionTimeout', value: '30', type: 'number', desc: '会话超时时间（分钟）', category: 'system', sort: 1 },
     { key: 'defaultPageSize', value: '20', type: 'number', desc: '默认每页条数', category: 'system', sort: 2 },
     { key: 'defaultLanguage', value: 'zh-CN', type: 'string', desc: '默认语言', category: 'system', sort: 3 },
@@ -44,6 +44,8 @@ async function initDefaultData() {
     // 安全设置
     { key: 'watermarkEnabled', value: 'false', type: 'boolean', desc: '是否启用水印', category: 'security', sort: 1 },
     { key: 'watermarkText', value: '', type: 'string', desc: '水印文字（为空时使用当前用户名）', category: 'security', sort: 2 },
+    { key: 'loginFailedThreshold', value: '5', type: 'number', desc: '登录失败次数阈值（达到该次数触发通知）', category: 'security', sort: 3 },
+    { key: 'lockDurationMinutes', value: '30', type: 'number', desc: '账户锁定时长（分钟）', category: 'security', sort: 4 },
     // 设备连接设置
     { key: 'plcProtocol', value: 'ModbusTcp', type: 'string', desc: '通信协议', category: 'plc', sort: 1 },
     { key: 'plcHost', value: '127.0.0.1', type: 'string', desc: '设备IP地址', category: 'plc', sort: 2 },
@@ -58,6 +60,8 @@ async function initDefaultData() {
     { key: 'heartbeatInterval', value: '25000', type: 'number', desc: 'WebSocket心跳间隔（ms）', category: 'connection', sort: 1 },
     { key: 'deviceStatusCheckInterval', value: '300', type: 'number', desc: '设备状态检查间隔（秒）', category: 'connection', sort: 2 },
     { key: 'deviceOfflineThreshold', value: '600', type: 'number', desc: '设备离线阈值（秒）', category: 'connection', sort: 3 },
+    { key: 'maintenanceCheckInterval', value: '24', type: 'number', desc: '设备维护检查间隔（小时）', category: 'connection', sort: 4 },
+    { key: 'partLifeStatInterval', value: '5', type: 'number', desc: '部件寿命统计间隔（分钟）', category: 'connection', sort: 5 },
     // 设备参数
     { key: 'deviceName', value: 'nexCM-灌装机-001', type: 'string', desc: '设备名称', category: 'device', sort: 1 },
     { key: 'deviceCode', value: 'NEXCM-FILL-2026-001', type: 'string', desc: '设备编号', category: 'device', sort: 2 },
@@ -82,12 +86,23 @@ async function initDefaultData() {
     { key: 'orderSwitchConfirm', value: 'true', type: 'boolean', desc: '订单切换确认', category: 'order', sort: 11 }
   ];
 
+  let insertedCount = 0;
   for (const config of defaultConfigs) {
-    const sql = `
-      INSERT INTO nex_system_config (config_key, config_value, config_type, description, category, sort)
-      VALUES (?, ?, ?, ?, ?, ?)
-    `;
-    await db.query(sql, [config.key, config.value, config.type, config.desc, config.category, config.sort]);
+    // 只插入不存在的配置项
+    if (!existingKeys.has(config.key)) {
+      const sql = `
+        INSERT INTO nex_system_config (config_key, config_value, config_type, description, category, sort)
+        VALUES (?, ?, ?, ?, ?, ?)
+      `;
+      await db.query(sql, [config.key, config.value, config.type, config.desc, config.category, config.sort]);
+      insertedCount++;
+      console.log('[配置初始化] 新增配置项:', config.key);
+    }
+  }
+  if (insertedCount > 0) {
+    console.log('[配置初始化] 共新增', insertedCount, '个配置项');
+  } else {
+    console.log('[配置初始化] 所有配置项已存在，无需新增');
   }
 }
 

@@ -34,6 +34,12 @@ router.post('/login', validate(loginSchema, 'body'), userController.login);
 // 注册接口（公开）
 router.post('/register', validate(registerSchema, 'body'), userController.register);
 
+// 忘记密码-发送验证码（公开）
+router.post('/forgot-password/send-code', userController.sendResetCode);
+
+// 忘记密码-重置密码（公开）
+router.post('/forgot-password/reset', userController.resetPasswordByCode);
+
 // 需要登录的接口
 router.use(requireAuth);
 
@@ -69,5 +75,11 @@ router.put('/:id', validate(idParamSchema, 'params'), validate(updateUserSchema,
 router.delete('/:id', validate(idParamSchema, 'params'), userController.deleteUser);
 router.delete('/batch', validate(batchDeleteSchema, 'body'), userController.batchDeleteUsers);
 router.patch('/:id/status', validate(idParamSchema, 'params'), validate(updateStatusSchema, 'body'), userController.updateUserStatus);
+
+// 管理员重置用户密码
+router.post('/:id/reset-password', userController.resetPassword);
+
+// 管理员解锁用户
+router.post('/:id/unlock', validate(idParamSchema, 'params'), userController.unlockUser);
 
 module.exports = router;

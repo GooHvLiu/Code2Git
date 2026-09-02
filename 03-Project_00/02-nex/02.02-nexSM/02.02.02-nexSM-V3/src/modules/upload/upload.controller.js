@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 文件上传控制器
  */
 const UploadService = require('./upload.service');
@@ -12,7 +12,7 @@ class UploadController {
     try {
       const host = `${req.protocol}://${req.get('host')}`;
       const fileInfo = UploadService.buildLocalFileInfo(req.file, { host });
-      return res.success(fileInfo, '文件上传成功');
+      return res.success(fileInfo);
     } catch (err) {
       next(err);
     }
@@ -40,7 +40,7 @@ class UploadController {
     try {
       const uploaderId = req.user?.userId || req.user?.id || null;
       const fileInfo = await UploadService.uploadToGithub(req.file, { uploaderId });
-      return res.success(fileInfo, 'GitHub 图床上传成功');
+      return res.success(fileInfo);
     } catch (err) {
       next(err);
     }
@@ -68,7 +68,7 @@ class UploadController {
     try {
       const { path: filePath } = req.body;
       UploadService.deleteLocalFile(filePath);
-      return res.success(null, '文件删除成功');
+      return res.success(null);
     } catch (err) {
       next(err);
     }
@@ -82,7 +82,7 @@ class UploadController {
     try {
       const { path: objectPath } = req.body;
       await UploadService.deleteGithubFile(objectPath);
-      return res.success(null, 'GitHub 文件删除成功');
+      return res.success(null);
     } catch (err) {
       next(err);
     }

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ==========================================
  * 权限校验中间件
  * ==========================================
@@ -27,7 +27,7 @@ function requirePermission(permissionCodes, options = {}) {
     try {
       // 未登录用户（理论上 requireAuth 已经拦截了，这里是双重保险）
       if (!req.user || !req.user.id) {
-        throw new BusinessError(ERROR_CODE.UNAUTHORIZED, '未登录，请先登录')
+        throw new BusinessError(ERROR_CODE.UNAUTHORIZED, null)
       }
 
       const userId = req.user.id
@@ -52,7 +52,7 @@ function requirePermission(permissionCodes, options = {}) {
       }
 
       if (!hasPermission) {
-        throw new BusinessError(ERROR_CODE.PERMISSION_DENIED, '权限不足，无法访问该资源')
+        throw new BusinessError(ERROR_CODE.PERMISSION_DENIED, null)
       }
 
       next()

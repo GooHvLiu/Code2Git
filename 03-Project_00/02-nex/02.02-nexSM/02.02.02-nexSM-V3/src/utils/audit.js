@@ -204,6 +204,17 @@ async function logExport(req, target) {
   })
 }
 
+/**
+ * 记录密码重置
+ */
+async function logPasswordReset(req, username, resetType) {
+  return await log(req, {
+    action: ACTION_TYPES.USER_RESET_PASSWORD,
+    target: username || '',
+    newValue: resetType || ''
+  })
+}
+
 module.exports = {
   // 核心方法
   log,
@@ -219,6 +230,7 @@ module.exports = {
   logUserDelete,
   logUserBatchDelete,
   logUserStatusChange,
+  logPasswordReset,
   logPlcWrite,
   logExport
 }

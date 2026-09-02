@@ -1,10 +1,12 @@
-/**
+﻿/**
  * plc模块 - 控制器层
  * 支持单设备和多设备模式
  */
 const plcService = require('./plc.service')
+const { ERROR_CODE } = require('../../constants/errorCode')
 const userService = require('../user/user.service')
 const { comparePassword } = require('../../utils/password')
+const { triggerNotification } = require('../../utils/notification')
 
 class PlcController {
   /**
@@ -16,10 +18,10 @@ class PlcController {
       const { device } = req.query
       if (device) {
         const status = await plcService.getPlcStatus(device)
-        res.success(status, '获取设备状态成功')
+        res.success(status)
       } else {
         const status = plcService.getAllStatus()
-        res.success(status, '获取所有设备状态成功')
+        res.success(status)
       }
     } catch (err) {
       next(err)
@@ -35,7 +37,7 @@ class PlcController {
       const { tag, device } = req.query
       if (!tag) throw new Error('缺少参数 tag')
       const result = await plcService.readPlcTag(tag, device)
-      res.success(result, '读取成功')
+      res.success(result)
     } catch (err) {
       next(err)
     }
@@ -49,7 +51,7 @@ class PlcController {
     try {
       const { device } = req.query
       const result = await plcService.readAllTags(device)
-      res.success(result, '读取全部点位成功')
+      res.success(result)
     } catch (err) {
       next(err)
     }
@@ -66,20 +68,20 @@ class PlcController {
       if (!tag) throw new Error('缺少参数 tag')
       if (value === undefined) throw new Error('缺少参数 value')
       if (!reason || reason.trim().length < 2) {
-        return res.error('请填写操作原因（至少2个字符）')
+        return res.error(ERROR_CODE.PARAM_INVALID)
       }
       if (!password) {
-        return res.error('电子签名：请输入密码确认')
+        return res.error(ERROR_CODE.E_SIGNATURE_PASSWORD_REQUIRED)
       }
 
       // 电子签名：验证当前用户密码
       const currentUser = await userService.getUserById(req.user.id)
       if (!currentUser) {
-        return res.error('用户不存在')
+        return res.error(ERROR_CODE.USER_NOT_FOUND)
       }
       const passwordValid = await comparePassword(password, currentUser.password)
       if (!passwordValid) {
-        return res.error('电子签名失败：密码错误')
+        return res.error(ERROR_CODE.E_SIGNATURE_FAILED)
       }
 
       const operatorInfo = {
@@ -90,7 +92,17 @@ class PlcController {
         userAgent: req.headers['user-agent'] || ''
       }
       const ret = await plcService.writePlcTag(tag, value, operatorInfo, device)
-      res.success(ret, '写入PLC成功')
+
+      // 触发通知：设备参数变更（通知管理员和工程师）
+      triggerNotification('device.param.change', {
+        tag: tag,
+        value: value,
+        device: device || 'default',
+        operator: req.user.username
+      }, req.user.id).catch(err => {
+        console.error('[设备参数变更] 触发通知失败:', err)
+      })
+      res.success(ret)
     } catch (err) {
       next(err)
     }

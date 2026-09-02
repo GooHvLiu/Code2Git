@@ -4,7 +4,6 @@
     <div class="page-header">
       <div class="header-left">
         <h2 class="page-title">
-          <i class="el-icon-s-tools title-icon" />
           {{ $t("menu.system.permission.page.title") }}
         </h2>
         <p class="page-desc">{{ $t("menu.system.permission.page.desc") }}</p>
@@ -582,11 +581,12 @@ loadAllPermissions();
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
-  padding: 16px 20px;
+  margin-bottom: 20px;
+  padding: 20px;
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ebeef5;
 
   .header-left {
     .page-title {

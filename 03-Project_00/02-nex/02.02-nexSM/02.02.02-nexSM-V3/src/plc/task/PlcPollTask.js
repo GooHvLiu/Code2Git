@@ -7,6 +7,7 @@
  * 1. 正常通讯：定时轮询 PLC 数据
  * 2. 自动重连：中途断开后持续尝试，直到连接成功
  * 3. 状态通知：PLC 连接状态变化时通知所有前端用户
+ * 4. 配置动态加载：轮询间隔从数据库系统配置读取，支持动态更新
  *
  * 设计原则：
  * - 连接管理与轮询分离，职责清晰
@@ -33,6 +34,13 @@ class PlcPollTask {
     // 数据变化回调
     this.onDataChangeCallback = null
 
+    // ========== 轮询配置（从数据库系统配置读取，默认值兜底） ==========
+    this.defaultFastInterval = 200  // 默认快速轮询间隔（ms）
+    this.defaultSlowInterval = 1000  // 默认慢速轮询间隔（ms）
+    this.currentFastInterval = this.defaultFastInterval
+    this.currentSlowInterval = this.defaultSlowInterval
+    this._configLoaded = false  // 配置是否已从数据库加载
+
     // ========== 重连配置 ==========
     // 连续失败多少次后触发重连
     this.maxConsecutiveErrors = 3
@@ -47,6 +55,68 @@ class PlcPollTask {
    */
   setCallback(fn) {
     this.onDataChangeCallback = fn
+  }
+
+  // ==========================================
+  // 零、配置管理（从数据库系统配置读取）
+  // ==========================================
+
+  /**
+   * 从数据库系统配置加载轮询间隔
+   * 优先级：数据库配置 > plcSetting.js 配置 > 默认值
+   */
+  async loadConfigFromDB() {
+    try {
+      const configService = require('../../modules/config/config.service')
+      const configs = await configService.getAllConfigs()
+
+      // 查找快速轮询间隔配置
+      const fastConfig = configs.find(c => c.config_key === 'pollFastInterval')
+      if (fastConfig && fastConfig.config_value) {
+        const val = Number(fastConfig.config_value)
+        if (!isNaN(val) && val >= 50 && val <= 5000) {
+          this.currentFastInterval = val
+        }
+      }
+
+      // 查找慢速轮询间隔配置
+      const slowConfig = configs.find(c => c.config_key === 'pollSlowInterval')
+      if (slowConfig && slowConfig.config_value) {
+        const val = Number(slowConfig.config_value)
+        if (!isNaN(val) && val >= 100 && val <= 10000) {
+          this.currentSlowInterval = val
+        }
+      }
+
+      this._configLoaded = true
+      console.log(`[PLC] 轮询配置已从数据库加载 (fast: ${this.currentFastInterval}ms, slow: ${this.currentSlowInterval}ms)`)
+      return true
+    } catch (err) {
+      console.error('[PLC] 从数据库加载轮询配置失败，使用默认值:', err.message)
+      this.currentFastInterval = this.defaultFastInterval
+      this.currentSlowInterval = this.defaultSlowInterval
+      this._configLoaded = true
+      return false
+    }
+  }
+
+  /**
+   * 从配置启动轮询（先加载配置，再启动）
+   */
+  async startFromConfig() {
+    await this.loadConfigFromDB()
+    this.start()
+  }
+
+  /**
+   * 重新从配置加载并重启轮询（配置变化时调用）
+   */
+  async restartFromConfig() {
+    console.log('[PLC] 配置变化，重启轮询任务...')
+    this.stop()
+    await this.loadConfigFromDB()
+    this.start()
+    console.log('[PLC] 轮询任务已重启')
   }
 
   // ==========================================
@@ -256,8 +326,9 @@ class PlcPollTask {
    */
   startDevice(deviceName) {
     const device = plcManager.getDevice(deviceName)
-    const fastMs = device.config.poll?.fastInterval || 200
-    const slowMs = device.config.poll?.slowInterval || 1000
+    // 优先使用设备自身配置，其次使用全局系统配置，最后使用默认值
+    const fastMs = device.config.poll?.fastInterval || this.currentFastInterval
+    const slowMs = device.config.poll?.slowInterval || this.currentSlowInterval
 
     const fastTimer = setInterval(() => {
       this.pollDevice(deviceName, 'fast').catch(() => {})

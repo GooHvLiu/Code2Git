@@ -1,4 +1,4 @@
-﻿/**
+/**
  * 用户管理模块 - 业务逻辑层
  * 
  * 处理用户的登录、注册、增删改查、密码重置、状态变更等业务逻辑
@@ -19,13 +19,18 @@ const { USER_STATUS, USER_ROLE } = require('../../constants/statusCode')
 const CaptchaService = require('../captcha/captcha.service')
 const audit = require('../../utils/audit')
 const { triggerNotification } = require('../../utils/notification')
+const configService = require('../config/config.service')
 const permissionService = require('../permission/permission.service')
 const wsManager = require('../../socket/wsManager')
 const notificationService = require('../notification/notification.service')
 const userDeviceService = require('./userDevice.service')
+const emailService = require('../email/email.service')
 const fs = require('fs')
 const { LicenseGuard } = require('../../../beehive/sdk')
 const licenseConfig = require('../../config/license.config')
+
+// 密码重置验证码存储（内存Map）
+const resetCodeStore = new Map()
 
 // 创建授权验证实例（用于获取授权文件中的 maxDevices）
 let licenseGuardInstance = null
@@ -43,11 +48,9 @@ function getLicenseGuard() {
   return licenseGuardInstance
 }
 
-// 登录失败锁定配置
-const MAX_LOGIN_ATTEMPTS = 5       // 最大失败次数
-const LOCK_DURATION = 30 * 60 * 1000 // 锁定时长 30 分钟
-// 内存存储登录失败次数（生产环境建议用 Redis）
-const loginAttempts = new Map()
+// 登录失败锁定默认配置（实际值从数据库配置读取）
+const DEFAULT_MAX_LOGIN_ATTEMPTS = 5       // 默认最大失败次数
+const DEFAULT_LOCK_DURATION_MINUTES = 30   // 默认锁定时长（分钟）
 
 class UserService extends BaseService {
   /**
@@ -83,14 +86,6 @@ class UserService extends BaseService {
    * console.log(result.userInfo) // 用户信息（不含密码）
    */
   async login(username, password, ip, userAgent = '', lang = 'zh-CN', deviceId = '', deviceName = '') {
-    // 0. 检查账户是否被锁定
-    const lockKey = `lock:${username}`
-    const locked = loginAttempts.get(lockKey)
-    if (locked && locked.until > Date.now()) {
-      const remainMin = Math.ceil((locked.until - Date.now()) / 60000)
-      throw new BusinessError(ERROR_CODE.USER_LOCKED, `账户已锁定，请 ${remainMin} 分钟后再试`, { minutes: remainMin })
-    }
-
     // 1. 查询用户（关联角色表获取 data_scope）
     const user = await userModel.getByUsernameWithRole(username, lang)
     if (!user) {
@@ -101,10 +96,38 @@ class UserService extends BaseService {
         result: 'failed',
         reason: '用户不存在'
       })
-      throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, '用户不存在')
+      throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, null)
     }
 
-    // 2. 校验状态
+    // 2. 检查账户是否被锁定（从数据库读取 lock_until）
+    if (user.lock_until && new Date(user.lock_until) > new Date()) {
+      const remainMin = Math.ceil((new Date(user.lock_until) - new Date()) / 60000)
+      throw new BusinessError(ERROR_CODE.USER_LOCKED, null, { minutes: remainMin })
+    }
+
+    // 3. 从数据库配置读取登录失败次数阈值和锁定时长
+    let maxAttempts = DEFAULT_MAX_LOGIN_ATTEMPTS
+    let lockDurationMinutes = DEFAULT_LOCK_DURATION_MINUTES
+    try {
+      const thresholdValue = await configService.getConfigValue('loginFailedThreshold', DEFAULT_MAX_LOGIN_ATTEMPTS)
+      if (thresholdValue) {
+        const val = Number(thresholdValue)
+        if (!isNaN(val) && val >= 1 && val <= 20) {
+          maxAttempts = val
+        }
+      }
+      const durationValue = await configService.getConfigValue('lockDurationMinutes', DEFAULT_LOCK_DURATION_MINUTES)
+      if (durationValue) {
+        const val = Number(durationValue)
+        if (!isNaN(val) && val >= 1 && val <= 1440) {
+          lockDurationMinutes = val
+        }
+      }
+    } catch (err) {
+      console.warn('[登录] 读取登录配置失败，使用默认值:', err.message)
+    }
+
+    // 3. 校验状态
     if (user.status === USER_STATUS.DISABLED) {
       await audit.log({ userId: user.id, userName: user.username, ip, userAgent }, {
         action: audit.ACTION.USER_LOGIN_FAILED,
@@ -112,42 +135,63 @@ class UserService extends BaseService {
         result: 'failed',
         reason: '账号已禁用'
       })
-      throw new BusinessError(ERROR_CODE.USER_DISABLED, '账号已被禁用')
+      throw new BusinessError(ERROR_CODE.USER_DISABLED, null)
     }
 
     // 3. 校验密码
     const passwordValid = await comparePassword(password, user.password)
     if (!passwordValid) {
-      // 记录失败次数
-      const attemptKey = `attempt:${username}`
-      const attempts = (loginAttempts.get(attemptKey) || 0) + 1
-      loginAttempts.set(attemptKey, attempts)
+      // 记录失败次数（数据库存储）
+      const attempts = await userModel.incrementFailedAttempts(user.id)
 
       let reason = '密码错误'
-      if (attempts >= MAX_LOGIN_ATTEMPTS) {
-        // 锁定账户
-        loginAttempts.set(lockKey, { until: Date.now() + LOCK_DURATION })
-        loginAttempts.delete(attemptKey)
-        reason = `密码错误 ${attempts} 次，账户已锁定 30 分钟`
+      if (attempts >= maxAttempts) {
+        // 锁定账户（写入数据库）
+        const lockUntil = new Date(Date.now() + lockDurationMinutes * 60 * 1000)
+        await userModel.updateLockStatus(user.id, lockUntil, '连续登录失败 ' + attempts + ' 次')
+        reason = '密码错误 ' + attempts + ' 次，账户已锁定 ' + lockDurationMinutes + ' 分钟'
+
+        // 记录账户锁定审计日志
+        try {
+          await audit.log({ userId: user.id, userName: user.username, ip, userAgent }, {
+            action: audit.ACTION.USER_LOGIN_FAILED,
+            target: '账户锁定',
+            result: 'locked',
+            reason: reason
+          })
+        } catch (auditErr) {
+          console.warn('[登录] 记录账户锁定审计日志失败:', auditErr.message)
+        }
+
+        // 触发通知：用户登录失败达到阈值（通知管理员）
+        triggerNotification('user.login.failed', {
+          username: user.username,
+          count: attempts,
+          ip: ip
+        }, user.id).catch(err => {
+          console.error('[登录失败] 触发通知失败:', err)
+        })
       }
 
-      await audit.log({ userId: user.id, userName: user.username, ip, userAgent }, {
-        action: audit.ACTION.USER_LOGIN_FAILED,
-        target: '系统登录',
-        result: 'failed',
-        reason
-      })
+      try {
+        await audit.log({ userId: user.id, userName: user.username, ip, userAgent }, {
+          action: audit.ACTION.USER_LOGIN_FAILED,
+          target: '系统登录',
+          result: 'failed',
+          reason
+        })
+      } catch (auditErr) {
+        console.warn('[登录] 记录登录失败审计日志失败:', auditErr.message)
+      }
       throw new BusinessError(ERROR_CODE.USER_PASSWORD_ERROR, reason, { reason: reason })
     }
 
-    // 登录成功，清除失败记录
-    loginAttempts.delete(`attempt:${username}`)
-    loginAttempts.delete(`lock:${username}`)
+    // 登录成功，清除失败次数和锁定状态（数据库存储）
+    await userModel.clearFailedAttemptsAndLock(user.id)
 
     // 3.4 单点登录：先把当前用户的所有旧设备设置为离线（确保设备数检查准确）
     try {
       await userDeviceService.setAllDevicesOffline(user.id)
-      console.log(`[登录-单点登录] 用户 ${user.username} (ID: ${user.id}) 的所有旧设备已设置为离线`)
     } catch (err) {
       console.error('[登录-单点登录] 设置旧设备离线失败:', err.message)
     }
@@ -165,7 +209,6 @@ class UserService extends BaseService {
       console.error('[登录-客户端授权] 读取授权文件失败:', err.message)
     }
     const loginCheck = await userDeviceService.checkLoginAllowed(maxDevices)
-    console.log(`[登录-客户端授权] 用户 ${user.username} (ID: ${user.id}) 系统在线设备数: ${loginCheck.currentCount}/${loginCheck.maxDevices || '不限'}, 是否允许: ${loginCheck.allowed}`)
     if (!loginCheck.allowed) {
       throw new BusinessError(
         ERROR_CODE.DEVICE_LIMIT_EXCEEDED,
@@ -193,7 +236,6 @@ class UserService extends BaseService {
     // 只有当该用户有其他在线连接时，才推送被踢下线通知和创建通知记录
     const loginTime = new Date().toISOString()
     const onlineConnectionCount = wsManager.getUserConnectionCount(user.id)
-    console.log(`[登录-单点登录] 用户 ${user.username} (ID: ${user.id}) 当前在线连接数: ${onlineConnectionCount}`)
     if (onlineConnectionCount > 0) {
       try {
         // WebSocket 实时推送 kicked_out 消息（用于前端立即跳转登录页）
@@ -217,34 +259,14 @@ class UserService extends BaseService {
           type: 'security',
           priority: 'high'
         })
-        console.log(`[登录-单点登录] 用户 ${user.username} 有 ${onlineConnectionCount} 个其他在线连接，已推送被踢下线通知`)
       } catch (err) {
         console.error('[登录] 推送被踢通知/创建通知记录失败:', err.message)
       }
     } else {
-      console.log(`[登录-单点登录] 用户 ${user.username} 没有其他在线连接，跳过被踢下线通知`)
     }
 
-    // 5.2 安全通知：给所有管理员创建用户登录通知记录（包括管理员自己的其他在线设备）
-    try {
-      const adminUserIds = await userModel.getAdminUserIds()
-      if (adminUserIds.length > 0) {
-        await notificationService.sendBatchNotifications(adminUserIds, {
-          titleKey: 'notification.userLoginTitle',
-          contentKey: 'notification.userLoginContent',
-          contentParams: JSON.stringify({
-            username: user.username,
-            role: user.role,
-            time: loginTime,
-            ip: ip
-          }),
-          type: 'security',
-          priority: 'normal'
-        })
-      }
-    } catch (err) {
-      console.error('[登录] 创建管理员登录通知失败:', err.message)
-    }
+    // 5.2 安全通知：用户登录成功通知已去掉（不在通知规则配置清单内）
+    // 如需恢复，请取消下方注释并在 notificationRules.config.js 中添加 user.login.success 规则
 
     // 6. 更新登录信息
     await userModel.updateLoginInfo(user.id, ip)
@@ -260,7 +282,6 @@ class UserService extends BaseService {
           ip: ip,
           userAgent: userAgent
         })
-        console.log(`[登录-客户端授权] 用户 ${user.username} (ID: ${user.id}) 设备信息已记录，deviceId: ${deviceId}`)
       } catch (err) {
         console.error('[登录-客户端授权] 记录设备信息失败:', err.message)
       }
@@ -389,7 +410,7 @@ class UserService extends BaseService {
   async getUserById(id, lang = 'zh-CN') {
     const user = await userModel.getByIdWithDept(id, lang)
     if (!user) {
-      throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, '用户不存在')
+      throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, null)
     }
     const { password, ...userInfo } = user
     return userInfo
@@ -432,7 +453,7 @@ class UserService extends BaseService {
     // 检查用户名是否存在
     const existUser = await userModel.getByUsername(data.username)
     if (existUser) {
-      throw new BusinessError(ERROR_CODE.USER_USERNAME_EXISTS, '用户名已存在')
+      throw new BusinessError(ERROR_CODE.USER_USERNAME_EXISTS, null)
     }
 
     // 加密密码
@@ -466,7 +487,7 @@ class UserService extends BaseService {
     // 检查用户是否存在
     const user = await userModel.getById(id)
     if (!user) {
-      throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, '用户不存在')
+      throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, null)
     }
 
     // 如果修改密码，需要加密
@@ -487,7 +508,7 @@ class UserService extends BaseService {
   async deleteUser(id) {
     const user = await userModel.getById(id)
     if (!user) {
-      throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, '用户不存在')
+      throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, null)
     }
 
     await userModel.delete(id)
@@ -502,7 +523,7 @@ class UserService extends BaseService {
    */
   async batchDeleteUsers(ids) {
     if (!ids || ids.length === 0) {
-      throw new BusinessError(ERROR_CODE.PARAM_MISSING, '请选择要删除的用户')
+      throw new BusinessError(ERROR_CODE.PARAM_MISSING, null)
     }
     await userModel.batchDelete(ids)
   }
@@ -518,11 +539,141 @@ class UserService extends BaseService {
   async updateUserStatus(id, status) {
     const user = await userModel.getById(id)
     if (!user) {
-      throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, '用户不存在')
+      throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, null)
     }
 
     await userModel.update(id, { status })
   }
-}
 
+  // ==================== 密码重置功能 ====================
+
+  /**
+   * 管理员重置用户密码
+   */
+  async resetPassword(id, newPassword, lang, operator) {
+    const user = await userModel.getById(id)
+    if (!user) {
+      throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, null)
+    }
+    if (!newPassword || newPassword.length < 8) {
+      throw new BusinessError(ERROR_CODE.PARAM_ERROR, null)
+    }
+    const hashedPassword = await hashPassword(newPassword)
+    await userModel.update(id, { password: hashedPassword })
+    if (user.email) {
+      try {
+        await emailService.sendTemplate('passwordReset', {
+          type: 'adminReset',
+          username: user.username,
+          newPassword: newPassword,
+          operator: operator?.username || '系统管理员'
+        }, { to: user.email })
+      } catch (err) {
+        console.error('[密码重置] 发送邮件失败:', err.message)
+      }
+    }
+    return { id: user.id, username: user.username, email: user.email }
+  }
+
+  /**
+   * 发送忘记密码验证码
+   */
+  async sendResetPasswordCode(username, email, lang) {
+    const user = await userModel.getByUsername(username)
+    if (!user) {
+      throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, null)
+    }
+    if (!user.email || user.email !== email) {
+      throw new BusinessError(ERROR_CODE.PARAM_ERROR, null)
+    }
+    const code = Math.floor(100000 + Math.random() * 900000).toString()
+    const expireAt = Date.now() + 15 * 60 * 1000
+    const key = username + ':' + email
+    resetCodeStore.set(key, { code, expireAt })
+    try {
+      await emailService.sendTemplate('passwordReset', {
+        type: 'forgotPassword',
+        username: user.username,
+        resetCode: code,
+        expireMinutes: 15
+      }, { to: user.email })
+    } catch (err) {
+      console.error('[忘记密码] 发送验证码邮件失败:', err.message)
+      throw new BusinessError(ERROR_CODE.SYSTEM_ERROR, null)
+    }
+  }
+
+  /**
+   * 验证验证码并重置密码
+   */
+  async resetPasswordByCode(username, email, code, newPassword, lang) {
+    const user = await userModel.getByUsername(username)
+    if (!user) {
+      throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, null)
+    }
+    if (!user.email || user.email !== email) {
+      throw new BusinessError(ERROR_CODE.PARAM_ERROR, null)
+    }
+    const key = username + ':' + email
+    const stored = resetCodeStore.get(key)
+    if (!stored) {
+      throw new BusinessError(ERROR_CODE.PARAM_ERROR, null)
+    }
+    if (stored.expireAt < Date.now()) {
+      resetCodeStore.delete(key)
+      throw new BusinessError(ERROR_CODE.PARAM_ERROR, null)
+    }
+    if (stored.code !== code) {
+      throw new BusinessError(ERROR_CODE.PARAM_ERROR, null)
+    }
+    if (!newPassword || newPassword.length < 8) {
+      throw new BusinessError(ERROR_CODE.PARAM_ERROR, null)
+    }
+    const hashedPassword = await hashPassword(newPassword)
+    await userModel.update(user.id, { password: hashedPassword })
+    resetCodeStore.delete(key)
+    try {
+      await emailService.sendTemplate('passwordReset', {
+        type: 'resetSuccess',
+        username: user.username
+      }, { to: user.email })
+    } catch (err) {
+      console.error('[密码重置] 发送通知邮件失败:', err.message)
+    }
+    return { id: user.id, username: user.username, email: user.email }
+  }
+
+  /**
+   * 管理员解锁用户
+   * @param {number} userId - 用户ID
+   * @param {Object} operator - 操作人信息 { id, username, ip, userAgent }
+   * @returns {Promise<void>}
+   */
+  async unlockUser(userId, operator) {
+    const user = await userModel.getById(userId)
+    if (!user) {
+      throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, null)
+    }
+    if (!user.lock_until || new Date(user.lock_until) <= new Date()) {
+      throw new BusinessError(ERROR_CODE.USER_NOT_LOCKED, null)
+    }
+    
+    // 解锁用户
+    await userModel.unlockUser(userId)
+    
+    // 记录解锁审计日志
+    try {
+      await audit.log({ userId: operator.id, userName: operator.username, ip: operator.ip, userAgent: operator.userAgent }, {
+        action: 'USER_UNLOCK',
+        target: '账户解锁',
+        result: 'success',
+        reason: '管理员手动解锁用户 ' + user.username
+      })
+    } catch (auditErr) {
+      console.warn('[用户解锁] 记录审计日志失败:', auditErr.message)
+    }
+    
+    return { id: user.id, username: user.username }
+  }
+}
 module.exports = new UserService()

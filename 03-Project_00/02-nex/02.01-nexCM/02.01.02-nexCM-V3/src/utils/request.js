@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ==========================================
  * Axios 请求统一封装
  * ==========================================
@@ -196,7 +196,56 @@ service.interceptors.response.use(
 
     // 权限不足：顶部警告提示，不跳转
     if (res.code === CODE_PERMISSION_DENIED) {
-      showWarning(res.msg || config.MESSAGES.PERMISSION_DENIED)
+      const i18n = require('@/i18n').default
+      let message
+      if (i18n.te(`error.${res.code}`)) {
+        message = i18n.t(`error.${res.code}`, res.data || {})
+      } else {
+        message = res.msg || config.MESSAGES.PERMISSION_DENIED
+      }
+      showWarning(message)
+      return Promise.reject(res)
+    }
+
+    // 参数校验错误：根据 field 和 type 生成国际化 key（type 中的点号替换为下划线，避免 vue-i18n 解析成嵌套对象）
+    if (res.code === 'PARAM_INVALID') {
+      const i18nInvalid = require('@/i18n').default
+      const { field, type } = res.data || {}
+      // 把 type 中的点号替换成下划线，如 string.min -> string_min
+      const typeKey = (type || '').replace(/\./g, '_')
+      const paramKey = 'error.PARAM_INVALID.' + field + '.' + typeKey
+      if (field && type && i18nInvalid.te(paramKey)) {
+        const paramMessage = i18nInvalid.t(paramKey, res.data || {})
+        showError(paramMessage)
+      } else {
+        // 标准实现：每一种参数校验错误都应该有对应的国际化配置
+        showError(res.data?.message || res.msg || '参数错误')
+      }
+      return Promise.reject(res)
+    }
+    // 参数校验错误：优先用 字段名.错误类型 作为 key 查找国际化，找不到就用通用兜底
+    // 参数校验错误：优先用 字段名.错误类型 作为 key 查找国际化，找不到就用通用兜底
+    if (res.code === 'PARAM_INVALID') {
+      const i18nInvalid = require('@/i18n').default
+      const { field, type, message: rawMessage } = res.data || {}
+      let paramMessage
+      // 1. 优先用 error.PARAM_INVALID.field.type 查找（如 error.PARAM_INVALID.password.string.min）
+      if (field && type && i18nInvalid.te('error.PARAM_INVALID.' + field + '.' + type)) {
+        paramMessage = i18nInvalid.t('error.PARAM_INVALID.' + field + '.' + type, res.data || {})
+      }
+      // 2. 其次用 error.PARAM_INVALID.type 查找（如 error.PARAM_INVALID.string.min）
+      else if (type && i18nInvalid.te('error.PARAM_INVALID.' + type)) {
+        paramMessage = i18nInvalid.t('error.PARAM_INVALID.' + type, res.data || {})
+      }
+      // 3. 再次用 error.PARAM_INVALID 查找（通用兜底）
+      else if (i18nInvalid.te('error.PARAM_INVALID.default')) {
+        paramMessage = i18nInvalid.t('error.PARAM_INVALID.default', res.data || {})
+      }
+      // 4. 最后用后端返回的原始错误信息兜底
+      else {
+        paramMessage = rawMessage || res.msg || '参数错误'
+      }
+      showError(paramMessage)
       return Promise.reject(res)
     }
 

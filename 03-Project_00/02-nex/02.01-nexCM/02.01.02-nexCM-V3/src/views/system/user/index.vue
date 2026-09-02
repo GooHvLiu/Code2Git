@@ -163,7 +163,7 @@
       </el-table-column>
       <el-table-column
         :label="$t('common.operation')"
-        width="200"
+        width="240"
         align="center"
         fixed="right"
       >
@@ -174,6 +174,14 @@
           <el-button type="text" size="small" @click="handleResetPwd(row)">{{
             $t("menu.system.user.page.resetPassword")
           }}</el-button>
+          <el-button
+            v-if="isUserLocked(row)"
+            type="text"
+            size="small"
+            style="color: #e6a23c"
+            @click="handleUnlock(row)"
+            >{{ $t("menu.system.user.page.unlock") }}</el-button
+          >
           <el-button
             type="text"
             size="small"
@@ -198,6 +206,42 @@
 
     <!-- ==================== 电子签名弹窗（删除用户用） ==================== -->
     <electronic-signature ref="esDialog" @confirm="handleEsConfirm" />
+
+    <!-- ==================== 重置密码弹窗 ==================== -->
+    <el-dialog
+      title="重置密码"
+      :visible.sync="resetPwdDialogVisible"
+      width="400px"
+    >
+      <el-form :model="resetPwdForm" label-width="80px">
+        <el-form-item label="用户名"
+          ><span>{{ resetPwdUser?.username }}</span></el-form-item
+        >
+        <el-form-item label="新密码">
+          <el-input
+            v-model="resetPwdForm.newPassword"
+            type="password"
+            placeholder="请输入新密码（至少8位）"
+            show-password
+          />
+        </el-form-item>
+        <el-form-item label="确认密码">
+          <el-input
+            v-model="resetPwdForm.confirmPassword"
+            type="password"
+            placeholder="请再次输入新密码"
+            show-password
+            @keyup.enter.native="handleConfirmResetPwd"
+          />
+        </el-form-item>
+      </el-form>
+      <span slot="footer">
+        <el-button @click="resetPwdDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="handleConfirmResetPwd"
+          >确 定</el-button
+        >
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -219,11 +263,16 @@ import {
   requestGetUserListApi,
   requestDeleteUserApi,
   requestBatchDeleteUserApi,
-  requestUpdateUserApi,
+  requestResetUserPwdApi,
+  requestUnlockUserApi,
 } from "@/api";
+import { Message, MessageBox } from "element-ui";
 import { requestGetRoleAllApi } from "@/api";
 import { requestGetDeptTreeApi } from "@/api";
 import { withCache } from "@/utils/cache";
+import { useI18n } from "@/composables/useI18n";
+
+const { t: $t } = useI18n();
 
 // 字典数据
 const { dict } = useDict(["user_status", "user_sex", "user_role"]);
@@ -320,7 +369,6 @@ async function loadRoleList() {
     roleList.value = res.data || [];
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.warn("[用户管理] 加载角色列表失败:", e);
   }
 }
 
@@ -331,7 +379,6 @@ async function loadDeptTree() {
     deptTree.value = res.data || [];
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.warn("[用户管理] 加载部门树失败:", e);
   }
 }
 
@@ -394,16 +441,67 @@ async function handleEsConfirm({ password, extraData }) {
   }
 }
 
-// 重置密码
+// 重置密码相关
+const resetPwdDialogVisible = ref(false);
+const resetPwdUser = ref(null);
+const resetPwdForm = reactive({ newPassword: "", confirmPassword: "" });
+
 function handleResetPwd(row) {
-  // 重置密码逻辑
-  requestUpdateUserApi({ id: row.id, password: "123456" })
-    .then(() => {
-      // 成功提示
-    })
-    .catch(() => {});
+  resetPwdUser.value = row;
+  resetPwdForm.newPassword = "";
+  resetPwdForm.confirmPassword = "";
+  resetPwdDialogVisible.value = true;
 }
 
+async function handleConfirmResetPwd() {
+  if (!resetPwdForm.newPassword || resetPwdForm.newPassword.length < 8) {
+    Message.warning("密码长度不能少于8位");
+    return;
+  }
+  if (resetPwdForm.newPassword !== resetPwdForm.confirmPassword) {
+    Message.warning($t("menu.system.user.page.passwordMismatch"));
+    return;
+  }
+  try {
+    await requestResetUserPwdApi(
+      resetPwdUser.value.id,
+      resetPwdForm.newPassword
+    );
+    Message.success($t("menu.system.user.page.resetPasswordSuccess"));
+    resetPwdDialogVisible.value = false;
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error("[用户管理] 重置密码失败:", err);
+  }
+}
+// 判断用户是否被锁定
+function isUserLocked(row) {
+  if (!row.lock_until) return false;
+  return new Date(row.lock_until) > new Date();
+}
+
+// 解锁用户
+async function handleUnlock(row) {
+  try {
+    await MessageBox.confirm(
+      $t("menu.system.user.page.unlockConfirm"),
+      $t("common.tip"),
+      {
+        confirmButtonText: $t("common.confirm"),
+        cancelButtonText: $t("common.cancel"),
+        type: "warning",
+      }
+    );
+    await requestUnlockUserApi(row.id);
+    Message.success($t("menu.system.user.page.unlockSuccess"));
+    getList();
+  } catch (err) {
+    if (err !== "cancel") {
+      // eslint-disable-next-line no-console
+      console.error("[用户管理] 解锁用户失败:", err);
+    }
+  }
+}
 onMounted(() => {
   loadRoleList();
   loadDeptTree();
@@ -415,7 +513,6 @@ onMounted(() => {
   height: 100%;
 }
 
-/* 排序箭头居中 */
 /deep/ .el-table .caret-wrapper {
   display: inline-flex;
   vertical-align: middle;

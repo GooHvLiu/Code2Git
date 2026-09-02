@@ -199,11 +199,26 @@
                 />
               </el-form-item>
 
-              <el-form-item
-                :label="
-                  $t('menu.system.config.childrenMenu.security.watermarkText')
-                "
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{
+                      $t(
+                        "menu.system.config.childrenMenu.security.watermarkText"
+                      )
+                    }}
+                    <el-tooltip
+                      :content="
+                        $t(
+                          'menu.system.config.childrenMenu.security.watermarkTextTip'
+                        )
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-input
                   v-model="form.watermarkText"
                   :placeholder="
@@ -212,7 +227,65 @@
                     )
                   "
                   clearable
-                  style="width: 300px"
+                  style="width: 200px"
+                />
+              </el-form-item>
+
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{
+                      $t(
+                        "menu.system.config.childrenMenu.security.loginFailedThreshold"
+                      )
+                    }}
+                    <el-tooltip
+                      :content="
+                        $t(
+                          'menu.system.config.childrenMenu.security.loginFailedThresholdTip'
+                        )
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
+                <el-input-number
+                  v-model="form.loginFailedThreshold"
+                  :min="1"
+                  :max="20"
+                  :step="1"
+                  controls-position="right"
+                />
+              </el-form-item>
+
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{
+                      $t(
+                        "menu.system.config.childrenMenu.security.lockDurationMinutes"
+                      )
+                    }}
+                    <el-tooltip
+                      :content="
+                        $t(
+                          'menu.system.config.childrenMenu.security.lockDurationMinutesTip'
+                        )
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
+                <el-input-number
+                  v-model="form.lockDurationMinutes"
+                  :min="1"
+                  :max="1440"
+                  :step="1"
+                  controls-position="right"
                 />
               </el-form-item>
             </el-form>
@@ -224,9 +297,20 @@
               {{ $t("menu.system.config.childrenMenu.plc.title") }}
             </h3>
             <el-form :model="form" label-width="160px" label-position="right">
-              <el-form-item
-                :label="$t('menu.system.config.childrenMenu.plc.protocol')"
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{ $t("menu.system.config.childrenMenu.plc.protocol") }}
+                    <el-tooltip
+                      :content="
+                        $t('menu.system.config.childrenMenu.plc.protocolTip')
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-select v-model="form.plcProtocol" style="width: 200px">
                   <el-option label="Modbus TCP" value="ModbusTcp" />
                   <el-option label="S7" value="S7" />
@@ -234,9 +318,20 @@
                 </el-select>
               </el-form-item>
 
-              <el-form-item
-                :label="$t('menu.system.config.childrenMenu.plc.host')"
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{ $t("menu.system.config.childrenMenu.plc.host") }}
+                    <el-tooltip
+                      :content="
+                        $t('menu.system.config.childrenMenu.plc.hostTip')
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-input
                   v-model="form.plcHost"
                   placeholder="192.168.1.100"
@@ -244,9 +339,20 @@
                 />
               </el-form-item>
 
-              <el-form-item
-                :label="$t('menu.system.config.childrenMenu.plc.port')"
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{ $t("menu.system.config.childrenMenu.plc.port") }}
+                    <el-tooltip
+                      :content="
+                        $t('menu.system.config.childrenMenu.plc.portTip')
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-input-number
                   v-model="form.plcPort"
                   :min="1"
@@ -255,9 +361,20 @@
                 />
               </el-form-item>
 
-              <el-form-item
-                :label="$t('menu.system.config.childrenMenu.plc.unitId')"
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{ $t("menu.system.config.childrenMenu.plc.unitId") }}
+                    <el-tooltip
+                      :content="
+                        $t('menu.system.config.childrenMenu.plc.unitIdTip')
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-input-number
                   v-model="form.plcUnitId"
                   :min="1"
@@ -270,9 +387,20 @@
                 $t("menu.system.config.childrenMenu.plc.pollSettings")
               }}</el-divider>
 
-              <el-form-item
-                :label="$t('menu.system.config.childrenMenu.plc.pollFast')"
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{ $t("menu.system.config.childrenMenu.plc.pollFast") }}
+                    <el-tooltip
+                      :content="
+                        $t('menu.system.config.childrenMenu.plc.pollFastTip')
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-input-number
                   v-model="form.pollFastInterval"
                   :min="50"
@@ -283,9 +411,20 @@
                 <span class="unit-text">ms</span>
               </el-form-item>
 
-              <el-form-item
-                :label="$t('menu.system.config.childrenMenu.plc.pollSlow')"
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{ $t("menu.system.config.childrenMenu.plc.pollSlow") }}
+                    <el-tooltip
+                      :content="
+                        $t('menu.system.config.childrenMenu.plc.pollSlowTip')
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-input-number
                   v-model="form.pollSlowInterval"
                   :min="100"
@@ -304,13 +443,26 @@
               {{ $t("menu.system.config.childrenMenu.export.title") }}
             </h3>
             <el-form :model="form" label-width="160px" label-position="right">
-              <el-form-item
-                :label="
-                  $t(
-                    'menu.system.config.childrenMenu.export.pdfWatermarkEnabled'
-                  )
-                "
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{
+                      $t(
+                        "menu.system.config.childrenMenu.export.pdfWatermarkEnabled"
+                      )
+                    }}
+                    <el-tooltip
+                      :content="
+                        $t(
+                          'menu.system.config.childrenMenu.export.pdfWatermarkEnabledTip'
+                        )
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-switch
                   v-model="form.pdfWatermarkEnabled"
                   active-color="#13ce66"
@@ -318,11 +470,26 @@
                 />
               </el-form-item>
 
-              <el-form-item
-                :label="
-                  $t('menu.system.config.childrenMenu.export.pdfWatermarkText')
-                "
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{
+                      $t(
+                        "menu.system.config.childrenMenu.export.pdfWatermarkText"
+                      )
+                    }}
+                    <el-tooltip
+                      :content="
+                        $t(
+                          'menu.system.config.childrenMenu.export.pdfWatermarkTextTip'
+                        )
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-input
                   v-model="form.pdfWatermarkText"
                   :placeholder="
@@ -343,13 +510,26 @@
               {{ $t("menu.system.config.childrenMenu.connection.title") }}
             </h3>
             <el-form :model="form" label-width="160px" label-position="right">
-              <el-form-item
-                :label="
-                  $t(
-                    'menu.system.config.childrenMenu.connection.heartbeatInterval'
-                  )
-                "
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{
+                      $t(
+                        "menu.system.config.childrenMenu.connection.heartbeatInterval"
+                      )
+                    }}
+                    <el-tooltip
+                      :content="
+                        $t(
+                          'menu.system.config.childrenMenu.connection.heartbeatIntervalTip'
+                        )
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-input-number
                   v-model="form.heartbeatInterval"
                   :min="5000"
@@ -359,13 +539,26 @@
                 />
                 <span class="unit-text">ms</span>
               </el-form-item>
-              <el-form-item
-                :label="
-                  $t(
-                    'menu.system.config.childrenMenu.connection.deviceStatusCheckInterval'
-                  )
-                "
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{
+                      $t(
+                        "menu.system.config.childrenMenu.connection.deviceStatusCheckInterval"
+                      )
+                    }}
+                    <el-tooltip
+                      :content="
+                        $t(
+                          'menu.system.config.childrenMenu.connection.deviceStatusCheckIntervalTip'
+                        )
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-input-number
                   v-model="form.deviceStatusCheckInterval"
                   :min="60"
@@ -377,13 +570,26 @@
                   $t("menu.system.config.childrenMenu.connection.unitSecond")
                 }}</span>
               </el-form-item>
-              <el-form-item
-                :label="
-                  $t(
-                    'menu.system.config.childrenMenu.connection.deviceOfflineThreshold'
-                  )
-                "
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{
+                      $t(
+                        "menu.system.config.childrenMenu.connection.deviceOfflineThreshold"
+                      )
+                    }}
+                    <el-tooltip
+                      :content="
+                        $t(
+                          'menu.system.config.childrenMenu.connection.deviceOfflineThresholdTip'
+                        )
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-input-number
                   v-model="form.deviceOfflineThreshold"
                   :min="120"
@@ -395,6 +601,70 @@
                   $t("menu.system.config.childrenMenu.connection.unitSecond")
                 }}</span>
               </el-form-item>
+
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{
+                      $t(
+                        "menu.system.config.childrenMenu.connection.maintenanceCheckInterval"
+                      )
+                    }}
+                    <el-tooltip
+                      :content="
+                        $t(
+                          'menu.system.config.childrenMenu.connection.maintenanceCheckIntervalTip'
+                        )
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
+                <el-input-number
+                  v-model="form.maintenanceCheckInterval"
+                  :min="1"
+                  :max="168"
+                  :step="1"
+                  controls-position="right"
+                />
+                <span class="unit-text">{{
+                  $t("menu.system.config.childrenMenu.connection.unitHour")
+                }}</span>
+              </el-form-item>
+
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{
+                      $t(
+                        "menu.system.config.childrenMenu.connection.partLifeStatInterval"
+                      )
+                    }}
+                    <el-tooltip
+                      :content="
+                        $t(
+                          'menu.system.config.childrenMenu.connection.partLifeStatIntervalTip'
+                        )
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
+                <el-input-number
+                  v-model="form.partLifeStatInterval"
+                  :min="1"
+                  :max="60"
+                  :step="1"
+                  controls-position="right"
+                />
+                <span class="unit-text">{{
+                  $t("menu.system.config.childrenMenu.connection.unitMinute")
+                }}</span>
+              </el-form-item>
             </el-form>
           </div>
 
@@ -404,9 +674,24 @@
               {{ $t("menu.system.config.childrenMenu.device.title") }}
             </h3>
             <el-form :model="form" label-width="160px" label-position="right">
-              <el-form-item
-                :label="$t('menu.system.config.childrenMenu.device.deviceName')"
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{
+                      $t("menu.system.config.childrenMenu.device.deviceName")
+                    }}
+                    <el-tooltip
+                      :content="
+                        $t(
+                          'menu.system.config.childrenMenu.device.deviceNameTip'
+                        )
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-input
                   v-model="form.deviceName"
                   :placeholder="
@@ -416,9 +701,24 @@
                   style="width: 300px"
                 />
               </el-form-item>
-              <el-form-item
-                :label="$t('menu.system.config.childrenMenu.device.deviceCode')"
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{
+                      $t("menu.system.config.childrenMenu.device.deviceCode")
+                    }}
+                    <el-tooltip
+                      :content="
+                        $t(
+                          'menu.system.config.childrenMenu.device.deviceCodeTip'
+                        )
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-input
                   v-model="form.deviceCode"
                   :placeholder="
@@ -428,11 +728,24 @@
                   style="width: 300px"
                 />
               </el-form-item>
-              <el-form-item
-                :label="
-                  $t('menu.system.config.childrenMenu.device.deviceRegion')
-                "
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{
+                      $t("menu.system.config.childrenMenu.device.deviceRegion")
+                    }}
+                    <el-tooltip
+                      :content="
+                        $t(
+                          'menu.system.config.childrenMenu.device.deviceRegionTip'
+                        )
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-cascader
                   v-model="form.deviceRegion"
                   :options="regionOptions"
@@ -446,11 +759,26 @@
                   style="width: 300px"
                 />
               </el-form-item>
-              <el-form-item
-                :label="
-                  $t('menu.system.config.childrenMenu.device.deviceInstallDate')
-                "
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{
+                      $t(
+                        "menu.system.config.childrenMenu.device.deviceInstallDate"
+                      )
+                    }}
+                    <el-tooltip
+                      :content="
+                        $t(
+                          'menu.system.config.childrenMenu.device.deviceInstallDateTip'
+                        )
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-date-picker
                   v-model="form.deviceInstallDate"
                   type="date"
@@ -474,31 +802,53 @@
               }}
             </h3>
             <el-form :model="form" label-width="160px" label-position="right">
-              <el-form-item
-                :label="
-                  $t(
-                    'menu.system.config.childrenMenu.device.partLifeReminderEnabled'
-                  )
-                "
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{
+                      $t(
+                        "menu.system.config.childrenMenu.device.partLifeReminderEnabled"
+                      )
+                    }}
+                    <el-tooltip
+                      :content="
+                        $t(
+                          'menu.system.config.childrenMenu.device.partLifeReminderEnabledTip'
+                        )
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-switch
                   v-model="form.partLifeReminderEnabled"
                   :active-value="true"
                   :inactive-value="false"
                 />
-                <div class="form-tip">
-                  {{
-                    $t(
-                      "menu.system.config.childrenMenu.device.partLifeReminderEnabledTip"
-                    )
-                  }}
-                </div>
               </el-form-item>
-              <el-form-item
-                :label="
-                  $t('menu.system.config.childrenMenu.device.partLifeThreshold')
-                "
-              >
+
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{
+                      $t(
+                        "menu.system.config.childrenMenu.device.partLifeThreshold"
+                      )
+                    }}
+                    <el-tooltip
+                      :content="
+                        $t(
+                          'menu.system.config.childrenMenu.device.partLifeThresholdTip'
+                        )
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-select
                   v-model="form.partLifeThreshold"
                   style="width: 200px"
@@ -509,21 +859,28 @@
                   <el-option label="30%" value="30" />
                   <el-option label="50%" value="50" />
                 </el-select>
-                <div class="form-tip">
-                  {{
-                    $t(
-                      "menu.system.config.childrenMenu.device.partLifeThresholdTip"
-                    )
-                  }}
-                </div>
               </el-form-item>
-              <el-form-item
-                :label="
-                  $t(
-                    'menu.system.config.childrenMenu.device.partLifeRemindInterval'
-                  )
-                "
-              >
+
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{
+                      $t(
+                        "menu.system.config.childrenMenu.device.partLifeRemindInterval"
+                      )
+                    }}
+                    <el-tooltip
+                      :content="
+                        $t(
+                          'menu.system.config.childrenMenu.device.partLifeRemindIntervalTip'
+                        )
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-select
                   v-model="form.partLifeRemindInterval"
                   style="width: 200px"
@@ -548,19 +905,28 @@
                     value="day"
                   />
                 </el-select>
-                <div class="form-tip">
-                  {{
-                    $t(
-                      "menu.system.config.childrenMenu.device.partLifeRemindIntervalTip"
-                    )
-                  }}
-                </div>
               </el-form-item>
-              <el-form-item
-                :label="
-                  $t('menu.system.config.childrenMenu.device.snoozeInterval')
-                "
-              >
+
+              <el-form-item>
+                <template slot="label">
+                  <span class="config-label-tip">
+                    {{
+                      $t(
+                        "menu.system.config.childrenMenu.device.snoozeInterval"
+                      )
+                    }}
+                    <el-tooltip
+                      :content="
+                        $t(
+                          'menu.system.config.childrenMenu.device.snoozeIntervalTip'
+                        )
+                      "
+                      placement="top"
+                    >
+                      <i class="el-icon-question tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-select
                   v-model="form.partLifeSnoozeInterval"
                   style="width: 200px"
@@ -597,13 +963,6 @@
                     value="120"
                   />
                 </el-select>
-                <div class="form-tip">
-                  {{
-                    $t(
-                      "menu.system.config.childrenMenu.device.snoozeIntervalTip"
-                    )
-                  }}
-                </div>
               </el-form-item>
             </el-form>
           </div>
@@ -623,57 +982,81 @@
                 }}</span>
               </div>
               <el-form :model="form" label-width="250px" label-position="right">
-                <el-form-item
-                  :label="
-                    $t(
-                      'menu.system.config.childrenMenu.order.allowNoOrderProduction'
-                    )
-                  "
-                >
+                <el-form-item>
+                  <template slot="label">
+                    <span class="config-label-tip">
+                      {{
+                        $t(
+                          "menu.system.config.childrenMenu.order.allowNoOrderProduction"
+                        )
+                      }}
+                      <el-tooltip
+                        :content="
+                          $t(
+                            'menu.system.config.childrenMenu.order.allowNoOrderProductionTip'
+                          )
+                        "
+                        placement="top"
+                      >
+                        <i class="el-icon-question tip-icon"></i>
+                      </el-tooltip>
+                    </span>
+                  </template>
                   <el-switch
                     v-model="form.allowNoOrderProduction"
                     active-color="#13ce66"
                     inactive-color="#c0c4cc"
                   />
-                  <span class="form-tip">{{
-                    $t(
-                      "menu.system.config.childrenMenu.order.allowNoOrderProductionTip"
-                    )
-                  }}</span>
                 </el-form-item>
 
-                <el-form-item
-                  :label="
-                    $t(
-                      'menu.system.config.childrenMenu.order.noOrderProductionHighlight'
-                    )
-                  "
-                >
+                <el-form-item>
+                  <template slot="label">
+                    <span class="config-label-tip">
+                      {{
+                        $t(
+                          "menu.system.config.childrenMenu.order.noOrderProductionHighlight"
+                        )
+                      }}
+                      <el-tooltip
+                        :content="
+                          $t(
+                            'menu.system.config.childrenMenu.order.noOrderProductionHighlightTip'
+                          )
+                        "
+                        placement="top"
+                      >
+                        <i class="el-icon-question tip-icon"></i>
+                      </el-tooltip>
+                    </span>
+                  </template>
                   <el-switch
                     v-model="form.noOrderProductionHighlight"
                     :disabled="!form.allowNoOrderProduction"
                     active-color="#e6a23c"
                     inactive-color="#c0c4cc"
                   />
-                  <span
-                    class="form-tip"
-                    :class="{ disabled: !form.allowNoOrderProduction }"
-                  >
-                    {{
-                      $t(
-                        "menu.system.config.childrenMenu.order.noOrderProductionHighlightTip"
-                      )
-                    }}
-                  </span>
                 </el-form-item>
 
-                <el-form-item
-                  :label="
-                    $t(
-                      'menu.system.config.childrenMenu.order.orderSwitchConfirm'
-                    )
-                  "
-                >
+                <el-form-item>
+                  <template slot="label">
+                    <span class="config-label-tip">
+                      {{
+                        $t(
+                          "menu.system.config.childrenMenu.order.orderSwitchConfirm"
+                        )
+                      }}
+                      <el-tooltip
+                        :content="
+                          $t(
+                            'menu.system.config.childrenMenu.order.orderSwitchConfirmTip'
+                          )
+                        "
+                        placement="top"
+                      >
+                        <i class="el-icon-question tip-icon"></i>
+                      </el-tooltip>
+                    </span>
+                  </template>
                   <el-switch
                     v-model="form.orderSwitchConfirm"
                     active-color="#13ce66"
@@ -681,13 +1064,26 @@
                   />
                 </el-form-item>
 
-                <el-form-item
-                  :label="
-                    $t(
-                      'menu.system.config.childrenMenu.order.autoArchiveCompleted'
-                    )
-                  "
-                >
+                <el-form-item>
+                  <template slot="label">
+                    <span class="config-label-tip">
+                      {{
+                        $t(
+                          "menu.system.config.childrenMenu.order.autoArchiveCompleted"
+                        )
+                      }}
+                      <el-tooltip
+                        :content="
+                          $t(
+                            'menu.system.config.childrenMenu.order.autoArchiveCompletedTip'
+                          )
+                        "
+                        placement="top"
+                      >
+                        <i class="el-icon-question tip-icon"></i>
+                      </el-tooltip>
+                    </span>
+                  </template>
                   <el-switch
                     v-model="form.autoArchiveCompleted"
                     active-color="#13ce66"
@@ -706,11 +1102,26 @@
                 }}</span>
               </div>
               <el-form :model="form" label-width="250px" label-position="right">
-                <el-form-item
-                  :label="
-                    $t('menu.system.config.childrenMenu.order.showOperatorName')
-                  "
-                >
+                <el-form-item>
+                  <template slot="label">
+                    <span class="config-label-tip">
+                      {{
+                        $t(
+                          "menu.system.config.childrenMenu.order.showOperatorName"
+                        )
+                      }}
+                      <el-tooltip
+                        :content="
+                          $t(
+                            'menu.system.config.childrenMenu.order.showOperatorNameTip'
+                          )
+                        "
+                        placement="top"
+                      >
+                        <i class="el-icon-question tip-icon"></i>
+                      </el-tooltip>
+                    </span>
+                  </template>
                   <el-switch
                     v-model="form.showOperatorName"
                     active-color="#13ce66"
@@ -718,11 +1129,26 @@
                   />
                 </el-form-item>
 
-                <el-form-item
-                  :label="
-                    $t('menu.system.config.childrenMenu.order.showAlarmCount')
-                  "
-                >
+                <el-form-item>
+                  <template slot="label">
+                    <span class="config-label-tip">
+                      {{
+                        $t(
+                          "menu.system.config.childrenMenu.order.showAlarmCount"
+                        )
+                      }}
+                      <el-tooltip
+                        :content="
+                          $t(
+                            'menu.system.config.childrenMenu.order.showAlarmCountTip'
+                          )
+                        "
+                        placement="top"
+                      >
+                        <i class="el-icon-question tip-icon"></i>
+                      </el-tooltip>
+                    </span>
+                  </template>
                   <el-switch
                     v-model="form.showAlarmCount"
                     active-color="#13ce66"
@@ -730,11 +1156,24 @@
                   />
                 </el-form-item>
 
-                <el-form-item
-                  :label="
-                    $t('menu.system.config.childrenMenu.order.showRuntime')
-                  "
-                >
+                <el-form-item>
+                  <template slot="label">
+                    <span class="config-label-tip">
+                      {{
+                        $t("menu.system.config.childrenMenu.order.showRuntime")
+                      }}
+                      <el-tooltip
+                        :content="
+                          $t(
+                            'menu.system.config.childrenMenu.order.showRuntimeTip'
+                          )
+                        "
+                        placement="top"
+                      >
+                        <i class="el-icon-question tip-icon"></i>
+                      </el-tooltip>
+                    </span>
+                  </template>
                   <el-switch
                     v-model="form.showRuntime"
                     active-color="#13ce66"
@@ -753,13 +1192,26 @@
                 }}</span>
               </div>
               <el-form :model="form" label-width="250px" label-position="right">
-                <el-form-item
-                  :label="
-                    $t(
-                      'menu.system.config.childrenMenu.order.reportIncludeAlarmDetail'
-                    )
-                  "
-                >
+                <el-form-item>
+                  <template slot="label">
+                    <span class="config-label-tip">
+                      {{
+                        $t(
+                          "menu.system.config.childrenMenu.order.reportIncludeAlarmDetail"
+                        )
+                      }}
+                      <el-tooltip
+                        :content="
+                          $t(
+                            'menu.system.config.childrenMenu.order.reportIncludeAlarmDetailTip'
+                          )
+                        "
+                        placement="top"
+                      >
+                        <i class="el-icon-question tip-icon"></i>
+                      </el-tooltip>
+                    </span>
+                  </template>
                   <el-switch
                     v-model="form.reportIncludeAlarmDetail"
                     active-color="#13ce66"
@@ -767,13 +1219,26 @@
                   />
                 </el-form-item>
 
-                <el-form-item
-                  :label="
-                    $t(
-                      'menu.system.config.childrenMenu.order.reportIncludeOperatorDetail'
-                    )
-                  "
-                >
+                <el-form-item>
+                  <template slot="label">
+                    <span class="config-label-tip">
+                      {{
+                        $t(
+                          "menu.system.config.childrenMenu.order.reportIncludeOperatorDetail"
+                        )
+                      }}
+                      <el-tooltip
+                        :content="
+                          $t(
+                            'menu.system.config.childrenMenu.order.reportIncludeOperatorDetailTip'
+                          )
+                        "
+                        placement="top"
+                      >
+                        <i class="el-icon-question tip-icon"></i>
+                      </el-tooltip>
+                    </span>
+                  </template>
                   <el-switch
                     v-model="form.reportIncludeOperatorDetail"
                     active-color="#13ce66"
@@ -781,13 +1246,26 @@
                   />
                 </el-form-item>
 
-                <el-form-item
-                  :label="
-                    $t(
-                      'menu.system.config.childrenMenu.order.reportIncludeDownloadCount'
-                    )
-                  "
-                >
+                <el-form-item>
+                  <template slot="label">
+                    <span class="config-label-tip">
+                      {{
+                        $t(
+                          "menu.system.config.childrenMenu.order.reportIncludeDownloadCount"
+                        )
+                      }}
+                      <el-tooltip
+                        :content="
+                          $t(
+                            'menu.system.config.childrenMenu.order.reportIncludeDownloadCountTip'
+                          )
+                        "
+                        placement="top"
+                      >
+                        <i class="el-icon-question tip-icon"></i>
+                      </el-tooltip>
+                    </span>
+                  </template>
                   <el-switch
                     v-model="form.reportIncludeDownloadCount"
                     active-color="#13ce66"
@@ -795,26 +1273,44 @@
                   />
                 </el-form-item>
 
-                <el-form-item
-                  :label="
-                    $t(
-                      'menu.system.config.childrenMenu.order.allowRunningOrderDownload'
-                    )
-                  "
-                >
+                <el-form-item>
+                  <template slot="label">
+                    <span class="config-label-tip">
+                      {{
+                        $t(
+                          "menu.system.config.childrenMenu.order.allowRunningOrderDownload"
+                        )
+                      }}
+                      <el-tooltip
+                        :content="
+                          $t(
+                            'menu.system.config.childrenMenu.order.allowRunningOrderDownloadTip'
+                          )
+                        "
+                        placement="top"
+                      >
+                        <i class="el-icon-question tip-icon"></i>
+                      </el-tooltip>
+                    </span>
+                  </template>
                   <el-switch
                     v-model="form.allowRunningOrderDownload"
                     active-color="#e6a23c"
                     inactive-color="#c0c4cc"
                   />
-                  <span class="form-tip">{{
-                    $t(
-                      "menu.system.config.childrenMenu.order.allowRunningOrderDownloadTip"
-                    )
-                  }}</span>
                 </el-form-item>
               </el-form>
             </div>
+          </div>
+
+          <!-- 邮箱配置 -->
+          <div v-if="activeMenu === 'email'" class="config-panel">
+            <EmailConfig />
+          </div>
+
+          <!-- 邮件日志 -->
+          <div v-if="activeMenu === 'emailLog'" class="config-panel">
+            <EmailLog />
           </div>
 
           <!-- 授权管理 -->
@@ -1365,6 +1861,8 @@ import { useLicense } from "@/composables/useLicense";
 import { useI18n } from "@/composables/useI18n";
 import { getCascaderOptions, getCoordsByValues } from "@/utils/worldCities";
 import { nextTick } from "vue";
+import EmailConfig from "./components/EmailConfig.vue";
+import EmailLog from "./components/EmailLog.vue";
 
 // 使用 useI18n 获取响应式的当前语言和 t 函数
 const { locale, t } = useI18n();
@@ -1408,6 +1906,16 @@ const menuList = computed(() => [
     key: "order",
     icon: "el-icon-s-order",
     title: t("menu.system.config.childrenMenu.order.title"),
+  },
+  {
+    key: "email",
+    icon: "el-icon-message",
+    title: t("menu.system.config.childrenMenu.email.title"),
+  },
+  {
+    key: "emailLog",
+    icon: "el-icon-document",
+    title: t("menu.system.config.childrenMenu.emailLog.title"),
   },
   {
     key: "license",
@@ -1464,6 +1972,8 @@ const REQUIRED_CONFIG_KEYS = [
   // 安全设置
   "watermarkEnabled",
   "watermarkText",
+  "loginFailedThreshold",
+  "lockDurationMinutes",
   // PLC 设置
   "plcProtocol",
   "plcHost",
@@ -1478,6 +1988,8 @@ const REQUIRED_CONFIG_KEYS = [
   "heartbeatInterval",
   "deviceStatusCheckInterval",
   "deviceOfflineThreshold",
+  "maintenanceCheckInterval",
+  "partLifeStatInterval",
   // 设备参数
   "deviceName",
   "deviceCode",
@@ -1804,8 +2316,11 @@ onMounted(() => {
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #ebeef5;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ebeef5;
     flex-shrink: 0;
 
     .header-left {
@@ -2297,6 +2812,10 @@ onMounted(() => {
   }
 }
 
+.unit-tip {
+  margin-left: 10px;
+}
+
 // 授权导入弹窗样式
 .import-tip {
   display: flex;
@@ -2338,6 +2857,25 @@ onMounted(() => {
   .file-name {
     color: #67c23a;
     font-weight: 500;
+  }
+}
+
+/* 配置项标签：文字 + 问号图标，不换行 */
+.config-label-tip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.tip-icon {
+  font-size: 14px;
+  color: #c0c4cc;
+  cursor: help;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #409eff;
   }
 }
 </style>
