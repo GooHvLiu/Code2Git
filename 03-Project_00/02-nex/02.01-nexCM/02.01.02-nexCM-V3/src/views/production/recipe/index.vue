@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="recipe-container">
     <!-- 顶部操作栏 -->
     <div class="page-header">
@@ -13,7 +13,7 @@
           trigger="click"
         >
           <el-button type="primary" icon="el-icon-download">
-            {{ $t("menu.production.recipe.page.downloadAll")
+            {{ $t("menu.production.recipe.download")
             }}<i class="el-icon-arrow-down el-icon--right"></i>
           </el-button>
           <el-dropdown-menu slot="dropdown">
@@ -112,7 +112,7 @@
               trigger="click"
             >
               <el-button size="small" icon="el-icon-download">
-                {{ $t("menu.production.recipe.page.download")
+                {{ $t("menu.production.recipe.download")
                 }}<i class="el-icon-arrow-down el-icon--right"></i>
               </el-button>
               <el-dropdown-menu slot="dropdown">
@@ -929,3 +929,4 @@ function handleDownloadAll(format) {
   }
 }
 </style>
+

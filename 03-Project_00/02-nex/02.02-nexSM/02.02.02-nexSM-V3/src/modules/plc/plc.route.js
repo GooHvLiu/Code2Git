@@ -37,4 +37,11 @@ router.get('/read-all', plcController.readAllTags)
  */
 router.post('/write-tag', plcController.writeParameter)
 
+/**
+ * @route POST /plc/reconnect
+ * @desc 手动重连PLC设备
+ * @body {string} [device] - 设备名称（可选，不传则重连所有设备）
+ */
+router.post('/reconnect', plcController.reconnect)
+
 module.exports = router

@@ -8,6 +8,7 @@
 const permissionService = require('./permission.service')
 const { getLangFromRequest } = require('../../utils/i18n')
 const { triggerNotification } = require('../../utils/notification')
+const audit = require('../../utils/audit')
 
 class PermissionController {
   /**
@@ -86,6 +87,17 @@ class PermissionController {
       const { roleId, roleCode, menuIds } = req.body
       const result = await permissionService.saveRolePermissions(roleId, menuIds, roleCode)
 
+      // 记录审计日志：权限配置变更
+      audit.log(req, {
+        action: audit.ACTION.PERMISSION_CHANGE,
+        target: `角色ID:${roleId}, 角色编码:${roleCode}`,
+        newValue: `权限数量:${menuIds.length}`,
+        result: 'success',
+        reason: '管理员配置角色权限'
+      }).catch(err => {
+        console.error('[权限配置变更] 记录审计日志失败:', err)
+      })
+
       // 触发通知：权限配置变更（通知管理员）
       triggerNotification('permission.change', {
         roleId: roleId,
@@ -101,42 +113,9 @@ class PermissionController {
     }
   }
 
-  /**
-   * 清除指定用户的权限缓存
-   * 管理员手动刷新用户权限时调用
-   * @param {Object} req - Express 请求对象
-   * @param {Object} req.body - 请求体
-   * @param {number} req.body.userId - 用户ID
-   * @param {Object} res - Express 响应对象
-   * @param {Function} next - Express 中间件 next 函数
-   * @returns {Promise<void>}
-   */
-  async clearUserCache(req, res, next) {
-    try {
-      const { userId } = req.body
-      const result = permissionService.clearUserCache(userId)
-      res.success({ success: result })
-    } catch (err) {
-      next(err)
-    }
-  }
-
-  /**
-   * 清除所有用户的权限缓存
-   * 系统级权限变更时调用
-   * @param {Object} req - Express 请求对象
-   * @param {Object} res - Express 响应对象
-   * @param {Function} next - Express 中间件 next 函数
-   * @returns {Promise<void>}
-   */
-  async clearAllCache(req, res, next) {
-    try {
-      const result = permissionService.clearAllCache()
-      res.success({ success: result })
-    } catch (err) {
-      next(err)
-    }
-  }
 }
 
 module.exports = new PermissionController()
+
+
+

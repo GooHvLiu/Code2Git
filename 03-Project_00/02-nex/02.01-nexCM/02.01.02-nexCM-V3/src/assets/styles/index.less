@@ -530,3 +530,21 @@ body {
     }
   }
 }
+
+// ==================== 分页组件当前页码按钮样式修复 ====================
+// 修复当前页码按钮文字颜色和背景颜色一致导致数字看不见的问题
+.el-pagination {
+  .el-pager {
+    li {
+      &.active {
+        color: #ffffff !important;
+        background-color: #409eff !important;
+        min-width: 30px !important;
+        height: 28px !important;
+        line-height: 28px !important;
+        text-align: center !important;
+        font-size: 13px !important;
+      }
+    }
+  }
+}

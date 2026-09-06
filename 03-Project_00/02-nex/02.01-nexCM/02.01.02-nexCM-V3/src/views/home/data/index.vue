@@ -1,9 +1,9 @@
-<template>
+﻿<template>
   <div class="data-management-container">
     <!-- 页签 -->
     <el-tabs v-model="activeTab" class="data-tabs" @tab-click="handleTabChange">
       <!-- 产能数据 -->
-      <el-tab-pane label="产能数据" name="output">
+      <el-tab-pane :label="$t('menu.home.dataview.output.title')" name="output">
         <div class="tab-content">
           <!-- 搜索区域 -->
           <div class="search-section">
@@ -57,12 +57,14 @@
                   type="primary"
                   icon="el-icon-search"
                   size="small"
+                  v-permission="'home:data:output:search'"
                   @click="handleSearch"
                   >搜索</el-button
                 >
                 <el-button
                   icon="el-icon-refresh"
                   size="small"
+                  v-permission="'home:data:output:reset'"
                   @click="handleReset('output')"
                   >重置</el-button
                 >
@@ -79,7 +81,7 @@
             </div>
             <div class="toolbar-right">
               <ExportDropdown
-                v-permission="'home:data:export'"
+                v-permission="'home:data:output:export'"
                 :data="tableData.output"
                 :columns="exportColumns.output"
                 title="产能数据"
@@ -91,6 +93,7 @@
                 type="primary"
                 icon="el-icon-refresh"
                 size="small"
+                  v-permission="'home:data:output:refresh'"
                 @click="handleRefresh"
                 >刷新</el-button
               >
@@ -214,7 +217,7 @@
       </el-tab-pane>
 
       <!-- 稼动率数据 -->
-      <el-tab-pane label="稼动率数据" name="oee">
+      <el-tab-pane :label="$t('menu.home.dataview.oee.title')" name="oee">
         <div class="tab-content">
           <div class="search-section">
             <el-form
@@ -252,12 +255,14 @@
                   type="primary"
                   icon="el-icon-search"
                   size="small"
+                  v-permission="'home:data:oee:search'"
                   @click="handleSearch"
                   >搜索</el-button
                 >
                 <el-button
                   icon="el-icon-refresh"
                   size="small"
+                  v-permission="'home:data:oee:reset'"
                   @click="handleReset('oee')"
                   >重置</el-button
                 >
@@ -273,7 +278,7 @@
             </div>
             <div class="toolbar-right">
               <ExportDropdown
-                v-permission="'home:data:export'"
+                v-permission="'home:data:oee:export'"
                 :data="tableData.oee"
                 :columns="exportColumns.oee"
                 title="稼动率数据"
@@ -285,6 +290,7 @@
                 type="primary"
                 icon="el-icon-refresh"
                 size="small"
+                v-permission="'home:data:oee:refresh'"
                 @click="handleRefresh"
                 >刷新</el-button
               >
@@ -405,7 +411,7 @@
       </el-tab-pane>
 
       <!-- 生产数据 -->
-      <el-tab-pane label="生产数据" name="production">
+      <el-tab-pane :label="$t('menu.home.dataview.production.title')" name="production">
         <div class="tab-content">
           <div class="search-section">
             <el-form
@@ -466,6 +472,7 @@
                 <el-button
                   type="primary"
                   icon="el-icon-search"
+                  v-permission="'home:data:production:search'"
                   @click="handleSearch"
                   size="small"
                   >搜索</el-button
@@ -473,6 +480,7 @@
                 <el-button
                   icon="el-icon-refresh"
                   size="small"
+                  v-permission="'home:data:production:reset'"
                   @click="handleReset('production')"
                   >重置</el-button
                 >
@@ -488,7 +496,7 @@
             </div>
             <div class="toolbar-right">
               <ExportDropdown
-                v-permission="'home:data:export'"
+                v-permission="'home:data:production:export'"
                 :data="tableData.production"
                 :columns="exportColumns.production"
                 title="生产数据"
@@ -500,6 +508,7 @@
                 type="primary"
                 icon="el-icon-refresh"
                 size="small"
+                v-permission="'home:data:production:refresh'"
                 @click="handleRefresh"
                 >刷新</el-button
               >
@@ -610,7 +619,7 @@
               >
                 <template slot-scope="scope">
                   <el-button
-                    v-permission="'home:data:detail'"
+                    v-permission="'home:data:production:detail'"
                     type="text"
                     size="small"
                     icon="el-icon-view"
@@ -618,7 +627,7 @@
                     >详情</el-button
                   >
                   <el-button
-                    v-permission="'home:data:export'"
+                    v-permission="'home:data:production:exportSingle'"
                     type="text"
                     size="small"
                     icon="el-icon-download"
@@ -646,7 +655,7 @@
       </el-tab-pane>
 
       <!-- 报警数据 -->
-      <el-tab-pane label="报警数据" name="alarm">
+      <el-tab-pane :label="$t('menu.home.dataview.alarm.title')" name="alarm">
         <div class="tab-content">
           <div class="search-section">
             <el-form
@@ -709,12 +718,14 @@
                   type="primary"
                   icon="el-icon-search"
                   size="small"
+                  v-permission="'home:data:alarm:search'"
                   @click="handleSearch"
                   >搜索</el-button
                 >
                 <el-button
                   icon="el-icon-refresh"
                   size="small"
+                  v-permission="'home:data:alarm:reset'"
                   @click="handleReset('alarm')"
                   >重置</el-button
                 >
@@ -730,7 +741,7 @@
             </div>
             <div class="toolbar-right">
               <ExportDropdown
-                v-permission="'home:data:export'"
+                v-permission="'home:data:alarm:export'"
                 :data="tableData.alarm"
                 :columns="exportColumns.alarm"
                 title="报警数据"
@@ -742,6 +753,7 @@
                 type="primary"
                 icon="el-icon-refresh"
                 size="small"
+                v-permission="'home:data:alarm:refresh'"
                 @click="handleRefresh"
                 >刷新</el-button
               >
@@ -1410,3 +1422,13 @@ onMounted(() => {
   color: #f56c6c !important;
 }
 </style>
+
+
+
+
+
+
+
+
+
+

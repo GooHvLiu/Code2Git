@@ -1,5 +1,51 @@
 <template>
   <div class="user-management">
+    <!-- ==================== 页面头部 ==================== -->
+    <div class="page-header">
+      <div class="header-left">
+        <h2 class="page-title">
+          {{ $t("menu.system.user.page.title") }}
+        </h2>
+        <p class="page-desc">{{ $t("menu.system.user.page.pageDesc") }}</p>
+      </div>
+      <div class="header-right">
+        <export-dropdown
+          :data="tableData"
+          :columns="exportColumns"
+          :title="$t('menu.system.user.page.title')"
+          :filename="$t('menu.system.user.page.title')"
+          :selected="selectedRows"
+          :exporter="$store.state.user.userInfo?.username || ''"
+        />
+        <el-button
+          v-if="selectedIds.length > 0"
+          type="danger"
+          icon="el-icon-delete"
+          size="small"
+          @click="handleBatchDelete"
+        >
+          {{ $t("common.delete") }}({{ selectedIds.length }})
+        </el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-plus"
+          size="small"
+          @click="handleAdd"
+        >
+          {{ $t("common.add") }}
+        </el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-refresh"
+          size="small"
+          :loading="loading"
+          @click="refreshList"
+        >
+          {{ $t("common.refresh") }}
+        </el-button>
+      </div>
+    </div>
+
     <!-- ==================== 搜索表单 ==================== -->
     <search-form :form="queryParams" @search="handleQuery" @reset="handleReset">
       <el-form-item
@@ -44,35 +90,6 @@
         </el-select>
       </el-form-item>
     </search-form>
-
-    <!-- ==================== 表格工具栏 ==================== -->
-    <table-toolbar
-      :title="$t('menu.system.user.page.title')"
-      show-add
-      show-refresh
-      @add="handleAdd"
-      @refresh="refreshList"
-    >
-      <template #right>
-        <export-dropdown
-          :data="tableData"
-          :columns="exportColumns"
-          :title="$t('menu.system.user.page.title')"
-          :filename="$t('menu.system.user.page.title')"
-          :selected="selectedRows"
-          :exporter="$store.state.user.userInfo?.username || ''"
-        />
-        <el-button
-          v-if="selectedIds.length > 0"
-          type="danger"
-          icon="el-icon-delete"
-          size="small"
-          @click="handleBatchDelete"
-        >
-          {{ $t("common.delete") }}({{ selectedIds.length }})
-        </el-button>
-      </template>
-    </table-toolbar>
 
     <!-- ==================== 表格 ==================== -->
     <el-table
@@ -204,9 +221,6 @@
     <!-- ==================== 新增/编辑弹窗 ==================== -->
     <user-dialog ref="userDialog" @success="refreshList" />
 
-    <!-- ==================== 电子签名弹窗（删除用户用） ==================== -->
-    <electronic-signature ref="esDialog" @confirm="handleEsConfirm" />
-
     <!-- ==================== 重置密码弹窗 ==================== -->
     <el-dialog
       title="重置密码"
@@ -247,18 +261,15 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted } from "vue";
-import store from "@/store";
 import { useTable } from "@/composables/useTable";
 import { useDict } from "@/composables/useDict";
 import SearchForm from "@/components/SearchForm/index.vue";
-import TableToolbar from "@/components/TableToolbar/index.vue";
 import Pagination from "@/components/Pagination/index.vue";
 import DictTag from "@/components/DictTag/index.vue";
 import ExportDropdown from "@/components/ExportDropdown/index.vue";
 import { formatDate } from "@/utils/date";
 // eslint-disable-next-line no-unused-vars
 import UserDialog from "./components/UserDialog.vue";
-import ElectronicSignature from "@/components/ElectronicSignature/index.vue";
 import {
   requestGetUserListApi,
   requestDeleteUserApi,
@@ -312,14 +323,9 @@ const deptTree = ref([]);
 const selectedIds = ref([]);
 // 选中的行数据（用于导出选中）
 const selectedRows = ref([]);
-// 当前待删除操作类型：single / batch
-const pendingDeleteType = ref("");
-// 待删除的用户数据
-const pendingDeleteUser = ref(null);
 
 // 弹窗 ref
 const userDialog = ref(null);
-const esDialog = ref(null);
 
 // 角色列表（从字典获取，用于下拉框和显示）
 const roleOptions = computed(() => dict.value.user_role || []);
@@ -403,42 +409,47 @@ function handleEdit(row) {
   userDialog.value.open(row);
 }
 
-// 删除（GMP：需电子签名）
+// 删除
 function handleDelete(row) {
-  pendingDeleteType.value = "single";
-  pendingDeleteUser.value = row;
-  esDialog.value.open({
-    operation: `删除 - ${row.username}`,
-    userName: store.state.user.userInfo?.username || "",
-    extraData: { id: row.id, username: row.username },
-  });
+  MessageBox.confirm(`确定要删除用户「${row.username}」吗？此操作不可撤销！`, "提示", {
+    confirmButtonText: "确定",
+    cancelButtonText: "取消",
+    type: "warning",
+  })
+    .then(async () => {
+      try {
+        await requestDeleteUserApi(row.id);
+        Message.success("删除成功");
+        refreshList();
+      } catch (err) {
+        // 错误已由拦截器处理
+      }
+    })
+    .catch(() => {});
 }
 
-// 批量删除（GMP：需电子签名）
+// 批量删除
 function handleBatchDelete() {
-  pendingDeleteType.value = "batch";
-  pendingDeleteUser.value = null;
-  esDialog.value.open({
-    operation: `删除 - ${selectedIds.value.length} 用户`,
-    userName: store.state.user.userInfo?.username || "",
-    extraData: { ids: [...selectedIds.value] },
-  });
-}
-
-// 电子签名确认回调
-async function handleEsConfirm({ password, extraData }) {
-  try {
-    if (pendingDeleteType.value === "single") {
-      await requestDeleteUserApi(extraData.id, password);
-    } else if (pendingDeleteType.value === "batch") {
-      await requestBatchDeleteUserApi(extraData.ids, password);
-      selectedIds.value = [];
-    }
-    esDialog.value.close();
-    refreshList();
-  } catch (err) {
-    // 错误已由拦截器处理
+  if (selectedIds.value.length === 0) {
+    Message.warning("请先选择要删除的用户");
+    return;
   }
+  MessageBox.confirm(`确定要删除选中的 ${selectedIds.value.length} 个用户吗？此操作不可撤销！`, "提示", {
+    confirmButtonText: "确定",
+    cancelButtonText: "取消",
+    type: "warning",
+  })
+    .then(async () => {
+      try {
+        await requestBatchDeleteUserApi([...selectedIds.value]);
+        Message.success("批量删除成功");
+        selectedIds.value = [];
+        refreshList();
+      } catch (err) {
+        // 错误已由拦截器处理
+      }
+    })
+    .catch(() => {});
 }
 
 // 重置密码相关
@@ -510,7 +521,42 @@ onMounted(() => {
 
 <style scoped lang="less">
 .user-management {
-  height: 100%;
+  padding: 0;
+  min-height: calc(100vh - 84px);
+}
+
+// 页面头部
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ebeef5;
+
+  .header-left {
+    .page-title {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+      color: #303133;
+    }
+
+    .page-desc {
+      margin: 8px 0 0;
+      font-size: 13px;
+      color: #909399;
+    }
+  }
+
+  .header-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
 }
 
 /deep/ .el-table .caret-wrapper {

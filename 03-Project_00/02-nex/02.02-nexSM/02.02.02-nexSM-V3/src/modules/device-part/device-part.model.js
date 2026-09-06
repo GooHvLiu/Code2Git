@@ -9,12 +9,39 @@ class DevicePartModel {
   // ==================== 部件模板相关 ====================
 
   /**
-   * 获取所有启用的部件模板
+   * 获取所有启用的部件模板（未删除）
    */
   async getAllTemplates() {
     const sql = `
       SELECT * FROM device_part_template 
-      WHERE enabled = 1 
+      WHERE enabled = 1 AND is_deleted = 0
+      ORDER BY sort ASC, id ASC
+    `;
+    return query(sql);
+  }
+
+  /**
+   * 获取所有模板（包括已删除的，用于管理页面）
+   */
+  async getAllTemplatesForAdmin() {
+    const sql = `
+      SELECT 
+        t.*,
+        (SELECT COUNT(*) FROM device_part p WHERE p.template_id = t.id AND p.is_deleted = 0) as part_count
+      FROM device_part_template t
+      WHERE t.is_deleted = 0
+      ORDER BY t.sort ASC, t.id ASC
+    `;
+    return query(sql);
+  }
+
+  /**
+   * 获取所有基础模板（用于新增模板时选择源模板）
+   */
+  async getBaseTemplates() {
+    const sql = `
+      SELECT * FROM device_part_template 
+      WHERE is_base_template = 1 AND enabled = 1 AND is_deleted = 0
       ORDER BY sort ASC, id ASC
     `;
     return query(sql);
@@ -24,7 +51,7 @@ class DevicePartModel {
    * 根据template_key获取模板
    */
   async getTemplateByKey(templateKey) {
-    const sql = `SELECT * FROM device_part_template WHERE template_key = ?`;
+    const sql = `SELECT * FROM device_part_template WHERE template_key = ? AND is_deleted = 0`;
     const result = await query(sql, [templateKey]);
     return result[0] || null;
   }
@@ -33,9 +60,87 @@ class DevicePartModel {
    * 根据ID获取模板
    */
   async getTemplateById(id) {
-    const sql = `SELECT * FROM device_part_template WHERE id = ?`;
+    const sql = `SELECT * FROM device_part_template WHERE id = ? AND is_deleted = 0`;
     const result = await query(sql, [id]);
     return result[0] || null;
+  }
+
+  /**
+   * 新增模板
+   */
+  async createTemplate(data) {
+    const sql = `
+      INSERT INTO device_part_template 
+      (template_key, name_key, code_prefix, default_spec, life_unit, default_rated_life, stat_method, stat_tag, icon, sort, enabled, created_at, updated_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
+    `;
+    const result = await query(sql, [
+      data.template_key,
+      data.name_key,
+      data.code_prefix,
+      data.default_spec,
+      data.life_unit || 'times',
+      data.default_rated_life,
+      data.stat_method || 'manual',
+      data.stat_tag || null,
+      data.icon !== undefined ? data.icon : 'el-icon-cpu',
+      data.sort || 0,
+      data.enabled !== undefined ? data.enabled : 1
+    ]);
+    return result.insertId;
+  }
+
+  /**
+   * 更新模板
+   */
+  async updateTemplate(id, data) {
+    const allowedFields = ['name_key', 'code_prefix', 'default_spec', 'life_unit', 'default_rated_life', 'stat_method', 'stat_tag', 'icon', 'sort', 'enabled'];
+    const updates = [];
+    const values = [];
+    
+    for (const field of allowedFields) {
+      if (data[field] !== undefined) {
+        updates.push(`${field} = ?`);
+        values.push(data[field]);
+      }
+    }
+    
+    if (updates.length === 0) return 0;
+    
+    updates.push('updated_at = NOW()');
+    values.push(id);
+    
+    const sql = `UPDATE device_part_template SET ${updates.join(', ')} WHERE id = ? AND is_deleted = 0`;
+    const result = await query(sql, values);
+    return result.affectedRows;
+  }
+
+  /**
+   * 删除模板（软删除）
+   */
+  async deleteTemplate(id) {
+    const sql = `UPDATE device_part_template SET is_deleted = 1, updated_at = NOW() WHERE id = ?`;
+    const result = await query(sql, [id]);
+    return result.affectedRows;
+  }
+
+  /**
+   * 根据模板ID统计部件实例数量
+   */
+  async countPartsByTemplateId(templateId) {
+    const sql = `SELECT COUNT(*) as count FROM device_part WHERE template_id = ? AND is_deleted = 0`;
+    const result = await query(sql, [templateId]);
+    return result[0].count;
+  }
+
+  /**
+   * 将指定sort之后的所有模板的sort + 1
+   * 用于在新增模板时，将新模板插入到指定位置
+   */
+  async incrementSortAfter(sort) {
+    const sql = `UPDATE device_part_template SET sort = sort + 1 WHERE sort > ? AND is_deleted = 0`;
+    const result = await query(sql, [sort]);
+    return result.affectedRows;
   }
 
   // ==================== 部件实例相关 ====================
@@ -124,7 +229,7 @@ class DevicePartModel {
     const fields = [];
     const values = [];
     
-    const allowedFields = ['spec', 'rated_life', 'used_life', 'install_date', 'last_replace_date', 'last_stat_value', 'status', 'remark'];
+    const allowedFields = ['part_code', 'spec', 'rated_life', 'used_life', 'install_date', 'last_replace_date', 'last_stat_value', 'status', 'remark'];
     for (const field of allowedFields) {
       if (data[field] !== undefined) {
         fields.push(`${field} = ?`);

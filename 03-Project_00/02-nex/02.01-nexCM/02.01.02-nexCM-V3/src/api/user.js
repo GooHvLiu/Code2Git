@@ -40,21 +40,19 @@ export function requestUpdateUserApi(data) {
 }
 
 /**
- * 删除用户（GMP：需电子签名密码验证）
+ * 删除用户
  * @param {number|string} id - 用户ID
- * @param {string} password - 当前用户密码（电子签名）
  */
-export function requestDeleteUserApi(id, password) {
-  return request({ url: `/user/${id}`, method: 'delete', data: { password } })
+export function requestDeleteUserApi(id) {
+  return request({ url: `/user/${id}`, method: 'delete' })
 }
 
 /**
- * 批量删除用户（GMP：需电子签名密码验证）
+ * 批量删除用户
  * @param {Array} ids - 用户ID数组
- * @param {string} password - 当前用户密码（电子签名）
  */
-export function requestBatchDeleteUserApi(ids, password) {
-  return request({ url: '/user/batch', method: 'delete', data: { ids, password } })
+export function requestBatchDeleteUserApi(ids) {
+  return request({ url: '/user/batch', method: 'delete', data: { ids } })
 }
 
 /**

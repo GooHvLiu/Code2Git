@@ -1,11 +1,11 @@
-﻿/**
+/**
  * PLC 服务层
  * 支持多设备模式和单设备兼容模式
  *
  * 多设备模式：传入 deviceName 参数
  * 单设备模式：不传 deviceName，使用默认设备
  */
-const { manager, getPlcInstance, getTagConfig, plcSetting, plcTagMap } = require('../../plc/index')
+const { manager, pollTask, getPlcInstance, getTagConfig, plcSetting, plcTagMap } = require('../../plc/index')
 const audit = require('../../utils/audit')
 
 // 默认设备名（单设备模式使用）
@@ -193,11 +193,96 @@ function getAllStatus() {
   return manager.getAllStatus()
 }
 
+/**
+ * 手动重连PLC设备
+ * 立即触发一次重连，并重置退避计时器
+ * 严格验证：连接成功后读取一个点位，验证通讯真的可用
+ * @param {string} [deviceName] - 设备名称（可选，不传则重连所有设备）
+ * @returns {Promise<Object>} 重连结果
+ */
+async function reconnectPlc(deviceName) {
+  _ensureDefaultDevice()
+  
+  if (deviceName) {
+    const device = manager.getDevice(deviceName)
+    if (!device) {
+      throw new Error(`设备 ${deviceName} 不存在`)
+    }
+    try {
+      // 先断开连接
+      try {
+        await device.client.disconnect()
+      } catch (e) { /* ignore */ }
+      
+      // 重新连接
+      await device.client.connect()
+      
+      // 严格验证：连接成功后读取一个点位，验证通讯真的可用
+      // 这是非常重要的验证，确保不是"假连接"
+      await device.client.verifyConnection(device.tagMap)
+      
+      device.connected = true
+      device.consecutiveErrors = 0
+      device.lastError = null
+      
+      // 通知状态变化
+      manager.notifyPlcStatusChanged(manager.isAllConnected(), deviceName)
+      
+      return {
+        success: true,
+        device: deviceName,
+        connected: true
+      }
+    } catch (err) {
+      device.connected = false
+      device.lastError = err.message
+      device.consecutiveErrors++
+      
+      // 通知状态变化
+      manager.notifyPlcStatusChanged(false, deviceName)
+      
+      // 手动重连失败后，立即触发自动重连机制，并重置退避计时器
+      // 先强制重置 _reconnecting 状态，确保 startReconnect 能重新开始
+      device._reconnecting = false
+      pollTask.startReconnect(deviceName)
+      
+      return {
+        success: false,
+        device: deviceName,
+        connected: false,
+        error: err.message
+      }
+    }
+  } else {
+    // 重连所有设备（connectAll 内部已经包含严格验证）
+    const results = await manager.connectAll()
+    const allConnected = manager.isAllConnected()
+    
+    // 对重连失败的设备，立即触发自动重连机制，并重置退避计时器
+    for (const [name, result] of Object.entries(results)) {
+      if (!result.success) {
+        const device = manager.getDevice(name)
+        if (device) {
+          device._reconnecting = false
+          pollTask.startReconnect(name)
+        }
+      }
+    }
+    
+    return {
+      success: allConnected,
+      allConnected,
+      devices: results
+    }
+  }
+}
+
 module.exports = {
   readPlcTag,
   readAllTags,
   writePlcTag,
   getPlcStatus,
   getAllStatus,
+  reconnectPlc,
   validateWriteValue
 }

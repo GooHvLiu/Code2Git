@@ -21,6 +21,7 @@ import ws from '@/utils/websocket'
 import i18n, { applySystemDefaultLanguage } from '@/i18n'
 import { resolveMenuTitle } from '@/router/helper/menuTitle'
 import { loadConfig } from '@/utils/config'
+import { isSuperAdmin } from '@/utils/permission'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
@@ -109,9 +110,17 @@ router.beforeEach(async (to, from, next) => {
     return requiredRoles.includes(userRole)
   }
 
+  // 超级面板访问校验：依据 is_super_admin 数据库字段，非超级管理员禁止访问（不硬编码角色编码）
+  function checkSuperPanelAccess(route) {
+    if (route.path && route.path.startsWith('/super-panel')) {
+      return isSuperAdmin()
+    }
+    return true
+  }
+
   // 已生成动态路由，直接放行（用 routesGenerated 标志，避免空菜单死循环）
   if (store.state.permission.routesGenerated) {
-    if (!checkRouteRoles(to)) {
+    if (!checkRouteRoles(to) || !checkSuperPanelAccess(to)) {
       return next(ROUTE_PATHS.FORBIDDEN)
     }
     // 根路径重定向到首页
@@ -155,7 +164,7 @@ router.beforeEach(async (to, from, next) => {
 
     // 6. addRoute 后必须 next({ ...to, replace: true }) 重新匹配
     // 角色校验：首次进入时也检查目标路由权限
-    if (!checkRouteRoles(to)) {
+    if (!checkRouteRoles(to) || !checkSuperPanelAccess(to)) {
       return next(ROUTE_PATHS.FORBIDDEN)
     }
     // 根路径重定向到首页

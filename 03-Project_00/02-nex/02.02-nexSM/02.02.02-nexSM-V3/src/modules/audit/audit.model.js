@@ -104,6 +104,10 @@ class AuditModel extends BaseModel {
       where.push('user_id = ?');
       values.push(params.userId);
     }
+    if (params.userName) {
+      where.push('user_name LIKE ?');
+      values.push(`%${params.userName}%`);
+    }
     if (params.action) {
       where.push('action LIKE ?');
       values.push(`%${params.action}%`);

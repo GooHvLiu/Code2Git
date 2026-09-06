@@ -7,6 +7,7 @@ const path = require('path');
 const { LicenseGuard } = require('../../../beehive/sdk');
 const licenseConfig = require('../../config/license.config');
 const { ERROR_CODE } = require('../../constants/errorCode');
+const audit = require('../../utils/audit');
 
 /**
  * 创建授权验证实例
@@ -130,6 +131,17 @@ class LicenseController {
       // 替换正式授权文件
       fs.copyFileSync(tempPath, licenseConfig.licensePath);
       fs.unlinkSync(tempPath);
+
+      // 记录审计日志：授权导入
+      audit.log(req, {
+        action: audit.ACTION.LICENSE_IMPORT,
+        target: `授权文件:${originalName}`,
+        newValue: `授权ID:${result.licenseData?.licenseId}, 到期时间:${result.licenseData?.expiresAt}`,
+        result: 'success',
+        reason: '管理员导入授权文件'
+      }).catch(err => {
+        console.error('[授权导入] 记录审计日志失败:', err);
+      });
 
       // 返回授权信息
       const lic = result.licenseData;
@@ -282,3 +294,5 @@ class LicenseController {
 }
 
 module.exports = new LicenseController();
+
+

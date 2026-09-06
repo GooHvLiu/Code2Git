@@ -347,12 +347,14 @@
                   type="primary"
                   icon="el-icon-search"
                   size="small"
+                  v-permission="'device:alarm:search'"
                   @click="handleSearch"
                   >搜索</el-button
                 >
                 <el-button
                   icon="el-icon-refresh"
                   size="small"
+                  v-permission="'device:alarm:reset'"
                   @click="handleReset"
                   >重置</el-button
                 >
@@ -389,6 +391,7 @@
                 type="primary"
                 icon="el-icon-refresh"
                 size="small"
+                v-permission="'device:alarm:refresh'"
                 @click="handleRefresh"
                 >刷新</el-button
               >
@@ -1278,3 +1281,4 @@ function handleResolve(row) {
   }
 }
 </style>
+

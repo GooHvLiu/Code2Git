@@ -1,5 +1,9 @@
-<template>
+﻿<template>
   <div class="part-life-page">
+    <!-- Tab切换 -->
+    <el-tabs v-model="activeTab" class="part-life-tabs">
+      <!-- 寿命详情Tab -->
+      <el-tab-pane :label="$t('menu.device.part.tab.life')" name="life">
     <!-- 顶部操作栏 -->
     <div class="page-toolbar">
       <div class="toolbar-left">
@@ -14,6 +18,7 @@
           <el-button
             slot="append"
             icon="el-icon-search"
+            v-permission="'device:part:search'"
             @click="loadPartList"
           ></el-button>
         </el-input>
@@ -24,10 +29,11 @@
           type="primary"
           icon="el-icon-plus"
           @click="handleAdd"
-          >{{ $t("menu.device.part.page.addBtn") }}</el-button
+          >{{ $t("menu.device.part.add") }}</el-button
         >
-        <el-button icon="el-icon-refresh" @click="loadPartList">{{
-          $t("menu.device.part.page.refreshBtn")
+        <el-button icon="el-icon-refresh" v-permission="'device:part:refresh'"
+          @click="loadPartList">{{
+          $t("menu.device.part.refresh")
         }}</el-button>
       </div>
     </div>
@@ -105,7 +111,10 @@
               <span class="install-date"
                 >{{ $t("menu.device.part.page.form.installDate") }}：{{
                   part.install_date || part.installDate
-                    ? formatDate(part.install_date || part.installDate, getGlobalDateFormat())
+                    ? formatDate(
+                        part.install_date || part.installDate,
+                        getGlobalDateFormat()
+                      )
                     : "-"
                 }}</span
               >
@@ -115,14 +124,14 @@
                   type="text"
                   size="small"
                   @click="handleEdit(part)"
-                  >{{ $t("menu.device.part.page.editBtn") }}</el-button
+                  >{{ $t("menu.device.part.edit") }}</el-button
                 >
                 <el-button
                   v-permission="'device:part:operate'"
                   type="text"
                   size="small"
                   @click="handleReplace(part)"
-                  >{{ $t("menu.device.part.page.replaceBtn") }}</el-button
+                  >{{ $t("menu.device.part.operate") }}</el-button
                 >
                 <el-button
                   v-permission="'device:part:delete'"
@@ -130,7 +139,7 @@
                   size="small"
                   class="delete-btn"
                   @click="handleDelete(part)"
-                  >{{ $t("menu.device.part.page.deleteBtn") }}</el-button
+                  >{{ $t("menu.device.part.delete") }}</el-button
                 >
               </div>
             </div>
@@ -254,9 +263,13 @@
                 align="center"
               >
                 <template slot-scope="scope">
-                  {{ scope.row.install_date || scope.row.installDate
-                    ? formatDate(scope.row.install_date || scope.row.installDate, getGlobalDateFormat())
-                    : "-"
+                  {{
+                    scope.row.install_date || scope.row.installDate
+                      ? formatDate(
+                          scope.row.install_date || scope.row.installDate,
+                          getGlobalDateFormat()
+                        )
+                      : "-"
                   }}
                 </template>
               </el-table-column>
@@ -272,14 +285,14 @@
                     type="text"
                     size="small"
                     @click="handleEdit(scope.row)"
-                    >{{ $t("menu.device.part.page.editBtn") }}</el-button
+                    >{{ $t("menu.device.part.edit") }}</el-button
                   >
                   <el-button
                     v-permission="'device:part:operate'"
                     type="text"
                     size="small"
                     @click="handleReplace(scope.row)"
-                    >{{ $t("menu.device.part.page.replaceBtn") }}</el-button
+                    >{{ $t("menu.device.part.operate") }}</el-button
                   >
                   <el-button
                     v-permission="'device:part:delete'"
@@ -287,7 +300,7 @@
                     size="small"
                     class="delete-btn"
                     @click="handleDelete(scope.row)"
-                    >{{ $t("menu.device.part.page.deleteBtn") }}</el-button
+                    >{{ $t("menu.device.part.delete") }}</el-button
                   >
                 </template>
               </el-table-column>
@@ -433,6 +446,7 @@
           <el-input
             v-model="partForm.spec_model"
             :placeholder="$t('menu.device.part.page.placeholder.specModel')"
+            disabled
           />
         </el-form-item>
         <el-form-item
@@ -447,6 +461,7 @@
               :step="1000"
               controls-position="right"
               style="width: 100%"
+              disabled
             />
             <span class="rated-life-unit">{{
               $t("menu.device.part.page.unit.times")
@@ -498,7 +513,7 @@
       <el-form
         :model="replaceForm"
         :rules="replaceRules"
-        ref="replaceForm"
+        ref="replaceFormRef"
         label-width="110px"
         class="part-dialog-form"
       >
@@ -507,11 +522,7 @@
           prop="partCode"
         >
           <el-input
-            :value="
-              currentReplacePart
-                ? currentReplacePart.part_name || currentReplacePart.name
-                : ''
-            "
+            :value="replaceForm.partName"
             disabled
           />
         </el-form-item>
@@ -520,7 +531,7 @@
           v-if="currentReplacePart"
         >
           <el-input
-            :value="currentReplacePart.part_code || currentReplacePart.code"
+            :value="replaceForm.partCode"
             disabled
           />
         </el-form-item>
@@ -586,6 +597,13 @@
         >
       </div>
     </el-dialog>
+      </el-tab-pane>
+
+      <!-- 模板管理Tab -->
+      <el-tab-pane :label="$t('menu.device.part.tab.template')" name="template">
+        <PartTemplateManager ref="templateManagerRef" />
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
@@ -602,11 +620,11 @@ import {
   getReplaceRecords,
 } from "@/api/devicePart";
 import { formatDate, getGlobalDateFormat } from "@/utils/date";
+import PartTemplateManager from "./components/PartTemplateManager.vue";
 
 // 获取当前实例，用于访问 $t 和 $store
 const { proxy } = getCurrentInstance();
 const $t = proxy.$t.bind(proxy);
-const store = proxy.$store;
 
 /**
  * 部件寿命管理页面
@@ -620,6 +638,10 @@ const searchKeyword = ref("");
 const parts = ref([]);
 const templates = ref([]);
 const recentRecords = ref([]);
+
+// Tab切换
+const activeTab = ref("life");
+const templateManagerRef = ref(null);
 
 // 添加/编辑部件弹窗
 const partDialogVisible = ref(false);
@@ -735,9 +757,7 @@ function getPartDisplayName(part) {
   }
   // 2. 否则根据 template_key 或 template_id 从模板列表中查找模板名称
   const template = templates.value.find(
-    (t) =>
-      t.template_key === part.template_key ||
-      t.id === part.template_id
+    (t) => t.template_key === part.template_key || t.id === part.template_id
   );
   if (template) {
     return getTemplateName(template);
@@ -893,10 +913,8 @@ function handleTemplateChange(templateId) {
         template.rated_life ||
         10000
     );
-    // 自动生成编码前缀
-    if (!partForm.part_code && template.code_prefix) {
-      partForm.part_code = template.code_prefix + "-001";
-    }
+    // 规格型号从模板中带出，不允许用户修改
+    partForm.spec_model = template.default_spec || template.spec || "";
   }
 }
 
@@ -934,7 +952,7 @@ async function confirmPart() {
         loadPartList();
       } else {
         Message.error(
-          res.message || $t("menu.device.part.page.message.updateFailed")
+          res.msg || $t("menu.device.part.page.message.updateFailed")
         );
       }
     } else {
@@ -945,7 +963,7 @@ async function confirmPart() {
         loadPartList();
       } else {
         Message.error(
-          res.message || $t("menu.device.part.page.message.addFailed")
+          res.msg || $t("menu.device.part.page.message.addFailed")
         );
       }
     }
@@ -975,7 +993,7 @@ function handleDelete(part) {
           loadPartList();
         } else {
           Message.error(
-            res.message || $t("menu.device.part.page.message.deleteFailed")
+            res.msg || $t("menu.device.part.page.message.deleteFailed")
           );
         }
       } catch (err) {
@@ -990,7 +1008,7 @@ function handleReplace(part) {
   currentReplacePart.value = part;
   Object.assign(replaceForm, {
     partCode: part.part_code || part.code,
-    partName: part.part_name || part.name,
+    partName: getPartDisplayName(part),
     newCode: "",
     reason: "",
     remark: "",
@@ -1018,7 +1036,7 @@ async function confirmReplace() {
   try {
     const data = {
       new_code: replaceForm.newCode,
-      reason: replaceForm.reason,
+      replace_reason: replaceForm.reason,
       remark: replaceForm.remark,
     };
 
@@ -1030,7 +1048,7 @@ async function confirmReplace() {
       loadReplaceRecords();
     } else {
       Message.error(
-        res.message || $t("menu.device.part.page.message.replaceFailed")
+        res.msg || $t("menu.device.part.page.message.replaceFailed")
       );
     }
   } catch (err) {
@@ -1440,3 +1458,5 @@ onMounted(() => {
   font-size: 13px;
 }
 </style>
+
+

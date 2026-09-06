@@ -1,12 +1,47 @@
 <template>
   <div class="audit-log">
+    <!-- ==================== 页面头部 ==================== -->
+    <div class="page-header">
+      <div class="header-left">
+        <h2 class="page-title">
+          {{
+            isAdmin
+              ? $t("menu.system.audit.page.title")
+              : $t("menu.system.audit.page.myTitle")
+          }}
+        </h2>
+        <p class="page-desc">{{ $t("menu.system.audit.page.pageDesc") }}</p>
+      </div>
+      <div class="header-right">
+        <el-button
+          type="primary"
+          icon="el-icon-refresh"
+          size="small"
+          :loading="loading"
+          @click="refreshList"
+        >
+          {{ $t("common.refresh") }}
+        </el-button>
+        <export-dropdown
+          :data="tableData"
+          :columns="exportColumns"
+          :title="
+            isAdmin
+              ? $t('menu.system.audit.page.title')
+              : $t('menu.system.audit.page.myTitle')
+          "
+          :filename="
+            isAdmin
+              ? $t('menu.system.audit.page.title')
+              : $t('menu.system.audit.page.myTitle')
+          "
+          :exporter="$store.state.user.userInfo?.username || ''"
+        />
+      </div>
+    </div>
+
     <!-- ==================== 搜索表单 ==================== -->
-    <search-form
-      v-permission="'system:audit:search'"
-      :form="queryParams"
-      @search="handleQuery"
-      @reset="handleReset"
-    >
+    <search-form :form="queryParams" @search="handleQuery" @reset="handleReset">
       <el-form-item
         v-if="isAdmin"
         :label="$t('menu.system.audit.page.userName')"
@@ -16,7 +51,7 @@
           v-model="queryParams.userName"
           :placeholder="$t('menu.system.audit.page.userName')"
           clearable
-          style="width: 120px"
+          style="width: 140px"
         />
       </el-form-item>
       <el-form-item :label="$t('menu.system.audit.page.action')" prop="action">
@@ -52,40 +87,10 @@
           :start-placeholder="$t('menu.system.audit.page.startTime')"
           :end-placeholder="$t('menu.system.audit.page.endTime')"
           value-format="yyyy-MM-dd HH:mm:ss"
-          style="width: 240px"
+          style="width: 280px"
         />
       </el-form-item>
     </search-form>
-
-    <!-- ==================== 表格工具栏 ==================== -->
-    <table-toolbar
-      :title="
-        isAdmin
-          ? $t('menu.system.audit.page.title')
-          : $t('menu.system.audit.page.myTitle')
-      "
-      :show-refresh="hasSearchPermission"
-      @refresh="refreshList"
-    >
-      <template #right>
-        <export-dropdown
-          v-permission="'system:audit:export'"
-          :data="tableData"
-          :columns="exportColumns"
-          :title="
-            isAdmin
-              ? $t('menu.system.audit.page.title')
-              : $t('menu.system.audit.page.myTitle')
-          "
-          :filename="
-            isAdmin
-              ? $t('menu.system.audit.page.title')
-              : $t('menu.system.audit.page.myTitle')
-          "
-          :exporter="$store.state.user.userInfo?.username || ''"
-        />
-      </template>
-    </table-toolbar>
 
     <!-- ==================== 表格 ==================== -->
     <el-table
@@ -99,6 +104,7 @@
         fontWeight: 'bold',
         textAlign: 'center',
       }"
+      class="audit-table"
     >
       <el-table-column
         :label="$t('common.index')"
@@ -120,7 +126,7 @@
         align="center"
       >
         <template slot-scope="{ row }">
-          <dict-tag dict-code="audit_action" :value="row.action" />
+          {{ getActionText(row.action) }}
         </template>
       </el-table-column>
       <el-table-column
@@ -168,30 +174,93 @@
           {{ formatDateTime(row.created_at) }}
         </template>
       </el-table-column>
+      <el-table-column
+        :label="$t('common.operation')"
+        width="100"
+        align="center"
+      >
+        <template slot-scope="{ row }">
+          <el-button
+            type="text"
+            size="small"
+            icon="el-icon-view"
+            @click="handleDetail(row)"
+          >
+            {{ $t("common.detail") }}
+          </el-button>
+        </template>
+      </el-table-column>
     </el-table>
 
     <!-- ==================== 分页 ==================== -->
-    <pagination
-      :total="total"
-      :page.sync="pageNum"
-      :limit.sync="pageSize"
-      @pagination="getList"
-    />
+    <div class="pagination-section">
+      <el-pagination
+        background
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+        :page.sync="pageNum"
+        :limit.sync="pageSize"
+        :page-sizes="[10, 20, 50, 100]"
+        @size-change="getList"
+        @current-change="getList"
+      />
+    </div>
+
+    <!-- ==================== 详情对话框 ==================== -->
+    <el-dialog
+      :title="$t('menu.system.audit.page.detailTitle')"
+      :visible.sync="detailDialogVisible"
+      width="600px"
+      :close-on-click-modal="false"
+    >
+      <el-descriptions :column="1" border v-if="currentDetail">
+        <el-descriptions-item :label="$t('menu.system.audit.page.userName')">
+          {{ currentDetail.user_name || "-" }}
+        </el-descriptions-item>
+        <el-descriptions-item :label="$t('menu.system.audit.page.action')">
+          {{ getActionText(currentDetail.action) }}
+        </el-descriptions-item>
+        <el-descriptions-item :label="$t('menu.system.audit.page.target')">
+          {{ currentDetail.target || "-" }}
+        </el-descriptions-item>
+        <el-descriptions-item :label="$t('menu.system.audit.page.oldValue')">
+          {{ currentDetail.old_value || "-" }}
+        </el-descriptions-item>
+        <el-descriptions-item :label="$t('menu.system.audit.page.newValue')">
+          {{ currentDetail.new_value || "-" }}
+        </el-descriptions-item>
+        <el-descriptions-item :label="$t('menu.system.audit.page.result')">
+          <dict-tag dict-code="audit_result" :value="currentDetail.result" />
+        </el-descriptions-item>
+        <el-descriptions-item :label="$t('menu.system.audit.page.ip')">
+          {{ currentDetail.ip || "-" }}
+        </el-descriptions-item>
+        <el-descriptions-item :label="$t('menu.system.audit.page.createdAt')">
+          {{ formatDateTime(currentDetail.created_at) }}
+        </el-descriptions-item>
+      </el-descriptions>
+      <div slot="footer">
+        <el-button @click="detailDialogVisible = false">{{
+          $t("common.close")
+        }}</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script setup>
-import { reactive, computed } from "vue";
+import { reactive, computed, ref } from "vue";
 import { useTable } from "@/composables/useTable";
 import { useDict } from "@/composables/useDict";
+import { useI18n } from "@/composables/useI18n";
 import SearchForm from "@/components/SearchForm/index.vue";
-import TableToolbar from "@/components/TableToolbar/index.vue";
-import Pagination from "@/components/Pagination/index.vue";
 import DictTag from "@/components/DictTag/index.vue";
 import ExportDropdown from "@/components/ExportDropdown/index.vue";
 import { formatDate } from "@/utils/date";
-import { hasRole, hasPermission } from "@/utils/permission";
+import store from "@/store";
 import { requestGetAuditListApi, requestGetMyAuditListApi } from "@/api";
+
+const { t: $t } = useI18n();
 
 // 字典数据
 const { dict } = useDict(["audit_action", "audit_result"]);
@@ -204,13 +273,15 @@ const queryParams = reactive({
   timeRange: [],
 });
 
-// 是否管理员
-const isAdmin = computed(() => hasRole("administrator"));
+// 详情对话框
+const detailDialogVisible = ref(false);
+const currentDetail = ref(null);
 
-// 是否有搜索/重置/刷新权限
-const hasSearchPermission = computed(() =>
-  hasPermission("system:audit:search")
-);
+// 是否管理员及以上（依据数据库 role_level 字段，等级 <=2）
+const isAdmin = computed(() => {
+  const level = Number(store?.state?.user?.userInfo?.role_level);
+  return level > 0 && level <= 2;
+});
 
 // 请求前参数转换
 function beforeFetch(params) {
@@ -222,6 +293,15 @@ function beforeFetch(params) {
     result.endTime = timeRange[1];
   }
   return result;
+}
+
+// 翻译操作类型
+function getActionText(action) {
+  if (!action) return '';
+  const key = `audit.${action}.title`;
+  const translated = $t(key);
+  // 如果翻译结果和key相同，说明没有对应的翻译，返回原始action
+  return translated === key ? action : translated;
 }
 
 // 根据角色选择 API
@@ -245,6 +325,12 @@ const {
 // 格式化日期时间
 function formatDateTime(date) {
   return formatDate(date);
+}
+
+// 查看详情
+function handleDetail(row) {
+  currentDetail.value = row;
+  detailDialogVisible.value = true;
 }
 
 // 导出列配置
@@ -279,6 +365,76 @@ const exportColumns = computed(() => {
 <style scoped lang="less">
 .audit-log {
   height: 100%;
+  min-height: calc(100vh - 84px);
+}
+
+// 页面头部
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ebeef5;
+
+  .header-left {
+    .page-title {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+      color: #303133;
+      display: flex;
+      align-items: center;
+    }
+
+    .page-desc {
+      margin: 8px 0 0;
+      font-size: 13px;
+      color: #909399;
+    }
+  }
+
+  .header-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+}
+
+// 筛选区域
+.filter-section {
+  margin-bottom: 16px;
+  padding: 16px 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ebeef5;
+
+  .filter-form {
+    .el-form-item {
+      margin-bottom: 0;
+      margin-right: 16px;
+    }
+  }
+}
+
+// 审计表格
+.audit-table {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ebeef5;
+}
+
+// 分页区域
+.pagination-section {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* 排序箭头居中 */

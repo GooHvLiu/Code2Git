@@ -1,11 +1,9 @@
-﻿/**
+/**
  * plc模块 - 控制器层
  * 支持单设备和多设备模式
  */
 const plcService = require('./plc.service')
 const { ERROR_CODE } = require('../../constants/errorCode')
-const userService = require('../user/user.service')
-const { comparePassword } = require('../../utils/password')
 const { triggerNotification } = require('../../utils/notification')
 
 class PlcController {
@@ -58,30 +56,17 @@ class PlcController {
   }
 
   /**
-   * 下发写参数到PLC（GMP 电子签名：需密码验证 + 操作原因）
+   * 下发写参数到PLC
    * POST /plc/write-tag
-   * body: { tag, value, reason, password, device? }
+   * body: { tag, value, reason, device? }
    */
   async writeParameter(req, res, next) {
     try {
-      const { tag, value, reason, password, device } = req.body
+      const { tag, value, reason, device } = req.body
       if (!tag) throw new Error('缺少参数 tag')
       if (value === undefined) throw new Error('缺少参数 value')
       if (!reason || reason.trim().length < 2) {
         return res.error(ERROR_CODE.PARAM_INVALID)
-      }
-      if (!password) {
-        return res.error(ERROR_CODE.E_SIGNATURE_PASSWORD_REQUIRED)
-      }
-
-      // 电子签名：验证当前用户密码
-      const currentUser = await userService.getUserById(req.user.id)
-      if (!currentUser) {
-        return res.error(ERROR_CODE.USER_NOT_FOUND)
-      }
-      const passwordValid = await comparePassword(password, currentUser.password)
-      if (!passwordValid) {
-        return res.error(ERROR_CODE.E_SIGNATURE_FAILED)
       }
 
       const operatorInfo = {
@@ -103,6 +88,20 @@ class PlcController {
         console.error('[设备参数变更] 触发通知失败:', err)
       })
       res.success(ret)
+    } catch (err) {
+      next(err)
+    }
+  }
+  /**
+   * 手动重连PLC
+   * POST /plc/reconnect
+   * body: { device? }
+   */
+  async reconnect(req, res, next) {
+    try {
+      const { device } = req.body || {}
+      const result = await plcService.reconnectPlc(device)
+      res.success(result)
     } catch (err) {
       next(err)
     }

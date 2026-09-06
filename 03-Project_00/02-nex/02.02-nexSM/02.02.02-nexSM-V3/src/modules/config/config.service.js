@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 系统配置服务层
  * 负责系统配置的业务逻辑处理
  */
@@ -106,16 +106,6 @@ async function updateConfigs(configs) {
 }
 
 /**
- * 重置所有配置为默认值
- */
-async function resetAllConfigs() {
-  await configModel.resetAllConfigs();
-  // 清空缓存
-  configCache = null;
-  cacheTime = 0;
-}
-
-/**
  * 清空缓存（配置变更后调用）
  */
 function clearCache() {
@@ -129,6 +119,6 @@ module.exports = {
   getConfigsByCategory,
   getConfigValue,
   updateConfigs,
-  resetAllConfigs,
   clearCache
 };
+

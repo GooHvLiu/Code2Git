@@ -6,7 +6,7 @@ const { query } = require('../../db/index')
 
 class RoleModel extends BaseModel {
   constructor() {
-    super('nex_role', ['role_name', 'role_code', 'description', 'data_scope', 'status', 'sort'], 'id')
+    super('nex_role', ['role_name', 'role_code', 'description', 'status', 'sort', 'role_level', 'is_super_admin', 'is_builtin', 'is_hidden', 'visible_role_levels'], 'id')
   }
 
   /** 根据角色编码查询 */

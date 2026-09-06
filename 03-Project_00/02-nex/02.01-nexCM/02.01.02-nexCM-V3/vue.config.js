@@ -6,6 +6,7 @@
 const { defineConfig } = require('@vue/cli-service')
 const path = require('path')
 const fs = require('fs')
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 
 // ========== 生成 JS/Less 共享主题变量文件 ==========
 // 读取 themeVariables.js，自动转成 Less 变量写入 _theme_vars.less
@@ -181,7 +182,13 @@ module.exports = defineConfig({
 
   // 路径别名
   configureWebpack: {
-    plugins: [new ThemeVarsGeneratorPlugin()],
+    plugins: [
+      new ThemeVarsGeneratorPlugin(),
+      new MonacoWebpackPlugin({
+        languages: ['javascript', 'typescript', 'json', 'html', 'css', 'plaintext'],
+        features: ['!gotoSymbol']
+      })
+    ],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src')

@@ -14,7 +14,6 @@ const roleSchema = Joi.object({
     'any.required': '角色编码是必填项'
   }),
   description: Joi.string().max(200).allow('', null),
-  data_scope: Joi.string().valid('all', 'dept', 'dept_and_child', 'self').default('self'),
   status: Joi.number().valid(0, 1).default(1),
   sort: Joi.number().integer().min(0).default(0),
   menuIds: Joi.array().items(Joi.alternatives().try(Joi.string(), Joi.number())).allow(null)

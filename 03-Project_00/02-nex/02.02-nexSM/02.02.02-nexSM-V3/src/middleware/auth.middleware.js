@@ -1,4 +1,4 @@
-﻿/**
+/**
  * JWT 鉴权中间件
  * 验证token有效性，解析用户信息挂载到 req.user
  * 支持单点登录：验证 token_version，旧 token 自动失效
@@ -7,6 +7,7 @@ const { verifyToken } = require('../utils/jwt');
 const { ERROR_CODE } = require('../constants/errorCode');
 const userModel = require('../modules/user/user.model');
 const cache = require('../utils/cache');
+const { checkIsSuperAdmin } = require('../utils/roleContext');
 
 // Token 版本号缓存前缀和过期时间（5分钟）
 const TOKEN_VERSION_CACHE_PREFIX = 'token_version:';
@@ -93,14 +94,26 @@ function optionalAuth(req, res, next) {
 
 /**
  * 角色权限校验
- * @param  {...number} roles 允许的角色列表
+ * 数据库中 is_super_admin=1 的角色自动通过所有角色校验（不硬编码角色编码）
+ * @param  {...string} roles 允许的角色编码列表
  */
 function requireRole(...roles) {
-  return (req, res, next) => {
-    if (!req.user || !roles.includes(req.user.role)) {
-      return res.error(ERROR_CODE.PERMISSION_DENIED);
+  return async (req, res, next) => {
+    try {
+      if (!req.user) {
+        return res.error(ERROR_CODE.PERMISSION_DENIED);
+      }
+      // 数据库标记为超级管理员的角色自动通过所有角色校验
+      if (await checkIsSuperAdmin(req.user)) {
+        return next();
+      }
+      if (!roles.includes(req.user.role)) {
+        return res.error(ERROR_CODE.PERMISSION_DENIED);
+      }
+      next();
+    } catch (err) {
+      next(err);
     }
-    next();
   };
 }
 

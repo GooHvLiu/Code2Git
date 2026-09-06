@@ -467,9 +467,10 @@ let countdownTimer = null;
 const countdownText = ref("");
 
 // ===== 计算属性 =====
-const isAdmin = computed(
-  () => store?.state?.user?.userInfo?.role === "administrator"
-);
+const isAdmin = computed(() => {
+  const level = Number(store?.state?.user?.userInfo?.role_level);
+  return level > 0 && level <= 2;
+});
 
 // ===== 方法 =====
 async function loadData() {

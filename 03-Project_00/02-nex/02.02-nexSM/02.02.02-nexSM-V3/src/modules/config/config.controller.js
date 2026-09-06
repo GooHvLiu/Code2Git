@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 系统配置控制器
  * 处理系统配置相关的 HTTP 请求
  */
@@ -8,6 +8,7 @@ const { triggerNotification } = require('../../utils/notification');
 const deviceStatusManager = require('../../socket/deviceStatusManager');
 const plcPollTask = require('../../plc/task/PlcPollTask');
 const maintenanceTaskManager = require('../../socket/maintenanceTaskManager');
+const audit = require('../../utils/audit');
 
 /**
  * 根据配置分类确定通知事件类型
@@ -155,7 +156,31 @@ async function updateConfigs(req, res) {
       }
     }
 
-    // 7. 发送通知，内容包含变化的配置项数量和 key 列表（由前端根据当前语言进行国际化）
+    // 7. 记录审计日志：系统配置修改（按分类记录）
+    for (const cat of categories) {
+      const actionMap = {
+        'system': audit.ACTION.CONFIG_SYSTEM_CHANGE,
+        'security': audit.ACTION.CONFIG_SECURITY_CHANGE,
+        'plc': audit.ACTION.CONFIG_PLC_CHANGE,
+        'export': audit.ACTION.CONFIG_EXPORT_CHANGE,
+        'connection': audit.ACTION.CONFIG_CONNECTION_CHANGE,
+        'device': audit.ACTION.CONFIG_DEVICE_CHANGE,
+        'order': audit.ACTION.CONFIG_ORDER_CHANGE
+      };
+      const action = actionMap[cat] || audit.ACTION.CONFIG_SYSTEM_CHANGE;
+      audit.log(req, {
+        action: action,
+        target: `配置分类:${cat}, 变化项数:${changedKeys.length}`,
+        oldValue: JSON.stringify(Object.fromEntries(changedKeys.map(k => [k, oldConfigs[k]]))),
+        newValue: JSON.stringify(Object.fromEntries(changedKeys.map(k => [k, configs[k]]))),
+        result: 'success',
+        reason: '管理员修改系统配置'
+      }).catch(err => {
+        console.error('[系统配置修改] 记录审计日志失败:', err)
+      });
+    }
+
+    // 8. 发送通知，内容包含变化的配置项数量和 key 列表（由前端根据当前语言进行国际化）
     const eventType = getNotificationEventType(selectedCategory);
 
     console.log(`[系统配置] 配置更新，涉及分类: ${JSON.stringify([...categories])}, 变化项: ${JSON.stringify(changedKeys)}, 选择通知类型: ${eventType}`);
@@ -226,32 +251,11 @@ async function updateConfigs(req, res) {
   }
 }
 
-/**
- * 重置所有配置为默认值
- * POST /api/v2/config/reset
- */
-async function resetAllConfigs(req, res) {
-  try {
-    await configService.resetAllConfigs();
-    const configs = await configService.getAllConfigs(true);
-    res.json({
-      code: 200,
-      message: '配置已重置为默认值',
-      data: configs
-    });
-  } catch (err) {
-    console.error('[系统配置] 重置配置失败:', err);
-    res.status(500).json({
-      code: 500,
-      message: '重置配置失败',
-      error: err.message
-    });
-  }
-}
 
 module.exports = {
   getAllConfigs,
   getConfigsByCategory,
   updateConfigs,
-  resetAllConfigs
 };
+
+

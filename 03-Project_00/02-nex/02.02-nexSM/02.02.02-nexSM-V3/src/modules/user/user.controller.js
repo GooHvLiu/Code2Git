@@ -1,4 +1,4 @@
-﻿/**
+/**
  * 用户管理模块 - 控制器层
  * 
  * 负责参数接收、调用 Service 层、返回统一响应
@@ -6,7 +6,6 @@
  * 继承 BaseController，复用通用 CRUD 接口
  * 
  * 【审计日志】通过 auditLogger 统一记录，不直接引用 audit.service
- * 【GMP 合规】删除、批量删除等关键操作需要电子签名密码验证
  * 
  * @author nexCM Team
  * @date 2026-01-01
@@ -112,7 +111,7 @@ class UserController extends BaseController {
     }
   }
 
-  // ==================== 通用 CRUD 接口（保留原有方法名，包含审计日志和电子签名） ====================
+  // ==================== 通用 CRUD 接口（保留原有方法名，包含审计日志） ====================
 
   /**
    * 分页查询用户列表（关联部门表）
@@ -133,7 +132,7 @@ class UserController extends BaseController {
   async getUserList(req, res, next) {
     try {
       const lang = getLangFromRequest(req)
-      const result = await userService.getUserList(req.query, lang)
+      const result = await userService.getUserList(req.query, lang, req.user)
       res.success(result)
     } catch (err) {
       next(err)
@@ -251,15 +250,11 @@ class UserController extends BaseController {
   }
 
   /**
-   * 删除用户（GMP：需电子签名密码验证）
-   * 
-   * 删除用户前需要验证当前登录用户的密码（电子签名），符合 GMP 21CFR Part 11 要求
+   * 删除用户
    * 
    * @param {Object} req - Express 请求对象
    * @param {Object} req.params - 路径参数
    * @param {number} req.params.id - 用户 ID
-   * @param {Object} req.body - 请求体
-   * @param {string} req.body.password - 当前用户密码（电子签名）
    * @param {Object} req.user - 当前登录用户信息
    * @param {number} req.user.id - 当前用户 ID
    * @param {Object} res - Express 响应对象
@@ -269,15 +264,6 @@ class UserController extends BaseController {
   async deleteUser(req, res, next) {
     try {
       const lang = getLangFromRequest(req)
-      // 电子签名：验证当前用户密码
-      const { password } = req.body
-      if (!password) {
-        return res.error(ERROR_CODE.E_SIGNATURE_PASSWORD_REQUIRED)
-      }
-      const passwordValid = await userService.verifyPassword(req.user.id, password)
-      if (!passwordValid) {
-        return res.error(ERROR_CODE.E_SIGNATURE_FAILED)
-      }
 
       const oldUser = await userService.getUserById(req.params.id, lang).catch(() => null)
       await userService.deleteUser(req.params.id)
@@ -292,14 +278,11 @@ class UserController extends BaseController {
   }
 
   /**
-   * 批量删除用户（GMP：需电子签名密码验证）
-   * 
-   * 批量删除用户前需要验证当前登录用户的密码（电子签名），符合 GMP 21CFR Part 11 要求
+   * 批量删除用户
    * 
    * @param {Object} req - Express 请求对象
    * @param {Object} req.body - 请求体
    * @param {Array<number>} req.body.ids - 用户 ID 数组
-   * @param {string} req.body.password - 当前用户密码（电子签名）
    * @param {Object} req.user - 当前登录用户信息
    * @param {number} req.user.id - 当前用户 ID
    * @param {Object} res - Express 响应对象
@@ -308,16 +291,6 @@ class UserController extends BaseController {
    */
   async batchDeleteUsers(req, res, next) {
     try {
-      // 电子签名：验证当前用户密码
-      const { password } = req.body
-      if (!password) {
-        return res.error(ERROR_CODE.E_SIGNATURE_PASSWORD_REQUIRED)
-      }
-      const passwordValid = await userService.verifyPassword(req.user.id, password)
-      if (!passwordValid) {
-        return res.error(ERROR_CODE.E_SIGNATURE_FAILED)
-      }
-
       await userService.batchDeleteUsers(req.body.ids)
       // 记录审计
       await audit.logUserBatchDelete(req, `ID: ${(req.body.ids || []).join(', ')}`, '')

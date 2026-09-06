@@ -1,4 +1,4 @@
-﻿/**
+/**
  * 角色管理模块 - 控制器层
  * 
  * 负责参数接收、调用 Service 层、返回统一响应
@@ -6,7 +6,7 @@
  * 
  * @author nexCM Team
  * @date 2026-01-01
- * @lastModified 2026-08-22
+ * @lastModified 2026-09-05
  */
 const BaseController = require('../../controllers/BaseController')
 const roleService = require('./role.service')
@@ -26,13 +26,15 @@ class RoleController extends BaseController {
   /**
    * 获取所有启用的角色（下拉选择用）
    * 
+   * 非超级管理员自动过滤隐藏角色
+   * 
    * @param {Object} req - Express 请求对象
    * @param {Object} res - Express 响应对象
    * @returns {Promise<void>}
    */
   async getAllRoles(req, res) {
     const lang = getLangFromRequest(req)
-    const result = await roleService.getAllRoles(lang)
+    const result = await roleService.getAllRoles(lang, req.user)
     res.success(result)
   }
 
@@ -40,6 +42,8 @@ class RoleController extends BaseController {
 
   /**
    * 分页查询角色列表
+   * 
+   * 非超级管理员自动过滤隐藏角色
    * 
    * @param {Object} req - Express 请求对象
    * @param {Object} req.query - 查询参数
@@ -50,7 +54,7 @@ class RoleController extends BaseController {
    */
   async getRoleList(req, res) {
     const lang = getLangFromRequest(req)
-    const result = await roleService.getRoleList(req.query, lang)
+    const result = await roleService.getRoleList(req.query, lang, req.user)
     res.success(result)
   }
 

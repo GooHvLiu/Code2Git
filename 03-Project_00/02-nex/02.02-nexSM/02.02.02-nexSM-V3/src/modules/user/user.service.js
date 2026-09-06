@@ -15,6 +15,7 @@ const { hashPassword, comparePassword } = require('../../utils/password')
 const { generateToken } = require('../../utils/jwt')
 const { BusinessError } = require('../../middleware/error.middleware')
 const { ERROR_CODE } = require('../../constants/errorCode')
+const { getExcludedRoleCodes, getRoleByCode } = require('../../utils/roleContext')
 const { USER_STATUS, USER_ROLE } = require('../../constants/statusCode')
 const CaptchaService = require('../captcha/captcha.service')
 const audit = require('../../utils/audit')
@@ -86,8 +87,8 @@ class UserService extends BaseService {
    * console.log(result.userInfo) // 用户信息（不含密码）
    */
   async login(username, password, ip, userAgent = '', lang = 'zh-CN', deviceId = '', deviceName = '') {
-    // 1. 查询用户（关联角色表获取 data_scope）
-    const user = await userModel.getByUsernameWithRole(username, lang)
+    // 1. 查询用户（关联角色表获取角色信息）
+    const user = await userModel.getByUsernameWithRole(username)
     if (!user) {
       // 记录登录失败审计
       await audit.log({ userId: 0, userName: username, ip, userAgent }, {
@@ -226,7 +227,6 @@ class UserService extends BaseService {
       username: user.username,
       realName: user.real_name,
       role: user.role,
-      data_scope: user.data_scope || 'self',
       dept_id: user.dept_id || null,
       token_version: tokenVersion
     })
@@ -297,6 +297,19 @@ class UserService extends BaseService {
     // 8. 返回用户信息（去掉密码）
     const { password: _, ...userInfo } = user
 
+    // 8.1 附加角色属性（role_level/is_super_admin/is_builtin/visible_role_levels，数据库字段驱动）
+    try {
+      const roleCtx = await getRoleByCode(user.role)
+      if (roleCtx) {
+        userInfo.role_level = roleCtx.role_level
+        userInfo.is_super_admin = roleCtx.is_super_admin ? 1 : 0
+        userInfo.is_builtin = roleCtx.is_builtin ? 1 : 0
+        userInfo.visible_role_levels = roleCtx.visible_role_levels
+      }
+    } catch (err) {
+      console.error('[登录] 加载角色上下文失败:', err.message)
+    }
+
     // 9. 查询用户权限码列表和权限版本号
     const permissions = await permissionService.getUserPermissions(user.id)
     const permissionVersion = await permissionService.getUserPermissionVersion(user.id)
@@ -349,23 +362,6 @@ class UserService extends BaseService {
     return result
   }
 
-  /**
-   * 验证用户密码（用于电子签名/GMP 合规）
-   * 
-   * 在删除用户、修改关键参数等操作前，需要验证当前用户的密码
-   * 
-   * @param {number} userId - 用户 ID
-   * @param {string} password - 明文密码
-   * @returns {Promise<boolean>} 密码是否正确
-   */
-  async verifyPassword(userId, password) {
-    const user = await userModel.getById(userId)
-    if (!user || !user.password) {
-      return false
-    }
-    return await comparePassword(password, user.password)
-  }
-
   // ==================== 通用 CRUD 方法（保留原有方法名，内部调用父类方法） ====================
 
   /**
@@ -380,13 +376,17 @@ class UserService extends BaseService {
    * @param {string} [params.role] - 角色
    * @param {number} [params.status] - 状态 1启用 0禁用
    * @param {string} [lang='zh-CN'] - 语言代码
+   * @param {Object} [currentUser] - 当前登录用户（用于判断是否过滤隐藏角色的用户）
    * @returns {Promise<Object>} { list, total, page, pageSize }
    */
-  async getUserList(params, lang = 'zh-CN') {
+  async getUserList(params, lang = 'zh-CN', currentUser = null) {
     const page = parseInt(params.page) || 1
     const pageSize = parseInt(params.pageSize) || 10
 
-    const result = await userModel.getUserListWithDept(params, page, pageSize, lang)
+    // 根据当前用户的 visible_role_levels 字段，过滤不可见角色的用户（数据库字段驱动）
+    const excludeRoles = await getExcludedRoleCodes(currentUser)
+
+    const result = await userModel.getUserListWithDept(params, page, pageSize, excludeRoles)
 
     // 去掉密码字段，避免敏感信息泄露
     result.list = result.list.map(item => {
@@ -408,11 +408,23 @@ class UserService extends BaseService {
    * @throws {BusinessError} 用户不存在
    */
   async getUserById(id, lang = 'zh-CN') {
-    const user = await userModel.getByIdWithDept(id, lang)
+    const user = await userModel.getByIdWithDept(id)
     if (!user) {
       throw new BusinessError(ERROR_CODE.USER_NOT_FOUND, null)
     }
     const { password, ...userInfo } = user
+    // 附加角色属性（数据库字段驱动，供前端做角色等级/超级管理员判断）
+    try {
+      const roleCtx = await getRoleByCode(user.role)
+      if (roleCtx) {
+        userInfo.role_level = roleCtx.role_level
+        userInfo.is_super_admin = roleCtx.is_super_admin ? 1 : 0
+        userInfo.is_builtin = roleCtx.is_builtin ? 1 : 0
+        userInfo.visible_role_levels = roleCtx.visible_role_levels
+      }
+    } catch (err) {
+      console.error('[用户详情] 加载角色上下文失败:', err.message)
+    }
     return userInfo
   }
 

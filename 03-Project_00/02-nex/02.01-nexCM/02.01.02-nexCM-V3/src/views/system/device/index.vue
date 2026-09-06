@@ -12,6 +12,7 @@
         <el-button
           type="primary"
           icon="el-icon-refresh"
+          size="small"
           @click="fetchData"
           :loading="loading"
         >
@@ -232,8 +233,9 @@
         align="center"
       >
         <template slot-scope="scope">
+          <!-- 在线且不是当前设备：显示踢掉按钮 -->
           <el-button
-            v-if="scope.row.status === 1 && !isCurrentDevice(scope.row)"
+            v-if="scope.row.status === 1 && !isCurrentDevice(scope.row) && hasKickPermission"
             type="danger"
             size="mini"
             icon="el-icon-switch-button"
@@ -241,14 +243,9 @@
           >
             {{ $t("menu.system.device.kick") }}
           </el-button>
-          <span
-            v-else-if="isCurrentDevice(scope.row)"
-            class="current-device-tag"
-            >{{ $t("menu.system.device.page.currentDevice") }}</span
-          >
-          <!-- 离线设备：显示删除按钮 -->
+          <!-- 离线设备：显示删除按钮（不管是不是当前设备） -->
           <el-button
-            v-else-if="scope.row.status === 0"
+            v-else-if="scope.row.status === 0 && hasDeletePermission"
             type="danger"
             size="mini"
             icon="el-icon-delete"
@@ -257,6 +254,12 @@
           >
             {{ $t("menu.system.device.page.delete") }}
           </el-button>
+          <!-- 当前设备且在线：显示当前设备标签 -->
+          <span
+            v-else-if="isCurrentDevice(scope.row)"
+            class="current-device-tag"
+            >{{ $t("menu.system.device.page.currentDevice") }}</span
+          >
           <span v-else class="no-operation">-</span>
         </template>
       </el-table-column>
@@ -366,6 +369,7 @@ import { Message } from "element-ui";
 import request from "@/utils/request";
 import i18n from "@/i18n";
 import { parseUserAgent } from "@/utils/websocket";
+import { hasPermission } from "@/utils/permission";
 
 // 响应式数据
 const loading = ref(false);
@@ -387,6 +391,10 @@ const currentDeviceId = ref(localStorage.getItem("nex_device_id") || "");
 const refreshStatusLoading = ref(false);
 
 // 计算属性
+// ===== 权限颗粒度控制 =====
+const hasKickPermission = computed(() => hasPermission("system:device:kick"));
+const hasDeletePermission = computed(() => hasPermission("system:device:delete"));
+
 const onlineUsers = computed(() => {
   const userIds = new Set(
     deviceList.value.filter((d) => d.status === 1).map((d) => d.user_id)
@@ -554,7 +562,7 @@ onMounted(() => {
 
 <style scoped lang="less">
 .device-management {
-  padding: 20px;
+  padding: 0;
   background: #fff;
   min-height: calc(100vh - 84px);
 }
@@ -607,7 +615,6 @@ onMounted(() => {
     border-radius: 8px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    margin-bottom: 20px;
     border: 1px solid #ebeef5;
 
     &:hover {

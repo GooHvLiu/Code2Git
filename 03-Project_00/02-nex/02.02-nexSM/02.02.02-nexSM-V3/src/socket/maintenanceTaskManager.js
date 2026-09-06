@@ -42,9 +42,8 @@ class MaintenanceTaskManager {
       const configService = require('../modules/config/config.service')
       const configs = await configService.getAllConfigs()
 
-      // 查找维护检查间隔配置
-      const checkIntervalConfig = configs.find(c => c.config_key === 'maintenanceCheckInterval')
-      const checkIntervalHours = checkIntervalConfig ? Number(checkIntervalConfig.config_value) : this.defaultCheckIntervalHours
+      // 查找维护检查间隔配置（configs是对象，直接用key访问）
+      const checkIntervalHours = configs['maintenanceCheckInterval'] !== undefined ? Number(configs['maintenanceCheckInterval']) : this.defaultCheckIntervalHours
       const checkIntervalMs = checkIntervalHours * 60 * 60 * 1000
 
       this.startPeriodicCheck(checkIntervalMs)
@@ -112,9 +111,8 @@ class MaintenanceTaskManager {
       const configService = require('../modules/config/config.service')
       const configs = await configService.getAllConfigs()
 
-      // 查找使用寿命统计间隔配置
-      const statIntervalConfig = configs.find(c => c.config_key === 'partLifeStatInterval')
-      const statIntervalMinutes = statIntervalConfig ? Number(statIntervalConfig.config_value) : this.defaultPartLifeStatIntervalMinutes
+      // 查找使用寿命统计间隔配置（configs是对象，直接用key访问）
+      const statIntervalMinutes = configs['partLifeStatInterval'] !== undefined ? Number(configs['partLifeStatInterval']) : this.defaultPartLifeStatIntervalMinutes
       const statIntervalMs = statIntervalMinutes * 60 * 1000
 
       this.startPartLifeStats(statIntervalMs)
@@ -288,19 +286,19 @@ class MaintenanceTaskManager {
       const notification = require('../utils/notification')
       const devicePartService = require('../modules/device-part/device-part.service')
 
-      // 读取配件寿命提醒配置
+      // 读取配件寿命提醒配置（configs是对象，直接用key访问）
       const configs = await configService.getAllConfigs()
-      const reminderEnabled = configs.find(c => c.config_key === 'partLifeReminderEnabled')
-      const thresholdConfig = configs.find(c => c.config_key === 'partLifeThreshold')
+      const reminderEnabledValue = configs['partLifeReminderEnabled']
+      const thresholdValue = configs['partLifeThreshold']
 
       // 检查是否启用了配件寿命提醒
-      const isEnabled = reminderEnabled ? reminderEnabled.config_value === 'true' : true
+      const isEnabled = reminderEnabledValue !== undefined ? String(reminderEnabledValue) === 'true' : true
       if (!isEnabled) {
         console.log('[MaintenanceTaskManager] 配件寿命提醒未启用，跳过检查')
         return
       }
 
-      const threshold = thresholdConfig ? Number(thresholdConfig.config_value) : 20
+      const threshold = thresholdValue !== undefined ? Number(thresholdValue) : 20
 
       console.log(`[MaintenanceTaskManager] 配件寿命预警检查: 阈值=${threshold}%`)
 

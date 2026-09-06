@@ -69,22 +69,20 @@ const userInfo = computed(() => store.state.user.userInfo)
 /**
  * 根据角色确定头像图标
  * 角色 → 图标映射：
- *   administrator → administrator.svg
- *   operator      → operator.svg
- *   engineer      → engineer.svg
- *   其他/未匹配    → who.svg（默认）
+ *   Super_Admin   → SuperAdmin.svg（超级管理员，金色皇冠）
+ * 头像依据数据库角色字段决定：is_super_admin / role_level，不硬编码角色编码
+ *   is_super_admin=1 或 level 1 → SuperAdmin.svg
+ *   level 2 → Administrator.svg，level 3 → Engineer.svg，level 4 → Operator.svg
+ *   其他/未匹配 → who.svg（默认）
  */
 const avatarIcon = computed(() => {
-  const roleMap = {
-    administrator: "administrator",
-    operator: "operator",
-    engineer: "engineer",
-    user: "user",
-  };
-  const role = userInfo.value?.role;
-  // role 可能是字符串或数组，取第一个
-  const roleCode = Array.isArray(role) ? role[0] : role;
-  return roleMap[roleCode] || "who";
+  const info = userInfo.value || {};
+  // 超级管理员（数据库字段）
+  if (Number(info.is_super_admin) === 1) return "SuperAdmin";
+  // 按角色等级映射头像
+  const levelMap = { 2: "Administrator", 3: "Engineer", 4: "Operator" };
+  const level = Number(info.role_level);
+  return levelMap[level] || "who";
 })
 
 // ===== 方法 =====

@@ -1,9 +1,11 @@
-﻿/**
+/**
  * ==========================================
  * 权限校验中间件
  * ==========================================
  * 用于接口级别的权限校验，在路由配置中声明每个接口需要的权限码
  * 无权限时返回 403 错误
+ *
+ * 超级管理员判断依据数据库 nex_role.is_super_admin 字段，不硬编码角色编码
  *
  * 使用方式：
  *   const { requirePermission } = require('../../middleware/permission.middleware')
@@ -12,6 +14,7 @@
 const permissionService = require('../modules/permission/permission.service')
 const { BusinessError } = require('./error.middleware')
 const { ERROR_CODE } = require('../constants/errorCode')
+const { checkIsSuperAdmin } = require('../utils/roleContext')
 
 /**
  * 权限校验中间件工厂函数
@@ -28,6 +31,11 @@ function requirePermission(permissionCodes, options = {}) {
       // 未登录用户（理论上 requireAuth 已经拦截了，这里是双重保险）
       if (!req.user || !req.user.id) {
         throw new BusinessError(ERROR_CODE.UNAUTHORIZED, null)
+      }
+
+      // 数据库标记为超级管理员的角色直接放行，拥有所有权限
+      if (await checkIsSuperAdmin(req.user)) {
+        return next()
       }
 
       const userId = req.user.id
@@ -77,6 +85,12 @@ function optionalPermission(permissionCodes, fieldName = 'hasPermission') {
         return next()
       }
 
+      // 数据库标记为超级管理员的角色默认拥有所有权限
+      if (await checkIsSuperAdmin(req.user)) {
+        req[fieldName] = true
+        return next()
+      }
+
       const userId = req.user.id
       const codes = Array.isArray(permissionCodes) ? permissionCodes : [permissionCodes]
 
@@ -99,5 +113,5 @@ function optionalPermission(permissionCodes, fieldName = 'hasPermission') {
 
 module.exports = {
   requirePermission,
-  optionalPermission
+  optionalPermission,
 }

@@ -18,6 +18,42 @@ router.use(requireAuth);
  */
 router.get('/templates', devicePartController.getTemplates);
 
+/**
+ * 获取所有部件模板（用于管理页面）
+ * GET /prod-api/v2/device-part/templates/admin
+ */
+router.get('/templates/admin', devicePartController.getTemplatesForAdmin);
+
+/**
+ * 获取所有基础模板（用于新增模板时选择源模板）
+ * GET /prod-api/v2/device-part/templates/base
+ */
+router.get('/templates/base', devicePartController.getBaseTemplates);
+
+/**
+ * 获取模板详情
+ * GET /prod-api/v2/device-part/templates/:id
+ */
+router.get('/templates/:id', devicePartController.getTemplateDetail);
+
+/**
+ * 新增模板
+ * POST /prod-api/v2/device-part/templates/add
+ */
+router.post('/templates/add', devicePartController.addTemplate);
+
+/**
+ * 编辑模板
+ * PUT /prod-api/v2/device-part/templates/update/:id
+ */
+router.put('/templates/update/:id', devicePartController.updateTemplate);
+
+/**
+ * 删除模板
+ * DELETE /prod-api/v2/device-part/templates/delete/:id
+ */
+router.delete('/templates/delete/:id', devicePartController.deleteTemplate);
+
 // ==================== 部件实例相关 ====================
 
 /**

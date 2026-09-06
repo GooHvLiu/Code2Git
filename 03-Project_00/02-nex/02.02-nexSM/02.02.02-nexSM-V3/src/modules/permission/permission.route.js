@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ==========================================
  * 权限模块 - 路由层
  * ==========================================
@@ -13,7 +13,6 @@ const validate = require('../../middleware/validate.middleware')
 const {
   saveRolePermissionsSchema,
   getRoleMenuIdsSchema,
-  clearUserCacheSchema
 } = require('./permission.schema')
 
 // 需要登录的接口
@@ -34,10 +33,7 @@ router.get('/role/:roleId/menu-ids', validate(getRoleMenuIdsSchema, 'params'), p
 // 保存角色权限分配（全量覆盖）
 router.post('/role/save', validate(saveRolePermissionsSchema, 'body'), permissionController.saveRolePermissions)
 
-// 清除指定用户的权限缓存
-router.post('/cache/clear-user', validate(clearUserCacheSchema, 'body'), permissionController.clearUserCache)
 
-// 清除所有用户的权限缓存
-router.post('/cache/clear-all', permissionController.clearAllCache)
 
 module.exports = router
+

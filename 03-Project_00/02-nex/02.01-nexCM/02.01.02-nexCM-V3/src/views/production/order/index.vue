@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="order-container">
     <!-- 顶部统计概览 -->
     <div class="stats-overview">
@@ -68,31 +68,31 @@
         <!-- 计划订单标签下显示新增按钮 -->
         <el-button
           v-if="activeTab === 'planned'"
-          v-permission="'production:order:add'"
+          v-permission="'production:order:planned:add'"
           type="primary"
           icon="el-icon-plus"
           @click="handleAdd"
         >
-          {{ $t("menu.production.order.page.add") }}
+          {{ $t("menu.production.order.add") }}
         </el-button>
         <el-button
-          v-permission="'production:order:download'"
+          v-permission="getTabPermission('downloadSelected')"
           type="primary"
           icon="el-icon-download"
           :disabled="!canDownload"
           @click="handleDownloadSelected"
         >
-          {{ $t("menu.production.order.page.downloadSelected") }} ({{
+          {{ $t("menu.production.order.download") }} ({{
             selectedOrders.length
           }})
         </el-button>
         <el-button
-          v-permission="'production:order:download'"
+          v-permission="getTabPermission('downloadAll')"
           icon="el-icon-document"
           :disabled="!canDownloadAll"
           @click="handleDownloadAll"
         >
-          {{ $t("menu.production.order.page.downloadAll") }}
+          {{ $t("menu.production.order.download") }}
         </el-button>
       </div>
     </div>
@@ -266,36 +266,36 @@
             <!-- 计划订单标签下显示编辑和删除按钮 -->
             <template v-if="activeTab === 'planned'">
               <el-button
-                v-permission="'production:order:edit'"
+                v-permission="'production:order:planned:edit'"
                 type="text"
                 size="mini"
                 icon="el-icon-edit"
                 @click="handleEdit(scope.row)"
               >
-                {{ $t("menu.production.order.page.edit") }}
+                {{ $t("menu.production.order.edit") }}
               </el-button>
               <el-button
-                v-permission="'production:order:delete'"
+                v-permission="'production:order:planned:delete'"
                 type="text"
                 size="mini"
                 icon="el-icon-delete"
                 style="color: #f56c6c"
                 @click="handleDelete(scope.row)"
               >
-                {{ $t("menu.production.order.page.delete") }}
+                {{ $t("menu.production.order.delete") }}
               </el-button>
             </template>
             <!-- 其他标签下只显示下载按钮 -->
             <el-button
               v-else
-              v-permission="'production:order:download'"
+              v-permission="getTabPermission('download')"
               type="text"
               size="mini"
               icon="el-icon-download"
               :disabled="!canDownloadOrder(scope.row)"
               @click="handleDownloadSingle(scope.row)"
             >
-              {{ $t("menu.production.order.page.download") }}
+              {{ $t("menu.production.order.download") }}
             </el-button>
           </template>
         </el-table-column>
@@ -467,8 +467,8 @@ const recipeList = computed(() => store.getters["device/recipeList"]);
 // 弹窗标题
 const dialogTitle = computed(() => {
   return isEdit.value
-    ? $t("menu.production.order.page.edit")
-    : $t("menu.production.order.page.add");
+    ? $t("menu.production.order.edit")
+    : $t("menu.production.order.add");
 });
 
 // 当前Tab的订单列表
@@ -497,6 +497,17 @@ const orderConfig = computed(() => ({
   reportIncludeDownloadCount: getConfig("reportIncludeDownloadCount", true),
   allowRunningOrderDownload: getConfig("allowRunningOrderDownload", false),
 }));
+
+// 根据当前Tab获取权限编码
+function getTabPermission(action) {
+  const tabMap = {
+    completed: 'completed',
+    running: 'running',
+    planned: 'planned'
+  };
+  const tab = tabMap[activeTab.value] || 'completed';
+  return `production:order:${tab}:${action}`;
+}
 
 // 是否显示无订单生产提示
 const showNoOrderTip = computed(
@@ -973,3 +984,6 @@ html
   background: #fff;
 }
 </style>
+
+
+

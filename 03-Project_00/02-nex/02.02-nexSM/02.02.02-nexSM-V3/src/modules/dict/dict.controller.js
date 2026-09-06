@@ -1,17 +1,17 @@
-﻿/**
+/**
  * 数据字典模块 - 控制器层
- * 
+ *
  * 负责参数接收、调用 Service 层、返回统一响应
  * 包含字典类型和字典项两个子模块的接口
  * 继承 BaseController，以字典类型为主模型
- * 
+ * 字典名称和标签均为常规字符串，国际化由前端处理
+ *
  * @author nexCM Team
  * @date 2026-01-01
- * @lastModified 2026-08-22
+ * @lastModified 2026-09-05
  */
 const BaseController = require('../../controllers/BaseController')
 const dictService = require('./dict.service')
-const { getLangFromRequest } = require('../../utils/i18n')
 
 class DictController extends BaseController {
   /**
@@ -26,21 +26,20 @@ class DictController extends BaseController {
 
   /**
    * 分页查询字典类型列表
-   * 
+   *
    * @param {Object} req - Express 请求对象
    * @param {Object} req.query - 查询参数
    * @param {Object} res - Express 响应对象
    * @returns {Promise<void>}
    */
   async getTypeList(req, res) {
-    const lang = getLangFromRequest(req)
-    const result = await dictService.getTypeList(req.query, lang)
+    const result = await dictService.getTypeList(req.query)
     res.success(result)
   }
 
   /**
    * 获取字典类型详情
-   * 
+   *
    * @param {Object} req - Express 请求对象
    * @param {Object} req.params - 路径参数
    * @param {number} req.params.id - 字典类型 ID
@@ -48,14 +47,13 @@ class DictController extends BaseController {
    * @returns {Promise<void>}
    */
   async getTypeById(req, res) {
-    const lang = getLangFromRequest(req)
-    const result = await dictService.getTypeById(req.params.id, lang)
+    const result = await dictService.getTypeById(req.params.id)
     res.success(result)
   }
 
   /**
    * 创建字典类型
-   * 
+   *
    * @param {Object} req - Express 请求对象
    * @param {Object} req.body - 请求体
    * @param {string} req.body.dict_name - 字典类型名称
@@ -70,7 +68,7 @@ class DictController extends BaseController {
 
   /**
    * 更新字典类型
-   * 
+   *
    * @param {Object} req - Express 请求对象
    * @param {Object} req.params - 路径参数
    * @param {number} req.params.id - 字典类型 ID
@@ -85,7 +83,7 @@ class DictController extends BaseController {
 
   /**
    * 删除字典类型
-   * 
+   *
    * @param {Object} req - Express 请求对象
    * @param {Object} req.params - 路径参数
    * @param {number} req.params.id - 字典类型 ID
@@ -101,7 +99,7 @@ class DictController extends BaseController {
 
   /**
    * 分页查询字典项列表
-   * 
+   *
    * @param {Object} req - Express 请求对象
    * @param {Object} req.query - 查询参数
    * @param {number} [req.query.type_id] - 字典类型 ID
@@ -109,14 +107,13 @@ class DictController extends BaseController {
    * @returns {Promise<void>}
    */
   async getItemList(req, res) {
-    const lang = getLangFromRequest(req)
-    const result = await dictService.getItemList(req.query, lang)
+    const result = await dictService.getItemList(req.query)
     res.success(result)
   }
 
   /**
    * 根据字典类型编码获取字典项列表（前端 DictTag 组件用）
-   * 
+   *
    * @param {Object} req - Express 请求对象
    * @param {Object} req.params - 路径参数
    * @param {string} req.params.code - 字典类型编码
@@ -124,15 +121,14 @@ class DictController extends BaseController {
    * @returns {Promise<void>}
    */
   async getItemsByTypeCode(req, res) {
-    const lang = getLangFromRequest(req)
     const { code } = req.params
-    const result = await dictService.getItemsByTypeCode(code, lang)
+    const result = await dictService.getItemsByTypeCode(code)
     res.success(result)
   }
 
   /**
    * 批量获取多个字典类型的字典项
-   * 
+   *
    * @param {Object} req - Express 请求对象
    * @param {Object} req.body - 请求体
    * @param {Array<string>} req.body.codes - 字典类型编码数组
@@ -140,15 +136,14 @@ class DictController extends BaseController {
    * @returns {Promise<void>}
    */
   async getItemsByTypeCodes(req, res) {
-    const lang = getLangFromRequest(req)
     const { codes } = req.body
-    const result = await dictService.getItemsByTypeCodes(codes, lang)
+    const result = await dictService.getItemsByTypeCodes(codes)
     res.success(result)
   }
 
   /**
    * 获取字典项详情
-   * 
+   *
    * @param {Object} req - Express 请求对象
    * @param {Object} req.params - 路径参数
    * @param {number} req.params.id - 字典项 ID
@@ -156,14 +151,13 @@ class DictController extends BaseController {
    * @returns {Promise<void>}
    */
   async getItemById(req, res) {
-    const lang = getLangFromRequest(req)
-    const result = await dictService.getItemById(req.params.id, lang)
+    const result = await dictService.getItemById(req.params.id)
     res.success(result)
   }
 
   /**
    * 创建字典项
-   * 
+   *
    * @param {Object} req - Express 请求对象
    * @param {Object} req.body - 请求体
    * @param {number} req.body.type_id - 字典类型 ID
@@ -179,7 +173,7 @@ class DictController extends BaseController {
 
   /**
    * 更新字典项
-   * 
+   *
    * @param {Object} req - Express 请求对象
    * @param {Object} req.params - 路径参数
    * @param {number} req.params.id - 字典项 ID
@@ -194,7 +188,7 @@ class DictController extends BaseController {
 
   /**
    * 删除字典项
-   * 
+   *
    * @param {Object} req - Express 请求对象
    * @param {Object} req.params - 路径参数
    * @param {number} req.params.id - 字典项 ID

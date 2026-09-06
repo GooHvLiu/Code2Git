@@ -10,7 +10,7 @@ initTheme()
 
 // Element UI 注册
 import '@/plugins/element.js'
-// 通用业务组件全局注册（Pagination/SvgIcon/DictTag/SearchForm/TableToolbar/UploadImage/ElectronicSignature）
+// 通用业务组件全局注册（Pagination/SvgIcon/DictTag/SearchForm/TableToolbar/UploadImage/I18nInput）
 import components from '@/plugins/components.js'
 Vue.use(components)
 // SVG 图标自动注册

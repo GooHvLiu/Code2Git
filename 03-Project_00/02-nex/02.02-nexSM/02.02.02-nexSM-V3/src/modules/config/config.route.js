@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 系统配置路由
  */
 const express = require('express');
@@ -15,7 +15,5 @@ router.get('/category/:category', requireAuth, configController.getConfigsByCate
 // 批量更新配置
 router.put('/', requireAuth, configController.updateConfigs);
 
-// 重置所有配置为默认值
-router.post('/reset', requireAuth, configController.resetAllConfigs);
-
 module.exports = router;
+

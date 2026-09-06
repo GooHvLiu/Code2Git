@@ -41,12 +41,12 @@ class DeviceStatusManager {
       const configService = require('../modules/config/config.service')
       const configs = await configService.getAllConfigs()
       
-      // 查找配置项
-      const checkIntervalConfig = configs.find(c => c.config_key === 'deviceStatusCheckInterval')
-      const offlineThresholdConfig = configs.find(c => c.config_key === 'deviceOfflineThreshold')
+      // 查找配置项（configs是对象，直接用key访问）
+      const checkIntervalValue = configs['deviceStatusCheckInterval']
+      const offlineThresholdValue = configs['deviceOfflineThreshold']
       
-      const checkInterval = checkIntervalConfig ? Number(checkIntervalConfig.config_value) * 1000 : this.defaultCheckInterval
-      const offlineThreshold = offlineThresholdConfig ? Number(offlineThresholdConfig.config_value) * 1000 : this.defaultOfflineThreshold
+      const checkInterval = checkIntervalValue !== undefined ? Number(checkIntervalValue) * 1000 : this.defaultCheckInterval
+      const offlineThreshold = offlineThresholdValue !== undefined ? Number(offlineThresholdValue) * 1000 : this.defaultOfflineThreshold
       
       this.startPeriodicCheck(checkInterval, offlineThreshold)
     } catch (err) {

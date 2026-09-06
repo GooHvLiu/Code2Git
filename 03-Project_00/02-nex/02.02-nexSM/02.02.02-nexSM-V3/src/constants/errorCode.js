@@ -50,6 +50,8 @@ const ERROR_CODE = {
   // ==================== 角色模块 ====================
   ROLE_NOT_FOUND: 'ROLE_NOT_FOUND',       // 角色不存在
   ROLE_CODE_EXISTS: 'ROLE_CODE_EXISTS',   // 角色编码已存在
+  ROLE_BASIC_CANNOT_EDIT: 'ROLE_BASIC_CANNOT_EDIT',     // 系统内置角色不允许编辑
+  ROLE_BASIC_CANNOT_DELETE: 'ROLE_BASIC_CANNOT_DELETE', // 系统内置角色不允许删除
 
   // ==================== 用户模块 ====================
   USER_NOT_FOUND: 'USER_NOT_FOUND',           // 用户不存在
@@ -59,8 +61,6 @@ const ERROR_CODE = {
   USER_LOCKED: 'USER_LOCKED',                   // 账户已锁定
   USER_NOT_LOCKED: 'USER_NOT_LOCKED',           // 用户未被锁定
   USER_REGISTER_FAIL: 'USER_REGISTER_FAIL',     // 用户注册失败
-  E_SIGNATURE_PASSWORD_REQUIRED: 'E_SIGNATURE_PASSWORD_REQUIRED', // 电子签名：请输入密码确认
-  E_SIGNATURE_FAILED: 'E_SIGNATURE_FAILED',     // 电子签名失败：密码错误
   DEVICE_LIMIT_EXCEEDED: 'DEVICE_LIMIT_EXCEEDED', // 在线设备数已达上限
 
   // ==================== 字典模块 ====================
@@ -120,6 +120,15 @@ const ERROR_CODE = {
   EMAIL_FORMAT_INVALID: 'EMAIL_FORMAT_INVALID',                         // 邮箱格式不正确
   EMAIL_VALIDATION_FAILED: 'EMAIL_VALIDATION_FAILED',                   // 配置校验失败
   EMAIL_TEST_SEND_FAILED: 'EMAIL_TEST_SEND_FAILED',                     // 测试邮件发送失败
+
+  // ==================== 部件模块 ====================
+  PART_CODE_EXISTS: 'PART_CODE_EXISTS',                                 // 部件编码已存在
+  PART_CODE_SAME_AS_OLD: 'PART_CODE_SAME_AS_OLD',                       // 新部件编码与原编码相同
+  PART_SPEC_NOT_MATCH: 'PART_SPEC_NOT_MATCH',                           // 规格型号与模板不匹配
+  PART_RATED_LIFE_NOT_MATCH: 'PART_RATED_LIFE_NOT_MATCH',               // 额定寿命与模板不匹配
+  PART_TEMPLATE_KEY_EXISTS: 'PART_TEMPLATE_KEY_EXISTS',                 // 模板编码已存在
+  PART_TEMPLATE_HAS_PARTS: 'PART_TEMPLATE_HAS_PARTS',                   // 模板下有部件实例
+  PART_TEMPLATE_IS_BASE: 'PART_TEMPLATE_IS_BASE',                       // 基础模板不允许编辑/删除
 };
 
 // 错误码对应消息（调试用，中文，开发环境看日志方便）
@@ -153,6 +162,8 @@ const ERROR_MESSAGE = {
 
   [ERROR_CODE.ROLE_NOT_FOUND]: '角色不存在',
   [ERROR_CODE.ROLE_CODE_EXISTS]: '角色编码已存在',
+  [ERROR_CODE.ROLE_BASIC_CANNOT_EDIT]: '系统内置角色不允许编辑',
+  [ERROR_CODE.ROLE_BASIC_CANNOT_DELETE]: '系统内置角色不允许删除',
 
   [ERROR_CODE.USER_NOT_FOUND]: '用户不存在',
   [ERROR_CODE.USER_USERNAME_EXISTS]: '用户名已存在',
@@ -161,8 +172,6 @@ const ERROR_MESSAGE = {
   [ERROR_CODE.USER_LOCKED]: '账户已锁定，请 {minutes} 分钟后再试',
   [ERROR_CODE.USER_NOT_LOCKED]: '该用户未被锁定',
   [ERROR_CODE.USER_REGISTER_FAIL]: '注册失败',
-  [ERROR_CODE.E_SIGNATURE_PASSWORD_REQUIRED]: '电子签名：请输入密码确认',
-  [ERROR_CODE.E_SIGNATURE_FAILED]: '电子签名失败：密码错误',
   [ERROR_CODE.DEVICE_LIMIT_EXCEEDED]: '在线设备数已达上限（最多 {maxDevices} 台），请联系管理员踢掉其他设备',
 
   [ERROR_CODE.DICT_TYPE_NOT_FOUND]: '字典类型不存在',
@@ -215,9 +224,19 @@ const ERROR_MESSAGE = {
   [ERROR_CODE.EMAIL_FORMAT_INVALID]: '邮箱格式不正确',
   [ERROR_CODE.EMAIL_VALIDATION_FAILED]: '配置校验失败',
   [ERROR_CODE.EMAIL_TEST_SEND_FAILED]: '测试邮件发送失败',
+
+  // ==================== 部件模块 ====================
+  [ERROR_CODE.PART_CODE_EXISTS]: '部件编码 {partCode} 已存在',
+  [ERROR_CODE.PART_TEMPLATE_KEY_EXISTS]: '模板编码 {templateKey} 已存在',
+  [ERROR_CODE.PART_TEMPLATE_HAS_PARTS]: '该模板下有 {partCount} 个部件实例，不允许删除',
+  [ERROR_CODE.PART_TEMPLATE_IS_BASE]: '基础模板不允许编辑或删除',
 };
 
 module.exports = {
   ERROR_CODE,
   ERROR_MESSAGE
 };
+
+
+
+

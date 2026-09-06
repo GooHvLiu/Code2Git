@@ -8,6 +8,7 @@
  * - 统一的读写接口
  * - 自动重连
  * - 健康检查
+ * - 严格通讯验证（连接成功后读取点位验证）
  */
 const ModbusTcpClient = require('../protocols/ModbusTcpClient')
 const S7Client = require('../protocols/S7Client')
@@ -127,6 +128,9 @@ class PlcManager {
     for (const [name, device] of this.devices) {
       try {
         await device.client.connect()
+        // 严格验证：连接成功后读取一个点位，验证通讯真的可用
+        // 这是非常重要的验证，确保不是"假连接"
+        await device.client.verifyConnection(device.tagMap)
         device.connected = true
         device.consecutiveErrors = 0
         results[name] = { success: true }

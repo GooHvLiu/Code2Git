@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 系统配置数据模型
  * 负责系统配置的数据库操作
  */
@@ -152,14 +152,6 @@ async function updateConfigs(configs) {
   }
 }
 
-/**
- * 重置所有配置为默认值
- */
-async function resetAllConfigs() {
-  await db.query('DELETE FROM nex_system_config');
-  await initDefaultData();
-}
-
 module.exports = {
   initTable,
   initDefaultData,
@@ -167,5 +159,5 @@ module.exports = {
   getConfigsByCategory,
   getConfigByKey,
   updateConfigs,
-  resetAllConfigs
 };
+

@@ -34,11 +34,12 @@ const USER_STATUS = {
   LOCKED: 2     // 锁定（预留，数据库暂未使用）
 };
 
-/** 用户岗位类别 role varchar(50)：administrator管理员 / engineer工程师 / operator操作员 */
+/** 用户岗位类别 role varchar(50)：Super_Admin超级管理员 / Administrator系统管理员 / Engineer工程师 / Operator操作员 */
 const USER_ROLE = {
-  ADMINISTRATOR: 'administrator',  // 管理员
-  ENGINEER: 'engineer',            // 工程师
-  OPERATOR: 'operator'             // 操作员
+  SUPER_ADMIN: 'Super_Admin',  // 超级管理员
+  ADMINISTRATOR: 'Administrator',  // 系统管理员
+  ENGINEER: 'Engineer',            // 工程师
+  OPERATOR: 'Operator'             // 操作员
 };
 
 /** 用户性别 sex tinyint：0未知 1男 2女 */

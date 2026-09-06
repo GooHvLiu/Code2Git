@@ -60,9 +60,11 @@ class PermissionModel {
    * @returns {Promise<Array>} 权限列表（树形结构）
    */
   async getAllPermissions() {
+    // 始终返回完整权限树，并携带 superOnly 标记；
+    // 是否展示/禁用由前端依据"当前正在配置的角色"决定（数据库字段驱动，不硬编码）
     const sql = `
-      SELECT id, parent_id, title, permission_code, type, path, sort
-      FROM ${MENU_TABLE}
+      SELECT id, parent_id, title, permission_code, type, path, sort, super_only
+      FROM ${MENU_TABLE} m
       WHERE permission_code IS NOT NULL
         AND permission_code != ''
       ORDER BY sort ASC
@@ -90,6 +92,7 @@ class PermissionModel {
         type: row.type,
         path: row.path,
         sort: row.sort,
+        superOnly: row.super_only === 1,
         children: []
       }
     })

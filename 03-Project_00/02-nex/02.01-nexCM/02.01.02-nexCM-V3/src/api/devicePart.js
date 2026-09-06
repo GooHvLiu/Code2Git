@@ -16,6 +16,68 @@ export function getPartTemplates() {
   })
 }
 
+/**
+ * 获取所有部件模板（用于管理页面）
+ */
+export function getPartTemplatesForAdmin() {
+  return request({
+    url: '/device-part/templates/admin',
+    method: 'get'
+  })
+}
+
+/**
+ * 获取所有基础模板（用于新增模板时选择源模板）
+ */
+export function getBasePartTemplates() {
+  return request({
+    url: '/device-part/templates/base',
+    method: 'get'
+  })
+}
+
+/**
+ * 获取模板详情
+ */
+export function getPartTemplateDetail(id) {
+  return request({
+    url: `/device-part/templates/${id}`,
+    method: 'get'
+  })
+}
+
+/**
+ * 新增模板
+ */
+export function addPartTemplate(data) {
+  return request({
+    url: '/device-part/templates/add',
+    method: 'post',
+    data
+  })
+}
+
+/**
+ * 编辑模板
+ */
+export function updatePartTemplate(id, data) {
+  return request({
+    url: `/device-part/templates/update/${id}`,
+    method: 'put',
+    data
+  })
+}
+
+/**
+ * 删除模板
+ */
+export function deletePartTemplate(id) {
+  return request({
+    url: `/device-part/templates/delete/${id}`,
+    method: 'delete'
+  })
+}
+
 // ==================== 部件实例相关 ====================
 
 /**

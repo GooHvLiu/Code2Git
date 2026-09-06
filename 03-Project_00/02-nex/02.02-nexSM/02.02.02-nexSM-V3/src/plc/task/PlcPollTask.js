@@ -70,19 +70,19 @@ class PlcPollTask {
       const configService = require('../../modules/config/config.service')
       const configs = await configService.getAllConfigs()
 
-      // 查找快速轮询间隔配置
-      const fastConfig = configs.find(c => c.config_key === 'pollFastInterval')
-      if (fastConfig && fastConfig.config_value) {
-        const val = Number(fastConfig.config_value)
+      // 查找快速轮询间隔配置（configs是对象，直接用key访问）
+      const fastValue = configs['pollFastInterval']
+      if (fastValue !== undefined && fastValue !== null && fastValue !== '') {
+        const val = Number(fastValue)
         if (!isNaN(val) && val >= 50 && val <= 5000) {
           this.currentFastInterval = val
         }
       }
 
-      // 查找慢速轮询间隔配置
-      const slowConfig = configs.find(c => c.config_key === 'pollSlowInterval')
-      if (slowConfig && slowConfig.config_value) {
-        const val = Number(slowConfig.config_value)
+      // 查找慢速轮询间隔配置（configs是对象，直接用key访问）
+      const slowValue = configs['pollSlowInterval']
+      if (slowValue !== undefined && slowValue !== null && slowValue !== '') {
+        const val = Number(slowValue)
         if (!isNaN(val) && val >= 100 && val <= 10000) {
           this.currentSlowInterval = val
         }
@@ -182,6 +182,10 @@ class PlcPollTask {
         15000,
         `设备 ${deviceName} 连接超时（15秒）`
       )
+
+      // 严格验证：连接成功后读取一个点位，验证通讯真的可用
+      // 这是非常重要的验证，确保不是"假连接"
+      await device.client.verifyConnection(device.tagMap)
 
       // 重连成功
       device._reconnecting = false

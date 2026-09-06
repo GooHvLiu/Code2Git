@@ -1,9 +1,8 @@
-﻿/**
+/**
  * 用户模块 - 数据模型层
  */
 const BaseModel = require('../../db/BaseModel');
 const { query } = require('../../db/index');
-const { getLangValue, processLangFields } = require('../../utils/i18n');
 const cache = require('../../utils/cache');
 
 // Token 版本号缓存前缀（与 auth.middleware.js 保持一致）
@@ -111,9 +110,9 @@ class UserModel extends BaseModel {
    * @param {string} lang - 语言代码
    * @returns {Promise<Object|null>}
    */
-  async getByUsernameWithRole(username, lang = 'zh-CN') {
+  async getByUsernameWithRole(username) {
     const sql = `
-      SELECT u.*, r.data_scope, r.role_name
+      SELECT u.*, r.role_name
       FROM ${TABLE_NAME} u
       LEFT JOIN nex_role r ON u.role = r.role_code
       WHERE u.username = ? AND u.is_delete = 0
@@ -121,11 +120,7 @@ class UserModel extends BaseModel {
     `;
     const rows = await query(sql, [username]);
     if (!rows[0]) return null;
-    // 处理多语言 JSON 字段
-    return {
-      ...rows[0],
-      role_name: getLangValue(rows[0].role_name, lang, rows[0].role)
-    };
+    return rows[0];
   }
 
   /**
@@ -133,10 +128,10 @@ class UserModel extends BaseModel {
    * @param {Object} params - 查询参数
    * @param {number} page - 页码
    * @param {number} pageSize - 每页数量
-   * @param {string} lang - 语言代码
+   * @param {Array<string>} [excludeRoles=[]] - 要排除的角色编码列表（用于隐藏超级管理员等角色）
    * @returns {Promise<{list: Array, total: number}>}
    */
-  async getUserListWithDept(params = {}, page = 1, pageSize = 10, lang = 'zh-CN') {
+  async getUserListWithDept(params = {}, page = 1, pageSize = 10, excludeRoles = []) {
     const where = ['u.is_delete = 0'];
     const queryParams = [];
 
@@ -151,6 +146,13 @@ class UserModel extends BaseModel {
     if (params.status !== '' && params.status !== undefined && params.status !== null) {
       where.push('u.status = ?');
       queryParams.push(params.status);
+    }
+
+    // 排除指定角色的用户（用于隐藏超级管理员等角色）
+    if (excludeRoles && excludeRoles.length > 0) {
+      const placeholders = excludeRoles.map(() => '?').join(',');
+      where.push(`u.role NOT IN (${placeholders})`);
+      queryParams.push(...excludeRoles);
     }
 
     const whereSql = where.join(' AND ');
@@ -175,29 +177,18 @@ class UserModel extends BaseModel {
     `;
     const list = await query(listSql, queryParams);
 
-    // 处理多语言 JSON 字段（role_name 仍需多语言，dept_name 已改为普通字符串）
-    const processedList = list.map(item => ({
-      ...item,
-      role_name: getLangValue(item.role_name, lang, item.role)
-    }));
-
-    return { list: processedList, total };
+    return { list, total };
   }
 
-  /**
-   * 根据ID查询用户（关联部门表获取部门名称）
-   * @param {number} id
-   * @returns {Promise<Object|null>}
-   */
   /**
    * 根据ID查询用户（关联部门表获取部门名称）
    * @param {number} id
    * @param {string} lang - 语言代码
    * @returns {Promise<Object|null>}
    */
-  async getByIdWithDept(id, lang = 'zh-CN') {
+  async getByIdWithDept(id) {
     const sql = `
-      SELECT u.*, d.dept_name, r.role_name, r.data_scope
+      SELECT u.*, d.dept_name, r.role_name
       FROM ${TABLE_NAME} u
       LEFT JOIN nex_dept d ON u.dept_id = d.id
       LEFT JOIN nex_role r ON u.role = r.role_code
@@ -206,11 +197,7 @@ class UserModel extends BaseModel {
     `;
     const rows = await query(sql, [id]);
     if (!rows[0]) return null;
-    // 处理多语言 JSON 字段（role_name 仍需多语言，dept_name 已改为普通字符串）
-    return {
-      ...rows[0],
-      role_name: getLangValue(rows[0].role_name, lang, rows[0].role)
-    };
+    return rows[0];
   }
 
   /**

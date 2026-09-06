@@ -8,13 +8,14 @@
  * 1. 业务模块只依赖本文件，不直接引用 audit.service
  * 2. 自动从 req 提取操作人信息（userId/userName/ip/userAgent）
  * 3. 操作类型使用统一常量，避免硬编码
+ * 4. 配置化：通过 auditRules.config.js 管理哪些操作需要记录审计日志
  *
  * 【用法】
  * const audit = require('./audit')
  *
- * // 方式一：通用方法（推荐）
+ * // 方式一：通用方法（推荐，使用配置化的操作类型）
  * await audit.log(req, {
- *   action: audit.ACTION.USER_UPDATE,
+ *   action: 'user.update',
  *   target: 'username',
  *   oldValue: '旧值',
  *   newValue: '新值',
@@ -30,38 +31,86 @@
  */
 
 const auditService = require('../modules/audit/audit.service')
+const auditRules = require('../config/auditRules.config')
 
 /**
  * 操作类型常量（统一管理，避免硬编码）
- * 后续新增操作类型在此添加
+ * 与 auditRules.config.js 中的 actionType 保持一致
+ * 后续新增操作类型在此添加，同时在配置文件中添加对应规则
  */
 const ACTION_TYPES = {
-  // 用户相关
-  USER_REGISTER: 'USER_REGISTER',
-  USER_LOGIN: 'USER_LOGIN',
-  USER_LOGIN_FAILED: 'USER_LOGIN_FAILED',
-  USER_LOGOUT: 'USER_LOGOUT',
-  USER_CREATE: 'USER_CREATE',
-  USER_UPDATE: 'USER_UPDATE',
-  USER_DELETE: 'USER_DELETE',
-  USER_BATCH_DELETE: 'USER_BATCH_DELETE',
-  USER_STATUS_CHANGE: 'USER_STATUS_CHANGE',
-  USER_RESET_PASSWORD: 'USER_RESET_PASSWORD',
+  // ==================== 用户管理 ====================
+  USER_REGISTER: 'user.register',
+  USER_LOGIN: 'user.login',
+  USER_LOGIN_FAILED: 'user.loginFailed',
+  USER_LOGOUT: 'user.logout',
+  USER_CREATE: 'user.create',
+  USER_UPDATE: 'user.update',
+  USER_DELETE: 'user.delete',
+  USER_BATCH_DELETE: 'user.batchDelete',
+  USER_STATUS_CHANGE: 'user.statusChange',
+  USER_RESET_PASSWORD: 'user.resetPassword',
+  USER_CHANGE_PASSWORD: 'user.changePassword',
+  USER_ROLE_CHANGE: 'user.roleChange',
 
-  // PLC 相关
-  PLC_WRITE: 'PLC_WRITE',
-  PLC_READ: 'PLC_READ',
-  PLC_CONNECT: 'PLC_CONNECT',
-  PLC_DISCONNECT: 'PLC_DISCONNECT',
-  PLC_RECONNECT: 'PLC_RECONNECT',
+  // ==================== 权限管理 ====================
+  ROLE_CREATE: 'role.create',
+  ROLE_UPDATE: 'role.update',
+  ROLE_DELETE: 'role.delete',
+  PERMISSION_CHANGE: 'permission.change',
+  PERMISSION_CACHE_CLEAR: 'permission.cacheClear',
 
-  // 系统相关
-  SYSTEM_CONFIG_CHANGE: 'SYSTEM_CONFIG_CHANGE',
-  SYSTEM_EXPORT: 'SYSTEM_EXPORT',
-  SYSTEM_IMPORT: 'SYSTEM_IMPORT',
+  // ==================== 系统配置 ====================
+  CONFIG_SYSTEM_CHANGE: 'config.system.change',
+  CONFIG_SECURITY_CHANGE: 'config.security.change',
+  CONFIG_PLC_CHANGE: 'config.plc.change',
+  CONFIG_EXPORT_CHANGE: 'config.export.change',
+  CONFIG_CONNECTION_CHANGE: 'config.connection.change',
+  CONFIG_DEVICE_CHANGE: 'config.device.change',
+  CONFIG_ORDER_CHANGE: 'config.order.change',
 
-  // 审计相关
-  AUDIT_VERIFY: 'AUDIT_VERIFY'
+  // ==================== 设备管理 ====================
+  DEVICE_STATUS_CHANGE: 'device.statusChange',
+  DEVICE_PARAM_CHANGE: 'device.paramChange',
+  DEVICE_PART_CREATE: 'device.part.create',
+  DEVICE_PART_UPDATE: 'device.part.update',
+  DEVICE_PART_REPLACE: 'device.part.replace',
+  DEVICE_PART_DELETE: 'device.part.delete',
+  DEVICE_PART_TEMPLATE_CREATE: 'device.part.template.create',
+  DEVICE_PART_TEMPLATE_UPDATE: 'device.part.template.update',
+  DEVICE_PART_TEMPLATE_DELETE: 'device.part.template.delete',
+  DEVICE_ALARM_HANDLE: 'device.alarm.handle',
+
+  // ==================== 生产管理 ====================
+  PRODUCTION_RECIPE_DOWNLOAD: 'production.recipe.download',
+  PRODUCTION_ORDER_CREATE: 'production.order.create',
+  PRODUCTION_ORDER_UPDATE: 'production.order.update',
+  PRODUCTION_ORDER_DELETE: 'production.order.delete',
+  PRODUCTION_ORDER_DOWNLOAD: 'production.order.download',
+
+  // ==================== 数据管理 ====================
+  DATA_EXPORT: 'data.export',
+  DATA_VIEW_DETAIL: 'data.viewDetail',
+
+  // ==================== PLC操作 ====================
+  PLC_WRITE: 'plc.write',
+  PLC_READ: 'plc.read',
+  PLC_CONNECT: 'plc.connect',
+  PLC_DISCONNECT: 'plc.disconnect',
+  PLC_RECONNECT: 'plc.reconnect',
+
+  // ==================== 审计自身 ====================
+  AUDIT_VIEW: 'audit.view',
+  AUDIT_VERIFY: 'audit.verify',
+  AUDIT_EXPORT: 'audit.export',
+
+  // ==================== 授权管理 ====================
+  LICENSE_IMPORT: 'license.import',
+  LICENSE_EXPIRE: 'license.expire',
+
+  // ==================== 邮箱配置 ====================
+  EMAIL_CONFIG_CHANGE: 'email.configChange',
+  EMAIL_LOG_DELETE: 'email.logDelete'
 }
 
 /**
@@ -86,29 +135,55 @@ function extractOperator(req) {
 
 /**
  * 记录审计日志（统一入口）
+ *
+ * 自动根据审计规则配置，判断是否需要记录日志
+ *
  * @param {Object|Express.Request} operator - 操作人信息或 Express req 对象
  * @param {Object} log - 日志内容 { action, target, oldValue, newValue, result, reason }
- * @returns {Promise<Object|null>} 写入的日志记录，失败返回 null
+ * @returns {Promise<Object|null>} 写入的日志记录，失败或未启用返回 null
  */
 async function log(operator, log = {}) {
-  // 判断 operator 是 req 对象还是手动传入的操作人信息
-  const isReq = operator && (operator.user !== undefined || operator.headers !== undefined)
-  const op = isReq ? extractOperator(operator) : (operator || {})
+  try {
+    // 检查审计功能是否启用
+    if (!auditRules.enabled) {
+      return null
+    }
 
-  const data = {
-    userId: op.userId || 0,
-    userName: op.userName || '',
-    action: log.action || '',
-    target: log.target || '',
-    oldValue: log.oldValue !== undefined ? log.oldValue : '',
-    newValue: log.newValue !== undefined ? log.newValue : '',
-    result: log.result || 'success',
-    reason: log.reason || '',
-    ip: op.ip || '',
-    userAgent: op.userAgent || ''
+    // 检查该操作类型是否启用审计
+    const action = log.action || ''
+    if (action && !auditRules.isEnabled(action)) {
+      return null
+    }
+
+    // 判断 operator 是 req 对象还是手动传入的操作人信息
+    const isReq = operator && (operator.user !== undefined || operator.headers !== undefined)
+    const op = isReq ? extractOperator(operator) : (operator || {})
+
+    // 获取审计规则，自动填充一些字段
+    const rule = action ? auditRules.getRule(action) : null
+
+    const data = {
+      userId: op.userId || 0,
+      userName: op.userName || '',
+      action: action,
+      target: log.target || '',
+      oldValue: log.oldValue !== undefined ? log.oldValue : '',
+      newValue: log.newValue !== undefined ? log.newValue : '',
+      result: log.result || 'success',
+      reason: log.reason || '',
+      ip: op.ip || '',
+      userAgent: op.userAgent || '',
+      // 扩展字段（用于后续统计和分析）
+      module: rule ? rule.moduleKey : '',
+      priority: rule ? rule.priority : 'normal'
+    }
+
+    return await auditService.create(data)
+  } catch (err) {
+    console.error('[审计日志] 写入失败:', err.message)
+    // 审计日志写入失败不影响主业务，但记录错误
+    return null
   }
-
-  return await auditService.create(data)
 }
 
 // ==================== 快捷方法 ====================
@@ -182,6 +257,17 @@ async function logUserStatusChange(req, target, oldValue, newValue) {
 }
 
 /**
+ * 记录密码重置
+ */
+async function logPasswordReset(req, username, resetType) {
+  return await log(req, {
+    action: ACTION_TYPES.USER_RESET_PASSWORD,
+    target: username || '',
+    newValue: resetType || ''
+  })
+}
+
+/**
  * 记录 PLC 参数写入
  */
 async function logPlcWrite(req, target, oldValue, newValue, reason = '') {
@@ -199,20 +285,37 @@ async function logPlcWrite(req, target, oldValue, newValue, reason = '') {
  */
 async function logExport(req, target) {
   return await log(req, {
-    action: ACTION_TYPES.SYSTEM_EXPORT,
+    action: ACTION_TYPES.DATA_EXPORT,
     target: target || ''
   })
 }
 
+// ==================== 工具方法 ====================
+
 /**
- * 记录密码重置
+ * 获取审计规则配置
+ * @returns {Object} 审计规则配置
  */
-async function logPasswordReset(req, username, resetType) {
-  return await log(req, {
-    action: ACTION_TYPES.USER_RESET_PASSWORD,
-    target: username || '',
-    newValue: resetType || ''
-  })
+function getAuditRules() {
+  return auditRules
+}
+
+/**
+ * 检查操作类型是否启用审计
+ * @param {string} actionType - 操作类型
+ * @returns {boolean} 是否启用
+ */
+function isActionEnabled(actionType) {
+  return auditRules.isEnabled(actionType)
+}
+
+/**
+ * 检查操作类型是否要求填写原因
+ * @param {string} actionType - 操作类型
+ * @returns {boolean} 是否要求
+ */
+function isReasonRequired(actionType) {
+  return auditRules.requireReason(actionType)
 }
 
 module.exports = {
@@ -232,5 +335,10 @@ module.exports = {
   logUserStatusChange,
   logPasswordReset,
   logPlcWrite,
-  logExport
+  logExport,
+
+  // 工具方法
+  getAuditRules,
+  isActionEnabled,
+  isReasonRequired
 }

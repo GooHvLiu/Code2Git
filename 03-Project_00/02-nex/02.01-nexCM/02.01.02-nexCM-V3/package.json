@@ -24,6 +24,8 @@
     "html2canvas": "^1.4.1",
     "jspdf": "^4.2.1",
     "less-loader": "^13.0.0",
+    "monaco-editor": "^0.34.1",
+    "monaco-editor-webpack-plugin": "^7.0.1",
     "nprogress": "^0.2.0",
     "reset-css": "^5.0.2",
     "vue": "^2.7.16",
@@ -75,7 +77,14 @@
       "defineSlots": "readonly"
     },
     "rules": {
-      "no-console": "warn",
+      "no-console": [
+        "warn",
+        {
+          "allow": [
+            "error"
+          ]
+        }
+      ],
       "no-unused-vars": "warn",
       "no-debugger": "warn",
       "vue/multi-word-component-names": "off",

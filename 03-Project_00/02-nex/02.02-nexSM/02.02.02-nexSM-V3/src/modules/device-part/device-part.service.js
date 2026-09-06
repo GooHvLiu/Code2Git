@@ -4,7 +4,8 @@
  */
 
 const devicePartModel = require('./device-part.model');
-const { BusinessError, ERROR_CODE } = require('../../constants/errorCode');
+const { ERROR_CODE } = require('../../constants/errorCode');
+const { BusinessError } = require('../../middleware/error.middleware');
 const dayjs = require('dayjs');
 
 class DevicePartService {
@@ -15,6 +16,151 @@ class DevicePartService {
    */
   async getAllTemplates() {
     return devicePartModel.getAllTemplates();
+  }
+
+  /**
+   * 获取所有模板（用于管理页面）
+   */
+  async getAllTemplatesForAdmin() {
+    return devicePartModel.getAllTemplatesForAdmin();
+  }
+
+  /**
+   * 获取所有基础模板（用于新增模板时选择源模板）
+   */
+  async getBaseTemplates() {
+    return devicePartModel.getBaseTemplates();
+  }
+
+  /**
+   * 根据ID获取模板
+   */
+  async getTemplateById(id) {
+    const template = await devicePartModel.getTemplateById(id);
+    if (!template) {
+      throw new BusinessError(ERROR_CODE.NOT_FOUND, null, { entity: '部件模板' });
+    }
+    return template;
+  }
+
+  /**
+   * 新增模板
+   * 用户只需要选择源模板（source_template_key）、填写默认规格型号和默认额定寿命
+   * 其他属性自动从源模板中复制，模板编码和排序自动生成
+   */
+  async addTemplate(data, operator = null) {
+    // 验证必填字段
+    if (!data.source_template_key) {
+      throw new BusinessError(ERROR_CODE.PARAM_MISSING, null, { field: '模板名称' });
+    }
+    if (!data.default_spec) {
+      throw new BusinessError(ERROR_CODE.PARAM_MISSING, null, { field: '默认规格型号' });
+    }
+    if (!data.default_rated_life) {
+      throw new BusinessError(ERROR_CODE.PARAM_MISSING, null, { field: '默认额定寿命' });
+    }
+
+    // 获取源模板
+    const sourceTemplate = await devicePartModel.getTemplateByKey(data.source_template_key);
+    if (!sourceTemplate) {
+      throw new BusinessError(ERROR_CODE.NOT_FOUND, null, { entity: '源模板' });
+    }
+
+    // 自动生成模板编码：编码前缀 + "-" + 随机4位数
+    const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+    const newTemplateKey = `${sourceTemplate.code_prefix}-${randomSuffix}`;
+    
+    // 验证模板编码是否已存在（如果存在，重新生成）
+    let existingTemplate = await devicePartModel.getTemplateByKey(newTemplateKey);
+    let finalTemplateKey = newTemplateKey;
+    let retryCount = 0;
+    while (existingTemplate && retryCount < 10) {
+      const newRandomSuffix = Math.floor(1000 + Math.random() * 9000);
+      finalTemplateKey = `${sourceTemplate.code_prefix}-${newRandomSuffix}`;
+      existingTemplate = await devicePartModel.getTemplateByKey(finalTemplateKey);
+      retryCount++;
+    }
+    if (existingTemplate) {
+      throw new BusinessError(ERROR_CODE.PART_TEMPLATE_KEY_EXISTS, null, { templateKey: finalTemplateKey });
+    }
+
+    // 自动排序：排到源模板的下面（源模板的sort + 1）
+    // 先更新源模板后面所有模板的sort + 1
+    await devicePartModel.incrementSortAfter(sourceTemplate.sort);
+
+    // 构建新模板数据
+    const templateData = {
+      template_key: finalTemplateKey,
+      name_key: sourceTemplate.name_key,
+      code_prefix: sourceTemplate.code_prefix,
+      default_spec: data.default_spec,
+      life_unit: sourceTemplate.life_unit,
+      default_rated_life: data.default_rated_life,
+      stat_method: sourceTemplate.stat_method,
+      stat_tag: sourceTemplate.stat_tag,
+      icon: null,
+      sort: sourceTemplate.sort + 1,
+      enabled: 1
+    };
+
+    const templateId = await devicePartModel.createTemplate(templateData);
+    return this.getTemplateById(templateId);
+  }
+
+  /**
+   * 更新模板
+   */
+  async updateTemplate(id, data, operator = null) {
+    const template = await devicePartModel.getTemplateById(id);
+    if (!template) {
+      throw new BusinessError(ERROR_CODE.NOT_FOUND, null, { entity: '部件模板' });
+    }
+
+    // 检查是否是基础模板，如果是则不允许编辑
+    if (template.is_base_template === 1) {
+      throw new BusinessError(ERROR_CODE.PART_TEMPLATE_IS_BASE, null, {});
+    }
+
+    // 检查该模板下是否有部件实例，如果有则不允许编辑
+    const partCount = await devicePartModel.countPartsByTemplateId(id);
+    if (partCount > 0) {
+      throw new BusinessError(ERROR_CODE.PART_TEMPLATE_HAS_PARTS, null, { partCount: partCount });
+    }
+
+    // 如果修改了模板编码，验证是否已存在
+    if (data.template_key && data.template_key !== template.template_key) {
+      const existingTemplate = await devicePartModel.getTemplateByKey(data.template_key);
+      if (existingTemplate) {
+        throw new BusinessError(ERROR_CODE.PART_TEMPLATE_KEY_EXISTS, null, { templateKey: data.template_key });
+      }
+    }
+
+    await devicePartModel.updateTemplate(id, data);
+    return this.getTemplateById(id);
+  }
+
+  /**
+   * 删除模板（软删除）
+   */
+  async deleteTemplate(id, operator = null) {
+    const template = await devicePartModel.getTemplateById(id);
+    if (!template) {
+      throw new BusinessError(ERROR_CODE.NOT_FOUND, null, { entity: '部件模板' });
+    }
+
+    // 检查是否是基础模板，如果是则不允许删除
+    if (template.is_base_template === 1) {
+      throw new BusinessError(ERROR_CODE.PART_TEMPLATE_IS_BASE, null, {});
+    }
+
+    // 检查该模板下是否有部件实例
+    const partCount = await devicePartModel.countPartsByTemplateId(id);
+    if (partCount > 0) {
+      throw new BusinessError(ERROR_CODE.PART_TEMPLATE_HAS_PARTS, null, { partCount: partCount });
+    }
+
+    await devicePartModel.deleteTemplate(id);
+    return { success: true };
   }
 
   // ==================== 部件实例相关 ====================
@@ -73,17 +219,32 @@ class DevicePartService {
     }
     
     // 验证部件编码是否已存在
-    if (data.part_code) {
-      const existingPart = await devicePartModel.getPartByCode(data.part_code);
-      if (existingPart) {
-        throw new BusinessError(ERROR_CODE.ALREADY_EXISTS, null, { entity: '部件编码', value: data.part_code });
-      }
-    } else {
-      // 自动生成部件编码：前缀-序号
-      const allParts = await devicePartModel.getAllParts();
-      const sameTemplateParts = allParts.filter(p => p.template_key === template.template_key);
-      const nextSeq = String(sameTemplateParts.length + 1).padStart(3, '0');
-      data.part_code = `${template.code_prefix}-${nextSeq}`;
+    if (!data.part_code) {
+      throw new BusinessError(ERROR_CODE.PARAM_MISSING, null, { field: '部件编码' });
+    }
+    const existingPart = await devicePartModel.getPartByCode(data.part_code);
+    if (existingPart) {
+      throw new BusinessError(ERROR_CODE.PART_CODE_EXISTS, null, { partCode: data.part_code });
+    }
+    
+    // 校验规格型号：必须与模板的默认规格型号一致，不允许用户自定义
+    const userSpec = data.spec || data.spec_model || '';
+    const templateSpec = template.default_spec || '';
+    if (userSpec && userSpec !== templateSpec) {
+      throw new BusinessError(ERROR_CODE.PART_SPEC_NOT_MATCH, null, { 
+        userSpec: userSpec, 
+        templateSpec: templateSpec 
+      });
+    }
+    
+    // 校验额定寿命：必须与模板的默认额定寿命一致，不允许用户修改
+    const userRatedLife = data.rated_life ? Number(data.rated_life) : null;
+    const templateRatedLife = template.default_rated_life ? Number(template.default_rated_life) : null;
+    if (userRatedLife && templateRatedLife && userRatedLife !== templateRatedLife) {
+      throw new BusinessError(ERROR_CODE.PART_RATED_LIFE_NOT_MATCH, null, { 
+        userRatedLife: userRatedLife, 
+        templateRatedLife: templateRatedLife 
+      });
     }
     
     // 创建部件实例
@@ -91,8 +252,8 @@ class DevicePartService {
       template_id: template.id,
       template_key: template.template_key,
       part_code: data.part_code,
-      spec: data.spec || template.default_spec,
-      rated_life: data.rated_life || template.default_rated_life,
+      spec: templateSpec,  // 强制使用模板的默认规格型号
+      rated_life: templateRatedLife,  // 强制使用模板的默认额定寿命
       used_life: 0,
       life_unit: template.life_unit,
       install_date: data.install_date || dayjs().format('YYYY-MM-DD'),
@@ -156,11 +317,15 @@ class DevicePartService {
     }
     
     // 验证新部件编码
-    if (data.new_code && data.new_code !== part.part_code) {
-      const existingPart = await devicePartModel.getPartByCode(data.new_code);
-      if (existingPart) {
-        throw new BusinessError(ERROR_CODE.ALREADY_EXISTS, null, { entity: '部件编码', value: data.new_code });
-      }
+    if (!data.new_code) {
+      throw new BusinessError(ERROR_CODE.PARAM_MISSING, null, { field: '新部件编码' });
+    }
+    if (data.new_code === part.part_code) {
+      throw new BusinessError(ERROR_CODE.PART_CODE_SAME_AS_OLD, null, { partCode: data.new_code });
+    }
+    const existingPart = await devicePartModel.getPartByCode(data.new_code);
+    if (existingPart) {
+      throw new BusinessError(ERROR_CODE.PART_CODE_EXISTS, null, { partCode: data.new_code });
     }
     
     const oldCode = part.part_code;

@@ -7,6 +7,7 @@ const emailService = require('./email.service');
 const { createProvider, getSupportedProviders, getDefaultConfig } = require('./providers');
 const { maskEmail } = require('./utils/crypto.util');
 const { ERROR_CODE } = require('../../constants/errorCode');
+const audit = require('../../utils/audit');
 
 class EmailController {
   /**
@@ -122,6 +123,17 @@ class EmailController {
         create_by: req.user?.username || 'system'
       });
 
+      // 记录审计日志：邮箱配置修改
+      audit.log(req, {
+        action: audit.ACTION.EMAIL_CONFIG_CHANGE,
+        target: `新增邮箱配置:${name}, 服务商:${provider}`,
+        newValue: `主机:${host}, 端口:${port}, 用户名:${username}`,
+        result: 'success',
+        reason: '管理员新增邮箱配置'
+      }).catch(err => {
+        console.error('[邮箱配置-新增] 记录审计日志失败:', err)
+      });
+
       // 清除传输器缓存
       emailService.clearTransporterCache();
 
@@ -172,6 +184,18 @@ class EmailController {
 
       await emailModel.update(parseInt(id), updateData);
 
+      // 记录审计日志：邮箱配置修改
+      audit.log(req, {
+        action: audit.ACTION.EMAIL_CONFIG_CHANGE,
+        target: `修改邮箱配置ID:${id}`,
+        oldValue: JSON.stringify(existing),
+        newValue: JSON.stringify(updateData),
+        result: 'success',
+        reason: '管理员修改邮箱配置'
+      }).catch(err => {
+        console.error('[邮箱配置-修改] 记录审计日志失败:', err)
+      });
+
       // 清除传输器缓存
       emailService.clearTransporterCache();
 
@@ -207,6 +231,17 @@ class EmailController {
 
       await emailModel.delete(parseInt(id));
 
+      // 记录审计日志：邮箱配置删除
+      audit.log(req, {
+        action: audit.ACTION.EMAIL_LOG_DELETE,
+        target: `删除邮箱配置ID:${id}, 名称:${existing.name}`,
+        oldValue: JSON.stringify(existing),
+        result: 'success',
+        reason: '管理员删除邮箱配置'
+      }).catch(err => {
+        console.error('[邮箱配置-删除] 记录审计日志失败:', err)
+      });
+
       // 清除传输器缓存
       emailService.clearTransporterCache();
 
@@ -236,6 +271,16 @@ class EmailController {
       }
 
       await emailModel.setDefault(parseInt(id));
+
+      // 记录审计日志：邮箱配置设为默认
+      audit.log(req, {
+        action: audit.ACTION.EMAIL_CONFIG_CHANGE,
+        target: `设为默认邮箱配置ID:${id}, 名称:${existing.name}`,
+        result: 'success',
+        reason: '管理员设置默认邮箱配置'
+      }).catch(err => {
+        console.error('[邮箱配置-设默认] 记录审计日志失败:', err)
+      });
 
       // 清除传输器缓存
       emailService.clearTransporterCache();
@@ -271,6 +316,18 @@ class EmailController {
       }
 
       await emailModel.update(parseInt(id), { status });
+
+      // 记录审计日志：邮箱配置启用/禁用
+      audit.log(req, {
+        action: audit.ACTION.EMAIL_CONFIG_CHANGE,
+        target: `邮箱配置ID:${id}, 名称:${existing.name}`,
+        oldValue: `状态:${existing.status}`,
+        newValue: `状态:${status}`,
+        result: 'success',
+        reason: status === 1 ? '管理员启用邮箱配置' : '管理员禁用邮箱配置'
+      }).catch(err => {
+        console.error('[邮箱配置-状态] 记录审计日志失败:', err)
+      });
 
       // 清除传输器缓存
       emailService.clearTransporterCache();
@@ -411,3 +468,6 @@ class EmailController {
 }
 
 module.exports = new EmailController();
+
+
+

@@ -101,6 +101,7 @@ import { requestAddUserApi, requestUpdateUserApi } from "@/api";
 import { requestGetRoleAllApi } from "@/api";
 import { requestGetDeptTreeApi } from "@/api";
 import { withCache } from "@/utils/cache";
+import { getRoleName } from "@/utils/roleMapper";
 
 const emit = defineEmits(["success"]);
 
@@ -152,7 +153,7 @@ const dialogTitle = computed(() => {
 // 角色选项（从角色管理接口获取）
 const roleOptions = computed(() => {
   return roleList.value.map((item) => ({
-    label: item.role_name || item.role_code,
+    label: getRoleName(item) || item.role_code,
     value: item.role_code,
   }));
 });

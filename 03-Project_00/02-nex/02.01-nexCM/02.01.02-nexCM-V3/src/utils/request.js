@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ==========================================
  * Axios 请求统一封装
  * ==========================================
@@ -116,8 +116,11 @@ service.interceptors.request.use(
     addPending(requestConfig)
 
     // 全局 Loading 计数 +1（动态引入 store 避免循环依赖）
-    const store = require('@/store/index').default
-    store.dispatch('app/showLoading')
+    // 如果请求配置中设置了 hideLoading: true，则不显示全局 loading
+    if (!requestConfig.hideLoading) {
+      const store = require('@/store/index').default
+      store.dispatch('app/showLoading')
+    }
 
     // 统一注入当前语言参数（后端根据语言返回对应多语言字段）
     const i18n = require('@/i18n').default

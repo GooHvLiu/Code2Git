@@ -91,6 +91,7 @@ class PermissionService {
    * @returns {Promise<Array>} 权限列表（树形结构）
    */
   async getAllPermissions() {
+    // 返回完整权限树（节点带 superOnly 标记），是否展示/禁用由前端按当前配置的角色决定
     return await permissionModel.getAllPermissions()
   }
 
