@@ -83,8 +83,7 @@ function hmacSha256(key, message) {
 
 /**
  * 获取翻译配置
- * 优先级：环境变量 > 配置文件 > 默认配置
- * 环境变量：TENCENT_TRANSLATION_SECRET_ID / TENCENT_TRANSLATION_SECRET_KEY / TENCENT_TRANSLATION_REGION / TENCENT_TRANSLATION_PROJECT_ID
+ * 从配置文件 translation-config.json 读取
  */
 function getConfig() {
   let config = { ...DEFAULT_CONFIG }
@@ -95,20 +94,6 @@ function getConfig() {
     }
   } catch (e) {
     // 配置文件读取失败，使用默认配置
-  }
-
-  // 环境变量优先级最高，覆盖配置文件中的值
-  if (process.env.TENCENT_TRANSLATION_SECRET_ID) {
-    config.tencent.secretId = process.env.TENCENT_TRANSLATION_SECRET_ID
-  }
-  if (process.env.TENCENT_TRANSLATION_SECRET_KEY) {
-    config.tencent.secretKey = process.env.TENCENT_TRANSLATION_SECRET_KEY
-  }
-  if (process.env.TENCENT_TRANSLATION_REGION) {
-    config.tencent.region = process.env.TENCENT_TRANSLATION_REGION
-  }
-  if (process.env.TENCENT_TRANSLATION_PROJECT_ID) {
-    config.tencent.projectId = parseInt(process.env.TENCENT_TRANSLATION_PROJECT_ID, 10) || 0
   }
 
   return config
