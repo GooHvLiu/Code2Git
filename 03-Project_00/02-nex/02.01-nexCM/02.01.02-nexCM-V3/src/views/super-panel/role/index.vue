@@ -39,6 +39,7 @@
     <!-- ==================== 表格 ==================== -->
     <el-table
       v-loading="loading"
+      :element-loading-text="$t('common.loading')"
       :data="tableData"
       border
       stripe
@@ -142,11 +143,16 @@
       width="560px"
       :close-on-click-modal="false"
     >
-      <el-form :model="form" :rules="rules" ref="formRef" label-width="100px">
+      <el-form :model="form" :rules="rules" ref="formRef" label-width="140px">
         <el-form-item
-          :label="$t('menu.superPanel.role.page.roleName')"
           prop="role_name"
         >
+          <span slot="label">
+            {{ $t('menu.superPanel.role.page.roleName') }}
+            <el-tooltip :content="$t('menu.superPanel.role.page.tips.roleName')" placement="top">
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input
             v-model="form.role_name"
             :maxlength="50"
@@ -154,18 +160,35 @@
           />
         </el-form-item>
         <el-form-item
-          :label="$t('menu.superPanel.role.page.roleCode')"
           prop="role_code"
         >
+          <span slot="label">
+            {{ $t('menu.superPanel.role.page.roleCode') }}
+            <el-tooltip :content="$t('menu.superPanel.role.page.tips.roleCode')" placement="top">
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input v-model="form.role_code" :disabled="dialog.isEdit" />
         </el-form-item>
-        <el-form-item :label="$t('common.status')" prop="status">
+        <el-form-item prop="status">
+          <span slot="label">
+            {{ $t('common.status') }}
+            <el-tooltip :content="$t('menu.superPanel.role.page.tips.status')" placement="top">
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-radio-group v-model="form.status">
             <el-radio :label="1">{{ $t("common.enable") }}</el-radio>
             <el-radio :label="0">{{ $t("common.disable") }}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item :label="$t('common.description')" prop="description">
+        <el-form-item prop="description">
+          <span slot="label">
+            {{ $t('common.description') }}
+            <el-tooltip :content="$t('menu.superPanel.role.page.tips.description')" placement="top">
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input
             v-model="form.description"
             type="textarea"

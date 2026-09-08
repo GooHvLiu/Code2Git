@@ -534,6 +534,16 @@
             <EmailConfig />
           </div>
 
+          <!-- 语言配置 -->
+          <div v-if="activeMenu === 'language'" class="config-panel">
+            <LanguageConfig />
+          </div>
+
+          <!-- 翻译配置 -->
+          <div v-if="activeMenu === 'translation'" class="config-panel">
+            <TranslationConfig />
+          </div>
+
           <!-- 上传设置 -->
           <div v-if="activeMenu === 'upload'" class="config-panel">
             <h3 class="panel-title">
@@ -695,6 +705,8 @@ import { useI18n } from "@/composables/useI18n";
 import { getCoordsByValues } from "@/utils/worldCities";
 import { nextTick } from "vue";
 import EmailConfig from "./components/EmailConfig.vue";
+import LanguageConfig from "./components/LanguageConfig.vue";
+import TranslationConfig from "./components/TranslationConfig.vue";
 
 // 使用 useI18n 获取响应式的当前语言和 t 函数
 const { locale, t } = useI18n();
@@ -717,6 +729,16 @@ const menuList = computed(() => [
     title: t("menu.superPanel.config.childrenMenu.email.title"),
   },
   {
+    key: "language",
+    icon: "el-icon-chat-line-round",
+    title: t("menu.superPanel.config.childrenMenu.language.title"),
+  },
+  {
+    key: "translation",
+    icon: "el-icon-connection",
+    title: t("menu.superPanel.config.childrenMenu.translation.title"),
+  },
+  {
     key: "upload",
     icon: "el-icon-upload",
     title: t("menu.superPanel.config.childrenMenu.upload.title"),
@@ -732,9 +754,9 @@ const menuList = computed(() => [
 const loading = ref(false);
 
 /**
- * 超级面板参数配置：显示 PLC通讯、连接设置、邮箱配置、上传设置、审计配置 五个 tab
+ * 超级面板参数配置：显示 PLC通讯、连接设置、邮箱配置、语言配置、翻译配置、上传设置、审计配置 七个 tab
  */
-const SUPER_PANEL_TABS = ["plc", "connection", "email", "upload", "audit"];
+const SUPER_PANEL_TABS = ["plc", "connection", "email", "language", "translation", "upload", "audit"];
 
 // 当前激活的菜单（默认第一个 tab）
 const activeMenu = ref("plc");

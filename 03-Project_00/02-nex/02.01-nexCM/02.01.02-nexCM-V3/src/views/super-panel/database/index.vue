@@ -49,7 +49,7 @@
                 />
                 <el-tooltip
                   placement="top"
-                  :content="'配置文件: src/config/database.config.js'"
+                  :content="$t('menu.superPanel.database.configFileTip')"
                 >
                   <i class="el-icon-question config-help-icon"></i>
                 </el-tooltip>
@@ -57,35 +57,35 @@
             </div>
             <div class="table-list">
               <div
-                v-for="(tables, category) in tablesByCategory"
-                :key="category"
+                v-for="(group, categoryKey) in tablesByCategory"
+                :key="categoryKey"
                 class="table-category"
               >
-                <div class="category-title" @click="toggleCategory(category)">
+                <div class="category-title" @click="toggleCategory(categoryKey)">
                   <i
                     class="category-arrow"
                     :class="
-                      expandedCategories[category]
+                      expandedCategories[categoryKey]
                         ? 'el-icon-arrow-down'
                         : 'el-icon-arrow-right'
                     "
                   ></i>
                   <i
                     :class="
-                      expandedCategories[category]
+                      expandedCategories[categoryKey]
                         ? 'el-icon-folder-opened'
                         : 'el-icon-folder'
                     "
                   ></i>
-                  <span>{{ category }}</span>
-                  <span class="category-count">{{ tables.length }}</span>
+                  <span>{{ getCategoryName(categoryKey, group.name) }}</span>
+                  <span class="category-count">{{ group.tables.length }}</span>
                 </div>
                 <div
                   class="category-tables"
-                  v-show="expandedCategories[category]"
+                  v-show="expandedCategories[categoryKey]"
                 >
                   <div
-                    v-for="table in tables"
+                    v-for="table in group.tables"
                     :key="table.table_name"
                     class="table-card"
                     :class="{ active: selectedTable === table.table_name }"
@@ -93,16 +93,16 @@
                   >
                     <div class="card-header">
                       <i :class="table.table_icon" class="card-icon"></i>
-                      <span class="card-alias">{{ table.table_alias }}</span>
+                      <span class="card-alias">{{ getTableAlias(table) }}</span>
                     </div>
                     <div class="card-name">{{ table.table_name }}</div>
                     <div class="card-desc">
-                      {{ table.table_comment || "暂无描述" }}
+                      {{ getTableComment(table) }}
                     </div>
                     <div class="card-stats">
                       <span class="stat">
                         <i class="el-icon-s-data"></i>
-                        {{ table.table_rows || 0 }} 行
+                        {{ table.table_rows || 0 }} {{ $t("menu.superPanel.database.rows") }}
                       </span>
                       <span class="stat">
                         <i class="el-icon-files"></i>
@@ -140,12 +140,12 @@
                   ></i>
                   <div class="title-text">
                     <h3 class="title-alias">
-                      {{ currentTableInfo?.table_alias || selectedTable }}
+                      {{ getTableAlias(currentTableInfo) || selectedTable }}
                     </h3>
                     <span class="title-name">{{ selectedTable }}</span>
                   </div>
                   <el-tag size="mini" type="info" effect="plain">{{
-                    currentTableInfo?.table_category || "其他"
+                    getCategoryName(currentTableInfo?.table_category_key, currentTableInfo?.table_category || "其他")
                   }}</el-tag>
                   <el-button
                     size="mini"
@@ -177,20 +177,18 @@
               <div class="table-stats-bar">
                 <div class="stat-item">
                   <i class="el-icon-s-data"></i>
-                  <span class="stat-label">数据行数</span>
+                  <span class="stat-label">{{ $t("menu.superPanel.database.dataRows") }}</span>
                   <span class="stat-value">{{ dataTotal }}</span>
                 </div>
                 <div class="stat-item">
                   <i class="el-icon-files"></i>
-                  <span class="stat-label">字段数量</span>
+                  <span class="stat-label">{{ $t("menu.superPanel.database.fieldCount") }}</span>
                   <span class="stat-value">{{ tableColumns.length }}</span>
                 </div>
                 <div class="stat-item">
                   <i class="el-icon-document"></i>
-                  <span class="stat-label">表描述</span>
-                  <span class="stat-value">{{
-                    currentTableInfo?.table_comment || "暂无描述"
-                  }}</span>
+                  <span class="stat-label">{{ $t("menu.superPanel.database.tableDescription") }}</span>
+                  <span class="stat-value">{{ getTableComment(currentTableInfo) }}</span>
                 </div>
               </div>
 
@@ -201,6 +199,7 @@
                 stripe
                 size="mini"
                 v-loading="dataLoading"
+                :element-loading-text="$t('common.loading')"
                 max-height="500"
                 :header-cell-style="{
                   background: '#f5f7fa',
@@ -262,13 +261,13 @@
               >
                 <div class="card-header">
                   <i :class="table.table_icon" class="card-icon"></i>
-                  <span class="card-alias">{{ table.table_alias }}</span>
+                  <span class="card-alias">{{ getTableAlias(table) }}</span>
                 </div>
                 <div class="card-name">{{ table.table_name }}</div>
                 <div class="card-stats">
                   <span class="stat">
                     <i class="el-icon-s-data"></i>
-                    {{ table.table_rows || 0 }} 行
+                    {{ table.table_rows || 0 }} {{ $t("menu.superPanel.database.rows") }}
                   </span>
                 </div>
                 <div
@@ -302,7 +301,7 @@
                   ></i>
                   <div class="title-text">
                     <h3 class="title-alias">
-                      {{ currentEditTableInfo?.table_alias || editTableName }}
+                      {{ getTableAlias(currentEditTableInfo) || editTableName }}
                     </h3>
                     <span class="title-name">{{ editTableName }}</span>
                   </div>
@@ -332,6 +331,7 @@
                   stripe
                   size="mini"
                   v-loading="editLoading"
+                  :element-loading-text="$t('common.loading')"
                   max-height="450"
                   class="config-edit-table"
                   :header-cell-style="{
@@ -409,7 +409,7 @@
               </div>
               <div class="stat-info">
                 <div class="stat-value">{{ backupTotal }}</div>
-                <div class="stat-label">备份总数</div>
+                <div class="stat-label">{{ $t("menu.superPanel.database.backupTotal") }}</div>
               </div>
             </div>
             <div class="stat-card">
@@ -418,7 +418,7 @@
               </div>
               <div class="stat-info">
                 <div class="stat-value">{{ successBackupCount }}</div>
-                <div class="stat-label">成功备份</div>
+                <div class="stat-label">{{ $t("menu.superPanel.database.successBackup") }}</div>
               </div>
             </div>
             <div class="stat-card">
@@ -427,7 +427,7 @@
               </div>
               <div class="stat-info">
                 <div class="stat-value">{{ failedBackupCount }}</div>
-                <div class="stat-label">失败备份</div>
+                <div class="stat-label">{{ $t("menu.superPanel.database.failedBackup") }}</div>
               </div>
             </div>
             <div class="stat-card">
@@ -436,7 +436,7 @@
               </div>
               <div class="stat-info">
                 <div class="stat-value">{{ totalBackupSize }}</div>
-                <div class="stat-label">总大小</div>
+                <div class="stat-label">{{ $t("menu.superPanel.database.totalSize") }}</div>
               </div>
             </div>
           </div>
@@ -464,12 +464,13 @@
                 size="small"
                 @click="openPathDialog"
               >
-                修改路径
+                {{ $t("menu.superPanel.database.changePath") }}
               </el-button>
               <el-tooltip
                 :content="
-                  '当前存储路径：' +
-                  (backupConfig.storagePath || 'backups/database (默认)')
+                  $t('menu.superPanel.database.currentStoragePath') +
+                  (backupConfig.storagePath ||
+                    $t('menu.superPanel.database.defaultPath'))
                 "
                 placement="top"
                 effect="dark"
@@ -490,6 +491,7 @@
             stripe
             size="small"
             v-loading="backupLoading"
+            :element-loading-text="$t('common.loading')"
             :header-cell-style="{
               background: '#f5f7fa',
               color: '#606266',
@@ -713,11 +715,17 @@
       width="600px"
       :close-on-click-modal="false"
     >
-      <el-form :model="editForm" label-width="120px" size="small">
-        <el-form-item v-for="col in editFormColumns" :key="col" :label="col">
+      <el-form :model="editForm" label-width="160px" size="small">
+        <el-form-item v-for="col in editFormColumns" :key="col">
+          <span slot="label">
+            {{ col }}
+            <el-tooltip :content="$t('menu.superPanel.database.tips.fieldValue')" placement="top">
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input
             v-model="editForm[col]"
-            :placeholder="'请输入' + col"
+            :placeholder="$t('menu.superPanel.database.placeholder.enterField') + col"
             :disabled="isPrimaryKey(col) && editMode === 'edit'"
           />
         </el-form-item>
@@ -789,27 +797,50 @@
 
     <!-- 修改存储路径弹窗 -->
     <el-dialog
-      title="修改存储路径"
+      :title="$t('menu.superPanel.database.pathDialogTitle')"
       :visible.sync="pathDialogVisible"
       width="550px"
       :close-on-click-modal="false"
     >
-      <el-form :model="pathForm" label-width="100px" size="small">
-        <el-form-item label="当前路径">
+      <el-form :model="pathForm" label-width="120px" size="small">
+        <el-form-item>
+          <template slot="label">
+            <span class="label-with-tip">
+              {{ $t("menu.superPanel.database.currentPath") }}
+              <el-tooltip
+                :content="$t('menu.superPanel.database.currentPathTip')"
+                placement="top"
+              >
+                <i class="el-icon-question label-tip-icon"></i>
+              </el-tooltip>
+            </span>
+          </template>
           <span style="color: #909399">{{
-            backupConfig.storagePath || "backups/database (默认)"
+            backupConfig.storagePath ||
+            $t("menu.superPanel.database.defaultPath")
           }}</span>
         </el-form-item>
-        <el-form-item label="新路径">
+        <el-form-item>
+          <template slot="label">
+            <span class="label-with-tip">
+              {{ $t("menu.superPanel.database.newPath") }}
+              <el-tooltip
+                :content="$t('menu.superPanel.database.newPathTip')"
+                placement="top"
+              >
+                <i class="el-icon-question label-tip-icon"></i>
+              </el-tooltip>
+            </span>
+          </template>
           <el-input
             v-model="pathForm.newPath"
-            placeholder="请输入存储路径，如：D:/backups/database"
+            :placeholder="$t('menu.superPanel.database.newPathPlaceholder')"
           >
             <el-button
               slot="append"
               icon="el-icon-folder-opened"
               @click="triggerFolderSelect"
-              >浏览</el-button
+              >{{ $t("menu.superPanel.database.browse") }}</el-button
             >
           </el-input>
           <input
@@ -821,7 +852,13 @@
             @change="handleFolderSelect"
           />
         </el-form-item>
-        <el-form-item label="快捷路径">
+        <el-form-item>
+          <span slot="label">
+            {{ $t('menu.superPanel.database.quickPath') }}
+            <el-tooltip :content="$t('menu.superPanel.database.tips.quickPath')" placement="top">
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <div class="quick-paths">
             <el-tag
               v-for="path in quickPaths"
@@ -835,7 +872,7 @@
         </el-form-item>
         <el-form-item>
           <el-alert
-            title="修改存储路径后，历史备份文件仍保留在原路径，新备份将保存到新路径。由于浏览器安全限制，浏览按钮只能获取文件夹名称，完整路径请手动输入。"
+            :title="$t('menu.superPanel.database.pathWarning')"
             type="warning"
             :closable="false"
             show-icon
@@ -843,12 +880,12 @@
         </el-form-item>
       </el-form>
       <div slot="footer">
-        <el-button size="small" @click="pathDialogVisible = false"
-          >取消</el-button
-        >
-        <el-button size="small" type="primary" @click="confirmChangePath"
-          >确定</el-button
-        >
+        <el-button size="small" @click="pathDialogVisible = false">{{
+          $t("common.cancel")
+        }}</el-button>
+        <el-button size="small" type="primary" @click="confirmChangePath">{{
+          $t("common.confirm")
+        }}</el-button>
       </div>
     </el-dialog>
   </div>
@@ -867,9 +904,7 @@ import {
   requestDeleteBackupApi,
   requestRestoreBackupApi,
 } from "@/api";
-import {
-  getTableAliasMap,
-} from "@/config/database.config";
+import { getTableAliasMap } from "@/config/database.config";
 
 // 表别名映射（从配置文件中提取）
 const tableAliasMap = getTableAliasMap();
@@ -949,13 +984,21 @@ export default {
       return this.allTables.map((table) => {
         const aliasInfo = tableAliasMap[table.table_name] || {
           alias: table.table_name,
+          alias_en: table.table_name,
+          comment: table.table_comment || "",
+          comment_en: table.table_comment || "",
           category: "其他",
+          categoryKey: "other",
           icon: "el-icon-database",
         };
         return {
           ...table,
           table_alias: aliasInfo.alias,
+          table_alias_en: aliasInfo.alias_en,
+          table_comment_config: aliasInfo.comment,
+          table_comment_en_config: aliasInfo.comment_en,
           table_category: aliasInfo.category,
+          table_category_key: aliasInfo.categoryKey,
           table_icon: aliasInfo.icon,
         };
       });
@@ -983,10 +1026,14 @@ export default {
     tablesByCategory() {
       const groups = {};
       this.filteredTables.forEach((table) => {
-        if (!groups[table.table_category]) {
-          groups[table.table_category] = [];
+        const key = table.table_category_key || "other";
+        if (!groups[key]) {
+          groups[key] = {
+            name: table.table_category,
+            tables: [],
+          };
         }
-        groups[table.table_category].push(table);
+        groups[key].tables.push(table);
       });
       return groups;
     },
@@ -1002,13 +1049,21 @@ export default {
       return this.configTables.map((table) => {
         const aliasInfo = tableAliasMap[table.table_name] || {
           alias: table.table_name,
+          alias_en: table.table_name,
+          comment: table.table_comment || "",
+          comment_en: table.table_comment || "",
           category: "配置管理",
+          categoryKey: "config",
           icon: "el-icon-setting",
         };
         return {
           ...table,
           table_alias: aliasInfo.alias,
+          table_alias_en: aliasInfo.alias_en,
+          table_comment_config: aliasInfo.comment,
+          table_comment_en_config: aliasInfo.comment_en,
           table_category: aliasInfo.category,
+          table_category_key: aliasInfo.categoryKey,
           table_icon: aliasInfo.icon,
         };
       });
@@ -1119,6 +1174,36 @@ export default {
         category,
         !this.expandedCategories[category]
       );
+    },
+
+    // 获取分类名称（支持国际化）
+    getCategoryName(categoryKey, defaultName) {
+      const i18nKey = `menu.superPanel.database.categories.${categoryKey}`;
+      const translated = this.$t(i18nKey);
+      if (translated && translated !== i18nKey) {
+        return translated;
+      }
+      return defaultName;
+    },
+
+    // 获取表别名（支持国际化）
+    getTableAlias(table) {
+      if (!table) return "";
+      const lang = this.$i18n.locale;
+      if (lang === "en-US" && table.table_alias_en) {
+        return table.table_alias_en;
+      }
+      return table.table_alias;
+    },
+
+    // 获取表描述（支持国际化，优先使用配置文件中的描述）
+    getTableComment(table) {
+      if (!table) return "";
+      const lang = this.$i18n.locale;
+      if (lang === "en-US") {
+        return table.table_comment_en_config || table.table_comment || this.$t("menu.superPanel.database.noDescription");
+      }
+      return table.table_comment_config || table.table_comment || this.$t("menu.superPanel.database.noDescription");
     },
 
     // 全部展开
@@ -1236,7 +1321,12 @@ export default {
 
     openAddDialog() {
       this.editMode = "add";
-      this.editForm = {};
+      // 预先初始化所有列的属性，避免动态添加响应式属性
+      const initForm = {};
+      this.editColumns.forEach((col) => {
+        initForm[col] = "";
+      });
+      this.editForm = initForm;
       this.editFormColumns = this.editColumns;
       this.editDialogVisible = true;
     },
@@ -1244,7 +1334,14 @@ export default {
     openEditDialog(row) {
       this.editMode = "edit";
       this.editOriginalRow = { ...row };
-      this.editForm = { ...row };
+      // 确保所有列的属性都存在，避免动态添加响应式属性
+      const initForm = { ...row };
+      this.editColumns.forEach((col) => {
+        if (initForm[col] === undefined) {
+          initForm[col] = "";
+        }
+      });
+      this.editForm = initForm;
       this.editFormColumns = this.editColumns;
       this.editDialogVisible = true;
     },
@@ -2416,5 +2513,23 @@ export default {
 
 .restore-action {
   text-align: center;
+}
+
+/* ========== 带问号提示的 label ========== */
+.label-with-tip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.label-tip-icon {
+  color: #c0c4cc;
+  cursor: help;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.label-tip-icon:hover {
+  color: #409eff;
 }
 </style>

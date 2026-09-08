@@ -163,8 +163,17 @@
                 "
               >
                 <el-select v-model="form.defaultLanguage" style="width: 200px">
-                  <el-option label="简体中文" value="zh-CN" />
-                  <el-option label="English" value="en-US" />
+                  <el-option
+                    v-for="lang in languageOptions"
+                    :key="lang.value"
+                    :label="lang.autonym || lang.label"
+                    :value="lang.value"
+                  >
+                    <span style="display: flex; align-items: center;">
+                      <svg-icon :icon-class="lang.flag || 'flags/global'" style="width: 20px; height: 20px; margin-right: 8px;" />
+                      <span>{{ lang.autonym || lang.label }}</span>
+                    </span>
+                  </el-option>
                 </el-select>
               </el-form-item>
 
@@ -1991,6 +2000,7 @@ import { useLicense } from "@/composables/useLicense";
 import { useI18n } from "@/composables/useI18n";
 import { getCascaderOptions, getCoordsByValues } from "@/utils/worldCities";
 import { nextTick } from "vue";
+import { dynamicLanguages, loadLanguageList } from "@/i18n";
 import EmailConfig from "./components/EmailConfig.vue";
 import EmailLog from "./components/EmailLog.vue";
 
@@ -1999,6 +2009,9 @@ const { locale, t } = useI18n();
 
 // 全球城市级联选择器数据（根据当前语言，响应式更新）
 const regionOptions = computed(() => getCascaderOptions(locale.value));
+
+// 语言选项列表（动态加载，包含后端管理的语言）
+const languageOptions = ref([...dynamicLanguages]);
 
 // 菜单列表（响应式，根据语言自动更新）
 const menuList = computed(() => [
@@ -2492,13 +2505,21 @@ function handleReset() {
     });
 }
 
-onMounted(() => {
+onMounted(async () => {
   // 普通模式：确保当前激活的菜单有权限访问（非管理员时，默认跳转到系统设置）
   if (!isSuperPanelMode.value) {
     const adminOnlyKeys = ["security", "export", "order"];
     if (!isAdmin.value && adminOnlyKeys.includes(activeMenu.value)) {
       activeMenu.value = "system";
     }
+  }
+
+  // 加载动态语言列表
+  try {
+    const langList = await loadLanguageList();
+    languageOptions.value = [...langList];
+  } catch (err) {
+    console.error("[SystemConfig] 加载语言列表失败:", err);
   }
 
   // 加载配置和授权数据（所有配置数据来自后端，不使用前端默认值）

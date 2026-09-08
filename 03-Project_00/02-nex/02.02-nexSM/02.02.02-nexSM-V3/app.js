@@ -38,9 +38,9 @@ const configService = require('./src/modules/config/config.service');
 // 跨域
 app.use(cors());
 
-// 解析JSON请求体
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// 解析JSON请求体（增大限制，支持大文件保存，如语言文件、配置文件等）
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // 统一响应格式 res.success和res.error
 app.use(responseMiddleware);

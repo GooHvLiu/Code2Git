@@ -120,6 +120,9 @@
 - <span style="color:orange;font-size:14px">_✅️强化审计追踪，整体架构定稿_；</span>
 - <span style="color:orange;font-size:14px">_✅️部件寿命增加模板管理功能_；</span>
 - <span style="color:orange;font-size:14px">_✅️角色增加超级管理员，可对项目做基本设置_；</span>
-- <span style="color:orange;font-size:14px">_完善ReadMe.md文件_；</span>
-- <span style="color:orange;font-size:14px">_电子签名_；</span>
-- <span style="color:orange;font-size:14px">_测试各功能模板BUG_；</span>
+
+##### nexCM-V3_09
+
+- <span style="color:orange;font-size:14px">_完善超级管理员的全部功能_；</span>
+- <span style="color:orange;font-size:14px">_完善文件命名和文件存放，文件夹命名规范_；</span>
+- <span style="color:orange;font-size:14px">_完善国际化配置命名规范和删除多余字段_；</span>

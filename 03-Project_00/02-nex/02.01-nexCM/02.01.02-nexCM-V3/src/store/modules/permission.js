@@ -43,7 +43,8 @@ function getCachedMenu(lang) {
 
 /** 提交菜单和路由 */
 function commitMenuAndRoutes(commit, rootState, rawArr, version) {
-  commit('SET_MENU', formatMenu(rawArr))
+  const formattedMenu = formatMenu(rawArr)
+  commit('SET_MENU', formattedMenu)
   commit('SET_MENU_VERSION', version)
   let routes = buildDynamicRoutes(rawArr)
   // 前端角色过滤（双重校验，后端已过滤，此处作为兜底）

@@ -83,7 +83,7 @@
       </div>
 
       <!-- 右侧功能列表 -->
-      <div class="feature-detail" v-loading="loading">
+      <div class="feature-detail" v-loading="loading" :element-loading-text="$t('common.loading')">
         <!-- 详情头部 -->
         <div class="detail-header">
           <div class="detail-title">
@@ -170,10 +170,13 @@
             </div>
           </div>
 
-          <el-empty
+          <div
             v-if="currentFeatures.length === 0"
-            :description="$t('menu.superPanel.feature.page.noData')"
-          />
+            class="empty-state"
+          >
+            <i class="el-icon-document"></i>
+            <p>{{ $t('menu.superPanel.feature.page.noData') }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -673,5 +676,25 @@ onMounted(() => {
       }
     }
   }
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+  color: #909399;
+  gap: 12px;
+}
+
+.empty-state i {
+  font-size: 48px;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 14px;
 }
 </style>

@@ -413,6 +413,20 @@ export const CONFIG_META = {
     filePath: 'src/modules/db-manager/db-manager.model.js',
     descriptionKey: 'menu.superPanel.projectConfig.items.storage.backup.dir.description'
   },
+  'storage.backup.i18nDir': {
+    labelKey: 'menu.superPanel.projectConfig.items.storage.backup.i18nDir.label',
+    editType: EDIT_TYPE.CONFIG_FILE,
+    effectType: EFFECT_TYPE.RESTART,
+    filePath: 'src/modules/i18n-manager/i18n-manager.service.js',
+    descriptionKey: 'menu.superPanel.projectConfig.items.storage.backup.i18nDir.description'
+  },
+  'storage.backup.configDir': {
+    labelKey: 'menu.superPanel.projectConfig.items.storage.backup.configDir.label',
+    editType: EDIT_TYPE.CONFIG_FILE,
+    effectType: EFFECT_TYPE.RESTART,
+    filePath: 'src/modules/file-manager/file-manager.service.js',
+    descriptionKey: 'menu.superPanel.projectConfig.items.storage.backup.configDir.description'
+  },
   'storage.logs.dir': {
     labelKey: 'menu.superPanel.projectConfig.items.storage.logs.dir.label',
     editType: EDIT_TYPE.CONFIG_FILE,

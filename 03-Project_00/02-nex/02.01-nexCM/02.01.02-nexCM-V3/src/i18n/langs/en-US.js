@@ -37,6 +37,21 @@ export default {
       notification_priority: 'Notification Priority', // [未使用]
     },
     items: {
+      user_sex: {
+        '0': 'Male',
+        '1': 'Female',
+        '2': 'Unknown'
+      },
+      user_status: {
+        '0': 'Disabled',
+        '1': 'Active'
+      },
+      user_role: {
+        'super_admin': 'Super Admin',
+        'administrator': 'Administrator',
+        'engineer': 'Engineer',
+        'operator': 'Operator'
+      },
       environment: {
         nodeEnv: { label: 'Environment', description: 'Node.js运行环境，development为开发模式，production为生产模式' },
         appPort: { label: 'Service Port', description: '后端服务监听的端口号' },
@@ -353,6 +368,11 @@ export default {
             enabled: 'Status', // [未使用]
             sort: 'Sort'
           },
+          tips: {
+            templateName: 'Select a base part template, default spec and rated life will be auto-filled',
+            defaultSpec: 'Default specification model for this template, auto-filled when adding new part',
+            defaultRatedLife: 'Default rated life (count) for this template, auto-filled when adding new part'
+          },
           statMethod: {
             successCount: 'Success Count',
             rotationCount: 'Rotation Count',
@@ -377,6 +397,12 @@ export default {
           replaceBtn: 'Replace', // [未使用]
           refreshBtn: 'Refresh', // [未使用]
           searchPlaceholder: 'Search part name/code',
+          template: {
+            fillNeedle: 'Filling Needle Assembly',
+            fillTube: 'Filling Tube Assembly',
+            stopperRod: 'Stopper Rod Component',
+            vacuumUnit: 'Vacuum Unit'
+          },
           form: {
             template: 'Part Template',
             partName: 'Part Name',
@@ -397,12 +423,6 @@ export default {
             warning: 'Warning',
             critical: 'Critical',
             expired: 'Expired'
-          },
-          template: {
-            fill_needle: 'Fill Needle Assembly', // [未使用]
-            fill_tube: 'Fill Tube Assembly', // [未使用]
-            stopper_rod: 'Stopper Rod Part', // [未使用]
-            vacuum_unit: 'Vacuum Unit' // [未使用]
           },
           unit: {
             times: 'times'
@@ -443,6 +463,15 @@ export default {
             newCode: 'Please enter new material code',
             replaceReason: 'Please select replacement reason',
             ratedLife: 'Please enter rated life'
+          },
+          tips: {
+            template: 'Selecting a part template will auto-fill part name, spec model and rated life',
+            partName: 'Part name is auto-filled from template, cannot be modified manually',
+            partCode: 'Unique material code for inventory management and traceability',
+            specModel: 'Specification model is auto-filled from template, cannot be modified manually',
+            ratedLife: 'Rated life is auto-filled from template, indicates design usage count',
+            installDate: 'Actual date when part was installed on device, used to calculate usage',
+            remark: 'Optional, for recording additional information'
           },
           replaceReason: {
             life: 'Reached service life',
@@ -585,6 +614,15 @@ export default {
           batchNoPlaceholder: 'Enter batch number',
           startTimePlaceholder: 'Select start time',
           estimatedEndPlaceholder: 'Select estimated end time',
+          tips: {
+            orderNo: 'Unique order number for identifying and tracing production orders',
+            productName: 'Product name for this production',
+            recipeName: 'Select production recipe, recipe determines production process parameters',
+            batchNo: 'Production batch number for quality traceability',
+            targetQty: 'Target quantity for this production',
+            startTime: 'Planned start production time',
+            estimatedEnd: 'Estimated production completion time'
+          },
           addSuccess: 'Order added successfully', // [未使用]
           editSuccess: 'Order updated successfully', // [未使用]
           deleteSuccess: 'Order deleted successfully', // [未使用]
@@ -1069,7 +1107,19 @@ export default {
           deleteItemConfirm: 'Are you sure to delete this dict item?',
           deleteTypeConfirm: 'Are you sure to delete this dict type?',
           editItem: 'Edit Dict Item',
-          editType: 'Edit Dict Type'
+          editType: 'Edit Dict Type',
+          tips: {
+            typeName: 'Display name of dictionary type, shown on the page',
+            typeCode: 'Unique code of dictionary type, used in code, cannot be modified after creation',
+            description: 'Detailed description of dictionary type, explaining its purpose',
+            status: 'Enable status of dictionary type, all items under it will be unavailable when disabled',
+            sort: 'Display order of dictionary type, smaller value comes first',
+            itemLabel: 'Display label of dictionary item, shown on the page',
+            itemValue: 'Actual value of dictionary item, used for storage and comparison in code',
+            itemStatus: 'Enable status of dictionary item, will be unavailable when disabled',
+            itemSort: 'Display order of dictionary item, smaller value comes first',
+            itemRemark: 'Remark information of dictionary item, optional'
+          }
         }
       },
       dept: {
@@ -1085,12 +1135,21 @@ export default {
           leader: 'Leader',
           phone: 'Phone',
           email: 'Email',
-          addChild: 'Add Child Department',
+          addChild: 'AddChildDept',
           parentDept: 'Parent Department',
           parentDeptPlaceholder: 'Select parent department',
           addDept: 'Add Department',
           deleteConfirm: 'Are you sure to delete this department?',
-          editDept: 'Edit Department'
+          editDept: 'Edit Department',
+          tips: {
+            parentDept: 'Select parent department for this department, leave empty for top-level',
+            deptName: 'Display name of department, shown on the page',
+            orderNum: 'Display order of department, smaller value comes first',
+            leader: 'Name of department leader',
+            phone: 'Contact phone number of department',
+            email: 'Contact email of department',
+            status: 'Enable status of department, will be unavailable when disabled'
+          }
         }
       },
       role: {
@@ -1106,7 +1165,13 @@ export default {
           editRole: 'Edit Role',
           deleteConfirm: 'Are you sure to delete this role?',
           basicRoleCannotEdit: 'System built-in roles cannot be edited',
-          basicRoleCannotDelete: 'System built-in roles cannot be deleted'
+          basicRoleCannotDelete: 'System built-in roles cannot be deleted',
+          tips: {
+            roleName: 'Display name of role, shown on the page',
+            roleCode: 'Unique code of role, used in code, cannot be modified after creation',
+            status: 'Enable status of role, will be unavailable when disabled',
+            description: 'Detailed description of role, explaining its permissions and purpose'
+          }
         }
       },
       config: {
@@ -1235,6 +1300,51 @@ export default {
             retryDelay: 'Retry Delay', // [未使用]
             retryDelayTip: 'Wait time before retrying after email sending fails (milliseconds)' // [未使用]
           },
+          language: {
+            title: 'SuppLangConf',
+            desc: 'Manage system preset language list, configure which languages the system supports. Restart backend service to take effect after modification.',
+            tipTitle: 'Notes',
+            tipContent: 'After modifying the preset language configuration, you need to restart the backend service to take effect. Please ensure the configuration file format is correct, otherwise it may cause system exceptions.',
+            tipExtra: 'Tip: Flag icons are stored in the frontend src/assets/icons/svg/flags/ directory. When adding a new language, please also add the corresponding flag SVG file.',
+            loadFailed: 'Failed to load language configuration',
+            saveSuccess: 'Saved successfully',
+            saveFailed: 'Failed to save',
+            emptyWarning: 'Configuration content cannot be empty',
+            resetInfo: 'Reset to original content',
+            currentSupportedLangs: 'Currently Supported Languages',
+            viewLanguages: 'View Languages',
+            totalLangs: 'Total {count} languages',
+            totalLangsUnit: 'languages'
+          },
+          translation: {
+            title: 'TransConfig',
+            enabled: 'Enabled',
+            disabled: 'Disabled',
+            basicSettings: 'Basic Settings',
+            enableTranslation: 'Enable',
+            enableTranslationTip: 'When enabled, you can use the auto-translation feature in the i18n management page to quickly translate Chinese content into other languages',
+            provider: 'Provider',
+            providerTip: 'Select which translation service provider to use, currently supports Tencent Cloud Translation',
+            masterLanguage: 'Master Language',
+            masterLanguageTip: 'The source language for batch translation. All translations are based on this language. Default is Chinese, can be changed to other existing language packs as needed.',
+            tencentSettings: 'Tencent Cloud Translation Settings',
+            secretId: 'SecretId',
+            secretIdTip: 'Tencent Cloud API key ID, obtained from Tencent Cloud Console - Access Management - API Key Management',
+            secretIdPlaceholder: 'Please enter Tencent Cloud SecretId',
+            secretKey: 'SecretKey',
+            secretKeyTip: 'Tencent Cloud API key, used in pairs with SecretId, please keep it confidential',
+            secretKeyPlaceholder: 'Please enter Tencent Cloud SecretKey',
+            region: 'Region',
+            regionTip: 'Tencent Cloud service region, it is recommended to choose the region closest to the server to reduce latency',
+            projectId: 'Project ID',
+            projectIdTip: 'Tencent Cloud Translation Project ID, default 0 means use default project',
+            testConfig: 'Test Config',
+            testSuccess: 'Config valid, translation test successful',
+            testFailed: 'Test failed',
+            existingLangs: 'Existing Languages',
+            tipTitle: 'Usage Instructions',
+            tipContent: 'After configuration, you can use the auto-translation feature in the i18n management page to quickly translate Chinese content into other languages. The translation service needs to be activated in the Tencent Cloud console and obtain API keys.'
+          },
           upload: {
             title: 'UploadConf',
             maxFileSize: 'Max File Size',
@@ -1278,7 +1388,7 @@ export default {
       feature: {
         default: 'Feat Conf', // [未使用]
         page: {
-          title: 'Feature Configuration',
+          title: 'Project Feature Configuration',
           pageDesc: 'Manage feature switches for all system modules, accessible only by super admin',
           categoryList: 'Categories', // [未使用]
           resetAll: 'Reset All',
@@ -1444,7 +1554,7 @@ export default {
       },
       database: {
         default: 'DataMgmt', // [未使用]
-        title: 'Database Management',
+        title: 'Project Database Management',
         desc: 'Database management tool, supports data viewing, table editing, backup and restore, only accessible to super admin',
         tabs: {
           dataView: 'Data View',
@@ -1453,7 +1563,31 @@ export default {
           restore: 'Restore Guide'
         },
         searchTable: 'Search Table',
+        configFileTip: 'Config file: src/config/database.config.js',
+        categories: {
+          system: 'System Management',
+          user: 'User Management',
+          security: 'Security & Compliance',
+          log: 'Log Management',
+          config: 'Config Management',
+          notification: 'Notification',
+          device: 'Device Management',
+          license: 'License Management',
+          other: 'Other'
+        },
         noTable: 'No tables found',
+        noDescription: 'No description',
+        rows: 'rows',
+        dataRows: 'Data Rows',
+        fieldCount: 'Field Count',
+        tableDescription: 'Table Description',
+        tips: {
+          fieldValue: 'Value of this field, please enter according to actual situation',
+          quickPath: 'Common backup storage paths, click to quickly fill into the new path input box'
+        },
+        placeholder: {
+          enterField: 'Please enter '
+        },
         selectTableTip: 'Please select a table from the left',
         refresh: 'Refresh',
         searchData: 'Search Data',
@@ -1477,6 +1611,22 @@ export default {
         deleteSuccess: 'Delete success',
         deleteFailed: 'Delete failed',
         createBackup: 'Create Backup',
+        changePath: 'Change Path',
+        currentStoragePath: 'Current Storage Path: ',
+        defaultPath: 'backups/database (default)',
+        pathDialogTitle: 'Change Storage Path',
+        currentPath: 'Current Path',
+        currentPathTip: 'The current storage directory for database backup files. All backup files will be saved in this directory.',
+        newPath: 'New Path',
+        newPathTip: 'Modify the storage directory for database backup files. After modification, new backups will be saved in the new directory, existing backups will not be moved.',
+        newPathPlaceholder: 'Please enter storage path, e.g. D:/backups/database',
+        browse: 'Browse',
+        quickPath: 'Quick Path',
+        pathWarning: 'After modifying the storage path, historical backup files will remain in the original path, and new backups will be saved to the new path. Due to browser security restrictions, the browse button can only get the folder name, please enter the full path manually.',
+        backupTotal: 'Total Backups',
+        successBackup: 'Successful',
+        failedBackup: 'Failed',
+        totalSize: 'Total Size',
         backupTip: 'Backup files will be saved in the server backups/database directory. Current table will be automatically backed up before editing table data.',
         backupName: 'Backup Name',
         backupType: 'Backup Type',
@@ -1531,7 +1681,138 @@ export default {
           database: 'DbConf', // [未使用]
           license: 'License', // [未使用]
           email: 'E-mail', // [未使用]
-          plc: 'PlcConf' // [未使用]
+          translation: 'TlStatus',
+          plc: 'PlcConf', // [未使用]
+          i18n: 'SuppLang'
+        },
+        translation: {
+          goToConfig: 'Go to Config',
+          tipTitle: 'Configuration Instructions',
+          tipContent: 'Translation configuration is used to manage the system\'s auto-translation feature. After configuration, you can use the auto-translation feature in the i18n management page to quickly translate Chinese content into other languages. The translation service needs to be activated in the Tencent Cloud console and obtain API keys.'
+        },
+        i18n: {
+          title: 'I18n Manager',
+          desc: 'Manage system multi-language config, support online search, edit, add i18n content. Only super admin can access.',
+          addConfig: 'Config',
+          backup: 'Backup',
+          backupPath: 'Backup Path',
+          searchPlaceholder: 'Search key or value...',
+          searchResult: 'Search Result',
+          noData: 'No Data',
+          selectLanguageTitle: 'Please Select Language',
+          selectLanguageDesc: 'Click the tab above or the language card below to select the language you want to edit. Load on demand.',
+          addChild: 'Add Child',
+          addSibling: 'Add Sibling',
+          deleteNode: 'Delete Node',
+          parentPath: 'Parent Path',
+          parentPathTip: 'Select the parent path for the new config item, e.g. common or menu.system',
+          parentPathPlaceholder: 'Please select parent path',
+          keyName: 'Key Name',
+          keyNameTip: 'The key name of the new config item, e.g. save, cancel, etc.',
+          keyNamePlaceholder: 'e.g. confirmSave',
+          valuePlaceholderWithLang: 'Please enter the value for {lang}',
+          autoTranslate: 'Auto Translate',
+          unsavedChanges: 'There are unsaved changes. Switching language will lose changes. Continue?',
+          noChanges: 'No changes to save',
+          saveSuccess: 'Saved successfully. Please rebuild or refresh the page.',
+          saveFailed: 'Save failed',
+          backupSuccess: 'Backup successful',
+          backupFailed: 'Backup failed',
+          loadFileListFailed: 'Failed to load file list',
+          loadFileFailed: 'Failed to load file',
+          cannotAddChildToLeaf: 'Cannot add child to leaf node',
+          confirmDelete: 'Are you sure you want to delete this config item?',
+          deleteSuccess: 'Deleted successfully',
+          deleteFailed: 'Delete failed',
+          keyNotEmpty: 'Key name cannot be empty',
+          keyInvalid: 'Invalid key name format. Only letters, numbers, underscore and dollar sign are allowed, and cannot start with a number.',
+          addSuccess: 'Added successfully. Please rebuild or refresh the page.',
+          addFailed: 'Add failed',
+          translateSourceEmpty: 'Please enter Chinese content first',
+          translateZhNotFound: 'The corresponding key was not found in the Chinese language pack. Please add this configuration in the Chinese language pack first.',
+          translateStart: 'Start batch translation',
+          translateNoContent: 'No content to translate',
+          translateBatchSuccess: 'Batch translation completed: {lang}, {success} success, {fail} failed',
+          translateSaveFailed: 'Failed to save translation results',
+          translateTip: 'Auto translation is for reference only. Please verify the translation manually.',
+          translateProgress: 'Translation Progress',
+          translating: 'Translating...',
+          totalCount: 'Total',
+          currentCount: 'Completed',
+          successCount: 'Success',
+          failCount: 'Failed',
+          currentTranslating: 'Currently Translating',
+          translateProgressTip: 'Translation will continue in the background after closing the dialog. Click the translation status icon to view progress again.',
+          cancelTranslate: 'Cancel Translation',
+          cancelTranslateConfirm: 'Are you sure you want to cancel the translation? Translated content will be saved.',
+          translateCancelled: 'Translation cancelled: {lang}, {completed} completed, {fail} failed',
+          minimize: 'Minimize',
+          closeTranslate: 'Close (translation continues in background)',
+          restore: 'Restore',
+          batchTranslate: 'Batch Translate',
+          batchTranslateTip: 'Please select translation mode. You can close the dialog and translation will continue in the background.',
+          translateMissingOnly: 'Translate Missing Only',
+          translateMissingOnlyDesc: 'Only translate empty fields, do not overwrite existing translations (Recommended)',
+          translateAll: 'Translate All',
+          translateAllDesc: 'Overwrite all existing translations (Dangerous, please use with caution)',
+          nodeTranslate: 'Node Translate',
+          nodeTranslateTip: 'Only the content under this node will be translated. You can close the dialog to continue translating in the background',
+          nodeTranslateLeafTip: 'Leaf nodes cannot be node-translated, please select a parent node',
+          nodeTranslateNoContent: 'There is no translatable content under this node',
+          translateInProgressTip: 'Translation is in progress, please wait for it to complete before operating',
+          translateSuccess: 'Translation successful',
+          translateFailed: 'Translation failed, please check translation config',
+          translateOnlyLeaf: 'Only leaf nodes can be translated',
+          translateNotZh: 'Chinese language does not need translation',
+          formatNormal: 'Normal (lowercase, with spaces)',
+          formatTitle: 'Title Case (capitalize first letter, with spaces)',
+          formatCamel: 'Camel Case (first word lowercase, subsequent capitalized, no spaces)',
+          autoTranslateAll: 'Auto Translate',
+          autoTranslateAllTip: 'When enabled, Chinese content will be automatically translated to the new language when creating the language file (values use Title Case format), which may consume more translation quota',
+          autoTranslateTip: 'Get the content of the corresponding key from the Chinese language pack and translate it to the current language. If the key is not found in the Chinese language pack, an error will be displayed.',
+          currentPath: 'Current Path',
+          currentPathTip: 'The current storage directory for i18n file backups. All backup files will be saved in this directory.',
+          newPath: 'New Path',
+          newPathTip: 'Modify the storage directory for backup files. After modification, new backups will be saved in the new directory, existing backups will not be moved.',
+          pathNotEmpty: 'Path cannot be empty',
+          setPathSuccess: 'Backup path set successfully',
+          setPathFailed: 'Failed to set backup path',
+          backupList: 'Backup List',
+          backupFileName: 'Backup File Name',
+          backupFileSize: 'File Size',
+          backupCreateTime: 'Created At',
+          noBackup: 'No backup files',
+          confirmDeleteBackup: 'Are you sure you want to delete this backup file?',
+          deleteBackupSuccess: 'Backup deleted successfully',
+          deleteBackupFailed: 'Failed to delete backup',
+          valuePlaceholder: 'Please enter value',
+          actions: 'Actions',
+          items: 'items',
+          folders: 'folders',
+          total: 'total nodes',
+          noChildren: 'No children, click the button above to add',
+          selectNodeTip: 'Please select a node from the tree on the left',
+          value: 'Value',
+          createLanguage: '+ Lang',
+          sourceLanguage: 'Source Language',
+          sourceLanguageTip: 'Select the source language file as template, the new language will be created based on its key structure',
+          newLangCode: 'New Language Code',
+          newLangCodeTip: 'File name of the new language, format "lang-code.js", e.g. ja-JP.js, ko-KR.js',
+          newLangCodePlaceholder: 'e.g. ja-JP.js / ko-KR.js / fr-FR.js',
+          newLangName: 'New Language Name',
+          newLangNameTip: 'Display name of the new language on the Tab, e.g. "日本語", "한국어", "Français"',
+          newLangNamePlaceholder: 'e.g. 日本語 / 한국어 / Français',
+          copyValues: 'Copy Source Content',
+          copyValuesTip: 'When enabled, copy source language values to the new language; when disabled, only keep key structure with empty values',
+          copyValuesYes: 'Copy',
+          copyValuesNo: 'Empty',
+          createLanguageTip: 'After creation, a new Tab will appear in the language list. Please recompile or refresh the page to take effect.',
+          createLanguageSuccess: 'Language created successfully, please recompile or refresh the page',
+          createLanguageFailed: 'Failed to create language',
+          sourceLangNotEmpty: 'Source language cannot be empty',
+          newLangCodeNotEmpty: 'New language code cannot be empty',
+          newLangCodeFormat: 'New language code must end with .js',
+          newLangNameNotEmpty: 'New language name cannot be empty'
         },
         editType: {
           database: 'Database Config', // [未使用]
@@ -1664,7 +1945,9 @@ export default {
               maxSize: { label: 'Max File Size', description: 'Max file size limit for GitHub image host upload' }
             },
             backup: {
-              dir: { label: 'Database Backup Directory', description: 'Database backup file storage directory' }
+              dir: { label: 'Database Backup Directory', description: 'Database backup file storage directory' },
+              i18nDir: { label: 'I18n Backup Directory', description: 'I18n language file backup storage directory' },
+              configDir: { label: 'Config Data Backup Directory', description: 'Config file version history backup storage directory' }
             },
             logs: {
               dir: { label: 'Log Directory', description: 'System log file storage directory' }
@@ -1768,6 +2051,11 @@ export default {
             multiDeviceEnabled: { label: 'Multi-device Mode', description: 'Whether to enable multi-device mode, support connecting multiple PLC devices simultaneously' }
           }
         }
+      },
+      i18n: {
+        default: 'LangConf',
+        title: 'I18n Management',
+        desc: 'Manage system multi-language configuration, support online search, editing, adding i18n content, only super admin can access'
       }
     },
   },
@@ -1867,7 +2155,9 @@ export default {
     language: {
       title: 'Language',
       switchedToZh: 'Switched to Chinese',
-      switchedToEn: 'Switched to English'
+      switchedToEn: 'Switched to English',
+      switched: 'Switched to {lang}',
+      switchFailed: 'Failed to switch language'
     }
   },
   notification: {

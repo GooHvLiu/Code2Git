@@ -125,10 +125,34 @@ const activeMenu = computed(() => {
   .sidebar-scroll {
     flex: 1;
     min-height: 0;
+    height: 0;
+
+    ::v-deep .el-scrollbar {
+      height: 100%;
+    }
 
     ::v-deep .el-scrollbar__wrap {
       overflow-x: hidden;
     }
+
+    /* 滚动条始终显示，不只是hover时 */
+    ::v-deep .el-scrollbar__bar {
+      opacity: 1;
+    }
+
+    ::v-deep .el-scrollbar__bar.is-vertical {
+      width: 6px;
+    }
+
+    ::v-deep .el-scrollbar__thumb {
+      background-color: rgba(144, 147, 153, 0.4);
+      border-radius: 3px;
+
+      &:hover {
+        background-color: rgba(144, 147, 153, 0.6);
+      }
+    }
+
     /* 修复el-scrollbar内部自带白色背景，保证整体侧边栏颜色统一 */
     ::v-deep .el-scrollbar__view {
       background: transparent !important;

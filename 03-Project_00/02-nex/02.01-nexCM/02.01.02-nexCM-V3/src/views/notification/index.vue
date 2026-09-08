@@ -53,7 +53,7 @@
     />
 
     <!-- 通知列表 - 使用可复用组件 -->
-    <div class="notification-list" v-loading="loading">
+    <div class="notification-list" v-loading="loading" :element-loading-text="$t('common.loading')">
       <NotificationItem
         v-for="item in list"
         :key="item.id"

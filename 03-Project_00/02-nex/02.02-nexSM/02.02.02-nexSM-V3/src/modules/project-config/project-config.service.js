@@ -98,7 +98,11 @@ class ProjectConfigService {
       // 数据库备份
       backup: {
         dir: './backups/database',
-        dirAbsolute: path.resolve('./backups/database')
+        dirAbsolute: path.resolve('./backups/database'),
+        i18nDir: './backups/i18n',
+        i18nDirAbsolute: path.resolve('./backups/i18n'),
+        configDir: './backups/config',
+        configDirAbsolute: path.resolve('./backups/config')
       },
       // 日志
       logs: {

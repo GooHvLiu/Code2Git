@@ -3,6 +3,7 @@
  * Vue I18n 国际化配置
  * ==========================================
  * 支持中英文切换，语言偏好持久化到 localStorage
+ * 支持动态加载后端管理的语言文件
  *
  * 用法：
  *   模板中：{{ $t('common.confirm') }}
@@ -10,9 +11,9 @@
  *   切换语言：this.$i18n.locale = 'en-US'
  *
  * 新增语言：
- *   1. 在 langs/ 下新建语言包文件
- *   2. 在下方 messages 中引入
- *   3. 在 LANGUAGES 常量中添加选项
+ *   1. 在国际化管理页面创建新语言文件
+ *   2. 系统会自动加载并注册到 Vue I18n 中
+ *   3. Quick Menu 中的语言切换会自动显示新语言
  */
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
@@ -27,15 +28,16 @@ import ElementEnUS from 'element-ui/lib/locale/lang/en'
 Vue.use(VueI18n)
 
 /**
- * 支持的语言列表
- * label: 当前语言下的显示名（用于界面翻译）
- * autonym: 该语言自己的写法（永远不变，用户总能找到自己的语言）
- * short: 简短代码（用于菜单显示）
+ * 动态语言列表（包含内置语言和后端管理的语言）
+ * 初始值为内置语言（中文和英文），应用启动时会从后端加载并更新
  */
-export const LANGUAGES = [
-  { label: '简体中文', value: 'zh-CN', autonym: '简体中文', short: '中' },
-  { label: 'English', value: 'en-US', autonym: 'English', short: 'EN' }
+export let dynamicLanguages = [
+  { label: '简体中文', value: 'zh-CN', autonym: '简体中文', short: '中', flag: 'flags/zh-CN', isBuiltIn: true },
+  { label: 'English', value: 'en-US', autonym: 'English', short: 'EN', flag: 'flags/en-US', isBuiltIn: true }
 ]
+
+/** 已加载的语言文件缓存 */
+const loadedLanguages = new Set(['zh-CN', 'en-US'])
 
 /** localStorage 存储 key */
 const LANG_KEY = 'app-language'
@@ -43,13 +45,17 @@ const LANG_KEY = 'app-language'
 /**
  * 获取当前语言
  * 优先从 localStorage 读取，否则用系统默认语言，否则用浏览器默认语言，兜底中文
+ * 注意：对于 localStorage 中保存的语言，不检查是否在 dynamicLanguages 中，
+ * 因为模块加载时 dynamicLanguages 还只有内置语言，动态语言列表尚未加载
  * @param {string} systemDefaultLang - 系统默认语言（从后端配置获取）
  */
 function getDefaultLang(systemDefaultLang = null) {
   const saved = localStorage.getItem(LANG_KEY)
-  if (saved && LANGUAGES.some(l => l.value === saved)) return saved
+  // 对于用户手动保存的语言，直接返回，不检查是否在 dynamicLanguages 中
+  // （因为模块加载时动态语言列表尚未加载，会导致用户选择的语言被错误地回退）
+  if (saved) return saved
   // 如果有系统默认语言，使用系统默认语言
-  if (systemDefaultLang && LANGUAGES.some(l => l.value === systemDefaultLang)) {
+  if (systemDefaultLang && dynamicLanguages.some(l => l.value === systemDefaultLang)) {
     return systemDefaultLang
   }
   const browserLang = navigator.language || 'zh-CN'
@@ -72,21 +78,139 @@ if (i18n.locale === 'en-US') {
   ElementLocale.use(ElementZhCN)
 }
 
+// 加载语言列表的 Promise 缓存，避免重复请求
+let loadingLanguageListPromise = null
+
 /**
- * 切换语言并持久化
- * @param {string} lang - 语言代码，如 'zh-CN' / 'en-US'
+ * 从后端加载语言列表并更新动态语言列表
+ * @returns {Promise<Array>} 语言列表
  */
-export function setLanguage(lang) {
-  if (!LANGUAGES.some(l => l.value === lang)) return
+export async function loadLanguageList() {
+  // 如果正在加载，返回同一个 Promise，避免重复请求
+  if (loadingLanguageListPromise) {
+    return loadingLanguageListPromise
+  }
+
+  loadingLanguageListPromise = (async () => {
+    try {
+      // 动态导入 API，避免循环依赖
+      // 使用 /languages 接口（所有登录用户可访问），而不是 /files 接口（仅超级管理员可访问）
+      const { requestGetLanguagesApi } = await import('@/api/i18nManager')
+      const res = await requestGetLanguagesApi()
+      const fileList = res.data || []
+      
+      // 构建动态语言列表：内置语言 + 后端管理的语言（去重）
+      const langMap = new Map()
+      dynamicLanguages.forEach(l => langMap.set(l.value, { ...l }))
+      
+      fileList.forEach(file => {
+        const langCode = file.langCode || file.fileName.replace(/\.js$/, '')
+        const existing = langMap.get(langCode)
+        if (existing) {
+          // 已存在的语言，更新元数据（保留内置语言的基本信息）
+          langMap.set(langCode, {
+            ...existing,
+            label: file.name || existing.label,
+            autonym: file.autonym || file.langName || existing.autonym,
+            flag: file.flag || existing.flag,
+            isBuiltIn: existing.isBuiltIn || false,
+            isMaster: file.isMaster || false
+          })
+        } else {
+          // 新语言，使用后端返回的完整元数据
+          langMap.set(langCode, {
+            label: file.name || langCode,
+            value: langCode,
+            autonym: file.autonym || file.langName || langCode,
+            short: langCode.split('-')[0].toUpperCase(),
+            flag: file.flag || 'flags/global',
+            isBuiltIn: file.isBuiltIn || false,
+            isMaster: file.isMaster || false,
+            isDynamic: true
+          })
+        }
+      })
+      
+      dynamicLanguages = Array.from(langMap.values())
+      return dynamicLanguages
+    } catch (err) {
+      console.error('[I18N] 加载语言列表失败:', err)
+      return dynamicLanguages
+    } finally {
+      // 加载完成后清除缓存
+      loadingLanguageListPromise = null
+    }
+  })()
+
+  return loadingLanguageListPromise
+}
+
+/**
+ * 动态加载语言文件并注册到 Vue I18n 中
+ * @param {string} lang - 语言代码，如 'ja-JP'
+ * @returns {Promise<boolean>} 是否加载成功
+ */
+export async function loadLanguageFile(lang) {
+  if (loadedLanguages.has(lang)) {
+    return true
+  }
+  
+  try {
+    // 动态导入 API，避免循环依赖
+    // 使用 /language/read 接口（所有登录用户可访问），而不是 /file/read 接口（仅超级管理员可访问）
+    const { requestReadLanguageFileApi } = await import('@/api/i18nManager')
+    const fileName = lang + '.js'
+    const res = await requestReadLanguageFileApi(fileName)
+    
+    if (res && res.data && res.data.data) {
+      // 注册语言包到 Vue I18n
+      i18n.setLocaleMessage(lang, res.data.data)
+      loadedLanguages.add(lang)
+      return true
+    }
+    return false
+  } catch (err) {
+    console.error('[I18N] 加载语言文件失败:', lang, err)
+    return false
+  }
+}
+
+/**
+ * 切换语言并持久化（支持动态加载语言文件）
+ * @param {string} lang - 语言代码，如 'zh-CN' / 'en-US' / 'ja-JP'
+ * @returns {Promise<boolean>} 是否切换成功
+ */
+export async function setLanguage(lang) {
+  // 检查语言是否在动态语言列表中
+  const langExists = dynamicLanguages.some(l => l.value === lang)
+  if (!langExists) {
+    console.error('[I18N] 语言不存在:', lang)
+    return false
+  }
+  
+  // 如果是动态语言且尚未加载，先加载语言文件
+  if (!loadedLanguages.has(lang)) {
+    const loaded = await loadLanguageFile(lang)
+    if (!loaded) {
+      console.error('[I18N] 语言文件加载失败，无法切换:', lang)
+      return false
+    }
+  }
+  
+  // 切换语言
   i18n.locale = lang
   localStorage.setItem(LANG_KEY, lang)
   document.documentElement.setAttribute('lang', lang)
+  
   // 同步设置 Element UI 语言（分页、日期选择器等组件）
   if (lang === 'zh-CN') {
     ElementLocale.use(ElementZhCN)
   } else if (lang === 'en-US') {
     ElementLocale.use(ElementEnUS)
   }
+  // 其他语言暂时使用英文 Element UI 语言包（后续可扩展）
+  
+  return true
 }
 
 /**
@@ -94,7 +218,7 @@ export function setLanguage(lang) {
  * @param {string} systemDefaultLang - 系统默认语言
  */
 export function applySystemDefaultLanguage(systemDefaultLang) {
-  if (!systemDefaultLang || !LANGUAGES.some(l => l.value === systemDefaultLang)) return
+  if (!systemDefaultLang || !dynamicLanguages.some(l => l.value === systemDefaultLang)) return
   // 如果用户已经手动设置过语言（localStorage 中有值），不覆盖用户选择
   const saved = localStorage.getItem(LANG_KEY)
   if (saved) return

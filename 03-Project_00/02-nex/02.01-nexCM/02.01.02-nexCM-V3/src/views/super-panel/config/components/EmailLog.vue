@@ -95,6 +95,7 @@
     <el-table
       :data="tableData"
       v-loading="loading"
+      :element-loading-text="$t('common.loading')"
       :header-cell-style="{
         background: '#f5f7fa',
         color: '#606266',
@@ -257,7 +258,7 @@
       width="700px"
       append-to-body
     >
-      <div v-loading="detailLoading" class="log-detail">
+      <div v-loading="detailLoading" :element-loading-text="$t('common.loading')" class="log-detail">
         <el-descriptions :column="2" border size="small">
           <el-descriptions-item
             :label="$t('menu.system.config.childrenMenu.emailLog.logId')"

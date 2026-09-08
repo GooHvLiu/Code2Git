@@ -39,6 +39,7 @@
     <!-- ==================== 树形表格 ==================== -->
     <el-table
       v-loading="loading"
+      :element-loading-text="$t('common.loading')"
       :data="tableData"
       border
       stripe
@@ -131,11 +132,16 @@
       width="560px"
       :close-on-click-modal="false"
     >
-      <el-form :model="form" :rules="rules" ref="form" label-width="100px">
+      <el-form :model="form" :rules="rules" ref="form" label-width="160px">
         <el-form-item
-          :label="$t('menu.superPanel.dept.page.parentDept')"
           prop="parent_id"
         >
+          <span slot="label">
+            {{ $t('menu.superPanel.dept.page.parentDept') }}
+            <el-tooltip :content="$t('menu.superPanel.dept.page.tips.parentDept')" placement="top">
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-select
             v-model="form.parent_id"
             :placeholder="$t('menu.superPanel.dept.page.parentDeptPlaceholder')"
@@ -151,9 +157,14 @@
           </el-select>
         </el-form-item>
         <el-form-item
-          :label="$t('menu.superPanel.dept.page.deptName')"
           prop="dept_name"
         >
+          <span slot="label">
+            {{ $t('menu.superPanel.dept.page.deptName') }}
+            <el-tooltip :content="$t('menu.superPanel.dept.page.tips.deptName')" placement="top">
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input
             v-model="form.dept_name"
             :maxlength="50"
@@ -161,21 +172,50 @@
           />
         </el-form-item>
         <el-form-item
-          :label="$t('menu.superPanel.dept.page.orderNum')"
           prop="order_num"
         >
+          <span slot="label">
+            {{ $t('menu.superPanel.dept.page.orderNum') }}
+            <el-tooltip :content="$t('menu.superPanel.dept.page.tips.orderNum')" placement="top">
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input-number v-model="form.order_num" :min="0" />
         </el-form-item>
-        <el-form-item :label="$t('menu.superPanel.dept.page.leader')" prop="leader">
+        <el-form-item prop="leader">
+          <span slot="label">
+            {{ $t('menu.superPanel.dept.page.leader') }}
+            <el-tooltip :content="$t('menu.superPanel.dept.page.tips.leader')" placement="top">
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input v-model="form.leader" />
         </el-form-item>
-        <el-form-item :label="$t('menu.superPanel.dept.page.phone')" prop="phone">
+        <el-form-item prop="phone">
+          <span slot="label">
+            {{ $t('menu.superPanel.dept.page.phone') }}
+            <el-tooltip :content="$t('menu.superPanel.dept.page.tips.phone')" placement="top">
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input v-model="form.phone" />
         </el-form-item>
-        <el-form-item :label="$t('menu.superPanel.dept.page.email')" prop="email">
+        <el-form-item prop="email">
+          <span slot="label">
+            {{ $t('menu.superPanel.dept.page.email') }}
+            <el-tooltip :content="$t('menu.superPanel.dept.page.tips.email')" placement="top">
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input v-model="form.email" />
         </el-form-item>
-        <el-form-item :label="$t('common.status')" prop="status">
+        <el-form-item prop="status">
+          <span slot="label">
+            {{ $t('common.status') }}
+            <el-tooltip :content="$t('menu.superPanel.dept.page.tips.status')" placement="top">
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-radio-group v-model="form.status">
             <el-radio :label="1">{{ $t("common.enable") }}</el-radio>
             <el-radio :label="0">{{ $t("common.disable") }}</el-radio>

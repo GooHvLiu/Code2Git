@@ -126,6 +126,7 @@
     <!-- 设备列表表格 -->
     <el-table
       v-loading="loading"
+      :element-loading-text="$t('common.loading')"
       :data="deviceList"
       border
       stripe

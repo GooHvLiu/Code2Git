@@ -95,6 +95,7 @@
     <!-- ==================== 表格 ==================== -->
     <el-table
       v-loading="loading"
+      :element-loading-text="$t('common.loading')"
       :data="tableData"
       border
       stripe

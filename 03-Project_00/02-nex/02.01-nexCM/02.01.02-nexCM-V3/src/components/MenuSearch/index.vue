@@ -51,11 +51,11 @@ const menuItems = computed(() => store.state.permission.userMenu)
 const flatMenus = computed(() => flattenMenu(menuItems.value))
 /** 过滤后的菜单 */
 const filteredMenus = computed(() => {
-  if (!keyword.value.trim()) return flatMenus.value.slice(0, 20)
+  if (!keyword.value.trim()) return flatMenus.value.slice(0, 50)
   const kw = keyword.value.trim().toLowerCase()
   return flatMenus.value
     .filter(item => item.title.toLowerCase().includes(kw))
-    .slice(0, 20)
+    .slice(0, 50)
 })
 
 // ===== 监听 =====

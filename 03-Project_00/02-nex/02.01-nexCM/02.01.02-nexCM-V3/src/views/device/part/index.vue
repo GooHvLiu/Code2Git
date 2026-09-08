@@ -4,599 +4,651 @@
     <el-tabs v-model="activeTab" class="part-life-tabs">
       <!-- 寿命详情Tab -->
       <el-tab-pane :label="$t('menu.device.part.tab.life')" name="life">
-    <!-- 顶部操作栏 -->
-    <div class="page-toolbar">
-      <div class="toolbar-left">
-        <el-input
-          v-model="searchKeyword"
-          :placeholder="$t('menu.device.part.page.searchPlaceholder')"
-          clearable
-          style="width: 280px"
-          @clear="loadPartList"
-          @keyup.enter.native="loadPartList"
-        >
-          <el-button
-            slot="append"
-            icon="el-icon-search"
-            v-permission="'device:part:search'"
-            @click="loadPartList"
-          ></el-button>
-        </el-input>
-      </div>
-      <div class="toolbar-right">
-        <el-button
-          v-permission="'device:part:add'"
-          type="primary"
-          icon="el-icon-plus"
-          @click="handleAdd"
-          >{{ $t("menu.device.part.add") }}</el-button
-        >
-        <el-button icon="el-icon-refresh" v-permission="'device:part:refresh'"
-          @click="loadPartList">{{
-          $t("menu.device.part.refresh")
-        }}</el-button>
-      </div>
-    </div>
-
-    <!-- 顶部概览卡片 -->
-    <el-row :gutter="12" class="overview-row">
-      <el-col
-        :span="6"
-        v-for="(part, index) in filteredParts"
-        :key="part.id || index"
-      >
-        <div class="part-card" :class="getPartStatus(part)">
-          <div class="card-header">
-            <div class="part-icon"><i :class="part.icon"></i></div>
-            <div class="part-info">
-              <div class="part-name">{{ getPartDisplayName(part) }}</div>
-              <div class="part-code">{{ part.part_code || part.code }}</div>
-            </div>
-            <el-tag
-              :type="getPartStatusTag(part)"
-              size="small"
-              effect="plain"
-              >{{ getPartStatusText(part) }}</el-tag
+        <!-- 顶部操作栏 -->
+        <div class="page-toolbar">
+          <div class="toolbar-left">
+            <el-input
+              v-model="searchKeyword"
+              :placeholder="$t('menu.device.part.page.searchPlaceholder')"
+              clearable
+              style="width: 280px"
+              @clear="loadPartList"
+              @keyup.enter.native="loadPartList"
             >
+              <el-button
+                slot="append"
+                icon="el-icon-search"
+                v-permission="'device:part:search'"
+                @click="loadPartList"
+              ></el-button>
+            </el-input>
           </div>
-          <div class="card-body">
-            <div class="life-info">
-              <div class="life-item">
-                <span class="life-label">{{
-                  $t("menu.device.part.page.form.usedLife")
-                }}</span>
-                <span class="life-value"
-                  >{{ part.used_life || part.used
-                  }}<span class="life-unit">{{
-                    $t("menu.device.part.page.unit.times")
-                  }}</span></span
-                >
-              </div>
-              <div class="life-item">
-                <span class="life-label">{{
-                  $t("menu.device.part.page.form.ratedLife")
-                }}</span>
-                <span class="life-value"
-                  >{{ part.rated_life || part.total
-                  }}<span class="life-unit">{{
-                    $t("menu.device.part.page.unit.times")
-                  }}</span></span
-                >
-              </div>
-              <div class="life-item">
-                <span class="life-label">{{
-                  $t("menu.device.part.page.message.remaining")
-                }}</span>
-                <span class="life-value" :class="getRemainingClass(part)"
-                  >{{ getRemaining(part)
-                  }}<span class="life-unit">{{
-                    $t("menu.device.part.page.unit.times")
-                  }}</span></span
-                >
-              </div>
-            </div>
-            <div class="life-progress">
-              <div class="progress-bar">
-                <div
-                  class="progress-fill"
-                  :style="{ width: getLifePercent(part) + '%' }"
-                  :class="getPartStatus(part)"
-                ></div>
-              </div>
-              <div class="progress-text">
-                {{ getLifePercent(part).toFixed(1) }}%
-              </div>
-            </div>
-            <div class="card-footer">
-              <span class="install-date"
-                >{{ $t("menu.device.part.page.form.installDate") }}：{{
-                  part.install_date || part.installDate
-                    ? formatDate(
-                        part.install_date || part.installDate,
-                        getGlobalDateFormat()
-                      )
-                    : "-"
-                }}</span
-              >
-              <div class="card-actions">
-                <el-button
-                  v-permission="'device:part:edit'"
-                  type="text"
-                  size="small"
-                  @click="handleEdit(part)"
-                  >{{ $t("menu.device.part.edit") }}</el-button
-                >
-                <el-button
-                  v-permission="'device:part:operate'"
-                  type="text"
-                  size="small"
-                  @click="handleReplace(part)"
-                  >{{ $t("menu.device.part.operate") }}</el-button
-                >
-                <el-button
-                  v-permission="'device:part:delete'"
-                  type="text"
-                  size="small"
-                  class="delete-btn"
-                  @click="handleDelete(part)"
-                  >{{ $t("menu.device.part.delete") }}</el-button
-                >
-              </div>
-            </div>
+          <div class="toolbar-right">
+            <el-button
+              v-permission="'device:part:add'"
+              type="primary"
+              icon="el-icon-plus"
+              @click="handleAdd"
+              >{{ $t("menu.device.part.add") }}</el-button
+            >
+            <el-button
+              icon="el-icon-refresh"
+              v-permission="'device:part:refresh'"
+              @click="loadPartList"
+              >{{ $t("menu.device.part.refresh") }}</el-button
+            >
           </div>
         </div>
-      </el-col>
-    </el-row>
 
-    <!-- 空数据提示 -->
-    <div v-if="filteredParts.length === 0 && !loading" class="empty-tip">
-      <i class="el-icon-box"></i>
-      <p>{{ $t("menu.device.part.page.message.noData") }}</p>
-    </div>
-
-    <!-- 详细信息 + 更换记录 -->
-    <el-row :gutter="12" class="detail-row" v-if="filteredParts.length > 0">
-      <!-- 部件详细列表 -->
-      <el-col :span="14">
-        <div class="panel">
-          <div class="panel-header">
-            <span class="panel-title"
-              ><i class="el-icon-s-tools"></i>
-              {{ $t("menu.device.part.page.title") }}</span
-            >
-          </div>
-          <div class="panel-body">
-            <el-table
-              :data="filteredParts"
-              border
-              stripe
-              v-loading="loading"
-              :header-cell-style="{
-                background: '#f5f7fa',
-                color: '#606266',
-                fontWeight: 'bold',
-                textAlign: 'center',
-              }"
-              style="width: 100%"
-            >
-              <el-table-column
-                :label="$t('menu.device.part.page.form.partName')"
-                width="120"
-                align="center"
-              >
-                <template slot-scope="scope">
-                  <i
-                    :class="scope.row.icon"
-                    style="margin-right: 6px; color: #409eff"
-                  ></i>
-                  {{ getPartDisplayName(scope.row) }}
-                </template>
-              </el-table-column>
-              <el-table-column
-                :label="$t('menu.device.part.page.form.partCode')"
-                width="140"
-                align="center"
-              >
-                <template slot-scope="scope">
-                  {{ scope.row.part_code || scope.row.code }}
-                </template>
-              </el-table-column>
-              <el-table-column
-                :label="$t('menu.device.part.page.form.specModel')"
-                width="120"
-                align="center"
-              >
-                <template slot-scope="scope">
-                  {{ scope.row.spec_model || scope.row.spec || "-" }}
-                </template>
-              </el-table-column>
-              <el-table-column
-                :label="$t('menu.device.part.page.table.lifeProgress')"
-                min-width="180"
-              >
-                <template slot-scope="scope">
-                  <div class="table-progress">
-                    <div class="tp-bar">
-                      <div
-                        class="tp-fill"
-                        :style="{
-                          width: getLifePercent(scope.row) + '%',
-                        }"
-                        :class="getPartStatus(scope.row)"
-                      ></div>
-                    </div>
-                    <span class="tp-text"
-                      >{{ scope.row.used_life || scope.row.used }}/{{
-                        scope.row.rated_life || scope.row.total
-                      }}
-                      {{ $t("menu.device.part.page.unit.times") }}</span
-                    >
-                  </div>
-                </template>
-              </el-table-column>
-              <el-table-column
-                :label="$t('menu.device.part.page.table.remainingLife')"
-                width="110"
-                align="center"
-              >
-                <template slot-scope="scope">
-                  <span :class="getRemainingClass(scope.row)"
-                    >{{ getRemaining(scope.row) }}
-                    {{ $t("menu.device.part.page.unit.times") }}</span
-                  >
-                </template>
-              </el-table-column>
-              <el-table-column
-                :label="$t('menu.device.part.page.table.status')"
-                width="80"
-                align="center"
-              >
-                <template slot-scope="scope">
-                  <el-tag :type="getPartStatusTag(scope.row)" size="mini">{{
-                    getPartStatusText(scope.row)
-                  }}</el-tag>
-                </template>
-              </el-table-column>
-              <el-table-column
-                :label="$t('menu.device.part.page.form.installDate')"
-                width="110"
-                align="center"
-              >
-                <template slot-scope="scope">
-                  {{
-                    scope.row.install_date || scope.row.installDate
-                      ? formatDate(
-                          scope.row.install_date || scope.row.installDate,
-                          getGlobalDateFormat()
-                        )
-                      : "-"
-                  }}
-                </template>
-              </el-table-column>
-              <el-table-column
-                :label="$t('menu.device.part.page.table.operation')"
-                width="150"
-                align="center"
-                fixed="right"
-              >
-                <template slot-scope="scope">
-                  <el-button
-                    v-permission="'device:part:edit'"
-                    type="text"
-                    size="small"
-                    @click="handleEdit(scope.row)"
-                    >{{ $t("menu.device.part.edit") }}</el-button
-                  >
-                  <el-button
-                    v-permission="'device:part:operate'"
-                    type="text"
-                    size="small"
-                    @click="handleReplace(scope.row)"
-                    >{{ $t("menu.device.part.operate") }}</el-button
-                  >
-                  <el-button
-                    v-permission="'device:part:delete'"
-                    type="text"
-                    size="small"
-                    class="delete-btn"
-                    @click="handleDelete(scope.row)"
-                    >{{ $t("menu.device.part.delete") }}</el-button
-                  >
-                </template>
-              </el-table-column>
-            </el-table>
-          </div>
-        </div>
-      </el-col>
-
-      <!-- 更换记录 -->
-      <el-col :span="10">
-        <div class="panel">
-          <div class="panel-header">
-            <span class="panel-title"
-              ><i class="el-icon-document"></i>
-              {{
-                $t("menu.device.part.page.message.recentReplaceRecords")
-              }}</span
-            >
-          </div>
-          <div class="panel-body">
-            <div class="timeline">
-              <div
-                class="timeline-item"
-                v-for="(record, index) in recentRecords"
-                :key="record.id || index"
-              >
-                <div class="timeline-dot" :class="record.status"></div>
-                <div
-                  class="timeline-line"
-                  v-if="index < recentRecords.length - 1"
-                ></div>
-                <div class="timeline-content">
-                  <div class="tl-header">
-                    <span class="tl-part">{{
-                      record.part_name || record.partName
+        <!-- 顶部概览卡片 -->
+        <el-row :gutter="12" class="overview-row">
+          <el-col
+            :span="6"
+            v-for="(part, index) in filteredParts"
+            :key="part.id || index"
+          >
+            <div class="part-card" :class="getPartStatus(part)">
+              <div class="card-header">
+                <div class="part-icon"><i :class="part.icon"></i></div>
+                <div class="part-info">
+                  <div class="part-name">{{ getPartDisplayName(part) }}</div>
+                  <div class="part-code">{{ part.part_code || part.code }}</div>
+                </div>
+                <el-tag
+                  :type="getPartStatusTag(part)"
+                  size="small"
+                  effect="plain"
+                  >{{ getPartStatusText(part) }}</el-tag
+                >
+              </div>
+              <div class="card-body">
+                <div class="life-info">
+                  <div class="life-item">
+                    <span class="life-label">{{
+                      $t("menu.device.part.page.form.usedLife")
                     }}</span>
-                    <el-tag
-                      :type="record.status === 'success' ? 'success' : 'danger'"
-                      size="mini"
-                      >{{
-                        record.status === "success"
-                          ? $t("menu.device.part.page.message.statusSuccess")
-                          : $t("menu.device.part.page.message.statusFailed")
-                      }}</el-tag
+                    <span class="life-value"
+                      >{{ part.used_life || part.used
+                      }}<span class="life-unit">{{
+                        $t("menu.device.part.page.unit.times")
+                      }}</span></span
                     >
                   </div>
-                  <div class="tl-detail">
-                    <span
-                      >{{ $t("menu.device.part.page.message.oldCode") }}：{{
-                        record.old_code || record.oldCode
-                      }}</span
-                    >
-                    <span
-                      >{{ $t("menu.device.part.page.message.newCode") }}：{{
-                        record.new_code || record.newCode
-                      }}</span
-                    >
-                  </div>
-                  <div class="tl-footer">
-                    <span class="tl-operator"
-                      >{{ $t("menu.device.part.page.message.operator") }}：{{
-                        record.operator_name || record.operator
-                      }}</span
-                    >
-                    <span class="tl-time">{{
-                      record.replace_time || record.time
+                  <div class="life-item">
+                    <span class="life-label">{{
+                      $t("menu.device.part.page.form.ratedLife")
                     }}</span>
+                    <span class="life-value"
+                      >{{ part.rated_life || part.total
+                      }}<span class="life-unit">{{
+                        $t("menu.device.part.page.unit.times")
+                      }}</span></span
+                    >
+                  </div>
+                  <div class="life-item">
+                    <span class="life-label">{{
+                      $t("menu.device.part.page.message.remaining")
+                    }}</span>
+                    <span class="life-value" :class="getRemainingClass(part)"
+                      >{{ getRemaining(part)
+                      }}<span class="life-unit">{{
+                        $t("menu.device.part.page.unit.times")
+                      }}</span></span
+                    >
+                  </div>
+                </div>
+                <div class="life-progress">
+                  <div class="progress-bar">
+                    <div
+                      class="progress-fill"
+                      :style="{ width: getLifePercent(part) + '%' }"
+                      :class="getPartStatus(part)"
+                    ></div>
+                  </div>
+                  <div class="progress-text">
+                    {{ getLifePercent(part).toFixed(1) }}%
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <span class="install-date"
+                    >{{ $t("menu.device.part.page.form.installDate") }}：{{
+                      part.install_date || part.installDate
+                        ? formatDate(
+                            part.install_date || part.installDate,
+                            getGlobalDateFormat()
+                          )
+                        : "-"
+                    }}</span
+                  >
+                  <div class="card-actions">
+                    <el-button
+                      v-permission="'device:part:edit'"
+                      type="text"
+                      size="small"
+                      @click="handleEdit(part)"
+                      >{{ $t("menu.device.part.edit") }}</el-button
+                    >
+                    <el-button
+                      v-permission="'device:part:operate'"
+                      type="text"
+                      size="small"
+                      @click="handleReplace(part)"
+                      >{{ $t("menu.device.part.operate") }}</el-button
+                    >
+                    <el-button
+                      v-permission="'device:part:delete'"
+                      type="text"
+                      size="small"
+                      class="delete-btn"
+                      @click="handleDelete(part)"
+                      >{{ $t("menu.device.part.delete") }}</el-button
+                    >
                   </div>
                 </div>
               </div>
             </div>
-            <div v-if="recentRecords.length === 0" class="empty-tip-small">
-              暂无更换记录
-            </div>
-          </div>
+          </el-col>
+        </el-row>
+
+        <!-- 空数据提示 -->
+        <div v-if="filteredParts.length === 0 && !loading" class="empty-tip">
+          <i class="el-icon-box"></i>
+          <p>{{ $t("menu.device.part.page.message.noData") }}</p>
         </div>
-      </el-col>
-    </el-row>
 
-    <!-- 添加/编辑部件弹窗 -->
-    <el-dialog
-      :title="
-        isEdit
-          ? $t('menu.device.part.page.editBtn')
-          : $t('menu.device.part.page.addBtn')
-      "
-      :visible.sync="partDialogVisible"
-      width="560px"
-      :close-on-click-modal="false"
-      @closed="handlePartDialogClosed"
-    >
-      <el-form
-        :model="partForm"
-        :rules="partRules"
-        ref="partFormRef"
-        label-width="110px"
-        class="part-dialog-form"
-      >
-        <el-form-item
-          :label="$t('menu.device.part.page.form.template')"
-          prop="template_id"
+        <!-- 详细信息 + 更换记录 -->
+        <el-row :gutter="12" class="detail-row" v-if="filteredParts.length > 0">
+          <!-- 部件详细列表 -->
+          <el-col :span="14">
+            <div class="panel">
+              <div class="panel-header">
+                <span class="panel-title"
+                  ><i class="el-icon-s-tools"></i>
+                  {{ $t("menu.device.part.page.title") }}</span
+                >
+              </div>
+              <div class="panel-body">
+                <el-table
+                  :data="filteredParts"
+                  border
+                  stripe
+                  v-loading="loading"
+                  :element-loading-text="$t('common.loading')"
+                  :header-cell-style="{
+                    background: '#f5f7fa',
+                    color: '#606266',
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                  }"
+                  style="width: 100%"
+                >
+                  <el-table-column
+                    :label="$t('menu.device.part.page.form.partName')"
+                    width="120"
+                    align="center"
+                  >
+                    <template slot-scope="scope">
+                      <i
+                        :class="scope.row.icon"
+                        style="margin-right: 6px; color: #409eff"
+                      ></i>
+                      {{ getPartDisplayName(scope.row) }}
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    :label="$t('menu.device.part.page.form.partCode')"
+                    width="140"
+                    align="center"
+                  >
+                    <template slot-scope="scope">
+                      {{ scope.row.part_code || scope.row.code }}
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    :label="$t('menu.device.part.page.form.specModel')"
+                    width="120"
+                    align="center"
+                  >
+                    <template slot-scope="scope">
+                      {{ scope.row.spec_model || scope.row.spec || "-" }}
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    :label="$t('menu.device.part.page.table.lifeProgress')"
+                    min-width="180"
+                  >
+                    <template slot-scope="scope">
+                      <div class="table-progress">
+                        <div class="tp-bar">
+                          <div
+                            class="tp-fill"
+                            :style="{
+                              width: getLifePercent(scope.row) + '%',
+                            }"
+                            :class="getPartStatus(scope.row)"
+                          ></div>
+                        </div>
+                        <span class="tp-text"
+                          >{{ scope.row.used_life || scope.row.used }}/{{
+                            scope.row.rated_life || scope.row.total
+                          }}
+                          {{ $t("menu.device.part.page.unit.times") }}</span
+                        >
+                      </div>
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    :label="$t('menu.device.part.page.table.remainingLife')"
+                    width="110"
+                    align="center"
+                  >
+                    <template slot-scope="scope">
+                      <span :class="getRemainingClass(scope.row)"
+                        >{{ getRemaining(scope.row) }}
+                        {{ $t("menu.device.part.page.unit.times") }}</span
+                      >
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    :label="$t('menu.device.part.page.table.status')"
+                    width="80"
+                    align="center"
+                  >
+                    <template slot-scope="scope">
+                      <el-tag :type="getPartStatusTag(scope.row)" size="mini">{{
+                        getPartStatusText(scope.row)
+                      }}</el-tag>
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    :label="$t('menu.device.part.page.form.installDate')"
+                    width="110"
+                    align="center"
+                  >
+                    <template slot-scope="scope">
+                      {{
+                        scope.row.install_date || scope.row.installDate
+                          ? formatDate(
+                              scope.row.install_date || scope.row.installDate,
+                              getGlobalDateFormat()
+                            )
+                          : "-"
+                      }}
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    :label="$t('menu.device.part.page.table.operation')"
+                    width="150"
+                    align="center"
+                    fixed="right"
+                  >
+                    <template slot-scope="scope">
+                      <el-button
+                        v-permission="'device:part:edit'"
+                        type="text"
+                        size="small"
+                        @click="handleEdit(scope.row)"
+                        >{{ $t("menu.device.part.edit") }}</el-button
+                      >
+                      <el-button
+                        v-permission="'device:part:operate'"
+                        type="text"
+                        size="small"
+                        @click="handleReplace(scope.row)"
+                        >{{ $t("menu.device.part.operate") }}</el-button
+                      >
+                      <el-button
+                        v-permission="'device:part:delete'"
+                        type="text"
+                        size="small"
+                        class="delete-btn"
+                        @click="handleDelete(scope.row)"
+                        >{{ $t("menu.device.part.delete") }}</el-button
+                      >
+                    </template>
+                  </el-table-column>
+                </el-table>
+              </div>
+            </div>
+          </el-col>
+
+          <!-- 更换记录 -->
+          <el-col :span="10">
+            <div class="panel">
+              <div class="panel-header">
+                <span class="panel-title"
+                  ><i class="el-icon-document"></i>
+                  {{
+                    $t("menu.device.part.page.message.recentReplaceRecords")
+                  }}</span
+                >
+              </div>
+              <div class="panel-body">
+                <div class="timeline">
+                  <div
+                    class="timeline-item"
+                    v-for="(record, index) in recentRecords"
+                    :key="record.id || index"
+                  >
+                    <div class="timeline-dot" :class="record.status"></div>
+                    <div
+                      class="timeline-line"
+                      v-if="index < recentRecords.length - 1"
+                    ></div>
+                    <div class="timeline-content">
+                      <div class="tl-header">
+                        <span class="tl-part">{{
+                          record.part_name || record.partName
+                        }}</span>
+                        <el-tag
+                          :type="
+                            record.status === 'success' ? 'success' : 'danger'
+                          "
+                          size="mini"
+                          >{{
+                            record.status === "success"
+                              ? $t(
+                                  "menu.device.part.page.message.statusSuccess"
+                                )
+                              : $t("menu.device.part.page.message.statusFailed")
+                          }}</el-tag
+                        >
+                      </div>
+                      <div class="tl-detail">
+                        <span
+                          >{{ $t("menu.device.part.page.message.oldCode") }}：{{
+                            record.old_code || record.oldCode
+                          }}</span
+                        >
+                        <span
+                          >{{ $t("menu.device.part.page.message.newCode") }}：{{
+                            record.new_code || record.newCode
+                          }}</span
+                        >
+                      </div>
+                      <div class="tl-footer">
+                        <span class="tl-operator"
+                          >{{
+                            $t("menu.device.part.page.message.operator")
+                          }}：{{
+                            record.operator_name || record.operator
+                          }}</span
+                        >
+                        <span class="tl-time">{{
+                          record.replace_time || record.time
+                        }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div v-if="recentRecords.length === 0" class="empty-tip-small">
+                  暂无更换记录
+                </div>
+              </div>
+            </div>
+          </el-col>
+        </el-row>
+
+        <!-- 添加/编辑部件弹窗 -->
+        <el-dialog
+          :title="
+            isEdit
+              ? $t('menu.device.part.page.editBtn')
+              : $t('menu.device.part.page.addBtn')
+          "
+          :visible.sync="partDialogVisible"
+          width="560px"
+          :close-on-click-modal="false"
+          @closed="handlePartDialogClosed"
         >
-          <el-select
-            v-model="partForm.template_id"
-            :placeholder="
-              $t('menu.device.part.page.placeholder.selectTemplate')
-            "
-            style="width: 100%"
-            :disabled="isEdit"
-            @change="handleTemplateChange"
+          <el-form
+            :model="partForm"
+            :rules="partRules"
+            ref="partFormRef"
+            label-width="130px"
+            class="part-dialog-form"
           >
-            <el-option
-              v-for="template in templates"
-              :key="template.id"
-              :label="getTemplateName(template)"
-              :value="template.id"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item
-          :label="$t('menu.device.part.page.form.partName')"
-          prop="part_name"
-        >
-          <el-input
-            v-model="partForm.part_name"
-            :placeholder="$t('menu.device.part.page.placeholder.partName')"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item
-          :label="$t('menu.device.part.page.form.partCode')"
-          prop="part_code"
-        >
-          <el-input
-            v-model="partForm.part_code"
-            :placeholder="$t('menu.device.part.page.placeholder.partCode')"
-          />
-        </el-form-item>
-        <el-form-item
-          :label="$t('menu.device.part.page.form.specModel')"
-          prop="spec_model"
-        >
-          <el-input
-            v-model="partForm.spec_model"
-            :placeholder="$t('menu.device.part.page.placeholder.specModel')"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item
-          :label="$t('menu.device.part.page.form.ratedLife')"
-          prop="rated_life"
-        >
-          <div class="rated-life-input">
-            <el-input-number
-              v-model="partForm.rated_life"
-              :min="1"
-              :max="9999999"
-              :step="1000"
-              controls-position="right"
-              style="width: 100%"
-              disabled
-            />
-            <span class="rated-life-unit">{{
-              $t("menu.device.part.page.unit.times")
-            }}</span>
+            <el-form-item prop="template_id">
+              <span slot="label">
+                {{ $t("menu.device.part.page.form.template") }}
+                <el-tooltip
+                  :content="$t('menu.device.part.page.tips.template')"
+                  placement="top"
+                >
+                  <i class="el-icon-question"></i>
+                </el-tooltip>
+              </span>
+              <el-select
+                v-model="partForm.template_id"
+                :placeholder="
+                  $t('menu.device.part.page.placeholder.selectTemplate')
+                "
+                style="width: 100%"
+                :disabled="isEdit"
+                @change="handleTemplateChange"
+              >
+                <el-option
+                  v-for="template in templates"
+                  :key="template.id"
+                  :label="getTemplateName(template)"
+                  :value="template.id"
+                />
+              </el-select>
+            </el-form-item>
+            <el-form-item prop="part_name">
+              <span slot="label">
+                {{ $t("menu.device.part.page.form.partName") }}
+                <el-tooltip
+                  :content="$t('menu.device.part.page.tips.partName')"
+                  placement="top"
+                >
+                  <i class="el-icon-question"></i>
+                </el-tooltip>
+              </span>
+              <el-input
+                v-model="partForm.part_name"
+                :placeholder="$t('menu.device.part.page.placeholder.partName')"
+                disabled
+              />
+            </el-form-item>
+            <el-form-item prop="part_code">
+              <span slot="label">
+                {{ $t("menu.device.part.page.form.partCode") }}
+                <el-tooltip
+                  :content="$t('menu.device.part.page.tips.partCode')"
+                  placement="top"
+                >
+                  <i class="el-icon-question"></i>
+                </el-tooltip>
+              </span>
+              <el-input
+                v-model="partForm.part_code"
+                :placeholder="$t('menu.device.part.page.placeholder.partCode')"
+              />
+            </el-form-item>
+            <el-form-item prop="spec_model">
+              <span slot="label">
+                {{ $t("menu.device.part.page.form.specModel") }}
+                <el-tooltip
+                  :content="$t('menu.device.part.page.tips.specModel')"
+                  placement="top"
+                >
+                  <i class="el-icon-question"></i>
+                </el-tooltip>
+              </span>
+              <el-input
+                v-model="partForm.spec_model"
+                :placeholder="$t('menu.device.part.page.placeholder.specModel')"
+                disabled
+              />
+            </el-form-item>
+            <el-form-item prop="rated_life">
+              <span slot="label">
+                {{ $t("menu.device.part.page.form.ratedLife") }}
+                <el-tooltip
+                  :content="$t('menu.device.part.page.tips.ratedLife')"
+                  placement="top"
+                >
+                  <i class="el-icon-question"></i>
+                </el-tooltip>
+              </span>
+              <div class="rated-life-input">
+                <el-input-number
+                  v-model="partForm.rated_life"
+                  :min="1"
+                  :max="9999999"
+                  :step="1000"
+                  controls-position="right"
+                  style="width: 100%"
+                  disabled
+                />
+                <span class="rated-life-unit">{{
+                  $t("menu.device.part.page.unit.times")
+                }}</span>
+              </div>
+            </el-form-item>
+            <el-form-item prop="install_date">
+              <span slot="label">
+                {{ $t("menu.device.part.page.form.installDate") }}
+                <el-tooltip
+                  :content="$t('menu.device.part.page.tips.installDate')"
+                  placement="top"
+                >
+                  <i class="el-icon-question"></i>
+                </el-tooltip>
+              </span>
+              <el-date-picker
+                v-model="partForm.install_date"
+                type="date"
+                :placeholder="
+                  $t('menu.device.part.page.placeholder.installDate')
+                "
+                value-format="yyyy-MM-dd"
+                style="width: 100%"
+              />
+            </el-form-item>
+            <el-form-item>
+              <span slot="label">
+                {{ $t("menu.device.part.page.form.remark") }}
+                <el-tooltip
+                  :content="$t('menu.device.part.page.tips.remark')"
+                  placement="top"
+                >
+                  <i class="el-icon-question"></i>
+                </el-tooltip>
+              </span>
+              <el-input
+                v-model="partForm.remark"
+                type="textarea"
+                :rows="2"
+                :placeholder="$t('menu.device.part.page.placeholder.remark')"
+              />
+            </el-form-item>
+          </el-form>
+          <div slot="footer">
+            <el-button @click="partDialogVisible = false">{{
+              $t("menu.device.part.page.message.cancelBtn")
+            }}</el-button>
+            <el-button
+              type="primary"
+              :loading="partDialogLoading"
+              @click="confirmPart"
+              >{{ $t("menu.device.part.page.message.confirmBtn") }}</el-button
+            >
           </div>
-        </el-form-item>
-        <el-form-item
-          :label="$t('menu.device.part.page.form.installDate')"
-          prop="install_date"
-        >
-          <el-date-picker
-            v-model="partForm.install_date"
-            type="date"
-            :placeholder="$t('menu.device.part.page.placeholder.installDate')"
-            value-format="yyyy-MM-dd"
-            style="width: 100%"
-          />
-        </el-form-item>
-        <el-form-item :label="$t('menu.device.part.page.form.remark')">
-          <el-input
-            v-model="partForm.remark"
-            type="textarea"
-            :rows="2"
-            :placeholder="$t('menu.device.part.page.placeholder.remark')"
-          />
-        </el-form-item>
-      </el-form>
-      <div slot="footer">
-        <el-button @click="partDialogVisible = false">{{
-          $t("menu.device.part.page.message.cancelBtn")
-        }}</el-button>
-        <el-button
-          type="primary"
-          :loading="partDialogLoading"
-          @click="confirmPart"
-          >{{ $t("menu.device.part.page.message.confirmBtn") }}</el-button
-        >
-      </div>
-    </el-dialog>
+        </el-dialog>
 
-    <!-- 更换录入弹窗 -->
-    <el-dialog
-      :title="$t('menu.device.part.page.message.replaceDialogTitle')"
-      :visible.sync="replaceDialogVisible"
-      width="560px"
-      :close-on-click-modal="false"
-      @closed="handleDialogClosed"
-    >
-      <el-form
-        :model="replaceForm"
-        :rules="replaceRules"
-        ref="replaceFormRef"
-        label-width="110px"
-        class="part-dialog-form"
-      >
-        <el-form-item
-          :label="$t('menu.device.part.page.form.replacePart')"
-          prop="partCode"
+        <!-- 更换录入弹窗 -->
+        <el-dialog
+          :title="$t('menu.device.part.page.message.replaceDialogTitle')"
+          :visible.sync="replaceDialogVisible"
+          width="560px"
+          :close-on-click-modal="false"
+          @closed="handleDialogClosed"
         >
-          <el-input
-            :value="replaceForm.partName"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item
-          :label="$t('menu.device.part.page.form.currentCode')"
-          v-if="currentReplacePart"
-        >
-          <el-input
-            :value="replaceForm.partCode"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item
-          :label="$t('menu.device.part.page.form.newCode')"
-          prop="newCode"
-        >
-          <el-input
-            v-model="replaceForm.newCode"
-            :placeholder="$t('menu.device.part.page.placeholder.newCode')"
-            clearable
-          />
-        </el-form-item>
-        <el-form-item
-          :label="$t('menu.device.part.page.form.replaceReason')"
-          prop="reason"
-        >
-          <el-select
-            v-model="replaceForm.reason"
-            :placeholder="$t('menu.device.part.page.placeholder.replaceReason')"
-            style="width: 100%"
+          <el-form
+            :model="replaceForm"
+            :rules="replaceRules"
+            ref="replaceFormRef"
+            label-width="110px"
+            class="part-dialog-form"
           >
-            <el-option
-              :label="$t('menu.device.part.page.replaceReason.life')"
-              value="life"
-            />
-            <el-option
-              :label="$t('menu.device.part.page.replaceReason.damage')"
-              value="damage"
-            />
-            <el-option
-              :label="$t('menu.device.part.page.replaceReason.maintenance')"
-              value="maintenance"
-            />
-            <el-option
-              :label="$t('menu.device.part.page.replaceReason.changeover')"
-              value="changeover"
-            />
-            <el-option
-              :label="$t('menu.device.part.page.replaceReason.other')"
-              value="other"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item :label="$t('menu.device.part.page.form.remark')">
-          <el-input
-            v-model="replaceForm.remark"
-            type="textarea"
-            :rows="2"
-            :placeholder="$t('menu.device.part.page.placeholder.remark')"
-          />
-        </el-form-item>
-      </el-form>
-      <div slot="footer">
-        <el-button @click="replaceDialogVisible = false">{{
-          $t("menu.device.part.page.message.cancelBtn")
-        }}</el-button>
-        <el-button
-          type="primary"
-          :loading="replaceLoading"
-          @click="confirmReplace"
-          >{{ $t("menu.device.part.page.form.confirmReplace") }}</el-button
-        >
-      </div>
-    </el-dialog>
+            <el-form-item
+              :label="$t('menu.device.part.page.form.replacePart')"
+              prop="partCode"
+            >
+              <el-input :value="replaceForm.partName" disabled />
+            </el-form-item>
+            <el-form-item
+              :label="$t('menu.device.part.page.form.currentCode')"
+              v-if="currentReplacePart"
+            >
+              <el-input :value="replaceForm.partCode" disabled />
+            </el-form-item>
+            <el-form-item
+              :label="$t('menu.device.part.page.form.newCode')"
+              prop="newCode"
+            >
+              <el-input
+                v-model="replaceForm.newCode"
+                :placeholder="$t('menu.device.part.page.placeholder.newCode')"
+                clearable
+              />
+            </el-form-item>
+            <el-form-item
+              :label="$t('menu.device.part.page.form.replaceReason')"
+              prop="reason"
+            >
+              <el-select
+                v-model="replaceForm.reason"
+                :placeholder="
+                  $t('menu.device.part.page.placeholder.replaceReason')
+                "
+                style="width: 100%"
+              >
+                <el-option
+                  :label="$t('menu.device.part.page.replaceReason.life')"
+                  value="life"
+                />
+                <el-option
+                  :label="$t('menu.device.part.page.replaceReason.damage')"
+                  value="damage"
+                />
+                <el-option
+                  :label="$t('menu.device.part.page.replaceReason.maintenance')"
+                  value="maintenance"
+                />
+                <el-option
+                  :label="$t('menu.device.part.page.replaceReason.changeover')"
+                  value="changeover"
+                />
+                <el-option
+                  :label="$t('menu.device.part.page.replaceReason.other')"
+                  value="other"
+                />
+              </el-select>
+            </el-form-item>
+            <el-form-item :label="$t('menu.device.part.page.form.remark')">
+              <el-input
+                v-model="replaceForm.remark"
+                type="textarea"
+                :rows="2"
+                :placeholder="$t('menu.device.part.page.placeholder.remark')"
+              />
+            </el-form-item>
+          </el-form>
+          <div slot="footer">
+            <el-button @click="replaceDialogVisible = false">{{
+              $t("menu.device.part.page.message.cancelBtn")
+            }}</el-button>
+            <el-button
+              type="primary"
+              :loading="replaceLoading"
+              @click="confirmReplace"
+              >{{ $t("menu.device.part.page.form.confirmReplace") }}</el-button
+            >
+          </div>
+        </el-dialog>
       </el-tab-pane>
 
       <!-- 模板管理Tab -->
@@ -962,9 +1014,7 @@ async function confirmPart() {
         partDialogVisible.value = false;
         loadPartList();
       } else {
-        Message.error(
-          res.msg || $t("menu.device.part.page.message.addFailed")
-        );
+        Message.error(res.msg || $t("menu.device.part.page.message.addFailed"));
       }
     }
   } catch (err) {
@@ -1458,5 +1508,3 @@ onMounted(() => {
   font-size: 13px;
 }
 </style>
-
-

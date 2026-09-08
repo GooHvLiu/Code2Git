@@ -40,6 +40,7 @@
     <el-table
       :data="filteredTemplates"
       v-loading="loading"
+      :element-loading-text="$t('common.loading')"
       border
       stripe
       :header-cell-style="{
@@ -57,7 +58,11 @@
         align="center"
       >
         <template slot-scope="{ row }">
-          <i v-if="row.icon" :class="row.icon" style="margin-right: 8px; color: #409eff"></i>
+          <i
+            v-if="row.icon"
+            :class="row.icon"
+            style="margin-right: 8px; color: #409eff"
+          ></i>
           {{ getTemplateName(row) }}
         </template>
       </el-table-column>
@@ -87,7 +92,8 @@
         align="center"
       >
         <template slot-scope="{ row }">
-          {{ row.default_rated_life }} {{ $t("menu.device.part.page.unit.times") }}
+          {{ row.default_rated_life }}
+          {{ $t("menu.device.part.page.unit.times") }}
         </template>
       </el-table-column>
       <el-table-column
@@ -115,7 +121,11 @@
       >
         <template slot-scope="{ row }">
           <el-tag :type="row.enabled ? 'success' : 'info'" size="mini">
-            {{ row.enabled ? $t("menu.device.part.template.status.enabled") : $t("menu.device.part.template.status.disabled") }}
+            {{
+              row.enabled
+                ? $t("menu.device.part.template.status.enabled")
+                : $t("menu.device.part.template.status.disabled")
+            }}
           </el-tag>
         </template>
       </el-table-column>
@@ -132,7 +142,11 @@
             icon="el-icon-edit"
             v-permission="'device:part:template:edit'"
             :disabled="row.part_count > 0 || row.is_base_template === 1"
-            :style="(row.part_count > 0 || row.is_base_template === 1) ? 'color: #c0c4cc !important; cursor: not-allowed;' : ''"
+            :style="
+              row.part_count > 0 || row.is_base_template === 1
+                ? 'color: #c0c4cc !important; cursor: not-allowed;'
+                : ''
+            "
             @click="handleEdit(row)"
             >{{ $t("menu.device.part.template.edit") }}</el-button
           >
@@ -140,7 +154,11 @@
             type="text"
             size="small"
             icon="el-icon-delete"
-            :style="(row.part_count > 0 || row.is_base_template === 1) ? 'color: #c0c4cc !important; cursor: not-allowed;' : 'color: #f56c6c'"
+            :style="
+              row.part_count > 0 || row.is_base_template === 1
+                ? 'color: #c0c4cc !important; cursor: not-allowed;'
+                : 'color: #f56c6c'
+            "
             v-permission="'device:part:template:delete'"
             :disabled="row.part_count > 0 || row.is_base_template === 1"
             @click="handleDelete(row)"
@@ -152,7 +170,11 @@
 
     <!-- 新增/编辑模板弹窗 -->
     <el-dialog
-      :title="isEdit ? $t('menu.device.part.template.edit') : $t('menu.device.part.template.add')"
+      :title="
+        isEdit
+          ? $t('menu.device.part.template.edit')
+          : $t('menu.device.part.template.add')
+      "
       :visible.sync="dialogVisible"
       width="600px"
       :close-on-click-modal="false"
@@ -161,13 +183,19 @@
         ref="templateFormRef"
         :model="templateForm"
         :rules="templateRules"
-        label-width="140px"
+        label-width="160px"
         class="template-dialog-form"
       >
-        <el-form-item
-          :label="$t('menu.device.part.template.form.templateName')"
-          prop="source_template_key"
-        >
+        <el-form-item prop="source_template_key">
+          <span slot="label">
+            {{ $t("menu.device.part.template.form.templateName") }}
+            <el-tooltip
+              :content="$t('menu.device.part.template.tips.templateName')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-select
             v-model="templateForm.source_template_key"
             :placeholder="$t('menu.device.part.template.form.templateName')"
@@ -183,19 +211,31 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item
-          :label="$t('menu.device.part.template.form.defaultSpec')"
-          prop="default_spec"
-        >
+        <el-form-item prop="default_spec">
+          <span slot="label">
+            {{ $t("menu.device.part.template.form.defaultSpec") }}
+            <el-tooltip
+              :content="$t('menu.device.part.template.tips.defaultSpec')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input
             v-model="templateForm.default_spec"
             :placeholder="$t('menu.device.part.template.form.defaultSpec')"
           />
         </el-form-item>
-        <el-form-item
-          :label="$t('menu.device.part.template.form.defaultRatedLife')"
-          prop="default_rated_life"
-        >
+        <el-form-item prop="default_rated_life">
+          <span slot="label">
+            {{ $t("menu.device.part.template.form.defaultRatedLife") }}
+            <el-tooltip
+              :content="$t('menu.device.part.template.tips.defaultRatedLife')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input-number
             v-model="templateForm.default_rated_life"
             :min="1"
@@ -262,9 +302,15 @@ const templateForm = reactive({
 
 // 表单验证规则
 const templateRules = {
-  source_template_key: [{ required: true, message: "请选择模板名称", trigger: "change" }],
-  default_spec: [{ required: true, message: "请输入默认规格型号", trigger: "blur" }],
-  default_rated_life: [{ required: true, message: "请输入默认额定寿命", trigger: "blur" }],
+  source_template_key: [
+    { required: true, message: "请选择模板名称", trigger: "change" },
+  ],
+  default_spec: [
+    { required: true, message: "请输入默认规格型号", trigger: "blur" },
+  ],
+  default_rated_life: [
+    { required: true, message: "请输入默认额定寿命", trigger: "blur" },
+  ],
 };
 
 // 过滤后的模板列表
@@ -306,15 +352,15 @@ async function loadTemplateList() {
     // 并行加载所有模板和基础模板
     const [res, baseRes] = await Promise.all([
       getPartTemplatesForAdmin(),
-      getBasePartTemplates()
+      getBasePartTemplates(),
     ]);
-    
+
     if (res.code === 200) {
       templateList.value = res.data || [];
     } else {
       Message.error(res.msg || res.message || "加载模板列表失败");
     }
-    
+
     if (baseRes.code === 200) {
       // 源模板列表只包含基础模板，用于新增模板时选择
       sourceTemplates.value = baseRes.data || [];
@@ -344,7 +390,9 @@ function handleTemplateChange(templateKey) {
     templateForm.default_rated_life = 0;
     return;
   }
-  const selectedTemplate = sourceTemplates.value.find(item => item.template_key === templateKey);
+  const selectedTemplate = sourceTemplates.value.find(
+    (item) => item.template_key === templateKey
+  );
   if (selectedTemplate) {
     templateForm.default_rated_life = selectedTemplate.default_rated_life || 0;
   }
@@ -486,4 +534,3 @@ defineExpose({
   padding: 0 20px;
 }
 </style>
-

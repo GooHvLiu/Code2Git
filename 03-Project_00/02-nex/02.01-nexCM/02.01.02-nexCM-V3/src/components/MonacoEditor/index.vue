@@ -99,12 +99,40 @@ export default {
     }
   },
   mounted() {
-    this.initEditor()
+    // 延迟初始化编辑器，避免 ResizeObserver 循环警告
+    this.$nextTick(() => {
+      requestAnimationFrame(() => {
+        this.initEditor()
+      })
+    })
+    // 手动监听窗口大小变化，替代 automaticLayout（避免 ResizeObserver 循环错误）
+    this._handleResize = this.debounce(() => {
+      if (this.editor) {
+        this.editor.layout()
+      }
+    }, 100)
+    window.addEventListener('resize', this._handleResize)
   },
   beforeDestroy() {
+    window.removeEventListener('resize', this._handleResize)
     this.disposeEditor()
   },
   methods: {
+    /**
+     * 防抖函数
+     */
+    debounce(fn, delay) {
+      let timer = null
+      return function() {
+        const context = this
+        const args = arguments
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          fn.apply(context, args)
+        }, delay)
+      }
+    },
+
     /**
      * 初始化编辑器
      */
@@ -122,7 +150,7 @@ export default {
         fontSize: this.fontSize,
         tabSize: this.tabSize,
         wordWrap: this.wordWrap ? 'on' : 'off',
-        automaticLayout: true,
+        automaticLayout: false, // 关闭自动布局，使用手动监听窗口大小变化，避免 ResizeObserver 循环错误
         scrollBeyondLastLine: false,
         folding: true,
         lineNumbers: 'on',

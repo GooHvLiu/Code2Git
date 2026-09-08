@@ -6,7 +6,7 @@
     :close-on-click-modal="false"
     @close="handleClose"
   >
-    <div v-loading="loading" class="notification-settings">
+    <div v-loading="loading" :element-loading-text="$t('common.loading')" class="notification-settings">
       <!-- 通知类型开关 -->
       <div class="settings-section">
         <div class="section-title">

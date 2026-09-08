@@ -1,0 +1,12 @@
+{
+  "ja-JP": {
+    "code": "ja-JP",
+    "name": "日语",
+    "autonym": "にほんご",
+    "flag": "flags/ja-JP",
+    "fileName": "ja-JP.js",
+    "isBuiltIn": false,
+    "isMaster": false,
+    "updatedAt": "2026-09-08T03:24:34.347Z"
+  }
+}

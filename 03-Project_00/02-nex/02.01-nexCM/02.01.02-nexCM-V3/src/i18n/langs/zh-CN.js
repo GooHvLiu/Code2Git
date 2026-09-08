@@ -37,6 +37,21 @@ export default {
       notification_priority: '通知优先级', // [未使用]
     },
     items: {
+      user_sex: {
+        '0': '男',
+        '1': '女',
+        '2': '未知'
+      },
+      user_status: {
+        '0': '禁用',
+        '1': '正常'
+      },
+      user_role: {
+        'super_admin': '超级管理员',
+        'administrator': '管理员',
+        'engineer': '工程师',
+        'operator': '操作员'
+      },
       environment: {
         nodeEnv: { label: '运行环境', description: 'Node.js运行环境，development为开发模式，production为生产模式' },
         appPort: { label: '服务端口', description: '后端服务监听的端口号' },
@@ -353,6 +368,11 @@ export default {
             enabled: '状态', // [未使用]
             sort: '排序'
           },
+          tips: {
+            templateName: '选择基础部件模板，将自动填充默认规格和额定寿命',
+            defaultSpec: '该模板部件的默认规格型号，新增部件时会自动填充',
+            defaultRatedLife: '该模板部件的默认额定寿命（次数），新增部件时会自动填充'
+          },
           statMethod: {
             successCount: '运行成功次数',
             rotationCount: '电机旋转圈数',
@@ -377,6 +397,12 @@ export default {
           replaceBtn: '更换录入', // [未使用]
           refreshBtn: '刷新', // [未使用]
           searchPlaceholder: '搜索部件名称/编码',
+          template: {
+            fillNeedle: '灌装针组件',
+            fillTube: '灌装管组件',
+            stopperRod: '加塞杆部件',
+            vacuumUnit: '真空组件'
+          },
           form: {
             template: '部件模板',
             partName: '部件名称',
@@ -397,12 +423,6 @@ export default {
             warning: '提醒',
             critical: '警告',
             expired: '已过期'
-          },
-          template: {
-            fillNeedle: '灌装针组件', // [未使用]
-            fillTube: '灌装管组件', // [未使用]
-            stopperRod: '加塞杆部件', // [未使用]
-            vacuumUnit: '真空组件' // [未使用]
           },
           unit: {
             times: '次'
@@ -443,6 +463,15 @@ export default {
             newCode: '请输入新物料编码',
             replaceReason: '请选择更换原因',
             ratedLife: '请输入额定寿命'
+          },
+          tips: {
+            template: '选择部件模板后，将自动填充部件名称、规格型号和额定寿命',
+            partName: '部件名称由模板自动填充，不可手动修改',
+            partCode: '部件的唯一物料编码，用于库存管理和追溯',
+            specModel: '规格型号由模板自动填充，不可手动修改',
+            ratedLife: '额定寿命由模板自动填充，表示部件的设计使用次数',
+            installDate: '部件实际安装到设备上的日期，用于计算已使用次数',
+            remark: '可选填写，用于记录额外信息'
           },
           replaceReason: {
             life: '达到使用寿命',
@@ -585,6 +614,15 @@ export default {
           batchNoPlaceholder: '请输入批次号',
           startTimePlaceholder: '请选择开始时间',
           estimatedEndPlaceholder: '请选择预计完成时间',
+          tips: {
+            orderNo: '订单的唯一编号，用于标识和追溯生产订单',
+            productName: '本次生产的产品名称',
+            recipeName: '选择生产配方，配方决定生产工艺参数',
+            batchNo: '生产批次号，用于质量追溯',
+            targetQty: '本次生产的目标数量',
+            startTime: '计划开始生产的时间',
+            estimatedEnd: '预计完成生产的时间'
+          },
           addSuccess: '订单新增成功', // [未使用]
           editSuccess: '订单编辑成功', // [未使用]
           deleteSuccess: '订单删除成功', // [未使用]
@@ -1068,7 +1106,19 @@ export default {
           deleteItemConfirm: '确定要删除该字典项吗？',
           deleteTypeConfirm: '确定要删除该字典类型吗？',
           editItem: '编辑字典项',
-          editType: '编辑字典类型'
+          editType: '编辑字典类型',
+          tips: {
+            typeName: '字典类型的显示名称，用于在页面中展示',
+            typeCode: '字典类型的唯一编码，用于代码中引用，创建后不可修改',
+            description: '字典类型的详细描述，说明该字典的用途',
+            status: '字典类型的启用状态，禁用后该字典下的所有字典项将不可用',
+            sort: '字典类型的显示排序，数值越小越靠前',
+            itemLabel: '字典项的显示标签，用于在页面中展示',
+            itemValue: '字典项的实际值，用于代码中存储和比较',
+            itemStatus: '字典项的启用状态，禁用后该字典项将不可用',
+            itemSort: '字典项的显示排序，数值越小越靠前',
+            itemRemark: '字典项的备注信息，可选填写'
+          }
         }
       },
       dept: {
@@ -1089,7 +1139,16 @@ export default {
           parentDeptPlaceholder: '选择上级部门',
           addDept: '新增部门',
           deleteConfirm: '确定要删除该部门吗？',
-          editDept: '编辑部门'
+          editDept: '编辑部门',
+          tips: {
+            parentDept: '选择该部门的上级部门，顶级部门可留空',
+            deptName: '部门的显示名称，用于在页面中展示',
+            orderNum: '部门的显示排序，数值越小越靠前',
+            leader: '部门的负责人姓名',
+            phone: '部门的联系电话',
+            email: '部门的联系邮箱',
+            status: '部门的启用状态，禁用后该部门将不可用'
+          }
         }
       },
       role: {
@@ -1105,7 +1164,13 @@ export default {
           editRole: '编辑角色',
           deleteConfirm: '确定要删除该角色吗？',
           basicRoleCannotEdit: '系统内置角色不允许编辑',
-          basicRoleCannotDelete: '系统内置角色不允许删除'
+          basicRoleCannotDelete: '系统内置角色不允许删除',
+          tips: {
+            roleName: '角色的显示名称，用于在页面中展示',
+            roleCode: '角色的唯一编码，用于代码中引用，创建后不可修改',
+            status: '角色的启用状态，禁用后该角色将不可用',
+            description: '角色的详细描述，说明该角色的权限和用途'
+          }
         }
       },
       config: {
@@ -1234,6 +1299,51 @@ export default {
             retryDelay: '重试间隔', // [未使用]
             retryDelayTip: '邮件发送失败后，等待多长时间后重试（毫秒）' // [未使用]
           },
+          language: {
+            title: '支持语言',
+            desc: '管理系统预设语言列表，配置系统支持哪些语言。修改后需重启后端服务生效。',
+            tipTitle: '注意事项',
+            tipContent: '修改预设语言配置后，需要重启后端服务才能生效。请确保配置文件格式正确，否则可能导致系统异常。',
+            tipExtra: '提示：国旗图标存放在前端 src/assets/icons/svg/flags/ 目录下，添加新语言时请同时添加对应的国旗SVG文件。',
+            loadFailed: '加载语言配置失败',
+            saveSuccess: '保存成功',
+            saveFailed: '保存失败',
+            emptyWarning: '配置内容不能为空',
+            resetInfo: '已重置为原始内容',
+            currentSupportedLangs: '当前支持的语言',
+            viewLanguages: '查看语言',
+            totalLangs: '共 {count} 种语言',
+            totalLangsUnit: '种语言'
+          },
+          translation: {
+            title: '翻译配置',
+            enabled: '已启用',
+            disabled: '未启用',
+            basicSettings: '基本设置',
+            enableTranslation: '启用自动翻译',
+            enableTranslationTip: '开启后，可在国际化管理页面使用自动翻译功能，将中文内容快速翻译为其他语言',
+            provider: '翻译服务商',
+            providerTip: '选择使用哪家翻译服务提供商，目前支持腾讯云翻译',
+            masterLanguage: '母版语言',
+            masterLanguageTip: '批量翻译时的源语言，所有翻译都基于此语言进行。默认中文，可根据需要修改为其他已存在的语言包',
+            tencentSettings: '腾讯云翻译配置',
+            secretId: 'SecretId',
+            secretIdTip: '腾讯云 API 密钥 ID，在腾讯云控制台-访问管理-API 密钥管理中获取',
+            secretIdPlaceholder: '请输入腾讯云 SecretId',
+            secretKey: 'SecretKey',
+            secretKeyTip: '腾讯云 API 密钥 Key，与 SecretId 配对使用，请注意保密',
+            secretKeyPlaceholder: '请输入腾讯云 SecretKey',
+            region: '区域',
+            regionTip: '腾讯云服务所在地域，建议选择距离服务器最近的区域以降低延迟',
+            projectId: '项目 ID',
+            projectIdTip: '腾讯云翻译项目 ID，默认 0 表示使用默认项目',
+            testConfig: '测试配置',
+            testSuccess: '配置有效，翻译测试成功',
+            testFailed: '测试失败',
+            existingLangs: '已存在的语言',
+            tipTitle: '使用说明',
+            tipContent: '配置完成后，可在国际化管理页面使用自动翻译功能，快速将中文内容翻译为其他语言。翻译服务需要在腾讯云控制台开通并获取 API 密钥。'
+          },
           upload: {
             title: '上传设置',
             maxFileSize: '最大文件大小',
@@ -1277,7 +1387,7 @@ export default {
       feature: {
         default: '功能配置', // [未使用]
         page: {
-          title: '功能配置',
+          title: '项目功能配置',
           pageDesc: '管理系统各功能模块的开关配置，仅超级管理员可访问',
           categoryList: '功能分类', // [未使用]
           resetAll: '全部重置',
@@ -1443,7 +1553,7 @@ export default {
       },
       database: {
         default: '数据管理', // [未使用]
-        title: '数据管理',
+        title: '项目数据库管理',
         desc: '数据库管理工具，支持数据查看、表编辑、备份和回滚，仅超级管理员可访问',
         tabs: {
           dataView: '数据查看',
@@ -1452,7 +1562,31 @@ export default {
           restore: '回滚指南'
         },
         searchTable: '搜索表',
+        configFileTip: '配置文件: src/config/database.config.js',
+        categories: {
+          system: '系统管理',
+          user: '用户管理',
+          security: '安全合规',
+          log: '日志管理',
+          config: '配置管理',
+          notification: '消息通知',
+          device: '设备管理',
+          license: '授权管理',
+          other: '其他'
+        },
         noTable: '暂无数据表',
+        noDescription: '暂无描述',
+        rows: '行',
+        dataRows: '数据行数',
+        fieldCount: '字段数量',
+        tableDescription: '表描述',
+        tips: {
+          fieldValue: '该字段的值，请根据实际情况输入',
+          quickPath: '常用的备份存储路径，点击可快速填充到新路径输入框'
+        },
+        placeholder: {
+          enterField: '请输入'
+        },
         selectTableTip: '请从左侧选择一个数据表',
         refresh: '刷新',
         searchData: '搜索数据',
@@ -1476,6 +1610,22 @@ export default {
         deleteSuccess: '删除成功',
         deleteFailed: '删除失败',
         createBackup: '创建备份',
+        changePath: '修改路径',
+        currentStoragePath: '当前存储路径：',
+        defaultPath: 'backups/database (默认)',
+        pathDialogTitle: '修改存储路径',
+        currentPath: '当前路径',
+        currentPathTip: '当前数据库备份文件的存储目录，所有备份文件都会保存在此目录下',
+        newPath: '新路径',
+        newPathTip: '修改数据库备份文件的存储目录，修改后新的备份会保存在新目录下，已有备份不会移动',
+        newPathPlaceholder: '请输入存储路径，如：D:/backups/database',
+        browse: '浏览',
+        quickPath: '快捷路径',
+        pathWarning: '修改存储路径后，历史备份文件仍保留在原路径，新备份将保存到新路径。由于浏览器安全限制，浏览按钮只能获取文件夹名称，完整路径请手动输入。',
+        backupTotal: '备份总数',
+        successBackup: '成功备份',
+        failedBackup: '失败备份',
+        totalSize: '总大小',
         backupTip: '备份文件将保存在服务器 backups/database 目录下，编辑表数据前会自动备份当前表',
         backupName: '备份名称',
         backupType: '备份类型',
@@ -1530,7 +1680,138 @@ export default {
           database: '数据配置', // [未使用]
           license: '授权配置', // [未使用]
           email: '邮箱配置', // [未使用]
-          plc: 'PLC 配置' // [未使用]
+          translation: '翻译配置',
+          plc: 'PLC 配置', // [未使用]
+          i18n: '支持语言'
+        },
+        translation: {
+          goToConfig: '前往设置',
+          tipTitle: '配置说明',
+          tipContent: '翻译配置用于管理系统的自动翻译功能。配置完成后，可在国际化管理页面使用自动翻译功能，快速将中文内容翻译为其他语言。翻译服务需要在腾讯云控制台开通并获取 API 密钥。'
+        },
+        i18n: {
+          title: '国际化管理',
+          desc: '管理系统多语言配置，支持在线搜索、编辑、新增国际化内容，仅超级管理员可访问',
+          addConfig: '配置',
+          backup: '备份',
+          backupPath: '备份路径',
+          searchPlaceholder: '搜索 key 或 value...',
+          searchResult: '搜索结果',
+          noData: '暂无数据',
+          selectLanguageTitle: '请选择语言',
+          selectLanguageDesc: '点击上方 Tab 或下方语言卡片选择要编辑的语言，需要哪个加载哪个',
+          addChild: '新增子节点',
+          addSibling: '新增同级节点',
+          deleteNode: '删除节点',
+          parentPath: '父级路径',
+          parentPathTip: '选择新增配置项的父级路径，如 common 或 menu.system',
+          parentPathPlaceholder: '请选择父级路径',
+          keyName: 'Key 名称',
+          keyNameTip: '新增配置项的 key 名称，如 save、cancel 等',
+          keyNamePlaceholder: '如：confirmSave',
+          valuePlaceholderWithLang: '请输入{lang}的值',
+          autoTranslate: '自动翻译',
+          unsavedChanges: '当前有未保存的修改，切换语言将丢失修改，确定继续吗？',
+          noChanges: '没有需要保存的修改',
+          saveSuccess: '保存成功，请重新编译或刷新页面',
+          saveFailed: '保存失败',
+          backupSuccess: '备份成功',
+          backupFailed: '备份失败',
+          loadFileListFailed: '加载文件列表失败',
+          loadFileFailed: '加载文件失败',
+          cannotAddChildToLeaf: '叶子节点不能新增子节点',
+          confirmDelete: '确定要删除该配置项吗',
+          deleteSuccess: '删除成功',
+          deleteFailed: '删除失败',
+          keyNotEmpty: 'Key 名称不能为空',
+          keyInvalid: 'Key 名称格式不正确，只能包含字母、数字、下划线和美元符号，且不能以数字开头',
+          addSuccess: '新增成功，请重新编译或刷新页面',
+          addFailed: '新增失败',
+          translateSourceEmpty: '请先输入中文内容',
+          translateZhNotFound: '中文语言包中找不到对应的 key，请先在中文语言包中添加该配置',
+          translateStart: '开始批量翻译',
+          translateNoContent: '没有可翻译的内容',
+          translateBatchSuccess: '批量翻译完成: {lang}，成功 {success} 项，失败 {fail} 项',
+          translateSaveFailed: '翻译结果保存失败',
+          translateTip: '自动翻译仅供参考，请人工核对翻译内容',
+          translateProgress: '翻译进度',
+          translating: '翻译中...',
+          totalCount: '总数',
+          currentCount: '已完成',
+          successCount: '成功',
+          failCount: '失败',
+          currentTranslating: '当前正在翻译',
+          translateProgressTip: '关闭弹窗后翻译将在后台继续，可随时点击翻译状态图标重新查看进度',
+          cancelTranslate: '取消翻译',
+          cancelTranslateConfirm: '确定要取消翻译吗？已翻译的内容将被保存。',
+          translateCancelled: '翻译已取消: {lang}，已完成 {completed} 项，失败 {fail} 项',
+          minimize: '最小化',
+          closeTranslate: '关闭（翻译在后台继续）',
+          restore: '还原',
+          batchTranslate: '批量翻译',
+          batchTranslateTip: '请选择翻译模式，翻译过程中可以关闭弹窗在后台继续翻译',
+          translateMissingOnly: '仅翻译缺失项',
+          translateMissingOnlyDesc: '只翻译当前为空的字段，不覆盖已有翻译（推荐）',
+          translateAll: '全部重新翻译',
+          translateAllDesc: '覆盖所有已有翻译（危险，请谨慎操作）',
+          nodeTranslate: '节点翻译',
+          nodeTranslateTip: '将只翻译该节点下的所有内容，翻译过程中可以关闭弹窗在后台继续翻译',
+          nodeTranslateLeafTip: '叶子节点不能进行节点翻译，请选择父级节点',
+          nodeTranslateNoContent: '该节点下没有可翻译的内容',
+          translateInProgressTip: '翻译正在进行中，请等待翻译完成后再操作',
+          translateSuccess: '翻译成功',
+          translateFailed: '翻译失败，请检查翻译配置',
+          translateOnlyLeaf: '只能翻译叶子节点',
+          translateNotZh: '中文语言不需要翻译',
+          formatNormal: '正常翻译（全小写，带空格）',
+          formatTitle: '首字大写（单词首字母大写，带空格）',
+          formatCamel: '驼峰命名（首词小写，后续首字母大写，无空格）',
+          autoTranslateAll: '创建后自动翻译',
+          autoTranslateAllTip: '开启后，创建语言文件时会自动将中文内容翻译为新语言（value 使用首字大写格式），可能消耗较多翻译额度',
+          autoTranslateTip: '从中文语言包中获取对应 key 的内容，翻译为当前语言。如果中文语言包中没有该 key，会报错提示。',
+          currentPath: '当前路径',
+          currentPathTip: '当前国际化文件备份的存储目录，所有备份文件都会保存在此目录下',
+          newPath: '新路径',
+          newPathTip: '修改备份文件的存储目录，修改后新的备份会保存在新目录下，已有备份不会移动',
+          pathNotEmpty: '路径不能为空',
+          setPathSuccess: '备份路径设置成功',
+          setPathFailed: '备份路径设置失败',
+          backupList: '备份清单',
+          backupFileName: '备份文件名',
+          backupFileSize: '文件大小',
+          backupCreateTime: '创建时间',
+          noBackup: '暂无备份文件',
+          confirmDeleteBackup: '确定要删除该备份文件吗',
+          deleteBackupSuccess: '备份删除成功',
+          deleteBackupFailed: '备份删除失败',
+          valuePlaceholder: '请输入值',
+          actions: '操作',
+          items: '项',
+          folders: '个文件夹',
+          total: '个节点',
+          noChildren: '暂无子节点，点击上方按钮新增',
+          selectNodeTip: '请从左侧树形结构选择要编辑的节点',
+          value: '值',
+          createLanguage: '语言',
+          sourceLanguage: '源语言',
+          sourceLanguageTip: '选择作为模板的源语言文件，新语言将基于此文件的 key 结构创建',
+          newLangCode: '新语言编码',
+          newLangCodeTip: '新语言的文件名，格式为"语言编码-地区编码.js"，如 ja-JP.js、ko-KR.js',
+          newLangCodePlaceholder: '如：ja-JP.js / ko-KR.js / fr-FR.js',
+          newLangName: '新语言名称',
+          newLangNameTip: '新语言在 Tab 标签上显示的名称，如"日本語"、"한국어"、"Français"',
+          newLangNamePlaceholder: '如：日本語 / 한국어 / Français',
+          copyValues: '复制源语言内容',
+          copyValuesTip: '开启后将复制源语言的 value 内容到新语言；关闭后只保留 key 结构，value 留空',
+          copyValuesYes: '复制',
+          copyValuesNo: '留空',
+          createLanguageTip: '创建后将在语言列表中显示新的 Tab，需要重新编译或刷新页面后生效',
+          createLanguageSuccess: '语言创建成功，请重新编译或刷新页面',
+          createLanguageFailed: '语言创建失败',
+          sourceLangNotEmpty: '源语言不能为空',
+          newLangCodeNotEmpty: '新语言编码不能为空',
+          newLangCodeFormat: '新语言编码必须以 .js 结尾',
+          newLangNameNotEmpty: '新语言名称不能为空'
         },
         editType: {
           database: '数据库配置', // [未使用]
@@ -1663,7 +1944,9 @@ export default {
               maxSize: { label: '最大文件大小', description: 'GitHub图床上传文件的最大大小限制' }
             },
             backup: {
-              dir: { label: '数据库备份目录', description: '数据库备份文件存储目录' }
+              dir: { label: '数据库备份目录', description: '数据库备份文件存储目录' },
+              i18nDir: { label: '国际化备份目录', description: '国际化语言文件备份存储目录' },
+              configDir: { label: '配置数据备份目录', description: '配置文件版本历史备份存储目录' }
             },
             logs: {
               dir: { label: '日志目录', description: '系统日志文件存储目录' }
@@ -1767,6 +2050,11 @@ export default {
             multiDeviceEnabled: { label: '多设备模式', description: '是否启用多设备模式，支持同时连接多个PLC设备' }
           }
         }
+      },
+      i18n: {
+        default: '语言配置',
+        title: '语言配置',
+        desc: '管理系统多语言配置，支持在线搜索、编辑、新增国际化内容，仅超级管理员可访问'
       }
     },
   },
@@ -1866,7 +2154,9 @@ export default {
     language: {
       title: '语言',
       switchedToZh: '已切换为中文',
-      switchedToEn: '已切换为英文'
+      switchedToEn: '已切换为英文',
+      switched: '已切换为 {lang}',
+      switchFailed: '语言切换失败'
     }
   },
   notification: {

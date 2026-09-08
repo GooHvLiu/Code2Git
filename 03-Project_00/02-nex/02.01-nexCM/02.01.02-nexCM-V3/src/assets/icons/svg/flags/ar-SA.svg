@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480">
+  <rect width="640" height="480" fill="#006C35"/>
+  <rect x="160" y="180" width="320" height="120" fill="#FFFFFF"/>
+  <text x="320" y="260" font-family="Arial" font-size="60" fill="#006C35" text-anchor="middle">العربية</text>
+</svg>

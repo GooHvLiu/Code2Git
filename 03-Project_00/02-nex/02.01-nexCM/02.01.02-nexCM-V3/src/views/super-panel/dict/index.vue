@@ -41,6 +41,7 @@
           </div>
           <el-table
             v-loading="typeLoading"
+            :element-loading-text="$t('common.loading')"
             :data="typeList"
             border
             highlight-current-row
@@ -99,7 +100,10 @@
             <span class="panel-title">
               {{
                 currentType
-                  ? getDictTypeLabel(currentType.dict_code, currentType.dict_name) +
+                  ? getDictTypeLabel(
+                      currentType.dict_code,
+                      currentType.dict_name
+                    ) +
                     " - " +
                     $t("menu.superPanel.dict.page.itemList")
                   : $t("menu.superPanel.dict.page.itemList")
@@ -126,6 +130,7 @@
           </div>
           <el-table
             v-loading="itemLoading"
+            :element-loading-text="$t('common.loading')"
             :data="itemList"
             border
             stripe
@@ -222,29 +227,50 @@
         :model="typeForm"
         :rules="typeRules"
         ref="typeFormRef"
-        label-width="100px"
+        label-width="160px"
       >
-        <el-form-item
-          :label="$t('menu.superPanel.dict.page.typeName')"
-          prop="dict_name"
-        >
+        <el-form-item prop="dict_name">
+          <span slot="label">
+            {{ $t("menu.superPanel.dict.page.typeName") }}
+            <el-tooltip
+              :content="$t('menu.superPanel.dict.page.tips.typeName')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input
             v-model="typeForm.dict_name"
             :placeholder="$t('menu.superPanel.dict.page.typeNamePlaceholder')"
             :maxlength="50"
           />
         </el-form-item>
-        <el-form-item
-          :label="$t('menu.superPanel.dict.page.typeCode')"
-          prop="dict_code"
-        >
+        <el-form-item prop="dict_code">
+          <span slot="label">
+            {{ $t("menu.superPanel.dict.page.typeCode") }}
+            <el-tooltip
+              :content="$t('menu.superPanel.dict.page.tips.typeCode')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input
             v-model="typeForm.dict_code"
             :placeholder="$t('menu.superPanel.dict.page.typeCodePlaceholder')"
             :disabled="typeDialog.isEdit"
           />
         </el-form-item>
-        <el-form-item :label="$t('common.description')" prop="description">
+        <el-form-item prop="description">
+          <span slot="label">
+            {{ $t("common.description") }}
+            <el-tooltip
+              :content="$t('menu.superPanel.dict.page.tips.description')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input
             v-model="typeForm.description"
             type="textarea"
@@ -252,13 +278,31 @@
             :maxlength="200"
           />
         </el-form-item>
-        <el-form-item :label="$t('common.status')" prop="status">
+        <el-form-item prop="status">
+          <span slot="label">
+            {{ $t("common.status") }}
+            <el-tooltip
+              :content="$t('menu.superPanel.dict.page.tips.status')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-radio-group v-model="typeForm.status">
             <el-radio :label="1">{{ $t("common.enable") }}</el-radio>
             <el-radio :label="0">{{ $t("common.disable") }}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item :label="$t('common.sort')" prop="sort">
+        <el-form-item prop="sort">
+          <span slot="label">
+            {{ $t("common.sort") }}
+            <el-tooltip
+              :content="$t('menu.superPanel.dict.page.tips.sort')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input-number v-model="typeForm.sort" :min="0" />
         </el-form-item>
       </el-form>
@@ -283,37 +327,76 @@
         :model="itemForm"
         :rules="itemRules"
         ref="itemFormRef"
-        label-width="100px"
+        label-width="160px"
       >
-        <el-form-item
-          :label="$t('menu.superPanel.dict.page.itemLabel')"
-          prop="label"
-        >
+        <el-form-item prop="label">
+          <span slot="label">
+            {{ $t("menu.superPanel.dict.page.itemLabel") }}
+            <el-tooltip
+              :content="$t('menu.superPanel.dict.page.tips.itemLabel')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input
             v-model="itemForm.label"
             :placeholder="$t('menu.superPanel.dict.page.itemLabelPlaceholder')"
             :maxlength="100"
           />
         </el-form-item>
-        <el-form-item
-          :label="$t('menu.superPanel.dict.page.itemValue')"
-          prop="value"
-        >
+        <el-form-item prop="value">
+          <span slot="label">
+            {{ $t("menu.superPanel.dict.page.itemValue") }}
+            <el-tooltip
+              :content="$t('menu.superPanel.dict.page.tips.itemValue')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input
             v-model="itemForm.value"
             :placeholder="$t('menu.superPanel.dict.page.itemValuePlaceholder')"
           />
         </el-form-item>
-        <el-form-item :label="$t('common.status')" prop="status">
+        <el-form-item prop="status">
+          <span slot="label">
+            {{ $t("common.status") }}
+            <el-tooltip
+              :content="$t('menu.superPanel.dict.page.tips.itemStatus')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-radio-group v-model="itemForm.status">
             <el-radio :label="1">{{ $t("common.enable") }}</el-radio>
             <el-radio :label="0">{{ $t("common.disable") }}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item :label="$t('common.sort')" prop="sort">
+        <el-form-item prop="sort">
+          <span slot="label">
+            {{ $t("common.sort") }}
+            <el-tooltip
+              :content="$t('menu.superPanel.dict.page.tips.itemSort')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input-number v-model="itemForm.sort" :min="0" />
         </el-form-item>
-        <el-form-item :label="$t('common.remark')" prop="remark">
+        <el-form-item prop="remark">
+          <span slot="label">
+            {{ $t("common.remark") }}
+            <el-tooltip
+              :content="$t('menu.superPanel.dict.page.tips.itemRemark')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input v-model="itemForm.remark" type="textarea" :rows="2" />
         </el-form-item>
       </el-form>
@@ -411,8 +494,16 @@ const itemRules = {
 
 // ===== 计算属性 =====
 const exportColumns = computed(() => [
-  { label: $t("menu.superPanel.dict.page.itemLabel"), prop: "label", width: 150 },
-  { label: $t("menu.superPanel.dict.page.itemValue"), prop: "value", width: 150 },
+  {
+    label: $t("menu.superPanel.dict.page.itemLabel"),
+    prop: "label",
+    width: 150,
+  },
+  {
+    label: $t("menu.superPanel.dict.page.itemValue"),
+    prop: "value",
+    width: 150,
+  },
   {
     label: $t("menu.superPanel.dict.page.itemStatus"),
     prop: "status",
@@ -426,7 +517,10 @@ const exportColumns = computed(() => [
 
 const exportTitle = computed(() =>
   currentType.value
-    ? `${getDictTypeLabel(currentType.value.dict_code, currentType.value.dict_name)} - ${$t("menu.superPanel.dict.page.itemList")}`
+    ? `${getDictTypeLabel(
+        currentType.value.dict_code,
+        currentType.value.dict_name
+      )} - ${$t("menu.superPanel.dict.page.itemList")}`
     : $t("menu.superPanel.dict.page.itemList")
 );
 

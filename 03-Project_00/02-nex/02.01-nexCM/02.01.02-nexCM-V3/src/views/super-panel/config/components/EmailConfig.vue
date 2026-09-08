@@ -39,6 +39,7 @@
     <el-table
       :data="tableData"
       v-loading="loading"
+      :element-loading-text="$t('common.loading')"
       :header-cell-style="{
         background: '#f5f7fa',
         color: '#606266',

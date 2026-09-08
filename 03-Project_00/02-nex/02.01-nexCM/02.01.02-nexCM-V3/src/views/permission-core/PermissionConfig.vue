@@ -51,7 +51,7 @@
           </span>
           <el-tag size="mini" type="info">{{ visibleRoles.length }}</el-tag>
         </div>
-        <div class="role-list" v-loading="roleLoading">
+        <div class="role-list" v-loading="roleLoading" :element-loading-text="$t('common.loading')">
           <div
             v-for="role in visibleRoles"
             :key="role.id"
@@ -119,7 +119,7 @@
         </div>
 
         <!-- 权限树形结构 -->
-        <div class="permission-tree-wrapper" v-loading="loading">
+        <div class="permission-tree-wrapper" v-loading="loading" :element-loading-text="$t('common.loading')">
           <div v-if="!currentRole" class="empty-tip empty-tip-large">
             <i class="el-icon-menu empty-icon" />
             <p class="empty-text">

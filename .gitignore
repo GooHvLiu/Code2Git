@@ -86,3 +86,6 @@ npm-debug.log*
 # Temp
 tmp/
 temp/
+
+# 腾讯云翻译秘钥
+translation-config.json

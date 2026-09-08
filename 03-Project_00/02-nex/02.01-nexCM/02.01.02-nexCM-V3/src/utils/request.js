@@ -210,37 +210,22 @@ service.interceptors.response.use(
       return Promise.reject(res)
     }
 
-    // 参数校验错误：根据 field 和 type 生成国际化 key（type 中的点号替换为下划线，避免 vue-i18n 解析成嵌套对象）
-    if (res.code === 'PARAM_INVALID') {
-      const i18nInvalid = require('@/i18n').default
-      const { field, type } = res.data || {}
-      // 把 type 中的点号替换成下划线，如 string.min -> string_min
-      const typeKey = (type || '').replace(/\./g, '_')
-      const paramKey = 'error.PARAM_INVALID.' + field + '.' + typeKey
-      if (field && type && i18nInvalid.te(paramKey)) {
-        const paramMessage = i18nInvalid.t(paramKey, res.data || {})
-        showError(paramMessage)
-      } else {
-        // 标准实现：每一种参数校验错误都应该有对应的国际化配置
-        showError(res.data?.message || res.msg || '参数错误')
-      }
-      return Promise.reject(res)
-    }
-    // 参数校验错误：优先用 字段名.错误类型 作为 key 查找国际化，找不到就用通用兜底
-    // 参数校验错误：优先用 字段名.错误类型 作为 key 查找国际化，找不到就用通用兜底
+    // 参数校验错误：优先用 字段名.错误类型 作为 key 查找国际化（type 中的点号替换为下划线，避免 vue-i18n 解析成嵌套对象），逐级降级兜底
     if (res.code === 'PARAM_INVALID') {
       const i18nInvalid = require('@/i18n').default
       const { field, type, message: rawMessage } = res.data || {}
+      // 把 type 中的点号替换成下划线，如 string.min -> string_min（与 i18n 语言包中的 key 保持一致）
+      const typeKey = (type || '').replace(/\./g, '_')
       let paramMessage
-      // 1. 优先用 error.PARAM_INVALID.field.type 查找（如 error.PARAM_INVALID.password.string.min）
-      if (field && type && i18nInvalid.te('error.PARAM_INVALID.' + field + '.' + type)) {
-        paramMessage = i18nInvalid.t('error.PARAM_INVALID.' + field + '.' + type, res.data || {})
+      // 1. 优先用 error.PARAM_INVALID.field.typeKey 查找（如 error.PARAM_INVALID.password.string_min）
+      if (field && type && i18nInvalid.te('error.PARAM_INVALID.' + field + '.' + typeKey)) {
+        paramMessage = i18nInvalid.t('error.PARAM_INVALID.' + field + '.' + typeKey, res.data || {})
       }
-      // 2. 其次用 error.PARAM_INVALID.type 查找（如 error.PARAM_INVALID.string.min）
-      else if (type && i18nInvalid.te('error.PARAM_INVALID.' + type)) {
-        paramMessage = i18nInvalid.t('error.PARAM_INVALID.' + type, res.data || {})
+      // 2. 其次用 error.PARAM_INVALID.typeKey 查找（如 error.PARAM_INVALID.string_min）
+      else if (type && i18nInvalid.te('error.PARAM_INVALID.' + typeKey)) {
+        paramMessage = i18nInvalid.t('error.PARAM_INVALID.' + typeKey, res.data || {})
       }
-      // 3. 再次用 error.PARAM_INVALID 查找（通用兜底）
+      // 3. 再次用 error.PARAM_INVALID.default 查找（通用兜底）
       else if (i18nInvalid.te('error.PARAM_INVALID.default')) {
         paramMessage = i18nInvalid.t('error.PARAM_INVALID.default', res.data || {})
       }

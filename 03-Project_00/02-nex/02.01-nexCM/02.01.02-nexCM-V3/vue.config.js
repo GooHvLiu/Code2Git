@@ -75,6 +75,16 @@ module.exports = defineConfig({
     client: {
       webSocketURL: {
         pathname: '/sockjs-node'
+      },
+      // 配置 overlay 遮罩层，忽略特定的运行时错误
+      overlay: {
+        runtimeErrors: (error) => {
+          // 忽略 ResizeObserver 循环错误（Monaco Editor 等组件常见，不影响功能）
+          if (error && error.message && error.message.includes('ResizeObserver loop completed with undelivered notifications')) {
+            return false;
+          }
+          return true;
+        }
       }
     },
     // 代理配置
@@ -112,7 +122,12 @@ module.exports = defineConfig({
       .use('svg-sprite')
       .loader('svg-sprite-loader')
       .options({
-        symbolId: 'icon-[name]'
+        symbolId: (filePath) => {
+          // 从文件路径中提取相对路径，去掉 src/assets/icons/svg/ 前缀
+          const relativePath = path.relative(path.join(__dirname, 'src/assets/icons/svg'), filePath)
+          // 把斜杠/反斜杠替换成短横线，去掉 .svg 后缀
+          return 'icon-' + relativePath.replace(/\\/g, '/').replace(/\//g, '-').replace(/\.svg$/, '')
+        }
       })
       .end()
 

@@ -138,7 +138,7 @@
         <el-table-column
           :label="$t('menu.production.order.page.productName')"
           prop="productName"
-          width="140"
+          width="140px"
         />
         <el-table-column
           :label="$t('menu.production.order.page.recipeName')"
@@ -314,22 +314,34 @@
         ref="orderForm"
         :model="orderForm"
         :rules="formRules"
-        label-width="100px"
+        label-width="140px"
       >
-        <el-form-item
-          :label="$t('menu.production.order.page.orderNo')"
-          prop="orderNo"
-        >
+        <el-form-item prop="orderNo">
+          <span slot="label">
+            {{ $t("menu.production.order.page.orderNo") }}
+            <el-tooltip
+              :content="$t('menu.production.order.page.tips.orderNo')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input
             v-model="orderForm.orderNo"
             :placeholder="$t('menu.production.order.page.orderNoPlaceholder')"
             :disabled="isEdit"
           />
         </el-form-item>
-        <el-form-item
-          :label="$t('menu.production.order.page.productName')"
-          prop="productName"
-        >
+        <el-form-item prop="productName">
+          <span slot="label">
+            {{ $t("menu.production.order.page.productName") }}
+            <el-tooltip
+              :content="$t('menu.production.order.page.tips.productName')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input
             v-model="orderForm.productName"
             :placeholder="
@@ -337,10 +349,16 @@
             "
           />
         </el-form-item>
-        <el-form-item
-          :label="$t('menu.production.order.page.recipeName')"
-          prop="recipeName"
-        >
+        <el-form-item prop="recipeName">
+          <span slot="label">
+            {{ $t("menu.production.order.page.recipeName") }}
+            <el-tooltip
+              :content="$t('menu.production.order.page.tips.recipeName')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-select
             v-model="orderForm.recipeName"
             :placeholder="
@@ -356,19 +374,31 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item
-          :label="$t('menu.production.order.page.batchNo')"
-          prop="batchNo"
-        >
+        <el-form-item prop="batchNo">
+          <span slot="label">
+            {{ $t("menu.production.order.page.batchNo") }}
+            <el-tooltip
+              :content="$t('menu.production.order.page.tips.batchNo')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input
             v-model="orderForm.batchNo"
             :placeholder="$t('menu.production.order.page.batchNoPlaceholder')"
           />
         </el-form-item>
-        <el-form-item
-          :label="$t('menu.production.order.page.targetQty')"
-          prop="targetQty"
-        >
+        <el-form-item prop="targetQty">
+          <span slot="label">
+            {{ $t("menu.production.order.page.targetQty") }}
+            <el-tooltip
+              :content="$t('menu.production.order.page.tips.targetQty')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-input-number
             v-model="orderForm.targetQty"
             :min="1"
@@ -376,10 +406,16 @@
             style="width: 100%"
           />
         </el-form-item>
-        <el-form-item
-          :label="$t('menu.production.order.page.startTime')"
-          prop="startTime"
-        >
+        <el-form-item prop="startTime">
+          <span slot="label">
+            {{ $t("menu.production.order.page.startTime") }}
+            <el-tooltip
+              :content="$t('menu.production.order.page.tips.startTime')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-date-picker
             v-model="orderForm.startTime"
             type="datetime"
@@ -387,10 +423,16 @@
             style="width: 100%"
           />
         </el-form-item>
-        <el-form-item
-          :label="$t('menu.production.order.page.estimatedEnd')"
-          prop="estimatedEnd"
-        >
+        <el-form-item prop="estimatedEnd">
+          <span slot="label">
+            {{ $t("menu.production.order.page.estimatedEnd") }}
+            <el-tooltip
+              :content="$t('menu.production.order.page.tips.estimatedEnd')"
+              placement="top"
+            >
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
           <el-date-picker
             v-model="orderForm.estimatedEnd"
             type="datetime"
@@ -501,11 +543,11 @@ const orderConfig = computed(() => ({
 // 根据当前Tab获取权限编码
 function getTabPermission(action) {
   const tabMap = {
-    completed: 'completed',
-    running: 'running',
-    planned: 'planned'
+    completed: "completed",
+    running: "running",
+    planned: "planned",
   };
-  const tab = tabMap[activeTab.value] || 'completed';
+  const tab = tabMap[activeTab.value] || "completed";
   return `production:order:${tab}:${action}`;
 }
 
@@ -984,6 +1026,3 @@ html
   background: #fff;
 }
 </style>
-
-
-

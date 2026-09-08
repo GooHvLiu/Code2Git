@@ -1,24 +1,24 @@
-﻿<template>
+<template>
   <!--
-    快捷设置入口（原 ThemePicker 扩展）
-    结构：加号按钮 → 下拉菜单 → 各功能面板（当前只有调色板，后续可扩展）
+    蹇嵎璁剧疆鍏ュ彛锛堝師 ThemePicker 鎵╁睍锛?
+    缁撴瀯锛氬姞鍙锋寜閽?鈫?涓嬫媺鑿滃崟 鈫?鍚勫姛鑳介潰鏉匡紙褰撳墠鍙湁璋冭壊鏉匡紝鍚庣画鍙墿灞曪級
 
-    用法（挂到 Navbar 右侧）：
+    鐢ㄦ硶锛堟寕鍒?Navbar 鍙充晶锛夛細
     <theme-picker />
 
-    扩展新功能：在 menuItems 数组中增加配置，
-    并在模板中增加对应的 activePanel 分支即可。
+    鎵╁睍鏂板姛鑳斤細鍦?menuItems 鏁扮粍涓鍔犻厤缃紝
+    骞跺湪妯℃澘涓鍔犲搴旂殑 activePanel 鍒嗘敮鍗冲彲銆?
   -->
   <div class="quick-menu">
-    <!-- 加号触发按钮 -->
+    <!-- 鍔犲彿瑙﹀彂鎸夐挳 -->
     <div class="quick-trigger" @click="toggleMenu" :class="{ active: visible }">
       <i class="el-icon-plus"></i>
     </div>
 
-    <!-- 下拉面板 -->
+    <!-- 涓嬫媺闈㈡澘 -->
     <transition name="fade">
       <div v-show="visible" class="quick-panel" @click.stop>
-        <!-- ========== 第一层：菜单列表 ========== -->
+        <!-- ========== 绗竴灞傦細鑿滃崟鍒楄〃 ========== -->
         <div v-if="!activePanel" class="menu-list">
           <div class="panel-title">{{ $t("quickMenu.title") }}</div>
 
@@ -29,7 +29,7 @@
             @click="openPanel(item.key)"
           >
             <span class="menu-icon" :style="{ color: item.color }">
-              <span v-if="item.key === 'language'" class="menu-emoji">🌐</span>
+              <svg-icon v-if="item.key === 'language'" :icon-class="currentLangFlag" class="menu-flag-icon" />
               <i v-else :class="item.icon"></i>
             </span>
             <span class="menu-label">
@@ -38,10 +38,10 @@
             <i class="el-icon-arrow-right menu-arrow"></i>
           </div>
 
-          <!-- 后续功能在这里加 menu-item -->
+          <!-- 鍚庣画鍔熻兘鍦ㄨ繖閲屽姞 menu-item -->
         </div>
 
-        <!-- ========== 第二层：主题调色面板 ========== -->
+        <!-- ========== 绗簩灞傦細涓婚璋冭壊闈㈡澘 ========== -->
         <div v-else-if="activePanel === 'palette'" class="palette-panel">
           <div class="panel-header">
             <i
@@ -57,7 +57,7 @@
           </div>
 
           <div class="palette-content">
-            <!-- 遍历所有可配置字段 -->
+            <!-- 閬嶅巻鎵€鏈夊彲閰嶇疆瀛楁 -->
             <div
               v-for="field in themeFields"
               :key="field.key"
@@ -78,7 +78,7 @@
                 </span>
               </div>
 
-              <!-- 预设颜色 -->
+              <!-- 棰勮棰滆壊 -->
               <div class="color-list">
                 <div
                   v-for="color in presetColors"
@@ -97,7 +97,7 @@
                 </div>
               </div>
 
-              <!-- 自定义颜色 -->
+              <!-- 鑷畾涔夐鑹?-->
               <div class="custom-color">
                 <span>{{ $t("quickMenu.theme.custom") }}</span>
                 <input
@@ -112,7 +112,7 @@
           </div>
         </div>
 
-        <!-- ========== 语言切换面板 ========== -->
+        <!-- ========== 璇█鍒囨崲闈㈡澘 ========== -->
         <div v-else-if="activePanel === 'language'" class="language-panel">
           <div class="panel-header">
             <i
@@ -131,7 +131,7 @@
               :class="{ active: currentLang === lang.value }"
               @click="handleSwitchLang(lang.value)"
             >
-              <span class="lang-flag">{{ lang.flag }}</span>
+              <svg-icon :icon-class="lang.flag || 'flags/global'" class="lang-flag-icon" />
               <span class="lang-label">{{ lang.autonym }}</span>
               <i
                 v-if="currentLang === lang.value"
@@ -141,8 +141,8 @@
           </div>
         </div>
 
-        <!-- ========== 后续功能面板在这里加 v-else-if ========== -->
-        <!-- 例如：
+        <!-- ========== 鍚庣画鍔熻兘闈㈡澘鍦ㄨ繖閲屽姞 v-else-if ========== -->
+        <!-- 渚嬪锛?
         <div v-else-if="activePanel === 'layout'" class="layout-panel">
           ...
         </div>
@@ -170,24 +170,21 @@ import {
   resetAllTheme,
   resetThemeField,
 } from "@/utils/theme";
-import { LANGUAGES, setLanguage } from "@/i18n";
+import { dynamicLanguages, setLanguage, loadLanguageList } from "@/i18n";
 import { useI18n } from "@/composables/useI18n";
 
 const { t: $t, i18n } = useI18n();
 const { proxy } = getCurrentInstance();
 const emit = defineEmits(["change", "reset", "reset-field"]);
 
-// ===== 响应式数据 =====
+// ===== 鍝嶅簲寮忔暟鎹?=====
 const visible = ref(false);
 const activePanel = ref(null);
 const themeFields = THEME_FIELDS;
 const currentColors = reactive(
   Object.fromEntries(themeFields.map((f) => [f.key, ""]))
 );
-const languages = LANGUAGES.map((l) => ({
-  ...l,
-  flag: l.value === "zh-CN" ? "🇨🇳" : "🇺🇸",
-}));
+const languages = ref([...dynamicLanguages]);
 const presetColors = [
   "#faf7f2",
   "#ffffff",
@@ -199,11 +196,15 @@ const presetColors = [
   "#9c27b0",
 ];
 
-// ===== 计算属性 =====
+// ===== 璁＄畻灞炴€?=====
 const currentLang = computed(() => i18n.locale);
 const currentLangAutonym = computed(() => {
-  const lang = languages.find((l) => l.value === i18n.locale);
+  const lang = languages.value.find((l) => l.value === i18n.locale);
   return lang ? lang.autonym : "";
+});
+const currentLangFlag = computed(() => {
+  const lang = languages.value.find((l) => l.value === i18n.locale);
+  return lang ? lang.flag : "flags/global";
 });
 const menuItems = computed(() => [
   {
@@ -220,7 +221,7 @@ const menuItems = computed(() => [
   },
 ]);
 
-// ===== 方法 =====
+// ===== 鏂规硶 =====
 function toggleMenu() {
   visible.value = !visible.value;
   if (!visible.value) {
@@ -262,29 +263,38 @@ function handleClickOutside(e) {
   }
 }
 
-function handleSwitchLang(lang) {
+async function handleSwitchLang(lang) {
   Object.keys(localStorage)
     .filter(
       (key) => key.startsWith("nex_menu_cache_") || key === "nex_menu_version"
     )
     .forEach((key) => localStorage.removeItem(key));
-  setLanguage(lang);
-  const msg =
-    lang === "zh-CN"
-      ? $t("quickMenu.language.switchedToZh")
-      : $t("quickMenu.language.switchedToEn");
-  Message.success(msg);
-  setTimeout(() => {
-    window.location.reload();
-  }, 800);
+  const success = await setLanguage(lang);
+  if (success) {
+    const langInfo = languages.value.find((l) => l.value === lang);
+    const langName = langInfo ? langInfo.autonym : lang;
+    Message.success($t("quickMenu.language.switched", { lang: langName }));
+    setTimeout(() => {
+      window.location.reload();
+    }, 800);
+  } else {
+    Message.error($t("quickMenu.language.switchFailed"));
+  }
 }
 
-// ===== 生命周期 =====
-onMounted(() => {
+// ===== 鐢熷懡鍛ㄦ湡 =====
+onMounted(async () => {
   themeFields.forEach((field) => {
     currentColors[field.key] = (getThemeField(field.key) || "").toLowerCase();
   });
   document.addEventListener("click", handleClickOutside);
+  // 加载动态语言列表（包含后端管理的语言）
+  try {
+    const langList = await loadLanguageList();
+    languages.value = [...langList];
+  } catch (err) {
+    console.error("[ThemePicker] 加载语言列表失败:", err);
+  }
 });
 
 onBeforeUnmount(() => {
@@ -297,7 +307,7 @@ onBeforeUnmount(() => {
   position: relative;
   display: inline-block;
 
-  // ---------- 加号触发按钮（无圆圈） ----------
+  // ---------- 鍔犲彿瑙﹀彂鎸夐挳锛堟棤鍦嗗湀锛?----------
   .quick-trigger {
     width: 28px;
     height: 28px;
@@ -316,7 +326,7 @@ onBeforeUnmount(() => {
     }
   }
 
-  // ---------- 下拉面板 ----------
+  // ---------- 涓嬫媺闈㈡澘 ----------
   .quick-panel {
     position: absolute;
     top: calc(100% + 8px);
@@ -330,14 +340,14 @@ onBeforeUnmount(() => {
     overflow: hidden;
   }
 
-  // ---------- 通用面板标题 ----------
+  // ---------- 閫氱敤闈㈡澘鏍囬 ----------
   .panel-title {
     font-size: @font-size-base;
     font-weight: 500;
     color: @text-primary;
   }
 
-  // ---------- 第一层：菜单列表 ----------
+  // ---------- 绗竴灞傦細鑿滃崟鍒楄〃 ----------
   .menu-list {
     padding: @spacing-sm 0;
 
@@ -370,9 +380,10 @@ onBeforeUnmount(() => {
       margin-right: @spacing-sm;
       font-size: 16px;
 
-      .menu-emoji {
-        font-size: 16px;
-        line-height: 1;
+      .menu-flag-icon {
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
       }
     }
 
@@ -388,7 +399,7 @@ onBeforeUnmount(() => {
     }
   }
 
-  // ---------- 第二层：调色板面板 ----------
+  // ---------- 绗簩灞傦細璋冭壊鏉块潰鏉?----------
   .palette-panel {
     width: 280px;
   }
@@ -538,7 +549,7 @@ onBeforeUnmount(() => {
   }
 }
 
-// ---------- 过渡动画 ----------
+// ---------- 杩囨浮鍔ㄧ敾 ----------
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.2s, transform 0.2s;
@@ -550,7 +561,7 @@ onBeforeUnmount(() => {
   transform: translateY(-4px);
 }
 
-// ---------- 语言切换面板 ----------
+// ---------- 璇█鍒囨崲闈㈡澘 ----------
 .language-panel {
   width: 220px;
 }
@@ -575,10 +586,11 @@ onBeforeUnmount(() => {
     color: var(--color-primary);
   }
 
-  .lang-flag {
+  .lang-flag-icon {
     font-size: 20px;
-    margin-right: @spacing-sm;
+    margin-right: 12px;
     line-height: 1;
+    flex-shrink: 0;
   }
 
   .lang-label {
@@ -592,3 +604,7 @@ onBeforeUnmount(() => {
   }
 }
 </style>
+
+
+
+
