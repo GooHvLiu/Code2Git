@@ -127,3 +127,8 @@
 - <span style="color:orange;font-size:14px">_✅️完善文件命名和文件存放，文件夹命名规范_；</span>
 - <span style="color:orange;font-size:14px">_✅️数据库结构完整优化，去掉不需要，冗余的字段列_；</span>
 - <span style="color:orange;font-size:14px">_✅️重构国际化配置_；</span>
+
+##### nexCM-V3_10
+
+- <span style="color:orange;font-size:14px">_测试全部功能并修复确定BUG_；</span>
+- <span style="color:orange;font-size:14px">_正式更新ReadMe.md文件_；</span>
