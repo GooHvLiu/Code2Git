@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <!--
     蹇嵎璁剧疆鍏ュ彛锛堝師 ThemePicker 鎵╁睍锛?
     缁撴瀯锛氬姞鍙锋寜閽?鈫?涓嬫媺鑿滃崟 鈫?鍚勫姛鑳介潰鏉匡紙褰撳墠鍙湁璋冭壊鏉匡紝鍚庣画鍙墿灞曪級
@@ -20,7 +20,7 @@
       <div v-show="visible" class="quick-panel" @click.stop>
         <!-- ========== 绗竴灞傦細鑿滃崟鍒楄〃 ========== -->
         <div v-if="!activePanel" class="menu-list">
-          <div class="panel-title">{{ $t("quickMenu.title") }}</div>
+          <div class="panel-title">{{ $t("layout.quickMenu.title") }}</div>
 
           <div
             v-for="item in menuItems"
@@ -48,11 +48,11 @@
               class="el-icon-arrow-left back-btn"
               @click="activePanel = null"
             ></i>
-            <span class="panel-title">{{ $t("quickMenu.theme.palette") }}</span>
+            <span class="panel-title">{{ $t("layout.quickMenu.theme.palette") }}</span>
             <i
               class="el-icon-refresh reset-btn"
               @click="handleResetAll"
-              :title="$t('quickMenu.theme.resetAll')"
+              :title="$t('layout.quickMenu.theme.resetAll')"
             ></i>
           </div>
 
@@ -64,7 +64,7 @@
               class="field-group"
             >
               <div class="field-label">
-                <span>{{ $t("quickMenu.theme." + field.key) }}</span>
+                <span>{{ $t("layout.quickMenu.theme." + field.key) }}</span>
                 <span class="field-actions">
                   <span
                     class="color-preview"
@@ -73,7 +73,7 @@
                   <i
                     class="el-icon-refresh field-reset"
                     @click="handleResetField(field.key)"
-                    :title="$t('quickMenu.theme.reset')"
+                    :title="$t('layout.quickMenu.theme.reset')"
                   ></i>
                 </span>
               </div>
@@ -99,7 +99,7 @@
 
               <!-- 鑷畾涔夐鑹?-->
               <div class="custom-color">
-                <span>{{ $t("quickMenu.theme.custom") }}</span>
+                <span>{{ $t("layout.quickMenu.theme.custom") }}</span>
                 <input
                   type="color"
                   class="color-input"
@@ -120,7 +120,7 @@
               @click="activePanel = null"
             ></i>
             <span class="panel-title">{{
-              $t("quickMenu.language.title")
+              $t("layout.quickMenu.language.title")
             }}</span>
           </div>
           <div class="language-list">
@@ -131,7 +131,7 @@
               :class="{ active: currentLang === lang.value }"
               @click="handleSwitchLang(lang.value)"
             >
-              <svg-icon :icon-class="lang.flag || 'flags/global'" class="lang-flag-icon" />
+              <svg-icon :icon-class="lang.flag || 'global'" class="lang-flag-icon" />
               <span class="lang-label">{{ lang.autonym }}</span>
               <i
                 v-if="currentLang === lang.value"
@@ -169,7 +169,7 @@ import {
   getThemeField,
   resetAllTheme,
   resetThemeField,
-} from "@/utils/theme";
+} from "@/utils/ui/theme";
 import { dynamicLanguages, setLanguage, loadLanguageList } from "@/i18n";
 import { useI18n } from "@/composables/useI18n";
 
@@ -204,18 +204,18 @@ const currentLangAutonym = computed(() => {
 });
 const currentLangFlag = computed(() => {
   const lang = languages.value.find((l) => l.value === i18n.locale);
-  return lang ? lang.flag : "flags/global";
+  return lang ? lang.flag : "global";
 });
 const menuItems = computed(() => [
   {
     key: "palette",
-    label: $t("quickMenu.theme.palette"),
+    label: $t("layout.quickMenu.theme.palette"),
     icon: "el-icon-brush",
     color: "#409eff",
   },
   {
     key: "language",
-    label: $t("quickMenu.language.title"),
+    label: $t("layout.quickMenu.language.title"),
     icon: "el-icon-service",
     color: "#e6a23c",
   },
@@ -273,12 +273,12 @@ async function handleSwitchLang(lang) {
   if (success) {
     const langInfo = languages.value.find((l) => l.value === lang);
     const langName = langInfo ? langInfo.autonym : lang;
-    Message.success($t("quickMenu.language.switched", { lang: langName }));
+    Message.success($t("layout.quickMenu.language.switched", { lang: langName }));
     setTimeout(() => {
       window.location.reload();
     }, 800);
   } else {
-    Message.error($t("quickMenu.language.switchFailed"));
+    Message.error($t("layout.quickMenu.language.switchFailed"));
   }
 }
 
@@ -604,6 +604,7 @@ onBeforeUnmount(() => {
   }
 }
 </style>
+
 
 
 

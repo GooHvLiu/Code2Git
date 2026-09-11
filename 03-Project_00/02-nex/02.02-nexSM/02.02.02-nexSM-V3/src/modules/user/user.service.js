@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 用户管理模块 - 业务逻辑层
  * 
  * 处理用户的登录、注册、增删改查、密码重置、状态变更等业务逻辑
@@ -24,7 +24,7 @@ const configService = require('../config/config.service')
 const permissionService = require('../permission/permission.service')
 const wsManager = require('../../socket/wsManager')
 const notificationService = require('../notification/notification.service')
-const userDeviceService = require('./userDevice.service')
+const userDeviceService = require('./user-device.service')
 const emailService = require('../email/email.service')
 const fs = require('fs')
 const { LicenseGuard } = require('../../../beehive/sdk')
@@ -60,8 +60,7 @@ class UserService extends BaseService {
    */
   constructor() {
     super(userModel, {
-      name: '用户',
-      langFields: [] // 用户模块没有需要多语言处理的字段
+      name: '用户' // 用户模块没有需要多语言处理的字段
     })
   }
 
@@ -239,10 +238,11 @@ class UserService extends BaseService {
     if (onlineConnectionCount > 0) {
       try {
         // WebSocket 实时推送 kicked_out 消息（用于前端立即跳转登录页）
+        // 不返回中文文案，仅传 reason，由前端按当前语言 i18n 翻译
         wsManager.sendToUser(user.id, {
           type: 'kicked_out',
-          message: '您已在其他设备登录，当前设备已下线',
           data: {
+            reason: 'login_elsewhere',
             userId: user.id,
             username: user.username,
             loginIp: ip,
@@ -253,8 +253,8 @@ class UserService extends BaseService {
         // 创建通知记录到通知中心（被踢下线通知）
         await notificationService.sendNotification({
           userId: user.id,
-          titleKey: 'notification.kickedOutTitle',
-          contentKey: 'notification.kickedOutContent',
+          titleKey: 'notification.security.kickedOut.title',
+          contentKey: 'notification.security.kickedOut.content',
           contentParams: JSON.stringify({ time: loginTime, ip: ip }),
           type: 'security',
           priority: 'high'

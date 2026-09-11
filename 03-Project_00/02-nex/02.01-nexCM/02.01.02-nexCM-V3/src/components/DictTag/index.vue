@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <el-tag v-if="dictItem" :type="dictItem.list_class || dictItem.css_class || 'info'" size="small" effect="light">
     {{ dictItem.label }}
   </el-tag>
@@ -17,7 +17,7 @@
  * type 可选：success / warning / danger / info / primary
  */
 import { ref, computed, watch } from 'vue'
-import { getDict, clearDictCache } from '@/utils/dict'
+import { getDict, clearDictCache } from '@/utils/business/dict'
 
 const props = defineProps({
   /** 字典选项列表（手动传入） */

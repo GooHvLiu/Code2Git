@@ -3,8 +3,8 @@
  * 与数据库 nex_user 表字段约束严格对齐
  *
  * 数据库字段说明：
- * - 客户端可传入字段：username, password, role, real_name, sex, phone, email, dept_id, avatar, remark, status
- * - 系统自动维护字段（客户端禁止传入）：id, login_ip, login_date, is_delete, create_time, create_by, update_time, update_by, is_first_login, first_login_at
+ * - 客户端可传入字段：username, password, role, real_name, sex, phone, email, dept_id, remark, status
+ * - 系统自动维护字段（客户端禁止传入）：id, login_ip, login_date, is_delete, create_time, create_by, update_time, update_by
  */
 const Joi = require('joi');
 const { USER_STATUS, USER_ROLE, USER_SEX } = require('../../constants/statusCode');
@@ -58,9 +58,6 @@ const emailField = Joi.string().email({ tlds: { allow: false } }).max(100).allow
 /** 部门ID dept_id int DEFAULT NULL */
 const deptIdField = Joi.number().integer().positive().allow(null);
 
-/** 头像 avatar varchar(255) DEFAULT '' */
-const avatarField = Joi.string().max(255).allow('', null);
-
 /** 备注 remark varchar(500) DEFAULT '' */
 const remarkField = Joi.string().max(500).allow('', null);
 
@@ -100,11 +97,10 @@ const createUserSchema = Joi.object({
   phone: phoneField,
   email: emailField,
   dept_id: deptIdField,
-  avatar: avatarField,
   remark: remarkField,
   status: statusField
   // 以下字段禁止客户端传入，由数据库默认值 / service层控制：
-  // id, login_ip, login_date, is_delete, create_time, create_by, update_time, update_by, is_first_login, first_login_at
+  // id, login_ip, login_date, is_delete, create_time, create_by, update_time, update_by
 }).unknown(false);
 
 /** 更新用户请求体（所有字段可选，至少传一个） */
@@ -117,7 +113,6 @@ const updateUserSchema = Joi.object({
   phone: phoneField,
   email: emailField,
   dept_id: deptIdField,
-  avatar: avatarField,
   remark: remarkField,
   status: Joi.number().valid(USER_STATUS.ENABLED, USER_STATUS.DISABLED)
 }).unknown(false).min(1).messages({

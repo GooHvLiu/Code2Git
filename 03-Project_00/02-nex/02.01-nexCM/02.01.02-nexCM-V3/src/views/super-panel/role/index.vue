@@ -1,19 +1,19 @@
-<template>
+﻿<template>
   <div class="role-management">
     <!-- ==================== 页面头部 ==================== -->
     <div class="page-header">
       <div class="header-left">
         <h2 class="page-title">
-          {{ $t("menu.superPanel.role.page.title") }}
+          {{ $t("superPanel.role.page.title") }}
         </h2>
-        <p class="page-desc">{{ $t("menu.superPanel.role.page.pageDesc") }}</p>
+        <p class="page-desc">{{ $t("superPanel.role.page.pageDesc") }}</p>
       </div>
       <div class="header-right">
         <export-dropdown
           :data="tableData"
           :columns="exportColumns"
-          :title="$t('menu.superPanel.role.page.title')"
-          :filename="$t('menu.superPanel.role.page.title')"
+          :title="$t('superPanel.role.page.title')"
+          :filename="$t('superPanel.role.page.title')"
           :exporter="$store.state.user.userInfo?.username || ''"
         />
         <el-button
@@ -43,12 +43,6 @@
       :data="tableData"
       border
       stripe
-      :header-cell-style="{
-        background: '#f5f7fa',
-        color: '#606266',
-        fontWeight: 'bold',
-        textAlign: 'center',
-      }"
       class="role-table"
     >
       <el-table-column
@@ -58,7 +52,7 @@
         align="center"
       />
       <el-table-column
-        :label="$t('menu.superPanel.role.page.roleName')"
+        :label="$t('superPanel.role.page.roleName')"
         min-width="120"
         align="center"
       >
@@ -67,7 +61,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        :label="$t('menu.superPanel.role.page.roleCode')"
+        :label="$t('superPanel.role.page.roleCode')"
         prop="role_code"
         min-width="120"
         align="center"
@@ -148,8 +142,8 @@
           prop="role_name"
         >
           <span slot="label">
-            {{ $t('menu.superPanel.role.page.roleName') }}
-            <el-tooltip :content="$t('menu.superPanel.role.page.tips.roleName')" placement="top">
+            {{ $t('superPanel.role.page.roleName') }}
+            <el-tooltip :content="$t('superPanel.role.page.tips.roleName')" placement="top">
               <i class="el-icon-question"></i>
             </el-tooltip>
           </span>
@@ -163,8 +157,8 @@
           prop="role_code"
         >
           <span slot="label">
-            {{ $t('menu.superPanel.role.page.roleCode') }}
-            <el-tooltip :content="$t('menu.superPanel.role.page.tips.roleCode')" placement="top">
+            {{ $t('superPanel.role.page.roleCode') }}
+            <el-tooltip :content="$t('superPanel.role.page.tips.roleCode')" placement="top">
               <i class="el-icon-question"></i>
             </el-tooltip>
           </span>
@@ -173,7 +167,7 @@
         <el-form-item prop="status">
           <span slot="label">
             {{ $t('common.status') }}
-            <el-tooltip :content="$t('menu.superPanel.role.page.tips.status')" placement="top">
+            <el-tooltip :content="$t('superPanel.role.page.tips.status')" placement="top">
               <i class="el-icon-question"></i>
             </el-tooltip>
           </span>
@@ -185,7 +179,7 @@
         <el-form-item prop="description">
           <span slot="label">
             {{ $t('common.description') }}
-            <el-tooltip :content="$t('menu.superPanel.role.page.tips.description')" placement="top">
+            <el-tooltip :content="$t('superPanel.role.page.tips.description')" placement="top">
               <i class="el-icon-question"></i>
             </el-tooltip>
           </span>
@@ -222,7 +216,7 @@ import {
 } from "@/api";
 import { useI18n } from "@/composables/useI18n";
 import { Message, MessageBox } from "element-ui";
-import { getRoleName, getRoleDesc } from "@/utils/roleMapper";
+import { getRoleName, getRoleDesc } from "@/utils/auth/roleMapper";
 
 const { t: $t } = useI18n();
 
@@ -257,16 +251,16 @@ function isBasicRole(row) {
 
 const rules = computed(() => ({
   role_name: [
-    { required: true, message: $t("menu.superPanel.role.page.roleNameRequired"), trigger: "blur" },
+    { required: true, message: $t("superPanel.role.page.roleNameRequired"), trigger: "blur" },
   ],
   role_code: [
-    { required: true, message: $t("menu.superPanel.role.page.roleCodeRequired"), trigger: "blur" },
+    { required: true, message: $t("superPanel.role.page.roleCodeRequired"), trigger: "blur" },
   ],
 }));
 
 const exportColumns = computed(() => [
-  { label: $t("menu.superPanel.role.page.roleName"), prop: "role_name", width: 120, formatter: (row) => getRoleName(row) },
-  { label: $t("menu.superPanel.role.page.roleCode"), prop: "role_code", width: 120 },
+  { label: $t("superPanel.role.page.roleName"), prop: "role_name", width: 120, formatter: (row) => getRoleName(row) },
+  { label: $t("superPanel.role.page.roleCode"), prop: "role_code", width: 120 },
   {
     label: $t("common.status"),
     prop: "status",
@@ -280,7 +274,7 @@ const exportColumns = computed(() => [
 function handleAdd() {
   Object.assign(dialog, {
     visible: true,
-    title: $t("menu.superPanel.role.page.addRole"),
+    title: $t("superPanel.role.page.addRole"),
     isEdit: false,
   });
   Object.assign(form, {
@@ -295,12 +289,12 @@ function handleAdd() {
 function handleEdit(row) {
   // 基本角色不允许编辑
   if (isBasicRole(row)) {
-    Message.warning($t("menu.superPanel.role.page.basicRoleCannotEdit"));
+    Message.warning($t("superPanel.role.page.basicRoleCannotEdit"));
     return;
   }
   Object.assign(dialog, {
     visible: true,
-    title: $t("menu.superPanel.role.page.editRole"),
+    title: $t("superPanel.role.page.editRole"),
     isEdit: true,
   });
   Object.assign(form, { ...row });
@@ -328,11 +322,11 @@ function submitForm() {
 function handleDelete(row) {
   // 基本角色不允许删除
   if (isBasicRole(row)) {
-    Message.warning($t("menu.superPanel.role.page.basicRoleCannotDelete"));
+    Message.warning($t("superPanel.role.page.basicRoleCannotDelete"));
     return;
   }
   MessageBox.confirm(
-    $t("menu.superPanel.role.page.deleteConfirm"),
+    $t("superPanel.role.page.deleteConfirm"),
     $t("common.tip"),
     {
       confirmButtonText: $t("common.confirm"),

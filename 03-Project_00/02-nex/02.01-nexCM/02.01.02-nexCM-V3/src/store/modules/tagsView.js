@@ -1,19 +1,19 @@
-/**
+﻿/**
  * ==========================================
  * TagsView 标签页状态管理
  * ==========================================
  * 管理已打开的标签页列表，支持增删、关闭其他、关闭全部
  * 数据持久化到 sessionStorage，刷新页面后标签不丢失
  */
-import { setSessionStorage, getSessionStorage } from '@/utils/storage'
-import { SESSIONSTORAGE_KEYS } from '@/utils/storageKey'
+import { setSessionStorage, getSessionStorage } from '@/utils/data/storage'
+import { SESSIONSTORAGE_KEYS } from '@/utils/data/storageKey'
 import { HOME_TAG, ROUTE_PATHS } from '@/router/constant/pathConstants'
 import i18n from '@/i18n'
 import { resolveMenuTitle } from '@/router/helper/menuTitle'
 
 /** 获取国际化的首页标签 */
 function getHomeTag() {
-  return { ...HOME_TAG, title: i18n.t('menu.home.overview.default') }
+  return { ...HOME_TAG, title: i18n.t('layout.home.overview.default') }
 }
 
 /** 从 sessionStorage 读取并过滤掉无效标签（登录页、404等 hidden 路由） */
@@ -23,7 +23,7 @@ function getValidVisitedViews() {
   // 过滤掉登录页等不应该出现在标签栏的路由（路径过滤）
   const invalidPaths = [ROUTE_PATHS.LOGIN, ROUTE_PATHS.NOT_FOUND, ROUTE_PATHS.FORBIDDEN, ROUTE_PATHS.REDIRECT, ROUTE_PATHS.LICENSE_IMPORT]
   // 过滤掉标题包含登录页标题的标签（双重保险，处理旧数据）
-  const invalidTitles = ['欢迎登录', 'login.title']
+  const invalidTitles = ['欢迎登录', 'layout.login.title']
   const filtered = saved.filter(v => {
     if (invalidPaths.includes(v.path)) return false
     // title 不是字符串的旧数据直接过滤掉（兼容历史数据）

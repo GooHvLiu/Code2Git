@@ -1,10 +1,10 @@
-/**
+﻿/**
  * useDict - 字典数据组合式函数
  * 页面中自动加载所需的字典数据，存入 dict 数据对象
  * 替代原 mixins/dict.js
  */
 import { ref, onMounted } from 'vue'
-import { getDicts } from '@/utils/dict'
+import { getDicts } from '@/utils/business/dict'
 
 export function useDict(dictCodes = []) {
   const dict = ref({})

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 审计日志模块 - 数据模型层
  * GMP 21CFR Part 11 电子记录与电子签名合规
  * 特性：哈希链校验（防止篡改）、只增不改不删（数据库触发器强制）
@@ -22,7 +22,7 @@ const ALLOW_FIELDS = [
   'user_agent',
   'prev_hash',
   'current_hash',
-  'created_at'
+  'create_time'
 ];
 
 class AuditModel extends BaseModel {
@@ -45,7 +45,7 @@ class AuditModel extends BaseModel {
       record.result,
       record.reason,
       record.ip,
-      record.created_at,
+      record.create_time,
       prevHash || ''
     ].join('|')
     return crypto.createHash('sha256').update(content).digest('hex')
@@ -117,11 +117,11 @@ class AuditModel extends BaseModel {
       values.push(`%${params.target}%`);
     }
     if (params.startTime) {
-      where.push('created_at >= ?');
+      where.push('create_time >= ?');
       values.push(params.startTime);
     }
     if (params.endTime) {
-      where.push('created_at <= ?');
+      where.push('create_time <= ?');
       values.push(params.endTime);
     }
 

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ==========================================
  * Vuex 全局 Getters
  * ==========================================
@@ -27,7 +27,7 @@ const getters = {
   cachedViews: state => state.tagsView.cachedViews,
 
   // errorLog 模块
-  errorLogs: state => state.errorLog.logs,
+  errorLogs: state => state.system.errorLog.logs,
 
   // websocket 模块
   wsConnected: state => state.websocket.connected,

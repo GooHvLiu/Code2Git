@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 通用基础模型类
  * 所有业务模型继承此类，封装通用CRUD操作
  * 包含字段白名单安全过滤，防止超量赋值
@@ -217,7 +217,7 @@ class BaseModel {
    * @param {string} orderDir 排序方向
    * @returns {Promise<Array>}
    */
-  async findAll(where = {}, orderBy = 'created_at', orderDir = 'DESC') {
+  async findAll(where = {}, orderBy = 'create_time', orderDir = 'DESC') {
     const conditions = [];
     const values = [];
     for (const [key, value] of Object.entries(where)) {

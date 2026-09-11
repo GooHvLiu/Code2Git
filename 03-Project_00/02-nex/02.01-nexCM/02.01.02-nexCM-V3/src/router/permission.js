@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ==========================================
  * 全局路由守卫
  * ==========================================
@@ -14,14 +14,14 @@ import router from '@/router'
 import store from '@/store'
 import { ROUTE_WHITE_LIST } from '@/router/constant/constants'
 import { ROUTE_PATHS } from '@/router/constant/pathConstants'
-import { getToken } from '@/utils/auth'
-import { cancelAllPending } from '@/utils/request'
+import { getToken } from '@/utils/auth/auth'
+import { cancelAllPending } from '@/utils/request/request'
 import { getLicenseStatus } from '@/api'
-import ws from '@/utils/websocket'
+import ws from '@/utils/request/websocket'
 import i18n, { applySystemDefaultLanguage } from '@/i18n'
 import { resolveMenuTitle } from '@/router/helper/menuTitle'
-import { loadConfig } from '@/utils/config'
-import { isSuperAdmin } from '@/utils/permission'
+import { loadConfig } from '@/utils/config/config'
+import { isSuperAdmin } from '@/utils/auth/permission'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 

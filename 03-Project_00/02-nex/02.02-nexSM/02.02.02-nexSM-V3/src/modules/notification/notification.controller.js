@@ -151,7 +151,7 @@ class NotificationController extends BaseController {
       const wsManager = require('../../socket/wsManager')
       wsManager.broadcast({
         type: 'notification',
-        data: { title, content, type: type || 'system', priority: priority || 'normal', created_at: new Date().toISOString() }
+        data: { title, content, type: type || 'system', priority: priority || 'normal', create_time: new Date().toISOString() }
       })
       return res.success(null)
     }

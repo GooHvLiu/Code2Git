@@ -1,16 +1,16 @@
-/**
+﻿/**
  * ==========================================
  * 登录相关接口
  * ==========================================
  */
-import request from '@/utils/request'
+import request from '@/utils/request/request'
 
 /**
  * 获取验证码
  * @returns {Promise<{code:number, msg:string, data:{img:string, uuid:string}}>}
  */
 export function requestCaptchaCodeApi() {
-  return request({ url: '/captcha/captchaImage', method: 'get' })
+  return request({ url: '/captcha/captcha-image', method: 'get' })
 }
 
 /**
@@ -51,7 +51,7 @@ export function getMenuVersionApi() {
  */
 export function requestGetUserMenuApi(version, lang) {
   return request({
-    url: '/menu/getRouters',
+    url: '/menu/routers',
     method: 'get',
     params: {
       ...(version ? { version } : {}),

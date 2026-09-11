@@ -47,7 +47,7 @@
             size="small"
             style="width: 140px;"
           />
-          <span class="time-separator">{{ $t('notification.to') }}</span>
+          <span class="time-separator">{{ $t('notification.filter.to') }}</span>
           <el-time-picker
             v-model="settings.doNotDisturb.endTime"
             format="HH:mm"
@@ -203,7 +203,7 @@ async function handleSave() {
     emit('updated', settings)
     handleClose()
   } catch (e) {
-    Message.error($t('notification.operationFailed'))
+    Message.error($t('notification.page.operationFailed'))
   } finally {
     saving.value = false
   }

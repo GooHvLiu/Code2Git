@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <el-dialog
     :title="dialogTitle"
     :visible.sync="dialogVisible"
@@ -6,13 +6,24 @@
     :close-on-click-modal="false"
     @close="close"
   >
-    <el-form v-if="dialogVisible" ref="formRef" :model="form" :rules="rules" label-width="90px">
+    <el-form v-if="dialogVisible" ref="formRef" :model="form" :rules="rules">
       <el-form-item
         v-for="field in visibleFields"
         :key="field.prop"
-        :label="$t(field.label)"
         :prop="field.prop"
       >
+        <template slot="label">
+          <span class="label-with-tip">
+            {{ $t(field.label) }}
+            <el-tooltip
+              v-if="field.tip"
+              :content="$t(field.tip)"
+              placement="top"
+            >
+              <i class="el-icon-question label-tip-icon"></i>
+            </el-tooltip>
+          </span>
+        </template>
         <!-- 文本输入 -->
         <el-input
           v-if="field.type === 'input'"
@@ -100,8 +111,9 @@ import { useDict } from "@/composables/useDict";
 import { requestAddUserApi, requestUpdateUserApi } from "@/api";
 import { requestGetRoleAllApi } from "@/api";
 import { requestGetDeptTreeApi } from "@/api";
-import { withCache } from "@/utils/cache";
-import { getRoleName } from "@/utils/roleMapper";
+import { withCache } from "@/utils/data/cache";
+import { getRoleName } from "@/utils/auth/roleMapper";
+import i18n from "@/i18n";
 
 const emit = defineEmits(["success"]);
 
@@ -147,7 +159,9 @@ const isEdit = computed(() => !!form.id);
 
 // 弹窗标题（国际化）
 const dialogTitle = computed(() => {
-  return isEdit.value ? "编辑用户" : "新增用户";
+  return isEdit.value
+    ? i18n.t("system.user.page.editUser")
+    : i18n.t("system.user.page.addUser");
 });
 
 // 角色选项（从角色管理接口获取）
@@ -194,66 +208,75 @@ const statusOptions = computed(() => {
 const fieldConfig = computed(() => [
   {
     prop: "username",
-    label: "menu.system.user.page.username",
+    label: "system.user.page.username",
+    tip: "system.user.page.usernameTip",
     type: "input",
-    placeholder: "menu.system.user.page.usernamePlaceholder",
+    placeholder: "system.user.page.usernamePlaceholder",
     required: true,
     disabledEdit: true,
   },
   {
     prop: "password",
-    label: "menu.system.user.page.password",
+    label: "system.user.page.password",
+    tip: "system.user.page.passwordTip",
     type: "password",
-    placeholder: "menu.system.user.page.passwordPlaceholder",
+    placeholder: "system.user.page.passwordPlaceholder",
     required: true,
     show: (isEdit) => !isEdit,
   },
   {
     prop: "real_name",
-    label: "menu.system.user.page.realName",
+    label: "system.user.page.realName",
+    tip: "system.user.page.realNameTip",
     type: "input",
-    placeholder: "menu.system.user.page.realNamePlaceholder",
+    placeholder: "system.user.page.realNamePlaceholder",
     required: false,
   },
   {
     prop: "sex",
-    label: "menu.system.user.page.sex",
+    label: "system.user.page.sex",
+    tip: "system.user.page.sexTip",
     type: "radio",
     required: false,
     options: sexOptions.value,
   },
   {
     prop: "phone",
-    label: "menu.system.user.page.phone",
+    label: "system.user.page.phone",
+    tip: "system.user.page.phoneTip",
     type: "input",
-    placeholder: "menu.system.user.page.phonePlaceholder",
+    placeholder: "system.user.page.phonePlaceholder",
     required: false,
   },
   {
     prop: "email",
-    label: "menu.system.user.page.email",
+    label: "system.user.page.email",
+    tip: "system.user.page.emailTip",
     type: "input",
-    placeholder: "menu.system.user.page.emailPlaceholder",
+    placeholder: "system.user.page.emailPlaceholder",
     required: false,
   },
   {
     prop: "dept_id",
-    label: "menu.system.user.page.dept",
+    label: "system.user.page.dept",
+    tip: "system.user.page.deptTip",
     type: "treeselect",
-    placeholder: "menu.system.user.page.deptPlaceholder",
+    placeholder: "system.user.page.deptPlaceholder",
     required: false,
   },
   {
     prop: "role",
-    label: "menu.system.user.page.role",
+    label: "system.user.page.role",
+    tip: "system.user.page.roleTip",
     type: "select",
-    placeholder: "menu.system.user.page.rolePlaceholder",
+    placeholder: "system.user.page.rolePlaceholder",
     required: false,
     options: roleOptions.value,
   },
   {
     prop: "status",
-    label: "menu.system.user.page.status",
+    label: "system.user.page.status",
+    tip: "system.user.page.statusTip",
     type: "radio",
     required: false,
     options: statusOptions.value,
@@ -261,9 +284,10 @@ const fieldConfig = computed(() => [
   },
   {
     prop: "remark",
-    label: "menu.system.user.page.remark",
+    label: "system.user.page.remark",
+    tip: "system.user.page.remarkTip",
     type: "textarea",
-    placeholder: "menu.system.user.page.remarkPlaceholder",
+    placeholder: "system.user.page.remarkPlaceholder",
     required: false,
   },
 ]);

@@ -1,10 +1,10 @@
-/**
+﻿/**
  * ==========================================
  * 角色管理接口
  * ==========================================
  * 后端路由前缀 /prod-api/v2/role
  */
-import request from '@/utils/request'
+import request from '@/utils/request/request'
 
 /** 获取所有启用的角色（下拉选择用） */
 export function requestGetRoleAllApi() {

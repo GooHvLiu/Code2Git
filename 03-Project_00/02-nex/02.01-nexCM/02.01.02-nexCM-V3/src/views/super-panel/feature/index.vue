@@ -1,13 +1,13 @@
-<template>
+﻿<template>
   <div class="feature-container">
     <!-- 顶部操作栏 -->
     <div class="page-header">
       <div class="header-left">
         <h2 class="page-title">
-          {{ $t("menu.superPanel.feature.page.title") }}
+          {{ $t("superPanel.feature.page.title") }}
         </h2>
         <p class="page-desc">
-          {{ $t("menu.superPanel.feature.page.pageDesc") }}
+          {{ $t("superPanel.feature.page.pageDesc") }}
         </p>
       </div>
       <div class="header-right">
@@ -18,7 +18,7 @@
           :loading="resetting"
           @click="handleResetAll"
         >
-          {{ $t("menu.superPanel.feature.page.resetAll") }}
+          {{ $t("superPanel.feature.page.resetAll") }}
         </el-button>
         <el-button
           type="primary"
@@ -91,7 +91,7 @@
             <h3>{{ getCategoryName(currentCategory) }}</h3>
             <el-tag size="small" type="info"
               >{{ currentFeatures.length }}
-              {{ $t("menu.superPanel.feature.page.items") }}</el-tag
+              {{ $t("superPanel.feature.page.items") }}</el-tag
             >
           </div>
           <div class="detail-actions">
@@ -101,7 +101,7 @@
               size="small"
               @click="handleResetCategory"
             >
-              {{ $t("menu.superPanel.feature.page.resetCategory") }}
+              {{ $t("superPanel.feature.page.resetCategory") }}
             </el-button>
           </div>
         </div>
@@ -128,14 +128,14 @@
                     type="warning"
                     effect="plain"
                   >
-                    {{ $t("menu.superPanel.feature.page.modified") }}
+                    {{ $t("superPanel.feature.page.modified") }}
                   </el-tag>
                 </div>
                 <div class="item-desc">{{ $t(feature.description) }}</div>
                 <div class="item-meta">
                   <span class="meta-key">{{ feature.feature_key }}</span>
                   <span class="meta-default">
-                    {{ $t("menu.superPanel.feature.page.defaultValue") }}:
+                    {{ $t("superPanel.feature.page.defaultValue") }}:
                     <strong
                       :class="{
                         'text-success': feature.default_value === 'true',
@@ -164,7 +164,7 @@
                   :disabled="feature.current_value === feature.default_value"
                   @click="handleResetFeature(feature)"
                 >
-                  {{ $t("menu.superPanel.feature.page.reset") }}
+                  {{ $t("superPanel.feature.page.reset") }}
                 </el-button>
               </div>
             </div>
@@ -175,7 +175,7 @@
             class="empty-state"
           >
             <i class="el-icon-document"></i>
-            <p>{{ $t('menu.superPanel.feature.page.noData') }}</p>
+            <p>{{ $t('superPanel.feature.page.noData') }}</p>
           </div>
         </div>
       </div>
@@ -231,7 +231,7 @@ function getCategoryIcon(category) {
 }
 
 function getCategoryName(category) {
-  const key = `menu.superPanel.feature.category.${category}`;
+  const key = `superPanel.feature.category.${category}`;
   const translated = $t(key);
   return translated === key ? category : translated;
 }
@@ -263,7 +263,7 @@ async function handleToggle(feature, value) {
   try {
     await requestUpdateFeatureConfigApi(feature.feature_key, String(value));
     feature.current_value = String(value);
-    Message.success($t("menu.superPanel.feature.page.updateSuccess"));
+    Message.success($t("superPanel.feature.page.updateSuccess"));
     // 更新统计
     const stat = categoryStats.value.find(
       (s) => s.category === feature.category
@@ -279,13 +279,13 @@ async function handleToggle(feature, value) {
 async function handleResetFeature(feature) {
   try {
     await MessageBox.confirm(
-      $t("menu.superPanel.feature.page.resetConfirm"),
+      $t("superPanel.feature.page.resetConfirm"),
       $t("common.tip"),
       { type: "warning" }
     );
     await requestResetFeatureConfigApi(feature.feature_key);
     feature.current_value = feature.default_value;
-    Message.success($t("menu.superPanel.feature.page.resetSuccess"));
+    Message.success($t("superPanel.feature.page.resetSuccess"));
     // 更新统计
     const stat = categoryStats.value.find(
       (s) => s.category === feature.category
@@ -305,12 +305,12 @@ async function handleResetFeature(feature) {
 async function handleResetCategory() {
   try {
     await MessageBox.confirm(
-      $t("menu.superPanel.feature.page.resetCategoryConfirm"),
+      $t("superPanel.feature.page.resetCategoryConfirm"),
       $t("common.tip"),
       { type: "warning" }
     );
     await requestResetCategoryFeatureConfigApi(currentCategory.value);
-    Message.success($t("menu.superPanel.feature.page.resetSuccess"));
+    Message.success($t("superPanel.feature.page.resetSuccess"));
     await loadData();
   } catch (e) {
     if (e !== "cancel") {
@@ -322,13 +322,13 @@ async function handleResetCategory() {
 async function handleResetAll() {
   try {
     await MessageBox.confirm(
-      $t("menu.superPanel.feature.page.resetAllConfirm"),
+      $t("superPanel.feature.page.resetAllConfirm"),
       $t("common.tip"),
       { type: "warning" }
     );
     resetting.value = true;
     await requestResetAllFeatureConfigApi();
-    Message.success($t("menu.superPanel.feature.page.resetSuccess"));
+    Message.success($t("superPanel.feature.page.resetSuccess"));
     await loadData();
   } catch (e) {
     if (e !== "cancel") {

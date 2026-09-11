@@ -254,9 +254,7 @@ class FileManagerService {
 
     return {
       success: true,
-      message: '文件保存成功',
-      backupName,
-      tip: '修改后需要重启后端服务才能生效'
+      backupName
     };
   }
 
@@ -353,9 +351,7 @@ class FileManagerService {
 
     return {
       success: true,
-      message: '回滚成功',
-      currentBackupName,
-      tip: '回滚后需要重启后端服务才能生效'
+      currentBackupName
     };
   }
 
@@ -369,7 +365,7 @@ class FileManagerService {
     }
 
     fs.unlinkSync(fullPath);
-    return { success: true, message: '备份删除成功' };
+    return { success: true };
   }
 
   /**

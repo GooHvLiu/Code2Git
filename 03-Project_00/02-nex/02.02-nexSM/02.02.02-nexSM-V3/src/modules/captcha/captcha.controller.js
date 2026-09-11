@@ -18,7 +18,8 @@ class CaptchaController {
     const { code, uuid } = req.body;
     const data = CaptchaService.verifyCaptcha(code, uuid);
     if (data.code !== ERROR_CODE.SUCCESS) {
-      return res.error(data.msg, data.code)
+      // 统一传错误码（前端按 common.error.错误码 翻译），中文 msg 仅后端调试，不返回前端
+      return res.error(data.code, data.data)
     }
 
     return next();

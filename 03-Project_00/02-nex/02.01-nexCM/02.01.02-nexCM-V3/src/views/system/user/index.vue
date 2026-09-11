@@ -1,19 +1,19 @@
-<template>
+﻿<template>
   <div class="user-management">
     <!-- ==================== 页面头部 ==================== -->
     <div class="page-header">
       <div class="header-left">
         <h2 class="page-title">
-          {{ $t("menu.system.user.page.title") }}
+          {{ $t("system.user.page.title") }}
         </h2>
-        <p class="page-desc">{{ $t("menu.system.user.page.pageDesc") }}</p>
+        <p class="page-desc">{{ $t("system.user.page.pageDesc") }}</p>
       </div>
       <div class="header-right">
         <export-dropdown
           :data="tableData"
           :columns="exportColumns"
-          :title="$t('menu.system.user.page.title')"
-          :filename="$t('menu.system.user.page.title')"
+          :title="$t('system.user.page.title')"
+          :filename="$t('system.user.page.title')"
           :selected="selectedRows"
           :exporter="$store.state.user.userInfo?.username || ''"
         />
@@ -47,22 +47,22 @@
     </div>
 
     <!-- ==================== 搜索表单 ==================== -->
-    <search-form :form="queryParams" @search="handleQuery" @reset="handleReset">
+    <search-form class="search-form" :form="queryParams" @search="handleQuery" @reset="handleReset">
       <el-form-item
-        :label="$t('menu.system.user.page.username')"
+        :label="$t('system.user.page.username')"
         prop="username"
       >
         <el-input
           v-model="queryParams.username"
-          :placeholder="$t('menu.system.user.page.username')"
+          :placeholder="$t('system.user.page.username')"
           clearable
           style="width: 140px"
         />
       </el-form-item>
-      <el-form-item :label="$t('menu.system.user.page.role')" prop="role">
+      <el-form-item :label="$t('system.user.page.role')" prop="role">
         <el-select
           v-model="queryParams.role"
-          :placeholder="$t('menu.system.user.page.role')"
+          :placeholder="$t('system.user.page.role')"
           clearable
           style="width: 120px"
         >
@@ -74,10 +74,10 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item :label="$t('menu.system.user.page.status')" prop="status">
+      <el-form-item :label="$t('system.user.page.status')" prop="status">
         <el-select
           v-model="queryParams.status"
-          :placeholder="$t('menu.system.user.page.status')"
+          :placeholder="$t('system.user.page.status')"
           clearable
           style="width: 100px"
         >
@@ -98,12 +98,6 @@
       :data="tableData"
       border
       stripe
-      :header-cell-style="{
-        background: '#f5f7fa',
-        color: '#606266',
-        fontWeight: 'bold',
-        textAlign: 'center',
-      }"
       @selection-change="handleSelectionChange"
       @sort-change="handleSortChange"
     >
@@ -115,31 +109,31 @@
         align="center"
       />
       <el-table-column
-        :label="$t('menu.system.user.page.username')"
+        :label="$t('system.user.page.username')"
         prop="username"
         min-width="120"
         align="center"
       />
       <el-table-column
-        :label="$t('menu.system.user.page.realName')"
+        :label="$t('system.user.page.realName')"
         prop="real_name"
         min-width="100"
         align="center"
       />
       <el-table-column
-        :label="$t('menu.system.user.page.email')"
+        :label="$t('system.user.page.email')"
         prop="email"
         min-width="160"
         align="center"
       />
       <el-table-column
-        :label="$t('menu.system.user.page.phone')"
+        :label="$t('system.user.page.phone')"
         prop="phone"
         min-width="120"
         align="center"
       />
       <el-table-column
-        :label="$t('menu.system.user.page.role')"
+        :label="$t('system.user.page.role')"
         prop="role"
         min-width="100"
         align="center"
@@ -149,7 +143,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        :label="$t('menu.system.user.page.dept')"
+        :label="$t('system.user.page.dept')"
         prop="dept_name"
         min-width="120"
         align="center"
@@ -159,7 +153,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        :label="$t('menu.system.user.page.status')"
+        :label="$t('system.user.page.status')"
         prop="status"
         width="80"
         align="center"
@@ -169,7 +163,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        :label="$t('menu.system.user.page.createTime')"
+        :label="$t('system.user.page.createTime')"
         prop="create_time"
         min-width="160"
         align="center"
@@ -190,7 +184,7 @@
             $t("common.edit")
           }}</el-button>
           <el-button type="text" size="small" @click="handleResetPwd(row)">{{
-            $t("menu.system.user.page.resetPassword")
+            $t("system.user.page.resetPassword")
           }}</el-button>
           <el-button
             v-if="isUserLocked(row)"
@@ -198,7 +192,7 @@
             size="small"
             style="color: #e6a23c"
             @click="handleUnlock(row)"
-            >{{ $t("menu.system.user.page.unlock") }}</el-button
+            >{{ $t("system.user.page.unlock") }}</el-button
           >
           <el-button
             type="text"
@@ -268,7 +262,7 @@ import SearchForm from "@/components/SearchForm/index.vue";
 import Pagination from "@/components/Pagination/index.vue";
 import DictTag from "@/components/DictTag/index.vue";
 import ExportDropdown from "@/components/ExportDropdown/index.vue";
-import { formatDate } from "@/utils/date";
+import { formatDate } from "@/utils/data/date";
 // eslint-disable-next-line no-unused-vars
 import UserDialog from "./components/UserDialog.vue";
 import {
@@ -281,7 +275,7 @@ import {
 import { Message, MessageBox } from "element-ui";
 import { requestGetRoleAllApi } from "@/api";
 import { requestGetDeptTreeApi } from "@/api";
-import { withCache } from "@/utils/cache";
+import { withCache } from "@/utils/data/cache";
 import { useI18n } from "@/composables/useI18n";
 
 const { t: $t } = useI18n();
@@ -412,15 +406,15 @@ function handleEdit(row) {
 
 // 删除
 function handleDelete(row) {
-  MessageBox.confirm(`确定要删除用户「${row.username}」吗？此操作不可撤销！`, "提示", {
-    confirmButtonText: "确定",
-    cancelButtonText: "取消",
+  MessageBox.confirm($t("system.user.page.deleteConfirm", { name: row.username }), $t("common.message.tip"), {
+    confirmButtonText: $t("common.action.confirm"),
+    cancelButtonText: $t("common.action.cancel"),
     type: "warning",
   })
     .then(async () => {
       try {
         await requestDeleteUserApi(row.id);
-        Message.success("删除成功");
+        Message.success($t("common.message.deleteSuccess"));
         refreshList();
       } catch (err) {
         // 错误已由拦截器处理
@@ -432,18 +426,18 @@ function handleDelete(row) {
 // 批量删除
 function handleBatchDelete() {
   if (selectedIds.value.length === 0) {
-    Message.warning("请先选择要删除的用户");
+    Message.warning($t("system.user.page.selectToDelete"));
     return;
   }
-  MessageBox.confirm(`确定要删除选中的 ${selectedIds.value.length} 个用户吗？此操作不可撤销！`, "提示", {
-    confirmButtonText: "确定",
-    cancelButtonText: "取消",
+  MessageBox.confirm($t("system.user.page.batchDeleteConfirm", { count: selectedIds.value.length }), $t("common.message.tip"), {
+    confirmButtonText: $t("common.action.confirm"),
+    cancelButtonText: $t("common.action.cancel"),
     type: "warning",
   })
     .then(async () => {
       try {
         await requestBatchDeleteUserApi([...selectedIds.value]);
-        Message.success("批量删除成功");
+        Message.success($t("system.user.page.batchDeleteSuccess"));
         selectedIds.value = [];
         refreshList();
       } catch (err) {
@@ -467,11 +461,11 @@ function handleResetPwd(row) {
 
 async function handleConfirmResetPwd() {
   if (!resetPwdForm.newPassword || resetPwdForm.newPassword.length < 8) {
-    Message.warning("密码长度不能少于8位");
+    Message.warning($t("system.user.page.passwordMinLength8"));
     return;
   }
   if (resetPwdForm.newPassword !== resetPwdForm.confirmPassword) {
-    Message.warning($t("menu.system.user.page.passwordMismatch"));
+    Message.warning($t("system.user.page.passwordMismatch"));
     return;
   }
   try {
@@ -479,7 +473,7 @@ async function handleConfirmResetPwd() {
       resetPwdUser.value.id,
       resetPwdForm.newPassword
     );
-    Message.success($t("menu.system.user.page.resetPasswordSuccess"));
+    Message.success($t("system.user.page.resetPasswordSuccess"));
     resetPwdDialogVisible.value = false;
   } catch (err) {
     // eslint-disable-next-line no-console
@@ -496,7 +490,7 @@ function isUserLocked(row) {
 async function handleUnlock(row) {
   try {
     await MessageBox.confirm(
-      $t("menu.system.user.page.unlockConfirm"),
+      $t("system.user.page.unlockConfirm"),
       $t("common.tip"),
       {
         confirmButtonText: $t("common.confirm"),
@@ -505,7 +499,7 @@ async function handleUnlock(row) {
       }
     );
     await requestUnlockUserApi(row.id);
-    Message.success($t("menu.system.user.page.unlockSuccess"));
+    Message.success($t("system.user.page.unlockSuccess"));
     getList();
   } catch (err) {
     if (err !== "cancel") {

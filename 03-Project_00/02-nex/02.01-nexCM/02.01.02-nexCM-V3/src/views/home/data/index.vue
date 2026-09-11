@@ -3,7 +3,7 @@
     <!-- 页签 -->
     <el-tabs v-model="activeTab" class="data-tabs" @tab-click="handleTabChange">
       <!-- 产能数据 -->
-      <el-tab-pane :label="$t('menu.home.dataview.output.title')" name="output">
+      <el-tab-pane :label="$t('layout.home.dataview.output.title')" name="output">
         <div class="tab-content">
           <!-- 搜索区域 -->
           <div class="search-section">
@@ -107,12 +107,6 @@
               :data="tableData.output"
               border
               stripe
-              :header-cell-style="{
-                background: '#f5f7fa',
-                color: '#606266',
-                fontWeight: 'bold',
-                textAlign: 'center',
-              }"
               style="width: 100%"
               @selection-change="handleSelectionChange"
             >
@@ -217,7 +211,7 @@
       </el-tab-pane>
 
       <!-- 稼动率数据 -->
-      <el-tab-pane :label="$t('menu.home.dataview.oee.title')" name="oee">
+      <el-tab-pane :label="$t('layout.home.dataview.oee.title')" name="oee">
         <div class="tab-content">
           <div class="search-section">
             <el-form
@@ -303,12 +297,6 @@
               :data="tableData.oee"
               border
               stripe
-              :header-cell-style="{
-                background: '#f5f7fa',
-                color: '#606266',
-                fontWeight: 'bold',
-                textAlign: 'center',
-              }"
               style="width: 100%"
               @selection-change="handleSelectionChange"
             >
@@ -411,7 +399,7 @@
       </el-tab-pane>
 
       <!-- 生产数据 -->
-      <el-tab-pane :label="$t('menu.home.dataview.production.title')" name="production">
+      <el-tab-pane :label="$t('layout.home.dataview.production.title')" name="production">
         <div class="tab-content">
           <div class="search-section">
             <el-form
@@ -521,12 +509,6 @@
               :data="tableData.production"
               border
               stripe
-              :header-cell-style="{
-                background: '#f5f7fa',
-                color: '#606266',
-                fontWeight: 'bold',
-                textAlign: 'center',
-              }"
               style="width: 100%"
               @selection-change="handleSelectionChange"
             >
@@ -655,7 +637,7 @@
       </el-tab-pane>
 
       <!-- 报警数据 -->
-      <el-tab-pane :label="$t('menu.home.dataview.alarm.title')" name="alarm">
+      <el-tab-pane :label="$t('layout.home.dataview.alarm.title')" name="alarm">
         <div class="tab-content">
           <div class="search-section">
             <el-form
@@ -766,12 +748,6 @@
               :data="tableData.alarm"
               border
               stripe
-              :header-cell-style="{
-                background: '#f5f7fa',
-                color: '#606266',
-                fontWeight: 'bold',
-                textAlign: 'center',
-              }"
               style="width: 100%"
               @selection-change="handleSelectionChange"
             >

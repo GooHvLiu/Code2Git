@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="notification-bell">
     <div class="bell-btn" :class="{ 'bell-ringing': hasUnread }" @click.stop="togglePanel">
       <i class="el-icon-bell bell-icon"></i>
@@ -9,8 +9,8 @@
       <div v-show="showPanel" class="notification-panel" @click.stop>
         <!-- 标题栏 -->
         <div class="panel-header">
-          <span class="panel-title">{{ $t('notification.center') }}</span>
-          <span v-if="hasUnread" class="mark-all-read" @click="handleMarkAllRead">{{ $t('notification.markAllRead') }}</span>
+          <span class="panel-title">{{ $t('notification.page.center') }}</span>
+          <span v-if="hasUnread" class="mark-all-read" @click="handleMarkAllRead">{{ $t('notification.action.markAllRead') }}</span>
         </div>
 
         <!-- 通知列表 -->
@@ -21,7 +21,7 @@
           </div>
           <div v-else-if="notifications.length === 0" class="panel-empty">
             <i class="el-icon-document"></i>
-            <span>{{ $t('notification.empty') }}</span>
+            <span>{{ $t('notification.page.empty') }}</span>
           </div>
           <div
             v-for="item in notifications"
@@ -40,18 +40,18 @@
             <div class="item-content">
               <div class="item-title-row">
                 <span class="item-title">{{ getDisplayTitle(item) }}</span>
-                <el-tag v-if="!item.is_read" size="mini" type="danger" effect="dark" class="status-tag">{{ $t('notification.unread') }}</el-tag>
-                <el-tag v-else size="mini" type="info" effect="plain" class="status-tag">{{ $t('notification.read') }}</el-tag>
+                <el-tag v-if="!item.is_read" size="mini" type="danger" effect="dark" class="status-tag">{{ $t('notification.status.unread') }}</el-tag>
+                <el-tag v-else size="mini" type="info" effect="plain" class="status-tag">{{ $t('notification.status.read') }}</el-tag>
               </div>
               <div class="item-desc">{{ getDisplayContent(item) }}</div>
-              <div class="item-time">{{ formatTime(item.created_at) }}</div>
+              <div class="item-time">{{ formatTime(item.create_time) }}</div>
             </div>
           </div>
         </div>
 
         <!-- 底部查看全部 -->
         <div class="panel-footer" @click="goToNotificationPage">
-          <span class="view-all">{{ $t('notification.viewAll') }} →</span>
+          <span class="view-all">{{ $t('notification.page.viewAll') }} →</span>
         </div>
       </div>
     </transition>
@@ -67,10 +67,10 @@ import {
   requestMarkAsReadApi,
   requestMarkAllAsReadApi
 } from '@/api'
-import ws from '@/utils/websocket'
+import ws from '@/utils/request/websocket'
 import router from '@/router'
 import store from '@/store'
-import { getToken } from '@/utils/auth'
+import { getToken } from '@/utils/auth/auth'
 import { useI18n } from '@/composables/useI18n'
 
 const { t: $t } = useI18n()
@@ -151,7 +151,7 @@ async function handleMarkAllRead() {
     notifications.value.forEach(item => { item.is_read = 1 })
     // 清零 Vuex 中的未读数量
     store.commit('notification/CLEAR_UNREAD_COUNT')
-    Message.success($t('notification.markAllSuccess'))
+    Message.success($t('notification.message.markAllSuccess'))
     // 广播给其他标签页
     broadcastUnreadCountChange()
     broadcastNotificationUpdated()
@@ -214,10 +214,10 @@ function formatTime(time) {
   const hours = Math.floor(diff / 3600000)
   const days = Math.floor(diff / 86400000)
 
-  if (minutes < 1) return $t('notification.justNow') || '刚刚'
-  if (minutes < 60) return `${minutes}${$t('notification.minutesAgo') || '分钟前'}`
-  if (hours < 24) return `${hours}${$t('notification.hoursAgo') || '小时前'}`
-  if (days < 7) return `${days}${$t('notification.daysAgo') || '天前'}`
+  if (minutes < 1) return $t('notification.time.justNow') || '刚刚'
+  if (minutes < 60) return `${minutes}${$t('notification.time.minutesAgo') || '分钟前'}`
+  if (hours < 24) return `${hours}${$t('notification.time.hoursAgo') || '小时前'}`
+  if (days < 7) return `${days}${$t('notification.time.daysAgo') || '天前'}`
   return date.toLocaleDateString()
 }
 

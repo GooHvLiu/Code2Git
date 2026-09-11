@@ -1,10 +1,10 @@
-/**
+﻿/**
  * ==========================================
  * 权限管理相关接口
  * ==========================================
  * 后端路由前缀 /prod-api/v2/permission
  */
-import request from '@/utils/request'
+import request from '@/utils/request/request'
 
 /**
  * 获取当前登录用户的权限码列表 + 权限版本号

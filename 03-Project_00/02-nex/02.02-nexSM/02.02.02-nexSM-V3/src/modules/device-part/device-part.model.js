@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 部件寿命管理 - 数据模型层
  * 负责部件模板、部件实例、更换记录的数据库操作
  */
@@ -71,7 +71,7 @@ class DevicePartModel {
   async createTemplate(data) {
     const sql = `
       INSERT INTO device_part_template 
-      (template_key, name_key, code_prefix, default_spec, life_unit, default_rated_life, stat_method, stat_tag, icon, sort, enabled, created_at, updated_at)
+      (template_key, name_key, code_prefix, default_spec, life_unit, default_rated_life, stat_method, stat_tag, icon, sort, enabled, create_time, update_time)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
     `;
     const result = await query(sql, [
@@ -107,7 +107,7 @@ class DevicePartModel {
     
     if (updates.length === 0) return 0;
     
-    updates.push('updated_at = NOW()');
+    updates.push('update_time = NOW()');
     values.push(id);
     
     const sql = `UPDATE device_part_template SET ${updates.join(', ')} WHERE id = ? AND is_deleted = 0`;
@@ -119,7 +119,7 @@ class DevicePartModel {
    * 删除模板（软删除）
    */
   async deleteTemplate(id) {
-    const sql = `UPDATE device_part_template SET is_deleted = 1, updated_at = NOW() WHERE id = ?`;
+    const sql = `UPDATE device_part_template SET is_deleted = 1, update_time = NOW() WHERE id = ?`;
     const result = await query(sql, [id]);
     return result.affectedRows;
   }
@@ -309,7 +309,7 @@ class DevicePartModel {
       SELECT r.* 
       FROM device_part_replace_record r 
       ${whereSql}
-      ORDER BY r.created_at DESC
+      ORDER BY r.create_time DESC
       LIMIT ${sizeNum} OFFSET ${offset}
     `;
     const list = await query(listSql, params);

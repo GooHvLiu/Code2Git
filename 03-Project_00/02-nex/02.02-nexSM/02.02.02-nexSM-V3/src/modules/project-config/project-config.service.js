@@ -10,7 +10,7 @@ const uploadConfig = require('../../config/upload.config');
 const licenseConfig = require('../../config/license.config');
 const appConfig = require('../../config/app.config');
 const plcSetting = require('../../plc/config/plcSetting');
-const emailConfig = require('../email/email.config');
+const emailConfig = require('../../config/email.config');
 const { DEFAULT_TIMEOUTS } = require('../../plc/utils/withTimeout');
 
 class ProjectConfigService {
@@ -99,6 +99,8 @@ class ProjectConfigService {
       backup: {
         dir: './backups/database',
         dirAbsolute: path.resolve('./backups/database'),
+        menuDir: './backups/menu',
+        menuDirAbsolute: path.resolve('./backups/menu'),
         i18nDir: './backups/i18n',
         i18nDirAbsolute: path.resolve('./backups/i18n'),
         configDir: './backups/config',

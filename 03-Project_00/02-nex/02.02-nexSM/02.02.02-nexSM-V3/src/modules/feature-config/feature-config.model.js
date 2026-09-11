@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ==========================================
  * 功能配置模块 - 数据模型层
  * ==========================================
@@ -85,7 +85,7 @@ class FeatureConfigModel {
   async updateValue(featureKey, value) {
     const sql = `
       UPDATE nex_feature_config
-      SET current_value = ?, updated_at = NOW()
+      SET current_value = ?, update_time = NOW()
       WHERE feature_key = ? AND is_enabled = 1
     `
     return await query(sql, [value, featureKey])
@@ -110,7 +110,7 @@ class FeatureConfigModel {
   async resetToDefault(featureKey) {
     const sql = `
       UPDATE nex_feature_config
-      SET current_value = default_value, updated_at = NOW()
+      SET current_value = default_value, update_time = NOW()
       WHERE feature_key = ? AND is_enabled = 1
     `
     return await query(sql, [featureKey])
@@ -124,7 +124,7 @@ class FeatureConfigModel {
   async resetCategoryToDefault(category) {
     const sql = `
       UPDATE nex_feature_config
-      SET current_value = default_value, updated_at = NOW()
+      SET current_value = default_value, update_time = NOW()
       WHERE category = ? AND is_enabled = 1
     `
     return await query(sql, [category])
@@ -137,7 +137,7 @@ class FeatureConfigModel {
   async resetAllToDefault() {
     const sql = `
       UPDATE nex_feature_config
-      SET current_value = default_value, updated_at = NOW()
+      SET current_value = default_value, update_time = NOW()
       WHERE is_enabled = 1
     `
     return await query(sql)

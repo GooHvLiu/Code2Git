@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 通知中心模块 - 数据模型层
  * 
  * 支持功能：
@@ -36,12 +36,12 @@ class NotificationModel extends BaseModel {
         is_read TINYINT DEFAULT 0,
         read_time DATETIME NULL,
         is_archived TINYINT DEFAULT 0,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+        update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         INDEX idx_user_id (user_id),
         INDEX idx_is_read (is_read),
         INDEX idx_is_archived (is_archived),
-        INDEX idx_created_at (created_at)
+        INDEX idx_create_time (create_time)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
     `
     await query(sql)
@@ -124,11 +124,11 @@ class NotificationModel extends BaseModel {
 
     // 时间范围筛选
     if (params.startDate) {
-      where += ' AND created_at >= ?'
+      where += ' AND create_time >= ?'
       queryParams.push(params.startDate + ' 00:00:00')
     }
     if (params.endDate) {
-      where += ' AND created_at <= ?'
+      where += ' AND create_time <= ?'
       queryParams.push(params.endDate + ' 23:59:59')
     }
 
@@ -146,7 +146,7 @@ class NotificationModel extends BaseModel {
     const countSql = `SELECT COUNT(*) as total FROM ${this.tableName} ${where}`
     const countResult = await query(countSql, queryParams)
 
-    const listSql = `SELECT * FROM ${this.tableName} ${where} ORDER BY created_at DESC LIMIT ${pageSize} OFFSET ${offset}`
+    const listSql = `SELECT * FROM ${this.tableName} ${where} ORDER BY create_time DESC LIMIT ${pageSize} OFFSET ${offset}`
     const list = await query(listSql, queryParams)
 
     return {

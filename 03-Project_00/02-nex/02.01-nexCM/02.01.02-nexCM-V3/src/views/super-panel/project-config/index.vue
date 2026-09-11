@@ -1,13 +1,13 @@
-<template>
+﻿<template>
   <div class="project-config-container">
     <!-- 页面头部 -->
     <div class="page-header">
       <div class="header-left">
         <h2 class="page-title">
-          {{ $t("menu.superPanel.projectConfig.page.title") }}
+          {{ $t("superPanel.projectConfig.page.title") }}
         </h2>
         <p class="page-desc">
-          {{ $t("menu.superPanel.projectConfig.page.desc") }}
+          {{ $t("superPanel.projectConfig.page.desc") }}
         </p>
       </div>
       <div class="header-right">
@@ -48,7 +48,7 @@
           <div class="panel-header">
             <h3 class="panel-title">
               <i class="el-icon-connection"></i>
-              {{ $t("menu.superPanel.projectConfig.menu.translation") }}
+              {{ $t("superPanel.projectConfig.translation.menu") }}
             </h3>
             <el-button
               type="primary"
@@ -56,7 +56,7 @@
               icon="el-icon-setting"
               @click="goToTranslationConfig"
             >
-              {{ $t("menu.superPanel.projectConfig.translation.goToConfig") }}
+              {{ $t("superPanel.projectConfig.translation.goToConfig") }}
             </el-button>
           </div>
 
@@ -65,7 +65,7 @@
               <div class="status-label">
                 {{
                   $t(
-                    "menu.superPanel.config.childrenMenu.translation.enableTranslation"
+                    "superPanel.config.translation.enableTranslation"
                   )
                 }}
               </div>
@@ -77,10 +77,10 @@
                   {{
                     translationConfig.enabled
                       ? $t(
-                          "menu.superPanel.config.childrenMenu.translation.enabled"
+                          "superPanel.config.translation.enabled"
                         )
                       : $t(
-                          "menu.superPanel.config.childrenMenu.translation.disabled"
+                          "superPanel.config.translation.disabled"
                         )
                   }}
                 </el-tag>
@@ -90,7 +90,7 @@
             <div class="status-card">
               <div class="status-label">
                 {{
-                  $t("menu.superPanel.config.childrenMenu.translation.provider")
+                  $t("superPanel.config.translation.provider")
                 }}
               </div>
               <div class="status-value">
@@ -101,7 +101,7 @@
             <div class="status-card">
               <div class="status-label">
                 {{
-                  $t("menu.superPanel.config.childrenMenu.translation.masterLanguage")
+                  $t("superPanel.config.translation.masterLanguage")
                 }}
               </div>
               <div class="status-value">
@@ -114,7 +114,7 @@
             <div class="status-card">
               <div class="status-label">
                 {{
-                  $t("menu.superPanel.config.childrenMenu.translation.secretId")
+                  $t("superPanel.config.translation.secretId")
                 }}
               </div>
               <div class="status-value code-value">
@@ -125,7 +125,7 @@
             <div class="status-card">
               <div class="status-label">
                 {{
-                  $t("menu.superPanel.config.childrenMenu.translation.region")
+                  $t("superPanel.config.translation.region")
                 }}
               </div>
               <div class="status-value">
@@ -137,7 +137,7 @@
               <div class="status-label">
                 {{
                   $t(
-                    "menu.superPanel.config.childrenMenu.translation.projectId"
+                    "superPanel.config.translation.projectId"
                   )
                 }}
               </div>
@@ -148,9 +148,9 @@
           </div>
 
           <el-alert
-            :title="$t('menu.superPanel.projectConfig.translation.tipTitle')"
+            :title="$t('superPanel.projectConfig.translation.tipTitle')"
             :description="
-              $t('menu.superPanel.projectConfig.translation.tipContent')
+              $t('superPanel.projectConfig.translation.tipContent')
             "
             type="info"
             :closable="false"
@@ -287,7 +287,7 @@
                     icon="el-icon-s-promotion"
                     @click="goToConfig(item.meta)"
                   >
-                    {{ $t("menu.superPanel.projectConfig.actions.goToConfig") }}
+                    {{ $t("superPanel.projectConfig.actions.goToConfig") }}
                   </el-button>
                   <!-- 配置文件/环境变量：编辑文件按钮 -->
                   <el-tooltip
@@ -295,7 +295,7 @@
                       canEditFile(item.meta) && !isFileInWhitelist(item.meta)
                     "
                     :content="
-                      $t('menu.superPanel.projectConfig.tips.notInWhitelist')
+                      $t('superPanel.projectConfig.tips.notInWhitelist')
                     "
                     placement="top"
                   >
@@ -305,7 +305,7 @@
                       icon="el-icon-edit-outline"
                       @click="openEditor(item)"
                     >
-                      {{ $t("menu.superPanel.projectConfig.actions.editFile") }}
+                      {{ $t("superPanel.projectConfig.actions.editFile") }}
                     </el-button>
                   </el-tooltip>
                   <el-button
@@ -317,20 +317,20 @@
                     icon="el-icon-edit"
                     @click="openEditor(item)"
                   >
-                    {{ $t("menu.superPanel.projectConfig.actions.editFile") }}
+                    {{ $t("superPanel.projectConfig.actions.editFile") }}
                   </el-button>
                   <!-- 代码常量：提示 -->
                   <el-tooltip
                     v-if="item.meta?.editType === 'code'"
                     :content="
-                      $t('menu.superPanel.projectConfig.tips.codeConstant')
+                      $t('superPanel.projectConfig.tips.codeConstant')
                     "
                     placement="top"
                   >
                     <el-tag type="info" size="mini" effect="plain">
                       <i class="el-icon-warning-outline"></i>
                       {{
-                        $t("menu.superPanel.projectConfig.tips.needCodeChange")
+                        $t("superPanel.projectConfig.tips.needCodeChange")
                       }}
                     </el-tag>
                   </el-tooltip>
@@ -350,7 +350,7 @@
                 <template v-else-if="getSourceType(item.meta) === 'runtime'">
                   <i class="el-icon-monitor"></i>
                   <code>{{
-                    $t("menu.superPanel.projectConfig.sourceType.runtime")
+                    $t("superPanel.projectConfig.sourceType.runtime")
                   }}</code>
                 </template>
                 <template v-else>
@@ -359,7 +359,7 @@
                     item.meta.filePath
                   }}</code>
                   <code v-else>{{
-                    $t("menu.superPanel.projectConfig.sourceType.code")
+                    $t("superPanel.projectConfig.sourceType.code")
                   }}</code>
                 </template>
               </div>
@@ -372,7 +372,7 @@
             class="empty-state"
           >
             <i class="el-icon-document"></i>
-            <p>{{ $t("menu.superPanel.projectConfig.empty.noConfig") }}</p>
+            <p>{{ $t("superPanel.projectConfig.empty.noConfig") }}</p>
           </div>
         </template>
       </div>
@@ -396,8 +396,8 @@
             <el-tag size="mini" :type="editorDirty ? 'warning' : 'success'">
               {{
                 editorDirty
-                  ? $t("menu.superPanel.projectConfig.editor.unsaved")
-                  : $t("menu.superPanel.projectConfig.editor.saved")
+                  ? $t("superPanel.projectConfig.editor.unsaved")
+                  : $t("superPanel.projectConfig.editor.saved")
               }}
             </el-tag>
             <div class="backup-path-wrapper">
@@ -406,12 +406,12 @@
                 icon="el-icon-folder-opened"
                 @click="showBackupPathDialog"
               >
-                {{ $t("menu.superPanel.projectConfig.editor.backupPath") }}
+                {{ $t("superPanel.projectConfig.editor.backupPath") }}
               </el-button>
               <el-tooltip
                 :content="
                   backupDirInfo.absolute ||
-                  $t('menu.superPanel.projectConfig.editor.backupPathLoading')
+                  $t('superPanel.projectConfig.editor.backupPathLoading')
                 "
                 placement="bottom"
               >
@@ -426,14 +426,14 @@
               @click="checkSyntax"
               :loading="checkingSyntax"
             >
-              {{ $t("menu.superPanel.projectConfig.editor.syntaxCheck") }}
+              {{ $t("superPanel.projectConfig.editor.syntaxCheck") }}
             </el-button>
             <el-button
               size="small"
               icon="el-icon-back"
               @click="showBackupPanel = !showBackupPanel"
             >
-              {{ $t("menu.superPanel.projectConfig.editor.versionHistory") }}
+              {{ $t("superPanel.projectConfig.editor.versionHistory") }}
             </el-button>
             <el-button
               size="small"
@@ -443,7 +443,7 @@
               :loading="saving"
               :disabled="!editorDirty"
             >
-              {{ $t("menu.superPanel.projectConfig.editor.save") }}
+              {{ $t("superPanel.projectConfig.editor.save") }}
             </el-button>
           </div>
         </div>
@@ -469,7 +469,7 @@
           <div class="backup-panel" v-if="showBackupPanel">
             <div class="panel-header">
               <span class="panel-title">{{
-                $t("menu.superPanel.projectConfig.backup.title")
+                $t("superPanel.projectConfig.backup.title")
               }}</span>
               <el-button
                 size="mini"
@@ -491,7 +491,7 @@
                 </div>
                 <div class="backup-meta">
                   <span
-                    >{{ $t("menu.superPanel.projectConfig.backup.operator") }}:
+                    >{{ $t("superPanel.projectConfig.backup.operator") }}:
                     {{ backup.operator }}</span
                   >
                   <span>{{ backup.sizeFormatted }}</span>
@@ -506,14 +506,14 @@
                     type="warning"
                     @click="restoreBackup(backup)"
                   >
-                    {{ $t("menu.superPanel.projectConfig.backup.restore") }}
+                    {{ $t("superPanel.projectConfig.backup.restore") }}
                   </el-button>
                   <el-button
                     size="mini"
                     type="danger"
                     @click="deleteBackup(backup)"
                   >
-                    {{ $t("menu.superPanel.projectConfig.backup.delete") }}
+                    {{ $t("superPanel.projectConfig.backup.delete") }}
                   </el-button>
                 </div>
               </div>
@@ -522,7 +522,7 @@
                 v-if="backupList.length === 0 && !backupListLoading"
               >
                 <i class="el-icon-box"></i>
-                <p>{{ $t("menu.superPanel.projectConfig.backup.empty") }}</p>
+                <p>{{ $t("superPanel.projectConfig.backup.empty") }}</p>
               </div>
             </div>
           </div>
@@ -533,8 +533,8 @@
           <el-alert
             :title="
               syntaxResult.valid
-                ? $t('menu.superPanel.projectConfig.editor.syntaxValid')
-                : $t('menu.superPanel.projectConfig.editor.syntaxInvalid')
+                ? $t('superPanel.projectConfig.editor.syntaxValid')
+                : $t('superPanel.projectConfig.editor.syntaxInvalid')
             "
             :type="syntaxResult.valid ? 'success' : 'error'"
             :description="syntaxResult.error || syntaxResult.warning"
@@ -546,7 +546,7 @@
 
       <!-- 保存备注弹窗 -->
       <el-dialog
-        :title="$t('menu.superPanel.projectConfig.saveDialog.title')"
+        :title="$t('superPanel.projectConfig.saveDialog.title')"
         :visible.sync="saveDialogVisible"
         width="400px"
         :close-on-click-modal="false"
@@ -554,19 +554,19 @@
       >
         <el-form :model="saveForm" label-width="80px">
           <el-form-item
-            :label="$t('menu.superPanel.projectConfig.saveDialog.remark')"
+            :label="$t('superPanel.projectConfig.saveDialog.remark')"
           >
             <el-input
               v-model="saveForm.remark"
               type="textarea"
               :rows="3"
               :placeholder="
-                $t('menu.superPanel.projectConfig.saveDialog.remarkPlaceholder')
+                $t('superPanel.projectConfig.saveDialog.remarkPlaceholder')
               "
             ></el-input>
           </el-form-item>
           <el-alert
-            :title="$t('menu.superPanel.projectConfig.saveDialog.warning')"
+            :title="$t('superPanel.projectConfig.saveDialog.warning')"
             type="warning"
             show-icon
             :closable="false"
@@ -577,14 +577,14 @@
             $t("common.cancel")
           }}</el-button>
           <el-button type="primary" @click="confirmSave" :loading="saving">
-            {{ $t("menu.superPanel.projectConfig.saveDialog.confirm") }}
+            {{ $t("superPanel.projectConfig.saveDialog.confirm") }}
           </el-button>
         </span>
       </el-dialog>
 
       <!-- 修改备份路径弹窗 -->
       <el-dialog
-        :title="$t('menu.superPanel.projectConfig.backupPathDialog.title')"
+        :title="$t('superPanel.projectConfig.backupPathDialog.title')"
         :visible.sync="backupPathDialogVisible"
         width="500px"
         :close-on-click-modal="false"
@@ -593,28 +593,32 @@
         <el-form :model="backupPathForm" label-width="140px">
           <el-form-item
             :label="
-              $t('menu.superPanel.projectConfig.backupPathDialog.currentPath')
+              $t('superPanel.projectConfig.backupPathDialog.currentPath')
             "
           >
-            <el-input :value="backupDirInfo.absolute" disabled></el-input>
+            <el-input
+              :value="backupDirInfo.absolute"
+              readonly
+              class="readonly-path-input"
+            ></el-input>
           </el-form-item>
           <el-form-item
             :label="
-              $t('menu.superPanel.projectConfig.backupPathDialog.newPath')
+              $t('superPanel.projectConfig.backupPathDialog.newPath')
             "
           >
             <el-input
               v-model="backupPathForm.newPath"
               :placeholder="
                 $t(
-                  'menu.superPanel.projectConfig.backupPathDialog.newPathPlaceholder'
+                  'superPanel.projectConfig.backupPathDialog.newPathPlaceholder'
                 )
               "
             ></el-input>
           </el-form-item>
           <el-alert
             :title="
-              $t('menu.superPanel.projectConfig.backupPathDialog.warning')
+              $t('superPanel.projectConfig.backupPathDialog.warning')
             "
             type="warning"
             show-icon
@@ -664,7 +668,7 @@ import {
   getTableName,
   SOURCE_TYPE_CONFIG,
   getSourceType,
-} from "@/config/projectConfig.meta";
+} from "@/config/project-config.meta";
 
 // 可直接编辑的文件白名单
 const EDITABLE_WHITELIST = [
@@ -673,7 +677,7 @@ const EDITABLE_WHITELIST = [
   "src/config/db.config.js",
   "src/config/jwt.config.js",
   "src/config/upload.config.js",
-  "src/config/license.config.js",
+  "src/config/superPanel.license.config.js",
   "src/modules/email/email.config.js",
   "src/plc/config/plcSetting.js",
 ];
@@ -701,52 +705,52 @@ export default {
         {
           key: "environment",
           icon: "el-icon-info",
-          titleKey: "menu.superPanel.projectConfig.menu.environment",
+          titleKey: "superPanel.projectConfig.menu.environment",
         },
         {
           key: "api",
           icon: "el-icon-link",
-          titleKey: "menu.superPanel.projectConfig.menu.api",
+          titleKey: "superPanel.projectConfig.menu.api",
         },
         {
           key: "storage",
           icon: "el-icon-folder-opened",
-          titleKey: "menu.superPanel.projectConfig.menu.storage",
+          titleKey: "superPanel.projectConfig.menu.storage",
         },
         {
           key: "security",
           icon: "el-icon-lock",
-          titleKey: "menu.superPanel.projectConfig.menu.security",
+          titleKey: "superPanel.projectConfig.menu.security",
         },
         {
           key: "database",
           icon: "el-icon-coin",
-          titleKey: "menu.superPanel.projectConfig.menu.database",
+          titleKey: "superPanel.projectConfig.menu.database",
         },
         {
           key: "license",
           icon: "el-icon-key",
-          titleKey: "menu.superPanel.projectConfig.menu.license",
+          titleKey: "superPanel.projectConfig.menu.license",
         },
         {
           key: "email",
           icon: "el-icon-message",
-          titleKey: "menu.superPanel.projectConfig.menu.email",
+          titleKey: "superPanel.projectConfig.menu.email",
         },
         {
           key: "i18n",
           icon: "el-icon-collection",
-          titleKey: "menu.superPanel.projectConfig.menu.i18n",
+          titleKey: "superPanel.projectConfig.menu.i18n",
         },
         {
           key: "translation",
           icon: "el-icon-connection",
-          titleKey: "menu.superPanel.projectConfig.menu.translation",
+          titleKey: "superPanel.projectConfig.translation.menu",
         },
         {
           key: "plc",
           icon: "el-icon-cpu",
-          titleKey: "menu.superPanel.projectConfig.menu.plc",
+          titleKey: "superPanel.projectConfig.menu.plc",
         },
       ],
 
@@ -784,10 +788,10 @@ export default {
     editorDialogTitle() {
       if (this.currentEditItem) {
         return `${this.currentEditItem.label} - ${this.$t(
-          "menu.superPanel.projectConfig.editor.title"
+          "superPanel.projectConfig.editor.title"
         )}`;
       }
-      return this.$t("menu.superPanel.projectConfig.editor.title");
+      return this.$t("superPanel.projectConfig.editor.title");
     },
     currentConfigItems() {
       const category = this.activeMenu;
@@ -812,7 +816,7 @@ export default {
         this.config = res.data || {};
       } catch (err) {
         this.$message.error(
-          this.$t("menu.superPanel.projectConfig.loadFailed")
+          this.$t("superPanel.projectConfig.page.loadFailed")
         );
       } finally {
         this.loading = false;
@@ -927,27 +931,27 @@ export default {
 
     getEditTypeLabelKey(editType) {
       const keyMap = {
-        [EDIT_TYPE.DATABASE]: "menu.superPanel.projectConfig.editType.database",
+        [EDIT_TYPE.DATABASE]: "superPanel.projectConfig.editType.database",
         [EDIT_TYPE.CONFIG_FILE]:
-          "menu.superPanel.projectConfig.editType.configFile",
-        [EDIT_TYPE.ENV_FILE]: "menu.superPanel.projectConfig.editType.envFile",
-        [EDIT_TYPE.CODE]: "menu.superPanel.projectConfig.editType.code",
+          "superPanel.projectConfig.editType.configFile",
+        [EDIT_TYPE.ENV_FILE]: "superPanel.projectConfig.editType.envFile",
+        [EDIT_TYPE.CODE]: "superPanel.projectConfig.editType.code",
       };
-      return keyMap[editType] || "menu.superPanel.projectConfig.editType.code";
+      return keyMap[editType] || "superPanel.projectConfig.editType.code";
     },
 
     getEditTypeTipKey(editType) {
       const keyMap = {
         [EDIT_TYPE.DATABASE]:
-          "menu.superPanel.projectConfig.editType.databaseTip",
+          "superPanel.projectConfig.editType.databaseTip",
         [EDIT_TYPE.CONFIG_FILE]:
-          "menu.superPanel.projectConfig.editType.configFileTip",
+          "superPanel.projectConfig.editType.configFileTip",
         [EDIT_TYPE.ENV_FILE]:
-          "menu.superPanel.projectConfig.editType.envFileTip",
-        [EDIT_TYPE.CODE]: "menu.superPanel.projectConfig.editType.codeTip",
+          "superPanel.projectConfig.editType.envFileTip",
+        [EDIT_TYPE.CODE]: "superPanel.projectConfig.editType.codeTip",
       };
       return (
-        keyMap[editType] || "menu.superPanel.projectConfig.editType.codeTip"
+        keyMap[editType] || "superPanel.projectConfig.editType.codeTip"
       );
     },
 
@@ -963,29 +967,29 @@ export default {
     getEffectTypeLabelKey(effectType) {
       const keyMap = {
         [EFFECT_TYPE.IMMEDIATE]:
-          "menu.superPanel.projectConfig.effectType.immediate",
+          "superPanel.projectConfig.effectType.immediate",
         [EFFECT_TYPE.RESTART]:
-          "menu.superPanel.projectConfig.effectType.restart",
+          "superPanel.projectConfig.effectType.restart",
         [EFFECT_TYPE.REBUILD]:
-          "menu.superPanel.projectConfig.effectType.rebuild",
+          "superPanel.projectConfig.effectType.rebuild",
       };
       return (
-        keyMap[effectType] || "menu.superPanel.projectConfig.effectType.restart"
+        keyMap[effectType] || "superPanel.projectConfig.effectType.restart"
       );
     },
 
     getEffectTypeTipKey(effectType) {
       const keyMap = {
         [EFFECT_TYPE.IMMEDIATE]:
-          "menu.superPanel.projectConfig.effectType.immediateTip",
+          "superPanel.projectConfig.effectType.immediateTip",
         [EFFECT_TYPE.RESTART]:
-          "menu.superPanel.projectConfig.effectType.restartTip",
+          "superPanel.projectConfig.effectType.restartTip",
         [EFFECT_TYPE.REBUILD]:
-          "menu.superPanel.projectConfig.effectType.rebuildTip",
+          "superPanel.projectConfig.effectType.rebuildTip",
       };
       return (
         keyMap[effectType] ||
-        "menu.superPanel.projectConfig.effectType.restartTip"
+        "superPanel.projectConfig.effectType.restartTip"
       );
     },
 
@@ -1050,7 +1054,7 @@ export default {
       const meta = item.meta;
       if (!meta || !meta.filePath) {
         this.$message.warning(
-          this.$t("menu.superPanel.projectConfig.tips.noFilePath")
+          this.$t("superPanel.projectConfig.tips.noFilePath")
         );
         return;
       }
@@ -1063,7 +1067,7 @@ export default {
       if (!isInWhitelist) {
         try {
           await MessageBox.confirm(
-            this.$t("menu.superPanel.projectConfig.tips.notInWhitelist"),
+            this.$t("superPanel.projectConfig.tips.notInWhitelist"),
             this.$t("common.warning"),
             {
               confirmButtonText: this.$t("common.confirm"),
@@ -1079,7 +1083,7 @@ export default {
           // 其他错误，打印日志并显示错误消息
           console.error("确认框调用失败:", err);
           this.$message.error(
-            this.$t("menu.superPanel.projectConfig.tips.confirmFailed")
+            this.$t("superPanel.projectConfig.tips.confirmFailed")
           );
           return;
         }
@@ -1105,7 +1109,7 @@ export default {
         });
       } catch (err) {
         this.$message.error(
-          this.$t("menu.superPanel.projectConfig.editor.readFailed")
+          this.$t("superPanel.projectConfig.editor.readFailed")
         );
       }
     },
@@ -1133,16 +1137,16 @@ export default {
         this.syntaxResult = res.data;
         if (res.data.valid) {
           this.$message.success(
-            this.$t("menu.superPanel.projectConfig.editor.syntaxValid")
+            this.$t("superPanel.projectConfig.editor.syntaxValid")
           );
         } else {
           this.$message.error(
-            this.$t("menu.superPanel.projectConfig.editor.syntaxInvalid")
+            this.$t("superPanel.projectConfig.editor.syntaxInvalid")
           );
         }
       } catch (err) {
         this.$message.error(
-          this.$t("menu.superPanel.projectConfig.editor.syntaxCheckFailed")
+          this.$t("superPanel.projectConfig.editor.syntaxCheckFailed")
         );
       } finally {
         this.checkingSyntax = false;
@@ -1159,7 +1163,7 @@ export default {
     async confirmSave() {
       this.saving = true;
       try {
-        const res = await requestWriteConfigFileApi({
+        await requestWriteConfigFileApi({
           filePath: this.currentEditFile,
           content: this.editorContent,
           remark: this.saveForm.remark,
@@ -1167,8 +1171,7 @@ export default {
         this.originalContent = this.editorContent;
         this.saveDialogVisible = false;
         this.$message.success(
-          res.data.message ||
-            this.$t("menu.superPanel.projectConfig.editor.saveSuccess")
+          this.$t("superPanel.projectConfig.editor.saveSuccess")
         );
         this.loadBackupList();
         this.loadConfig();
@@ -1188,7 +1191,7 @@ export default {
         this.backupList = res.data || [];
       } catch (err) {
         this.$message.error(
-          this.$t("menu.superPanel.projectConfig.backup.loadFailed")
+          this.$t("superPanel.projectConfig.backup.loadFailed")
         );
       } finally {
         this.backupListLoading = false;
@@ -1198,7 +1201,7 @@ export default {
     async restoreBackup(backup) {
       try {
         await MessageBox.confirm(
-          this.$t("menu.superPanel.projectConfig.backup.restoreConfirm"),
+          this.$t("superPanel.projectConfig.backup.restoreConfirm"),
           this.$t("common.warning"),
           {
             confirmButtonText: this.$t("common.confirm"),
@@ -1211,13 +1214,12 @@ export default {
       }
 
       try {
-        const res = await requestRestoreConfigBackupApi({
+        await requestRestoreConfigBackupApi({
           filePath: this.currentEditFile,
           backupName: backup.name,
         });
         this.$message.success(
-          res.data.message ||
-            this.$t("menu.superPanel.projectConfig.backup.restoreSuccess")
+          this.$t("superPanel.projectConfig.backup.restoreSuccess")
         );
         // 重新加载文件内容
         const fileRes = await requestReadConfigFileApi(this.currentEditFile);
@@ -1233,7 +1235,7 @@ export default {
     async deleteBackup(backup) {
       try {
         await MessageBox.confirm(
-          this.$t("menu.superPanel.projectConfig.backup.deleteConfirm"),
+          this.$t("superPanel.projectConfig.backup.deleteConfirm"),
           this.$t("common.warning"),
           {
             confirmButtonText: this.$t("common.confirm"),
@@ -1251,7 +1253,7 @@ export default {
           backupName: backup.name,
         });
         this.$message.success(
-          this.$t("menu.superPanel.projectConfig.backup.deleteSuccess")
+          this.$t("superPanel.projectConfig.backup.deleteSuccess")
         );
         this.loadBackupList();
       } catch (err) {
@@ -1277,7 +1279,7 @@ export default {
     async confirmChangeBackupPath() {
       if (!this.backupPathForm.newPath || !this.backupPathForm.newPath.trim()) {
         this.$message.warning(
-          this.$t("menu.superPanel.projectConfig.backupPathDialog.pathRequired")
+          this.$t("superPanel.projectConfig.backupPathDialog.pathRequired")
         );
         return;
       }
@@ -1291,7 +1293,7 @@ export default {
         this.backupPathDialogVisible = false;
         this.$message.success(
           this.$t(
-            "menu.superPanel.projectConfig.backupPathDialog.changeSuccess"
+            "superPanel.projectConfig.backupPathDialog.changeSuccess"
           )
         );
         this.loadBackupList();
@@ -1726,5 +1728,13 @@ export default {
 
 .syntax-result {
   margin-top: 10px;
+}
+
+/* 只读路径输入框灰色样式（与语言配置备份路径弹窗一致） */
+.readonly-path-input >>> .el-input__inner {
+  background-color: #f5f7fa !important;
+  border: 1px solid #dcdfe6 !important;
+  color: #909399 !important;
+  cursor: not-allowed !important;
 }
 </style>

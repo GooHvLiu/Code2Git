@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ==========================================
  * 静态路由（无需权限，所有人可访问）
  * ==========================================
@@ -6,7 +6,7 @@
  * 注意：业务菜单全部从后端服务器动态获取，前端不再硬编码
  * meta.titles 为面包屑层级数组，TagsView 取最后一项作为标签标题
  */
-import Layout from '@/Layout/index.vue'
+import Layout from '@/layout/index.vue'
 import { ROUTE_PATHS } from './pathConstants'
 
 export const constantRoutes = [
@@ -15,28 +15,28 @@ export const constantRoutes = [
     name: 'Login',
     component: () => import('@/views/login/index.vue'),
     hidden: true,
-    meta: { titles: ['login.title'] }
+    meta: { titles: ['layout.login.title'] }
   },
   {
     path: ROUTE_PATHS.LICENSE_IMPORT,
     name: 'LicenseImport',
-    component: () => import('@/views/license/LicenseImport.vue'),
+    component: () => import('@/views/license/license-import/index.vue'),
     hidden: true,
-    meta: { titles: ['license.importTitle'] }
+    meta: { titles: ['superPanel.license.page.importTitle'] }
   },
   {
     path: ROUTE_PATHS.NOT_FOUND,
     name: 'NotFound',
     component: () => import('@/views/error/404.vue'),
     hidden: true,
-    meta: { titles: ['errorPage.notFound'] }
+    meta: { titles: ['layout.errorPage.notFound'] }
   },
   {
     path: ROUTE_PATHS.FORBIDDEN,
     name: 'Forbidden',
     component: () => import('@/views/error/403.vue'),
     hidden: true,
-    meta: { titles: ['errorPage.forbiddenTitle'] }
+    meta: { titles: ['layout.errorPage.forbidden'] }
   },
   {
     path: ROUTE_PATHS.REDIRECT,
@@ -44,6 +44,13 @@ export const constantRoutes = [
     component: () => import('@/views/redirect/index.vue'),
     hidden: true,
     meta: { titles: ['redirect'] }
+  },
+  {
+    path: ROUTE_PATHS.MENU_CONFIG_PREVIEW,
+    name: 'MenuConfigPreview',
+    component: () => import('@/views/super-panel/menu-config/preview.vue'),
+    hidden: true,
+    meta: { titles: ['superPanel.menuConfig.preview.title'] }
   },
   {
     path: ROUTE_PATHS.ROOT,
@@ -56,7 +63,7 @@ export const constantRoutes = [
         name: 'Profile',
         component: () => import('@/views/profile/index.vue'),
         hidden: true,
-        meta: { titles: ['layout.profile'] }
+        meta: { titles: ['layout.profile.title'] }
       },
       // 通知中心（隐藏路由，不显示在菜单中，但可通过通知铃铛跳转）
       {
@@ -64,7 +71,7 @@ export const constantRoutes = [
         name: 'Notification',
         component: () => import('@/views/notification/index.vue'),
         hidden: true,
-        meta: { titles: ['layout.notificationCenter'] }
+        meta: { titles: ['notification.page.title'] }
       }
     ]
   }

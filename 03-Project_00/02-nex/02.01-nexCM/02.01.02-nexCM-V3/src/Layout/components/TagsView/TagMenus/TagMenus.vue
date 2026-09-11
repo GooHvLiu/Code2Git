@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <!-- 全屏遮罩 @click.self：只有点击遮罩空白区域触发，点击菜单内部不会关闭 -->
   <div class="context-menu-mask" @click.self="$emit('close')">
     <div class="context-menu" :style="menuStyle">
@@ -38,12 +38,12 @@ const emit = defineEmits(["menu-click", "close"]);
 // ===== 计算属性 =====
 /** 右键菜单项（国际化） */
 const tagMenu = computed(() => [
-  { id: 1, icon: "el-icon-refresh-right", text: $t("tagsview.refresh") },
-  { id: 2, icon: "el-icon-close", text: $t("tagsview.close") },
-  { id: 3, icon: "el-icon-circle-close", text: $t("tagsview.closeOthers") },
-  { id: 4, icon: "el-icon-back", text: $t("tagsview.closeLeft") },
-  { id: 5, icon: "el-icon-right", text: $t("tagsview.closeRight") },
-  { id: 6, icon: "el-icon-circle-close", text: $t("tagsview.closeAll") },
+  { id: 1, icon: "el-icon-refresh-right", text: $t("layout.tagsview.refresh") },
+  { id: 2, icon: "el-icon-close", text: $t("layout.tagsview.close") },
+  { id: 3, icon: "el-icon-circle-close", text: $t("layout.tagsview.closeOthers") },
+  { id: 4, icon: "el-icon-back", text: $t("layout.tagsview.closeLeft") },
+  { id: 5, icon: "el-icon-right", text: $t("layout.tagsview.closeRight") },
+  { id: 6, icon: "el-icon-circle-close", text: $t("layout.tagsview.closeAll") },
 ]);
 
 /** 根据当前右键位置和标签总数，过滤不可用的菜单项 */

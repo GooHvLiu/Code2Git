@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <!--
     403 无权限页面
     用户已登录但访问了无权限的路由时显示
@@ -7,13 +7,13 @@
   <div class="error-page">
     <div class="error-content">
       <div class="error-code">403</div>
-      <div class="error-title">{{ $t("errorPage.forbidden") }}</div>
-      <div class="error-desc">{{ $t("errorPage.forbiddenDesc") }}</div>
+      <div class="error-title">{{ $t("layout.errorPage.forbidden") }}</div>
+      <div class="error-desc">{{ $t("layout.errorPage.forbiddenDesc") }}</div>
       <div class="error-actions">
         <el-button type="primary" @click="goHome">{{
-          $t("errorPage.backHome")
+          $t("layout.errorPage.backHome")
         }}</el-button>
-        <el-button @click="goBack">{{ $t("errorPage.back") }}</el-button>
+        <el-button @click="goBack">{{ $t("layout.errorPage.back") }}</el-button>
       </div>
     </div>
   </div>

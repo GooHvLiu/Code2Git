@@ -55,7 +55,7 @@ app.use('/uploads', express.static(path.join(__dirname, './uploads')));
 // Swagger API 文档（仅开发环境启用）
 if (process.env.NODE_ENV !== 'production') {
   const swaggerUi = require('swagger-ui-express');
-  const swaggerSpecs = require('./src/config/swagger.js');
+  const swaggerSpecs = require('./src/config/swagger.config.js');
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
   console.log('📖 Swagger API 文档: http://localhost:' + (process.env.PORT || 3002) + '/api-docs');
 }
@@ -97,7 +97,7 @@ initSystemConfig();
 
 // 通知模块初始化：创建表 + 添加字段
 const notificationModel = require('./src/modules/notification/notification.model');
-const notificationSettingModel = require('./src/modules/notification/notificationSetting.model');
+const notificationSettingModel = require('./src/modules/notification/notification-setting.model');
 async function initNotificationModule() {
   try {
     await notificationModel.ensureTable();

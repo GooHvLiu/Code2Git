@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="page-404">
     <TransitionScale :duration="320" :scale="0.8" appear>
       <div class="content-box" v-if="show">
@@ -7,12 +7,12 @@
           <div class="ball"></div>
         </div>
         <h1 class="code">404</h1>
-        <h2 class="title">{{ $t("errorPage.notFound") }}</h2>
+        <h2 class="title">{{ $t("layout.errorPage.notFound") }}</h2>
         <p class="tip">
-          {{ $t("errorPage.countdown", { count: countDown }) }}{{ dotText }}
+          {{ $t("layout.errorPage.countdown", { count: countDown }) }}{{ dotText }}
         </p>
         <el-button type="primary" size="medium" @click="goHome">{{
-          $t("errorPage.backHome")
+          $t("layout.errorPage.backHome")
         }}</el-button>
       </div>
     </TransitionScale>

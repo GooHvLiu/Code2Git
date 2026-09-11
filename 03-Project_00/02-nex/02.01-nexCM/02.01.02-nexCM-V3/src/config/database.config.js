@@ -87,13 +87,6 @@ export const databaseTableConfig = [
         comment_en: 'Dict Item Table',
         icon: 'el-icon-document',
       },
-      nex_db_backup: {
-        alias: '数据库备份',
-        alias_en: 'Database Backup',
-        comment: '数据库备份表',
-        comment_en: 'Database Backup Table',
-        icon: 'el-icon-folder-opened',
-      },
     },
   },
 

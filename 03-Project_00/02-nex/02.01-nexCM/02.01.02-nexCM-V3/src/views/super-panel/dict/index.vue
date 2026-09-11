@@ -1,12 +1,12 @@
-<template>
+﻿<template>
   <div class="dict-management">
     <!-- ==================== 页面头部 ==================== -->
     <div class="page-header">
       <div class="header-left">
         <h2 class="page-title">
-          {{ $t("menu.superPanel.dict.page.title") }}
+          {{ $t("superPanel.dict.page.title") }}
         </h2>
-        <p class="page-desc">{{ $t("menu.superPanel.dict.page.pageDesc") }}</p>
+        <p class="page-desc">{{ $t("superPanel.dict.page.pageDesc") }}</p>
       </div>
       <div class="header-right">
         <el-button
@@ -28,7 +28,7 @@
         <div class="dict-type-panel">
           <div class="panel-header">
             <span class="panel-title">{{
-              $t("menu.superPanel.dict.page.typeList")
+              $t("superPanel.dict.page.typeList")
             }}</span>
             <el-button
               type="primary"
@@ -46,15 +46,10 @@
             border
             highlight-current-row
             @current-change="handleTypeChange"
-            :header-cell-style="{
-              background: '#f5f7fa',
-              color: '#606266',
-              fontWeight: 'bold',
-            }"
             style="width: 100%"
           >
             <el-table-column
-              :label="$t('menu.superPanel.dict.page.typeName')"
+              :label="$t('superPanel.dict.page.typeName')"
               min-width="120"
               align="center"
             >
@@ -64,7 +59,7 @@
             </el-table-column>
             <el-table-column
               prop="dict_code"
-              :label="$t('menu.superPanel.dict.page.typeCode')"
+              :label="$t('superPanel.dict.page.typeCode')"
               min-width="120"
               align="center"
             />
@@ -105,8 +100,8 @@
                       currentType.dict_name
                     ) +
                     " - " +
-                    $t("menu.superPanel.dict.page.itemList")
-                  : $t("menu.superPanel.dict.page.itemList")
+                    $t("superPanel.dict.page.itemList")
+                  : $t("superPanel.dict.page.itemList")
               }}
             </span>
             <div class="panel-actions">
@@ -134,12 +129,6 @@
             :data="itemList"
             border
             stripe
-            :header-cell-style="{
-              background: '#f5f7fa',
-              color: '#606266',
-              fontWeight: 'bold',
-              textAlign: 'center',
-            }"
           >
             <el-table-column
               :label="$t('common.index')"
@@ -149,13 +138,13 @@
             />
             <el-table-column
               prop="label"
-              :label="$t('menu.superPanel.dict.page.itemLabel')"
+              :label="$t('superPanel.dict.page.itemLabel')"
               min-width="120"
               align="center"
             />
             <el-table-column
               prop="value"
-              :label="$t('menu.superPanel.dict.page.itemValue')"
+              :label="$t('superPanel.dict.page.itemValue')"
               min-width="120"
               align="center"
             />
@@ -231,9 +220,9 @@
       >
         <el-form-item prop="dict_name">
           <span slot="label">
-            {{ $t("menu.superPanel.dict.page.typeName") }}
+            {{ $t("superPanel.dict.page.typeName") }}
             <el-tooltip
-              :content="$t('menu.superPanel.dict.page.tips.typeName')"
+              :content="$t('superPanel.dict.page.tips.typeName')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -241,15 +230,15 @@
           </span>
           <el-input
             v-model="typeForm.dict_name"
-            :placeholder="$t('menu.superPanel.dict.page.typeNamePlaceholder')"
+            :placeholder="$t('superPanel.dict.page.typeNamePlaceholder')"
             :maxlength="50"
           />
         </el-form-item>
         <el-form-item prop="dict_code">
           <span slot="label">
-            {{ $t("menu.superPanel.dict.page.typeCode") }}
+            {{ $t("superPanel.dict.page.typeCode") }}
             <el-tooltip
-              :content="$t('menu.superPanel.dict.page.tips.typeCode')"
+              :content="$t('superPanel.dict.page.tips.typeCode')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -257,7 +246,7 @@
           </span>
           <el-input
             v-model="typeForm.dict_code"
-            :placeholder="$t('menu.superPanel.dict.page.typeCodePlaceholder')"
+            :placeholder="$t('superPanel.dict.page.typeCodePlaceholder')"
             :disabled="typeDialog.isEdit"
           />
         </el-form-item>
@@ -265,7 +254,7 @@
           <span slot="label">
             {{ $t("common.description") }}
             <el-tooltip
-              :content="$t('menu.superPanel.dict.page.tips.description')"
+              :content="$t('superPanel.dict.page.tips.description')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -282,7 +271,7 @@
           <span slot="label">
             {{ $t("common.status") }}
             <el-tooltip
-              :content="$t('menu.superPanel.dict.page.tips.status')"
+              :content="$t('superPanel.dict.page.tips.status')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -297,7 +286,7 @@
           <span slot="label">
             {{ $t("common.sort") }}
             <el-tooltip
-              :content="$t('menu.superPanel.dict.page.tips.sort')"
+              :content="$t('superPanel.dict.page.tips.sort')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -331,9 +320,9 @@
       >
         <el-form-item prop="label">
           <span slot="label">
-            {{ $t("menu.superPanel.dict.page.itemLabel") }}
+            {{ $t("superPanel.dict.page.itemLabel") }}
             <el-tooltip
-              :content="$t('menu.superPanel.dict.page.tips.itemLabel')"
+              :content="$t('superPanel.dict.page.tips.itemLabel')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -341,15 +330,15 @@
           </span>
           <el-input
             v-model="itemForm.label"
-            :placeholder="$t('menu.superPanel.dict.page.itemLabelPlaceholder')"
+            :placeholder="$t('superPanel.dict.page.itemLabelPlaceholder')"
             :maxlength="100"
           />
         </el-form-item>
         <el-form-item prop="value">
           <span slot="label">
-            {{ $t("menu.superPanel.dict.page.itemValue") }}
+            {{ $t("superPanel.dict.page.itemValue") }}
             <el-tooltip
-              :content="$t('menu.superPanel.dict.page.tips.itemValue')"
+              :content="$t('superPanel.dict.page.tips.itemValue')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -357,14 +346,14 @@
           </span>
           <el-input
             v-model="itemForm.value"
-            :placeholder="$t('menu.superPanel.dict.page.itemValuePlaceholder')"
+            :placeholder="$t('superPanel.dict.page.itemValuePlaceholder')"
           />
         </el-form-item>
         <el-form-item prop="status">
           <span slot="label">
             {{ $t("common.status") }}
             <el-tooltip
-              :content="$t('menu.superPanel.dict.page.tips.itemStatus')"
+              :content="$t('superPanel.dict.page.tips.itemStatus')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -379,7 +368,7 @@
           <span slot="label">
             {{ $t("common.sort") }}
             <el-tooltip
-              :content="$t('menu.superPanel.dict.page.tips.itemSort')"
+              :content="$t('superPanel.dict.page.tips.itemSort')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -391,7 +380,7 @@
           <span slot="label">
             {{ $t("common.remark") }}
             <el-tooltip
-              :content="$t('menu.superPanel.dict.page.tips.itemRemark')"
+              :content="$t('superPanel.dict.page.tips.itemRemark')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -427,7 +416,7 @@ import {
   requestDeleteDictItemApi,
 } from "@/api";
 import { useI18n } from "@/composables/useI18n";
-import { getDictTypeLabel } from "@/utils/dict";
+import { getDictTypeLabel } from "@/utils/business/dict";
 
 const { t: $t } = useI18n();
 
@@ -462,14 +451,14 @@ const typeRules = {
   dict_name: [
     {
       required: true,
-      message: $t("menu.superPanel.dict.page.typeNameRequired"),
+      message: $t("superPanel.dict.page.typeNameRequired"),
       trigger: "blur",
     },
   ],
   dict_code: [
     {
       required: true,
-      message: $t("menu.superPanel.dict.page.typeCodeRequired"),
+      message: $t("superPanel.dict.page.typeCodeRequired"),
       trigger: "blur",
     },
   ],
@@ -479,14 +468,14 @@ const itemRules = {
   label: [
     {
       required: true,
-      message: $t("menu.superPanel.dict.page.itemLabelRequired"),
+      message: $t("superPanel.dict.page.itemLabelRequired"),
       trigger: "blur",
     },
   ],
   value: [
     {
       required: true,
-      message: $t("menu.superPanel.dict.page.itemValueRequired"),
+      message: $t("superPanel.dict.page.itemValueRequired"),
       trigger: "blur",
     },
   ],
@@ -495,17 +484,17 @@ const itemRules = {
 // ===== 计算属性 =====
 const exportColumns = computed(() => [
   {
-    label: $t("menu.superPanel.dict.page.itemLabel"),
+    label: $t("superPanel.dict.page.itemLabel"),
     prop: "label",
     width: 150,
   },
   {
-    label: $t("menu.superPanel.dict.page.itemValue"),
+    label: $t("superPanel.dict.page.itemValue"),
     prop: "value",
     width: 150,
   },
   {
-    label: $t("menu.superPanel.dict.page.itemStatus"),
+    label: $t("superPanel.dict.page.itemStatus"),
     prop: "status",
     width: 80,
     formatter: (row) =>
@@ -520,8 +509,8 @@ const exportTitle = computed(() =>
     ? `${getDictTypeLabel(
         currentType.value.dict_code,
         currentType.value.dict_name
-      )} - ${$t("menu.superPanel.dict.page.itemList")}`
-    : $t("menu.superPanel.dict.page.itemList")
+      )} - ${$t("superPanel.dict.page.itemList")}`
+    : $t("superPanel.dict.page.itemList")
 );
 
 // ===== 方法 =====
@@ -574,7 +563,7 @@ function handleTypeChange(row) {
 function handleAddType() {
   Object.assign(typeDialog, {
     visible: true,
-    title: $t("menu.superPanel.dict.page.addType"),
+    title: $t("superPanel.dict.page.addType"),
     isEdit: false,
   });
   Object.assign(typeForm, {
@@ -590,7 +579,7 @@ function handleAddType() {
 function handleEditType(row) {
   Object.assign(typeDialog, {
     visible: true,
-    title: $t("menu.superPanel.dict.page.editType"),
+    title: $t("superPanel.dict.page.editType"),
     isEdit: true,
   });
   Object.assign(typeForm, { ...row });
@@ -619,7 +608,7 @@ function submitTypeForm() {
 // 删除字典类型
 function handleDeleteType(row) {
   MessageBox.confirm(
-    $t("menu.superPanel.dict.page.deleteTypeConfirm"),
+    $t("superPanel.dict.page.deleteTypeConfirm"),
     $t("common.tip"),
     {
       confirmButtonText: $t("common.confirm"),
@@ -643,7 +632,7 @@ function handleDeleteType(row) {
 function handleAddItem() {
   Object.assign(itemDialog, {
     visible: true,
-    title: $t("menu.superPanel.dict.page.addItem"),
+    title: $t("superPanel.dict.page.addItem"),
     isEdit: false,
   });
   Object.assign(itemForm, {
@@ -659,7 +648,7 @@ function handleAddItem() {
 function handleEditItem(row) {
   Object.assign(itemDialog, {
     visible: true,
-    title: $t("menu.superPanel.dict.page.editItem"),
+    title: $t("superPanel.dict.page.editItem"),
     isEdit: true,
   });
   Object.assign(itemForm, { ...row });
@@ -689,7 +678,7 @@ function submitItemForm() {
 // 删除字典项
 function handleDeleteItem(row) {
   MessageBox.confirm(
-    $t("menu.superPanel.dict.page.deleteItemConfirm"),
+    $t("superPanel.dict.page.deleteItemConfirm"),
     $t("common.tip"),
     {
       confirmButtonText: $t("common.confirm"),

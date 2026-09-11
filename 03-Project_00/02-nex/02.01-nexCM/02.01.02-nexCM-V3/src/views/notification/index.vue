@@ -1,21 +1,21 @@
-<template>
+﻿<template>
   <div class="notification-page">
     <!-- 工具栏 -->
     <div class="toolbar">
-      <div class="title">{{ $t('notification.title') }}</div>
+      <div class="title">{{ $t('notification.page.title') }}</div>
       <div class="actions">
         <el-button size="small" icon="el-icon-setting" @click="showSettings = true">
-          {{ $t('notification.notificationSettings') }}
+          {{ $t('notification.page.settingsEntry') }}
         </el-button>
         <export-dropdown
           :data="list"
           :columns="exportColumns"
-          :title="$t('notification.title')"
-          :filename="$t('notification.title')"
+          :title="$t('notification.page.title')"
+          :filename="$t('notification.page.title')"
           :exporter="$store.state.user.userInfo?.username || ''"
         />
         <el-button type="primary" size="small" icon="el-icon-check" @click="handleMarkAllWithConfirm">
-          {{ $t('notification.markAllRead') }}
+          {{ $t('notification.action.markAllRead') }}
         </el-button>
         <el-button size="small" icon="el-icon-refresh" @click="getList">
           {{ $t('common.refresh') }}
@@ -72,7 +72,7 @@
 
       <div v-if="!loading && list.length === 0" class="empty-state">
         <i class="el-icon-bell empty-icon"></i>
-        <p class="empty-text">{{ $t('notification.empty') }}</p>
+        <p class="empty-text">{{ $t('notification.page.empty') }}</p>
       </div>
     </div>
 
@@ -93,7 +93,7 @@ import NotificationSettings from '@/components/NotificationSettings/index.vue'
 import NotificationFilter from '@/components/NotificationFilter/index.vue'
 import NotificationBatchToolbar from '@/components/NotificationBatchToolbar/index.vue'
 import NotificationItem from '@/components/NotificationItem/index.vue'
-import { formatDate } from '@/utils/date'
+import { formatDate } from '@/utils/data/date'
 import router from '@/router'
 import { Message, MessageBox } from 'element-ui'
 
@@ -156,13 +156,13 @@ function handleDoubleClick(item) {
 // 重写删除方法，添加确认对话框
 async function handleDeleteWithConfirm(item) {
   try {
-    await MessageBox.confirm($t('notification.deleteConfirm'), $t('notification.delete'), {
+    await MessageBox.confirm($t('notification.confirm.delete'), $t('notification.action.delete'), {
       confirmButtonText: $t('common.confirm'),
       cancelButtonText: $t('common.cancel'),
       type: 'warning'
     })
     await handleDelete(item)
-    Message.success($t('notification.deleteSuccess'))
+    Message.success($t('notification.message.deleteSuccess'))
   } catch (e) {
     // 用户取消，不做处理
   }
@@ -171,17 +171,17 @@ async function handleDeleteWithConfirm(item) {
 // 重写批量删除方法，添加确认对话框
 async function handleBatchDeleteWithConfirm() {
   if (selectedIds.value.length === 0) {
-    Message.warning($t('notification.deleteConfirm'))
+    Message.warning($t('notification.confirm.delete'))
     return
   }
   try {
-    await MessageBox.confirm($t('notification.batchDeleteConfirm', { count: selectedIds.value.length }), $t('notification.batchDelete'), {
+    await MessageBox.confirm($t('notification.confirm.batchDelete', { count: selectedIds.value.length }), $t('notification.action.batchDelete'), {
       confirmButtonText: $t('common.confirm'),
       cancelButtonText: $t('common.cancel'),
       type: 'warning'
     })
     await handleBatchDelete()
-    Message.success($t('notification.batchDeleteSuccess'))
+    Message.success($t('notification.message.batchDeleteSuccess'))
   } catch (e) {
     // 用户取消，不做处理
   }
@@ -190,13 +190,13 @@ async function handleBatchDeleteWithConfirm() {
 // 重写全部已读方法，添加确认对话框
 async function handleMarkAllWithConfirm() {
   try {
-    await MessageBox.confirm($t('notification.markAllConfirm'), $t('notification.markAllRead'), {
+    await MessageBox.confirm($t('notification.confirm.markAll'), $t('notification.action.markAllRead'), {
       confirmButtonText: $t('common.confirm'),
       cancelButtonText: $t('common.cancel'),
       type: 'info'
     })
     await handleMarkAll()
-    Message.success($t('notification.markAllSuccess'))
+    Message.success($t('notification.message.markAllSuccess'))
   } catch (e) {
     // 用户取消，不做处理
   }
@@ -209,16 +209,16 @@ function handleSettingsUpdated() {
 
 // 导出列配置
 const exportColumns = computed(() => [
-  { label: $t('notification.type'), prop: 'type', width: 100 },
-  { label: $t('notification.title'), prop: 'title', width: 200 },
-  { label: $t('notification.content'), prop: 'content', width: 300 },
+  { label: $t('notification.filter.type'), prop: 'type', width: 100 },
+  { label: $t('notification.page.title'), prop: 'title', width: 200 },
+  { label: $t('notification.table.content'), prop: 'content', width: 300 },
   {
-    label: $t('notification.read'),
+    label: $t('notification.status.read'),
     prop: 'is_read',
     width: 80,
-    formatter: row => (row.is_read === 1 ? $t('notification.read') : $t('notification.unread'))
+    formatter: row => (row.is_read === 1 ? $t('notification.status.read') : $t('notification.status.unread'))
   },
-  { label: $t('notification.createdAt'), prop: 'created_at', width: 170, formatter: row => formatDate(row.created_at) }
+  { label: $t('notification.table.createdAt'), prop: 'create_time', width: 170, formatter: row => formatDate(row.create_time) }
 ])
 
 // 监听全局事件，当小窗口标记全部已读后自动刷新数据

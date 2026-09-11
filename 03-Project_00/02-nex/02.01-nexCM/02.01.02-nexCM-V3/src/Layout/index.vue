@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div
     class="main-layout"
     :class="{ 'is-mobile': device === 'mobile' }"
@@ -36,7 +36,7 @@ import PartLifeReminder from "@/components/PartLifeReminder/index.vue"
 import { useResize } from "@/composables/useResize"
 import { useSessionTimeout } from "@/composables/useSessionTimeout"
 import settings from "@/settings"
-import { getConfig } from "@/utils/config"
+import { getConfig } from "@/utils/config/config"
 
 // 使用 useResize 组合式函数
 useResize()

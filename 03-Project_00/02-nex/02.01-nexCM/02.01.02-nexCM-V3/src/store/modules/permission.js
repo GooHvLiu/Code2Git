@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ==========================================
  * Permission 模块 - 路由权限与菜单
  * ==========================================
@@ -8,7 +8,7 @@ import { constantRoutes } from '@/router/constant/constantRoutes'
 import { requestGetUserMenuApi, getMenuVersionApi } from '@/api'
 import { formatMenu } from '@/router/helper/menuHelper'
 import { buildDynamicRoutes, filterRoutesByRoles } from '@/router/helper/routerHelper'
-import { CODE_MENU_NOT_MODIFIED } from '@/utils/constants'
+import { CODE_MENU_NOT_MODIFIED } from '@/utils/config/constants'
 import i18n from '@/i18n'
 
 /** 菜单版本号缓存 key（全局，不分语言） */

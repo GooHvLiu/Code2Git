@@ -11,7 +11,7 @@
  */
 const BaseService = require('../../services/BaseService')
 const notificationModel = require('./notification.model')
-const notificationSettingModel = require('./notificationSetting.model')
+const notificationSettingModel = require('./notification-setting.model')
 const wsManager = require('../../socket/wsManager')
 const { BusinessError } = require('../../middleware/error.middleware')
 const { ERROR_CODE } = require('../../constants/errorCode')
@@ -24,8 +24,7 @@ class NotificationService extends BaseService {
    */
   constructor() {
     super(notificationModel, {
-      name: '通知',
-      langFields: []
+      name: '通知'
     })
   }
 
@@ -173,7 +172,7 @@ class NotificationService extends BaseService {
         contentParams,
         type,
         priority,
-        created_at: new Date().toISOString()
+        create_time: new Date().toISOString()
       }
     })
     console.log(`[通知推送] 当前在线用户: ${JSON.stringify(wsManager.getOnlineUserIds())}`)

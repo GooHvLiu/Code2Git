@@ -1,19 +1,19 @@
 <template>
   <div v-if="selectedCount > 0" class="notification-batch-toolbar">
-    <span class="batch-info">{{ $t('notification.selectedCount', { count: selectedCount }) }}</span>
+    <span class="batch-info">{{ $t('notification.page.selectedCount', { count: selectedCount }) }}</span>
     <el-button size="small" type="primary" icon="el-icon-check" @click="$emit('batch-mark-read')">
-      {{ $t('notification.batchMarkRead') }}
+      {{ $t('notification.action.batchMarkRead') }}
     </el-button>
     <el-button v-if="archiveTab === '0'" size="small" icon="el-icon-folder-opened" @click="$emit('batch-archive')">
-      {{ $t('notification.batchArchive') }}
+      {{ $t('notification.action.batchArchive') }}
     </el-button>
     <el-button v-if="archiveTab === '1'" size="small" icon="el-icon-refresh-left" @click="$emit('batch-unarchive')">
-      {{ $t('notification.batchUnarchive') }}
+      {{ $t('notification.action.batchUnarchive') }}
     </el-button>
     <el-button size="small" type="danger" icon="el-icon-delete" @click="$emit('batch-delete')">
-      {{ $t('notification.batchDelete') }}
+      {{ $t('notification.action.batchDelete') }}
     </el-button>
-    <el-button size="small" @click="$emit('clear-selection')">{{ $t('notification.clearSelection') }}</el-button>
+    <el-button size="small" @click="$emit('clear-selection')">{{ $t('notification.page.clearSelection') }}</el-button>
   </div>
 </template>
 

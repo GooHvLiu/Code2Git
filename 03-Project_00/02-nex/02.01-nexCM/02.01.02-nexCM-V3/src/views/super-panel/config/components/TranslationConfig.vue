@@ -1,18 +1,18 @@
-<template>
+﻿<template>
   <div class="translation-config-panel">
     <!-- 操作栏 -->
     <div class="translation-toolbar">
       <div class="toolbar-left">
         <span class="panel-title">
           <i class="el-icon-connection"></i>
-          {{ $t('menu.superPanel.config.childrenMenu.translation.title') }}
+          {{ $t('superPanel.config.translation.title') }}
         </span>
         <el-tag 
           :type="config.enabled ? 'success' : 'info'" 
           size="small"
           class="status-tag"
         >
-          {{ config.enabled ? $t('menu.superPanel.config.childrenMenu.translation.enabled') : $t('menu.superPanel.config.childrenMenu.translation.disabled') }}
+          {{ config.enabled ? $t('superPanel.config.translation.enabled') : $t('superPanel.config.translation.disabled') }}
         </el-tag>
       </div>
       <div class="toolbar-right">
@@ -46,14 +46,14 @@
         <div class="form-section">
           <div class="section-title">
             <i class="el-icon-setting"></i>
-            {{ $t('menu.superPanel.config.childrenMenu.translation.basicSettings') }}
+            {{ $t('superPanel.config.translation.basicSettings') }}
           </div>
           
           <el-form-item>
             <template slot="label">
               <span class="label-with-tip">
-                {{ $t('menu.superPanel.config.childrenMenu.translation.enableTranslation') }}
-                <el-tooltip :content="$t('menu.superPanel.config.childrenMenu.translation.enableTranslationTip')" placement="top">
+                {{ $t('superPanel.config.translation.enableTranslation') }}
+                <el-tooltip :content="$t('superPanel.config.translation.enableTranslationTip')" placement="top">
                   <i class="el-icon-question label-tip-icon"></i>
                 </el-tooltip>
               </span>
@@ -68,8 +68,8 @@
           <el-form-item>
             <template slot="label">
               <span class="label-with-tip">
-                {{ $t('menu.superPanel.config.childrenMenu.translation.provider') }}
-                <el-tooltip :content="$t('menu.superPanel.config.childrenMenu.translation.providerTip')" placement="top">
+                {{ $t('superPanel.config.translation.provider') }}
+                <el-tooltip :content="$t('superPanel.config.translation.providerTip')" placement="top">
                   <i class="el-icon-question label-tip-icon"></i>
                 </el-tooltip>
               </span>
@@ -82,8 +82,8 @@
           <el-form-item>
             <template slot="label">
               <span class="label-with-tip">
-                {{ $t('menu.superPanel.config.childrenMenu.translation.masterLanguage') }}
-                <el-tooltip :content="$t('menu.superPanel.config.childrenMenu.translation.masterLanguageTip')" placement="top">
+                {{ $t('superPanel.config.translation.masterLanguage') }}
+                <el-tooltip :content="$t('superPanel.config.translation.masterLanguageTip')" placement="top">
                   <i class="el-icon-question label-tip-icon"></i>
                 </el-tooltip>
               </span>
@@ -91,33 +91,48 @@
             <el-select v-model="config.masterLanguage" style="width: 300px">
               <el-option
                 v-for="lang in langList"
-                :key="lang.fileName"
-                :label="lang.langName + ' (' + lang.fileName.replace('.js', '') + ')'"
-                :value="lang.fileName.replace('.js', '')"
+                :key="lang.langCode"
+                :label="lang.autonym + ' (' + lang.langCode + ')'"
+                :value="lang.langCode"
               />
             </el-select>
           </el-form-item>
         </div>
 
+          <el-form-item>
+            <template slot="label">
+              <span class="label-with-tip">
+                {{ $t('superPanel.config.translation.languageDisplayField') }}
+                <el-tooltip :content="$t('superPanel.config.translation.languageDisplayFieldTip')" placement="top">
+                  <i class="el-icon-question label-tip-icon"></i>
+                </el-tooltip>
+              </span>
+            </template>
+            <el-select v-model="config.languageDisplayField" style="width: 300px">
+              <el-option :label="$t('superPanel.config.translation.displayAutonym')" value="autonym" />
+              <el-option :label="$t('superPanel.config.translation.displayName')" value="name" />
+            </el-select>
+          </el-form-item>
+
         <!-- 腾讯云配置 -->
         <div class="form-section" v-if="config.provider === 'tencent'">
           <div class="section-title">
             <i class="el-icon-cloudy"></i>
-            {{ $t('menu.superPanel.config.childrenMenu.translation.tencentSettings') }}
+            {{ $t('superPanel.config.translation.tencentSettings') }}
           </div>
           
           <el-form-item prop="tencent.secretId">
             <template slot="label">
               <span class="label-with-tip">
-                {{ $t('menu.superPanel.config.childrenMenu.translation.secretId') }}
-                <el-tooltip :content="$t('menu.superPanel.config.childrenMenu.translation.secretIdTip')" placement="top">
+                {{ $t('superPanel.config.translation.secretId') }}
+                <el-tooltip :content="$t('superPanel.config.translation.secretIdTip')" placement="top">
                   <i class="el-icon-question label-tip-icon"></i>
                 </el-tooltip>
               </span>
             </template>
             <el-input 
               v-model="config.tencent.secretId" 
-              :placeholder="$t('menu.superPanel.config.childrenMenu.translation.secretIdPlaceholder')"
+              :placeholder="$t('superPanel.config.translation.secretIdPlaceholder')"
               show-password
               style="width: 400px"
             />
@@ -126,15 +141,15 @@
           <el-form-item prop="tencent.secretKey">
             <template slot="label">
               <span class="label-with-tip">
-                {{ $t('menu.superPanel.config.childrenMenu.translation.secretKey') }}
-                <el-tooltip :content="$t('menu.superPanel.config.childrenMenu.translation.secretKeyTip')" placement="top">
+                {{ $t('superPanel.config.translation.secretKey') }}
+                <el-tooltip :content="$t('superPanel.config.translation.secretKeyTip')" placement="top">
                   <i class="el-icon-question label-tip-icon"></i>
                 </el-tooltip>
               </span>
             </template>
             <el-input 
               v-model="config.tencent.secretKey" 
-              :placeholder="$t('menu.superPanel.config.childrenMenu.translation.secretKeyPlaceholder')"
+              :placeholder="$t('superPanel.config.translation.secretKeyPlaceholder')"
               show-password
               style="width: 400px"
             />
@@ -143,8 +158,8 @@
           <el-form-item>
             <template slot="label">
               <span class="label-with-tip">
-                {{ $t('menu.superPanel.config.childrenMenu.translation.region') }}
-                <el-tooltip :content="$t('menu.superPanel.config.childrenMenu.translation.regionTip')" placement="top">
+                {{ $t('superPanel.config.translation.region') }}
+                <el-tooltip :content="$t('superPanel.config.translation.regionTip')" placement="top">
                   <i class="el-icon-question label-tip-icon"></i>
                 </el-tooltip>
               </span>
@@ -162,8 +177,8 @@
           <el-form-item>
             <template slot="label">
               <span class="label-with-tip">
-                {{ $t('menu.superPanel.config.childrenMenu.translation.projectId') }}
-                <el-tooltip :content="$t('menu.superPanel.config.childrenMenu.translation.projectIdTip')" placement="top">
+                {{ $t('superPanel.config.translation.projectId') }}
+                <el-tooltip :content="$t('superPanel.config.translation.projectIdTip')" placement="top">
                   <i class="el-icon-question label-tip-icon"></i>
                 </el-tooltip>
               </span>
@@ -183,7 +198,7 @@
               :loading="testing"
               @click="handleTest"
             >
-              {{ $t('menu.superPanel.config.childrenMenu.translation.testConfig') }}
+              {{ $t('superPanel.config.translation.testConfig') }}
             </el-button>
             <div class="test-result" v-if="testResult">
               <div class="test-result-main">
@@ -203,16 +218,16 @@
         <div class="form-section">
           <div class="section-title">
             <i class="el-icon-collection"></i>
-            {{ $t('menu.superPanel.config.childrenMenu.translation.existingLangs') }}
+            {{ $t('superPanel.config.translation.existingLangs') }}
           </div>
           <div class="lang-list">
             <el-tag 
               v-for="lang in langList" 
-              :key="lang.fileName"
+              :key="lang.langCode"
               size="small"
               class="lang-tag"
             >
-              <svg-icon :icon-class="lang.flag || 'flags/global'" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;" /> {{ lang.autonym || lang.langName }} ({{ lang.langCode }})
+              <svg-icon :icon-file-name="lang.flag || 'global'" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;" /> {{ lang.autonym }} ({{ lang.langCode }})
             </el-tag>
           </div>
         </div>
@@ -220,8 +235,8 @@
         <!-- 说明 -->
         <div class="form-section">
           <el-alert
-            :title="$t('menu.superPanel.config.childrenMenu.translation.tipTitle')"
-            :description="$t('menu.superPanel.config.childrenMenu.translation.tipContent')"
+            :title="$t('superPanel.config.translation.tipTitle')"
+            :description="$t('superPanel.config.translation.tipContent')"
             type="info"
             :closable="false"
             show-icon
@@ -237,7 +252,7 @@ import {
   requestGetTranslationConfigApi,
   requestSaveTranslationConfigApi,
   requestTestTranslationConfigApi,
-  requestGetI18nFileListApi
+  requestGetLanguagesApi
 } from '@/api'
 
 export default {
@@ -253,6 +268,7 @@ export default {
         enabled: false,
         provider: 'tencent',
         masterLanguage: 'zh-CN', // 母版语言，默认中文
+        languageDisplayField: 'autonym', // 语言名称显示方式：autonym=母语, name=中文
         tencent: {
           secretId: '',
           secretKey: '',
@@ -278,7 +294,7 @@ export default {
     // 加载已存在的语言清单
     async loadLangList() {
       try {
-        const res = await requestGetI18nFileListApi()
+        const res = await requestGetLanguagesApi()
         this.langList = res.data || []
       } catch (err) {
         console.error('[TranslationConfig] 加载语言清单失败:', err)
@@ -294,6 +310,7 @@ export default {
             enabled: res.data.enabled,
             provider: res.data.provider,
             masterLanguage: res.data.masterLanguage || 'zh-CN',
+            languageDisplayField: res.data.languageDisplayField || 'autonym',
             tencent: {
               ...res.data.tencent
             }
@@ -342,18 +359,18 @@ export default {
             }
           }
         }
+        // 成功/失败提示均由前端按当前语言国际化，不使用后端返回文案、不兜底
         this.testResult = {
           success: data.success,
-          // 成功时用前端国际化提示，失败时显示后端返回的错误信息
-          message: data.success 
-            ? this.$t('menu.superPanel.config.childrenMenu.translation.testSuccess')
-            : (data.message || this.$t('menu.superPanel.config.childrenMenu.translation.testFailed')),
+          message: data.success
+            ? this.$t('superPanel.config.translation.testSuccess')
+            : this.$t('superPanel.config.translation.testFailed'),
           translation
         }
       } catch (err) {
         this.testResult = {
           success: false,
-          message: err.message || this.$t('menu.superPanel.config.childrenMenu.translation.testFailed'),
+          message: this.$t('superPanel.config.translation.testFailed'),
           translation: null
         }
       } finally {
@@ -513,3 +530,5 @@ export default {
   margin: 0;
 }
 </style>
+
+

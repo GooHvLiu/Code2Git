@@ -22,8 +22,7 @@ class DeptService extends BaseService {
    */
   constructor() {
     super(deptModel, {
-      name: '部门',
-      langFields: []
+      name: '部门'
     })
   }
 

@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="audit-log">
     <!-- ==================== 页面头部 ==================== -->
     <div class="page-header">
@@ -6,11 +6,11 @@
         <h2 class="page-title">
           {{
             isAdmin
-              ? $t("menu.system.audit.page.title")
-              : $t("menu.system.audit.page.myTitle")
+              ? $t("system.audit.page.title")
+              : $t("system.audit.page.myTitle")
           }}
         </h2>
-        <p class="page-desc">{{ $t("menu.system.audit.page.pageDesc") }}</p>
+        <p class="page-desc">{{ $t("system.audit.page.pageDesc") }}</p>
       </div>
       <div class="header-right">
         <el-button
@@ -27,13 +27,13 @@
           :columns="exportColumns"
           :title="
             isAdmin
-              ? $t('menu.system.audit.page.title')
-              : $t('menu.system.audit.page.myTitle')
+              ? $t('system.audit.page.title')
+              : $t('system.audit.page.myTitle')
           "
           :filename="
             isAdmin
-              ? $t('menu.system.audit.page.title')
-              : $t('menu.system.audit.page.myTitle')
+              ? $t('system.audit.page.title')
+              : $t('system.audit.page.myTitle')
           "
           :exporter="$store.state.user.userInfo?.username || ''"
         />
@@ -41,23 +41,23 @@
     </div>
 
     <!-- ==================== 搜索表单 ==================== -->
-    <search-form :form="queryParams" @search="handleQuery" @reset="handleReset">
+    <search-form class="search-form" :form="queryParams" @search="handleQuery" @reset="handleReset">
       <el-form-item
         v-if="isAdmin"
-        :label="$t('menu.system.audit.page.userName')"
+        :label="$t('system.audit.page.userName')"
         prop="userName"
       >
         <el-input
           v-model="queryParams.userName"
-          :placeholder="$t('menu.system.audit.page.userName')"
+          :placeholder="$t('system.audit.page.userName')"
           clearable
           style="width: 140px"
         />
       </el-form-item>
-      <el-form-item :label="$t('menu.system.audit.page.action')" prop="action">
+      <el-form-item :label="$t('system.audit.page.action')" prop="action">
         <el-select
           v-model="queryParams.action"
-          :placeholder="$t('menu.system.audit.page.action')"
+          :placeholder="$t('system.audit.page.action')"
           clearable
           style="width: 140px"
         >
@@ -69,23 +69,23 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item :label="$t('menu.system.audit.page.target')" prop="target">
+      <el-form-item :label="$t('system.audit.page.target')" prop="target">
         <el-input
           v-model="queryParams.target"
-          :placeholder="$t('menu.system.audit.page.target')"
+          :placeholder="$t('system.audit.page.target')"
           clearable
           style="width: 140px"
         />
       </el-form-item>
       <el-form-item
-        :label="$t('menu.system.audit.page.timeRange')"
+        :label="$t('system.audit.page.timeRange')"
         prop="timeRange"
       >
         <el-date-picker
           v-model="queryParams.timeRange"
           type="datetimerange"
-          :start-placeholder="$t('menu.system.audit.page.startTime')"
-          :end-placeholder="$t('menu.system.audit.page.endTime')"
+          :start-placeholder="$t('system.audit.page.startTime')"
+          :end-placeholder="$t('system.audit.page.endTime')"
           value-format="yyyy-MM-dd HH:mm:ss"
           style="width: 280px"
         />
@@ -99,12 +99,6 @@
       :data="tableData"
       border
       stripe
-      :header-cell-style="{
-        background: '#f5f7fa',
-        color: '#606266',
-        fontWeight: 'bold',
-        textAlign: 'center',
-      }"
       class="audit-table"
     >
       <el-table-column
@@ -115,13 +109,13 @@
       />
       <el-table-column
         v-if="isAdmin"
-        :label="$t('menu.system.audit.page.userName')"
+        :label="$t('system.audit.page.userName')"
         prop="user_name"
         min-width="120"
         align="center"
       />
       <el-table-column
-        :label="$t('menu.system.audit.page.action')"
+        :label="$t('system.audit.page.action')"
         prop="action"
         min-width="140"
         align="center"
@@ -131,25 +125,25 @@
         </template>
       </el-table-column>
       <el-table-column
-        :label="$t('menu.system.audit.page.target')"
+        :label="$t('system.audit.page.target')"
         prop="target"
         min-width="200"
         show-overflow-tooltip
       />
       <el-table-column
-        :label="$t('menu.system.audit.page.oldValue')"
+        :label="$t('system.audit.page.oldValue')"
         prop="old_value"
         min-width="120"
         show-overflow-tooltip
       />
       <el-table-column
-        :label="$t('menu.system.audit.page.newValue')"
+        :label="$t('system.audit.page.newValue')"
         prop="new_value"
         min-width="120"
         show-overflow-tooltip
       />
       <el-table-column
-        :label="$t('menu.system.audit.page.result')"
+        :label="$t('system.audit.page.result')"
         prop="result"
         width="100"
         align="center"
@@ -159,20 +153,20 @@
         </template>
       </el-table-column>
       <el-table-column
-        :label="$t('menu.system.audit.page.ip')"
+        :label="$t('system.audit.page.ip')"
         prop="ip"
         width="140"
         align="center"
       />
       <el-table-column
-        :label="$t('menu.system.audit.page.createdAt')"
-        prop="created_at"
+        :label="$t('system.audit.page.createdAt')"
+        prop="create_time"
         min-width="170"
         align="center"
         sortable="custom"
       >
         <template slot-scope="{ row }">
-          {{ formatDateTime(row.created_at) }}
+          {{ formatDateTime(row.create_time) }}
         </template>
       </el-table-column>
       <el-table-column
@@ -209,35 +203,35 @@
 
     <!-- ==================== 详情对话框 ==================== -->
     <el-dialog
-      :title="$t('menu.system.audit.page.detailTitle')"
+      :title="$t('system.audit.page.detailTitle')"
       :visible.sync="detailDialogVisible"
       width="600px"
       :close-on-click-modal="false"
     >
       <el-descriptions :column="1" border v-if="currentDetail">
-        <el-descriptions-item :label="$t('menu.system.audit.page.userName')">
+        <el-descriptions-item :label="$t('system.audit.page.userName')">
           {{ currentDetail.user_name || "-" }}
         </el-descriptions-item>
-        <el-descriptions-item :label="$t('menu.system.audit.page.action')">
+        <el-descriptions-item :label="$t('system.audit.page.action')">
           {{ getActionText(currentDetail.action) }}
         </el-descriptions-item>
-        <el-descriptions-item :label="$t('menu.system.audit.page.target')">
+        <el-descriptions-item :label="$t('system.audit.page.target')">
           {{ currentDetail.target || "-" }}
         </el-descriptions-item>
-        <el-descriptions-item :label="$t('menu.system.audit.page.oldValue')">
+        <el-descriptions-item :label="$t('system.audit.page.oldValue')">
           {{ currentDetail.old_value || "-" }}
         </el-descriptions-item>
-        <el-descriptions-item :label="$t('menu.system.audit.page.newValue')">
+        <el-descriptions-item :label="$t('system.audit.page.newValue')">
           {{ currentDetail.new_value || "-" }}
         </el-descriptions-item>
-        <el-descriptions-item :label="$t('menu.system.audit.page.result')">
+        <el-descriptions-item :label="$t('system.audit.page.result')">
           <dict-tag dict-code="audit_result" :value="currentDetail.result" />
         </el-descriptions-item>
-        <el-descriptions-item :label="$t('menu.system.audit.page.ip')">
+        <el-descriptions-item :label="$t('system.audit.page.ip')">
           {{ currentDetail.ip || "-" }}
         </el-descriptions-item>
-        <el-descriptions-item :label="$t('menu.system.audit.page.createdAt')">
-          {{ formatDateTime(currentDetail.created_at) }}
+        <el-descriptions-item :label="$t('system.audit.page.createdAt')">
+          {{ formatDateTime(currentDetail.create_time) }}
         </el-descriptions-item>
       </el-descriptions>
       <div slot="footer">
@@ -257,7 +251,7 @@ import { useI18n } from "@/composables/useI18n";
 import SearchForm from "@/components/SearchForm/index.vue";
 import DictTag from "@/components/DictTag/index.vue";
 import ExportDropdown from "@/components/ExportDropdown/index.vue";
-import { formatDate } from "@/utils/date";
+import { formatDate } from "@/utils/data/date";
 import store from "@/store";
 import { requestGetAuditListApi, requestGetMyAuditListApi } from "@/api";
 
@@ -299,7 +293,7 @@ function beforeFetch(params) {
 // 翻译操作类型
 function getActionText(action) {
   if (!action) return '';
-  const key = `audit.${action}.title`;
+  const key = `system.audit.action.${action}.title`;
   const translated = $t(key);
   // 如果翻译结果和key相同，说明没有对应的翻译，返回原始action
   return translated === key ? action : translated;
@@ -354,9 +348,9 @@ const exportColumns = computed(() => {
     { label: "IP地址", prop: "ip", width: 130 },
     {
       label: "创建时间",
-      prop: "created_at",
+      prop: "create_time",
       width: 170,
-      formatter: (row) => formatDate(row.created_at),
+      formatter: (row) => formatDate(row.create_time),
     }
   );
   return cols;

@@ -5,7 +5,7 @@
       <div class="toolbar-left">
         <el-input
           v-model="searchKeyword"
-          :placeholder="$t('menu.device.part.template.searchPlaceholder')"
+          :placeholder="$t('device.part.templateSearchPlaceholder')"
           clearable
           style="width: 280px"
           @clear="loadTemplateList"
@@ -25,13 +25,13 @@
           type="primary"
           icon="el-icon-plus"
           @click="handleAdd"
-          >{{ $t("menu.device.part.template.add") }}</el-button
+          >{{ $t("device.part.templateAdd") }}</el-button
         >
         <el-button
           icon="el-icon-refresh"
           v-permission="'device:part:template:refresh'"
           @click="loadTemplateList"
-          >{{ $t("menu.device.part.template.refresh") }}</el-button
+          >{{ $t("device.part.templateRefresh") }}</el-button
         >
       </div>
     </div>
@@ -43,16 +43,10 @@
       :element-loading-text="$t('common.loading')"
       border
       stripe
-      :header-cell-style="{
-        background: '#f5f7fa',
-        color: '#606266',
-        fontWeight: 'bold',
-        textAlign: 'center',
-      }"
       style="width: 100%"
     >
       <el-table-column
-        :label="$t('menu.device.part.template.column.templateName')"
+        :label="$t('device.part.templateColumnTemplateName')"
         prop="name_key"
         min-width="150"
         align="center"
@@ -67,37 +61,37 @@
         </template>
       </el-table-column>
       <el-table-column
-        :label="$t('menu.device.part.template.column.templateKey')"
+        :label="$t('device.part.templateColumnTemplateKey')"
         prop="template_key"
         min-width="150"
         align="center"
       />
       <el-table-column
-        :label="$t('menu.device.part.template.column.codePrefix')"
+        :label="$t('device.part.templateColumnCodePrefix')"
         prop="code_prefix"
         min-width="120"
         align="center"
       />
       <el-table-column
-        :label="$t('menu.device.part.template.column.defaultSpec')"
+        :label="$t('device.part.templateColumnDefaultSpec')"
         prop="default_spec"
         min-width="150"
         show-overflow-tooltip
         align="center"
       />
       <el-table-column
-        :label="$t('menu.device.part.template.column.defaultRatedLife')"
+        :label="$t('device.part.templateColumnDefaultRatedLife')"
         prop="default_rated_life"
         min-width="120"
         align="center"
       >
         <template slot-scope="{ row }">
           {{ row.default_rated_life }}
-          {{ $t("menu.device.part.page.unit.times") }}
+          {{ $t("device.part.unitTimes") }}
         </template>
       </el-table-column>
       <el-table-column
-        :label="$t('menu.device.part.template.column.statMethod')"
+        :label="$t('device.part.templateColumnStatMethod')"
         prop="stat_method"
         min-width="140"
         align="center"
@@ -107,14 +101,14 @@
         </template>
       </el-table-column>
       <el-table-column
-        :label="$t('menu.device.part.template.column.statTag')"
+        :label="$t('device.part.templateColumnStatTag')"
         prop="stat_tag"
         min-width="180"
         show-overflow-tooltip
         align="center"
       />
       <el-table-column
-        :label="$t('menu.device.part.template.column.status')"
+        :label="$t('device.part.templateColumnStatus')"
         prop="enabled"
         width="80"
         align="center"
@@ -123,14 +117,14 @@
           <el-tag :type="row.enabled ? 'success' : 'info'" size="mini">
             {{
               row.enabled
-                ? $t("menu.device.part.template.status.enabled")
-                : $t("menu.device.part.template.status.disabled")
+                ? $t("device.part.templateStatusEnabled")
+                : $t("device.part.templateStatusDisabled")
             }}
           </el-tag>
         </template>
       </el-table-column>
       <el-table-column
-        :label="$t('menu.device.part.template.column.action')"
+        :label="$t('device.part.templateColumnAction')"
         width="180"
         align="center"
         fixed="right"
@@ -148,7 +142,7 @@
                 : ''
             "
             @click="handleEdit(row)"
-            >{{ $t("menu.device.part.template.edit") }}</el-button
+            >{{ $t("device.part.templateEdit") }}</el-button
           >
           <el-button
             type="text"
@@ -162,7 +156,7 @@
             v-permission="'device:part:template:delete'"
             :disabled="row.part_count > 0 || row.is_base_template === 1"
             @click="handleDelete(row)"
-            >{{ $t("menu.device.part.template.delete") }}</el-button
+            >{{ $t("device.part.templateDelete") }}</el-button
           >
         </template>
       </el-table-column>
@@ -172,8 +166,8 @@
     <el-dialog
       :title="
         isEdit
-          ? $t('menu.device.part.template.edit')
-          : $t('menu.device.part.template.add')
+          ? $t('device.part.templateEdit')
+          : $t('device.part.templateAdd')
       "
       :visible.sync="dialogVisible"
       width="600px"
@@ -188,9 +182,9 @@
       >
         <el-form-item prop="source_template_key">
           <span slot="label">
-            {{ $t("menu.device.part.template.form.templateName") }}
+            {{ $t("device.part.templateFormTemplateName") }}
             <el-tooltip
-              :content="$t('menu.device.part.template.tips.templateName')"
+              :content="$t('device.part.templateTipTemplateName')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -198,7 +192,7 @@
           </span>
           <el-select
             v-model="templateForm.source_template_key"
-            :placeholder="$t('menu.device.part.template.form.templateName')"
+            :placeholder="$t('device.part.templateFormTemplateName')"
             style="width: 100%"
             :disabled="isEdit"
             @change="handleTemplateChange"
@@ -213,9 +207,9 @@
         </el-form-item>
         <el-form-item prop="default_spec">
           <span slot="label">
-            {{ $t("menu.device.part.template.form.defaultSpec") }}
+            {{ $t("device.part.templateFormDefaultSpec") }}
             <el-tooltip
-              :content="$t('menu.device.part.template.tips.defaultSpec')"
+              :content="$t('device.part.templateTipDefaultSpec')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -223,14 +217,14 @@
           </span>
           <el-input
             v-model="templateForm.default_spec"
-            :placeholder="$t('menu.device.part.template.form.defaultSpec')"
+            :placeholder="$t('device.part.templateFormDefaultSpec')"
           />
         </el-form-item>
         <el-form-item prop="default_rated_life">
           <span slot="label">
-            {{ $t("menu.device.part.template.form.defaultRatedLife") }}
+            {{ $t("device.part.templateFormDefaultRatedLife") }}
             <el-tooltip
-              :content="$t('menu.device.part.template.tips.defaultRatedLife')"
+              :content="$t('device.part.templateTipDefaultRatedLife')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -267,7 +261,7 @@ import {
   addPartTemplate,
   updatePartTemplate,
   deletePartTemplate,
-} from "@/api/devicePart";
+} from "@/api/device-part";
 import { useI18n } from "@/composables/useI18n";
 
 const { t: $t } = useI18n();
@@ -303,13 +297,13 @@ const templateForm = reactive({
 // 表单验证规则
 const templateRules = {
   source_template_key: [
-    { required: true, message: "请选择模板名称", trigger: "change" },
+    { required: true, message: $t("device.part.templateRuleSelectName"), trigger: "change" },
   ],
   default_spec: [
-    { required: true, message: "请输入默认规格型号", trigger: "blur" },
+    { required: true, message: $t("device.part.templateRuleSpecRequired"), trigger: "blur" },
   ],
   default_rated_life: [
-    { required: true, message: "请输入默认额定寿命", trigger: "blur" },
+    { required: true, message: $t("device.part.templateRuleRatedLifeRequired"), trigger: "blur" },
   ],
 };
 
@@ -329,7 +323,7 @@ const filteredTemplates = computed(() => {
 // 获取模板名称
 function getTemplateName(template) {
   if (!template) return "";
-  if (template.name_key && template.name_key.startsWith("menu.")) {
+  if (template.name_key && template.name_key.startsWith("layout.menu.")) {
     return $t(template.name_key);
   }
   return template.name_key || template.template_name || template.name || "";
@@ -338,9 +332,9 @@ function getTemplateName(template) {
 // 获取统计方式文本
 function getStatMethodText(method) {
   const map = {
-    success_count: $t("menu.device.part.template.statMethod.successCount"),
-    rotation_count: $t("menu.device.part.template.statMethod.rotationCount"),
-    manual: $t("menu.device.part.template.statMethod.manual"),
+    success_count: $t("device.part.templateStatMethodSuccessCount"),
+    rotation_count: $t("device.part.templateStatMethodRotationCount"),
+    manual: $t("device.part.templateStatMethodManual"),
   };
   return map[method] || method;
 }
@@ -355,18 +349,15 @@ async function loadTemplateList() {
       getBasePartTemplates(),
     ]);
 
-    if (res.code === 200) {
-      templateList.value = res.data || [];
-    } else {
-      Message.error(res.msg || res.message || "加载模板列表失败");
-    }
+    // 业务成功才会进入此处（非 200 已由请求拦截器统一提示并 reject，无需页面重复弹错）
+    templateList.value = res.data || [];
 
     if (baseRes.code === 200) {
       // 源模板列表只包含基础模板，用于新增模板时选择
       sourceTemplates.value = baseRes.data || [];
     }
   } catch (err) {
-    Message.error("加载模板列表失败");
+    // 错误提示已由请求拦截器统一处理，这里仅兜底避免未捕获
   } finally {
     loading.value = false;
   }
@@ -423,7 +414,7 @@ function handleEdit(row) {
 async function handleDelete(row) {
   try {
     await MessageBox.confirm(
-      $t("menu.device.part.template.message.deleteConfirm"),
+      $t("device.part.templateMessageDeleteConfirm"),
       $t("common.tip"),
       {
         confirmButtonText: $t("common.confirm"),
@@ -433,15 +424,12 @@ async function handleDelete(row) {
     );
     const res = await deletePartTemplate(row.id);
     if (res.code === 200) {
-      Message.success($t("menu.device.part.template.message.deleteSuccess"));
+      Message.success($t("device.part.templateMessageDeleteSuccess"));
       loadTemplateList();
-    } else {
-      Message.error(res.msg || res.message || "删除模板失败");
     }
+    // 非 200 已由请求拦截器统一提示，无需页面重复弹错
   } catch (err) {
-    if (err !== "cancel") {
-      Message.error(err.msg || err.message || "删除模板失败");
-    }
+    // 用户取消确认框时不提示；其余错误已由请求拦截器统一处理
   }
 }
 
@@ -478,18 +466,15 @@ async function handleConfirm() {
     if (res.code === 200) {
       Message.success(
         isEdit.value
-          ? $t("menu.device.part.template.message.editSuccess")
-          : $t("menu.device.part.template.message.addSuccess")
+          ? $t("device.part.templateMessageEditSuccess")
+          : $t("device.part.templateMessageAddSuccess")
       );
       dialogVisible.value = false;
       loadTemplateList();
-    } else {
-      Message.error(res.msg || res.message || "保存模板失败");
     }
+    // 非 200 已由请求拦截器统一提示，无需页面重复弹错
   } catch (err) {
-    if (err !== "cancel") {
-      Message.error(err.msg || err.message || "保存模板失败");
-    }
+    // 表单校验失败由 Element 表单自身提示；取消/请求错误已分别处理，这里仅兜底避免未捕获
   } finally {
     saving.value = false;
   }

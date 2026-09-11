@@ -22,36 +22,36 @@
 
       <!-- 详细信息 -->
       <div class="profile-body">
-        <h3 class="section-title">{{ $t("profile.basicInfo") }}</h3>
+        <h3 class="section-title">{{ $t("layout.profile.basicInfo") }}</h3>
         <div class="info-grid">
           <div class="info-item">
-            <span class="info-label">{{ $t("profile.username") }}</span>
+            <span class="info-label">{{ $t("layout.profile.username") }}</span>
             <span class="info-value">{{ userInfo.username || "--" }}</span>
           </div>
           <div class="info-item">
-            <span class="info-label">{{ $t("profile.realName") }}</span>
+            <span class="info-label">{{ $t("layout.profile.realName") }}</span>
             <span class="info-value">{{ userInfo.realName || "--" }}</span>
           </div>
           <div class="info-item">
-            <span class="info-label">{{ $t("profile.role") }}</span>
+            <span class="info-label">{{ $t("layout.profile.role") }}</span>
             <span class="info-value">
               <el-tag :type="roleTagType" size="small">{{ roleText }}</el-tag>
             </span>
           </div>
           <div class="info-item">
-            <span class="info-label">{{ $t("profile.sex") }}</span>
+            <span class="info-label">{{ $t("layout.profile.sex") }}</span>
             <span class="info-value">{{ sexText }}</span>
           </div>
           <div class="info-item">
-            <span class="info-label">{{ $t("profile.phone") }}</span>
+            <span class="info-label">{{ $t("layout.profile.phone") }}</span>
             <span class="info-value">{{ userInfo.phone || "--" }}</span>
           </div>
           <div class="info-item">
-            <span class="info-label">{{ $t("profile.email") }}</span>
+            <span class="info-label">{{ $t("layout.profile.email") }}</span>
             <span class="info-value">{{ userInfo.email || "--" }}</span>
           </div>
           <div class="info-item">
-            <span class="info-label">{{ $t("profile.status") }}</span>
+            <span class="info-label">{{ $t("layout.profile.status") }}</span>
             <span class="info-value">
               <el-tag
                 :type="userInfo.status === 0 ? 'danger' : 'success'"
@@ -62,7 +62,7 @@
             </span>
           </div>
           <div class="info-item">
-            <span class="info-label">{{ $t("profile.createTime") }}</span>
+            <span class="info-label">{{ $t("layout.profile.createTime") }}</span>
             <span class="info-value">{{
               formatTime(userInfo.createTime)
             }}</span>

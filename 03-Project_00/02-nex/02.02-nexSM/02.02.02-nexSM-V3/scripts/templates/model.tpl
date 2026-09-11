@@ -1,4 +1,4 @@
-/**
+﻿/**
  * {{name}} 模块 - 数据模型层
  * 自动生成，根据业务需求调整字段白名单和自定义方法
  */
@@ -11,8 +11,8 @@ const TABLE_NAME = '{{name_snake}}';
 // TODO: 请根据实际数据表字段补充
 const ALLOW_FIELDS = [
   'id',
-  'created_at',
-  'updated_at'
+  'create_time',
+  'update_time'
   // 在此处添加业务字段
 ];
 

@@ -1,10 +1,10 @@
-<template>
+﻿<template>
   <div class="database-manager">
     <!-- 页面标题 -->
     <div class="page-header">
       <div class="header-left">
-        <h2 class="page-title">{{ $t("menu.superPanel.database.title") }}</h2>
-        <p class="page-desc">{{ $t("menu.superPanel.database.desc") }}</p>
+        <h2 class="page-title">{{ $t("superPanel.database.page.title") }}</h2>
+        <p class="page-desc">{{ $t("superPanel.database.page.desc") }}</p>
       </div>
       <div class="header-right">
         <el-button
@@ -22,7 +22,7 @@
     <el-tabs v-model="activeTab" class="main-tabs" @tab-click="handleTabChange">
       <!-- 1. 数据查看 -->
       <el-tab-pane
-        :label="$t('menu.superPanel.database.tabs.dataView')"
+        :label="$t('superPanel.database.tab.dataView')"
         name="dataView"
       >
         <div class="tab-content">
@@ -42,14 +42,14 @@
                 </el-tooltip>
                 <el-input
                   v-model="tableSearch"
-                  :placeholder="$t('menu.superPanel.database.searchTable')"
+                  :placeholder="$t('superPanel.database.dataView.searchTable')"
                   size="small"
                   clearable
                   style="width: 160px"
                 />
                 <el-tooltip
                   placement="top"
-                  :content="$t('menu.superPanel.database.configFileTip')"
+                  :content="$t('superPanel.database.dataView.configFileTip')"
                 >
                   <i class="el-icon-question config-help-icon"></i>
                 </el-tooltip>
@@ -61,7 +61,10 @@
                 :key="categoryKey"
                 class="table-category"
               >
-                <div class="category-title" @click="toggleCategory(categoryKey)">
+                <div
+                  class="category-title"
+                  @click="toggleCategory(categoryKey)"
+                >
                   <i
                     class="category-arrow"
                     :class="
@@ -102,7 +105,8 @@
                     <div class="card-stats">
                       <span class="stat">
                         <i class="el-icon-s-data"></i>
-                        {{ table.table_rows || 0 }} {{ $t("menu.superPanel.database.rows") }}
+                        {{ table.table_rows || 0 }}
+                        {{ $t("superPanel.database.dataView.rows") }}
                       </span>
                       <span class="stat">
                         <i class="el-icon-files"></i>
@@ -119,7 +123,7 @@
                 </div>
               </div>
               <div v-if="filteredTables.length === 0" class="empty-tip">
-                {{ $t("menu.superPanel.database.noTable") }}
+                {{ $t("superPanel.database.dataView.noTable") }}
               </div>
             </div>
           </div>
@@ -128,7 +132,7 @@
           <div class="data-panel">
             <div v-if="!selectedTable" class="empty-data">
               <i class="el-icon-database"></i>
-              <p>{{ $t("menu.superPanel.database.selectTableTip") }}</p>
+              <p>{{ $t("superPanel.database.dataView.selectTip") }}</p>
             </div>
             <div v-else class="data-content">
               <!-- 表信息头部 -->
@@ -145,20 +149,23 @@
                     <span class="title-name">{{ selectedTable }}</span>
                   </div>
                   <el-tag size="mini" type="info" effect="plain">{{
-                    getCategoryName(currentTableInfo?.table_category_key, currentTableInfo?.table_category || "其他")
+                    getCategoryName(
+                      currentTableInfo?.table_category_key,
+                      currentTableInfo?.table_category || "其他"
+                    )
                   }}</el-tag>
                   <el-button
                     size="mini"
                     type="primary"
                     icon="el-icon-refresh"
                     @click="loadTableData"
-                    >{{ $t("menu.superPanel.database.refresh") }}</el-button
+                    >{{ $t("superPanel.database.page.refresh") }}</el-button
                   >
                 </div>
                 <div class="data-search">
                   <el-input
                     v-model="dataSearch"
-                    :placeholder="$t('menu.superPanel.database.searchData')"
+                    :placeholder="$t('superPanel.database.dataView.searchData')"
                     size="small"
                     clearable
                     style="width: 200px"
@@ -169,7 +176,7 @@
                     type="primary"
                     icon="el-icon-search"
                     @click="loadTableData"
-                    >{{ $t("menu.superPanel.database.search") }}</el-button
+                    >{{ $t("superPanel.database.page.search") }}</el-button
                   >
                 </div>
               </div>
@@ -177,18 +184,26 @@
               <div class="table-stats-bar">
                 <div class="stat-item">
                   <i class="el-icon-s-data"></i>
-                  <span class="stat-label">{{ $t("menu.superPanel.database.dataRows") }}</span>
+                  <span class="stat-label">{{
+                    $t("superPanel.database.dataView.dataRows")
+                  }}</span>
                   <span class="stat-value">{{ dataTotal }}</span>
                 </div>
                 <div class="stat-item">
                   <i class="el-icon-files"></i>
-                  <span class="stat-label">{{ $t("menu.superPanel.database.fieldCount") }}</span>
+                  <span class="stat-label">{{
+                    $t("superPanel.database.dataView.fieldCount")
+                  }}</span>
                   <span class="stat-value">{{ tableColumns.length }}</span>
                 </div>
                 <div class="stat-item">
                   <i class="el-icon-document"></i>
-                  <span class="stat-label">{{ $t("menu.superPanel.database.tableDescription") }}</span>
-                  <span class="stat-value">{{ getTableComment(currentTableInfo) }}</span>
+                  <span class="stat-label">{{
+                    $t("superPanel.database.dataView.description")
+                  }}</span>
+                  <span class="stat-value">{{
+                    getTableComment(currentTableInfo)
+                  }}</span>
                 </div>
               </div>
 
@@ -201,12 +216,6 @@
                 v-loading="dataLoading"
                 :element-loading-text="$t('common.loading')"
                 max-height="500"
-                :header-cell-style="{
-                  background: '#f5f7fa',
-                  color: '#606266',
-                  fontWeight: 'bold',
-                  textAlign: 'center',
-                }"
               >
                 <el-table-column
                   v-for="col in tableColumns"
@@ -240,7 +249,7 @@
 
       <!-- 2. 配置表编辑 -->
       <el-tab-pane
-        :label="$t('menu.superPanel.database.tabs.tableEdit')"
+        :label="$t('superPanel.database.tab.tableEdit')"
         name="tableEdit"
       >
         <div class="tab-content edit-tab-content">
@@ -248,7 +257,7 @@
           <div class="config-list-panel">
             <div class="panel-header">
               <span class="panel-title">{{
-                $t("menu.superPanel.database.selectConfigTable")
+                $t("superPanel.database.dataView.selectConfig")
               }}</span>
             </div>
             <div class="config-list">
@@ -267,7 +276,8 @@
                 <div class="card-stats">
                   <span class="stat">
                     <i class="el-icon-s-data"></i>
-                    {{ table.table_rows || 0 }} {{ $t("menu.superPanel.database.rows") }}
+                    {{ table.table_rows || 0 }}
+                    {{ $t("superPanel.database.dataView.rows") }}
                   </span>
                 </div>
                 <div
@@ -287,7 +297,7 @@
           <div class="edit-panel">
             <div v-if="!editTableName" class="empty-data">
               <i class="el-icon-document"></i>
-              <p>{{ $t("menu.superPanel.database.selectConfigTableTip") }}</p>
+              <p>{{ $t("superPanel.database.dataView.selectConfigTip") }}</p>
             </div>
             <div v-else class="edit-content">
               <!-- 编辑头部 -->
@@ -312,13 +322,15 @@
                     type="primary"
                     icon="el-icon-plus"
                     @click="openAddDialog"
-                    >{{ $t("menu.superPanel.database.addRecord") }}</el-button
+                    >{{
+                      $t("superPanel.database.dataView.addRecord")
+                    }}</el-button
                   >
                   <el-button
                     size="small"
                     icon="el-icon-refresh"
                     @click="loadEditData"
-                    >{{ $t("menu.superPanel.database.refresh") }}</el-button
+                    >{{ $t("superPanel.database.page.refresh") }}</el-button
                   >
                 </div>
               </div>
@@ -334,12 +346,6 @@
                   :element-loading-text="$t('common.loading')"
                   max-height="450"
                   class="config-edit-table"
-                  :header-cell-style="{
-                    background: '#f5f7fa',
-                    color: '#606266',
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                  }"
                 >
                   <el-table-column
                     v-for="col in editColumns"
@@ -351,7 +357,7 @@
                     show-overflow-tooltip
                   />
                   <el-table-column
-                    :label="$t('menu.superPanel.database.operation')"
+                    :label="$t('superPanel.database.page.operation')"
                     width="120"
                     fixed="right"
                     align="center"
@@ -362,7 +368,9 @@
                         size="mini"
                         icon="el-icon-edit"
                         @click="openEditDialog(scope.row)"
-                        >{{ $t("menu.superPanel.database.edit") }}</el-button
+                        >{{
+                          $t("superPanel.database.dataView.edit")
+                        }}</el-button
                       >
                       <el-button
                         type="text"
@@ -370,7 +378,7 @@
                         icon="el-icon-delete"
                         style="color: #f56c6c"
                         @click="handleDeleteRecord(scope.row)"
-                        >{{ $t("menu.superPanel.database.delete") }}</el-button
+                        >{{ $t("superPanel.database.page.delete") }}</el-button
                       >
                     </template>
                   </el-table-column>
@@ -396,10 +404,7 @@
       </el-tab-pane>
 
       <!-- 3. 版本备份 -->
-      <el-tab-pane
-        :label="$t('menu.superPanel.database.tabs.backup')"
-        name="backup"
-      >
+      <el-tab-pane :label="$t('superPanel.database.tab.backup')" name="backup">
         <div class="tab-content backup-tab-content">
           <!-- 统计卡片 -->
           <div class="backup-stats">
@@ -409,7 +414,9 @@
               </div>
               <div class="stat-info">
                 <div class="stat-value">{{ backupTotal }}</div>
-                <div class="stat-label">{{ $t("menu.superPanel.database.backupTotal") }}</div>
+                <div class="stat-label">
+                  {{ $t("superPanel.database.backup.total") }}
+                </div>
               </div>
             </div>
             <div class="stat-card">
@@ -418,7 +425,9 @@
               </div>
               <div class="stat-info">
                 <div class="stat-value">{{ successBackupCount }}</div>
-                <div class="stat-label">{{ $t("menu.superPanel.database.successBackup") }}</div>
+                <div class="stat-label">
+                  {{ $t("superPanel.database.backup.successCount") }}
+                </div>
               </div>
             </div>
             <div class="stat-card">
@@ -427,7 +436,9 @@
               </div>
               <div class="stat-info">
                 <div class="stat-value">{{ failedBackupCount }}</div>
-                <div class="stat-label">{{ $t("menu.superPanel.database.failedBackup") }}</div>
+                <div class="stat-label">
+                  {{ $t("superPanel.database.backup.failedCount") }}
+                </div>
               </div>
             </div>
             <div class="stat-card">
@@ -436,7 +447,9 @@
               </div>
               <div class="stat-info">
                 <div class="stat-value">{{ totalBackupSize }}</div>
-                <div class="stat-label">{{ $t("menu.superPanel.database.totalSize") }}</div>
+                <div class="stat-label">
+                  {{ $t("superPanel.database.page.totalSize") }}
+                </div>
               </div>
             </div>
           </div>
@@ -450,27 +463,27 @@
                 size="small"
                 @click="openBackupDialog"
               >
-                {{ $t("menu.superPanel.database.createBackup") }}
+                {{ $t("superPanel.database.backup.create") }}
               </el-button>
               <el-button
                 icon="el-icon-refresh"
                 size="small"
                 @click="loadBackupList"
               >
-                {{ $t("menu.superPanel.database.refresh") }}
+                {{ $t("superPanel.database.page.refresh") }}
               </el-button>
               <el-button
                 icon="el-icon-folder"
                 size="small"
                 @click="openPathDialog"
               >
-                {{ $t("menu.superPanel.database.changePath") }}
+                {{ $t("superPanel.database.path.change") }}
               </el-button>
               <el-tooltip
                 :content="
-                  $t('menu.superPanel.database.currentStoragePath') +
+                  $t('superPanel.database.path.currentStorage') +
                   (backupConfig.storagePath ||
-                    $t('menu.superPanel.database.defaultPath'))
+                    $t('superPanel.database.path.default'))
                 "
                 placement="top"
                 effect="dark"
@@ -480,7 +493,7 @@
             </div>
             <div class="backup-tip">
               <i class="el-icon-info"></i>
-              {{ $t("menu.superPanel.database.backupTip") }}
+              {{ $t("superPanel.database.backup.tip") }}
             </div>
           </div>
 
@@ -492,17 +505,10 @@
             size="small"
             v-loading="backupLoading"
             :element-loading-text="$t('common.loading')"
-            :header-cell-style="{
-              background: '#f5f7fa',
-              color: '#606266',
-              fontWeight: 'bold',
-              textAlign: 'center',
-            }"
           >
-            <el-table-column prop="id" label="ID" width="70" align="center" />
             <el-table-column
               prop="backup_name"
-              :label="$t('menu.superPanel.database.backupName')"
+              :label="$t('superPanel.database.backup.name')"
               :min-width="120"
               align="center"
               class-name="auto-width-col"
@@ -510,7 +516,7 @@
             />
             <el-table-column
               prop="backup_type"
-              :label="$t('menu.superPanel.database.backupType')"
+              :label="$t('superPanel.database.backup.type')"
               width="90"
               align="center"
             >
@@ -519,16 +525,16 @@
                   v-if="scope.row.backup_type === 'full'"
                   size="mini"
                   type="success"
-                  >{{ $t("menu.superPanel.database.fullBackup") }}</el-tag
+                  >{{ $t("superPanel.database.backup.fullType") }}</el-tag
                 >
                 <el-tag v-else size="mini" type="warning">{{
-                  $t("menu.superPanel.database.tableBackup")
+                  $t("superPanel.database.backup.tableType")
                 }}</el-tag>
               </template>
             </el-table-column>
             <el-table-column
               prop="table_name"
-              :label="$t('menu.superPanel.database.tableName')"
+              :label="$t('superPanel.database.dataView.name')"
               :min-width="100"
               align="center"
               class-name="auto-width-col"
@@ -540,13 +546,13 @@
             </el-table-column>
             <el-table-column
               prop="file_size_formatted"
-              :label="$t('menu.superPanel.database.fileSize')"
+              :label="$t('superPanel.database.page.fileSize')"
               width="100"
               align="center"
             />
             <el-table-column
               prop="remark"
-              :label="$t('menu.superPanel.database.remark')"
+              :label="$t('superPanel.database.page.remark')"
               :min-width="120"
               align="center"
               class-name="auto-width-col"
@@ -558,13 +564,13 @@
             </el-table-column>
             <el-table-column
               prop="operator"
-              :label="$t('menu.superPanel.database.operator')"
+              :label="$t('superPanel.database.page.operator')"
               width="100"
               align="center"
             />
             <el-table-column
               prop="status"
-              :label="$t('menu.superPanel.database.status')"
+              :label="$t('superPanel.database.page.status')"
               width="80"
               align="center"
             >
@@ -573,24 +579,24 @@
                   v-if="scope.row.status === 'success'"
                   size="mini"
                   type="success"
-                  >{{ $t("menu.superPanel.database.success") }}</el-tag
+                  >{{ $t("superPanel.database.page.success") }}</el-tag
                 >
                 <el-tag v-else size="mini" type="danger">{{
-                  $t("menu.superPanel.database.failed")
+                  $t("superPanel.database.page.failed")
                 }}</el-tag>
               </template>
             </el-table-column>
             <el-table-column
-              :label="$t('menu.superPanel.database.createTime')"
+              :label="$t('superPanel.database.page.createTime')"
               width="180"
               align="center"
             >
               <template slot-scope="scope">
-                {{ scope.row.created_at | formatDate }}
+                {{ scope.row.create_time | formatDate }}
               </template>
             </el-table-column>
             <el-table-column
-              :label="$t('menu.superPanel.database.operation')"
+              :label="$t('superPanel.database.page.operation')"
               width="150"
               fixed="right"
               align="center"
@@ -603,7 +609,7 @@
                   style="color: #e6a23c"
                   @click="handleRestore(scope.row)"
                   :disabled="scope.row.status !== 'success'"
-                  >{{ $t("menu.superPanel.database.restore") }}</el-button
+                  >{{ $t("superPanel.database.restore.action") }}</el-button
                 >
                 <el-button
                   type="text"
@@ -611,7 +617,7 @@
                   icon="el-icon-delete"
                   style="color: #f56c6c"
                   @click="handleDeleteBackup(scope.row)"
-                  >{{ $t("menu.superPanel.database.delete") }}</el-button
+                  >{{ $t("superPanel.database.page.delete") }}</el-button
                 >
               </template>
             </el-table-column>
@@ -635,47 +641,47 @@
 
       <!-- 4. 回滚（在备份tab中已包含，这里做一个回滚历史/说明） -->
       <el-tab-pane
-        :label="$t('menu.superPanel.database.tabs.restore')"
+        :label="$t('superPanel.database.tab.restore')"
         name="restore"
       >
         <div class="tab-content">
           <div class="restore-guide">
-            <h3>{{ $t("menu.superPanel.database.restoreGuideTitle") }}</h3>
+            <h3>{{ $t("superPanel.database.restore.guideTitle") }}</h3>
             <div class="guide-steps">
               <div class="step">
                 <div class="step-number">1</div>
                 <div class="step-content">
                   <h4>
-                    {{ $t("menu.superPanel.database.restoreStep1Title") }}
+                    {{ $t("superPanel.database.restore.step1Title") }}
                   </h4>
-                  <p>{{ $t("menu.superPanel.database.restoreStep1Desc") }}</p>
+                  <p>{{ $t("superPanel.database.restore.step1Desc") }}</p>
                 </div>
               </div>
               <div class="step">
                 <div class="step-number">2</div>
                 <div class="step-content">
                   <h4>
-                    {{ $t("menu.superPanel.database.restoreStep2Title") }}
+                    {{ $t("superPanel.database.restore.step2Title") }}
                   </h4>
-                  <p>{{ $t("menu.superPanel.database.restoreStep2Desc") }}</p>
+                  <p>{{ $t("superPanel.database.restore.step2Desc") }}</p>
                 </div>
               </div>
               <div class="step">
                 <div class="step-number">3</div>
                 <div class="step-content">
                   <h4>
-                    {{ $t("menu.superPanel.database.restoreStep3Title") }}
+                    {{ $t("superPanel.database.restore.step3Title") }}
                   </h4>
-                  <p>{{ $t("menu.superPanel.database.restoreStep3Desc") }}</p>
+                  <p>{{ $t("superPanel.database.restore.step3Desc") }}</p>
                 </div>
               </div>
               <div class="step">
                 <div class="step-number">4</div>
                 <div class="step-content">
                   <h4>
-                    {{ $t("menu.superPanel.database.restoreStep4Title") }}
+                    {{ $t("superPanel.database.restore.step4Title") }}
                   </h4>
-                  <p>{{ $t("menu.superPanel.database.restoreStep4Desc") }}</p>
+                  <p>{{ $t("superPanel.database.restore.step4Desc") }}</p>
                 </div>
               </div>
             </div>
@@ -684,12 +690,12 @@
               <i class="el-icon-warning-outline"></i>
               <div>
                 <h4>
-                  {{ $t("menu.superPanel.database.restoreWarningTitle") }}
+                  {{ $t("superPanel.database.restore.warningTitle") }}
                 </h4>
                 <ul>
-                  <li>{{ $t("menu.superPanel.database.restoreWarning1") }}</li>
-                  <li>{{ $t("menu.superPanel.database.restoreWarning2") }}</li>
-                  <li>{{ $t("menu.superPanel.database.restoreWarning3") }}</li>
+                  <li>{{ $t("superPanel.database.restore.warning1") }}</li>
+                  <li>{{ $t("superPanel.database.restore.warning2") }}</li>
+                  <li>{{ $t("superPanel.database.restore.warning3") }}</li>
                 </ul>
               </div>
             </div>
@@ -700,7 +706,7 @@
                 icon="el-icon-refresh-left"
                 @click="activeTab = 'backup'"
               >
-                {{ $t("menu.superPanel.database.goToBackup") }}
+                {{ $t("superPanel.database.backup.goTo") }}
               </el-button>
             </div>
           </div>
@@ -719,48 +725,53 @@
         <el-form-item v-for="col in editFormColumns" :key="col">
           <span slot="label">
             {{ col }}
-            <el-tooltip :content="$t('menu.superPanel.database.tips.fieldValue')" placement="top">
+            <el-tooltip
+              :content="$t('superPanel.database.dataView.fieldValueTip')"
+              placement="top"
+            >
               <i class="el-icon-question"></i>
             </el-tooltip>
           </span>
           <el-input
             v-model="editForm[col]"
-            :placeholder="$t('menu.superPanel.database.placeholder.enterField') + col"
+            :placeholder="
+              $t('superPanel.database.dataView.fieldSearchPlaceholder') + col
+            "
             :disabled="isPrimaryKey(col) && editMode === 'edit'"
           />
         </el-form-item>
       </el-form>
       <div slot="footer">
         <el-button @click="editDialogVisible = false">{{
-          $t("menu.superPanel.database.cancel")
+          $t("superPanel.database.page.cancel")
         }}</el-button>
         <el-button type="primary" @click="saveEditRecord">{{
-          $t("menu.superPanel.database.confirm")
+          $t("superPanel.database.page.confirm")
         }}</el-button>
       </div>
     </el-dialog>
 
     <!-- 创建备份弹窗 -->
     <el-dialog
-      :title="$t('menu.superPanel.database.createBackup')"
+      :title="$t('superPanel.database.backup.create')"
       :visible.sync="backupDialogVisible"
       width="500px"
       :close-on-click-modal="false"
     >
       <el-form :model="backupForm" label-width="100px" size="small">
-        <el-form-item :label="$t('menu.superPanel.database.backupType')">
+        <el-form-item :label="$t('superPanel.database.backup.type')">
           <el-radio-group v-model="backupForm.backupType">
             <el-radio label="full">{{
-              $t("menu.superPanel.database.fullBackup")
+              $t("superPanel.database.backup.fullType")
             }}</el-radio>
             <el-radio label="table">{{
-              $t("menu.superPanel.database.tableBackup")
+              $t("superPanel.database.backup.tableType")
             }}</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item
           v-if="backupForm.backupType === 'table'"
-          :label="$t('menu.superPanel.database.selectTable')"
+          :label="$t('superPanel.database.dataView.select')"
         >
           <el-select v-model="backupForm.tableName" style="width: 100%">
             <el-option
@@ -771,33 +782,31 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('menu.superPanel.database.remark')">
+        <el-form-item :label="$t('superPanel.database.page.remark')">
           <el-input
             type="textarea"
             v-model="backupForm.remark"
             :rows="3"
-            :placeholder="
-              $t('menu.superPanel.database.backupRemarkPlaceholder')
-            "
+            :placeholder="$t('superPanel.database.backup.remarkPlaceholder')"
           />
         </el-form-item>
       </el-form>
       <div slot="footer">
         <el-button @click="backupDialogVisible = false">{{
-          $t("menu.superPanel.database.cancel")
+          $t("superPanel.database.page.cancel")
         }}</el-button>
         <el-button
           type="primary"
           :loading="backupCreating"
           @click="confirmCreateBackup"
-          >{{ $t("menu.superPanel.database.confirm") }}</el-button
+          >{{ $t("superPanel.database.page.confirm") }}</el-button
         >
       </div>
     </el-dialog>
 
     <!-- 修改存储路径弹窗 -->
     <el-dialog
-      :title="$t('menu.superPanel.database.pathDialogTitle')"
+      :title="$t('superPanel.database.path.dialogTitle')"
       :visible.sync="pathDialogVisible"
       width="550px"
       :close-on-click-modal="false"
@@ -806,9 +815,9 @@
         <el-form-item>
           <template slot="label">
             <span class="label-with-tip">
-              {{ $t("menu.superPanel.database.currentPath") }}
+              {{ $t("superPanel.database.path.current") }}
               <el-tooltip
-                :content="$t('menu.superPanel.database.currentPathTip')"
+                :content="$t('superPanel.database.path.currentTip')"
                 placement="top"
               >
                 <i class="el-icon-question label-tip-icon"></i>
@@ -816,16 +825,15 @@
             </span>
           </template>
           <span style="color: #909399">{{
-            backupConfig.storagePath ||
-            $t("menu.superPanel.database.defaultPath")
+            backupConfig.storagePath || $t("superPanel.database.path.default")
           }}</span>
         </el-form-item>
         <el-form-item>
           <template slot="label">
             <span class="label-with-tip">
-              {{ $t("menu.superPanel.database.newPath") }}
+              {{ $t("superPanel.database.path.new") }}
               <el-tooltip
-                :content="$t('menu.superPanel.database.newPathTip')"
+                :content="$t('superPanel.database.path.newTip')"
                 placement="top"
               >
                 <i class="el-icon-question label-tip-icon"></i>
@@ -834,13 +842,13 @@
           </template>
           <el-input
             v-model="pathForm.newPath"
-            :placeholder="$t('menu.superPanel.database.newPathPlaceholder')"
+            :placeholder="$t('superPanel.database.path.newPlaceholder')"
           >
             <el-button
               slot="append"
               icon="el-icon-folder-opened"
               @click="triggerFolderSelect"
-              >{{ $t("menu.superPanel.database.browse") }}</el-button
+              >{{ $t("superPanel.database.path.browse") }}</el-button
             >
           </el-input>
           <input
@@ -854,8 +862,11 @@
         </el-form-item>
         <el-form-item>
           <span slot="label">
-            {{ $t('menu.superPanel.database.quickPath') }}
-            <el-tooltip :content="$t('menu.superPanel.database.tips.quickPath')" placement="top">
+            {{ $t("superPanel.database.path.quick") }}
+            <el-tooltip
+              :content="$t('superPanel.database.path.quickTip')"
+              placement="top"
+            >
               <i class="el-icon-question"></i>
             </el-tooltip>
           </span>
@@ -872,7 +883,7 @@
         </el-form-item>
         <el-form-item>
           <el-alert
-            :title="$t('menu.superPanel.database.pathWarning')"
+            :title="$t('superPanel.database.path.warning')"
             type="warning"
             :closable="false"
             show-icon
@@ -1094,8 +1105,8 @@ export default {
     },
     editDialogTitle() {
       return this.editMode === "add"
-        ? this.$t("menu.superPanel.database.addRecord")
-        : this.$t("menu.superPanel.database.editRecord");
+        ? this.$t("superPanel.database.dataView.addRecord")
+        : this.$t("superPanel.database.dataView.editRecord");
     },
   },
   watch: {
@@ -1178,7 +1189,7 @@ export default {
 
     // 获取分类名称（支持国际化）
     getCategoryName(categoryKey, defaultName) {
-      const i18nKey = `menu.superPanel.database.categories.${categoryKey}`;
+      const i18nKey = `superPanel.database.categories.${categoryKey}`;
       const translated = this.$t(i18nKey);
       if (translated && translated !== i18nKey) {
         return translated;
@@ -1201,9 +1212,17 @@ export default {
       if (!table) return "";
       const lang = this.$i18n.locale;
       if (lang === "en-US") {
-        return table.table_comment_en_config || table.table_comment || this.$t("menu.superPanel.database.noDescription");
+        return (
+          table.table_comment_en_config ||
+          table.table_comment ||
+          this.$t("superPanel.database.page.noDescription")
+        );
       }
-      return table.table_comment_config || table.table_comment || this.$t("menu.superPanel.database.noDescription");
+      return (
+        table.table_comment_config ||
+        table.table_comment ||
+        this.$t("superPanel.database.page.noDescription")
+      );
     },
 
     // 全部展开
@@ -1359,13 +1378,13 @@ export default {
           );
           if (res.code === 200) {
             this.$message.success(
-              this.$t("menu.superPanel.database.addSuccess")
+              this.$t("superPanel.database.dataView.addSuccess")
             );
             this.editDialogVisible = false;
             this.loadEditData();
           } else {
             this.$message.error(
-              res.message || this.$t("menu.superPanel.database.addFailed")
+              this.$t("superPanel.database.dataView.addFailed")
             );
           }
         } else {
@@ -1388,20 +1407,20 @@ export default {
           );
           if (res.code === 200) {
             this.$message.success(
-              this.$t("menu.superPanel.database.editSuccess")
+              this.$t("superPanel.database.dataView.editSuccess")
             );
             this.editDialogVisible = false;
             this.loadEditData();
           } else {
             this.$message.error(
-              res.message || this.$t("menu.superPanel.database.editFailed")
+              this.$t("superPanel.database.dataView.editFailed")
             );
           }
         }
       } catch (err) {
         console.error("保存失败:", err);
         this.$message.error(
-          this.$t("menu.superPanel.database.saveFailed") +
+          this.$t("superPanel.database.dataView.saveFailed") +
             ": " +
             (err.message || "")
         );
@@ -1410,11 +1429,11 @@ export default {
 
     handleDeleteRecord(row) {
       MessageBox.confirm(
-        this.$t("menu.superPanel.database.deleteConfirm"),
-        this.$t("menu.superPanel.database.warning"),
+        this.$t("superPanel.database.dataView.deleteConfirm"),
+        this.$t("superPanel.database.page.warning"),
         {
-          confirmButtonText: this.$t("menu.superPanel.database.confirm"),
-          cancelButtonText: this.$t("menu.superPanel.database.cancel"),
+          confirmButtonText: this.$t("superPanel.database.page.confirm"),
+          cancelButtonText: this.$t("superPanel.database.page.cancel"),
           type: "warning",
         }
       )
@@ -1435,18 +1454,18 @@ export default {
             );
             if (res.code === 200) {
               this.$message.success(
-                this.$t("menu.superPanel.database.deleteSuccess")
+                this.$t("superPanel.database.dataView.deleteSuccess")
               );
               this.loadEditData();
             } else {
               this.$message.error(
-                res.message || this.$t("menu.superPanel.database.deleteFailed")
+                this.$t("superPanel.database.dataView.deleteFailed")
               );
             }
           } catch (err) {
             console.error("删除失败:", err);
             this.$message.error(
-              this.$t("menu.superPanel.database.deleteFailed") +
+              this.$t("superPanel.database.dataView.deleteFailed") +
                 ": " +
                 (err.message || "")
             );
@@ -1526,7 +1545,7 @@ export default {
         !this.backupForm.tableName
       ) {
         this.$message.warning(
-          this.$t("menu.superPanel.database.backupSelectTableTip")
+          this.$t("superPanel.database.backup.selectTableTip")
         );
         return;
       }
@@ -1540,20 +1559,16 @@ export default {
           this.backupForm.remark
         );
         if (res.code === 200) {
-          this.$message.success(
-            this.$t("menu.superPanel.database.backupSuccess")
-          );
+          this.$message.success(this.$t("superPanel.database.backup.success"));
           this.backupDialogVisible = false;
           this.loadBackupList();
         } else {
-          this.$message.error(
-            res.message || this.$t("menu.superPanel.database.backupFailed")
-          );
+          this.$message.error(this.$t("superPanel.database.backup.failed"));
         }
       } catch (err) {
         console.error("创建备份失败:", err);
         this.$message.error(
-          this.$t("menu.superPanel.database.backupFailed") +
+          this.$t("superPanel.database.backup.failed") +
             ": " +
             (err.message || "")
         );
@@ -1599,13 +1614,13 @@ export default {
 
     handleRestore(backup) {
       MessageBox.confirm(
-        this.$t("menu.superPanel.database.restoreConfirm", {
+        this.$t("superPanel.database.restore.confirm", {
           name: backup.backup_name,
         }),
-        this.$t("menu.superPanel.database.warning"),
+        this.$t("superPanel.database.page.warning"),
         {
-          confirmButtonText: this.$t("menu.superPanel.database.confirm"),
-          cancelButtonText: this.$t("menu.superPanel.database.cancel"),
+          confirmButtonText: this.$t("superPanel.database.page.confirm"),
+          cancelButtonText: this.$t("superPanel.database.page.cancel"),
           type: "warning",
         }
       )
@@ -1614,18 +1629,18 @@ export default {
             const res = await requestRestoreBackupApi(backup.id);
             if (res.code === 200) {
               this.$message.success(
-                this.$t("menu.superPanel.database.restoreSuccess")
+                this.$t("superPanel.database.restore.success")
               );
               this.loadBackupList();
             } else {
               this.$message.error(
-                res.message || this.$t("menu.superPanel.database.restoreFailed")
+                this.$t("superPanel.database.restore.failed")
               );
             }
           } catch (err) {
             console.error("回滚失败:", err);
             this.$message.error(
-              this.$t("menu.superPanel.database.restoreFailed") +
+              this.$t("superPanel.database.restore.failed") +
                 ": " +
                 (err.message || "")
             );
@@ -1636,13 +1651,13 @@ export default {
 
     handleDeleteBackup(backup) {
       MessageBox.confirm(
-        this.$t("menu.superPanel.database.deleteBackupConfirm", {
+        this.$t("superPanel.database.backup.deleteConfirm", {
           name: backup.backup_name,
         }),
-        this.$t("menu.superPanel.database.warning"),
+        this.$t("superPanel.database.page.warning"),
         {
-          confirmButtonText: this.$t("menu.superPanel.database.confirm"),
-          cancelButtonText: this.$t("menu.superPanel.database.cancel"),
+          confirmButtonText: this.$t("superPanel.database.page.confirm"),
+          cancelButtonText: this.$t("superPanel.database.page.cancel"),
           type: "warning",
         }
       )
@@ -1651,18 +1666,18 @@ export default {
             const res = await requestDeleteBackupApi(backup.id);
             if (res.code === 200) {
               this.$message.success(
-                this.$t("menu.superPanel.database.deleteSuccess")
+                this.$t("superPanel.database.dataView.deleteSuccess")
               );
               this.loadBackupList();
             } else {
               this.$message.error(
-                res.message || this.$t("menu.superPanel.database.deleteFailed")
+                this.$t("superPanel.database.dataView.deleteFailed")
               );
             }
           } catch (err) {
             console.error("删除备份失败:", err);
             this.$message.error(
-              this.$t("menu.superPanel.database.deleteFailed") +
+              this.$t("superPanel.database.dataView.deleteFailed") +
                 ": " +
                 (err.message || "")
             );

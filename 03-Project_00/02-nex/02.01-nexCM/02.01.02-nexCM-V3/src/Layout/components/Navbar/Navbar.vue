@@ -24,16 +24,16 @@
           <span class="user-info">
             <svg-icon :icon-file-name="avatarIcon" class="avatar-icon" />
             <span class="username">{{
-              userInfo.real_name || $t("layout.user")
+              userInfo.real_name || $t("layout.navbar.user")
             }}</span>
             <i class="el-icon-arrow-down"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="profile">{{
-              $t("layout.profile")
+              $t("layout.navbar.profileTitle")
             }}</el-dropdown-item>
             <el-dropdown-item command="logout" divided>{{
-              $t("layout.logout")
+              $t("layout.navbar.logout")
             }}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -48,8 +48,8 @@
 <script setup>
 /* eslint-disable vue/multi-word-component-names */
 import { computed } from "vue";
-import HeadBreadcrumb from "@/components/Breadcrumb/HeadBreadcrumb.vue";
-import TagsView from "@/Layout/components/TagsView/TagsView.vue";
+import HeadBreadcrumb from "@/components/Breadcrumb/index.vue";
+import TagsView from "@/layout/components/TagsView/TagsView.vue";
 import ThemePicker from "@/components/ThemePicker/index.vue";
 import MenuSearch from "@/components/MenuSearch/index.vue";
 import NotificationBell from "@/components/NotificationBell/index.vue";

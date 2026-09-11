@@ -206,7 +206,7 @@ async function triggerManualReconnect() {
     }
   } catch (err) {
     console.error('[Heartbeat] 手动重连失败:', err)
-    const errorMsg = err.message || $t('heartbeat.reconnectFailedUnknown')
+    const errorMsg = $t('heartbeat.reconnectFailedUnknown')
     store.dispatch('websocket/manualReconnectFailed', errorMsg)
   }
 }

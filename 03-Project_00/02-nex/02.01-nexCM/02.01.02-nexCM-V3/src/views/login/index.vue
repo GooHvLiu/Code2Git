@@ -9,12 +9,12 @@
           ref="registerFormRef"
           class="auth-form"
         >
-          <h2 class="form-title">{{ $t('login.registerTitle') }}</h2>
+          <h2 class="form-title">{{ $t('layout.login.registerTitle') }}</h2>
           <el-form-item prop="username">
             <el-input
               v-model="registerForm.username"
               prefix-icon="el-icon-user"
-              :placeholder="$t('login.username')"
+              :placeholder="$t('layout.login.username')"
               autocomplete="off"
             />
           </el-form-item>
@@ -22,7 +22,7 @@
             <el-input
               v-model="registerForm.email"
               prefix-icon="el-icon-message"
-              :placeholder="$t('login.email')"
+              :placeholder="$t('layout.login.email')"
               autocomplete="off"
             />
           </el-form-item>
@@ -31,7 +31,7 @@
               v-model="registerForm.password"
               type="password"
               prefix-icon="el-icon-lock"
-              :placeholder="$t('login.password')"
+              :placeholder="$t('layout.login.password')"
               show-password
             />
           </el-form-item>
@@ -40,7 +40,7 @@
               v-model="registerForm.confirmPassword"
               type="password"
               prefix-icon="el-icon-lock"
-              :placeholder="$t('login.confirmPassword')"
+              :placeholder="$t('layout.login.confirmPassword')"
               show-password
             />
           </el-form-item>
@@ -49,7 +49,7 @@
               <el-input
                 v-model="registerForm.captchacode"
                 prefix-icon="el-icon-key"
-                :placeholder="$t('login.captcha')"
+                :placeholder="$t('layout.login.captcha')"
                 @keyup.enter.native="handleRegister"
               />
               <img
@@ -64,7 +64,7 @@
             </div>
           </el-form-item>
           <el-button class="submit-btn" type="primary" :loading="loading" @click="handleRegister"
-            >{{ $t('login.registerBtn') }}</el-button
+            >{{ $t('layout.login.registerBtn') }}</el-button
           >
         </el-form>
       </div>
@@ -78,14 +78,14 @@
           ref="ruleFormRef"
           class="auth-form"
         >
-          <h2 class="form-title">{{ $t('login.title') }}</h2>
+          <h2 class="form-title">{{ $t('layout.login.title') }}</h2>
           <el-form-item prop="username">
             <el-input
               v-model="ruleForm.username"
               type="text"
               autocomplete="off"
               prefix-icon="el-icon-user"
-              :placeholder="$t('login.username')"
+              :placeholder="$t('layout.login.username')"
             />
           </el-form-item>
           <el-form-item prop="password">
@@ -94,7 +94,7 @@
               type="password"
               autocomplete="off"
               prefix-icon="el-icon-lock"
-              :placeholder="$t('login.password')"
+              :placeholder="$t('layout.login.password')"
             />
           </el-form-item>
           <el-form-item prop="captchacode">
@@ -102,7 +102,7 @@
               <el-input
                 v-model="ruleForm.captchacode"
                 prefix-icon="el-icon-key"
-                :placeholder="$t('login.captcha')"
+                :placeholder="$t('layout.login.captcha')"
                 @keyup.enter.native="submitForm('ruleForm')"
               />
               <img
@@ -121,10 +121,10 @@
             type="primary"
             :loading="loading"
             @click="submitForm('ruleForm')"
-            >{{ $t('login.loginBtn') }}</el-button
+            >{{ $t('layout.login.loginBtn') }}</el-button
           >
           <div class="forgot-password-link">
-            <a @click="showForgotPasswordDialog = true">{{ $t('login.forgotPassword') }}</a>
+            <a @click="showForgotPasswordDialog = true">{{ $t('layout.login.forgotPassword') }}</a>
           </div>
         </el-form>
       </div>
@@ -141,9 +141,9 @@
             />
             <h1 class="overlay-title">{{ config.SYSTEM_NAME }}</h1>
             <p class="overlay-desc">{{ config.SYSTEM_DESC }}</p>
-            <p class="overlay-tip">{{ $t('login.hasAccount') }}</p>
+            <p class="overlay-tip">{{ $t('layout.login.hasAccount') }}</p>
             <button class="ghost-btn" @click="switchPanel('login')">
-              {{ $t('login.loginNow') }}
+              {{ $t('layout.login.loginNow') }}
             </button>
           </div>
           <!-- 右侧覆盖面板（登录状态显示） -->
@@ -155,9 +155,9 @@
             />
             <h1 class="overlay-title">{{ config.SYSTEM_NAME }}</h1>
             <p class="overlay-desc">{{ config.SYSTEM_DESC }}</p>
-            <p class="overlay-tip">{{ $t('login.noAccount') }}</p>
+            <p class="overlay-tip">{{ $t('layout.login.noAccount') }}</p>
             <button class="ghost-btn" @click="switchPanel('register')">
-              {{ $t('login.registerNow') }}
+              {{ $t('layout.login.registerNow') }}
             </button>
           </div>
         </div>
@@ -167,10 +167,10 @@
     <!-- 移动端底部切换链接 -->
     <div class="mobile-switch">
       <span v-if="!isRegister"
-        >{{ $t('login.noAccount') }}<a @click="switchPanel('register')">{{ $t('login.registerNow') }}</a></span
+        >{{ $t('layout.login.noAccount') }}<a @click="switchPanel('register')">{{ $t('layout.login.registerNow') }}</a></span
       >
       <span v-else
-        >{{ $t('login.hasAccount') }}<a @click="switchPanel('login')">{{ $t('login.loginNow') }}</a></span
+        >{{ $t('layout.login.hasAccount') }}<a @click="switchPanel('login')">{{ $t('layout.login.loginNow') }}</a></span
       >
     </div>
 
@@ -245,21 +245,21 @@ import {
   validatePassword,
   validateConfirmPassword,
   validateEmail,
-} from "@/utils/validate";
+} from "@/utils/data/validate";
 import {
   getLocalStorage,
   setLocalStorage,
   removeLocalStorage,
   removeSessionStorage,
-} from "@/utils/storage";
-import { LOCALSTORAGE_KEYS, SESSIONSTORAGE_KEYS } from "@/utils/storageKey";
+} from "@/utils/data/storage";
+import { LOCALSTORAGE_KEYS, SESSIONSTORAGE_KEYS } from "@/utils/data/storageKey";
 import { requestCaptchaCodeApi, requestLoginApi, requestRegisterApi } from "@/api/login"
 import { requestSendResetCodeApi, requestResetPasswordByCodeApi } from "@/api/user";
-import { setToken } from "@/utils/auth";
+import { setToken } from "@/utils/auth/auth";
 import config from "@/config";
 import router from '@/router'
 import { useI18n } from '@/composables/useI18n'
-import ws from '@/utils/websocket'
+import ws from '@/utils/request/websocket'
 import store from '@/store'
 
 const { t: $t } = useI18n()
@@ -305,33 +305,33 @@ const forgotForm = reactive({
 /** 登录表单校验规则（国际化） */
 const rules = computed(() => ({
   username: [
-    { required: true, message: $t('login.usernameRequired'), trigger: "blur" },
+    { required: true, message: $t('layout.login.usernameRequired'), trigger: "blur" },
     { validator: validateUsername, trigger: "blur" },
   ],
   password: [
-    { required: true, message: $t('login.passwordRequired'), trigger: "blur" },
+    { required: true, message: $t('layout.login.passwordRequired'), trigger: "blur" },
   ],
   captchacode: [
-    { required: true, message: $t('login.captchaRequired'), trigger: "blur" },
+    { required: true, message: $t('layout.login.captchaRequired'), trigger: "blur" },
   ],
 }))
 
 /** 注册表单校验规则（国际化） */
 const registerRules = computed(() => ({
   username: [
-    { required: true, message: $t('login.usernameRequired'), trigger: "blur" },
+    { required: true, message: $t('layout.login.usernameRequired'), trigger: "blur" },
     { validator: validateUsername, trigger: "blur" },
   ],
   email: [
-    { required: true, message: $t('login.emailRequired'), trigger: "blur" },
+    { required: true, message: $t('layout.login.emailRequired'), trigger: "blur" },
     { validator: validateEmail, trigger: "blur" },
   ],
   password: [
-    { required: true, message: $t('login.passwordRequired'), trigger: "blur" },
+    { required: true, message: $t('layout.login.passwordRequired'), trigger: "blur" },
     { validator: validatePassword, trigger: "blur" },
   ],
   confirmPassword: [
-    { required: true, message: $t('login.confirmPasswordRequired'), trigger: "blur" },
+    { required: true, message: $t('layout.login.confirmPasswordRequired'), trigger: "blur" },
     {
       validator: (rule, value, callback) => {
         validateConfirmPassword(registerForm.password)(
@@ -344,7 +344,7 @@ const registerRules = computed(() => ({
     },
   ],
   captchacode: [
-    { required: true, message: $t('login.captchaRequired'), trigger: "blur" },
+    { required: true, message: $t('layout.login.captchaRequired'), trigger: "blur" },
   ],
 }))
 
@@ -354,8 +354,8 @@ function switchPanel(type) {
   isRegister.value = type === "register";
   // 切换浏览器标签页标题
   const pageName = isRegister.value
-    ? $t('login.registerTitle')
-    : $t('login.title');
+    ? $t('layout.login.registerTitle')
+    : $t('layout.login.title');
   document.title = `${pageName} - ${config.SYSTEM_NAME}`;
 }
 
@@ -450,7 +450,7 @@ function handleRegister() {
         code: registerForm.captchacode,
         uuid: getLocalStorage(LOCALSTORAGE_KEYS.CAPTCHA_UUID),
       });
-      Message.success($t('login.registerSuccess'));
+      Message.success($t('layout.login.registerSuccess'));
       // 清空注册表单，切换到登录面板
       Object.assign(registerForm, {
         username: "",
@@ -505,16 +505,16 @@ function resetForgotPasswordForm() {
 
 async function handleSendResetCode() {
   if (!forgotForm.username) {
-    Message.warning('请输入用户名')
+    Message.warning($t('layout.login.usernameRequired'))
     return
   }
   if (!forgotForm.email) {
-    Message.warning('请输入邮箱')
+    Message.warning($t('layout.login.emailRequired'))
     return
   }
   try {
     await requestSendResetCodeApi({ username: forgotForm.username, email: forgotForm.email })
-    Message.success('验证码已发送，请查收邮件')
+    Message.success($t('layout.login.resetCodeSent'))
     codeCountdown.value = 60
     codeTimer = setInterval(() => {
       codeCountdown.value--
@@ -524,13 +524,13 @@ async function handleSendResetCode() {
       }
     }, 1000)
   } catch (err) {
-    Message.error('操作失败')
+    Message.error($t('layout.login.operationFailed'))
   }
 }
 
 function handleVerifyCode() {
   if (!forgotForm.username || !forgotForm.email || !forgotForm.code) {
-    Message.warning('请填写完整信息')
+    Message.warning($t('layout.login.fillCompleteInfo'))
     return
   }
   forgotStep.value = 1
@@ -538,11 +538,11 @@ function handleVerifyCode() {
 
 async function handleResetPassword() {
   if (!forgotForm.newPassword || forgotForm.newPassword.length < 8) {
-    Message.warning('密码长度不能少于8位')
+    Message.warning($t('layout.login.resetPasswordMinLength'))
     return
   }
   if (forgotForm.newPassword !== forgotForm.confirmPassword) {
-    Message.warning('两次输入的密码不一致')
+    Message.warning($t('common.validate.passwordMismatch'))
     return
   }
   try {
@@ -554,7 +554,7 @@ async function handleResetPassword() {
     })
     forgotStep.value = 2
   } catch (err) {
-    Message.error('操作失败')
+    Message.error($t('layout.login.operationFailed'))
   }
 }
 

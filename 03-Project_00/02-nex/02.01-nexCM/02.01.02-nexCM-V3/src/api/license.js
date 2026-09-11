@@ -1,8 +1,8 @@
-/**
+﻿/**
  * 授权管理 API
  * 与后端 /prod-api/v2/license 接口对应
  */
-import request from '@/utils/request'
+import request from '@/utils/request/request'
 
 /**
  * 查询当前授权状态（完整信息）

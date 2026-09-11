@@ -83,6 +83,7 @@ const ERROR_CODE = {
 
   // ==================== 菜单模块 ====================
   MENU_USER_ID_REQUIRED: 'MENU_USER_ID_REQUIRED', // 用户ID不能为空
+  MENU_NOT_MODIFIED: 'MENU_NOT_MODIFIED',           // 菜单未变更（缓存命中）
 
   // ==================== 文件上传模块 ====================
   FILE_NOT_EXIST: 'FILE_NOT_EXIST',               // 文件不存在/请选择要上传的文件
@@ -128,7 +129,16 @@ const ERROR_CODE = {
   PART_RATED_LIFE_NOT_MATCH: 'PART_RATED_LIFE_NOT_MATCH',               // 额定寿命与模板不匹配
   PART_TEMPLATE_KEY_EXISTS: 'PART_TEMPLATE_KEY_EXISTS',                 // 模板编码已存在
   PART_TEMPLATE_HAS_PARTS: 'PART_TEMPLATE_HAS_PARTS',                   // 模板下有部件实例
-  PART_TEMPLATE_IS_BASE: 'PART_TEMPLATE_IS_BASE',                       // 基础模板不允许编辑/删除
+  PART_TEMPLATE_IS_BASE: 'PART_TEMPLATE_IS_BASE',                       // 基础模板不允许编辑/删除,
+  // ==================== 国际化管理模块 ====================
+  I18N_LANG_NOT_FOUND: 'I18N_LANG_NOT_FOUND',               // 语言目录不存在
+  I18N_LANG_EXISTS: 'I18N_LANG_EXISTS',                     // 语言已存在
+  I18N_LANG_CODE_INVALID: 'I18N_LANG_CODE_INVALID',         // 语言代码不合法
+  I18N_PRESET_NOT_FOUND: 'I18N_PRESET_NOT_FOUND',           // 预设语言不存在，新建语言只能从预设列表选择
+  I18N_KEY_NOT_FOUND: 'I18N_KEY_NOT_FOUND',                 // 国际化字段不存在
+  I18N_KEY_EXISTS: 'I18N_KEY_EXISTS',                       // 国际化字段已存在
+  I18N_BACKUP_NOT_FOUND: 'I18N_BACKUP_NOT_FOUND',           // 国际化备份文件不存在
+  I18N_BACKUP_INVALID: 'I18N_BACKUP_INVALID'                // 国际化备份文件损坏或结构不合法
 };
 
 // 错误码对应消息（调试用，中文，开发环境看日志方便）
@@ -189,6 +199,7 @@ const ERROR_MESSAGE = {
   [ERROR_CODE.CUSTOMER_NOT_FOUND]: '客户不存在',
 
   [ERROR_CODE.MENU_USER_ID_REQUIRED]: '用户ID不能为空',
+  [ERROR_CODE.MENU_NOT_MODIFIED]: '菜单未变更（缓存命中）',
 
   [ERROR_CODE.FILE_NOT_EXIST]: '请选择要上传的文件',
   [ERROR_CODE.FILE_PATH_EMPTY]: '文件路径不能为空',
@@ -230,6 +241,16 @@ const ERROR_MESSAGE = {
   [ERROR_CODE.PART_TEMPLATE_KEY_EXISTS]: '模板编码 {templateKey} 已存在',
   [ERROR_CODE.PART_TEMPLATE_HAS_PARTS]: '该模板下有 {partCount} 个部件实例，不允许删除',
   [ERROR_CODE.PART_TEMPLATE_IS_BASE]: '基础模板不允许编辑或删除',
+
+  // ==================== 国际化管理模块 ====================
+  [ERROR_CODE.I18N_LANG_NOT_FOUND]: '语言不存在',
+  [ERROR_CODE.I18N_LANG_EXISTS]: '语言已存在',
+  [ERROR_CODE.I18N_LANG_CODE_INVALID]: '语言代码不合法',
+  [ERROR_CODE.I18N_PRESET_NOT_FOUND]: '预设语言不存在，只能从预设语言列表中选择',
+  [ERROR_CODE.I18N_KEY_NOT_FOUND]: '国际化字段不存在',
+  [ERROR_CODE.I18N_KEY_EXISTS]: '国际化字段已存在',
+  [ERROR_CODE.I18N_BACKUP_NOT_FOUND]: '备份文件不存在',
+  [ERROR_CODE.I18N_BACKUP_INVALID]: '备份文件损坏或结构不合法'
 };
 
 module.exports = {

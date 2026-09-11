@@ -1,19 +1,19 @@
-<template>
+﻿<template>
   <div class="dept-management">
     <!-- ==================== 页面头部 ==================== -->
     <div class="page-header">
       <div class="header-left">
         <h2 class="page-title">
-          {{ $t("menu.superPanel.dept.page.title") }}
+          {{ $t("superPanel.dept.page.title") }}
         </h2>
-        <p class="page-desc">{{ $t("menu.superPanel.dept.page.pageDesc") }}</p>
+        <p class="page-desc">{{ $t("superPanel.dept.page.pageDesc") }}</p>
       </div>
       <div class="header-right">
         <export-dropdown
           :data="flatTableData"
           :columns="exportColumns"
-          :title="$t('menu.superPanel.dept.page.title')"
-          :filename="$t('menu.superPanel.dept.page.title')"
+          :title="$t('superPanel.dept.page.title')"
+          :filename="$t('superPanel.dept.page.title')"
           :exporter="$store.state.user.userInfo?.username || ''"
         />
         <el-button
@@ -45,40 +45,34 @@
       stripe
       row-key="id"
       :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
-      :header-cell-style="{
-        background: '#f5f7fa',
-        color: '#606266',
-        fontWeight: 'bold',
-        textAlign: 'center',
-      }"
       default-expand-all
       class="dept-table"
     >
       <el-table-column
-        :label="$t('menu.superPanel.dept.page.deptName')"
+        :label="$t('superPanel.dept.page.deptName')"
         prop="dept_name"
         min-width="200"
       />
       <el-table-column
-        :label="$t('menu.superPanel.dept.page.orderNum')"
+        :label="$t('superPanel.dept.page.orderNum')"
         prop="order_num"
         width="100"
         align="center"
       />
       <el-table-column
-        :label="$t('menu.superPanel.dept.page.leader')"
+        :label="$t('superPanel.dept.page.leader')"
         prop="leader"
         width="120"
         align="center"
       />
       <el-table-column
-        :label="$t('menu.superPanel.dept.page.phone')"
+        :label="$t('superPanel.dept.page.phone')"
         prop="phone"
         width="150"
         align="center"
       />
       <el-table-column
-        :label="$t('menu.superPanel.dept.page.email')"
+        :label="$t('superPanel.dept.page.email')"
         prop="email"
         width="200"
         align="center"
@@ -106,7 +100,7 @@
             type="text"
             size="small"
             @click="handleAddChild(row)"
-            >{{ $t("menu.superPanel.dept.page.addChild") }}</el-button
+            >{{ $t("superPanel.dept.page.addChild") }}</el-button
           >
           <el-button
             type="text"
@@ -137,14 +131,14 @@
           prop="parent_id"
         >
           <span slot="label">
-            {{ $t('menu.superPanel.dept.page.parentDept') }}
-            <el-tooltip :content="$t('menu.superPanel.dept.page.tips.parentDept')" placement="top">
+            {{ $t('superPanel.dept.page.parentDept') }}
+            <el-tooltip :content="$t('superPanel.dept.page.tips.parentDept')" placement="top">
               <i class="el-icon-question"></i>
             </el-tooltip>
           </span>
           <el-select
             v-model="form.parent_id"
-            :placeholder="$t('menu.superPanel.dept.page.parentDeptPlaceholder')"
+            :placeholder="$t('superPanel.dept.page.parentDeptPlaceholder')"
             style="width: 100%"
             clearable
           >
@@ -160,23 +154,23 @@
           prop="dept_name"
         >
           <span slot="label">
-            {{ $t('menu.superPanel.dept.page.deptName') }}
-            <el-tooltip :content="$t('menu.superPanel.dept.page.tips.deptName')" placement="top">
+            {{ $t('superPanel.dept.page.deptName') }}
+            <el-tooltip :content="$t('superPanel.dept.page.tips.deptName')" placement="top">
               <i class="el-icon-question"></i>
             </el-tooltip>
           </span>
           <el-input
             v-model="form.dept_name"
             :maxlength="50"
-            :placeholder="$t('menu.superPanel.dept.page.deptNamePlaceholder')"
+            :placeholder="$t('superPanel.dept.page.deptNamePlaceholder')"
           />
         </el-form-item>
         <el-form-item
           prop="order_num"
         >
           <span slot="label">
-            {{ $t('menu.superPanel.dept.page.orderNum') }}
-            <el-tooltip :content="$t('menu.superPanel.dept.page.tips.orderNum')" placement="top">
+            {{ $t('superPanel.dept.page.orderNum') }}
+            <el-tooltip :content="$t('superPanel.dept.page.tips.orderNum')" placement="top">
               <i class="el-icon-question"></i>
             </el-tooltip>
           </span>
@@ -184,8 +178,8 @@
         </el-form-item>
         <el-form-item prop="leader">
           <span slot="label">
-            {{ $t('menu.superPanel.dept.page.leader') }}
-            <el-tooltip :content="$t('menu.superPanel.dept.page.tips.leader')" placement="top">
+            {{ $t('superPanel.dept.page.leader') }}
+            <el-tooltip :content="$t('superPanel.dept.page.tips.leader')" placement="top">
               <i class="el-icon-question"></i>
             </el-tooltip>
           </span>
@@ -193,8 +187,8 @@
         </el-form-item>
         <el-form-item prop="phone">
           <span slot="label">
-            {{ $t('menu.superPanel.dept.page.phone') }}
-            <el-tooltip :content="$t('menu.superPanel.dept.page.tips.phone')" placement="top">
+            {{ $t('superPanel.dept.page.phone') }}
+            <el-tooltip :content="$t('superPanel.dept.page.tips.phone')" placement="top">
               <i class="el-icon-question"></i>
             </el-tooltip>
           </span>
@@ -202,8 +196,8 @@
         </el-form-item>
         <el-form-item prop="email">
           <span slot="label">
-            {{ $t('menu.superPanel.dept.page.email') }}
-            <el-tooltip :content="$t('menu.superPanel.dept.page.tips.email')" placement="top">
+            {{ $t('superPanel.dept.page.email') }}
+            <el-tooltip :content="$t('superPanel.dept.page.tips.email')" placement="top">
               <i class="el-icon-question"></i>
             </el-tooltip>
           </span>
@@ -212,7 +206,7 @@
         <el-form-item prop="status">
           <span slot="label">
             {{ $t('common.status') }}
-            <el-tooltip :content="$t('menu.superPanel.dept.page.tips.status')" placement="top">
+            <el-tooltip :content="$t('superPanel.dept.page.tips.status')" placement="top">
               <i class="el-icon-question"></i>
             </el-tooltip>
           </span>
@@ -270,7 +264,7 @@ const rules = {
   dept_name: [
     {
       required: true,
-      message: $t("menu.superPanel.dept.page.deptNameRequired"),
+      message: $t("superPanel.dept.page.deptNameRequired"),
       trigger: "blur",
     },
   ],
@@ -279,7 +273,7 @@ const rules = {
 // ===== 计算属性 =====
 /** 扁平化的部门列表（用于上级部门下拉选择） */
 const flatDeptOptions = computed(() => {
-  const result = [{ id: 0, dept_name: $t("menu.superPanel.dept.page.rootDept") }];
+  const result = [{ id: 0, dept_name: $t("superPanel.dept.page.rootDept") }];
   const flatten = (list) => {
     if (!Array.isArray(list)) return;
     list.forEach((item) => {
@@ -310,19 +304,19 @@ const flatTableData = computed(() => {
 
 const exportColumns = computed(() => [
   {
-    label: $t("menu.superPanel.dept.page.deptName"),
+    label: $t("superPanel.dept.page.deptName"),
     prop: "dept_name",
     width: 200,
     formatter: (row) => "  ".repeat(row._level || 0) + row.dept_name,
   },
   {
-    label: $t("menu.superPanel.dept.page.orderNum"),
+    label: $t("superPanel.dept.page.orderNum"),
     prop: "order_num",
     width: 100,
   },
-  { label: $t("menu.superPanel.dept.page.leader"), prop: "leader", width: 120 },
-  { label: $t("menu.superPanel.dept.page.phone"), prop: "phone", width: 150 },
-  { label: $t("menu.superPanel.dept.page.email"), prop: "email", width: 200 },
+  { label: $t("superPanel.dept.page.leader"), prop: "leader", width: 120 },
+  { label: $t("superPanel.dept.page.phone"), prop: "phone", width: 150 },
+  { label: $t("superPanel.dept.page.email"), prop: "email", width: 200 },
   {
     label: $t("common.status"),
     prop: "status",
@@ -338,7 +332,7 @@ async function getList() {
   try {
     const res = await requestGetDeptTreeApi();
     tableData.value = res.data || [];
-    deptTree.value = [{ id: 0, dept_name: $t("menu.superPanel.dept.page.rootDept"), children: res || [] }];
+    deptTree.value = [{ id: 0, dept_name: $t("superPanel.dept.page.rootDept"), children: res || [] }];
   } finally {
     loading.value = false;
   }
@@ -347,7 +341,7 @@ async function getList() {
 function handleAdd() {
   Object.assign(dialog, {
     visible: true,
-    title: $t("menu.superPanel.dept.page.addDept"),
+    title: $t("superPanel.dept.page.addDept"),
     isEdit: false,
   });
   Object.assign(form, {
@@ -365,7 +359,7 @@ function handleAdd() {
 function handleAddChild(row) {
   Object.assign(dialog, {
     visible: true,
-    title: $t("menu.superPanel.dept.page.addChild"),
+    title: $t("superPanel.dept.page.addChild"),
     isEdit: false,
   });
   Object.assign(form, {
@@ -383,7 +377,7 @@ function handleAddChild(row) {
 function handleEdit(row) {
   Object.assign(dialog, {
     visible: true,
-    title: $t("menu.superPanel.dept.page.editDept"),
+    title: $t("superPanel.dept.page.editDept"),
     isEdit: true,
   });
   Object.assign(form, { ...row });
@@ -410,7 +404,7 @@ function submitForm() {
 
 function handleDelete(row) {
   MessageBox.confirm(
-    $t("menu.superPanel.dept.page.deleteConfirm"),
+    $t("superPanel.dept.page.deleteConfirm"),
     $t("common.tip"),
     {
       confirmButtonText: $t("common.confirm"),

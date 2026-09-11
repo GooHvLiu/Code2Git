@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <!--
     图片上传组件
     支持单图/多图、预览、删除、上传进度
@@ -69,8 +69,8 @@
 <script setup>
 /* eslint-disable vue/multi-word-component-names */
 import { ref, computed } from 'vue'
-import { validateImage, validateFileSize } from '@/utils/upload'
-import { showError, showSuccess } from '@/utils/feedback'
+import { validateImage, validateFileSize } from '@/utils/business/upload'
+import { showError, showSuccess } from '@/utils/ui/feedback'
 
 const props = defineProps({
   /** 绑定值（单图传字符串，多图传数组） */

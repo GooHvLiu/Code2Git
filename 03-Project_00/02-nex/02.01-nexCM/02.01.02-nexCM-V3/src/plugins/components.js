@@ -11,7 +11,6 @@
  * - SearchForm      搜索表单
  * - TableToolbar    表格工具栏
  * - UploadImage     图片上传
- * - I18nInput       多语言输入（中英文双输入框）
  *
  * 用法：
  * <pagination :total="total" @pagination="handlePagination" />
@@ -24,7 +23,6 @@ import DictTag from '@/components/DictTag/index.vue'
 import SearchForm from '@/components/SearchForm/index.vue'
 import TableToolbar from '@/components/TableToolbar/index.vue'
 import UploadImage from '@/components/UploadImage/index.vue'
-import I18nInput from '@/components/I18nInput/index.vue'
 
 /**
  * 需要全局注册的组件列表
@@ -36,8 +34,7 @@ const components = [
   DictTag,
   SearchForm,
   TableToolbar,
-  UploadImage,
-  I18nInput
+  UploadImage
 ]
 
 export default {

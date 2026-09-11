@@ -1,4 +1,4 @@
-# 审计追踪模块（GMP 21CFR Part 11 合规）
+﻿# 审计追踪模块（GMP 21CFR Part 11 合规）
 
 ## 模块简介
 
@@ -137,7 +137,7 @@ const operator = auditLogger.extractOperator(req)
 | user_agent | varchar(500) | 浏览器UA |
 | prev_hash | varchar(64) | 前一条记录哈希值 |
 | current_hash | varchar(64) | 当前记录哈希值 |
-| created_at | datetime | 操作时间 |
+| create_time | datetime | 操作时间 |
 
 **数据库触发器（强制只增不改不删）：**
 - `trg_audit_log_no_update`：禁止 UPDATE

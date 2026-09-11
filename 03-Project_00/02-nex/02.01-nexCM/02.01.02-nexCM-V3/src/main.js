@@ -1,16 +1,16 @@
-import Vue from 'vue'
+﻿import Vue from 'vue'
 import 'reset-css'
 // 全局样式（变量、mixin、工具类、Element UI 覆盖）
 import '@/assets/styles/index.less'
 import App from './App.vue'
 
 // 初始化主题（从 localStorage 或 settings 读取）
-import { initTheme } from '@/utils/theme'
+import { initTheme } from '@/utils/ui/theme'
 initTheme()
 
 // Element UI 注册
 import '@/plugins/element.js'
-// 通用业务组件全局注册（Pagination/SvgIcon/DictTag/SearchForm/TableToolbar/UploadImage/I18nInput）
+// 通用业务组件全局注册（Pagination/SvgIcon/DictTag/SearchForm/TableToolbar/UploadImage）
 import components from '@/plugins/components.js'
 Vue.use(components)
 // SVG 图标自动注册
@@ -22,10 +22,10 @@ Vue.use(filters)
 import directives from '@/directives'
 Vue.use(directives)
 // 权限判断工具（挂载 $hasRole / $hasPermission / $checkPermission）
-import permissionUtil from '@/utils/permission'
+import permissionUtil from '@/utils/auth/permission'
 Vue.use(permissionUtil)
 // 全局用户反馈工具（消息提示 + 确认弹窗，挂载 $msg / $confirm）
-import feedbackUtil from '@/utils/feedback'
+import feedbackUtil from '@/utils/ui/feedback'
 Vue.use(feedbackUtil)
 
 // Vuex Store
@@ -37,8 +37,8 @@ import '@/router/permission.js'
 // 国际化
 import i18n from '@/i18n'
 // WebSocket 单点登录被踢下线监听
-import ws from '@/utils/websocket'
-import { showWarning } from '@/utils/feedback'
+import ws from '@/utils/request/websocket'
+import { showWarning } from '@/utils/ui/feedback'
 import { ROUTE_PATHS } from '@/router/constant/pathConstants'
 
 /**
@@ -51,7 +51,11 @@ function initKickOutListener() {
     if (window.__kickedOutHandled) return
     window.__kickedOutHandled = true
 
-    const message = data?.message || '您已在其他设备登录，当前设备已下线'
+    // 后端只传 reason，文案由前端按当前语言 i18n 翻译（不使用后端中文、不兜底）
+    const reason = data?.data?.reason
+    const message = reason === 'admin_kick'
+      ? i18n.t('notification.device.kicked.title')
+      : i18n.t('common.error.TOKEN_KICKED_OUT')
     showWarning(message)
 
     // 清除登录状态并跳转登录页
@@ -79,6 +83,10 @@ Vue.config.productionTip = false
  * 捕获组件渲染、生命周期、事件回调中的错误，避免白屏无提示
  */
 Vue.config.errorHandler = function (err, vm, info) {
+  // 被取消的请求不显示错误提示（用户取消操作或重复请求自动取消）
+  if (err && (err.__CANCEL__ || err.code === 'ERR_CANCELED' || err.message === '重复请求，自动取消上一次' || err.message === '路由切换，取消未完成请求')) {
+    return
+  }
   // eslint-disable-next-line no-console
   console.error('[Global Error]', info, err)
   // 收集到 errorLog 模块

@@ -84,7 +84,7 @@ class WsManager {
         // 客户端授权：更新设备最后活跃时间（如果 deviceId 存在）
         if (ws.userId && ws.deviceId) {
           try {
-            const userDeviceService = require('../modules/user/userDevice.service')
+            const userDeviceService = require('../modules/user/user-device.service')
             await userDeviceService.updateLastActiveTime(ws.userId, ws.deviceId)
           } catch (err) {
             // 静默失败，不影响心跳响应
@@ -116,7 +116,7 @@ class WsManager {
       // 客户端授权：更新设备状态为在线（如果 deviceId 存在）
       if (data.deviceId) {
         try {
-          const userDeviceService = require('../modules/user/userDevice.service')
+          const userDeviceService = require('../modules/user/user-device.service')
           await userDeviceService.upsertDevice({
             userId: data.userId,
             deviceId: data.deviceId,
@@ -177,7 +177,7 @@ class WsManager {
       // 客户端授权：更新设备状态为离线（如果 deviceId 存在）
       if (ws.deviceId) {
         try {
-          const userDeviceService = require('../modules/user/userDevice.service')
+          const userDeviceService = require('../modules/user/user-device.service')
           await userDeviceService.setDeviceOffline(ws.userId, ws.deviceId)
           console.log(`[WS-断开] 用户 ${ws.userId} 设备 ${ws.deviceId} 状态已更新为离线`)
         } catch (err) {

@@ -1,12 +1,12 @@
-/**
+﻿/**
  * 日期格式化过滤器 Vue2
- * 内部调用 @/utils/date 的 formatDate 函数，统一日期处理逻辑
+ * 内部调用 @/utils/data/date 的 formatDate 函数，统一日期处理逻辑
  * @param {String|Number|Date} originVal 原始日期：时间戳/日期字符串/Date对象
  * @param {String} fmt 输出格式 YYYY-MM-DD HH:mm:ss | YYYY-MM-DD | YYYY-MM-DD HH:mm
  * @param {String} emptyText 空数据占位符
  * @returns {String} 格式化后日期
  */
-import { formatDate, getGlobalDateFormat } from '@/utils/date'
+import { formatDate, getGlobalDateFormat } from '@/utils/data/date'
 
 export function formatDateFilter(originVal, fmt, emptyText = '--') {
   // 空值直接返回占位符

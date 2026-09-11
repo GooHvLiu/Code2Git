@@ -3,13 +3,13 @@
     <!-- Tab切换 -->
     <el-tabs v-model="activeTab" class="part-life-tabs">
       <!-- 寿命详情Tab -->
-      <el-tab-pane :label="$t('menu.device.part.tab.life')" name="life">
+      <el-tab-pane :label="$t('device.part.tabLife')" name="life">
         <!-- 顶部操作栏 -->
         <div class="page-toolbar">
           <div class="toolbar-left">
             <el-input
               v-model="searchKeyword"
-              :placeholder="$t('menu.device.part.page.searchPlaceholder')"
+              :placeholder="$t('device.part.pageSearchPlaceholder')"
               clearable
               style="width: 280px"
               @clear="loadPartList"
@@ -29,13 +29,13 @@
               type="primary"
               icon="el-icon-plus"
               @click="handleAdd"
-              >{{ $t("menu.device.part.add") }}</el-button
+              >{{ $t("device.part.add") }}</el-button
             >
             <el-button
               icon="el-icon-refresh"
               v-permission="'device:part:refresh'"
               @click="loadPartList"
-              >{{ $t("menu.device.part.refresh") }}</el-button
+              >{{ $t("device.part.refresh") }}</el-button
             >
           </div>
         </div>
@@ -65,34 +65,34 @@
                 <div class="life-info">
                   <div class="life-item">
                     <span class="life-label">{{
-                      $t("menu.device.part.page.form.usedLife")
+                      $t("device.part.formUsedLife")
                     }}</span>
                     <span class="life-value"
                       >{{ part.used_life || part.used
                       }}<span class="life-unit">{{
-                        $t("menu.device.part.page.unit.times")
+                        $t("device.part.unitTimes")
                       }}</span></span
                     >
                   </div>
                   <div class="life-item">
                     <span class="life-label">{{
-                      $t("menu.device.part.page.form.ratedLife")
+                      $t("device.part.formRatedLife")
                     }}</span>
                     <span class="life-value"
                       >{{ part.rated_life || part.total
                       }}<span class="life-unit">{{
-                        $t("menu.device.part.page.unit.times")
+                        $t("device.part.unitTimes")
                       }}</span></span
                     >
                   </div>
                   <div class="life-item">
                     <span class="life-label">{{
-                      $t("menu.device.part.page.message.remaining")
+                      $t("device.part.messageRemaining")
                     }}</span>
                     <span class="life-value" :class="getRemainingClass(part)"
                       >{{ getRemaining(part)
                       }}<span class="life-unit">{{
-                        $t("menu.device.part.page.unit.times")
+                        $t("device.part.unitTimes")
                       }}</span></span
                     >
                   </div>
@@ -111,7 +111,7 @@
                 </div>
                 <div class="card-footer">
                   <span class="install-date"
-                    >{{ $t("menu.device.part.page.form.installDate") }}：{{
+                    >{{ $t("device.part.formInstallDate") }}：{{
                       part.install_date || part.installDate
                         ? formatDate(
                             part.install_date || part.installDate,
@@ -126,14 +126,14 @@
                       type="text"
                       size="small"
                       @click="handleEdit(part)"
-                      >{{ $t("menu.device.part.edit") }}</el-button
+                      >{{ $t("device.part.edit") }}</el-button
                     >
                     <el-button
                       v-permission="'device:part:operate'"
                       type="text"
                       size="small"
                       @click="handleReplace(part)"
-                      >{{ $t("menu.device.part.operate") }}</el-button
+                      >{{ $t("device.part.operate") }}</el-button
                     >
                     <el-button
                       v-permission="'device:part:delete'"
@@ -141,7 +141,7 @@
                       size="small"
                       class="delete-btn"
                       @click="handleDelete(part)"
-                      >{{ $t("menu.device.part.delete") }}</el-button
+                      >{{ $t("device.part.delete") }}</el-button
                     >
                   </div>
                 </div>
@@ -153,7 +153,7 @@
         <!-- 空数据提示 -->
         <div v-if="filteredParts.length === 0 && !loading" class="empty-tip">
           <i class="el-icon-box"></i>
-          <p>{{ $t("menu.device.part.page.message.noData") }}</p>
+          <p>{{ $t("device.part.messageNoData") }}</p>
         </div>
 
         <!-- 详细信息 + 更换记录 -->
@@ -164,7 +164,7 @@
               <div class="panel-header">
                 <span class="panel-title"
                   ><i class="el-icon-s-tools"></i>
-                  {{ $t("menu.device.part.page.title") }}</span
+                  {{ $t("device.part.pageTitle") }}</span
                 >
               </div>
               <div class="panel-body">
@@ -174,16 +174,10 @@
                   stripe
                   v-loading="loading"
                   :element-loading-text="$t('common.loading')"
-                  :header-cell-style="{
-                    background: '#f5f7fa',
-                    color: '#606266',
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                  }"
                   style="width: 100%"
                 >
                   <el-table-column
-                    :label="$t('menu.device.part.page.form.partName')"
+                    :label="$t('device.part.formPartName')"
                     width="120"
                     align="center"
                   >
@@ -196,7 +190,7 @@
                     </template>
                   </el-table-column>
                   <el-table-column
-                    :label="$t('menu.device.part.page.form.partCode')"
+                    :label="$t('device.part.formPartCode')"
                     width="140"
                     align="center"
                   >
@@ -205,7 +199,7 @@
                     </template>
                   </el-table-column>
                   <el-table-column
-                    :label="$t('menu.device.part.page.form.specModel')"
+                    :label="$t('device.part.formSpecModel')"
                     width="120"
                     align="center"
                   >
@@ -214,7 +208,7 @@
                     </template>
                   </el-table-column>
                   <el-table-column
-                    :label="$t('menu.device.part.page.table.lifeProgress')"
+                    :label="$t('device.part.tableLifeProgress')"
                     min-width="180"
                   >
                     <template slot-scope="scope">
@@ -232,25 +226,25 @@
                           >{{ scope.row.used_life || scope.row.used }}/{{
                             scope.row.rated_life || scope.row.total
                           }}
-                          {{ $t("menu.device.part.page.unit.times") }}</span
+                          {{ $t("device.part.unitTimes") }}</span
                         >
                       </div>
                     </template>
                   </el-table-column>
                   <el-table-column
-                    :label="$t('menu.device.part.page.table.remainingLife')"
+                    :label="$t('device.part.tableRemainingLife')"
                     width="110"
                     align="center"
                   >
                     <template slot-scope="scope">
                       <span :class="getRemainingClass(scope.row)"
                         >{{ getRemaining(scope.row) }}
-                        {{ $t("menu.device.part.page.unit.times") }}</span
+                        {{ $t("device.part.unitTimes") }}</span
                       >
                     </template>
                   </el-table-column>
                   <el-table-column
-                    :label="$t('menu.device.part.page.table.status')"
+                    :label="$t('device.part.tableStatus')"
                     width="80"
                     align="center"
                   >
@@ -261,7 +255,7 @@
                     </template>
                   </el-table-column>
                   <el-table-column
-                    :label="$t('menu.device.part.page.form.installDate')"
+                    :label="$t('device.part.formInstallDate')"
                     width="110"
                     align="center"
                   >
@@ -277,7 +271,7 @@
                     </template>
                   </el-table-column>
                   <el-table-column
-                    :label="$t('menu.device.part.page.table.operation')"
+                    :label="$t('device.part.tableOperation')"
                     width="150"
                     align="center"
                     fixed="right"
@@ -288,14 +282,14 @@
                         type="text"
                         size="small"
                         @click="handleEdit(scope.row)"
-                        >{{ $t("menu.device.part.edit") }}</el-button
+                        >{{ $t("device.part.edit") }}</el-button
                       >
                       <el-button
                         v-permission="'device:part:operate'"
                         type="text"
                         size="small"
                         @click="handleReplace(scope.row)"
-                        >{{ $t("menu.device.part.operate") }}</el-button
+                        >{{ $t("device.part.operate") }}</el-button
                       >
                       <el-button
                         v-permission="'device:part:delete'"
@@ -303,7 +297,7 @@
                         size="small"
                         class="delete-btn"
                         @click="handleDelete(scope.row)"
-                        >{{ $t("menu.device.part.delete") }}</el-button
+                        >{{ $t("device.part.delete") }}</el-button
                       >
                     </template>
                   </el-table-column>
@@ -319,7 +313,7 @@
                 <span class="panel-title"
                   ><i class="el-icon-document"></i>
                   {{
-                    $t("menu.device.part.page.message.recentReplaceRecords")
+                    $t("device.part.messageRecentReplaceRecords")
                   }}</span
                 >
               </div>
@@ -348,20 +342,20 @@
                           >{{
                             record.status === "success"
                               ? $t(
-                                  "menu.device.part.page.message.statusSuccess"
+                                  "device.part.messageStatusSuccess"
                                 )
-                              : $t("menu.device.part.page.message.statusFailed")
+                              : $t("device.part.messageStatusFailed")
                           }}</el-tag
                         >
                       </div>
                       <div class="tl-detail">
                         <span
-                          >{{ $t("menu.device.part.page.message.oldCode") }}：{{
+                          >{{ $t("device.part.messageOldCode") }}：{{
                             record.old_code || record.oldCode
                           }}</span
                         >
                         <span
-                          >{{ $t("menu.device.part.page.message.newCode") }}：{{
+                          >{{ $t("device.part.messageNewCode") }}：{{
                             record.new_code || record.newCode
                           }}</span
                         >
@@ -369,7 +363,7 @@
                       <div class="tl-footer">
                         <span class="tl-operator"
                           >{{
-                            $t("menu.device.part.page.message.operator")
+                            $t("device.part.messageOperator")
                           }}：{{
                             record.operator_name || record.operator
                           }}</span
@@ -393,8 +387,8 @@
         <el-dialog
           :title="
             isEdit
-              ? $t('menu.device.part.page.editBtn')
-              : $t('menu.device.part.page.addBtn')
+              ? $t('device.part.pageEditBtn')
+              : $t('device.part.pageAddBtn')
           "
           :visible.sync="partDialogVisible"
           width="560px"
@@ -410,9 +404,9 @@
           >
             <el-form-item prop="template_id">
               <span slot="label">
-                {{ $t("menu.device.part.page.form.template") }}
+                {{ $t("device.part.formTemplate") }}
                 <el-tooltip
-                  :content="$t('menu.device.part.page.tips.template')"
+                  :content="$t('device.part.tipTemplate')"
                   placement="top"
                 >
                   <i class="el-icon-question"></i>
@@ -421,7 +415,7 @@
               <el-select
                 v-model="partForm.template_id"
                 :placeholder="
-                  $t('menu.device.part.page.placeholder.selectTemplate')
+                  $t('device.part.placeholderSelectTemplate')
                 "
                 style="width: 100%"
                 :disabled="isEdit"
@@ -437,9 +431,9 @@
             </el-form-item>
             <el-form-item prop="part_name">
               <span slot="label">
-                {{ $t("menu.device.part.page.form.partName") }}
+                {{ $t("device.part.formPartName") }}
                 <el-tooltip
-                  :content="$t('menu.device.part.page.tips.partName')"
+                  :content="$t('device.part.tipPartName')"
                   placement="top"
                 >
                   <i class="el-icon-question"></i>
@@ -447,15 +441,15 @@
               </span>
               <el-input
                 v-model="partForm.part_name"
-                :placeholder="$t('menu.device.part.page.placeholder.partName')"
+                :placeholder="$t('device.part.placeholderPartName')"
                 disabled
               />
             </el-form-item>
             <el-form-item prop="part_code">
               <span slot="label">
-                {{ $t("menu.device.part.page.form.partCode") }}
+                {{ $t("device.part.formPartCode") }}
                 <el-tooltip
-                  :content="$t('menu.device.part.page.tips.partCode')"
+                  :content="$t('device.part.tipPartCode')"
                   placement="top"
                 >
                   <i class="el-icon-question"></i>
@@ -463,14 +457,14 @@
               </span>
               <el-input
                 v-model="partForm.part_code"
-                :placeholder="$t('menu.device.part.page.placeholder.partCode')"
+                :placeholder="$t('device.part.placeholderPartCode')"
               />
             </el-form-item>
             <el-form-item prop="spec_model">
               <span slot="label">
-                {{ $t("menu.device.part.page.form.specModel") }}
+                {{ $t("device.part.formSpecModel") }}
                 <el-tooltip
-                  :content="$t('menu.device.part.page.tips.specModel')"
+                  :content="$t('device.part.tipSpecModel')"
                   placement="top"
                 >
                   <i class="el-icon-question"></i>
@@ -478,15 +472,15 @@
               </span>
               <el-input
                 v-model="partForm.spec_model"
-                :placeholder="$t('menu.device.part.page.placeholder.specModel')"
+                :placeholder="$t('device.part.placeholderSpecModel')"
                 disabled
               />
             </el-form-item>
             <el-form-item prop="rated_life">
               <span slot="label">
-                {{ $t("menu.device.part.page.form.ratedLife") }}
+                {{ $t("device.part.formRatedLife") }}
                 <el-tooltip
-                  :content="$t('menu.device.part.page.tips.ratedLife')"
+                  :content="$t('device.part.tipRatedLife')"
                   placement="top"
                 >
                   <i class="el-icon-question"></i>
@@ -503,15 +497,15 @@
                   disabled
                 />
                 <span class="rated-life-unit">{{
-                  $t("menu.device.part.page.unit.times")
+                  $t("device.part.unitTimes")
                 }}</span>
               </div>
             </el-form-item>
             <el-form-item prop="install_date">
               <span slot="label">
-                {{ $t("menu.device.part.page.form.installDate") }}
+                {{ $t("device.part.formInstallDate") }}
                 <el-tooltip
-                  :content="$t('menu.device.part.page.tips.installDate')"
+                  :content="$t('device.part.tipInstallDate')"
                   placement="top"
                 >
                   <i class="el-icon-question"></i>
@@ -521,7 +515,7 @@
                 v-model="partForm.install_date"
                 type="date"
                 :placeholder="
-                  $t('menu.device.part.page.placeholder.installDate')
+                  $t('device.part.placeholderInstallDate')
                 "
                 value-format="yyyy-MM-dd"
                 style="width: 100%"
@@ -529,9 +523,9 @@
             </el-form-item>
             <el-form-item>
               <span slot="label">
-                {{ $t("menu.device.part.page.form.remark") }}
+                {{ $t("device.part.formRemark") }}
                 <el-tooltip
-                  :content="$t('menu.device.part.page.tips.remark')"
+                  :content="$t('device.part.tipRemark')"
                   placement="top"
                 >
                   <i class="el-icon-question"></i>
@@ -541,26 +535,26 @@
                 v-model="partForm.remark"
                 type="textarea"
                 :rows="2"
-                :placeholder="$t('menu.device.part.page.placeholder.remark')"
+                :placeholder="$t('device.part.placeholderRemark')"
               />
             </el-form-item>
           </el-form>
           <div slot="footer">
             <el-button @click="partDialogVisible = false">{{
-              $t("menu.device.part.page.message.cancelBtn")
+              $t("device.part.messageCancelBtn")
             }}</el-button>
             <el-button
               type="primary"
               :loading="partDialogLoading"
               @click="confirmPart"
-              >{{ $t("menu.device.part.page.message.confirmBtn") }}</el-button
+              >{{ $t("device.part.messageConfirmBtn") }}</el-button
             >
           </div>
         </el-dialog>
 
         <!-- 更换录入弹窗 -->
         <el-dialog
-          :title="$t('menu.device.part.page.message.replaceDialogTitle')"
+          :title="$t('device.part.messageReplaceDialogTitle')"
           :visible.sync="replaceDialogVisible"
           width="560px"
           :close-on-click-modal="false"
@@ -574,85 +568,85 @@
             class="part-dialog-form"
           >
             <el-form-item
-              :label="$t('menu.device.part.page.form.replacePart')"
+              :label="$t('device.part.formReplacePart')"
               prop="partCode"
             >
               <el-input :value="replaceForm.partName" disabled />
             </el-form-item>
             <el-form-item
-              :label="$t('menu.device.part.page.form.currentCode')"
+              :label="$t('device.part.formCurrentCode')"
               v-if="currentReplacePart"
             >
               <el-input :value="replaceForm.partCode" disabled />
             </el-form-item>
             <el-form-item
-              :label="$t('menu.device.part.page.form.newCode')"
+              :label="$t('device.part.formNewCode')"
               prop="newCode"
             >
               <el-input
                 v-model="replaceForm.newCode"
-                :placeholder="$t('menu.device.part.page.placeholder.newCode')"
+                :placeholder="$t('device.part.placeholderNewCode')"
                 clearable
               />
             </el-form-item>
             <el-form-item
-              :label="$t('menu.device.part.page.form.replaceReason')"
+              :label="$t('device.part.formReplaceReason')"
               prop="reason"
             >
               <el-select
                 v-model="replaceForm.reason"
                 :placeholder="
-                  $t('menu.device.part.page.placeholder.replaceReason')
+                  $t('device.part.placeholderReplaceReason')
                 "
                 style="width: 100%"
               >
                 <el-option
-                  :label="$t('menu.device.part.page.replaceReason.life')"
+                  :label="$t('device.part.replaceReasonLife')"
                   value="life"
                 />
                 <el-option
-                  :label="$t('menu.device.part.page.replaceReason.damage')"
+                  :label="$t('device.part.replaceReasonDamage')"
                   value="damage"
                 />
                 <el-option
-                  :label="$t('menu.device.part.page.replaceReason.maintenance')"
+                  :label="$t('device.part.replaceReasonMaintenance')"
                   value="maintenance"
                 />
                 <el-option
-                  :label="$t('menu.device.part.page.replaceReason.changeover')"
+                  :label="$t('device.part.replaceReasonChangeover')"
                   value="changeover"
                 />
                 <el-option
-                  :label="$t('menu.device.part.page.replaceReason.other')"
+                  :label="$t('device.part.replaceReasonOther')"
                   value="other"
                 />
               </el-select>
             </el-form-item>
-            <el-form-item :label="$t('menu.device.part.page.form.remark')">
+            <el-form-item :label="$t('device.part.formRemark')">
               <el-input
                 v-model="replaceForm.remark"
                 type="textarea"
                 :rows="2"
-                :placeholder="$t('menu.device.part.page.placeholder.remark')"
+                :placeholder="$t('device.part.placeholderRemark')"
               />
             </el-form-item>
           </el-form>
           <div slot="footer">
             <el-button @click="replaceDialogVisible = false">{{
-              $t("menu.device.part.page.message.cancelBtn")
+              $t("device.part.messageCancelBtn")
             }}</el-button>
             <el-button
               type="primary"
               :loading="replaceLoading"
               @click="confirmReplace"
-              >{{ $t("menu.device.part.page.form.confirmReplace") }}</el-button
+              >{{ $t("device.part.formConfirmReplace") }}</el-button
             >
           </div>
         </el-dialog>
       </el-tab-pane>
 
       <!-- 模板管理Tab -->
-      <el-tab-pane :label="$t('menu.device.part.tab.template')" name="template">
+      <el-tab-pane :label="$t('device.part.tabTemplate')" name="template">
         <PartTemplateManager ref="templateManagerRef" />
       </el-tab-pane>
     </el-tabs>
@@ -670,8 +664,8 @@ import {
   deletePart,
   replacePart,
   getReplaceRecords,
-} from "@/api/devicePart";
-import { formatDate, getGlobalDateFormat } from "@/utils/date";
+} from "@/api/device-part";
+import { formatDate, getGlobalDateFormat } from "@/utils/data/date";
 import PartTemplateManager from "./components/PartTemplateManager.vue";
 
 // 获取当前实例，用于访问 $t 和 $store
@@ -716,21 +710,21 @@ const partRules = {
   template_id: [
     {
       required: true,
-      message: $t("menu.device.part.page.placeholder.selectTemplate"),
+      message: $t("device.part.placeholderSelectTemplate"),
       trigger: "change",
     },
   ],
   part_code: [
     {
       required: true,
-      message: $t("menu.device.part.page.placeholder.partCode"),
+      message: $t("device.part.placeholderPartCode"),
       trigger: "blur",
     },
   ],
   rated_life: [
     {
       required: true,
-      message: $t("menu.device.part.page.placeholder.ratedLife"),
+      message: $t("device.part.placeholderRatedLife"),
       trigger: "blur",
     },
   ],
@@ -754,14 +748,14 @@ const replaceRules = {
   newCode: [
     {
       required: true,
-      message: $t("menu.device.part.page.placeholder.newCode"),
+      message: $t("device.part.placeholderNewCode"),
       trigger: "blur",
     },
   ],
   reason: [
     {
       required: true,
-      message: $t("menu.device.part.page.placeholder.replaceReason"),
+      message: $t("device.part.placeholderReplaceReason"),
       trigger: "change",
     },
   ],
@@ -791,8 +785,8 @@ function getTemplateName(template) {
   // 支持多种字段名：name_key（后端）、template_name、name
   const nameKey =
     template.name_key || template.template_name || template.name || "";
-  // 如果是国际化 key（如 menu.device.part.page.template.fill_needle），用 $t 解析
-  if (nameKey && nameKey.startsWith("menu.")) {
+  // 如果是国际化 key（如 device.part.pageTemplate.fill_needle），用 $t 解析
+  if (nameKey && nameKey.startsWith("layout.menu.")) {
     return $t(nameKey);
   }
   return nameKey;
@@ -842,12 +836,12 @@ function getPartStatusTag(part) {
 function getPartStatusText(part) {
   const status = getPartStatus(part);
   const map = {
-    normal: $t("menu.device.part.page.status.normal"),
-    notice: $t("menu.device.part.page.status.warning"),
-    warning: $t("menu.device.part.page.status.critical"),
-    expired: $t("menu.device.part.page.status.expired"),
+    normal: $t("device.part.statusNormal"),
+    notice: $t("device.part.statusWarning"),
+    warning: $t("device.part.statusCritical"),
+    expired: $t("device.part.statusExpired"),
   };
-  return map[status] || $t("menu.device.part.page.status.normal");
+  return map[status] || $t("device.part.statusNormal");
 }
 
 function getLifePercent(part) {
@@ -888,11 +882,11 @@ async function loadPartList() {
       }));
     } else {
       Message.error(
-        res.message || $t("menu.device.part.page.message.loadFailed")
+        $t("device.part.messageLoadFailed")
       );
     }
   } catch (err) {
-    Message.error($t("menu.device.part.page.message.loadFailed"));
+    Message.error($t("device.part.messageLoadFailed"));
   } finally {
     loading.value = false;
   }
@@ -999,26 +993,26 @@ async function confirmPart() {
     if (isEdit.value && currentEditPart.value) {
       const res = await updatePart(currentEditPart.value.id, data);
       if (res.code === 200) {
-        Message.success($t("menu.device.part.page.message.updateSuccess"));
+        Message.success($t("device.part.messageUpdateSuccess"));
         partDialogVisible.value = false;
         loadPartList();
       } else {
         Message.error(
-          res.msg || $t("menu.device.part.page.message.updateFailed")
+          $t("device.part.messageUpdateFailed")
         );
       }
     } else {
       const res = await addPart(data);
       if (res.code === 200) {
-        Message.success($t("menu.device.part.page.message.addSuccess"));
+        Message.success($t("device.part.messageAddSuccess"));
         partDialogVisible.value = false;
         loadPartList();
       } else {
-        Message.error(res.msg || $t("menu.device.part.page.message.addFailed"));
+        Message.error($t("device.part.messageAddFailed"));
       }
     }
   } catch (err) {
-    Message.error($t("menu.device.part.page.message.saveFailed"));
+    Message.error($t("device.part.messageSaveFailed"));
   } finally {
     partDialogLoading.value = false;
   }
@@ -1027,11 +1021,11 @@ async function confirmPart() {
 // ===== 删除部件 =====
 function handleDelete(part) {
   MessageBox.confirm(
-    $t("menu.device.part.page.message.deleteConfirm"),
-    $t("menu.device.part.page.message.deleteConfirmTitle"),
+    $t("device.part.messageDeleteConfirm"),
+    $t("device.part.messageDeleteConfirmTitle"),
     {
-      confirmButtonText: $t("menu.device.part.page.message.confirmBtn"),
-      cancelButtonText: $t("menu.device.part.page.message.cancelBtn"),
+      confirmButtonText: $t("device.part.messageConfirmBtn"),
+      cancelButtonText: $t("device.part.messageCancelBtn"),
       type: "warning",
     }
   )
@@ -1039,15 +1033,15 @@ function handleDelete(part) {
       try {
         const res = await deletePart(part.id);
         if (res.code === 200) {
-          Message.success($t("menu.device.part.page.message.deleteSuccess"));
+          Message.success($t("device.part.messageDeleteSuccess"));
           loadPartList();
         } else {
           Message.error(
-            res.msg || $t("menu.device.part.page.message.deleteFailed")
+            $t("device.part.messageDeleteFailed")
           );
         }
       } catch (err) {
-        Message.error($t("menu.device.part.page.message.deleteFailedCatch"));
+        Message.error($t("device.part.messageDeleteFailedCatch"));
       }
     })
     .catch(() => {});
@@ -1092,17 +1086,17 @@ async function confirmReplace() {
 
     const res = await replacePart(currentReplacePart.value.id, data);
     if (res.code === 200) {
-      Message.success($t("menu.device.part.page.message.replaceSuccess"));
+      Message.success($t("device.part.messageReplaceSuccess"));
       replaceDialogVisible.value = false;
       loadPartList();
       loadReplaceRecords();
     } else {
       Message.error(
-        res.msg || $t("menu.device.part.page.message.replaceFailed")
+        $t("device.part.messageReplaceFailed")
       );
     }
   } catch (err) {
-    Message.error($t("menu.device.part.page.message.replaceFailed"));
+    Message.error($t("device.part.messageReplaceFailed"));
   } finally {
     replaceLoading.value = false;
   }

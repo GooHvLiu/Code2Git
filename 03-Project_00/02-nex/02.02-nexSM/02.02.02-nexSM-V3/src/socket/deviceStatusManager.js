@@ -9,7 +9,7 @@
  * 4. 获取设备状态统计
  */
 
-const userDeviceService = require('../modules/user/userDevice.service')
+const userDeviceService = require('../modules/user/user-device.service')
 
 class DeviceStatusManager {
   constructor() {

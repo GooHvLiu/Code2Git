@@ -1,12 +1,12 @@
-/**
+﻿/**
  * ==========================================
  * App 模块 - 全局 UI 状态
  * ==========================================
  * 管理侧边栏折叠、设备类型等全局 UI 状态
  * 侧边栏状态持久化到 localStorage，刷新后保持
  */
-import { getLocalStorage, setLocalStorage } from '@/utils/storage'
-import { LOCALSTORAGE_KEYS } from '@/utils/storageKey'
+import { getLocalStorage, setLocalStorage } from '@/utils/data/storage'
+import { LOCALSTORAGE_KEYS } from '@/utils/data/storageKey'
 
 /** 从 localStorage 读取侧边栏状态，默认展开 */
 const getSidebarOpened = () => {

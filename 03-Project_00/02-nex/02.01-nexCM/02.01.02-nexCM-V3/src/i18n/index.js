@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ==========================================
  * Vue I18n 国际化配置
  * ==========================================
@@ -17,8 +17,9 @@
  */
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import zhCN from './langs/zh-CN'
-import enUS from './langs/en-US'
+// 模块化国际化配置：中文固定 modules 目录，其他语言为 modules-<langCode 全小写> 目录
+import zhCN from './modules/index.js'
+import enUS from './modules-en-us/index.js'
 
 // Element UI 语言包（用于分页、日期选择器等组件的国际化）
 import ElementLocale from 'element-ui/lib/locale'
@@ -32,8 +33,8 @@ Vue.use(VueI18n)
  * 初始值为内置语言（中文和英文），应用启动时会从后端加载并更新
  */
 export let dynamicLanguages = [
-  { label: '简体中文', value: 'zh-CN', autonym: '简体中文', short: '中', flag: 'flags/zh-CN', isBuiltIn: true },
-  { label: 'English', value: 'en-US', autonym: 'English', short: 'EN', flag: 'flags/en-US', isBuiltIn: true }
+  { label: '简体中文', value: 'zh-CN', autonym: '简体中文', short: '中', flag: 'zh-CN', isBuiltIn: true },
+  { label: 'English', value: 'en-US', autonym: 'English', short: 'EN', flag: 'en-US', isBuiltIn: true }
 ]
 
 /** 已加载的语言文件缓存 */
@@ -62,13 +63,54 @@ function getDefaultLang(systemDefaultLang = null) {
   return browserLang.startsWith('zh') ? 'zh-CN' : 'en-US'
 }
 
+/**
+ * 中英文一致性校验
+ * 检查中英文配置的 key 是否完全一致，开发环境下会在控制台输出警告
+ * 注意：不使用兜底方案，缺失字段直接显示 key，问题马上暴露
+ */
+function validateI18nConsistency(zh, en, path = '') {
+  if (process.env.NODE_ENV === 'production') return
+  
+  const zhKeys = Object.keys(zh || {})
+  const enKeys = Object.keys(en || {})
+  
+  // 检查中文有但英文没有的 key
+  zhKeys.forEach(key => {
+    const currentPath = path ? `${path}.${key}` : key
+    if (!(key in en)) {
+      // 开发期一致性诊断，函数顶部已有 production 守卫
+      // eslint-disable-next-line no-console
+      console.warn(`[I18n] 英文配置缺少 key: ${currentPath}`)
+    } else if (typeof zh[key] === 'object' && zh[key] !== null && !Array.isArray(zh[key])) {
+      validateI18nConsistency(zh[key], en[key], currentPath)
+    }
+  })
+  
+  // 检查英文有但中文没有的 key
+  enKeys.forEach(key => {
+    const currentPath = path ? `${path}.${key}` : key
+    if (!(key in zh)) {
+      // 开发期一致性诊断，函数顶部已有 production 守卫
+      // eslint-disable-next-line no-console
+      console.warn(`[I18n] 中文配置缺少 key: ${currentPath}`)
+    }
+  })
+}
+
+// 开发环境下执行中英文一致性校验
+validateI18nConsistency(zhCN, enUS)
+
 const i18n = new VueI18n({
   locale: getDefaultLang(),
-  fallbackLocale: 'zh-CN',
+  // 注意：不使用兜底方案，缺失字段直接显示 key，问题马上暴露
+  // fallbackLocale 不设置，让缺失的 key 直接显示原始 key
   messages: {
     'zh-CN': zhCN,
     'en-US': enUS
-  }
+  },
+  // 缺失 key 时不使用回退，直接显示 key
+  silentTranslationWarn: false,
+  silentFallbackWarn: true
 })
 
 // 初始化时设置 Element UI 语言
@@ -95,7 +137,7 @@ export async function loadLanguageList() {
     try {
       // 动态导入 API，避免循环依赖
       // 使用 /languages 接口（所有登录用户可访问），而不是 /files 接口（仅超级管理员可访问）
-      const { requestGetLanguagesApi } = await import('@/api/i18nManager')
+      const { requestGetLanguagesApi } = await import('@/api/i18n-manager')
       const res = await requestGetLanguagesApi()
       const fileList = res.data || []
       
@@ -104,28 +146,29 @@ export async function loadLanguageList() {
       dynamicLanguages.forEach(l => langMap.set(l.value, { ...l }))
       
       fileList.forEach(file => {
-        const langCode = file.langCode || file.fileName.replace(/\.js$/, '')
+        const langCode = file.langCode
+        if (!langCode) return
         const existing = langMap.get(langCode)
         if (existing) {
-          // 已存在的语言，更新元数据（保留内置语言的基本信息）
+          // 已存在的内置语言，用后端目录扫描结果补充元数据（展示一律用 autonym）
           langMap.set(langCode, {
             ...existing,
             label: file.name || existing.label,
-            autonym: file.autonym || file.langName || existing.autonym,
+            autonym: file.autonym || existing.autonym,
             flag: file.flag || existing.flag,
-            isBuiltIn: existing.isBuiltIn || false,
-            isMaster: file.isMaster || false
+            isBuiltIn: existing.isBuiltIn || !!file.isBuiltIn,
+            isMaster: !!file.isMaster
           })
         } else {
-          // 新语言，使用后端返回的完整元数据
+          // 新建的动态语言
           langMap.set(langCode, {
             label: file.name || langCode,
             value: langCode,
-            autonym: file.autonym || file.langName || langCode,
+            autonym: file.autonym || langCode,
             short: langCode.split('-')[0].toUpperCase(),
-            flag: file.flag || 'flags/global',
-            isBuiltIn: file.isBuiltIn || false,
-            isMaster: file.isMaster || false,
+            flag: file.flag || 'global',
+            isBuiltIn: !!file.isBuiltIn,
+            isMaster: !!file.isMaster,
             isDynamic: true
           })
         }
@@ -134,7 +177,6 @@ export async function loadLanguageList() {
       dynamicLanguages = Array.from(langMap.values())
       return dynamicLanguages
     } catch (err) {
-      console.error('[I18N] 加载语言列表失败:', err)
       return dynamicLanguages
     } finally {
       // 加载完成后清除缓存
@@ -157,11 +199,11 @@ export async function loadLanguageFile(lang) {
   
   try {
     // 动态导入 API，避免循环依赖
-    // 使用 /language/read 接口（所有登录用户可访问），而不是 /file/read 接口（仅超级管理员可访问）
-    const { requestReadLanguageFileApi } = await import('@/api/i18nManager')
-    const fileName = lang + '.js'
-    const res = await requestReadLanguageFileApi(fileName)
-    
+    // 使用 /language/read 接口（所有登录用户可访问），按 langCode 聚合整门语言目录
+    const { requestReadLanguageApi } = await import('@/api/i18n-manager')
+    const res = await requestReadLanguageApi(lang)
+
+    // request 响应拦截器已解包为 body {code,message,data}，后端 readLanguage 的语言嵌套对象在 res.data.data
     if (res && res.data && res.data.data) {
       // 注册语言包到 Vue I18n
       i18n.setLocaleMessage(lang, res.data.data)
@@ -170,7 +212,6 @@ export async function loadLanguageFile(lang) {
     }
     return false
   } catch (err) {
-    console.error('[I18N] 加载语言文件失败:', lang, err)
     return false
   }
 }
@@ -184,7 +225,6 @@ export async function setLanguage(lang) {
   // 检查语言是否在动态语言列表中
   const langExists = dynamicLanguages.some(l => l.value === lang)
   if (!langExists) {
-    console.error('[I18N] 语言不存在:', lang)
     return false
   }
   
@@ -192,7 +232,6 @@ export async function setLanguage(lang) {
   if (!loadedLanguages.has(lang)) {
     const loaded = await loadLanguageFile(lang)
     if (!loaded) {
-      console.error('[I18N] 语言文件加载失败，无法切换:', lang)
       return false
     }
   }
@@ -241,3 +280,4 @@ export function hasUserSetLanguage() {
 }
 
 export default i18n
+

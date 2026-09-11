@@ -17,11 +17,7 @@ class DevicePartController {
   async getTemplates(req, res, next) {
     try {
       const templates = await devicePartService.getAllTemplates();
-      res.json({
-        code: 200,
-        message: '获取成功',
-        data: templates
-      });
+      res.success(templates);
     } catch (err) {
       next(err);
     }
@@ -34,11 +30,7 @@ class DevicePartController {
   async getTemplatesForAdmin(req, res, next) {
     try {
       const templates = await devicePartService.getAllTemplatesForAdmin();
-      res.json({
-        code: 200,
-        message: '获取成功',
-        data: templates
-      });
+      res.success(templates);
     } catch (err) {
       next(err);
     }
@@ -51,11 +43,7 @@ class DevicePartController {
   async getBaseTemplates(req, res, next) {
     try {
       const templates = await devicePartService.getBaseTemplates();
-      res.json({
-        code: 200,
-        message: '获取成功',
-        data: templates
-      });
+      res.success(templates);
     } catch (err) {
       next(err);
     }
@@ -69,11 +57,7 @@ class DevicePartController {
     try {
       const { id } = req.params;
       const template = await devicePartService.getTemplateById(id);
-      res.json({
-        code: 200,
-        message: '获取成功',
-        data: template
-      });
+      res.success(template);
     } catch (err) {
       next(err);
     }
@@ -95,11 +79,7 @@ class DevicePartController {
         newValue: JSON.stringify(template)
       });
       
-      res.json({
-        code: 200,
-        message: '新增成功',
-        data: template
-      });
+      res.success(template);
     } catch (err) {
       next(err);
     }
@@ -124,11 +104,7 @@ class DevicePartController {
         newValue: JSON.stringify(template)
       });
       
-      res.json({
-        code: 200,
-        message: '更新成功',
-        data: template
-      });
+      res.success(template);
     } catch (err) {
       next(err);
     }
@@ -152,10 +128,7 @@ class DevicePartController {
         oldValue: JSON.stringify(template)
       });
       
-      res.json({
-        code: 200,
-        message: '删除成功'
-      });
+      res.success();
     } catch (err) {
       next(err);
     }
@@ -170,11 +143,7 @@ class DevicePartController {
   async getPartList(req, res, next) {
     try {
       const parts = await devicePartService.getAllParts();
-      res.json({
-        code: 200,
-        message: '获取成功',
-        data: parts
-      });
+      res.success(parts);
     } catch (err) {
       next(err);
     }
@@ -188,11 +157,7 @@ class DevicePartController {
     try {
       const { id } = req.params;
       const part = await devicePartService.getPartById(id);
-      res.json({
-        code: 200,
-        message: '获取成功',
-        data: part
-      });
+      res.success(part);
     } catch (err) {
       next(err);
     }
@@ -227,11 +192,7 @@ class DevicePartController {
         console.error('[部件寿命-新增] 记录审计日志失败:', err)
       });
 
-      res.json({
-        code: 200,
-        message: '添加成功',
-        data: part
-      });
+      res.success(part);
     } catch (err) {
       next(err);
     }
@@ -259,11 +220,7 @@ class DevicePartController {
         console.error('[部件寿命-编辑] 记录审计日志失败:', err)
       });
 
-      res.json({
-        code: 200,
-        message: '更新成功',
-        data: part
-      });
+      res.success(part);
     } catch (err) {
       next(err);
     }
@@ -289,10 +246,7 @@ class DevicePartController {
         console.error('[部件寿命-删除] 记录审计日志失败:', err)
       });
 
-      res.json({
-        code: 200,
-        message: '删除成功'
-      });
+      res.success();
     } catch (err) {
       next(err);
     }
@@ -331,11 +285,7 @@ class DevicePartController {
         console.error('[部件寿命-更换] 记录审计日志失败:', err)
       });
 
-      res.json({
-        code: 200,
-        message: '更换成功',
-        data: part
-      });
+      res.success(part);
     } catch (err) {
       next(err);
     }
@@ -353,11 +303,7 @@ class DevicePartController {
       const { plc_value } = req.body;
       const result = await devicePartService.updateUsedLife(id, plc_value);
       
-      res.json({
-        code: 200,
-        message: '更新成功',
-        data: result
-      });
+      res.success(result);
     } catch (err) {
       next(err);
     }
@@ -372,11 +318,7 @@ class DevicePartController {
       const { plc_data } = req.body;
       const results = await devicePartService.batchUpdateUsedLife(plc_data);
       
-      res.json({
-        code: 200,
-        message: '批量更新成功',
-        data: results
-      });
+      res.success(results);
     } catch (err) {
       next(err);
     }
@@ -398,11 +340,7 @@ class DevicePartController {
         partId: part_id ? Number(part_id) : null
       });
       
-      res.json({
-        code: 200,
-        message: '获取成功',
-        data: result
-      });
+      res.success(result);
     } catch (err) {
       next(err);
     }
@@ -419,11 +357,7 @@ class DevicePartController {
       const { threshold = 20 } = req.query;
       const parts = await devicePartService.getWarningParts(Number(threshold));
       
-      res.json({
-        code: 200,
-        message: '获取成功',
-        data: parts
-      });
+      res.success(parts);
     } catch (err) {
       next(err);
     }

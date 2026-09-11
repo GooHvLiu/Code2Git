@@ -1,11 +1,11 @@
-/**
+﻿/**
  * useTable - 列表页通用组合式函数
  * 封装列表页的通用逻辑：搜索、分页、加载状态、获取数据
  * 替代原 mixins/table.js
  */
 import { ref, onMounted, onUnmounted } from 'vue'
 import config from '@/config'
-import { getConfig } from '@/utils/config'
+import { getConfig } from '@/utils/config/config'
 
 export function useTable(listApi, queryParams = {}, options = {}) {
   const { immediate = true, beforeFetch = null } = options

@@ -74,6 +74,8 @@ import {
   Backtop,
   PageHeader,
   CascaderPanel,
+  Descriptions,
+  DescriptionsItem,
   Loading,
   MessageBox,
   Message,
@@ -155,6 +157,8 @@ Vue.use(Calendar)
 Vue.use(Backtop)
 Vue.use(PageHeader)
 Vue.use(CascaderPanel)
+Vue.use(Descriptions)
+Vue.use(DescriptionsItem)
 Vue.use(ElScrollbar)
 
 Vue.use(Loading.directive)

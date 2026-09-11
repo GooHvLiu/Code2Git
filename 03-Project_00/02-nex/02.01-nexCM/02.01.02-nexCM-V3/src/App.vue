@@ -23,7 +23,6 @@ onMounted(async () => {
       await loadLanguageFile(currentLang)
     } catch (err) {
       // 加载失败不阻塞应用启动，可能是用户未登录或网络问题
-      console.warn('[I18N] 应用启动时加载语言包失败:', currentLang, err)
     }
   }
 })

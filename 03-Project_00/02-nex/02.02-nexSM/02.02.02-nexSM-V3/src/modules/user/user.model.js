@@ -22,7 +22,6 @@ const ALLOW_FIELDS = [
   'phone',
   'email',
   'dept_id',
-  'avatar',
   'login_ip',
   'login_date',
   'remark',
@@ -30,9 +29,7 @@ const ALLOW_FIELDS = [
   'is_delete',
   'create_by',
   'update_time',
-  'update_by',
-  'is_first_login',
-  'first_login_at'
+  'update_by'
 ];
 
 class UserModel extends BaseModel {

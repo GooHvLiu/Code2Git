@@ -2,7 +2,7 @@
   <div class="menu-search">
     <el-input
       v-model="keyword"
-      :placeholder="$t('layout.searchMenu')"
+      :placeholder="$t('layout.navbar.searchMenu')"
       size="small"
       clearable
       prefix-icon="el-icon-search"

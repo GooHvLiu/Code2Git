@@ -32,9 +32,7 @@ async function requireSuperAdmin(req, res, next) {
     // 数据库标记为超级管理员的角色直接放行
     const isSuper = await checkIsSuperAdmin(req.user)
     if (!isSuper) {
-      throw new BusinessError(ERROR_CODE.PERMISSION_DENIED, null, {
-        message: '仅超级管理员可访问此功能'
-      })
+      throw new BusinessError(ERROR_CODE.PERMISSION_DENIED, null)
     }
 
     next()

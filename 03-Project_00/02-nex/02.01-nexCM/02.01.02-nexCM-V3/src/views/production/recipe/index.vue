@@ -3,8 +3,8 @@
     <!-- 顶部操作栏 -->
     <div class="page-header">
       <div class="header-left">
-        <h2 class="page-title">{{ $t("menu.production.recipe.default") }}</h2>
-        <p class="page-desc">{{ $t("menu.production.recipe.page.desc") }}</p>
+        <h2 class="page-title">{{ $t("production.recipe.default") }}</h2>
+        <p class="page-desc">{{ $t("production.recipe.page.desc") }}</p>
       </div>
       <div class="header-right">
         <el-dropdown
@@ -13,15 +13,15 @@
           trigger="click"
         >
           <el-button type="primary" icon="el-icon-download">
-            {{ $t("menu.production.recipe.download")
+            {{ $t("production.recipe.download")
             }}<i class="el-icon-arrow-down el-icon--right"></i>
           </el-button>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="excel">{{
-              $t("menu.production.recipe.page.exportExcel")
+              $t("production.recipe.page.exportExcel")
             }}</el-dropdown-item>
             <el-dropdown-item command="pdf">{{
-              $t("menu.production.recipe.page.exportPdf")
+              $t("production.recipe.page.exportPdf")
             }}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -49,7 +49,7 @@
               size="mini"
               type="success"
               effect="dark"
-              >{{ $t("menu.production.recipe.page.inUse") }}</el-tag
+              >{{ $t("production.recipe.page.inUse") }}</el-tag
             >
           </div>
           <div class="card-info">
@@ -102,8 +102,8 @@
             >
               {{
                 currentRecipe.isActive
-                  ? $t("menu.production.recipe.page.inUse")
-                  : $t("menu.production.recipe.page.notInUse")
+                  ? $t("production.recipe.page.inUse")
+                  : $t("production.recipe.page.notInUse")
               }}
             </el-tag>
             <el-dropdown
@@ -112,15 +112,15 @@
               trigger="click"
             >
               <el-button size="small" icon="el-icon-download">
-                {{ $t("menu.production.recipe.download")
+                {{ $t("production.recipe.download")
                 }}<i class="el-icon-arrow-down el-icon--right"></i>
               </el-button>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item command="excel">{{
-                  $t("menu.production.recipe.page.exportExcel")
+                  $t("production.recipe.page.exportExcel")
                 }}</el-dropdown-item>
                 <el-dropdown-item command="pdf">{{
-                  $t("menu.production.recipe.page.exportPdf")
+                  $t("production.recipe.page.exportPdf")
                 }}</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -131,30 +131,30 @@
         <div class="detail-section">
           <div class="section-title">
             <i class="el-icon-info"></i
-            >{{ $t("menu.production.recipe.page.basicInfo") }}
+            >{{ $t("production.recipe.page.basicInfo") }}
           </div>
           <div class="info-grid">
             <div class="info-cell">
               <span class="label">{{
-                $t("menu.production.recipe.page.recipeCode")
+                $t("production.recipe.page.recipeCode")
               }}</span
               ><span class="value">{{ currentRecipe.code }}</span>
             </div>
             <div class="info-cell">
               <span class="label">{{
-                $t("menu.production.recipe.page.productType")
+                $t("production.recipe.page.productType")
               }}</span
               ><span class="value">{{ currentRecipe.productType }}</span>
             </div>
             <div class="info-cell">
               <span class="label">{{
-                $t("menu.production.recipe.page.fillVolume")
+                $t("production.recipe.page.fillVolume")
               }}</span
               ><span class="value">{{ currentRecipe.fillVolume }} ml</span>
             </div>
             <div class="info-cell">
               <span class="label">{{
-                $t("menu.production.recipe.page.lastUsed")
+                $t("production.recipe.page.lastUsed")
               }}</span
               ><span class="value">{{ currentRecipe.lastUsedTime }}</span>
             </div>
@@ -165,7 +165,7 @@
         <div class="detail-section">
           <div class="section-title">
             <i class="el-icon-position"></i
-            >{{ $t("menu.production.recipe.page.axisParams") }}
+            >{{ $t("production.recipe.page.axisParams") }}
           </div>
           <div class="param-card-grid">
             <div
@@ -186,7 +186,7 @@
         <div class="detail-section">
           <div class="section-title">
             <i class="el-icon-odometer"></i
-            >{{ $t("menu.production.recipe.page.speedParams") }}
+            >{{ $t("production.recipe.page.speedParams") }}
           </div>
           <div class="param-card-grid">
             <div
@@ -207,30 +207,30 @@
         <div class="detail-section">
           <div class="section-title">
             <i class="el-icon-timer"></i
-            >{{ $t("menu.production.recipe.page.delayParams") }}
+            >{{ $t("production.recipe.page.delayParams") }}
           </div>
           <div class="info-grid">
             <div class="info-cell">
               <span class="label">{{
-                $t("menu.production.recipe.page.fillDelay")
+                $t("production.recipe.page.fillDelay")
               }}</span
               ><span class="value">{{ currentRecipe.fillDelay }} ms</span>
             </div>
             <div class="info-cell">
               <span class="label">{{
-                $t("menu.production.recipe.page.vacuumDelay")
+                $t("production.recipe.page.vacuumDelay")
               }}</span
               ><span class="value">{{ currentRecipe.vacuumDelay }} ms</span>
             </div>
             <div class="info-cell">
               <span class="label">{{
-                $t("menu.production.recipe.page.fillSpeed")
+                $t("production.recipe.page.fillSpeed")
               }}</span
               ><span class="value">{{ currentRecipe.fillSpeed }} 瓶/h</span>
             </div>
             <div class="info-cell">
               <span class="label">{{
-                $t("menu.production.recipe.page.suckBackSpeed")
+                $t("production.recipe.page.suckBackSpeed")
               }}</span
               ><span class="value">{{ currentRecipe.suckBackSpeed }} 瓶/h</span>
             </div>
@@ -241,7 +241,7 @@
         <div class="detail-section analysis-section">
           <div class="section-title">
             <i class="el-icon-data-analysis"></i
-            >{{ $t("menu.production.recipe.page.analysis") }}
+            >{{ $t("production.recipe.page.analysis") }}
           </div>
           <div class="analysis-grid">
             <div class="analysis-card">
@@ -249,7 +249,7 @@
               <div class="analysis-content">
                 <div class="analysis-value">{{ currentRecipe.usageCount }}</div>
                 <div class="analysis-label">
-                  {{ $t("menu.production.recipe.page.usageCount") }}
+                  {{ $t("production.recipe.page.usageCount") }}
                 </div>
               </div>
             </div>
@@ -263,7 +263,7 @@
               <div class="analysis-content">
                 <div class="analysis-value">{{ currentRecipe.faultRate }}%</div>
                 <div class="analysis-label">
-                  {{ $t("menu.production.recipe.page.faultRate") }}
+                  {{ $t("production.recipe.page.faultRate") }}
                 </div>
               </div>
             </div>
@@ -276,7 +276,7 @@
                   {{ currentRecipe.avgQualifiedRate }}%
                 </div>
                 <div class="analysis-label">
-                  {{ $t("menu.production.recipe.page.avgQualifiedRate") }}
+                  {{ $t("production.recipe.page.avgQualifiedRate") }}
                 </div>
               </div>
             </div>
@@ -289,7 +289,7 @@
                   {{ currentRecipe.lastUsedTime }}
                 </div>
                 <div class="analysis-label">
-                  {{ $t("menu.production.recipe.page.lastUsed") }}
+                  {{ $t("production.recipe.page.lastUsed") }}
                 </div>
               </div>
             </div>
@@ -303,8 +303,8 @@
 <script setup>
 import { ref, computed } from "vue";
 import store from "@/store";
-import { exportTable } from "@/utils/exportTable";
-import { getConfig } from "@/utils/config";
+import { exportTable } from "@/utils/business/exportTable";
+import { getConfig } from "@/utils/config/config";
 import { useI18n } from "@/composables/useI18n";
 
 const { t: $t } = useI18n();
@@ -326,52 +326,52 @@ const axisParams = computed(() => {
   if (!r) return [];
   return [
     {
-      label: $t("menu.production.recipe.page.fillAngle"),
+      label: $t("production.recipe.page.fillAngle"),
       value: r.fillAngle,
       unit: "度",
     },
     {
-      label: $t("menu.production.recipe.page.suckBackAngle"),
+      label: $t("production.recipe.page.suckBackAngle"),
       value: r.suckBackAngle,
       unit: "度",
     },
     {
-      label: $t("menu.production.recipe.page.fillAxisInit"),
+      label: $t("production.recipe.page.fillAxisInit"),
       value: r.fillAxisInit,
       unit: "脉冲",
     },
     {
-      label: $t("menu.production.recipe.page.fillAxisReach"),
+      label: $t("production.recipe.page.fillAxisReach"),
       value: r.fillAxisReach,
       unit: "脉冲",
     },
     {
-      label: $t("menu.production.recipe.page.fixAxisInit"),
+      label: $t("production.recipe.page.fixAxisInit"),
       value: r.fixAxisInit,
       unit: "脉冲",
     },
     {
-      label: $t("menu.production.recipe.page.fixAxisReach"),
+      label: $t("production.recipe.page.fixAxisReach"),
       value: r.fixAxisReach,
       unit: "脉冲",
     },
     {
-      label: $t("menu.production.recipe.page.fixAxisPreLift"),
+      label: $t("production.recipe.page.fixAxisPreLift"),
       value: r.fixAxisPreLift,
       unit: "脉冲",
     },
     {
-      label: $t("menu.production.recipe.page.stopperAxisInit"),
+      label: $t("production.recipe.page.stopperAxisInit"),
       value: r.stopperAxisInit,
       unit: "脉冲",
     },
     {
-      label: $t("menu.production.recipe.page.stopperAxisPrePress"),
+      label: $t("production.recipe.page.stopperAxisPrePress"),
       value: r.stopperAxisPrePress,
       unit: "脉冲",
     },
     {
-      label: $t("menu.production.recipe.page.stopperAxisReach"),
+      label: $t("production.recipe.page.stopperAxisReach"),
       value: r.stopperAxisReach,
       unit: "脉冲",
     },
@@ -384,42 +384,42 @@ const speedParams = computed(() => {
   if (!r) return [];
   return [
     {
-      label: $t("menu.production.recipe.page.fillAxisInitSpeed"),
+      label: $t("production.recipe.page.fillAxisInitSpeed"),
       value: r.fillAxisInitSpeed,
       unit: "脉冲/s",
     },
     {
-      label: $t("menu.production.recipe.page.fillAxisReachSpeed"),
+      label: $t("production.recipe.page.fillAxisReachSpeed"),
       value: r.fillAxisReachSpeed,
       unit: "脉冲/s",
     },
     {
-      label: $t("menu.production.recipe.page.fixAxisInitSpeed"),
+      label: $t("production.recipe.page.fixAxisInitSpeed"),
       value: r.fixAxisInitSpeed,
       unit: "脉冲/s",
     },
     {
-      label: $t("menu.production.recipe.page.fixAxisReachSpeed"),
+      label: $t("production.recipe.page.fixAxisReachSpeed"),
       value: r.fixAxisReachSpeed,
       unit: "脉冲/s",
     },
     {
-      label: $t("menu.production.recipe.page.fixAxisPreLiftSpeed"),
+      label: $t("production.recipe.page.fixAxisPreLiftSpeed"),
       value: r.fixAxisPreLiftSpeed,
       unit: "脉冲/s",
     },
     {
-      label: $t("menu.production.recipe.page.stopperAxisInitSpeed"),
+      label: $t("production.recipe.page.stopperAxisInitSpeed"),
       value: r.stopperAxisInitSpeed,
       unit: "脉冲/s",
     },
     {
-      label: $t("menu.production.recipe.page.stopperAxisPrePressSpeed"),
+      label: $t("production.recipe.page.stopperAxisPrePressSpeed"),
       value: r.stopperAxisPrePressSpeed,
       unit: "脉冲/s",
     },
     {
-      label: $t("menu.production.recipe.page.stopperAxisReachSpeed"),
+      label: $t("production.recipe.page.stopperAxisReachSpeed"),
       value: r.stopperAxisReachSpeed,
       unit: "脉冲/s",
     },
@@ -429,52 +429,52 @@ const speedParams = computed(() => {
 // 导出列配置
 const exportColumns = computed(() => [
   {
-    label: $t("menu.production.recipe.page.recipeCode"),
+    label: $t("production.recipe.page.recipeCode"),
     prop: "code",
     width: 120,
   },
   {
-    label: $t("menu.production.recipe.page.recipeName"),
+    label: $t("production.recipe.page.recipeName"),
     prop: "name",
     width: 140,
   },
   {
-    label: $t("menu.production.recipe.page.productType"),
+    label: $t("production.recipe.page.productType"),
     prop: "productType",
     width: 100,
   },
   {
-    label: $t("menu.production.recipe.page.fillVolume"),
+    label: $t("production.recipe.page.fillVolume"),
     prop: "fillVolume",
     width: 80,
   },
   {
-    label: $t("menu.production.recipe.page.fillAngle"),
+    label: $t("production.recipe.page.fillAngle"),
     prop: "fillAngle",
     width: 80,
   },
   {
-    label: $t("menu.production.recipe.page.suckBackAngle"),
+    label: $t("production.recipe.page.suckBackAngle"),
     prop: "suckBackAngle",
     width: 80,
   },
   {
-    label: $t("menu.production.recipe.page.fillSpeed"),
+    label: $t("production.recipe.page.fillSpeed"),
     prop: "fillSpeed",
     width: 80,
   },
   {
-    label: $t("menu.production.recipe.page.usageCount"),
+    label: $t("production.recipe.page.usageCount"),
     prop: "usageCount",
     width: 80,
   },
   {
-    label: $t("menu.production.recipe.page.faultRate"),
+    label: $t("production.recipe.page.faultRate"),
     prop: "faultRate",
     width: 80,
   },
   {
-    label: $t("menu.production.recipe.page.avgQualifiedRate"),
+    label: $t("production.recipe.page.avgQualifiedRate"),
     prop: "avgQualifiedRate",
     width: 100,
   },
@@ -501,8 +501,8 @@ function handleDownloadSingle(format, recipe) {
   exportTable({
     data: [recipe],
     columns: exportColumns.value,
-    title: `${$t("menu.production.recipe.page.recipe")} - ${recipe.name}`,
-    filename: `${$t("menu.production.recipe.page.recipe")}_${recipe.name}`,
+    title: `${$t("production.recipe.page.recipe")} - ${recipe.name}`,
+    filename: `${$t("production.recipe.page.recipe")}_${recipe.name}`,
     format,
     exporter: exporter.value,
     watermark: pdfWatermark.value,
@@ -515,8 +515,8 @@ function handleDownloadAll(format) {
   exportTable({
     data: recipeList.value,
     columns: exportColumns.value,
-    title: $t("menu.production.recipe.page.recipeList"),
-    filename: $t("menu.production.recipe.page.recipeList"),
+    title: $t("production.recipe.page.recipeList"),
+    filename: $t("production.recipe.page.recipeList"),
     format,
     exporter: exporter.value,
     watermark: pdfWatermark.value,

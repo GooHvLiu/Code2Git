@@ -1,10 +1,10 @@
-/**
+﻿/**
  * ==========================================
  * PLC 设备接口
  * ==========================================
  * 后端路由前缀 /prod-api/v2/plc
  */
-import request from '@/utils/request'
+import request from '@/utils/request/request'
 
 /**
  * 获取PLC通讯状态

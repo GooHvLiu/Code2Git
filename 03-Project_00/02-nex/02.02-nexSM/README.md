@@ -123,6 +123,7 @@
 
 ##### nexCM-V3_09
 
-- <span style="color:orange;font-size:14px">_完善超级管理员的全部功能_；</span>
-- <span style="color:orange;font-size:14px">_完善文件命名和文件存放，文件夹命名规范_；</span>
-- <span style="color:orange;font-size:14px">_完善国际化配置命名规范和删除多余字段_；</span>
+- <span style="color:orange;font-size:14px">_✅️完善超级管理员的全部功能_；</span>
+- <span style="color:orange;font-size:14px">_✅️完善文件命名和文件存放，文件夹命名规范_；</span>
+- <span style="color:orange;font-size:14px">_✅️数据库结构完整优化，去掉不需要，冗余的字段列_；</span>
+- <span style="color:orange;font-size:14px">_✅️重构国际化配置_；</span>

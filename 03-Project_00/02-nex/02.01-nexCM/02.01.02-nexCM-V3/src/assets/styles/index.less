@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ==========================================
  * 全局样式入口文件
  * ==========================================
@@ -153,7 +153,7 @@ body {
 
 // 表格头部背景
 .el-table th.el-table__cell {
-  background-color: @bg-gray;
+  background-color: @bg-gray !important;
 }
 
 // 分页组件
@@ -547,4 +547,72 @@ body {
       }
     }
   }
+}
+
+// ==================== 表格表头全局样式（统一：背景色 + 文字居中 + 加粗） ====================
+.el-table th.el-table__cell {
+  .cell {
+    text-align: center !important;
+    font-weight: 600 !important;
+  }
+}
+
+// ==================== 全局表单标签样式（统一160px宽度+右对齐，搜索表单通过.search-form覆盖） ====================
+/* 全局所有表单：标签宽度160px，右对齐 */
+.el-form .el-form-item__label {
+  width: 160px !important;
+  min-width: 160px !important;
+  text-align: right !important;
+  padding-right: 12px !important;
+  box-sizing: border-box !important;
+  line-height: 40px !important;
+}
+
+.el-form .el-form-item__content {
+  margin-left: 160px !important;
+  line-height: 40px !important;
+}
+
+/* 带问号提示的 label：inline-flex 元素，靠父元素的 text-align: right 来右对齐 */
+.el-form .el-form-item__label .label-with-tip {
+  display: inline-flex !important;
+  justify-content: flex-end !important;
+  vertical-align: middle !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+/* 带问号提示的 label 中的图标 */
+.el-form .el-form-item__label .label-tip-icon {
+  color: #c0c4cc !important;
+  cursor: help !important;
+  font-size: 14px !important;
+  transition: color 0.2s !important;
+}
+
+.el-form .el-form-item__label .label-tip-icon:hover {
+  color: #409eff !important;
+}
+
+/* 搜索表单（页面顶部筛选区，添加 search-form class）：保持紧凑布局，覆盖全局宽度 */
+.search-form .el-form-item__label {
+  width: auto !important;
+  min-width: auto !important;
+  padding-right: 8px !important;
+}
+
+.search-form .el-form-item__content {
+  margin-left: 0 !important;
+}
+
+/* 登录/注册表单（auth-form class）：无label，恢复默认紧凑布局，覆盖全局宽度 */
+.el-form.auth-form .el-form-item__label {
+  width: 0 !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  display: none !important;
+}
+
+.el-form.auth-form .el-form-item__content {
+  margin-left: 0 !important;
 }

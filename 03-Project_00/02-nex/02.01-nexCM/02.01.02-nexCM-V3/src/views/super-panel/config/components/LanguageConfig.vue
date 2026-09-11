@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="language-config-container">
     <!-- 配置文件卡片列表 -->
     <div class="config-cards">
@@ -79,9 +79,9 @@
         <!-- 卡片内容：配置值 -->
         <div class="card-body">
           <div class="config-value">
-            <span class="lang-count-text">{{ $t("menu.superPanel.config.childrenMenu.language.currentSupportedLangs") }}：</span>
+            <span class="lang-count-text">{{ $t("superPanel.config.language.currentSupportedLangs") }}：</span>
             <span class="lang-count-number">{{ presetLanguages.length }}</span>
-            <span class="lang-count-unit">{{ $t("menu.superPanel.config.childrenMenu.language.totalLangsUnit") }}</span>
+            <span class="lang-count-unit">{{ $t("superPanel.config.language.totalLangsUnit") }}</span>
           </div>
           <!-- 语言标签预览 -->
           <div class="lang-preview">
@@ -91,7 +91,7 @@
               size="mini"
               class="lang-tag"
             >
-              <svg-icon :icon-class="lang.flag || 'flags/global'" class="lang-flag-icon" />
+              <svg-icon :icon-file-name="lang.flag || 'global'" class="lang-flag-icon" />
               <span>{{ lang.autonym }}</span>
             </el-tag>
             <el-tag
@@ -125,14 +125,14 @@
               icon="el-icon-edit"
               @click="openEditor(item)"
             >
-              {{ $t("menu.superPanel.projectConfig.actions.editFile") }}
+              {{ $t("superPanel.projectConfig.actions.editFile") }}
             </el-button>
             <el-button
               size="mini"
               icon="el-icon-view"
               @click="viewLanguages"
             >
-              {{ $t("menu.superPanel.config.childrenMenu.language.viewLanguages") }}
+              {{ $t("superPanel.config.language.viewLanguages") }}
             </el-button>
           </div>
         </div>
@@ -165,8 +165,8 @@
             <el-tag size="mini" :type="editorDirty ? 'warning' : 'success'">
               {{
                 editorDirty
-                  ? $t("menu.superPanel.projectConfig.editor.unsaved")
-                  : $t("menu.superPanel.projectConfig.editor.saved")
+                  ? $t("superPanel.projectConfig.editor.unsaved")
+                  : $t("superPanel.projectConfig.editor.saved")
               }}
             </el-tag>
           </div>
@@ -177,14 +177,14 @@
               @click="checkSyntax"
               :loading="checkingSyntax"
             >
-              {{ $t("menu.superPanel.projectConfig.editor.syntaxCheck") }}
+              {{ $t("superPanel.projectConfig.editor.syntaxCheck") }}
             </el-button>
             <el-button
               size="small"
               icon="el-icon-back"
               @click="showBackupPanel = !showBackupPanel"
             >
-              {{ $t("menu.superPanel.projectConfig.editor.versionHistory") }}
+              {{ $t("superPanel.projectConfig.editor.versionHistory") }}
             </el-button>
             <el-button
               size="small"
@@ -194,7 +194,7 @@
               :loading="saving"
               :disabled="!editorDirty"
             >
-              {{ $t("menu.superPanel.projectConfig.editor.save") }}
+              {{ $t("superPanel.projectConfig.editor.save") }}
             </el-button>
           </div>
         </div>
@@ -223,7 +223,7 @@
           <div class="backup-panel" v-if="showBackupPanel">
             <div class="panel-header">
               <span class="panel-title">{{
-                $t("menu.superPanel.projectConfig.backup.title")
+                $t("superPanel.projectConfig.backup.title")
               }}</span>
               <el-button
                 size="mini"
@@ -252,14 +252,14 @@
                     type="warning"
                     @click="restoreBackup(backup)"
                   >
-                    {{ $t("menu.superPanel.projectConfig.backup.restore") }}
+                    {{ $t("superPanel.projectConfig.backup.restore") }}
                   </el-button>
                   <el-button
                     size="mini"
                     type="danger"
                     @click="deleteBackup(backup)"
                   >
-                    {{ $t("menu.superPanel.projectConfig.backup.delete") }}
+                    {{ $t("superPanel.projectConfig.backup.delete") }}
                   </el-button>
                 </div>
               </div>
@@ -268,7 +268,7 @@
                 class="backup-empty"
               >
                 <i class="el-icon-document"></i>
-                <p>{{ $t("menu.superPanel.projectConfig.backup.empty") }}</p>
+                <p>{{ $t("superPanel.projectConfig.backup.empty") }}</p>
               </div>
             </div>
           </div>
@@ -277,15 +277,15 @@
         <!-- 提示信息 -->
         <div class="editor-tip">
           <el-alert
-            :title="$t('menu.superPanel.config.childrenMenu.language.tipTitle')"
+            :title="$t('superPanel.config.language.tipTitle')"
             type="warning"
             :closable="false"
             show-icon
           >
             <template #default>
-              <p>{{ $t("menu.superPanel.config.childrenMenu.language.tipContent") }}</p>
+              <p>{{ $t("superPanel.config.language.tipContent") }}</p>
               <p class="tip-extra">
-                {{ $t("menu.superPanel.config.childrenMenu.language.tipExtra") }}
+                {{ $t("superPanel.config.language.tipExtra") }}
               </p>
             </template>
           </el-alert>
@@ -295,7 +295,7 @@
 
     <!-- 语言列表预览对话框 -->
     <el-dialog
-      :title="$t('menu.superPanel.config.childrenMenu.language.currentSupportedLangs')"
+      :title="$t('superPanel.config.language.currentSupportedLangs')"
       :visible.sync="languageDialogVisible"
       width="60%"
       top="10vh"
@@ -308,12 +308,12 @@
             size="small"
             class="lang-tag"
           >
-            <svg-icon :icon-class="lang.flag || 'flags/global'" class="lang-flag-icon" />
+            <svg-icon :icon-file-name="lang.flag || 'global'" class="lang-flag-icon" />
             <span class="lang-tag-text">{{ lang.autonym }} ({{ lang.code }})</span>
           </el-tag>
         </div>
         <div class="lang-count-info">
-          {{ $t("menu.superPanel.config.childrenMenu.language.totalLangs", { count: presetLanguages.length }) }}
+          {{ $t("superPanel.config.language.totalLangs", { count: presetLanguages.length }) }}
         </div>
       </div>
       <span slot="footer" class="dialog-footer">
@@ -327,8 +327,13 @@
 
 <script>
 import MonacoEditor from "@/components/MonacoEditor/index.vue";
-import { requestGetPresetLanguagesConfigApi, requestSavePresetLanguagesConfigApi, requestGetPresetLanguagesApi, requestGetI18nBackupListApi, requestRestoreI18nBackupApi, requestDeleteI18nBackupApi } from '@/api/i18nManager'
-import { requestCheckConfigSyntaxApi } from '@/api/projectConfig'
+import { requestGetPresetLanguagesConfigApi, requestSavePresetLanguagesConfigApi, requestGetPresetLanguagesApi } from '@/api/i18n-manager'
+import {
+  requestCheckConfigSyntaxApi,
+  requestGetConfigBackupListApi,
+  requestRestoreConfigBackupApi,
+  requestDeleteConfigBackupApi
+} from '@/api/project-config'
 
 // 编辑类型常量
 const EDIT_TYPE = {
@@ -348,14 +353,14 @@ const EFFECT_TYPE = {
 // 归属类型配置
 const OWNER_TYPE_CONFIG = {
   frontend: {
-    labelKey: 'menu.superPanel.projectConfig.ownerType.frontend',
-    descriptionKey: 'menu.superPanel.projectConfig.ownerType.frontendTip',
+    labelKey: 'superPanel.projectConfig.ownerType.frontend',
+    descriptionKey: 'superPanel.projectConfig.ownerType.frontendTip',
     icon: 'el-icon-monitor',
     type: 'primary'
   },
   backend: {
-    labelKey: 'menu.superPanel.projectConfig.ownerType.backend',
-    descriptionKey: 'menu.superPanel.projectConfig.ownerType.backendTip',
+    labelKey: 'superPanel.projectConfig.ownerType.backend',
+    descriptionKey: 'superPanel.projectConfig.ownerType.backendTip',
     icon: 'el-icon-cpu',
     type: 'success'
   }
@@ -388,8 +393,8 @@ export default {
           key: 'languagesConfig',
           label: '预设语言配置',
           meta: {
-            labelKey: 'menu.superPanel.config.childrenMenu.language.title',
-            descriptionKey: 'menu.superPanel.config.childrenMenu.language.desc',
+            labelKey: 'superPanel.config.language.title',
+            descriptionKey: 'superPanel.config.language.desc',
             editType: EDIT_TYPE.CONFIG_FILE,
             effectType: EFFECT_TYPE.RESTART,
             owner: 'backend',
@@ -410,10 +415,10 @@ export default {
           ? this.$t(this.currentEditItem.meta.labelKey)
           : this.currentEditItem.label;
         return `${label} - ${this.$t(
-          "menu.superPanel.projectConfig.editor.title"
+          "superPanel.projectConfig.editor.title"
         )}`;
       }
-      return this.$t("menu.superPanel.projectConfig.editor.title");
+      return this.$t("superPanel.projectConfig.editor.title");
     }
   },
   mounted() {
@@ -453,22 +458,22 @@ export default {
 
     getEditTypeLabelKey(editType) {
       const keyMap = {
-        [EDIT_TYPE.DATABASE]: "menu.superPanel.projectConfig.editType.database",
-        [EDIT_TYPE.CONFIG_FILE]: "menu.superPanel.projectConfig.editType.configFile",
-        [EDIT_TYPE.ENV_FILE]: "menu.superPanel.projectConfig.editType.envFile",
-        [EDIT_TYPE.CODE]: "menu.superPanel.projectConfig.editType.code",
+        [EDIT_TYPE.DATABASE]: "superPanel.projectConfig.editType.database",
+        [EDIT_TYPE.CONFIG_FILE]: "superPanel.projectConfig.editType.configFile",
+        [EDIT_TYPE.ENV_FILE]: "superPanel.projectConfig.editType.envFile",
+        [EDIT_TYPE.CODE]: "superPanel.projectConfig.editType.code",
       };
-      return keyMap[editType] || "menu.superPanel.projectConfig.editType.code";
+      return keyMap[editType] || "superPanel.projectConfig.editType.code";
     },
 
     getEditTypeTipKey(editType) {
       const keyMap = {
-        [EDIT_TYPE.DATABASE]: "menu.superPanel.projectConfig.editType.databaseTip",
-        [EDIT_TYPE.CONFIG_FILE]: "menu.superPanel.projectConfig.editType.configFileTip",
-        [EDIT_TYPE.ENV_FILE]: "menu.superPanel.projectConfig.editType.envFileTip",
-        [EDIT_TYPE.CODE]: "menu.superPanel.projectConfig.editType.codeTip",
+        [EDIT_TYPE.DATABASE]: "superPanel.projectConfig.editType.databaseTip",
+        [EDIT_TYPE.CONFIG_FILE]: "superPanel.projectConfig.editType.configFileTip",
+        [EDIT_TYPE.ENV_FILE]: "superPanel.projectConfig.editType.envFileTip",
+        [EDIT_TYPE.CODE]: "superPanel.projectConfig.editType.codeTip",
       };
-      return keyMap[editType] || "menu.superPanel.projectConfig.editType.codeTip";
+      return keyMap[editType] || "superPanel.projectConfig.editType.codeTip";
     },
 
     getEffectTypeTagType(effectType) {
@@ -482,20 +487,20 @@ export default {
 
     getEffectTypeLabelKey(effectType) {
       const keyMap = {
-        [EFFECT_TYPE.IMMEDIATE]: "menu.superPanel.projectConfig.effectType.immediate",
-        [EFFECT_TYPE.RESTART]: "menu.superPanel.projectConfig.effectType.restart",
-        [EFFECT_TYPE.REBUILD]: "menu.superPanel.projectConfig.effectType.rebuild",
+        [EFFECT_TYPE.IMMEDIATE]: "superPanel.projectConfig.effectType.immediate",
+        [EFFECT_TYPE.RESTART]: "superPanel.projectConfig.effectType.restart",
+        [EFFECT_TYPE.REBUILD]: "superPanel.projectConfig.effectType.rebuild",
       };
-      return keyMap[effectType] || "menu.superPanel.projectConfig.effectType.restart";
+      return keyMap[effectType] || "superPanel.projectConfig.effectType.restart";
     },
 
     getEffectTypeTipKey(effectType) {
       const keyMap = {
-        [EFFECT_TYPE.IMMEDIATE]: "menu.superPanel.projectConfig.effectType.immediateTip",
-        [EFFECT_TYPE.RESTART]: "menu.superPanel.projectConfig.effectType.restartTip",
-        [EFFECT_TYPE.REBUILD]: "menu.superPanel.projectConfig.effectType.rebuildTip",
+        [EFFECT_TYPE.IMMEDIATE]: "superPanel.projectConfig.effectType.immediateTip",
+        [EFFECT_TYPE.RESTART]: "superPanel.projectConfig.effectType.restartTip",
+        [EFFECT_TYPE.REBUILD]: "superPanel.projectConfig.effectType.rebuildTip",
       };
-      return keyMap[effectType] || "menu.superPanel.projectConfig.effectType.restartTip";
+      return keyMap[effectType] || "superPanel.projectConfig.effectType.restartTip";
     },
 
     // ==================== 归属类型 ====================
@@ -533,7 +538,7 @@ export default {
       } catch (err) {
         console.error('[LanguageConfig] 加载配置失败:', err);
         this.$message.error(
-          this.$t("menu.superPanel.config.childrenMenu.language.loadFailed")
+          this.$t("superPanel.config.language.loadFailed")
         );
       } finally {
         this.loading = false;
@@ -568,7 +573,7 @@ export default {
     async saveFile() {
       if (!this.editorContent.trim()) {
         this.$message.warning(
-          this.$t("menu.superPanel.config.childrenMenu.language.emptyWarning")
+          this.$t("superPanel.config.language.emptyWarning")
         );
         return;
       }
@@ -578,7 +583,7 @@ export default {
         await requestSavePresetLanguagesConfigApi(this.editorContent);
         this.originalContent = this.editorContent;
         this.$message.success(
-          this.$t("menu.superPanel.config.childrenMenu.language.saveSuccess")
+          this.$t("superPanel.config.language.saveSuccess")
         );
         // 重新加载预设语言列表
         this.loadPresetLanguages();
@@ -586,7 +591,7 @@ export default {
       } catch (err) {
         console.error('[LanguageConfig] 保存配置失败:', err);
         this.$message.error(
-          this.$t("menu.superPanel.config.childrenMenu.language.saveFailed")
+          this.$t("superPanel.config.language.saveFailed")
         );
       } finally {
         this.saving = false;
@@ -614,7 +619,7 @@ export default {
     async loadBackupList() {
       this.backupListLoading = true;
       try {
-        const res = await requestGetI18nBackupListApi('languages.config.js');
+        const res = await requestGetConfigBackupListApi(this.currentEditFile);
         this.backupList = res.data || [];
       } catch (err) {
         console.error('[LanguageConfig] 加载备份列表失败:', err);
@@ -641,7 +646,10 @@ export default {
       }
 
       try {
-        await requestRestoreI18nBackupApi(backup.name, 'languages.config.js');
+        await requestRestoreConfigBackupApi({
+          filePath: this.currentEditFile,
+          backupName: backup.name
+        });
         this.$message.success('备份恢复成功');
         // 重新加载配置内容
         const res = await requestGetPresetLanguagesConfigApi();
@@ -674,7 +682,10 @@ export default {
       }
 
       try {
-        await requestDeleteI18nBackupApi(backup.name);
+        await requestDeleteConfigBackupApi({
+          filePath: this.currentEditFile,
+          backupName: backup.name
+        });
         this.$message.success('备份删除成功');
         // 重新加载备份列表
         this.loadBackupList();
@@ -1035,3 +1046,5 @@ export default {
   gap: 10px;
 }
 </style>
+
+

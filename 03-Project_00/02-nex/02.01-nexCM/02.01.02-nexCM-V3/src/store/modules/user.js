@@ -1,14 +1,14 @@
-/**
+﻿/**
  * ==========================================
  * User 模块 - 用户信息与权限
  * ==========================================
  * 管理 Token、用户信息、角色权限
  */
 import { requestGetUserInfoApi, requestGetMyPermissionsApi } from '@/api'
-import { getToken, removeToken } from '@/utils/auth'
-import ws from '@/utils/websocket'
-import { clearLoginStorage, getLocalStorage, setLocalStorage } from '@/utils/storage'
-import { LOCALSTORAGE_KEYS } from '@/utils/storageKey'
+import { getToken, removeToken } from '@/utils/auth/auth'
+import ws from '@/utils/request/websocket'
+import { clearLoginStorage, getLocalStorage, setLocalStorage } from '@/utils/data/storage'
+import { LOCALSTORAGE_KEYS } from '@/utils/data/storageKey'
 import { resetRouter } from '@/router'
 
 const getDefaultUserInfo = () => ({

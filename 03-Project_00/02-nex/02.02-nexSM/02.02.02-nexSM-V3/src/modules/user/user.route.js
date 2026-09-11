@@ -4,7 +4,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('./user.controller');
-const userDeviceController = require('./userDevice.controller');
+const userDeviceController = require('./user-device.controller');
 const { requireAuth, optionalAuth, requireRole } = require('../../middleware/auth.middleware');
 const { USER_ROLE } = require('../../constants/statusCode');
 const validate = require('../../middleware/validate.middleware');
@@ -20,7 +20,7 @@ const {
 } = require('./user.schema');
 
 // token验证有效性接口，公开接口
-router.get('/tokenvalid', optionalAuth, (req, res) => {
+router.get('/token-valid', optionalAuth, (req, res) => {
   /**
    * req.user 存在 = token合法、未过期
    * req.user undefined = 无token / token篡改 / token过期

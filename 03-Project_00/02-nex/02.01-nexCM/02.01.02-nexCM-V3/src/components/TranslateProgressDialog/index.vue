@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="translate-progress-wrapper">
     <!-- 完整进度弹窗 -->
     <div
@@ -11,8 +11,8 @@
     <div class="dialog-header">
       <div class="header-title">
         <i class="el-icon-loading"></i>
-        <span v-if="translateManager.state.nodePath">{{ $t('menu.superPanel.projectConfig.i18n.nodeTranslate') }}</span>
-        <span v-else>{{ $t('menu.superPanel.projectConfig.i18n.translateProgress') }}</span>
+        <span v-if="translateManager.state.nodePath">{{ $t('superPanel.i18n.translate.node') }}</span>
+        <span v-else>{{ $t('superPanel.i18n.translate.progress') }}</span>
         <span class="target-lang">{{ translateManager.state.targetLangName }}</span>
         <span v-if="translateManager.state.nodePath" class="node-label" :title="translateManager.state.nodePath">
           [{{ translateManager.state.nodeLabel }}]
@@ -20,20 +20,20 @@
       </div>
       <div class="header-actions">
         <!-- 最小化按钮 -->
-        <button class="action-btn" :title="$t('menu.superPanel.projectConfig.i18n.minimize')" @click.stop="handleMinimize">
+        <button class="action-btn" :title="$t('superPanel.i18n.translate.minimize')" @click.stop="handleMinimize">
           <i class="el-icon-minus"></i>
         </button>
         <!-- 取消翻译按钮 -->
         <button
           class="action-btn cancel-btn"
           :class="{ disabled: !translateManager.state.isTranslating }"
-          :title="$t('menu.superPanel.projectConfig.i18n.cancelTranslate')"
+          :title="$t('superPanel.i18n.translate.cancel')"
           @click.stop="handleCancel"
         >
           <i class="el-icon-remove-outline"></i>
         </button>
         <!-- 关闭按钮 -->
-        <button class="action-btn close-btn" :title="$t('menu.superPanel.projectConfig.i18n.closeTranslate')" @click.stop="handleClose">
+        <button class="action-btn close-btn" :title="$t('superPanel.i18n.translate.close')" @click.stop="handleClose">
           <i class="el-icon-close"></i>
         </button>
       </div>
@@ -44,7 +44,7 @@
       <!-- 进度条 -->
       <div class="progress-section">
         <div class="progress-header">
-          <span class="progress-label">{{ $t('menu.superPanel.projectConfig.i18n.translateProgress') }}</span>
+          <span class="progress-label">{{ $t('superPanel.i18n.translate.progress') }}</span>
           <span class="progress-percent">{{ progressPercent }}%</span>
         </div>
         <el-progress
@@ -57,26 +57,26 @@
       <!-- 统计信息 -->
       <div class="stats-section">
         <div class="stat-item">
-          <span class="stat-label">{{ $t('menu.superPanel.projectConfig.i18n.totalCount') }}</span>
+          <span class="stat-label">{{ $t('superPanel.i18n.translate.totalCount') }}</span>
           <span class="stat-value">{{ translateManager.state.totalCount }}</span>
         </div>
         <div class="stat-item">
-          <span class="stat-label">{{ $t('menu.superPanel.projectConfig.i18n.currentCount') }}</span>
+          <span class="stat-label">{{ $t('superPanel.i18n.translate.currentCount') }}</span>
           <span class="stat-value">{{ translateManager.state.currentCount }}</span>
         </div>
         <div class="stat-item success">
-          <span class="stat-label">{{ $t('menu.superPanel.projectConfig.i18n.successCount') }}</span>
+          <span class="stat-label">{{ $t('superPanel.i18n.translate.successCount') }}</span>
           <span class="stat-value">{{ translateManager.state.successCount }}</span>
         </div>
         <div class="stat-item fail">
-          <span class="stat-label">{{ $t('menu.superPanel.projectConfig.i18n.failCount') }}</span>
+          <span class="stat-label">{{ $t('superPanel.i18n.translate.failCount') }}</span>
           <span class="stat-value">{{ translateManager.state.failCount }}</span>
         </div>
       </div>
 
       <!-- 当前翻译项 -->
       <div class="current-item" v-if="translateManager.state.currentKey">
-        <div class="current-label">{{ $t('menu.superPanel.projectConfig.i18n.currentTranslating') }}</div>
+        <div class="current-label">{{ $t('superPanel.i18n.translate.currentStatus') }}</div>
         <div class="current-key" :title="translateManager.state.currentKey">
           {{ translateManager.state.currentKey }}
         </div>
@@ -103,7 +103,7 @@
       <!-- 提示信息 -->
       <div class="tip-section" v-if="translateManager.state.isTranslating">
         <i class="el-icon-info"></i>
-        <span>{{ $t('menu.superPanel.projectConfig.i18n.translateTip') }}</span>
+        <span>{{ $t('superPanel.i18n.translate.tip') }}</span>
       </div>
     </div>
   </div>
@@ -116,7 +116,7 @@
   >
     <div class="mini-header">
       <i class="el-icon-loading"></i>
-      <span class="mini-title">{{ $t('menu.superPanel.projectConfig.i18n.translating') }}</span>
+      <span class="mini-title">{{ $t('superPanel.i18n.translate.status') }}</span>
       <span class="mini-percent">{{ progressPercent }}%</span>
     </div>
     <div class="mini-progress">
@@ -132,7 +132,7 @@
 </template>
 
 <script>
-import translateManager from '@/utils/translateManager'
+import translateManager from '@/utils/business/translateManager'
 import { MessageBox } from 'element-ui'
 
 export default {
@@ -241,8 +241,8 @@ export default {
     handleCancel() {
       if (!translateManager.state.isTranslating) return
       MessageBox.confirm(
-        this.$t('menu.superPanel.projectConfig.i18n.cancelTranslateConfirm'),
-        this.$t('menu.superPanel.projectConfig.i18n.cancelTranslate'),
+        this.$t('superPanel.i18n.translate.cancelConfirm'),
+        this.$t('superPanel.i18n.translate.cancel'),
         {
           confirmButtonText: this.$t('common.confirm'),
           cancelButtonText: this.$t('common.cancel'),

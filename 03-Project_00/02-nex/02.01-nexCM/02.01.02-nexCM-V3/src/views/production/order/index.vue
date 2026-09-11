@@ -7,7 +7,7 @@
         <div class="stat-info">
           <div class="stat-value">{{ orderStats.completedCount }}</div>
           <div class="stat-label">
-            {{ $t("menu.production.order.page.completed") }}
+            {{ $t("production.order.page.completed") }}
           </div>
         </div>
       </div>
@@ -16,7 +16,7 @@
         <div class="stat-info">
           <div class="stat-value">{{ orderStats.runningCount }}</div>
           <div class="stat-label">
-            {{ $t("menu.production.order.page.running") }}
+            {{ $t("production.order.page.running") }}
           </div>
         </div>
       </div>
@@ -25,7 +25,7 @@
         <div class="stat-info">
           <div class="stat-value">{{ orderStats.plannedCount }}</div>
           <div class="stat-label">
-            {{ $t("menu.production.order.page.planned") }}
+            {{ $t("production.order.page.planned") }}
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@
         <div class="stat-info">
           <div class="stat-value">{{ orderStats.avgQualifiedRate }}%</div>
           <div class="stat-label">
-            {{ $t("menu.production.order.page.qualifiedRate") }}
+            {{ $t("production.order.page.qualifiedRate") }}
           </div>
         </div>
       </div>
@@ -46,19 +46,19 @@
         <el-tabs v-model="activeTab" type="card" @tab-click="handleTabClick">
           <el-tab-pane name="completed">
             <span slot="label" class="tab-label">
-              {{ $t("menu.production.order.page.completed") }}
+              {{ $t("production.order.page.completed") }}
               <span class="tab-badge">{{ completedOrders.length }}</span>
             </span>
           </el-tab-pane>
           <el-tab-pane name="running">
             <span slot="label" class="tab-label">
-              {{ $t("menu.production.order.page.running") }}
+              {{ $t("production.order.page.running") }}
               <span class="tab-badge running">{{ runningOrders.length }}</span>
             </span>
           </el-tab-pane>
           <el-tab-pane name="planned">
             <span slot="label" class="tab-label">
-              {{ $t("menu.production.order.page.planned") }}
+              {{ $t("production.order.page.planned") }}
               <span class="tab-badge planned">{{ plannedOrders.length }}</span>
             </span>
           </el-tab-pane>
@@ -73,7 +73,7 @@
           icon="el-icon-plus"
           @click="handleAdd"
         >
-          {{ $t("menu.production.order.add") }}
+          {{ $t("production.order.add") }}
         </el-button>
         <el-button
           v-permission="getTabPermission('downloadSelected')"
@@ -82,7 +82,7 @@
           :disabled="!canDownload"
           @click="handleDownloadSelected"
         >
-          {{ $t("menu.production.order.download") }} ({{
+          {{ $t("production.order.download") }} ({{
             selectedOrders.length
           }})
         </el-button>
@@ -92,7 +92,7 @@
           :disabled="!canDownloadAll"
           @click="handleDownloadAll"
         >
-          {{ $t("menu.production.order.download") }}
+          {{ $t("production.order.download") }}
         </el-button>
       </div>
     </div>
@@ -100,7 +100,7 @@
     <!-- 无订单生产提示 -->
     <el-alert
       v-if="showNoOrderTip"
-      :title="$t('menu.production.order.page.noOrderProduction')"
+      :title="$t('production.order.page.noOrderProduction')"
       type="warning"
       :closable="false"
       show-icon
@@ -113,12 +113,6 @@
         :data="currentOrders"
         border
         stripe
-        :header-cell-style="{
-          background: '#f5f7fa',
-          color: '#606266',
-          fontWeight: 'bold',
-          textAlign: 'center',
-        }"
         highlight-current-row
         :cell-style="cellStyle"
         @selection-change="handleSelectionChange"
@@ -131,33 +125,33 @@
           align="center"
         />
         <el-table-column
-          :label="$t('menu.production.order.page.orderNo')"
+          :label="$t('production.order.page.orderNo')"
           prop="orderNo"
           width="170"
         />
         <el-table-column
-          :label="$t('menu.production.order.page.productName')"
+          :label="$t('production.order.page.productName')"
           prop="productName"
           width="140px"
         />
         <el-table-column
-          :label="$t('menu.production.order.page.recipeName')"
+          :label="$t('production.order.page.recipeName')"
           prop="recipeName"
           width="120"
         />
         <el-table-column
-          :label="$t('menu.production.order.page.batchNo')"
+          :label="$t('production.order.page.batchNo')"
           prop="batchNo"
           width="140"
         />
         <el-table-column
-          :label="$t('menu.production.order.page.targetQty')"
+          :label="$t('production.order.page.targetQty')"
           prop="targetQty"
           width="90"
           align="center"
         />
         <el-table-column
-          :label="$t('menu.production.order.page.completedQty')"
+          :label="$t('production.order.page.completedQty')"
           width="110"
           align="center"
         >
@@ -175,7 +169,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('menu.production.order.page.qualifiedRate')"
+          :label="$t('production.order.page.qualifiedRate')"
           width="90"
           align="center"
         >
@@ -196,14 +190,14 @@
         </el-table-column>
         <el-table-column
           v-if="orderConfig.showOperatorName"
-          :label="$t('menu.production.order.page.operator')"
+          :label="$t('production.order.page.operator')"
           prop="operator"
           width="90"
           align="center"
         />
         <el-table-column
           v-if="orderConfig.showAlarmCount"
-          :label="$t('menu.production.order.page.alarmCount')"
+          :label="$t('production.order.page.alarmCount')"
           prop="alarmCount"
           width="80"
           align="center"
@@ -217,7 +211,7 @@
         </el-table-column>
         <el-table-column
           v-if="orderConfig.showRuntime"
-          :label="$t('menu.production.order.page.runtime')"
+          :label="$t('production.order.page.runtime')"
           width="80"
           align="center"
         >
@@ -226,12 +220,12 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('menu.production.order.page.startTime')"
+          :label="$t('production.order.page.startTime')"
           prop="startTime"
           width="150"
         />
         <el-table-column
-          :label="$t('menu.production.order.page.endTime')"
+          :label="$t('production.order.page.endTime')"
           prop="endTime"
           width="150"
         >
@@ -243,7 +237,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          :label="$t('menu.production.order.page.status')"
+          :label="$t('production.order.page.status')"
           width="90"
           align="center"
         >
@@ -272,7 +266,7 @@
                 icon="el-icon-edit"
                 @click="handleEdit(scope.row)"
               >
-                {{ $t("menu.production.order.edit") }}
+                {{ $t("production.order.edit") }}
               </el-button>
               <el-button
                 v-permission="'production:order:planned:delete'"
@@ -282,7 +276,7 @@
                 style="color: #f56c6c"
                 @click="handleDelete(scope.row)"
               >
-                {{ $t("menu.production.order.delete") }}
+                {{ $t("production.order.delete") }}
               </el-button>
             </template>
             <!-- 其他标签下只显示下载按钮 -->
@@ -295,7 +289,7 @@
               :disabled="!canDownloadOrder(scope.row)"
               @click="handleDownloadSingle(scope.row)"
             >
-              {{ $t("menu.production.order.download") }}
+              {{ $t("production.order.download") }}
             </el-button>
           </template>
         </el-table-column>
@@ -318,9 +312,9 @@
       >
         <el-form-item prop="orderNo">
           <span slot="label">
-            {{ $t("menu.production.order.page.orderNo") }}
+            {{ $t("production.order.page.orderNo") }}
             <el-tooltip
-              :content="$t('menu.production.order.page.tips.orderNo')"
+              :content="$t('production.order.page.tips.orderNo')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -328,15 +322,15 @@
           </span>
           <el-input
             v-model="orderForm.orderNo"
-            :placeholder="$t('menu.production.order.page.orderNoPlaceholder')"
+            :placeholder="$t('production.order.page.orderNoPlaceholder')"
             :disabled="isEdit"
           />
         </el-form-item>
         <el-form-item prop="productName">
           <span slot="label">
-            {{ $t("menu.production.order.page.productName") }}
+            {{ $t("production.order.page.productName") }}
             <el-tooltip
-              :content="$t('menu.production.order.page.tips.productName')"
+              :content="$t('production.order.page.tips.productName')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -345,15 +339,15 @@
           <el-input
             v-model="orderForm.productName"
             :placeholder="
-              $t('menu.production.order.page.productNamePlaceholder')
+              $t('production.order.page.productNamePlaceholder')
             "
           />
         </el-form-item>
         <el-form-item prop="recipeName">
           <span slot="label">
-            {{ $t("menu.production.order.page.recipeName") }}
+            {{ $t("production.order.page.recipeName") }}
             <el-tooltip
-              :content="$t('menu.production.order.page.tips.recipeName')"
+              :content="$t('production.order.page.tips.recipeName')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -362,7 +356,7 @@
           <el-select
             v-model="orderForm.recipeName"
             :placeholder="
-              $t('menu.production.order.page.recipeNamePlaceholder')
+              $t('production.order.page.recipeNamePlaceholder')
             "
             style="width: 100%"
           >
@@ -376,9 +370,9 @@
         </el-form-item>
         <el-form-item prop="batchNo">
           <span slot="label">
-            {{ $t("menu.production.order.page.batchNo") }}
+            {{ $t("production.order.page.batchNo") }}
             <el-tooltip
-              :content="$t('menu.production.order.page.tips.batchNo')"
+              :content="$t('production.order.page.tips.batchNo')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -386,14 +380,14 @@
           </span>
           <el-input
             v-model="orderForm.batchNo"
-            :placeholder="$t('menu.production.order.page.batchNoPlaceholder')"
+            :placeholder="$t('production.order.page.batchNoPlaceholder')"
           />
         </el-form-item>
         <el-form-item prop="targetQty">
           <span slot="label">
-            {{ $t("menu.production.order.page.targetQty") }}
+            {{ $t("production.order.page.targetQty") }}
             <el-tooltip
-              :content="$t('menu.production.order.page.tips.targetQty')"
+              :content="$t('production.order.page.tips.targetQty')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -408,9 +402,9 @@
         </el-form-item>
         <el-form-item prop="startTime">
           <span slot="label">
-            {{ $t("menu.production.order.page.startTime") }}
+            {{ $t("production.order.page.startTime") }}
             <el-tooltip
-              :content="$t('menu.production.order.page.tips.startTime')"
+              :content="$t('production.order.page.tips.startTime')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -419,15 +413,15 @@
           <el-date-picker
             v-model="orderForm.startTime"
             type="datetime"
-            :placeholder="$t('menu.production.order.page.startTimePlaceholder')"
+            :placeholder="$t('production.order.page.startTimePlaceholder')"
             style="width: 100%"
           />
         </el-form-item>
         <el-form-item prop="estimatedEnd">
           <span slot="label">
-            {{ $t("menu.production.order.page.estimatedEnd") }}
+            {{ $t("production.order.page.estimatedEnd") }}
             <el-tooltip
-              :content="$t('menu.production.order.page.tips.estimatedEnd')"
+              :content="$t('production.order.page.tips.estimatedEnd')"
               placement="top"
             >
               <i class="el-icon-question"></i>
@@ -437,7 +431,7 @@
             v-model="orderForm.estimatedEnd"
             type="datetime"
             :placeholder="
-              $t('menu.production.order.page.estimatedEndPlaceholder')
+              $t('production.order.page.estimatedEndPlaceholder')
             "
             style="width: 100%"
           />
@@ -463,8 +457,8 @@
 import { ref, computed, reactive } from "vue";
 import { Message, MessageBox } from "element-ui";
 import store from "@/store";
-import { generateOrderReport } from "@/utils/orderReport";
-import { getConfig } from "@/utils/config";
+import { generateOrderReport } from "@/utils/business/orderReport";
+import { getConfig } from "@/utils/config/config";
 import { useI18n } from "@/composables/useI18n";
 
 const { t: $t } = useI18n();
@@ -509,8 +503,8 @@ const recipeList = computed(() => store.getters["device/recipeList"]);
 // 弹窗标题
 const dialogTitle = computed(() => {
   return isEdit.value
-    ? $t("menu.production.order.edit")
-    : $t("menu.production.order.add");
+    ? $t("production.order.edit")
+    : $t("production.order.add");
 });
 
 // 当前Tab的订单列表
@@ -643,11 +637,11 @@ function statusType(status) {
 function statusText(status) {
   switch (status) {
     case "completed":
-      return $t("menu.production.order.page.statusCompleted");
+      return $t("production.order.page.statusCompleted");
     case "running":
-      return $t("menu.production.order.page.statusRunning");
+      return $t("production.order.page.statusRunning");
     case "planned":
-      return $t("menu.production.order.page.statusPlanned");
+      return $t("production.order.page.statusPlanned");
     default:
       return status;
   }
@@ -657,9 +651,9 @@ function statusText(status) {
 function handleDownloadSingle(order) {
   if (!canDownloadOrder(order)) {
     if (order.status === "planned") {
-      Message.warning($t("menu.production.order.page.plannedNoDownload"));
+      Message.warning($t("production.order.page.plannedNoDownload"));
     } else if (order.status === "running") {
-      Message.warning($t("menu.production.order.page.runningNoDownload"));
+      Message.warning($t("production.order.page.runningNoDownload"));
     }
     return;
   }
@@ -669,7 +663,7 @@ function handleDownloadSingle(order) {
 // 下载选中订单报告
 function handleDownloadSelected() {
   if (selectedOrders.value.length === 0) {
-    Message.warning($t("menu.production.order.page.selectOrderTip"));
+    Message.warning($t("production.order.page.selectOrderTip"));
     return;
   }
   generateAndDownload(selectedOrders.value);

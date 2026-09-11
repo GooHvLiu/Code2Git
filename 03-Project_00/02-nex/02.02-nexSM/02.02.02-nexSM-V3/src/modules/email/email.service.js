@@ -3,7 +3,7 @@
  * 处理邮件发送、自动降级、失败重试、发送记录等
  */
 const nodemailer = require('nodemailer');
-const emailConfig = require('./email.config');
+const emailConfig = require('../../config/email.config');
 const emailConfigModel = require('./email.model');
 const { createProvider } = require('./providers');
 const templateRegistry = require('./templates');
@@ -30,6 +30,7 @@ class EmailService {
 
     const provider = createProvider(config.provider || 'custom', config);
     const smtpConfig = provider.getSmtpConfig();
+    console.log(`[邮件服务] 创建SMTP传输器: host=${smtpConfig.host}, port=${smtpConfig.port}, secure=${smtpConfig.secure}, username=${smtpConfig.auth.user}`);
     const transporter = nodemailer.createTransport(smtpConfig);
     transporterCache.set(cacheKey, transporter);
     return transporter;
@@ -236,6 +237,8 @@ class EmailService {
         } catch (err) {
           lastError = err;
           console.warn(`[邮件服务] 第 ${attempt + 1} 次发送失败: ${err.message}`);
+          console.warn(`[邮件服务] 错误详情: code=${err.code}, command=${err.command}, responseCode=${err.responseCode}, response=${err.response ? err.response.substring(0, 200) : 'N/A'}`);
+          console.warn(`[邮件服务] 当前配置: host=${configToUse.host}, port=${configToUse.port}, secure=${configToUse.secure}, provider=${configToUse.provider}`);
 
           if (attempt < maxRetries) {
             // 清除缓存，重新创建传输器

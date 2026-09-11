@@ -9,7 +9,7 @@ const https = require('https');
 
 const uploadConfig = require('../../config/upload.config');
 const fileUtil = require('../../utils/file');
-const fileModel = require('./file.model');
+const fileModel = require('./upload.model');
 const { BusinessError } = require('../../middleware/error.middleware');
 const { ERROR_CODE } = require('../../constants/errorCode');
 const { FILE_STORAGE_TYPE } = require('../../constants/statusCode');

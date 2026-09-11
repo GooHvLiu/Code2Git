@@ -1,13 +1,13 @@
-<template>
+﻿<template>
   <div class="i18n-manager-container">
     <!-- 页面头部 -->
     <div class="page-header">
       <div class="header-left">
         <h2 class="page-title">
-          {{ $t("menu.superPanel.projectConfig.i18n.title") }}
+          {{ $t("superPanel.i18n.page.title") }}
         </h2>
         <span class="page-desc">{{
-          $t("menu.superPanel.projectConfig.i18n.desc")
+          $t("superPanel.i18n.page.desc")
         }}</span>
       </div>
       <div class="header-right">
@@ -19,7 +19,7 @@
           icon="el-icon-loading"
           @click="translateManager.showDialog()"
         >
-          {{ $t("menu.superPanel.projectConfig.i18n.translating") }}
+          {{ $t("superPanel.i18n.translate.status") }}
           {{ translateManager.getProgressPercent() }}%
         </el-button>
         <el-button
@@ -28,16 +28,7 @@
           icon="el-icon-plus"
           @click="openCreateLanguageDialog"
         >
-          {{ $t("menu.superPanel.projectConfig.i18n.createLanguage") }}
-        </el-button>
-        <el-button
-          type="primary"
-          size="small"
-          icon="el-icon-plus"
-          :disabled="!activeTab"
-          @click="openAddDialog()"
-        >
-          {{ $t("menu.superPanel.projectConfig.i18n.addConfig") }}
+          {{ $t("superPanel.i18n.createLang.action") }}
         </el-button>
         <el-button
           type="success"
@@ -50,7 +41,7 @@
           {{ $t("common.save") }}
         </el-button>
         <el-tooltip
-          :content="$t('menu.superPanel.projectConfig.i18n.backup')"
+          :content="$t('superPanel.i18n.backup.action')"
           placement="bottom"
         >
           <el-button
@@ -61,14 +52,31 @@
             circle
           ></el-button>
         </el-tooltip>
+        <!-- 批量对比字段按钮（图标按钮，非母版语言且未在翻译时显示） -->
+        <el-tooltip
+          v-if="
+            activeTab &&
+            activeTab !== masterLanguage &&
+            !translateManager.state.isTranslating
+          "
+          :content="$t('superPanel.i18n.compare.batch')"
+          placement="bottom"
+        >
+          <el-button
+            size="small"
+            icon="el-icon-document-copy"
+            @click="openBatchCompareDialog"
+            circle
+          ></el-button>
+        </el-tooltip>
         <!-- 批量翻译当前语言按钮（图标按钮，非母版语言且未在翻译时显示） -->
         <el-tooltip
           v-if="
             activeTab &&
-            activeTab !== masterLanguage + '.js' &&
+            activeTab !== masterLanguage &&
             !translateManager.state.isTranslating
           "
-          :content="$t('menu.superPanel.projectConfig.i18n.batchTranslate')"
+          :content="$t('superPanel.i18n.translate.batch')"
           placement="bottom"
         >
           <el-button
@@ -104,13 +112,13 @@
       <div class="lang-tabs">
         <div
           v-for="file in fileList"
-          :key="file.fileName"
+          :key="file.langCode"
           class="lang-tab-item"
-          :class="{ active: activeTab === file.fileName }"
-          @click="handleLangTabClick(file.fileName)"
+          :class="{ active: activeTab === file.langCode }"
+          @click="handleLangTabClick(file.langCode)"
         >
           <i class="el-icon-chat-line-round"></i>
-          <span>{{ file.langName }}</span>
+          <span>{{ file.autonym }}</span>
         </div>
       </div>
 
@@ -120,20 +128,20 @@
           <i class="el-icon-document"></i>
         </div>
         <h3 class="tip-title">
-          {{ $t("menu.superPanel.projectConfig.i18n.selectLanguageTitle") }}
+          {{ $t("superPanel.i18n.createLang.selectTitle") }}
         </h3>
         <p class="tip-desc">
-          {{ $t("menu.superPanel.projectConfig.i18n.selectLanguageDesc") }}
+          {{ $t("superPanel.i18n.createLang.selectDesc") }}
         </p>
         <div class="tip-language-list">
           <div
             v-for="file in fileList"
-            :key="file.fileName"
+            :key="file.langCode"
             class="language-card"
-            @click="handleLangTabClick(file.fileName)"
+            @click="handleLangTabClick(file.langCode)"
           >
             <i class="el-icon-chat-line-round"></i>
-            <span>{{ file.langName }}</span>
+            <span>{{ file.autonym }}</span>
           </div>
         </div>
       </div>
@@ -153,7 +161,7 @@
               <el-input
                 v-model="searchKeyword"
                 :placeholder="
-                  $t('menu.superPanel.projectConfig.i18n.searchPlaceholder')
+                  $t('superPanel.i18n.field.searchPlaceholder')
                 "
                 prefix-icon="el-icon-search"
                 clearable
@@ -191,7 +199,7 @@
                 "
               >
                 <span>{{
-                  $t("menu.superPanel.projectConfig.i18n.noData")
+                  $t("superPanel.i18n.field.noData")
                 }}</span>
               </div>
             </div>
@@ -246,24 +254,24 @@
               </el-tree>
               <div class="empty-state" v-if="!loading && !currentData">
                 <i class="el-icon-folder-opened"></i>
-                <p>{{ $t("menu.superPanel.projectConfig.i18n.noData") }}</p>
+                <p>{{ $t("superPanel.i18n.field.noData") }}</p>
               </div>
               <!-- 统计栏 -->
               <div class="tree-footer" v-if="currentData && !loading">
                 <span class="footer-stat">
                   <i class="el-icon-folder"></i>
                   {{ totalFolderCount }}
-                  {{ $t("menu.superPanel.projectConfig.i18n.folders") }}
+                  {{ $t("superPanel.i18n.node.folders") }}
                 </span>
                 <span class="footer-stat">
                   <i class="el-icon-document"></i>
                   {{ totalLeafCount }}
-                  {{ $t("menu.superPanel.projectConfig.i18n.items") }}
+                  {{ $t("superPanel.i18n.node.items") }}
                 </span>
                 <span class="footer-stat footer-total">
                   <i class="el-icon-menu"></i>
                   {{ totalNodeCount }}
-                  {{ $t("menu.superPanel.projectConfig.i18n.total") }}
+                  {{ $t("superPanel.i18n.compare.total") }}
                 </span>
               </div>
             </div>
@@ -288,7 +296,7 @@
             <div class="breadcrumb-bar" v-if="selectedKeyPath !== null">
               <span class="breadcrumb-label"
                 >{{
-                  $t("menu.superPanel.projectConfig.i18n.currentPath")
+                  $t("superPanel.i18n.backup.currentPath")
                 }}:</span
               >
               <el-breadcrumb separator="/">
@@ -308,7 +316,7 @@
                   icon="el-icon-plus"
                   @click="openAddDialog('addChild', selectedKeyPath)"
                 >
-                  {{ $t("menu.superPanel.projectConfig.i18n.addChild") }}
+                  {{ $t("superPanel.i18n.node.addChild") }}
                 </el-button>
               </div>
             </div>
@@ -323,7 +331,7 @@
                 type="textarea"
                 :rows="3"
                 :placeholder="
-                  $t('menu.superPanel.projectConfig.i18n.valuePlaceholder')
+                  $t('superPanel.i18n.field.valuePlaceholder')
                 "
                 @change="handleLeafValueChange"
               />
@@ -333,13 +341,13 @@
             <div class="detail-list" v-else-if="selectedKeyPath !== null">
               <div class="list-header">
                 <span class="header-key">{{
-                  $t("menu.superPanel.projectConfig.i18n.keyName")
+                  $t("superPanel.i18n.field.keyName")
                 }}</span>
                 <span class="header-value">{{
-                  $t("menu.superPanel.projectConfig.i18n.value")
+                  $t("superPanel.i18n.field.value")
                 }}</span>
                 <span class="header-actions">{{
-                  $t("menu.superPanel.projectConfig.i18n.actions")
+                  $t("superPanel.i18n.page.actions")
                 }}</span>
               </div>
               <div class="list-body">
@@ -363,7 +371,7 @@
                       size="mini"
                       :placeholder="
                         $t(
-                          'menu.superPanel.projectConfig.i18n.valuePlaceholder'
+                          'superPanel.i18n.field.valuePlaceholder'
                         )
                       "
                       @change="handleValueChange(item)"
@@ -375,7 +383,7 @@
                     @click="handleItemClick(item)"
                   >
                     {{ item.childCount }}
-                    {{ $t("menu.superPanel.projectConfig.i18n.items") }}
+                    {{ $t("superPanel.i18n.node.items") }}
                   </span>
                   <span class="item-actions">
                     <el-button
@@ -385,11 +393,11 @@
                       @click="openAddDialog('addChild', item.keyPath)"
                       v-if="!item.isLeaf"
                     >
-                      {{ $t("menu.superPanel.projectConfig.i18n.addChild") }}
+                      {{ $t("superPanel.i18n.node.addChild") }}
                     </el-button>
                     <!-- 自动翻译按钮：只对叶子节点且非中文语言显示 -->
                     <el-dropdown
-                      v-if="item.isLeaf && activeTab !== masterLanguage + '.js'"
+                      v-if="item.isLeaf && activeTab !== masterLanguage"
                       trigger="hover"
                       placement="bottom"
                       @command="
@@ -404,12 +412,12 @@
                         class="auto-translate-btn-text"
                       >
                         {{
-                          $t("menu.superPanel.projectConfig.i18n.autoTranslate")
+                          $t("superPanel.i18n.translate.auto")
                         }}
                         <el-tooltip
                           :content="
                             $t(
-                              'menu.superPanel.projectConfig.i18n.autoTranslateTip'
+                              'superPanel.i18n.translate.autoTip'
                             )
                           "
                           placement="top"
@@ -424,20 +432,20 @@
                           <i class="el-icon-document"></i>
                           {{
                             $t(
-                              "menu.superPanel.projectConfig.i18n.formatNormal"
+                              "superPanel.i18n.field.formatNormal"
                             )
                           }}
                         </el-dropdown-item>
                         <el-dropdown-item command="title">
                           <i class="el-icon-document"></i>
                           {{
-                            $t("menu.superPanel.projectConfig.i18n.formatTitle")
+                            $t("superPanel.i18n.field.formatTitle")
                           }}
                         </el-dropdown-item>
                         <el-dropdown-item command="camel">
                           <i class="el-icon-document"></i>
                           {{
-                            $t("menu.superPanel.projectConfig.i18n.formatCamel")
+                            $t("superPanel.i18n.field.formatCamel")
                           }}
                         </el-dropdown-item>
                       </el-dropdown-menu>
@@ -456,7 +464,7 @@
                 <div class="empty-list" v-if="detailList.length === 0">
                   <i class="el-icon-folder-opened"></i>
                   <p>
-                    {{ $t("menu.superPanel.projectConfig.i18n.noChildren") }}
+                    {{ $t("superPanel.i18n.node.noChildren") }}
                   </p>
                 </div>
               </div>
@@ -469,7 +477,7 @@
             >
               <i class="el-icon-pointer"></i>
               <p>
-                {{ $t("menu.superPanel.projectConfig.i18n.selectNodeTip") }}
+                {{ $t("superPanel.i18n.node.selectTip") }}
               </p>
             </div>
           </div>
@@ -485,11 +493,11 @@
     >
       <li @click="handleAddChild">
         <i class="el-icon-plus"></i>
-        <span>{{ $t("menu.superPanel.projectConfig.i18n.addChild") }}</span>
+        <span>{{ $t("superPanel.i18n.node.addChild") }}</span>
       </li>
       <li @click="handleAddSibling">
         <i class="el-icon-document-copy"></i>
-        <span>{{ $t("menu.superPanel.projectConfig.i18n.addSibling") }}</span>
+        <span>{{ $t("superPanel.i18n.node.addSibling") }}</span>
       </li>
       <li class="divider"></li>
       <li
@@ -499,31 +507,32 @@
       >
         <i class="el-icon-reading"></i>
         <span>{{
-          $t("menu.superPanel.projectConfig.i18n.nodeTranslate")
+          $t("superPanel.i18n.translate.node")
         }}</span>
       </li>
       <li class="divider" v-if="!contextMenu.data?.isLeaf"></li>
       <li @click="handleDeleteNode" class="danger">
         <i class="el-icon-delete"></i>
-        <span>{{ $t("menu.superPanel.projectConfig.i18n.deleteNode") }}</span>
+        <span>{{ $t("superPanel.i18n.node.deleteNode") }}</span>
       </li>
     </ul>
 
     <!-- 新增配置对话框 -->
+    <!-- 新增/编辑配置对话框（右键菜单使用） -->
     <el-dialog
-      :title="$t('menu.superPanel.projectConfig.i18n.addConfig')"
+      :title="addDialog.mode === 'edit' ? $t('superPanel.i18n.node.editConfig') : $t('superPanel.i18n.node.addConfig')"
       :visible.sync="addDialog.visible"
       width="600px"
       @close="addDialog.visible = false"
     >
       <el-form :model="addDialog.form" label-width="180px">
-        <el-form-item>
+        <el-form-item v-if="addDialog.mode !== 'edit'">
           <template slot="label">
             <span class="label-with-tip">
-              {{ $t("menu.superPanel.projectConfig.i18n.parentPath") }}
+              {{ $t("superPanel.i18n.node.parentPath") }}
               <el-tooltip
                 :content="
-                  $t('menu.superPanel.projectConfig.i18n.parentPathTip')
+                  $t('superPanel.i18n.node.parentPathTip')
                 "
                 placement="top"
               >
@@ -541,7 +550,7 @@
               value: 'keyPath',
             }"
             :placeholder="
-              $t('menu.superPanel.projectConfig.i18n.parentPathPlaceholder')
+              $t('superPanel.i18n.node.parentPathPlaceholder')
             "
             style="width: 100%"
             clearable
@@ -551,9 +560,9 @@
         <el-form-item>
           <template slot="label">
             <span class="label-with-tip">
-              {{ $t("menu.superPanel.projectConfig.i18n.keyName") }}
+              {{ $t("superPanel.i18n.field.keyName") }}
               <el-tooltip
-                :content="$t('menu.superPanel.projectConfig.i18n.keyNameTip')"
+                :content="$t('superPanel.i18n.field.keyNameTip')"
                 placement="top"
               >
                 <i class="el-icon-question label-tip-icon"></i>
@@ -563,56 +572,57 @@
           <el-input
             v-model="addDialog.form.key"
             :placeholder="
-              $t('menu.superPanel.projectConfig.i18n.keyNamePlaceholder')
+              $t('superPanel.i18n.field.keyNamePlaceholder')
             "
+            :disabled="addDialog.mode === 'edit'"
           />
         </el-form-item>
         <el-form-item
           v-for="file in fileList"
-          :key="file.fileName"
-          :label="file.langName"
+          :key="file.langCode"
+          :label="file.autonym"
         >
           <div class="value-input-wrapper">
             <el-input
-              v-model="addDialog.form.values[file.fileName]"
+              v-model="addDialog.form.values[file.langCode]"
               :placeholder="
                 $t(
-                  'menu.superPanel.projectConfig.i18n.valuePlaceholderWithLang',
-                  { lang: file.langName }
+                  'superPanel.i18n.field.valuePlaceholderWithLang',
+                  { lang: file.autonym }
                 )
               "
             />
             <el-dropdown
               v-if="
-                file.fileName !== masterLanguage + '.js' &&
-                addDialog.form.values[masterLanguage + '.js']
+                file.langCode !== masterLanguage &&
+                addDialog.form.values[masterLanguage]
               "
               trigger="hover"
               placement="bottom"
-              @command="(format) => autoTranslate(file.fileName, format)"
+              @command="(format) => autoTranslate(file.langCode, format)"
             >
               <el-button
                 size="mini"
                 type="primary"
                 icon="el-icon-connection"
-                :loading="addDialog.translating[file.fileName]"
+                :loading="addDialog.translating[file.langCode]"
                 class="auto-translate-btn"
               >
-                {{ $t("menu.superPanel.projectConfig.i18n.autoTranslate") }}
+                {{ $t("superPanel.i18n.translate.auto") }}
                 <i class="el-icon-arrow-down el-icon--right"></i>
               </el-button>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item command="normal">
                   <i class="el-icon-document"></i>
-                  {{ $t("menu.superPanel.projectConfig.i18n.formatNormal") }}
+                  {{ $t("superPanel.i18n.field.formatNormal") }}
                 </el-dropdown-item>
                 <el-dropdown-item command="title">
                   <i class="el-icon-document"></i>
-                  {{ $t("menu.superPanel.projectConfig.i18n.formatTitle") }}
+                  {{ $t("superPanel.i18n.field.formatTitle") }}
                 </el-dropdown-item>
                 <el-dropdown-item command="camel">
                   <i class="el-icon-document"></i>
-                  {{ $t("menu.superPanel.projectConfig.i18n.formatCamel") }}
+                  {{ $t("superPanel.i18n.field.formatCamel") }}
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -635,7 +645,7 @@
 
     <!-- 备份路径设置对话框 -->
     <el-dialog
-      :title="$t('menu.superPanel.projectConfig.i18n.backupPath')"
+      :title="$t('superPanel.i18n.backup.path')"
       :visible.sync="backupPathDialog.visible"
       width="700px"
       @open="loadBackupList"
@@ -644,10 +654,10 @@
         <el-form-item>
           <template slot="label">
             <span class="label-with-tip">
-              {{ $t("menu.superPanel.projectConfig.i18n.currentPath") }}
+              {{ $t("superPanel.i18n.backup.currentPath") }}
               <el-tooltip
                 :content="
-                  $t('menu.superPanel.projectConfig.i18n.currentPathTip')
+                  $t('superPanel.i18n.backup.currentPathTip')
                 "
                 placement="top"
               >
@@ -655,14 +665,18 @@
               </el-tooltip>
             </span>
           </template>
-          <el-input :value="backupConfig.backupDir" readonly />
+          <el-input
+            :value="backupConfig.backupDir"
+            readonly
+            class="readonly-path-input"
+          />
         </el-form-item>
         <el-form-item>
           <template slot="label">
             <span class="label-with-tip">
-              {{ $t("menu.superPanel.projectConfig.i18n.newPath") }}
+              {{ $t("superPanel.i18n.backup.newPath") }}
               <el-tooltip
-                :content="$t('menu.superPanel.projectConfig.i18n.newPathTip')"
+                :content="$t('superPanel.i18n.backup.newPathTip')"
                 placement="top"
               >
                 <i class="el-icon-question label-tip-icon"></i>
@@ -671,7 +685,7 @@
           </template>
           <el-input
             v-model="backupPathDialog.newPath"
-            :placeholder="$t('menu.superPanel.projectConfig.i18n.pathNotEmpty')"
+            :placeholder="$t('superPanel.i18n.node.pathNotEmpty')"
           />
         </el-form-item>
       </el-form>
@@ -680,7 +694,7 @@
       <div class="backup-list-section">
         <div class="backup-list-header">
           <span class="backup-list-title">{{
-            $t("menu.superPanel.projectConfig.i18n.backupList")
+            $t("superPanel.i18n.backup.list")
           }}</span>
           <el-button size="mini" icon="el-icon-refresh" @click="loadBackupList">
             {{ $t("common.refresh") }}
@@ -700,18 +714,18 @@
           >
             <el-table-column
               prop="fileName"
-              :label="$t('menu.superPanel.projectConfig.i18n.backupFileName')"
+              :label="$t('superPanel.i18n.backup.fileName')"
               min-width="200"
               show-overflow-tooltip
             />
             <el-table-column
               prop="size"
-              :label="$t('menu.superPanel.projectConfig.i18n.backupFileSize')"
+              :label="$t('superPanel.i18n.backup.fileSize')"
               width="100"
             />
             <el-table-column
               prop="createdAt"
-              :label="$t('menu.superPanel.projectConfig.i18n.backupCreateTime')"
+              :label="$t('superPanel.i18n.backup.createTime')"
               width="180"
             />
             <el-table-column
@@ -737,7 +751,7 @@
             v-if="!backupListLoading && backupList.length === 0"
           >
             <i class="el-icon-folder-opened"></i>
-            <span>{{ $t("menu.superPanel.projectConfig.i18n.noBackup") }}</span>
+            <span>{{ $t("superPanel.i18n.backup.noBackup") }}</span>
           </div>
         </div>
       </div>
@@ -756,8 +770,8 @@
     <el-dialog
       :title="
         batchTranslateDialog.nodePath
-          ? $t('menu.superPanel.projectConfig.i18n.nodeTranslate')
-          : $t('menu.superPanel.projectConfig.i18n.batchTranslate')
+          ? $t('superPanel.i18n.translate.node')
+          : $t('superPanel.i18n.translate.batch')
       "
       :visible.sync="batchTranslateDialog.visible"
       width="500px"
@@ -767,13 +781,13 @@
         <div class="batch-translate-info">
           <i class="el-icon-warning-outline"></i>
           <span v-if="batchTranslateDialog.nodePath">
-            {{ $t("menu.superPanel.projectConfig.i18n.nodeTranslateTip") }}
+            {{ $t("superPanel.i18n.translate.nodeTip") }}
             <span class="node-path-label"
               >[{{ batchTranslateDialog.nodeLabel }}]</span
             >
           </span>
           <span v-else>{{
-            $t("menu.superPanel.projectConfig.i18n.batchTranslateTip")
+            $t("superPanel.i18n.translate.batchTip")
           }}</span>
         </div>
         <el-radio-group
@@ -781,19 +795,19 @@
           class="batch-translate-mode"
         >
           <el-radio label="missing">
-            {{ $t("menu.superPanel.projectConfig.i18n.translateMissingOnly") }}
+            {{ $t("superPanel.i18n.translate.missingOnly") }}
             <div class="radio-desc">
               {{
                 $t(
-                  "menu.superPanel.projectConfig.i18n.translateMissingOnlyDesc"
+                  "superPanel.i18n.translate.missingOnlyDesc"
                 )
               }}
             </div>
           </el-radio>
           <el-radio label="all">
-            {{ $t("menu.superPanel.projectConfig.i18n.translateAll") }}
+            {{ $t("superPanel.i18n.translate.all") }}
             <div class="radio-desc">
-              {{ $t("menu.superPanel.projectConfig.i18n.translateAllDesc") }}
+              {{ $t("superPanel.i18n.translate.allDesc") }}
             </div>
           </el-radio>
         </el-radio-group>
@@ -808,9 +822,227 @@
       </div>
     </el-dialog>
 
+    <!-- 批量对比字段对话框 -->
+    <el-dialog
+      :title="$t('superPanel.i18n.compare.batch')"
+      :visible.sync="batchCompareDialog.visible"
+      width="900px"
+      :close-on-click-modal="false"
+      @close="batchCompareDialog.visible = false"
+    >
+      <!-- 顶部配置区 -->
+      <div class="batch-compare-config">
+        <el-form
+          :model="batchCompareDialog.form"
+          label-width="160px"
+          size="small"
+        >
+          <el-form-item>
+            <template slot="label">
+              <span class="label-with-tip">
+                {{ $t("superPanel.i18n.compare.masterLanguage") }}
+                <el-tooltip
+                  :content="
+                    $t('superPanel.i18n.compare.masterLanguageTip')
+                  "
+                  placement="top"
+                >
+                  <i class="el-icon-question label-tip-icon"></i>
+                </el-tooltip>
+              </span>
+            </template>
+            <el-input
+              :value="batchCompareDialog.masterLangName"
+              readonly
+              class="readonly-language-input"
+              style="width: 300px"
+            />
+          </el-form-item>
+          <el-form-item>
+            <template slot="label">
+              <span class="label-with-tip">
+                {{ $t("superPanel.i18n.compare.targetLanguage") }}
+                <el-tooltip
+                  :content="
+                    $t('superPanel.i18n.compare.targetLanguageTip')
+                  "
+                  placement="top"
+                >
+                  <i class="el-icon-question label-tip-icon"></i>
+                </el-tooltip>
+              </span>
+            </template>
+            <el-select
+              v-model="batchCompareDialog.form.targetLangCode"
+              :placeholder="
+                $t('superPanel.i18n.compare.pleaseSelectLanguage')
+              "
+              style="width: 300px"
+            >
+              <el-option
+                v-for="file in fileList"
+                :key="file.langCode"
+                :label="file.autonym"
+                :value="file.langCode"
+                :disabled="file.langCode === masterLanguage"
+              />
+            </el-select>
+          </el-form-item>
+          <el-form-item>
+            <el-button
+              type="primary"
+              icon="el-icon-search"
+              :loading="batchCompareDialog.comparing"
+              @click="handleStartCompare"
+            >
+              {{ $t("superPanel.i18n.compare.start") }}
+            </el-button>
+          </el-form-item>
+        </el-form>
+      </div>
+
+      <!-- 统计信息区（比对完成后显示） -->
+      <div v-if="batchCompareDialog.hasResult" class="batch-compare-stats">
+        <div class="stat-card stat-blue">
+          <div class="stat-value">
+            {{ batchCompareDialog.stats.masterTotal }}
+          </div>
+          <div class="stat-label">
+            {{ $t("superPanel.i18n.compare.masterCount") }}
+          </div>
+        </div>
+        <div class="stat-card stat-blue">
+          <div class="stat-value">
+            {{ batchCompareDialog.stats.targetTotal }}
+          </div>
+          <div class="stat-label">
+            {{ $t("superPanel.i18n.compare.targetCount") }}
+          </div>
+        </div>
+        <div class="stat-card stat-orange">
+          <div class="stat-value">
+            {{ batchCompareDialog.stats.missingCount }}
+          </div>
+          <div class="stat-label">
+            {{ $t("superPanel.i18n.compare.missingCount") }}
+          </div>
+        </div>
+        <div class="stat-card stat-green">
+          <div class="stat-value">
+            {{ batchCompareDialog.stats.extraCount }}
+          </div>
+          <div class="stat-label">
+            {{ $t("superPanel.i18n.compare.extraCount") }}
+          </div>
+        </div>
+      </div>
+
+      <!-- 详细结果区（比对完成后显示） -->
+      <div v-if="batchCompareDialog.hasResult" class="batch-compare-result">
+        <div class="result-toolbar">
+          <el-tabs v-model="batchCompareDialog.activeTab" size="small">
+            <el-tab-pane
+              :label="
+                $t('superPanel.i18n.compare.missingFields') +
+                ' (' +
+                batchCompareDialog.stats.missingCount +
+                ')'
+              "
+              name="missing"
+            />
+            <el-tab-pane
+              :label="
+                $t('superPanel.i18n.compare.extraFields') +
+                ' (' +
+                batchCompareDialog.stats.extraCount +
+                ')'
+              "
+              name="extra"
+            />
+            <el-tab-pane
+              :label="
+                $t('superPanel.i18n.compare.emptyFields') +
+                ' (' +
+                batchCompareDialog.stats.emptyCount +
+                ')'
+              "
+              name="empty"
+            />
+          </el-tabs>
+          <el-tooltip :content="$t('common.copy')" placement="top">
+            <el-button
+              size="mini"
+              type="primary"
+              icon="el-icon-document-copy"
+              circle
+              @click="handleCopyReport"
+            />
+          </el-tooltip>
+        </div>
+        <div class="result-table-wrapper">
+          <el-table
+            :data="batchCompareDialog.fields[batchCompareDialog.activeTab]"
+            border
+            size="mini"
+            style="width: 100%"
+            max-height="400"
+          >
+            <el-table-column
+              type="index"
+              label="#"
+              width="60"
+              align="center"
+            />
+            <el-table-column
+              prop="keyPath"
+              :label="$t('superPanel.i18n.node.fieldPath')"
+              min-width="280"
+              show-overflow-tooltip
+            />
+            <el-table-column
+              :label="$t('superPanel.i18n.compare.masterValue')"
+              min-width="180"
+              show-overflow-tooltip
+            >
+              <template slot-scope="scope">
+                <span v-if="scope.row.masterValue !== null && scope.row.masterValue !== undefined">
+                  {{ scope.row.masterValue }}
+                </span>
+                <span v-else class="text-muted">-</span>
+              </template>
+            </el-table-column>
+            <el-table-column
+              :label="$t('superPanel.i18n.compare.targetValue')"
+              min-width="180"
+              show-overflow-tooltip
+            >
+              <template slot-scope="scope">
+                <span v-if="scope.row.targetValue !== null && scope.row.targetValue !== undefined && scope.row.targetValue !== ''">
+                  {{ scope.row.targetValue }}
+                </span>
+                <span v-else class="text-muted">-</span>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+      </div>
+
+      <!-- 未比对时的提示 -->
+      <div v-if="!batchCompareDialog.hasResult" class="batch-compare-empty">
+        <i class="el-icon-document"></i>
+        <p>{{ $t("superPanel.i18n.compare.emptyTip") }}</p>
+      </div>
+
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="batchCompareDialog.visible = false">
+          {{ $t("common.close") }}
+        </el-button>
+      </div>
+    </el-dialog>
+
     <!-- 新建语言对话框 -->
     <el-dialog
-      :title="$t('menu.superPanel.projectConfig.i18n.createLanguage')"
+      :title="$t('superPanel.i18n.createLang.action')"
       :visible.sync="createLanguageDialog.visible"
       width="550px"
       @close="createLanguageDialog.visible = false"
@@ -819,10 +1051,10 @@
         <el-form-item>
           <template slot="label">
             <span class="label-with-tip">
-              {{ $t("menu.superPanel.projectConfig.i18n.sourceLanguage") }}
+              {{ $t("superPanel.i18n.translate.source") }}
               <el-tooltip
                 :content="
-                  $t('menu.superPanel.projectConfig.i18n.sourceLanguageTip')
+                  $t('superPanel.i18n.translate.sourceTip')
                 "
                 placement="top"
               >
@@ -830,25 +1062,22 @@
               </el-tooltip>
             </span>
           </template>
-          <el-select
-            v-model="createLanguageDialog.form.sourceFileName"
+          <el-input
+            v-model="masterLangDisplay"
+            readonly
             style="width: 100%"
-          >
-            <el-option
-              v-for="file in fileList"
-              :key="file.fileName"
-              :label="file.langName"
-              :value="file.fileName"
-            />
-          </el-select>
+          />
+          <div class="source-lang-hint">
+            {{ $t("superPanel.i18n.createLang.sourceHint") }}
+          </div>
         </el-form-item>
         <el-form-item>
           <template slot="label">
             <span class="label-with-tip">
-              {{ $t("menu.superPanel.projectConfig.i18n.newLangCode") }}
+              {{ $t("superPanel.i18n.createLang.code") }}
               <el-tooltip
                 :content="
-                  $t('menu.superPanel.projectConfig.i18n.newLangCodeTip')
+                  $t('superPanel.i18n.createLang.codeTip')
                 "
                 placement="top"
               >
@@ -860,19 +1089,21 @@
             v-model="createLanguageDialog.form.newLangCode"
             style="width: 100%"
             :placeholder="
-              $t('menu.superPanel.projectConfig.i18n.newLangCodePlaceholder')
+              $t('superPanel.i18n.createLang.codePlaceholder')
             "
-            @change="handlePresetLangChange"
           >
             <el-option
               v-for="lang in presetLanguages"
               :key="lang.code"
-              :label="`${lang.autonym} (${lang.code})`"
+              :label="`${lang[languageDisplayField]} (${lang.code})`"
               :value="lang.code"
             >
-              <span style="display: flex; align-items: center;">
-                <svg-icon :icon-class="lang.flag || 'flags/global'" style="width: 20px; height: 20px; margin-right: 8px;" />
-                <span>{{ lang.autonym }} ({{ lang.code }})</span>
+              <span style="display: flex; align-items: center">
+                <svg-icon
+                  :icon-class="lang.flag || 'global'"
+                  style="width: 20px; height: 20px; margin-right: 8px"
+                />
+                <span>{{ lang[languageDisplayField] }} ({{ lang.code }})</span>
               </span>
             </el-option>
           </el-select>
@@ -880,31 +1111,10 @@
         <el-form-item>
           <template slot="label">
             <span class="label-with-tip">
-              {{ $t("menu.superPanel.projectConfig.i18n.newLangName") }}
+              {{ $t("superPanel.i18n.translate.copyValues") }}
               <el-tooltip
                 :content="
-                  $t('menu.superPanel.projectConfig.i18n.newLangNameTip')
-                "
-                placement="top"
-              >
-                <i class="el-icon-question label-tip-icon"></i>
-              </el-tooltip>
-            </span>
-          </template>
-          <el-input
-            v-model="createLanguageDialog.form.newLangName"
-            :placeholder="
-              $t('menu.superPanel.projectConfig.i18n.newLangNamePlaceholder')
-            "
-          />
-        </el-form-item>
-        <el-form-item>
-          <template slot="label">
-            <span class="label-with-tip">
-              {{ $t("menu.superPanel.projectConfig.i18n.copyValues") }}
-              <el-tooltip
-                :content="
-                  $t('menu.superPanel.projectConfig.i18n.copyValuesTip')
+                  $t('superPanel.i18n.translate.copyValuesTip')
                 "
                 placement="top"
               >
@@ -915,20 +1125,20 @@
           <el-switch
             v-model="createLanguageDialog.form.copyValues"
             :active-text="
-              $t('menu.superPanel.projectConfig.i18n.copyValuesYes')
+              $t('superPanel.i18n.translate.copyValuesYes')
             "
             :inactive-text="
-              $t('menu.superPanel.projectConfig.i18n.copyValuesNo')
+              $t('superPanel.i18n.translate.copyValuesNo')
             "
           />
         </el-form-item>
         <el-form-item>
           <template slot="label">
             <span class="label-with-tip">
-              {{ $t("menu.superPanel.projectConfig.i18n.autoTranslateAll") }}
+              {{ $t("superPanel.i18n.translate.autoAll") }}
               <el-tooltip
                 :content="
-                  $t('menu.superPanel.projectConfig.i18n.autoTranslateAllTip')
+                  $t('superPanel.i18n.translate.autoAllTip')
                 "
                 placement="top"
               >
@@ -944,7 +1154,7 @@
           />
         </el-form-item>
         <el-alert
-          :title="$t('menu.superPanel.projectConfig.i18n.createLanguageTip')"
+          :title="$t('superPanel.i18n.createLang.tip')"
           type="info"
           :closable="false"
           show-icon
@@ -968,22 +1178,22 @@
 
 <script>
 import {
-  requestGetI18nFileListApi,
-  requestReadI18nFileApi,
-  requestSaveI18nFileApi,
-  requestBackupI18nFileApi,
-  requestAddI18nConfigApi,
-  requestDeleteI18nConfigApi,
+  requestGetLanguagesApi,
+  requestReadLanguageApi,
+  requestSaveLanguageValuesApi,
+  requestBackupLanguageApi,
+  requestAddNodeApi,
+  requestDeleteNodeApi,
   requestGetI18nBackupConfigApi,
   requestSetI18nBackupDirApi,
   requestCreateLanguageApi,
   requestTranslateApi,
-  requestGetI18nBackupListApi,
-  requestDeleteI18nBackupApi,
+  requestGetLanguageBackupListApi,
+  requestDeleteLanguageBackupApi,
   requestGetTranslationConfigApi,
 } from "@/api";
-import { applyFormat } from "@/utils/translationFormat";
-import translateManager from "@/utils/translateManager";
+import { applyFormat } from "@/utils/business/translationFormat";
+import translateManager from "@/utils/business/translateManager";
 
 export default {
   name: "I18nManager",
@@ -995,6 +1205,7 @@ export default {
       loading: false,
       saving: false,
       masterLanguage: "zh-CN", // 母版语言，默认中文，从翻译配置中加载
+      languageDisplayField: "autonym", // 语言名称显示方式：autonym=母语, name=中文
       currentData: null,
       originalData: null,
       selectedKeyPath: null,
@@ -1045,15 +1256,36 @@ export default {
         nodePath: null, // 节点翻译时的节点路径，null 表示全量翻译
         nodeLabel: "", // 节点翻译时的节点名称
       },
+      // 批量对比字段对话框
+      batchCompareDialog: {
+        visible: false,
+        comparing: false,
+        hasResult: false,
+        masterLangName: "",
+        activeTab: "missing",
+        form: {
+          targetLangCode: "",
+        },
+        stats: {
+          masterTotal: 0,
+          targetTotal: 0,
+          missingCount: 0,
+          extraCount: 0,
+          emptyCount: 0,
+        },
+        fields: {
+          missing: [],
+          extra: [],
+          empty: [],
+        },
+      },
       createLanguageDialog: {
         visible: false,
         saving: false,
         autoTranslate: false,
         form: {
-          sourceFileName: "zh-CN.js",
+          sourceLangCode: "zh-CN",
           newLangCode: "",
-          newFileName: "",
-          newLangName: "",
           copyValues: true,
         },
       },
@@ -1076,9 +1308,19 @@ export default {
 
   computed: {
     backupPathTooltip() {
-      return `${this.$t("menu.superPanel.projectConfig.i18n.currentPath")}: ${
+      return `${this.$t("superPanel.i18n.backup.currentPath")}: ${
         this.backupConfig.backupDir
       }`;
+    },
+
+    // 母版语言的显示名称（根据 languageDisplayField 决定 autonym 或 name）
+    masterLangDisplay() {
+      const master = this.fileList.find(
+        (f) => f.langCode === this.masterLanguage
+      );
+      if (!master) return this.masterLanguage;
+      const field = this.languageDisplayField || "autonym";
+      return master[field] || master.autonym || this.masterLanguage;
     },
 
     breadcrumbList() {
@@ -1125,12 +1367,12 @@ export default {
     async loadPresetLanguages() {
       try {
         const { requestGetPresetLanguagesApi } = await import(
-          "@/api/i18nManager"
+          "@/api/i18n-manager"
         );
         const res = await requestGetPresetLanguagesApi();
         this.presetLanguages = res.data || [];
       } catch (err) {
-        console.error("[I18N] 加载预设语言列表失败:", err);
+        // 加载预设语言失败，忽略错误
       }
     },
 
@@ -1168,17 +1410,17 @@ export default {
     async loadFileList(retryCount = 0) {
       // 如果正在加载，返回同一个 Promise，避免重复请求
       if (this.loadingFileListPromise && retryCount === 0) {
-        return this.loadingFileListPromise
+        return this.loadingFileListPromise;
       }
 
       this.loadingFileListPromise = (async () => {
         try {
-          const res = await requestGetI18nFileListApi();
+          const res = await requestGetLanguagesApi();
           this.fileList = res.data || [];
           // 加载成功后，如果 activeTab 不在文件列表中，重置为 null
           if (
             this.activeTab &&
-            !this.fileList.some((f) => f.fileName === this.activeTab)
+            !this.fileList.some((f) => f.langCode === this.activeTab)
           ) {
             this.activeTab = "";
             this.currentData = null;
@@ -1206,17 +1448,17 @@ export default {
             return this.loadFileList(retryCount + 1);
           }
           this.$message.error(
-            this.$t("menu.superPanel.projectConfig.i18n.loadFileListFailed") +
+            this.$t("superPanel.i18n.common.loadFileListFailed") +
               (err.message ? `: ${err.message}` : "")
           );
         }
-      })()
+      })();
 
       try {
-        return await this.loadingFileListPromise
+        return await this.loadingFileListPromise;
       } finally {
         // 加载完成后清除缓存
-        this.loadingFileListPromise = null
+        this.loadingFileListPromise = null;
       }
     },
 
@@ -1224,21 +1466,25 @@ export default {
     async loadTranslationConfig() {
       try {
         const res = await requestGetTranslationConfigApi();
-        if (res.data && res.data.masterLanguage) {
-          this.masterLanguage = res.data.masterLanguage;
+        if (res.data) {
+          if (res.data.masterLanguage) {
+            this.masterLanguage = res.data.masterLanguage;
+          }
+          if (res.data.languageDisplayField) {
+            this.languageDisplayField = res.data.languageDisplayField;
+          }
         }
       } catch (err) {
         // 加载失败，使用默认值 zh-CN
-        console.error("[I18N] 加载翻译配置失败，使用默认母版语言 zh-CN");
       }
     },
 
-    async handleLangTabClick(fileName) {
-      if (this.activeTab === fileName) return;
+    async handleLangTabClick(langCode) {
+      if (this.activeTab === langCode) return;
       if (this.modifiedKeys.size > 0) {
         try {
           await this.$confirm(
-            this.$t("menu.superPanel.projectConfig.i18n.unsavedChanges"),
+            this.$t("superPanel.i18n.common.unsavedChanges"),
             this.$t("common.tip"),
             { type: "warning" }
           );
@@ -1246,7 +1492,7 @@ export default {
           return;
         }
       }
-      this.activeTab = fileName;
+      this.activeTab = langCode;
       await this.loadCurrentFile();
     },
 
@@ -1260,7 +1506,7 @@ export default {
       this.detailList = [];
       try {
         // 加载当前语言文件
-        const res = await requestReadI18nFileApi(this.activeTab);
+        const res = await requestReadLanguageApi(this.activeTab);
         if (!res || !res.data || !res.data.data) {
           throw new Error("返回数据格式不正确");
         }
@@ -1269,15 +1515,15 @@ export default {
         this.originalData = JSON.parse(JSON.stringify(i18nData));
 
         // 如果当前语言不是母版语言，同时加载母版语言文件作为翻译源
-        const masterFileName = this.masterLanguage + ".js";
+        const masterFileName = this.masterLanguage;
         if (this.activeTab !== masterFileName) {
           try {
-            const masterRes = await requestReadI18nFileApi(masterFileName);
+            const masterRes = await requestReadLanguageApi(masterFileName);
             if (masterRes && masterRes.data && masterRes.data.data) {
               this.zhData = masterRes.data.data;
             }
           } catch (masterErr) {
-            console.error("[I18N] 加载母版语言文件失败:", masterErr);
+            // 加载主语言文件失败，忽略错误
           }
         } else {
           this.zhData = i18nData;
@@ -1292,11 +1538,10 @@ export default {
         });
         this.searchKeyword = "";
       } catch (err) {
-        console.error("[I18N] 加载失败:", err);
         // 只有用户主动操作时才显示错误提示
         if (showLoading) {
           this.$message.error(
-            this.$t("menu.superPanel.projectConfig.i18n.loadFileFailed") +
+            this.$t("superPanel.i18n.common.loadFileFailed") +
               (err.message ? ": " + err.message : "")
           );
         }
@@ -1459,7 +1704,7 @@ export default {
     async handleDeleteItem(item) {
       try {
         await this.$confirm(
-          `${this.$t("menu.superPanel.projectConfig.i18n.confirmDelete")}: ${
+          `${this.$t("superPanel.i18n.node.confirmDelete")}: ${
             item.keyPath
           }`,
           this.$t("common.tip"),
@@ -1470,14 +1715,14 @@ export default {
       }
 
       try {
-        await requestDeleteI18nConfigApi(this.activeTab, item.keyPath);
+        await requestDeleteNodeApi({ langCode: this.activeTab, keyPath: item.keyPath });
         this.$message.success(
-          this.$t("menu.superPanel.projectConfig.i18n.deleteSuccess")
+          this.$t("superPanel.i18n.common.deleteSuccess")
         );
         await this.loadCurrentFile();
       } catch (err) {
         this.$message.error(
-          this.$t("menu.superPanel.projectConfig.i18n.deleteFailed")
+          this.$t("superPanel.i18n.common.deleteFailed")
         );
       }
     },
@@ -1763,22 +2008,22 @@ export default {
     async handleSave() {
       if (this.modifiedKeys.size === 0) {
         this.$message.info(
-          this.$t("menu.superPanel.projectConfig.i18n.noChanges")
+          this.$t("superPanel.i18n.common.noChanges")
         );
         return;
       }
 
       this.saving = true;
       try {
-        await requestSaveI18nFileApi(this.activeTab, this.currentData);
+        await requestSaveLanguageValuesApi(this.activeTab, this.currentData);
         this.$message.success(
-          this.$t("menu.superPanel.projectConfig.i18n.saveSuccess")
+          this.$t("superPanel.i18n.common.saveSuccess")
         );
         this.modifiedKeys.clear();
         this.originalData = JSON.parse(JSON.stringify(this.currentData));
       } catch (err) {
         this.$message.error(
-          this.$t("menu.superPanel.projectConfig.i18n.saveFailed")
+          this.$t("superPanel.i18n.common.saveFailed")
         );
       } finally {
         this.saving = false;
@@ -1789,13 +2034,13 @@ export default {
 
     async handleBackup() {
       try {
-        await requestBackupI18nFileApi(this.activeTab);
+        await requestBackupLanguageApi(this.activeTab);
         this.$message.success(
-          this.$t("menu.superPanel.projectConfig.i18n.backupSuccess")
+          this.$t("superPanel.i18n.backup.success")
         );
       } catch (err) {
         this.$message.error(
-          this.$t("menu.superPanel.projectConfig.i18n.backupFailed")
+          this.$t("superPanel.i18n.backup.failed")
         );
       }
     },
@@ -1810,7 +2055,7 @@ export default {
     async handleSetBackupPath() {
       if (!this.backupPathDialog.newPath) {
         this.$message.warning(
-          this.$t("menu.superPanel.projectConfig.i18n.pathNotEmpty")
+          this.$t("superPanel.i18n.node.pathNotEmpty")
         );
         return;
       }
@@ -1818,12 +2063,12 @@ export default {
         await requestSetI18nBackupDirApi(this.backupPathDialog.newPath);
         this.backupConfig.backupDir = this.backupPathDialog.newPath;
         this.$message.success(
-          this.$t("menu.superPanel.projectConfig.i18n.setPathSuccess")
+          this.$t("superPanel.i18n.backup.setPathSuccess")
         );
         this.backupPathDialog.visible = false;
       } catch (err) {
         this.$message.error(
-          this.$t("menu.superPanel.projectConfig.i18n.setPathFailed")
+          this.$t("superPanel.i18n.backup.setPathFailed")
         );
       }
     },
@@ -1832,7 +2077,8 @@ export default {
     async loadBackupList() {
       this.backupListLoading = true;
       try {
-        const res = await requestGetI18nBackupListApi();
+        // 备份路径弹窗为全局配置，显示所有语言的备份，不传 activeTab 过滤
+        const res = await requestGetLanguageBackupListApi();
         if (res && res.data && Array.isArray(res.data)) {
           this.backupList = res.data.map((item) => ({
             ...item,
@@ -1843,7 +2089,6 @@ export default {
           this.backupList = [];
         }
       } catch (err) {
-        console.error("[I18N] 加载备份列表失败:", err);
         this.backupList = [];
       } finally {
         this.backupListLoading = false;
@@ -1852,26 +2097,21 @@ export default {
 
     // 删除备份
     async handleDeleteBackup(backupFileName) {
+      const confirmed = await this.$confirm.delete(
+        `${this.$t(
+          "superPanel.i18n.backup.deleteConfirm"
+        )}: ${backupFileName}`
+      );
+      if (!confirmed) return;
       try {
-        await this.$confirm(
-          `${this.$t(
-            "menu.superPanel.projectConfig.i18n.confirmDeleteBackup"
-          )}: ${backupFileName}`,
-          this.$t("common.tip"),
-          { type: "warning" }
-        );
-      } catch {
-        return;
-      }
-      try {
-        await requestDeleteI18nBackupApi(backupFileName);
+        await requestDeleteLanguageBackupApi(backupFileName);
         this.$message.success(
-          this.$t("menu.superPanel.projectConfig.i18n.deleteBackupSuccess")
+          this.$t("superPanel.i18n.backup.deleteSuccess")
         );
         await this.loadBackupList();
       } catch (err) {
         this.$message.error(
-          this.$t("menu.superPanel.projectConfig.i18n.deleteBackupFailed")
+          this.$t("superPanel.i18n.backup.deleteFailed")
         );
       }
     },
@@ -1902,7 +2142,7 @@ export default {
       // 如果正在翻译，不允许开始新的翻译
       if (translateManager.state.isTranslating) {
         this.$message.warning(
-          this.$t("menu.superPanel.projectConfig.i18n.translateInProgressTip")
+          this.$t("superPanel.i18n.translate.inProgressTip")
         );
         return;
       }
@@ -1912,12 +2152,234 @@ export default {
       this.batchTranslateDialog.nodeLabel = "";
     },
 
+    // ========== 批量对比字段 ==========
+
+    // 打开批量对比字段弹窗
+    openBatchCompareDialog() {
+      // 如果正在翻译，不允许开始对比
+      if (translateManager.state.isTranslating) {
+        this.$message.warning(
+          this.$t("superPanel.i18n.translate.inProgressTip")
+        );
+        return;
+      }
+      // 设置母版语言名称
+      const masterFile = this.fileList.find(
+        (f) => f.langCode === this.masterLanguage
+      );
+      this.batchCompareDialog.masterLangName = masterFile
+        ? masterFile.autonym
+        : this.masterLanguage;
+      // 默认选中当前激活的语言（如果不是母版）
+      if (this.activeTab && this.activeTab !== this.masterLanguage) {
+        this.batchCompareDialog.form.targetLangCode = this.activeTab;
+      } else {
+        // 否则选中第一个非母版语言
+        const firstNonMaster = this.fileList.find(
+          (f) => f.langCode !== this.masterLanguage
+        );
+        this.batchCompareDialog.form.targetLangCode = firstNonMaster
+          ? firstNonMaster.langCode
+          : "";
+      }
+      // 重置结果
+      this.batchCompareDialog.hasResult = false;
+      this.batchCompareDialog.comparing = false;
+      this.batchCompareDialog.activeTab = "missing";
+      this.batchCompareDialog.stats = {
+        masterTotal: 0,
+        targetTotal: 0,
+        missingCount: 0,
+        extraCount: 0,
+        emptyCount: 0,
+      };
+      this.batchCompareDialog.reports = {
+        missing: "",
+        extra: "",
+        empty: "",
+        full: "",
+      };
+      this.batchCompareDialog.visible = true;
+    },
+
+    // 开始比对
+    async handleStartCompare() {
+      if (!this.batchCompareDialog.form.targetLangCode) {
+        this.$message.warning(
+          this.$t("superPanel.i18n.compare.selectLanguage")
+        );
+        return;
+      }
+      this.batchCompareDialog.comparing = true;
+      try {
+        const masterFileName = this.masterLanguage;
+        const targetLangCode = this.batchCompareDialog.form.targetLangCode;
+
+        // 加载母版语言文件
+        const masterRes = await requestReadLanguageApi(masterFileName);
+        const masterData = masterRes?.data?.data || {};
+
+        // 加载待比对语言
+        const targetRes = await requestReadLanguageApi(targetLangCode);
+        const targetData = targetRes?.data?.data || {};
+
+        // 执行对比
+        const result = this.compareLanguageFiles(
+          masterData,
+          targetData,
+          masterFileName,
+          targetLangCode
+        );
+
+        // 更新统计数据
+        this.batchCompareDialog.stats = {
+          masterTotal: result.masterTotal,
+          targetTotal: result.targetTotal,
+          missingCount: result.missingFields.length,
+          extraCount: result.extraFields.length,
+          emptyCount: result.emptyFields.length,
+        };
+
+        // 保存字段列表（用于表格展示）
+        this.batchCompareDialog.fields.missing = result.missingFields;
+        this.batchCompareDialog.fields.extra = result.extraFields;
+        this.batchCompareDialog.fields.empty = result.emptyFields;
+
+        this.batchCompareDialog.hasResult = true;
+        this.$message.success(
+          this.$t("superPanel.i18n.compare.success")
+        );
+      } catch (error) {
+        console.error("比对失败:", error);
+        this.$message.error(
+          this.$t("superPanel.i18n.compare.failed") +
+            ": " +
+            (error.message || "")
+        );
+      } finally {
+        this.batchCompareDialog.comparing = false;
+      }
+    },
+
+    // ========== 语言文件对比工具函数 ==========
+
+    /**
+     * 对比两个语言文件的结构差异
+     * @param {Object} masterData - 母版语言数据
+     * @param {Object} targetData - 待比对语言数据
+     * @param {string} masterFileName - 母版文件名
+     * @param {string} targetLangCode - 待比对文件名
+     * @returns {Object} 对比结果
+     */
+    compareLanguageFiles(masterData, targetData) {
+      const masterLeaves = this.collectLeafNodes(masterData);
+      const targetLeaves = this.collectLeafNodes(targetData);
+
+      const masterKeySet = new Set(masterLeaves.map((n) => n.keyPath));
+      const targetKeySet = new Set(targetLeaves.map((n) => n.keyPath));
+      const targetValueMap = new Map(
+        targetLeaves.map((n) => [n.keyPath, n.value])
+      );
+
+      // 缺失字段：母版有但待比对没有
+      const missingFields = masterLeaves
+        .filter((node) => !targetKeySet.has(node.keyPath))
+        .map((node) => ({
+          keyPath: node.keyPath,
+          masterValue: node.value,
+          targetValue: null,
+        }));
+
+      // 多余字段：待比对有但母版没有
+      const extraFields = targetLeaves
+        .filter((node) => !masterKeySet.has(node.keyPath))
+        .map((node) => ({
+          keyPath: node.keyPath,
+          masterValue: null,
+          targetValue: node.value,
+        }));
+
+      // 空值字段：待比对中值为空的字段（且母版中有值）
+      const emptyFields = masterLeaves
+        .filter((node) => {
+          if (!targetKeySet.has(node.keyPath)) return false;
+          const targetValue = targetValueMap.get(node.keyPath);
+          const masterValue = node.value;
+          return (
+            masterValue &&
+            (!targetValue || targetValue.toString().trim() === "")
+          );
+        })
+        .map((node) => ({
+          keyPath: node.keyPath,
+          masterValue: node.value,
+          targetValue: targetValueMap.get(node.keyPath) || "",
+        }));
+
+      return {
+        masterTotal: masterLeaves.length,
+        targetTotal: targetLeaves.length,
+        missingFields,
+        extraFields,
+        emptyFields,
+      };
+    },
+
+    // 复制当前Tab的字段列表
+    handleCopyReport() {
+      const activeTab = this.batchCompareDialog.activeTab;
+      const fields = this.batchCompareDialog.fields[activeTab] || [];
+      if (fields.length === 0) {
+        this.$message.warning(
+          this.$t("superPanel.i18n.compare.noContentToCopy")
+        );
+        return;
+      }
+      // 生成文本内容
+      const lines = [];
+      const tabLabel = {
+        missing: "缺失字段",
+        extra: "多余字段",
+        empty: "空值字段",
+      }[activeTab] || activeTab;
+      lines.push(`// ${tabLabel}报告（共 ${fields.length} 个）`);
+      lines.push("");
+      fields.forEach((field, index) => {
+        lines.push(`// [${index + 1}] ${field.keyPath}`);
+        if (field.masterValue !== null && field.masterValue !== undefined) {
+          lines.push(`//   母版值: ${JSON.stringify(field.masterValue)}`);
+        }
+        if (field.targetValue !== null && field.targetValue !== undefined && field.targetValue !== "") {
+          lines.push(`//   待比对值: ${JSON.stringify(field.targetValue)}`);
+        }
+        lines.push(`"${field.keyPath}": "",`);
+        lines.push("");
+      });
+      const content = lines.join("\n");
+      // 创建临时 textarea 元素
+      const textarea = document.createElement("textarea");
+      textarea.value = content;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        this.$message.success(this.$t("common.copySuccess"));
+      } catch (err) {
+        this.$message.error(this.$t("common.copyFailed"));
+        console.error("复制失败:", err);
+      } finally {
+        document.body.removeChild(textarea);
+      }
+    },
+
     // 节点翻译：打开批量翻译确认弹窗，只翻译当前节点下的内容
     handleNodeTranslate() {
       // 如果正在翻译，不允许开始新的翻译
       if (translateManager.state.isTranslating) {
         this.$message.warning(
-          this.$t("menu.superPanel.projectConfig.i18n.translateInProgressTip")
+          this.$t("superPanel.i18n.translate.inProgressTip")
         );
         return;
       }
@@ -1936,13 +2398,15 @@ export default {
 
       if (!data || data.isLeaf) {
         this.$message.warning(
-          this.$t("menu.superPanel.projectConfig.i18n.nodeTranslateLeafTip")
+          this.$t("superPanel.i18n.translate.nodeLeafTip")
         );
         return;
       }
       if (!data.keyPath) {
         this.$message.error(
-          this.$t("menu.superPanel.projectConfig.i18n.nodeTranslateKeyPathMissing")
+          this.$t(
+            "superPanel.i18n.translate.nodeKeyPathMissing"
+          )
         );
         return;
       }
@@ -1955,17 +2419,17 @@ export default {
 
     async confirmBatchTranslate() {
       this.batchTranslateDialog.visible = false;
-      const targetFileName = this.activeTab;
+      const targetLangCode = this.activeTab;
       // 获取当前语言的名称
       const currentFile = this.fileList.find(
-        (f) => f.fileName === targetFileName
+        (f) => f.langCode === targetLangCode
       );
       const targetLangName = currentFile
-        ? currentFile.langName
-        : targetFileName;
+        ? currentFile.autonym
+        : targetLangCode;
       // 执行批量翻译（支持节点翻译）
       await this.batchTranslateLanguage(
-        targetFileName,
+        targetLangCode,
         targetLangName,
         this.batchTranslateDialog.mode,
         this.batchTranslateDialog.nodePath,
@@ -1978,55 +2442,36 @@ export default {
     openCreateLanguageDialog() {
       this.createLanguageDialog.visible = true;
       this.createLanguageDialog.form = {
-        sourceFileName: this.masterLanguage + ".js",
+        sourceLangCode: this.masterLanguage,
         newLangCode: "",
-        newFileName: "",
-        newLangName: "",
         copyValues: true,
       };
     },
 
-    // 选择预设语言时自动填充语言名称和文件名
-    handlePresetLangChange(langCode) {
-      const lang = this.presetLanguages.find((l) => l.code === langCode);
-      if (lang) {
-        this.createLanguageDialog.form.newLangName = lang.autonym;
-        this.createLanguageDialog.form.newFileName = langCode + ".js";
-      }
-    },
-
     async handleCreateLanguage() {
       // 如果正在翻译且勾选了自动翻译，不允许创建
-      if (translateManager.state.isTranslating && this.createLanguageDialog.autoTranslate) {
+      if (
+        translateManager.state.isTranslating &&
+        this.createLanguageDialog.autoTranslate
+      ) {
         this.$message.warning(
-          this.$t("menu.superPanel.projectConfig.i18n.translateInProgressTip")
+          this.$t("superPanel.i18n.translate.inProgressTip")
         );
         return;
       }
-      const { sourceFileName, newLangCode, newLangName, copyValues } =
+      const { sourceLangCode, newLangCode, copyValues } =
         this.createLanguageDialog.form;
 
-      // 根据语言代码生成文件名
-      const newFileName = newLangCode.endsWith(".js")
-        ? newLangCode
-        : newLangCode + ".js";
-
       // 校验
-      if (!sourceFileName) {
+      if (!sourceLangCode) {
         this.$message.warning(
-          this.$t("menu.superPanel.projectConfig.i18n.sourceLangNotEmpty")
+          this.$t("superPanel.i18n.translate.sourceNotEmpty")
         );
         return;
       }
       if (!newLangCode) {
         this.$message.warning(
-          this.$t("menu.superPanel.projectConfig.i18n.newLangCodeNotEmpty")
-        );
-        return;
-      }
-      if (!newLangName) {
-        this.$message.warning(
-          this.$t("menu.superPanel.projectConfig.i18n.newLangNameNotEmpty")
+          this.$t("superPanel.i18n.createLang.codeNotEmpty")
         );
         return;
       }
@@ -2034,30 +2479,31 @@ export default {
       this.createLanguageDialog.saving = true;
       try {
         await requestCreateLanguageApi({
-          sourceFileName,
-          newFileName,
-          newLangName,
+          sourceLangCode,
+          newLangCode,
           copyValues,
         });
         this.$message.success(
-          this.$t("menu.superPanel.projectConfig.i18n.createLanguageSuccess")
+          this.$t("superPanel.i18n.createLang.success")
         );
 
-        // 如果勾选了自动翻译，执行批量翻译
+        // 重新加载语言列表
+        await this.loadFileList();
+        this.createLanguageDialog.visible = false;
+
+        // 勾选自动翻译时，切换到新语言并执行整语言批量翻译
         if (this.createLanguageDialog.autoTranslate) {
-          this.createLanguageDialog.visible = false;
-          await this.loadFileList();
-          // 执行批量翻译
-          await this.batchTranslateLanguage(newFileName, newLangName);
-        } else {
-          this.createLanguageDialog.visible = false;
-          // 重新加载文件列表
-          await this.loadFileList();
+          const preset = this.presetLanguages.find(
+            (l) => l.code === newLangCode
+          );
+          const targetLangName = preset ? preset.autonym : newLangCode;
+          this.activeTab = newLangCode;
+          await this.loadCurrentFile();
+          await this.batchTranslateLanguage(newLangCode, targetLangName);
         }
       } catch (err) {
         this.$message.error(
-          err.message ||
-            this.$t("menu.superPanel.projectConfig.i18n.createLanguageFailed")
+          this.$t("superPanel.i18n.createLang.failed")
         );
       } finally {
         this.createLanguageDialog.saving = false;
@@ -2069,7 +2515,7 @@ export default {
     // nodePath: 节点路径，null 表示全量翻译
     // nodeLabel: 节点名称，用于显示
     async batchTranslateLanguage(
-      targetFileName,
+      targetLangCode,
       targetLangName,
       mode = "all",
       nodePath = null,
@@ -2079,14 +2525,14 @@ export default {
       this.loading = false;
       try {
         // 母版语言文件名和代码
-        const masterFileName = this.masterLanguage + ".js";
+        const masterFileName = this.masterLanguage;
         const masterLangCode = this.masterLanguage;
 
         // 加载母版语言文件作为源
-        const masterRes = await requestReadI18nFileApi(masterFileName);
+        const masterRes = await requestReadLanguageApi(masterFileName);
         if (!masterRes || !masterRes.data || !masterRes.data.data) {
           this.$message.error(
-            this.$t("menu.superPanel.projectConfig.i18n.translateFailed")
+            this.$t("superPanel.i18n.translate.failed")
           );
           return;
         }
@@ -2104,7 +2550,7 @@ export default {
           ) {
             this.$message.warning(
               this.$t(
-                "menu.superPanel.projectConfig.i18n.nodeTranslateNoContent"
+                "superPanel.i18n.translate.nodeNoContent"
               )
             );
             return;
@@ -2118,14 +2564,14 @@ export default {
 
         if (totalCount === 0) {
           this.$message.warning(
-            this.$t("menu.superPanel.projectConfig.i18n.translateNoContent")
+            this.$t("superPanel.i18n.translate.noContent")
           );
           return;
         }
 
         // 开始翻译（显示进度弹窗）
         translateManager.startTranslate(
-          targetFileName,
+          targetLangCode,
           targetLangName,
           totalCount,
           nodePath,
@@ -2133,11 +2579,11 @@ export default {
         );
 
         // 加载目标语言文件
-        const targetRes = await requestReadI18nFileApi(targetFileName);
+        const targetRes = await requestReadLanguageApi(targetLangCode);
         if (!targetRes || !targetRes.data || !targetRes.data.data) {
           translateManager.finishTranslate(
             false,
-            this.$t("menu.superPanel.projectConfig.i18n.translateFailed")
+            this.$t("superPanel.i18n.translate.failed")
           );
           return;
         }
@@ -2151,7 +2597,6 @@ export default {
         for (let i = 0; i < leafNodes.length; i++) {
           // 检查是否取消
           if (translateManager.state.isCancelled) {
-            console.error("[I18N] 翻译已取消，已完成:", i, "/", totalCount);
             break;
           }
 
@@ -2181,9 +2626,10 @@ export default {
             const res = await requestTranslateApi(
               node.value,
               masterLangCode,
-              targetFileName.replace(".js", "")
+              targetLangCode
             );
-            if (res.data && res.data.result) {
+            // 响应拦截器返回 response.data，翻译结果在 res.data.result 中
+            if (res && res.data && res.data.result) {
               // 应用首字大写格式（value 使用首字大写）
               const formattedResult = applyFormat(res.data.result, "title");
               // 更新目标语言数据
@@ -2195,6 +2641,15 @@ export default {
               translateManager.addFailItem(node.keyPath);
             }
           } catch (err) {
+            // 被取消的请求不计入失败数（用户取消翻译或重复请求自动取消）
+            if (
+              err &&
+              (err.__CANCEL__ ||
+                err.code === "ERR_CANCELED" ||
+                err.message === "重复请求，自动取消上一次")
+            ) {
+              continue;
+            }
             failCount++;
             failItems.push(node.keyPath);
             translateManager.addFailItem(node.keyPath);
@@ -2212,16 +2667,16 @@ export default {
 
         // 保存翻译结果
         try {
-          await requestSaveI18nFileApi(targetFileName, targetData);
+          await requestSaveLanguageValuesApi(targetLangCode, targetData);
           const successMessage = this.$t(
-            "menu.superPanel.projectConfig.i18n.translateBatchSuccess",
+            "superPanel.i18n.translate.batchSuccess",
             { lang: targetLangName, success: successCount, fail: failCount }
           );
 
           // 如果是取消的，显示取消提示
           if (translateManager.state.isCancelled) {
             const cancelMessage = this.$t(
-              "menu.superPanel.projectConfig.i18n.translateCancelled",
+              "superPanel.i18n.translate.cancelled",
               { lang: targetLangName, completed: successCount, fail: failCount }
             );
             translateManager.finishTranslate(false, cancelMessage);
@@ -2232,11 +2687,11 @@ export default {
           this.$message.success(successMessage);
 
           if (failItems.length > 0 && failItems.length <= 10) {
-            console.error("[I18N] 翻译失败的 key:", failItems);
+            // TODO: 失败项较少时，显示详细的失败列表
           }
           // 翻译完成后不自动刷新，避免后端接口异常导致"加载中"和错误提示
           // 用户可以手动点击刷新按钮查看翻译结果
-          // if (this.activeTab === targetFileName) {
+          // if (this.activeTab === targetLangCode) {
           //   try {
           //     await this.loadCurrentFile(false);
           //   } catch (e) {
@@ -2245,15 +2700,14 @@ export default {
           // }
         } catch (saveErr) {
           const saveFailedMessage = this.$t(
-            "menu.superPanel.projectConfig.i18n.translateSaveFailed"
+            "superPanel.i18n.translate.saveFailed"
           );
           translateManager.finishTranslate(false, saveFailedMessage);
           this.$message.error(saveFailedMessage);
         }
       } catch (err) {
         const errorMessage =
-          err.message ||
-          this.$t("menu.superPanel.projectConfig.i18n.translateFailed");
+          this.$t("superPanel.i18n.translate.failed");
         translateManager.finishTranslate(false, errorMessage);
         this.$message.error(errorMessage);
       }
@@ -2291,7 +2745,7 @@ export default {
       this.hideContextMenu();
       if (data.isLeaf) {
         this.$message.warning(
-          this.$t("menu.superPanel.projectConfig.i18n.cannotAddChildToLeaf")
+          this.$t("superPanel.i18n.node.cannotAddChildToLeaf")
         );
         return;
       }
@@ -2311,7 +2765,7 @@ export default {
 
       try {
         await this.$confirm(
-          `${this.$t("menu.superPanel.projectConfig.i18n.confirmDelete")}: ${
+          `${this.$t("superPanel.i18n.node.confirmDelete")}: ${
             data.keyPath
           }`,
           this.$t("common.tip"),
@@ -2322,14 +2776,14 @@ export default {
       }
 
       try {
-        await requestDeleteI18nConfigApi(this.activeTab, data.keyPath);
+        await requestDeleteNodeApi({ langCode: this.activeTab, keyPath: data.keyPath });
         this.$message.success(
-          this.$t("menu.superPanel.projectConfig.i18n.deleteSuccess")
+          this.$t("superPanel.i18n.common.deleteSuccess")
         );
         await this.loadCurrentFile();
       } catch (err) {
         this.$message.error(
-          this.$t("menu.superPanel.projectConfig.i18n.deleteFailed")
+          this.$t("superPanel.i18n.common.deleteFailed")
         );
       }
     },
@@ -2341,7 +2795,7 @@ export default {
       // 先构建好完整的 values 对象，避免 Vue2 响应式问题
       const values = {};
       for (const file of this.fileList) {
-        values[file.fileName] = "";
+        values[file.langCode] = "";
       }
       this.addDialog.form = {
         parentPath,
@@ -2387,14 +2841,14 @@ export default {
 
       if (!key) {
         this.$message.warning(
-          this.$t("menu.superPanel.projectConfig.i18n.keyNotEmpty")
+          this.$t("superPanel.i18n.field.keyNotEmpty")
         );
         return;
       }
 
       if (!/^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(key)) {
         this.$message.warning(
-          this.$t("menu.superPanel.projectConfig.i18n.keyInvalid")
+          this.$t("superPanel.i18n.field.keyInvalid")
         );
         return;
       }
@@ -2402,17 +2856,17 @@ export default {
       this.addDialog.saving = true;
       try {
         for (const file of this.fileList) {
-          const value = values[file.fileName] || "";
-          await requestAddI18nConfigApi(file.fileName, parentPath, key, value);
+          const value = values[file.langCode] || "";
+          await requestAddNodeApi({ langCode: file.langCode, parentPath, key, value });
         }
         this.$message.success(
-          this.$t("menu.superPanel.projectConfig.i18n.addSuccess")
+          this.$t("superPanel.i18n.common.addSuccess")
         );
         this.addDialog.visible = false;
         await this.loadCurrentFile();
       } catch (err) {
         this.$message.error(
-          err.message || this.$t("menu.superPanel.projectConfig.i18n.addFailed")
+          this.$t("superPanel.i18n.common.addFailed")
         );
       } finally {
         this.addDialog.saving = false;
@@ -2421,48 +2875,48 @@ export default {
 
     // ========== 自动翻译 ==========
 
-    async autoTranslate(targetFileName, format = "title") {
-      const masterFileName = this.masterLanguage + ".js";
+    async autoTranslate(targetLangCode, format = "title") {
+      const masterFileName = this.masterLanguage;
       const sourceText = this.addDialog.form.values[masterFileName];
       if (!sourceText) {
         this.$message.warning(
-          this.$t("menu.superPanel.projectConfig.i18n.translateSourceEmpty")
+          this.$t("superPanel.i18n.translate.sourceEmpty")
         );
         return;
       }
 
       // 设置翻译中状态
-      this.$set(this.addDialog.translating, targetFileName, true);
+      this.$set(this.addDialog.translating, targetLangCode, true);
 
       try {
         const res = await requestTranslateApi(
           sourceText,
           this.masterLanguage,
-          targetFileName.replace(".js", "")
+          targetLangCode
         );
-        if (res.data && res.data.result) {
+        // 响应拦截器返回 response.data，翻译结果在 res.data.result 中
+        if (res && res.data && res.data.result) {
           // 应用翻译格式
           const formattedResult = applyFormat(res.data.result, format);
           this.$set(
             this.addDialog.form.values,
-            targetFileName,
+            targetLangCode,
             formattedResult
           );
           this.$message.success(
-            this.$t("menu.superPanel.projectConfig.i18n.translateSuccess")
+            this.$t("superPanel.i18n.translate.success")
           );
         } else {
           this.$message.warning(
-            this.$t("menu.superPanel.projectConfig.i18n.translateFailed")
+            this.$t("superPanel.i18n.translate.failed")
           );
         }
       } catch (err) {
         this.$message.error(
-          err.message ||
-            this.$t("menu.superPanel.projectConfig.i18n.translateFailed")
+          this.$t("superPanel.i18n.translate.failed")
         );
       } finally {
-        this.$set(this.addDialog.translating, targetFileName, false);
+        this.$set(this.addDialog.translating, targetLangCode, false);
       }
     },
 
@@ -2474,7 +2928,7 @@ export default {
         // 中文语言包中找不到对应的 key，给出明确的错误提示
         this.$message.error(
           `${this.$t(
-            "menu.superPanel.projectConfig.i18n.translateZhNotFound"
+            "superPanel.i18n.translate.zhNotFound"
           )}: ${item.keyPath}`
         );
         return;
@@ -2487,9 +2941,10 @@ export default {
         const res = await requestTranslateApi(
           sourceText,
           this.masterLanguage,
-          this.activeTab.replace(".js", "")
+          this.activeTab
         );
-        if (res.data && res.data.result) {
+        // 响应拦截器返回 response.data，翻译结果在 res.data.result 中
+        if (res && res.data && res.data.result) {
           // 应用翻译格式
           const formattedResult = applyFormat(res.data.result, format);
           // 更新当前语言中对应 keyPath 的 value
@@ -2501,18 +2956,17 @@ export default {
           // 给出明确的成功提示，显示翻译的源内容和结果
           this.$message.success(
             `${this.$t(
-              "menu.superPanel.projectConfig.i18n.translateSuccess"
+              "superPanel.i18n.translate.success"
             )}: 「${sourceText}」→ 「${formattedResult}」`
           );
         } else {
           this.$message.warning(
-            this.$t("menu.superPanel.projectConfig.i18n.translateFailed")
+            this.$t("superPanel.i18n.translate.failed")
           );
         }
       } catch (err) {
         this.$message.error(
-          err.message ||
-            this.$t("menu.superPanel.projectConfig.i18n.translateFailed")
+          this.$t("superPanel.i18n.translate.failed")
         );
       } finally {
         this.$set(this.detailTranslating, item.keyPath, false);
@@ -2523,6 +2977,13 @@ export default {
 </script>
 
 <style scoped>
+/* 只读路径输入框灰色样式 */
+.readonly-path-input >>> .el-input__inner {
+  background-color: #f5f7fa !important;
+  color: #909399 !important;
+  cursor: not-allowed !important;
+}
+
 .i18n-manager-container {
   padding: 20px;
   height: 100%;
@@ -3205,6 +3666,7 @@ export default {
 .label-with-tip {
   display: inline-flex;
   align-items: center;
+  width: 150px;
   gap: 4px;
 }
 
@@ -3328,5 +3790,143 @@ export default {
   color: #909399;
   line-height: 1.5;
   padding-left: 4px;
+}
+
+/* ========== 批量对比字段对话框 ========== */
+.batch-compare-config {
+  padding: 10px 0;
+  border-bottom: 1px solid #ebeef5;
+  margin-bottom: 16px;
+}
+
+.readonly-language-input {
+  background-color: #f5f7fa !important;
+  color: #909399 !important;
+  cursor: not-allowed;
+}
+
+.readonly-language-input >>> .el-input__inner {
+  background-color: #f5f7fa;
+  color: #909399;
+  cursor: not-allowed;
+}
+
+/* 统计信息区 */
+.batch-compare-stats {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.stat-card {
+  flex: 1;
+  padding: 16px;
+  border-radius: 6px;
+  text-align: center;
+  border: 1px solid #ebeef5;
+}
+
+.stat-blue {
+  background: linear-gradient(135deg, #ecf5ff 0%, #d9ecff 100%);
+  border-color: #b3d8ff;
+}
+
+.stat-orange {
+  background: linear-gradient(135deg, #fdf6ec 0%, #faecd8 100%);
+  border-color: #f5dab1;
+}
+
+.stat-green {
+  background: linear-gradient(135deg, #f0f9eb 0%, #e1f3d8 100%);
+  border-color: #c2e7b0;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: bold;
+  color: #303133;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #606266;
+}
+
+/* 详细报告区 */
+.batch-compare-result {
+  border: 1px solid #ebeef5;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.result-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px;
+  background: #f5f7fa;
+  border-bottom: 1px solid #ebeef5;
+}
+
+.result-toolbar >>> .el-tabs__header {
+  margin-bottom: 0;
+}
+
+.result-toolbar >>> .el-tabs__item {
+  height: 36px;
+  line-height: 36px;
+  font-size: 13px;
+  padding: 0 18px;
+}
+
+.result-table-wrapper {
+  padding: 0;
+  background: #fff;
+}
+
+.result-table-wrapper >>> .el-table {
+  border-radius: 0;
+}
+
+.result-table-wrapper >>> .el-table th {
+  background: #f5f7fa;
+  color: #606266;
+  font-weight: 600;
+}
+
+.text-muted {
+  color: #c0c4cc;
+}
+
+/* 空状态提示 */
+.batch-compare-empty {
+  text-align: center;
+  padding: 60px 20px;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #909399;
+  box-sizing: border-box;
+}
+
+.batch-compare-empty i {
+  font-size: 48px;
+  margin-bottom: 16px;
+  color: #c0c4cc;
+}
+
+.batch-compare-empty p {
+  font-size: 14px;
+  margin: 0;
+}
+.source-lang-hint {
+  font-size: 12px;
+  color: #909399;
+  margin-top: 4px;
+  line-height: 1.4;
 }
 </style>

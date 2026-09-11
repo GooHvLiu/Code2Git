@@ -1,6 +1,8 @@
 ﻿/**
  * 系统配置控制器
  * 处理系统配置相关的 HTTP 请求
+ * 国际化规范：成功用 res.success(data)；错误用 res.error('错误码')，前端按 common.error.错误码 翻译
+ * console 为后端调试日志，保留中文
  */
 const configService = require('./config.service');
 const configModel = require('./config.model');
@@ -34,18 +36,10 @@ function getNotificationEventType(category) {
 async function getAllConfigs(req, res) {
   try {
     const configs = await configService.getAllConfigs(true);
-    res.json({
-      code: 200,
-      message: 'success',
-      data: configs
-    });
+    res.success(configs);
   } catch (err) {
     console.error('[系统配置] 获取配置失败:', err);
-    res.status(500).json({
-      code: 500,
-      message: '获取配置失败',
-      error: err.message
-    });
+    res.error('SYSTEM_ERROR', null, 500);
   }
 }
 
@@ -57,18 +51,10 @@ async function getConfigsByCategory(req, res) {
   try {
     const { category } = req.params;
     const configs = await configService.getConfigsByCategory(category);
-    res.json({
-      code: 200,
-      message: 'success',
-      data: configs
-    });
+    res.success(configs);
   } catch (err) {
     console.error('[系统配置] 获取分类配置失败:', err);
-    res.status(500).json({
-      code: 500,
-      message: '获取分类配置失败',
-      error: err.message
-    });
+    res.error('SYSTEM_ERROR', null, 500);
   }
 }
 
@@ -80,10 +66,7 @@ async function updateConfigs(req, res) {
   try {
     const configs = req.body;
     if (!configs || typeof configs !== 'object') {
-      return res.status(400).json({
-        code: 400,
-        message: '配置数据格式错误'
-      });
+      return res.error('PARAM_INVALID', null, 400);
     }
 
     // 1. 获取旧配置，用于比较变化（注意：旧配置已根据 config_type 解析过）
@@ -116,11 +99,7 @@ async function updateConfigs(req, res) {
 
     // 没有变化的配置，直接返回，不更新数据库，不触发通知
     if (changedKeys.length === 0) {
-      return res.json({
-        code: 200,
-        message: '配置无变化',
-        data: oldConfigs
-      });
+      return res.success(oldConfigs);
     }
 
     // 3. 只更新变化的配置项（减少数据库操作）
@@ -235,19 +214,10 @@ async function updateConfigs(req, res) {
       });
     }
 
-    res.json({
-      code: 200,
-
-      message: '配置更新成功',
-      data: updatedConfigs
-    });
+    res.success(updatedConfigs);
   } catch (err) {
     console.error('[系统配置] 更新配置失败:', err);
-    res.status(500).json({
-      code: 500,
-      message: '更新配置失败',
-      error: err.message
-    });
+    res.error('SYSTEM_ERROR', null, 500);
   }
 }
 
@@ -257,5 +227,3 @@ module.exports = {
   getConfigsByCategory,
   updateConfigs,
 };
-
-

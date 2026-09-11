@@ -27,12 +27,14 @@ export const ROUTE_PATHS = {
   /** 授权管理页 */
   LICENSE_MANAGE: '/license/manage',
   /** 首页 - 概况预览（用于首页固定标签） */
-  HOME_OVERVIEW: '/home/overview'
+  HOME_OVERVIEW: '/home/overview',
+  /** 菜单配置预览页（独立窗口，无需登录布局） */
+  MENU_CONFIG_PREVIEW: '/menu-config/preview'
 }
 
 /** 首页固定标签（TagsView 首页不可关闭） */
 export const HOME_TAG = {
-  title: 'layout.homeOverview',
+  title: 'layout.home.overview.default',
   path: ROUTE_PATHS.HOME_OVERVIEW,
   icon: 'home'
 }

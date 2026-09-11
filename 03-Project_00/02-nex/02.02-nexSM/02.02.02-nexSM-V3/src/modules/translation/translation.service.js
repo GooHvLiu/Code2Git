@@ -11,13 +11,15 @@ const https = require('https')
 
 // ========== 配置 ==========
 
-// 翻译配置文件路径（放在前端项目的 src/config/ 下）
-const TRANSLATION_CONFIG_FILE = path.join(__dirname, '../../../../../02.01-nexCM/02.01.02-nexCM-V3/src/config/translation-config.json')
+// 翻译配置文件路径（放在前端项目的 src/config/data/ 下）
+const TRANSLATION_CONFIG_FILE = path.join(__dirname, '../../../../../02.01-nexCM/02.01.02-nexCM-V3/src/config/data/translation-config.json')
 
 // 默认配置
 const DEFAULT_CONFIG = {
   enabled: false,
   provider: 'tencent',
+  masterLanguage: 'zh-CN',
+  languageDisplayField: 'autonym',
   tencent: {
     secretId: '',
     secretKey: '',
@@ -279,19 +281,19 @@ async function translateBatch(items, sourceLang, targetLang) {
  */
 async function testConfig() {
   try {
+    // '你好' 为翻译测试的固定源文本样本（被翻译内容，非界面文案）
     const targetText = await translateText('你好', 'zh', 'en')
     return {
       success: true,
-      message: '配置有效，翻译测试成功',
       result: {
         source: '你好',
         target: targetText
       }
     }
   } catch (e) {
+    console.error('[翻译配置] 配置测试失败:', e)
     return {
-      success: false,
-      message: e.message
+      success: false
     }
   }
 }

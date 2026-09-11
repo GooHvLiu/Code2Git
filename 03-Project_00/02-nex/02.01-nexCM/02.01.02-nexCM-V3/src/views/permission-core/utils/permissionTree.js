@@ -1,8 +1,8 @@
-/**
+﻿/**
  * 权限树工具函数
  * 用于权限配置模块的树数据处理、裁剪、筛选和统计
  */
-import { getRoleName as mapperGetRoleName } from "@/utils/roleMapper";
+import { getRoleName as mapperGetRoleName } from "@/utils/auth/roleMapper";
 
 /**
  * 递归裁剪超级专属节点（superOnly）

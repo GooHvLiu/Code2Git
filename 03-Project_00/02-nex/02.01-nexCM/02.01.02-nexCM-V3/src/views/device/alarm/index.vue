@@ -2,7 +2,7 @@
   <div class="alarm-log-page">
     <el-tabs v-model="activeTab" class="alarm-tabs">
       <!-- 统计看板 -->
-      <el-tab-pane :label="$t('menu.device.alarm.dashboard.title')" name="dashboard">
+      <el-tab-pane :label="$t('device.alarm.dashboard.title')" name="dashboard">
         <div class="dashboard-content">
           <!-- 顶部统计卡片 -->
           <el-row :gutter="12" class="stats-cards">
@@ -273,7 +273,7 @@
       </el-tab-pane>
 
       <!-- 详细记录 -->
-      <el-tab-pane :label="$t('menu.device.alarm.list.title')" name="list">
+      <el-tab-pane :label="$t('device.alarm.list.title')" name="list">
         <div class="list-content">
           <!-- 搜索区域 -->
           <div class="search-section">
@@ -405,12 +405,6 @@
               :data="pagedData"
               border
               stripe
-              :header-cell-style="{
-                background: '#f5f7fa',
-                color: '#606266',
-                fontWeight: 'bold',
-                textAlign: 'center',
-              }"
               style="width: 100%"
               @selection-change="handleSelectionChange"
             >

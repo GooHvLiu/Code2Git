@@ -4,9 +4,9 @@
     <div class="page-header">
       <div class="header-left">
         <h2 class="page-title">
-          {{ $t("menu.system.device.page.title") }}
+          {{ $t("system.device.page.title") }}
         </h2>
-        <p class="page-desc">{{ $t("menu.system.device.page.pageDesc") }}</p>
+        <p class="page-desc">{{ $t("system.device.page.pageDesc") }}</p>
       </div>
       <div class="header-right">
         <el-button
@@ -31,7 +31,7 @@
           <div class="stat-info">
             <div class="stat-value">{{ onlineCount }}</div>
             <div class="stat-label">
-              {{ $t("menu.system.device.page.onlineDevices") }}
+              {{ $t("system.device.page.onlineDevices") }}
             </div>
           </div>
         </div>
@@ -46,11 +46,11 @@
               {{
                 maxDevices > 0
                   ? maxDevices
-                  : $t("menu.system.device.page.unlimited")
+                  : $t("system.device.page.unlimited")
               }}
             </div>
             <div class="stat-label">
-              {{ $t("menu.system.device.page.maxDevices") }}
+              {{ $t("system.device.page.maxDevices") }}
             </div>
           </div>
         </div>
@@ -63,7 +63,7 @@
           <div class="stat-info">
             <div class="stat-value">{{ onlineUsers }}</div>
             <div class="stat-label">
-              {{ $t("menu.system.device.page.onlineUsers") }}
+              {{ $t("system.device.page.onlineUsers") }}
             </div>
           </div>
         </div>
@@ -79,7 +79,7 @@
           <div class="stat-info">
             <div class="stat-value">{{ usagePercent }}%</div>
             <div class="stat-label">
-              {{ $t("menu.system.device.page.usageRate") }}
+              {{ $t("system.device.page.usageRate") }}
             </div>
           </div>
         </div>
@@ -90,7 +90,7 @@
     <div class="filter-section">
       <el-input
         v-model="searchKeyword"
-        :placeholder="$t('menu.system.device.page.searchPlaceholder')"
+        :placeholder="$t('system.device.page.searchPlaceholder')"
         prefix-icon="el-icon-search"
         clearable
         class="search-input"
@@ -99,17 +99,17 @@
       />
       <el-select
         v-model="filterStatus"
-        :placeholder="$t('menu.system.device.page.filterStatus')"
+        :placeholder="$t('system.device.page.filterStatus')"
         clearable
         class="filter-select"
         @change="fetchData"
       >
         <el-option
-          :label="$t('menu.system.device.page.statusOnline')"
+          :label="$t('system.device.page.statusOnline')"
           value="online"
         />
         <el-option
-          :label="$t('menu.system.device.page.statusOffline')"
+          :label="$t('system.device.page.statusOffline')"
           value="offline"
         />
       </el-select>
@@ -119,7 +119,7 @@
         :loading="refreshStatusLoading"
         @click="handleRefreshStatus"
       >
-        {{ $t("menu.system.device.page.refreshStatus") }}
+        {{ $t("system.device.page.refreshStatus") }}
       </el-button>
     </div>
 
@@ -130,12 +130,6 @@
       :data="deviceList"
       border
       stripe
-      :header-cell-style="{
-        background: '#f5f7fa',
-        color: '#606266',
-        fontWeight: 'bold',
-        textAlign: 'center',
-      }"
       class="device-table"
     >
       <el-table-column
@@ -146,7 +140,7 @@
       />
 
       <el-table-column
-        :label="$t('menu.system.device.page.deviceInfo')"
+        :label="$t('system.device.page.deviceInfo')"
         min-width="200"
       >
         <template slot-scope="scope">
@@ -165,7 +159,7 @@
       </el-table-column>
 
       <el-table-column
-        :label="$t('menu.system.device.page.user')"
+        :label="$t('system.device.page.user')"
         width="150"
         align="center"
       >
@@ -181,7 +175,7 @@
 
       <el-table-column
         prop="ip"
-        :label="$t('menu.system.device.page.ip')"
+        :label="$t('system.device.page.ip')"
         width="140"
         align="center"
       >
@@ -191,7 +185,7 @@
       </el-table-column>
 
       <el-table-column
-        :label="$t('menu.system.device.page.loginTime')"
+        :label="$t('system.device.page.loginTime')"
         width="170"
         align="center"
       >
@@ -201,7 +195,7 @@
       </el-table-column>
 
       <el-table-column
-        :label="$t('menu.system.device.page.lastActive')"
+        :label="$t('system.device.page.lastActive')"
         width="170"
         align="center"
       >
@@ -221,8 +215,8 @@
           >
             {{
               scope.row.status === 1
-                ? $t("menu.system.device.page.statusOnline")
-                : $t("menu.system.device.page.statusOffline")
+                ? $t("system.device.page.statusOnline")
+                : $t("system.device.page.statusOffline")
             }}
           </el-tag>
         </template>
@@ -242,7 +236,7 @@
             icon="el-icon-switch-button"
             @click="handleKickDevice(scope.row)"
           >
-            {{ $t("menu.system.device.kick") }}
+            {{ $t("system.device.kick") }}
           </el-button>
           <!-- 离线设备：显示删除按钮（不管是不是当前设备） -->
           <el-button
@@ -253,13 +247,13 @@
             plain
             @click="handleDeleteDevice(scope.row)"
           >
-            {{ $t("menu.system.device.page.delete") }}
+            {{ $t("system.device.page.delete") }}
           </el-button>
           <!-- 当前设备且在线：显示当前设备标签 -->
           <span
             v-else-if="isCurrentDevice(scope.row)"
             class="current-device-tag"
-            >{{ $t("menu.system.device.page.currentDevice") }}</span
+            >{{ $t("system.device.page.currentDevice") }}</span
           >
           <span v-else class="no-operation">-</span>
         </template>
@@ -282,7 +276,7 @@
 
     <!-- 踢掉设备确认对话框 -->
     <el-dialog
-      :title="$t('menu.system.device.page.kickConfirmTitle')"
+      :title="$t('system.device.page.kickConfirmTitle')"
       :visible.sync="kickDialogVisible"
       width="450px"
       :close-on-click-modal="false"
@@ -294,14 +288,14 @@
         </div>
         <div class="kick-warning-text">
           <p class="warning-title">
-            {{ $t("menu.system.device.page.kickWarningTitle") }}
+            {{ $t("system.device.page.kickWarningTitle") }}
           </p>
           <p class="warning-desc">
             {{
-              $t("menu.system.device.page.kickWarningDesc", {
+              $t("system.device.page.kickWarningDesc", {
                 deviceName:
                   currentKickDevice?.device_name ||
-                  $t("menu.system.device.page.unknownDevice"),
+                  $t("system.device.page.unknownDevice"),
               })
             }}
           </p>
@@ -316,14 +310,14 @@
           @click="confirmKickDevice"
           :loading="kickLoading"
         >
-          {{ $t("menu.system.device.kick") }}
+          {{ $t("system.device.kick") }}
         </el-button>
       </div>
     </el-dialog>
 
     <!-- 删除设备确认对话框 -->
     <el-dialog
-      :title="$t('menu.system.device.page.deleteConfirmTitle')"
+      :title="$t('system.device.page.deleteConfirmTitle')"
       :visible.sync="deleteDialogVisible"
       width="420px"
       :close-on-click-modal="false"
@@ -335,14 +329,14 @@
         </div>
         <div class="delete-warning-text">
           <p class="warning-title">
-            {{ $t("menu.system.device.page.deleteWarningTitle") }}
+            {{ $t("system.device.page.deleteWarningTitle") }}
           </p>
           <p class="warning-desc">
             {{
-              $t("menu.system.device.page.deleteWarningDesc", {
+              $t("system.device.page.deleteWarningDesc", {
                 deviceName:
                   formatDeviceName(currentDeleteDevice?.device_name) ||
-                  $t("menu.system.device.page.unknownDevice"),
+                  $t("system.device.page.unknownDevice"),
               })
             }}
           </p>
@@ -357,7 +351,7 @@
           @click="confirmDeleteDevice"
           :loading="deleteLoading"
         >
-          {{ $t("menu.system.device.page.delete") }}
+          {{ $t("system.device.page.delete") }}
         </el-button>
       </div>
     </el-dialog>
@@ -367,10 +361,10 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 import { Message } from "element-ui";
-import request from "@/utils/request";
+import request from "@/utils/request/request";
 import i18n from "@/i18n";
-import { parseUserAgent } from "@/utils/websocket";
-import { hasPermission } from "@/utils/permission";
+import { parseUserAgent } from "@/utils/request/websocket";
+import { hasPermission } from "@/utils/auth/permission";
 
 // 响应式数据
 const loading = ref(false);
@@ -425,22 +419,22 @@ async function handleRefreshStatus() {
       method: "post",
     });
     if (res.code === 200) {
-      Message.success(i18n.t("menu.system.device.page.refreshStatusSuccess"));
+      Message.success(i18n.t("system.device.page.refreshStatusSuccess"));
       // 刷新后重新获取设备列表
       fetchData();
     } else {
       Message.error(
-        res.message || i18n.t("menu.system.device.page.refreshStatusFailed")
+        i18n.t("system.device.page.refreshStatusFailed")
       );
     }
   } catch (err) {
-    Message.error(i18n.t("menu.system.device.page.refreshStatusFailed"));
+    Message.error(i18n.t("system.device.page.refreshStatusFailed"));
   } finally {
     refreshStatusLoading.value = false;
   }
 }
 function formatDeviceName(deviceName) {
-  if (!deviceName) return i18n.t("menu.system.device.page.unknownDevice");
+  if (!deviceName) return i18n.t("system.device.page.unknownDevice");
   // 如果已经是简短格式（包含 ·），直接返回
   if (deviceName.includes("·")) return deviceName;
   // 否则用 parseUserAgent 解析
@@ -461,7 +455,7 @@ async function fetchData() {
     });
     onlineCount.value = countRes.data?.count || 0;
 
-    // 获取最大客户端数限制（从授权文件 license.lic 中读取，0表示不限制）
+    // 获取最大客户端数限制（从授权文件 superPanel.license.lic 中读取，0表示不限制）
     try {
       const licenseRes = await request({
         url: "/license/status",
@@ -486,7 +480,7 @@ async function fetchData() {
     deviceList.value = listRes.data?.list || [];
     total.value = listRes.data?.total || 0;
   } catch (e) {
-    Message.error(e.message || i18n.t("menu.system.device.page.fetchFailed"));
+    Message.error(e.message || i18n.t("system.device.page.fetchFailed"));
   } finally {
     loading.value = false;
   }
@@ -517,11 +511,11 @@ async function confirmKickDevice() {
       url: `/user/device/${currentKickDevice.value.id}/kick`,
       method: "post",
     });
-    Message.success(i18n.t("menu.system.device.page.kickSuccess"));
+    Message.success(i18n.t("system.device.page.kickSuccess"));
     kickDialogVisible.value = false;
     fetchData();
   } catch (e) {
-    Message.error(e.message || i18n.t("menu.system.device.page.kickFailed"));
+    Message.error(e.message || i18n.t("system.device.page.kickFailed"));
   } finally {
     kickLoading.value = false;
   }
@@ -542,13 +536,13 @@ async function confirmDeleteDevice() {
       url: `/user/device/${currentDeleteDevice.value.id}`,
       method: "delete",
     });
-    Message.success(i18n.t("menu.system.device.page.deleteSuccess"));
+    Message.success(i18n.t("system.device.page.deleteSuccess"));
     deleteDialogVisible.value = false;
     currentDeleteDevice.value = null;
     fetchData();
   } catch (err) {
     Message.error(
-      err.message || i18n.t("menu.system.device.page.deleteFailed")
+      i18n.t("system.device.page.deleteFailed")
     );
   } finally {
     deleteLoading.value = false;

@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="system-config-container">
     <!-- 页面标题 -->
     <div class="page-header">
@@ -7,7 +7,7 @@
           {{ pageTitle }}
         </h2>
         <p class="page-desc">
-          {{ $t("menu.superPanel.config.childrenMenu.desc") }}
+          {{ $t("superPanel.config.page.desc") }}
         </p>
       </div>
       <div class="header-right">
@@ -19,7 +19,7 @@
           :disabled="configStatus !== 'ready'"
           :loading="loading"
         >
-          {{ $t("menu.superPanel.config.childrenMenu.save") }}
+          {{ $t("superPanel.config.page.save") }}
         </el-button>
         <el-button
           icon="el-icon-refresh-left"
@@ -28,7 +28,7 @@
           :disabled="configStatus !== 'ready'"
           :loading="loading"
         >
-          {{ $t("menu.superPanel.config.childrenMenu.reset") }}
+          {{ $t("superPanel.config.page.reset") }}
         </el-button>
       </div>
     </div>
@@ -124,17 +124,17 @@
           <!-- 系统设置 -->
           <div v-if="activeMenu === 'plc'" class="config-panel">
             <h3 class="panel-title">
-              {{ $t("menu.superPanel.config.childrenMenu.plc.title") }}
+              {{ $t("superPanel.config.plc.title") }}
             </h3>
-            <el-form :model="form" label-width="160px" label-position="right">
+            <el-form :model="form" label-width="160px">
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.plc.protocol") }}
+                    {{ $t("superPanel.config.plc.protocol") }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.superPanel.config.childrenMenu.plc.protocolTip'
+                          'superPanel.config.plc.protocolTip'
                         )
                       "
                       placement="top"
@@ -153,10 +153,10 @@
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.plc.host") }}
+                    {{ $t("superPanel.config.plc.host") }}
                     <el-tooltip
                       :content="
-                        $t('menu.superPanel.config.childrenMenu.plc.hostTip')
+                        $t('superPanel.config.plc.hostTip')
                       "
                       placement="top"
                     >
@@ -174,10 +174,10 @@
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.plc.port") }}
+                    {{ $t("superPanel.config.plc.port") }}
                     <el-tooltip
                       :content="
-                        $t('menu.superPanel.config.childrenMenu.plc.portTip')
+                        $t('superPanel.config.plc.portTip')
                       "
                       placement="top"
                     >
@@ -196,10 +196,10 @@
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.plc.unitId") }}
+                    {{ $t("superPanel.config.plc.unitId") }}
                     <el-tooltip
                       :content="
-                        $t('menu.superPanel.config.childrenMenu.plc.unitIdTip')
+                        $t('superPanel.config.plc.unitIdTip')
                       "
                       placement="top"
                     >
@@ -216,17 +216,17 @@
               </el-form-item>
 
               <el-divider content-position="left">{{
-                $t("menu.superPanel.config.childrenMenu.plc.pollSettings")
+                $t("superPanel.config.plc.pollSettings")
               }}</el-divider>
 
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.plc.pollFast") }}
+                    {{ $t("superPanel.config.plc.pollFast") }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.superPanel.config.childrenMenu.plc.pollFastTip'
+                          'superPanel.config.plc.pollFastTip'
                         )
                       "
                       placement="top"
@@ -248,11 +248,11 @@
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.plc.pollSlow") }}
+                    {{ $t("superPanel.config.plc.pollSlow") }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.superPanel.config.childrenMenu.plc.pollSlowTip'
+                          'superPanel.config.plc.pollSlowTip'
                         )
                       "
                       placement="top"
@@ -275,9 +275,9 @@
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.plc.reconnectDelay") }}
+                    {{ $t("superPanel.config.plc.reconnectDelay") }}
                     <el-tooltip
-                      :content="$t('menu.superPanel.config.childrenMenu.plc.reconnectDelayTip')"
+                      :content="$t('superPanel.config.plc.reconnectDelayTip')"
                       placement="top"
                     >
                       <i class="el-icon-question tip-icon"></i>
@@ -298,9 +298,9 @@
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.plc.enablePoll") }}
+                    {{ $t("superPanel.config.plc.enablePoll") }}
                     <el-tooltip
-                      :content="$t('menu.superPanel.config.childrenMenu.plc.enablePollTip')"
+                      :content="$t('superPanel.config.plc.enablePollTip')"
                       placement="top"
                     >
                       <i class="el-icon-question tip-icon"></i>
@@ -318,9 +318,9 @@
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.plc.enableWriteAudit") }}
+                    {{ $t("superPanel.config.plc.enableWriteAudit") }}
                     <el-tooltip
-                      :content="$t('menu.superPanel.config.childrenMenu.plc.enableWriteAuditTip')"
+                      :content="$t('superPanel.config.plc.enableWriteAuditTip')"
                       placement="top"
                     >
                       <i class="el-icon-question tip-icon"></i>
@@ -338,9 +338,9 @@
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.plc.maxWriteRetry") }}
+                    {{ $t("superPanel.config.plc.maxWriteRetry") }}
                     <el-tooltip
-                      :content="$t('menu.superPanel.config.childrenMenu.plc.maxWriteRetryTip')"
+                      :content="$t('superPanel.config.plc.maxWriteRetryTip')"
                       placement="top"
                     >
                       <i class="el-icon-question tip-icon"></i>
@@ -362,21 +362,21 @@
           <!-- 导出设置 -->
           <div v-if="activeMenu === 'connection'" class="config-panel">
             <h3 class="panel-title">
-              {{ $t("menu.superPanel.config.childrenMenu.connection.title") }}
+              {{ $t("superPanel.config.connection.title") }}
             </h3>
-            <el-form :model="form" label-width="160px" label-position="right">
+            <el-form :model="form" label-width="160px">
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.superPanel.config.childrenMenu.connection.heartbeatInterval"
+                        "superPanel.config.connection.heartbeatInterval"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.superPanel.config.childrenMenu.connection.heartbeatIntervalTip'
+                          'superPanel.config.connection.heartbeatIntervalTip'
                         )
                       "
                       placement="top"
@@ -399,13 +399,13 @@
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.superPanel.config.childrenMenu.connection.deviceStatusCheckInterval"
+                        "superPanel.config.connection.deviceStatusCheckInterval"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.superPanel.config.childrenMenu.connection.deviceStatusCheckIntervalTip'
+                          'superPanel.config.connection.deviceStatusCheckIntervalTip'
                         )
                       "
                       placement="top"
@@ -423,7 +423,7 @@
                 />
                 <span class="unit-text">{{
                   $t(
-                    "menu.superPanel.config.childrenMenu.connection.unitSecond"
+                    "superPanel.config.connection.unitSecond"
                   )
                 }}</span>
               </el-form-item>
@@ -432,13 +432,13 @@
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.superPanel.config.childrenMenu.connection.deviceOfflineThreshold"
+                        "superPanel.config.connection.deviceOfflineThreshold"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.superPanel.config.childrenMenu.connection.deviceOfflineThresholdTip'
+                          'superPanel.config.connection.deviceOfflineThresholdTip'
                         )
                       "
                       placement="top"
@@ -456,7 +456,7 @@
                 />
                 <span class="unit-text">{{
                   $t(
-                    "menu.superPanel.config.childrenMenu.connection.unitSecond"
+                    "superPanel.config.connection.unitSecond"
                   )
                 }}</span>
               </el-form-item>
@@ -466,13 +466,13 @@
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.superPanel.config.childrenMenu.connection.maintenanceCheckInterval"
+                        "superPanel.config.connection.maintenanceCheckInterval"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.superPanel.config.childrenMenu.connection.maintenanceCheckIntervalTip'
+                          'superPanel.config.connection.maintenanceCheckIntervalTip'
                         )
                       "
                       placement="top"
@@ -489,7 +489,7 @@
                   controls-position="right"
                 />
                 <span class="unit-text">{{
-                  $t("menu.superPanel.config.childrenMenu.connection.unitHour")
+                  $t("superPanel.config.connection.unitHour")
                 }}</span>
               </el-form-item>
 
@@ -498,13 +498,13 @@
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.superPanel.config.childrenMenu.connection.partLifeStatInterval"
+                        "superPanel.config.connection.partLifeStatInterval"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.superPanel.config.childrenMenu.connection.partLifeStatIntervalTip'
+                          'superPanel.config.connection.partLifeStatIntervalTip'
                         )
                       "
                       placement="top"
@@ -522,7 +522,7 @@
                 />
                 <span class="unit-text">{{
                   $t(
-                    "menu.superPanel.config.childrenMenu.connection.unitMinute"
+                    "superPanel.config.connection.unitMinute"
                   )
                 }}</span>
               </el-form-item>
@@ -547,16 +547,16 @@
           <!-- 上传设置 -->
           <div v-if="activeMenu === 'upload'" class="config-panel">
             <h3 class="panel-title">
-              {{ $t("menu.superPanel.config.childrenMenu.upload.title") }}
+              {{ $t("superPanel.config.upload.title") }}
             </h3>
-            <el-form :model="form" label-width="160px" label-position="right">
+            <el-form :model="form" label-width="160px">
               <!-- 上传文件最大大小 -->
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.upload.maxFileSize") }}
+                    {{ $t("superPanel.config.upload.maxFileSize") }}
                     <el-tooltip
-                      :content="$t('menu.superPanel.config.childrenMenu.upload.maxFileSizeTip')"
+                      :content="$t('superPanel.config.upload.maxFileSizeTip')"
                       placement="top"
                     >
                       <i class="el-icon-question tip-icon"></i>
@@ -577,9 +577,9 @@
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.upload.allowedTypes") }}
+                    {{ $t("superPanel.config.upload.allowedTypes") }}
                     <el-tooltip
-                      :content="$t('menu.superPanel.config.childrenMenu.upload.allowedTypesTip')"
+                      :content="$t('superPanel.config.upload.allowedTypesTip')"
                       placement="top"
                     >
                       <i class="el-icon-question tip-icon"></i>
@@ -597,9 +597,9 @@
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.upload.uploadPath") }}
+                    {{ $t("superPanel.config.upload.uploadPath") }}
                     <el-tooltip
-                      :content="$t('menu.superPanel.config.childrenMenu.upload.uploadPathTip')"
+                      :content="$t('superPanel.config.upload.uploadPathTip')"
                       placement="top"
                     >
                       <i class="el-icon-question tip-icon"></i>
@@ -617,9 +617,9 @@
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.upload.enableAudit") }}
+                    {{ $t("superPanel.config.upload.enableAudit") }}
                     <el-tooltip
-                      :content="$t('menu.superPanel.config.childrenMenu.upload.enableAuditTip')"
+                      :content="$t('superPanel.config.upload.enableAuditTip')"
                       placement="top"
                     >
                       <i class="el-icon-question tip-icon"></i>
@@ -638,16 +638,16 @@
           <!-- 审计配置 -->
           <div v-if="activeMenu === 'audit'" class="config-panel">
             <h3 class="panel-title">
-              {{ $t("menu.superPanel.config.childrenMenu.audit.title") }}
+              {{ $t("superPanel.config.audit.title") }}
             </h3>
-            <el-form :model="form" label-width="160px" label-position="right">
+            <el-form :model="form" label-width="160px">
               <!-- 审计日志保留天数 -->
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.audit.retentionDays") }}
+                    {{ $t("superPanel.config.audit.retentionDays") }}
                     <el-tooltip
-                      :content="$t('menu.superPanel.config.childrenMenu.audit.retentionDaysTip')"
+                      :content="$t('superPanel.config.audit.retentionDaysTip')"
                       placement="top"
                     >
                       <i class="el-icon-question tip-icon"></i>
@@ -668,9 +668,9 @@
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.audit.autoArchive") }}
+                    {{ $t("superPanel.config.audit.autoArchive") }}
                     <el-tooltip
-                      :content="$t('menu.superPanel.config.childrenMenu.audit.autoArchiveTip')"
+                      :content="$t('superPanel.config.audit.autoArchiveTip')"
                       placement="top"
                     >
                       <i class="el-icon-question tip-icon"></i>
@@ -700,11 +700,11 @@ import {
   requestUpdateConfigsApi,
   requestResetConfigsApi,
 } from "@/api";
-import { applyConfig } from "@/utils/config";
+import { applyConfig } from "@/utils/config/config";
 import { useI18n } from "@/composables/useI18n";
-import { getCoordsByValues } from "@/utils/worldCities";
+import { getCoordsByValues } from "@/utils/business/worldCities";
 import { nextTick } from "vue";
-import EmailConfig from "./components/EmailConfig.vue";
+import EmailConfig from "@/components/EmailConfig/index.vue";
 import LanguageConfig from "./components/LanguageConfig.vue";
 import TranslationConfig from "./components/TranslationConfig.vue";
 
@@ -716,37 +716,37 @@ const menuList = computed(() => [
   {
     key: "plc",
     icon: "el-icon-cpu",
-    title: t("menu.superPanel.config.childrenMenu.plc.title"),
+    title: t("superPanel.config.plc.title"),
   },
   {
     key: "connection",
     icon: "el-icon-connection",
-    title: t("menu.superPanel.config.childrenMenu.connection.title"),
+    title: t("superPanel.config.connection.title"),
   },
   {
     key: "email",
     icon: "el-icon-message",
-    title: t("menu.superPanel.config.childrenMenu.email.title"),
+    title: t("superPanel.config.email.title"),
   },
   {
     key: "language",
     icon: "el-icon-chat-line-round",
-    title: t("menu.superPanel.config.childrenMenu.language.title"),
+    title: t("superPanel.config.language.title"),
   },
   {
     key: "translation",
     icon: "el-icon-connection",
-    title: t("menu.superPanel.config.childrenMenu.translation.title"),
+    title: t("superPanel.config.translation.title"),
   },
   {
     key: "upload",
     icon: "el-icon-upload",
-    title: t("menu.superPanel.config.childrenMenu.upload.title"),
+    title: t("superPanel.config.upload.title"),
   },
   {
     key: "audit",
     icon: "el-icon-document",
-    title: t("menu.superPanel.config.childrenMenu.audit.title"),
+    title: t("superPanel.config.audit.title"),
   },
 ]);
 
@@ -868,7 +868,7 @@ const filteredMenuList = computed(() => {
 });
 
 // 页面标题
-const pageTitle = computed(() => t("menu.superPanel.config.pageTitle"));
+const pageTitle = computed(() => t("superPanel.config.page.title"));
 
 /**
  * 解析 deviceRegion 为数组格式（兼容多种后端存储格式）
@@ -995,14 +995,14 @@ async function loadConfigs() {
     } else {
       // 加载失败：后端返回异常
       configStatus.value = "error";
-      Message.error("配置加载失败，后端返回数据异常，请刷新页面重试");
+      Message.error(t("superPanel.config.page.loadDataAbnormal"));
     }
   } catch (err) {
     // 加载失败：网络或其他错误
     configStatus.value = "error";
     // eslint-disable-next-line no-console
     console.error("[参数配置] 加载配置失败:", err);
-    Message.error("配置加载失败，请检查网络连接或联系管理员");
+    Message.error(t("superPanel.config.page.loadNetworkError"));
   } finally {
     loading.value = false;
   }
@@ -1015,11 +1015,11 @@ async function handleSave() {
   // 状态校验：只有 ready 状态才能保存
   if (configStatus.value !== "ready") {
     const statusMsg = {
-      loading: "配置加载中，请稍候...",
-      incomplete: "配置不完整，存在未初始化项，无法保存，请联系管理员",
-      error: "配置加载失败，无法保存，请刷新页面重试",
+      loading: t("superPanel.config.page.statusLoading"),
+      incomplete: t("superPanel.config.page.statusIncomplete"),
+      error: t("superPanel.config.page.statusLoadError"),
     };
-    Message.error(statusMsg[configStatus.value] || "配置状态异常，无法保存");
+    Message.error(statusMsg[configStatus.value] || t("superPanel.config.page.statusAbnormal"));
     return;
   }
 
@@ -1027,9 +1027,7 @@ async function handleSave() {
   const missingKeys = checkConfigCompleteness(form);
   if (missingKeys.length > 0) {
     Message.error(
-      `存在 ${missingKeys.length} 个未配置项，无法保存：${missingKeys.join(
-        ", "
-      )}`
+      t("superPanel.config.page.missingItems", { count: missingKeys.length, items: missingKeys.join(", ") })
     );
     return;
   }
@@ -1056,14 +1054,14 @@ async function handleSave() {
         installDate: form.deviceInstallDate,
       });
 
-      Message.success("保存成功");
+      Message.success(t("common.message.saveSuccess"));
     } else {
-      Message.error("保存失败，请重试");
+      Message.error(t("superPanel.config.page.saveFailedRetry"));
     }
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error("[参数配置] 保存配置失败:", err);
-    Message.error("保存失败，请检查网络连接");
+    Message.error(t("superPanel.config.page.saveFailedNetwork"));
   } finally {
     loading.value = false;
   }
@@ -1075,7 +1073,7 @@ async function handleSave() {
 function handleReset() {
   // 状态校验：只有 ready 状态才能重置
   if (configStatus.value !== "ready") {
-    Message.warning("当前配置状态不允许重置，请刷新页面后重试");
+    Message.warning(t("superPanel.config.page.resetNotAllowed"));
     return;
   }
 
@@ -1089,7 +1087,7 @@ function handleReset() {
           configStatus.value = "incomplete";
           missingConfigKeys.value = missingKeys;
           Message.warning(
-            `重置后检测到 ${missingKeys.length} 个未配置项，请联系管理员`
+            t("superPanel.config.page.resetMissingItems", { count: missingKeys.length })
           );
           return;
         }
@@ -1107,15 +1105,15 @@ function handleReset() {
         // defaultLanguage 同步为当前界面语言，避免重置配置时语言被意外切换
         form.defaultLanguage = locale.value;
         applyConfig(form);
-        Message.success("重置成功");
+        Message.success(t("common.message.resetSuccess"));
       } else {
-        Message.error("重置失败，请重试");
+        Message.error(t("superPanel.config.page.resetFailedRetry"));
       }
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
       console.error("[参数配置] 重置配置失败:", err);
-      Message.error("重置失败，请检查网络连接");
+      Message.error(t("superPanel.config.page.resetFailedNetwork"));
     });
 }
 

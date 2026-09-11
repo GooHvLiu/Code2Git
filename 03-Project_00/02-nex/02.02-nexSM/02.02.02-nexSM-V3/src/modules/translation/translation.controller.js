@@ -1,6 +1,7 @@
 /**
  * 翻译模块 - 控制器层
  * 处理 HTTP 请求，调用服务层
+ * 国际化规范：成功用 res.success(data)；参数/业务错误用 res.error('错误码')，前端按 common.error.错误码 翻译
  */
 
 const translationService = require('./translation.service')
@@ -19,11 +20,7 @@ async function getConfig(req, res, next) {
         secretKey: config.tencent.secretKey ? '********' : ''
       }
     }
-    res.json({
-      code: 200,
-      message: 'success',
-      data: safeConfig
-    })
+    res.success(safeConfig)
   } catch (err) {
     next(err)
   }
@@ -41,15 +38,11 @@ async function saveConfig(req, res, next) {
       config.tencent.secretKey = oldConfig.tencent.secretKey
     }
     const savedConfig = translationService.saveConfig(config)
-    res.json({
-      code: 200,
-      message: '配置保存成功',
-      data: {
-        ...savedConfig,
-        tencent: {
-          ...savedConfig.tencent,
-          secretKey: savedConfig.tencent.secretKey ? '********' : ''
-        }
+    res.success({
+      ...savedConfig,
+      tencent: {
+        ...savedConfig.tencent,
+        secretKey: savedConfig.tencent.secretKey ? '********' : ''
       }
     })
   } catch (err) {
@@ -64,19 +57,15 @@ async function translate(req, res, next) {
   try {
     const { text, source, target } = req.body
     if (!text) {
-      return res.status(400).json({ code: 400, message: 'text 参数不能为空' })
+      return res.error('PARAM_MISSING', null, 400)
     }
     if (!source || !target) {
-      return res.status(400).json({ code: 400, message: 'source 和 target 参数不能为空' })
+      return res.error('PARAM_MISSING', null, 400)
     }
     const sourceLang = translationService.convertLangCode(source)
     const targetLang = translationService.convertLangCode(target)
     const result = await translationService.translateText(text, sourceLang, targetLang)
-    res.json({
-      code: 200,
-      message: 'success',
-      data: { result }
-    })
+    res.success({ result })
   } catch (err) {
     next(err)
   }
@@ -89,17 +78,13 @@ async function translateBatch(req, res, next) {
   try {
     const { items, source, target } = req.body
     if (!items || !Array.isArray(items)) {
-      return res.status(400).json({ code: 400, message: 'items 参数必须是数组' })
+      return res.error('PARAM_INVALID', null, 400)
     }
     if (!source || !target) {
-      return res.status(400).json({ code: 400, message: 'source 和 target 参数不能为空' })
+      return res.error('PARAM_MISSING', null, 400)
     }
     const results = await translationService.translateBatch(items, source, target)
-    res.json({
-      code: 200,
-      message: 'success',
-      data: { results }
-    })
+    res.success({ results })
   } catch (err) {
     next(err)
   }
@@ -111,11 +96,7 @@ async function translateBatch(req, res, next) {
 async function testConfig(req, res, next) {
   try {
     const result = await translationService.testConfig()
-    res.json({
-      code: 200,
-      message: 'success',
-      data: result
-    })
+    res.success(result)
   } catch (err) {
     next(err)
   }

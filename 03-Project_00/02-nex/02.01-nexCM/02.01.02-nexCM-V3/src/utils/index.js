@@ -158,3 +158,42 @@ export function formatMoney(num, decimals = 2) {
     maximumFractionDigits: decimals
   })
 }
+
+// ========== 分类模块重新导出 ==========
+// 请求相关
+export * from './request/request'
+export * from './request/websocket'
+
+// 认证相关
+export * from './auth/auth'
+export * from './auth/permission'
+export * from './auth/roleMapper'
+
+// UI 相关
+export * from './ui/confirm'
+export * from './ui/feedback'
+export * from './ui/message'
+export * from './ui/theme'
+
+// 数据处理相关
+export * from './data/cache'
+export * from './data/storage'
+export * from './data/storageKey'
+export * from './data/date'
+export * from './data/validate'
+
+// 业务相关
+export * from './business/dict'
+export * from './business/export'
+export * from './business/exportTable'
+export * from './business/licenseHelper'
+export * from './business/orderReport'
+export * from './business/pdfGenerator'
+export * from './business/translateManager'
+export * from './business/translationFormat'
+export * from './business/upload'
+export * from './business/worldCities'
+
+// 配置相关
+export * from './config/config'
+export * from './config/constants'

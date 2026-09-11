@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 数据库管理数据模型
  * 负责数据库管理相关的数据库操作
  */
@@ -177,6 +177,48 @@ async function deleteTableData(tableName, where) {
 }
 
 /**
+ * 从文件名解析备份信息
+ * @param {string} fileName 文件名
+ * @returns {Object} 备份信息
+ */
+function parseBackupFileName(fileName) {
+  // 去掉 .sql 后缀
+  const nameWithoutExt = fileName.replace(/\.sql$/, '');
+  const parts = nameWithoutExt.split('_');
+
+  let backupType = 'full';
+  let tableName = null;
+  let remark = '';
+  let timestamp = '';
+
+  if (parts[0] === 'pre' && parts[1] === 'restore') {
+    // 回滚前自动备份: pre_restore_{timestamp}.sql
+    backupType = 'full';
+    remark = '回滚前自动备份';
+    timestamp = parts.slice(2).join('_');
+  } else if (parts[0] === 'table') {
+    // 单表备份: table_{tableName}_{timestamp}.sql
+    backupType = 'table';
+    // 表名可能包含下划线，需要找到时间戳的位置
+    // 时间戳格式: 2026-09-09T05-44-13-971Z
+    const timestampIndex = parts.findIndex(p => /^\d{4}-\d{2}-\d{2}T/.test(p));
+    if (timestampIndex > 1) {
+      tableName = parts.slice(1, timestampIndex).join('_');
+      timestamp = parts.slice(timestampIndex).join('_');
+    } else {
+      tableName = parts[1] || '';
+      timestamp = parts.slice(2).join('_');
+    }
+  } else {
+    // 全量备份: full_{timestamp}.sql
+    backupType = 'full';
+    timestamp = parts.slice(1).join('_');
+  }
+
+  return { backupType, tableName, remark, timestamp };
+}
+
+/**
  * 执行数据库备份
  * @param {string} backupType 备份类型：full全量/table单表
  * @param {string} tableName 单表备份时的表名
@@ -185,12 +227,16 @@ async function deleteTableData(tableName, where) {
  */
 async function createBackup(backupType = 'full', tableName = null, remark = '', operator = '') {
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-  const backupName = `${backupType}_${timestamp}.sql`;
+  let backupName;
+  if (backupType === 'table' && tableName) {
+    backupName = `table_${tableName}_${timestamp}.sql`;
+  } else {
+    backupName = `full_${timestamp}.sql`;
+  }
   const filePath = path.join(BACKUP_DIR, backupName);
 
   // 使用项目统一的数据库配置，添加 --set-gtid-purged=OFF 避免回滚时GTID冲突
-  // 排除 nex_db_backup 表，避免回滚时备份记录丢失
-  let dumpCommand = `mysqldump --set-gtid-purged=OFF --ignore-table=${dbConfig.database}.nex_db_backup -h${dbConfig.host} -P${dbConfig.port} -u${dbConfig.user} -p${dbConfig.password} ${dbConfig.database}`;
+  let dumpCommand = `mysqldump --set-gtid-purged=OFF -h${dbConfig.host} -P${dbConfig.port} -u${dbConfig.user} -p${dbConfig.password} ${dbConfig.database}`;
   if (backupType === 'table' && tableName) {
     dumpCommand += ` ${tableName}`;
   }
@@ -203,23 +249,16 @@ async function createBackup(backupType = 'full', tableName = null, remark = '', 
       if (error) {
         console.error('[数据库备份] 失败:', error.message);
         console.error('[数据库备份] stderr:', stderr);
-        // 记录失败的备份
-        await db.query(`
-          INSERT INTO nex_db_backup (backup_name, backup_type, table_name, file_path, file_size, remark, operator, status, error_msg)
-          VALUES (?, ?, ?, ?, 0, ?, ?, 'failed', ?)
-        `, [backupName, backupType, tableName, filePath, remark, operator, error.message + '\n' + stderr]);
+        // 备份失败时删除可能生成的不完整文件
+        if (fs.existsSync(filePath)) {
+          try { fs.unlinkSync(filePath); } catch (e) { /* ignore */ }
+        }
         reject(error);
         return;
       }
 
       // 获取文件大小
       const fileSize = fs.existsSync(filePath) ? fs.statSync(filePath).size : 0;
-
-      // 记录备份
-      await db.query(`
-        INSERT INTO nex_db_backup (backup_name, backup_type, table_name, file_path, file_size, remark, operator, status)
-        VALUES (?, ?, ?, ?, ?, ?, ?, 'success')
-      `, [backupName, backupType, tableName, filePath, fileSize, remark, operator]);
 
       resolve({ backupName, filePath, fileSize });
     });
@@ -236,54 +275,100 @@ async function getBackupList(page = 1, pageSize = 20) {
   const pageSizeNum = parseInt(pageSize) || 20;
   const offset = (pageNum - 1) * pageSizeNum;
 
-  const countResult = await db.query('SELECT COUNT(*) as total FROM nex_db_backup');
-  const total = countResult[0]?.total || 0;
+  if (!fs.existsSync(BACKUP_DIR)) {
+    return { list: [], total: 0, page: pageNum, pageSize: pageSizeNum };
+  }
 
-  const list = await db.query(`
-    SELECT * FROM nex_db_backup 
-    ORDER BY created_at DESC 
-    LIMIT ${pageSizeNum} OFFSET ${offset}
-  `);
+  const allFiles = fs.readdirSync(BACKUP_DIR);
+  const backupFiles = allFiles.filter(f => f.endsWith('.sql'));
+
+  const allBackups = [];
+  for (const f of backupFiles) {
+    try {
+      const filePath = path.join(BACKUP_DIR, f);
+      const stats = fs.statSync(filePath);
+      const parsed = parseBackupFileName(f);
+      allBackups.push({
+        id: f,
+        backup_name: f,
+        backup_type: parsed.backupType,
+        table_name: parsed.tableName,
+        file_path: filePath,
+        file_size: stats.size,
+        remark: parsed.remark,
+        operator: '',
+        status: 'success',
+        error_msg: null,
+        create_time: stats.mtime
+      });
+    } catch (fileErr) {
+      console.warn(`处理备份文件失败: ${f}`, fileErr.message);
+    }
+  }
+
+  // 按创建时间倒序排序
+  allBackups.sort((a, b) => new Date(b.create_time) - new Date(a.create_time));
+
+  const total = allBackups.length;
+  const list = allBackups.slice(offset, offset + pageSizeNum);
 
   return { list, total, page: pageNum, pageSize: pageSizeNum };
 }
 
 /**
  * 获取备份详情
- * @param {number} id 备份ID
+ * @param {string} fileName 备份文件名
  */
-async function getBackupById(id) {
-  const result = await db.query('SELECT * FROM nex_db_backup WHERE id = ?', [id]);
-  return result[0] || null;
+async function getBackupById(fileName) {
+  const filePath = path.join(BACKUP_DIR, fileName);
+  if (!fs.existsSync(filePath)) {
+    return null;
+  }
+
+  try {
+    const stats = fs.statSync(filePath);
+    const parsed = parseBackupFileName(fileName);
+    return {
+      id: fileName,
+      backup_name: fileName,
+      backup_type: parsed.backupType,
+      table_name: parsed.tableName,
+      file_path: filePath,
+      file_size: stats.size,
+      remark: parsed.remark,
+      operator: '',
+      status: 'success',
+      error_msg: null,
+      create_time: stats.mtime
+    };
+  } catch (err) {
+    console.error('获取备份详情失败:', err);
+    return null;
+  }
 }
 
 /**
  * 删除备份
- * @param {number} id 备份ID
+ * @param {string} fileName 备份文件名
  */
-async function deleteBackup(id) {
-  const backup = await getBackupById(id);
-  if (!backup) {
-    throw new Error('Backup not found');
+async function deleteBackup(fileName) {
+  const filePath = path.join(BACKUP_DIR, fileName);
+  if (!fs.existsSync(filePath)) {
+    throw new Error('Backup file not found');
   }
 
   // 删除文件
-  if (fs.existsSync(backup.file_path)) {
-    fs.unlinkSync(backup.file_path);
-  }
-
-  // 删除记录
-  await db.query('DELETE FROM nex_db_backup WHERE id = ?', [id]);
+  fs.unlinkSync(filePath);
   return true;
 }
 
 /**
  * 执行数据库回滚
- * @param {number} backupId 备份ID
+ * @param {string} fileName 备份文件名
  * @param {string} operator 操作人
  */
-async function restoreBackup(backupId, operator = '') {
-  const backup = await getBackupById(backupId);
+async function restoreBackup(fileName, operator = '') {
+  const backup = await getBackupById(fileName);
   if (!backup) {
     throw new Error('Backup not found');
   }
@@ -299,7 +384,7 @@ async function restoreBackup(backupId, operator = '') {
   const preRestoreBackupName = `pre_restore_${timestamp}.sql`;
   const preRestoreFilePath = path.join(BACKUP_DIR, preRestoreBackupName);
 
-  const preDumpCommand = `mysqldump --set-gtid-purged=OFF --ignore-table=${dbConfig.database}.nex_db_backup -h${dbConfig.host} -P${dbConfig.port} -u${dbConfig.user} -p${dbConfig.password} ${dbConfig.database} > "${preRestoreFilePath}"`;
+  const preDumpCommand = `mysqldump --set-gtid-purged=OFF -h${dbConfig.host} -P${dbConfig.port} -u${dbConfig.user} -p${dbConfig.password} ${dbConfig.database} > "${preRestoreFilePath}"`;
 
   console.log('[数据库回滚] 回滚前自动备份命令:', preDumpCommand);
 
@@ -309,11 +394,6 @@ async function restoreBackup(backupId, operator = '') {
         console.warn('[数据库回滚] 回滚前自动备份失败:', preError.message);
         console.warn('[数据库回滚] stderr:', preStderr);
       } else {
-        const preFileSize = fs.existsSync(preRestoreFilePath) ? fs.statSync(preRestoreFilePath).size : 0;
-        await db.query(`
-          INSERT INTO nex_db_backup (backup_name, backup_type, table_name, file_path, file_size, remark, operator, status)
-          VALUES (?, 'full', NULL, ?, ?, '回滚前自动备份', ?, 'success')
-        `, [preRestoreBackupName, preRestoreFilePath, preFileSize, operator]);
         console.log('[数据库回滚] 回滚前自动备份成功:', preRestoreBackupName);
       }
 
@@ -330,7 +410,7 @@ async function restoreBackup(backupId, operator = '') {
           return;
         }
         console.log('[数据库回滚] 回滚成功');
-        resolve({ success: true, backupId, restoredAt: new Date() });
+        resolve({ success: true, fileName, restoredAt: new Date() });
       });
     });
   });

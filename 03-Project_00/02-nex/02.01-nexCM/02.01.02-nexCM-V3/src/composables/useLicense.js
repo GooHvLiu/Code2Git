@@ -1,11 +1,11 @@
-/**
+﻿/**
  * useLicense - 授权管理组合式函数
  * 授权管理页面的通用数据和方法
  * 替代原 mixins/licenseMixin.js
  */
 import { ref, onMounted, onUnmounted } from 'vue'
 import { getLicenseStatus, importLicense, syncLicenseTime, downloadLicense } from '@/api'
-import { formatLicenseTime, licenseTypeTag, licenseTypeLabel, copyToClipboard, getLicenseCountdown } from '@/utils/licenseHelper'
+import { formatLicenseTime, licenseTypeTag, licenseTypeLabel, copyToClipboard, getLicenseCountdown } from '@/utils/business/licenseHelper'
 
 export function useLicense() {
   const licenseData = ref({})

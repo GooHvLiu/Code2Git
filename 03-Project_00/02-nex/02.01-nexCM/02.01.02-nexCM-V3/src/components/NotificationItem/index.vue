@@ -14,28 +14,28 @@
       <div class="item-header">
         <div class="item-status">
           <span v-if="!item.is_read" class="status-dot unread-dot"></span>
-          <el-tag v-if="!item.is_read" size="mini" type="danger" effect="dark">{{ $t('notification.unread') }}</el-tag>
-          <el-tag v-else size="mini" type="info" effect="plain">{{ $t('notification.read') }}</el-tag>
+          <el-tag v-if="!item.is_read" size="mini" type="danger" effect="dark">{{ $t('notification.status.unread') }}</el-tag>
+          <el-tag v-else size="mini" type="info" effect="plain">{{ $t('notification.status.read') }}</el-tag>
         </div>
         <el-tag size="mini" :type="priorityType" class="type-tag">
           {{ typeName }}
         </el-tag>
         <span class="item-title">{{ displayTitle }}</span>
-        <span class="item-time">{{ formatTime(item.created_at) }}</span>
+        <span class="item-time">{{ formatTime(item.create_time) }}</span>
       </div>
       <div class="item-content">{{ displayContent }}</div>
       <div class="item-actions" @click.stop>
         <el-button v-if="!item.is_read" type="text" size="mini" @click="$emit('mark-read', item)">
-          {{ $t('notification.markRead') }}
+          {{ $t('notification.action.markRead') }}
         </el-button>
         <el-button v-if="archiveTab === '0'" type="text" size="mini" @click="$emit('archive', item)">
-          {{ $t('notification.archive') }}
+          {{ $t('notification.action.archive') }}
         </el-button>
         <el-button v-if="archiveTab === '1'" type="text" size="mini" @click="$emit('unarchive', item)">
-          {{ $t('notification.unarchive') }}
+          {{ $t('notification.action.unarchive') }}
         </el-button>
         <el-button type="text" size="mini" style="color: #f56c6c" @click="$emit('delete', item)">
-          {{ $t('notification.delete') }}
+          {{ $t('notification.action.delete') }}
         </el-button>
       </div>
     </div>
@@ -104,16 +104,16 @@ const displayContent = computed(() => {
 // 类型名称（使用国际化）
 const typeName = computed(() => {
   const typeKeyMap = {
-    system: 'notification.typeSystem',
-    plc: 'notification.typePlc',
-    user: 'notification.typeUser',
-    audit: 'notification.typeAudit',
-    device: 'notification.typeDevice',
-    connection: 'notification.typeConnection',
-    security: 'notification.typeSecurity',
-    production: 'notification.typeProduction',
-    config: 'notification.typeConfig',
-    license: 'notification.typeLicense',
+    system: 'notification.type.system',
+    plc: 'notification.type.plc',
+    user: 'notification.type.user',
+    audit: 'notification.type.audit',
+    device: 'notification.type.device',
+    connection: 'notification.type.connection',
+    security: 'notification.type.security',
+    production: 'notification.type.production',
+    config: 'notification.type.config',
+    license: 'notification.type.license',
   }
   const key = typeKeyMap[props.item.type]
   return key ? $t(key) : (props.item.type || '')
@@ -134,10 +134,10 @@ function formatTime(time) {
   const hours = Math.floor(diff / 3600000)
   const days = Math.floor(diff / 86400000)
 
-  if (minutes < 1) return $t('notification.justNow')
-  if (minutes < 60) return `${minutes}${$t('notification.minutesAgo')}`
-  if (hours < 24) return `${hours}${$t('notification.hoursAgo')}`
-  if (days < 30) return `${days}${$t('notification.daysAgo')}`
+  if (minutes < 1) return $t('notification.time.justNow')
+  if (minutes < 60) return `${minutes}${$t('notification.time.minutesAgo')}`
+  if (hours < 24) return `${hours}${$t('notification.time.hoursAgo')}`
+  if (days < 30) return `${days}${$t('notification.time.daysAgo')}`
 
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
 }

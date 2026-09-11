@@ -3,15 +3,15 @@
     <!-- 归档标签页 -->
     <div class="filter-row">
       <el-radio-group v-model="localArchiveTab" size="small" @change="handleArchiveChange">
-        <el-radio-button label="0">{{ $t('notification.unarchived') }}</el-radio-button>
-        <el-radio-button label="1">{{ $t('notification.archived') }}</el-radio-button>
+        <el-radio-button label="0">{{ $t('notification.status.unarchived') }}</el-radio-button>
+        <el-radio-button label="1">{{ $t('notification.status.archived') }}</el-radio-button>
       </el-radio-group>
     </div>
 
     <!-- 类型筛选 -->
     <div class="filter-row">
       <el-radio-group v-model="localFilterType" size="small" @change="handleFilterChange">
-        <el-radio-button label="">{{ $t('notification.all') }}</el-radio-button>
+        <el-radio-button label="">{{ $t('notification.filter.all') }}</el-radio-button>
         <el-radio-button v-for="(name, key) in typeList" :key="key" :label="key">
           {{ $t(name) }}
         </el-radio-button>
@@ -21,9 +21,9 @@
     <!-- 状态筛选 -->
     <div class="filter-row">
       <el-radio-group v-model="localReadFilter" size="small" @change="handleReadFilterChange">
-        <el-radio-button label="">{{ $t('notification.all') }}</el-radio-button>
-        <el-radio-button label="0">{{ $t('notification.unread') }}</el-radio-button>
-        <el-radio-button label="1">{{ $t('notification.read') }}</el-radio-button>
+        <el-radio-button label="">{{ $t('notification.filter.all') }}</el-radio-button>
+        <el-radio-button label="0">{{ $t('notification.status.unread') }}</el-radio-button>
+        <el-radio-button label="1">{{ $t('notification.status.read') }}</el-radio-button>
       </el-radio-group>
     </div>
 
@@ -32,28 +32,28 @@
       <el-select
         v-model="localPriorityFilter"
         size="small"
-        :placeholder="$t('notification.priority')"
+        :placeholder="$t('notification.filter.priority')"
         clearable
         @change="handleFilterChange"
         style="width: 120px;"
       >
-        <el-option :label="$t('notification.priorityHigh')" value="high" />
-        <el-option :label="$t('notification.priorityMedium')" value="medium" />
-        <el-option :label="$t('notification.priorityLow')" value="low" />
+        <el-option :label="$t('notification.priority.high')" value="high" />
+        <el-option :label="$t('notification.priority.medium')" value="medium" />
+        <el-option :label="$t('notification.priority.low')" value="low" />
       </el-select>
 
       <el-select
         v-model="localTimeFilter"
         size="small"
-        :placeholder="$t('notification.timeRange')"
+        :placeholder="$t('notification.filter.timeRange')"
         clearable
         @change="handleTimeFilterChange"
         style="width: 140px;"
       >
-        <el-option :label="$t('notification.today')" value="today" />
-        <el-option :label="$t('notification.thisWeek')" value="week" />
-        <el-option :label="$t('notification.thisMonth')" value="month" />
-        <el-option :label="$t('notification.custom')" value="custom" />
+        <el-option :label="$t('notification.filter.today')" value="today" />
+        <el-option :label="$t('notification.filter.thisWeek')" value="week" />
+        <el-option :label="$t('notification.filter.thisMonth')" value="month" />
+        <el-option :label="$t('notification.filter.custom')" value="custom" />
       </el-select>
 
       <el-date-picker
@@ -61,9 +61,9 @@
         v-model="localDateRange"
         type="daterange"
         size="small"
-        :range-separator="$t('notification.to')"
-        :start-placeholder="$t('notification.startDate')"
-        :end-placeholder="$t('notification.endDate')"
+        :range-separator="$t('notification.filter.to')"
+        :start-placeholder="$t('notification.filter.startDate')"
+        :end-placeholder="$t('notification.filter.endDate')"
         @change="handleDateRangeChange"
         style="width: 240px;"
       />
@@ -71,7 +71,7 @@
       <el-input
         v-model="localKeyword"
         size="small"
-        :placeholder="$t('notification.searchPlaceholder')"
+        :placeholder="$t('notification.page.searchPlaceholder')"
         clearable
         @input="handleKeywordInput"
         @keyup.enter.native="handleFilterChange"
@@ -80,7 +80,7 @@
         <el-button slot="append" icon="el-icon-search" @click="handleFilterChange"></el-button>
       </el-input>
 
-      <el-button size="small" icon="el-icon-refresh" @click="handleReset">{{ $t('notification.reset') }}</el-button>
+      <el-button size="small" icon="el-icon-refresh" @click="handleReset">{{ $t('notification.filter.reset') }}</el-button>
     </div>
   </div>
 </template>
@@ -108,13 +108,13 @@ const emit = defineEmits([
 
 // 通知类型列表（使用国际化 key）
 const typeList = {
-  system: 'notification.typeSystem',
-  plc: 'notification.typePlc',
-  user: 'notification.typeUser',
-  audit: 'notification.typeAudit',
-  device: 'notification.typeDevice',
-  connection: 'notification.typeConnection',
-  security: 'notification.typeSecurity'
+  system: 'notification.type.system',
+  plc: 'notification.type.plc',
+  user: 'notification.type.user',
+  audit: 'notification.type.audit',
+  device: 'notification.type.device',
+  connection: 'notification.type.connection',
+  security: 'notification.type.security'
 }
 
 const localArchiveTab = ref(props.archiveTab)

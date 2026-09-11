@@ -1,4 +1,4 @@
-/**
+﻿/**
  * useNotification - 通知中心可复用组合式函数
  *
  * 功能：
@@ -30,7 +30,7 @@
  */
 import { ref, reactive, computed, onUnmounted } from 'vue'
 import store from '@/store'
-import ws from '@/utils/websocket'
+import ws from '@/utils/request/websocket'
 import {
   requestGetNotificationListApi,
   requestGetUnreadCountApi,
@@ -45,23 +45,23 @@ import {
   requestGetNotificationSettingsApi,
   requestUpdateNotificationSettingsApi
 } from '@/api'
-import { formatDate } from '@/utils/date'
+import { formatDate } from '@/utils/data/date'
 
 // 通知类型映射（使用国际化 key）
 export const NOTIFICATION_TYPE_MAP = {
-  system: { key: 'notification.typeSystem', enabled: true },
-  plc: { key: 'notification.typePlc', enabled: true },
-  user: { key: 'notification.typeUser', enabled: true },
-  audit: { key: 'notification.typeAudit', enabled: true },
-  device: { key: 'notification.typeDevice', enabled: true },
-  connection: { key: 'notification.typeConnection', enabled: true }
+  system: { key: 'notification.type.system', enabled: true },
+  plc: { key: 'notification.type.plc', enabled: true },
+  user: { key: 'notification.type.user', enabled: true },
+  audit: { key: 'notification.type.audit', enabled: true },
+  device: { key: 'notification.type.device', enabled: true },
+  connection: { key: 'notification.type.connection', enabled: true }
 }
 
 // 优先级映射（使用国际化 key）
 export const PRIORITY_MAP = {
-  high: { key: 'notification.priorityHigh', type: 'danger' },
-  medium: { key: 'notification.priorityMedium', type: 'warning' },
-  low: { key: 'notification.priorityLow', type: 'info' }
+  high: { key: 'notification.priority.high', type: 'danger' },
+  medium: { key: 'notification.priority.medium', type: 'warning' },
+  low: { key: 'notification.priority.low', type: 'info' }
 }
 
 // 默认通知设置

@@ -1,354 +1,213 @@
 /**
- * 国际化管理模块 - 控制器层
- * 处理 HTTP 请求，调用服务层
+ * 国际化管理模块 - 控制器层（模块化「目录模型」版）
+ * 处理 HTTP 请求，调用服务层。
+ * 规范：成功 res.success(data)；参数缺失 res.error('PARAM_MISSING', null, 400)；
+ *       业务异常统一 next(err)，由全局错误中间件按错误码返回，前端按 code 翻译，不做兜底。
  */
 
 const i18nManagerService = require('./i18n-manager.service')
 
-/**
- * 获取国际化文件列表
- */
-async function getFileList(req, res, next) {
+// ========== 语言列表 / 读取 / 搜索 ==========
+
+/** 语言列表（登录用户均可，用于语言切换与管理页） */
+async function listLanguages(req, res, next) {
   try {
-    const files = i18nManagerService.getFileList()
-    res.json({
-      code: 200,
-      message: 'success',
-      data: files
-    })
+    res.success(i18nManagerService.listLanguages())
   } catch (err) {
     next(err)
   }
 }
 
-/**
- * 读取国际化文件内容
- */
-async function readFile(req, res, next) {
+/** 聚合读取整门语言（登录用户均可，用于动态加载语言包） */
+async function readLanguage(req, res, next) {
   try {
-    const { fileName } = req.query
-    if (!fileName) {
-      return res.status(400).json({ code: 400, message: 'fileName 参数不能为空' })
-    }
-    const data = i18nManagerService.readFile(fileName)
-    res.json({
-      code: 200,
-      message: 'success',
-      data
-    })
+    const { langCode } = req.query
+    if (!langCode) return res.error('PARAM_MISSING', null, 400)
+    res.success(i18nManagerService.readLanguage(langCode))
   } catch (err) {
     next(err)
   }
 }
 
-/**
- * 搜索国际化内容
- */
-async function searchContent(req, res, next) {
+/** 在一门语言内按 key / 值搜索（超管） */
+async function searchLanguage(req, res, next) {
   try {
-    const { fileName, keyword } = req.query
-    if (!fileName || !keyword) {
-      return res.status(400).json({ code: 400, message: 'fileName 和 keyword 参数不能为空' })
-    }
-    const data = i18nManagerService.searchContent(fileName, keyword)
-    res.json({
-      code: 200,
-      message: 'success',
-      data
-    })
+    const { langCode, keyword } = req.query
+    if (!langCode || !keyword) return res.error('PARAM_MISSING', null, 400)
+    res.success(i18nManagerService.searchLanguage(langCode, keyword))
   } catch (err) {
     next(err)
   }
 }
 
-/**
- * 保存国际化文件内容
- */
-async function saveFile(req, res, next) {
+// ========== 节点级增删改 ==========
+
+/** 修改单个 key 的值 */
+async function saveNodeValue(req, res, next) {
   try {
-    const { fileName, data } = req.body
-    if (!fileName || !data) {
-      return res.status(400).json({ code: 400, message: 'fileName 和 data 参数不能为空' })
-    }
-    const result = i18nManagerService.saveFile(fileName, data)
-    res.json({
-      code: 200,
-      message: '保存成功，请重新编译或刷新页面',
-      data: result
-    })
+    const { langCode, keyPath, value } = req.body
+    if (!langCode || !keyPath) return res.error('PARAM_MISSING', null, 400)
+    res.success(i18nManagerService.saveNodeValue(langCode, keyPath, value))
   } catch (err) {
     next(err)
   }
 }
 
-/**
- * 手动备份
- */
-async function backupFile(req, res, next) {
+/** 新增一个 key */
+async function addNode(req, res, next) {
   try {
-    const { fileName } = req.body
-    if (!fileName) {
-      return res.status(400).json({ code: 400, message: 'fileName 参数不能为空' })
-    }
-    const result = i18nManagerService.backupFile(fileName)
-    res.json({
-      code: 200,
-      message: '备份成功',
-      data: result
-    })
+    const { langCode, parentPath, key, value, spreadFile } = req.body
+    if (!langCode || !key) return res.error('PARAM_MISSING', null, 400)
+    res.success(i18nManagerService.addNode(langCode, parentPath, key, value, spreadFile))
   } catch (err) {
     next(err)
   }
 }
 
-/**
- * 获取备份文件列表
- */
+/** 删除一个 key */
+async function deleteNode(req, res, next) {
+  try {
+    const { langCode, keyPath } = req.body
+    if (!langCode || !keyPath) return res.error('PARAM_MISSING', null, 400)
+    res.success(i18nManagerService.deleteNode(langCode, keyPath))
+  } catch (err) {
+    next(err)
+  }
+}
+
+/** 整语言灌值（批量翻译结果保存） */
+async function saveLanguageValues(req, res, next) {
+  try {
+    const { langCode, data } = req.body
+    if (!langCode || !data) return res.error('PARAM_MISSING', null, 400)
+    res.success(i18nManagerService.saveLanguageValues(langCode, data))
+  } catch (err) {
+    next(err)
+  }
+}
+
+// ========== 创建语言 ==========
+
+/** 以源语言目录为模板创建新语言（新语言必须命中预设） */
+async function createLanguage(req, res, next) {
+  try {
+    const { sourceLangCode, newLangCode, copyValues } = req.body
+    if (!sourceLangCode || !newLangCode) return res.error('PARAM_MISSING', null, 400)
+    res.success(i18nManagerService.createLanguage(sourceLangCode, newLangCode, copyValues === true))
+  } catch (err) {
+    next(err)
+  }
+}
+
+// ========== zip 备份 / 恢复 / 删除 ==========
+
+/** 创建整目录 zip 备份 */
+async function backupLanguage(req, res, next) {
+  try {
+    const { langCode } = req.body
+    if (!langCode) return res.error('PARAM_MISSING', null, 400)
+    res.success(i18nManagerService.backupLanguage(langCode))
+  } catch (err) {
+    next(err)
+  }
+}
+
+/** 备份清单（可按 langCode 过滤） */
 async function getBackupList(req, res, next) {
   try {
-    const { fileName } = req.query
-    const data = i18nManagerService.getBackupList(fileName)
-    res.json({
-      code: 200,
-      message: 'success',
-      data
-    })
+    const { langCode } = req.query
+    res.success(i18nManagerService.getBackupList(langCode))
   } catch (err) {
     next(err)
   }
 }
 
-/**
- * 恢复备份
- */
+/** 恢复备份（恢复前自动备份当前） */
 async function restoreBackup(req, res, next) {
   try {
-    const { backupFileName, targetFileName } = req.body
-    if (!backupFileName || !targetFileName) {
-      return res.status(400).json({ code: 400, message: 'backupFileName 和 targetFileName 参数不能为空' })
-    }
-    const result = i18nManagerService.restoreBackup(backupFileName, targetFileName)
-    res.json({
-      code: 200,
-      message: '恢复成功，请重新编译或刷新页面',
-      data: result
-    })
+    const { backupFileName, langCode } = req.body
+    if (!backupFileName || !langCode) return res.error('PARAM_MISSING', null, 400)
+    res.success(i18nManagerService.restoreBackup(backupFileName, langCode))
   } catch (err) {
     next(err)
   }
 }
 
-/**
- * 删除备份
- */
+/** 删除备份 */
 async function deleteBackup(req, res, next) {
   try {
     const { backupFileName } = req.body
-    if (!backupFileName) {
-      return res.status(400).json({ code: 400, message: 'backupFileName 参数不能为空' })
-    }
-    const result = i18nManagerService.deleteBackup(backupFileName)
-    res.json({
-      code: 200,
-      message: '删除成功',
-      data: result
-    })
+    if (!backupFileName) return res.error('PARAM_MISSING', null, 400)
+    res.success(i18nManagerService.deleteBackup(backupFileName))
   } catch (err) {
     next(err)
   }
 }
 
-/**
- * 新增国际化配置
- */
-async function addConfig(req, res, next) {
-  try {
-    const { fileName, parentPath, key, value } = req.body
-    if (!fileName || !key || value === undefined) {
-      return res.status(400).json({ code: 400, message: 'fileName、key、value 参数不能为空' })
-    }
-    const result = i18nManagerService.addConfig(fileName, parentPath, key, value)
-    res.json({
-      code: 200,
-      message: '新增成功，请重新编译或刷新页面',
-      data: result
-    })
-  } catch (err) {
-    next(err)
-  }
-}
+// ========== 备份目录配置 ==========
 
-/**
- * 删除国际化配置
- */
-async function deleteConfig(req, res, next) {
-  try {
-    const { fileName, keyPath } = req.body
-    if (!fileName || !keyPath) {
-      return res.status(400).json({ code: 400, message: 'fileName 和 keyPath 参数不能为空' })
-    }
-    const result = i18nManagerService.deleteConfig(fileName, keyPath)
-    res.json({
-      code: 200,
-      message: '删除成功，请重新编译或刷新页面',
-      data: result
-    })
-  } catch (err) {
-    next(err)
-  }
-}
-
-/**
- * 获取备份目录配置
- */
 async function getBackupConfig(req, res, next) {
   try {
-    const data = i18nManagerService.getBackupConfig()
-    res.json({
-      code: 200,
-      message: 'success',
-      data
-    })
+    res.success(i18nManagerService.getBackupConfig())
   } catch (err) {
     next(err)
   }
 }
 
-/**
- * 设置备份目录
- */
 async function setBackupDir(req, res, next) {
   try {
     const { backupDir } = req.body
-    if (!backupDir) {
-      return res.status(400).json({ code: 400, message: 'backupDir 参数不能为空' })
-    }
-    i18nManagerService.setBackupDir(backupDir)
-    res.json({
-      code: 200,
-      message: '备份目录设置成功',
-      data: { backupDir }
-    })
+    if (!backupDir) return res.error('PARAM_MISSING', null, 400)
+    res.success(i18nManagerService.setBackupDir(backupDir))
   } catch (err) {
     next(err)
   }
 }
 
-/**
- * 创建新语言文件
- */
-async function createLanguage(req, res, next) {
-  try {
-    const { sourceFileName, newFileName, newLangName, copyValues } = req.body
-    if (!sourceFileName || !newFileName) {
-      return res.status(400).json({ code: 400, message: 'sourceFileName 和 newFileName 参数不能为空' })
-    }
-    const result = i18nManagerService.createLanguage(
-      sourceFileName,
-      newFileName,
-      newLangName || newFileName,
-      copyValues !== false
-    )
-    res.json({
-      code: 200,
-      message: '语言创建成功',
-      data: result
-    })
-  } catch (err) {
-    console.error('[I18N] createLanguage controller - 捕获异常:', err)
-    next(err)
-  }
-}
+// ========== 预设语言 ==========
 
-/**
- * 获取预设语言列表
- */
 async function getPresetLanguages(req, res, next) {
   try {
-    const languages = i18nManagerService.getPresetLanguages()
-    res.json({
-      code: 200,
-      message: 'success',
-      data: languages
-    })
+    res.success(i18nManagerService.getPresetLanguages())
   } catch (err) {
     next(err)
   }
 }
 
-/**
- * 获取所有语言元数据
- */
-async function getAllLanguageMeta(req, res, next) {
-  try {
-    const meta = i18nManagerService.getAllLanguageMeta()
-    res.json({
-      code: 200,
-      message: 'success',
-      data: meta
-    })
-  } catch (err) {
-    next(err)
-  }
-}
-
-// 获取预设语言配置文件内容
 async function getPresetLanguagesConfigContent(req, res, next) {
   try {
-    const content = i18nManagerService.getPresetLanguagesConfigContent()
-    res.json({
-      code: 200,
-      message: 'success',
-      data: content
-    })
+    res.success(i18nManagerService.getPresetLanguagesConfigContent())
   } catch (err) {
     next(err)
   }
 }
 
-// 保存预设语言配置文件内容
 async function savePresetLanguagesConfigContent(req, res, next) {
   try {
     const { content } = req.body
-    if (!content) {
-      return res.status(400).json({
-        code: 400,
-        message: '内容不能为空'
-      })
-    }
-    const success = i18nManagerService.savePresetLanguagesConfigContent(content)
-    if (success) {
-      res.json({
-        code: 200,
-        message: '保存成功'
-      })
-    } else {
-      res.status(500).json({
-        code: 500,
-        message: '保存失败'
-      })
-    }
+    if (!content) return res.error('PARAM_MISSING', null, 400)
+    res.success(i18nManagerService.savePresetLanguagesConfigContent(content))
   } catch (err) {
     next(err)
   }
 }
 
 module.exports = {
-  getFileList,
-  readFile,
-  searchContent,
-  saveFile,
-  backupFile,
+  listLanguages,
+  readLanguage,
+  searchLanguage,
+  saveNodeValue,
+  addNode,
+  deleteNode,
+  saveLanguageValues,
+  createLanguage,
+  backupLanguage,
   getBackupList,
   restoreBackup,
   deleteBackup,
-  addConfig,
-  deleteConfig,
   getBackupConfig,
   setBackupDir,
-  createLanguage,
   getPresetLanguages,
-  getAllLanguageMeta,
   getPresetLanguagesConfigContent,
   savePresetLanguagesConfigContent
 }

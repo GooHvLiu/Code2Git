@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <transition name="reminder-fade">
     <div
       v-if="visible"
@@ -10,7 +10,7 @@
       <div class="reminder-header">
         <div class="header-left">
           <i class="el-icon-warning-outline warning-icon"></i>
-          <span class="reminder-title">{{ $t("systemConfig.device.reminderTitle") }}</span>
+          <span class="reminder-title">{{ $t("system.config.device.reminderTitle") }}</span>
           <span v-if="reminderList.length > 0" class="reminder-count">{{ reminderList.length }}</span>
         </div>
         <div class="header-right">
@@ -26,7 +26,7 @@
 
       <!-- 内容区域 -->
       <div class="reminder-body" @mousedown.stop>
-        <div class="reminder-content">{{ $t("systemConfig.device.reminderContent") }}</div>
+        <div class="reminder-content">{{ $t("system.config.device.reminderContent") }}</div>
         <div v-if="reminderList.length > 0" class="reminder-list">
           <div
             v-for="(item, index) in reminderList"
@@ -43,17 +43,17 @@
           </div>
         </div>
         <div v-else class="reminder-empty">
-          {{ $t("systemConfig.device.reminderNoData") }}
+          {{ $t("system.config.device.reminderNoData") }}
         </div>
       </div>
 
       <!-- 底部操作栏 -->
       <div class="reminder-footer" @mousedown.stop>
         <el-button size="small" @click="handleRemindLater">
-          {{ $t("systemConfig.device.reminderRemindLater") }}
+          {{ $t("system.config.device.reminderRemindLater") }}
         </el-button>
         <el-button type="primary" size="small" @click="handleViewDetail">
-          {{ $t("systemConfig.device.reminderViewDetail") }}
+          {{ $t("system.config.device.reminderViewDetail") }}
         </el-button>
       </div>
     </div>

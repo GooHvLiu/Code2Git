@@ -22,8 +22,7 @@ class AuditService extends BaseService {
    */
   constructor() {
     super(auditModel, {
-      name: '审计日志',
-      langFields: []
+      name: '审计日志'
     })
   }
 
@@ -60,7 +59,7 @@ class AuditService extends BaseService {
         reason: log.reason || '',
         ip: log.ip || '',
         user_agent: log.userAgent || '',
-        created_at: new Date()
+        create_time: new Date()
       }
       return await auditModel.insertWithHash(data)
     } catch (err) {

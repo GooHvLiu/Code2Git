@@ -9,9 +9,9 @@ const fs = require('fs')
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 
 // ========== 生成 JS/Less 共享主题变量文件 ==========
-// 读取 themeVariables.js，自动转成 Less 变量写入 _theme_vars.less
+// 读取 theme-variables.config.js，自动转成 Less 变量写入 _theme_vars.less
 // 通过 style-resources-loader 注入到所有 .less 文件，实现改一处两边生效
-const themeVarsPath = path.resolve(__dirname, 'src/config/themeVariables.js')
+const themeVarsPath = path.resolve(__dirname, 'src/config/theme-variables.config.js')
 const themeVarsOutputPath = path.resolve(__dirname, 'src/assets/styles/_theme_vars.less')
 
 function generateThemeVars() {
@@ -21,8 +21,8 @@ function generateThemeVars() {
   const content = [
     '/**',
     ' * 自动生成文件，请勿手动编辑',
-    ' * 由 vue.config.js 从 src/config/themeVariables.js 生成',
-    ' * 修改颜色请编辑 themeVariables.js',
+    ' * 由 vue.config.js 从 src/config/theme-variables.config.js 生成',
+    ' * 修改颜色请编辑 theme-variables.config.js',
     ' */',
     ...Object.entries(themeVariables).map(([key, value]) => `@${key}: ${value};`)
   ].join('\n') + '\n'
@@ -123,10 +123,10 @@ module.exports = defineConfig({
       .loader('svg-sprite-loader')
       .options({
         symbolId: (filePath) => {
-          // 从文件路径中提取相对路径，去掉 src/assets/icons/svg/ 前缀
-          const relativePath = path.relative(path.join(__dirname, 'src/assets/icons/svg'), filePath)
-          // 把斜杠/反斜杠替换成短横线，去掉 .svg 后缀
-          return 'icon-' + relativePath.replace(/\\/g, '/').replace(/\//g, '-').replace(/\.svg$/, '')
+          // 只使用文件名，不包含目录名
+          // 例如：src/assets/icons/svg/avatar/SuperAdmin.svg → icon-SuperAdmin
+          const fileName = path.basename(filePath, '.svg')
+          return 'icon-' + fileName
         }
       })
       .end()

@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div ref="dashboardRef" class="dashboard-container" :class="{ fullscreen: isFullscreen }">
     <div class="dashboard-stage" :style="stageStyle">
     <!-- 科技感装饰背景 -->
@@ -396,7 +396,7 @@ import * as echarts from 'echarts'
 import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import store from '@/store'
 import { Message } from 'element-ui'
-import { getCoordsByValues } from '@/utils/worldCities'
+import { getCoordsByValues } from '@/utils/business/worldCities'
 
 /**
  * 数据看板页面 - 大屏展示版（浅色科技感主题 + ECharts 世界地图）

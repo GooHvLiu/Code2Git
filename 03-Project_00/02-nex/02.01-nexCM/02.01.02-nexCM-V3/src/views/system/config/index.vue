@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="system-config-container">
     <!-- 页面标题 -->
     <div class="page-header">
@@ -7,7 +7,7 @@
           {{ pageTitle }}
         </h2>
         <p class="page-desc">
-          {{ $t("menu.system.config.childrenMenu.desc") }}
+          {{ $t("system.config.desc") }}
         </p>
       </div>
       <div class="header-right">
@@ -19,7 +19,7 @@
           :disabled="configStatus !== 'ready'"
           :loading="loading"
         >
-          {{ $t("menu.system.config.childrenMenu.save") }}
+          {{ $t("system.config.save") }}
         </el-button>
         <el-button
           icon="el-icon-refresh-left"
@@ -28,7 +28,7 @@
           :disabled="configStatus !== 'ready'"
           :loading="loading"
         >
-          {{ $t("menu.system.config.childrenMenu.reset") }}
+          {{ $t("system.config.reset") }}
         </el-button>
       </div>
     </div>
@@ -124,14 +124,18 @@
           <!-- 系统设置 -->
           <div v-if="activeMenu === 'system'" class="config-panel">
             <h3 class="panel-title">
-              {{ $t("menu.system.config.childrenMenu.system.title") }}
+              {{ $t("system.config.system.title") }}
             </h3>
-            <el-form :model="form" label-width="160px" label-position="right">
-              <el-form-item
-                :label="
-                  $t('menu.system.config.childrenMenu.system.sessionTimeout')
-                "
-              >
+            <el-form :model="form" label-width="160px">
+              <el-form-item>
+                <template slot="label">
+                  <span class="label-with-tip">
+                    {{ $t('system.config.system.sessionTimeout') }}
+                    <el-tooltip :content="$t('system.config.system.sessionTimeoutTip')" placement="top">
+                      <i class="el-icon-question label-tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-input-number
                   v-model="form.sessionTimeout"
                   :min="5"
@@ -140,15 +144,19 @@
                   controls-position="right"
                 />
                 <span class="unit-text">{{
-                  $t("menu.system.config.childrenMenu.system.minutes")
+                  $t("system.config.system.minutes")
                 }}</span>
               </el-form-item>
 
-              <el-form-item
-                :label="
-                  $t('menu.system.config.childrenMenu.system.defaultPageSize')
-                "
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="label-with-tip">
+                    {{ $t('system.config.system.defaultPageSize') }}
+                    <el-tooltip :content="$t('system.config.system.defaultPageSizeTip')" placement="top">
+                      <i class="el-icon-question label-tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-select v-model="form.defaultPageSize" style="width: 200px">
                   <el-option :label="10" :value="10" />
                   <el-option :label="20" :value="20" />
@@ -157,11 +165,15 @@
                 </el-select>
               </el-form-item>
 
-              <el-form-item
-                :label="
-                  $t('menu.system.config.childrenMenu.system.defaultLanguage')
-                "
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="label-with-tip">
+                    {{ $t('system.config.system.defaultLanguage') }}
+                    <el-tooltip :content="$t('system.config.system.defaultLanguageTip')" placement="top">
+                      <i class="el-icon-question label-tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-select v-model="form.defaultLanguage" style="width: 200px">
                   <el-option
                     v-for="lang in languageOptions"
@@ -170,16 +182,22 @@
                     :value="lang.value"
                   >
                     <span style="display: flex; align-items: center;">
-                      <svg-icon :icon-class="lang.flag || 'flags/global'" style="width: 20px; height: 20px; margin-right: 8px;" />
+                      <svg-icon :icon-file-name="lang.flag || 'global'" style="width: 20px; height: 20px; margin-right: 8px;" />
                       <span>{{ lang.autonym || lang.label }}</span>
                     </span>
                   </el-option>
                 </el-select>
               </el-form-item>
 
-              <el-form-item
-                :label="$t('menu.system.config.childrenMenu.system.dateFormat')"
-              >
+              <el-form-item>
+                <template slot="label">
+                  <span class="label-with-tip">
+                    {{ $t('system.config.system.dateFormat') }}
+                    <el-tooltip :content="$t('system.config.system.dateFormatTip')" placement="top">
+                      <i class="el-icon-question label-tip-icon"></i>
+                    </el-tooltip>
+                  </span>
+                </template>
                 <el-select v-model="form.dateFormat" style="width: 200px">
                   <el-option label="YYYY-MM-DD" value="YYYY-MM-DD" />
                   <el-option label="YYYY/MM/DD" value="YYYY/MM/DD" />
@@ -193,13 +211,13 @@
           <!-- 安全设置 -->
           <div v-if="activeMenu === 'security'" class="config-panel">
             <h3 class="panel-title">
-              {{ $t("menu.system.config.childrenMenu.security.title") }}
+              {{ $t("system.config.security.title") }}
             </h3>
-            <el-form :model="form" label-width="160px" label-position="right">
+            <el-form :model="form" label-width="160px">
               <el-form-item
                 :label="
                   $t(
-                    'menu.system.config.childrenMenu.security.watermarkEnabled'
+                    'system.config.security.watermarkEnabled'
                   )
                 "
               >
@@ -215,13 +233,13 @@
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.system.config.childrenMenu.security.watermarkText"
+                        "system.config.security.watermarkText"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.system.config.childrenMenu.security.watermarkTextTip'
+                          'system.config.security.watermarkTextTip'
                         )
                       "
                       placement="top"
@@ -234,7 +252,7 @@
                   v-model="form.watermarkText"
                   :placeholder="
                     $t(
-                      'menu.system.config.childrenMenu.security.watermarkPlaceholder'
+                      'system.config.security.watermarkPlaceholder'
                     )
                   "
                   clearable
@@ -247,13 +265,13 @@
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.system.config.childrenMenu.security.loginFailedThreshold"
+                        "system.config.security.loginFailedThreshold"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.system.config.childrenMenu.security.loginFailedThresholdTip'
+                          'system.config.security.loginFailedThresholdTip'
                         )
                       "
                       placement="top"
@@ -276,13 +294,13 @@
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.system.config.childrenMenu.security.lockDurationMinutes"
+                        "system.config.security.lockDurationMinutes"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.system.config.childrenMenu.security.lockDurationMinutesTip'
+                          'system.config.security.lockDurationMinutesTip'
                         )
                       "
                       placement="top"
@@ -305,16 +323,16 @@
           <!-- 设备连接设置 -->
           <div v-if="activeMenu === 'plc'" class="config-panel">
             <h3 class="panel-title">
-              {{ $t("menu.superPanel.config.childrenMenu.plc.title") }}
+              {{ $t("superPanel.config.plc.title") }}
             </h3>
-            <el-form :model="form" label-width="160px" label-position="right">
+            <el-form :model="form" label-width="160px">
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.plc.protocol") }}
+                    {{ $t("superPanel.config.plc.protocol") }}
                     <el-tooltip
                       :content="
-                        $t('menu.superPanel.config.childrenMenu.plc.protocolTip')
+                        $t('superPanel.config.plc.protocolTip')
                       "
                       placement="top"
                     >
@@ -332,10 +350,10 @@
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.plc.host") }}
+                    {{ $t("superPanel.config.plc.host") }}
                     <el-tooltip
                       :content="
-                        $t('menu.superPanel.config.childrenMenu.plc.hostTip')
+                        $t('superPanel.config.plc.hostTip')
                       "
                       placement="top"
                     >
@@ -353,10 +371,10 @@
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.plc.port") }}
+                    {{ $t("superPanel.config.plc.port") }}
                     <el-tooltip
                       :content="
-                        $t('menu.superPanel.config.childrenMenu.plc.portTip')
+                        $t('superPanel.config.plc.portTip')
                       "
                       placement="top"
                     >
@@ -375,10 +393,10 @@
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.plc.unitId") }}
+                    {{ $t("superPanel.config.plc.unitId") }}
                     <el-tooltip
                       :content="
-                        $t('menu.superPanel.config.childrenMenu.plc.unitIdTip')
+                        $t('superPanel.config.plc.unitIdTip')
                       "
                       placement="top"
                     >
@@ -395,16 +413,16 @@
               </el-form-item>
 
               <el-divider content-position="left">{{
-                $t("menu.superPanel.config.childrenMenu.plc.pollSettings")
+                $t("superPanel.config.plc.pollSettings")
               }}</el-divider>
 
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.plc.pollFast") }}
+                    {{ $t("superPanel.config.plc.pollFast") }}
                     <el-tooltip
                       :content="
-                        $t('menu.superPanel.config.childrenMenu.plc.pollFastTip')
+                        $t('superPanel.config.plc.pollFastTip')
                       "
                       placement="top"
                     >
@@ -425,10 +443,10 @@
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.superPanel.config.childrenMenu.plc.pollSlow") }}
+                    {{ $t("superPanel.config.plc.pollSlow") }}
                     <el-tooltip
                       :content="
-                        $t('menu.superPanel.config.childrenMenu.plc.pollSlowTip')
+                        $t('superPanel.config.plc.pollSlowTip')
                       "
                       placement="top"
                     >
@@ -451,21 +469,21 @@
           <!-- 导出设置 -->
           <div v-if="activeMenu === 'export'" class="config-panel">
             <h3 class="panel-title">
-              {{ $t("menu.system.config.childrenMenu.export.title") }}
+              {{ $t("system.config.export.title") }}
             </h3>
-            <el-form :model="form" label-width="160px" label-position="right">
+            <el-form :model="form" label-width="160px">
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.system.config.childrenMenu.export.pdfWatermarkEnabled"
+                        "system.config.export.pdfWatermarkEnabled"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.system.config.childrenMenu.export.pdfWatermarkEnabledTip'
+                          'system.config.export.pdfWatermarkEnabledTip'
                         )
                       "
                       placement="top"
@@ -486,13 +504,13 @@
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.system.config.childrenMenu.export.pdfWatermarkText"
+                        "system.config.export.pdfWatermarkText"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.system.config.childrenMenu.export.pdfWatermarkTextTip'
+                          'system.config.export.pdfWatermarkTextTip'
                         )
                       "
                       placement="top"
@@ -505,7 +523,7 @@
                   v-model="form.pdfWatermarkText"
                   :placeholder="
                     $t(
-                      'menu.system.config.childrenMenu.export.pdfWatermarkPlaceholder'
+                      'system.config.export.pdfWatermarkPlaceholder'
                     )
                   "
                   clearable
@@ -518,21 +536,21 @@
           <!-- 连接设置 -->
           <div v-if="activeMenu === 'connection'" class="config-panel">
             <h3 class="panel-title">
-              {{ $t("menu.superPanel.config.childrenMenu.connection.title") }}
+              {{ $t("superPanel.config.connection.title") }}
             </h3>
-            <el-form :model="form" label-width="160px" label-position="right">
+            <el-form :model="form" label-width="160px">
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.superPanel.config.childrenMenu.connection.heartbeatInterval"
+                        "superPanel.config.connection.heartbeatInterval"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.superPanel.config.childrenMenu.connection.heartbeatIntervalTip'
+                          'superPanel.config.connection.heartbeatIntervalTip'
                         )
                       "
                       placement="top"
@@ -555,13 +573,13 @@
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.superPanel.config.childrenMenu.connection.deviceStatusCheckInterval"
+                        "superPanel.config.connection.deviceStatusCheckInterval"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.superPanel.config.childrenMenu.connection.deviceStatusCheckIntervalTip'
+                          'superPanel.config.connection.deviceStatusCheckIntervalTip'
                         )
                       "
                       placement="top"
@@ -578,7 +596,7 @@
                   controls-position="right"
                 />
                 <span class="unit-text">{{
-                  $t("menu.superPanel.config.childrenMenu.connection.unitSecond")
+                  $t("superPanel.config.connection.unitSecond")
                 }}</span>
               </el-form-item>
               <el-form-item>
@@ -586,13 +604,13 @@
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.superPanel.config.childrenMenu.connection.deviceOfflineThreshold"
+                        "superPanel.config.connection.deviceOfflineThreshold"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.superPanel.config.childrenMenu.connection.deviceOfflineThresholdTip'
+                          'superPanel.config.connection.deviceOfflineThresholdTip'
                         )
                       "
                       placement="top"
@@ -609,7 +627,7 @@
                   controls-position="right"
                 />
                 <span class="unit-text">{{
-                  $t("menu.superPanel.config.childrenMenu.connection.unitSecond")
+                  $t("superPanel.config.connection.unitSecond")
                 }}</span>
               </el-form-item>
 
@@ -618,13 +636,13 @@
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.superPanel.config.childrenMenu.connection.maintenanceCheckInterval"
+                        "superPanel.config.connection.maintenanceCheckInterval"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.superPanel.config.childrenMenu.connection.maintenanceCheckIntervalTip'
+                          'superPanel.config.connection.maintenanceCheckIntervalTip'
                         )
                       "
                       placement="top"
@@ -641,7 +659,7 @@
                   controls-position="right"
                 />
                 <span class="unit-text">{{
-                  $t("menu.superPanel.config.childrenMenu.connection.unitHour")
+                  $t("superPanel.config.connection.unitHour")
                 }}</span>
               </el-form-item>
 
@@ -650,13 +668,13 @@
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.superPanel.config.childrenMenu.connection.partLifeStatInterval"
+                        "superPanel.config.connection.partLifeStatInterval"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.superPanel.config.childrenMenu.connection.partLifeStatIntervalTip'
+                          'superPanel.config.connection.partLifeStatIntervalTip'
                         )
                       "
                       placement="top"
@@ -673,7 +691,7 @@
                   controls-position="right"
                 />
                 <span class="unit-text">{{
-                  $t("menu.superPanel.config.childrenMenu.connection.unitMinute")
+                  $t("superPanel.config.connection.unitMinute")
                 }}</span>
               </el-form-item>
             </el-form>
@@ -682,19 +700,19 @@
           <!-- 设备参数 -->
           <div v-if="activeMenu === 'device'" class="config-panel">
             <h3 class="panel-title">
-              {{ $t("menu.system.config.childrenMenu.device.title") }}
+              {{ $t("system.config.device.title") }}
             </h3>
-            <el-form :model="form" label-width="160px" label-position="right">
+            <el-form :model="form" label-width="160px">
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
                     {{
-                      $t("menu.system.config.childrenMenu.device.deviceName")
+                      $t("system.config.device.deviceName")
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.system.config.childrenMenu.device.deviceNameTip'
+                          'system.config.device.deviceNameTip'
                         )
                       "
                       placement="top"
@@ -706,7 +724,7 @@
                 <el-input
                   v-model="form.deviceName"
                   :placeholder="
-                    $t('menu.system.config.childrenMenu.device.deviceName')
+                    $t('system.config.device.deviceName')
                   "
                   clearable
                   style="width: 300px"
@@ -716,12 +734,12 @@
                 <template slot="label">
                   <span class="config-label-tip">
                     {{
-                      $t("menu.system.config.childrenMenu.device.deviceCode")
+                      $t("system.config.device.deviceCode")
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.system.config.childrenMenu.device.deviceCodeTip'
+                          'system.config.device.deviceCodeTip'
                         )
                       "
                       placement="top"
@@ -733,7 +751,7 @@
                 <el-input
                   v-model="form.deviceCode"
                   :placeholder="
-                    $t('menu.system.config.childrenMenu.device.deviceCode')
+                    $t('system.config.device.deviceCode')
                   "
                   clearable
                   style="width: 300px"
@@ -743,12 +761,12 @@
                 <template slot="label">
                   <span class="config-label-tip">
                     {{
-                      $t("menu.system.config.childrenMenu.device.deviceRegion")
+                      $t("system.config.device.deviceRegion")
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.system.config.childrenMenu.device.deviceRegionTip'
+                          'system.config.device.deviceRegionTip'
                         )
                       "
                       placement="top"
@@ -762,7 +780,7 @@
                   :options="regionOptions"
                   :props="{ expandTrigger: 'hover' }"
                   :placeholder="
-                    $t('menu.system.config.childrenMenu.device.deviceRegion')
+                    $t('system.config.device.deviceRegion')
                   "
                   clearable
                   filterable
@@ -775,13 +793,13 @@
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.system.config.childrenMenu.device.deviceInstallDate"
+                        "system.config.device.deviceInstallDate"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.system.config.childrenMenu.device.deviceInstallDateTip'
+                          'system.config.device.deviceInstallDateTip'
                         )
                       "
                       placement="top"
@@ -795,7 +813,7 @@
                   type="date"
                   :placeholder="
                     $t(
-                      'menu.system.config.childrenMenu.device.deviceInstallDate'
+                      'system.config.device.deviceInstallDate'
                     )
                   "
                   value-format="yyyy-MM-dd"
@@ -808,23 +826,23 @@
             <h3 class="panel-title" style="margin-top: 24px">
               {{
                 $t(
-                  "menu.system.config.childrenMenu.device.partLifeSettingsTitle"
+                  "system.config.device.partLifeSettingsTitle"
                 )
               }}
             </h3>
-            <el-form :model="form" label-width="160px" label-position="right">
+            <el-form :model="form" label-width="160px">
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.system.config.childrenMenu.device.partLifeReminderEnabled"
+                        "system.config.device.partLifeReminderEnabled"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.system.config.childrenMenu.device.partLifeReminderEnabledTip'
+                          'system.config.device.partLifeReminderEnabledTip'
                         )
                       "
                       placement="top"
@@ -845,13 +863,13 @@
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.system.config.childrenMenu.device.partLifeThreshold"
+                        "system.config.device.partLifeThreshold"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.system.config.childrenMenu.device.partLifeThresholdTip'
+                          'system.config.device.partLifeThresholdTip'
                         )
                       "
                       placement="top"
@@ -877,13 +895,13 @@
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.system.config.childrenMenu.device.partLifeRemindInterval"
+                        "system.config.device.partLifeRemindInterval"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.system.config.childrenMenu.device.partLifeRemindIntervalTip'
+                          'system.config.device.partLifeRemindIntervalTip'
                         )
                       "
                       placement="top"
@@ -899,19 +917,19 @@
                 >
                   <el-option
                     :label="
-                      $t('menu.system.config.childrenMenu.device.intervalHour')
+                      $t('system.config.device.intervalHour')
                     "
                     value="hour"
                   />
                   <el-option
                     :label="
-                      $t('menu.system.config.childrenMenu.device.intervalShift')
+                      $t('system.config.device.intervalShift')
                     "
                     value="shift"
                   />
                   <el-option
                     :label="
-                      $t('menu.system.config.childrenMenu.device.intervalDay')
+                      $t('system.config.device.intervalDay')
                     "
                     value="day"
                   />
@@ -923,13 +941,13 @@
                   <span class="config-label-tip">
                     {{
                       $t(
-                        "menu.system.config.childrenMenu.device.snoozeInterval"
+                        "system.config.device.snoozeInterval"
                       )
                     }}
                     <el-tooltip
                       :content="
                         $t(
-                          'menu.system.config.childrenMenu.device.snoozeIntervalTip'
+                          'system.config.device.snoozeIntervalTip'
                         )
                       "
                       placement="top"
@@ -945,31 +963,31 @@
                 >
                   <el-option
                     :label="
-                      $t('menu.system.config.childrenMenu.device.snooze5min')
+                      $t('system.config.device.snooze5min')
                     "
                     value="5"
                   />
                   <el-option
                     :label="
-                      $t('menu.system.config.childrenMenu.device.snooze10min')
+                      $t('system.config.device.snooze10min')
                     "
                     value="10"
                   />
                   <el-option
                     :label="
-                      $t('menu.system.config.childrenMenu.device.snooze30min')
+                      $t('system.config.device.snooze30min')
                     "
                     value="30"
                   />
                   <el-option
                     :label="
-                      $t('menu.system.config.childrenMenu.device.snooze1hour')
+                      $t('system.config.device.snooze1hour')
                     "
                     value="60"
                   />
                   <el-option
                     :label="
-                      $t('menu.system.config.childrenMenu.device.snooze2hour')
+                      $t('system.config.device.snooze2hour')
                     "
                     value="120"
                   />
@@ -981,7 +999,7 @@
           <!-- 订单设置 -->
           <div v-if="activeMenu === 'order'" class="config-panel">
             <h3 class="panel-title">
-              {{ $t("menu.system.config.childrenMenu.order.title") }}
+              {{ $t("system.config.order.title") }}
             </h3>
 
             <!-- 生产控制区域 -->
@@ -989,22 +1007,22 @@
               <div class="section-title">
                 <i class="el-icon-cpu"></i>
                 <span>{{
-                  $t("menu.system.config.childrenMenu.order.productionControl")
+                  $t("system.config.order.productionControl")
                 }}</span>
               </div>
-              <el-form :model="form" label-width="250px" label-position="right">
+              <el-form :model="form" label-width="250px">
                 <el-form-item>
                   <template slot="label">
                     <span class="config-label-tip">
                       {{
                         $t(
-                          "menu.system.config.childrenMenu.order.allowNoOrderProduction"
+                          "system.config.order.allowNoOrderProduction"
                         )
                       }}
                       <el-tooltip
                         :content="
                           $t(
-                            'menu.system.config.childrenMenu.order.allowNoOrderProductionTip'
+                            'system.config.order.allowNoOrderProductionTip'
                           )
                         "
                         placement="top"
@@ -1025,13 +1043,13 @@
                     <span class="config-label-tip">
                       {{
                         $t(
-                          "menu.system.config.childrenMenu.order.noOrderProductionHighlight"
+                          "system.config.order.noOrderProductionHighlight"
                         )
                       }}
                       <el-tooltip
                         :content="
                           $t(
-                            'menu.system.config.childrenMenu.order.noOrderProductionHighlightTip'
+                            'system.config.order.noOrderProductionHighlightTip'
                           )
                         "
                         placement="top"
@@ -1053,13 +1071,13 @@
                     <span class="config-label-tip">
                       {{
                         $t(
-                          "menu.system.config.childrenMenu.order.orderSwitchConfirm"
+                          "system.config.order.orderSwitchConfirm"
                         )
                       }}
                       <el-tooltip
                         :content="
                           $t(
-                            'menu.system.config.childrenMenu.order.orderSwitchConfirmTip'
+                            'system.config.order.orderSwitchConfirmTip'
                           )
                         "
                         placement="top"
@@ -1080,13 +1098,13 @@
                     <span class="config-label-tip">
                       {{
                         $t(
-                          "menu.system.config.childrenMenu.order.autoArchiveCompleted"
+                          "system.config.order.autoArchiveCompleted"
                         )
                       }}
                       <el-tooltip
                         :content="
                           $t(
-                            'menu.system.config.childrenMenu.order.autoArchiveCompletedTip'
+                            'system.config.order.autoArchiveCompletedTip'
                           )
                         "
                         placement="top"
@@ -1109,22 +1127,22 @@
               <div class="section-title">
                 <i class="el-icon-data-line"></i>
                 <span>{{
-                  $t("menu.system.config.childrenMenu.order.statDisplay")
+                  $t("system.config.order.statDisplay")
                 }}</span>
               </div>
-              <el-form :model="form" label-width="250px" label-position="right">
+              <el-form :model="form" label-width="250px">
                 <el-form-item>
                   <template slot="label">
                     <span class="config-label-tip">
                       {{
                         $t(
-                          "menu.system.config.childrenMenu.order.showOperatorName"
+                          "system.config.order.showOperatorName"
                         )
                       }}
                       <el-tooltip
                         :content="
                           $t(
-                            'menu.system.config.childrenMenu.order.showOperatorNameTip'
+                            'system.config.order.showOperatorNameTip'
                           )
                         "
                         placement="top"
@@ -1145,13 +1163,13 @@
                     <span class="config-label-tip">
                       {{
                         $t(
-                          "menu.system.config.childrenMenu.order.showAlarmCount"
+                          "system.config.order.showAlarmCount"
                         )
                       }}
                       <el-tooltip
                         :content="
                           $t(
-                            'menu.system.config.childrenMenu.order.showAlarmCountTip'
+                            'system.config.order.showAlarmCountTip'
                           )
                         "
                         placement="top"
@@ -1171,12 +1189,12 @@
                   <template slot="label">
                     <span class="config-label-tip">
                       {{
-                        $t("menu.system.config.childrenMenu.order.showRuntime")
+                        $t("system.config.order.showRuntime")
                       }}
                       <el-tooltip
                         :content="
                           $t(
-                            'menu.system.config.childrenMenu.order.showRuntimeTip'
+                            'system.config.order.showRuntimeTip'
                           )
                         "
                         placement="top"
@@ -1199,22 +1217,22 @@
               <div class="section-title">
                 <i class="el-icon-document"></i>
                 <span>{{
-                  $t("menu.system.config.childrenMenu.order.reportConfig")
+                  $t("system.config.order.reportConfig")
                 }}</span>
               </div>
-              <el-form :model="form" label-width="250px" label-position="right">
+              <el-form :model="form" label-width="250px">
                 <el-form-item>
                   <template slot="label">
                     <span class="config-label-tip">
                       {{
                         $t(
-                          "menu.system.config.childrenMenu.order.reportIncludeAlarmDetail"
+                          "system.config.order.reportIncludeAlarmDetail"
                         )
                       }}
                       <el-tooltip
                         :content="
                           $t(
-                            'menu.system.config.childrenMenu.order.reportIncludeAlarmDetailTip'
+                            'system.config.order.reportIncludeAlarmDetailTip'
                           )
                         "
                         placement="top"
@@ -1235,13 +1253,13 @@
                     <span class="config-label-tip">
                       {{
                         $t(
-                          "menu.system.config.childrenMenu.order.reportIncludeOperatorDetail"
+                          "system.config.order.reportIncludeOperatorDetail"
                         )
                       }}
                       <el-tooltip
                         :content="
                           $t(
-                            'menu.system.config.childrenMenu.order.reportIncludeOperatorDetailTip'
+                            'system.config.order.reportIncludeOperatorDetailTip'
                           )
                         "
                         placement="top"
@@ -1262,13 +1280,13 @@
                     <span class="config-label-tip">
                       {{
                         $t(
-                          "menu.system.config.childrenMenu.order.reportIncludeDownloadCount"
+                          "system.config.order.reportIncludeDownloadCount"
                         )
                       }}
                       <el-tooltip
                         :content="
                           $t(
-                            'menu.system.config.childrenMenu.order.reportIncludeDownloadCountTip'
+                            'system.config.order.reportIncludeDownloadCountTip'
                           )
                         "
                         placement="top"
@@ -1289,13 +1307,13 @@
                     <span class="config-label-tip">
                       {{
                         $t(
-                          "menu.system.config.childrenMenu.order.allowRunningOrderDownload"
+                          "system.config.order.allowRunningOrderDownload"
                         )
                       }}
                       <el-tooltip
                         :content="
                           $t(
-                            'menu.system.config.childrenMenu.order.allowRunningOrderDownloadTip'
+                            'system.config.order.allowRunningOrderDownloadTip'
                           )
                         "
                         placement="top"
@@ -1327,16 +1345,16 @@
           <!-- 通知设置 -->
           <div v-if="activeMenu === 'notification'" class="config-panel">
             <h3 class="panel-title">
-              {{ $t("menu.system.config.childrenMenu.notification.title") }}
+              {{ $t("system.config.notification.title") }}
             </h3>
-            <el-form :model="form" label-width="160px" label-position="right">
+            <el-form :model="form" label-width="160px">
               <!-- 自动已读天数 -->
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.system.config.childrenMenu.notification.autoReadDays") }}
+                    {{ $t("system.config.notification.autoReadDays") }}
                     <el-tooltip
-                      :content="$t('menu.system.config.childrenMenu.notification.autoReadDaysTip')"
+                      :content="$t('system.config.notification.autoReadDaysTip')"
                       placement="top"
                     >
                       <i class="el-icon-question tip-icon"></i>
@@ -1350,16 +1368,16 @@
                   :step="1"
                   controls-position="right"
                 />
-                <span class="unit-text">{{ $t("menu.system.config.childrenMenu.notification.unitDay") }}</span>
+                <span class="unit-text">{{ $t("system.config.notification.unitDay") }}</span>
               </el-form-item>
 
               <!-- 声音提醒 -->
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.system.config.childrenMenu.notification.soundEnabled") }}
+                    {{ $t("system.config.notification.soundEnabled") }}
                     <el-tooltip
-                      :content="$t('menu.system.config.childrenMenu.notification.soundEnabledTip')"
+                      :content="$t('system.config.notification.soundEnabledTip')"
                       placement="top"
                     >
                       <i class="el-icon-question tip-icon"></i>
@@ -1378,16 +1396,16 @@
           <!-- 授权设置 -->
           <div v-if="activeMenu === 'licenseSetting'" class="config-panel">
             <h3 class="panel-title">
-              {{ $t("menu.system.config.childrenMenu.licenseSetting.title") }}
+              {{ $t("system.config.licenseSetting.title") }}
             </h3>
-            <el-form :model="form" label-width="160px" label-position="right">
+            <el-form :model="form" label-width="160px">
               <!-- 到期提醒天数 -->
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.system.config.childrenMenu.licenseSetting.expiringDays") }}
+                    {{ $t("system.config.licenseSetting.expiringDays") }}
                     <el-tooltip
-                      :content="$t('menu.system.config.childrenMenu.licenseSetting.expiringDaysTip')"
+                      :content="$t('system.config.licenseSetting.expiringDaysTip')"
                       placement="top"
                     >
                       <i class="el-icon-question tip-icon"></i>
@@ -1401,16 +1419,16 @@
                   :step="1"
                   controls-position="right"
                 />
-                <span class="unit-text">{{ $t("menu.system.config.childrenMenu.licenseSetting.unitDay") }}</span>
+                <span class="unit-text">{{ $t("system.config.licenseSetting.unitDay") }}</span>
               </el-form-item>
 
               <!-- 宽限期 -->
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.system.config.childrenMenu.licenseSetting.gracePeriod") }}
+                    {{ $t("system.config.licenseSetting.gracePeriod") }}
                     <el-tooltip
-                      :content="$t('menu.system.config.childrenMenu.licenseSetting.gracePeriodTip')"
+                      :content="$t('system.config.licenseSetting.gracePeriodTip')"
                       placement="top"
                     >
                       <i class="el-icon-question tip-icon"></i>
@@ -1424,16 +1442,16 @@
                   :step="1"
                   controls-position="right"
                 />
-                <span class="unit-text">{{ $t("menu.system.config.childrenMenu.licenseSetting.unitDay") }}</span>
+                <span class="unit-text">{{ $t("system.config.licenseSetting.unitDay") }}</span>
               </el-form-item>
 
               <!-- 检查间隔 -->
               <el-form-item>
                 <template slot="label">
                   <span class="config-label-tip">
-                    {{ $t("menu.system.config.childrenMenu.licenseSetting.checkInterval") }}
+                    {{ $t("system.config.licenseSetting.checkInterval") }}
                     <el-tooltip
-                      :content="$t('menu.system.config.childrenMenu.licenseSetting.checkIntervalTip')"
+                      :content="$t('system.config.licenseSetting.checkIntervalTip')"
                       placement="top"
                     >
                       <i class="el-icon-question tip-icon"></i>
@@ -1447,7 +1465,7 @@
                   :step="1"
                   controls-position="right"
                 />
-                <span class="unit-text">{{ $t("menu.system.config.childrenMenu.licenseSetting.unitHour") }}</span>
+                <span class="unit-text">{{ $t("system.config.licenseSetting.unitHour") }}</span>
               </el-form-item>
             </el-form>
           </div>
@@ -1462,7 +1480,7 @@
               <div class="toolbar-title">
                 <i class="el-icon-key"></i>
                 <span>{{
-                  $t("menu.system.config.childrenMenu.license.manageTitle")
+                  $t("system.config.superPanelLicense.manageTitle")
                 }}</span>
               </div>
               <div class="toolbar-actions">
@@ -1472,7 +1490,7 @@
                   @click="loadLicenseData"
                   :loading="licenseLoading"
                   >{{
-                    $t("menu.system.config.childrenMenu.license.refresh")
+                    $t("system.config.superPanelLicense.refresh")
                   }}</el-button
                 >
                 <el-button
@@ -1481,7 +1499,7 @@
                   icon="el-icon-upload2"
                   @click="showLicenseImport = true"
                   >{{
-                    $t("menu.system.config.childrenMenu.license.importLicense")
+                    $t("system.config.superPanelLicense.importLicense")
                   }}</el-button
                 >
                 <el-button
@@ -1490,7 +1508,7 @@
                   icon="el-icon-download"
                   @click="handleDownloadLicense"
                   >{{
-                    $t("menu.system.config.childrenMenu.license.download")
+                    $t("system.config.superPanelLicense.download")
                   }}</el-button
                 >
               </div>
@@ -1514,10 +1532,10 @@
                     {{
                       licenseData.valid
                         ? $t(
-                            "menu.system.config.childrenMenu.license.statusValid"
+                            "system.config.superPanelLicense.statusValid"
                           )
                         : $t(
-                            "menu.system.config.childrenMenu.license.statusInvalid"
+                            "system.config.superPanelLicense.statusInvalid"
                           )
                     }}
                   </div>
@@ -1534,7 +1552,7 @@
               <div class="status-right">
                 <div class="status-item">
                   <span class="item-label">{{
-                    $t("menu.system.config.childrenMenu.license.expireTime")
+                    $t("system.config.superPanelLicense.expireTime")
                   }}</span>
                   <span class="item-value">{{
                     formatLicenseTime(licenseData.expiresAt)
@@ -1542,7 +1560,7 @@
                 </div>
                 <div class="status-item">
                   <span class="item-label">{{
-                    $t("menu.system.config.childrenMenu.license.remaining")
+                    $t("system.config.superPanelLicense.remaining")
                   }}</span>
                   <span class="item-value countdown">{{
                     licenseCountdown
@@ -1550,7 +1568,7 @@
                 </div>
                 <div class="status-item">
                   <span class="item-label">{{
-                    $t("menu.system.config.childrenMenu.license.projectName")
+                    $t("system.config.superPanelLicense.projectName")
                   }}</span>
                   <span class="item-value">{{
                     licenseData.projectName || "-"
@@ -1558,7 +1576,7 @@
                 </div>
                 <div class="status-item">
                   <span class="item-label">{{
-                    $t("menu.system.config.childrenMenu.license.customerName")
+                    $t("system.config.superPanelLicense.customerName")
                   }}</span>
                   <span class="item-value">{{
                     licenseData.customer?.name || "-"
@@ -1572,7 +1590,7 @@
               <!-- 授权详细信息 -->
               <el-collapse-item
                 :title="
-                  $t('menu.system.config.childrenMenu.license.detailTitle')
+                  $t('system.config.superPanelLicense.detailTitle')
                 "
                 name="detail"
               >
@@ -1580,7 +1598,7 @@
                   <div class="detail-item">
                     <div class="detail-label">
                       {{
-                        $t("menu.system.config.childrenMenu.license.licenseId")
+                        $t("system.config.superPanelLicense.licenseId")
                       }}
                     </div>
                     <div class="detail-value mono-text">
@@ -1590,7 +1608,7 @@
                   <div class="detail-item">
                     <div class="detail-label">
                       {{
-                        $t("menu.system.config.childrenMenu.license.projectId")
+                        $t("system.config.superPanelLicense.projectId")
                       }}
                     </div>
                     <div class="detail-value mono-text">
@@ -1601,7 +1619,7 @@
                     <div class="detail-label">
                       {{
                         $t(
-                          "menu.system.config.childrenMenu.license.projectName"
+                          "system.config.superPanelLicense.projectName"
                         )
                       }}
                     </div>
@@ -1613,7 +1631,7 @@
                     <div class="detail-label">
                       {{
                         $t(
-                          "menu.system.config.childrenMenu.license.licenseType"
+                          "system.config.superPanelLicense.licenseType"
                         )
                       }}
                     </div>
@@ -1628,7 +1646,7 @@
                   <div class="detail-item">
                     <div class="detail-label">
                       {{
-                        $t("menu.system.config.childrenMenu.license.issuedAt")
+                        $t("system.config.superPanelLicense.issuedAt")
                       }}
                     </div>
                     <div class="detail-value">
@@ -1638,7 +1656,7 @@
                   <div class="detail-item">
                     <div class="detail-label">
                       {{
-                        $t("menu.system.config.childrenMenu.license.expireTime")
+                        $t("system.config.superPanelLicense.expireTime")
                       }}
                     </div>
                     <div class="detail-value">
@@ -1649,7 +1667,7 @@
                     <div class="detail-label">
                       {{
                         $t(
-                          "menu.system.config.childrenMenu.license.customerName"
+                          "system.config.superPanelLicense.customerName"
                         )
                       }}
                     </div>
@@ -1660,7 +1678,7 @@
                   <div class="detail-item">
                     <div class="detail-label">
                       {{
-                        $t("menu.system.config.childrenMenu.license.contact")
+                        $t("system.config.superPanelLicense.contact")
                       }}
                     </div>
                     <div class="detail-value">
@@ -1669,7 +1687,7 @@
                   </div>
                   <div class="detail-item">
                     <div class="detail-label">
-                      {{ $t("menu.system.config.childrenMenu.license.phone") }}
+                      {{ $t("system.config.superPanelLicense.phone") }}
                     </div>
                     <div class="detail-value">
                       {{ licenseData.customer?.phone || "-" }}
@@ -1677,7 +1695,7 @@
                   </div>
                   <div class="detail-item">
                     <div class="detail-label">
-                      {{ $t("menu.system.config.childrenMenu.license.email") }}
+                      {{ $t("system.config.superPanelLicense.email") }}
                     </div>
                     <div class="detail-value">
                       {{ licenseData.customer?.email || "-" }}
@@ -1686,33 +1704,33 @@
                   <div class="detail-item">
                     <div class="detail-label">
                       {{
-                        $t("menu.system.config.childrenMenu.license.maxUsers")
+                        $t("system.config.superPanelLicense.maxUsers")
                       }}
                     </div>
                     <div class="detail-value">
                       {{
                         licenseData.maxUsers ||
-                        $t("menu.system.config.childrenMenu.license.unlimited")
+                        $t("system.config.superPanelLicense.unlimited")
                       }}
                     </div>
                   </div>
                   <div class="detail-item">
                     <div class="detail-label">
                       {{
-                        $t("menu.system.config.childrenMenu.license.maxDevices")
+                        $t("system.config.superPanelLicense.maxDevices")
                       }}
                     </div>
                     <div class="detail-value">
                       {{
                         licenseData.maxDevices ||
-                        $t("menu.system.config.childrenMenu.license.unlimited")
+                        $t("system.config.superPanelLicense.unlimited")
                       }}
                     </div>
                   </div>
                   <div class="detail-item detail-item-full">
                     <div class="detail-label">
                       {{
-                        $t("menu.system.config.childrenMenu.license.features")
+                        $t("system.config.superPanelLicense.features")
                       }}
                     </div>
                     <div class="detail-value">
@@ -1732,7 +1750,7 @@
                         class="text-muted"
                         >{{
                           $t(
-                            "menu.system.config.childrenMenu.license.allFeatures"
+                            "system.config.superPanelLicense.allFeatures"
                           )
                         }}</span
                       >
@@ -1744,7 +1762,7 @@
               <!-- 机器绑定信息 -->
               <el-collapse-item
                 :title="
-                  $t('menu.system.config.childrenMenu.license.machineBind')
+                  $t('system.config.superPanelLicense.machineBind')
                 "
                 name="machine"
               >
@@ -1752,7 +1770,7 @@
                   <div class="machine-row">
                     <span class="machine-label">{{
                       $t(
-                        "menu.system.config.childrenMenu.license.currentMachineId"
+                        "system.config.superPanelLicense.currentMachineId"
                       )
                     }}</span>
                     <div class="machine-value-wrap">
@@ -1771,17 +1789,17 @@
                   <div class="machine-row">
                     <span class="machine-label">{{
                       $t(
-                        "menu.system.config.childrenMenu.license.boundMachineId"
+                        "system.config.superPanelLicense.boundMachineId"
                       )
                     }}</span>
                     <span class="machine-id mono-text">{{
                       licenseData.boundMachineId ||
-                      $t("menu.system.config.childrenMenu.license.notBoundAny")
+                      $t("system.config.superPanelLicense.notBoundAny")
                     }}</span>
                   </div>
                   <div class="machine-row">
                     <span class="machine-label">{{
-                      $t("menu.system.config.childrenMenu.license.matchStatus")
+                      $t("system.config.superPanelLicense.matchStatus")
                     }}</span>
                     <el-tag
                       :type="licenseData.machineMatched ? 'success' : 'danger'"
@@ -1798,10 +1816,10 @@
                       {{
                         licenseData.machineMatched
                           ? $t(
-                              "menu.system.config.childrenMenu.license.matched"
+                              "system.config.superPanelLicense.matched"
                             )
                           : $t(
-                              "menu.system.config.childrenMenu.license.notMatched"
+                              "system.config.superPanelLicense.notMatched"
                             )
                       }}
                     </el-tag>
@@ -1811,14 +1829,14 @@
 
               <!-- 时间防护信息 -->
               <el-collapse-item
-                :title="$t('menu.system.config.childrenMenu.license.timeGuard')"
+                :title="$t('system.config.superPanelLicense.timeGuard')"
                 name="time"
               >
                 <div class="time-info">
                   <div class="time-row">
                     <span class="time-label">{{
                       $t(
-                        "menu.system.config.childrenMenu.license.timeGuardStatus"
+                        "system.config.superPanelLicense.timeGuardStatus"
                       )
                     }}</span>
                     <el-tag
@@ -1828,17 +1846,17 @@
                       {{
                         licenseData.timeGuard?.exists
                           ? $t(
-                              "menu.system.config.childrenMenu.license.enabled"
+                              "system.config.superPanelLicense.enabled"
                             )
                           : $t(
-                              "menu.system.config.childrenMenu.license.notInitialized"
+                              "system.config.superPanelLicense.notInitialized"
                             )
                       }}
                     </el-tag>
                   </div>
                   <div class="time-row">
                     <span class="time-label">{{
-                      $t("menu.system.config.childrenMenu.license.lastVerified")
+                      $t("system.config.superPanelLicense.lastVerified")
                     }}</span>
                     <span class="time-value">{{
                       formatLicenseTime(licenseData.timeGuard?.lastVerifiedAt)
@@ -1846,7 +1864,7 @@
                   </div>
                   <div class="time-row">
                     <span class="time-label">{{
-                      $t("menu.system.config.childrenMenu.license.serverTime")
+                      $t("system.config.superPanelLicense.serverTime")
                     }}</span>
                     <span class="time-value">{{
                       formatLicenseTime(licenseData.serverTime)
@@ -1854,7 +1872,7 @@
                   </div>
                   <div class="time-row">
                     <span class="time-label">{{
-                      $t("menu.system.config.childrenMenu.license.operation")
+                      $t("system.config.superPanelLicense.operation")
                     }}</span>
                     <el-button
                       type="primary"
@@ -1864,7 +1882,7 @@
                       :loading="licenseSyncing"
                       >{{
                         $t(
-                          "menu.system.config.childrenMenu.license.networkDiagnosis"
+                          "system.config.superPanelLicense.networkDiagnosis"
                         )
                       }}</el-button
                     >
@@ -1875,14 +1893,14 @@
               <!-- 授权文件信息（仅管理员） -->
               <el-collapse-item
                 v-if="isAdmin"
-                :title="$t('menu.system.config.childrenMenu.license.fileInfo')"
+                :title="$t('system.config.superPanelLicense.fileInfo')"
                 name="file"
               >
                 <div v-if="licenseData.licenseFile" class="license-detail-grid">
                   <div class="detail-item detail-item-full">
                     <div class="detail-label">
                       {{
-                        $t("menu.system.config.childrenMenu.license.filePath")
+                        $t("system.config.superPanelLicense.filePath")
                       }}
                     </div>
                     <div class="detail-value mono-text">
@@ -1892,7 +1910,7 @@
                   <div class="detail-item">
                     <div class="detail-label">
                       {{
-                        $t("menu.system.config.childrenMenu.license.fileName")
+                        $t("system.config.superPanelLicense.fileName")
                       }}
                     </div>
                     <div class="detail-value">
@@ -1902,7 +1920,7 @@
                   <div class="detail-item">
                     <div class="detail-label">
                       {{
-                        $t("menu.system.config.childrenMenu.license.fileSize")
+                        $t("system.config.superPanelLicense.fileSize")
                       }}
                     </div>
                     <div class="detail-value">
@@ -1913,7 +1931,7 @@
                     <div class="detail-label">
                       {{
                         $t(
-                          "menu.system.config.childrenMenu.license.lastModified"
+                          "system.config.superPanelLicense.lastModified"
                         )
                       }}
                     </div>
@@ -1927,7 +1945,7 @@
                 <div v-else class="empty-state">
                   <i class="el-icon-document-delete"></i>
                   <span>{{
-                    $t("menu.system.config.childrenMenu.license.noLicenseFile")
+                    $t("system.config.superPanelLicense.noLicenseFile")
                   }}</span>
                 </div>
               </el-collapse-item>
@@ -1939,7 +1957,7 @@
 
     <!-- 授权导入弹窗 -->
     <el-dialog
-      :title="$t('menu.system.config.childrenMenu.license.importDialogTitle')"
+      :title="$t('system.config.superPanelLicense.importDialogTitle')"
       :visible.sync="showLicenseImport"
       width="500px"
       :close-on-click-modal="false"
@@ -1947,7 +1965,7 @@
       <div class="import-tip">
         <i class="el-icon-info"></i>
         <span>{{
-          $t("menu.system.config.childrenMenu.license.importTip")
+          $t("system.config.superPanelLicense.importTip")
         }}</span>
       </div>
       <el-upload
@@ -1961,7 +1979,7 @@
       >
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">
-          {{ $t("menu.system.config.childrenMenu.license.dragUpload") }}
+          {{ $t("system.config.superPanelLicense.dragUpload") }}
         </div>
       </el-upload>
       <div v-if="selectedLicenseFile" class="selected-file-info">
@@ -1970,7 +1988,7 @@
       </div>
       <div slot="footer">
         <el-button @click="showLicenseImport = false">{{
-          $t("menu.system.config.childrenMenu.license.cancel")
+          $t("system.config.superPanelLicense.cancel")
         }}</el-button>
         <el-button
           type="primary"
@@ -1978,7 +1996,7 @@
           :disabled="!selectedLicenseFile"
           @click="handleImportLicense"
           >{{
-            $t("menu.system.config.childrenMenu.license.confirmImport")
+            $t("system.config.superPanelLicense.confirmImport")
           }}</el-button
         >
       </div>
@@ -1995,14 +2013,14 @@ import {
   requestUpdateConfigsApi,
   requestResetConfigsApi,
 } from "@/api";
-import { applyConfig } from "@/utils/config";
+import { applyConfig } from "@/utils/config/config";
 import { useLicense } from "@/composables/useLicense";
 import { useI18n } from "@/composables/useI18n";
-import { getCascaderOptions, getCoordsByValues } from "@/utils/worldCities";
+import { getCascaderOptions, getCoordsByValues } from "@/utils/business/worldCities";
 import { nextTick } from "vue";
 import { dynamicLanguages, loadLanguageList } from "@/i18n";
-import EmailConfig from "./components/EmailConfig.vue";
-import EmailLog from "./components/EmailLog.vue";
+import EmailConfig from "@/components/EmailConfig/index.vue";
+import EmailLog from "@/components/EmailLog/index.vue";
 
 // 使用 useI18n 获取响应式的当前语言和 t 函数
 const { locale, t } = useI18n();
@@ -2018,62 +2036,62 @@ const menuList = computed(() => [
   {
     key: "system",
     icon: "el-icon-setting",
-    title: t("menu.system.config.childrenMenu.system.title"),
+    title: t("system.config.system.title"),
   },
   {
     key: "security",
     icon: "el-icon-lock",
-    title: t("menu.system.config.childrenMenu.security.title"),
+    title: t("system.config.security.title"),
   },
   {
     key: "plc",
     icon: "el-icon-cpu",
-    title: t("menu.superPanel.config.childrenMenu.plc.title"),
+    title: t("superPanel.config.plc.title"),
   },
   {
     key: "export",
     icon: "el-icon-document",
-    title: t("menu.system.config.childrenMenu.export.title"),
+    title: t("system.config.export.title"),
   },
   {
     key: "connection",
     icon: "el-icon-connection",
-    title: t("menu.superPanel.config.childrenMenu.connection.title"),
+    title: t("superPanel.config.connection.title"),
   },
   {
     key: "device",
     icon: "el-icon-cpu",
-    title: t("menu.system.config.childrenMenu.device.title"),
+    title: t("system.config.device.title"),
   },
   {
     key: "email",
     icon: "el-icon-message",
-    title: t("menu.superPanel.config.childrenMenu.email.title"),
+    title: t("superPanel.config.email.title"),
   },
   {
     key: "emailLog",
     icon: "el-icon-document",
-    title: t("menu.system.config.childrenMenu.emailLog.title"),
+    title: t("system.config.emailLog.title"),
   },
   {
     key: "notification",
     icon: "el-icon-bell",
-    title: t("menu.system.config.childrenMenu.notification.title"),
+    title: t("system.config.notification.title"),
   },
   {
     key: "order",
     icon: "el-icon-s-order",
-    title: t("menu.system.config.childrenMenu.order.title"),
+    title: t("system.config.order.title"),
   },
   {
     key: "licenseSetting",
     icon: "el-icon-setting",
-    title: t("menu.system.config.childrenMenu.licenseSetting.title"),
+    title: t("system.config.licenseSetting.title"),
   },
   {
     key: "license",
     icon: "el-icon-key",
-    title: t("menu.system.config.childrenMenu.license.manageTitle"),
+    title: t("system.config.superPanelLicense.manageTitle"),
   },
 ]);
 const {
@@ -2251,9 +2269,9 @@ const filteredMenuList = computed(() => {
 // 页面标题（超级面板模式下显示参数配置标题，否则显示参数配置标题）
 const pageTitle = computed(() => {
   if (isSuperPanelMode.value) {
-    return t("menu.superPanel.config.default");
+    return t("superPanel.config.page.title");
   }
-  return t("menu.system.config.childrenMenu.title");
+  return t("system.config.childrenMenu.title");
 });
 
 /**
@@ -2381,14 +2399,14 @@ async function loadConfigs() {
     } else {
       // 加载失败：后端返回异常
       configStatus.value = "error";
-      Message.error("配置加载失败，后端返回数据异常，请刷新页面重试");
+      Message.error(t("system.config.loadDataAbnormal"));
     }
   } catch (err) {
     // 加载失败：网络或其他错误
     configStatus.value = "error";
     // eslint-disable-next-line no-console
     console.error("[参数配置] 加载配置失败:", err);
-    Message.error("配置加载失败，请检查网络连接或联系管理员");
+    Message.error(t("system.config.loadNetworkError"));
   } finally {
     loading.value = false;
   }
@@ -2401,11 +2419,11 @@ async function handleSave() {
   // 状态校验：只有 ready 状态才能保存
   if (configStatus.value !== "ready") {
     const statusMsg = {
-      loading: "配置加载中，请稍候...",
-      incomplete: "配置不完整，存在未初始化项，无法保存，请联系管理员",
-      error: "配置加载失败，无法保存，请刷新页面重试",
+      loading: t("system.config.statusLoading"),
+      incomplete: t("system.config.statusIncomplete"),
+      error: t("system.config.statusLoadError"),
     };
-    Message.error(statusMsg[configStatus.value] || "配置状态异常，无法保存");
+    Message.error(statusMsg[configStatus.value] || t("system.config.statusAbnormal"));
     return;
   }
 
@@ -2413,9 +2431,7 @@ async function handleSave() {
   const missingKeys = checkConfigCompleteness(form);
   if (missingKeys.length > 0) {
     Message.error(
-      `存在 ${missingKeys.length} 个未配置项，无法保存：${missingKeys.join(
-        ", "
-      )}`
+      t("system.config.missingItems", { count: missingKeys.length, items: missingKeys.join(", ") })
     );
     return;
   }
@@ -2442,14 +2458,14 @@ async function handleSave() {
         installDate: form.deviceInstallDate,
       });
 
-      Message.success("保存成功");
+      Message.success(t("common.message.saveSuccess"));
     } else {
-      Message.error("保存失败，请重试");
+      Message.error(t("system.config.saveFailedRetry"));
     }
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error("[参数配置] 保存配置失败:", err);
-    Message.error("保存失败，请检查网络连接");
+    Message.error(t("system.config.saveFailedNetwork"));
   } finally {
     loading.value = false;
   }
@@ -2461,7 +2477,7 @@ async function handleSave() {
 function handleReset() {
   // 状态校验：只有 ready 状态才能重置
   if (configStatus.value !== "ready") {
-    Message.warning("当前配置状态不允许重置，请刷新页面后重试");
+    Message.warning(t("system.config.resetNotAllowed"));
     return;
   }
 
@@ -2475,7 +2491,7 @@ function handleReset() {
           configStatus.value = "incomplete";
           missingConfigKeys.value = missingKeys;
           Message.warning(
-            `重置后检测到 ${missingKeys.length} 个未配置项，请联系管理员`
+            t("system.config.resetMissingItems", { count: missingKeys.length })
           );
           return;
         }
@@ -2493,15 +2509,15 @@ function handleReset() {
         // defaultLanguage 同步为当前界面语言，避免重置配置时语言被意外切换
         form.defaultLanguage = locale.value;
         applyConfig(form);
-        Message.success("重置成功");
+        Message.success(t("common.message.resetSuccess"));
       } else {
-        Message.error("重置失败，请重试");
+        Message.error(t("system.config.resetFailedRetry"));
       }
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
       console.error("[参数配置] 重置配置失败:", err);
-      Message.error("重置失败，请检查网络连接");
+      Message.error(t("system.config.resetFailedNetwork"));
     });
 }
 
@@ -3133,3 +3149,5 @@ onMounted(async () => {
   background: #f5f7fa;
 }
 </style>
+
+

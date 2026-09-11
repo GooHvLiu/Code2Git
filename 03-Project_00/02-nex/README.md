@@ -1,6 +1,6 @@
 # nex 项目 — 移动式灌装加塞设备管理系统
 
-> **项目版本**：v1.0.0 | **更新日期**：2026-09-06 | **作者**：GooHv
+> **项目版本**：v1.1.0 | **更新日期**：2026-09-08 | **作者**：GooHv
 
 ---
 
@@ -184,19 +184,28 @@ npm run serve
 ├── 02.01-nexCM/                    # 前端项目
 │   └── 02.01.02-nexCM-V3/
 │       ├── src/
-│       │   ├── api/                # API 接口层（22 个模块）
+│       │   ├── api/                # API 接口层（22 个模块，统一连字符命名）
 │       │   ├── assets/             # 静态资源
-│       │   ├── components/         # 公共组件
-│       │   ├── composables/        # 组合式函数
-│       │   ├── config/             # 前端配置（9 个配置文件）
+│       │   ├── components/         # 公共组件（统一 index.vue 命名）
+│       │   ├── composables/        # 组合式函数（useXxx.js 命名）
+│       │   ├── config/             # 前端配置
+│       │   │   ├── data/           # JSON 配置文件
+│       │   │   └── *.config.js     # JS 配置文件（统一 .config.js 后缀）
 │       │   ├── directives/         # 自定义指令
 │       │   ├── filters/            # 全局过滤器
-│       │   ├── i18n/               # 国际化（中英文语言包）
-│       │   ├── Layout/             # 布局组件
-│       │   ├── router/             # 路由配置
+│       │   ├── i18n/               # 国际化（多语言包，动态加载）
+│       │   ├── layout/             # 布局组件（小写命名）
+│       │   ├── plugins/            # 插件
+│       │   ├── router/             # 路由配置（动态路由 + 权限控制）
 │       │   ├── store/              # Vuex 状态管理
-│       │   ├── utils/              # 工具函数
-│       │   └── views/              # 页面视图
+│       │   ├── utils/              # 工具函数（按功能分类到子目录）
+│       │   │   ├── request/        # 请求相关（request.js, websocket.js）
+│       │   │   ├── auth/           # 认证相关（auth.js, permission.js, roleMapper.js）
+│       │   │   ├── ui/             # UI 相关（confirm.js, feedback.js, message.js, theme.js）
+│       │   │   ├── data/           # 数据处理（cache.js, storage.js, date.js, validate.js 等）
+│       │   │   ├── business/       # 业务相关（dict.js, export.js, translateManager.js 等）
+│       │   │   └── config/         # 配置相关（config.js, constants.js）
+│       │   └── views/              # 页面视图（子目录 + index.vue 规范）
 │       ├── public/                 # 公共静态资源
 │       ├── .env.development        # 开发环境变量
 │       ├── .env.production         # 生产环境变量
@@ -207,15 +216,25 @@ npm run serve
 │   └── 02.02.02-nexSM-V3/
 │       ├── src/
 │       │   ├── config/             # 配置文件
-│       │   ├── constants/          # 常量定义
+│       │   │   ├── data/           # JSON 配置文件
+│       │   │   └── *.config.js     # JS 配置文件（统一 .config.js 后缀）
+│       │   ├── constants/          # 常量定义（errorCode.js, statusCode.js）
+│       │   ├── controllers/        # 基础控制器
 │       │   ├── db/                 # 数据库连接池
-│       │   ├── middleware/         # 中间件（认证/授权/审计/校验/错误）
+│       │   ├── middleware/         # 中间件（认证/授权/审计/校验/错误/响应）
 │       │   ├── modules/            # 业务模块（22 个，MVC 完整结构）
-│       │   ├── plc/                # PLC 通信层（多协议支持）
+│       │   │   └── module-name/    # 每个模块使用连字符命名
+│       │   │       ├── module-name.controller.js  # 控制器层
+│       │   │       ├── module-name.service.js     # 服务层（业务逻辑）
+│       │   │       ├── module-name.route.js       # 路由定义
+│       │   │       ├── module-name.model.js       # 数据模型
+│       │   │       └── index.js                   # 模块入口
+│       │   ├── plc/                # PLC 通信层（多协议支持，类定义保留 PascalCase）
 │       │   ├── services/           # 公共服务（邮件/通知/审计/缓存）
-│       │   └── socket/             # WebSocket 服务
-│       ├── routes/                 # 路由聚合（自动扫描）
-│       ├── scripts/                # 脚本与 SQL
+│       │   ├── socket/             # WebSocket 服务
+│       │   └── utils/              # 工具函数
+│       ├── scripts/                # 脚本与 SQL（迁移脚本、初始化脚本）
+│       ├── test/                   # 测试文件
 │       ├── backups/                # 数据库备份
 │       ├── beehive/                # Beehive 授权相关
 │       ├── uploads/                # 上传文件目录
@@ -224,13 +243,15 @@ npm run serve
 │       ├── app.js                  # 应用入口
 │       └── package.json
 │
-└── docs/                           # 项目文档（本次交付）
+└── docs/                           # 项目文档
     ├── 01-项目架构与模块依赖关系图.md
     ├── 02-配置项完整清单.md
     ├── 03-数据库表结构与字段说明.md
     ├── 04-接口调用链路与前后端对应关系.md
     ├── 05-代码审查报告与优化建议.md
-    └── README.md                   # 本文件
+    ├── 架构规范深度审计报告.md
+    ├── 项目架构规范.md
+    └── email-module.md             # email 模块文档
 ```
 
 ---
@@ -332,6 +353,9 @@ server {
 | [03-数据库表结构与字段说明](./docs/03-数据库表结构与字段说明.md) | 19 张表的完整字段定义、索引、关系图 |
 | [04-接口调用链路与前后端对应关系](./docs/04-接口调用链路与前后端对应关系.md) | ~181 个接口、核心业务时序图、WebSocket 消息 |
 | [05-代码审查报告与优化建议](./docs/05-代码审查报告与优化建议.md) | 29 项问题（1 严重已修复）、优化优先级、实施计划 |
+| [架构规范深度审计报告](./docs/架构规范深度审计报告.md) | 前后端命名规范、目录结构、文件存放深度审计（25 项问题） |
+| [项目架构规范](./docs/项目架构规范.md) | 目录命名、文件命名、目录结构、命名一致性、导入导出规范 |
+| [email-module](./docs/email-module.md) | email 模块详细文档 |
 
 ---
 
@@ -341,10 +365,22 @@ server {
 
 - **缩进**：2 空格
 - **引号**：单引号
-- **命名**：变量 camelCase，类 PascalCase，常量 UPPER_SNAKE_CASE，文件 kebab-case
+- **命名**：
+  - 变量/函数：camelCase（小驼峰）
+  - 类/组件：PascalCase（大驼峰）
+  - 常量：UPPER_SNAKE_CASE（大写下划线）
+  - 目录：kebab-case（小写连字符）
+  - 文件：
+    - Vue 组件：PascalCase 或 index.vue（推荐使用子目录 + index.vue）
+    - 后端模块：kebab-case + 固定后缀（.controller.js / .service.js / .route.js / .model.js）
+    - 配置文件：kebab-case + .config.js 后缀
+    - 工具函数：kebab-case.js
 - **异步**：使用 async/await，禁止回调地狱
 - **错误**：必须处理，不能静默忽略
 - **国际化**：所有用户可见文本必须使用 `$t()`，禁止硬编码
+- **错误码**：使用字符串类型错误码（如 `'PARAM_INVALID'`），前端根据错误码做国际化，成功码为数字 `200`
+
+**详细架构规范** → [`docs/项目架构规范.md`](./docs/项目架构规范.md)
 
 ### Git 提交规范
 
@@ -393,6 +429,42 @@ A: 检查对应语言包中是否有该 key，检查是否使用了硬编码文�
 ---
 
 ## 📅 更新日志
+
+### v1.1.0 (2026-09-08)
+
+**架构规范重构**：完成前后端架构规范深度审计与重构，提升项目命名规范度、目录结构清晰度和代码复用度。
+
+**后端重构（9项）**：
+- email 模块清理非核心文件（7个文件移动到 scripts/、test/、docs/、src/config/）
+- config 目录格式统一（i18n-languages.json → data/ 子目录）
+- swagger.js → swagger.config.js
+- upload 模块：file.model.js → upload.model.js
+- user 模块：userDevice.* → user-device.*（6个文件引用更新）
+- notification 模块：notificationSetting.model.js → notification-setting.model.js
+- plc 目录：类定义保留 PascalCase（已在规范中说明）
+- license 模块重构：业务逻辑从 controller 抽取到独立 service
+- 错误码定义修复：添加缺失的 MENU_NOT_MODIFIED 定义
+
+**前端重构（9项）**：
+- Layout 目录 → layout（小写命名）
+- Breadcrumb 组件：HeadBreadcrumb.vue → index.vue
+- API 文件命名统一（5个文件从驼峰改为连字符）
+- 页面文件存放位置重构（license、permission-core、error 目录）
+- utils 目录分类整理（28个文件 → 6个子目录，70个文件引用更新）
+- config 目录格式统一（JSON → data/ 子目录，JS → .config.js 后缀）
+- EmailConfig/EmailLog 组件抽取为全局组件（删除4个重复文件）
+- 全局组件命名规范检查（删除3个空目录）
+- API 接口命名一致性检查（修改3个驼峰命名路由路径）
+
+**一致性优化**：
+- 错误码类型统一：前后端统一为字符串类型错误码（成功码除外）
+- 前端 constants.js 重构：删除数字类型错误码常量，统一为字符串类型
+- 修复菜单未变更（缓存命中）错误码缺失导致的 bug
+
+**文档更新**：
+- 新增 `docs/架构规范深度审计报告.md`（25项问题，三阶段优先级）
+- 新增 `docs/项目架构规范.md`（目录命名、文件命名、目录结构、命名一致性、导入导出规范）
+- 新增 `docs/email-module.md`（email 模块详细文档）
 
 ### v1.0.0 (2026-09-06)
 
