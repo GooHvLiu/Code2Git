@@ -1,0 +1,314 @@
+/* ========== 全局重置 ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #app {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  color: #303133;
+  background-color: #f0f2f5;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ========== Element Plus 主题色覆盖（Beehive 风格 #1890ff） ========== */
+:root {
+  --el-color-primary: #1890ff;
+  --el-color-primary-light-3: #40a9ff;
+  --el-color-primary-light-5: #69c0ff;
+  --el-color-primary-light-7: #91d5ff;
+  --el-color-primary-light-8: #bae7ff;
+  --el-color-primary-light-9: #e6f7ff;
+  --el-color-primary-dark-2: #096dd9;
+  --el-border-radius-base: 6px;
+  --el-border-radius-small: 4px;
+}
+
+/* ========== 滚动条 ========== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* ========== 卡片（Beehive 风格：圆角8px、无边框、阴影） ========== */
+.el-card {
+  border-radius: 8px !important;
+  border: none !important;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08) !important;
+}
+.el-card__header {
+  border-bottom: 1px solid #f0f0f0 !important;
+  padding: 14px 20px !important;
+  font-weight: 600;
+  color: #262626;
+  font-size: 15px;
+}
+.el-card__body {
+  padding: 20px !important;
+}
+
+/* ========== 按钮（Beehive 风格：圆角6px） ========== */
+.el-button {
+  border-radius: 6px !important;
+}
+.el-button--primary {
+  background: #1890ff !important;
+  border-color: #1890ff !important;
+}
+.el-button--primary:hover {
+  background: #40a9ff !important;
+  border-color: #40a9ff !important;
+}
+
+/* ========== 输入框（Beehive 风格：圆角6px） ========== */
+.el-input__inner,
+.el-textarea__inner {
+  border-radius: 6px !important;
+}
+.el-textarea__inner {
+  resize: none !important;
+}
+.el-input__inner:focus {
+  border-color: #1890ff !important;
+}
+
+/* ========== 表格（Beehive 风格：圆角8px、表头#fafafa） ========== */
+.el-table {
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+.el-table th.el-table__cell {
+  background: #fafafa !important;
+  color: #595959 !important;
+  font-weight: 600 !important;
+}
+
+/* ========== 标签（Beehive 风格：圆角4px） ========== */
+.el-tag {
+  border-radius: 4px !important;
+}
+
+/* ========== 弹窗（Beehive 风格：圆角8px、分割线） ========== */
+.el-dialog {
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+.el-dialog__header {
+  padding: 16px 20px !important;
+  border-bottom: 1px solid #f0f0f0;
+  margin-right: 0 !important;
+}
+.el-dialog__body {
+  padding: 20px !important;
+}
+.el-dialog__footer {
+  padding: 12px 20px !important;
+  border-top: 1px solid #f0f0f0;
+}
+
+/* ========== 面包屑（Beehive 风格） ========== */
+.el-breadcrumb__inner {
+  color: #909399 !important;
+}
+.el-breadcrumb__item:last-child .el-breadcrumb__inner {
+  color: #303133 !important;
+  font-weight: 500;
+}
+
+/* ========== 分页（Beehive 风格） ========== */
+.el-pagination {
+  margin-top: 16px;
+}
+
+/* ========== 页面容器 ========== */
+.page-container {
+  padding: 20px 24px;
+}
+
+/* ========== 统计卡片 ========== */
+.stat-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 21, 41, 0.1);
+}
+.stat-card .stat-value {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 8px 0;
+}
+.stat-card .stat-label {
+  font-size: 13px;
+  color: #909399;
+}
+
+/* ========== 状态标签 ========== */
+.status-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+.status-success { background: #f0f9eb; color: #67c23a; }
+.status-failed { background: #fef0f0; color: #f56c6c; }
+.status-running { background: #e6f7ff; color: #1890ff; }
+.status-pending { background: #f4f4f5; color: #909399; }
+.status-error { background: #fdf6ec; color: #e6a23c; }
+
+/* ========== 模块卡片 ========== */
+.module-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid #ebeef5;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.04);
+}
+.module-card:hover {
+  border-color: #1890ff;
+  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.12);
+  transform: translateY(-2px);
+}
+.module-card .module-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+.module-card .module-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.module-card .module-desc {
+  font-size: 13px;
+  color: #909399;
+  line-height: 1.5;
+}
+
+/* ========== 页面标题 ========== */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.header-title {
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* ========== 分类标题 ========== */
+.category-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #606266;
+  margin: 16px 0 12px;
+  padding-left: 8px;
+  border-left: 3px solid #1890ff;
+}
+
+/* ========== 结果区域 ========== */
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.result-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+.result-stats {
+  display: flex;
+  gap: 8px;
+}
+
+/* ========== 详情统计 ========== */
+.stat-item {
+  text-align: center;
+  padding: 12px;
+  background: #f5f7fa;
+  border-radius: 8px;
+}
+.stat-label {
+  font-size: 12px;
+  color: #909399;
+  margin-bottom: 4px;
+}
+.stat-value {
+  font-size: 24px;
+  font-weight: 600;
+}
+.stat-value-sm {
+  font-size: 14px;
+  font-weight: 600;
+  color: #606266;
+}
+
+/* ========== 筛选栏 ========== */
+.filter-bar {
+  display: flex;
+  gap: 12px;
+}
+
+/* ========== 标签提示问号 ========== */
+.label-tip {
+  margin-left: 4px;
+  color: #c0c4cc;
+  font-size: 14px;
+  cursor: help;
+}
+.label-tip:hover {
+  color: #1890ff;
+}
+/* 表单 label 统一 flex 垂直居中 */
+.el-form-item__label {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+/* descriptions label 统一 flex 垂直居中 */
+.el-descriptions__label {
+  display: inline-flex !important;
+  align-items: center !important;
+}
