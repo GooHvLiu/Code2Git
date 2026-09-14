@@ -33,7 +33,10 @@
         <el-table-column prop="fail_count" label="失败" width="80" />
         <el-table-column label="通过率" width="100">
           <template #default="{ row }">
-            <el-progress :percentage="row.total_count > 0 ? Math.round((row.pass_count / row.total_count) * 100) : 0" :stroke-width="8" />
+            <el-progress
+              :percentage="row.total_count > 0 ? Math.round((row.pass_count / row.total_count) * 100) : 0"
+              :stroke-width="8"
+            />
           </template>
         </el-table-column>
         <el-table-column prop="duration" label="耗时(ms)" width="100" />
@@ -41,20 +44,20 @@
         <el-table-column prop="created_at" label="执行时间" width="170" />
         <el-table-column label="操作" width="140" fixed="right">
           <template #default="{ row }">
-            <el-button type="primary" link @click="$router.push(`/reports/${row.id}`)">查看</el-button>
+            <el-button type="success" link @click="$router.push(`/reports/${row.id}`)">查看</el-button>
             <el-button type="danger" link @click="handleDelete(row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
 
       <el-pagination
-        v-model:current-page="page"
-        v-model:page-size="pageSize"
+        :current-page="page"
+        :page-size="pageSize"
         :total="total"
         :page-sizes="[10, 20, 50, 100]"
         layout="total, sizes, prev, pager, next, jumper"
-        @size-change="loadData"
-        @current-change="loadData"
+        @size-change="onSizeChange"
+        @current-change="onPageChange"
         style="margin-top: 16px; justify-content: flex-end"
       />
     </div>
@@ -62,68 +65,79 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { ElMessage, ElMessageBox } from 'element-plus'
-import { getTestRunList, deleteTestRun } from '@/api/testRuns'
-import { getAllProjects } from '@/api/projects'
-import { getModuleList } from '@/api/modules'
+import { ref, onMounted } from "vue";
+import { ElMessage, ElMessageBox } from "element-plus";
+import { getTestRunList, deleteTestRun } from "@/api/testRuns";
+import { getAllProjects } from "@/api/projects";
+import { getModuleList } from "@/api/modules";
 
-const tableData = ref([])
-const loading = ref(false)
-const page = ref(1)
-const pageSize = ref(20)
-const total = ref(0)
-const projects = ref([])
-const modules = ref([])
-const filterProject = ref(null)
-const filterModule = ref(null)
-const filterStatus = ref(null)
+const tableData = ref([]);
+const loading = ref(false);
+const page = ref(1);
+const pageSize = ref(20);
+const total = ref(0);
+const projects = ref([]);
+const modules = ref([]);
+const filterProject = ref(null);
+const filterModule = ref(null);
+const filterStatus = ref(null);
 
 const statusText = {
-  success: '成功',
-  failed: '失败',
-  running: '执行中',
-  pending: '等待中',
-  error: '错误'
-}
+  success: "成功",
+  failed: "失败",
+  running: "执行中",
+  pending: "等待中",
+  error: "错误"
+};
 
 async function loadData() {
-  loading.value = true
+  loading.value = true;
   try {
-    const params = { page: page.value, pageSize: pageSize.value }
-    if (filterProject.value) params.project_id = filterProject.value
-    if (filterModule.value) params.module_type = filterModule.value
-    if (filterStatus.value) params.status = filterStatus.value
-    const res = await getTestRunList(params)
-    tableData.value = res.data.list
-    total.value = res.data.total
+    const params = { page: page.value, pageSize: pageSize.value };
+    if (filterProject.value) params.project_id = filterProject.value;
+    if (filterModule.value) params.module_type = filterModule.value;
+    if (filterStatus.value) params.status = filterStatus.value;
+    const res = await getTestRunList(params);
+    tableData.value = res.data.list;
+    total.value = res.data.total;
   } finally {
-    loading.value = false
+    loading.value = false;
   }
 }
 
+function onPageChange(p) {
+  page.value = p;
+  loadData();
+}
+
+function onSizeChange(s) {
+  pageSize.value = s;
+  page.value = 1;
+  loadData();
+}
+
 async function loadProjects() {
-  const res = await getAllProjects()
-  projects.value = res.data
+  const res = await getAllProjects();
+  projects.value = res.data;
 }
 
 async function loadModules() {
-  const res = await getModuleList()
-  modules.value = res.data.modules
+  const res = await getModuleList();
+  modules.value = res.data.modules;
 }
 
 async function handleDelete(row) {
-  await ElMessageBox.confirm(`确定删除执行记录 #${row.id} 吗？`, '提示', { type: 'warning' })
-  await deleteTestRun(row.id)
-  ElMessage.success('删除成功')
-  loadData()
+  await ElMessageBox.confirm(`确定删除执行记录 #${row.id} 吗？`, "提示", { type: "warning" });
+  await deleteTestRun(row.id);
+  ElMessage.success("删除成功");
+  loadData();
 }
 
 onMounted(() => {
-  loadProjects()
-  loadModules()
-  loadData()
-})
+  loadProjects();
+  loadModules();
+  loadData();
+});
 </script>
 
 <style scoped>

@@ -18,14 +18,14 @@
         <el-table-column label="状态" width="80">
           <template #default="{ row }">
             <el-tag :type="row.status === 'active' ? 'success' : 'info'" size="small">
-              {{ row.status === 'active' ? '启用' : '停用' }}
+              {{ row.status === "active" ? "启用" : "停用" }}
             </el-tag>
           </template>
         </el-table-column>
         <el-table-column prop="created_at" label="创建时间" width="170" />
         <el-table-column label="操作" width="180" fixed="right">
           <template #default="{ row }">
-            <el-button type="primary" link @click="handleEdit(row)">编辑</el-button>
+            <el-button type="warning" link @click="handleEdit(row)">编辑</el-button>
             <el-button type="success" link @click="handleTest(row)">测试</el-button>
             <el-button type="danger" link @click="handleDelete(row)">删除</el-button>
           </template>
@@ -33,13 +33,13 @@
       </el-table>
 
       <el-pagination
-        v-model:current-page="page"
-        v-model:page-size="pageSize"
+        :current-page="page"
+        :page-size="pageSize"
         :total="total"
         :page-sizes="[10, 20, 50]"
         layout="total, sizes, prev, pager, next, jumper"
-        @size-change="loadData"
-        @current-change="loadData"
+        @size-change="onSizeChange"
+        @current-change="onPageChange"
         style="margin-top: 16px; justify-content: flex-end"
       />
     </div>
@@ -129,107 +129,118 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { ElMessage, ElMessageBox } from 'element-plus'
-import { getProjectList, createProject, updateProject, deleteProject } from '@/api/projects'
+import { ref, reactive, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { ElMessage, ElMessageBox } from "element-plus";
+import { getProjectList, createProject, updateProject, deleteProject } from "@/api/projects";
 
-const router = useRouter()
-const tableData = ref([])
-const loading = ref(false)
-const page = ref(1)
-const pageSize = ref(20)
-const total = ref(0)
-const dialogVisible = ref(false)
-const isEdit = ref(false)
-const formRef = ref(null)
+const router = useRouter();
+const tableData = ref([]);
+const loading = ref(false);
+const page = ref(1);
+const pageSize = ref(20);
+const total = ref(0);
+const dialogVisible = ref(false);
+const isEdit = ref(false);
+const formRef = ref(null);
 
 const form = reactive({
   id: null,
-  name: '',
-  description: '',
-  frontend_path: '',
-  backend_path: '',
-  api_base_url: '',
-  admin_username: '',
-  admin_password: '',
-  status: 'active'
-})
+  name: "",
+  description: "",
+  frontend_path: "",
+  backend_path: "",
+  api_base_url: "",
+  admin_username: "",
+  admin_password: "",
+  status: "active"
+});
 
 const rules = {
-  name: [{ required: true, message: '请输入项目名称', trigger: 'blur' }]
-}
+  name: [{ required: true, message: "请输入项目名称", trigger: "blur" }]
+};
 
 async function loadData() {
-  loading.value = true
+  loading.value = true;
   try {
-    const res = await getProjectList({ page: page.value, pageSize: pageSize.value })
-    tableData.value = res.data.list
-    total.value = res.data.total
+    const res = await getProjectList({ page: page.value, pageSize: pageSize.value });
+    tableData.value = res.data.list;
+    total.value = res.data.total;
   } finally {
-    loading.value = false
+    loading.value = false;
   }
+}
+
+function onPageChange(p) {
+  page.value = p;
+  loadData();
+}
+
+function onSizeChange(s) {
+  pageSize.value = s;
+  page.value = 1;
+  loadData();
 }
 
 function resetForm() {
   Object.assign(form, {
     id: null,
-    name: '',
-    description: '',
-    frontend_path: '',
-    backend_path: '',
-    api_base_url: '',
-    admin_username: '',
-    admin_password: '',
-    status: 'active'
-  })
+    name: "",
+    description: "",
+    frontend_path: "",
+    backend_path: "",
+    api_base_url: "",
+    admin_username: "",
+    admin_password: "",
+    status: "active"
+  });
 }
 
 function handleAdd() {
-  isEdit.value = false
-  resetForm()
-  dialogVisible.value = true
+  isEdit.value = false;
+  resetForm();
+  dialogVisible.value = true;
 }
 
 function handleEdit(row) {
-  isEdit.value = true
-  Object.assign(form, { ...row, admin_password: '******' })
-  dialogVisible.value = true
+  isEdit.value = true;
+  Object.assign(form, { ...row, admin_password: "******" });
+  dialogVisible.value = true;
 }
 
 async function handleSubmit() {
-  await formRef.value.validate()
+  await formRef.value.validate();
   try {
     if (isEdit.value) {
-      await updateProject(form.id, form)
-      ElMessage.success('更新成功')
+      await updateProject(form.id, form);
+      ElMessage.success("更新成功");
     } else {
-      await createProject(form)
-      ElMessage.success('创建成功')
+      await createProject(form);
+      ElMessage.success("创建成功");
     }
-    dialogVisible.value = false
-    loadData()
+    dialogVisible.value = false;
+    loadData();
   } catch (e) {
     // 错误已在拦截器处理
   }
 }
 
 async function handleDelete(row) {
-  await ElMessageBox.confirm(`确定删除项目「${row.name}」吗？相关测试记录也会被删除。`, '提示', {
-    type: 'warning'
-  })
-  await deleteProject(row.id)
-  ElMessage.success('删除成功')
-  loadData()
+  await ElMessageBox.confirm(`确定删除项目「${row.name}」吗？相关测试记录也会被删除。`, "提示", {
+    type: "warning"
+  });
+  await deleteProject(row.id);
+  ElMessage.success("删除成功");
+  loadData();
 }
 
 function handleTest(row) {
-  router.push({ path: '/modules', query: { projectId: row.id } })
+  router.push({ path: "/modules", query: { projectId: row.id } });
 }
 
 onMounted(() => {
-  loadData()
-})
+  loadData();
+});
 </script>
 
 <style scoped>

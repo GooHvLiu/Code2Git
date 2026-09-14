@@ -64,10 +64,30 @@ class DatabaseWrapper {
         const flatParams = params.length === 1 && typeof params[0] === 'object'
           ? Object.values(params[0])
           : params;
-        self.db.run(sql, flatParams);
+        const stmt = self.db.prepare(sql);
+        try {
+          stmt.bind(flatParams);
+          stmt.step();
+        } finally {
+          stmt.free();
+        }
+        // 关键：必须在 save()(内部 db.export()) 之前读取自增 id 和影响行数，
+        // 否则 export 会重置连接状态，导致 lastInsertRowid / changes 变成 0。
+        let lastId = 0;
+        try {
+          const rows = self.db.exec('SELECT last_insert_rowid() AS id');
+          if (rows && rows[0] && Array.isArray(rows[0].values) && rows[0].values[0]) {
+            lastId = Number(rows[0].values[0][0]) || 0;
+          }
+        } catch (e) {
+          console.error('[DB] 读取 last_insert_rowid 失败:', e.message);
+        }
+        const changes = self.db.getRowsModified();
         self.save();
-        const lastId = self.db.exec('SELECT last_insert_rowid() as id')[0]?.values[0]?.[0] || 0;
-        return { lastInsertRowid: lastId, changes: 0 };
+        if (/^\s*(INSERT|REPLACE)/i.test(sql) && lastId === 0) {
+          console.error('[DB] 警告: INSERT 后 lastInsertRowid=0, sql=', sql.slice(0, 80), 'params=', flatParams);
+        }
+        return { lastInsertRowid: lastId, changes };
       }
     };
   }

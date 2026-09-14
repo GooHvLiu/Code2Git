@@ -65,22 +65,31 @@ router.post('/run', async (req, res) => {
         const reportFile = path.join(reportDir, `${module_type}_${runId}.json`);
         fs.writeFileSync(reportFile, JSON.stringify(report, null, 2), 'utf-8');
 
-        // 更新执行记录
+        // 更新执行记录（参数强制转 SQL 安全类型，避免 undefined/NaN 导致 sql.js 绑定失败）
         db.prepare(
           `UPDATE test_runs SET status = ?, total_count = ?, pass_count = ?, fail_count = ?,
            duration = ?, report_path = ?, finished_at = datetime('now', 'localtime')
            WHERE id = ?`
         ).run(
-          report.fail > 0 ? 'failed' : 'success',
-          report.total, report.pass, report.fail,
-          report.duration, reportFile, runId
+          Number(report.fail) > 0 ? 'failed' : 'success',
+          Number(report.total) || 0,
+          Number(report.pass) || 0,
+          Number(report.fail) || 0,
+          Number(report.duration) || 0,
+          String(reportFile),
+          Number(runId)
         );
+        console.log(`[TestRun] run#${runId} 完成，状态已更新为 ${Number(report.fail) > 0 ? 'failed' : 'success'}`);
       } catch (err) {
         console.error('[TestRun] 执行出错:', err);
-        db.prepare(
-          `UPDATE test_runs SET status = 'error', error_message = ?, finished_at = datetime('now', 'localtime')
-           WHERE id = ?`
-        ).run(err.message, runId);
+        try {
+          db.prepare(
+            `UPDATE test_runs SET status = 'error', error_message = ?, finished_at = datetime('now', 'localtime')
+             WHERE id = ?`
+          ).run(String(err && err.message || err).slice(0, 1000), Number(runId));
+        } catch (e2) {
+          console.error('[TestRun] 标记 error 状态也失败:', e2);
+        }
       }
     })();
 
@@ -133,8 +142,10 @@ router.get('/:id/report', (req, res) => {
   try {
     const run = db.prepare('SELECT * FROM test_runs WHERE id = ?').get(req.params.id);
     if (!run) return res.error('执行记录不存在', 404);
+    // 报告尚未生成（任务仍在执行）：返回 200 + data:null，前端轮询据此静默继续，
+    // 不要用 HTTP 404，否则会触发全局错误弹窗。
     if (!run.report_path || !fs.existsSync(run.report_path)) {
-      return res.error('报告文件不存在', 404);
+      return res.success(null, '报告尚未生成');
     }
     const report = JSON.parse(fs.readFileSync(run.report_path, 'utf-8'));
     res.success(report);

@@ -51,7 +51,7 @@
           <el-col :span="4">
             <div class="stat-item">
               <div class="stat-label">时间</div>
-              <div class="stat-value-sm">{{ report.timestamp?.replace('T', ' ').slice(0, 19) }}</div>
+              <div class="stat-value-sm">{{ report.timestamp?.replace("T", " ").slice(0, 19) }}</div>
             </div>
           </el-col>
         </el-row>
@@ -61,11 +61,11 @@
         <!-- 分类筛选 -->
         <el-radio-group v-model="filterCategory" style="margin-bottom: 16px">
           <el-radio-button label="all">全部 ({{ report.results.length }})</el-radio-button>
-          <el-radio-button label="missing">缺失 ({{ countByCategory('missing') }})</el-radio-button>
-          <el-radio-button label="extra">多余 ({{ countByCategory('extra') }})</el-radio-button>
-          <el-radio-button label="empty">空值 ({{ countByCategory('empty') }})</el-radio-button>
-          <el-radio-button label="pass">通过 ({{ countByCategory('pass') }})</el-radio-button>
-          <el-radio-button label="info">信息 ({{ countByCategory('info') }})</el-radio-button>
+          <el-radio-button label="missing">缺失 ({{ countByCategory("missing") }})</el-radio-button>
+          <el-radio-button label="extra">多余 ({{ countByCategory("extra") }})</el-radio-button>
+          <el-radio-button label="empty">空值 ({{ countByCategory("empty") }})</el-radio-button>
+          <el-radio-button label="pass">通过 ({{ countByCategory("pass") }})</el-radio-button>
+          <el-radio-button label="info">信息 ({{ countByCategory("info") }})</el-radio-button>
         </el-radio-group>
 
         <!-- 结果表格 -->
@@ -75,7 +75,7 @@
           <el-table-column label="结果" width="80">
             <template #default="{ row }">
               <el-tag :type="row.passed ? 'success' : 'danger'" size="small">
-                {{ row.passed ? '通过' : '失败' }}
+                {{ row.passed ? "通过" : "失败" }}
               </el-tag>
             </template>
           </el-table-column>
@@ -84,7 +84,7 @@
           <el-table-column prop="actual" label="实际" width="150" show-overflow-tooltip />
           <el-table-column label="操作" width="80">
             <template #default="{ row }">
-              <el-button v-if="row.detail" type="primary" link @click="showDetail(row)">详情</el-button>
+              <el-button v-if="row.detail" type="success" link @click="showDetail(row)">详情</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -95,67 +95,66 @@
 
     <!-- 详情弹窗 -->
     <el-dialog v-model="detailVisible" title="检测详情" width="600px">
-      <pre style="background: #f5f7fa; padding: 16px; border-radius: 4px; max-height: 400px; overflow: auto;">{{ JSON.stringify(currentDetail, null, 2) }}</pre>
+      <pre style="background: #f5f7fa; padding: 16px; border-radius: 4px; max-height: 400px; overflow: auto">{{
+        JSON.stringify(currentDetail, null, 2)
+      }}</pre>
     </el-dialog>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import { getTestRun, getTestReport } from '@/api/testRuns'
+import { ref, computed, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import { getTestRun, getTestReport } from "@/api/testRuns";
 
-const route = useRoute()
-const runId = route.params.id
-const loading = ref(false)
-const runInfo = ref(null)
-const report = ref(null)
-const filterCategory = ref('all')
-const detailVisible = ref(false)
-const currentDetail = ref(null)
+const route = useRoute();
+const runId = route.params.id;
+const loading = ref(false);
+const runInfo = ref(null);
+const report = ref(null);
+const filterCategory = ref("all");
+const detailVisible = ref(false);
+const currentDetail = ref(null);
 
 const statusText = {
-  success: '成功',
-  failed: '失败',
-  running: '执行中',
-  pending: '等待中',
-  error: '错误'
-}
+  success: "成功",
+  failed: "失败",
+  running: "执行中",
+  pending: "等待中",
+  error: "错误"
+};
 
 const filteredResults = computed(() => {
-  if (!report.value) return []
-  if (filterCategory.value === 'all') return report.value.results
-  return report.value.results.filter(r => r.category === filterCategory.value)
-})
+  if (!report.value) return [];
+  if (filterCategory.value === "all") return report.value.results;
+  return report.value.results.filter((r) => r.category === filterCategory.value);
+});
 
 function countByCategory(cat) {
-  return report.value?.results.filter(r => r.category === cat).length || 0
+  return report.value?.results.filter((r) => r.category === cat).length || 0;
 }
 
 async function loadData() {
-  loading.value = true
+  loading.value = true;
   try {
-    const [runRes, reportRes] = await Promise.all([
-      getTestRun(runId),
-      getTestReport(runId)
-    ])
-    runInfo.value = runRes.data
-    report.value = reportRes.data
+    const [runRes, reportRes] = await Promise.all([getTestRun(runId), getTestReport(runId)]);
+    runInfo.value = runRes.data;
+    report.value = reportRes.data;
   } catch (e) {
-    console.error(e)
+    console.error(e);
   } finally {
-    loading.value = false
+    loading.value = false;
   }
 }
 
 function showDetail(row) {
-  currentDetail.value = row.detail
-  detailVisible.value = true
+  currentDetail.value = row.detail;
+  detailVisible.value = true;
 }
 
 onMounted(() => {
-  loadData()
-})
+  loadData();
+});
 </script>
 
 <style scoped>
