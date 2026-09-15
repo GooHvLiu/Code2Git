@@ -1,0 +1,14 @@
+{
+  "name": "syt-medical-server",
+  "version": "1.0.0",
+  "description": "尚医通前端学习专用 Mock 后端 - Node.js + Express",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.0"
+  }
+}
