@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "provider": "tencent",
+  "tencent": {
+    "secretId": "Your Own secretId",
+    "secretKey": "Your Own secretKey",
+    "region": "ap-guangzhou",
+    "projectId": 0
+  },
+  "masterLanguage": "zh-CN",
+  "languageDisplayField": "autonym",
+  "updatedAt": "2026-09-16T00:00:00.000Z"
+}

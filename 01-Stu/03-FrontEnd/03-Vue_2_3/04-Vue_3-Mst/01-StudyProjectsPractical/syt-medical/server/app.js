@@ -11,6 +11,11 @@
  */
 
 const express = require("express");
+
+// 引入 Open API 需要的资源 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./openAPI/data/swagger-output.json');
+
 const cors = require("cors");
 
 const app = express();
@@ -27,6 +32,11 @@ app.use((req, res, next) => {
   console.log(`[${time}] ${req.method} ${req.url}`);
   next();
 });
+
+// ========== 挂载swagger页面 ==========
+app.use('/api/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
+  customCss: '.swagger-ui .topbar { display: none }'
+}));
 
 // ===== 路由 =====
 // 医院模块

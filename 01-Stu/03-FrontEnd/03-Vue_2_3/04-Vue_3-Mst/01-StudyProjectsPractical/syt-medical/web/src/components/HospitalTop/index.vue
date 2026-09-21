@@ -60,7 +60,7 @@
       }
       p {
         font-size: 1.5rem;
-        color: #55a6fe;
+        color: #5566cc;
         cursor: pointer;
       }
     }

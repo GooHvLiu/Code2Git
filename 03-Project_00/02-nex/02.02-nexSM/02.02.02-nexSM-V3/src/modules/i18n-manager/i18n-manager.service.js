@@ -24,12 +24,12 @@ const AdmZip = require('adm-zip')
 const { BusinessError } = require('../../middleware/error.middleware')
 const { ERROR_CODE } = require('../../constants/errorCode')
 const presetModule = require('../../config/languages.config')
+// 前端工程根目录统一解析（默认 Vue3 主线工程，可用环境变量 FRONTEND_ROOT 覆盖）
+const { FRONTEND_ROOT } = require('../../config/frontend-root')
 const catalog = require('./i18n-catalog.util')
 
 // ========== 路径配置 ==========
 
-// 前端项目根目录
-const FRONTEND_ROOT = path.resolve(__dirname, '../../../../../02.01-nexCM/02.01.02-nexCM-V3')
 // 前端国际化根目录（目录模型：其下是 modules / modules-xx 语言目录）
 const I18N_ROOT = path.join(FRONTEND_ROOT, 'src', 'i18n')
 // 前端翻译（母版）配置：母版语言动态来源
@@ -90,7 +90,7 @@ function assertValidLangCode(langCode) {
 /** 断言语言目录存在，返回语言目录绝对路径 */
 function assertLangExists(langCode) {
   const dir = catalog.langDirPath(I18N_ROOT, langCode)
-  if (!fs.existsSync(dir) || !fs.existsSync(path.join(dir, 'index.js'))) {
+  if (!fs.existsSync(dir) || !catalog.resolveIndex(dir)) {
     throw new BusinessError(ERROR_CODE.I18N_LANG_NOT_FOUND, { langCode })
   }
   return dir

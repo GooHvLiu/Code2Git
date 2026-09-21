@@ -9,10 +9,13 @@ const path = require('path')
 const crypto = require('crypto')
 const https = require('https')
 
+// 前端工程根目录统一解析（默认 Vue3 主线工程，可用环境变量 FRONTEND_ROOT 覆盖）
+const { FRONTEND_ROOT } = require('../../config/frontend-root')
+
 // ========== 配置 ==========
 
 // 翻译配置文件路径（放在前端项目的 src/config/data/ 下）
-const TRANSLATION_CONFIG_FILE = path.join(__dirname, '../../../../../02.01-nexCM/02.01.02-nexCM-V3/src/config/data/translation-config.json')
+const TRANSLATION_CONFIG_FILE = path.join(FRONTEND_ROOT, 'src', 'config', 'data', 'translation-config.json')
 
 // 默认配置
 const DEFAULT_CONFIG = {

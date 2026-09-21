@@ -1,0 +1,69 @@
+<template>
+  <div v-if="selectedCount > 0" class="notification-batch-toolbar">
+    <span class="batch-info">{{ t('notification.page.selectedCount', { count: selectedCount }) }}</span>
+    <el-button size="small" type="primary" :icon="Check" @click="emit('batch-mark-read')">
+      {{ t('notification.action.batchMarkRead') }}
+    </el-button>
+    <el-button v-if="archiveTab === '0'" size="small" :icon="FolderOpened" @click="emit('batch-archive')">
+      {{ t('notification.action.batchArchive') }}
+    </el-button>
+    <el-button v-if="archiveTab === '1'" size="small" :icon="RefreshLeft" @click="emit('batch-unarchive')">
+      {{ t('notification.action.batchUnarchive') }}
+    </el-button>
+    <el-button size="small" type="danger" :icon="Delete" @click="emit('batch-delete')">
+      {{ t('notification.action.batchDelete') }}
+    </el-button>
+    <el-button size="small" @click="emit('clear-selection')">
+      {{ t('notification.page.clearSelection') }}
+    </el-button>
+  </div>
+</template>
+
+<script setup lang="ts">
+/**
+ * 通知列表批量操作工具栏
+ */
+import { useI18n } from 'vue-i18n'
+import { Check, FolderOpened, RefreshLeft, Delete } from '@element-plus/icons-vue'
+
+defineOptions({ name: 'NotificationBatchToolbar' })
+
+interface Props {
+  selectedCount?: number
+  archiveTab?: string
+}
+
+withDefaults(defineProps<Props>(), {
+  selectedCount: 0,
+  archiveTab: '0'
+})
+
+const emit = defineEmits<{
+  (e: 'batch-mark-read'): void
+  (e: 'batch-archive'): void
+  (e: 'batch-unarchive'): void
+  (e: 'batch-delete'): void
+  (e: 'clear-selection'): void
+}>()
+
+const { t } = useI18n()
+</script>
+
+<style scoped lang="less">
+.notification-batch-toolbar {
+  background: #ecf5ff;
+  border: 1px solid #d9ecff;
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .batch-info {
+    font-size: 14px;
+    color: #409eff;
+    font-weight: 500;
+  }
+}
+</style>

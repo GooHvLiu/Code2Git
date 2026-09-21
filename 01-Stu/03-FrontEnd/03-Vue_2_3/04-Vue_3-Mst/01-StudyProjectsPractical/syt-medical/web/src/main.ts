@@ -7,10 +7,29 @@ import App from "./App.vue";
 // 引入全局组件- HospitalTop 和 HospitalBottom，用于页面的顶部和底部
 import HospitalTop from "@/components/HospitalTop/index.vue";
 import HospitalBottom from "@/components/HospitalBottom/index.vue";
+// 引入路由组件
+import router from "./router/index.ts";
+// 引入 element-plus 组件库
+import ElementPlus from "element-plus";
+import "element-plus/dist/index.css";
+// 引入 element-plus 国际化组件库
+import zhCn from "element-plus/es/locale/lang/zh-cn";
+// 引入 element-plus Icon图标库
+import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 // 利用 createApp 方法创建应用实例
 const app = createApp(App);
 // 将 HospitalTop 和 HospitalBottom 注册为全局组件
 app.component("HospitalTop", HospitalTop);
 app.component("HospitalBottom", HospitalBottom);
+// 使用 router 插件，全局注册相关方法
+app.use(router);
+// 使用 element-plus 插件，全局注册相关方法 + 国际化全局配置
+app.use(ElementPlus, {
+  locale: zhCn
+});
+// 将 element-plus 内置Icon进行全局注册
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component);
+}
 // 将应用实例挂载到挂载点上
 app.mount("#app");

@@ -63,6 +63,59 @@ function langDirPath(i18nRoot, langCode) {
 }
 
 /**
+ * 语言模块支持的扩展名（同时兼容 Vue3/TS 工程与 Vue2/JS 工程）
+ * 解析优先级：.ts -> .js（同目录下若两者并存，优先 TypeScript 源文件）
+ */
+const MODULE_EXTS = ['.ts', '.js']
+
+/** 判断文件名是否为语言模块扩展名 */
+function hasModuleExt(name) {
+  return MODULE_EXTS.some((ext) => name.endsWith(ext))
+}
+
+/** 判断文件名是否为目录聚合入口 index（index.ts / index.js） */
+function isIndexFile(name) {
+  return /^index\.(ts|js)$/.test(name)
+}
+
+/**
+ * 将一个可能「不带扩展名 / 带 .ts|.js / 指向目录」的模块说明符解析为真实文件。
+ * 解析顺序：
+ *   1. 说明符本身就是已存在的文件（如 './action.js'）
+ *   2. 说明符 + 各扩展名（如 './action' -> './action.ts'）
+ *   3. 说明符作为目录，取其下 index.ts / index.js（如 './common' -> './common/index.ts'）
+ * @param {string} absCandidate 已 path.resolve 过的绝对路径（可不带扩展名）
+ * @returns {string|null} 命中的真实文件绝对路径；未命中返回 null
+ */
+function resolveModuleFile(absCandidate) {
+  if (absCandidate && fs.existsSync(absCandidate) && fs.statSync(absCandidate).isFile()) {
+    return absCandidate
+  }
+  for (const ext of MODULE_EXTS) {
+    const withExt = absCandidate + ext
+    if (fs.existsSync(withExt) && fs.statSync(withExt).isFile()) return withExt
+  }
+  for (const ext of MODULE_EXTS) {
+    const indexInDir = path.join(absCandidate, `index${ext}`)
+    if (fs.existsSync(indexInDir) && fs.statSync(indexInDir).isFile()) return indexInDir
+  }
+  return null
+}
+
+/**
+ * 解析某语言（或模块）目录下的聚合入口 index.ts / index.js
+ * @param {string} dir 目录绝对路径
+ * @returns {string|null}
+ */
+function resolveIndex(dir) {
+  for (const ext of MODULE_EXTS) {
+    const f = path.join(dir, `index${ext}`)
+    if (fs.existsSync(f) && fs.statSync(f).isFile()) return f
+  }
+  return null
+}
+
+/**
  * 目录名 -> langCode（还原标准大小写）
  * 优先在已知语言 code（内置 + 预设 + 元数据）中大小写不敏感精确匹配，匹配不到再按 xx-YY 规范化
  * @param {string} dirName 目录名
@@ -112,8 +165,24 @@ function matchBrace(s, openIdx) {
   let inStr = false
   let quote = ''
   let escaped = false
+  let inLineComment = false
+  let inBlockComment = false
   for (let i = openIdx; i < s.length; i++) {
     const c = s[i]
+    const next = s[i + 1]
+    // 行注释：直到行尾
+    if (inLineComment) {
+      if (c === '\n') inLineComment = false
+      continue
+    }
+    // 块注释：直到 */
+    if (inBlockComment) {
+      if (c === '*' && next === '/') {
+        inBlockComment = false
+        i++
+      }
+      continue
+    }
     if (inStr) {
       if (escaped) {
         escaped = false
@@ -129,6 +198,17 @@ function matchBrace(s, openIdx) {
     if (c === "'" || c === '"' || c === '`') {
       inStr = true
       quote = c
+      continue
+    }
+    // 注释起始（字符串态之外才生效，避免误判 URL/文本里的 //）
+    if (c === '/' && next === '/') {
+      inLineComment = true
+      i++
+      continue
+    }
+    if (c === '/' && next === '*') {
+      inBlockComment = true
+      i++
       continue
     }
     if (c === '{') depth++
@@ -162,9 +242,26 @@ function splitTopLevel(text) {
   let inStr = false
   let quote = ''
   let escaped = false
+  let inLineComment = false
+  let inBlockComment = false
   let buf = ''
   for (let i = 0; i < text.length; i++) {
     const c = text[i]
+    const next = text[i + 1]
+    if (inLineComment) {
+      buf += c
+      if (c === '\n') inLineComment = false
+      continue
+    }
+    if (inBlockComment) {
+      buf += c
+      if (c === '*' && next === '/') {
+        inBlockComment = false
+        buf += next
+        i++
+      }
+      continue
+    }
     if (inStr) {
       buf += c
       if (escaped) {
@@ -181,6 +278,16 @@ function splitTopLevel(text) {
     if (c === "'" || c === '"' || c === '`') {
       inStr = true
       quote = c
+      buf += c
+      continue
+    }
+    if (c === '/' && next === '/') {
+      inLineComment = true
+      buf += c
+      continue
+    }
+    if (c === '/' && next === '*') {
+      inBlockComment = true
       buf += c
       continue
     }
@@ -225,10 +332,17 @@ function stripLineComments(s) {
  */
 function parseImports(content, dir) {
   const imports = []
-  const importRe = /import\s+([A-Za-z_$][\w$]*)\s+from\s+['"]([^'"]+)['"]/g
+  // (?!type\b) 排除 TS 的 `import type ...`，仅收集运行时 default 导入
+  const importRe = /import\s+(?!type\b)([A-Za-z_$][\w$]*)\s+from\s+['"]([^'"]+)['"]/g
   let m
   while ((m = importRe.exec(content)) !== null) {
-    imports.push({ local: m[1], rel: m[2], target: path.resolve(dir, m[2]) })
+    const resolved = resolveModuleFile(path.resolve(dir, m[2]))
+    imports.push({
+      local: m[1],
+      rel: m[2],
+      // 扩展名无关解析（.ts/.js/目录 index）；未命中保留原路径，由读取阶段抛出清晰错误
+      target: resolved || path.resolve(dir, m[2])
+    })
   }
   return imports
 }
@@ -295,10 +409,11 @@ function parseIndex(indexAbs) {
   const dir = path.dirname(indexAbs)
 
   const imports = []
-  const importRe = /import\s+([A-Za-z_$][\w$]*)\s+from\s+['"]([^'"]+)['"]/g
+  const importRe = /import\s+(?!type\b)([A-Za-z_$][\w$]*)\s+from\s+['"]([^'"]+)['"]/g
   let m
   while ((m = importRe.exec(content)) !== null) {
-    imports.push({ local: m[1], rel: m[2], target: path.resolve(dir, m[2]) })
+    const resolved = resolveModuleFile(path.resolve(dir, m[2]))
+    imports.push({ local: m[1], rel: m[2], target: resolved || path.resolve(dir, m[2]) })
   }
 
   const objText = extractExportObjectText(content)
@@ -337,9 +452,9 @@ function evaluateIndex(indexAbs, seen) {
  * 聚合整门语言为一个完整嵌套对象
  */
 function assembleLanguage(i18nRoot, langCode) {
-  const idx = path.join(langDirPath(i18nRoot, langCode), 'index.js')
-  if (!fs.existsSync(idx)) {
-    throw new Error(`[i18n-catalog] 语言目录不存在或缺少 index.js: ${langCode}`)
+  const idx = resolveIndex(langDirPath(i18nRoot, langCode))
+  if (!idx) {
+    throw new Error(`[i18n-catalog] 语言目录不存在或缺少 index.ts/index.js: ${langCode}`)
   }
   return evaluateIndex(idx)
 }
@@ -351,9 +466,9 @@ function assembleLanguage(i18nRoot, langCode) {
  * 解决聚合 key（superPanel）与物理目录名（super-panel）不一致的问题
  */
 function getTopModuleMap(i18nRoot, langCode) {
-  const rootIdx = path.join(langDirPath(i18nRoot, langCode), 'index.js')
-  if (!fs.existsSync(rootIdx)) {
-    throw new Error(`[i18n-catalog] 语言根 index.js 不存在: ${langCode}`)
+  const rootIdx = resolveIndex(langDirPath(i18nRoot, langCode))
+  if (!rootIdx) {
+    throw new Error(`[i18n-catalog] 语言根 index.ts/index.js 不存在: ${langCode}`)
   }
   const { imports } = parseIndex(rootIdx)
   const map = {}
@@ -426,7 +541,7 @@ function locateLeafFile(i18nRoot, langCode, keySegments, opts) {
   // 3) 新增平铺 key：必须显式指定落在哪个 spread 分类文件
   if (opts && opts.create) {
     if (opts.spreadFile) {
-      const hit = spreads.find((e) => path.basename(e.file, '.js') === opts.spreadFile)
+      const hit = spreads.find((e) => path.basename(e.file, path.extname(e.file)) === opts.spreadFile)
       if (hit) {
         return { file: hit.file, inFileSegments: keySegments.slice(1) }
       }
@@ -544,14 +659,14 @@ function writeModuleObject(fileAbs, obj, headerLines) {
 
 // ========== 目录遍历 / 统计 / 复制 ==========
 
-/** 递归列出语言目录下全部叶子 .js（不含 index.js） */
+/** 递归列出语言目录下全部叶子模块（.ts/.js，不含 index 聚合入口） */
 function listLeafFiles(langDir) {
   const out = []
   ;(function walk(d) {
     for (const ent of fs.readdirSync(d, { withFileTypes: true })) {
       const p = path.join(d, ent.name)
       if (ent.isDirectory()) walk(p)
-      else if (ent.isFile() && ent.name.endsWith('.js') && ent.name !== 'index.js') out.push(p)
+      else if (ent.isFile() && hasModuleExt(ent.name) && !isIndexFile(ent.name)) out.push(p)
     }
   })(langDir)
   return out
@@ -604,9 +719,9 @@ function copyLanguageTree(i18nRoot, srcLangCode, dstLangCode, clearValues) {
       const dp = path.join(d, ent.name)
       if (ent.isDirectory()) {
         walk(sp, dp)
-      } else if (ent.isFile() && ent.name.endsWith('.js')) {
-        // index.js 与「复制译文」场景直接原样复制，保持组装结构一致
-        if (ent.name === 'index.js' || !clearValues) {
+      } else if (ent.isFile() && hasModuleExt(ent.name)) {
+        // index 聚合入口与「复制译文」场景直接原样复制，保持组装结构一致
+        if (isIndexFile(ent.name) || !clearValues) {
           fs.copyFileSync(sp, dp)
         } else {
           const cleared = clearLeafStrings(parseModuleObject(sp))
@@ -645,9 +760,14 @@ module.exports = {
   PHYSICAL_MASTER_CODE,
   PHYSICAL_MASTER_DIR,
   TOP_MODULES,
+  MODULE_EXTS,
   dirNameForLangCode,
   langDirPath,
   langCodeFromDirName,
+  hasModuleExt,
+  isIndexFile,
+  resolveModuleFile,
+  resolveIndex,
   listLangDirs,
   matchBrace,
   extractExportObjectText,

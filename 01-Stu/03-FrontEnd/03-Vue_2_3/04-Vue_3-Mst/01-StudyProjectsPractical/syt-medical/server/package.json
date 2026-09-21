@@ -4,11 +4,16 @@
   "description": "尚医通前端学习专用 Mock 后端 - Node.js + Express",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "node --watch app.js"
+    "start": "nodemon app.js",
+    "gen-swagger": "node ./openAPI/swagger.js",
+    "dev": "npm run gen-swagger && nodemon --watch app.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.21.0"
+    "express": "^4.21.0",
+    "redoc-express": "^2.1.3",
+    "swagger-autogen": "^2.23.7",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-express": "^5.0.1"
   }
 }

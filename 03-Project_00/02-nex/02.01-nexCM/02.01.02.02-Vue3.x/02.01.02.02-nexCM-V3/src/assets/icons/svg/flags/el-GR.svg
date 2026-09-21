@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480">
+  <rect width="640" height="480" fill="#0D5EAF"/>
+  <g fill="#FFFFFF">
+    <rect y="0" width="640" height="40"/>
+    <rect y="80" width="640" height="40"/>
+    <rect y="160" width="640" height="40"/>
+    <rect y="240" width="640" height="40"/>
+    <rect y="320" width="640" height="40"/>
+    <rect y="400" width="640" height="40"/>
+  </g>
+  <rect width="280" height="240" fill="#0D5EAF"/>
+  <path d="M140,40 L140,200 M60,120 L220,120" stroke="#FFFFFF" stroke-width="40"/>
+</svg>
