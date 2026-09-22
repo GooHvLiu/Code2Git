@@ -8,6 +8,8 @@
 </template>
 
 <script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Search" });
 import { Search } from "@element-plus/icons-vue";
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
 

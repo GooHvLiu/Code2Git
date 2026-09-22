@@ -71,8 +71,19 @@ const districts = [
   { id: 110101, name: "东城区", value: "110101", dictCode: "District", parentId: 110100 },
   { id: 110102, name: "西城区", value: "110102", dictCode: "District", parentId: 110100 },
   { id: 110105, name: "朝阳区", value: "110105", dictCode: "District", parentId: 110100 },
+  { id: 110106, name: "丰台区", value: "110106", dictCode: "District", parentId: 110100 },
+  { id: 110107, name: "石景山区", value: "110107", dictCode: "District", parentId: 110100 },
   { id: 110108, name: "海淀区", value: "110108", dictCode: "District", parentId: 110100 },
+  { id: 110109, name: "门头沟区", value: "110109", dictCode: "District", parentId: 110100 },
+  { id: 110111, name: "房山区", value: "110111", dictCode: "District", parentId: 110100 },
+  { id: 110112, name: "通州区", value: "110112", dictCode: "District", parentId: 110100 },
+  { id: 110113, name: "顺义区", value: "110113", dictCode: "District", parentId: 110100 },
   { id: 110114, name: "昌平区", value: "110114", dictCode: "District", parentId: 110100 },
+  { id: 110115, name: "大兴区", value: "110115", dictCode: "District", parentId: 110100 },
+  { id: 110116, name: "怀柔区", value: "110116", dictCode: "District", parentId: 110100 },
+  { id: 110117, name: "平谷区", value: "110117", dictCode: "District", parentId: 110100 },
+  { id: 110118, name: "密云区", value: "110118", dictCode: "District", parentId: 110100 },
+  { id: 110119, name: "延庆区", value: "110119", dictCode: "District", parentId: 110100 },
   { id: 310101, name: "黄浦区", value: "310101", dictCode: "District", parentId: 310100 },
   { id: 310104, name: "徐汇区", value: "310104", dictCode: "District", parentId: 310100 },
   { id: 310115, name: "浦东新区", value: "310115", dictCode: "District", parentId: 310100 },
@@ -123,4 +134,5 @@ const allDicts = [
   ...certTypes, ...nations, ...orderStatus, ...authStatus
 ];
 
-module.exports = { allDicts, hostypes, provinces, cities, districts };
+module.exports = { allDicts };
+//, hostypes, provinces, cities, districts 

@@ -9,6 +9,8 @@
 </template>
 
 <script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Carousel" });
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
 
 // Props定义示例

@@ -61,6 +61,8 @@
 </template>
 
 <script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Card" });
 // 通过 type 引入类型接口
 import type { HospitalItem } from "@/types/index";
 // import { ref, reactive, computed, watch, onMounted } from 'vue'

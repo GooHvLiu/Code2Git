@@ -97,4 +97,5 @@ app.listen(PORT, () => {
   console.log("");
   console.log("记得在前端 vite.config.ts 中配置代理：");
   console.log("  server: { proxy: { '/api': 'http://localhost:8201' } }");
+  console.log(`  API文档: http://localhost:8201/api/api-docs/`);
 });

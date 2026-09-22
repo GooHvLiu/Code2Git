@@ -1585,18 +1585,38 @@ onMounted(() => {
 // 引入网络请求接口
 import request from "@/utils/request";
 // 通过 type 引入类型接口
-import type { ResponseData, HospitalPageResponse } from "@/types/index";
+import type {
+  ResponseData,
+  HospitalPageResponse,
+  HospitalLevelPageResponse,
+  HospitalRegionPageResponse
+} from "@/types/index";
 
 // 通过枚举管理首页 home 模块的接口地址
 enum API {
   // 获取已有的医院数据接口地址
-  HOSPITAL_URL = "/hosp/hospital/findHospitalPage/"
+  HOSPITAL_URL = "/hosp/hospital/findHospitalPage/",
+  HOSPITAL_Level_URL = "/cmn/dict/findByDictCode/",
+  HOSPITAL_Region_URL = "/cmn/dict/findChildData/"
 }
-// 通过网络请求获取已有医院数据 : Promise<HospitalPageResponse>
-export const reqHospital = async (page: number, limit: number) => {
+// 医院名称清单 数据
+export const reqHospitalNameList = async (page: number, limit: number) => {
   const result = await request.get(API.HOSPITAL_URL + `${page}/${limit}`);
   return result.data as ResponseData<HospitalPageResponse>;
 };
+
+// 医院等级 数据
+export const reqHospitalLevelList = async (dictCode: string) => {
+  const result = await request.get(API.HOSPITAL_Level_URL + `${dictCode}`);
+  return result.data as ResponseData<HospitalLevelPageResponse>;
+};
+
+// 医院区域数据
+export const reqHospitalRegionList = async (dictCode: number) => {
+  const result = await request.get(API.HOSPITAL_Region_URL + `${dictCode}`);
+  return result.data as ResponseData<HospitalRegionPageResponse>;
+};
+
 ```
 
 ## 类型推导
@@ -1635,7 +1655,7 @@ export interface ResponseData<T> {
 从后端获取的已有医院数据`src/types/hospital/index.ts`，实际需要的部分进行类型定义：
 
 ```ts
-// 单条医院 数据类型
+// 单条医院名称清单 数据类型
 export interface HospitalItem {
   id: string;
   hosname: string;
@@ -1663,7 +1683,7 @@ export interface HospitalItem {
   districtString: string;
 }
 
-// 医院分页接口里 data 的结构
+// 医院名称清单分页接口里 data 的结构
 export interface HospitalPageResponse {
   totalElements: number;
   content: HospitalItem[];
@@ -1671,6 +1691,47 @@ export interface HospitalPageResponse {
   size: number;
   number: number;
 }
+
+// 单条医院等级 数据类型
+export interface HospitalLevelItem {
+  id: number;
+  name: string;
+  value: string;
+  dictCode: string;
+  parentId: number;
+}
+
+// 医院等级 分页接口里 data 的结构
+export type HospitalLevelPageResponse = HospitalLevelItem[];
+
+// 医院区域 数据类型
+export interface HospitalRegionItem {
+  id: number;
+  name: string;
+  value: string;
+  dictCode: string;
+  parentId: number;
+}
+
+// 医院区域 分页接口里 data 的结构
+export type HospitalRegionPageResponse = HospitalRegionItem[];
+
+```
+
+## 常量定义
+
+常量数据以及后端网络请求常量会保存在`src/const`文件夹内。
+
+### 请求常量
+
+后端网络请求常量会保存在`src/const/reqParams/index.ts`文件内：
+
+```ts
+// 获取 医院等级 的参数
+export const hospitalLevelDictCode = "Hostype";
+
+// 当前城市 北京=110100
+export const provinceCode = 110100;
 ```
 
 ## 动态组件
@@ -2043,31 +2104,291 @@ const emit = defineEmits(["change", "sizeChange"]);
 
 #### 等级组件
 
-##### 父亲组件
+##### 数据展示
 
+`home`组件内的医院等级的获取放在`src/pages/home/level`组件内，并在本组件内实现数据的`v-for`渲染：
 
+```vue
+<template>
+  <div class="page-home-level">
+    <h1 class="hospital">医院</h1>
+    <div class="level">
+      <h1>等级：</h1>
+      <ul class="level-list">
+        <li class="active">全部</li>
+        <li v-for="hospitalLevel in hospitalLevelArr" key="hospitalLevel.value">{{ hospitalLevel.name }}</li>
+      </ul>
+    </div>
+  </div>
+</template>
 
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+// 导入网络请求 API
+import { reqHospitalLevelList } from "@/api/home";
+// 导入类型定义
+import type { ResponseData } from "@/types/api";
+import type { HospitalLevelPageResponse } from "@/types/index";
+// 引入网络请求后台网址参数常量
+import { hospitalLevelDictCode } from "@/const/index";
+// 响应式数据
+let hospitalLevelArr = ref<HospitalLevelPageResponse>([]);
+// 生命周期
+onMounted(() => {
+  // 通过网络请求获取医院等级数据
+  getHospitalLevel();
+});
+// 获取医院等级 的函数
+const getHospitalLevel = async () => {
+  // 通过网络请求获取医院等级数据
+  const result = (await reqHospitalLevelList(hospitalLevelDictCode)) as ResponseData<HospitalLevelPageResponse>;
+  // 当获取的数据code为200时
+  if (result.code === 200) {
+    // 将后端获取到的数据给到hospitalLevel
+    hospitalLevelArr.value = result.data;
+    // console.log("当前获取的医院等级@@:", hospitalLevelArr.value);
+  }
+};
+</script>
+<style scoped lang="less">
+.page-home-level {
+  color: #a9a9a9;
+  font-weight: 900;
+  .hospital {
+    margin: 10px 0;
+  }
+  .level {
+    display: flex;
+    margin-top: 15px;
+    h1 {
+      width: 60px;
+    }
+    .level-list {
+      display: flex;
+      li {
+        margin-right: 15px;
+        &.active {
+          color: #5566cc;
+        }
+        &:hover {
+          color: #5566cc;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+</style>
+```
 
+##### 动态类名
 
+###### 基本逻辑
 
+创建一个字符串`activeString=‘0’`，在等级全部默认状态下进行判断` :class="{ active: activeString === '0' }" `，其他等级使用`:class="{ active: activeString == hospitalLevel.value }"`进行判断，点击事件触发`activeString.value = selectedItem;`：
 
-##### 儿子组件
+* 初始状态，`activeString`为`0`，默认全部是被选中的；
+* 渲染数据通过当前渲染对象数据中的唯一标识与`activeString`判断是否一致，一致挂载`active`类属性；
+* 当点击事件触发之后，`activeString`被修改为对应渲染对象数据中的唯一标识；
+* 数据变更，`vue3`进行重新渲染，基于第2条进行判断渲染；
 
+###### 基本实现
 
+`src/pages/home/level/index.vue`基于如下逻辑实现选中：
 
+```vue
+<template>
+......
+      <ul class="level-list">
+        <li :class="{ active: activeString == '0' }" @click="activeString = '0'">全部</li>
+        <li
+          v-for="hospitalLevel in hospitalLevelArr"
+          key="hospitalLevel.name"
+          :class="{ active: activeString == hospitalLevel.value }"
+          @click="changeActive(hospitalLevel.value)"
+        >
+          {{ hospitalLevel.name }}
+        </li>
+      </ul>
+......
+</template>
+<script setup lang="ts">
+......
+let activeString = ref<string>("0");
+......
+// 点击后 更改 动态类名存储字符串内容
+const changeActive = (selectedItem: string) => {
+  // 将当前选中的 item 中的 value 存储在动态类名字符串变量，item.value 是唯一的
+  activeString.value = selectedItem;
+  // console.log("当前点击等级value@@:", activeString.value);
+};
+</script>
 
+<style scoped lang="less">
+......
+    .level-list {
+      display: flex;
+      li {
+        margin-right: 15px;
+        &.active {
+          color: #5566cc;
+        }
+        &:hover {
+          color: #5566cc;
+          cursor: pointer;
+        }
+      }
+    }
+......
+</style>
+```
 
 #### 地区组件
 
-##### 父亲组件
+##### 数据展示
+
+`home`组件内的医院等级的获取放在`src/pages/home/region`组件内，并在本组件内实现数据的`v-for`渲染：
+
+```vue
+<template>
+  <div class="page-home-region">
+    <div class="region">
+      <h1>地区：</h1>
+      <ul class="region-list">
+        <li class="active">全部</li>
+        <li v-for="regionItem in hospitalRegionArr" key="regionItem.id">{{ regionItem.name }}</li>
+      </ul>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 引入生命周期函数onMounted
+import { ref, onMounted } from "vue";
+// 引入类型变量定义
+import type { ResponseData } from "@/types/api";
+import type { HospitalRegionPageResponse } from "@/types/hospital";
+// 引入 网络请求 网址参数
+import { provinceCode } from "@/const/index";
+// 引入网络请求函数
+import { reqHospitalRegionList } from "@/api/home/index";
+// 响应式数据
+const hospitalRegionArr = ref<HospitalRegionPageResponse>([]);
+// 生命周期
+onMounted(() => {
+  getHospitalRegion();
+});
+// 获取医院区域数据的函数
+const getHospitalRegion = async () => {
+  const result = (await reqHospitalRegionList(provinceCode)) as ResponseData<HospitalRegionPageResponse>;
+  // 当获取的数据code为200时
+  if (result.code === 200) {
+    // 将数据存入hospitalRegionArr
+    hospitalRegionArr.value = result.data;
+    // console.log("获取到的医院地区数据@@：", hospitalRegionArr.value);
+  }
+};
+</script>
+<style scoped lang="less">
+.page-home-region {
+  color: #a9a9a9;
+  font-weight: 900;
+  .region {
+    display: flex;
+    margin-top: 15px;
+    h1 {
+      margin-top: 10px;
+      width: 69px;
+    }
+    .region-list {
+      display: flex;
+      flex-wrap: wrap;
+      li {
+        margin-right: 15px;
+        margin-top: 10px;
+        &.active {
+          color: #5566cc;
+        }
+        &:hover {
+          color: #5566cc;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+</style>
+```
+
+##### 动态类名
+
+###### 基本逻辑
+
+创建一个字符串`activeString=‘0’`，在等级全部默认状态下进行判断` :class="{ active: activeString === '0' }" `，其他等级使用`:class="{ active: activeString == hospitalRegion.value }"`进行判断，点击事件触发`activeString.value = selectedItem;`：
+
+* 初始状态，`activeString`为`0`，默认全部是被选中的；
+* 渲染数据通过当前渲染对象数据中的唯一标识与`activeString`判断是否一致，一致挂载`active`类属性；
+* 当点击事件触发之后，`activeString`被修改为对应渲染对象数据中的唯一标识；
+* 数据变更，`vue3`进行重新渲染，基于第2条进行判断渲染；
+
+###### 基本实现
+
+`src/pages/home/region/index.vue`基于如下逻辑实现选中：
+
+```vue
+<template>
+......
+      <ul class="region-list">
+        <li :class="{ active: activeString === '0' }" @click="activeString = '0'">全部</li>
+        <li
+          v-for="hospitalRegion in hospitalRegionArr"
+          key="hospitalRegion.id"
+          :class="{ active: activeString == hospitalRegion.value }"
+          @click="changeActive(hospitalRegion.value)"
+        >
+          {{ hospitalRegion.name }}
+        </li>
+      </ul>
+......
+</template>
+<script setup lang="ts">
+......
+let activeString = ref<string>("0");
+......
+// 点击后 更改 动态类名存储字符串内容
+const changeActive = (selectedItem: string) => {
+  // 将当前选中的 item 中的 value 存储在动态类名字符串变量，item.value 是唯一的
+  activeString.value = selectedItem;
+  // console.log("当前点击等级value@@:", activeString.value);
+};
+</script>
+
+<style scoped lang="less">
+......
+    .level-list {
+      display: flex;
+      li {
+        margin-right: 15px;
+        &.active {
+          color: #5566cc;
+        }
+        &:hover {
+          color: #5566cc;
+          cursor: pointer;
+        }
+      }
+    }
+......
+</style>
+```
+
+#### 智能筛选
 
 
 
 
 
-##### 儿子组件
-
-
+#### 智能搜索
 
 
 

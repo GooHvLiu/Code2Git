@@ -1,4 +1,4 @@
-// 单条医院 数据类型
+// 单条医院名称清单 数据类型
 export interface HospitalItem {
   id: string;
   hosname: string;
@@ -26,7 +26,7 @@ export interface HospitalItem {
   districtString: string;
 }
 
-// 医院分页接口里 data 的结构
+// 医院名称清单分页接口里 data 的结构
 export interface HospitalPageResponse {
   totalElements: number;
   content: HospitalItem[];
@@ -34,3 +34,27 @@ export interface HospitalPageResponse {
   size: number;
   number: number;
 }
+
+// 单条医院等级 数据类型
+export interface HospitalLevelItem {
+  id: number;
+  name: string;
+  value: string;
+  dictCode: string;
+  parentId: number;
+}
+
+// 医院等级 分页接口里 data 的结构
+export type HospitalLevelPageResponse = HospitalLevelItem[];
+
+// 医院区域 数据类型
+export interface HospitalRegionItem {
+  id: number;
+  name: string;
+  value: string;
+  dictCode: string;
+  parentId: number;
+}
+
+// 医院区域 分页接口里 data 的结构
+export type HospitalRegionPageResponse = HospitalRegionItem[];

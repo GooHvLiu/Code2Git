@@ -17,6 +17,8 @@
 </template>
 
 <script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Pagination" });
 // 通过 type 引入类型接口
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
 import { ref } from "vue";

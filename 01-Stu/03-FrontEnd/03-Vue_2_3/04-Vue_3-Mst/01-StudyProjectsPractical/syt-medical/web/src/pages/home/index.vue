@@ -30,6 +30,8 @@
 </template>
 
 <script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Home" });
 // 通过 type 引入类型接口
 import type { ResponseData } from "@/types/api";
 import type { HospitalItem, HospitalPageResponse } from "@/types/index";
@@ -46,7 +48,7 @@ import Card from "@/pages/home/card/index.vue";
 // 导入分页器组件
 import Pagination from "@/pages/home/pagination/index.vue";
 // 导入 网络请求 API
-import { reqHospital } from "@/api/home";
+import { reqHospitalNameList } from "@/api/home";
 // 导入 onmounted()生命周期钩子
 import { ref, onMounted } from "vue";
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
@@ -74,14 +76,14 @@ const pageTotalData = ref<number>(0);
 // watch(count, (newVal) => {})
 
 // 生命周期
-onMounted(async () => {
+onMounted(() => {
   // 通过调用网络请求 API 接口获取已存在的医院数据
   getHospitalInfo();
   // console.log("获取到的医院数据：", hospHavedData);
 });
 // 获取已有医院的数据函数
 const getHospitalInfo = async () => {
-  const result = (await reqHospital(pageNo.value, pageSize.value)) as ResponseData<HospitalPageResponse>;
+  const result = (await reqHospitalNameList(pageNo.value, pageSize.value)) as ResponseData<HospitalPageResponse>;
   // 当从后台获取数据成功之后
   if (result.code === 200) {
     // 将获取到的医院数据给到 hasHospitalArr
