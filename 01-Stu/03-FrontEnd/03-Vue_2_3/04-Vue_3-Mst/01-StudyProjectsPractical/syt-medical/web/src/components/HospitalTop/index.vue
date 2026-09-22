@@ -40,7 +40,7 @@
   height: 70px;
   position: fixed;
   z-index: 9999;
-  /* background-color: #fff; */
+  background-color: #fff;
   display: flex;
   justify-content: center;
   .content {

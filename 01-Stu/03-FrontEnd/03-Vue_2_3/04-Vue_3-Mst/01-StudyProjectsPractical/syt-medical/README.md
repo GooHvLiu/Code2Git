@@ -2095,6 +2095,50 @@ onMounted(() => {
 </script>
 ```
 
+## 类型推导
+
+### 基本定义
+
+在`src/types`下创建类型推导`hospital.ts`和聚合函数`index.ts`文件，用于所有`ts`文件的类型推导模板，可以很快速的实现导入及使用。
+
+### 核心代码
+
+#### 聚合函数
+
+`src/types/index.ts`文件中通过聚合导出所需的类型，实现对类型的统一管理：
+
+```ts
+export * from "./hospital";
+// 以后新增其他类型直接在这里导出，比如字典、登录用户
+```
+
+#### 已有医院
+
+从后端获取的已有医院数据`src/types/hospital.ts`，实际需要的部分进行类型定义：
+
+```ts
+// 单条医院数据类型
+export interface HospitalItem {
+  id: number;
+  hosname: string;
+  hostypeString: string;
+  bookingRule: {
+    releaseTime: string;
+  };
+}
+
+// 后端分页返回整体结构
+export interface HospitalPageResponse {
+  code: number;
+  data: {
+    content: HospitalItem[];
+    totalElements: number;
+  };
+}
+```
+
+
+
 ## 动态组件
 
 在静态组件、网络请求均已具备的情况下，可以将请求的数据与页面进行关联，实现动态数据的效果展示与互动。

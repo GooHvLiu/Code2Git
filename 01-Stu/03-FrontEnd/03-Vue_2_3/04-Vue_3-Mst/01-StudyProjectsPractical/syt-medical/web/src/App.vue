@@ -13,10 +13,6 @@
 </template>
 
 <script setup lang="ts">
-// 引入 Axios 二次封装的工具request
-import request from "@/utils/request";
-// 引入 vue 中页面挂载方法
-import { onMounted } from "vue";
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
 
 // Props定义示例
@@ -34,16 +30,7 @@ import { onMounted } from "vue";
 // watch(count, (newVal) => {})
 
 // 生命周期
-onMounted(() => {
-  request
-    .get("/hosp/hospital/findHospitalPage/1/10")
-    .then((res) => {
-      console.log("app组件展示获取的数据:", res);
-    })
-    .catch((err) => {
-      console.error("请求失败：", err);
-    });
-});
+// onMounted(() => {});
 </script>
 
 <style scoped lang="less">

@@ -12,9 +12,17 @@
         <!-- 医院地区 组件 -->
         <Regin />
         <!-- 医院卡片 组件 -->
-        <Card />
+        <div class="hospital-card">
+          <Card class="card-item" v-for="item in hasHospitalArr" :key="item.id" :hospital-item="item" />
+        </div>
         <!-- 分页器 组件 -->
-        <Pagination />
+        <Pagination
+          :page-no="pageNo"
+          :page-size="pageSize"
+          :page-total="pageTotalData"
+          @change="handlePageChange"
+          @size-change="handleSizeChange"
+        />
       </el-col>
       <el-col :span="4"> 第2列 </el-col>
     </el-row>
@@ -22,6 +30,8 @@
 </template>
 
 <script setup lang="ts">
+// 通过 type 引入类型接口
+import type { HospitalItem, HospitalPageResponse } from "@/types/index";
 // 导入轮播图组件
 import Carousel from "@/pages/home/carousel/index.vue";
 // 导入搜索框+按钮组件
@@ -34,6 +44,10 @@ import Regin from "@/pages/home/region/index.vue";
 import Card from "@/pages/home/card/index.vue";
 // 导入分页器组件
 import Pagination from "@/pages/home/pagination/index.vue";
+// 导入 网络请求 API
+import { reqHospital } from "@/api/home";
+// 导入 onmounted()生命周期钩子
+import { ref, onMounted } from "vue";
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
 
 // Props定义示例
@@ -43,6 +57,14 @@ import Pagination from "@/pages/home/pagination/index.vue";
 // 响应式数据
 // const count = ref(0)
 // const state = reactive({})
+// 已有医院数组存储 通过使用自定义的接口定义，可以在 v-for 中使用内部的id变量
+const hasHospitalArr = ref<HospitalItem[]>([]);
+// 分页器当前页码
+const pageNo = ref<number>(1);
+// 分页器 1 页展示数量
+const pageSize = ref<number>(10);
+// 分页器 数据 总数量
+const pageTotalData = ref<number>(0);
 
 // 计算属性
 // const computedVal = computed(() => {})
@@ -51,7 +73,45 @@ import Pagination from "@/pages/home/pagination/index.vue";
 // watch(count, (newVal) => {})
 
 // 生命周期
-// onMounted(() => {})
+onMounted(async () => {
+  // 通过调用网络请求 API 接口获取已存在的医院数据
+  getHospitalInfo();
+  // console.log("获取到的医院数据：", hospHavedData);
+});
+// 获取已有医院的数据函数
+const getHospitalInfo = async () => {
+  const result = (await reqHospital(pageNo.value, pageSize.value)) as HospitalPageResponse;
+  // 当从后台获取数据成功之后
+  if (result.code === 200) {
+    // 将获取到的医院数据给到 hasHospitalArr
+    hasHospitalArr.value = result.data.content;
+    // console.log("当前获取到的医院数据：", hasHospitalArr.value);
+
+    // 将获取到的医院数据中的医院总数给到 pageTotalData
+    pageTotalData.value = result.data.totalElements;
+    console.log("当前获取到的医院数据：", pageTotalData.value);
+  }
+};
+// 页码变更之后，子组件通过 emit 触发页码变更函数
+const handlePageChange = (newPage: number) => {
+  pageNo.value = newPage;
+  // 重新网络请求数据更新
+  getHospitalInfo();
+};
+// 每页显示数量变更之后，子组件通过 emit 触发每页显示数量变更函数
+const handleSizeChange = (newSize: number) => {
+  pageSize.value = newSize;
+  // 切换每页条数，重置为第一页
+  pageNo.value = 1;
+  // 重新网络请求数据更新
+  getHospitalInfo();
+};
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.hospital-card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+</style>
