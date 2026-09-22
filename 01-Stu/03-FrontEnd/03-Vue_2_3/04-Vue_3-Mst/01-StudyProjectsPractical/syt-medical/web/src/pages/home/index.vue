@@ -31,6 +31,7 @@
 
 <script setup lang="ts">
 // 通过 type 引入类型接口
+import type { ResponseData } from "@/types/api";
 import type { HospitalItem, HospitalPageResponse } from "@/types/index";
 // 导入轮播图组件
 import Carousel from "@/pages/home/carousel/index.vue";
@@ -80,7 +81,7 @@ onMounted(async () => {
 });
 // 获取已有医院的数据函数
 const getHospitalInfo = async () => {
-  const result = (await reqHospital(pageNo.value, pageSize.value)) as HospitalPageResponse;
+  const result = (await reqHospital(pageNo.value, pageSize.value)) as ResponseData<HospitalPageResponse>;
   // 当从后台获取数据成功之后
   if (result.code === 200) {
     // 将获取到的医院数据给到 hasHospitalArr

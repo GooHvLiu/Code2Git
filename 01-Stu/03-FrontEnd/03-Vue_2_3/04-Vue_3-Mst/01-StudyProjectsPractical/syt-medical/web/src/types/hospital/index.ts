@@ -1,4 +1,4 @@
-// 单条医院数据类型
+// 单条医院 数据类型
 export interface HospitalItem {
   id: string;
   hosname: string;
@@ -8,7 +8,7 @@ export interface HospitalItem {
   cityCode: string;
   districtCode: string;
   address: string;
-  logoData: string; // base64字符串
+  logoData: string;
   intro: string;
   route: string;
   status: number;
@@ -21,13 +21,16 @@ export interface HospitalItem {
     rule: string[];
   };
   hostypeString: string;
+  provinceString: string;
+  cityString: string;
+  districtString: string;
 }
 
-// 后端分页返回整体结构
+// 医院分页接口里 data 的结构
 export interface HospitalPageResponse {
-  code: number;
-  data: {
-    content: HospitalItem[];
-    totalElements: number;
-  };
+  totalElements: number;
+  content: HospitalItem[];
+  totalPages: number;
+  size: number;
+  number: number;
 }

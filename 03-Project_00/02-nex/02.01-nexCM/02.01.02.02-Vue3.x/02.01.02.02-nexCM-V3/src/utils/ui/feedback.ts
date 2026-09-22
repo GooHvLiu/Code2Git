@@ -109,7 +109,7 @@ export function confirmDanger(message: string, confirmText = ''): Promise<boolea
     beforeClose: (action: string, instance, done: () => void) => {
       if (action === 'confirm' && confirmText) {
         if (instance.inputValue !== confirmText) {
-          ElMessage.error(t('common.message.confirmTextRequired', { text: confirmText }))
+          ElMessage.error(t('common.confirmTextRequired', { text: confirmText }))
           return
         }
       }

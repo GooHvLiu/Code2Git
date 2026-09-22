@@ -5,6 +5,32 @@
 export default {
   // [Submodule] Page
   page: {
+    // [Page] Reset password dialog title
+    resetPwdTitle: 'Reset Password',
+    // [Label] New password
+    newPassword: 'New Password',
+    // [Placeholder] Enter new password
+    newPasswordPlaceholder: 'Please enter new password',
+    // [Label] Confirm password
+    confirmPassword: 'Confirm Password',
+    // [Placeholder] Re-enter new password
+    confirmPasswordPlaceholder: 'Please re-enter the new password',
+    // [Validation] Username required
+    usernameRequired: 'Please enter username',
+    // [Validation] Username must be 2-50 characters
+    usernameLength: 'Username must be 2-50 characters',
+    // [Validation] Password required
+    passwordRequired: 'Please enter password',
+    // [Validation] Password must be 6-32 characters
+    passwordLength: 'Password must be 6-32 characters',
+    // [Validation] Invalid email format
+    emailInvalid: 'Invalid email format',
+    // [Status] Enabled
+    statusEnabled: 'Enabled',
+    // [Status] Disabled
+    statusDisabled: 'Disabled',
+    // [Message] User deleted successfully
+    deleteSuccess: 'Deleted successfully',
     // [Page] Add user
     addUser: 'Add User',
     // [Label] Create time

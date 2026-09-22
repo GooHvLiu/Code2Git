@@ -66,7 +66,7 @@
 
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" size="small" @click.stop="closeDetailDialog">
+          <el-button type="primary" @click.stop="closeDetailDialog">
             {{ t('heartbeat.confirm') }}
           </el-button>
         </div>

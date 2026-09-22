@@ -307,7 +307,7 @@
 
     <!-- 新增/编辑记录弹窗 -->
     <el-dialog v-model="editDialogVisible" :title="editDialogTitle" width="600px" :close-on-click-modal="false">
-      <el-form :model="editForm" label-width="160px" size="small">
+      <el-form :model="editForm" label-width="160px">
         <el-form-item v-for="col in editFormColumns" :key="col">
           <template #label>
             {{ col }}
@@ -326,7 +326,7 @@
 
     <!-- 创建备份弹窗 -->
     <el-dialog v-model="backupDialogVisible" :title="t('superPanel.database.backup.create')" width="500px" :close-on-click-modal="false">
-      <el-form :model="backupForm" label-width="100px" size="small">
+      <el-form :model="backupForm" label-width="100px">
         <el-form-item :label="t('superPanel.database.backup.type')">
           <el-radio-group v-model="backupForm.backupType">
             <el-radio value="full">{{ t('superPanel.database.backup.fullType') }}</el-radio>
@@ -350,7 +350,7 @@
 
     <!-- 修改存储路径弹窗 -->
     <el-dialog v-model="pathDialogVisible" :title="t('superPanel.database.path.dialogTitle')" width="550px" :close-on-click-modal="false">
-      <el-form :model="pathForm" label-width="120px" size="small">
+      <el-form :model="pathForm" label-width="120px">
         <el-form-item>
           <template #label>
             <span class="label-with-tip">
@@ -390,8 +390,8 @@
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button size="small" @click="pathDialogVisible = false">{{ t('common.cancel') }}</el-button>
-        <el-button size="small" type="primary" @click="confirmChangePath">{{ t('common.confirm') }}</el-button>
+        <el-button @click="pathDialogVisible = false">{{ t('common.cancel') }}</el-button>
+        <el-button type="primary" @click="confirmChangePath">{{ t('common.confirm') }}</el-button>
       </template>
     </el-dialog>
   </div>

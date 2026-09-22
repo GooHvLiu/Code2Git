@@ -362,7 +362,7 @@
     <!-- 批量对比字段对话框 -->
     <el-dialog v-model="batchCompareDialog.visible" :title="t('superPanel.i18n.compare.batch')" width="900px" :close-on-click-modal="false">
       <div class="batch-compare-config">
-        <el-form :model="batchCompareDialog.form" label-width="160px" size="small">
+        <el-form :model="batchCompareDialog.form" label-width="160px">
           <el-form-item>
             <template #label>
               <span class="label-with-tip">

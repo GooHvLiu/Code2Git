@@ -627,7 +627,7 @@ async function handleSave(): Promise<void> {
         locationCoords: cityInfo ? { lng: cityInfo.lng, lat: cityInfo.lat } : null,
         installDate: form.deviceInstallDate
       })
-      showSuccess(t('common.message.saveSuccess'))
+      showSuccess(t('common.saveSuccess'))
     } else {
       showError(t('superPanel.config.page.saveFailedRetry'))
     }
@@ -659,7 +659,7 @@ function handleReset(): void {
         assignFormData(data)
         normalizeFlags()
         applyConfig(form)
-        showSuccess(t('common.message.resetSuccess'))
+        showSuccess(t('common.resetSuccess'))
       } else {
         showError(t('superPanel.config.page.resetFailedRetry'))
       }

@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="system-config-container">
     <!-- 页面标题 -->
     <div class="page-header">
@@ -2267,7 +2267,7 @@ async function handleSave(): Promise<void> {
         locationCoords: cityInfo ? { lng: cityInfo.lng, lat: cityInfo.lat } : null,
         installDate: form.deviceInstallDate
       })
-      showSuccess(t('common.message.saveSuccess'))
+      showSuccess(t('common.saveSuccess'))
     } else {
       showError(t('system.config.saveFailedRetry'))
     }
@@ -2303,7 +2303,7 @@ function handleReset(): void {
           form.partLifeReminderEnabled === '1'
         form.defaultLanguage = locale.value
         applyConfig(form as Parameters<typeof applyConfig>[0])
-        showSuccess(t('common.message.resetSuccess'))
+        showSuccess(t('common.resetSuccess'))
       } else {
         showError(t('system.config.resetFailedRetry'))
       }

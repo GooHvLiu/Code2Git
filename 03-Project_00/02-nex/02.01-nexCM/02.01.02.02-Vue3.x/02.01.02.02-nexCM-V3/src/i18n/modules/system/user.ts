@@ -5,6 +5,32 @@
 export default {
   // 【子模块】页面
   page: {
+    // 【页面】重置密码弹窗标题
+    resetPwdTitle: '重置密码',
+    // 【标签】新密码
+    newPassword: '新密码',
+    // 【占位符】请输入新密码
+    newPasswordPlaceholder: '请输入新密码',
+    // 【标签】确认密码
+    confirmPassword: '确认密码',
+    // 【占位符】请再次输入新密码
+    confirmPasswordPlaceholder: '请再次输入新密码',
+    // 【校验】请输入用户名
+    usernameRequired: '请输入用户名',
+    // 【校验】用户名长度需在2-50个字符之间
+    usernameLength: '用户名长度需在 2-50 个字符之间',
+    // 【校验】请输入密码
+    passwordRequired: '请输入密码',
+    // 【校验】密码长度需在6-32个字符之间
+    passwordLength: '密码长度需在 6-32 个字符之间',
+    // 【校验】邮箱格式不正确
+    emailInvalid: '邮箱格式不正确',
+    // 【状态】启用
+    statusEnabled: '启用',
+    // 【状态】禁用
+    statusDisabled: '禁用',
+    // 【消息】删除用户成功
+    deleteSuccess: '删除成功',
     // 【页面】新增用户
     addUser: '新增用户',
     // 【标签】创建时间

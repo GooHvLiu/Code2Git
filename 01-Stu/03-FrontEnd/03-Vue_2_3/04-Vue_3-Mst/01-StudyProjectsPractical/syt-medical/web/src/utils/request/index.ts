@@ -40,16 +40,15 @@ service.interceptors.request.use(
  */
 service.interceptors.response.use(
   (response) => {
-    console.log(response);
-
-    const res = response.data;
+    console.log("后端返回的数据@@:", response);
+    const res = response;
     // 业务成功
-    if (res.code === 200) {
+    if (res.data.code === 200) {
       console.log("恭喜，响应拦截器已生效，响应码:200");
 
       return res;
     } else {
-      console.log(res.message || "业务失败");
+      console.log(res.data.message || "业务失败");
       return Promise.reject(res);
     }
   },

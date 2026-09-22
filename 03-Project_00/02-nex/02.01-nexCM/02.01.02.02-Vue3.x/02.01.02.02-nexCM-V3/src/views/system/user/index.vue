@@ -160,7 +160,7 @@
       width="400px"
     >
       <el-form :model="resetPwdForm" label-width="100px">
-        <el-form-item :label="t('system.user.page.usernameLabel')">
+        <el-form-item :label="t('system.user.page.username')">
           <span>{{ resetPwdUser?.username }}</span>
         </el-form-item>
         <el-form-item :label="t('system.user.page.newPassword')">
@@ -284,7 +284,7 @@ const exportColumns = computed<ExportColumn[]>(() => [
   { label: t('system.user.page.email'), prop: 'email', width: 180 },
   { label: t('system.user.page.phone'), prop: 'phone', width: 130 },
   { label: t('system.user.page.role'), prop: 'role', width: 100, formatter: (row) => roleMap.value[String(row.role)] || row.role },
-  { label: t('system.user.page.status'), prop: 'status', width: 80, formatter: (row) => (row.status === 1 ? t('system.user.statusEnabled') : t('system.user.statusDisabled')) },
+  { label: t('system.user.page.status'), prop: 'status', width: 80, formatter: (row) => (row.status === 1 ? t('system.user.page.statusEnabled') : t('system.user.page.statusDisabled')) },
   { label: t('system.user.page.createTime'), prop: 'create_time', width: 170, formatter: (row) => formatDate(row.create_time as string) }
 ])
 
@@ -325,7 +325,7 @@ async function handleDelete(row: UserRow): Promise<void> {
   if (!ok) return
   try {
     await requestDeleteUserApi(String(row.id))
-    showSuccess(t('system.user.deleteSuccess'))
+    showSuccess(t('system.user.page.deleteSuccess'))
     refreshList()
   } catch { /* 拦截器已处理 */ }
 }
@@ -342,7 +342,7 @@ async function handleBatchDelete(): Promise<void> {
   if (!ok) return
   try {
     await requestBatchDeleteUserApi([...selectedIds.value])
-    showSuccess(t('system.user.batchDeleteSuccess'))
+    showSuccess(t('system.user.page.batchDeleteSuccess'))
     selectedIds.value = []
     refreshList()
   } catch { /* 拦截器已处理 */ }
