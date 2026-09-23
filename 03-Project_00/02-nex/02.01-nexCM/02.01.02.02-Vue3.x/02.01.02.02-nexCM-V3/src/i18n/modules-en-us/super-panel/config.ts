@@ -257,7 +257,7 @@ export default {
     // [Label] Total languages
     totalLangs: 'Total Languages',
     // [Unit] Total languages unit
-    totalLangsUnit: '',
+    totalLangsUnit: 'languages',
     // [Action] View languages
     viewLanguages: 'View Language List'
   },

@@ -114,7 +114,7 @@ export default {
     // [Panel] Today alarm stats
     alarmStats: {
       title: "Today's Alarm Stats",
-      times: ''
+      times: 'times'
     },
     // [Panel] Quality inspection
     quality: {

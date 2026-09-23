@@ -1,10 +1,12 @@
 /**
  * 科室数据 - 对应 hosp_department 表
  * 结构：{ id, hoscode, depcode, depname, title, children: [] }
- * 父子层级：大科室 -> 小科室
+ * 每家医院都有完整的10个大科室 + 子科室
  */
 
-// 通用科室模板（按医院复用，depcode 全局唯一）
+const { hospitals } = require("./hospitals");
+
+// 大科室模板
 const depTemplates = [
   { depcode: "dept_neike", depname: "内科", title: "内科是临床医学的一个专科，是临床医学的基础，与外科相对。" },
   { depcode: "dept_waike", depname: "外科", title: "外科是研究外科疾病的发生、发展规律及其临床表现，诊断、预防和治疗的科学。" },
@@ -67,47 +69,23 @@ const subDeps = {
 };
 
 /**
- * 为每家医院生成科室树
- * 为了数据多样，每家医院选择不同的科室子集
+ * 为每家医院生成完整科室树
  */
-const hospitalDepPick = {
-  "1000_0": ["dept_neike", "dept_waike", "dept_fuchan", "dept_erk", "dept_yanke", "dept_erkbi", "dept_kouqiang", "dept_zhongliu"],
-  "1001_0": ["dept_neike", "dept_waike", "dept_fuchan", "dept_erk", "dept_pifu"],
-  "1002_0": ["dept_neike", "dept_waike", "dept_erk", "dept_zhongliu"],
-  "1003_0": ["dept_neike", "dept_waike", "dept_jingshen"],
-  "2000_0": ["dept_neike", "dept_waike", "dept_erk", "dept_yanke", "dept_erkbi", "dept_zhongliu"],
-  "2001_0": ["dept_neike", "dept_waike", "dept_fuchan", "dept_zhongliu"],
-  "2002_0": ["dept_neike", "dept_waike", "dept_fuchan", "dept_erk", "dept_zhongliu"],
-  "3000_0": ["dept_neike", "dept_waike", "dept_fuchan", "dept_erk", "dept_yanke", "dept_erkbi"],
-  "3001_0": ["dept_neike", "dept_waike", "dept_fuchan", "dept_erk"],
-  "3002_0": ["dept_neike", "dept_waike", "dept_fuchan", "dept_erk", "dept_zhongliu"],
-  "4000_0": ["dept_neike", "dept_waike", "dept_fuchan", "dept_erk", "dept_yanke", "dept_erkbi", "dept_kouqiang", "dept_zhongliu"],
-  "4001_0": ["dept_neike", "dept_waike", "dept_fuchan", "dept_erk"],
-  "5000_0": ["dept_neike", "dept_waike", "dept_fuchan", "dept_erk", "dept_zhongliu"],
-  "5001_0": ["dept_neike", "dept_waike", "dept_fuchan", "dept_erk", "dept_yanke"],
-  "6000_0": ["dept_neike", "dept_waike", "dept_fuchan", "dept_erk", "dept_yanke", "dept_erkbi", "dept_kouqiang", "dept_pifu", "dept_zhongliu", "dept_jingshen"],
-  "7000_0": ["dept_neike", "dept_waike", "dept_fuchan", "dept_erk"],
-  "8000_0": ["dept_neike", "dept_waike", "dept_fuchan", "dept_erk"],
-  "9000_0": ["dept_neike", "dept_waike", "dept_fuchan", "dept_erk"],
-};
-
 function buildDepartments() {
   const result = [];
-  Object.entries(hospitalDepPick).forEach(([hoscode, depCodes]) => {
-    depCodes.forEach((depCode) => {
-      const tpl = depTemplates.find((d) => d.depcode === depCode);
-      if (!tpl) return;
-      const children = (subDeps[depCode] || []).map((sd) => ({
-        id: `${hoscode}_${sd.depcode}`,
-        hoscode,
+  hospitals.forEach((hospital) => {
+    depTemplates.forEach((tpl) => {
+      const children = (subDeps[tpl.depcode] || []).map((sd) => ({
+        id: `${hospital.hoscode}_${sd.depcode}`,
+        hoscode: hospital.hoscode,
         depcode: sd.depcode,
         depname: sd.depname,
         title: sd.title,
         children: [],
       }));
       result.push({
-        id: `${hoscode}_${tpl.depcode}`,
-        hoscode,
+        id: `${hospital.hoscode}_${tpl.depcode}`,
+        hoscode: hospital.hoscode,
         depcode: tpl.depcode,
         depname: tpl.depname,
         title: tpl.title,

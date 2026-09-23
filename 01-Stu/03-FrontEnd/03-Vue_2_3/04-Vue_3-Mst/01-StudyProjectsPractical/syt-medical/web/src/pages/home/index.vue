@@ -8,9 +8,9 @@
     <el-row>
       <el-col :span="20">
         <!-- 医院等级 组件 -->
-        <Level />
+        <Level @change-level="handleChangeLevel" />
         <!-- 医院地区 组件 -->
-        <Regin />
+        <Regin @change-region="handleChangeRegion" />
         <!-- 医院卡片 组件 -->
         <div class="hospital-card">
           <Card class="card-item" v-for="item in hasHospitalArr" :key="item.id" :hospital-item="item" />
@@ -68,6 +68,10 @@ const pageNo = ref<number>(1);
 const pageSize = ref<number>(10);
 // 分页器 数据 总数量
 const pageTotalData = ref<number>(0);
+// 医院 等级 字符串代码
+const hospitalLevel = ref<string>("");
+// 医院 地区 字符串代码
+const hospitalRegion = ref<string>("");
 
 // 计算属性
 // const computedVal = computed(() => {})
@@ -83,7 +87,12 @@ onMounted(() => {
 });
 // 获取已有医院的数据函数
 const getHospitalInfo = async () => {
-  const result = (await reqHospitalNameList(pageNo.value, pageSize.value)) as ResponseData<HospitalPageResponse>;
+  const result = (await reqHospitalNameList(
+    pageNo.value,
+    pageSize.value,
+    hospitalLevel.value,
+    hospitalRegion.value
+  )) as ResponseData<HospitalPageResponse>;
   // 当从后台获取数据成功之后
   if (result.code === 200) {
     // 将获取到的医院数据给到 hasHospitalArr
@@ -92,7 +101,7 @@ const getHospitalInfo = async () => {
 
     // 将获取到的医院数据中的医院总数给到 pageTotalData
     pageTotalData.value = result.data.totalElements;
-    console.log("当前获取到的医院数据：", pageTotalData.value);
+    // console.log("当前获取到的医院数据：", pageTotalData.value);
   }
 };
 // 页码变更之后，子组件通过 emit 触发页码变更函数
@@ -108,6 +117,44 @@ const handleSizeChange = (newSize: number) => {
   pageNo.value = 1;
   // 重新网络请求数据更新
   getHospitalInfo();
+};
+// 当用户点击医院等级后进行数据重新加载
+const handleChangeLevel = (newLevel: string) => {
+  // 如果用户点击的还是全部
+  if (newLevel == "0") {
+    // 判断当前显示是否是全部，如果不是全部，则显示全部
+    if (hospitalLevel.value != "") {
+      hospitalLevel.value = "";
+      getHospitalInfo();
+    }
+  }
+  // 如果用户点击的不是全部
+  else {
+    // 判断当前点击的与目前选中的是不是同一个，如果不是，则赋值并获取数据
+    if (newLevel != hospitalLevel.value) {
+      hospitalLevel.value = newLevel;
+      getHospitalInfo();
+    }
+  }
+};
+// 当用户点击医院地区后进行数据重新加载
+const handleChangeRegion = (newRegion: string) => {
+  // 如果用户点击的还是全部
+  if (newRegion == "0") {
+    // 判断当前显示是否是全部，如果不是全部，则显示全部
+    if (hospitalRegion.value != "") {
+      hospitalRegion.value = "";
+      getHospitalInfo();
+    }
+  }
+  // 如果用户点击的不是全部
+  else {
+    // 判断当前点击的与目前选中的是不是同一个，如果不是，则赋值并获取数据
+    if (newRegion != hospitalRegion.value) {
+      hospitalRegion.value = newRegion;
+      getHospitalInfo();
+    }
+  }
 };
 </script>
 

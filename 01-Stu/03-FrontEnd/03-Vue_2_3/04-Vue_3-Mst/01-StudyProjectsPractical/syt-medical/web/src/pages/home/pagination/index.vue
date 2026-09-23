@@ -25,7 +25,7 @@ import { ref } from "vue";
 import type { ComponentSize } from "element-plus";
 const size = ref<ComponentSize>("large");
 const background = ref(true);
-const singlepage = ref(true);
+const singlepage = ref(false);
 const disabled = ref(false);
 // 每页条数切换
 const handleSizeChange = (val: number) => {

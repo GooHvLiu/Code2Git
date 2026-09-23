@@ -15,9 +15,16 @@ enum API {
   HOSPITAL_Level_URL = "/cmn/dict/findByDictCode/",
   HOSPITAL_Region_URL = "/cmn/dict/findChildData/"
 }
-// 医院名称清单 数据
-export const reqHospitalNameList = async (page: number, limit: number) => {
-  const result = await request.get(API.HOSPITAL_URL + `${page}/${limit}`);
+// 医院名称清单 数据 hostype / districtCode 不传参默认为空
+export const reqHospitalNameList = async (
+  page: number,
+  limit: number,
+  hostype: string = "",
+  districtCode: string = ""
+) => {
+  const result = await request.get(
+    API.HOSPITAL_URL + `${page}/${limit}` + "?hostype=" + `${hostype}` + "&districtCode=" + `${districtCode}`
+  );
   return result.data as ResponseData<HospitalPageResponse>;
 };
 

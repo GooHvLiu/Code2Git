@@ -3,12 +3,12 @@
     <div class="region">
       <h1>地区：</h1>
       <ul class="region-list">
-        <li :class="{ active: activeString === '0' }" @click="activeString = '0'">全部</li>
+        <li :class="{ active: activeString === '0' }" @click="handleSelected('0')">全部</li>
         <li
           v-for="hospitalRegion in hospitalRegionArr"
           key="hospitalRegion.id"
           :class="{ active: activeString == hospitalRegion.value }"
-          @click="changeActive(hospitalRegion.value)"
+          @click="handleSelected(hospitalRegion.value)"
         >
           {{ hospitalRegion.name }}
         </li>
@@ -27,13 +27,15 @@ import { ref, onMounted } from "vue";
 import type { ResponseData } from "@/types/api";
 import type { HospitalRegionPageResponse } from "@/types/hospital";
 // 引入 网络请求 网址参数
-import { provinceCode } from "@/const/index";
+import { cityCode } from "@/const/index";
 // 引入网络请求函数
 import { reqHospitalRegionList } from "@/api/home/index";
 
 // Props定义示例
 // const props = defineProps<{}>()
 // const emit = defineEmits<{}>()
+// 定义子传父要抛出的事件
+const emit = defineEmits(["changeRegion"]);
 
 // 响应式数据
 // 创建 医院地区 存储变量数组
@@ -54,7 +56,7 @@ onMounted(() => {
 });
 // 获取医院区域数据的函数
 const getHospitalRegion = async () => {
-  const result = (await reqHospitalRegionList(provinceCode)) as ResponseData<HospitalRegionPageResponse>;
+  const result = (await reqHospitalRegionList(cityCode)) as ResponseData<HospitalRegionPageResponse>;
   // 当获取的数据code为200时
   if (result.code === 200) {
     // 将数据存入hospitalRegionArr
@@ -63,10 +65,12 @@ const getHospitalRegion = async () => {
   }
 };
 // 点击后 更改 动态类名存储字符串内容
-const changeActive = (selectedItem: string) => {
+const handleSelected = (selectedItem: string) => {
   // 将当前选中的 item 中的 value 存储在动态类名字符串变量，item.value 是唯一的
   activeString.value = selectedItem;
   // console.log("当前点击地区value@@:", activeString.value);
+  // 将目前已经被选中的地区字符串数据返回给父组件进行重新加载
+  emit("changeRegion", selectedItem);
 };
 </script>
 

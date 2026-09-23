@@ -4,12 +4,12 @@
     <div class="level">
       <h1>等级：</h1>
       <ul class="level-list">
-        <li :class="{ active: activeString == '0' }" @click="activeString = '0'">全部</li>
+        <li :class="{ active: activeString == '0' }" @click="handleSelected('0')">全部</li>
         <li
           v-for="hospitalLevel in hospitalLevelArr"
           key="hospitalLevel.name"
           :class="{ active: activeString == hospitalLevel.value }"
-          @click="changeActive(hospitalLevel.value)"
+          @click="handleSelected(hospitalLevel.value)"
         >
           {{ hospitalLevel.name }}
         </li>
@@ -33,7 +33,9 @@ import { hospitalLevelDictCode } from "@/const/index";
 
 // Props定义示例
 // const props = defineProps<{}>()
-// const emit = defineEmits<{}>()
+// const emit = defineEmits<{}>();
+// 定义子传父要抛出的事件
+const emit = defineEmits(["changeLevel"]);
 
 // 响应式数据
 // 创建 医院等级 存储变量数组
@@ -64,11 +66,13 @@ const getHospitalLevel = async () => {
     // console.log("当前获取的医院等级@@:", hospitalLevelArr.value);
   }
 };
-// 点击后 更改 动态类名存储字符串内容
-const changeActive = (selectedItem: string) => {
+// 点击后 更改 动态类名存储字符串内容 + 触发点击事件传递给父组件进行重新加载医院清单数据
+const handleSelected = (selectedItem: string) => {
   // 将当前选中的 item 中的 value 存储在动态类名字符串变量，item.value 是唯一的
   activeString.value = selectedItem;
   // console.log("当前点击等级value@@:", activeString.value);
+  // 将目前已经被选中的等级字符串数据返回给父组件进行重新加载
+  emit("changeLevel", selectedItem);
 };
 </script>
 

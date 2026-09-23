@@ -2085,10 +2085,10 @@ const {
 } = licenseApi
 /** licenseData 在 useLicense 中为 ref({})，模板访问其字段时按需断言为任意记录 */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const licenseData = computed<any>(() => licenseApi.licenseData as any)
+const licenseData = computed<any>(() => licenseApi.licenseData.value as any)
 /** selectedLicenseFile 在 useLicense 中为 ref(null)，模板访问 .name 时按需断言 */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const selectedLicenseFile = computed<any>(() => licenseApi.selectedLicenseFile as any)
+const selectedLicenseFile = computed<any>(() => licenseApi.selectedLicenseFile.value as any)
 
 const loading = ref(false)
 

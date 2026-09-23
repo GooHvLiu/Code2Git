@@ -1579,6 +1579,8 @@ onMounted(() => {
 
 #### Home组件
 
+##### 基础封装
+
 `src/api/home/index.ts`文件封装了关于`home`组件的数据请求，后续会陆续增加：
 
 ```ts
@@ -1618,6 +1620,56 @@ export const reqHospitalRegionList = async (dictCode: number) => {
 };
 
 ```
+
+##### 动态筛选
+
+在动态展示数据之后，进行筛选功能开发时，需要将查询参数拓展，具体参考动态组件-Home组件-智能筛选单元，将查询语句参数增加：
+
+```ts
+// 引入网络请求接口
+import request from "@/utils/request";
+// 通过 type 引入类型接口
+import type {
+  ResponseData,
+  HospitalPageResponse,
+  HospitalLevelPageResponse,
+  HospitalRegionPageResponse
+} from "@/types/index";
+
+// 通过枚举管理首页 home 模块的接口地址
+enum API {
+  // 获取已有的医院数据接口地址
+  HOSPITAL_URL = "/hosp/hospital/findHospitalPage/",
+  HOSPITAL_Level_URL = "/cmn/dict/findByDictCode/",
+  HOSPITAL_Region_URL = "/cmn/dict/findChildData/"
+}
+// 医院名称清单 数据 hostype / districtCode 不传参默认为空
+export const reqHospitalNameList = async (
+  page: number,
+  limit: number,
+  hostype: string = "",
+  districtCode: string = ""
+) => {
+  const result = await request.get(
+    API.HOSPITAL_URL + `${page}/${limit}` + "?hostype=" + `${hostype}` + "&districtCode=" + `${districtCode}`
+  );
+  return result.data as ResponseData<HospitalPageResponse>;
+};
+
+// 医院等级 数据
+export const reqHospitalLevelList = async (dictCode: string) => {
+  const result = await request.get(API.HOSPITAL_Level_URL + `${dictCode}`);
+  return result.data as ResponseData<HospitalLevelPageResponse>;
+};
+
+// 医院区域数据
+export const reqHospitalRegionList = async (dictCode: number) => {
+  const result = await request.get(API.HOSPITAL_Region_URL + `${dictCode}`);
+  return result.data as ResponseData<HospitalRegionPageResponse>;
+};
+```
+
+> 此时处于医院等级、地区智能筛选部分，未涉及搜索功能
 
 ## 类型推导
 
@@ -2384,9 +2436,230 @@ const changeActive = (selectedItem: string) => {
 
 #### 智能筛选
 
+##### 框架搭建
 
+###### 后台参数
 
+经过查询，后端服务器具备`page / limit / hosname / hostype / provinceCode / cityCode / districtCode`参数，除了`page / limit`是路径参数外，其他参数采用查询参数，为非必填项。
 
+###### 查询参数
+
+已在网络请求-路径管理-Home组件-动态筛选中更新最新代码，查询参数具有默认值，可自由搭配查询参数，再次不再重复介绍。
+
+##### Home组件
+
+###### 等级组件
+
+需要在`Level`组件触发点击事件时，将变量和事件通过`emit`传递给父亲`Home`组件：
+
+```vue
+<template>
+  <div class="page-home-level">
+    <h1 class="hospital">医院</h1>
+    <div class="level">
+      <h1>等级：</h1>
+      <ul class="level-list">
+        <li :class="{ active: activeString == '0' }" @click="handleSelected('0')">全部</li>
+        <li
+          v-for="hospitalLevel in hospitalLevelArr"
+          key="hospitalLevel.name"
+          :class="{ active: activeString == hospitalLevel.value }"
+          @click="handleSelected(hospitalLevel.value)"
+        >
+          {{ hospitalLevel.name }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
+<script setup lang="ts">
+......
+// 定义子传父要抛出的事件
+const emit = defineEmits(["changeLevel"]);
+......
+// 点击后 更改 动态类名存储字符串内容 + 触发点击事件传递给父组件进行重新加载医院清单数据
+const handleSelected = (selectedItem: string) => {
+  // 将当前选中的 item 中的 value 存储在动态类名字符串变量，item.value 是唯一的
+  activeString.value = selectedItem;
+  // console.log("当前点击等级value@@:", activeString.value);
+  // 将目前已经被选中的等级字符串数据返回给父组件进行重新加载
+  emit("changeLevel", selectedItem);
+};
+</script>
+```
+
+> 通过`emit`将数据传递给父组件，并触发父组件的`change-level`事件
+
+###### 地区组件
+
+需要在`Region`组件触发点击事件时，将变量和事件通过`emit`传递给父亲`Home`组件：
+
+```vue
+<template>
+  <div class="page-home-region">
+    <div class="region">
+      <h1>地区：</h1>
+      <ul class="region-list">
+        <li :class="{ active: activeString === '0' }" @click="handleSelected('0')">全部</li>
+        <li
+          v-for="hospitalRegion in hospitalRegionArr"
+          key="hospitalRegion.id"
+          :class="{ active: activeString == hospitalRegion.value }"
+          @click="handleSelected(hospitalRegion.value)"
+        >
+          {{ hospitalRegion.name }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+......
+// 定义子传父要抛出的事件
+const emit = defineEmits(["changeRegion"]);
+......
+// 点击后 更改 动态类名存储字符串内容
+const handleSelected = (selectedItem: string) => {
+  // 将当前选中的 item 中的 value 存储在动态类名字符串变量，item.value 是唯一的
+  activeString.value = selectedItem;
+  // console.log("当前点击地区value@@:", activeString.value);
+  // 将目前已经被选中的地区字符串数据返回给父组件进行重新加载
+  emit("changeRegion", selectedItem);
+};
+</script>
+```
+
+> 通过`emit`将数据传递给父组件，并触发父组件的`change-region`事件
+
+###### 父亲组件
+
+需要在`Home`组件中添加对应的触发事件和相关函数：
+
+```vue
+<template>
+  <div class="page-wrap">
+    ......
+  <el-row>
+      <el-col :span="20">
+        <!-- 医院等级 组件 -->
+        <Level @change-level="handleChangeLevel" />
+        <!-- 医院地区 组件 -->
+        <Regin @change-region="handleChangeRegion" />
+        <!-- 医院卡片 组件 -->
+        <div class="hospital-card">
+          <Card class="card-item" v-for="item in hasHospitalArr" :key="item.id" :hospital-item="item" />
+        </div>
+        ......
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Home" });
+// 通过 type 引入类型接口
+import type { ResponseData } from "@/types/api";
+import type { HospitalItem, HospitalPageResponse } from "@/types/index";
+// 导入轮播图组件
+import Carousel from "@/pages/home/carousel/index.vue";
+// 导入搜索框+按钮组件
+import Search from "@/pages/home/search/index.vue";
+// 导入等级组件
+import Level from "@/pages/home/level/index.vue";
+// 导入地区组件
+import Regin from "@/pages/home/region/index.vue";
+// 导入医院卡片组件
+import Card from "@/pages/home/card/index.vue";
+// 导入分页器组件
+import Pagination from "@/pages/home/pagination/index.vue";
+// 导入 网络请求 API
+import { reqHospitalNameList } from "@/api/home";
+// 导入 onmounted()生命周期钩子
+import { ref, onMounted } from "vue";
+// import { ref, reactive, computed, watch, onMounted } from 'vue'
+
+// Props定义示例
+// const props = defineProps<{}>()
+// const emit = defineEmits<{}>()
+
+// 响应式数据
+// const count = ref(0)
+// const state = reactive({})
+// 已有医院数组存储 通过使用自定义的接口定义，可以在 v-for 中使用内部的id变量
+const hasHospitalArr = ref<HospitalItem[]>([]);
+// 分页器当前页码
+const pageNo = ref<number>(1);
+// 分页器 1 页展示数量
+const pageSize = ref<number>(10);
+// 分页器 数据 总数量
+const pageTotalData = ref<number>(0);
+// 医院 等级 字符串代码
+const hospitalLevel = ref<string>("");
+// 医院 地区 字符串代码
+const hospitalRegion = ref<string>("");
+......
+// 获取已有医院的数据函数
+const getHospitalInfo = async () => {
+  const result = (await reqHospitalNameList(
+    pageNo.value,
+    pageSize.value,
+    hospitalLevel.value,
+    hospitalRegion.value
+  )) as ResponseData<HospitalPageResponse>;
+  // 当从后台获取数据成功之后
+  if (result.code === 200) {
+    // 将获取到的医院数据给到 hasHospitalArr
+    hasHospitalArr.value = result.data.content;
+    // console.log("当前获取到的医院数据：", hasHospitalArr.value);
+
+    // 将获取到的医院数据中的医院总数给到 pageTotalData
+    pageTotalData.value = result.data.totalElements;
+    // console.log("当前获取到的医院数据：", pageTotalData.value);
+  }
+};
+......
+// 当用户点击医院等级后进行数据重新加载
+const handleChangeLevel = (newLevel: string) => {
+  // 如果用户点击的还是全部
+  if (newLevel == "0") {
+    // 判断当前显示是否是全部，如果不是全部，则显示全部
+    if (hospitalLevel.value != "") {
+      hospitalLevel.value = "";
+      getHospitalInfo();
+    }
+  }
+  // 如果用户点击的不是全部
+  else {
+    // 判断当前点击的与目前选中的是不是同一个，如果不是，则赋值并获取数据
+    if (newLevel != hospitalLevel.value) {
+      hospitalLevel.value = newLevel;
+      getHospitalInfo();
+    }
+  }
+};
+// 当用户点击医院地区后进行数据重新加载
+const handleChangeRegion = (newRegion: string) => {
+  // 如果用户点击的还是全部
+  if (newRegion == "0") {
+    // 判断当前显示是否是全部，如果不是全部，则显示全部
+    if (hospitalRegion.value != "") {
+      hospitalRegion.value = "";
+      getHospitalInfo();
+    }
+  }
+  // 如果用户点击的不是全部
+  else {
+    // 判断当前点击的与目前选中的是不是同一个，如果不是，则赋值并获取数据
+    if (newRegion != hospitalRegion.value) {
+      hospitalRegion.value = newRegion;
+      getHospitalInfo();
+    }
+  }
+};
+</script>
+```
+
+> 通过`emit`实现数据的子传父，并完成数据获取的重新渲染
 
 #### 智能搜索
 
