@@ -1,0 +1,444 @@
+# 医院管理模块接口
+# 前缀：/api/hosp/hospital
+
+/api/hosp/hospital/findHospitalPage/{page}/{limit}:
+  get:
+    tags: [医院管理]
+    summary: 分页查询医院列表
+    description: |
+      支持按医院名称、等级、省市区条件筛选。
+      返回数据包含医院基本信息及预约规则。
+    operationId: findHospitalPage
+    parameters:
+      - name: page
+        in: path
+        required: true
+        description: 当前页码（从1开始）
+        schema:
+          type: integer
+          minimum: 1
+          example: 1
+      - name: limit
+        in: path
+        required: true
+        description: 每页条数
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          example: 10
+      - name: hosname
+        in: query
+        required: false
+        description: 医院名称（模糊搜索）
+        schema:
+          type: string
+          example: "协和"
+      - name: hostype
+        in: query
+        required: false
+        description: 医院等级
+        schema:
+          $ref: "#/components/schemas/HostypeEnum"
+      - name: provinceCode
+        in: query
+        required: false
+        description: 省份编码
+        schema:
+          type: string
+          example: "110000"
+      - name: cityCode
+        in: query
+        required: false
+        description: 城市编码
+        schema:
+          type: string
+          example: "110100"
+      - name: districtCode
+        in: query
+        required: false
+        description: 区县编码
+        schema:
+          type: string
+          example: "110101"
+    responses:
+      "200":
+        description: 查询成功
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/ResponseWrapper"
+                - type: object
+                  properties:
+                    data:
+                      allOf:
+                        - $ref: "#/components/schemas/PageResult"
+                        - type: object
+                          properties:
+                            content:
+                              type: array
+                              items:
+                                $ref: "#/components/schemas/Hospital"
+            examples:
+              成功:
+                value:
+                  code: 200
+                  message: "成功"
+                  ok: true
+                  data:
+                    totalElements: 42
+                    totalPages: 5
+                    size: 10
+                    number: 1
+                    content:
+                      - id: "h001"
+                        hosname: "北京协和医院"
+                        hoscode: "1000_0"
+                        hostype: "1"
+                        hostypeString: "三级甲等"
+                        provinceCode: "110000"
+                        cityCode: "110100"
+                        districtCode: "110101"
+                        address: "北京市东城区帅府园一号"
+                        status: 1
+
+/api/hosp/hospital/findByHosname/{hosname}:
+  get:
+    tags: [医院管理]
+    summary: 根据医院名称搜索医院
+    description: |
+      根据医院名称模糊搜索，返回匹配的医院列表（仅 id、hosname、hoscode）。
+      用于首页搜索框的自动补全下拉提示。
+    operationId: findByHosname
+    parameters:
+      - name: hosname
+        in: path
+        required: true
+        description: 医院名称关键词
+        schema:
+          type: string
+          example: "协和"
+    responses:
+      "200":
+        description: 查询成功
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/ResponseWrapper"
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            example: "h001"
+                          hosname:
+                            type: string
+                            example: "北京协和医院"
+                          hoscode:
+                            type: string
+                            example: "1000_0"
+            examples:
+              搜索协和:
+                value:
+                  code: 200
+                  message: "成功"
+                  ok: true
+                  data:
+                    - id: "h001"
+                      hosname: "北京协和医院"
+                      hoscode: "1000_0"
+
+/api/hosp/hospital/findHospitalDetail/{hoscode}:
+  get:
+    tags: [医院管理]
+    summary: 查询医院详情
+    description: 根据医院编号查询医院详细信息，包含预约规则。
+    operationId: findHospitalDetail
+    parameters:
+      - name: hoscode
+        in: path
+        required: true
+        description: 医院编号
+        schema:
+          type: string
+          example: "1000_0"
+    responses:
+      "200":
+        description: 查询成功
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/ResponseWrapper"
+                - type: object
+                  properties:
+                    data:
+                      $ref: "#/components/schemas/Hospital"
+      "404":
+        description: 医院不存在
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorResponse"
+
+/api/hosp/hospital/department/{hoscode}:
+  get:
+    tags: [医院管理]
+    summary: 查询医院科室列表（树形）
+    description: 返回指定医院的科室树形结构，大科室包含子科室。
+    operationId: findDepartment
+    parameters:
+      - name: hoscode
+        in: path
+        required: true
+        description: 医院编号
+        schema:
+          type: string
+          example: "1000_0"
+    responses:
+      "200":
+        description: 查询成功
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/ResponseWrapper"
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: "#/components/schemas/Department"
+            examples:
+              成功:
+                value:
+                  code: 200
+                  message: "成功"
+                  ok: true
+                  data:
+                    - id: "1000_0_dept_neike"
+                      hoscode: "1000_0"
+                      depcode: "dept_neike"
+                      depname: "内科"
+                      children:
+                        - id: "1000_0_dept_neike_xinnao"
+                          depcode: "dept_neike_xinnao"
+                          depname: "神经内科"
+
+/api/hosp/hospital/doctor/{hoscode}/{depcode}/{page}/{limit}:
+  get:
+    tags: [医院管理]
+    summary: 分页查询医生排班
+    description: 查询指定医院、指定科室的医生排班列表，按出诊日期排序。
+    operationId: findDoctorSchedule
+    parameters:
+      - name: hoscode
+        in: path
+        required: true
+        description: 医院编号
+        schema:
+          type: string
+          example: "1000_0"
+      - name: depcode
+        in: path
+        required: true
+        description: 科室编码（子科室）
+        schema:
+          type: string
+          example: "dept_neike_xinnao"
+      - name: page
+        in: path
+        required: true
+        description: 当前页码
+        schema:
+          type: integer
+          example: 1
+      - name: limit
+        in: path
+        required: true
+        description: 每页条数
+        schema:
+          type: integer
+          example: 10
+    responses:
+      "200":
+        description: 查询成功
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/ResponseWrapper"
+                - type: object
+                  properties:
+                    data:
+                      allOf:
+                        - $ref: "#/components/schemas/PageResult"
+                        - type: object
+                          properties:
+                            content:
+                              type: array
+                              items:
+                                $ref: "#/components/schemas/Schedule"
+
+/api/hosp/hospital/doctorInfo/{hoscode}/{depcode}/{scheduleId}:
+  get:
+    tags: [医院管理]
+    summary: 查询医生排班详情
+    description: 根据排班ID查询单条排班的详细信息。
+    operationId: findDoctorInfo
+    parameters:
+      - name: hoscode
+        in: path
+        required: true
+        schema:
+          type: string
+          example: "1000_0"
+      - name: depcode
+        in: path
+        required: true
+        schema:
+          type: string
+          example: "dept_neike_xinnao"
+      - name: scheduleId
+        in: path
+        required: true
+        description: 排班ID
+        schema:
+          type: string
+          example: "sch_1"
+    responses:
+      "200":
+        description: 查询成功
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/ResponseWrapper"
+                - type: object
+                  properties:
+                    data:
+                      $ref: "#/components/schemas/Schedule"
+      "404":
+        description: 排班不存在
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorResponse"
+
+/api/hosp/hospital/show/{hoscode}/{depcode}/{scheduleId}:
+  get:
+    tags: [医院管理]
+    summary: 预约挂号详情页数据
+    description: 预约挂号确认页所需的完整数据，包含医院信息、科室名称、排班信息。
+    operationId: showBookingDetail
+    parameters:
+      - name: hoscode
+        in: path
+        required: true
+        schema:
+          type: string
+          example: "1000_0"
+      - name: depcode
+        in: path
+        required: true
+        schema:
+          type: string
+          example: "dept_neike_xinnao"
+      - name: scheduleId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: "sch_1"
+    responses:
+      "200":
+        description: 查询成功
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/ResponseWrapper"
+                - type: object
+                  properties:
+                    data:
+                      $ref: "#/components/schemas/BookingDetail"
+      "404":
+        description: 排班不存在
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorResponse"
+
+/api/hosp/hospital/auth/userAuth:
+  post:
+    tags: [医院管理]
+    summary: 提交预约挂号
+    description: |
+      选择就诊人和排班后提交预约，创建待支付订单。
+      需要登录认证。提交后号源自动扣减。
+    operationId: submitBooking
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OrderSubmitRequest"
+          examples:
+            提交预约:
+              value:
+                scheduleId: "sch_1"
+                patientId: 1
+    responses:
+      "200":
+        description: 预约成功，返回订单ID
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/ResponseWrapper"
+                - type: object
+                  properties:
+                    data:
+                      type: integer
+                      description: 新创建的订单ID
+                      example: 33
+            examples:
+              预约成功:
+                value:
+                  code: 200
+                  message: "预约成功"
+                  ok: true
+                  data: 33
+      "201":
+        description: 预约失败（号源已满/就诊人不存在）
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorResponse"
+            examples:
+              号源已满:
+                value:
+                  code: 201
+                  message: "号源已约满"
+                  ok: false
+                  data: null
+              就诊人不存在:
+                value:
+                  code: 201
+                  message: "就诊人不存在"
+                  ok: false
+                  data: null
+      "208":
+        description: 未登录
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorResponse"

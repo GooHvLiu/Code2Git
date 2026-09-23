@@ -1,0 +1,226 @@
+# 医院管理相关数据模型
+
+Hospital:
+  type: object
+  description: 医院信息
+  required: [id, hosname, hoscode, hostype, provinceCode, cityCode, districtCode, address]
+  properties:
+    id:
+      type: string
+      description: 医院ID
+      example: "h001"
+    hosname:
+      type: string
+      description: 医院名称
+      example: "北京协和医院"
+    hoscode:
+      type: string
+      description: 医院编号（唯一标识）
+      example: "1000_0"
+    hostype:
+      $ref: "#/components/schemas/HostypeEnum"
+    provinceCode:
+      type: string
+      description: 省份编码
+      example: "110000"
+    cityCode:
+      type: string
+      description: 城市编码
+      example: "110100"
+    districtCode:
+      type: string
+      description: 区县编码
+      example: "110101"
+    address:
+      type: string
+      description: 医院地址
+      example: "北京市东城区帅府园一号"
+    logoData:
+      type: string
+      description: 医院Logo（base64图片）
+      example: "data:image/svg+xml;base64,..."
+    intro:
+      type: string
+      description: 医院简介
+      example: "北京协和医院是集医疗、科研、教学为一体的大型综合医院..."
+    route:
+      type: string
+      description: 乘车路线
+      example: "乘1路、52路东单路口西站下车"
+    status:
+      type: integer
+      description: 医院状态（1=上线 0=下线）
+      example: 1
+      enum: [0, 1]
+    bookingRule:
+      $ref: "#/components/schemas/BookingRule"
+    hostypeString:
+      type: string
+      description: 医院等级文字（列表接口附加字段）
+      example: "三级甲等"
+    provinceString:
+      type: string
+      description: 省份编码（列表接口附加字段）
+      example: "110000"
+    cityString:
+      type: string
+      description: 城市编码（列表接口附加字段）
+      example: "110100"
+    districtString:
+      type: string
+      description: 区县编码（列表接口附加字段）
+      example: "110101"
+
+BookingRule:
+  type: object
+  description: 预约规则
+  required: [cycle, releaseTime, stopTime, quitDay, quitTime, rule]
+  properties:
+    cycle:
+      type: integer
+      description: 预约周期（天）
+      example: 7
+    releaseTime:
+      type: string
+      description: 放号时间
+      example: "08:30"
+    stopTime:
+      type: string
+      description: 停挂时间
+      example: "11:30"
+    quitDay:
+      type: integer
+      description: 退号天数（就诊前N天）
+      example: 1
+    quitTime:
+      type: string
+      description: 退号时间
+      example: "10:30"
+    rule:
+      type: array
+      description: 预约规则说明
+      items:
+        type: string
+      example: ["预约周期：7天", "放号时间：08:30"]
+
+Department:
+  type: object
+  description: 科室信息（树形结构）
+  required: [id, hoscode, depcode, depname, children]
+  properties:
+    id:
+      type: string
+      description: 科室ID
+      example: "1000_0_dept_neike"
+    hoscode:
+      type: string
+      description: 所属医院编号
+      example: "1000_0"
+    depcode:
+      type: string
+      description: 科室编码
+      example: "dept_neike"
+    depname:
+      type: string
+      description: 科室名称
+      example: "内科"
+    title:
+      type: string
+      description: 科室描述
+      example: "内科是临床医学的基础..."
+    children:
+      type: array
+      description: 子科室列表
+      items:
+        $ref: "#/components/schemas/SubDepartment"
+
+SubDepartment:
+  type: object
+  description: 子科室
+  required: [id, hoscode, depcode, depname]
+  properties:
+    id:
+      type: string
+      example: "1000_0_dept_neike_xinnao"
+    hoscode:
+      type: string
+      example: "1000_0"
+    depcode:
+      type: string
+      example: "dept_neike_xinnao"
+    depname:
+      type: string
+      example: "神经内科"
+    title:
+      type: string
+      example: "神经内科常见疾病包括脑血管疾病..."
+    children:
+      type: array
+      items: {}
+      example: []
+
+Schedule:
+  type: object
+  description: 医生排班
+  required: [id, hoscode, depcode, title, docname, workDate, reservedNumber, availableNumber, amount]
+  properties:
+    id:
+      type: string
+      description: 排班ID
+      example: "sch_1"
+    hoscode:
+      type: string
+      description: 医院编号
+      example: "1000_0"
+    depcode:
+      type: string
+      description: 科室编码
+      example: "dept_neike_xinnao"
+    title:
+      $ref: "#/components/schemas/DoctorTitleEnum"
+    docname:
+      type: string
+      description: 医生姓名
+      example: "王拥军"
+    skill:
+      type: string
+      description: 擅长领域
+      example: "擅长脑血管病、头痛、癫痫等神经系统疾病的诊治"
+    workDate:
+      type: string
+      format: date
+      description: 出诊日期
+      example: "2026-09-24"
+    dayOfWeek:
+      type: string
+      description: 星期
+      example: "周四"
+    reservedNumber:
+      type: integer
+      description: 总号源数
+      example: 30
+    availableNumber:
+      type: integer
+      description: 剩余号源数
+      example: 15
+    amount:
+      type: number
+      description: 挂号费（元）
+      example: 600
+    status:
+      $ref: "#/components/schemas/ScheduleStatusEnum"
+
+BookingDetail:
+  type: object
+  description: 预约挂号详情（医院+科室+排班组合）
+  properties:
+    hospital:
+      $ref: "#/components/schemas/Hospital"
+    depcode:
+      type: string
+      example: "dept_neike_xinnao"
+    depname:
+      type: string
+      example: "神经内科"
+    schedule:
+      $ref: "#/components/schemas/Schedule"

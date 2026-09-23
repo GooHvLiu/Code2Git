@@ -12,9 +12,9 @@
 
 const express = require("express");
 
-// 引入 Open API 需要的资源 
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./openAPI/data/swagger-output.json');
+// 引入 OpenAPI 文档（swagger-helper 可复用模块）
+const swaggerHelper = require("./openAPI/swagger-helper");
+const swaggerConfig = require("./openAPI/config");
 
 const cors = require("cors");
 
@@ -33,10 +33,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// ========== 挂载swagger页面 ==========
-app.use('/api/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
-  customCss: '.swagger-ui .topbar { display: none }'
-}));
+// ========== 挂载 OpenAPI 文档页面 ==========
+// 访问 http://localhost:8201/api/api-docs 查看接口文档
+// 访问 http://localhost:8201/api/api-docs/spec.json 下载完整规范
+app.use("/api/api-docs", swaggerHelper(swaggerConfig));
 
 // ===== 路由 =====
 // 医院模块

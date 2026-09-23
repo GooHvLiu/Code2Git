@@ -1,0 +1,130 @@
+# 订单管理相关数据模型
+
+OrderInfo:
+  type: object
+  description: 挂号订单
+  required: [id, userId, outTradeNo, hoscode, scheduleId, orderStatus]
+  properties:
+    id:
+      type: integer
+      description: 订单ID
+      example: 1
+    userId:
+      type: integer
+      description: 用户ID
+      example: 1
+    outTradeNo:
+      type: string
+      description: 订单号
+      example: "ORD202409100001"
+    hoscode:
+      type: string
+      description: 医院编号
+      example: "1000_0"
+    hosname:
+      type: string
+      description: 医院名称
+      example: "北京协和医院"
+    depcode:
+      type: string
+      description: 科室编码
+      example: "dept_neike_xinxueguan"
+    depname:
+      type: string
+      description: 科室名称
+      example: "心血管内科"
+    scheduleId:
+      type: string
+      description: 排班ID
+      example: "sch_31"
+    title:
+      $ref: "#/components/schemas/DoctorTitleEnum"
+    docname:
+      type: string
+      description: 医生姓名
+      example: "张抒扬"
+    skill:
+      type: string
+      description: 医生擅长
+      example: "擅长冠心病、高血压等心血管疾病的诊治"
+    reserveDate:
+      type: string
+      format: date
+      description: 预约就诊日期
+      example: "2026-09-24"
+    dayOfWeek:
+      type: string
+      description: 星期
+      example: "周四"
+    reservedNumber:
+      type: integer
+      description: 号源序号
+      example: 30
+    amount:
+      type: number
+      description: 挂号费（元）
+      example: 600
+    patientId:
+      type: integer
+      description: 就诊人ID
+      example: 1
+    patientName:
+      type: string
+      description: 就诊人姓名
+      example: "张伟"
+    patientCertificatesType:
+      $ref: "#/components/schemas/CertificatesTypeEnum"
+    patientCertificatesNo:
+      type: string
+      description: 就诊人证件号
+      example: "110101199003152345"
+    patientPhone:
+      type: string
+      description: 就诊人电话
+      example: "13800000001"
+    orderStatus:
+      $ref: "#/components/schemas/OrderStatusEnum"
+    orderStatusString:
+      type: string
+      description: 订单状态文字（列表接口附加字段）
+      example: "已支付"
+    createTime:
+      type: string
+      description: 下单时间
+      example: "2024-09-10 10:00:00"
+    paidTime:
+      type: string
+      description: 支付时间
+      nullable: true
+      example: "2024-09-10 10:05:00"
+    isDeleted:
+      type: integer
+      description: 是否删除
+      example: 0
+      enum: [0, 1]
+
+DictItem:
+  type: object
+  description: 字典项
+  required: [id, name, value, dictCode, parentId]
+  properties:
+    id:
+      type: integer
+      description: 字典ID
+      example: 1
+    name:
+      type: string
+      description: 字典名称
+      example: "北京市"
+    value:
+      type: string
+      description: 字典值（编码）
+      example: "110000"
+    dictCode:
+      type: string
+      description: 字典编码（顶级分类）
+      example: "Province"
+    parentId:
+      type: integer
+      description: 父节点ID（0表示顶级）
+      example: 0

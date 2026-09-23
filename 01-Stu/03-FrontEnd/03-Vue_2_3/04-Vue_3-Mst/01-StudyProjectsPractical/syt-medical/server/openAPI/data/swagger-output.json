@@ -22,6 +22,16 @@
         }
       }
     },
+    "/api/api-docs/spec.json": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/hosp/hospital/findHospitalPage/{page}/{limit}": {
       "get": {
         "description": "",
@@ -73,6 +83,26 @@
           {
             "name": "districtCode",
             "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/hosp/hospital/findByHosname/{hosname}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "hosname",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "string"
             }

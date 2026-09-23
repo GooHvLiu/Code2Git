@@ -56,6 +56,25 @@ router.get("/findHospitalPage/:page/:limit", (req, res) => {
 });
 
 /**
+ * GET /api/hosp/hospital/findByHosname/{hosname}
+ * 根据医院名称模糊搜索医院列表（用于搜索框自动补全）
+ */
+router.get("/findByHosname/:hosname", (req, res) => {
+  const { hosname } = req.params;
+  if (!hosname || hosname.trim() === "") {
+    return success(res, []);
+  }
+  const list = hospitals
+    .filter((h) => h.status === 1 && h.hosname.includes(hosname))
+    .map((h) => ({
+      id: h.id,
+      hosname: h.hosname,
+      hoscode: h.hoscode,
+    }));
+  return success(res, list);
+});
+
+/**
  * GET /api/hosp/hospital/findHospitalDetail/{hoscode}
  * 医院详情
  */

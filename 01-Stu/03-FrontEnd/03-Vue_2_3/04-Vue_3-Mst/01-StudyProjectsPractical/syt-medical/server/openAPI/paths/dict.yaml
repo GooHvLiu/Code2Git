@@ -1,0 +1,112 @@
+# 数据字典模块接口
+# 前缀：/api/cmn/dict
+
+/api/cmn/dict/findByDictCode/{dictCode}:
+  get:
+    tags: [数据字典]
+    summary: 按字典编码查询顶级字典
+    description: |
+      根据 dictCode 查询该分类下的顶级字典项。
+      常用 dictCode：
+      - `Province`：省份列表
+      - `Hostype`：医院等级
+    operationId: findByDictCode
+    parameters:
+      - name: dictCode
+        in: path
+        required: true
+        description: 字典编码
+        schema:
+          type: string
+          enum: [Province, Hostype]
+          example: "Province"
+    responses:
+      "200":
+        description: 查询成功
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/ResponseWrapper"
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: "#/components/schemas/DictItem"
+            examples:
+              省份列表:
+                value:
+                  code: 200
+                  message: "成功"
+                  ok: true
+                  data:
+                    - id: 1
+                      name: "北京市"
+                      value: "110000"
+                      dictCode: "Province"
+                      parentId: 0
+                    - id: 2
+                      name: "上海市"
+                      value: "310000"
+                      dictCode: "Province"
+                      parentId: 0
+              医院等级:
+                value:
+                  code: 200
+                  message: "成功"
+                  ok: true
+                  data:
+                    - id: 100
+                      name: "三级甲等"
+                      value: "1"
+                      dictCode: "Hostype"
+                      parentId: 0
+
+/api/cmn/dict/findChildData/{dictCode}:
+  get:
+    tags: [数据字典]
+    summary: 查询子级字典
+    description: |
+      根据父节点的 value 查询子级字典列表。
+      用于级联选择：选省份后查城市，选城市后查区县。
+    operationId: findChildData
+    parameters:
+      - name: dictCode
+        in: path
+        required: true
+        description: 父节点的 value（如省份编码 110000）
+        schema:
+          type: string
+          example: "110000"
+    responses:
+      "200":
+        description: 查询成功
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/ResponseWrapper"
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: "#/components/schemas/DictItem"
+            examples:
+              北京市下辖区:
+                value:
+                  code: 200
+                  message: "成功"
+                  ok: true
+                  data:
+                    - id: 10
+                      name: "东城区"
+                      value: "110101"
+                      dictCode: "110000"
+                      parentId: 1
+                    - id: 11
+                      name: "西城区"
+                      value: "110102"
+                      dictCode: "110000"
+                      parentId: 1

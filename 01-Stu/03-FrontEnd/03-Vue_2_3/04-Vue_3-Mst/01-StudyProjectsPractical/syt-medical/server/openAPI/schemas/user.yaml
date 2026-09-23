@@ -1,0 +1,221 @@
+# 用户中心相关数据模型
+
+UserInfo:
+  type: object
+  description: 用户信息
+  required: [id, phone, status]
+  properties:
+    id:
+      type: integer
+      description: 用户ID
+      example: 1
+    username:
+      type: string
+      description: 用户名
+      example: "testuser"
+    name:
+      type: string
+      description: 真实姓名（实名认证后）
+      example: "张伟"
+      nullable: true
+    phone:
+      type: string
+      description: 手机号
+      example: "13800000001"
+    certificatesType:
+      $ref: "#/components/schemas/CertificatesTypeEnum"
+    certificatesNo:
+      type: string
+      description: 证件号码
+      example: "110101199003152345"
+      nullable: true
+    sex:
+      $ref: "#/components/schemas/SexEnum"
+    age:
+      type: integer
+      description: 年龄
+      example: 35
+      nullable: true
+    authStatus:
+      $ref: "#/components/schemas/AuthStatusEnum"
+    status:
+      type: integer
+      description: 账号状态（1=正常 0=禁用）
+      example: 1
+      enum: [0, 1]
+    openid:
+      type: string
+      description: 微信openid
+      nullable: true
+      example: null
+    nickName:
+      type: string
+      description: 昵称
+      example: "测试用户"
+    avatar:
+      type: string
+      description: 头像URL
+      example: ""
+    createTime:
+      type: string
+      description: 创建时间
+      example: "2024-01-01 10:00:00"
+    updateTime:
+      type: string
+      description: 更新时间
+      example: "2024-01-01 10:00:00"
+
+LoginRequest:
+  type: object
+  description: 登录请求
+  required: [phone, code]
+  properties:
+    phone:
+      type: string
+      description: 手机号
+      pattern: "^1[3-9]\\d{9}$"
+      example: "13800000001"
+    code:
+      type: string
+      description: 短信验证码（测试专用：111111）
+      example: "111111"
+
+LoginResponse:
+  type: object
+  description: 登录响应
+  required: [token, name]
+  properties:
+    token:
+      type: string
+      description: 登录令牌（后续请求头携带）
+      example: "mock_token_1_1726000000000_abc123"
+    name:
+      type: string
+      description: 用户昵称
+      example: "测试用户"
+
+AuthUserRequest:
+  type: object
+  description: 实名认证请求
+  required: [name, certificatesType, certificatesNo]
+  properties:
+    name:
+      type: string
+      description: 真实姓名
+      example: "张伟"
+    certificatesType:
+      $ref: "#/components/schemas/CertificatesTypeEnum"
+    certificatesNo:
+      type: string
+      description: 证件号码
+      example: "110101199003152345"
+
+Patient:
+  type: object
+  description: 就诊人信息
+  required: [id, userId, name, certificatesType, certificatesNo, sex, birthDate, phone]
+  properties:
+    id:
+      type: integer
+      description: 就诊人ID
+      example: 1
+    userId:
+      type: integer
+      description: 所属用户ID
+      example: 1
+    name:
+      type: string
+      description: 就诊人姓名
+      example: "张伟"
+    certificatesType:
+      $ref: "#/components/schemas/CertificatesTypeEnum"
+    certificatesNo:
+      type: string
+      description: 证件号码
+      example: "110101199003152345"
+    sex:
+      $ref: "#/components/schemas/SexEnum"
+    birthDate:
+      type: string
+      format: date
+      description: 出生日期
+      example: "1990-03-15"
+    phone:
+      type: string
+      description: 联系电话
+      example: "13800000001"
+    isInsure:
+      type: integer
+      description: 是否有医保（1=是 0=否）
+      example: 1
+      enum: [0, 1]
+    cardNo:
+      type: string
+      description: 医保卡号
+      example: "110101199003152345"
+    address:
+      type: string
+      description: 地址
+      example: "北京市东城区东单大街1号"
+    createTime:
+      type: string
+      example: "2024-01-01 10:00:00"
+    updateTime:
+      type: string
+      example: "2024-01-01 10:00:00"
+    isDeleted:
+      type: integer
+      description: 是否删除（0=正常 1=已删除）
+      example: 0
+      enum: [0, 1]
+
+PatientSaveRequest:
+  type: object
+  description: 新增/修改就诊人请求
+  required: [name, certificatesType, certificatesNo, sex, birthDate, phone]
+  properties:
+    id:
+      type: integer
+      description: 就诊人ID（修改时必填，新增时不传）
+      example: 1
+    name:
+      type: string
+      example: "张伟"
+    certificatesType:
+      $ref: "#/components/schemas/CertificatesTypeEnum"
+    certificatesNo:
+      type: string
+      example: "110101199003152345"
+    sex:
+      $ref: "#/components/schemas/SexEnum"
+    birthDate:
+      type: string
+      format: date
+      example: "1990-03-15"
+    phone:
+      type: string
+      example: "13800000001"
+    isInsure:
+      type: integer
+      example: 1
+      enum: [0, 1]
+    cardNo:
+      type: string
+      example: "110101199003152345"
+    address:
+      type: string
+      example: "北京市东城区"
+
+OrderSubmitRequest:
+  type: object
+  description: 提交预约挂号请求
+  required: [scheduleId, patientId]
+  properties:
+    scheduleId:
+      type: string
+      description: 排班ID
+      example: "sch_1"
+    patientId:
+      type: integer
+      description: 就诊人ID
+      example: 1

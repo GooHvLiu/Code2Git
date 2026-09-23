@@ -1,0 +1,215 @@
+# 订单管理模块接口
+# 前缀：/api/order/orderInfo
+
+/api/order/orderInfo/auth/{page}/{limit}:
+  get:
+    tags: [订单管理]
+    summary: 分页查询当前用户订单
+    description: |
+      查询当前登录用户的挂号订单列表，按创建时间倒序。
+      附加 orderStatusString 状态文字字段。
+    operationId: findOrderPage
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: page
+        in: path
+        required: true
+        description: 当前页码
+        schema:
+          type: integer
+          example: 1
+      - name: limit
+        in: path
+        required: true
+        description: 每页条数
+        schema:
+          type: integer
+          example: 10
+    responses:
+      "200":
+        description: 查询成功
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/ResponseWrapper"
+                - type: object
+                  properties:
+                    data:
+                      allOf:
+                        - $ref: "#/components/schemas/PageResult"
+                        - type: object
+                          properties:
+                            content:
+                              type: array
+                              items:
+                                $ref: "#/components/schemas/OrderInfo"
+            examples:
+              成功:
+                value:
+                  code: 200
+                  message: "成功"
+                  ok: true
+                  data:
+                    totalElements: 5
+                    totalPages: 1
+                    size: 10
+                    number: 1
+                    content:
+                      - id: 1
+                        outTradeNo: "ORD202409100001"
+                        hosname: "北京协和医院"
+                        depname: "心血管内科"
+                        docname: "张抒扬"
+                        reserveDate: "2026-09-24"
+                        amount: 600
+                        orderStatus: 2
+                        orderStatusString: "已支付"
+      "208":
+        description: 未登录
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorResponse"
+
+/api/order/orderInfo/getOrders/{orderId}:
+  get:
+    tags: [订单管理]
+    summary: 查询订单详情
+    description: 根据订单ID查询订单详细信息，只能查询当前用户的订单。
+    operationId: getOrderDetail
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: orderId
+        in: path
+        required: true
+        description: 订单ID
+        schema:
+          type: integer
+          example: 1
+    responses:
+      "200":
+        description: 查询成功
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/ResponseWrapper"
+                - type: object
+                  properties:
+                    data:
+                      $ref: "#/components/schemas/OrderInfo"
+      "201":
+        description: 订单不存在
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorResponse"
+      "208":
+        description: 未登录
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorResponse"
+
+/api/order/orderInfo/auth/getOrderStatus/{orderId}:
+  get:
+    tags: [订单管理]
+    summary: 查询订单状态
+    description: 只返回订单的状态码（0=已取消 1=待支付 2=已支付 3=已取号）。
+    operationId: getOrderStatus
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: orderId
+        in: path
+        required: true
+        description: 订单ID
+        schema:
+          type: integer
+          example: 1
+    responses:
+      "200":
+        description: 查询成功
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/ResponseWrapper"
+                - type: object
+                  properties:
+                    data:
+                      $ref: "#/components/schemas/OrderStatusEnum"
+            examples:
+              成功:
+                value:
+                  code: 200
+                  message: "成功"
+                  ok: true
+                  data: 2
+      "201":
+        description: 订单不存在
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorResponse"
+      "208":
+        description: 未登录
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorResponse"
+
+/api/order/orderInfo/auth/cancelOrder/{orderId}:
+  put:
+    tags: [订单管理]
+    summary: 取消订单
+    description: |
+      取消待支付状态的订单。
+      只有 orderStatus=1（待支付）的订单可以取消。
+    operationId: cancelOrder
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: orderId
+        in: path
+        required: true
+        description: 订单ID
+        schema:
+          type: integer
+          example: 1
+    responses:
+      "200":
+        description: 取消成功
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResponseWrapper"
+            examples:
+              成功:
+                value:
+                  code: 200
+                  message: "取消成功"
+                  ok: true
+                  data: null
+      "201":
+        description: 取消失败（订单不存在/当前状态不可取消）
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorResponse"
+            examples:
+              状态不可取消:
+                value:
+                  code: 201
+                  message: "当前状态不能取消"
+                  ok: false
+                  data: null
+      "208":
+        description: 未登录
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorResponse"

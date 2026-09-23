@@ -1,0 +1,120 @@
+# 通用数据模型 - 响应包装、分页、错误码
+# 所有接口的响应都遵循 ResponseWrapper 格式
+
+ResponseWrapper:
+  type: object
+  description: 统一响应包装
+  required: [code, message, ok, data]
+  properties:
+    code:
+      type: integer
+      description: 状态码（200成功，201业务失败，208未登录）
+      example: 200
+      enum: [200, 201, 208, 404, 500]
+    message:
+      type: string
+      description: 响应消息
+      example: "成功"
+    ok:
+      type: boolean
+      description: 是否成功
+      example: true
+    data:
+      description: 响应数据（具体类型由各接口定义）
+      nullable: true
+
+ErrorResponse:
+  type: object
+  description: 错误响应
+  required: [code, message, ok, data]
+  properties:
+    code:
+      type: integer
+      example: 201
+      enum: [201, 208, 404, 500]
+    message:
+      type: string
+      example: "业务失败"
+    ok:
+      type: boolean
+      example: false
+    data:
+      type: object
+      nullable: true
+      example: null
+
+PageResult:
+  type: object
+  description: 通用分页结果
+  required: [content, totalElements, totalPages, size, number]
+  properties:
+    content:
+      type: array
+      description: 当前页数据列表
+      items: {}
+    totalElements:
+      type: integer
+      description: 总条数
+      example: 42
+    totalPages:
+      type: integer
+      description: 总页数
+      example: 5
+    size:
+      type: integer
+      description: 每页条数
+      example: 10
+    number:
+      type: integer
+      description: 当前页码（从1开始）
+      example: 1
+
+# ===== 枚举定义 =====
+
+HostypeEnum:
+  type: string
+  description: 医院等级
+  enum: ["1", "2", "3", "4", "5"]
+  example: "1"
+  x-enum-varnames: [三级甲等, 三级乙等, 二级甲等, 二级乙等, 一级甲等]
+
+CertificatesTypeEnum:
+  type: string
+  description: 证件类型
+  enum: ["1", "2", "3"]
+  example: "1"
+  x-enum-varnames: [身份证, 护照, 港澳通行证]
+
+OrderStatusEnum:
+  type: integer
+  description: 订单状态
+  enum: [0, 1, 2, 3]
+  example: 2
+  x-enum-varnames: [已取消, 待支付, 已支付, 已取号]
+
+AuthStatusEnum:
+  type: integer
+  description: 实名认证状态
+  enum: [0, 1, 2]
+  example: 2
+  x-enum-varnames: [未认证, 认证中, 已认证]
+
+SexEnum:
+  type: integer
+  description: 性别
+  enum: [0, 1, 2]
+  example: 1
+  x-enum-varnames: [未知, 男, 女]
+
+ScheduleStatusEnum:
+  type: integer
+  description: 排班状态
+  enum: [0, 1]
+  example: 1
+  x-enum-varnames: [无号, 有号]
+
+DoctorTitleEnum:
+  type: string
+  description: 医生职称
+  enum: [主任医师, 副主任医师, 主治医师]
+  example: "主任医师"
