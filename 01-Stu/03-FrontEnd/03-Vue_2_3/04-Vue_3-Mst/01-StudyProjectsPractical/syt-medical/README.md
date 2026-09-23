@@ -684,6 +684,113 @@ export default defineConfig(({ mode }) => {
 
 > 可彻底解决跨域问题
 
+```ts
+// 单条医院名称清单 数据类型
+export interface HospitalItem {
+  id: string;
+  hosname: string;
+  hoscode: string;
+  hostype: string;
+  provinceCode: string;
+  cityCode: string;
+  districtCode: string;
+  address: string;
+  logoData: string;
+  intro: string;
+  route: string;
+  status: number;
+  bookingRule: {
+    cycle: number;
+    releaseTime: string;
+    stopTime: string;
+    quitDay: number;
+    quitTime: string;
+    rule: string[];
+  };
+  hostypeString: string;
+  provinceString: string;
+  cityString: string;
+  districtString: string;
+}
+
+// 医院名称清单分页接口里 data 的结构
+export interface HospitalPageResponse {
+  totalElements: number;
+  content: HospitalItem[];
+  totalPages: number;
+  size: number;
+  number: number;
+}
+
+// 单条医院等级 数据类型
+export interface HospitalLevelItem {
+  id: number;
+  name: string;
+  value: string;
+  dictCode: string;
+  parentId: number;
+}
+
+// 医院等级 分页接口里 data 的结构
+export type HospitalLevelPageResponse = HospitalLevelItem[];
+
+// 医院区域 数据类型
+export interface HospitalRegionItem {
+  id: number;
+  name: string;
+  value: string;
+  dictCode: string;
+  parentId: number;
+}
+
+// 医院区域 分页接口里 data 的结构
+export type HospitalRegionPageResponse = HospitalRegionItem[];
+
+```
+
+## 常量定义
+
+常量数据以及后端网络请求常量会保存在`src/const`文件夹内。
+
+### 聚合定义
+
+在根目录下创建`index.ts`文件作为聚合文件，其他文件引入此文件即可：
+
+```ts
+// 导出 网络请求中 的参数变量
+export * from "./reqParams";
+
+// 导出 路由路径常量 的参数变量
+export * from "./router";
+```
+
+### 请求常量
+
+后端网络请求常量会保存在`src/const/reqParams/index.ts`文件内：
+
+```ts
+// 获取 医院等级 的参数
+export const hospitalLevelDictCode = "Hostype";
+
+// 当前城市 北京=110100
+export const provinceCode = 110100;
+```
+
+### 路由常量
+
+路由常量设定在此处，用于统一管理和维护，文件`src/const/router/index.ts`文件内：
+
+```ts
+// INDEX path 统一放在这里保存和管理
+export const INDEX_PATH = "/";
+
+// HOME path 统一放在这里保存和管理
+export const HOME_PATH = "/home";
+
+// HOSPITAL path 统一放在这里保存和管理
+export const HOSPITAL_PATH = "/hospital";
+```
+
 ## 标准框架
 
 ### 项目 框架
@@ -959,6 +1066,8 @@ added 34 packages in 12s
 
 ```ts
 import { createRouter, createWebHistory } from "vue-router";
+// 导入路由常量管理文件
+import { INDEX_PATH, HOME_PATH, HOSPITAL_PATH } from "@/const/index";
 
 // createRouter方法，用于创建路由器实例，可以管理多个路由
 export default createRouter({
@@ -967,16 +1076,16 @@ export default createRouter({
   // 管理路由
   routes: [
     {
-      path: "/home",
+      path: HOME_PATH,
       component: () => import("@/pages/home/index.vue")
     },
     {
-      path: "/hospital",
+      path: HOSPITAL_PATH,
       component: () => import("@/pages/hospital/index.vue")
     },
     {
-      path: "/",
-      redirect: "/home"
+      path: INDEX_PATH,
+      redirect: HOME_PATH
     }
   ],
   // 管理滚动行为 保证每次跳转，滚动条都回到最初的上面位置
@@ -989,7 +1098,7 @@ export default createRouter({
 });
 ```
 
-> 为了保证每次都会跳会最上部，增加了滚动跳行为，确保每次都能回到最初的上面的位置
+> 1. 为了保证每次都会跳会最上部，增加了滚动跳行为，确保每次都能回到最初的上面的位置
 
 ##### 全局注册
 
@@ -1677,9 +1786,7 @@ export const reqHospitalRegionList = async (dictCode: number) => {
 
 在`src/types`下创建类型推导`hospital.ts`和聚合函数`index.ts`文件，用于所有`ts`文件的类型推导模板，可以很快速的实现导入及使用。
 
-### 核心代码
-
-#### 聚合函数
+### 聚合函数
 
 `src/types/index.ts`文件中通过聚合导出所需的类型，实现对类型的统一管理：
 
@@ -1688,7 +1795,7 @@ export * from "./hospital";
 // 以后新增其他类型直接在这里导出，比如字典、登录用户
 ```
 
-#### 基本类型
+### 基本类型
 
 后端返回的数据结构基本保持一致，在此基础上，封装一个标准类型，`src/types/api.ts`采用泛型：
 
@@ -1702,9 +1809,11 @@ export interface ResponseData<T> {
 }
 ```
 
-#### 已有医院
+### 医院组件
 
-从后端获取的已有医院数据`src/types/hospital/index.ts`，实际需要的部分进行类型定义：
+#### 医院清单
+
+从后端获取的已有医院清单`src/types/hospital/index.ts`，实际需要的部分进行类型定义：
 
 ```ts
 // 单条医院名称清单 数据类型
@@ -1743,7 +1852,13 @@ export interface HospitalPageResponse {
   size: number;
   number: number;
 }
+```
 
+#### 医院等级
+
+从后端获取的已有医院等级`src/types/hospital/index.ts`，实际需要的部分进行类型定义：
+
+```ts
 // 单条医院等级 数据类型
 export interface HospitalLevelItem {
   id: number;
@@ -1755,7 +1870,13 @@ export interface HospitalLevelItem {
 
 // 医院等级 分页接口里 data 的结构
 export type HospitalLevelPageResponse = HospitalLevelItem[];
+```
 
+#### 医院地区
+
+从后端获取的已有医院地区`src/types/hospital/index.ts`，实际需要的部分进行类型定义：
+
+```ts
 // 医院区域 数据类型
 export interface HospitalRegionItem {
   id: number;
@@ -1767,23 +1888,22 @@ export interface HospitalRegionItem {
 
 // 医院区域 分页接口里 data 的结构
 export type HospitalRegionPageResponse = HospitalRegionItem[];
-
 ```
 
-## 常量定义
+#### 搜索医院
 
-常量数据以及后端网络请求常量会保存在`src/const`文件夹内。
-
-### 请求常量
-
-后端网络请求常量会保存在`src/const/reqParams/index.ts`文件内：
+从后端获取 搜索医院名称 `src/types/hospital/index.ts`，实际需要的部分进行类型定义：
 
 ```ts
-// 获取 医院等级 的参数
-export const hospitalLevelDictCode = "Hostype";
+// 搜索 医院关键字 对应医院名称
+export interface SearchHospitalKeyWord {
+  id: string;
+  hosname: string;
+  hoscode: string;
+}
 
-// 当前城市 北京=110100
-export const provinceCode = 110100;
+// 搜索 医院关键字 接口里 data 的结构
+export type SearchHospitalKeyWordPageResponse = SearchHospitalKeyWord[];
 ```
 
 ## 动态组件
@@ -2662,6 +2782,231 @@ const handleChangeRegion = (newRegion: string) => {
 > 通过`emit`实现数据的子传父，并完成数据获取的重新渲染
 
 #### 智能搜索
+
+##### API 接口
+
+`src/api/home/index.ts`创建API接口的网络请求地址：
+
+```ts
+// 引入网络请求接口
+import request from "@/utils/request";
+// 通过 type 引入类型接口
+import type {
+  ......
+  SearchHospitalKeyWordPageResponse
+} from "@/types/index";
+
+// 通过枚举管理首页 home 模块的接口地址
+enum API {
+  ......
+// 获取搜索框关键字 医院名查询 的接口地址
+  SEARCH_HOSPITAL_KEYWORD_URL = "/hosp/hospital/findByHosname/"
+}
+
+// 搜索医院名称关键字
+export const reqSearchHospitalKeyWord = async (hosname: string) => {
+  const result = await request.get(API.SEARCH_HOSPITAL_KEYWORD_URL + `${hosname}`);
+  return result.data as ResponseData<SearchHospitalKeyWordPageResponse>;
+};
+```
+
+##### 改造组件
+
+将通过`elment-plus`实现医院名称搜索功能：
+
+```vue
+<template>
+  <div class="page-home-search">
+    <div class="search-bar">
+      <el-autocomplete
+        v-model="searchKeyWord"
+        :fetch-suggestions="keyWordSearch"
+        :trigger-on-focus="false"
+        clearable
+        class="search-form"
+        placeholder="请输入医院名称"
+        size="large"
+      />
+      <el-button type="primary" :icon="Search" size="large">搜索</el-button>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+......
+// 导入类型定义
+import type { ResponseData } from "@/types/api";
+import type { SearchHospitalKeyWordPageResponse } from "@/types/index";
+// 导入网络请求函数
+import { reqSearchHospitalKeyWord } from "@/api/home/index";
+// 用户输入的关键词
+const searchKeyWord = ref<string>("");
+
+// 用户输入关键字后进行后台数据获取
+const keyWordSearch = async (keyWord: string, cb: any) => {
+  // console.log("keyWord", keyWord);
+  // 通过用户输入关键字后进行后台数据获取
+  const result = (await reqSearchHospitalKeyWord(keyWord)) as ResponseData<SearchHospitalKeyWordPageResponse>;
+  // 当返回数据的 code 为200时
+  if (result.code == 200) {
+    let showData = result.data.map((item) => {
+      return {
+        value: item.hosname,
+        hoscode: item.hoscode
+      };
+    });
+    // 搜索框下选内容的回调函数
+    cb(showData);
+  }
+};
+</script>
+```
+
+> 1. `hoscode`用于点击后进行跳转搜索使用的
+> 2. 不含点击路由跳转功能
+
+#### 路由跳转
+
+##### 实现逻辑
+
+###### 引入路由
+
+参考如下实现方式，引入`vue`的路由管理模块：
+
+```ts
+// 导入路由并创建路由
+import { useRouter } from "vue-router";
+const router = useRouter();
+```
+
+###### 引入常量
+
+本案例的路由常量统一录入并管理，需要在需要的`vue组件`中引入相关的常量：
+
+```ts
+// 导入路由常量管理文件
+import { HOSPITAL_PATH } from "@/const/index";
+```
+
+###### 跳转逻辑
+
+通过路由自带的方法`push`实现：
+
+```ts
+// 通过路由跳转到医院详情页面 query: { hoscode }
+  router.push({ path: HOSPITAL_PATH });
+```
+
+> 本案例采用对象方式实现调整，可实现路径`push`、参数`query`的设定
+
+##### 检索跳转
+
+###### 基本功能
+
+此功能即为在搜索框只能搜索出模糊结果后，通过点击搜索结果进行跳转，目前只跳转到对应医院详情页面，待医院详情页面开发完毕后实现完整功能：
+
+```vue
+<template>
+  <div class="page-home-search">
+    <div class="search-bar">
+      <el-autocomplete
+        v-model="searchKeyWord"
+        :fetch-suggestions="keyWordSearch"
+        :trigger-on-focus="false"
+        clearable
+        class="search-form"
+        placeholder="请输入医院名称"
+        @select="handleSelect"
+        size="large"
+      />
+      <el-button type="primary" :icon="Search" size="large">搜索</el-button>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+......
+// 导入路由并创建路由
+import { useRouter } from "vue-router";
+const router = useRouter();
+// 导入路由常量管理文件
+import { HOSPITAL_PATH } from "@/const/index";
+
+// 当用户选中搜索框下选项内容时被触发
+const handleSelect = (hoscode: string) => {
+  // 通过路由跳转到医院详情页面 query: { hoscode }
+  router.push({ path: HOSPITAL_PATH });
+};
+</script>
+```
+
+##### 卡片跳转
+
+###### 基本功能
+
+此功能通过点击对应卡片进行跳转，目前只跳转到对应医院详情页面，待医院详情页面开发完毕后实现完整功能：
+
+```vue
+<template>
+  <div class="page-home-card">
+    <!-- 医院卡片 -->
+    <el-card shadow="hover" @click="handleSelect(hospitalItem.hoscode)"></el-card>
+   ......
+  </div>
+</template>
+
+<script setup lang="ts">
+......
+// 导入路由并创建路由
+import { useRouter } from "vue-router";
+const router = useRouter();
+// 导入路由常量管理文件
+import { HOSPITAL_PATH } from "@/const/index";
+// 当用户点击时被触发
+const handleSelect = (hoscode: string) => {
+  // 通过路由跳转到医院详情页面
+  router.push({ path: HOSPITAL_PATH });
+};
+</script>
+```
+
+##### 头部跳转
+
+此功能通过点击对应顶部的文字进行跳转，已经实现点击跳转到`home组件`的主页：
+
+```vue
+<template>
+  <div class="page-top">
+    <div class="content">
+      <div class="left">
+        <img src="../../assets/images/logo.png" alt="logo" />
+        <p @click="handleSelect">尚医通 - 预约挂号统一平台</p>
+      </div>
+      <div class="right">
+        <p>帮助中心</p>
+        <p>注册/登录</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 导入路由并创建路由
+import { useRouter } from "vue-router";
+const router = useRouter();
+// 导入路由常量管理文件
+import { HOME_PATH } from "@/const/index";
+// 当用户点击时被触发
+const handleSelect = () => {
+  // 通过路由跳转到主页
+  router.push({ path: HOME_PATH });
+};
+</script>
+```
+
+
+
+
 
 
 

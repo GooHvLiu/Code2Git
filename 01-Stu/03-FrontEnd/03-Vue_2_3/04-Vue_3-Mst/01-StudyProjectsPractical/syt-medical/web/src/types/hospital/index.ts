@@ -58,3 +58,13 @@ export interface HospitalRegionItem {
 
 // 医院区域 分页接口里 data 的结构
 export type HospitalRegionPageResponse = HospitalRegionItem[];
+
+// 搜索 医院关键字 对应医院名称
+export interface SearchHospitalKeyWord {
+  id: string;
+  hosname: string;
+  hoscode: string;
+}
+
+// 搜索 医院关键字 接口里 data 的结构
+export type SearchHospitalKeyWordPageResponse = SearchHospitalKeyWord[];

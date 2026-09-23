@@ -3,7 +3,7 @@
     <div class="content">
       <div class="left">
         <img src="../../assets/images/logo.png" alt="logo" />
-        <p>尚医通 - 预约挂号统一平台</p>
+        <p @click="handleSelect">尚医通 - 预约挂号统一平台</p>
       </div>
       <div class="right">
         <p>帮助中心</p>
@@ -15,6 +15,11 @@
 
 <script setup lang="ts">
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
+// 导入路由并创建路由
+import { useRouter } from "vue-router";
+const router = useRouter();
+// 导入路由常量管理文件
+import { HOME_PATH } from "@/const/index";
 
 // Props定义示例
 // const props = defineProps<{}>()
@@ -32,6 +37,12 @@
 
 // 生命周期
 // onMounted(() => {})
+
+// 当用户点击时被触发
+const handleSelect = () => {
+  // 通过路由跳转到主页
+  router.push({ path: HOME_PATH });
+};
 </script>
 
 <style scoped lang="less">

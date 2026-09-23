@@ -1,7 +1,7 @@
 <template>
   <div class="page-home-card">
     <!-- 医院卡片 -->
-    <el-card shadow="hover">
+    <el-card shadow="hover" @click="handleSelect(hospitalItem.hoscode)">
       <div class="content">
         <div class="left">
           <div class="top">{{ hospitalItem.hosname }}</div>
@@ -66,6 +66,11 @@ defineOptions({ name: "Card" });
 // 通过 type 引入类型接口
 import type { HospitalItem } from "@/types/index";
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
+// 导入路由并创建路由
+import { useRouter } from "vue-router";
+const router = useRouter();
+// 导入路由常量管理文件
+import { HOSPITAL_PATH } from "@/const/index";
 
 // Props定义示例
 const props = defineProps<{
@@ -86,6 +91,12 @@ const props = defineProps<{
 
 // 生命周期
 // onMounted(() => {})
+
+// 当用户点击时被触发
+const handleSelect = (hoscode: string) => {
+  // 通过路由跳转到医院详情页面
+  router.push({ path: HOSPITAL_PATH });
+};
 </script>
 
 <style scoped lang="less">
