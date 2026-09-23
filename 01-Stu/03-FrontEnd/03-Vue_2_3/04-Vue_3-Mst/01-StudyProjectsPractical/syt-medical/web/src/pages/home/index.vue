@@ -4,8 +4,9 @@
     <Carousel />
     <!-- 搜索框+搜索按钮 组件 -->
     <Search />
-    <!-- 医院等级 + 医院地区 + 医院卡片 + 分页器 组件 -->
+    <!-- 医院等级 + 医院地区 + 医院卡片 + 分页器 组件 + 左侧和右侧 -->
     <el-row>
+      <!-- 左侧部分内容 -->
       <el-col :span="20">
         <!-- 医院等级 组件 -->
         <Level @change-level="handleChangeLevel" />
@@ -24,7 +25,10 @@
           @size-change="handleSizeChange"
         />
       </el-col>
-      <el-col :span="4"> 第2列 </el-col>
+      <!-- 右侧部分内容 -->
+      <el-col :span="4">
+        <QuickLink />
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -47,6 +51,8 @@ import Regin from "@/pages/home/region/index.vue";
 import Card from "@/pages/home/card/index.vue";
 // 导入分页器组件
 import Pagination from "@/pages/home/pagination/index.vue";
+// 导入右侧快速链接组件
+import QuickLink from "@/pages/home/quickLink/index.vue";
 // 导入 网络请求 API
 import { reqHospitalNameList } from "@/api/home";
 // 导入 onmounted()生命周期钩子
