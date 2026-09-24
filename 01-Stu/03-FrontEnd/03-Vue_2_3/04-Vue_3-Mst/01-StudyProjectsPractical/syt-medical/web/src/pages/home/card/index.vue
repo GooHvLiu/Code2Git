@@ -95,7 +95,8 @@ const props = defineProps<{
 // 当用户点击时被触发
 const handleSelect = (hoscode: string) => {
   // 通过路由跳转到医院详情页面
-  router.push({ path: HOSPITAL.PATH });
+  router.push({ path: HOSPITAL.PATH + "/" + HOSPITAL.CHILDREN.DETAL_PATH, query: { hoscode: hoscode } });
+  // console.log("点击的医院代码为：", hoscode);
 };
 </script>
 

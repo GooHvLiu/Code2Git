@@ -16,8 +16,15 @@
 defineOptions({ name: "Hospital" });
 // 引入 菜单 子组件
 import Menu from "./menu/index.vue";
+// 引入路由和路由器
+import { useRoute } from "vue-router";
+const route = useRoute();
 
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { onMounted } from "vue";
+// 引入 Pinia Store
+import { useHospitalDetailStore } from "@/stores/index.ts";
+const useStore = useHospitalDetailStore();
 
 // Props定义示例
 // const props = defineProps<{}>()
@@ -34,7 +41,12 @@ import Menu from "./menu/index.vue";
 // watch(count, (newVal) => {})
 
 // 生命周期
-// onMounted(() => {})
+onMounted(() => {
+  // 获取当前网址中的 query 中的  hoscode 参数
+  const hoscode = route.query.hoscode as string;
+  // 页面挂载后即可获取 Store 数据
+  useStore.getHospitalDetailInfo(hoscode);
+});
 </script>
 
 <style scoped lang="less">

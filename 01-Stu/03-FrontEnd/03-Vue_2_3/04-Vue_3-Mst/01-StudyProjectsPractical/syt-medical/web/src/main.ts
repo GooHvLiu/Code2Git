@@ -9,6 +9,8 @@ import HospitalTop from "@/components/HospitalTop/index.vue";
 import HospitalBottom from "@/components/HospitalBottom/index.vue";
 // 引入路由组件
 import router from "./router/index.ts";
+// 引入 pinia 状态管理工具
+import { createPinia } from "pinia";
 // 引入 element-plus 组件库
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
@@ -18,6 +20,8 @@ import zhCn from "element-plus/es/locale/lang/zh-cn";
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 // 利用 createApp 方法创建应用实例
 const app = createApp(App);
+// 将创建的 createrPinia 进行挂载
+app.use(createPinia());
 // 将 HospitalTop 和 HospitalBottom 注册为全局组件
 app.component("HospitalTop", HospitalTop);
 app.component("HospitalBottom", HospitalBottom);

@@ -2,14 +2,14 @@
 
 ## 技术选型
 
-- Vue3 + 组合式API
-- Vite 构建工具
-- TypeScript
-- vue-router
-- Pinia状态管理
-- element-plus
-- Axios 网络交互
-- 后端：node.js+express+虚拟数据
+- `Vue3 `+ 组合式`API`
+- `Vite` 构建工具
+- `TypeScript`
+- `vue-router`
+- `Pinia` 状态管理
+- `element-plus`
+- `Axios`网络交互
+- 后端：`node.js + express`+`Open API` + 虚拟数据
 
 ## 前置准备
 
@@ -65,7 +65,7 @@ added 48 packages in 9s
 
 #### TS / Vue
 
-**缺少 `vite-env.d.ts`** — 没有它，TS 不认识 `.vue` 模块，创建`vite-env.d.ts`:
+缺少 `vite-env.d.ts` — 没有它，TS 不认识 `.vue` 模块，创建`vite-env.d.ts`:
 
 ```ts
 /// <reference types="vite/client" />
@@ -180,7 +180,7 @@ export default defineConfig({
 
 #### 智能提示
 
-找到`tsconfig.app.json`配置文件，找到配置项`compilerOptions`添加配置，这一步的作用是让 IDE 可以对路径进行智能提示：
+找到`tsconfig.app.json`配置文件，找到配置项`compilerOptions`添加配置，这一步的作用是让` IDE `可以对路径进行智能提示：
 
 ```json
 "paths": {
@@ -196,8 +196,8 @@ export default defineConfig({
 
 #### 技术路线
 
-* node.js
-* express
+* `node.js`
+* `express`
 
 #### 项目结构
 
@@ -231,7 +231,7 @@ cd server
 npm run dev
 ```
 
-> 服务跑在 **http://localhost:8201**，前端 Vite 代理我已经帮你配好了（`web/vite.config.ts`）
+> 服务跑在 `http://localhost:8201`，前端 `Vite` 代理我已经帮你配好了（`web/vite.config.ts`）
 
 #### 测试账号
 
@@ -2085,9 +2085,156 @@ defineOptions({ name: "SearchCancel" });
 
 > 未进行内容创建，待后续补充
 
+##### 集成01段
+
+集成阶段，以上单模块集成到主程序中，即在`src/pages/hospital`下引用`router-view`并集成`Pinia`状态管理实现方法：
+
+```vue
+<template>
+  <div class="page-wrap">
+    <!-- 左侧为菜单栏 -->
+    <div class="left-menu">
+      <Menu />
+    </div>
+    <!-- 右侧为内容展示区 -->
+    <div class="right-content">
+      <router-view></router-view>
+    </div>
+  </div>
+</template>
+<script setup lang="ts">
+// 定义组件名称
+defineOptions({ name: "Hospital" });
+// 引入 菜单 子组件
+import Menu from "./menu/index.vue";
+// 引入路由和路由器
+import { useRoute } from "vue-router";
+const route = useRoute();
+// import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { onMounted } from "vue";
+// 引入 Pinia Store
+import { useHospitalDetailStore } from "@/stores/index.ts";
+const useStore = useHospitalDetailStore();
+// 生命周期
+onMounted(() => {
+  // 获取当前网址中的 query 中的  hoscode 参数
+  const hoscode = route.query.hoscode as string;
+  // 页面挂载后即可获取 Store 数据
+  useStore.getHospitalDetailInfo(hoscode);
+});
+</script>
+
+<style scoped lang="less">
+.page-wrap {
+  display: grid;
+  grid-template-columns: 1.5fr 8.5fr;
+  .left-menu {
+  }
+  .right-content {
+    background-color: orange;
+  }
+}
+</style>
+```
 
 
 
+## 状态管理
+
+本案例状态管理采用`pinia`状态管理工具，搭配`Vue3.x`使用。
+
+### 前置准备
+
+#### 安装依赖
+
+通过如下命令安装`pinia`工具依赖包：
+
+```bash
+PS F:\CodingMan\Code2Git\01-Stu\03-FrontEnd\03-Vue_2_3\04-Vue_3-Mst\01-StudyProjectsPractical\syt-medical\web> npm i pinia
+
+added 1 package in 861ms
+
+35 packages are looking for funding
+  run `npm fund` for details
+```
+
+#### 注册使用
+
+在`src/main.ts`内进行注册与挂载：
+
+```ts
+......
+// 引入 pinia 状态管理工具
+import { createPinia } from "pinia";
+......
+// 将创建的 createrPinia 进行挂载
+app.use(createPinia());
+......
+```
+
+#### 聚合导出
+
+`index.ts`用于聚合导出，用于对模组自身方法实现导出：
+
+```ts
+// 聚合导出文件，每个模块统一导出
+// 医院详情 下的聚合导出
+export * from "./modules/hospitalDetail";		
+```
+
+> 当前仅针对医院详情的方法导出
+
+#### 目录架构
+
+##### 初始架构
+
+`src`路径下创建`stores/modules`以及`stores/index.ts`，其中`stores/index.ts`用于聚合导出文件，`stores/modules`下创建各类模块的状态管理文件，用于数据进行状态存储，其数据结构树状图如下所示：
+
+```text
+📦stores
+ ┣ 📂modules
+ ┗ 📜index.ts
+```
+
+> 当前路径仅应用于初始结构搭建
+
+##### 医院详情
+
+`src/modules/hospitalDetail.ts`的详细实现方式如下：
+
+```ts
+// 本文件是 医院详情 / hospitalDetail 用于状态管理的文件
+import { defineStore } from "pinia";
+import { ref } from "vue";
+// 引入 类型定义
+import type { ResponseData } from "@/types/api";
+import type { HospitalDetailItem } from "@/types/index";
+// 引入网络请求标准API
+import { reqHospitalDetailInfo } from "@/api/hospital/index";
+
+// 创建医院详情状态存储
+export const useHospitalDetailStore = defineStore("HospitalDetail", () => {
+  // =============== State
+  // 用于存储医院详细数据的 State 变量 hospitalDetailInfo
+  let hospitalDetailInfo = ref<HospitalDetailItem | null>(null);
+
+  // =============== Actions
+  // 通过网络请求获取医院详细数据的 Actions 方法 getHospitalDetailInfo
+  const getHospitalDetailInfo = async (hoscode: string) => {
+    // 将获取的结果保存
+    const result = (await reqHospitalDetailInfo(hoscode)) as ResponseData<HospitalDetailItem>;
+    // 获取的结果数据 code 代码 ==200时再处理
+    if (result.code == 200) {
+      // 将实际获取数据保存到 State 变量中
+      hospitalDetailInfo.value = result.data;
+      console.log("Pinia获取到的医院详情数据：", hospitalDetailInfo.value);
+    }
+  };
+  // =============== Getters
+  return { hospitalDetailInfo, getHospitalDetailInfo };
+});
+
+```
 
 ## 网络请求
 
@@ -2119,7 +2266,7 @@ onMounted(() => {
 
 统一创建请求路径管理文件`src/api`，将需要的请求路径纳入其中，在其他项目文件中进行引入，后期若需要修改访问路径，请通过单一文件处理即可。
 
-#### Home组件
+#### 主页组件
 
 ##### 基础封装
 
@@ -2213,6 +2360,35 @@ export const reqHospitalRegionList = async (dictCode: number) => {
 
 > 此时处于医院等级、地区智能筛选部分，未涉及搜索功能
 
+#### 医院组件
+
+##### 医院详情
+
+`src/api/hospital/index.ts`文件封装了关于`hospital`组件的数据请求，目前支持医院详情数据的请求：
+
+```ts
+// 引入网络请求接口
+import request from "@/utils/request";
+
+// 通过 type 引入类型接口定义
+import type { ResponseData } from "@/types/api";
+import type { HospitalDetailItem } from "@/types/index";
+
+// 通过枚举管理医院详情 HospitalDetail 模块的接口地址
+enum API {
+  // 获取 医院详情 的接口地址
+  HOSPITAL_DETAIL_URL = "hosp/hospital/findHospitalDetail/"
+}
+
+// 医院详情 网络请求函数
+export const reqHospitalDetailInfo = async (hoscode: string) => {
+  const result = await request.get(API.HOSPITAL_DETAIL_URL + hoscode);
+  return result.data as ResponseData<HospitalDetailItem>;
+};
+```
+
+
+
 ## 类型推导
 
 ### 基本定义
@@ -2242,11 +2418,11 @@ export interface ResponseData<T> {
 }
 ```
 
-### 医院组件
+### 主页组件
 
 #### 医院清单
 
-从后端获取的已有医院清单`src/types/hospital/index.ts`，实际需要的部分进行类型定义：
+从后端获取的已有医院清单`src/types/hospitalList/index.ts`，实际需要的部分进行类型定义：
 
 ```ts
 // 单条医院名称清单 数据类型
@@ -2289,7 +2465,7 @@ export interface HospitalPageResponse {
 
 #### 医院等级
 
-从后端获取的已有医院等级`src/types/hospital/index.ts`，实际需要的部分进行类型定义：
+从后端获取的已有医院等级`src/types/hospitalList/index.ts`，实际需要的部分进行类型定义：
 
 ```ts
 // 单条医院等级 数据类型
@@ -2307,7 +2483,7 @@ export type HospitalLevelPageResponse = HospitalLevelItem[];
 
 #### 医院地区
 
-从后端获取的已有医院地区`src/types/hospital/index.ts`，实际需要的部分进行类型定义：
+从后端获取的已有医院地区`src/types/hospitalList/index.ts`，实际需要的部分进行类型定义：
 
 ```ts
 // 医院区域 数据类型
@@ -2325,7 +2501,7 @@ export type HospitalRegionPageResponse = HospitalRegionItem[];
 
 #### 搜索医院
 
-从后端获取 搜索医院名称 `src/types/hospital/index.ts`，实际需要的部分进行类型定义：
+从后端获取 搜索医院名称 `src/types/hospitalList/index.ts`，实际需要的部分进行类型定义：
 
 ```ts
 // 搜索 医院关键字 对应医院名称
@@ -2339,6 +2515,45 @@ export interface SearchHospitalKeyWord {
 export type SearchHospitalKeyWordPageResponse = SearchHospitalKeyWord[];
 ```
 
+### 医院组件
+
+#### 医院详情
+
+从后端获取的已有医院详情`src/types/hospitalDetail/index.ts`，实际需要的部分进行类型定义：
+
+```ts
+// 单条医院详情 / bookingRule 的数据类型
+export interface BookingRule {
+  cycle: number;
+  releaseTime: string;
+  stopTime: string;
+  quitDay: number;
+  quitTime: string;
+  rule: string[];
+}
+// 单条医院详情 的数据类型
+export interface HospitalDetailItem {
+  id: string;
+  hosname: string;
+  hoscode: string;
+  hostype: string;
+  provinceCode: string;
+  cityCode: string;
+  districtCode: string;
+  address: string;
+  logoData: string;
+  intro: string;
+  route: string;
+  status: number;
+  bookingRule: BookingRule;
+  hostypeString: string;
+  provinceString: string;
+  cityString: string;
+  districtString: string;
+}
+
+```
+
 ## 动态组件
 
 在静态组件、网络请求均已具备的情况下，可以将请求的数据与页面进行关联，实现动态数据的效果展示与互动：
@@ -2348,7 +2563,7 @@ export type SearchHospitalKeyWordPageResponse = SearchHospitalKeyWord[];
 * `home`组件在`mounted`时、点击分页器时进行数据请求操作；
 * 通过父传子`props`和子传父`emits`实现数据交互，请注意，`props`中的数据在子组件中无法进行修改，如需调整数据，需要通过`watch`或`computed`实现；
 
-### Home组件
+### 主页组件
 
 #### 医院组件
 
@@ -2999,7 +3214,7 @@ const changeActive = (selectedItem: string) => {
 
 已在网络请求-路径管理-Home组件-动态筛选中更新最新代码，查询参数具有默认值，可自由搭配查询参数，再次不再重复介绍。
 
-##### Home组件
+##### 主页组件
 
 ###### 等级组件
 
@@ -3373,6 +3588,23 @@ const handleSelect = (hoscode: string) => {
 </script>
 ```
 
+###### 跳转功能
+
+经过使用`Pinia`状态管理功能后，可以实现跳转到医院详情页面：
+
+```ts
+......
+// 当用户选中搜索框下选项内容时被触发
+const handleSelect = (item: Record<string, any>) => {
+  // 通过路由跳转到医院详情页面 query: { hoscode }
+  // console.log("点击的医院代码为：", item);
+  router.push({ path: HOSPITAL.PATH + "/" + HOSPITAL.CHILDREN.DETAL_PATH, query: { hoscode: item.hoscode } });
+};
+......			
+```
+
+> 通过传入`query`实现跳转到医院详情功能
+
 ##### 卡片跳转
 
 ###### 基本功能
@@ -3402,6 +3634,23 @@ const handleSelect = (hoscode: string) => {
 };
 </script>
 ```
+
+###### 跳转功能
+
+经过使用`Pinia`状态管理功能后，可以实现跳转到医院详情页面：
+
+```ts
+......
+// 当用户点击时被触发
+const handleSelect = (hoscode: string) => {
+  // 通过路由跳转到医院详情页面
+  router.push({ path: HOSPITAL.PATH + "/" + HOSPITAL.CHILDREN.DETAL_PATH, query: { hoscode: hoscode } });
+  // console.log("点击的医院代码为：", hoscode);
+};
+......			
+```
+
+> 通过传入`query`实现跳转到医院详情功能
 
 ##### 头部跳转
 

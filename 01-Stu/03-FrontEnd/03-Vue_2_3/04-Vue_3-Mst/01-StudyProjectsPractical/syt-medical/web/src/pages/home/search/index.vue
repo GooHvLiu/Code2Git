@@ -70,9 +70,10 @@ const keyWordSearch = async (keyWord: string, cb: any) => {
   }
 };
 // 当用户选中搜索框下选项内容时被触发
-const handleSelect = (hoscode: string) => {
+const handleSelect = (item: Record<string, any>) => {
   // 通过路由跳转到医院详情页面 query: { hoscode }
-  router.push({ path: HOSPITAL.PATH });
+  // console.log("点击的医院代码为：", item);
+  router.push({ path: HOSPITAL.PATH + "/" + HOSPITAL.CHILDREN.DETAL_PATH, query: { hoscode: item.hoscode } });
 };
 </script>
 
