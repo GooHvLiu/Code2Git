@@ -3,12 +3,7 @@
   <div class="context-menu-mask" @click.self="emit('close')">
     <div class="context-menu" :style="menuStyle">
       <ul class="menu-item-group">
-        <li
-          v-for="item in filterMenu"
-          :key="item.id"
-          class="menu-item"
-          @click="handleMenuClick(item.id)"
-        >
+        <li v-for="item in filterMenu" :key="item.id" class="menu-item" @click="handleMenuClick(item.id)">
           <el-icon class="menu-icon"><component :is="item.icon" /></el-icon>
           <span>{{ item.text }}</span>
         </li>

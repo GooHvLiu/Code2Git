@@ -45,7 +45,7 @@ export function useForm<T extends Record<string, unknown> = Record<string, unkno
       console.warn(`[useForm] 未找到 ref="${formRefName}" 的表单`)
       return true
     }
-    return new Promise<boolean>((resolve) => {
+    return new Promise<boolean>(resolve => {
       formRef.value!.validate((valid: boolean) => {
         resolve(valid)
       })
@@ -54,7 +54,7 @@ export function useForm<T extends Record<string, unknown> = Record<string, unkno
 
   async function validateField(fields?: string | string[]): Promise<boolean> {
     if (!formRef.value) return true
-    return new Promise<boolean>((resolve) => {
+    return new Promise<boolean>(resolve => {
       formRef.value!.validateField(fields, (error?: unknown) => {
         resolve(!error)
       })

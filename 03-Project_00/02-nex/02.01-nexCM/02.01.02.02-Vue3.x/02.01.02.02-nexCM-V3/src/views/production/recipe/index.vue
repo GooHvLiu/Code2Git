@@ -7,11 +7,7 @@
         <p class="page-desc">{{ t('production.recipe.desc') }}</p>
       </div>
       <div class="header-right">
-        <el-dropdown
-          v-permission="'production:recipe:download'"
-          trigger="click"
-          @command="handleDownloadAll"
-        >
+        <el-dropdown v-permission="'production:recipe:download'" trigger="click" @command="handleDownloadAll">
           <el-button type="primary" :icon="Download">
             {{ t('production.recipe.download') }}
             <el-icon class="el-icon--right"><ArrowDown /></el-icon>
@@ -44,11 +40,17 @@
             </el-tag>
           </div>
           <div class="card-info">
-            <span class="info-item"><el-icon><Goods /></el-icon> {{ recipe.productType }}</span>
-            <span class="info-item"><el-icon><Mug /></el-icon> {{ recipe.fillVolume }}ml</span>
+            <span class="info-item"
+              ><el-icon><Goods /></el-icon> {{ recipe.productType }}</span
+            >
+            <span class="info-item"
+              ><el-icon><Mug /></el-icon> {{ recipe.fillVolume }}ml</span
+            >
           </div>
           <div class="card-stats">
-            <span class="stat"><el-icon><View /></el-icon> {{ recipe.usageCount }}</span>
+            <span class="stat"
+              ><el-icon><View /></el-icon> {{ recipe.usageCount }}</span
+            >
             <span class="stat" :class="{ danger: recipe.faultRate > 1 }">
               <el-icon><Warning /></el-icon> {{ recipe.faultRate }}%
             </span>
@@ -66,7 +68,9 @@
       <!-- 中间视觉分隔条 -->
       <div class="recipe-divider">
         <div class="divider-line"></div>
-        <div class="divider-badge"><el-icon><DArrowRight /></el-icon></div>
+        <div class="divider-badge">
+          <el-icon><DArrowRight /></el-icon>
+        </div>
         <div class="divider-line"></div>
       </div>
 
@@ -79,9 +83,7 @@
           </div>
           <div class="detail-actions">
             <el-tag size="small" :type="currentRecipe.isActive ? 'success' : 'info'">
-              {{ currentRecipe.isActive
-                ? t('production.recipe.page.inUse')
-                : t('production.recipe.page.notInUse') }}
+              {{ currentRecipe.isActive ? t('production.recipe.page.inUse') : t('production.recipe.page.notInUse') }}
             </el-tag>
             <el-dropdown
               v-permission="'production:recipe:download'"
@@ -179,7 +181,9 @@
             </div>
             <div class="info-cell">
               <span class="label">{{ t('production.recipe.page.suckBackSpeed') }}</span>
-              <span class="value">{{ currentRecipe.suckBackSpeed }} {{ t('production.recipe.units.bottlePerHour') }}</span>
+              <span class="value"
+                >{{ currentRecipe.suckBackSpeed }} {{ t('production.recipe.units.bottlePerHour') }}</span
+              >
             </div>
           </div>
         </div>
@@ -191,7 +195,9 @@
           </div>
           <div class="analysis-grid">
             <div class="analysis-card">
-              <div class="analysis-icon blue"><el-icon><View /></el-icon></div>
+              <div class="analysis-icon blue">
+                <el-icon><View /></el-icon>
+              </div>
               <div class="analysis-content">
                 <div class="analysis-value">{{ currentRecipe.usageCount }}</div>
                 <div class="analysis-label">{{ t('production.recipe.page.usageCount') }}</div>
@@ -207,14 +213,18 @@
               </div>
             </div>
             <div class="analysis-card">
-              <div class="analysis-icon green"><el-icon><CircleCheckFilled /></el-icon></div>
+              <div class="analysis-icon green">
+                <el-icon><CircleCheckFilled /></el-icon>
+              </div>
               <div class="analysis-content">
                 <div class="analysis-value">{{ currentRecipe.avgQualifiedRate }}%</div>
                 <div class="analysis-label">{{ t('production.recipe.page.avgQualifiedRate') }}</div>
               </div>
             </div>
             <div class="analysis-card">
-              <div class="analysis-icon orange"><el-icon><Clock /></el-icon></div>
+              <div class="analysis-icon orange">
+                <el-icon><Clock /></el-icon>
+              </div>
               <div class="analysis-content">
                 <div class="analysis-value-sm">{{ currentRecipe.lastUsedTime }}</div>
                 <div class="analysis-label">{{ t('production.recipe.page.lastUsed') }}</div>
@@ -265,12 +275,10 @@ const { t } = useI18n()
 const userStore = useUserStore()
 const { recipes, getRecipeById } = useProdRecipe()
 
-const selectedId = ref<number>(recipes.value.find((r) => r.isActive)?.id ?? recipes.value[0]?.id ?? 1)
+const selectedId = ref<number>(recipes.value.find(r => r.isActive)?.id ?? recipes.value[0]?.id ?? 1)
 
 const recipeList = computed<Recipe[]>(() => recipes.value)
-const currentRecipe = computed<Recipe | undefined>(
-  () => getRecipeById(selectedId.value) || recipes.value[0]
-)
+const currentRecipe = computed<Recipe | undefined>(() => getRecipeById(selectedId.value) || recipes.value[0])
 
 interface ParamVM {
   label: string
@@ -334,9 +342,7 @@ const exporter = computed<string>(() => userStore.userInfo?.username || 'admin')
 
 // PDF 水印设置（从系统配置读取）
 const pdfWatermark = computed<boolean>(() => Boolean(getConfig<boolean>('pdfWatermarkEnabled', true) ?? true))
-const pdfWatermarkText = computed<string>(
-  () => (getConfig<string>('pdfWatermarkText', '') as string) || exporter.value
-)
+const pdfWatermarkText = computed<string>(() => (getConfig<string>('pdfWatermarkText', '') as string) || exporter.value)
 
 function selectRecipe(id: number): void {
   selectedId.value = id
@@ -532,13 +538,7 @@ function handleDownloadAll(format: string): void {
   .divider-line {
     flex: 1;
     width: 2px;
-    background: linear-gradient(
-      180deg,
-      transparent 0%,
-      #dcdfe6 20%,
-      #dcdfe6 80%,
-      transparent 100%
-    );
+    background: linear-gradient(180deg, transparent 0%, #dcdfe6 20%, #dcdfe6 80%, transparent 100%);
   }
 
   .divider-badge {

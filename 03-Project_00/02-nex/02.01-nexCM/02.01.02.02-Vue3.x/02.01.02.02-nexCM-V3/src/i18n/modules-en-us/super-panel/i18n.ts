@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Super Panel Module - Language Configuration Internationalization Fields
  * Big company standard: unified nested object structure, grouped by functional area
  * Note: No fallback solution, missing fields directly display the key
@@ -191,7 +191,8 @@ export default {
     // [Label] Master language
     masterLanguage: 'Master Language',
     // [Tip] Master language tip
-    masterLanguageTip: 'The language used as the comparison baseline, set in Parameter Configuration - Translation Settings',
+    masterLanguageTip:
+      'The language used as the comparison baseline, set in Parameter Configuration - Translation Settings',
     // [Label] Master value
     masterValue: 'Master Value',
     // [Label] Missing field count
@@ -275,7 +276,7 @@ export default {
     // [Tip] New language code not empty
     codeNotEmpty: 'Language code cannot be empty',
     // [Placeholder] New language code placeholder
-    codePlaceholder: 'e.g. ja-JP, ko-KR',
+    codePlaceholder: 'e.g. zh-CN, en-US',
     // [Tip] New language code tip
     codeTip: 'Unique identifier for the language, e.g. zh-CN, en-US',
     // [Label] New language name

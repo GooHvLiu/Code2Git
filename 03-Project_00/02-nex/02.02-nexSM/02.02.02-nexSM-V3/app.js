@@ -1,9 +1,14 @@
 ﻿require("module-alias/register");
 require("dotenv-expand").expand(require("dotenv").config());
+// 环境变量校验：缺失必需变量直接终止进程（须在 dotenv 加载之后、其它 require 之前）
+require("./src/config/env.validate.js");
 var express = require("express");
 const cors = require("cors");
 var path = require("path");
 const fs = require("fs");
+const helmet = require("helmet");
+const logger = require("./src/utils/logger.js");
+const { generalLimiter, strictLimiter } = require("./src/middleware/rateLimit.middleware.js");
 const app = express();
 const appConfig = require('./src/config/app.config.js');
 
@@ -38,6 +43,23 @@ const configService = require('./src/modules/config/config.service');
 // 跨域
 app.use(cors());
 
+// helmet 安全头（CORS 之后、路由之前）
+// 开发环境关闭 CSP 以兼容 Swagger UI / Vite 的 inline script；生产环境使用 helmet 默认严格策略
+app.use(helmet({
+  contentSecurityPolicy: process.env.NODE_ENV === 'production' ? undefined : false,
+  crossOriginEmbedderPolicy: false
+}));
+
+// 通用限流：所有路由之前，15 分钟 1000 次/IP
+app.use(generalLimiter);
+
+// 严格限流：登录/注册/忘记密码/验证码等敏感接口，15 分钟 10 次/IP
+// 注意业务路由统一挂载在 /prod-api/v2/<module> 下
+app.use('/prod-api/v2/user/login', strictLimiter);
+app.use('/prod-api/v2/user/register', strictLimiter);
+app.use('/prod-api/v2/user/forgot-password', strictLimiter);
+app.use('/prod-api/v2/captcha', strictLimiter);
+
 // 解析JSON请求体（增大限制，支持大文件保存，如语言文件、配置文件等）
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
@@ -55,9 +77,9 @@ app.use('/uploads', express.static(path.join(__dirname, './uploads')));
 // Swagger API 文档（仅开发环境启用）
 if (process.env.NODE_ENV !== 'production') {
   const swaggerUi = require('swagger-ui-express');
-  const swaggerSpecs = require('./src/config/swagger.config.js');
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
-  console.log('📖 Swagger API 文档: http://localhost:' + (process.env.PORT || 3002) + '/api-docs');
+  const { specs, uiOptions } = require('./src/config/swagger.config.js');
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, uiOptions));
+  logger.info('Swagger API 文档: http://localhost:' + appConfig.port + '/api-docs');
 }
 
 // 使用路由
@@ -90,7 +112,7 @@ async function initSystemConfig() {
   try {
     await configService.initConfig();
   } catch (err) {
-    console.error('❌ 系统配置初始化失败:', err.message);
+    logger.error('系统配置初始化失败: ' + err.message);
   }
 }
 initSystemConfig();
@@ -102,9 +124,9 @@ async function initNotificationModule() {
   try {
     await notificationModel.ensureTable();
     await notificationSettingModel.ensureTable();
-    console.log('✅ 通知模块初始化完成');
+    logger.info('通知模块初始化完成');
   } catch (err) {
-    console.error('❌ 通知模块初始化失败:', err.message);
+    logger.error('通知模块初始化失败: ' + err.message);
   }
 }
 initNotificationModule();
@@ -129,10 +151,10 @@ async function initPlcModule() {
       pollTask.startFromConfig()
     }
 
-    console.log(`✅ PLC模块初始化完成，设备数: ${manager.size}，已连接: ${connectedCount}`)
+    logger.info('PLC模块初始化完成，设备数: ' + manager.size + '，已连接: ' + connectedCount)
   } catch (err) {
-    console.error('❌ PLC初始化失败：', err.message)
-    console.log('   提示：请检查 .env 中的 PLC_HOST / PLC_PORT 配置，或确认PLC已开机')
+    logger.error('PLC初始化失败: ' + err.message)
+    logger.info('提示：请检查 .env 中的 PLC_HOST / PLC_PORT 配置，或确认PLC已开机')
   }
 }
 initPlcModule()
@@ -165,18 +187,18 @@ setTimeout(() => {
         timestamp: Date.now()
       }
     })
-    console.log(`[WS] 初始设备连接状态已发送: ${isConnected ? '已连接' : '未连接'}`)
+    logger.info('[WS] 初始设备连接状态已发送: ' + (isConnected ? '已连接' : '未连接'))
   } catch (e) {
-    console.error('[WS] 发送初始设备连接状态失败:', e.message)
+    logger.error('[WS] 发送初始设备连接状态失败: ' + e.message)
   }
 }, 1000)
 
 server.listen(PORT, HOST, () => {
-  console.log('\n========================================');
-  console.log(`🚀 服务启动成功`);
-  console.log(`📍 地址: http://${HOST}:${PORT}`);
-  console.log(`📦 环境: ${process.env.NODE_ENV || 'development'}`);
-  console.log('========================================\n');
+  logger.info('========================================');
+  logger.info('服务启动成功');
+  logger.info('地址: http://' + HOST + ':' + PORT);
+  logger.info('环境: ' + (process.env.NODE_ENV || 'development'));
+  logger.info('========================================');
 
   // 启动自动时间校准（启动时校准 + 每6小时自动校准）
   licenseGuard.startAutoSync();

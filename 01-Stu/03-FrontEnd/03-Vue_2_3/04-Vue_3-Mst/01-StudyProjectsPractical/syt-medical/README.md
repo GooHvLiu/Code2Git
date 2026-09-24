@@ -1217,7 +1217,7 @@ app.use(ElementPlus);
 
 ## 静态组件
 
-### Home组件
+### 主页组件
 
 #### 轮播组件
 
@@ -1899,6 +1899,195 @@ defineOptions({ name: "QuickLink" });
 </template>
 ......
 ```
+
+### 医院组件
+
+#### 菜单组件
+
+在`src/pages/hospital/menu`下创建`index.vue`组件：
+
+```vue
+<template>
+  <div class="page-wrap">
+    <el-menu :default-active="route.path" @select="handleSelect">
+      <div class="menu-topTitle">
+        <el-icon color="#58317B"><HomeFilled /></el-icon>
+        <el-icon size="0.9rem"><DArrowRight /></el-icon>
+        <span>医院信息</span>
+      </div>
+      <!-- 索引使用完整的路由路径，这样最方便，不用拼串，也可以直接跳转 -->
+      <el-menu-item :index="HOSPITAL.PATH + '/' + HOSPITAL.CHILDREN.APPOINTMENT_PATH">
+        <el-icon><Service /></el-icon>
+        <span>预约挂号</span>
+      </el-menu-item>
+      <el-menu-item :index="HOSPITAL.PATH + '/' + HOSPITAL.CHILDREN.DETAL_PATH">
+        <el-icon><Finished /></el-icon>
+        <span>医院详情</span>
+      </el-menu-item>
+      <el-menu-item :index="HOSPITAL.PATH + '/' + HOSPITAL.CHILDREN.NOTICE_PATH">
+        <el-icon><Bell /></el-icon>
+        <span>预约须知</span>
+      </el-menu-item>
+      <el-menu-item :index="HOSPITAL.PATH + '/' + HOSPITAL.CHILDREN.STOP_SERVICE_PATH">
+        <el-icon><Timer /></el-icon>
+        <span>停诊信息</span>
+      </el-menu-item>
+      <el-menu-item :index="HOSPITAL.PATH + '/' + HOSPITAL.CHILDREN.SEARCH_CANCEL_PATH">
+        <el-icon><Switch /></el-icon>
+        <span>查询取消</span>
+      </el-menu-item>
+    </el-menu>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Menu" });
+// 引入路由 path 常量
+import { HOSPITAL } from "@/const/router/index";
+// 导入路由组件
+import { useRouter, useRoute } from "vue-router";
+// 操作路由
+const router = useRouter();
+// 读取路由
+const route = useRoute();
+
+// 点击菜单触发函数
+const handleSelect = (key: string) => {
+  // console.log(key, keyPath);
+  // 使用 router 进行跳转
+  router.push({
+    path: key
+  });
+};
+</script>
+
+<style scoped lang="less">
+.page-wrap {
+  .menu-topTitle {
+  }
+  .el-menu {
+    min-width: 150px;
+    .el-menu-item {
+      margin-bottom: 10px;
+    }
+  }
+}
+</style>
+```
+
+#### 内容组件
+
+在`src/pages/hospital/content`下创建多个内容子组件，分别为：
+
+```text
+src/pages/hospital/content/appointment/index.vue --- 挂号预约 组件
+```
+
+```text
+src/pages/hospital/content/detail/index.vue --- 医院详情 组件
+```
+
+```text
+src/pages/hospital/content/notice/index.vue --- 预约须知 组件
+```
+
+```text
+src/pages/hospital/content/searchCancel/index.vue --- 查询/取消 组件
+```
+
+```text
+src/pages/hospital/content/stopService/index.vue --- 停诊信息 组件
+```
+
+##### 预约挂号
+
+在`src/pages/hospital/content/appointment`下创建`index.vue`组件：
+
+```vue
+<template>
+  <div class="page-wrap">预约挂号</div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Appointment" });
+</script>
+```
+
+> 未进行内容创建，待后续补充
+
+##### 医院详情
+
+在`src/pages/hospital/content/detail`下创建`index.vue`组件：
+
+```vue
+<template>
+  <div class="page-wrap">医院详情</div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Detail" });
+</script>
+```
+
+> 未进行内容创建，待后续补充
+
+##### 预约须知
+
+在`src/pages/hospital/content/notice`下创建`index.vue`组件：
+
+```vue
+<template>
+  <div class="page-wrap">预约须知</div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Notice" });
+</script>
+```
+
+> 未进行内容创建，待后续补充
+
+##### 停诊信息
+
+在`src/pages/hospital/content/stopService`下创建`index.vue`组件：
+
+```vue
+<template>
+  <div class="page-wrap">停诊信息</div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "StopService" });
+</script>
+```
+
+> 未进行内容创建，待后续补充
+
+##### 查询取消
+
+在`src/pages/hospital/content/searchCancel`下创建`index.vue`组件：
+
+```vue
+<template>
+  <div class="page-wrap">查询与取消</div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "SearchCancel" });
+</script>
+```
+
+> 未进行内容创建，待后续补充
+
+
+
+
 
 ## 网络请求
 

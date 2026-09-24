@@ -11,6 +11,7 @@ import table from './table'
 import validate from './validate'
 import dict from './dict'
 import upload from './upload'
+import shift from './shift'
 
 export default {
   // 操作类
@@ -27,6 +28,8 @@ export default {
   dict,
   // 上传组件（命名空间挂载：common.upload.*）
   upload,
+  // 班次（命名空间挂载：common.shift.day/night）
+  ...shift,
   // 表格通用类
   ...table
 }

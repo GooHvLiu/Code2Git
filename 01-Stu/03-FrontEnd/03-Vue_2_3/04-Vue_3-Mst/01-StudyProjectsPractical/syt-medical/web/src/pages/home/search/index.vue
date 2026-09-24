@@ -31,7 +31,7 @@ import { reqSearchHospitalKeyWord } from "@/api/home/index";
 import { useRouter } from "vue-router";
 const router = useRouter();
 // 导入路由常量管理文件
-import { HOSPITAL_PATH } from "@/const/index";
+import { HOSPITAL } from "@/const/index";
 
 // Props定义示例
 // const props = defineProps<{}>()
@@ -72,7 +72,7 @@ const keyWordSearch = async (keyWord: string, cb: any) => {
 // 当用户选中搜索框下选项内容时被触发
 const handleSelect = (hoscode: string) => {
   // 通过路由跳转到医院详情页面 query: { hoscode }
-  router.push({ path: HOSPITAL_PATH });
+  router.push({ path: HOSPITAL.PATH });
 };
 </script>
 

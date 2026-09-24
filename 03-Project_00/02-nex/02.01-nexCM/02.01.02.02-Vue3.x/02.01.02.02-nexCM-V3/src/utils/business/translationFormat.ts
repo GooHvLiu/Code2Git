@@ -16,8 +16,8 @@ function splitWords(text: string): string[] {
   processed = processed.replace(/([A-Z])([A-Z][a-z])/g, '$1 $2')
   return processed
     .split(/\s+/)
-    .filter((word) => word.length > 0)
-    .map((word) => word.toLowerCase())
+    .filter(word => word.length > 0)
+    .map(word => word.toLowerCase())
 }
 
 /** 正常格式：全小写，单词间空格。例：system privileges */
@@ -31,9 +31,7 @@ export function toNormalCase(text: string): string {
 export function toTitleCase(text: string): string {
   const words = splitWords(text)
   if (words.length === 0) return text || ''
-  return words
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ')
+  return words.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
 }
 
 /** 驼峰格式：首词小写其余首字母大写无空格。例：systemPrivileges */
@@ -41,10 +39,13 @@ export function toCamelCase(text: string): string {
   const words = splitWords(text)
   if (words.length === 0) return text || ''
   if (words.length === 1) return words[0]
-  return words[0] + words
-    .slice(1)
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join('')
+  return (
+    words[0] +
+    words
+      .slice(1)
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join('')
+  )
 }
 
 export type FormatType = 'normal' | 'title' | 'camel'

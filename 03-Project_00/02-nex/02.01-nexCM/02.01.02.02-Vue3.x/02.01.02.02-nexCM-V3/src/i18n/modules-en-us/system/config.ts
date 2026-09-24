@@ -17,7 +17,8 @@ export default {
   // [Status] Loading
   statusLoading: 'Loading configuration, please wait...',
   // [Status] Incomplete
-  statusIncomplete: 'Configuration is incomplete with uninitialized items and cannot be saved, please contact administrator',
+  statusIncomplete:
+    'Configuration is incomplete with uninitialized items and cannot be saved, please contact administrator',
   // [Status] Load error, cannot save
   statusLoadError: 'Failed to load configuration, cannot save, please refresh and retry',
   // [Status] Abnormal status
@@ -36,6 +37,23 @@ export default {
   resetFailedRetry: 'Failed to reset, please retry',
   // [Message] Reset failed, network
   resetFailedNetwork: 'Failed to reset, please check the network connection',
+  // [Status] Load failed title
+  loadFailedTitle: 'Failed to Load Configuration',
+  // [Status] Load failed description
+  loadFailedDesc: 'Please check the network connection or contact the administrator',
+  // [Status] Incomplete title
+  incompleteTitle: 'Configuration Incomplete',
+  // [Status] Uninitialized items detected (count)
+  incompleteDetected:
+    '{count} uninitialized configuration item(s) detected. Editing and saving are disabled on this page.',
+  // [Status] Missing keys title
+  missingKeysTitle: 'Missing configuration items:',
+  // [Status] Incomplete tip
+  incompleteTip:
+    'Please contact the administrator to run the configuration initialization SQL, or click the button below to reload.',
+  // [Message] Unconfigured items warning (count)
+  missingItemsWarning:
+    '{count} unconfigured item(s) detected. Please contact the administrator to initialize the configuration',
 
   // ==================== System Configuration ====================
   system: {

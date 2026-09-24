@@ -23,7 +23,10 @@ export function resetRouter(): void {
   // 收集动态添加的路由名（静态路由已注册，移除所有后重新挂载静态路由）
   const constantNames = new Set(constantRoutes.map(r => r.name).filter(Boolean))
   // 当前已注册的所有路由
-  const allNames = router.getRoutes().map(r => r.name).filter(Boolean) as string[]
+  const allNames = router
+    .getRoutes()
+    .map(r => r.name)
+    .filter(Boolean) as string[]
   allNames.forEach(name => {
     if (!constantNames.has(name)) {
       router.removeRoute(name)

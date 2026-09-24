@@ -8,13 +8,7 @@
     class="form-dialog"
     @close="handleClose"
   >
-    <el-form
-      ref="formRef"
-      :model="form"
-      :rules="rules"
-      :label-width="labelWidth"
-      :disabled="disabled"
-    >
+    <el-form ref="formRef" :model="form" :rules="rules" :label-width="labelWidth" :disabled="disabled">
       <slot name="form-content" :form="form" :disabled="disabled"></slot>
     </el-form>
     <template #footer>
@@ -32,6 +26,8 @@
 /**
  * 表单弹窗组件
  * 通过 ref 调用 open(row?) 打开（传 row 视为编辑），emit submit(form, isEdit)。
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { ref, computed, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'

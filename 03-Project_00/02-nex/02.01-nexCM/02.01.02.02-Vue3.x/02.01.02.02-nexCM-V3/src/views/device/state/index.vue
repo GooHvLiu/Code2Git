@@ -3,13 +3,21 @@
     <!-- 设备信息头部 -->
     <div class="device-header">
       <div class="device-basic">
-        <div class="device-icon"><el-icon><Cpu /></el-icon></div>
+        <div class="device-icon">
+          <el-icon><Cpu /></el-icon>
+        </div>
         <div class="device-meta">
           <div class="device-name">{{ deviceInfo.name }}</div>
           <div class="device-sub">
-            <span class="meta-item"><el-icon><CollectionTag /></el-icon>{{ deviceInfo.code }}</span>
-            <span class="meta-item"><el-icon><Location /></el-icon>{{ deviceInfo.location }}</span>
-            <span class="meta-item"><el-icon><Calendar /></el-icon>{{ t('device.state.installDate') }}: {{ deviceInfo.installDate }}</span>
+            <span class="meta-item"
+              ><el-icon><CollectionTag /></el-icon>{{ deviceInfo.code }}</span
+            >
+            <span class="meta-item"
+              ><el-icon><Location /></el-icon>{{ deviceInfo.location }}</span
+            >
+            <span class="meta-item"
+              ><el-icon><Calendar /></el-icon>{{ t('device.state.installDate') }}: {{ deviceInfo.installDate }}</span
+            >
           </div>
         </div>
       </div>
@@ -42,7 +50,9 @@
       <el-col :span="14">
         <div class="panel">
           <div class="panel-header">
-            <span class="panel-title"><el-icon><DataLine /></el-icon>{{ t('device.state.realtimeParams') }}</span>
+            <span class="panel-title"
+              ><el-icon><DataLine /></el-icon>{{ t('device.state.realtimeParams') }}</span
+            >
           </div>
           <div class="panel-body">
             <el-table :data="realtimeParamsList" border stripe size="small">
@@ -54,9 +64,7 @@
               </el-table-column>
               <el-table-column prop="unit" :label="t('device.state.colUnit')" width="80" align="center" />
               <el-table-column :label="t('device.state.colRange')" align="center">
-                <template #default="{ row }">
-                  {{ row.min }} ~ {{ row.max }}
-                </template>
+                <template #default="{ row }"> {{ row.min }} ~ {{ row.max }} </template>
               </el-table-column>
             </el-table>
           </div>
@@ -67,7 +75,9 @@
       <el-col :span="10">
         <div class="panel">
           <div class="panel-header">
-            <span class="panel-title"><el-icon><DataBoard /></el-icon>{{ t('device.state.todayStats') }}</span>
+            <span class="panel-title"
+              ><el-icon><DataBoard /></el-icon>{{ t('device.state.todayStats') }}</span
+            >
           </div>
           <div class="panel-body">
             <div class="stat-list">
@@ -92,21 +102,12 @@
  * 数据来源：useDevDashboard（派生自 Pinia device store）
  * 作者：GooHv
  */
-import {
-  Cpu, CollectionTag, Location, Calendar,
-  Top, Bottom, DataLine, DataBoard
-} from '@element-plus/icons-vue'
+import { Cpu, CollectionTag, Location, Calendar, Top, Bottom, DataLine, DataBoard } from '@element-plus/icons-vue'
 import { useI18n } from '@/composables/useI18n'
 import { useDevDashboard } from '@/composables/useDevDashboard'
 
 const { t } = useI18n()
-const {
-  deviceInfo,
-  deviceStatusObj,
-  coreMetrics,
-  realtimeParamsList,
-  todayStats
-} = useDevDashboard()
+const { deviceInfo, deviceStatusObj, coreMetrics, realtimeParamsList, todayStats } = useDevDashboard()
 </script>
 
 <style scoped lang="less">
@@ -175,9 +176,15 @@ const {
   border-radius: 50%;
   background: #67c23a;
 }
-.status-dot.idle { background: #e6a23c; }
-.status-dot.fault { background: #f56c6c; }
-.status-dot.offline { background: #909399; }
+.status-dot.idle {
+  background: #e6a23c;
+}
+.status-dot.fault {
+  background: #f56c6c;
+}
+.status-dot.offline {
+  background: #909399;
+}
 
 .status-text {
   font-weight: 600;
@@ -227,8 +234,12 @@ const {
   align-items: center;
   gap: 2px;
 }
-.metric-trend.up { color: #f56c6c; }
-.metric-trend.down { color: #67c23a; }
+.metric-trend.up {
+  color: #f56c6c;
+}
+.metric-trend.down {
+  color: #67c23a;
+}
 
 .content-row {
   margin-bottom: 16px;
@@ -266,7 +277,9 @@ const {
   padding-bottom: 12px;
   border-bottom: 1px dashed #f0f2f5;
 }
-.stat-item:last-child { border-bottom: none; }
+.stat-item:last-child {
+  border-bottom: none;
+}
 
 .stat-label {
   font-size: 12px;

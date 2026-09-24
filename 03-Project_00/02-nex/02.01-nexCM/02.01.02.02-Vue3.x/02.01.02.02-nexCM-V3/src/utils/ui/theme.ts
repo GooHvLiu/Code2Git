@@ -2,6 +2,8 @@
  * ==========================================
  * 主题切换工具（CSS 变量运行时切换）
  * ==========================================
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import themeVariables from '@/config/theme-variables.config'
 import i18n from '@/i18n'
@@ -15,11 +17,46 @@ interface ThemeField {
 }
 
 export const THEME_FIELDS: ThemeField[] = [
-  { key: 'sidebarBg', get label() { return i18n.global.t('layout.quickMenu.theme.sidebarBg') as string }, varName: '--sidebar-bg', default: themeVariables['sidebar-bg'] },
-  { key: 'sidebarHoverText', get label() { return i18n.global.t('layout.quickMenu.theme.sidebarHoverText') as string }, varName: '--sidebar-hover-text', default: themeVariables['sidebar-hover-text'] },
-  { key: 'sidebarHoverBg', get label() { return i18n.global.t('layout.quickMenu.theme.sidebarHoverBg') as string }, varName: '--sidebar-hover-bg', default: themeVariables['sidebar-hover-bg'] },
-  { key: 'sidebarIconColor', get label() { return i18n.global.t('layout.quickMenu.theme.sidebarIconColor') as string }, varName: '--sidebar-icon-color', default: themeVariables['sidebar-icon-color'] },
-  { key: 'sidebarActiveBg', get label() { return i18n.global.t('layout.quickMenu.theme.sidebarActiveBg') as string }, varName: '--sidebar-active-bg', default: themeVariables['sidebar-active-bg'] }
+  {
+    key: 'sidebarBg',
+    get label() {
+      return i18n.global.t('layout.quickMenu.theme.sidebarBg') as string
+    },
+    varName: '--sidebar-bg',
+    default: themeVariables['sidebar-bg']
+  },
+  {
+    key: 'sidebarHoverText',
+    get label() {
+      return i18n.global.t('layout.quickMenu.theme.sidebarHoverText') as string
+    },
+    varName: '--sidebar-hover-text',
+    default: themeVariables['sidebar-hover-text']
+  },
+  {
+    key: 'sidebarHoverBg',
+    get label() {
+      return i18n.global.t('layout.quickMenu.theme.sidebarHoverBg') as string
+    },
+    varName: '--sidebar-hover-bg',
+    default: themeVariables['sidebar-hover-bg']
+  },
+  {
+    key: 'sidebarIconColor',
+    get label() {
+      return i18n.global.t('layout.quickMenu.theme.sidebarIconColor') as string
+    },
+    varName: '--sidebar-icon-color',
+    default: themeVariables['sidebar-icon-color']
+  },
+  {
+    key: 'sidebarActiveBg',
+    get label() {
+      return i18n.global.t('layout.quickMenu.theme.sidebarActiveBg') as string
+    },
+    varName: '--sidebar-active-bg',
+    default: themeVariables['sidebar-active-bg']
+  }
 ]
 
 const STORAGE_PREFIX = 'theme-'
@@ -36,7 +73,11 @@ function setCssVar(name: string, value: string): void {
 
 function hexToRgb(hex: string): { r: number; g: number; b: number } {
   let color = hex.replace('#', '')
-  if (color.length === 3) color = color.split('').map(c => c + c).join('')
+  if (color.length === 3)
+    color = color
+      .split('')
+      .map(c => c + c)
+      .join('')
   const num = parseInt(color, 16)
   return { r: (num >> 16) & 255, g: (num >> 8) & 255, b: num & 255 }
 }
@@ -53,11 +94,7 @@ function mixColor(hex: string, ratio: number): string {
   const { r, g, b } = hexToRgb(hex)
   const mixWith = ratio >= 0 ? 255 : 0
   const absRatio = Math.abs(ratio)
-  return rgbToHex(
-    r + (mixWith - r) * absRatio,
-    g + (mixWith - g) * absRatio,
-    b + (mixWith - b) * absRatio
-  )
+  return rgbToHex(r + (mixWith - r) * absRatio, g + (mixWith - g) * absRatio, b + (mixWith - b) * absRatio)
 }
 
 function getFieldConfig(key: string): ThemeField | undefined {

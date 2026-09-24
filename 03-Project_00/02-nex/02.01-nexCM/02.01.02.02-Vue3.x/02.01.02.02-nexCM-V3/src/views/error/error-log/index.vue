@@ -20,10 +20,12 @@
           <span class="error-time">{{ formatTime(log.time) }}</span>
         </div>
         <div v-if="log.info" class="error-info">
-          <span class="label">{{ t('system.errorLog.triggerLocation') }}</span>{{ log.info }}
+          <span class="label">{{ t('system.errorLog.triggerLocation') }}</span
+          >{{ log.info }}
         </div>
         <div v-if="log.url" class="error-url">
-          <span class="label">{{ t('system.errorLog.pageUrl') }}</span>{{ log.url }}
+          <span class="label">{{ t('system.errorLog.pageUrl') }}</span
+          >{{ log.url }}
         </div>
         <div v-if="log.stack" class="error-stack" @click="toggleExpand(index)">
           <span class="label">{{ t('system.errorLog.stackInfo') }}</span>
@@ -135,7 +137,9 @@ async function handleClear(): Promise<void> {
     margin-bottom: @spacing-xs;
     word-break: break-all;
 
-    .label { color: @text-placeholder; }
+    .label {
+      color: @text-placeholder;
+    }
   }
 
   .error-stack {
@@ -143,8 +147,12 @@ async function handleClear(): Promise<void> {
     font-size: @font-size-sm;
     color: @text-secondary;
 
-    .label { color: @text-placeholder; }
-    .el-icon { margin-left: @spacing-xs; }
+    .label {
+      color: @text-placeholder;
+    }
+    .el-icon {
+      margin-left: @spacing-xs;
+    }
 
     pre {
       margin-top: @spacing-sm;

@@ -29,6 +29,8 @@
  * 用法：
  * <export-dropdown :data="list" :columns="cols" title="用户" filename="users"
  *   :selected="selectedRows" exporter="admin" />
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -82,21 +84,15 @@ const { t } = useI18n()
 const pdfWatermarkEnabled = ref<boolean>(getConfig<boolean>('pdfWatermarkEnabled', true) as boolean)
 const pdfWatermarkText = ref<string>(getConfig<string>('pdfWatermarkText', '') as string)
 
-const buttonText = computed(() =>
-  props.defaultFormat === 'pdf' ? t('common.exportPdf') : t('common.exportExcel')
-)
+const buttonText = computed(() => (props.defaultFormat === 'pdf' ? t('common.exportPdf') : t('common.exportExcel')))
 
 const hasSelected = computed(() => !!(props.selected && props.selected.length > 0))
 
 const finalTitle = computed(() => props.title)
 
-const finalWatermark = computed<boolean>(() =>
-  props.watermark !== null ? props.watermark : pdfWatermarkEnabled.value
-)
+const finalWatermark = computed<boolean>(() => (props.watermark !== null ? props.watermark : pdfWatermarkEnabled.value))
 
-const finalWatermarkText = computed(() =>
-  props.watermarkText || pdfWatermarkText.value || props.exporter || ''
-)
+const finalWatermarkText = computed(() => props.watermarkText || pdfWatermarkText.value || props.exporter || '')
 
 function handlePdfWatermarkConfigChanged(event: Event): void {
   const detail = (event as CustomEvent<{ enabled?: boolean; text?: string }>).detail || {}

@@ -37,12 +37,20 @@
                   <span>{{ getMenuTitle(item) }}</span>
                 </template>
                 <template v-for="child in item.children" :key="child.id">
-                  <el-sub-menu v-if="child.children && child.children.length > 0 && child.type !== 1" :index="child.path">
+                  <el-sub-menu
+                    v-if="child.children && child.children.length > 0 && child.type !== 1"
+                    :index="child.path"
+                  >
                     <template #title>
                       <el-icon><Document /></el-icon>
                       <span>{{ getMenuTitle(child) }}</span>
                     </template>
-                    <el-menu-item v-for="grandChild in child.children" v-show="!grandChild.hidden" :key="grandChild.id" :index="grandChild.path">
+                    <el-menu-item
+                      v-for="grandChild in child.children"
+                      v-show="!grandChild.hidden"
+                      :key="grandChild.id"
+                      :index="grandChild.path"
+                    >
                       <el-icon><Document /></el-icon>
                       <template #title>{{ getMenuTitle(grandChild) }}</template>
                     </el-menu-item>
@@ -112,7 +120,7 @@ const previewTime = ref('')
 const menuCount = computed(() => {
   let count = 0
   const countMenus = (nodes: PreviewMenu[]): void => {
-    nodes.forEach((node) => {
+    nodes.forEach(node => {
       if (node.type !== 1) count++
       if (node.children && node.children.length > 0) countMenus(node.children)
     })
@@ -155,25 +163,128 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.menu-preview-container { padding: 20px; height: 100vh; box-sizing: border-box; display: flex; flex-direction: column; background: #f0f2f5; }
-.preview-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; padding: 16px 20px; background: #fff; border-radius: 4px; box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); }
-.header-left { flex: 1; }
-.preview-title { margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #303133; }
-.preview-desc { margin: 0; font-size: 13px; color: #909399; }
-.preview-content { flex: 1; display: flex; background: #fff; border-radius: 4px; box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); overflow: hidden; }
-.preview-sidebar { width: 210px; background: #304156; display: flex; flex-direction: column; }
-.preview-sidebar-logo { height: 50px; display: flex; align-items: center; overflow: hidden; flex-shrink: 0; background: #2b3648; color: #fff; }
-.preview-sidebar-logo .logo-link { display: flex; align-items: center; text-decoration: none; padding: 0 16px; width: 100%; }
-.preview-logo-svg { width: 32px; height: 32px; vertical-align: middle; margin-left: 3px; flex-shrink: 0; }
-.preview-logo-text { font-size: 16px; font-weight: 600; color: #fff; margin-left: 12px; white-space: nowrap; }
-.preview-sidebar-scroll { flex: 1; width: 100%; }
-.preview-sidebar-scroll :deep(.el-scrollbar__wrap) { overflow-x: hidden; }
-.preview-sidebar-scroll :deep(.el-menu) { border-right: none; }
-.preview-sidebar-scroll :deep(.el-scrollbar__bar.is-vertical) { right: 0; }
-.preview-main { flex: 1; display: flex; align-items: center; justify-content: center; background: #f0f2f5; }
-.main-placeholder { text-align: center; color: #909399; }
-.placeholder-icon { font-size: 64px; margin-bottom: 16px; color: #c0c4cc; }
-.main-placeholder p { margin: 8px 0; font-size: 14px; }
-.tip-text { font-size: 12px !important; color: #c0c4cc !important; }
-.preview-footer { display: flex; justify-content: space-between; margin-top: 16px; padding: 12px 20px; background: #fff; border-radius: 4px; box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); font-size: 13px; color: #909399; }
+.menu-preview-container {
+  padding: 20px;
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: #f0f2f5;
+}
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  padding: 16px 20px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+.header-left {
+  flex: 1;
+}
+.preview-title {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #303133;
+}
+.preview-desc {
+  margin: 0;
+  font-size: 13px;
+  color: #909399;
+}
+.preview-content {
+  flex: 1;
+  display: flex;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.preview-sidebar {
+  width: 210px;
+  background: #304156;
+  display: flex;
+  flex-direction: column;
+}
+.preview-sidebar-logo {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #2b3648;
+  color: #fff;
+}
+.preview-sidebar-logo .logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 16px;
+  width: 100%;
+}
+.preview-logo-svg {
+  width: 32px;
+  height: 32px;
+  vertical-align: middle;
+  margin-left: 3px;
+  flex-shrink: 0;
+}
+.preview-logo-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin-left: 12px;
+  white-space: nowrap;
+}
+.preview-sidebar-scroll {
+  flex: 1;
+  width: 100%;
+}
+.preview-sidebar-scroll :deep(.el-scrollbar__wrap) {
+  overflow-x: hidden;
+}
+.preview-sidebar-scroll :deep(.el-menu) {
+  border-right: none;
+}
+.preview-sidebar-scroll :deep(.el-scrollbar__bar.is-vertical) {
+  right: 0;
+}
+.preview-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f2f5;
+}
+.main-placeholder {
+  text-align: center;
+  color: #909399;
+}
+.placeholder-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  color: #c0c4cc;
+}
+.main-placeholder p {
+  margin: 8px 0;
+  font-size: 14px;
+}
+.tip-text {
+  font-size: 12px !important;
+  color: #c0c4cc !important;
+}
+.preview-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding: 12px 20px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  font-size: 13px;
+  color: #909399;
+}
 </style>

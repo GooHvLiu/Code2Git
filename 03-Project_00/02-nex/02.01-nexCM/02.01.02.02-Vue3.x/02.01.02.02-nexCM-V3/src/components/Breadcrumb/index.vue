@@ -4,10 +4,7 @@
       <template #separator>
         <el-icon class="breadcrumb-separator"><ArrowRight /></el-icon>
       </template>
-      <el-breadcrumb-item
-        v-for="(item, index) in breadcrumbList"
-        :key="item + '-' + index"
-      >
+      <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item + '-' + index">
         {{ item }}
       </el-breadcrumb-item>
     </el-breadcrumb>
@@ -18,6 +15,8 @@
 /**
  * 头部面包屑
  * 依据当前路由 meta.titles（多级）或 meta.title 解析展示，标题走 i18n。
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'

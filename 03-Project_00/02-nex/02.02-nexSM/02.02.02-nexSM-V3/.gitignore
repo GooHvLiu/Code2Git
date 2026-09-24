@@ -1,0 +1,31 @@
+# ===== 依赖 =====
+node_modules/
+
+# ===== 环境变量（敏感配置，禁止提交）=====
+.env
+.env.local
+.env.*.local
+
+# ===== 日志 =====
+logs/
+*.log
+
+# ===== 运行时产物 =====
+uploads/
+public/
+data/
+backups/
+
+# ===== Beehive 授权文件（含私钥/授权，禁止提交）=====
+beehive/license/
+beehive/time/
+
+# ===== 系统/编辑器 =====
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# ===== 测试覆盖率 =====
+coverage/

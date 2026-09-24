@@ -18,6 +18,8 @@ export default {
   metricFillVolume: 'Fill volume',
   metricVacuum: 'Vacuum',
   metricTemperature: 'Fill temperature',
+  metricPressure: 'Capping pressure',
+  metricVibration: 'Vibration',
 
   unitBottlePerHour: 'bottle/h',
   unitBottle: 'bottles',

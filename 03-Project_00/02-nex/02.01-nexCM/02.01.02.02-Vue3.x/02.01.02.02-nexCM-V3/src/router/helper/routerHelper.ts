@@ -7,13 +7,15 @@
 import type { RouteRecordRaw } from 'vue-router'
 import type { RawMenuItem } from '@/types/router'
 
-// 预加载所有 views 下的 .vue 组件（Eager 同步加载，与原 require.context 行为一致）
-const modules = import.meta.glob('@/views/**/*.vue', { eager: true })
-const componentMap: Record<string, unknown> = {}
+// 按需懒加载所有 views 下的 .vue 组件（Vite import.meta.glob 默认 lazy，
+// 返回 () => import(...) 函数；Vue Router 直接接受该函数作为组件，
+// 访问路由时才加载对应 chunk，避免把全部业务页面打进首屏 bundle）
+const modules = import.meta.glob('@/views/**/*.vue')
+const componentMap: Record<string, () => Promise<unknown>> = {}
 Object.keys(modules).forEach(key => {
   // '@/views/system/user/index.vue' → 'system/user/index'
   const componentPath = key.replace(/^\/src\/views\//, '').replace(/\.vue$/, '')
-  componentMap[componentPath] = (modules[key] as { default?: unknown }).default || modules[key]
+  componentMap[componentPath] = modules[key] as () => Promise<unknown>
 })
 
 function isRoutableMenu(item: RawMenuItem): boolean {

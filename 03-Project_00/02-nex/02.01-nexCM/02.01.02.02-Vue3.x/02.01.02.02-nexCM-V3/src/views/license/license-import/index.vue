@@ -5,7 +5,9 @@
     <div class="license-container">
       <!-- 左侧：品牌信息 -->
       <div class="brand-panel">
-        <div class="brand-logo"><el-icon><Lock /></el-icon></div>
+        <div class="brand-logo">
+          <el-icon><Lock /></el-icon>
+        </div>
         <h1 class="brand-title">{{ t('system.config.superPanelLicense.licenseManager.brandTitle') }}</h1>
         <p class="brand-desc">{{ t('system.config.superPanelLicense.licenseManager.brandDesc') }}</p>
         <div class="brand-features">
@@ -58,13 +60,7 @@
               {{ formatLicenseReason(licenseStatus?.reason) }}
             </div>
           </div>
-          <el-button
-            class="status-refresh"
-            link
-            :icon="Refresh"
-            :loading="statusLoading"
-            @click="handleRefreshStatus"
-          >
+          <el-button class="status-refresh" link :icon="Refresh" :loading="statusLoading" @click="handleRefreshStatus">
             {{ t('system.config.superPanelLicense.licenseManager.refreshStatus') }}
           </el-button>
         </div>
@@ -168,13 +164,7 @@
 
         <!-- 操作按钮 -->
         <div class="form-actions">
-          <el-button
-            type="primary"
-            :icon="Upload"
-            :loading="importing"
-            :disabled="!selectedFile"
-            @click="handleImport"
-          >
+          <el-button type="primary" :icon="Upload" :loading="importing" :disabled="!selectedFile" @click="handleImport">
             {{ t('system.config.superPanelLicense.licenseManager.importLicense') }}
           </el-button>
           <el-button v-if="importedLicense" type="success" :icon="HomeFilled" @click="handleGoHome">
@@ -376,7 +366,8 @@ onMounted(() => {
 .license-bg {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
   pointer-events: none;
 }

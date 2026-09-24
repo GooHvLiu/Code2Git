@@ -152,6 +152,6 @@ export function requestDeleteEmailLogApi(id: string) {
  * @param {Array<number>} ids 日志ID数组
  * @returns {Promise<Object>} { count }
  */
-export function requestBatchDeleteEmailLogsApi(ids: (string|number)[]) {
+export function requestBatchDeleteEmailLogsApi(ids: (string | number)[]) {
   return request({ url: '/email/log/batch-delete', method: 'post', data: { ids } })
 }

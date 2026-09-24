@@ -21,7 +21,9 @@
       </div>
       <div class="toolbar-right">
         <el-button :icon="Download" size="small" @click="handleExport">{{ t('production.order.export') }}</el-button>
-        <el-button type="primary" :icon="Printer" size="small" @click="handleReport">{{ t('production.order.reportBtn') }}</el-button>
+        <el-button type="primary" :icon="Printer" size="small" @click="handleReport">{{
+          t('production.order.reportBtn')
+        }}</el-button>
       </div>
     </div>
 
@@ -40,7 +42,9 @@
       </el-table-column>
       <el-table-column :label="t('production.order.colPriority')" width="90" align="center">
         <template #default="{ row }">
-          <el-tag :type="priorityType(row.priority)" size="small">{{ t(`production.order.priority.${row.priority}`) }}</el-tag>
+          <el-tag :type="priorityType(row.priority)" size="small">{{
+            t(`production.order.priority.${row.priority}`)
+          }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column prop="startDate" :label="t('production.order.colStartDate')" width="110" align="center" />
@@ -84,7 +88,7 @@ function priorityType(p: string): 'danger' | 'warning' | 'info' {
 }
 
 function handleExport() {
-  const rows = currentOrders.value.map((o) => ({
+  const rows = currentOrders.value.map(o => ({
     [t('production.order.colOrderNo')]: o.orderNo,
     [t('production.order.colProduct')]: o.productName,
     [t('production.order.colBottleType')]: o.bottleType,
@@ -107,14 +111,47 @@ function handleReport() {
 </script>
 
 <style scoped>
-.production-order-page { padding: 16px; }
-.stat-row { margin-bottom: 16px; }
-.stat-card { background: #fff; border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 4px solid #409eff; }
-.stat-card.completed { border-left-color: #67c23a; }
-.stat-card.running { border-left-color: #409eff; }
-.stat-card.planned { border-left-color: #e6a23c; }
-.stat-label { font-size: 12px; color: #909399; margin-bottom: 8px; }
-.stat-value { font-size: 24px; font-weight: 700; color: #303133; font-family: 'Courier New', monospace; }
-.toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-.toolbar-right { display: flex; gap: 8px; }
+.production-order-page {
+  padding: 16px;
+}
+.stat-row {
+  margin-bottom: 16px;
+}
+.stat-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border-left: 4px solid #409eff;
+}
+.stat-card.completed {
+  border-left-color: #67c23a;
+}
+.stat-card.running {
+  border-left-color: #409eff;
+}
+.stat-card.planned {
+  border-left-color: #e6a23c;
+}
+.stat-label {
+  font-size: 12px;
+  color: #909399;
+  margin-bottom: 8px;
+}
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #303133;
+  font-family: 'Courier New', monospace;
+}
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.toolbar-right {
+  display: flex;
+  gap: 8px;
+}
 </style>

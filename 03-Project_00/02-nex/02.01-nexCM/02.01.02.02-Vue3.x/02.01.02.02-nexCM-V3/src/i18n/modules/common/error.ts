@@ -230,7 +230,8 @@ export default {
   // 【错误】规格型号不匹配
   PART_SPEC_NOT_MATCH: '规格型号 {userSpec} 与模板规格型号 {templateSpec} 不匹配，必须使用模板中定义的规格型号',
   // 【错误】额定寿命不匹配
-  PART_RATED_LIFE_NOT_MATCH: '额定寿命 {userRatedLife} 与模板额定寿命 {templateRatedLife} 不匹配，必须使用模板中定义的额定寿命',
+  PART_RATED_LIFE_NOT_MATCH:
+    '额定寿命 {userRatedLife} 与模板额定寿命 {templateRatedLife} 不匹配，必须使用模板中定义的额定寿命',
   // 【错误】模板编码已存在
   PART_TEMPLATE_KEY_EXISTS: '模板编码 {templateKey} 已存在',
   // 【错误】模板下有部件实例

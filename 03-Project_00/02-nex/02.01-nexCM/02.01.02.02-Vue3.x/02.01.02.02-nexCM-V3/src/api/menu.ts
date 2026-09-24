@@ -52,7 +52,7 @@ export function requestDragMenuApi(id: string, parentId: string, sort: number) {
 }
 
 /** 鎵归噺淇濆瓨鑿滃崟淇敼 */
-export function requestBatchSaveMenuApi(changes: (string|number)[]) {
+export function requestBatchSaveMenuApi(changes: (string | number)[]) {
   return request({
     url: '/menu/admin/batch-save',
     method: 'post',

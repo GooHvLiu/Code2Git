@@ -37,6 +37,8 @@
 <script setup lang="ts">
 /**
  * 顶部菜单搜索（键盘上下选择 + 回车跳转）
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { ref, computed, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -61,9 +63,7 @@ const flatMenus = computed<FlatMenuItem[]>(() => flattenMenu(permissionStore.use
 const filteredMenus = computed<FlatMenuItem[]>(() => {
   if (!keyword.value.trim()) return flatMenus.value.slice(0, 50)
   const kw = keyword.value.trim().toLowerCase()
-  return flatMenus.value
-    .filter(item => item.title.toLowerCase().includes(kw))
-    .slice(0, 50)
+  return flatMenus.value.filter(item => item.title.toLowerCase().includes(kw)).slice(0, 50)
 })
 
 watch(filteredMenus, () => {

@@ -1,9 +1,5 @@
 <template>
-  <div
-    v-watermark="watermarkText"
-    class="main-layout"
-    :class="{ 'is-mobile': isMobileDevice }"
-  >
+  <div v-watermark="watermarkText" class="main-layout" :class="{ 'is-mobile': isMobileDevice }">
     <Sidebar />
 
     <!-- 移动端遮罩：点击关闭侧边栏 -->

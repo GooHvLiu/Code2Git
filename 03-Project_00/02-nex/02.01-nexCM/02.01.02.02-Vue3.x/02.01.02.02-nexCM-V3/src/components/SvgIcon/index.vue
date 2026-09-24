@@ -10,6 +10,8 @@
 /**
  * SVG 图标组件
  * 用法：<svg-icon icon-class="user" className="nav-icon" />
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { computed } from 'vue'
 

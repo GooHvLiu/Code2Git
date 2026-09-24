@@ -49,9 +49,17 @@
       </el-table-column>
       <el-table-column :label="t('common.operation')" width="200" align="center" fixed="right">
         <template #default="{ row }">
-          <el-button type="text" size="small" @click="handleAddChild(row as DeptItem)">{{ t('superPanel.dept.page.addChild') }}</el-button>
+          <el-button type="text" size="small" @click="handleAddChild(row as DeptItem)">{{
+            t('superPanel.dept.page.addChild')
+          }}</el-button>
           <el-button type="text" size="small" @click="handleEdit(row as DeptItem)">{{ t('common.edit') }}</el-button>
-          <el-button type="text" size="small" style="color: var(--el-color-danger)" @click="handleDelete(row as DeptItem)">{{ t('common.delete') }}</el-button>
+          <el-button
+            type="text"
+            size="small"
+            style="color: var(--el-color-danger)"
+            @click="handleDelete(row as DeptItem)"
+            >{{ t('common.delete') }}</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -66,7 +74,12 @@
               <el-icon><QuestionFilled /></el-icon>
             </el-tooltip>
           </template>
-          <el-select v-model="form.parent_id" :placeholder="t('superPanel.dept.page.parentDeptPlaceholder')" style="width: 100%" clearable>
+          <el-select
+            v-model="form.parent_id"
+            :placeholder="t('superPanel.dept.page.parentDeptPlaceholder')"
+            style="width: 100%"
+            clearable
+          >
             <el-option v-for="item in flatDeptOptions" :key="item.id" :label="item.dept_name" :value="item.id" />
           </el-select>
         </el-form-item>
@@ -77,7 +90,11 @@
               <el-icon><QuestionFilled /></el-icon>
             </el-tooltip>
           </template>
-          <el-input v-model="form.dept_name" :maxlength="50" :placeholder="t('superPanel.dept.page.deptNamePlaceholder')" />
+          <el-input
+            v-model="form.dept_name"
+            :maxlength="50"
+            :placeholder="t('superPanel.dept.page.deptNamePlaceholder')"
+          />
         </el-form-item>
         <el-form-item prop="order_num">
           <template #label>
@@ -148,12 +165,7 @@ import type { ExportColumn } from '@/utils/business/exportTable'
 import { useUserStore } from '@/store/modules/user'
 import ExportDropdown from '@/components/ExportDropdown/index.vue'
 import { showSuccess, showError, confirmDelete } from '@/utils/ui/feedback'
-import {
-  requestGetDeptTreeApi,
-  requestCreateDeptApi,
-  requestUpdateDeptApi,
-  requestDeleteDeptApi
-} from '@/api'
+import { requestGetDeptTreeApi, requestCreateDeptApi, requestUpdateDeptApi, requestDeleteDeptApi } from '@/api'
 import type { DeptItem, DeptForm } from '@/types/super-panel'
 
 const { t } = useI18n()
@@ -188,7 +200,7 @@ const flatDeptOptions = computed<DeptOption[]>(() => {
   const result: DeptOption[] = [{ id: 0, dept_name: t('superPanel.dept.page.rootDept') }]
   const flatten = (list: DeptItem[]): void => {
     if (!Array.isArray(list)) return
-    list.forEach((item) => {
+    list.forEach(item => {
       result.push({ id: item.id, dept_name: item.dept_name })
       if (item.children && item.children.length > 0) flatten(item.children)
     })
@@ -201,7 +213,7 @@ const flatDeptOptions = computed<DeptOption[]>(() => {
 const flatTableData = computed<DeptItem[]>(() => {
   const result: DeptItem[] = []
   const flatten = (list: DeptItem[], level = 0): void => {
-    list.forEach((item) => {
+    list.forEach(item => {
       result.push({ ...item, _level: level })
       if (item.children && item.children.length > 0) flatten(item.children, level + 1)
     })
@@ -211,16 +223,38 @@ const flatTableData = computed<DeptItem[]>(() => {
 })
 
 const exportColumns = computed((): ExportColumn[] => [
-  { label: t('superPanel.dept.page.deptName'), prop: 'dept_name', width: 200, formatter: (row) => { const r = row as DeptItem; return '  '.repeat(r._level || 0) + r.dept_name } },
+  {
+    label: t('superPanel.dept.page.deptName'),
+    prop: 'dept_name',
+    width: 200,
+    formatter: row => {
+      const r = row as DeptItem
+      return '  '.repeat(r._level || 0) + r.dept_name
+    }
+  },
   { label: t('superPanel.dept.page.orderNum'), prop: 'order_num', width: 100 },
   { label: t('superPanel.dept.page.leader'), prop: 'leader', width: 120 },
   { label: t('superPanel.dept.page.phone'), prop: 'phone', width: 150 },
   { label: t('superPanel.dept.page.email'), prop: 'email', width: 200 },
-  { label: t('common.status'), prop: 'status', width: 80, formatter: (row) => ((row as DeptItem).status === 1 ? t('common.enable') : t('common.disable')) }
+  {
+    label: t('common.status'),
+    prop: 'status',
+    width: 80,
+    formatter: row => ((row as DeptItem).status === 1 ? t('common.enable') : t('common.disable'))
+  }
 ])
 
 function resetForm(): void {
-  Object.assign(form, { id: null, parent_id: 0, dept_name: '', order_num: 0, leader: '', phone: '', email: '', status: 1 })
+  Object.assign(form, {
+    id: null,
+    parent_id: 0,
+    dept_name: '',
+    order_num: 0,
+    leader: '',
+    phone: '',
+    email: '',
+    status: 1
+  })
 }
 
 async function getList(): Promise<void> {

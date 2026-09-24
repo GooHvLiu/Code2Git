@@ -6,7 +6,7 @@
  */
 
 export default {
-// ==================== Page Common ====================
+  // ==================== Page Common ====================
   page: {
     // [Page] Notification center title
     title: 'Notification Center',
@@ -28,7 +28,7 @@ export default {
     clearSelection: 'Clear Selection'
   },
 
-// ==================== Filter ====================
+  // ==================== Filter ====================
   filter: {
     // [Label] All
     all: 'All',
@@ -56,7 +56,7 @@ export default {
     thisMonth: 'This Month'
   },
 
-// ==================== Relative Time ====================
+  // ==================== Relative Time ====================
   time: {
     // [Time] Just now
     justNow: 'Just now',
@@ -68,7 +68,7 @@ export default {
     daysAgo: 'days ago'
   },
 
-// ==================== Notification Type ====================
+  // ==================== Notification Type ====================
   type: {
     // [Type] System
     system: 'System',
@@ -92,7 +92,7 @@ export default {
     license: 'License'
   },
 
-// ==================== Priority ====================
+  // ==================== Priority ====================
   priority: {
     // [Priority] High
     high: 'High',
@@ -102,7 +102,7 @@ export default {
     low: 'Low'
   },
 
-// ==================== Status ====================
+  // ==================== Status ====================
   status: {
     // [Status] Read
     read: 'Read',
@@ -114,7 +114,7 @@ export default {
     unarchived: 'Unarchived'
   },
 
-// ==================== Table Columns ====================
+  // ==================== Table Columns ====================
   table: {
     // [Label] Content
     content: 'Content',
@@ -122,7 +122,7 @@ export default {
     createdAt: 'Created At'
   },
 
-// ==================== Actions ====================
+  // ==================== Actions ====================
   action: {
     // [Action] Mark read
     markRead: 'Mark as Read',
@@ -144,7 +144,7 @@ export default {
     delete: 'Delete'
   },
 
-// ==================== Confirm ====================
+  // ==================== Confirm ====================
   confirm: {
     // [Confirm] Mark all confirm
     markAll: 'Are you sure you want to mark all notifications as read?',
@@ -154,7 +154,7 @@ export default {
     batchDelete: 'Are you sure you want to delete selected notifications?'
   },
 
-// ==================== Result Messages ====================
+  // ==================== Result Messages ====================
   message: {
     // [Message] Mark all success
     markAllSuccess: 'All marked as read successfully',
@@ -164,7 +164,7 @@ export default {
     batchDeleteSuccess: 'Batch deleted successfully'
   },
 
-// ==================== Notification Settings ====================
+  // ==================== Notification Settings ====================
   settings: {
     // [Label] Notification settings title
     title: 'Notification Settings',

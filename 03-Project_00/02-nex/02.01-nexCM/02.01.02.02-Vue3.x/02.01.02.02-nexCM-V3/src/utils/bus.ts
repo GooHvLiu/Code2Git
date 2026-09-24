@@ -7,6 +7,8 @@
  *   import bus from '@/utils/bus'
  *   bus.on('some-event', handler)
  *   bus.emit('some-event', payload)
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import mitt, { type Emitter } from 'mitt'
 

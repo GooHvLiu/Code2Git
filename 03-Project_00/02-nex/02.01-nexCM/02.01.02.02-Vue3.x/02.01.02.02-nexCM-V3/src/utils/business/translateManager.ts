@@ -57,7 +57,7 @@ type Listener = (s: TranslateState) => void
 const listeners: Listener[] = []
 
 function notifyListeners(): void {
-  listeners.forEach((fn) => {
+  listeners.forEach(fn => {
     try {
       fn(state)
     } catch (e) {

@@ -30,11 +30,7 @@
       </div>
       <!-- 已上传预览 -->
       <div v-else-if="displayList.length > 0" class="preview-list">
-        <div
-          v-for="(item, index) in displayList"
-          :key="index"
-          class="preview-item"
-        >
+        <div v-for="(item, index) in displayList" :key="index" class="preview-item">
           <img :src="item.url" class="preview-img" />
           <div class="preview-mask">
             <el-icon @click.stop="handlePreview(item)"><ZoomIn /></el-icon>
@@ -63,6 +59,8 @@
 /**
  * 图片上传组件
  * v-model 单图传字符串，多图传 string[]。
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -131,9 +129,7 @@ interface PreviewItem {
 
 const displayList = computed<PreviewItem[]>(() => {
   if (Array.isArray(props.modelValue)) {
-    return props.modelValue.map(item =>
-      typeof item === 'string' ? { url: item } : (item as unknown as PreviewItem)
-    )
+    return props.modelValue.map(item => (typeof item === 'string' ? { url: item } : (item as unknown as PreviewItem)))
   }
   return props.modelValue ? [{ url: props.modelValue }] : []
 })
@@ -220,7 +216,7 @@ function handlePreview(item: PreviewItem): void {
 /** 从嵌套对象按 'a.b.c' 路径取值 */
 function getNestedValue(obj: Record<string, unknown>, path: string): string {
   return path.split('.').reduce<unknown>((acc, key) => {
-    return (acc && (acc as Record<string, unknown>)[key] !== undefined)
+    return acc && (acc as Record<string, unknown>)[key] !== undefined
       ? (acc as Record<string, unknown>)[key]
       : undefined
   }, obj) as string

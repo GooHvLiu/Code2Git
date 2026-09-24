@@ -3,6 +3,8 @@
  * 权限判断工具函数
  * ==========================================
  * 与 v-permission 指令逻辑一致；超级管理员依据 is_super_admin 字段
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { useUserStore } from '@/store/modules/user'
 
@@ -35,10 +37,27 @@ export function hasPermission(permission: string | string[]): boolean {
     const parts = p.split(':')
     if (parts.length >= 3) {
       const action = parts[parts.length - 1]
-      const buttonActions = ['add', 'edit', 'delete', 'export', 'permission',
-        'detail', 'verify', 'handle', 'operate', 'viewAll',
-        'download', 'print', 'kick', 'test', 'refresh',
-        'reset', 'save', 'unlock', 'import']
+      const buttonActions = [
+        'add',
+        'edit',
+        'delete',
+        'export',
+        'permission',
+        'detail',
+        'verify',
+        'handle',
+        'operate',
+        'viewAll',
+        'download',
+        'print',
+        'kick',
+        'test',
+        'refresh',
+        'reset',
+        'save',
+        'unlock',
+        'import'
+      ]
       if (buttonActions.includes(action)) {
         const viewPermission = [...parts.slice(0, -1), 'view'].join(':')
         if (permissions.includes(viewPermission)) return true

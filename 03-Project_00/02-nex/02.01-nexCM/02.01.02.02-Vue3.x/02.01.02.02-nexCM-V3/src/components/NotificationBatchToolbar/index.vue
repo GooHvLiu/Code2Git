@@ -22,6 +22,8 @@
 <script setup lang="ts">
 /**
  * 通知列表批量操作工具栏
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { useI18n } from 'vue-i18n'
 import { Check, FolderOpened, RefreshLeft, Delete } from '@element-plus/icons-vue'

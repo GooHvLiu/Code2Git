@@ -1,0 +1,11 @@
+﻿=== i18n Symmetry Check ===
+zh total leaf keys: 2731
+en total leaf keys: 2731
+
+[MISSING in en (zh has, en missing)]: 0
+
+[MISSING in zh (en has, zh missing)]: 0
+
+[EMPTY in zh]: 0
+
+[EMPTY in en]: 0

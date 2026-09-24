@@ -15,12 +15,20 @@
                 {{ t(getEditTypeLabelKey(item.meta.editType)) }}
               </el-tag>
             </el-tooltip>
-            <el-tooltip v-if="item.meta?.effectType" :content="t(getEffectTypeTipKey(item.meta.effectType))" placement="top">
+            <el-tooltip
+              v-if="item.meta?.effectType"
+              :content="t(getEffectTypeTipKey(item.meta.effectType))"
+              placement="top"
+            >
               <el-tag :type="getEffectTypeTagType(item.meta.effectType)" size="small" effect="plain">
                 {{ t(getEffectTypeLabelKey(item.meta.effectType)) }}
               </el-tag>
             </el-tooltip>
-            <el-tooltip v-if="getOwnerType(item.meta)" :content="t(getOwnerTypeConfig(getOwnerType(item.meta)).descriptionKey)" placement="top">
+            <el-tooltip
+              v-if="getOwnerType(item.meta)"
+              :content="t(getOwnerTypeConfig(getOwnerType(item.meta)).descriptionKey)"
+              placement="top"
+            >
               <el-tag :type="getOwnerTypeConfig(getOwnerType(item.meta)).type" size="small" effect="plain">
                 <el-icon><component :is="getOwnerTypeConfig(getOwnerType(item.meta)).icon" /></el-icon>
                 {{ t(getOwnerTypeConfig(getOwnerType(item.meta)).labelKey) }}
@@ -74,14 +82,24 @@
     </div>
 
     <!-- Monaco 编辑器弹窗 -->
-    <el-dialog v-model="editorDialogVisible" :title="editorDialogTitle" width="90%" top="5vh" :close-on-click-modal="false" append-to-body @closed="handleEditorClosed">
+    <el-dialog
+      v-model="editorDialogVisible"
+      :title="editorDialogTitle"
+      width="90%"
+      top="5vh"
+      :close-on-click-modal="false"
+      append-to-body
+      @closed="handleEditorClosed"
+    >
       <div class="editor-dialog-content">
         <!-- 工具栏 -->
         <div class="editor-toolbar">
           <div class="toolbar-left">
             <el-tag size="small" type="info">{{ currentEditFile }}</el-tag>
             <el-tag size="small" :type="editorDirty ? 'warning' : 'success'">
-              {{ editorDirty ? t('superPanel.projectConfig.editor.unsaved') : t('superPanel.projectConfig.editor.saved') }}
+              {{
+                editorDirty ? t('superPanel.projectConfig.editor.unsaved') : t('superPanel.projectConfig.editor.saved')
+              }}
             </el-tag>
           </div>
           <div class="toolbar-right">
@@ -113,7 +131,9 @@
           <div v-if="showBackupPanel" class="backup-panel">
             <div class="panel-header">
               <span class="panel-title">{{ t('superPanel.projectConfig.backup.title') }}</span>
-              <el-button size="small" @click="loadBackupList"><el-icon><Refresh /></el-icon></el-button>
+              <el-button size="small" @click="loadBackupList"
+                ><el-icon><Refresh /></el-icon
+              ></el-button>
             </div>
             <div v-loading="backupListLoading" :element-loading-text="t('common.loading')" class="backup-list">
               <div v-for="backup in backupList" :key="backup.name" class="backup-item">
@@ -154,7 +174,12 @@
     </el-dialog>
 
     <!-- 语言列表预览对话框 -->
-    <el-dialog v-model="languageDialogVisible" :title="t('superPanel.config.language.currentSupportedLangs')" width="60%" top="10vh">
+    <el-dialog
+      v-model="languageDialogVisible"
+      :title="t('superPanel.config.language.currentSupportedLangs')"
+      width="60%"
+      top="10vh"
+    >
       <div class="language-preview">
         <div class="lang-tags">
           <el-tag v-for="lang in presetLanguages" :key="lang.code" size="small" class="lang-tag">
@@ -230,8 +255,18 @@ interface OwnerTypeConfig {
 }
 
 const OWNER_TYPE_CONFIG: Record<string, OwnerTypeConfig> = {
-  frontend: { labelKey: 'superPanel.projectConfig.ownerType.frontend', descriptionKey: 'superPanel.projectConfig.ownerType.frontendTip', icon: Monitor, type: 'primary' },
-  backend: { labelKey: 'superPanel.projectConfig.ownerType.backend', descriptionKey: 'superPanel.projectConfig.ownerType.backendTip', icon: Cpu, type: 'success' }
+  frontend: {
+    labelKey: 'superPanel.projectConfig.ownerType.frontend',
+    descriptionKey: 'superPanel.projectConfig.ownerType.frontendTip',
+    icon: Monitor,
+    type: 'primary'
+  },
+  backend: {
+    labelKey: 'superPanel.projectConfig.ownerType.backend',
+    descriptionKey: 'superPanel.projectConfig.ownerType.backendTip',
+    icon: Cpu,
+    type: 'success'
+  }
 }
 
 interface ConfigMeta {
@@ -310,11 +345,13 @@ const editorDialogTitle = computed(() => {
 })
 
 function loadPresetLanguages(): Promise<void> {
-  return requestGetPresetLanguagesApi().then((res: any) => {
-    presetLanguages.value = (res.data as PresetLang[]) || []
-  }).catch((err: unknown) => {
-    console.error('[LanguageConfig] 加载预设语言列表失败:', err)
-  })
+  return requestGetPresetLanguagesApi()
+    .then((res: any) => {
+      presetLanguages.value = (res.data as PresetLang[]) || []
+    })
+    .catch((err: unknown) => {
+      console.error('[LanguageConfig] 加载预设语言列表失败:', err)
+    })
 }
 
 function getEditTypeIcon(editType?: string): unknown {
@@ -417,7 +454,9 @@ async function checkSyntax(): Promise<void> {
     const valid = res.data?.valid !== false
     syntaxResult.value = {
       valid,
-      message: res.data?.message || (valid ? t('superPanel.projectConfig.editor.syntaxValid') : t('superPanel.projectConfig.editor.syntaxInvalid'))
+      message:
+        res.data?.message ||
+        (valid ? t('superPanel.projectConfig.editor.syntaxValid') : t('superPanel.projectConfig.editor.syntaxInvalid'))
     }
   } catch (err: any) {
     console.error('[LanguageConfig] 语法检查失败:', err)
@@ -465,18 +504,25 @@ function viewLanguages(): void {
 
 function loadBackupList(): Promise<void> {
   backupListLoading.value = true
-  return requestGetConfigBackupListApi(currentEditFile.value).then((res: any) => {
-    backupList.value = (res.data as BackupItem[]) || []
-  }).catch((err: unknown) => {
-    console.error('[LanguageConfig] 加载备份列表失败:', err)
-    showError(t('superPanel.projectConfig.backup.loadFailed'))
-  }).finally(() => {
-    backupListLoading.value = false
-  })
+  return requestGetConfigBackupListApi(currentEditFile.value)
+    .then((res: any) => {
+      backupList.value = (res.data as BackupItem[]) || []
+    })
+    .catch((err: unknown) => {
+      console.error('[LanguageConfig] 加载备份列表失败:', err)
+      showError(t('superPanel.projectConfig.backup.loadFailed'))
+    })
+    .finally(() => {
+      backupListLoading.value = false
+    })
 }
 
 async function restoreBackup(backup: BackupItem): Promise<void> {
-  const ok = await confirmAction(t('superPanel.projectConfig.backup.restoreConfirm'), t('superPanel.projectConfig.backup.restore'), { type: 'warning' })
+  const ok = await confirmAction(
+    t('superPanel.projectConfig.backup.restoreConfirm'),
+    t('superPanel.projectConfig.backup.restore'),
+    { type: 'warning' }
+  )
   if (!ok) return
   try {
     await requestRestoreConfigBackupApi({ filePath: currentEditFile.value, backupName: backup.name })
@@ -493,7 +539,11 @@ async function restoreBackup(backup: BackupItem): Promise<void> {
 }
 
 async function deleteBackup(backup: BackupItem): Promise<void> {
-  const ok = await confirmAction(t('superPanel.projectConfig.backup.deleteConfirm'), t('superPanel.projectConfig.backup.delete'), { type: 'warning' })
+  const ok = await confirmAction(
+    t('superPanel.projectConfig.backup.deleteConfirm'),
+    t('superPanel.projectConfig.backup.delete'),
+    { type: 'warning' }
+  )
   if (!ok) return
   try {
     await requestDeleteConfigBackupApi({ filePath: currentEditFile.value, backupName: backup.name })
@@ -511,55 +561,283 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.language-config-container { padding: 0; }
-.config-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 15px; }
-.config-card { border: 1px solid #ebeef5; border-radius: 4px; overflow: hidden; transition: all 0.2s; }
-.config-card:hover { box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1); border-color: #dcdfe6; }
-.card-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background: #fafafa; border-bottom: 1px solid #ebeef5; }
-.config-name { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #303133; }
-.name-icon { font-size: 16px; color: #409eff; }
-.config-tags { display: flex; gap: 5px; }
-.card-body { padding: 15px; }
-.config-value { font-size: 14px; color: #606266; margin-bottom: 10px; display: flex; align-items: baseline; gap: 4px; }
-.lang-count-text { color: #909399; }
-.lang-count-number { font-size: 20px; font-weight: 600; color: #409eff; }
-.lang-count-unit { color: #909399; }
-.lang-preview { display: flex; flex-wrap: wrap; gap: 6px; }
-.lang-tag { display: flex; align-items: center; gap: 4px; }
-.lang-flag-icon { width: 14px; height: 14px; vertical-align: middle; }
-.card-footer { padding: 10px 15px; border-top: 1px solid #f0f0f0; }
-.config-desc { display: flex; align-items: flex-start; gap: 5px; font-size: 12px; color: #909399; margin-bottom: 10px; line-height: 1.5; }
-.config-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-.file-path { display: flex; align-items: center; gap: 5px; padding: 8px 15px; background: #f5f7fa; border-top: 1px solid #ebeef5; font-size: 12px; }
-.file-path code { font-family: "Consolas", "Monaco", "Courier New", monospace; background: #fff; padding: 2px 6px; border-radius: 3px; color: #606266; font-size: 11px; }
-.editor-dialog-content { display: flex; flex-direction: column; gap: 12px; }
-.editor-toolbar { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; background: #f5f7fa; border-radius: 4px; }
-.toolbar-left, .toolbar-right { display: flex; align-items: center; gap: 10px; }
-.syntax-result { padding: 10px 15px; border-radius: 4px; font-size: 13px; display: flex; align-items: center; gap: 8px; }
-.syntax-result.success { background: #f0f9eb; color: #67c23a; border: 1px solid #e1f3d8; }
-.syntax-result.error { background: #fef0f0; color: #f56c6c; border: 1px solid #fde2e2; }
-.editor-main { flex: 1; display: flex; gap: 10px; min-height: 500px; height: 500px; }
-.editor-wrapper { flex: 1; border: 1px solid #ebeef5; border-radius: 4px; overflow: hidden; }
-.backup-panel { width: 280px; flex-shrink: 0; border: 1px solid #ebeef5; border-radius: 4px; display: flex; flex-direction: column; overflow: hidden; }
-.backup-panel .panel-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #fafafa; border-bottom: 1px solid #ebeef5; }
-.backup-panel .panel-title { font-size: 14px; font-weight: 600; color: #303133; }
-.backup-list { flex: 1; overflow-y: auto; padding: 10px; }
-.backup-item { padding: 10px; border: 1px solid #ebeef5; border-radius: 4px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s; }
-.backup-item:hover { border-color: #409eff; }
-.backup-header { display: flex; align-items: center; gap: 5px; margin-bottom: 6px; }
-.backup-header i { color: #909399; font-size: 12px; }
-.backup-time { font-size: 13px; font-weight: 500; color: #303133; }
-.backup-meta { display: flex; justify-content: space-between; font-size: 11px; color: #909399; margin-bottom: 6px; }
-.backup-actions { display: flex; gap: 5px; }
-.backup-empty { text-align: center; padding: 30px 0; color: #909399; }
-.backup-empty .el-icon { font-size: 36px; margin-bottom: 10px; }
-.backup-empty p { font-size: 13px; margin: 0; }
-.editor-tip { margin-top: 10px; }
-.tip-extra { margin-top: 8px; color: #909399; font-size: 12px; }
-.language-preview { padding: 10px 0; }
-.lang-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-.lang-tag { display: flex; align-items: center; gap: 6px; padding: 6px 12px; }
-.lang-tag-text { font-size: 13px; }
-.lang-count-info { text-align: center; color: #909399; font-size: 13px; padding-top: 10px; border-top: 1px solid #ebeef5; }
-.dialog-footer { display: flex; justify-content: flex-end; gap: 10px; }
+.language-config-container {
+  padding: 0;
+}
+.config-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 15px;
+}
+.config-card {
+  border: 1px solid #ebeef5;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+.config-card:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  border-color: #dcdfe6;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  background: #fafafa;
+  border-bottom: 1px solid #ebeef5;
+}
+.config-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #303133;
+}
+.name-icon {
+  font-size: 16px;
+  color: #409eff;
+}
+.config-tags {
+  display: flex;
+  gap: 5px;
+}
+.card-body {
+  padding: 15px;
+}
+.config-value {
+  font-size: 14px;
+  color: #606266;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.lang-count-text {
+  color: #909399;
+}
+.lang-count-number {
+  font-size: 20px;
+  font-weight: 600;
+  color: #409eff;
+}
+.lang-count-unit {
+  color: #909399;
+}
+.lang-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.lang-tag {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.lang-flag-icon {
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
+}
+.card-footer {
+  padding: 10px 15px;
+  border-top: 1px solid #f0f0f0;
+}
+.config-desc {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  font-size: 12px;
+  color: #909399;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.config-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.file-path {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 15px;
+  background: #f5f7fa;
+  border-top: 1px solid #ebeef5;
+  font-size: 12px;
+}
+.file-path code {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  background: #fff;
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: #606266;
+  font-size: 11px;
+}
+.editor-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.editor-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background: #f5f7fa;
+  border-radius: 4px;
+}
+.toolbar-left,
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.syntax-result {
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.syntax-result.success {
+  background: #f0f9eb;
+  color: #67c23a;
+  border: 1px solid #e1f3d8;
+}
+.syntax-result.error {
+  background: #fef0f0;
+  color: #f56c6c;
+  border: 1px solid #fde2e2;
+}
+.editor-main {
+  flex: 1;
+  display: flex;
+  gap: 10px;
+  min-height: 500px;
+  height: 500px;
+}
+.editor-wrapper {
+  flex: 1;
+  border: 1px solid #ebeef5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.backup-panel {
+  width: 280px;
+  flex-shrink: 0;
+  border: 1px solid #ebeef5;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.backup-panel .panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: #fafafa;
+  border-bottom: 1px solid #ebeef5;
+}
+.backup-panel .panel-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #303133;
+}
+.backup-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+.backup-item {
+  padding: 10px;
+  border: 1px solid #ebeef5;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.backup-item:hover {
+  border-color: #409eff;
+}
+.backup-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 6px;
+}
+.backup-header i {
+  color: #909399;
+  font-size: 12px;
+}
+.backup-time {
+  font-size: 13px;
+  font-weight: 500;
+  color: #303133;
+}
+.backup-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #909399;
+  margin-bottom: 6px;
+}
+.backup-actions {
+  display: flex;
+  gap: 5px;
+}
+.backup-empty {
+  text-align: center;
+  padding: 30px 0;
+  color: #909399;
+}
+.backup-empty .el-icon {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+.backup-empty p {
+  font-size: 13px;
+  margin: 0;
+}
+.editor-tip {
+  margin-top: 10px;
+}
+.tip-extra {
+  margin-top: 8px;
+  color: #909399;
+  font-size: 12px;
+}
+.language-preview {
+  padding: 10px 0;
+}
+.lang-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.lang-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+}
+.lang-tag-text {
+  font-size: 13px;
+}
+.lang-count-info {
+  text-align: center;
+  color: #909399;
+  font-size: 13px;
+  padding-top: 10px;
+  border-top: 1px solid #ebeef5;
+}
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
 </style>

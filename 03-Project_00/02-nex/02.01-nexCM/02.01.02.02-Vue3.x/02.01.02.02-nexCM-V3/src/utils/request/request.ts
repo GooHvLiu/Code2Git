@@ -6,10 +6,13 @@
  * - 统一 Token 注入、业务码判断、错误提示、Token 过期跳转
  * - 取消重复请求、路由切换取消
  * - 动态 import store / router / i18n 避免循环依赖
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import axios, { type AxiosRequestConfig } from 'axios'
 import type { ApiResponse } from '@/types/api'
 import { showError, showWarning } from '../ui/feedback'
+import i18n from '@/i18n'
 import config from '@/config'
 import { getToken } from '../auth/auth'
 import { ROUTE_PATHS } from '@/router/constant/pathConstants'
@@ -45,7 +48,7 @@ function getRequestKey(reqConfig: AxiosRequestConfig): string {
 function addPending(reqConfig: InternalAxiosRequestConfigLike): void {
   const key = getRequestKey(reqConfig)
   if (pendingMap.has(key)) {
-    pendingMap.get(key)?.('重复请求，自动取消上一次')
+    pendingMap.get(key)?.(i18n.global.t('common.requestCancelDuplicate') as string)
   }
   const source = axios.CancelToken.source()
   reqConfig.cancelToken = source.token
@@ -58,7 +61,7 @@ function removePending(reqConfig: AxiosRequestConfig): void {
 }
 
 export function cancelAllPending(): void {
-  pendingMap.forEach(cancel => cancel('路由切换，取消未完成请求'))
+  pendingMap.forEach(cancel => cancel(i18n.global.t('common.requestCancelRouteChange') as string))
   pendingMap.clear()
 }
 
@@ -88,7 +91,7 @@ function delay(ms: number): Promise<void> {
 
 // 请求拦截器
 service.interceptors.request.use(
-  async (requestConfig) => {
+  async requestConfig => {
     const cfg = requestConfig as InternalAxiosRequestConfigLike
     if (!cfg.skipPending) addPending(cfg)
 
@@ -112,7 +115,7 @@ service.interceptors.request.use(
     }
     return requestConfig
   },
-  async (error) => {
+  async error => {
     const { useAppStore } = await import('@/store/modules/app')
     useAppStore().hideLoading()
     return Promise.reject(error)
@@ -144,7 +147,9 @@ service.interceptors.response.use(
         await useUserStore().logout()
         const { default: router } = await import('@/router/index')
         router.push(`${ROUTE_PATHS.LOGIN}?redirect=${router.currentRoute.value.fullPath}`)
-        setTimeout(() => { isReloginShowing = false }, 2000)
+        setTimeout(() => {
+          isReloginShowing = false
+        }, 2000)
       }
       return Promise.reject(res)
     }
@@ -176,7 +181,7 @@ service.interceptors.response.use(
     showError(message)
     return Promise.reject(res)
   },
-  async (error) => {
+  async error => {
     if (error.config) removePending(error.config)
     const { useAppStore } = await import('@/store/modules/app')
     useAppStore().hideLoading()
@@ -184,8 +189,8 @@ service.interceptors.response.use(
     if (axios.isCancel(error)) return Promise.reject(error)
 
     const reqConfig = (error.config || {}) as InternalAxiosRequestConfigLike
-    const shouldRetry = reqConfig.retry !== false &&
-      (!error.response || RETRY_CONFIG.retryableStatus.includes(error.response.status))
+    const shouldRetry =
+      reqConfig.retry !== false && (!error.response || RETRY_CONFIG.retryableStatus.includes(error.response.status))
 
     if (shouldRetry) {
       reqConfig._retryCount = reqConfig._retryCount || 0

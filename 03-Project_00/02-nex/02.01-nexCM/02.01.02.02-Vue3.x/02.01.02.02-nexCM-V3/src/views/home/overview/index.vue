@@ -21,14 +21,18 @@
       <!-- 运行速度 -->
       <el-col :span="6">
         <div class="metric-card speed">
-          <div class="card-icon"><el-icon><Odometer /></el-icon></div>
+          <div class="card-icon">
+            <el-icon><Odometer /></el-icon>
+          </div>
           <div class="card-content">
             <div class="card-label">{{ t('layout.home.dashboard.metrics.speed') }}</div>
             <div class="card-value">
               {{ formatNumber(metrics.currentSpeed)
               }}<span class="card-unit">{{ t('layout.home.dashboard.metrics.bottlePerHour') }}</span>
             </div>
-            <div class="card-sub">{{ t('layout.home.overview.targetSpeed', { speed: formatNumber(metrics.targetSpeed) }) }}</div>
+            <div class="card-sub">
+              {{ t('layout.home.overview.targetSpeed', { speed: formatNumber(metrics.targetSpeed) }) }}
+            </div>
           </div>
         </div>
       </el-col>
@@ -36,7 +40,9 @@
       <!-- 今日产能 -->
       <el-col :span="6">
         <div class="metric-card today">
-          <div class="card-icon"><el-icon><Calendar /></el-icon></div>
+          <div class="card-icon">
+            <el-icon><Calendar /></el-icon>
+          </div>
           <div class="card-content">
             <div class="card-label">{{ t('layout.home.dashboard.metrics.todayOutput') }}</div>
             <div class="card-value">
@@ -58,7 +64,9 @@
       <!-- 本班产能 -->
       <el-col :span="6">
         <div class="metric-card shift">
-          <div class="card-icon"><el-icon><Timer /></el-icon></div>
+          <div class="card-icon">
+            <el-icon><Timer /></el-icon>
+          </div>
           <div class="card-content">
             <div class="card-label">{{ t('layout.home.dashboard.metrics.shiftOutput') }}</div>
             <div class="card-value">
@@ -66,7 +74,12 @@
               }}<span class="card-unit">{{ t('layout.home.dashboard.metrics.bottle') }}</span>
             </div>
             <div class="card-sub">
-              {{ t('layout.home.overview.shiftTarget', { shift: metrics.shiftName, target: formatNumber(metrics.shiftTarget) }) }}
+              {{
+                t('layout.home.overview.shiftTarget', {
+                  shift: metrics.shiftName,
+                  target: formatNumber(metrics.shiftTarget)
+                })
+              }}
             </div>
           </div>
         </div>
@@ -90,11 +103,7 @@
           </template>
           <div class="chart-body">
             <div v-if="productionTrend.length > 0" class="bar-chart">
-              <div
-                v-for="(item, index) in productionTrend"
-                :key="index"
-                class="bar-item"
-              >
+              <div v-for="(item, index) in productionTrend" :key="index" class="bar-item">
                 <div class="bar-tooltip">
                   {{ t('layout.home.overview.trendTooltip', { hour: item.hour, value: formatNumber(item.value) }) }}
                 </div>
@@ -135,12 +144,7 @@
           </template>
           <div class="alarm-body">
             <div class="alarm-list">
-              <div
-                v-for="(alarm, index) in activeAlarms"
-                :key="index"
-                class="alarm-item"
-                :class="alarm.level"
-              >
+              <div v-for="(alarm, index) in activeAlarms" :key="index" class="alarm-item" :class="alarm.level">
                 <el-icon class="alarm-icon">
                   <CircleCloseFilled v-if="alarm.level === 'danger'" />
                   <WarningFilled v-else-if="alarm.level === 'warning'" />
@@ -232,7 +236,7 @@ const metrics = computed(() => ({
   todayRate: deviceStore.production.todayRate,
   shiftOutput: deviceStore.production.shiftOutput,
   shiftTarget: deviceStore.production.shiftTarget,
-  shiftName: deviceStore.production.shiftName
+  shiftName: t(deviceStore.production.shiftName)
 }))
 
 // 24 小时产能趋势（直接消费 store 数据，无数据时展示空状态而非虚构柱条）
@@ -249,9 +253,7 @@ const activeAlarms = computed<AlarmVM[]>(() => {
   const list = deviceStore.alarms.current || []
   return list.slice(0, 5).map((raw): AlarmVM => {
     const a = raw as Record<string, unknown>
-    const level = (['danger', 'warning', 'info'].includes(a.level as string)
-      ? a.level
-      : 'warning') as AlarmLevel
+    const level = (['danger', 'warning', 'info'].includes(a.level as string) ? a.level : 'warning') as AlarmLevel
     return {
       level,
       title: String(a.message ?? a.title ?? ''),

@@ -73,7 +73,7 @@ export function filterTreeByType(tree: PermissionNode[] | undefined, type: strin
  */
 export function countNodesByType(nodes: PermissionNode[], type: string, keys: Array<number | string>): number {
   let count = 0
-  nodes.forEach((node) => {
+  nodes.forEach(node => {
     if (node.type === type && keys.includes(node.id)) count++
     if (node.children && node.children.length > 0) {
       count += countNodesByType(node.children, type, keys)

@@ -9,6 +9,7 @@ import { useUserStore } from '@/store/modules/user'
 import { usePermissionStore } from '@/store/modules/permission'
 import { ROUTE_WHITE_LIST } from './constant/constants'
 import { ROUTE_PATHS, CATCH_ALL_ROUTE_NAME } from './constant/pathConstants'
+import { layoutChildRoutes } from './constant/constantRoutes'
 import { getToken } from '@/utils/auth/auth'
 import { cancelAllPending } from '@/utils/request/request'
 import { checkLicense, resetLicenseCache } from '@/utils/auth/licenseGuard'
@@ -20,6 +21,7 @@ import { isSuperAdmin } from '@/utils/auth/permission'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import type { RouteLocationNormalized } from 'vue-router'
+import { watch } from 'vue'
 
 NProgress.configure({ showSpinner: false })
 
@@ -27,6 +29,27 @@ const whiteList = ROUTE_WHITE_LIST || [ROUTE_PATHS.LOGIN]
 
 // 授权校验与缓存统一收敛到 utils/auth/licenseGuard；透出 resetLicenseCache 兼容既有引用
 export { resetLicenseCache }
+
+/**
+ * 按指定路由与 locale 重算并设置 document.title。
+ * 路由守卫首屏/切路由时传入 to；locale 变化（无导航）时不传参，用当前路由。
+ */
+function updateDocumentTitle(route?: RouteLocationNormalized): void {
+  const target = route || router.currentRoute.value
+  const titles = target.meta?.titles as string[] | undefined
+  const pageTitleKey = titles?.[titles.length - 1]
+  const pageTitle = resolveMenuTitle(pageTitleKey as string)
+  const systemName = i18n.global.t('common.systemName') as string
+  document.title = pageTitle ? `${pageTitle} - ${systemName}` : systemName
+}
+
+/** locale 切换（不经导航）时同步标题 */
+watch(
+  () => (i18n.global.locale as { value: string }).value,
+  () => {
+    updateDocumentTitle()
+  }
+)
 
 function checkRouteRoles(to: RouteLocationNormalized, roles: string[]): boolean {
   const requiredRoles = to.meta?.roles as string[] | undefined
@@ -43,10 +66,7 @@ router.beforeEach(async (to, _from, next) => {
   NProgress.start()
   cancelAllPending()
 
-  const pageTitleKey = to.meta?.titles?.[(to.meta.titles as string[]).length - 1]
-  const pageTitle = resolveMenuTitle(pageTitleKey as string)
-  const systemName = i18n.global.t('common.systemName') as string
-  document.title = pageTitle ? `${pageTitle} - ${systemName}` : systemName
+  updateDocumentTitle(to)
 
   if (to.path === ROUTE_PATHS.LICENSE_IMPORT) return next()
 
@@ -87,6 +107,13 @@ router.beforeEach(async (to, _from, next) => {
 
     const accessRoutes = await permissionStore.generateRoutes()
     accessRoutes.forEach(route => {
+      router.addRoute('Layout', route)
+    })
+
+    // 补挂 Layout 常驻子路由（profile / notification）。
+    // Vue Router 4 在批量 addRoute('Layout', ...) 重建 matcher 后，
+    // 最初随 constantRoutes 注册的相对路径子路由会从匹配表丢失，需按同名重新补挂。
+    layoutChildRoutes.forEach(route => {
       router.addRoute('Layout', route)
     })
 

@@ -58,7 +58,11 @@ export interface SpEditorTarget {
 
 type ReadFileApi = (filePath: string) => Promise<{ data: { content?: string } } | any>
 type WriteFileApi = (payload: { filePath: string; content: string; remark?: string }) => Promise<unknown>
-type CheckSyntaxApi = (payload: { filePath?: string; content?: string; language?: string }) => Promise<{ data: SpSyntaxResult } | any>
+type CheckSyntaxApi = (payload: {
+  filePath?: string
+  content?: string
+  language?: string
+}) => Promise<{ data: SpSyntaxResult } | any>
 type BackupListApi = (filePath: string) => Promise<{ data: SpBackupItem[] } | any>
 type BackupMutateApi = (payload: { filePath: string; backupName: string }) => Promise<unknown>
 type BackupDirGetApi = () => Promise<any>
@@ -121,7 +125,8 @@ export function useSpConfigFileEditor(apis: SpConfigFileEditorApis) {
   async function openEditor(target: SpEditorTarget): Promise<void> {
     currentEditItem.value = target
     currentEditFile.value = target.filePath
-    editorLanguage.value = target.filePath.endsWith('.js') || target.filePath.endsWith('.ts') ? 'javascript' : 'plaintext'
+    editorLanguage.value =
+      target.filePath.endsWith('.js') || target.filePath.endsWith('.ts') ? 'javascript' : 'plaintext'
     highlightLines.value = target.highlightLine ? [target.highlightLine] : []
     scrollToLine.value = target.highlightLine || null
     syntaxResult.value = null
@@ -181,7 +186,11 @@ export function useSpConfigFileEditor(apis: SpConfigFileEditorApis) {
   async function confirmSave(): Promise<void> {
     saving.value = true
     try {
-      await apis.writeFile({ filePath: currentEditFile.value, content: editorContent.value, remark: saveForm.value.remark })
+      await apis.writeFile({
+        filePath: currentEditFile.value,
+        content: editorContent.value,
+        remark: saveForm.value.remark
+      })
       originalContent.value = editorContent.value
       saveDialogVisible.value = false
       showSuccess(t('superPanel.projectConfig.editor.saveSuccess'))
@@ -211,7 +220,9 @@ export function useSpConfigFileEditor(apis: SpConfigFileEditorApis) {
 
   /** 恢复备份 */
   async function restoreBackup(backup: SpBackupItem): Promise<void> {
-    const ok = await confirmAction(t('superPanel.projectConfig.backup.restoreConfirm'), t('common.warning'), { type: 'warning' })
+    const ok = await confirmAction(t('superPanel.projectConfig.backup.restoreConfirm'), t('common.warning'), {
+      type: 'warning'
+    })
     if (!ok) return
     try {
       await apis.restoreBackup({ filePath: currentEditFile.value, backupName: backup.name })
@@ -228,7 +239,9 @@ export function useSpConfigFileEditor(apis: SpConfigFileEditorApis) {
 
   /** 删除备份 */
   async function deleteBackup(backup: SpBackupItem): Promise<void> {
-    const ok = await confirmAction(t('superPanel.projectConfig.backup.deleteConfirm'), t('common.warning'), { type: 'warning' })
+    const ok = await confirmAction(t('superPanel.projectConfig.backup.deleteConfirm'), t('common.warning'), {
+      type: 'warning'
+    })
     if (!ok) return
     try {
       await apis.deleteBackup({ filePath: currentEditFile.value, backupName: backup.name })

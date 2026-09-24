@@ -9,13 +9,7 @@
         <p class="page-desc">{{ t('system.audit.page.pageDesc') }}</p>
       </div>
       <div class="header-right">
-        <el-button
-          type="primary"
-          :icon="Refresh"
-          size="small"
-          :loading="loading"
-          @click="refreshList"
-        >
+        <el-button type="primary" :icon="Refresh" size="small" :loading="loading" @click="refreshList">
           {{ t('common.refresh') }}
         </el-button>
         <export-dropdown
@@ -83,20 +77,42 @@
       class="audit-table"
     >
       <el-table-column :label="t('common.index')" type="index" width="60" align="center" />
-      <el-table-column v-if="isAdmin" :label="t('system.audit.page.userName')" prop="user_name" min-width="120" align="center" />
+      <el-table-column
+        v-if="isAdmin"
+        :label="t('system.audit.page.userName')"
+        prop="user_name"
+        min-width="120"
+        align="center"
+      />
       <el-table-column :label="t('system.audit.page.action')" prop="action" min-width="140" align="center">
         <template #default="{ row }">{{ getActionText(row.action) }}</template>
       </el-table-column>
-      <el-table-column :label="t('system.audit.page.target')" prop="target" min-width="200" show-overflow-tooltip />
-      <el-table-column :label="t('system.audit.page.oldValue')" prop="old_value" min-width="120" show-overflow-tooltip />
-      <el-table-column :label="t('system.audit.page.newValue')" prop="new_value" min-width="120" show-overflow-tooltip />
+      <el-table-column :label="t('system.audit.page.target')" prop="target" min-width="200" show-overflow-tooltip><template #default="{ row }">{{ getTargetText(row.target) }}</template></el-table-column>
+      <el-table-column
+        :label="t('system.audit.page.oldValue')"
+        prop="old_value"
+        min-width="120"
+        show-overflow-tooltip
+      />
+      <el-table-column
+        :label="t('system.audit.page.newValue')"
+        prop="new_value"
+        min-width="120"
+        show-overflow-tooltip
+      />
       <el-table-column :label="t('system.audit.page.result')" prop="result" width="100" align="center">
         <template #default="{ row }">
           <dict-tag dict-code="audit_result" :value="row.result" />
         </template>
       </el-table-column>
       <el-table-column :label="t('system.audit.page.ip')" prop="ip" width="140" align="center" />
-      <el-table-column :label="t('system.audit.page.createdAt')" prop="create_time" min-width="170" align="center" sortable="custom">
+      <el-table-column
+        :label="t('system.audit.page.createdAt')"
+        prop="create_time"
+        min-width="170"
+        align="center"
+        sortable="custom"
+      >
         <template #default="{ row }">{{ formatDateTime(row.create_time) }}</template>
       </el-table-column>
       <el-table-column :label="t('common.operation')" width="100" align="center">
@@ -127,16 +143,28 @@
       :close-on-click-modal="false"
     >
       <el-descriptions v-if="currentDetail" :column="1" border>
-        <el-descriptions-item :label="t('system.audit.page.userName')">{{ currentDetail.user_name || '-' }}</el-descriptions-item>
-        <el-descriptions-item :label="t('system.audit.page.action')">{{ getActionText(currentDetail.action) }}</el-descriptions-item>
-        <el-descriptions-item :label="t('system.audit.page.target')">{{ currentDetail.target || '-' }}</el-descriptions-item>
-        <el-descriptions-item :label="t('system.audit.page.oldValue')">{{ currentDetail.old_value || '-' }}</el-descriptions-item>
-        <el-descriptions-item :label="t('system.audit.page.newValue')">{{ currentDetail.new_value || '-' }}</el-descriptions-item>
+        <el-descriptions-item :label="t('system.audit.page.userName')">{{
+          currentDetail.user_name || '-'
+        }}</el-descriptions-item>
+        <el-descriptions-item :label="t('system.audit.page.action')">{{
+          getActionText(currentDetail.action)
+        }}</el-descriptions-item>
+        <el-descriptions-item :label="t('system.audit.page.target')">{{
+          getTargetText(currentDetail.target) || '-'
+        }}</el-descriptions-item>
+        <el-descriptions-item :label="t('system.audit.page.oldValue')">{{
+          currentDetail.old_value || '-'
+        }}</el-descriptions-item>
+        <el-descriptions-item :label="t('system.audit.page.newValue')">{{
+          currentDetail.new_value || '-'
+        }}</el-descriptions-item>
         <el-descriptions-item :label="t('system.audit.page.result')">
           <dict-tag dict-code="audit_result" :value="currentDetail.result" />
         </el-descriptions-item>
         <el-descriptions-item :label="t('system.audit.page.ip')">{{ currentDetail.ip || '-' }}</el-descriptions-item>
-        <el-descriptions-item :label="t('system.audit.page.createdAt')">{{ formatDateTime(currentDetail.create_time) }}</el-descriptions-item>
+        <el-descriptions-item :label="t('system.audit.page.createdAt')">{{
+          formatDateTime(currentDetail.create_time)
+        }}</el-descriptions-item>
       </el-descriptions>
       <template #footer>
         <el-button @click="detailDialogVisible = false">{{ t('common.close') }}</el-button>
@@ -215,19 +243,18 @@ function getActionText(action?: string): string {
   return translated === key ? action : translated
 }
 
+/** 翻译审计目标（缺 key 回退原始 target） */
+function getTargetText(target?: string): string {
+  if (!target) return ''
+  const key = `system.audit.target.${target}`
+  const translated = t(key)
+  return translated === key ? target : translated
+}
+
 const listApi = computed(() => (isAdmin.value ? requestGetAuditListApi : requestGetMyAuditListApi))
 
-const {
-  loading,
-  tableData,
-  total,
-  pageNum,
-  pageSize,
-  getList,
-  handleQuery,
-  handleReset,
-  refreshList
-} = useSysTable<AuditRow>(listApi.value, queryParams, { beforeFetch })
+const { loading, tableData, total, pageNum, pageSize, getList, handleQuery, handleReset, refreshList } =
+  useSysTable<AuditRow>(listApi.value, queryParams, { beforeFetch })
 
 function formatDateTime(date?: string): string {
   return formatDate(date)
@@ -252,10 +279,16 @@ const exportColumns = computed<ExportColumn[]>(() => {
       label: t('system.audit.page.result'),
       prop: 'result',
       width: 80,
-      formatter: (row) => (row.result === 'success' ? t('system.audit.page.resultSuccess') : t('system.audit.page.resultFailed'))
+      formatter: row =>
+        row.result === 'success' ? t('system.audit.page.resultSuccess') : t('system.audit.page.resultFailed')
     },
     { label: t('system.audit.page.ip'), prop: 'ip', width: 130 },
-    { label: t('system.audit.page.createdAt'), prop: 'create_time', width: 170, formatter: (row) => formatDate(row.create_time as string) }
+    {
+      label: t('system.audit.page.createdAt'),
+      prop: 'create_time',
+      width: 170,
+      formatter: row => formatDate(row.create_time as string)
+    }
   )
   return cols
 })
@@ -287,9 +320,17 @@ const exportColumns = computed<ExportColumn[]>(() => {
       display: flex;
       align-items: center;
     }
-    .page-desc { margin: 8px 0 0; font-size: 13px; color: #909399; }
+    .page-desc {
+      margin: 8px 0 0;
+      font-size: 13px;
+      color: #909399;
+    }
   }
-  .header-right { display: flex; gap: 10px; align-items: center; }
+  .header-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
 }
 
 .audit-table {

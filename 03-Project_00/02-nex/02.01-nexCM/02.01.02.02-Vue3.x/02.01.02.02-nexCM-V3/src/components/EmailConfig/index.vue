@@ -27,7 +27,14 @@
     </div>
 
     <!-- 配置列表表格 -->
-    <el-table v-loading="loading" :data="tableData" :element-loading-text="t('common.loading')" border stripe style="width: 100%">
+    <el-table
+      v-loading="loading"
+      :data="tableData"
+      :element-loading-text="t('common.loading')"
+      border
+      stripe
+      style="width: 100%"
+    >
       <el-table-column prop="id" label="ID" width="70" align="center" />
       <el-table-column prop="name" :label="t('superPanel.config.email.configName')" min-width="150" />
       <el-table-column prop="provider" :label="t('superPanel.config.email.provider')" width="120" align="center">
@@ -192,7 +199,11 @@
             v-model="form.password"
             type="password"
             show-password
-            :placeholder="form.id ? t('superPanel.config.email.authCodePlaceholderEdit') : t('superPanel.config.email.authCodePlaceholder')"
+            :placeholder="
+              form.id
+                ? t('superPanel.config.email.authCodePlaceholderEdit')
+                : t('superPanel.config.email.authCodePlaceholder')
+            "
           />
           <div class="form-tip">{{ t('superPanel.config.email.authCodeTip') }}</div>
         </el-form-item>
@@ -297,13 +308,13 @@
 <script setup lang="ts">
 /**
  * 邮箱配置管理（CRUD + 测试发送）
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { FormInstance, FormRules } from 'element-plus'
-import {
-  Search, Plus, Refresh, Promotion, Star, Edit, Delete, QuestionFilled
-} from '@element-plus/icons-vue'
+import { Search, Plus, Refresh, Promotion, Star, Edit, Delete, QuestionFilled } from '@element-plus/icons-vue'
 import {
   requestGetEmailConfigListApi,
   requestCreateEmailConfigApi,
@@ -503,11 +514,11 @@ async function handleSave(): Promise<void> {
 
 async function handleDelete(row: EmailRow): Promise<void> {
   try {
-    await confirmAction(
-      t('superPanel.config.email.deleteConfirm'),
-      t('superPanel.config.email.deleteTitle'),
-      { type: 'warning', confirmButtonText: t('superPanel.config.email.confirmBtn'), cancelButtonText: t('superPanel.config.email.cancelBtn') }
-    )
+    await confirmAction(t('superPanel.config.email.deleteConfirm'), t('superPanel.config.email.deleteTitle'), {
+      type: 'warning',
+      confirmButtonText: t('superPanel.config.email.confirmBtn'),
+      cancelButtonText: t('superPanel.config.email.cancelBtn')
+    })
     await requestDeleteEmailConfigApi(String(row.id))
     showMessage(t('superPanel.config.email.deleteSuccess'), 'success')
     loadList()
@@ -530,9 +541,7 @@ async function handleStatusChange(row: EmailRow): Promise<void> {
   try {
     await requestUpdateEmailConfigStatusApi(String(row.id), String(row.status))
     showMessage(
-      row.status === 1
-        ? t('superPanel.config.email.enableSuccess')
-        : t('superPanel.config.email.disableSuccess'),
+      row.status === 1 ? t('superPanel.config.email.enableSuccess') : t('superPanel.config.email.disableSuccess'),
       'success'
     )
   } catch {
@@ -571,7 +580,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.email-config-panel { padding: 20px; }
+.email-config-panel {
+  padding: 20px;
+}
 
 .email-toolbar {
   display: flex;
@@ -611,5 +622,7 @@ onMounted(() => {
   transition: color 0.2s;
 }
 
-.label-tip-icon:hover { color: #409eff; }
+.label-tip-icon:hover {
+  color: #409eff;
+}
 </style>

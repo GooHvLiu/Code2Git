@@ -103,7 +103,7 @@ export function useTable<T = Record<string, unknown>, P extends Record<string, u
   }
 
   function handleReset(): void {
-    (Object.keys(queryParams) as Array<keyof P>).forEach(key => {
+    ;(Object.keys(queryParams) as Array<keyof P>).forEach(key => {
       queryParams[key] = '' as P[keyof P]
     })
     pageNum.value = 1

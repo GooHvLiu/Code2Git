@@ -9,6 +9,8 @@
  *   import { showSuccess, showError, confirmDelete } from '@/utils/ui/feedback'
  *   showError('请求失败')
  *   const ok = await confirmDelete('确定要删除吗？')
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { ElMessage, ElMessageBox } from 'element-plus'
 import i18n from '@/i18n'
@@ -47,7 +49,10 @@ interface ShowMessageOptions {
   [key: string]: unknown
 }
 
-export function showMessage(options: string | ShowMessageOptions, type: 'success' | 'warning' | 'info' | 'error' = 'info') {
+export function showMessage(
+  options: string | ShowMessageOptions,
+  type: 'success' | 'warning' | 'info' | 'error' = 'info'
+) {
   const config: ShowMessageOptions = typeof options === 'string' ? { message: options } : { ...options }
   const content = config.message || ''
   if (!content) return
@@ -74,7 +79,11 @@ export function showInfo(message: string, options: ShowMessageOptions = {}) {
   return showMessage({ message, ...options }, 'info')
 }
 
-export function confirmAction(message: string, title: string = t('common.tip'), options: Record<string, unknown> = {}): Promise<boolean> {
+export function confirmAction(
+  message: string,
+  title: string = t('common.tip'),
+  options: Record<string, unknown> = {}
+): Promise<boolean> {
   return ElMessageBox.confirm(message, title, {
     confirmButtonText: t('common.confirm'),
     cancelButtonText: t('common.cancel'),
@@ -85,19 +94,23 @@ export function confirmAction(message: string, title: string = t('common.tip'), 
     .catch(() => false)
 }
 
-export function confirmDelete(message = '确定要删除吗？删除后不可恢复。'): Promise<boolean> {
-  return confirmAction(message, t('common.deleteConfirm'), {
+export function confirmDelete(message?: string): Promise<boolean> {
+  return confirmAction(message || t('common.deleteConfirmDefault'), t('common.deleteConfirm'), {
     confirmButtonText: t('common.confirmDelete'),
     cancelButtonText: t('common.cancel'),
     type: 'warning'
   })
 }
 
-export function confirmBatch(count: number, action = '操作'): Promise<boolean> {
+export function confirmBatch(count: number, action?: string): Promise<boolean> {
   if (count === 0) return Promise.resolve(false)
-  return confirmAction(`已选中 ${count} 项，确定要执行${action}吗？`, t('common.batchConfirm'), {
-    type: 'warning'
-  })
+  return confirmAction(
+    t('common.batchConfirmMessage', { count, action: action || t('common.action') }),
+    t('common.batchConfirm'),
+    {
+      type: 'warning'
+    }
+  )
 }
 
 export function confirmDanger(message: string, confirmText = ''): Promise<boolean> {
@@ -121,7 +134,7 @@ export function confirmDanger(message: string, confirmText = ''): Promise<boolea
 }
 
 export function confirmLogout(): Promise<boolean> {
-  return confirmAction('确定要退出登录吗？', t('common.logoutConfirm'), {
+  return confirmAction(t('common.logoutConfirmMessage'), t('common.logoutConfirm'), {
     confirmButtonText: t('common.logout'),
     cancelButtonText: t('common.cancel'),
     type: 'warning'

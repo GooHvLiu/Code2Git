@@ -34,7 +34,12 @@ export function requestGetTableStructureApi(tableName: string) {
  * @param {string} search - 搜索关键词
  * @returns {Promise<{code:number, msg:string, data:{data:Array, total:number, page:number, pageSize:number}}>}
  */
-export function requestGetTableDataApi(tableName: string, page: number= 1, pageSize: number= 20, search: unknown= '') {
+export function requestGetTableDataApi(
+  tableName: string,
+  page: number = 1,
+  pageSize: number = 20,
+  search: unknown = ''
+) {
   return request({
     url: `/db-manager/tables/${tableName}/data`,
     method: 'get',
@@ -96,7 +101,11 @@ export function requestDeleteTableDataApi(tableName: string, where: string) {
  * @param {string} remark - 备份备注
  * @returns {Promise<{code:number, msg:string, data:{backupName:string, filePath:string, fileSize:number}}>}
  */
-export function requestCreateBackupApi(backupType: string= 'full', tableName: string | null = null, remark: string= '') {
+export function requestCreateBackupApi(
+  backupType: string = 'full',
+  tableName: string | null = null,
+  remark: string = ''
+) {
   return request({
     url: '/db-manager/backup',
     method: 'post',
@@ -110,7 +119,7 @@ export function requestCreateBackupApi(backupType: string= 'full', tableName: st
  * @param {number} pageSize - 每页条数
  * @returns {Promise<{code:number, msg:string, data:{list:Array, total:number, page:number, pageSize:number}}>}
  */
-export function requestGetBackupListApi(page: number= 1, pageSize: number= 20) {
+export function requestGetBackupListApi(page: number = 1, pageSize: number = 20) {
   return request({
     url: '/db-manager/backup',
     method: 'get',

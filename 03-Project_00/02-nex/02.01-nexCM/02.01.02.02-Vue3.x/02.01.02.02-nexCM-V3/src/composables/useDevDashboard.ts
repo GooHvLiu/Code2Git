@@ -60,11 +60,11 @@ export function useDevDashboard() {
   const realtimeParamsList = computed<RealtimeParam[]>(() => {
     const config = deviceStore.paramsConfig
     const params = deviceStore.params
-    return Object.keys(config).map((key) => {
+    return Object.keys(config).map(key => {
       const c = config[key]
       return {
         key,
-        name: c.name,
+        name: t(c.name),
         value: Number(params[key as keyof typeof params] ?? 0),
         unit: c.unit,
         min: c.min,
@@ -100,7 +100,7 @@ export function useDevDashboard() {
         label: t('device.state.statShiftOutput'),
         value: prod.shiftOutput.toLocaleString(),
         unit: t('device.state.unitBottle'),
-        sub: `${prod.shiftName} · ${t('device.state.target')} ${prod.shiftTarget.toLocaleString()}`
+        sub: `${t(prod.shiftName)} · ${t('device.state.target')} ${prod.shiftTarget.toLocaleString()}`
       }
     ]
   })

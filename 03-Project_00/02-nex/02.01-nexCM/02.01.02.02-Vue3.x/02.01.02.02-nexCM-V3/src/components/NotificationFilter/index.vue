@@ -92,6 +92,8 @@
 <script setup lang="ts">
 /**
  * 通知筛选条（归档/类型/已读/优先级/时间/关键词）
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { ref, watch, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -159,13 +161,48 @@ const localKeyword = ref(props.keyword)
 
 let searchTimer: ReturnType<typeof setTimeout> | null = null
 
-watch(() => props.archiveTab, val => { localArchiveTab.value = val })
-watch(() => props.filterType, val => { localFilterType.value = val })
-watch(() => props.readFilter, val => { localReadFilter.value = val })
-watch(() => props.priorityFilter, val => { localPriorityFilter.value = val })
-watch(() => props.timeFilter, val => { localTimeFilter.value = val })
-watch(() => props.dateRange, val => { localDateRange.value = [...val] })
-watch(() => props.keyword, val => { localKeyword.value = val })
+watch(
+  () => props.archiveTab,
+  val => {
+    localArchiveTab.value = val
+  }
+)
+watch(
+  () => props.filterType,
+  val => {
+    localFilterType.value = val
+  }
+)
+watch(
+  () => props.readFilter,
+  val => {
+    localReadFilter.value = val
+  }
+)
+watch(
+  () => props.priorityFilter,
+  val => {
+    localPriorityFilter.value = val
+  }
+)
+watch(
+  () => props.timeFilter,
+  val => {
+    localTimeFilter.value = val
+  }
+)
+watch(
+  () => props.dateRange,
+  val => {
+    localDateRange.value = [...val]
+  }
+)
+watch(
+  () => props.keyword,
+  val => {
+    localKeyword.value = val
+  }
+)
 
 function handleArchiveChange(): void {
   emit('update:archiveTab', localArchiveTab.value)
@@ -230,7 +267,9 @@ onBeforeUnmount(() => {
 
   .filter-row {
     margin-bottom: 12px;
-    &:last-child { margin-bottom: 0; }
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   .advanced-row {

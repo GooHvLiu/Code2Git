@@ -46,198 +46,218 @@ export default {
   action: {
     audit: {
       export: {
-        title: 'Audit Log Export',
+        title: 'Audit Log Export'
       },
       verify: {
-        title: 'Audit Hash Chain Verify',
+        title: 'Audit Hash Chain Verify'
       },
       view: {
-        title: 'Audit Log View',
-      },
+        title: 'Audit Log View'
+      }
     },
     config: {
       connection: {
         change: {
-          title: 'Connection Configuration Change',
-        },
+          title: 'Connection Configuration Change'
+        }
       },
       device: {
         change: {
-          title: 'Device Configuration Change',
-        },
+          title: 'Device Configuration Change'
+        }
       },
       export: {
         change: {
-          title: 'Export Configuration Change',
-        },
+          title: 'Export Configuration Change'
+        }
       },
       order: {
         change: {
-          title: 'Order Configuration Change',
-        },
+          title: 'Order Configuration Change'
+        }
       },
       plc: {
         change: {
-          title: 'PLC Connection Configuration Change',
-        },
+          title: 'PLC Connection Configuration Change'
+        }
       },
       security: {
         change: {
-          title: 'Security Configuration Change',
-        },
+          title: 'Security Configuration Change'
+        }
       },
       system: {
         change: {
-          title: 'System Parameter Change',
-        },
-      },
+          title: 'System Parameter Change'
+        }
+      }
     },
     data: {
       export: {
-        title: 'Data Export',
+        title: 'Data Export'
       },
       viewDetail: {
-        title: 'Data View Detail',
-      },
+        title: 'Data View Detail'
+      }
     },
     device: {
       alarm: {
         handle: {
-          title: 'Alarm Handle',
-        },
+          title: 'Alarm Handle'
+        }
       },
       paramChange: {
-        title: 'Device Parameter Change',
+        title: 'Device Parameter Change'
       },
       part: {
         create: {
-          title: 'Create Part',
+          title: 'Create Part'
         },
         delete: {
-          title: 'Delete Part',
+          title: 'Delete Part'
         },
         replace: {
-          title: 'Replace Part',
+          title: 'Replace Part'
         },
         update: {
-          title: 'Update Part',
-        },
+          title: 'Update Part'
+        }
       },
       statusChange: {
-        title: 'Device Status Change',
-      },
+        title: 'Device Status Change'
+      }
     },
     email: {
       configChange: {
-        title: 'Email Configuration Change',
+        title: 'Email Configuration Change'
       },
       logDelete: {
-        title: 'Email Log Delete',
-      },
+        title: 'Email Log Delete'
+      }
     },
     license: {
       expire: {
-        title: 'License Expire',
+        title: 'License Expire'
       },
       import: {
-        title: 'License Import',
-      },
+        title: 'License Import'
+      }
     },
     permission: {
       cacheClear: {
-        title: 'Permission Cache Clear',
+        title: 'Permission Cache Clear'
       },
       change: {
-        title: 'Permission Configuration Change',
-      },
+        title: 'Permission Configuration Change'
+      }
     },
     plc: {
       connect: {
-        title: 'PLC Connect',
+        title: 'PLC Connect'
       },
       disconnect: {
-        title: 'PLC Disconnect',
+        title: 'PLC Disconnect'
       },
       read: {
-        title: 'PLC Parameter Read',
+        title: 'PLC Parameter Read'
       },
       reconnect: {
-        title: 'PLC Reconnect',
+        title: 'PLC Reconnect'
       },
       write: {
-        title: 'PLC Parameter Write',
-      },
+        title: 'PLC Parameter Write'
+      }
     },
     production: {
       order: {
         create: {
-          title: 'Create Production Order',
+          title: 'Create Production Order'
         },
         delete: {
-          title: 'Delete Production Order',
+          title: 'Delete Production Order'
         },
         download: {
-          title: 'Download Production Order',
+          title: 'Download Production Order'
         },
         update: {
-          title: 'Update Production Order',
-        },
+          title: 'Update Production Order'
+        }
       },
       recipe: {
         download: {
-          title: 'Recipe Download',
-        },
-      },
+          title: 'Recipe Download'
+        }
+      }
     },
     role: {
       create: {
-        title: 'Create Role',
+        title: 'Create Role'
       },
       delete: {
-        title: 'Delete Role',
+        title: 'Delete Role'
       },
       update: {
-        title: 'Update Role',
-      },
+        title: 'Update Role'
+      }
     },
     user: {
       batchDelete: {
-        title: 'Batch Delete User',
+        title: 'Batch Delete User'
       },
       changePassword: {
-        title: 'Change Password',
+        title: 'Change Password'
       },
       create: {
-        title: 'Create User',
+        title: 'Create User'
       },
       delete: {
-        title: 'Delete User',
+        title: 'Delete User'
       },
       login: {
-        title: 'User Login',
+        title: 'User Login'
       },
       loginFailed: {
-        title: 'User Login Failed',
+        title: 'User Login Failed'
       },
       logout: {
-        title: 'User Logout',
+        title: 'User Logout'
       },
       register: {
-        title: 'User Register',
+        title: 'User Register'
       },
       resetPassword: {
-        title: 'Reset Password',
+        title: 'Reset Password'
       },
       roleChange: {
-        title: 'User Role Change',
+        title: 'User Role Change'
       },
       statusChange: {
-        title: 'Change User Status',
+        title: 'Change User Status'
       },
       update: {
-        title: 'Update User',
-      },
-    },
+        title: 'Update User'
+      }
+    }
+  },
+  target: {
+    '系统登录': 'System Login',
+    '账户锁定': 'Account Locked',
+    '账户解锁': 'Account Unlocked',
+    '密码修改': 'Password Changed',
+    '密码重置': 'Password Reset',
+    '用户创建': 'User Created',
+    '用户删除': 'User Deleted',
+    '角色变更': 'Role Changed',
+    '权限变更': 'Permission Changed',
+    '菜单修改': 'Menu Modified',
+    '配置修改': 'Config Modified',
+    '设备操作': 'Device Operation',
+    'PLC写入': 'PLC Write',
+    '数据导出': 'Data Export',
+    '文件上传': 'File Upload',
+    '授权导入': 'License Import',
+    '登录失败': 'Login Failed',
+    '用户登出': 'User Logout'
   },
   module: {
     audit: 'Audit Self',
@@ -249,6 +269,6 @@ export default {
     permission: 'Permission Management',
     plc: 'PLC Operation',
     production: 'Production Management',
-    user: 'User Management',
-  },
+    user: 'User Management'
+  }
 }

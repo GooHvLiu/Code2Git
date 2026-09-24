@@ -13,7 +13,12 @@
 import * as XLSX from 'xlsx'
 import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
+import i18n from '@/i18n'
 import { showSuccess, showError, showWarning } from '@/utils/ui/feedback'
+
+function t(key: string, params?: Record<string, unknown>): string {
+  return i18n.global.t(key, params || {}) as string
+}
 
 /** 列配置 */
 export interface ExportColumn {
@@ -40,7 +45,7 @@ export interface ExportTableOptions {
 }
 
 function getRowValues(columns: ExportColumn[], row: Record<string, unknown>): unknown[] {
-  return columns.map((col) => {
+  return columns.map(col => {
     if (col.formatter) return col.formatter(row, col)
     const value = col.prop ? row[col.prop] : ''
     if (value === null || value === undefined || value === '') return '--'
@@ -49,7 +54,7 @@ function getRowValues(columns: ExportColumn[], row: Record<string, unknown>): un
 }
 
 function filterExportColumns(columns: ExportColumn[]): ExportColumn[] {
-  return columns.filter((col) => col.prop && col.export !== false)
+  return columns.filter(col => col.prop && col.export !== false)
 }
 
 function formatNow(): string {
@@ -66,19 +71,25 @@ export function exportExcel(
 ): void {
   const { filename = 'export', sheetName = 'Sheet1' } = options
   const exportColumns = filterExportColumns(columns)
-  if (!exportColumns.length) { showError('没有可导出的列'); return }
-  if (!data || !data.length) { showWarning('没有可导出的数据'); return }
+  if (!exportColumns.length) {
+    showError(t('common.noColumnsToExport'))
+    return
+  }
+  if (!data || !data.length) {
+    showWarning(t('common.noDataToExport'))
+    return
+  }
 
-  const headers = exportColumns.map((col) => col.label)
-  const rows = data.map((row) => getRowValues(exportColumns, row))
+  const headers = exportColumns.map(col => col.label)
+  const rows = data.map(row => getRowValues(exportColumns, row))
   const worksheet = XLSX.utils.aoa_to_sheet([headers, ...rows])
-  worksheet['!cols'] = exportColumns.map((col) => ({
+  worksheet['!cols'] = exportColumns.map(col => ({
     wch: col.width ? Math.max(col.width / 8, 10) : 15
   }))
   const workbook = XLSX.utils.book_new()
   XLSX.utils.book_append_sheet(workbook, worksheet, sheetName)
   XLSX.writeFile(workbook, `${filename}.xlsx`)
-  showSuccess(`成功导出 ${data.length} 条数据`)
+  showSuccess(t('common.exportSuccess', { count: data.length }))
 }
 
 /** 导出 PDF（html2canvas + jsPDF） */
@@ -95,7 +106,7 @@ export function exportPdf(
   } = {}
 ): void {
   const {
-    title = '导出数据',
+    title = t('common.exportData'),
     filename = 'export',
     exporter = '',
     watermark = true,
@@ -104,15 +115,21 @@ export function exportPdf(
   } = options
 
   const i18nLabels = {
-    exporter: labels.exporter || '导出人',
-    time: labels.time || '导出时间',
-    countPrefix: labels.countPrefix || '共',
-    countSuffix: labels.countSuffix || '条记录'
+    exporter: labels.exporter || t('common.exporter'),
+    time: labels.time || t('common.exportTime'),
+    countPrefix: labels.countPrefix || t('common.recordCountPrefix'),
+    countSuffix: labels.countSuffix || t('common.recordCountSuffix')
   }
 
   const exportColumns = filterExportColumns(columns)
-  if (!exportColumns.length) { showError('没有可导出的列'); return }
-  if (!data || !data.length) { showWarning('没有可导出的数据'); return }
+  if (!exportColumns.length) {
+    showError(t('common.noColumnsToExport'))
+    return
+  }
+  if (!data || !data.length) {
+    showWarning(t('common.noDataToExport'))
+    return
+  }
 
   const container = document.createElement('div')
   container.style.width = '1040px'
@@ -122,7 +139,8 @@ export function exportPdf(
 
   if (watermark) {
     const wm = document.createElement('div')
-    wm.style.cssText = 'position:absolute;inset:0;opacity:0.12;font-size:15px;word-break:break-all;line-height:80px;color:#909399;pointer-events:none;'
+    wm.style.cssText =
+      'position:absolute;inset:0;opacity:0.12;font-size:15px;word-break:break-all;line-height:80px;color:#909399;pointer-events:none;'
     wm.textContent = (watermarkText || exporter || 'NEX').repeat(60)
     container.appendChild(wm)
   }
@@ -150,9 +168,10 @@ export function exportPdf(
   const thead = document.createElement('thead')
   const headerRow = document.createElement('tr')
   headerRow.style.background = '#f5f7fa'
-  exportColumns.forEach((col) => {
+  exportColumns.forEach(col => {
     const th = document.createElement('th')
-    th.style.cssText = 'border:1px solid #ebeef5;padding:10px 12px;text-align:center;font-weight:600;color:#303133;white-space:nowrap;'
+    th.style.cssText =
+      'border:1px solid #ebeef5;padding:10px 12px;text-align:center;font-weight:600;color:#303133;white-space:nowrap;'
     th.textContent = col.label
     headerRow.appendChild(th)
   })
@@ -176,30 +195,33 @@ export function exportPdf(
   container.appendChild(content)
   document.body.appendChild(container)
 
-  html2canvas(container, { scale: 2, useCORS: true }).then((canvas) => {
-    const img = canvas.toDataURL('image/png')
-    const pdf = new jsPDF('p', 'mm', 'a4')
-    const pageWidth = pdf.internal.pageSize.getWidth()
-    const pageHeight = pdf.internal.pageSize.getHeight()
-    const imgWidth = pageWidth
-    const imgHeight = (canvas.height * imgWidth) / canvas.width
-    let heightLeft = imgHeight
-    let position = 0
-    pdf.addImage(img, 'PNG', 0, position, imgWidth, imgHeight)
-    heightLeft -= pageHeight
-    while (heightLeft > 0) {
-      position -= pageHeight
-      pdf.addPage()
+  html2canvas(container, { scale: 2, useCORS: true })
+    .then(canvas => {
+      const img = canvas.toDataURL('image/png')
+      const pdf = new jsPDF('p', 'mm', 'a4')
+      const pageWidth = pdf.internal.pageSize.getWidth()
+      const pageHeight = pdf.internal.pageSize.getHeight()
+      const imgWidth = pageWidth
+      const imgHeight = (canvas.height * imgWidth) / canvas.width
+      let heightLeft = imgHeight
+      let position = 0
       pdf.addImage(img, 'PNG', 0, position, imgWidth, imgHeight)
       heightLeft -= pageHeight
-    }
-    pdf.save(`${filename}.pdf`)
-    showSuccess(`成功导出 ${data.length} 条数据`)
-  }).catch(() => {
-    showError('PDF 导出失败，请重试')
-  }).finally(() => {
-    document.body.removeChild(container)
-  })
+      while (heightLeft > 0) {
+        position -= pageHeight
+        pdf.addPage()
+        pdf.addImage(img, 'PNG', 0, position, imgWidth, imgHeight)
+        heightLeft -= pageHeight
+      }
+      pdf.save(`${filename}.pdf`)
+      showSuccess(t('common.exportSuccess', { count: data.length }))
+    })
+    .catch(() => {
+      showError(t('common.pdfExportFailed'))
+    })
+    .finally(() => {
+      document.body.removeChild(container)
+    })
 }
 
 /** 统一导出入口 */
@@ -207,7 +229,7 @@ export function exportTable(options: ExportTableOptions): void {
   const {
     data,
     columns,
-    title = '导出数据',
+    title = t('common.exportData'),
     filename = 'export',
     format = 'excel',
     selected = null,
@@ -219,14 +241,13 @@ export function exportTable(options: ExportTableOptions): void {
 
   const exportData = selected && selected.length > 0 ? selected : data
   if (!exportData || !exportData.length) {
-    showWarning('没有可导出的数据')
+    showWarning(t('common.noDataToExport'))
     return
   }
   const opts = { title, filename, exporter, watermark, watermarkText, labels }
   if (format === 'excel') exportExcel(exportData, columns, opts)
   else if (format === 'pdf') exportPdf(exportData, columns, opts)
-  else showError('不支持的导出格式')
+  else showError(t('common.unsupportedExportFormat'))
 }
 
 export default { exportTable, exportExcel, exportPdf }
-

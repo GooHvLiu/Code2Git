@@ -74,7 +74,13 @@ export const usePermissionStore = defineStore('permission', () => {
     try {
       const versionRes = await getMenuVersionApi()
       const latestVersion = (versionRes.data as { version?: string | number })?.version || null
-      if (cachedMenu && cachedMenu.length > 0 && cachedVersion && latestVersion && String(cachedVersion) === String(latestVersion)) {
+      if (
+        cachedMenu &&
+        cachedMenu.length > 0 &&
+        cachedVersion &&
+        latestVersion &&
+        String(cachedVersion) === String(latestVersion)
+      ) {
         menuTree = cachedMenu
         newVersion = latestVersion
       } else {

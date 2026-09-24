@@ -32,15 +32,12 @@
 /**
  * 确认弹窗组件
  * 通过 ref 调用 open() 打开，emit confirm / cancel / close。
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import {
-  WarningFilled,
-  CircleCloseFilled,
-  InfoFilled,
-  CircleCheckFilled
-} from '@element-plus/icons-vue'
+import { WarningFilled, CircleCloseFilled, InfoFilled, CircleCheckFilled } from '@element-plus/icons-vue'
 import type { Component } from 'vue'
 
 defineOptions({ name: 'ConfirmDialog' })

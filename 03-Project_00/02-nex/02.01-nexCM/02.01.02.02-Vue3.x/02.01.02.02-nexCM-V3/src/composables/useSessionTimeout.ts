@@ -38,7 +38,11 @@ export function useSessionTimeout(): UseSessionTimeoutReturn {
     activityHandler = resetSessionTimer
     const handler = resetSessionTimer
     const events: Array<'mousemove' | 'keydown' | 'click' | 'scroll' | 'touchstart'> = [
-      'mousemove', 'keydown', 'click', 'scroll', 'touchstart'
+      'mousemove',
+      'keydown',
+      'click',
+      'scroll',
+      'touchstart'
     ]
     events.forEach(event => {
       window.addEventListener(event, handler, { passive: true })
@@ -76,7 +80,11 @@ export function useSessionTimeout(): UseSessionTimeoutReturn {
     if (activityHandler) {
       const handler = activityHandler
       const events: Array<'mousemove' | 'keydown' | 'click' | 'scroll' | 'touchstart'> = [
-        'mousemove', 'keydown', 'click', 'scroll', 'touchstart'
+        'mousemove',
+        'keydown',
+        'click',
+        'scroll',
+        'touchstart'
       ]
       events.forEach(event => {
         window.removeEventListener(event, handler)

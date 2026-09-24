@@ -9,7 +9,8 @@
  *
  * 作者：GooHv
  */
-import { ref, onMounted, type Ref } from 'vue'
+import { ref, onMounted, watch, type Ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { getDicts, type DictItem } from '@/utils/business/dict'
 
 export interface UseDictReturn {
@@ -24,6 +25,7 @@ export interface UseDictReturn {
  */
 export function useDict(dictCodes: string[] = []): UseDictReturn {
   const dict = ref<Record<string, DictItem[]>>({})
+  const { locale } = useI18n()
 
   async function initDict(): Promise<void> {
     if (!dictCodes || !dictCodes.length) return
@@ -32,6 +34,11 @@ export function useDict(dictCodes: string[] = []): UseDictReturn {
   }
 
   onMounted(() => {
+    void initDict()
+  })
+
+  /** 切换 locale 后重新加载，确保 label 跟随新语言（无 reload 场景） */
+  watch(locale, () => {
     void initDict()
   })
 

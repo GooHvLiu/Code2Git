@@ -22,16 +22,10 @@
       <div class="reminder-body" @mousedown.stop>
         <div class="reminder-content">{{ t('system.config.device.reminderContent') }}</div>
         <div v-if="reminderList.length > 0" class="reminder-list">
-          <div
-            v-for="(item, index) in reminderList"
-            :key="index"
-            class="reminder-item"
-          >
+          <div v-for="(item, index) in reminderList" :key="index" class="reminder-item">
             <div class="item-name">{{ item.name }}</div>
             <div class="item-info">
-              <span class="life-percent" :class="getLifeClass(item.remainingLife)">
-                {{ item.remainingLife }}%
-              </span>
+              <span class="life-percent" :class="getLifeClass(item.remainingLife)"> {{ item.remainingLife }}% </span>
               <span class="item-location">{{ item.location }}</span>
             </div>
           </div>
@@ -58,6 +52,8 @@
 /**
  * 备件寿命提醒浮层（可拖拽）
  * v-model:visible 控制显隐；reminderList 传入临期备件。
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { ref, reactive, onMounted, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -158,18 +154,25 @@ onBeforeUnmount(() => {
   width: 380px;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(245, 108, 108, 0.25), 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 8px 32px rgba(245, 108, 108, 0.25),
+    0 2px 8px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   user-select: none;
   animation: reminder-pulse 2s ease-in-out infinite;
 }
 
 @keyframes reminder-pulse {
-  0%, 100% {
-    box-shadow: 0 8px 32px rgba(245, 108, 108, 0.25), 0 2px 8px rgba(0, 0, 0, 0.08);
+  0%,
+  100% {
+    box-shadow:
+      0 8px 32px rgba(245, 108, 108, 0.25),
+      0 2px 8px rgba(0, 0, 0, 0.08);
   }
   50% {
-    box-shadow: 0 8px 40px rgba(245, 108, 108, 0.4), 0 2px 12px rgba(0, 0, 0, 0.12);
+    box-shadow:
+      0 8px 40px rgba(245, 108, 108, 0.4),
+      0 2px 12px rgba(0, 0, 0, 0.12);
   }
 }
 
@@ -196,8 +199,13 @@ onBeforeUnmount(() => {
 }
 
 @keyframes icon-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
 }
 
 .reminder-title {

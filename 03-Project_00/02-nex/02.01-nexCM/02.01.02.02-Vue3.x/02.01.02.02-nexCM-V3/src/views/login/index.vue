@@ -7,18 +7,10 @@
     <div class="auth-container" :class="{ 'right-panel-active': isRegister }">
       <!-- 注册表单 -->
       <div class="form-container register-container">
-        <el-form
-          ref="registerFormRef"
-          :model="registerForm"
-          :rules="registerRules"
-          class="auth-form register-form"
-        >
+        <el-form ref="registerFormRef" :model="registerForm" :rules="registerRules" class="auth-form register-form">
           <h2 class="form-title">{{ t('layout.login.registerTitle') }}</h2>
           <el-form-item prop="username">
-            <el-input
-              v-model="registerForm.username"
-              :placeholder="t('layout.login.username')"
-            >
+            <el-input v-model="registerForm.username" :placeholder="t('layout.login.username')">
               <template #prefix>
                 <el-icon><User /></el-icon>
               </template>
@@ -56,12 +48,7 @@
               </template>
             </el-input>
           </el-form-item>
-          <el-button
-            type="primary"
-            class="submit-btn"
-            :loading="loading"
-            @click="handleRegister"
-          >
+          <el-button type="primary" class="submit-btn" :loading="loading" @click="handleRegister">
             {{ t('layout.login.registerBtn') }}
           </el-button>
         </el-form>
@@ -69,18 +56,10 @@
 
       <!-- 登录表单 -->
       <div class="form-container login-container">
-        <el-form
-          ref="ruleFormRef"
-          :model="ruleForm"
-          :rules="rules"
-          class="auth-form login-form"
-        >
+        <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" class="auth-form login-form">
           <h2 class="form-title">{{ t('layout.login.title') }}</h2>
           <el-form-item prop="username">
-            <el-input
-              v-model="ruleForm.username"
-              :placeholder="t('layout.login.username')"
-            >
+            <el-input v-model="ruleForm.username" :placeholder="t('layout.login.username')">
               <template #prefix>
                 <el-icon><User /></el-icon>
               </template>
@@ -119,12 +98,7 @@
           <div class="forgot-password-link" @click="openForgotDialog">
             {{ t('layout.login.forgotPassword') }}
           </div>
-          <el-button
-            type="primary"
-            class="submit-btn"
-            :loading="loading"
-            @click="submitForm"
-          >
+          <el-button type="primary" class="submit-btn" :loading="loading" @click="submitForm">
             {{ t('layout.login.loginBtn') }}
           </el-button>
         </el-form>
@@ -163,12 +137,7 @@
 
     <!-- 移动端切换按钮 -->
     <div class="mobile-switch">
-      <el-button
-        v-if="!isRegister"
-        type="text"
-        class="switch-btn"
-        @click="switchPanel('register')"
-      >
+      <el-button v-if="!isRegister" type="text" class="switch-btn" @click="switchPanel('register')">
         {{ t('layout.login.registerNow') }}
       </el-button>
       <el-button v-else type="text" class="switch-btn" @click="switchPanel('login')">
@@ -191,13 +160,7 @@
       </el-steps>
 
       <!-- 第一步：验证身份 -->
-      <el-form
-        v-if="activeStep === 0"
-        ref="forgotFormRef"
-        :model="forgotForm"
-        :rules="forgotRules"
-        class="reset-form"
-      >
+      <el-form v-if="activeStep === 0" ref="forgotFormRef" :model="forgotForm" :rules="forgotRules" class="reset-form">
         <el-form-item :label="t('layout.login.username')" prop="username">
           <el-input
             v-model="forgotForm.username"
@@ -205,16 +168,10 @@
           />
         </el-form-item>
         <el-form-item :label="t('layout.login.email')" prop="email">
-          <el-input
-            v-model="forgotForm.email"
-            :placeholder="t('layout.login.forgotPasswordDialog.emailPlaceholder')"
-          />
+          <el-input v-model="forgotForm.email" :placeholder="t('layout.login.forgotPasswordDialog.emailPlaceholder')" />
         </el-form-item>
         <el-form-item :label="t('layout.login.captcha')" prop="code">
-          <el-input
-            v-model="forgotForm.code"
-            :placeholder="t('layout.login.forgotPasswordDialog.codePlaceholder')"
-          />
+          <el-input v-model="forgotForm.code" :placeholder="t('layout.login.forgotPasswordDialog.codePlaceholder')" />
         </el-form-item>
         <el-button
           type="primary"
@@ -232,13 +189,7 @@
       </el-form>
 
       <!-- 第二步：重置密码 -->
-      <el-form
-        v-if="activeStep === 1"
-        ref="resetFormRef"
-        :model="forgotForm"
-        :rules="resetRules"
-        class="reset-form"
-      >
+      <el-form v-if="activeStep === 1" ref="resetFormRef" :model="forgotForm" :rules="resetRules" class="reset-form">
         <el-form-item :label="t('layout.login.password')" prop="newPassword">
           <el-input
             v-model="forgotForm.newPassword"
@@ -297,19 +248,9 @@ import type { FormInstance, FormRules } from 'element-plus'
 import { requestCaptchaCodeApi, requestLoginApi, requestRegisterApi } from '@/api/login'
 import { requestSendResetCodeApi, requestResetPasswordByCodeApi } from '@/api/user'
 import { setToken } from '@/utils/auth/auth'
-import {
-  getLocalStorage,
-  setLocalStorage,
-  removeLocalStorage,
-  removeSessionStorage
-} from '@/utils/data/storage'
+import { getLocalStorage, setLocalStorage, removeLocalStorage, removeSessionStorage } from '@/utils/data/storage'
 import { LOCALSTORAGE_KEYS, SESSIONSTORAGE_KEYS } from '@/utils/data/storageKey'
-import {
-  validateUsername,
-  validatePassword,
-  validateConfirmPassword,
-  validateEmail
-} from '@/utils/data/validate'
+import { validateUsername, validatePassword, validateConfirmPassword, validateEmail } from '@/utils/data/validate'
 import { showSuccess, showWarning } from '@/utils/ui/feedback'
 import { useUserStore } from '@/store/modules/user'
 import { ROUTE_PATHS } from '@/router/constant/pathConstants'
@@ -376,9 +317,7 @@ const rules = computed<FormRules>(() => ({
     { required: true, message: t('layout.login.passwordRequired'), trigger: 'blur' },
     { validator: validatePassword, trigger: 'blur' }
   ],
-  captchacode: [
-    { required: true, message: t('layout.login.captchaRequired'), trigger: 'blur' }
-  ]
+  captchacode: [{ required: true, message: t('layout.login.captchaRequired'), trigger: 'blur' }]
 }))
 
 /** 注册校验规则 */
@@ -403,9 +342,7 @@ const registerRules = computed<FormRules>(() => ({
 
 /** 忘记密码第一步校验 */
 const forgotRules = computed<FormRules>(() => ({
-  username: [
-    { required: true, message: t('layout.login.usernameRequired'), trigger: 'blur' }
-  ],
+  username: [{ required: true, message: t('layout.login.usernameRequired'), trigger: 'blur' }],
   email: [
     { required: true, message: t('layout.login.emailRequired'), trigger: 'blur' },
     { validator: validateEmail, trigger: 'blur' }
@@ -463,7 +400,7 @@ async function getCaptchaCode(): Promise<void> {
 
 /** 登录提交 */
 function submitForm(): void {
-  ruleFormRef.value?.validate(async (valid) => {
+  ruleFormRef.value?.validate(async valid => {
     if (!valid) return
     loading.value = true
     try {
@@ -494,8 +431,7 @@ function submitForm(): void {
       }
       removeLocalStorage(LOCALSTORAGE_KEYS.CAPTCHA_UUID)
       removeSessionStorage(SESSIONSTORAGE_KEYS.TAG_LIST)
-      const redirect =
-        typeof route.query.redirect === 'string' ? route.query.redirect : ROUTE_PATHS.HOME
+      const redirect = typeof route.query.redirect === 'string' ? route.query.redirect : ROUTE_PATHS.HOME
       router.push(redirect)
     } catch (error) {
       console.error('登录失败:', error)
@@ -509,7 +445,7 @@ function submitForm(): void {
 
 /** 注册提交 */
 function handleRegister(): void {
-  registerFormRef.value?.validate(async (valid) => {
+  registerFormRef.value?.validate(async valid => {
     if (!valid) return
     loading.value = true
     try {
@@ -551,7 +487,7 @@ function resetForgotForm(): void {
 
 /** 发送重置密码验证码 */
 function handleSendResetCode(): void {
-  forgotFormRef.value?.validateField(['username', 'email'], async (valid) => {
+  forgotFormRef.value?.validateField(['username', 'email'], async valid => {
     if (!valid) return
     try {
       await requestSendResetCodeApi({
@@ -575,7 +511,7 @@ function handleSendResetCode(): void {
 
 /** 第一步：校验验证码并进入下一步 */
 function handleVerifyIdentity(): void {
-  forgotFormRef.value?.validateField(['code'], (valid) => {
+  forgotFormRef.value?.validateField(['code'], valid => {
     if (!valid) {
       showWarning(t('layout.login.fillCompleteInfo'))
       return
@@ -586,7 +522,7 @@ function handleVerifyIdentity(): void {
 
 /** 第二步：提交重置密码 */
 function handleResetPassword(): void {
-  resetFormRef.value?.validate(async (valid) => {
+  resetFormRef.value?.validate(async valid => {
     if (!valid) return
     if (forgotForm.newPassword.length < 8) {
       showWarning(t('layout.login.resetPasswordMinLength'))

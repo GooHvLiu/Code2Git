@@ -28,7 +28,9 @@
           @click="selectCategory(cat.category)"
         >
           <div class="card-header">
-            <span class="category-icon"><el-icon><component :is="getCategoryIcon(cat.category)" /></el-icon></span>
+            <span class="category-icon"
+              ><el-icon><component :is="getCategoryIcon(cat.category)" /></el-icon
+            ></span>
             <span class="category-name">{{ getCategoryName(cat.category) }}</span>
           </div>
           <div class="card-stats">
@@ -50,7 +52,9 @@
       <!-- 中间分隔 -->
       <div class="feature-divider">
         <div class="divider-line"></div>
-        <div class="divider-badge"><el-icon><DArrowRight /></el-icon></div>
+        <div class="divider-badge">
+          <el-icon><DArrowRight /></el-icon>
+        </div>
         <div class="divider-line"></div>
       </div>
 
@@ -60,7 +64,9 @@
           <div class="detail-title">
             <el-icon><component :is="getCategoryIcon(currentCategory)" /></el-icon>
             <h3>{{ getCategoryName(currentCategory) }}</h3>
-            <el-tag size="small" type="info">{{ currentFeatures.length }} {{ t('superPanel.feature.page.items') }}</el-tag>
+            <el-tag size="small" type="info"
+              >{{ currentFeatures.length }} {{ t('superPanel.feature.page.items') }}</el-tag
+            >
           </div>
           <div class="detail-actions">
             <el-button type="text" size="small" @click="handleResetCategory">
@@ -81,7 +87,12 @@
                 <div class="item-name">
                   <span class="status-dot" :class="{ on: feature.current_value === 'true' }"></span>
                   {{ t(feature.feature_name) }}
-                  <el-tag v-if="feature.current_value !== feature.default_value" size="small" type="warning" effect="plain">
+                  <el-tag
+                    v-if="feature.current_value !== feature.default_value"
+                    size="small"
+                    type="warning"
+                    effect="plain"
+                  >
                     {{ t('superPanel.feature.page.modified') }}
                   </el-tag>
                 </div>
@@ -166,10 +177,10 @@ const categoryStats = ref<FeatureCategoryStat[]>([])
 const currentCategory = ref('notification')
 
 const categoryList = computed(() =>
-  categoryStats.value.map((s) => ({ category: s.category, enabled_count: s.enabled_count, total: s.total }))
+  categoryStats.value.map(s => ({ category: s.category, enabled_count: s.enabled_count, total: s.total }))
 )
 
-const currentFeatures = computed(() => allFeatures.value.filter((f) => f.category === currentCategory.value))
+const currentFeatures = computed(() => allFeatures.value.filter(f => f.category === currentCategory.value))
 
 /** 分类 → 图标组件映射（替代原 el-icon-* 字体图标） */
 const categoryIcons: Record<string, unknown> = {
@@ -218,7 +229,7 @@ async function handleToggle(feature: FeatureItem, value: boolean): Promise<void>
     await requestUpdateFeatureConfigApi(feature.feature_key, String(value))
     feature.current_value = String(value)
     showSuccess(t('superPanel.feature.page.updateSuccess'))
-    const stat = categoryStats.value.find((s) => s.category === feature.category)
+    const stat = categoryStats.value.find(s => s.category === feature.category)
     if (stat) stat.enabled_count += value ? 1 : -1
   } catch (e) {
     // 错误已由拦截器处理
@@ -232,9 +243,9 @@ async function handleResetFeature(feature: FeatureItem): Promise<void> {
     await requestResetFeatureConfigApi(feature.feature_key)
     feature.current_value = feature.default_value
     showSuccess(t('superPanel.feature.page.resetSuccess'))
-    const stat = categoryStats.value.find((s) => s.category === feature.category)
+    const stat = categoryStats.value.find(s => s.category === feature.category)
     if (stat) {
-      stat.enabled_count = currentFeatures.value.filter((f) => f.current_value === 'true').length
+      stat.enabled_count = currentFeatures.value.filter(f => f.current_value === 'true').length
     }
   } catch (e) {
     // 错误已由拦截器处理
@@ -242,7 +253,9 @@ async function handleResetFeature(feature: FeatureItem): Promise<void> {
 }
 
 async function handleResetCategory(): Promise<void> {
-  const ok = await confirmAction(t('superPanel.feature.page.resetCategoryConfirm'), t('common.tip'), { type: 'warning' })
+  const ok = await confirmAction(t('superPanel.feature.page.resetCategoryConfirm'), t('common.tip'), {
+    type: 'warning'
+  })
   if (!ok) return
   try {
     await requestResetCategoryFeatureConfigApi(currentCategory.value)

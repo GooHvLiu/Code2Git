@@ -43,7 +43,13 @@ export function useDevAlarm() {
     const a = deviceStore.alarms
     return [
       { label: t('device.alarm.statToday'), value: a.todayCount || 12, icon: Warning, type: 'danger', trend: 20 },
-      { label: t('device.alarm.statCritical'), value: a.criticalCount || 2, icon: CircleClose, type: 'critical', trend: -33.3 },
+      {
+        label: t('device.alarm.statCritical'),
+        value: a.criticalCount || 2,
+        icon: CircleClose,
+        type: 'critical',
+        trend: -33.3
+      },
       { label: t('device.alarm.statPending'), value: a.pendingCount || 5, icon: Clock, type: 'warning', trend: 25 },
       { label: t('device.alarm.statAvgHandle'), value: '1.5', icon: AlarmClock, type: 'info', trend: -10 }
     ]
@@ -102,16 +108,27 @@ export function useDevAlarm() {
     const statuses: AlarmStatus[] = ['pending', 'processing', 'resolved']
     const handlers = ['张三', '李四', '王五', '赵六', '']
     const descs = [
-      t('device.alarm.desc1'), t('device.alarm.desc2'), t('device.alarm.desc3'),
-      t('device.alarm.desc4'), t('device.alarm.desc5'), t('device.alarm.desc6'),
-      t('device.alarm.desc7'), t('device.alarm.desc8')
+      t('device.alarm.desc1'),
+      t('device.alarm.desc2'),
+      t('device.alarm.desc3'),
+      t('device.alarm.desc4'),
+      t('device.alarm.desc5'),
+      t('device.alarm.desc6'),
+      t('device.alarm.desc7'),
+      t('device.alarm.desc8')
     ]
     const data: AlarmRecord[] = []
     for (let i = 1; i <= 56; i++) {
       const level = levels[Math.floor(Math.random() * levels.length)]
       const category = categories[Math.floor(Math.random() * categories.length)]
       const status = statuses[Math.floor(Math.random() * statuses.length)]
-      const date = new Date(2026, 7, 24 - Math.floor(Math.random() * 7), Math.floor(Math.random() * 24), Math.floor(Math.random() * 60))
+      const date = new Date(
+        2026,
+        7,
+        24 - Math.floor(Math.random() * 7),
+        Math.floor(Math.random() * 24),
+        Math.floor(Math.random() * 60)
+      )
       data.push({
         id: i,
         alarmNo: 'ALM202608' + String(i).padStart(4, '0'),
@@ -143,7 +160,10 @@ export function useDevAlarm() {
 
   function getLevelType(level: AlarmLevel): 'danger' | 'warning' | 'info' | 'success' {
     const map: Record<AlarmLevel, 'danger' | 'warning' | 'info' | 'success'> = {
-      critical: 'danger', major: 'warning', minor: 'info', info: 'success'
+      critical: 'danger',
+      major: 'warning',
+      minor: 'info',
+      info: 'success'
     }
     return map[level]
   }
@@ -173,7 +193,9 @@ export function useDevAlarm() {
 
   function getStatusType(status: AlarmStatus): 'danger' | 'warning' | 'success' {
     const map: Record<AlarmStatus, 'danger' | 'warning' | 'success'> = {
-      pending: 'danger', processing: 'warning', resolved: 'success'
+      pending: 'danger',
+      processing: 'warning',
+      resolved: 'success'
     }
     return map[status] || 'info'
   }

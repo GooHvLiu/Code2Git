@@ -7,7 +7,13 @@
         <p class="page-desc">{{ t('superPanel.config.page.desc') }}</p>
       </div>
       <div class="header-right">
-        <el-button type="primary" size="small" :disabled="configStatus !== 'ready'" :loading="loading" @click="handleSave">
+        <el-button
+          type="primary"
+          size="small"
+          :disabled="configStatus !== 'ready'"
+          :loading="loading"
+          @click="handleSave"
+        >
           <el-icon><Check /></el-icon>&nbsp;{{ t('superPanel.config.page.save') }}
         </el-button>
         <el-button size="small" :disabled="configStatus !== 'ready'" :loading="loading" @click="handleReset">
@@ -57,7 +63,13 @@
         <!-- 配置不完整 -->
         <div v-else-if="configStatus === 'incomplete'" class="config-status-wrapper">
           <div class="config-status-incomplete">
-            <el-alert :title="t('superPanel.config.page.incompleteTitle')" type="warning" :closable="false" show-icon class="incomplete-alert">
+            <el-alert
+              :title="t('superPanel.config.page.incompleteTitle')"
+              type="warning"
+              :closable="false"
+              show-icon
+              class="incomplete-alert"
+            >
               <template #default>
                 <p class="incomplete-desc">
                   {{ t('superPanel.config.page.incompleteDesc', { count: missingConfigKeys.length }) }}
@@ -148,7 +160,13 @@
                     </el-tooltip>
                   </span>
                 </template>
-                <el-input-number v-model="form.pollFastInterval" :min="50" :max="5000" :step="50" controls-position="right" />
+                <el-input-number
+                  v-model="form.pollFastInterval"
+                  :min="50"
+                  :max="5000"
+                  :step="50"
+                  controls-position="right"
+                />
                 <span class="unit-text">ms</span>
               </el-form-item>
 
@@ -161,7 +179,13 @@
                     </el-tooltip>
                   </span>
                 </template>
-                <el-input-number v-model="form.pollSlowInterval" :min="100" :max="10000" :step="100" controls-position="right" />
+                <el-input-number
+                  v-model="form.pollSlowInterval"
+                  :min="100"
+                  :max="10000"
+                  :step="100"
+                  controls-position="right"
+                />
                 <span class="unit-text">ms</span>
               </el-form-item>
 
@@ -174,7 +198,13 @@
                     </el-tooltip>
                   </span>
                 </template>
-                <el-input-number v-model="form.plcReconnectDelay" :min="1000" :max="30000" :step="500" controls-position="right" />
+                <el-input-number
+                  v-model="form.plcReconnectDelay"
+                  :min="1000"
+                  :max="30000"
+                  :step="500"
+                  controls-position="right"
+                />
                 <span class="unit-text">ms</span>
               </el-form-item>
 
@@ -211,7 +241,13 @@
                     </el-tooltip>
                   </span>
                 </template>
-                <el-input-number v-model="form.plcMaxWriteRetry" :min="0" :max="5" :step="1" controls-position="right" />
+                <el-input-number
+                  v-model="form.plcMaxWriteRetry"
+                  :min="0"
+                  :max="5"
+                  :step="1"
+                  controls-position="right"
+                />
                 <span class="unit-text">{{ t('superPanel.config.plc.unitTimes') }}</span>
               </el-form-item>
             </el-form>
@@ -230,19 +266,34 @@
                     </el-tooltip>
                   </span>
                 </template>
-                <el-input-number v-model="form.heartbeatInterval" :min="5000" :max="60000" :step="1000" controls-position="right" />
+                <el-input-number
+                  v-model="form.heartbeatInterval"
+                  :min="5000"
+                  :max="60000"
+                  :step="1000"
+                  controls-position="right"
+                />
                 <span class="unit-text">ms</span>
               </el-form-item>
               <el-form-item>
                 <template #label>
                   <span class="config-label-tip">
                     {{ t('superPanel.config.connection.deviceStatusCheckInterval') }}
-                    <el-tooltip :content="t('superPanel.config.connection.deviceStatusCheckIntervalTip')" placement="top">
+                    <el-tooltip
+                      :content="t('superPanel.config.connection.deviceStatusCheckIntervalTip')"
+                      placement="top"
+                    >
                       <el-icon class="tip-icon"><QuestionFilled /></el-icon>
                     </el-tooltip>
                   </span>
                 </template>
-                <el-input-number v-model="form.deviceStatusCheckInterval" :min="60" :max="3600" :step="60" controls-position="right" />
+                <el-input-number
+                  v-model="form.deviceStatusCheckInterval"
+                  :min="60"
+                  :max="3600"
+                  :step="60"
+                  controls-position="right"
+                />
                 <span class="unit-text">{{ t('superPanel.config.connection.unitSecond') }}</span>
               </el-form-item>
               <el-form-item>
@@ -254,19 +305,34 @@
                     </el-tooltip>
                   </span>
                 </template>
-                <el-input-number v-model="form.deviceOfflineThreshold" :min="120" :max="7200" :step="60" controls-position="right" />
+                <el-input-number
+                  v-model="form.deviceOfflineThreshold"
+                  :min="120"
+                  :max="7200"
+                  :step="60"
+                  controls-position="right"
+                />
                 <span class="unit-text">{{ t('superPanel.config.connection.unitSecond') }}</span>
               </el-form-item>
               <el-form-item>
                 <template #label>
                   <span class="config-label-tip">
                     {{ t('superPanel.config.connection.maintenanceCheckInterval') }}
-                    <el-tooltip :content="t('superPanel.config.connection.maintenanceCheckIntervalTip')" placement="top">
+                    <el-tooltip
+                      :content="t('superPanel.config.connection.maintenanceCheckIntervalTip')"
+                      placement="top"
+                    >
                       <el-icon class="tip-icon"><QuestionFilled /></el-icon>
                     </el-tooltip>
                   </span>
                 </template>
-                <el-input-number v-model="form.maintenanceCheckInterval" :min="1" :max="168" :step="1" controls-position="right" />
+                <el-input-number
+                  v-model="form.maintenanceCheckInterval"
+                  :min="1"
+                  :max="168"
+                  :step="1"
+                  controls-position="right"
+                />
                 <span class="unit-text">{{ t('superPanel.config.connection.unitHour') }}</span>
               </el-form-item>
               <el-form-item>
@@ -278,7 +344,13 @@
                     </el-tooltip>
                   </span>
                 </template>
-                <el-input-number v-model="form.partLifeStatInterval" :min="1" :max="60" :step="1" controls-position="right" />
+                <el-input-number
+                  v-model="form.partLifeStatInterval"
+                  :min="1"
+                  :max="60"
+                  :step="1"
+                  controls-position="right"
+                />
                 <span class="unit-text">{{ t('superPanel.config.connection.unitMinute') }}</span>
               </el-form-item>
             </el-form>
@@ -312,7 +384,13 @@
                     </el-tooltip>
                   </span>
                 </template>
-                <el-input-number v-model="form.uploadMaxFileSize" :min="1" :max="100" :step="1" controls-position="right" />
+                <el-input-number
+                  v-model="form.uploadMaxFileSize"
+                  :min="1"
+                  :max="100"
+                  :step="1"
+                  controls-position="right"
+                />
                 <span class="unit-text">MB</span>
               </el-form-item>
               <el-form-item>
@@ -364,7 +442,13 @@
                     </el-tooltip>
                   </span>
                 </template>
-                <el-input-number v-model="form.auditRetentionDays" :min="30" :max="3650" :step="30" controls-position="right" />
+                <el-input-number
+                  v-model="form.auditRetentionDays"
+                  :min="30"
+                  :max="3650"
+                  :step="30"
+                  controls-position="right"
+                />
                 <span class="unit-text">{{ t('superPanel.config.audit.unitDays') }}</span>
               </el-form-item>
               <el-form-item>
@@ -415,11 +499,7 @@ import {
   RefreshLeft,
   QuestionFilled
 } from '@element-plus/icons-vue'
-import {
-  requestGetAllConfigsApi,
-  requestUpdateConfigsApi,
-  requestResetConfigsApi
-} from '@/api'
+import { requestGetAllConfigsApi, requestUpdateConfigsApi, requestResetConfigsApi } from '@/api'
 
 const { locale, t } = useI18n()
 const deviceStore = useDeviceStore()
@@ -428,22 +508,64 @@ type ConfigStatus = 'loading' | 'ready' | 'incomplete' | 'error'
 
 /** 必需配置项清单（与后端 initDefaultData 保持一致） */
 const REQUIRED_CONFIG_KEYS = [
-  'sessionTimeout', 'defaultPageSize', 'defaultLanguage', 'dateFormat',
-  'watermarkEnabled', 'watermarkText', 'loginFailedThreshold', 'lockDurationMinutes',
-  'plcProtocol', 'plcHost', 'plcPort', 'plcUnitId', 'pollFastInterval', 'pollSlowInterval',
-  'pdfWatermarkEnabled', 'pdfWatermarkText',
-  'heartbeatInterval', 'deviceStatusCheckInterval', 'deviceOfflineThreshold', 'maintenanceCheckInterval', 'partLifeStatInterval',
-  'deviceName', 'deviceCode', 'deviceRegion', 'deviceInstallDate',
-  'partLifeReminderEnabled', 'partLifeThreshold', 'partLifeRemindInterval', 'partLifeSnoozeInterval',
-  'allowNoOrderProduction', 'noOrderProductionHighlight', 'showOperatorName', 'showAlarmCount', 'showRuntime',
-  'reportIncludeAlarmDetail', 'reportIncludeOperatorDetail', 'reportIncludeDownloadCount',
-  'allowRunningOrderDownload', 'autoArchiveCompleted', 'orderSwitchConfirm',
-  'plcReconnectDelay', 'plcEnablePoll', 'plcEnableWriteAudit', 'plcMaxWriteRetry',
-  'emailSendTimeout', 'emailMaxRetries', 'emailRetryDelay',
-  'uploadMaxFileSize', 'uploadAllowedTypes', 'uploadPath', 'uploadEnableAudit',
-  'auditRetentionDays', 'auditAutoArchive',
-  'licenseExpiringDays', 'licenseGracePeriod', 'licenseCheckInterval',
-  'notificationAutoReadDays', 'notificationSoundEnabled'
+  'sessionTimeout',
+  'defaultPageSize',
+  'defaultLanguage',
+  'dateFormat',
+  'watermarkEnabled',
+  'watermarkText',
+  'loginFailedThreshold',
+  'lockDurationMinutes',
+  'plcProtocol',
+  'plcHost',
+  'plcPort',
+  'plcUnitId',
+  'pollFastInterval',
+  'pollSlowInterval',
+  'pdfWatermarkEnabled',
+  'pdfWatermarkText',
+  'heartbeatInterval',
+  'deviceStatusCheckInterval',
+  'deviceOfflineThreshold',
+  'maintenanceCheckInterval',
+  'partLifeStatInterval',
+  'deviceName',
+  'deviceCode',
+  'deviceRegion',
+  'deviceInstallDate',
+  'partLifeReminderEnabled',
+  'partLifeThreshold',
+  'partLifeRemindInterval',
+  'partLifeSnoozeInterval',
+  'allowNoOrderProduction',
+  'noOrderProductionHighlight',
+  'showOperatorName',
+  'showAlarmCount',
+  'showRuntime',
+  'reportIncludeAlarmDetail',
+  'reportIncludeOperatorDetail',
+  'reportIncludeDownloadCount',
+  'allowRunningOrderDownload',
+  'autoArchiveCompleted',
+  'orderSwitchConfirm',
+  'plcReconnectDelay',
+  'plcEnablePoll',
+  'plcEnableWriteAudit',
+  'plcMaxWriteRetry',
+  'emailSendTimeout',
+  'emailMaxRetries',
+  'emailRetryDelay',
+  'uploadMaxFileSize',
+  'uploadAllowedTypes',
+  'uploadPath',
+  'uploadEnableAudit',
+  'auditRetentionDays',
+  'auditAutoArchive',
+  'licenseExpiringDays',
+  'licenseGracePeriod',
+  'licenseCheckInterval',
+  'notificationAutoReadDays',
+  'notificationSoundEnabled'
 ] as const
 
 /** 超级面板展示的 tab */
@@ -459,7 +581,9 @@ const menuList = computed(() => [
   { key: 'audit', icon: Document, title: t('superPanel.config.audit.title') }
 ])
 
-const filteredMenuList = computed(() => menuList.value.filter((item) => (SUPER_PANEL_TABS as readonly string[]).includes(item.key)))
+const filteredMenuList = computed(() =>
+  menuList.value.filter(item => (SUPER_PANEL_TABS as readonly string[]).includes(item.key))
+)
 
 const loading = ref(false)
 const activeMenu = ref<string>('plc')
@@ -491,7 +615,7 @@ interface ConfigMap {
   [key: string]: any
 }
 const form = reactive<ConfigMap>({})
-REQUIRED_CONFIG_KEYS.forEach((key) => {
+REQUIRED_CONFIG_KEYS.forEach(key => {
   form[key] = undefined
 })
 
@@ -507,7 +631,7 @@ function parseDeviceRegion(value: unknown): string[] {
     } catch (e) {
       // 非 JSON
     }
-    if (value.includes(',')) return value.split(',').map((s) => s.trim())
+    if (value.includes(',')) return value.split(',').map(s => s.trim())
   }
   return []
 }
@@ -536,9 +660,9 @@ function parseDate(value: unknown): string {
 }
 
 function assignFormData(data: ConfigMap): void {
-  REQUIRED_CONFIG_KEYS.forEach((key) => {
+  REQUIRED_CONFIG_KEYS.forEach(key => {
     if (data && key in data) {
-      (form as Record<string, unknown>)[key] = (data as Record<string, unknown>)[key]
+      ;(form as Record<string, unknown>)[key] = (data as Record<string, unknown>)[key]
     }
   })
 }
@@ -546,7 +670,7 @@ function assignFormData(data: ConfigMap): void {
 /** 校验配置完整性，返回缺失 key 列表 */
 function checkConfigCompleteness(data: ConfigMap | null): string[] {
   if (!data || typeof data !== 'object') return [...REQUIRED_CONFIG_KEYS]
-  return REQUIRED_CONFIG_KEYS.filter((key) => !(key in data))
+  return REQUIRED_CONFIG_KEYS.filter(key => !(key in data))
 }
 
 function normalizeFlags(): void {
@@ -645,7 +769,7 @@ function handleReset(): void {
     return
   }
   requestResetConfigsApi()
-    .then((res) => {
+    .then(res => {
       if (res.code === 200 && res.data) {
         const data = res.data as ConfigMap
         const missingKeys = checkConfigCompleteness(data)
@@ -664,7 +788,7 @@ function handleReset(): void {
         showError(t('superPanel.config.page.resetFailedRetry'))
       }
     })
-    .catch((err) => {
+    .catch(err => {
       console.error('[参数配置] 重置配置失败:', err)
       showError(t('superPanel.config.page.resetFailedNetwork'))
     })

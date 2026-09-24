@@ -17,12 +17,7 @@
         <div v-if="!activePanel" class="menu-list">
           <div class="panel-title">{{ t('layout.quickMenu.title') }}</div>
 
-          <div
-            v-for="item in menuItems"
-            :key="item.key"
-            class="menu-item"
-            @click="openPanel(item.key)"
-          >
+          <div v-for="item in menuItems" :key="item.key" class="menu-item" @click="openPanel(item.key)">
             <span class="menu-icon" :style="{ color: item.color }">
               <svg-icon v-if="item.key === 'language'" :icon-class="currentLangFlag" class="menu-flag-icon" />
               <el-icon v-else><component :is="item.icon" /></el-icon>
@@ -70,7 +65,9 @@
                   :class="{ active: currentColors[field.key] === color.toLowerCase() }"
                   @click="handlePick(field.key, color)"
                 >
-                  <el-icon v-if="currentColors[field.key] === color.toLowerCase()" class="active-check"><Check /></el-icon>
+                  <el-icon v-if="currentColors[field.key] === color.toLowerCase()" class="active-check"
+                    ><Check
+                  /></el-icon>
                 </div>
               </div>
 
@@ -117,20 +114,14 @@
 <script setup lang="ts">
 /**
  * 快捷设置：主题调色 + 语言切换
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { Component } from 'vue'
-import {
-  Plus, Brush, Tools, ArrowRight, ArrowLeft, Refresh, Check
-} from '@element-plus/icons-vue'
-import {
-  THEME_FIELDS,
-  setThemeField,
-  getThemeField,
-  resetAllTheme,
-  resetThemeField
-} from '@/utils/ui/theme'
+import { Plus, Brush, Tools, ArrowRight, ArrowLeft, Refresh, Check } from '@element-plus/icons-vue'
+import { THEME_FIELDS, setThemeField, getThemeField, resetAllTheme, resetThemeField } from '@/utils/ui/theme'
 import { dynamicLanguages, setLanguage, loadLanguageList } from '@/i18n'
 import type { DynamicLanguage } from '@/i18n'
 import { showSuccess, showError } from '@/utils/ui/feedback'
@@ -150,15 +141,10 @@ const visible = ref(false)
 const activePanel = ref<string | null>(null)
 
 const themeFields = THEME_FIELDS
-const currentColors = reactive<Record<string, string>>(
-  Object.fromEntries(themeFields.map(f => [f.key, '']))
-)
+const currentColors = reactive<Record<string, string>>(Object.fromEntries(themeFields.map(f => [f.key, ''])))
 const languages = ref<DynamicLanguage[]>([...dynamicLanguages])
 
-const presetColors = [
-  '#faf7f2', '#ffffff', '#808080', '#49c3ce',
-  '#67c23a', '#e6a23c', '#f56c6c', '#9c27b0'
-]
+const presetColors = ['#faf7f2', '#ffffff', '#808080', '#49c3ce', '#67c23a', '#e6a23c', '#f56c6c', '#9c27b0']
 
 const currentLang = computed(() => locale.value)
 
@@ -366,10 +352,14 @@ onBeforeUnmount(() => {
       margin-right: @spacing-sm;
       transition: color @transition-duration;
 
-      &:hover { color: var(--color-primary); }
+      &:hover {
+        color: var(--color-primary);
+      }
     }
 
-    .panel-title { flex: 1; }
+    .panel-title {
+      flex: 1;
+    }
 
     .reset-btn {
       cursor: pointer;
@@ -377,7 +367,9 @@ onBeforeUnmount(() => {
       font-size: 14px;
       transition: color @transition-duration;
 
-      &:hover { color: var(--color-primary); }
+      &:hover {
+        color: var(--color-primary);
+      }
     }
   }
 
@@ -391,7 +383,9 @@ onBeforeUnmount(() => {
     padding: @spacing-md 0;
     border-bottom: 1px solid @border-lighter;
 
-    &:last-child { border-bottom: none; }
+    &:last-child {
+      border-bottom: none;
+    }
   }
 
   .field-label {
@@ -421,7 +415,9 @@ onBeforeUnmount(() => {
       cursor: pointer;
       transition: color @transition-duration;
 
-      &:hover { color: var(--color-primary); }
+      &:hover {
+        color: var(--color-primary);
+      }
     }
   }
 
@@ -443,7 +439,9 @@ onBeforeUnmount(() => {
     border: 1px solid @border-lighter;
     transition: transform @transition-duration;
 
-    &:hover { transform: scale(1.15); }
+    &:hover {
+      transform: scale(1.15);
+    }
 
     &.active {
       box-shadow: 0 0 0 2px var(--color-primary);
@@ -485,7 +483,9 @@ onBeforeUnmount(() => {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.2s, transform 0.2s;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
 }
 
 .fade-enter-from,
@@ -509,7 +509,9 @@ onBeforeUnmount(() => {
   cursor: pointer;
   transition: background-color @transition-duration;
 
-  &:hover { background-color: @bg-gray; }
+  &:hover {
+    background-color: @bg-gray;
+  }
 
   &.active {
     background-color: rgba(64, 158, 255, 0.08);

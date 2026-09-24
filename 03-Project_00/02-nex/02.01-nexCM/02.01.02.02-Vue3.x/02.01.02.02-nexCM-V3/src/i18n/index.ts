@@ -50,7 +50,11 @@ function validateI18nConsistency(zh: Record<string, unknown>, en: Record<string,
     if (!(key in en)) {
       console.warn(`[I18n] 英文配置缺少 key: ${currentPath}`)
     } else if (typeof zh[key] === 'object' && zh[key] !== null && !Array.isArray(zh[key])) {
-      validateI18nConsistency(zh[key] as Record<string, unknown>, (en as Record<string, unknown>)[key] as Record<string, unknown>, currentPath)
+      validateI18nConsistency(
+        zh[key] as Record<string, unknown>,
+        (en as Record<string, unknown>)[key] as Record<string, unknown>,
+        currentPath
+      )
     }
   })
   enKeys.forEach(key => {
@@ -85,7 +89,7 @@ export function getCurrentLocale(): string {
 }
 
 function setLocale(lang: string): void {
-  (i18n.global.locale as { value: string }).value = lang
+  ;(i18n.global.locale as { value: string }).value = lang
   document.documentElement.setAttribute('lang', lang)
 }
 
@@ -147,7 +151,7 @@ export async function loadLanguageFile(lang: string): Promise<boolean> {
     const resData = (res as unknown as { data?: { data?: unknown } }).data
     if (resData && resData.data) {
       // 动态注册整门语言
-      (i18n.global as unknown as Composer).setLocaleMessage(lang, resData.data)
+      ;(i18n.global as unknown as Composer).setLocaleMessage(lang, resData.data)
       loadedLanguages.add(lang)
       return true
     }

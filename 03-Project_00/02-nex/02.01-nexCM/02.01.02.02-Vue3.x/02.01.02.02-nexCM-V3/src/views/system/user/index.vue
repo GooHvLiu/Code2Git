@@ -17,30 +17,13 @@
           :selected="selectedRows"
           :exporter="(userStore.userInfo?.username as string) || ''"
         />
-        <el-button
-          v-if="selectedIds.length > 0"
-          type="danger"
-          :icon="Delete"
-          size="small"
-          @click="handleBatchDelete"
-        >
+        <el-button v-if="selectedIds.length > 0" type="danger" :icon="Delete" size="small" @click="handleBatchDelete">
           {{ t('common.delete') }}({{ selectedIds.length }})
         </el-button>
-        <el-button
-          type="primary"
-          :icon="Plus"
-          size="small"
-          @click="handleAdd"
-        >
+        <el-button type="primary" :icon="Plus" size="small" @click="handleAdd">
           {{ t('common.add') }}
         </el-button>
-        <el-button
-          type="primary"
-          :icon="Refresh"
-          size="small"
-          :loading="loading"
-          @click="refreshList"
-        >
+        <el-button type="primary" :icon="Refresh" size="small" :loading="loading" @click="refreshList">
           {{ t('common.refresh') }}
         </el-button>
       </div>
@@ -57,18 +40,8 @@
         />
       </el-form-item>
       <el-form-item :label="t('system.user.page.role')" prop="role">
-        <el-select
-          v-model="queryParams.role"
-          :placeholder="t('system.user.page.role')"
-          clearable
-          style="width: 120px"
-        >
-          <el-option
-            v-for="item in roleOptions"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
+        <el-select v-model="queryParams.role" :placeholder="t('system.user.page.role')" clearable style="width: 120px">
+          <el-option v-for="item in roleOptions" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
       </el-form-item>
       <el-form-item :label="t('system.user.page.status')" prop="status">
@@ -78,12 +51,7 @@
           clearable
           style="width: 100px"
         >
-          <el-option
-            v-for="item in statusOptions"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
+          <el-option v-for="item in statusOptions" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
       </el-form-item>
     </search-form>
@@ -119,15 +87,25 @@
           <dict-tag :options="statusOptions" :value="row.status" />
         </template>
       </el-table-column>
-      <el-table-column :label="t('system.user.page.createTime')" prop="create_time" min-width="160" align="center" sortable="custom">
+      <el-table-column
+        :label="t('system.user.page.createTime')"
+        prop="create_time"
+        min-width="160"
+        align="center"
+        sortable="custom"
+      >
         <template #default="{ row }">
           {{ formatDateTime(row.create_time) }}
         </template>
       </el-table-column>
       <el-table-column :label="t('common.operation')" width="240" align="center" fixed="right">
         <template #default="{ row }">
-          <el-button type="primary" link size="small" @click="handleEdit(row as UserRow)">{{ t('common.edit') }}</el-button>
-          <el-button type="primary" link size="small" @click="handleResetPwd(row as UserRow)">{{ t('system.user.page.resetPassword') }}</el-button>
+          <el-button type="primary" link size="small" @click="handleEdit(row as UserRow)">{{
+            t('common.edit')
+          }}</el-button>
+          <el-button type="primary" link size="small" @click="handleResetPwd(row as UserRow)">{{
+            t('system.user.page.resetPassword')
+          }}</el-button>
           <el-button
             v-if="isUserLocked(row as UserRow)"
             type="warning"
@@ -137,28 +115,21 @@
           >
             {{ t('system.user.page.unlock') }}
           </el-button>
-          <el-button type="danger" link size="small" @click="handleDelete(row as UserRow)">{{ t('common.delete') }}</el-button>
+          <el-button type="danger" link size="small" @click="handleDelete(row as UserRow)">{{
+            t('common.delete')
+          }}</el-button>
         </template>
       </el-table-column>
     </el-table>
 
     <!-- ==================== 分页 ==================== -->
-    <pagination
-      v-model:page="pageNum"
-      v-model:limit="pageSize"
-      :total="total"
-      @pagination="getList"
-    />
+    <pagination v-model:page="pageNum" v-model:limit="pageSize" :total="total" @pagination="getList" />
 
     <!-- ==================== 新增/编辑弹窗 ==================== -->
     <user-dialog ref="userDialog" @success="refreshList" />
 
     <!-- ==================== 重置密码弹窗 ==================== -->
-    <el-dialog
-      v-model="resetPwdDialogVisible"
-      :title="t('system.user.page.resetPwdTitle')"
-      width="400px"
-    >
+    <el-dialog v-model="resetPwdDialogVisible" :title="t('system.user.page.resetPwdTitle')" width="400px">
       <el-form :model="resetPwdForm" label-width="100px">
         <el-form-item :label="t('system.user.page.username')">
           <span>{{ resetPwdUser?.username }}</span>
@@ -274,7 +245,9 @@ interface UserRow {
 
 const roleMap = computed<Record<string, string>>(() => {
   const map: Record<string, string> = {}
-  roleOptions.value.forEach((item) => { map[String(item.value)] = item.label })
+  roleOptions.value.forEach(item => {
+    map[String(item.value)] = item.label
+  })
   return map
 })
 
@@ -283,22 +256,41 @@ const exportColumns = computed<ExportColumn[]>(() => [
   { label: t('system.user.page.realName'), prop: 'real_name', width: 100 },
   { label: t('system.user.page.email'), prop: 'email', width: 180 },
   { label: t('system.user.page.phone'), prop: 'phone', width: 130 },
-  { label: t('system.user.page.role'), prop: 'role', width: 100, formatter: (row) => roleMap.value[String(row.role)] || row.role },
-  { label: t('system.user.page.status'), prop: 'status', width: 80, formatter: (row) => (row.status === 1 ? t('system.user.page.statusEnabled') : t('system.user.page.statusDisabled')) },
-  { label: t('system.user.page.createTime'), prop: 'create_time', width: 170, formatter: (row) => formatDate(row.create_time as string) }
+  {
+    label: t('system.user.page.role'),
+    prop: 'role',
+    width: 100,
+    formatter: row => roleMap.value[String(row.role)] || row.role
+  },
+  {
+    label: t('system.user.page.status'),
+    prop: 'status',
+    width: 80,
+    formatter: row => (row.status === 1 ? t('system.user.page.statusEnabled') : t('system.user.page.statusDisabled'))
+  },
+  {
+    label: t('system.user.page.createTime'),
+    prop: 'create_time',
+    width: 170,
+    formatter: row => formatDate(row.create_time as string)
+  }
 ])
 
 async function loadRoleList(): Promise<void> {
   try {
     const res = await withCache('user_roleList', () => requestGetRoleAllApi())
     roleList.value = (res.data as Array<Record<string, any>>) || []
-  } catch { /* 拦截器已处理 */ }
+  } catch {
+    /* 拦截器已处理 */
+  }
 }
 async function loadDeptTree(): Promise<void> {
   try {
     const res = await withCache('user_deptTree', () => requestGetDeptTreeApi())
     deptTree.value = (res.data as Array<Record<string, any>>) || []
-  } catch { /* 拦截器已处理 */ }
+  } catch {
+    /* 拦截器已处理 */
+  }
 }
 
 function formatDateTime(date: string): string {
@@ -306,7 +298,7 @@ function formatDateTime(date: string): string {
 }
 
 function handleSelectionChange(selection: UserRow[]): void {
-  selectedIds.value = selection.map((item) => item.id)
+  selectedIds.value = selection.map(item => item.id)
   selectedRows.value = selection
 }
 
@@ -327,7 +319,9 @@ async function handleDelete(row: UserRow): Promise<void> {
     await requestDeleteUserApi(String(row.id))
     showSuccess(t('system.user.page.deleteSuccess'))
     refreshList()
-  } catch { /* 拦截器已处理 */ }
+  } catch {
+    /* 拦截器已处理 */
+  }
 }
 
 async function handleBatchDelete(): Promise<void> {
@@ -345,7 +339,9 @@ async function handleBatchDelete(): Promise<void> {
     showSuccess(t('system.user.page.batchDeleteSuccess'))
     selectedIds.value = []
     refreshList()
-  } catch { /* 拦截器已处理 */ }
+  } catch {
+    /* 拦截器已处理 */
+  }
 }
 
 // ===== 重置密码 =====
@@ -373,7 +369,9 @@ async function handleConfirmResetPwd(): Promise<void> {
     await requestResetUserPwdApi(String(resetPwdUser.value?.id), resetPwdForm.newPassword)
     showSuccess(t('system.user.page.resetPasswordSuccess'))
     resetPwdDialogVisible.value = false
-  } catch { /* 拦截器已处理 */ }
+  } catch {
+    /* 拦截器已处理 */
+  }
 }
 
 function isUserLocked(row: UserRow): boolean {
@@ -388,7 +386,9 @@ async function handleUnlock(row: UserRow): Promise<void> {
     await requestUnlockUserApi(String(row.id))
     showSuccess(t('system.user.page.unlockSuccess'))
     getList()
-  } catch { /* 拦截器已处理 */ }
+  } catch {
+    /* 拦截器已处理 */
+  }
 }
 
 onMounted(() => {
@@ -415,11 +415,24 @@ onMounted(() => {
   border: 1px solid #ebeef5;
 
   .header-left {
-    .page-title { margin: 0; font-size: 20px; font-weight: 600; color: #303133; }
-    .page-desc { margin: 8px 0 0; font-size: 13px; color: #909399; }
+    .page-title {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+      color: #303133;
+    }
+    .page-desc {
+      margin: 8px 0 0;
+      font-size: 13px;
+      color: #909399;
+    }
   }
 
-  .header-right { display: flex; gap: 10px; align-items: center; }
+  .header-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
 }
 
 :deep(.el-table .caret-wrapper) {

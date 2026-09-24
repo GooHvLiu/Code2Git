@@ -92,7 +92,7 @@ export const useWebSocketStore = defineStore('websocket', () => {
   function manualReconnectFailed(error?: string): void {
     isReconnecting.value = false
     reconnectResult.value = 'failed'
-    reconnectError.value = error || '未知错误'
+    reconnectError.value = error || (i18n.global.t('common.error.UNKNOWN_ERROR') as string)
   }
   function setHeartbeatInterval(interval: number): void {
     heartbeatInterval.value = interval

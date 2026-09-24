@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 超级面板模块 - 语言配置国际化字段
  * 大厂规范：统一嵌套对象结构，按功能区分组
  * 注意：不使用兜底方案，缺失字段直接显示 key
@@ -275,7 +275,7 @@ export default {
     // 【提示】新语言代码不能为空
     codeNotEmpty: '语言代码不能为空',
     // 【占位符】新语言代码占位符
-    codePlaceholder: '如 ja-JP、ko-KR',
+    codePlaceholder: '如 zh-CN、en-US',
     // 【提示】新语言代码提示
     codeTip: '语言的唯一标识，如 zh-CN、en-US',
     // 【标签】新语言名称

@@ -46,7 +46,7 @@ export function setCache<T>(key: string, data: T, expire = DEFAULT_EXPIRE): void
 /** 清除指定缓存（不传 key 清空全部） */
 export function clearCache(key?: string): void {
   if (key) delete cacheStore[key]
-  else Object.keys(cacheStore).forEach((k) => delete cacheStore[k])
+  else Object.keys(cacheStore).forEach(k => delete cacheStore[k])
 }
 
 /**
@@ -77,8 +77,8 @@ export async function withCache<T>(key: string, requestFn: () => Promise<T>, exp
 
 /** 清除所有缓存（退出登录时调用） */
 export function clearAllCache(): void {
-  Object.keys(cacheStore).forEach((k) => delete cacheStore[k])
-  Object.keys(loadingStore).forEach((k) => delete loadingStore[k])
+  Object.keys(cacheStore).forEach(k => delete cacheStore[k])
+  Object.keys(loadingStore).forEach(k => delete loadingStore[k])
 }
 
 export default {

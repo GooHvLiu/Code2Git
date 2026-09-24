@@ -63,7 +63,7 @@ export function requestMarkAllAsReadApi() {
  * 批量标记为已读
  * @param {Array<number>} ids - 通知ID数组
  */
-export function requestBatchMarkAsReadApi(ids: (string|number)[]) {
+export function requestBatchMarkAsReadApi(ids: (string | number)[]) {
   return request({ url: '/notification/batch-read', method: 'put', data: { ids } })
 }
 
@@ -78,7 +78,7 @@ export function requestDeleteNotificationApi(id: string) {
  * 批量删除通知
  * @param {Array<number>} ids - 通知ID数组
  */
-export function requestBatchDeleteApi(ids: (string|number)[]) {
+export function requestBatchDeleteApi(ids: (string | number)[]) {
   return request({ url: '/notification/batch', method: 'delete', data: { ids } })
 }
 
@@ -86,7 +86,7 @@ export function requestBatchDeleteApi(ids: (string|number)[]) {
  * 全部删除（清空所有通知）
  * @param {boolean} includeArchived - 是否包含已归档的通知
  */
-export function requestDeleteAllApi(includeArchived: unknown= false) {
+export function requestDeleteAllApi(includeArchived: unknown = false) {
   return request({ url: '/notification/all', method: 'delete', data: { includeArchived } })
 }
 
@@ -96,7 +96,7 @@ export function requestDeleteAllApi(includeArchived: unknown= false) {
  * 归档通知
  * @param {Array<number>} ids - 通知ID数组
  */
-export function requestArchiveApi(ids: (string|number)[]) {
+export function requestArchiveApi(ids: (string | number)[]) {
   return request({ url: '/notification/archive', method: 'put', data: { ids } })
 }
 
@@ -104,7 +104,7 @@ export function requestArchiveApi(ids: (string|number)[]) {
  * 恢复已归档的通知
  * @param {Array<number>} ids - 通知ID数组
  */
-export function requestUnarchiveApi(ids: (string|number)[]) {
+export function requestUnarchiveApi(ids: (string | number)[]) {
   return request({ url: '/notification/unarchive', method: 'put', data: { ids } })
 }
 

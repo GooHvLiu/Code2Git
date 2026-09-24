@@ -26,7 +26,11 @@ function getValidVisitedViews(): VisitedView[] {
   const saved = getSessionStorage<VisitedView[]>(SESSIONSTORAGE_KEYS.TAG_LIST)
   if (!Array.isArray(saved)) return [getHomeTag()]
   const invalidPaths: string[] = [
-    ROUTE_PATHS.LOGIN, ROUTE_PATHS.NOT_FOUND, ROUTE_PATHS.FORBIDDEN, ROUTE_PATHS.REDIRECT, ROUTE_PATHS.LICENSE_IMPORT
+    ROUTE_PATHS.LOGIN,
+    ROUTE_PATHS.NOT_FOUND,
+    ROUTE_PATHS.FORBIDDEN,
+    ROUTE_PATHS.REDIRECT,
+    ROUTE_PATHS.LICENSE_IMPORT
   ]
   const invalidTitles = ['欢迎登录', 'layout.login.title']
   const filtered = saved.filter(v => {
@@ -51,7 +55,11 @@ export const useTagsViewStore = defineStore('tagsView', () => {
     const isHiddenRoute = view.meta?.hidden === true
     if (isHiddenRoute) return
     const invalidPaths: string[] = [
-      ROUTE_PATHS.LOGIN, ROUTE_PATHS.NOT_FOUND, ROUTE_PATHS.FORBIDDEN, ROUTE_PATHS.REDIRECT, ROUTE_PATHS.LICENSE_IMPORT
+      ROUTE_PATHS.LOGIN,
+      ROUTE_PATHS.NOT_FOUND,
+      ROUTE_PATHS.FORBIDDEN,
+      ROUTE_PATHS.REDIRECT,
+      ROUTE_PATHS.LICENSE_IMPORT
     ]
     if (invalidPaths.includes(view.path)) return
     if (visitedViews.value.some(v => v.path === view.path)) {

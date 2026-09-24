@@ -1,25 +1,11 @@
 <template>
-  <el-dialog
-    v-model="dialogVisible"
-    :title="dialogTitle"
-    width="560px"
-    :close-on-click-modal="false"
-    @close="close"
-  >
+  <el-dialog v-model="dialogVisible" :title="dialogTitle" width="560px" :close-on-click-modal="false" @close="close">
     <el-form v-if="dialogVisible" ref="formRef" :model="form" :rules="rules">
-      <el-form-item
-        v-for="field in visibleFields"
-        :key="field.prop"
-        :prop="field.prop"
-      >
+      <el-form-item v-for="field in visibleFields" :key="field.prop" :prop="field.prop">
         <template #label>
           <span class="label-with-tip">
             {{ t(field.label) }}
-            <el-tooltip
-              v-if="field.tip"
-              :content="t(field.tip)"
-              placement="top"
-            >
+            <el-tooltip v-if="field.tip" :content="t(field.tip)" placement="top">
               <el-icon class="label-tip-icon"><QuestionFilled /></el-icon>
             </el-tooltip>
           </span>
@@ -48,12 +34,7 @@
           :placeholder="t(field.placeholder || '')"
           style="width: 100%"
         >
-          <el-option
-            v-for="opt in field.options || []"
-            :key="opt.value"
-            :label="opt.label"
-            :value="opt.value"
-          />
+          <el-option v-for="opt in field.options || []" :key="opt.value" :label="opt.label" :value="opt.value" />
         </el-select>
         <!-- 树形下拉选择（部门） -->
         <el-select
@@ -63,23 +44,11 @@
           style="width: 100%"
           clearable
         >
-          <el-option
-            v-for="item in flatDeptList"
-            :key="item.id"
-            :label="item.dept_name"
-            :value="item.id"
-          />
+          <el-option v-for="item in flatDeptList" :key="item.id" :label="item.dept_name" :value="item.id" />
         </el-select>
         <!-- 单选按钮 -->
-        <el-radio-group
-          v-if="field.type === 'radio'"
-          v-model="form[field.prop]"
-        >
-          <el-radio
-            v-for="opt in field.options || []"
-            :key="opt.value"
-            :value="opt.value"
-          >
+        <el-radio-group v-if="field.type === 'radio'" v-model="form[field.prop]">
+          <el-radio v-for="opt in field.options || []" :key="opt.value" :value="opt.value">
             {{ opt.label }}
           </el-radio>
         </el-radio-group>
@@ -96,11 +65,7 @@
     </el-form>
     <template #footer>
       <el-button @click="close">{{ t('common.cancel') }}</el-button>
-      <el-button
-        type="primary"
-        :loading="submitLoading"
-        @click="handleSubmit"
-      >
+      <el-button type="primary" :loading="submitLoading" @click="handleSubmit">
         {{ t('common.confirm') }}
       </el-button>
     </template>
@@ -144,7 +109,10 @@ interface UserForm {
 }
 
 /** 字段配置 */
-interface FieldOption { label: string; value: string | number }
+interface FieldOption {
+  label: string
+  value: string | number
+}
 interface FieldConfigItem {
   prop: string
   label: string
@@ -188,12 +156,10 @@ const defaultForm = getDefaultForm()
 
 const isEdit = computed(() => !!form.id)
 
-const dialogTitle = computed(() =>
-  isEdit.value ? t('system.user.page.editUser') : t('system.user.page.addUser')
-)
+const dialogTitle = computed(() => (isEdit.value ? t('system.user.page.editUser') : t('system.user.page.addUser')))
 
 const roleOptions = computed<FieldOption[]>(() =>
-  roleList.value.map((item) => ({
+  roleList.value.map(item => ({
     label: getRoleName(item as unknown as Role) || item.role_code,
     value: item.role_code
   }))
@@ -203,7 +169,7 @@ const flatDeptList = computed<Array<{ id: string | number; dept_name: string }>>
   const result: Array<{ id: string | number; dept_name: string }> = []
   const flatten = (list: Array<Record<string, any>>) => {
     if (!Array.isArray(list)) return
-    list.forEach((item) => {
+    list.forEach(item => {
       result.push({ id: item.id, dept_name: item.dept_name })
       if (item.children && item.children.length > 0) flatten(item.children)
     })
@@ -213,33 +179,107 @@ const flatDeptList = computed<Array<{ id: string | number; dept_name: string }>>
 })
 
 const sexOptions = computed<FieldOption[]>(() =>
-  (dictMap.value.user_sex || []).map((item) => ({ ...item, value: Number(item.value) }))
+  (dictMap.value.user_sex || []).map(item => ({ ...item, value: Number(item.value) }))
 )
 const statusOptions = computed<FieldOption[]>(() =>
-  (dictMap.value.user_status || []).map((item) => ({ ...item, value: Number(item.value) }))
+  (dictMap.value.user_status || []).map(item => ({ ...item, value: Number(item.value) }))
 )
 
 const fieldConfig = computed<FieldConfigItem[]>(() => [
-  { prop: 'username', label: 'system.user.page.username', tip: 'system.user.page.usernameTip', type: 'input', placeholder: 'system.user.page.usernamePlaceholder', required: true, disabledEdit: true },
-  { prop: 'password', label: 'system.user.page.password', tip: 'system.user.page.passwordTip', type: 'password', placeholder: 'system.user.page.passwordPlaceholder', required: true, show: (e) => !e },
-  { prop: 'real_name', label: 'system.user.page.realName', tip: 'system.user.page.realNameTip', type: 'input', placeholder: 'system.user.page.realNamePlaceholder', required: false },
-  { prop: 'sex', label: 'system.user.page.sex', tip: 'system.user.page.sexTip', type: 'radio', required: false, options: sexOptions.value },
-  { prop: 'phone', label: 'system.user.page.phone', tip: 'system.user.page.phoneTip', type: 'input', placeholder: 'system.user.page.phonePlaceholder', required: false },
-  { prop: 'email', label: 'system.user.page.email', tip: 'system.user.page.emailTip', type: 'input', placeholder: 'system.user.page.emailPlaceholder', required: false },
-  { prop: 'dept_id', label: 'system.user.page.dept', tip: 'system.user.page.deptTip', type: 'treeselect', placeholder: 'system.user.page.deptPlaceholder', required: false },
-  { prop: 'role', label: 'system.user.page.role', tip: 'system.user.page.roleTip', type: 'select', placeholder: 'system.user.page.rolePlaceholder', required: false, options: roleOptions.value },
-  { prop: 'status', label: 'system.user.page.status', tip: 'system.user.page.statusTip', type: 'radio', required: false, options: statusOptions.value, show: (e) => e },
-  { prop: 'remark', label: 'system.user.page.remark', tip: 'system.user.page.remarkTip', type: 'textarea', placeholder: 'system.user.page.remarkPlaceholder', required: false }
+  {
+    prop: 'username',
+    label: 'system.user.page.username',
+    tip: 'system.user.page.usernameTip',
+    type: 'input',
+    placeholder: 'system.user.page.usernamePlaceholder',
+    required: true,
+    disabledEdit: true
+  },
+  {
+    prop: 'password',
+    label: 'system.user.page.password',
+    tip: 'system.user.page.passwordTip',
+    type: 'password',
+    placeholder: 'system.user.page.passwordPlaceholder',
+    required: true,
+    show: e => !e
+  },
+  {
+    prop: 'real_name',
+    label: 'system.user.page.realName',
+    tip: 'system.user.page.realNameTip',
+    type: 'input',
+    placeholder: 'system.user.page.realNamePlaceholder',
+    required: false
+  },
+  {
+    prop: 'sex',
+    label: 'system.user.page.sex',
+    tip: 'system.user.page.sexTip',
+    type: 'radio',
+    required: false,
+    options: sexOptions.value
+  },
+  {
+    prop: 'phone',
+    label: 'system.user.page.phone',
+    tip: 'system.user.page.phoneTip',
+    type: 'input',
+    placeholder: 'system.user.page.phonePlaceholder',
+    required: false
+  },
+  {
+    prop: 'email',
+    label: 'system.user.page.email',
+    tip: 'system.user.page.emailTip',
+    type: 'input',
+    placeholder: 'system.user.page.emailPlaceholder',
+    required: false
+  },
+  {
+    prop: 'dept_id',
+    label: 'system.user.page.dept',
+    tip: 'system.user.page.deptTip',
+    type: 'treeselect',
+    placeholder: 'system.user.page.deptPlaceholder',
+    required: false
+  },
+  {
+    prop: 'role',
+    label: 'system.user.page.role',
+    tip: 'system.user.page.roleTip',
+    type: 'select',
+    placeholder: 'system.user.page.rolePlaceholder',
+    required: false,
+    options: roleOptions.value
+  },
+  {
+    prop: 'status',
+    label: 'system.user.page.status',
+    tip: 'system.user.page.statusTip',
+    type: 'radio',
+    required: false,
+    options: statusOptions.value,
+    show: e => e
+  },
+  {
+    prop: 'remark',
+    label: 'system.user.page.remark',
+    tip: 'system.user.page.remarkTip',
+    type: 'textarea',
+    placeholder: 'system.user.page.remarkPlaceholder',
+    required: false
+  }
 ])
 
 const visibleFields = computed<FieldConfigItem[]>(() =>
-  fieldConfig.value.filter((field) => (typeof field.show === 'function' ? field.show(isEdit.value) : true))
+  fieldConfig.value.filter(field => (typeof field.show === 'function' ? field.show(isEdit.value) : true))
 )
 
 const rules = computed<FormRules>(() => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const r: Record<string, any> = {}
-  fieldConfig.value.forEach((field) => {
+  fieldConfig.value.forEach(field => {
     if (field.required) {
       r[field.prop] = [{ required: true, message: t(field.placeholder || field.label), trigger: 'blur' }]
     }
@@ -299,10 +339,20 @@ function close(): void {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function submitApi(formData: Record<string, any>) {
   const ALLOWED_FIELDS = [
-    'username', 'password', 'role', 'real_name', 'sex', 'phone', 'email', 'dept_id', 'avatar', 'remark', 'status'
+    'username',
+    'password',
+    'role',
+    'real_name',
+    'sex',
+    'phone',
+    'email',
+    'dept_id',
+    'avatar',
+    'remark',
+    'status'
   ]
   const cleanData: Record<string, unknown> = {}
-  ALLOWED_FIELDS.forEach((key) => {
+  ALLOWED_FIELDS.forEach(key => {
     if (formData[key] !== undefined) cleanData[key] = formData[key]
   })
   if (formData.id) cleanData.id = formData.id
@@ -310,7 +360,7 @@ function submitApi(formData: Record<string, any>) {
 }
 
 function handleSubmit(): void {
-  formRef.value?.validate(async (valid) => {
+  formRef.value?.validate(async valid => {
     if (!valid) return
     submitLoading.value = true
     try {

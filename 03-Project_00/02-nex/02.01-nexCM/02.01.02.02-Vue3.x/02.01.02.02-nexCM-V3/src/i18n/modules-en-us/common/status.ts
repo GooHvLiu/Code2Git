@@ -17,5 +17,9 @@ export default {
   // [Status] Sort
   sort: 'Sort',
   // [Status] Selected
-  selected: 'Selected'
+  selected: 'Selected',
+  // [Status] Running
+  running: 'Running',
+  // [Status] Offline
+  offline: 'Offline'
 }

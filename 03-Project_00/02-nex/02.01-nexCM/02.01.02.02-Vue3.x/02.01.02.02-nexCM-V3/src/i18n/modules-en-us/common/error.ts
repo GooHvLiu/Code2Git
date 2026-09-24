@@ -118,7 +118,8 @@ export default {
   // [Error] Register failed
   USER_REGISTER_FAIL: 'Registration failed',
   // [Error] Device limit exceeded
-  DEVICE_LIMIT_EXCEEDED: 'Online device limit reached (max {maxDevices} devices), please contact administrator to kick other devices',
+  DEVICE_LIMIT_EXCEEDED:
+    'Online device limit reached (max {maxDevices} devices), please contact administrator to kick other devices',
 
   // ==================== Dictionary module ====================
   // [Error] Dict type not found
@@ -190,11 +191,13 @@ export default {
   // [Error] Config name exists
   EMAIL_CONFIG_NAME_EXISTS: 'Configuration name already exists',
   // [Error] Default cannot delete
-  EMAIL_CONFIG_DEFAULT_CANNOT_DELETE: 'Default configuration cannot be deleted, please set another configuration as default first',
+  EMAIL_CONFIG_DEFAULT_CANNOT_DELETE:
+    'Default configuration cannot be deleted, please set another configuration as default first',
   // [Error] System config cannot delete
   EMAIL_CONFIG_SYSTEM_CANNOT_DELETE: 'System built-in configuration cannot be deleted',
   // [Error] Default cannot disable
-  EMAIL_CONFIG_DEFAULT_CANNOT_DISABLE: 'Default configuration cannot be disabled, please set another configuration as default first',
+  EMAIL_CONFIG_DEFAULT_CANNOT_DISABLE:
+    'Default configuration cannot be disabled, please set another configuration as default first',
   // [Error] Only enabled can be default
   EMAIL_CONFIG_ONLY_ENABLED_CAN_DEFAULT: 'Only enabled configurations can be set as default',
   // [Error] Name required
@@ -228,9 +231,11 @@ export default {
   // [Error] Part code same as old
   PART_CODE_SAME_AS_OLD: 'New part code {partCode} is the same as the old code, no need to replace',
   // [Error] Spec not match
-  PART_SPEC_NOT_MATCH: 'Spec model {userSpec} does not match template spec model {templateSpec}, must use the spec model defined in the template',
+  PART_SPEC_NOT_MATCH:
+    'Spec model {userSpec} does not match template spec model {templateSpec}, must use the spec model defined in the template',
   // [Error] Rated life not match
-  PART_RATED_LIFE_NOT_MATCH: 'Rated life {userRatedLife} does not match template rated life {templateRatedLife}, must use the rated life defined in the template',
+  PART_RATED_LIFE_NOT_MATCH:
+    'Rated life {userRatedLife} does not match template rated life {templateRatedLife}, must use the rated life defined in the template',
   // [Error] Template key exists
   PART_TEMPLATE_KEY_EXISTS: 'Template code {templateKey} already exists',
   // [Error] Template has parts

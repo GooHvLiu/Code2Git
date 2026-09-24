@@ -19,11 +19,7 @@ import {
   requestGetRoleMenuIdsApi,
   requestSaveRolePermissionsApi
 } from '@/api'
-import {
-  scopeSuperOnlyNodes,
-  filterTreeByType,
-  countNodesByType
-} from '../utils/permissionTree'
+import { scopeSuperOnlyNodes, filterTreeByType, countNodesByType } from '../utils/permissionTree'
 import type { PermissionNode, Role } from '@/types/system'
 
 /** 组件 Props（与 permission-core/index.vue 对齐） */
@@ -87,13 +83,11 @@ export function usePermissionConfig(props: PermissionConfigProps) {
   /** 可见角色列表（showSuperAdmin=false 时过滤超级管理员） */
   const visibleRoles = computed<Role[]>(() => {
     if (props.showSuperAdmin) return roleList.value
-    return roleList.value.filter((r) => Number(r.is_super_admin) !== 1)
+    return roleList.value.filter(r => Number(r.is_super_admin) !== 1)
   })
 
   /** 当前正在配置的角色是否为超级管理员 */
-  const isConfiguringSuperRole = computed<boolean>(
-    () => Number(currentRole.value?.is_super_admin) === 1
-  )
+  const isConfiguringSuperRole = computed<boolean>(() => Number(currentRole.value?.is_super_admin) === 1)
 
   /** 根据当前配置角色裁剪超级专属节点 */
   const roleScopedTreeData = computed<PermissionNode[]>(() => {
@@ -125,7 +119,7 @@ export function usePermissionConfig(props: PermissionConfigProps) {
     if (!permissionTree.value) return false
     const currentChecked = permissionTree.value.getCheckedKeys() || []
     if (currentChecked.length !== originalCheckedKeys.value.length) return true
-    return !currentChecked.every((key) => originalCheckedKeys.value.includes(key))
+    return !currentChecked.every(key => originalCheckedKeys.value.includes(key))
   })
 
   // ===== 方法 =====
@@ -160,7 +154,7 @@ export function usePermissionConfig(props: PermissionConfigProps) {
     loading.value = true
     try {
       const res = await requestGetAllPermissionsApi()
-      allPermissions.value = ((res.data as { permissions?: PermissionNode[] })?.permissions) || []
+      allPermissions.value = (res.data as { permissions?: PermissionNode[] })?.permissions || []
     } catch {
       // 错误已由拦截器统一处理
     } finally {
@@ -172,7 +166,7 @@ export function usePermissionConfig(props: PermissionConfigProps) {
   async function loadRolePermissions(roleId: string | number): Promise<void> {
     try {
       const res = await requestGetRoleMenuIdsApi(String(roleId))
-      const menuIds = ((res.data as { menuIds?: Array<string | number> })?.menuIds) || []
+      const menuIds = (res.data as { menuIds?: Array<string | number> })?.menuIds || []
 
       originalCheckedKeys.value = [...menuIds]
       await nextTick()
@@ -183,7 +177,7 @@ export function usePermissionConfig(props: PermissionConfigProps) {
         treeEl.store.checkStrictly = true
 
         treeEl.setCheckedKeys([])
-        menuIds.forEach((id) => {
+        menuIds.forEach(id => {
           const node = treeEl.store.nodesMap[id]
           if (node) treeEl.setChecked(node, true, false)
         })
@@ -215,11 +209,11 @@ export function usePermissionConfig(props: PermissionConfigProps) {
       if (!permissionTree.value) return
       const treeEl = permissionTree.value
       treeEl.setCheckedKeys([])
-      originalCheckedKeys.value.forEach((id) => {
+      originalCheckedKeys.value.forEach(id => {
         const node = treeEl.store.nodesMap[id]
         if (node) treeEl.setChecked(node, true, false)
       })
-      Object.keys(treeEl.store.nodesMap).forEach((key) => {
+      Object.keys(treeEl.store.nodesMap).forEach(key => {
         treeEl.store.nodesMap[key].expanded = true
       })
     }, 100)
@@ -228,7 +222,7 @@ export function usePermissionConfig(props: PermissionConfigProps) {
   /** 展开全部 */
   function handleExpandAll(): void {
     if (!permissionTree.value) return
-    Object.keys(permissionTree.value.store.nodesMap).forEach((key) => {
+    Object.keys(permissionTree.value.store.nodesMap).forEach(key => {
       permissionTree.value!.store.nodesMap[key].expanded = true
     })
   }
@@ -236,7 +230,7 @@ export function usePermissionConfig(props: PermissionConfigProps) {
   /** 折叠全部 */
   function handleCollapseAll(): void {
     if (!permissionTree.value) return
-    Object.keys(permissionTree.value.store.nodesMap).forEach((key) => {
+    Object.keys(permissionTree.value.store.nodesMap).forEach(key => {
       permissionTree.value!.store.nodesMap[key].expanded = false
     })
   }

@@ -6,6 +6,11 @@
  *
  * 作者：GooHv
  */
+import i18n from '@/i18n'
+
+function t(key: string, params?: Record<string, unknown>): string {
+  return i18n.global.t(key, params || {}) as string
+}
 
 /**
  * 格式化授权时间戳
@@ -40,7 +45,11 @@ export function licenseTypeTag(type?: LicenseType): EpTagType {
  * @param type 授权类型 trial/formal/permanent
  */
 export function licenseTypeLabel(type?: LicenseType): string {
-  const map: Record<string, string> = { trial: '试用授权', formal: '正式授权', permanent: '永久授权' }
+  const map: Record<string, string> = {
+    trial: t('superPanel.license.type.trial'),
+    formal: t('superPanel.license.type.formal'),
+    permanent: t('superPanel.license.type.permanent')
+  }
   return (type && map[type]) || type || '-'
 }
 
@@ -50,7 +59,7 @@ export function licenseTypeLabel(type?: LicenseType): string {
  * @returns 是否复制成功
  */
 export function copyToClipboard(text: string): Promise<boolean> {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     if (!text) {
       resolve(false)
       return
@@ -90,11 +99,11 @@ export function formatFileSize(bytes?: number): string {
 export function getLicenseCountdown(expireTimestamp?: number | string | null): string {
   if (!expireTimestamp) return '-'
   const diff = Number(expireTimestamp) - Date.now()
-  if (diff <= 0) return '已过期'
+  if (diff <= 0) return t('superPanel.license.status.expired')
   const days = Math.floor(diff / (1000 * 60 * 60 * 24))
   const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
   const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
-  return `${days}天 ${hours}时 ${minutes}分`
+  return t('superPanel.license.message.countdownFormat', { days, hours, minutes })
 }
 
 export default {

@@ -2,6 +2,8 @@
  * ==========================================
  * 接口响应业务码常量定义
  * ==========================================
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 export const CODE_SUCCESS = 200
 
@@ -31,12 +33,7 @@ export const TOKEN_AUTO_REDIRECT_CODES: string[] = [
 ]
 
 /** 不需要 token 的接口白名单 */
-export const NO_TOKEN_API: string[] = [
-  '/user/login',
-  '/captcha/captcha-image',
-  '/license/status',
-  '/license/import'
-]
+export const NO_TOKEN_API: string[] = ['/user/login', '/captcha/captcha-image', '/license/status', '/license/import']
 
 /** 系统角色定义 */
 export const ROLES = {

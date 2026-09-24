@@ -6,11 +6,7 @@
       <span v-else class="menu-icon-placeholder"></span>
       <span>{{ displayTitle }}</span>
     </template>
-    <SidebarItem
-      v-for="child in item.children"
-      :key="child.path"
-      :item="child"
-    />
+    <SidebarItem v-for="child in item.children" :key="child.path" :item="child" />
   </el-sub-menu>
 
   <!-- 无子菜单：渲染 el-menu-item -->
@@ -38,9 +34,7 @@ const props = defineProps<{
 }>()
 
 /** 存在子菜单 */
-const hasChildren = computed(() =>
-  Array.isArray(props.item.children) && props.item.children.length > 0
-)
+const hasChildren = computed(() => Array.isArray(props.item.children) && props.item.children.length > 0)
 
 /** 显示标题：formatMenu 已通过 resolveMenuTitle 转换，直接使用 */
 const displayTitle = computed(() => props.item.title || '')

@@ -49,6 +49,8 @@
 <script setup lang="ts">
 /**
  * 通知列表项
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -121,7 +123,7 @@ const typeName = computed(() => {
     license: 'notification.type.license'
   }
   const key = typeKeyMap[props.item.type]
-  return key ? t(key) : (props.item.type || '')
+  return key ? t(key) : props.item.type || ''
 })
 
 const priorityType = computed<'danger' | 'warning' | 'info'>(() => {
@@ -156,15 +158,21 @@ function formatTime(time?: string): string {
   cursor: pointer;
   transition: background 0.15s;
 
-  &:hover { background: #f5f7fa; }
+  &:hover {
+    background: #f5f7fa;
+  }
 
   &.unread {
     background: #f0f7ff;
     border-left: 3px solid #409eff;
   }
 
-  &.read { opacity: 0.7; }
-  &.selected { background: #ecf5ff; }
+  &.read {
+    opacity: 0.7;
+  }
+  &.selected {
+    background: #ecf5ff;
+  }
 
   .item-checkbox {
     display: flex;
@@ -193,11 +201,15 @@ function formatTime(time?: string): string {
         height: 8px;
         border-radius: 50%;
 
-        &.unread-dot { background: #f56c6c; }
+        &.unread-dot {
+          background: #f56c6c;
+        }
       }
     }
 
-    .type-tag { flex-shrink: 0; }
+    .type-tag {
+      flex-shrink: 0;
+    }
 
     .item-title {
       font-weight: 600;

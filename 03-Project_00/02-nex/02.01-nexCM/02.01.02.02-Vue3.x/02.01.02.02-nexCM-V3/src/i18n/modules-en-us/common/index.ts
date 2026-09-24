@@ -11,6 +11,7 @@ import table from './table'
 import validate from './validate'
 import dict from './dict'
 import upload from './upload'
+import shift from './shift'
 
 export default {
   // Action
@@ -27,6 +28,8 @@ export default {
   dict,
   // Upload components (namespace: common.upload.*)
   upload,
+  // Shift (namespace: common.shift.day/night)
+  ...shift,
   // Table
   ...table
 }

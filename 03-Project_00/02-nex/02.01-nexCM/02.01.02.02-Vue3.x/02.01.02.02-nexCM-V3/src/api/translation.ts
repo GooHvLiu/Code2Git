@@ -58,7 +58,7 @@ export function requestTranslateApi(text: string, source: string, target: string
  * @param {string} source - 源语言编码
  * @param {string} target - 目标语言编码
  */
-export function requestTranslateBatchApi(items: (string|number)[], source: string, target: string) {
+export function requestTranslateBatchApi(items: (string | number)[], source: string, target: string) {
   return request({
     url: '/translation/translate/batch',
     method: 'post',

@@ -11,16 +11,26 @@
             </div>
           </template>
           <el-descriptions v-if="license" :column="2" border>
-            <el-descriptions-item :label="t('superPanel.license.info.type')">{{ licenseTypeLabel }}</el-descriptions-item>
-            <el-descriptions-item :label="t('superPanel.license.info.expireTime')">{{ license.expireTime || '-' }}</el-descriptions-item>
-            <el-descriptions-item :label="t('superPanel.license.info.customerName')">{{ license.customer || '-' }}</el-descriptions-item>
+            <el-descriptions-item :label="t('superPanel.license.info.type')">{{
+              licenseTypeLabel
+            }}</el-descriptions-item>
+            <el-descriptions-item :label="t('superPanel.license.info.expireTime')">{{
+              license.expireTime || '-'
+            }}</el-descriptions-item>
+            <el-descriptions-item :label="t('superPanel.license.info.customerName')">{{
+              license.customer || '-'
+            }}</el-descriptions-item>
             <el-descriptions-item :label="t('superPanel.license.info.features')">
               <el-tag v-for="f in featureList" :key="f" size="small" style="margin-right: 6px">{{ f }}</el-tag>
             </el-descriptions-item>
           </el-descriptions>
           <div class="actions">
-            <el-button type="primary" :icon="Upload" @click="goImport">{{ t('superPanel.license.import.action') }}</el-button>
-            <el-button :icon="Download" @click="handleDownload">{{ t('superPanel.license.import.download') }}</el-button>
+            <el-button type="primary" :icon="Upload" @click="goImport">{{
+              t('superPanel.license.import.action')
+            }}</el-button>
+            <el-button :icon="Download" @click="handleDownload">{{
+              t('superPanel.license.import.download')
+            }}</el-button>
             <el-button :icon="RefreshRight" @click="handleSync">{{ t('superPanel.license.info.syncTime') }}</el-button>
           </div>
         </el-card>
@@ -29,12 +39,18 @@
       <!-- 机器绑定 -->
       <el-col :span="8">
         <el-card shadow="never">
-          <template #header><span>{{ t('superPanel.license.manage.machineBinding') }}</span></template>
+          <template #header
+            ><span>{{ t('superPanel.license.manage.machineBinding') }}</span></template
+          >
           <p class="binding-label">{{ t('superPanel.license.manage.machineId') }}</p>
           <el-input :model-value="machineId" readonly>
-            <template #append><el-button @click="copyMachineId">{{ t('superPanel.license.manage.copy') }}</el-button></template>
+            <template #append
+              ><el-button @click="copyMachineId">{{ t('superPanel.license.manage.copy') }}</el-button></template
+            >
           </el-input>
-          <p class="binding-hint">{{ machineId ? t('superPanel.license.status.matched') : t('superPanel.license.status.notMatched') }}</p>
+          <p class="binding-hint">
+            {{ machineId ? t('superPanel.license.status.matched') : t('superPanel.license.status.notMatched') }}
+          </p>
         </el-card>
       </el-col>
     </el-row>
@@ -125,9 +141,27 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.license-manage-page { padding: 16px; }
-.card-head { display: flex; justify-content: space-between; align-items: center; }
-.actions { margin-top: 16px; display: flex; gap: 8px; }
-.binding-label { font-size: 12px; color: #909399; margin-bottom: 8px; }
-.binding-hint { font-size: 12px; color: #909399; margin-top: 10px; }
+.license-manage-page {
+  padding: 16px;
+}
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.actions {
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
+}
+.binding-label {
+  font-size: 12px;
+  color: #909399;
+  margin-bottom: 8px;
+}
+.binding-hint {
+  font-size: 12px;
+  color: #909399;
+  margin-top: 10px;
+}
 </style>

@@ -114,9 +114,10 @@ export interface UseCrudReturn<T extends Record<string, unknown>, F extends Reco
   validateForm: () => Promise<boolean>
 }
 
-export function useCrud<T extends Record<string, unknown> = Record<string, unknown>, F extends Record<string, unknown> = Record<string, unknown>>(
-  options: UseCrudOptions<T, F> = {}
-): UseCrudReturn<T, F> {
+export function useCrud<
+  T extends Record<string, unknown> = Record<string, unknown>,
+  F extends Record<string, unknown> = Record<string, unknown>
+>(options: UseCrudOptions<T, F> = {}): UseCrudReturn<T, F> {
   const { t } = useI18n()
 
   const {
@@ -235,7 +236,7 @@ export function useCrud<T extends Record<string, unknown> = Record<string, unkno
     }
 
     // 校验表单
-    const valid = await new Promise<boolean>((resolve) => {
+    const valid = await new Promise<boolean>(resolve => {
       formRef.value!.validate((v: boolean) => resolve(v))
     })
     if (!valid) return
@@ -271,15 +272,11 @@ export function useCrud<T extends Record<string, unknown> = Record<string, unkno
     }
 
     try {
-      await ElMessageBox.confirm(
-        t(deleteMessage, { name: row?.name || row?.username || '' }),
-        t(deleteTitle),
-        {
-          confirmButtonText: t('common.confirm'),
-          cancelButtonText: t('common.cancel'),
-          type: 'warning'
-        }
-      )
+      await ElMessageBox.confirm(t(deleteMessage, { name: row?.name || row?.username || '' }), t(deleteTitle), {
+        confirmButtonText: t('common.confirm'),
+        cancelButtonText: t('common.cancel'),
+        type: 'warning'
+      })
     } catch {
       return // 用户取消
     }
@@ -306,7 +303,7 @@ export function useCrud<T extends Record<string, unknown> = Record<string, unkno
 
   async function validateForm(): Promise<boolean> {
     if (!formRef.value) return true
-    return new Promise<boolean>((resolve) => {
+    return new Promise<boolean>(resolve => {
       formRef.value!.validate((v: boolean) => resolve(v))
     })
   }

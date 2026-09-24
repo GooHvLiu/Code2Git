@@ -17,5 +17,9 @@ export default {
   // 【状态】排序
   sort: '排序',
   // 【状态】已选中
-  selected: '已选中'
+  selected: '已选中',
+  // 【状态】运行中
+  running: '运行中',
+  // 【状态】离线
+  offline: '离线'
 }

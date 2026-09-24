@@ -30,6 +30,10 @@ export default {
   metricVacuum: '真空度',
   // 【指标】灌装温度
   metricTemperature: '灌装温度',
+  // 【指标】加塞压力
+  metricPressure: '加塞压力',
+  // 【指标】设备振动
+  metricVibration: '设备振动',
 
   // 【单位】瓶/小时
   unitBottlePerHour: '瓶/h',

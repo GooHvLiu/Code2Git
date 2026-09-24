@@ -80,6 +80,8 @@
  * 心跳指示器组件
  * 显示 WebSocket 连接状态与 PLC 连接状态；点击断联时触发手动重连并弹出详情。
  * 状态全部来自 websocket Pinia store。
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -259,23 +261,39 @@ function handleDialogClosed(): void {
   }
 
   &.online {
-    .heartbeat-dot::before { background: #67c23a; }
-    .heartbeat-label { color: #67c23a; }
+    .heartbeat-dot::before {
+      background: #67c23a;
+    }
+    .heartbeat-label {
+      color: #67c23a;
+    }
   }
 
   &.warning {
-    .heartbeat-dot::before { background: #e6a23c; }
-    .heartbeat-label { color: #e6a23c; }
+    .heartbeat-dot::before {
+      background: #e6a23c;
+    }
+    .heartbeat-label {
+      color: #e6a23c;
+    }
   }
 
   &.offline {
-    .heartbeat-dot::before { background: #f56c6c; }
-    .heartbeat-label { color: #f56c6c; }
+    .heartbeat-dot::before {
+      background: #f56c6c;
+    }
+    .heartbeat-label {
+      color: #f56c6c;
+    }
   }
 
   &.reconnecting {
-    .heartbeat-dot::before { background: #409eff; }
-    .heartbeat-label { color: #409eff; }
+    .heartbeat-dot::before {
+      background: #409eff;
+    }
+    .heartbeat-label {
+      color: #409eff;
+    }
     cursor: wait;
   }
 
@@ -296,16 +314,25 @@ function handleDialogClosed(): void {
     padding: 8px 0;
     border-bottom: 1px solid #ebeef5;
 
-    &:last-child { border-bottom: none; }
+    &:last-child {
+      border-bottom: none;
+    }
 
-    .detail-label { color: #606266; font-size: 14px; }
+    .detail-label {
+      color: #606266;
+      font-size: 14px;
+    }
 
     .detail-value {
       font-size: 14px;
       font-weight: 500;
 
-      &.text-success { color: #67c23a; }
-      &.text-error { color: #f56c6c; }
+      &.text-success {
+        color: #67c23a;
+      }
+      &.text-error {
+        color: #f56c6c;
+      }
     }
   }
 
@@ -323,15 +350,23 @@ function handleDialogClosed(): void {
       gap: 8px;
       font-size: 14px;
 
-      .el-icon { font-size: 18px; }
+      .el-icon {
+        font-size: 18px;
+      }
     }
 
     .reconnect-connecting {
       color: #409eff;
-      .el-icon.is-loading { animation: spin-icon 1s linear infinite; }
+      .el-icon.is-loading {
+        animation: spin-icon 1s linear infinite;
+      }
     }
-    .reconnect-success { color: #67c23a; }
-    .reconnect-failed { color: #f56c6c; }
+    .reconnect-success {
+      color: #67c23a;
+    }
+    .reconnect-failed {
+      color: #f56c6c;
+    }
   }
 }
 
@@ -341,17 +376,31 @@ function handleDialogClosed(): void {
 }
 
 @keyframes pulse {
-  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-  100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
 }
 
 @keyframes spin {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 @keyframes spin-icon {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

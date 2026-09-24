@@ -140,5 +140,5 @@ export function toNotificationVM(t: Translate, raw: NotificationDTO): Notificati
 
 /** 列表 DTO[] -> VM[] */
 export function toNotificationVMList(t: Translate, list: NotificationDTO[]): NotificationVM[] {
-  return (Array.isArray(list) ? list : []).map((raw) => toNotificationVM(t, raw))
+  return (Array.isArray(list) ? list : []).map(raw => toNotificationVM(t, raw))
 }

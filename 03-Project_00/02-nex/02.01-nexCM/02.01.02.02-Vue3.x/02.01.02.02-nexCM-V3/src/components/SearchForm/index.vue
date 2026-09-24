@@ -1,13 +1,6 @@
 <template>
   <div class="search-form-wrapper">
-    <el-form
-      ref="searchFormRef"
-      :model="form"
-      :inline="true"
-      label-width="90px"
-      class="search-form"
-      size="small"
-    >
+    <el-form ref="searchFormRef" :model="form" :inline="true" label-width="90px" class="search-form" size="small">
       <slot></slot>
     </el-form>
 

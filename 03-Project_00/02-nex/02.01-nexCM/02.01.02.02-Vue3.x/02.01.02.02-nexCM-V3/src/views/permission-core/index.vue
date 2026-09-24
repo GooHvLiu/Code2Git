@@ -9,33 +9,14 @@
         <p class="page-desc">{{ t(descKey) }}</p>
       </div>
       <div class="header-right">
-        <el-tooltip
-          :content="t('system.permission.page.expandAll')"
-          placement="bottom"
-        >
-          <el-button
-            :icon="ArrowDown"
-            circle
-            @click="handleExpandAll"
-          />
+        <el-tooltip :content="t('system.permission.page.expandAll')" placement="bottom">
+          <el-button :icon="ArrowDown" circle @click="handleExpandAll" />
         </el-tooltip>
-        <el-tooltip
-          :content="t('system.permission.page.collapseAll')"
-          placement="bottom"
-        >
-          <el-button
-            :icon="ArrowRight"
-            circle
-            @click="handleCollapseAll"
-          />
+        <el-tooltip :content="t('system.permission.page.collapseAll')" placement="bottom">
+          <el-button :icon="ArrowRight" circle @click="handleCollapseAll" />
         </el-tooltip>
         <el-tooltip :content="t('common.refresh')" placement="bottom">
-          <el-button
-            :icon="Refresh"
-            circle
-            :loading="loading"
-            @click="handleRefresh"
-          />
+          <el-button :icon="Refresh" circle :loading="loading" @click="handleRefresh" />
         </el-tooltip>
       </div>
     </div>
@@ -59,20 +40,12 @@
             :class="{ active: currentRole?.id === role.id }"
             @click="handleSelectRole(role)"
           >
-            <svg-icon
-              :icon-class="getRoleAvatarIcon(role)"
-              class="role-avatar-icon"
-            />
+            <svg-icon :icon-class="getRoleAvatarIcon(role)" class="role-avatar-icon" />
             <div class="role-info">
               <div class="role-name">{{ getRoleName(role) }}</div>
               <div class="role-code">{{ role.role_code }}</div>
             </div>
-            <el-tag
-              v-if="currentRole?.id === role.id"
-              size="small"
-              type="success"
-              effect="dark"
-            >
+            <el-tag v-if="currentRole?.id === role.id" size="small" type="success" effect="dark">
               {{ t('system.permission.page.current') }}
             </el-tag>
           </div>
@@ -91,36 +64,22 @@
           <div class="panel-title">
             <el-icon><Menu /></el-icon>
             {{ t('system.permission.page.permissionTree') }}
-            <span v-if="currentRole" class="current-role-name">
-              - {{ getRoleName(currentRole) }}
-            </span>
+            <span v-if="currentRole" class="current-role-name"> - {{ getRoleName(currentRole) }} </span>
           </div>
           <div class="panel-actions">
             <!-- 类型筛选 -->
-            <el-radio-group
-              v-model="filterType"
-              size="small"
-              @change="handleFilterType"
-            >
+            <el-radio-group v-model="filterType" size="small" @change="handleFilterType">
               <el-radio-button value="all">
-                {{
-                  t('system.permission.page.all')
-                }}
+                {{ t('system.permission.page.all') }}
               </el-radio-button>
               <el-radio-button value="menu">
-                {{
-                  t('system.permission.page.menu')
-                }}
+                {{ t('system.permission.page.menu') }}
               </el-radio-button>
               <el-radio-button value="button">
-                {{
-                  t('system.permission.page.button')
-                }}
+                {{ t('system.permission.page.button') }}
               </el-radio-button>
               <el-radio-button value="param">
-                {{
-                  t('system.permission.page.param')
-                }}
+                {{ t('system.permission.page.param') }}
               </el-radio-button>
             </el-radio-group>
           </div>
@@ -158,11 +117,7 @@
                 <span class="node-type-tag" :class="`tag-${data.type}`">
                   {{ getTypeName(data.type) }}
                 </span>
-                <span
-                  v-if="data.permissionCode"
-                  class="node-code"
-                  :title="data.permissionCode"
-                >
+                <span v-if="data.permissionCode" class="node-code" :title="data.permissionCode">
                   {{ data.permissionCode }}
                 </span>
               </span>
@@ -239,12 +194,7 @@ import {
 import { resolveMenuTitle } from '@/router/helper/menuTitle'
 import { usePermissionConfig } from './composables/usePermissionConfig'
 import type { PermissionConfigProps } from './composables/usePermissionConfig'
-import {
-  getNodeIcon,
-  getNodeIconClass,
-  getRoleAvatarIcon,
-  getRoleName
-} from './utils/permissionTree'
+import { getNodeIcon, getNodeIconClass, getRoleAvatarIcon, getRoleName } from './utils/permissionTree'
 
 const { t } = useI18n()
 

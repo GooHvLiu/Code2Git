@@ -10,34 +10,17 @@
     <!-- 右侧：操作按钮 -->
     <div class="toolbar-right">
       <!-- 新增按钮 -->
-      <el-button
-        v-if="showAdd"
-        type="primary"
-        :icon="Plus"
-        size="small"
-        @click="emit('add')"
-      >
+      <el-button v-if="showAdd" type="primary" :icon="Plus" size="small" @click="emit('add')">
         {{ addText || t('common.add') }}
       </el-button>
 
       <!-- 导出按钮 -->
-      <el-button
-        v-if="showExport"
-        :icon="Download"
-        size="small"
-        :loading="exportLoading"
-        @click="emit('export')"
-      >
+      <el-button v-if="showExport" :icon="Download" size="small" :loading="exportLoading" @click="emit('export')">
         {{ exportText || t('common.export') }}
       </el-button>
 
       <!-- 刷新按钮 -->
-      <el-button
-        v-if="showRefresh"
-        :icon="Refresh"
-        size="small"
-        @click="emit('refresh')"
-      >
+      <el-button v-if="showRefresh" :icon="Refresh" size="small" @click="emit('refresh')">
         {{ t('common.refresh') }}
       </el-button>
 
@@ -69,6 +52,8 @@
  *     <el-button size="small" @click="handleCustom">自定义</el-button>
  *   </template>
  * </table-toolbar>
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { useI18n } from 'vue-i18n'
 import { Plus, Download, Refresh } from '@element-plus/icons-vue'

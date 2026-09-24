@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div ref="dashboardRef" class="dashboard-container" :class="{ fullscreen: isFullscreen }">
     <div class="dashboard-stage" :style="stageStyle">
       <!-- 科技感装饰背景 -->
@@ -69,8 +69,8 @@
               <span class="unit">{{ metric.unit }}</span>
             </div>
             <div class="metric-footer">
-              <span v-html="metric.subLeft"></span>
-              <span class="rate" v-html="metric.subRight"></span>
+              <span v-safe-html="metric.subLeft"></span>
+              <span class="rate" v-safe-html="metric.subRight"></span>
             </div>
             <div v-if="metric.progress" class="metric-progress">
               <div class="progress-fill" :class="metric.type" :style="{ width: metric.progress + '%' }"></div>
@@ -79,16 +79,23 @@
               <svg viewBox="0 0 100 100">
                 <defs>
                   <linearGradient :id="'oeeGrad-' + index" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style="stop-color:#00d4ff" />
-                    <stop offset="50%" style="stop-color:#409eff" />
-                    <stop offset="100%" style="stop-color:#667eea" />
+                    <stop offset="0%" style="stop-color: #00d4ff" />
+                    <stop offset="50%" style="stop-color: #409eff" />
+                    <stop offset="100%" style="stop-color: #667eea" />
                   </linearGradient>
                 </defs>
                 <circle cx="50" cy="50" r="42" fill="none" stroke="#e8f0fe" stroke-width="3" />
                 <circle
-                  cx="50" cy="50" r="42" fill="none" :stroke="'url(#oeeGrad-' + index + ')'" stroke-width="3"
-                  :stroke-dasharray="263.9" :stroke-dashoffset="263.9 * (1 - oeeData.value / 100)"
-                  transform="rotate(-90 50 50)" stroke-linecap="round"
+                  cx="50"
+                  cy="50"
+                  r="42"
+                  fill="none"
+                  :stroke="'url(#oeeGrad-' + index + ')'"
+                  stroke-width="3"
+                  :stroke-dasharray="263.9"
+                  :stroke-dashoffset="263.9 * (1 - oeeData.value / 100)"
+                  transform="rotate(-90 50 50)"
+                  stroke-linecap="round"
                 />
                 <circle cx="50" cy="8" r="2" fill="#409eff" class="ring-dot" />
               </svg>
@@ -104,10 +111,16 @@
             <div class="border-flow"></div>
             <div class="panel-scan"></div>
             <div class="panel-header">
-              <span class="panel-title"><el-icon><Location /></el-icon> {{ t('layout.home.dashboard.worldMap.title') }}</span>
+              <span class="panel-title"
+                ><el-icon><Location /></el-icon> {{ t('layout.home.dashboard.worldMap.title') }}</span
+              >
               <div class="map-stats">
-                <span class="map-stat"><el-icon><User /></el-icon> {{ t('layout.home.dashboard.worldMap.onlineDevice') }} <b>1</b></span>
-                <span class="map-stat"><el-icon><WarningFilled /></el-icon> {{ t('layout.home.dashboard.worldMap.alarm') }} <b>0</b></span>
+                <span class="map-stat"
+                  ><el-icon><User /></el-icon> {{ t('layout.home.dashboard.worldMap.onlineDevice') }} <b>1</b></span
+                >
+                <span class="map-stat"
+                  ><el-icon><WarningFilled /></el-icon> {{ t('layout.home.dashboard.worldMap.alarm') }} <b>0</b></span
+                >
               </div>
             </div>
             <div class="panel-body map-body">
@@ -116,7 +129,12 @@
                 <div class="info-header">
                   <span class="info-dot"></span>
                   <span class="info-title">{{ t('layout.home.dashboard.deviceInfo.title') }}</span>
-                  <el-tag size="small" :type="deviceStatus.status === 'running' ? 'success' : 'warning'" effect="plain">{{ deviceStatus.text }}</el-tag>
+                  <el-tag
+                    size="small"
+                    :type="deviceStatus.status === 'running' ? 'success' : 'warning'"
+                    effect="plain"
+                    >{{ deviceStatus.text }}</el-tag
+                  >
                 </div>
                 <div class="info-body">
                   <div class="info-row">
@@ -129,7 +147,11 @@
                   </div>
                   <div class="info-row">
                     <span class="info-label">{{ t('layout.home.dashboard.deviceInfo.location') }}</span>
-                    <span class="info-value">{{ deviceInfo.locationCoords ? deviceInfo.locationCoords.lng + '°E, ' + deviceInfo.locationCoords.lat + '°N' : '-' }}</span>
+                    <span class="info-value">{{
+                      deviceInfo.locationCoords
+                        ? deviceInfo.locationCoords.lng + '°E, ' + deviceInfo.locationCoords.lat + '°N'
+                        : '-'
+                    }}</span>
                   </div>
                   <div class="info-row">
                     <span class="info-label">{{ t('layout.home.dashboard.deviceInfo.ip') }}</span>
@@ -137,7 +159,9 @@
                   </div>
                   <div class="info-row">
                     <span class="info-label">{{ t('layout.home.dashboard.deviceInfo.runtime') }}</span>
-                    <span class="info-value highlight">{{ runtimeStats.running }}{{ t('layout.home.dashboard.deviceInfo.hours') }}</span>
+                    <span class="info-value highlight"
+                      >{{ runtimeStats.running }}{{ t('layout.home.dashboard.deviceInfo.hours') }}</span
+                    >
                   </div>
                 </div>
               </div>
@@ -150,7 +174,9 @@
             <div class="border-flow"></div>
             <div class="panel-scan"></div>
             <div class="panel-header">
-              <span class="panel-title"><el-icon><TrendCharts /></el-icon> {{ t('layout.home.dashboard.outputTrend.title') }}</span>
+              <span class="panel-title"
+                ><el-icon><TrendCharts /></el-icon> {{ t('layout.home.dashboard.outputTrend.title') }}</span
+              >
               <div class="panel-tabs">
                 <span
                   v-for="tab in trendTabs"
@@ -158,7 +184,8 @@
                   class="tab-item"
                   :class="{ active: trendType === tab.value }"
                   @click="trendType = tab.value"
-                >{{ tab.label }}</span>
+                  >{{ tab.label }}</span
+                >
               </div>
             </div>
             <div class="panel-body">
@@ -166,13 +193,13 @@
                 <svg viewBox="0 0 400 180" preserveAspectRatio="none" class="chart-svg">
                   <defs>
                     <linearGradient id="lineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" style="stop-color:#409eff;stop-opacity:0.3" />
-                      <stop offset="100%" style="stop-color:#409eff;stop-opacity:0" />
+                      <stop offset="0%" style="stop-color: #409eff; stop-opacity: 0.3" />
+                      <stop offset="100%" style="stop-color: #409eff; stop-opacity: 0" />
                     </linearGradient>
                     <linearGradient id="lineStroke" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" style="stop-color:#00d4ff" />
-                      <stop offset="50%" style="stop-color:#409eff" />
-                      <stop offset="100%" style="stop-color:#667eea" />
+                      <stop offset="0%" style="stop-color: #00d4ff" />
+                      <stop offset="50%" style="stop-color: #409eff" />
+                      <stop offset="100%" style="stop-color: #667eea" />
                     </linearGradient>
                   </defs>
                   <line x1="0" y1="45" x2="400" y2="45" stroke="#f0f2f5" stroke-width="1" stroke-dasharray="4,4" />
@@ -208,7 +235,9 @@
             <div class="border-flow"></div>
             <div class="panel-scan"></div>
             <div class="panel-header">
-              <span class="panel-title"><el-icon><Cpu /></el-icon> {{ t('layout.home.dashboard.deviceStatus.title') }}</span>
+              <span class="panel-title"
+                ><el-icon><Cpu /></el-icon> {{ t('layout.home.dashboard.deviceStatus.title') }}</span
+              >
             </div>
             <div class="panel-body">
               <div class="status-distribution">
@@ -216,18 +245,34 @@
                   <svg viewBox="0 0 100 100" class="donut-svg">
                     <circle cx="50" cy="50" r="35" fill="none" stroke="#f0f2f5" stroke-width="10" />
                     <circle
-                      cx="50" cy="50" r="35" fill="none" stroke="#67c23a" stroke-width="10"
+                      cx="50"
+                      cy="50"
+                      r="35"
+                      fill="none"
+                      stroke="#67c23a"
+                      stroke-width="10"
                       :stroke-dasharray="(runtimeStats.runningRate / 100) * 219.9 + ' 219.9'"
-                      transform="rotate(-90 50 50)" stroke-linecap="round"
+                      transform="rotate(-90 50 50)"
+                      stroke-linecap="round"
                     />
                     <circle
-                      cx="50" cy="50" r="35" fill="none" stroke="#e6a23c" stroke-width="10"
+                      cx="50"
+                      cy="50"
+                      r="35"
+                      fill="none"
+                      stroke="#e6a23c"
+                      stroke-width="10"
                       :stroke-dasharray="(runtimeStats.idleRate / 100) * 219.9 + ' 219.9'"
                       :stroke-dashoffset="-(runtimeStats.runningRate / 100) * 219.9"
                       transform="rotate(-90 50 50)"
                     />
                     <circle
-                      cx="50" cy="50" r="35" fill="none" stroke="#f56c6c" stroke-width="10"
+                      cx="50"
+                      cy="50"
+                      r="35"
+                      fill="none"
+                      stroke="#f56c6c"
+                      stroke-width="10"
                       :stroke-dasharray="(runtimeStats.faultRate / 100) * 219.9 + ' 219.9'"
                       :stroke-dashoffset="-((runtimeStats.runningRate + runtimeStats.idleRate) / 100) * 219.9"
                       transform="rotate(-90 50 50)"
@@ -256,7 +301,9 @@
             <div class="border-flow"></div>
             <div class="panel-scan"></div>
             <div class="panel-header">
-              <span class="panel-title"><el-icon><List /></el-icon> {{ t('layout.home.dashboard.batch.title') }}</span>
+              <span class="panel-title"
+                ><el-icon><List /></el-icon> {{ t('layout.home.dashboard.batch.title') }}</span
+              >
               <el-tag size="small" type="primary" effect="plain" class="batch-tag">{{ batchInfo.batchNo }}</el-tag>
             </div>
             <div class="panel-body">
@@ -269,7 +316,10 @@
               <div class="batch-progress">
                 <div class="progress-header">
                   <span>{{ t('layout.home.dashboard.batch.progress') }}</span>
-                  <span class="progress-text">{{ formatNumber(batchInfo.produced) }} / {{ formatNumber(batchInfo.target) }} {{ t('layout.home.dashboard.batch.bottle') }}</span>
+                  <span class="progress-text"
+                    >{{ formatNumber(batchInfo.produced) }} / {{ formatNumber(batchInfo.target) }}
+                    {{ t('layout.home.dashboard.batch.bottle') }}</span
+                  >
                 </div>
                 <div class="progress-bar-large">
                   <div class="progress-fill-large" :style="{ width: batchInfo.progress + '%' }">
@@ -293,22 +343,39 @@
             <div class="border-flow"></div>
             <div class="panel-scan"></div>
             <div class="panel-header">
-              <span class="panel-title"><el-icon><TrendCharts /></el-icon> {{ t('layout.home.dashboard.realtime.title') }}</span>
-              <span class="panel-badge"><span class="badge-dot"></span>{{ t('layout.home.dashboard.realtime.live') }}</span>
+              <span class="panel-title"
+                ><el-icon><TrendCharts /></el-icon> {{ t('layout.home.dashboard.realtime.title') }}</span
+              >
+              <span class="panel-badge"
+                ><span class="badge-dot"></span>{{ t('layout.home.dashboard.realtime.live') }}</span
+              >
             </div>
             <div class="panel-body">
               <div class="realtime-table">
                 <div class="rt-header">
-                  <span>{{ t('layout.home.dashboard.realtime.colTime') }}</span><span>{{ t('layout.home.dashboard.realtime.colSpeed') }}</span><span>{{ t('layout.home.dashboard.realtime.colOutput') }}</span><span>{{ t('layout.home.dashboard.realtime.colFill') }}</span><span>{{ t('layout.home.dashboard.realtime.colStatus') }}</span>
+                  <span>{{ t('layout.home.dashboard.realtime.colTime') }}</span
+                  ><span>{{ t('layout.home.dashboard.realtime.colSpeed') }}</span
+                  ><span>{{ t('layout.home.dashboard.realtime.colOutput') }}</span
+                  ><span>{{ t('layout.home.dashboard.realtime.colFill') }}</span
+                  ><span>{{ t('layout.home.dashboard.realtime.colStatus') }}</span>
                 </div>
                 <div class="rt-body">
-                  <div v-for="(item, index) in realtimeData" :key="index" class="rt-row" :class="{ latest: index === 0 }">
+                  <div
+                    v-for="(item, index) in realtimeData"
+                    :key="index"
+                    class="rt-row"
+                    :class="{ latest: index === 0 }"
+                  >
                     <span class="rt-time">{{ item.time }}</span>
                     <span>{{ item.speed }}</span>
                     <span>{{ formatNumber(item.output) }}</span>
                     <span>{{ item.fillVolume }}</span>
                     <span>
-                      <span class="rt-status" :class="item.status === 'normal' ? 'normal' : 'warning'">{{ item.status === 'normal' ? t('layout.home.dashboard.realtime.statusNormal') : t('layout.home.dashboard.realtime.statusFluctuate') }}</span>
+                      <span class="rt-status" :class="item.status === 'normal' ? 'normal' : 'warning'">{{
+                        item.status === 'normal'
+                          ? t('layout.home.dashboard.realtime.statusNormal')
+                          : t('layout.home.dashboard.realtime.statusFluctuate')
+                      }}</span>
                     </span>
                   </div>
                 </div>
@@ -325,8 +392,12 @@
             <div class="border-flow"></div>
             <div class="panel-scan"></div>
             <div class="panel-header">
-              <span class="panel-title"><el-icon><WarningFilled /></el-icon> {{ t('layout.home.dashboard.alarmStats.title') }}</span>
-              <span class="panel-badge danger">{{ alarmStats.total }}{{ t('layout.home.dashboard.alarmStats.times') }}</span>
+              <span class="panel-title"
+                ><el-icon><WarningFilled /></el-icon> {{ t('layout.home.dashboard.alarmStats.title') }}</span
+              >
+              <span class="panel-badge danger"
+                >{{ alarmStats.total }}{{ t('layout.home.dashboard.alarmStats.times') }}</span
+              >
             </div>
             <div class="panel-body">
               <div class="alarm-stats">
@@ -336,7 +407,10 @@
                     <span class="as-count">{{ item.count }}{{ t('layout.home.dashboard.alarmStats.times') }}</span>
                   </div>
                   <div class="as-bar">
-                    <div class="as-fill" :style="{ width: (item.count / alarmStats.maxCount * 100) + '%', background: item.color }"></div>
+                    <div
+                      class="as-fill"
+                      :style="{ width: (item.count / alarmStats.maxCount) * 100 + '%', background: item.color }"
+                    ></div>
                   </div>
                 </div>
               </div>
@@ -349,8 +423,12 @@
             <div class="border-flow"></div>
             <div class="panel-scan"></div>
             <div class="panel-header">
-              <span class="panel-title"><el-icon><CircleCheckFilled /></el-icon> {{ t('layout.home.dashboard.quality.title') }}</span>
-              <span class="panel-badge success">{{ t('layout.home.dashboard.quality.qualifiedRate') }} {{ qualityData.qualifiedRate }}%</span>
+              <span class="panel-title"
+                ><el-icon><CircleCheckFilled /></el-icon> {{ t('layout.home.dashboard.quality.title') }}</span
+              >
+              <span class="panel-badge success"
+                >{{ t('layout.home.dashboard.quality.qualifiedRate') }} {{ qualityData.qualifiedRate }}%</span
+              >
             </div>
             <div class="panel-body">
               <div class="quality-content">
@@ -358,15 +436,21 @@
                   <svg viewBox="0 0 100 100">
                     <defs>
                       <linearGradient id="qualityGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#67c23a" />
-                        <stop offset="100%" style="stop-color:#95d475" />
+                        <stop offset="0%" style="stop-color: #67c23a" />
+                        <stop offset="100%" style="stop-color: #95d475" />
                       </linearGradient>
                     </defs>
                     <circle cx="50" cy="50" r="38" fill="none" stroke="#f0f2f5" stroke-width="8" />
                     <circle
-                      cx="50" cy="50" r="38" fill="none" stroke="url(#qualityGradient)" stroke-width="8"
+                      cx="50"
+                      cy="50"
+                      r="38"
+                      fill="none"
+                      stroke="url(#qualityGradient)"
+                      stroke-width="8"
                       :stroke-dasharray="(qualityData.qualifiedRate / 100) * 238.8 + ' 238.8'"
-                      transform="rotate(-90 50 50)" stroke-linecap="round"
+                      transform="rotate(-90 50 50)"
+                      stroke-linecap="round"
                     />
                   </svg>
                   <div class="quality-center">
@@ -400,13 +484,25 @@ import * as echarts from 'echarts'
 import { ref, computed, onMounted, onBeforeUnmount, nextTick, shallowRef } from 'vue'
 import type { Component } from 'vue'
 import {
-  Monitor, Location, User, WarningFilled, TrendCharts, Cpu, List,
-  CircleCheckFilled, FullScreen, Close, Box, Clock, Lightning
+  Monitor,
+  Location,
+  User,
+  WarningFilled,
+  TrendCharts,
+  Cpu,
+  List,
+  CircleCheckFilled,
+  FullScreen,
+  Close,
+  Box,
+  Clock,
+  Lightning
 } from '@element-plus/icons-vue'
 import { useDeviceStore } from '@/store/modules/device'
 import { useI18n } from '@/composables/useI18n'
 import { showError } from '@/utils/ui/feedback'
 import { getCoordsByValues } from '@/utils/business/worldCities'
+import { sanitizeHtml } from '@/utils/security/dompurify'
 
 const { t } = useI18n()
 const deviceStore = useDeviceStore()
@@ -457,7 +553,7 @@ const deviceInfo = computed(() => deviceStore.info)
 
 const deviceStatus = computed(() => ({
   status: deviceStore.status,
-  text: deviceStore.statusText
+  text: t(deviceStore.statusText)
 }))
 
 // 报警统计：从 categoryStats 组装成图表所需结构（源工程直接消费 alarms.total/list/maxCount，此处补齐）
@@ -488,7 +584,7 @@ const metrics = computed(() => ({
   todayRate: storeProduction.value.todayRate,
   shiftOutput: storeProduction.value.shiftOutput,
   shiftTarget: storeProduction.value.shiftTarget,
-  shiftName: storeProduction.value.shiftName,
+  shiftName: t(storeProduction.value.shiftName),
   currentSpeed: storeParams.value.speed,
   targetSpeed: 1500
 }))
@@ -502,13 +598,21 @@ const oeeData = computed(() => ({
 
 const productionTrend = computed(() => {
   if (storeTrend.value && storeTrend.value.speed && storeTrend.value.speed.length > 0) {
-    return storeTrend.value.speed.map((item) => ({ hour: item.time.slice(0, 2), value: item.value }))
+    return storeTrend.value.speed.map(item => ({ hour: item.time.slice(0, 2), value: item.value }))
   }
   return [
-    { hour: '00', value: 0 }, { hour: '02', value: 0 }, { hour: '04', value: 0 },
-    { hour: '06', value: 120 }, { hour: '08', value: 850 }, { hour: '10', value: 1200 },
-    { hour: '12', value: 1100 }, { hour: '14', value: 1350 }, { hour: '16', value: 1280 },
-    { hour: '18', value: 660 }, { hour: '20', value: 0 }, { hour: '22', value: 0 }
+    { hour: '00', value: 0 },
+    { hour: '02', value: 0 },
+    { hour: '04', value: 0 },
+    { hour: '06', value: 120 },
+    { hour: '08', value: 850 },
+    { hour: '10', value: 1200 },
+    { hour: '12', value: 1100 },
+    { hour: '14', value: 1350 },
+    { hour: '16', value: 1280 },
+    { hour: '18', value: 660 },
+    { hour: '20', value: 0 },
+    { hour: '22', value: 0 }
   ]
 })
 
@@ -549,64 +653,102 @@ interface MetricItem {
 
 const metricList = computed<MetricItem[]>(() => [
   {
-    type: 'today', icon: Box, label: t('layout.home.dashboard.metrics.todayOutput'),
-    value: formatNumber(metrics.value.todayOutput), unit: t('layout.home.dashboard.metrics.bottle'),
+    type: 'today',
+    icon: Box,
+    label: t('layout.home.dashboard.metrics.todayOutput'),
+    value: formatNumber(metrics.value.todayOutput),
+    unit: t('layout.home.dashboard.metrics.bottle'),
     subLeft: `${t('layout.home.dashboard.metrics.target')} ${formatNumber(metrics.value.todayTarget)}`,
     subRight: `${t('layout.home.dashboard.metrics.completion')} ${metrics.value.todayRate}%`,
     progress: metrics.value.todayRate
   },
   {
-    type: 'shift', icon: Clock, label: t('layout.home.dashboard.metrics.shiftOutput'),
-    value: formatNumber(metrics.value.shiftOutput), unit: t('layout.home.dashboard.metrics.bottle'),
+    type: 'shift',
+    icon: Clock,
+    label: t('layout.home.dashboard.metrics.shiftOutput'),
+    value: formatNumber(metrics.value.shiftOutput),
+    unit: t('layout.home.dashboard.metrics.bottle'),
     subLeft: metrics.value.shiftName,
     subRight: `${t('layout.home.dashboard.metrics.target')} ${formatNumber(metrics.value.shiftTarget)}`,
     progress: ((metrics.value.shiftOutput / metrics.value.shiftTarget) * 100).toFixed(1)
   },
   {
-    type: 'speed', icon: Lightning, label: t('layout.home.dashboard.metrics.speed'),
-    value: metrics.value.currentSpeed, unit: t('layout.home.dashboard.metrics.bottlePerHour'),
+    type: 'speed',
+    icon: Lightning,
+    label: t('layout.home.dashboard.metrics.speed'),
+    value: metrics.value.currentSpeed,
+    unit: t('layout.home.dashboard.metrics.bottlePerHour'),
     subLeft: `${t('layout.home.dashboard.metrics.target')} ${metrics.value.targetSpeed} ${t('layout.home.dashboard.metrics.bottlePerHour')}`,
     subRight: `${t('layout.home.dashboard.metrics.efficiency')} ${Math.round((metrics.value.currentSpeed / metrics.value.targetSpeed) * 100)}%`,
     progress: ((metrics.value.currentSpeed / metrics.value.targetSpeed) * 100).toFixed(1)
   },
   {
-    type: 'oee', icon: TrendCharts, label: t('layout.home.dashboard.metrics.oee'),
-    value: oeeData.value.value, unit: '%',
+    type: 'oee',
+    icon: TrendCharts,
+    label: t('layout.home.dashboard.metrics.oee'),
+    value: oeeData.value.value,
+    unit: '%',
     subLeft: `${t('layout.home.dashboard.metrics.available')} ${oeeData.value.availability}%`,
     subRight: `${t('layout.home.dashboard.metrics.performance')} ${oeeData.value.performance}% ${t('layout.home.dashboard.metrics.qualified')} ${oeeData.value.quality}%`,
     progress: null
   }
 ])
 
-const legendList = computed(() => ([
-  { type: 'running', name: t('layout.home.dashboard.runtime.running'), time: runtimeStats.value.running, rate: runtimeStats.value.runningRate },
-  { type: 'idle', name: t('layout.home.dashboard.runtime.idle'), time: runtimeStats.value.idle, rate: runtimeStats.value.idleRate },
-  { type: 'fault', name: t('layout.home.dashboard.runtime.fault'), time: runtimeStats.value.fault, rate: runtimeStats.value.faultRate }
-]))
+const legendList = computed(() => [
+  {
+    type: 'running',
+    name: t('layout.home.dashboard.runtime.running'),
+    time: runtimeStats.value.running,
+    rate: runtimeStats.value.runningRate
+  },
+  {
+    type: 'idle',
+    name: t('layout.home.dashboard.runtime.idle'),
+    time: runtimeStats.value.idle,
+    rate: runtimeStats.value.idleRate
+  },
+  {
+    type: 'fault',
+    name: t('layout.home.dashboard.runtime.fault'),
+    time: runtimeStats.value.fault,
+    rate: runtimeStats.value.faultRate
+  }
+])
 
-const batchInfoList = computed(() => ([
+const batchInfoList = computed(() => [
   { label: t('layout.home.dashboard.batchInfo.productName'), value: batchInfo.value.productName },
   { label: t('layout.home.dashboard.batchInfo.fillVolume'), value: `${batchInfo.value.fillVolume} ml` },
   { label: t('layout.home.dashboard.batchInfo.startTime'), value: batchInfo.value.startTime },
   { label: t('layout.home.dashboard.batchInfo.estimatedEnd'), value: batchInfo.value.estimatedEnd }
-]))
+])
 
-const batchStatsList = computed(() => ([
+const batchStatsList = computed(() => [
   { value: formatNumber(batchInfo.value.produced), label: t('layout.home.dashboard.batchInfo.produced') },
-  { value: formatNumber(batchInfo.value.target - batchInfo.value.produced), label: t('layout.home.dashboard.batchInfo.remaining') },
+  {
+    value: formatNumber(batchInfo.value.target - batchInfo.value.produced),
+    label: t('layout.home.dashboard.batchInfo.remaining')
+  },
   { value: batchInfo.value.estimatedTime, label: t('layout.home.dashboard.batchInfo.estimatedRemaining') },
   { value: `${batchInfo.value.qualifiedRate}%`, label: t('layout.home.dashboard.quality.qualifiedRate') }
-]))
+])
 
-const qualityStatsList = computed(() => ([
+const qualityStatsList = computed(() => [
   { label: t('layout.home.dashboard.quality.total'), value: formatNumber(qualityData.value.total), type: '' },
-  { label: t('layout.home.dashboard.quality.qualified'), value: formatNumber(qualityData.value.qualified), type: 'success' },
-  { label: t('layout.home.dashboard.quality.unqualified'), value: formatNumber(qualityData.value.unqualified), type: 'danger' },
+  {
+    label: t('layout.home.dashboard.quality.qualified'),
+    value: formatNumber(qualityData.value.qualified),
+    type: 'success'
+  },
+  {
+    label: t('layout.home.dashboard.quality.unqualified'),
+    value: formatNumber(qualityData.value.unqualified),
+    type: 'danger'
+  },
   { label: t('layout.home.dashboard.quality.scrapRate'), value: `${qualityData.value.scrapRate}%`, type: '' }
-]))
+])
 
 const chartPoints = computed(() => {
-  const maxVal = Math.max(...productionTrend.value.map((item) => item.value), 1)
+  const maxVal = Math.max(...productionTrend.value.map(item => item.value), 1)
   return productionTrend.value.map((item, index) => ({
     x: (index / (productionTrend.value.length - 1)) * 400,
     y: 170 - (item.value / maxVal) * 150
@@ -649,7 +791,7 @@ async function initMap(): Promise<void> {
     const deviceName = info.name || 'nexCM-灌装机-001'
     const deviceLocation = info.location || ''
 
-    let deviceCoords: [number, number] = [120.30, 31.57]
+    let deviceCoords: [number, number] = [120.3, 31.57]
     if (info.locationCoords && info.locationCoords.lng && info.locationCoords.lat) {
       deviceCoords = [info.locationCoords.lng, info.locationCoords.lat]
     } else if (Array.isArray(info.locationCode) && info.locationCode.length === 2) {
@@ -657,11 +799,13 @@ async function initMap(): Promise<void> {
       if (cityInfo) deviceCoords = [cityInfo.lng, cityInfo.lat]
     }
 
-    const deviceData = [{
-      name: deviceName,
-      value: [deviceCoords[0], deviceCoords[1], 100],
-      itemStyle: { color: '#409eff' }
-    }]
+    const deviceData = [
+      {
+        name: deviceName,
+        value: [deviceCoords[0], deviceCoords[1], 100],
+        itemStyle: { color: '#409eff' }
+      }
+    ]
 
     const option = {
       backgroundColor: 'transparent',
@@ -682,43 +826,77 @@ async function initMap(): Promise<void> {
         }
       },
       geo: {
-        map: 'world', roam: false, zoom: 1.2, center: [60, 25],
+        map: 'world',
+        roam: false,
+        zoom: 1.2,
+        center: [60, 25],
         itemStyle: {
-          areaColor: { type: 'radial', x: 0.5, y: 0.5, r: 0.8, colorStops: [
-            { offset: 0, color: '#e8f4fd' }, { offset: 1, color: '#c6e2ff' }
-          ] },
-          borderColor: '#7ab8f5', borderWidth: 0.5,
-          shadowColor: 'rgba(64,158,255,0.2)', shadowBlur: 10, shadowOffsetX: 2, shadowOffsetY: 2
+          areaColor: {
+            type: 'radial',
+            x: 0.5,
+            y: 0.5,
+            r: 0.8,
+            colorStops: [
+              { offset: 0, color: '#e8f4fd' },
+              { offset: 1, color: '#c6e2ff' }
+            ]
+          },
+          borderColor: '#7ab8f5',
+          borderWidth: 0.5,
+          shadowColor: 'rgba(64,158,255,0.2)',
+          shadowBlur: 10,
+          shadowOffsetX: 2,
+          shadowOffsetY: 2
         },
         emphasis: {
           itemStyle: { areaColor: '#a8d4ff', borderColor: '#409eff', borderWidth: 1 },
           label: { show: false }
         },
-        regions: [{
-          name: 'China',
-          itemStyle: {
-            areaColor: { type: 'radial', x: 0.5, y: 0.5, r: 0.8, colorStops: [
-              { offset: 0, color: '#d4edda' }, { offset: 1, color: '#a8d5b5' }
-            ] },
-            borderColor: '#67c23a', borderWidth: 1
+        regions: [
+          {
+            name: 'China',
+            itemStyle: {
+              areaColor: {
+                type: 'radial',
+                x: 0.5,
+                y: 0.5,
+                r: 0.8,
+                colorStops: [
+                  { offset: 0, color: '#d4edda' },
+                  { offset: 1, color: '#a8d5b5' }
+                ]
+              },
+              borderColor: '#67c23a',
+              borderWidth: 1
+            }
           }
-        }]
+        ]
       },
-      series: [{
-        name: '设备位置', type: 'effectScatter', coordinateSystem: 'geo',
-        data: deviceData,
-        symbolSize: (val: number[]) => val[2] / 8 + 8,
-        showEffectOn: 'render',
-        rippleEffect: { brushType: 'stroke', scale: 4, period: 3 },
-        emphasis: { scale: true },
-        label: {
-          show: true, position: 'right', formatter: '{b}', color: '#409eff',
-          fontSize: 11, fontWeight: 600, backgroundColor: 'rgba(255,255,255,0.8)',
-          padding: [2, 6], borderRadius: 3
-        },
-        itemStyle: { color: '#409eff', shadowBlur: 10, shadowColor: '#409eff' },
-        zlevel: 1
-      }]
+      series: [
+        {
+          name: '设备位置',
+          type: 'effectScatter',
+          coordinateSystem: 'geo',
+          data: deviceData,
+          symbolSize: (val: number[]) => val[2] / 8 + 8,
+          showEffectOn: 'render',
+          rippleEffect: { brushType: 'stroke', scale: 4, period: 3 },
+          emphasis: { scale: true },
+          label: {
+            show: true,
+            position: 'right',
+            formatter: '{b}',
+            color: '#409eff',
+            fontSize: 11,
+            fontWeight: 600,
+            backgroundColor: 'rgba(255,255,255,0.8)',
+            padding: [2, 6],
+            borderRadius: 3
+          },
+          itemStyle: { color: '#409eff', shadowBlur: 10, shadowColor: '#409eff' },
+          zlevel: 1
+        }
+      ]
     }
     mapChart.value.setOption(option)
     mapLoaded.value = true
@@ -726,7 +904,9 @@ async function initMap(): Promise<void> {
   } catch (error) {
     console.error('地图初始化失败:', error)
     if (mapChartRef.value) {
-      mapChartRef.value.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#909399;font-size:13px;">${t('layout.home.dashboard.mapTooltip.loading')}</div>`
+      mapChartRef.value.innerHTML = sanitizeHtml(
+        `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#909399;font-size:13px;">${t('layout.home.dashboard.mapTooltip.loading')}</div>`
+      )
     }
   }
 }
@@ -736,7 +916,10 @@ function handleMapResize(): void {
 }
 
 function updateScale(): void {
-  if (!isFullscreen.value) { scale.value = 1; return }
+  if (!isFullscreen.value) {
+    scale.value = 1
+    return
+  }
   const screenW = window.innerWidth
   const screenH = window.innerHeight
   scale.value = Math.min(screenW / DESIGN_WIDTH, screenH / DESIGN_HEIGHT)
@@ -744,10 +927,12 @@ function updateScale(): void {
 }
 
 function toggleFullscreen(): void {
-  const el = dashboardRef.value as (HTMLElement & {
-    requestFullscreen?: () => Promise<void>
-    webkitRequestFullscreen?: () => Promise<void>
-  }) | null
+  const el = dashboardRef.value as
+    | (HTMLElement & {
+        requestFullscreen?: () => Promise<void>
+        webkitRequestFullscreen?: () => Promise<void>
+      })
+    | null
   if (!el) return
   if (!isFullscreen.value) {
     const requestMethod = el.requestFullscreen || el.webkitRequestFullscreen
@@ -928,9 +1113,9 @@ onBeforeUnmount(() => {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
-      linear-gradient(rgba(64,158,255,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(64,158,255,0.04) 1px, transparent 1px);
+    background-image:
+      linear-gradient(rgba(64, 158, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(64, 158, 255, 0.04) 1px, transparent 1px);
     background-size: 30px 30px;
   }
 
@@ -940,27 +1125,41 @@ onBeforeUnmount(() => {
     filter: blur(100px);
     opacity: 0.5;
     &.glow-1 {
-      width: 500px; height: 500px;
-      top: -150px; right: -100px;
-      background: radial-gradient(circle, rgba(64,158,255,0.2) 0%, transparent 70%);
+      width: 500px;
+      height: 500px;
+      top: -150px;
+      right: -100px;
+      background: radial-gradient(circle, rgba(64, 158, 255, 0.2) 0%, transparent 70%);
       animation: glowMove1 8s ease-in-out infinite;
     }
     &.glow-2 {
-      width: 400px; height: 400px;
-      bottom: -100px; left: -50px;
-      background: radial-gradient(circle, rgba(102,126,234,0.15) 0%, transparent 70%);
+      width: 400px;
+      height: 400px;
+      bottom: -100px;
+      left: -50px;
+      background: radial-gradient(circle, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
       animation: glowMove2 10s ease-in-out infinite;
     }
   }
 }
 
 @keyframes glowMove1 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(-30px, 20px); }
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-30px, 20px);
+  }
 }
 @keyframes glowMove2 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(20px, -30px); }
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(20px, -30px);
+  }
 }
 
 .dashboard-header,
@@ -981,9 +1180,9 @@ onBeforeUnmount(() => {
   margin-bottom: 12px;
   padding: 14px 24px;
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  border: 1px solid rgba(64,158,255,0.2);
+  border: 1px solid rgba(64, 158, 255, 0.2);
   border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(64,158,255,0.08);
+  box-shadow: 0 4px 20px rgba(64, 158, 255, 0.08);
 
   .header-decor {
     position: absolute;
@@ -991,8 +1190,12 @@ onBeforeUnmount(() => {
     width: 80px;
     height: 3px;
     background: linear-gradient(90deg, transparent, #409eff, transparent);
-    &.left { left: 15%; }
-    &.right { right: 15%; }
+    &.left {
+      left: 15%;
+    }
+    &.right {
+      right: 15%;
+    }
   }
 
   .header-left {
@@ -1010,19 +1213,25 @@ onBeforeUnmount(() => {
       font-size: 26px;
       margin-right: 16px;
       color: #fff;
-      box-shadow: 0 4px 15px rgba(64,158,255,0.3);
+      box-shadow: 0 4px 15px rgba(64, 158, 255, 0.3);
 
       .icon-ring {
         position: absolute;
-        border: 1px solid rgba(64,158,255,0.4);
+        border: 1px solid rgba(64, 158, 255, 0.4);
         border-radius: 12px;
         &.ring-1 {
-          top: -4px; left: -4px; right: -4px; bottom: -4px;
+          top: -4px;
+          left: -4px;
+          right: -4px;
+          bottom: -4px;
           animation: ringRotate 4s linear infinite;
         }
         &.ring-2 {
-          top: -8px; left: -8px; right: -8px; bottom: -8px;
-          border-color: rgba(64,158,255,0.15);
+          top: -8px;
+          left: -8px;
+          right: -8px;
+          bottom: -8px;
+          border-color: rgba(64, 158, 255, 0.15);
           animation: ringRotate 6s linear infinite reverse;
         }
       }
@@ -1068,7 +1277,9 @@ onBeforeUnmount(() => {
         width: 20px;
         height: 1px;
         background: linear-gradient(90deg, transparent, #409eff);
-        &.right { background: linear-gradient(90deg, #409eff, transparent); }
+        &.right {
+          background: linear-gradient(90deg, #409eff, transparent);
+        }
       }
     }
     .current-time {
@@ -1136,36 +1347,56 @@ onBeforeUnmount(() => {
         background: linear-gradient(135deg, #409eff 0%, #667eea 100%);
         color: #fff;
         border-color: transparent;
-        box-shadow: 0 4px 12px rgba(64,158,255,0.3);
+        box-shadow: 0 4px 12px rgba(64, 158, 255, 0.3);
       }
     }
   }
 }
 
 @keyframes ringRotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 @keyframes titleShine {
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
 }
 @keyframes ringPulse {
-  0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.4; }
-  50% { transform: translateY(-50%) scale(1.5); opacity: 0; }
+  0%,
+  100% {
+    transform: translateY(-50%) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-50%) scale(1.5);
+    opacity: 0;
+  }
 }
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
 }
 
 // ========== 通用面板 ==========
 .chart-panel {
   position: relative;
   background: linear-gradient(135deg, #ffffff 0%, #fafcfe 100%);
-  border: 1px solid rgba(64,158,255,0.15);
+  border: 1px solid rgba(64, 158, 255, 0.15);
   border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(64,158,255,0.06);
+  box-shadow: 0 4px 16px rgba(64, 158, 255, 0.06);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -1189,7 +1420,7 @@ onBeforeUnmount(() => {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(64,158,255,0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(64, 158, 255, 0.3), transparent);
     animation: panelScan 4s ease-in-out infinite;
     z-index: 2;
     pointer-events: none;
@@ -1201,13 +1432,16 @@ onBeforeUnmount(() => {
     align-items: center;
     padding: 10px 14px;
     border-bottom: 1px solid #f0f2f5;
-    background: linear-gradient(90deg, rgba(64,158,255,0.05) 0%, transparent 100%);
+    background: linear-gradient(90deg, rgba(64, 158, 255, 0.05) 0%, transparent 100%);
     .panel-title {
       font-size: 14px;
       font-weight: 600;
       color: #303133;
       letter-spacing: 1px;
-      i { margin-right: 6px; color: #409eff; }
+      i {
+        margin-right: 6px;
+        color: #409eff;
+      }
     }
     .panel-badge {
       display: flex;
@@ -1226,8 +1460,14 @@ onBeforeUnmount(() => {
         margin-right: 5px;
         animation: blink 1.5s infinite;
       }
-      &.danger { background: #fef0f0; color: #f56c6c; }
-      &.success { background: #f0f9eb; color: #67c23a; }
+      &.danger {
+        background: #fef0f0;
+        color: #f56c6c;
+      }
+      &.success {
+        background: #f0f9eb;
+        color: #67c23a;
+      }
     }
     .panel-tabs {
       display: flex;
@@ -1256,14 +1496,29 @@ onBeforeUnmount(() => {
 }
 
 @keyframes borderFlow {
-  0% { left: -100%; }
-  100% { left: 100%; }
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 @keyframes panelScan {
-  0%, 100% { top: 0; opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
+  0%,
+  100% {
+    top: 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
 }
 
 // ========== 第一行：大指标卡片 ==========
@@ -1273,10 +1528,10 @@ onBeforeUnmount(() => {
 .big-metric {
   position: relative;
   background: linear-gradient(135deg, #ffffff 0%, #fafcfe 100%);
-  border: 1px solid rgba(64,158,255,0.15);
+  border: 1px solid rgba(64, 158, 255, 0.15);
   border-radius: 8px;
   padding: 14px 16px;
-  box-shadow: 0 4px 16px rgba(64,158,255,0.06);
+  box-shadow: 0 4px 16px rgba(64, 158, 255, 0.06);
   overflow: hidden;
   height: 130px;
 
@@ -1298,7 +1553,7 @@ onBeforeUnmount(() => {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(64,158,255,0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(64, 158, 255, 0.3), transparent);
     animation: scanMove 3s ease-in-out infinite;
     z-index: 2;
     pointer-events: none;
@@ -1312,10 +1567,26 @@ onBeforeUnmount(() => {
     border-style: solid;
     z-index: 3;
     opacity: 0.5;
-    &.corner-tl { top: 3px; left: 3px; border-width: 2px 0 0 2px; }
-    &.corner-tr { top: 3px; right: 3px; border-width: 2px 2px 0 0; }
-    &.corner-bl { bottom: 3px; left: 3px; border-width: 0 0 2px 2px; }
-    &.corner-br { bottom: 3px; right: 3px; border-width: 0 2px 2px 0; }
+    &.corner-tl {
+      top: 3px;
+      left: 3px;
+      border-width: 2px 0 0 2px;
+    }
+    &.corner-tr {
+      top: 3px;
+      right: 3px;
+      border-width: 2px 2px 0 0;
+    }
+    &.corner-bl {
+      bottom: 3px;
+      left: 3px;
+      border-width: 0 0 2px 2px;
+    }
+    &.corner-br {
+      bottom: 3px;
+      right: 3px;
+      border-width: 0 2px 2px 0;
+    }
   }
 
   .metric-label {
@@ -1326,7 +1597,11 @@ onBeforeUnmount(() => {
     margin-bottom: 8px;
     font-weight: 500;
     letter-spacing: 1px;
-    i { margin-right: 6px; color: #409eff; font-size: 14px; }
+    i {
+      margin-right: 6px;
+      color: #409eff;
+      font-size: 14px;
+    }
   }
   .metric-value {
     display: flex;
@@ -1337,10 +1612,18 @@ onBeforeUnmount(() => {
       font-weight: 700;
       font-family: 'Courier New', monospace;
       letter-spacing: 1px;
-      &.today { color: #67c23a; }
-      &.shift { color: #e6a23c; }
-      &.speed { color: #409eff; }
-      &.oee { color: #667eea; }
+      &.today {
+        color: #67c23a;
+      }
+      &.shift {
+        color: #e6a23c;
+      }
+      &.speed {
+        color: #409eff;
+      }
+      &.oee {
+        color: #667eea;
+      }
     }
     .unit {
       font-size: 13px;
@@ -1354,7 +1637,10 @@ onBeforeUnmount(() => {
     justify-content: space-between;
     font-size: 11px;
     color: #c0c4cc;
-    .rate { color: #409eff; font-weight: 600; }
+    .rate {
+      color: #409eff;
+      font-weight: 600;
+    }
   }
   .metric-progress {
     position: absolute;
@@ -1366,14 +1652,24 @@ onBeforeUnmount(() => {
     .progress-fill {
       height: 100%;
       transition: width 0.5s;
-      &.today { background: linear-gradient(90deg, #67c23a, #95d475); }
-      &.shift { background: linear-gradient(90deg, #e6a23c, #f0c78a); }
-      &.speed { background: linear-gradient(90deg, #409eff, #66b1ff); }
+      &.today {
+        background: linear-gradient(90deg, #67c23a, #95d475);
+      }
+      &.shift {
+        background: linear-gradient(90deg, #e6a23c, #f0c78a);
+      }
+      &.speed {
+        background: linear-gradient(90deg, #409eff, #66b1ff);
+      }
     }
   }
 
   &.oee {
-    .oee-footer { span { font-size: 10px; } }
+    .oee-footer {
+      span {
+        font-size: 10px;
+      }
+    }
     .oee-ring {
       position: absolute;
       right: 12px;
@@ -1381,27 +1677,50 @@ onBeforeUnmount(() => {
       transform: translateY(-50%);
       width: 70px;
       height: 70px;
-      .ring-dot { animation: ringDotRotate 4s linear infinite; transform-origin: 50px 50px; }
-      svg { width: 100%; height: 100%; }
+      .ring-dot {
+        animation: ringDotRotate 4s linear infinite;
+        transform-origin: 50px 50px;
+      }
+      svg {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }
 
 @keyframes scanMove {
-  0%, 100% { top: 0; opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
+  0%,
+  100% {
+    top: 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
 }
 @keyframes ringDotRotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 // ========== 第二行：地图 + 产能趋势 ==========
 .map-row {
   margin-bottom: 12px;
-  .chart-panel { height: 300px; }
+  .chart-panel {
+    height: 300px;
+  }
 }
 
 // 世界地图
@@ -1412,8 +1731,13 @@ onBeforeUnmount(() => {
     .map-stat {
       font-size: 11px;
       color: #909399;
-      i { margin-right: 3px; }
-      b { color: #409eff; font-size: 13px; }
+      i {
+        margin-right: 3px;
+      }
+      b {
+        color: #409eff;
+        font-size: 13px;
+      }
     }
   }
   .map-body {
@@ -1433,10 +1757,10 @@ onBeforeUnmount(() => {
   top: 16px;
   right: 16px;
   width: 200px;
-  background: rgba(255,255,255,0.95);
-  border: 1px solid rgba(64,158,255,0.3);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(64, 158, 255, 0.3);
   border-radius: 6px;
-  box-shadow: 0 4px 16px rgba(64,158,255,0.15);
+  box-shadow: 0 4px 16px rgba(64, 158, 255, 0.15);
   backdrop-filter: blur(10px);
   overflow: hidden;
   z-index: 10;
@@ -1445,7 +1769,7 @@ onBeforeUnmount(() => {
     display: flex;
     align-items: center;
     padding: 8px 10px;
-    background: linear-gradient(90deg, rgba(64,158,255,0.1) 0%, transparent 100%);
+    background: linear-gradient(90deg, rgba(64, 158, 255, 0.1) 0%, transparent 100%);
     border-bottom: 1px solid #f0f2f5;
     .info-dot {
       width: 6px;
@@ -1471,10 +1795,22 @@ onBeforeUnmount(() => {
       padding: 4px 0;
       font-size: 11px;
       border-bottom: 1px dashed #f0f2f5;
-      &:last-child { border-bottom: none; }
-      .info-label { color: #909399; }
-      .info-value { color: #303133; font-weight: 500; text-align: right; max-width: 120px; }
-      .highlight { color: #409eff; font-weight: 600; }
+      &:last-child {
+        border-bottom: none;
+      }
+      .info-label {
+        color: #909399;
+      }
+      .info-value {
+        color: #303133;
+        font-weight: 500;
+        text-align: right;
+        max-width: 120px;
+      }
+      .highlight {
+        color: #409eff;
+        font-weight: 600;
+      }
     }
   }
 }
@@ -1489,7 +1825,9 @@ onBeforeUnmount(() => {
     width: 100%;
     .data-point {
       transition: r 0.2s;
-      &:hover { r: 6; }
+      &:hover {
+        r: 6;
+      }
     }
   }
   .chart-labels {
@@ -1504,7 +1842,9 @@ onBeforeUnmount(() => {
 // ========== 第三行：数据 ==========
 .data-row {
   margin-bottom: 12px;
-  .chart-panel { height: 240px; }
+  .chart-panel {
+    height: 240px;
+  }
 }
 
 // 设备状态
@@ -1518,7 +1858,10 @@ onBeforeUnmount(() => {
     width: 100px;
     height: 100px;
     flex-shrink: 0;
-    .donut-svg { width: 100%; height: 100%; }
+    .donut-svg {
+      width: 100%;
+      height: 100%;
+    }
     .donut-center {
       position: absolute;
       top: 50%;
@@ -1550,13 +1893,30 @@ onBeforeUnmount(() => {
         height: 10px;
         border-radius: 2px;
         margin-right: 8px;
-        &.running { background: #67c23a; }
-        &.idle { background: #e6a23c; }
-        &.fault { background: #f56c6c; }
+        &.running {
+          background: #67c23a;
+        }
+        &.idle {
+          background: #e6a23c;
+        }
+        &.fault {
+          background: #f56c6c;
+        }
       }
-      .legend-name { flex: 1; color: #606266; }
-      .legend-time { color: #303133; font-weight: 600; margin-right: 8px; }
-      .legend-percent { color: #909399; width: 35px; text-align: right; }
+      .legend-name {
+        flex: 1;
+        color: #606266;
+      }
+      .legend-time {
+        color: #303133;
+        font-weight: 600;
+        margin-right: 8px;
+      }
+      .legend-percent {
+        color: #909399;
+        width: 35px;
+        text-align: right;
+      }
     }
   }
 }
@@ -1571,8 +1931,13 @@ onBeforeUnmount(() => {
     display: flex;
     justify-content: space-between;
     font-size: 12px;
-    .batch-label { color: #909399; }
-    .batch-value { color: #303133; font-weight: 500; }
+    .batch-label {
+      color: #909399;
+    }
+    .batch-value {
+      color: #303133;
+      font-weight: 500;
+    }
   }
 }
 .batch-tag {
@@ -1586,8 +1951,15 @@ onBeforeUnmount(() => {
     justify-content: space-between;
     font-size: 12px;
     margin-bottom: 6px;
-    span:first-child { color: #606266; font-weight: 600; letter-spacing: 1px; }
-    .progress-text { color: #409eff; font-weight: 500; }
+    span:first-child {
+      color: #606266;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .progress-text {
+      color: #409eff;
+      font-weight: 500;
+    }
   }
   .progress-bar-large {
     position: relative;
@@ -1617,7 +1989,7 @@ onBeforeUnmount(() => {
       left: -100%;
       width: 50%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
       animation: shineMove 2s ease-in-out infinite;
     }
   }
@@ -1643,8 +2015,12 @@ onBeforeUnmount(() => {
 }
 
 @keyframes shineMove {
-  0% { left: -100%; }
-  100% { left: 200%; }
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
 }
 
 // 实时数据
@@ -1661,7 +2037,13 @@ onBeforeUnmount(() => {
     font-weight: 600;
     color: #409eff;
     letter-spacing: 1px;
-    span { flex: 1; text-align: center; &:first-child { text-align: left; } }
+    span {
+      flex: 1;
+      text-align: center;
+      &:first-child {
+        text-align: left;
+      }
+    }
   }
   .rt-body {
     flex: 1;
@@ -1673,19 +2055,38 @@ onBeforeUnmount(() => {
       font-size: 11px;
       color: #606266;
       transition: background 0.2s;
-      &:hover { background: #f5f7fa; }
+      &:hover {
+        background: #f5f7fa;
+      }
       &.latest {
         background: linear-gradient(90deg, #f0f9eb 0%, transparent 100%);
-        .rt-time { color: #67c23a; font-weight: 600; }
+        .rt-time {
+          color: #67c23a;
+          font-weight: 600;
+        }
       }
-      span { flex: 1; text-align: center; &:first-child { text-align: left; color: #909399; font-family: 'Courier New', monospace; } }
+      span {
+        flex: 1;
+        text-align: center;
+        &:first-child {
+          text-align: left;
+          color: #909399;
+          font-family: 'Courier New', monospace;
+        }
+      }
       .rt-status {
         padding: 1px 6px;
         border-radius: 8px;
         font-size: 10px;
         font-weight: 500;
-        &.normal { background: #f0f9eb; color: #67c23a; }
-        &.warning { background: #fdf6ec; color: #e6a23c; }
+        &.normal {
+          background: #f0f9eb;
+          color: #67c23a;
+        }
+        &.warning {
+          background: #fdf6ec;
+          color: #e6a23c;
+        }
       }
     }
   }
@@ -1693,7 +2094,9 @@ onBeforeUnmount(() => {
 
 // ========== 第四行 ==========
 .bottom-row {
-  .chart-panel { height: 220px; }
+  .chart-panel {
+    height: 220px;
+  }
 }
 
 // 报警
@@ -1708,8 +2111,13 @@ onBeforeUnmount(() => {
       justify-content: space-between;
       font-size: 12px;
       margin-bottom: 4px;
-      .as-name { color: #606266; }
-      .as-count { color: #303133; font-weight: 600; }
+      .as-name {
+        color: #606266;
+      }
+      .as-count {
+        color: #303133;
+        font-weight: 600;
+      }
     }
     .as-bar {
       position: relative;
@@ -1737,7 +2145,10 @@ onBeforeUnmount(() => {
     width: 110px;
     height: 110px;
     flex-shrink: 0;
-    svg { width: 100%; height: 100%; }
+    svg {
+      width: 100%;
+      height: 100%;
+    }
     .quality-center {
       position: absolute;
       top: 50%;
@@ -1765,11 +2176,23 @@ onBeforeUnmount(() => {
       padding: 8px 0;
       border-bottom: 1px solid #f5f7fa;
       font-size: 13px;
-      &:last-child { border-bottom: none; }
-      .qs-label { color: #909399; }
-      .qs-value { color: #303133; font-weight: 600; &.success { color: #67c23a; } &.danger { color: #f56c6c; } }
+      &:last-child {
+        border-bottom: none;
+      }
+      .qs-label {
+        color: #909399;
+      }
+      .qs-value {
+        color: #303133;
+        font-weight: 600;
+        &.success {
+          color: #67c23a;
+        }
+        &.danger {
+          color: #f56c6c;
+        }
+      }
     }
   }
 }
 </style>
-

@@ -27,11 +27,7 @@
         <div class="section-title">
           <el-icon><Clock /></el-icon>
           <span>{{ t('notification.settings.doNotDisturb') }}</span>
-          <el-switch
-            v-model="settings.doNotDisturb.enabled"
-            active-color="#409eff"
-            style="margin-left: auto"
-          />
+          <el-switch v-model="settings.doNotDisturb.enabled" active-color="#409eff" style="margin-left: auto" />
         </div>
         <div class="section-desc">{{ t('notification.settings.doNotDisturbEnabled') }}</div>
         <div v-if="settings.doNotDisturb.enabled" class="time-range">
@@ -93,14 +89,13 @@
 <script setup lang="ts">
 /**
  * 通知设置弹窗（v-model 控制显隐）
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { ref, reactive, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Bell, Clock, Setting } from '@element-plus/icons-vue'
-import {
-  requestGetNotificationSettingsApi,
-  requestUpdateNotificationSettingsApi
-} from '@/api'
+import { requestGetNotificationSettingsApi, requestUpdateNotificationSettingsApi } from '@/api'
 import { showSuccess, showError } from '@/utils/ui/feedback'
 
 defineOptions({ name: 'NotificationSettings' })
@@ -155,10 +150,13 @@ const loading = ref(false)
 const saving = ref(false)
 const settings = reactive<NotificationSettingsData>({ ...defaultSettings })
 
-watch(() => props.modelValue, val => {
-  dialogVisible.value = val
-  if (val) loadSettings()
-})
+watch(
+  () => props.modelValue,
+  val => {
+    dialogVisible.value = val
+    if (val) loadSettings()
+  }
+)
 
 watch(dialogVisible, val => {
   emit('update:modelValue', val)
@@ -210,7 +208,9 @@ function handleClose(): void {
   .settings-section {
     margin-bottom: 24px;
 
-    &:last-child { margin-bottom: 0; }
+    &:last-child {
+      margin-bottom: 0;
+    }
 
     .section-title {
       display: flex;
@@ -221,7 +221,9 @@ function handleClose(): void {
       color: #303133;
       margin-bottom: 8px;
 
-      .el-icon { color: #409eff; }
+      .el-icon {
+        color: #409eff;
+      }
     }
 
     .section-desc {
@@ -256,7 +258,9 @@ function handleClose(): void {
     align-items: center;
     gap: 12px;
 
-    .time-separator { color: #909399; }
+    .time-separator {
+      color: #909399;
+    }
   }
 
   .reminder-list {
@@ -269,7 +273,9 @@ function handleClose(): void {
       border-radius: 4px;
       margin-bottom: 8px;
 
-      &:last-child { margin-bottom: 0; }
+      &:last-child {
+        margin-bottom: 0;
+      }
 
       .reminder-info .reminder-name {
         display: block;

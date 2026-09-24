@@ -126,13 +126,11 @@ export function useProdRecipe() {
 
   /** 按 id 查询配方 */
   function getRecipeById(id: number): Recipe | undefined {
-    return recipes.value.find((r) => r.id === id)
+    return recipes.value.find(r => r.id === id)
   }
 
   /** 当前使用中的配方（无标记时回退第一条） */
-  const activeRecipe = computed<Recipe | undefined>(
-    () => recipes.value.find((r) => r.isActive) || recipes.value[0]
-  )
+  const activeRecipe = computed<Recipe | undefined>(() => recipes.value.find(r => r.isActive) || recipes.value[0])
 
   return { recipes, activeRecipe, getRecipeById }
 }

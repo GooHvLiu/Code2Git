@@ -2,6 +2,8 @@
  * ==========================================
  * 日期工具封装（基于 dayjs）
  * ==========================================
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -62,7 +64,12 @@ export function diffDays(start: Date | string, end: Date | string): number {
   return dayjs(end).diff(dayjs(start), 'day')
 }
 
-export function isDateBetween(date: Date | string, start: Date | string, end: Date | string, inclusivity: string = '[]'): boolean {
+export function isDateBetween(
+  date: Date | string,
+  start: Date | string,
+  end: Date | string,
+  inclusivity: string = '[]'
+): boolean {
   return dayjs(date).isBetween(start, end, null, inclusivity as '[]')
 }
 

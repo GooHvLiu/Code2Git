@@ -8,7 +8,9 @@
           {{ t('superPanel.config.translation.title') }}
         </span>
         <el-tag :type="config.enabled ? 'success' : 'info'" size="small" class="status-tag">
-          {{ config.enabled ? t('superPanel.config.translation.enabled') : t('superPanel.config.translation.disabled') }}
+          {{
+            config.enabled ? t('superPanel.config.translation.enabled') : t('superPanel.config.translation.disabled')
+          }}
         </el-tag>
       </div>
       <div class="toolbar-right">
@@ -40,7 +42,11 @@
                 </el-tooltip>
               </span>
             </template>
-            <el-switch v-model="config.enabled" :active-text="t('common.enabled')" :inactive-text="t('common.disabled')" />
+            <el-switch
+              v-model="config.enabled"
+              :active-text="t('common.enabled')"
+              :inactive-text="t('common.disabled')"
+            />
           </el-form-item>
 
           <el-form-item>
@@ -108,7 +114,12 @@
                 </el-tooltip>
               </span>
             </template>
-            <el-input v-model="config.tencent.secretId" :placeholder="t('superPanel.config.translation.secretIdPlaceholder')" show-password style="width: 400px" />
+            <el-input
+              v-model="config.tencent.secretId"
+              :placeholder="t('superPanel.config.translation.secretIdPlaceholder')"
+              show-password
+              style="width: 400px"
+            />
           </el-form-item>
 
           <el-form-item prop="tencent.secretKey">
@@ -120,7 +131,12 @@
                 </el-tooltip>
               </span>
             </template>
-            <el-input v-model="config.tencent.secretKey" :placeholder="t('superPanel.config.translation.secretKeyPlaceholder')" show-password style="width: 400px" />
+            <el-input
+              v-model="config.tencent.secretKey"
+              :placeholder="t('superPanel.config.translation.secretKeyPlaceholder')"
+              show-password
+              style="width: 400px"
+            />
           </el-form-item>
 
           <el-form-item>
@@ -133,12 +149,30 @@
               </span>
             </template>
             <el-select v-model="config.tencent.region" style="width: 300px">
-              <el-option :label="t('superPanel.config.translation.regionGuangzhou') + ' (ap-guangzhou)'" value="ap-guangzhou" />
-              <el-option :label="t('superPanel.config.translation.regionShanghai') + ' (ap-shanghai)'" value="ap-shanghai" />
-              <el-option :label="t('superPanel.config.translation.regionBeijing') + ' (ap-beijing)'" value="ap-beijing" />
-              <el-option :label="t('superPanel.config.translation.regionChengdu') + ' (ap-chengdu)'" value="ap-chengdu" />
-              <el-option :label="t('superPanel.config.translation.regionHongkong') + ' (ap-hongkong)'" value="ap-hongkong" />
-              <el-option :label="t('superPanel.config.translation.regionSingapore') + ' (ap-singapore)'" value="ap-singapore" />
+              <el-option
+                :label="t('superPanel.config.translation.regionGuangzhou') + ' (ap-guangzhou)'"
+                value="ap-guangzhou"
+              />
+              <el-option
+                :label="t('superPanel.config.translation.regionShanghai') + ' (ap-shanghai)'"
+                value="ap-shanghai"
+              />
+              <el-option
+                :label="t('superPanel.config.translation.regionBeijing') + ' (ap-beijing)'"
+                value="ap-beijing"
+              />
+              <el-option
+                :label="t('superPanel.config.translation.regionChengdu') + ' (ap-chengdu)'"
+                value="ap-chengdu"
+              />
+              <el-option
+                :label="t('superPanel.config.translation.regionHongkong') + ' (ap-hongkong)'"
+                value="ap-hongkong"
+              />
+              <el-option
+                :label="t('superPanel.config.translation.regionSingapore') + ' (ap-singapore)'"
+                value="ap-singapore"
+              />
             </el-select>
           </el-form-item>
 
@@ -182,14 +216,22 @@
           </div>
           <div class="lang-list">
             <el-tag v-for="lang in langList" :key="lang.langCode" size="small" class="lang-tag">
-              <SvgIcon :icon-class="lang.flag || 'global'" class-name="lang-flag-tag" /> {{ lang.autonym }} ({{ lang.langCode }})
+              <SvgIcon :icon-class="lang.flag || 'global'" class-name="lang-flag-tag" /> {{ lang.autonym }} ({{
+                lang.langCode
+              }})
             </el-tag>
           </div>
         </div>
 
         <!-- 说明 -->
         <div class="form-section">
-          <el-alert :title="t('superPanel.config.translation.tipTitle')" :description="t('superPanel.config.translation.tipContent')" type="info" :closable="false" show-icon />
+          <el-alert
+            :title="t('superPanel.config.translation.tipTitle')"
+            :description="t('superPanel.config.translation.tipContent')"
+            type="info"
+            :closable="false"
+            show-icon
+          />
         </div>
       </el-form>
     </div>
@@ -272,16 +314,22 @@ const config = reactive<TranslationConfig>({
 })
 
 const rules = reactive<FormRules>({
-  'tencent.secretId': [{ required: true, message: t('superPanel.config.translation.secretIdRequired'), trigger: 'blur' }],
-  'tencent.secretKey': [{ required: true, message: t('superPanel.config.translation.secretKeyRequired'), trigger: 'blur' }]
+  'tencent.secretId': [
+    { required: true, message: t('superPanel.config.translation.secretIdRequired'), trigger: 'blur' }
+  ],
+  'tencent.secretKey': [
+    { required: true, message: t('superPanel.config.translation.secretKeyRequired'), trigger: 'blur' }
+  ]
 })
 
 function loadLangList(): void {
-  requestGetLanguagesApi().then((res: any) => {
-    langList.value = (res.data as LangItem[]) || []
-  }).catch((err: unknown) => {
-    console.error('[TranslationConfig] 加载语言清单失败:', err)
-  })
+  requestGetLanguagesApi()
+    .then((res: any) => {
+      langList.value = (res.data as LangItem[]) || []
+    })
+    .catch((err: unknown) => {
+      console.error('[TranslationConfig] 加载语言清单失败:', err)
+    })
 }
 
 async function loadConfig(): Promise<void> {
@@ -334,7 +382,9 @@ async function handleTest(): Promise<void> {
     }
     testResult.value = {
       success: data.success,
-      message: data.success ? t('superPanel.config.translation.testSuccess') : t('superPanel.config.translation.testFailed'),
+      message: data.success
+        ? t('superPanel.config.translation.testSuccess')
+        : t('superPanel.config.translation.testFailed'),
       translation
     }
   } catch (err) {
@@ -356,28 +406,127 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.translation-config-panel { padding: 20px; }
-.translation-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #ebeef5; }
-.toolbar-left { display: flex; align-items: center; gap: 12px; }
-.panel-title { font-size: 16px; font-weight: 600; color: #303133; display: flex; align-items: center; gap: 8px; }
-.panel-title .el-icon { color: #409eff; font-size: 18px; }
-.status-tag { margin-left: 8px; }
-.config-form-wrapper { background: #fff; border: 1px solid #ebeef5; border-radius: 4px; padding: 24px; }
-.config-form { max-width: 800px; }
-.form-section { margin-bottom: 32px; }
-.form-section:last-child { margin-bottom: 0; }
-.section-title { font-size: 14px; font-weight: 600; color: #303133; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #f0f2f5; display: flex; align-items: center; gap: 8px; }
-.section-title .el-icon { color: #409eff; }
-.label-with-tip { display: inline-flex; align-items: center; gap: 4px; }
-.label-tip-icon { color: #c0c4cc; cursor: help; font-size: 14px; transition: color 0.2s; }
-.label-tip-icon:hover { color: #409eff; }
-.test-result { display: inline-flex; flex-direction: column; gap: 8px; margin-left: 12px; vertical-align: middle; }
-.test-result-main { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; }
-.test-result-detail { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; background: #f0f9eb; border: 1px solid #e1f3d8; border-radius: 4px; font-size: 13px; }
-.translation-source { color: #606266; font-weight: 500; }
-.translation-arrow { color: #67c23a; font-size: 12px; }
-.translation-target { color: #67c23a; font-weight: 500; }
-.lang-list { display: flex; flex-wrap: wrap; gap: 8px; }
-.lang-tag { margin: 0; }
-.lang-flag-tag { width: 16px; height: 16px; margin-right: 4px; vertical-align: middle; }
+.translation-config-panel {
+  padding: 20px;
+}
+.translation-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ebeef5;
+}
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.panel-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #303133;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.panel-title .el-icon {
+  color: #409eff;
+  font-size: 18px;
+}
+.status-tag {
+  margin-left: 8px;
+}
+.config-form-wrapper {
+  background: #fff;
+  border: 1px solid #ebeef5;
+  border-radius: 4px;
+  padding: 24px;
+}
+.config-form {
+  max-width: 800px;
+}
+.form-section {
+  margin-bottom: 32px;
+}
+.form-section:last-child {
+  margin-bottom: 0;
+}
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #303133;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f2f5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-title .el-icon {
+  color: #409eff;
+}
+.label-with-tip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.label-tip-icon {
+  color: #c0c4cc;
+  cursor: help;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+.label-tip-icon:hover {
+  color: #409eff;
+}
+.test-result {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-left: 12px;
+  vertical-align: middle;
+}
+.test-result-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+.test-result-detail {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: #f0f9eb;
+  border: 1px solid #e1f3d8;
+  border-radius: 4px;
+  font-size: 13px;
+}
+.translation-source {
+  color: #606266;
+  font-weight: 500;
+}
+.translation-arrow {
+  color: #67c23a;
+  font-size: 12px;
+}
+.translation-target {
+  color: #67c23a;
+  font-weight: 500;
+}
+.lang-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.lang-tag {
+  margin: 0;
+}
+.lang-flag-tag {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
 </style>

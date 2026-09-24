@@ -16,14 +16,14 @@ export const useDeviceStore = defineStore('device', () => {
     model: 'nexCM-V2 全自动灌装机',
     location: '中国 · 江苏无锡 · 生产车间A区',
     locationCode: ['CN', 'CN-WX'] as string[],
-    locationCoords: { lng: 120.30, lat: 31.57 },
+    locationCoords: { lng: 120.3, lat: 31.57 },
     installDate: '2026-01-15',
     manufacturer: 'nexCM 科技',
     ip: '192.168.1.100'
   })
 
   const status = ref<DeviceStatus>('running')
-  const statusText = ref('运行中')
+  const statusText = ref('common.running')
   const runningDuration = ref(0)
   const runningStartTime = ref<number | null>(null)
 
@@ -36,13 +36,15 @@ export const useDeviceStore = defineStore('device', () => {
     vibration: 0.8
   })
 
-  const paramsConfig = reactive<Record<string, { name: string; unit: string; min: number; max: number; decimal: number }>>({
-    speed: { name: '运行速度', unit: '瓶/h', min: 0, max: 1500, decimal: 0 },
-    fillVolume: { name: '灌装体积', unit: 'mL', min: 0.5, max: 10, decimal: 1 },
-    vacuum: { name: '真空度', unit: 'MPa', min: -0.1, max: -0.05, decimal: 3 },
-    temperature: { name: '灌装温度', unit: '℃', min: 15, max: 35, decimal: 1 },
-    pressure: { name: '加塞压力', unit: 'MPa', min: 0.05, max: 0.2, decimal: 2 },
-    vibration: { name: '设备振动', unit: 'mm/s', min: 0, max: 2.5, decimal: 1 }
+  const paramsConfig = reactive<
+    Record<string, { name: string; unit: string; min: number; max: number; decimal: number }>
+  >({
+    speed: { name: 'device.state.metricSpeed', unit: '瓶/h', min: 0, max: 1500, decimal: 0 },
+    fillVolume: { name: 'device.state.metricFillVolume', unit: 'mL', min: 0.5, max: 10, decimal: 1 },
+    vacuum: { name: 'device.state.metricVacuum', unit: 'MPa', min: -0.1, max: -0.05, decimal: 3 },
+    temperature: { name: 'device.state.metricTemperature', unit: '℃', min: 15, max: 35, decimal: 1 },
+    pressure: { name: 'device.state.metricPressure', unit: 'MPa', min: 0.05, max: 0.2, decimal: 2 },
+    vibration: { name: 'device.state.metricVibration', unit: 'mm/s', min: 0, max: 2.5, decimal: 1 }
   })
 
   const production = reactive({
@@ -51,7 +53,7 @@ export const useDeviceStore = defineStore('device', () => {
     todayRate: 71.3,
     shiftOutput: 3240,
     shiftTarget: 5000,
-    shiftName: '白班',
+    shiftName: 'common.shift.day',
     totalOutput: 125680,
     qualifiedRate: 98.5,
     qualifiedCount: 8432,
@@ -86,7 +88,8 @@ export const useDeviceStore = defineStore('device', () => {
 
   const trendData = reactive<Record<string, Array<{ time: string; value: number }>>>({
     speed: [
-      { time: '10:00', value: 1200 }, { time: '12:00', value: 1100 }
+      { time: '10:00', value: 1200 },
+      { time: '12:00', value: 1100 }
     ],
     fillVolume: [{ time: '10:00', value: 2.0 }],
     vacuum: [{ time: '10:00', value: -0.085 }],
@@ -174,7 +177,7 @@ export const useDeviceStore = defineStore('device', () => {
 
   function onDeviceDisconnected(): void {
     status.value = 'offline'
-    statusText.value = '离线'
+    statusText.value = 'common.offline'
     alarms.current = []
     lastUpdateTime.value = null
   }

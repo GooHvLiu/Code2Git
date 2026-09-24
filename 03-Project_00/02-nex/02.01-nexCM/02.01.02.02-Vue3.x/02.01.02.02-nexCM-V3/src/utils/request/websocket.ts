@@ -3,6 +3,8 @@
  * WebSocket 客户端工具（单例）
  * ==========================================
  * 自动认证、心跳、断线重连、消息分发，状态同步到 Pinia websocket store。
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { IS_DEV, WS_HOST } from '@/utils/config/env'
 import { useWebSocketStore } from '@/store/modules/websocket'
@@ -97,7 +99,7 @@ class WebSocketClient {
         this.authenticate()
         this.startHeartbeat()
       }
-      this.ws.onmessage = (event) => this.handleMessage(event.data)
+      this.ws.onmessage = event => this.handleMessage(event.data)
       this.ws.onclose = () => {
         this.connected = false
         this.authenticated = false
@@ -105,7 +107,7 @@ class WebSocketClient {
         this.store.onDisconnected()
         if (!this.manualClose) this.scheduleReconnect()
       }
-      this.ws.onerror = (error) => console.error('[WS] WebSocket 连接错误:', error)
+      this.ws.onerror = error => console.error('[WS] WebSocket 连接错误:', error)
     } catch (e) {
       console.error('[WS] 连接失败:', (e as Error).message)
       this.scheduleReconnect()
@@ -203,7 +205,11 @@ class WebSocketClient {
   emit(type: string, data?: unknown): void {
     if (!this.listeners[type]) return
     this.listeners[type].forEach(callback => {
-      try { callback(data) } catch (e) { console.error(`[WS] 监听器 ${type} 执行错误:`, e) }
+      try {
+        callback(data)
+      } catch (e) {
+        console.error(`[WS] 监听器 ${type} 执行错误:`, e)
+      }
     })
   }
 

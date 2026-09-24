@@ -70,7 +70,7 @@ import type { HospitalItem } from "@/types/index";
 import { useRouter } from "vue-router";
 const router = useRouter();
 // 导入路由常量管理文件
-import { HOSPITAL_PATH } from "@/const/index";
+import { HOSPITAL } from "@/const/index";
 
 // Props定义示例
 const props = defineProps<{
@@ -95,7 +95,7 @@ const props = defineProps<{
 // 当用户点击时被触发
 const handleSelect = (hoscode: string) => {
   // 通过路由跳转到医院详情页面
-  router.push({ path: HOSPITAL_PATH });
+  router.push({ path: HOSPITAL.PATH });
 };
 </script>
 

@@ -31,6 +31,12 @@
     "src/**/*.vue",
     "vite.config.ts"
   ],
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/**/*.spec.ts",
+    "node_modules",
+    "dist"
+  ],
   "references": [
     { "path": "./tsconfig.node.json" }
   ]

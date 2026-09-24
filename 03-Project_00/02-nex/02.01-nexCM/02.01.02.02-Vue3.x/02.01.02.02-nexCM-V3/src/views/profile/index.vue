@@ -109,7 +109,7 @@ const roleCode = computed<string>(() => {
 
 /** 角色文本（数据字典） */
 const roleText = computed<string>(() => {
-  const item = (dict.value.user_role || []).find((i) => String(i.value) === String(roleCode.value))
+  const item = (dict.value.user_role || []).find(i => String(i.value) === String(roleCode.value))
   return item ? item.label : roleCode.value || '--'
 })
 
@@ -118,21 +118,21 @@ type TagType = 'primary' | 'success' | 'info' | 'warning' | 'danger'
 
 /** 角色标签颜色（数据字典 list_class / css_class） */
 const roleTagType = computed<TagType>(() => {
-  const item = (dict.value.user_role || []).find((i) => String(i.value) === String(roleCode.value))
+  const item = (dict.value.user_role || []).find(i => String(i.value) === String(roleCode.value))
   return ((item && (item.list_class || item.css_class)) || 'info') as TagType
 })
 
 /** 性别文本（数据字典） */
 const sexText = computed<string>(() => {
   const sex = userInfo.value.sex
-  const item = (dict.value.user_sex || []).find((i) => String(i.value) === String(sex))
+  const item = (dict.value.user_sex || []).find(i => String(i.value) === String(sex))
   return item ? item.label : '--'
 })
 
 /** 状态文本（数据字典） */
 const statusText = computed<string>(() => {
   const status = userInfo.value.status
-  const item = (dict.value.user_status || []).find((i) => String(i.value) === String(status))
+  const item = (dict.value.user_status || []).find(i => String(i.value) === String(status))
   return item ? item.label : '--'
 })
 

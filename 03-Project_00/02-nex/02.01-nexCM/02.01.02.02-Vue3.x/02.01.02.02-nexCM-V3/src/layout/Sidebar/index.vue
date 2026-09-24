@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="sidebar"
-    :class="{ 'is-collapse': !appStore.sidebar.opened }"
-  >
+  <div class="sidebar" :class="{ 'is-collapse': !appStore.sidebar.opened }">
     <div v-if="settings.sidebarLogo" class="sidebar-logo">
       <router-link :to="ROUTE_PATHS.ROOT" class="logo-link">
         <SvgIcon icon-class="logo" class="logo-svg" />
@@ -66,7 +63,7 @@ const menuItems = computed<SidebarMenu[]>(() => permissionStore.userMenu || [])
 const menuReady = ref(false)
 watch(
   () => menuItems.value.length,
-  async (len) => {
+  async len => {
     if (len > 0) {
       await nextTick()
       menuReady.value = true

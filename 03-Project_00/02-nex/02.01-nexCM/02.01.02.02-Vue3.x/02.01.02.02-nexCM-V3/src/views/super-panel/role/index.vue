@@ -24,7 +24,14 @@
     </div>
 
     <!-- ==================== 表格 ==================== -->
-    <el-table v-loading="loading" :element-loading-text="t('common.loading')" :data="tableData" border stripe class="role-table">
+    <el-table
+      v-loading="loading"
+      :element-loading-text="t('common.loading')"
+      :data="tableData"
+      border
+      stripe
+      class="role-table"
+    >
       <el-table-column :label="t('common.index')" type="index" width="60" align="center" />
       <el-table-column :label="t('superPanel.role.page.roleName')" min-width="120" align="center">
         <template #default="{ row }">{{ getRoleName(row as RoleItem) }}</template>
@@ -144,12 +151,7 @@ import { useUserStore } from '@/store/modules/user'
 import ExportDropdown from '@/components/ExportDropdown/index.vue'
 import { showSuccess, showError, showWarning, confirmDelete } from '@/utils/ui/feedback'
 import { getRoleName, getRoleDesc } from '@/utils/auth/roleMapper'
-import {
-  requestGetRoleListApi,
-  requestCreateRoleApi,
-  requestUpdateRoleApi,
-  requestDeleteRoleApi
-} from '@/api'
+import { requestGetRoleListApi, requestCreateRoleApi, requestUpdateRoleApi, requestDeleteRoleApi } from '@/api'
 import type { RoleItem, RoleForm } from '@/types/super-panel'
 
 const { t } = useI18n()
@@ -182,15 +184,20 @@ const rules = computed(() => ({
 }))
 
 const exportColumns = computed((): ExportColumn[] => [
-  { label: t('superPanel.role.page.roleName'), prop: 'role_name', width: 120, formatter: (row) => getRoleName(row as RoleItem) },
+  {
+    label: t('superPanel.role.page.roleName'),
+    prop: 'role_name',
+    width: 120,
+    formatter: row => getRoleName(row as RoleItem)
+  },
   { label: t('superPanel.role.page.roleCode'), prop: 'role_code', width: 120 },
   {
     label: t('common.status'),
     prop: 'status',
     width: 80,
-    formatter: (row) => ((row as RoleItem).status === 1 ? t('common.enable') : t('common.disable'))
+    formatter: row => ((row as RoleItem).status === 1 ? t('common.enable') : t('common.disable'))
   },
-  { label: t('common.description'), prop: 'description', width: 200, formatter: (row) => getRoleDesc(row as RoleItem) }
+  { label: t('common.description'), prop: 'description', width: 200, formatter: row => getRoleDesc(row as RoleItem) }
 ])
 
 function resetForm(): void {

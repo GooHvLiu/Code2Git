@@ -6,6 +6,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import settings from '@/settings'
+import i18n from '@/i18n'
 import { IS_PROD } from '@/utils/config/env'
 
 interface ErrorLogItem {
@@ -24,7 +25,7 @@ export const useErrorLogStore = defineStore('errorLog', () => {
     if (settings.errorLog === 'production' && !IS_PROD) return
     const { err, info } = errorInfo
     logs.value.push({
-      message: err?.message || '未知错误',
+      message: err?.message || (i18n.global.t('common.error.UNKNOWN_ERROR') as string),
       stack: err?.stack || '',
       info: info || '',
       url: window.location.href,

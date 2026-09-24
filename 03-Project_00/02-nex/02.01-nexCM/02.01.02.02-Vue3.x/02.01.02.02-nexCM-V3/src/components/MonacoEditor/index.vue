@@ -9,6 +9,8 @@
  * Monaco 代码编辑器封装
  * v-model 绑定内容（modelValue），emit change。
  * 通过 ref 暴露 getValue/setValue/revealLine/focus/layout。
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import * as monaco from 'monaco-editor'
@@ -72,19 +74,28 @@ watch(
   }
 )
 
-watch(() => props.language, newVal => {
-  if (editor?.getModel()) {
-    monaco.editor.setModelLanguage(editor.getModel()!, newVal)
+watch(
+  () => props.language,
+  newVal => {
+    if (editor?.getModel()) {
+      monaco.editor.setModelLanguage(editor.getModel()!, newVal)
+    }
   }
-})
+)
 
-watch(() => props.theme, newVal => {
-  monaco.editor.setTheme(newVal)
-})
+watch(
+  () => props.theme,
+  newVal => {
+    monaco.editor.setTheme(newVal)
+  }
+)
 
-watch(() => props.readOnly, newVal => {
-  if (editor) editor.updateOptions({ readOnly: newVal })
-})
+watch(
+  () => props.readOnly,
+  newVal => {
+    if (editor) editor.updateOptions({ readOnly: newVal })
+  }
+)
 
 watch(
   () => props.highlightLines,
@@ -92,9 +103,12 @@ watch(
   { deep: true }
 )
 
-watch(() => props.scrollToLine, newVal => {
-  if (newVal && editor) editor.revealLineInCenter(newVal)
-})
+watch(
+  () => props.scrollToLine,
+  newVal => {
+    if (newVal && editor) editor.revealLineInCenter(newVal)
+  }
+)
 
 function debounce<T extends (...args: unknown[]) => void>(fn: T, delay: number): (...args: Parameters<T>) => void {
   let timer: ReturnType<typeof setTimeout> | null = null

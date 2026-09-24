@@ -11,6 +11,7 @@
  */
 import { ref, nextTick, type Ref } from 'vue'
 import type { FormInstance } from 'element-plus'
+import i18n from '@/i18n'
 
 /** 表单提交接口（任意入参，返回 Promise） */
 export type DialogSubmitApi<T> = (form: T) => Promise<unknown>
@@ -42,8 +43,8 @@ export function useDialog<T extends Record<string, unknown> = Record<string, unk
   options: UseDialogOptions<T> = {}
 ): UseDialogReturn<T> {
   const {
-    addTitle = '新增',
-    editTitle = '编辑',
+    addTitle = i18n.global.t('common.add') as string,
+    editTitle = i18n.global.t('common.edit') as string,
     submitApi = null,
     onSubmitSuccess = null
   } = options

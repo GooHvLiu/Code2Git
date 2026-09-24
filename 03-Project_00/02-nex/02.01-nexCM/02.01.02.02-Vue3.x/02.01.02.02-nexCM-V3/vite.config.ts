@@ -112,16 +112,25 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       sourcemap: false,
-      chunkSizeWarningLimit: 2000,
+      // 阈值：除 monaco-editor 外所有 chunk 均 < 1500kB。
+      // monaco-editor 核心本身体积约 2.7MB（编辑器内核 + 基础语言），仅在打开
+      // MonacoEditor 页面时按需加载，不进入首屏，故阈值放宽到 3000 以消除该已知大块警告。
+      chunkSizeWarningLimit: 3000,
       rollupOptions: {
         output: {
           manualChunks: {
-            // Vue 核心库
-            vue: ['vue', 'vue-router', 'pinia', 'vue-i18n'],
-            // Element Plus
-            element: ['element-plus', '@element-plus/icons-vue'],
-            // 其他重型三方库
-            libs: ['echarts', 'xlsx', 'jspdf', 'html2canvas', 'dayjs', 'axios']
+            // Vue 核心运行时（vue / vue-router / pinia / vue-i18n）
+            'vue-vendor': ['vue', 'vue-router', 'pinia', 'vue-i18n'],
+            // Element Plus 组件库与图标
+            'element-plus': ['element-plus', '@element-plus/icons-vue'],
+            // 图表库（仅 Dashboard 等用到，按需加载）
+            echarts: ['echarts'],
+            // Monaco 代码编辑器核心（仅 MonacoEditor 用到，按需加载）
+            monaco: ['monaco-editor'],
+            // Excel 导入导出
+            xlsx: ['xlsx'],
+            // PDF / 截图导出（jspdf + html2canvas）
+            pdf: ['jspdf', 'html2canvas']
           }
         }
       }

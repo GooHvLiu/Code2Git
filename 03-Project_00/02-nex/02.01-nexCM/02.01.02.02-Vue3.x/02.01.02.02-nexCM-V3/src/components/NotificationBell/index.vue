@@ -44,22 +44,10 @@
             <div class="item-content">
               <div class="item-title-row">
                 <span class="item-title">{{ getDisplayTitle(item) }}</span>
-                <el-tag
-                  v-if="!item.is_read"
-                  size="small"
-                  type="danger"
-                  effect="dark"
-                  class="status-tag"
-                >
+                <el-tag v-if="!item.is_read" size="small" type="danger" effect="dark" class="status-tag">
                   {{ t('notification.status.unread') }}
                 </el-tag>
-                <el-tag
-                  v-else
-                  size="small"
-                  type="info"
-                  effect="plain"
-                  class="status-tag"
-                >
+                <el-tag v-else size="small" type="info" effect="plain" class="status-tag">
                   {{ t('notification.status.read') }}
                 </el-tag>
               </div>
@@ -82,13 +70,22 @@
 /**
  * 通知铃铛（顶部导航）
  * 未读数本地维护 + BroadcastChannel/storage 跨标签页同步 + WebSocket 实时推送。
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { Component } from 'vue'
 import {
-  Bell, Loading, Document, ChatDotRound, Cpu, User,
-  WarningFilled, InfoFilled, CircleCheckFilled
+  Bell,
+  Loading,
+  Document,
+  ChatDotRound,
+  Cpu,
+  User,
+  WarningFilled,
+  InfoFilled,
+  CircleCheckFilled
 } from '@element-plus/icons-vue'
 import {
   requestGetUnreadCountApi,
@@ -187,7 +184,9 @@ async function handleItemClick(item: NotificationItemData): Promise<void> {
 async function handleMarkAllRead(): Promise<void> {
   try {
     await requestMarkAllAsReadApi()
-    notifications.value.forEach(item => { item.is_read = 1 })
+    notifications.value.forEach(item => {
+      item.is_read = 1
+    })
     unreadCount.value = 0
     showSuccess(t('notification.message.markAllSuccess'))
     broadcastUnreadCountChange()
@@ -253,7 +252,9 @@ function handleWsNotificationRead(data: WsReadData): void {
   }
   if (showPanel.value) {
     if (data.markAll) {
-      notifications.value.forEach(item => { item.is_read = 1 })
+      notifications.value.forEach(item => {
+        item.is_read = 1
+      })
     } else if (data.notificationIds && data.notificationIds.length > 0) {
       const idSet = new Set(data.notificationIds)
       notifications.value.forEach(item => {
@@ -356,7 +357,9 @@ onBeforeUnmount(() => {
   cursor: pointer;
   font-size: 20px;
   color: #606266;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
   position: relative;
 
   &:hover {
@@ -375,9 +378,23 @@ onBeforeUnmount(() => {
 }
 
 @keyframes bell-shake {
-  0%, 100% { transform: rotate(0deg); }
-  10%, 30%, 50%, 70%, 90% { transform: rotate(-12deg); }
-  20%, 40%, 60%, 80% { transform: rotate(12deg); }
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: rotate(-12deg);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: rotate(12deg);
+  }
 }
 
 .notification-panel {
@@ -416,7 +433,9 @@ onBeforeUnmount(() => {
     cursor: pointer;
     transition: color 0.15s;
 
-    &:hover { color: #66b1ff; }
+    &:hover {
+      color: #66b1ff;
+    }
   }
 }
 
@@ -451,7 +470,9 @@ onBeforeUnmount(() => {
   transition: all 0.15s ease;
   position: relative;
 
-  &:last-child { border-bottom: none; }
+  &:last-child {
+    border-bottom: none;
+  }
   &:hover {
     background: #f5f7fa;
     transform: translateX(2px);
@@ -467,7 +488,9 @@ onBeforeUnmount(() => {
     background: #409eff;
   }
 
-  &.read { opacity: 0.7; }
+  &.read {
+    opacity: 0.7;
+  }
 
   .item-status {
     display: flex;
@@ -501,13 +524,34 @@ onBeforeUnmount(() => {
     margin-right: 12px;
     flex-shrink: 0;
 
-    &.type-system { background: #ecf5ff; color: #409eff; }
-    &.type-plc { background: #f0f9eb; color: #67c23a; }
-    &.type-user { background: #fdf6ec; color: #e6a23c; }
-    &.type-audit { background: #f4f4f5; color: #909399; }
-    &.type-warning { background: #fef0f0; color: #f56c6c; }
-    &.type-info { background: #f4f4f5; color: #909399; }
-    &.type-success { background: #f0f9eb; color: #67c23a; }
+    &.type-system {
+      background: #ecf5ff;
+      color: #409eff;
+    }
+    &.type-plc {
+      background: #f0f9eb;
+      color: #67c23a;
+    }
+    &.type-user {
+      background: #fdf6ec;
+      color: #e6a23c;
+    }
+    &.type-audit {
+      background: #f4f4f5;
+      color: #909399;
+    }
+    &.type-warning {
+      background: #fef0f0;
+      color: #f56c6c;
+    }
+    &.type-info {
+      background: #f4f4f5;
+      color: #909399;
+    }
+    &.type-success {
+      background: #f0f9eb;
+      color: #67c23a;
+    }
   }
 
   .item-content {
@@ -563,7 +607,9 @@ onBeforeUnmount(() => {
   cursor: pointer;
   transition: background 0.15s;
 
-  &:hover { background: #f5f7fa; }
+  &:hover {
+    background: #f5f7fa;
+  }
 
   .view-all {
     font-size: 13px;
@@ -573,7 +619,9 @@ onBeforeUnmount(() => {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.15s, transform 0.15s;
+  transition:
+    opacity 0.15s,
+    transform 0.15s;
 }
 
 .fade-enter-from,
@@ -583,7 +631,14 @@ onBeforeUnmount(() => {
 }
 
 @keyframes dot-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.2); }
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
 }
 </style>

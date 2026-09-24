@@ -225,7 +225,8 @@ export default {
     // [Warning] Warning 2
     item2: 'Deleting a menu will also delete all its submenus, please proceed with caution',
     // [Warning] Warning 3
-    item3: 'Menu titles use internationalization keys. After modification, you need to add corresponding translations in language configuration',
+    item3:
+      'Menu titles use internationalization keys. After modification, you need to add corresponding translations in language configuration',
     // [Warning] Warning 4
     item4: 'Dragging menus can adjust sorting and parent-child relationships',
     // [Warning] Warning 5

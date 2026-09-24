@@ -36,6 +36,20 @@ export default {
   resetFailedRetry: '重置失败，请重试',
   // 【消息】重置失败网络错误
   resetFailedNetwork: '重置失败，请检查网络连接',
+  // 【状态】加载失败标题
+  loadFailedTitle: '配置加载失败',
+  // 【状态】加载失败描述
+  loadFailedDesc: '请检查网络连接或联系管理员',
+  // 【状态】不完整标题
+  incompleteTitle: '配置不完整',
+  // 【状态】检测到未初始化项（count）
+  incompleteDetected: '检测到 {count} 个未初始化的配置项，当前页面禁止编辑和保存。',
+  // 【状态】缺失配置项标题
+  missingKeysTitle: '缺失的配置项：',
+  // 【状态】不完整提示
+  incompleteTip: '请联系管理员执行配置初始化 SQL，或点击下方按钮重新加载。',
+  // 【消息】检测到未配置项警告（count）
+  missingItemsWarning: '检测到 {count} 个未配置项，请联系管理员初始化配置',
 
   // ==================== 系统配置 ====================
   system: {

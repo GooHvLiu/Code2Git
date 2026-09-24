@@ -46,7 +46,7 @@ export function requestGetDictItemsByCodeApi(code: string) {
 }
 
 /** 批量获取多个字典类型的字典项 */
-export function requestGetDictItemsBatchApi(codes: (string|number)[]) {
+export function requestGetDictItemsBatchApi(codes: (string | number)[]) {
   return request({ url: '/dict/items/batch', method: 'post', data: { codes } })
 }
 

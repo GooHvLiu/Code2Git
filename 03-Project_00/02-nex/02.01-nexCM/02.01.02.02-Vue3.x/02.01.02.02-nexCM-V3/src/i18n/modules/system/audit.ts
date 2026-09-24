@@ -46,198 +46,218 @@ export default {
   action: {
     audit: {
       export: {
-        title: '审计日志导出',
+        title: '审计日志导出'
       },
       verify: {
-        title: '审计哈希链校验',
+        title: '审计哈希链校验'
       },
       view: {
-        title: '审计日志查看',
-      },
+        title: '审计日志查看'
+      }
     },
     config: {
       connection: {
         change: {
-          title: '连接配置修改',
-        },
+          title: '连接配置修改'
+        }
       },
       device: {
         change: {
-          title: '设备配置修改',
-        },
+          title: '设备配置修改'
+        }
       },
       export: {
         change: {
-          title: '导出配置修改',
-        },
+          title: '导出配置修改'
+        }
       },
       order: {
         change: {
-          title: '订单配置修改',
-        },
+          title: '订单配置修改'
+        }
       },
       plc: {
         change: {
-          title: 'PLC连接配置修改',
-        },
+          title: 'PLC连接配置修改'
+        }
       },
       security: {
         change: {
-          title: '安全配置修改',
-        },
+          title: '安全配置修改'
+        }
       },
       system: {
         change: {
-          title: '系统参数修改',
-        },
-      },
+          title: '系统参数修改'
+        }
+      }
     },
     data: {
       export: {
-        title: '数据导出',
+        title: '数据导出'
       },
       viewDetail: {
-        title: '数据查看详情',
-      },
+        title: '数据查看详情'
+      }
     },
     device: {
       alarm: {
         handle: {
-          title: '报警处理',
-        },
+          title: '报警处理'
+        }
       },
       paramChange: {
-        title: '设备参数修改',
+        title: '设备参数修改'
       },
       part: {
         create: {
-          title: '新增部件',
+          title: '新增部件'
         },
         delete: {
-          title: '删除部件',
+          title: '删除部件'
         },
         replace: {
-          title: '更换部件',
+          title: '更换部件'
         },
         update: {
-          title: '编辑部件',
-        },
+          title: '编辑部件'
+        }
       },
       statusChange: {
-        title: '设备状态变更',
-      },
+        title: '设备状态变更'
+      }
     },
     email: {
       configChange: {
-        title: '邮箱配置修改',
+        title: '邮箱配置修改'
       },
       logDelete: {
-        title: '邮箱日志删除',
-      },
+        title: '邮箱日志删除'
+      }
     },
     license: {
       expire: {
-        title: '授权到期',
+        title: '授权到期'
       },
       import: {
-        title: '授权导入',
-      },
+        title: '授权导入'
+      }
     },
     permission: {
       cacheClear: {
-        title: '权限缓存清除',
+        title: '权限缓存清除'
       },
       change: {
-        title: '权限配置变更',
-      },
+        title: '权限配置变更'
+      }
     },
     plc: {
       connect: {
-        title: 'PLC连接',
+        title: 'PLC连接'
       },
       disconnect: {
-        title: 'PLC断开',
+        title: 'PLC断开'
       },
       read: {
-        title: 'PLC参数读取',
+        title: 'PLC参数读取'
       },
       reconnect: {
-        title: 'PLC重连',
+        title: 'PLC重连'
       },
       write: {
-        title: 'PLC参数写入',
-      },
+        title: 'PLC参数写入'
+      }
     },
     production: {
       order: {
         create: {
-          title: '新增生产订单',
+          title: '新增生产订单'
         },
         delete: {
-          title: '删除生产订单',
+          title: '删除生产订单'
         },
         download: {
-          title: '下载生产订单',
+          title: '下载生产订单'
         },
         update: {
-          title: '编辑生产订单',
-        },
+          title: '编辑生产订单'
+        }
       },
       recipe: {
         download: {
-          title: '配方下载',
-        },
-      },
+          title: '配方下载'
+        }
+      }
     },
     role: {
       create: {
-        title: '创建角色',
+        title: '创建角色'
       },
       delete: {
-        title: '删除角色',
+        title: '删除角色'
       },
       update: {
-        title: '修改角色',
-      },
+        title: '修改角色'
+      }
     },
     user: {
       batchDelete: {
-        title: '批量删除用户',
+        title: '批量删除用户'
       },
       changePassword: {
-        title: '修改密码',
+        title: '修改密码'
       },
       create: {
-        title: '创建用户',
+        title: '创建用户'
       },
       delete: {
-        title: '删除用户',
+        title: '删除用户'
       },
       login: {
-        title: '用户登录',
+        title: '用户登录'
       },
       loginFailed: {
-        title: '用户登录失败',
+        title: '用户登录失败'
       },
       logout: {
-        title: '用户登出',
+        title: '用户登出'
       },
       register: {
-        title: '用户注册',
+        title: '用户注册'
       },
       resetPassword: {
-        title: '重置密码',
+        title: '重置密码'
       },
       roleChange: {
-        title: '用户角色变更',
+        title: '用户角色变更'
       },
       statusChange: {
-        title: '修改用户状态',
+        title: '修改用户状态'
       },
       update: {
-        title: '修改用户',
-      },
-    },
+        title: '修改用户'
+      }
+    }
+  },
+  target: {
+    '系统登录': '系统登录',
+    '账户锁定': '账户锁定',
+    '账户解锁': '账户解锁',
+    '密码修改': '密码修改',
+    '密码重置': '密码重置',
+    '用户创建': '用户创建',
+    '用户删除': '用户删除',
+    '角色变更': '角色变更',
+    '权限变更': '权限变更',
+    '菜单修改': '菜单修改',
+    '配置修改': '配置修改',
+    '设备操作': '设备操作',
+    'PLC写入': 'PLC写入',
+    '数据导出': '数据导出',
+    '文件上传': '文件上传',
+    '授权导入': '授权导入',
+    '登录失败': '登录失败',
+    '用户登出': '用户登出'
   },
   module: {
     audit: '审计自身',
@@ -249,6 +269,6 @@ export default {
     permission: '权限管理',
     plc: 'PLC操作',
     production: '生产管理',
-    user: '用户管理',
-  },
+    user: '用户管理'
+  }
 }

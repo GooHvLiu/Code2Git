@@ -21,7 +21,8 @@ export default {
     // [Status] Loading
     statusLoading: 'Loading configuration, please wait...',
     // [Status] Incomplete
-    statusIncomplete: 'Configuration is incomplete with uninitialized items and cannot be saved, please contact administrator',
+    statusIncomplete:
+      'Configuration is incomplete with uninitialized items and cannot be saved, please contact administrator',
     // [Status] Load error, cannot save
     statusLoadError: 'Failed to load configuration, cannot save, please refresh and retry',
     // [Status] Abnormal status
@@ -45,10 +46,13 @@ export default {
     loadFailedDesc: 'Please check the network connection or contact the administrator',
     reload: 'Reload',
     incompleteTitle: 'Incomplete configuration',
-    incompleteDesc: 'Detected {count} uninitialized configuration item(s). Editing and saving are disabled on this page.',
+    incompleteDesc:
+      'Detected {count} uninitialized configuration item(s). Editing and saving are disabled on this page.',
     missingKeysTitle: 'Missing configuration items:',
-    incompleteTip: 'Please ask the administrator to run the configuration initialization SQL, or click the button below to reload.',
-    incompleteWarning: 'Detected {count} unconfigured item(s), please ask the administrator to initialize the configuration'
+    incompleteTip:
+      'Please ask the administrator to run the configuration initialization SQL, or click the button below to reload.',
+    incompleteWarning:
+      'Detected {count} unconfigured item(s), please ask the administrator to initialize the configuration'
   },
 
   // ==================== Audit Configuration ====================
@@ -332,7 +336,8 @@ export default {
     // [Label] Language display field
     languageDisplayField: 'Display Field',
     // [Tip] Language display field tip
-    languageDisplayFieldTip: 'Controls how language names appear in the create language dialog. autonym=native name, name=Chinese name',
+    languageDisplayFieldTip:
+      'Controls how language names appear in the create language dialog. autonym=native name, name=Chinese name',
     // [Option] Display autonym
     displayAutonym: 'Native Name (autonym)',
     // [Option] Display name

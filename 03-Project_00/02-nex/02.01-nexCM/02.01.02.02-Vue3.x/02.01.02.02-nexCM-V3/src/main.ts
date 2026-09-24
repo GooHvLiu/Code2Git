@@ -26,6 +26,7 @@ import './assets/styles/index.less'
 import componentsPlugin from './plugins/components'
 import permissionDirective from '@/directives/permission'
 import { watermark } from '@/directives/index'
+import safeHtmlDirective from '@/directives/safeHtml'
 import { initTheme } from '@/utils/ui/theme'
 
 const app = createApp(App)
@@ -40,6 +41,7 @@ app.use(componentsPlugin)
 // 全局指令
 app.directive('permission', permissionDirective)
 app.directive('watermark', watermark)
+app.directive('safe-html', safeHtmlDirective)
 
 // 全局错误处理（占位：接入 errorLog Pinia store）
 app.config.errorHandler = (err, _vm, info) => {

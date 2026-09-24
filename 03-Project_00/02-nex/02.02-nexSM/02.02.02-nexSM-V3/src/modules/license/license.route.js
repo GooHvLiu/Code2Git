@@ -1,6 +1,7 @@
 /**
  * 授权模块 - 路由层
  * 自动注册到 /prod-api/v2/license 前缀下
+ * 作者: GooHv
  */
 const express = require('express');
 const router = express.Router();
@@ -29,14 +30,56 @@ const upload = multer({
 // ==================== 公开接口（无需登录） ====================
 
 /**
- * 导入授权文件（公开接口，无需登录）
- * POST /prod-api/v2/license/import
+ * @openapi
+ * /license/import:
+ *   post:
+ *     tags: [授权管理]
+ *     summary: 导入授权文件（公开）
+ *     description: 上传 .license 授权文件完成授权激活。
+ *     security: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               file:
+ *                 type: string
+ *                 format: binary
+ *                 description: 授权文件
+ *     responses:
+ *       200:
+ *         description: 导入成功
+ *         content: { application/json: { schema: { $ref: '#/components/schemas/ApiResponse' } } }
+ *       400: { description: 文件格式错误, content: { application/json: { schema: { $ref: '#/components/schemas/BadRequest' } } } }
  */
 router.post('/import', upload.single(licenseConfig.upload.fieldName), licenseController.importLicense);
 
 /**
- * 查询当前授权状态（公开接口，无需登录）
- * GET /prod-api/v2/license/status
+ * @openapi
+ * /license/status:
+ *   get:
+ *     tags: [授权管理]
+ *     summary: 查询当前授权状态（公开）
+ *     security: []
+ *     responses:
+ *       200:
+ *         description: 授权状态
+ *         content:
+ *           application/json:
+ *             schema:
+ *               allOf:
+ *                 - $ref: '#/components/schemas/ApiResponse'
+ *                 - type: object
+ *                   properties:
+ *                     data:
+ *                       type: object
+ *                       properties:
+ *                         valid: { type: boolean, example: true }
+ *                         customer: { type: string, example: 'nexCM' }
+ *                         expireTime: { type: string, format: 'date-time' }
+ *                         licenseType: { type: string, example: 'standard' }
  */
 router.get('/status', licenseController.getLicenseStatus);
 
@@ -45,14 +88,39 @@ router.get('/status', licenseController.getLicenseStatus);
 router.use(requireAuth);
 
 /**
- * 获取当前服务器机器ID（需登录）
- * GET /prod-api/v2/license/machine-id
+ * @openapi
+ * /license/machine-id:
+ *   get:
+ *     tags: [授权管理]
+ *     summary: 获取当前服务器机器ID（需登录）
+ *     description: 用于向厂商申请授权文件时提供机器指纹。
+ *     responses:
+ *       200:
+ *         description: 机器ID
+ *         content:
+ *           application/json:
+ *             schema:
+ *               allOf:
+ *                 - $ref: '#/components/schemas/ApiResponse'
+ *                 - type: object
+ *                   properties:
+ *                     data:
+ *                       type: object
+ *                       properties:
+ *                         machineId: { type: string, example: 'ABC-1234-DEF' }
  */
 router.get('/machine-id', licenseController.getMachineId);
 
 /**
- * 手动触发联网时间校准（需登录）
- * POST /prod-api/v2/license/sync-time
+ * @openapi
+ * /license/sync-time:
+ *   post:
+ *     tags: [授权管理]
+ *     summary: 手动触发联网时间校准（需登录）
+ *     responses:
+ *       200:
+ *         description: 校准完成
+ *         content: { application/json: { schema: { $ref: '#/components/schemas/ApiResponse' } } }
  */
 router.post('/sync-time', licenseController.syncTime);
 
@@ -61,8 +129,18 @@ router.post('/sync-time', licenseController.syncTime);
 router.use(requireRole(USER_ROLE.ADMINISTRATOR));
 
 /**
- * 下载当前授权文件（仅管理员）
- * GET /prod-api/v2/license/download
+ * @openapi
+ * /license/download:
+ *   get:
+ *     tags: [授权管理]
+ *     summary: 下载当前授权文件（仅管理员）
+ *     responses:
+ *       200:
+ *         description: 授权文件流
+ *         content:
+ *           application/octet-stream:
+ *             schema: { type: string, format: binary }
+ *       403: { description: 非管理员, content: { application/json: { schema: { $ref: '#/components/schemas/Forbidden' } } } }
  */
 router.get('/download', licenseController.downloadLicense);
 

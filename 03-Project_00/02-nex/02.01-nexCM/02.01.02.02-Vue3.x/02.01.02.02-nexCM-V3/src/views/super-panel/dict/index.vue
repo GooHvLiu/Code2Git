@@ -36,11 +36,24 @@
             <el-table-column :label="t('superPanel.dict.page.typeName')" min-width="120" align="center">
               <template #default="{ row }">{{ getDictTypeLabel(row.dict_code, row.dict_name) }}</template>
             </el-table-column>
-            <el-table-column prop="dict_code" :label="t('superPanel.dict.page.typeCode')" min-width="120" align="center" />
+            <el-table-column
+              prop="dict_code"
+              :label="t('superPanel.dict.page.typeCode')"
+              min-width="120"
+              align="center"
+            />
             <el-table-column :label="t('common.operation')" width="100" align="center">
               <template #default="{ row }">
-                <el-button type="text" size="small" @click.stop="handleEditType(row as DictTypeItem)">{{ t('common.edit') }}</el-button>
-                <el-button type="text" size="small" style="color: var(--el-color-danger)" @click.stop="handleDeleteType(row as DictTypeItem)">{{ t('common.delete') }}</el-button>
+                <el-button type="text" size="small" @click.stop="handleEditType(row as DictTypeItem)">{{
+                  t('common.edit')
+                }}</el-button>
+                <el-button
+                  type="text"
+                  size="small"
+                  style="color: var(--el-color-danger)"
+                  @click.stop="handleDeleteType(row as DictTypeItem)"
+                  >{{ t('common.delete') }}</el-button
+                >
               </template>
             </el-table-column>
           </el-table>
@@ -54,7 +67,9 @@
             <span class="panel-title">
               {{
                 currentType
-                  ? getDictTypeLabel(currentType.dict_code, currentType.dict_name) + ' - ' + t('superPanel.dict.page.itemList')
+                  ? getDictTypeLabel(currentType.dict_code, currentType.dict_name) +
+                    ' - ' +
+                    t('superPanel.dict.page.itemList')
                   : t('superPanel.dict.page.itemList')
               }}
             </span>
@@ -86,8 +101,16 @@
             <el-table-column :label="t('common.remark')" prop="remark" min-width="120" show-overflow-tooltip />
             <el-table-column :label="t('common.operation')" width="100" align="center">
               <template #default="{ row }">
-                <el-button type="text" size="small" @click="handleEditItem(row as DictItemRow)">{{ t('common.edit') }}</el-button>
-                <el-button type="text" size="small" style="color: var(--el-color-danger)" @click="handleDeleteItem(row as DictItemRow)">{{ t('common.delete') }}</el-button>
+                <el-button type="text" size="small" @click="handleEditItem(row as DictItemRow)">{{
+                  t('common.edit')
+                }}</el-button>
+                <el-button
+                  type="text"
+                  size="small"
+                  style="color: var(--el-color-danger)"
+                  @click="handleDeleteItem(row as DictItemRow)"
+                  >{{ t('common.delete') }}</el-button
+                >
               </template>
             </el-table-column>
           </el-table>
@@ -101,28 +124,44 @@
         <el-form-item prop="dict_name">
           <template #label>
             {{ t('superPanel.dict.page.typeName') }}
-            <el-tooltip :content="t('superPanel.dict.page.tips.typeName')" placement="top"><el-icon><QuestionFilled /></el-icon></el-tooltip>
+            <el-tooltip :content="t('superPanel.dict.page.tips.typeName')" placement="top"
+              ><el-icon><QuestionFilled /></el-icon
+            ></el-tooltip>
           </template>
-          <el-input v-model="typeForm.dict_name" :placeholder="t('superPanel.dict.page.typeNamePlaceholder')" :maxlength="50" />
+          <el-input
+            v-model="typeForm.dict_name"
+            :placeholder="t('superPanel.dict.page.typeNamePlaceholder')"
+            :maxlength="50"
+          />
         </el-form-item>
         <el-form-item prop="dict_code">
           <template #label>
             {{ t('superPanel.dict.page.typeCode') }}
-            <el-tooltip :content="t('superPanel.dict.page.tips.typeCode')" placement="top"><el-icon><QuestionFilled /></el-icon></el-tooltip>
+            <el-tooltip :content="t('superPanel.dict.page.tips.typeCode')" placement="top"
+              ><el-icon><QuestionFilled /></el-icon
+            ></el-tooltip>
           </template>
-          <el-input v-model="typeForm.dict_code" :placeholder="t('superPanel.dict.page.typeCodePlaceholder')" :disabled="typeDialog.isEdit" />
+          <el-input
+            v-model="typeForm.dict_code"
+            :placeholder="t('superPanel.dict.page.typeCodePlaceholder')"
+            :disabled="typeDialog.isEdit"
+          />
         </el-form-item>
         <el-form-item prop="description">
           <template #label>
             {{ t('common.description') }}
-            <el-tooltip :content="t('superPanel.dict.page.tips.description')" placement="top"><el-icon><QuestionFilled /></el-icon></el-tooltip>
+            <el-tooltip :content="t('superPanel.dict.page.tips.description')" placement="top"
+              ><el-icon><QuestionFilled /></el-icon
+            ></el-tooltip>
           </template>
           <el-input v-model="typeForm.description" type="textarea" :rows="2" :maxlength="200" />
         </el-form-item>
         <el-form-item prop="status">
           <template #label>
             {{ t('common.status') }}
-            <el-tooltip :content="t('superPanel.dict.page.tips.status')" placement="top"><el-icon><QuestionFilled /></el-icon></el-tooltip>
+            <el-tooltip :content="t('superPanel.dict.page.tips.status')" placement="top"
+              ><el-icon><QuestionFilled /></el-icon
+            ></el-tooltip>
           </template>
           <el-radio-group v-model="typeForm.status">
             <el-radio :value="1">{{ t('common.enable') }}</el-radio>
@@ -132,7 +171,9 @@
         <el-form-item prop="sort">
           <template #label>
             {{ t('common.sort') }}
-            <el-tooltip :content="t('superPanel.dict.page.tips.sort')" placement="top"><el-icon><QuestionFilled /></el-icon></el-tooltip>
+            <el-tooltip :content="t('superPanel.dict.page.tips.sort')" placement="top"
+              ><el-icon><QuestionFilled /></el-icon
+            ></el-tooltip>
           </template>
           <el-input-number v-model="typeForm.sort" :min="0" />
         </el-form-item>
@@ -149,21 +190,31 @@
         <el-form-item prop="label">
           <template #label>
             {{ t('superPanel.dict.page.itemLabel') }}
-            <el-tooltip :content="t('superPanel.dict.page.tips.itemLabel')" placement="top"><el-icon><QuestionFilled /></el-icon></el-tooltip>
+            <el-tooltip :content="t('superPanel.dict.page.tips.itemLabel')" placement="top"
+              ><el-icon><QuestionFilled /></el-icon
+            ></el-tooltip>
           </template>
-          <el-input v-model="itemForm.label" :placeholder="t('superPanel.dict.page.itemLabelPlaceholder')" :maxlength="100" />
+          <el-input
+            v-model="itemForm.label"
+            :placeholder="t('superPanel.dict.page.itemLabelPlaceholder')"
+            :maxlength="100"
+          />
         </el-form-item>
         <el-form-item prop="value">
           <template #label>
             {{ t('superPanel.dict.page.itemValue') }}
-            <el-tooltip :content="t('superPanel.dict.page.tips.itemValue')" placement="top"><el-icon><QuestionFilled /></el-icon></el-tooltip>
+            <el-tooltip :content="t('superPanel.dict.page.tips.itemValue')" placement="top"
+              ><el-icon><QuestionFilled /></el-icon
+            ></el-tooltip>
           </template>
           <el-input v-model="itemForm.value" :placeholder="t('superPanel.dict.page.itemValuePlaceholder')" />
         </el-form-item>
         <el-form-item prop="status">
           <template #label>
             {{ t('common.status') }}
-            <el-tooltip :content="t('superPanel.dict.page.tips.itemStatus')" placement="top"><el-icon><QuestionFilled /></el-icon></el-tooltip>
+            <el-tooltip :content="t('superPanel.dict.page.tips.itemStatus')" placement="top"
+              ><el-icon><QuestionFilled /></el-icon
+            ></el-tooltip>
           </template>
           <el-radio-group v-model="itemForm.status">
             <el-radio :value="1">{{ t('common.enable') }}</el-radio>
@@ -173,14 +224,18 @@
         <el-form-item prop="sort">
           <template #label>
             {{ t('common.sort') }}
-            <el-tooltip :content="t('superPanel.dict.page.tips.itemSort')" placement="top"><el-icon><QuestionFilled /></el-icon></el-tooltip>
+            <el-tooltip :content="t('superPanel.dict.page.tips.itemSort')" placement="top"
+              ><el-icon><QuestionFilled /></el-icon
+            ></el-tooltip>
           </template>
           <el-input-number v-model="itemForm.sort" :min="0" />
         </el-form-item>
         <el-form-item prop="remark">
           <template #label>
             {{ t('common.remark') }}
-            <el-tooltip :content="t('superPanel.dict.page.tips.itemRemark')" placement="top"><el-icon><QuestionFilled /></el-icon></el-tooltip>
+            <el-tooltip :content="t('superPanel.dict.page.tips.itemRemark')" placement="top"
+              ><el-icon><QuestionFilled /></el-icon
+            ></el-tooltip>
           </template>
           <el-input v-model="itemForm.remark" type="textarea" :rows="2" />
         </el-form-item>
@@ -238,8 +293,22 @@ const itemFormRef = ref()
 const typeDialog = reactive({ visible: false, title: '', isEdit: false })
 const itemDialog = reactive({ visible: false, title: '', isEdit: false })
 
-const typeForm = reactive({ id: null as number | string | null, dict_name: '', dict_code: '', description: '', status: 1 as 0 | 1, sort: 0 })
-const itemForm = reactive({ id: null as number | string | null, label: '', value: '', status: 1 as 0 | 1, sort: 0, remark: '' })
+const typeForm = reactive({
+  id: null as number | string | null,
+  dict_name: '',
+  dict_code: '',
+  description: '',
+  status: 1 as 0 | 1,
+  sort: 0
+})
+const itemForm = reactive({
+  id: null as number | string | null,
+  label: '',
+  value: '',
+  status: 1 as 0 | 1,
+  sort: 0,
+  remark: ''
+})
 
 const typeRules = {
   dict_name: [{ required: true, message: t('superPanel.dict.page.typeNameRequired'), trigger: 'blur' }],
@@ -253,7 +322,12 @@ const itemRules = {
 const exportColumns = computed((): ExportColumn[] => [
   { label: t('superPanel.dict.page.itemLabel'), prop: 'label', width: 150 },
   { label: t('superPanel.dict.page.itemValue'), prop: 'value', width: 150 },
-  { label: t('superPanel.dict.page.itemStatus'), prop: 'status', width: 80, formatter: (row) => ((row as DictItemRow).status === 1 ? t('common.enable') : t('common.disable')) },
+  {
+    label: t('superPanel.dict.page.itemStatus'),
+    prop: 'status',
+    width: 80,
+    formatter: row => ((row as DictItemRow).status === 1 ? t('common.enable') : t('common.disable'))
+  },
   { label: t('common.sort'), prop: 'sort', width: 80 },
   { label: t('common.remark'), prop: 'remark', width: 200 }
 ])
@@ -273,7 +347,7 @@ async function loadTypeList(): Promise<void> {
   typeLoading.value = true
   try {
     const res = await requestGetDictTypeListApi({ page: 1, pageSize: 100 })
-    typeList.value = ((res.data as PageData<DictTypeItem>)?.list) || []
+    typeList.value = (res.data as PageData<DictTypeItem>)?.list || []
     if (typeList.value.length > 0 && !currentType.value) {
       currentType.value = typeList.value[0]
       loadItemList()
@@ -288,7 +362,7 @@ async function loadItemList(): Promise<void> {
   itemLoading.value = true
   try {
     const res = await requestGetDictItemListApi({ type_id: currentType.value.id, page: 1, pageSize: 100 })
-    itemList.value = ((res.data as PageData<DictItemRow>)?.list) || []
+    itemList.value = (res.data as PageData<DictItemRow>)?.list || []
   } finally {
     itemLoading.value = false
   }

@@ -2,6 +2,8 @@
  * ==========================================
  * 系统配置管理工具（加载 / 缓存 / 应用）
  * ==========================================
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { requestGetAllConfigsApi } from '@/api'
 import { useDeviceStore } from '@/store/modules/device'
@@ -114,7 +116,11 @@ export function applyConfig(configs: Partial<SystemConfig>): void {
     }
   }
   if (configs.defaultLanguage !== undefined) {
-    try { setLanguage(configs.defaultLanguage) } catch (e) { console.error('[配置管理] 切换语言失败:', e) }
+    try {
+      setLanguage(configs.defaultLanguage)
+    } catch (e) {
+      console.error('[配置管理] 切换语言失败:', e)
+    }
   }
   if (configs.sessionTimeout !== undefined) {
     window.dispatchEvent(new CustomEvent('sessionTimeoutChanged', { detail: { timeout: configs.sessionTimeout } }))

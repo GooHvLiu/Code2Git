@@ -11,7 +11,14 @@
         </el-radio-group>
       </div>
       <div class="toolbar-right">
-        <el-input v-model="keyword" :placeholder="t('notification.page.searchPlaceholder')" clearable size="small" style="width: 200px" @keyup.enter="handleFilterChange" />
+        <el-input
+          v-model="keyword"
+          :placeholder="t('notification.page.searchPlaceholder')"
+          clearable
+          size="small"
+          style="width: 200px"
+          @keyup.enter="handleFilterChange"
+        />
         <el-button size="small" @click="handleMarkAll">{{ t('notification.action.markAllRead') }}</el-button>
         <el-button size="small" @click="openSettings">{{ t('notification.settings.title') }}</el-button>
       </div>
@@ -20,7 +27,13 @@
     <!-- 通知列表 -->
     <el-card v-loading="loading" shadow="never" class="list-card">
       <el-empty v-if="items.length === 0" :description="t('notification.page.empty')" />
-      <div v-for="item in items" :key="item.id" class="notify-item" :class="{ unread: !item.read }" @click="handleMarkRead(item.raw)">
+      <div
+        v-for="item in items"
+        :key="item.id"
+        class="notify-item"
+        :class="{ unread: !item.read }"
+        @click="handleMarkRead(item.raw)"
+      >
         <div class="notify-icon">
           <el-icon :size="18" :color="typeColor(item.type)"><component :is="typeIcon(item.type)" /></el-icon>
         </div>
@@ -33,14 +46,23 @@
           <div class="notify-time">{{ item.time }}</div>
         </div>
         <div class="notify-actions">
-          <el-button type="danger" link size="small" @click.stop="handleDelete(item.raw)">{{ t('notification.action.delete') }}</el-button>
+          <el-button type="danger" link size="small" @click.stop="handleDelete(item.raw)">{{
+            t('notification.action.delete')
+          }}</el-button>
         </div>
       </div>
     </el-card>
 
     <!-- 分页 -->
     <div class="pager">
-      <el-pagination background layout="prev, pager, next" :total="total" :page-size="pageSize" :current-page="pageNum" @current-change="onPageChange" />
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="total"
+        :page-size="pageSize"
+        :current-page="pageNum"
+        @current-change="onPageChange"
+      />
     </div>
 
     <!-- 设置弹窗 -->
@@ -83,24 +105,36 @@ import { ref, computed, onMounted } from 'vue'
 import { Bell, Warning, Tools, InfoFilled } from '@element-plus/icons-vue'
 import { useI18n } from '@/composables/useI18n'
 import { useNotification } from '@/composables/useNotification'
-import {
-  toNotificationVMList,
-  type NotificationDTO,
-  type NotificationVM
-} from '@/utils/business/notificationPresenter'
+import { toNotificationVMList, type NotificationDTO, type NotificationVM } from '@/utils/business/notificationPresenter'
 
 const { t } = useI18n()
 const {
-  list, loading, total, pageNum, pageSize, filterType, keyword,
-  getList, handleFilterChange, handleMarkRead, handleMarkAll, handleDelete,
-  settings, settingsSaving, loadSettings, saveSettings
+  list,
+  loading,
+  total,
+  pageNum,
+  pageSize,
+  filterType,
+  keyword,
+  getList,
+  handleFilterChange,
+  handleMarkRead,
+  handleMarkAll,
+  handleDelete,
+  settings,
+  settingsSaving,
+  loadSettings,
+  saveSettings
 } = useNotification()
 
 const settingsVisible = ref(false)
 
 /** 后端 DTO 列表统一经展示适配层映射为视图模型（标题/内容翻译、相对时间、已读布尔） */
 const items = computed<NotificationVM[]>(() =>
-  toNotificationVMList(t as unknown as (key: string, named?: Record<string, unknown>) => string, list.value as unknown as NotificationDTO[])
+  toNotificationVMList(
+    t as unknown as (key: string, named?: Record<string, unknown>) => string,
+    list.value as unknown as NotificationDTO[]
+  )
 )
 
 function typeIcon(type: string) {
@@ -131,18 +165,64 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.notification-center-page { padding: 16px; }
-.center-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-.toolbar-right { display: flex; gap: 8px; align-items: center; }
-.list-card :deep(.el-card__body) { padding: 0; }
-.notify-item { display: flex; align-items: center; padding: 12px 16px; border-bottom: 1px solid #f0f2f5; cursor: pointer; }
-.notify-item.unread { background: #f5f9ff; }
-.notify-item:hover { background: #f8f9fb; }
-.notify-icon { margin-right: 12px; }
-.notify-body { flex: 1; }
-.notify-title-row { display: flex; align-items: center; gap: 8px; }
-.notify-title { font-size: 14px; font-weight: 600; color: #303133; }
-.notify-content { font-size: 12px; color: #606266; margin: 4px 0; }
-.notify-time { font-size: 11px; color: #909399; }
-.pager { display: flex; justify-content: flex-end; margin-top: 12px; }
+.notification-center-page {
+  padding: 16px;
+}
+.center-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.toolbar-right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.list-card :deep(.el-card__body) {
+  padding: 0;
+}
+.notify-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f2f5;
+  cursor: pointer;
+}
+.notify-item.unread {
+  background: #f5f9ff;
+}
+.notify-item:hover {
+  background: #f8f9fb;
+}
+.notify-icon {
+  margin-right: 12px;
+}
+.notify-body {
+  flex: 1;
+}
+.notify-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.notify-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #303133;
+}
+.notify-content {
+  font-size: 12px;
+  color: #606266;
+  margin: 4px 0;
+}
+.notify-time {
+  font-size: 11px;
+  color: #909399;
+}
+.pager {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
 </style>

@@ -70,6 +70,16 @@ export default {
     unlimited: 'Unlimited'
   },
 
+  // ==================== License Type Values ====================
+  type: {
+    // [Type] Trial license
+    trial: 'Trial License',
+    // [Type] Formal license
+    formal: 'Formal License',
+    // [Type] Permanent license
+    permanent: 'Permanent License'
+  },
+
   // ==================== Status Values ====================
   status: {
     // [Status] Enabled

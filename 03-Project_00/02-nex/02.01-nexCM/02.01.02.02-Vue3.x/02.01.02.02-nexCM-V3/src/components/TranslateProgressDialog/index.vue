@@ -73,7 +73,11 @@
           <div class="current-key" :title="translateManager.state.currentKey">
             {{ translateManager.state.currentKey }}
           </div>
-          <div v-if="translateManager.state.currentValue" class="current-value" :title="translateManager.state.currentValue">
+          <div
+            v-if="translateManager.state.currentValue"
+            class="current-value"
+            :title="translateManager.state.currentValue"
+          >
             "{{ translateManager.state.currentValue }}"
           </div>
         </div>
@@ -128,6 +132,8 @@
 /**
  * 翻译进度弹窗（可拖拽 / 可最小化）
  * 数据源为 @/utils/business/translateManager 单例（super-panel i18n 迁移 shard 提供）。
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -202,11 +208,11 @@ function handleRestore(): void {
 async function handleCancel(): Promise<void> {
   if (!translateManager.state.isTranslating) return
   try {
-    await confirmAction(
-      t('superPanel.i18n.translate.cancelConfirm'),
-      t('superPanel.i18n.translate.cancel'),
-      { type: 'warning', confirmButtonText: t('common.confirm'), cancelButtonText: t('common.cancel') }
-    )
+    await confirmAction(t('superPanel.i18n.translate.cancelConfirm'), t('superPanel.i18n.translate.cancel'), {
+      type: 'warning',
+      confirmButtonText: t('common.confirm'),
+      cancelButtonText: t('common.cancel')
+    })
     translateManager.cancelTranslate()
   } catch {
     // 用户取消
@@ -283,7 +289,10 @@ onBeforeUnmount(() => {
   vertical-align: middle;
 }
 
-.header-actions { display: flex; gap: 4px; }
+.header-actions {
+  display: flex;
+  gap: 4px;
+}
 
 .action-btn {
   width: 24px;
@@ -299,14 +308,28 @@ onBeforeUnmount(() => {
   transition: background 0.2s;
 }
 
-.action-btn:hover { background: rgba(255, 255, 255, 0.2); }
-.action-btn.disabled { opacity: 0.5; cursor: not-allowed; }
-.action-btn.cancel-btn:hover { background: #e6a23c; }
-.action-btn.close-btn:hover { background: #f56c6c; }
+.action-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.action-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.action-btn.cancel-btn:hover {
+  background: #e6a23c;
+}
+.action-btn.close-btn:hover {
+  background: #f56c6c;
+}
 
-.dialog-body { padding: 16px; cursor: default; }
+.dialog-body {
+  padding: 16px;
+  cursor: default;
+}
 
-.progress-section { margin-bottom: 16px; }
+.progress-section {
+  margin-bottom: 16px;
+}
 
 .progress-header {
   display: flex;
@@ -315,8 +338,16 @@ onBeforeUnmount(() => {
   margin-bottom: 8px;
 }
 
-.progress-label { font-size: 13px; color: #606266; font-weight: 500; }
-.progress-percent { font-size: 16px; font-weight: 600; color: #409eff; }
+.progress-label {
+  font-size: 13px;
+  color: #606266;
+  font-weight: 500;
+}
+.progress-percent {
+  font-size: 16px;
+  font-weight: 600;
+  color: #409eff;
+}
 
 .stats-section {
   display: grid;
@@ -332,10 +363,24 @@ onBeforeUnmount(() => {
   border-radius: 4px;
 }
 
-.stat-label { display: block; font-size: 11px; color: #909399; margin-bottom: 4px; }
-.stat-value { display: block; font-size: 18px; font-weight: 600; color: #303133; }
-.stat-item.success .stat-value { color: #67c23a; }
-.stat-item.fail .stat-value { color: #f56c6c; }
+.stat-label {
+  display: block;
+  font-size: 11px;
+  color: #909399;
+  margin-bottom: 4px;
+}
+.stat-value {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  color: #303133;
+}
+.stat-item.success .stat-value {
+  color: #67c23a;
+}
+.stat-item.fail .stat-value {
+  color: #f56c6c;
+}
 
 .current-item {
   margin-bottom: 16px;
@@ -345,7 +390,11 @@ onBeforeUnmount(() => {
   border-left: 3px solid #409eff;
 }
 
-.current-label { font-size: 11px; color: #909399; margin-bottom: 4px; }
+.current-label {
+  font-size: 11px;
+  color: #909399;
+  margin-bottom: 4px;
+}
 
 .current-key {
   font-size: 12px;
@@ -365,8 +414,13 @@ onBeforeUnmount(() => {
   text-overflow: ellipsis;
 }
 
-.result-section { margin-bottom: 16px; }
-.result-actions { margin-top: 12px; text-align: center; }
+.result-section {
+  margin-bottom: 16px;
+}
+.result-actions {
+  margin-top: 12px;
+  text-align: center;
+}
 
 .tip-section {
   display: flex;
@@ -390,7 +444,9 @@ onBeforeUnmount(() => {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   padding: 12px;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .translate-progress-mini:hover {
@@ -398,10 +454,26 @@ onBeforeUnmount(() => {
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
 }
 
-.mini-header { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
-.mini-header .el-icon.is-loading { animation: rotating 2s linear infinite; color: #409eff; }
-.mini-title { font-size: 12px; color: #606266; flex: 1; }
-.mini-percent { font-size: 14px; font-weight: 600; color: #409eff; }
+.mini-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.mini-header .el-icon.is-loading {
+  animation: rotating 2s linear infinite;
+  color: #409eff;
+}
+.mini-title {
+  font-size: 12px;
+  color: #606266;
+  flex: 1;
+}
+.mini-percent {
+  font-size: 14px;
+  font-weight: 600;
+  color: #409eff;
+}
 
 .mini-progress {
   height: 6px;
@@ -425,11 +497,19 @@ onBeforeUnmount(() => {
   color: #909399;
 }
 
-.mini-success { color: #67c23a; }
-.mini-fail { color: #f56c6c; }
+.mini-success {
+  color: #67c23a;
+}
+.mini-fail {
+  color: #f56c6c;
+}
 
 @keyframes rotating {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>

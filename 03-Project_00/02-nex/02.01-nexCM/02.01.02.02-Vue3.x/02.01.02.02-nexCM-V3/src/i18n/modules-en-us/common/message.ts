@@ -30,14 +30,44 @@ export default {
   deleteConfirm: 'Delete Confirmation',
   // [Message] Delete confirmation message (with name param)
   deleteConfirmMessage: 'Are you sure you want to delete "{name}"?',
+  // [Message] Default delete confirmation message (no name)
+  deleteConfirmDefault: 'Are you sure you want to delete? This action cannot be undone.',
   // [Message] Batch operation confirmation
   batchConfirm: 'Batch Operation Confirmation',
+  // [Message] Batch confirmation message (count/action params)
+  batchConfirmMessage: '{count} item(s) selected. Execute {action}?',
+  // [Message] Generic action
+  action: 'Action',
+  // [Message] Logout confirmation message
+  logoutConfirmMessage: 'Are you sure you want to log out?',
+  // [Message] Duplicate request cancellation reason
+  requestCancelDuplicate: 'Duplicate request; previous request cancelled automatically',
+  // [Message] Route change cancellation reason
+  requestCancelRouteChange: 'Route changed; pending request cancelled',
   // [Message] Dangerous operation
   dangerOperation: 'Dangerous Operation',
   // [Message] Logout confirmation
   logoutConfirm: 'Logout Confirmation',
   // [Message] No data to export
   noDataToExport: 'No data to export',
+  // [Message] No columns to export
+  noColumnsToExport: 'No columns to export',
+  // [Message] Export succeeded (count param)
+  exportSuccess: 'Successfully exported {count} records',
+  // [Message] Export data (PDF title)
+  exportData: 'Exported Data',
+  // [Message] Exporter
+  exporter: 'Exported by',
+  // [Message] Export time
+  exportTime: 'Exported at',
+  // [Message] Record count prefix
+  recordCountPrefix: 'Total',
+  // [Message] Record count suffix
+  recordCountSuffix: 'records',
+  // [Message] PDF export failed
+  pdfExportFailed: 'PDF export failed, please try again',
+  // [Message] Unsupported export format
+  unsupportedExportFormat: 'Unsupported export format',
   // [Message] Download succeeded
   downloadSuccess: 'Download succeeded',
   // [Message] Download failed

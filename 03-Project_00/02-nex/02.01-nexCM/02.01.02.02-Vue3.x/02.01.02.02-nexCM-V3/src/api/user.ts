@@ -51,7 +51,7 @@ export function requestDeleteUserApi(id: string) {
  * 批量删除用户
  * @param {Array} ids - 用户ID数组
  */
-export function requestBatchDeleteUserApi(ids: (string|number)[]) {
+export function requestBatchDeleteUserApi(ids: (string | number)[]) {
   return request({ url: '/user/batch', method: 'delete', data: { ids } })
 }
 

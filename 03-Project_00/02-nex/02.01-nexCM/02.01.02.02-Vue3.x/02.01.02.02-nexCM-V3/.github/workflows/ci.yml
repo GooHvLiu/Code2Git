@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run type-check
+
+      - name: Unit tests
+        run: npm run test
+
+      - name: Build
+        run: npm run build
+
+      - name: i18n symmetry check
+        run: |
+          node scripts/i18n-symmetry.mjs
+          node -e "const zh=require('./scripts/.i18n-zh-flat.json');const en=require('./scripts/.i18n-en-flat.json');const zk=new Set(Object.keys(zh));const ek=new Set(Object.keys(en));const missEn=[...zk].filter(k=>!ek.has(k));const missZh=[...ek].filter(k=>!zk.has(k));const emptyZh=[...zk].filter(k=>zh[k]===''||zh[k]==null||typeof zh[k]==='string'&&zh[k].trim()==='');const emptyEn=[...ek].filter(k=>en[k]===''||en[k]==null||typeof en[k]==='string'&&en[k].trim()==='');const bad=[...missEn.map(k=>'missing-in-en: '+k),...missZh.map(k=>'missing-in-zh: '+k),...emptyZh.map(k=>'empty-zh: '+k),...emptyEn.map(k=>'empty-en: '+k)];if(bad.length){console.error('i18n symmetry issues:\n'+bad.join('\n'));process.exit(1)}console.log('i18n symmetry OK')"

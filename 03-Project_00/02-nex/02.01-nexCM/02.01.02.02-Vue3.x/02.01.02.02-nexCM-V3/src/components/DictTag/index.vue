@@ -1,10 +1,5 @@
 <template>
-  <el-tag
-    v-if="dictItem"
-    :type="tagType"
-    size="small"
-    effect="light"
-  >
+  <el-tag v-if="dictItem" :type="tagType" size="small" effect="light">
     {{ dictItem.label }}
   </el-tag>
   <span v-else-if="value !== undefined && value !== null && value !== ''">{{ value }}</span>
@@ -22,8 +17,11 @@
  * type 可选：success / warning / danger / info / primary
  *
  * 字典缓存与内置字典 i18n 由 @/utils/business/dict 统一管理。
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { ref, computed, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { getDict, clearDictCache, type DictItem } from '@/utils/business/dict'
 
 defineOptions({ name: 'DictTag' })
@@ -43,11 +41,10 @@ const props = withDefaults(defineProps<Props>(), {
   value: ''
 })
 
+const { locale } = useI18n()
 const loadedOptions = ref<DictItem[]>([])
 
-const finalOptions = computed<DictItem[]>(() =>
-  props.options.length > 0 ? props.options : loadedOptions.value
-)
+const finalOptions = computed<DictItem[]>(() => (props.options.length > 0 ? props.options : loadedOptions.value))
 
 const dictItem = computed<DictItem | undefined>(() =>
   finalOptions.value.find(item => String(item.value) === String(props.value))
@@ -82,4 +79,9 @@ watch(
   },
   { immediate: true }
 )
+
+/** 切换 locale 后重新加载字典，确保 label 跟随新语言（无 reload 场景） */
+watch(locale, () => {
+  if (props.dictCode) loadDictData(props.dictCode)
+})
 </script>

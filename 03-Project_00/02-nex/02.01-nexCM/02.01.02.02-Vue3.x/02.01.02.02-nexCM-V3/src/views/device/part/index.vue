@@ -5,15 +5,26 @@
       <el-tab-pane :label="t('device.part.tabLife')" name="life">
         <div class="page-toolbar">
           <div class="toolbar-left">
-            <el-input v-model="searchKeyword" :placeholder="t('device.part.pageSearchPlaceholder')" clearable style="width: 280px" @clear="loadPartList" @keyup.enter="loadPartList">
+            <el-input
+              v-model="searchKeyword"
+              :placeholder="t('device.part.pageSearchPlaceholder')"
+              clearable
+              style="width: 280px"
+              @clear="loadPartList"
+              @keyup.enter="loadPartList"
+            >
               <template #append>
                 <el-button v-permission="'device:part:search'" :icon="Search" @click="loadPartList"></el-button>
               </template>
             </el-input>
           </div>
           <div class="toolbar-right">
-            <el-button v-permission="'device:part:add'" type="primary" :icon="Plus" @click="handleAdd">{{ t('device.part.add') }}</el-button>
-            <el-button v-permission="'device:part:refresh'" :icon="Refresh" @click="loadPartList">{{ t('device.part.refresh') }}</el-button>
+            <el-button v-permission="'device:part:add'" type="primary" :icon="Plus" @click="handleAdd">{{
+              t('device.part.add')
+            }}</el-button>
+            <el-button v-permission="'device:part:refresh'" :icon="Refresh" @click="loadPartList">{{
+              t('device.part.refresh')
+            }}</el-button>
           </div>
         </div>
 
@@ -22,40 +33,80 @@
           <el-col v-for="(part, index) in filteredParts" :key="part.id || index" :span="6">
             <div class="part-card" :class="getPartStatus(part)">
               <div class="card-header">
-                <div class="part-icon"><el-icon :size="20"><component :is="partIconComp(part)" /></el-icon></div>
+                <div class="part-icon">
+                  <el-icon :size="20"><component :is="partIconComp(part)" /></el-icon>
+                </div>
                 <div class="part-info">
                   <div class="part-name">{{ getPartDisplayName(part) }}</div>
                   <div class="part-code">{{ part.part_code || part.code }}</div>
                 </div>
-                <el-tag :type="getPartStatusTag(part)" size="small" effect="plain">{{ getPartStatusText(part) }}</el-tag>
+                <el-tag :type="getPartStatusTag(part)" size="small" effect="plain">{{
+                  getPartStatusText(part)
+                }}</el-tag>
               </div>
               <div class="card-body">
                 <div class="life-info">
                   <div class="life-item">
                     <span class="life-label">{{ t('device.part.formUsedLife') }}</span>
-                    <span class="life-value">{{ part.used_life || part.used }}<span class="life-unit">{{ t('device.part.unitTimes') }}</span></span>
+                    <span class="life-value"
+                      >{{ part.used_life || part.used
+                      }}<span class="life-unit">{{ t('device.part.unitTimes') }}</span></span
+                    >
                   </div>
                   <div class="life-item">
                     <span class="life-label">{{ t('device.part.formRatedLife') }}</span>
-                    <span class="life-value">{{ part.rated_life || part.total }}<span class="life-unit">{{ t('device.part.unitTimes') }}</span></span>
+                    <span class="life-value"
+                      >{{ part.rated_life || part.total
+                      }}<span class="life-unit">{{ t('device.part.unitTimes') }}</span></span
+                    >
                   </div>
                   <div class="life-item">
                     <span class="life-label">{{ t('device.part.messageRemaining') }}</span>
-                    <span class="life-value" :class="getRemainingClass(part)">{{ getRemaining(part) }}<span class="life-unit">{{ t('device.part.unitTimes') }}</span></span>
+                    <span class="life-value" :class="getRemainingClass(part)"
+                      >{{ getRemaining(part) }}<span class="life-unit">{{ t('device.part.unitTimes') }}</span></span
+                    >
                   </div>
                 </div>
                 <div class="life-progress">
                   <div class="progress-bar">
-                    <div class="progress-fill" :style="{ width: getLifePercent(part) + '%' }" :class="getPartStatus(part)"></div>
+                    <div
+                      class="progress-fill"
+                      :style="{ width: getLifePercent(part) + '%' }"
+                      :class="getPartStatus(part)"
+                    ></div>
                   </div>
                   <div class="progress-text">{{ getLifePercent(part).toFixed(1) }}%</div>
                 </div>
                 <div class="card-footer">
-                  <span class="install-date">{{ t('device.part.formInstallDate') }}: {{ formatInstallDate(part) }}</span>
+                  <span class="install-date"
+                    >{{ t('device.part.formInstallDate') }}: {{ formatInstallDate(part) }}</span
+                  >
                   <div class="card-actions">
-                    <el-button v-permission="'device:part:edit'" type="primary" link size="small" @click="handleEdit(part)">{{ t('device.part.edit') }}</el-button>
-                    <el-button v-permission="'device:part:operate'" type="primary" link size="small" @click="handleReplace(part)">{{ t('device.part.operate') }}</el-button>
-                    <el-button v-permission="'device:part:delete'" type="danger" link size="small" class="delete-btn" @click="handleDelete(part)">{{ t('device.part.delete') }}</el-button>
+                    <el-button
+                      v-permission="'device:part:edit'"
+                      type="primary"
+                      link
+                      size="small"
+                      @click="handleEdit(part)"
+                      >{{ t('device.part.edit') }}</el-button
+                    >
+                    <el-button
+                      v-permission="'device:part:operate'"
+                      type="primary"
+                      link
+                      size="small"
+                      @click="handleReplace(part)"
+                      >{{ t('device.part.operate') }}</el-button
+                    >
+                    <el-button
+                      v-permission="'device:part:delete'"
+                      type="danger"
+                      link
+                      size="small"
+                      class="delete-btn"
+                      @click="handleDelete(part)"
+                      >{{ t('device.part.delete') }}</el-button
+                    >
                   </div>
                 </div>
               </div>
@@ -72,9 +123,20 @@
         <el-row v-if="filteredParts.length > 0" :gutter="12" class="detail-row">
           <el-col :span="14">
             <div class="panel">
-              <div class="panel-header"><span class="panel-title"><el-icon><Tools /></el-icon>{{ t('device.part.pageTitle') }}</span></div>
+              <div class="panel-header">
+                <span class="panel-title"
+                  ><el-icon><Tools /></el-icon>{{ t('device.part.pageTitle') }}</span
+                >
+              </div>
               <div class="panel-body">
-                <el-table v-loading="loading" :data="filteredParts" border stripe :element-loading-text="t('common.loading')" style="width: 100%">
+                <el-table
+                  v-loading="loading"
+                  :data="filteredParts"
+                  border
+                  stripe
+                  :element-loading-text="t('common.loading')"
+                  style="width: 100%"
+                >
                   <el-table-column :label="t('device.part.formPartName')" width="120" align="center">
                     <template #default="{ row }">
                       <el-icon style="margin-right: 6px; color: #409eff"><component :is="partIconComp(row)" /></el-icon>
@@ -90,25 +152,63 @@
                   <el-table-column :label="t('device.part.tableLifeProgress')" min-width="180">
                     <template #default="{ row }">
                       <div class="table-progress">
-                        <div class="tp-bar"><div class="tp-fill" :style="{ width: getLifePercent(row) + '%' }" :class="getPartStatus(row)"></div></div>
-                        <span class="tp-text">{{ row.used_life || row.used }}/{{ row.rated_life || row.total }} {{ t('device.part.unitTimes') }}</span>
+                        <div class="tp-bar">
+                          <div
+                            class="tp-fill"
+                            :style="{ width: getLifePercent(row) + '%' }"
+                            :class="getPartStatus(row)"
+                          ></div>
+                        </div>
+                        <span class="tp-text"
+                          >{{ row.used_life || row.used }}/{{ row.rated_life || row.total }}
+                          {{ t('device.part.unitTimes') }}</span
+                        >
                       </div>
                     </template>
                   </el-table-column>
                   <el-table-column :label="t('device.part.tableRemainingLife')" width="110" align="center">
-                    <template #default="{ row }"><span :class="getRemainingClass(row)">{{ getRemaining(row) }} {{ t('device.part.unitTimes') }}</span></template>
+                    <template #default="{ row }"
+                      ><span :class="getRemainingClass(row)"
+                        >{{ getRemaining(row) }} {{ t('device.part.unitTimes') }}</span
+                      ></template
+                    >
                   </el-table-column>
                   <el-table-column :label="t('device.part.tableStatus')" width="80" align="center">
-                    <template #default="{ row }"><el-tag :type="getPartStatusTag(row)" size="small">{{ getPartStatusText(row) }}</el-tag></template>
+                    <template #default="{ row }"
+                      ><el-tag :type="getPartStatusTag(row)" size="small">{{
+                        getPartStatusText(row)
+                      }}</el-tag></template
+                    >
                   </el-table-column>
                   <el-table-column :label="t('device.part.formInstallDate')" width="110" align="center">
                     <template #default="{ row }">{{ formatInstallDate(row) }}</template>
                   </el-table-column>
                   <el-table-column :label="t('device.part.tableOperation')" width="150" align="center" fixed="right">
                     <template #default="{ row }">
-                      <el-button v-permission="'device:part:edit'" type="primary" link size="small" @click="handleEdit(row)">{{ t('device.part.edit') }}</el-button>
-                      <el-button v-permission="'device:part:operate'" type="primary" link size="small" @click="handleReplace(row)">{{ t('device.part.operate') }}</el-button>
-                      <el-button v-permission="'device:part:delete'" type="danger" link size="small" @click="handleDelete(row)">{{ t('device.part.delete') }}</el-button>
+                      <el-button
+                        v-permission="'device:part:edit'"
+                        type="primary"
+                        link
+                        size="small"
+                        @click="handleEdit(row)"
+                        >{{ t('device.part.edit') }}</el-button
+                      >
+                      <el-button
+                        v-permission="'device:part:operate'"
+                        type="primary"
+                        link
+                        size="small"
+                        @click="handleReplace(row)"
+                        >{{ t('device.part.operate') }}</el-button
+                      >
+                      <el-button
+                        v-permission="'device:part:delete'"
+                        type="danger"
+                        link
+                        size="small"
+                        @click="handleDelete(row)"
+                        >{{ t('device.part.delete') }}</el-button
+                      >
                     </template>
                   </el-table-column>
                 </el-table>
@@ -118,7 +218,11 @@
 
           <el-col :span="10">
             <div class="panel">
-              <div class="panel-header"><span class="panel-title"><el-icon><Document /></el-icon>{{ t('device.part.messageRecentReplaceRecords') }}</span></div>
+              <div class="panel-header">
+                <span class="panel-title"
+                  ><el-icon><Document /></el-icon>{{ t('device.part.messageRecentReplaceRecords') }}</span
+                >
+              </div>
               <div class="panel-body">
                 <div class="timeline">
                   <div v-for="(record, index) in recentRecords" :key="record.id || index" class="timeline-item">
@@ -128,7 +232,11 @@
                       <div class="tl-header">
                         <span class="tl-part">{{ record.part_name || record.partName }}</span>
                         <el-tag :type="record.status === 'success' ? 'success' : 'danger'" size="small">
-                          {{ record.status === 'success' ? t('device.part.messageStatusSuccess') : t('device.part.messageStatusFailed') }}
+                          {{
+                            record.status === 'success'
+                              ? t('device.part.messageStatusSuccess')
+                              : t('device.part.messageStatusFailed')
+                          }}
                         </el-tag>
                       </div>
                       <div class="tl-detail">
@@ -136,85 +244,153 @@
                         <span>{{ t('device.part.messageNewCode') }}: {{ record.new_code || record.newCode }}</span>
                       </div>
                       <div class="tl-footer">
-                        <span class="tl-operator">{{ t('device.part.messageOperator') }}: {{ record.operator_name || record.operator }}</span>
+                        <span class="tl-operator"
+                          >{{ t('device.part.messageOperator') }}: {{ record.operator_name || record.operator }}</span
+                        >
                         <span class="tl-time">{{ record.replace_time || record.time }}</span>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div v-if="recentRecords.length === 0" class="empty-tip-small">{{ t('device.part.messageNoRecords') }}</div>
+                <div v-if="recentRecords.length === 0" class="empty-tip-small">
+                  {{ t('device.part.messageNoRecords') }}
+                </div>
               </div>
             </div>
           </el-col>
         </el-row>
 
         <!-- 添加/编辑弹窗 -->
-        <el-dialog v-model="partDialogVisible" :title="isEdit ? t('device.part.pageEditBtn') : t('device.part.pageAddBtn')" width="560px" :close-on-click-modal="false" @closed="handlePartDialogClosed">
+        <el-dialog
+          v-model="partDialogVisible"
+          :title="isEdit ? t('device.part.pageEditBtn') : t('device.part.pageAddBtn')"
+          width="560px"
+          :close-on-click-modal="false"
+          @closed="handlePartDialogClosed"
+        >
           <el-form ref="partFormRef" :model="partForm" :rules="partRules" label-width="130px" class="part-dialog-form">
             <el-form-item prop="template_id">
               <template #label>
                 {{ t('device.part.formTemplate') }}
-                <el-tooltip :content="t('device.part.tipTemplate')" placement="top"><el-icon><QuestionFilled /></el-icon></el-tooltip>
+                <el-tooltip :content="t('device.part.tipTemplate')" placement="top"
+                  ><el-icon><QuestionFilled /></el-icon
+                ></el-tooltip>
               </template>
-              <el-select v-model="partForm.template_id" :placeholder="t('device.part.placeholderSelectTemplate')" style="width: 100%" :disabled="isEdit" @change="handleTemplateChange">
-                <el-option v-for="template in templates" :key="template.id" :label="getTemplateName(template)" :value="template.id ?? ''" />
+              <el-select
+                v-model="partForm.template_id"
+                :placeholder="t('device.part.placeholderSelectTemplate')"
+                style="width: 100%"
+                :disabled="isEdit"
+                @change="handleTemplateChange"
+              >
+                <el-option
+                  v-for="template in templates"
+                  :key="template.id"
+                  :label="getTemplateName(template)"
+                  :value="template.id ?? ''"
+                />
               </el-select>
             </el-form-item>
             <el-form-item prop="part_name">
               <template #label>
                 {{ t('device.part.formPartName') }}
-                <el-tooltip :content="t('device.part.tipPartName')" placement="top"><el-icon><QuestionFilled /></el-icon></el-tooltip>
+                <el-tooltip :content="t('device.part.tipPartName')" placement="top"
+                  ><el-icon><QuestionFilled /></el-icon
+                ></el-tooltip>
               </template>
               <el-input v-model="partForm.part_name" :placeholder="t('device.part.placeholderPartName')" disabled />
             </el-form-item>
             <el-form-item prop="part_code">
               <template #label>
                 {{ t('device.part.formPartCode') }}
-                <el-tooltip :content="t('device.part.tipPartCode')" placement="top"><el-icon><QuestionFilled /></el-icon></el-tooltip>
+                <el-tooltip :content="t('device.part.tipPartCode')" placement="top"
+                  ><el-icon><QuestionFilled /></el-icon
+                ></el-tooltip>
               </template>
               <el-input v-model="partForm.part_code" :placeholder="t('device.part.placeholderPartCode')" />
             </el-form-item>
             <el-form-item prop="spec_model">
               <template #label>
                 {{ t('device.part.formSpecModel') }}
-                <el-tooltip :content="t('device.part.tipSpecModel')" placement="top"><el-icon><QuestionFilled /></el-icon></el-tooltip>
+                <el-tooltip :content="t('device.part.tipSpecModel')" placement="top"
+                  ><el-icon><QuestionFilled /></el-icon
+                ></el-tooltip>
               </template>
               <el-input v-model="partForm.spec_model" :placeholder="t('device.part.placeholderSpecModel')" disabled />
             </el-form-item>
             <el-form-item prop="rated_life">
               <template #label>
                 {{ t('device.part.formRatedLife') }}
-                <el-tooltip :content="t('device.part.tipRatedLife')" placement="top"><el-icon><QuestionFilled /></el-icon></el-tooltip>
+                <el-tooltip :content="t('device.part.tipRatedLife')" placement="top"
+                  ><el-icon><QuestionFilled /></el-icon
+                ></el-tooltip>
               </template>
               <div class="rated-life-input">
-                <el-input-number v-model="partForm.rated_life" :min="1" :max="9999999" :step="1000" controls-position="right" style="width: 100%" disabled />
+                <el-input-number
+                  v-model="partForm.rated_life"
+                  :min="1"
+                  :max="9999999"
+                  :step="1000"
+                  controls-position="right"
+                  style="width: 100%"
+                  disabled
+                />
                 <span class="rated-life-unit">{{ t('device.part.unitTimes') }}</span>
               </div>
             </el-form-item>
             <el-form-item prop="install_date">
               <template #label>
                 {{ t('device.part.formInstallDate') }}
-                <el-tooltip :content="t('device.part.tipInstallDate')" placement="top"><el-icon><QuestionFilled /></el-icon></el-tooltip>
+                <el-tooltip :content="t('device.part.tipInstallDate')" placement="top"
+                  ><el-icon><QuestionFilled /></el-icon
+                ></el-tooltip>
               </template>
-              <el-date-picker v-model="partForm.install_date" type="date" :placeholder="t('device.part.placeholderInstallDate')" value-format="YYYY-MM-DD" style="width: 100%" />
+              <el-date-picker
+                v-model="partForm.install_date"
+                type="date"
+                :placeholder="t('device.part.placeholderInstallDate')"
+                value-format="YYYY-MM-DD"
+                style="width: 100%"
+              />
             </el-form-item>
             <el-form-item>
               <template #label>
                 {{ t('device.part.formRemark') }}
-                <el-tooltip :content="t('device.part.tipRemark')" placement="top"><el-icon><QuestionFilled /></el-icon></el-tooltip>
+                <el-tooltip :content="t('device.part.tipRemark')" placement="top"
+                  ><el-icon><QuestionFilled /></el-icon
+                ></el-tooltip>
               </template>
-              <el-input v-model="partForm.remark" type="textarea" :rows="2" :placeholder="t('device.part.placeholderRemark')" />
+              <el-input
+                v-model="partForm.remark"
+                type="textarea"
+                :rows="2"
+                :placeholder="t('device.part.placeholderRemark')"
+              />
             </el-form-item>
           </el-form>
           <template #footer>
             <el-button @click="partDialogVisible = false">{{ t('device.part.messageCancelBtn') }}</el-button>
-            <el-button type="primary" :loading="partDialogLoading" @click="confirmPart">{{ t('device.part.messageConfirmBtn') }}</el-button>
+            <el-button type="primary" :loading="partDialogLoading" @click="confirmPart">{{
+              t('device.part.messageConfirmBtn')
+            }}</el-button>
           </template>
         </el-dialog>
 
         <!-- 更换录入弹窗 -->
-        <el-dialog v-model="replaceDialogVisible" :title="t('device.part.messageReplaceDialogTitle')" width="560px" :close-on-click-modal="false" @closed="handleDialogClosed">
-          <el-form ref="replaceFormRef" :model="replaceForm" :rules="replaceRules" label-width="110px" class="part-dialog-form">
+        <el-dialog
+          v-model="replaceDialogVisible"
+          :title="t('device.part.messageReplaceDialogTitle')"
+          width="560px"
+          :close-on-click-modal="false"
+          @closed="handleDialogClosed"
+        >
+          <el-form
+            ref="replaceFormRef"
+            :model="replaceForm"
+            :rules="replaceRules"
+            label-width="110px"
+            class="part-dialog-form"
+          >
             <el-form-item :label="t('device.part.formReplacePart')" prop="partCode">
               <el-input :model-value="replaceForm.partName" disabled />
             </el-form-item>
@@ -225,7 +401,11 @@
               <el-input v-model="replaceForm.newCode" :placeholder="t('device.part.placeholderNewCode')" clearable />
             </el-form-item>
             <el-form-item :label="t('device.part.formReplaceReason')" prop="reason">
-              <el-select v-model="replaceForm.reason" :placeholder="t('device.part.placeholderReplaceReason')" style="width: 100%">
+              <el-select
+                v-model="replaceForm.reason"
+                :placeholder="t('device.part.placeholderReplaceReason')"
+                style="width: 100%"
+              >
                 <el-option :label="t('device.part.replaceReasonLife')" value="life" />
                 <el-option :label="t('device.part.replaceReasonDamage')" value="damage" />
                 <el-option :label="t('device.part.replaceReasonMaintenance')" value="maintenance" />
@@ -234,12 +414,19 @@
               </el-select>
             </el-form-item>
             <el-form-item :label="t('device.part.formRemark')">
-              <el-input v-model="replaceForm.remark" type="textarea" :rows="2" :placeholder="t('device.part.placeholderRemark')" />
+              <el-input
+                v-model="replaceForm.remark"
+                type="textarea"
+                :rows="2"
+                :placeholder="t('device.part.placeholderRemark')"
+              />
             </el-form-item>
           </el-form>
           <template #footer>
             <el-button @click="replaceDialogVisible = false">{{ t('device.part.messageCancelBtn') }}</el-button>
-            <el-button type="primary" :loading="replaceLoading" @click="confirmReplace">{{ t('device.part.formConfirmReplace') }}</el-button>
+            <el-button type="primary" :loading="replaceLoading" @click="confirmReplace">{{
+              t('device.part.formConfirmReplace')
+            }}</el-button>
           </template>
         </el-dialog>
       </el-tab-pane>
@@ -260,11 +447,27 @@
 import { ref, reactive, computed, onMounted } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import {
-  Search, Plus, Refresh, Box, Tools, Document, QuestionFilled,
-  Aim, Operation, TopRight, Download, Cpu
+  Search,
+  Plus,
+  Refresh,
+  Box,
+  Tools,
+  Document,
+  QuestionFilled,
+  Aim,
+  Operation,
+  TopRight,
+  Download,
+  Cpu
 } from '@element-plus/icons-vue'
 import {
-  getPartList, getPartTemplates, addPart, updatePart, deletePart, replacePart, getReplaceRecords
+  getPartList,
+  getPartTemplates,
+  addPart,
+  updatePart,
+  deletePart,
+  replacePart,
+  getReplaceRecords
 } from '@/api/device-part'
 import { formatDate, getGlobalDateFormat } from '@/utils/data/date'
 import { $msg, $confirm } from '@/utils/ui/feedback'
@@ -331,7 +534,7 @@ const filteredParts = computed(() => {
   if (!searchKeyword.value) return parts.value
   const keyword = searchKeyword.value.toLowerCase()
   return parts.value.filter(
-    (part) =>
+    part =>
       (part.part_name || part.name || '').toLowerCase().includes(keyword) ||
       (part.part_code || part.code || '').toLowerCase().includes(keyword)
   )
@@ -345,7 +548,7 @@ function getTemplateName(template: PartTemplate): string {
 
 function getPartDisplayName(part: Part): string {
   if (part.part_name || part.name) return part.part_name || part.name || ''
-  const template = templates.value.find((tmpl) => tmpl.template_key === part.template_key || tmpl.id === part.template_id)
+  const template = templates.value.find(tmpl => tmpl.template_key === part.template_key || tmpl.id === part.template_id)
   if (template) return getTemplateName(template)
   return part.part_code || part.code || ''
 }
@@ -441,7 +644,15 @@ async function loadReplaceRecords() {
 function handleAdd() {
   isEdit.value = false
   currentEditPart.value = null
-  Object.assign(partForm, { template_id: null, part_name: '', part_code: '', spec_model: '', rated_life: 10000, install_date: '', remark: '' })
+  Object.assign(partForm, {
+    template_id: null,
+    part_name: '',
+    part_code: '',
+    spec_model: '',
+    rated_life: 10000,
+    install_date: '',
+    remark: ''
+  })
   partDialogVisible.value = true
 }
 
@@ -461,7 +672,7 @@ function handleEdit(part: Part) {
 }
 
 function handleTemplateChange(templateId: number | string) {
-  const template = templates.value.find((tmpl) => tmpl.id === templateId)
+  const template = templates.value.find(tmpl => tmpl.id === templateId)
   if (template) {
     const nameKey = template.name_key || template.template_name || template.name || ''
     partForm.part_name = nameKey.startsWith('menu.') ? t(nameKey) : nameKey
@@ -580,72 +791,320 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.part-life-page { padding: 16px; }
-.part-dialog-form { margin-left: 20px; }
+.part-life-page {
+  padding: 16px;
+}
+.part-dialog-form {
+  margin-left: 20px;
+}
 .part-dialog-form :deep(.el-form-item__content) .el-input,
 .part-dialog-form :deep(.el-form-item__content) .el-select,
-.part-dialog-form :deep(.el-form-item__content) .el-date-editor { width: 280px !important; }
-.rated-life-input { display: flex; align-items: center; width: 280px !important; gap: 10px; }
-.rated-life-input .el-input-number { flex: 1; min-width: 0; }
-.rated-life-unit { color: #909399; font-size: 14px; white-space: nowrap; margin-right: -40px; width: 32px; text-align: left; }
-.page-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-.toolbar-left, .toolbar-right { display: flex; gap: 8px; }
-.overview-row { margin-bottom: 16px; }
-.part-card { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 4px solid #67c23a; transition: all 0.3s; }
-.part-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); transform: translateY(-2px); }
-.part-card.normal { border-left-color: #67c23a; }
-.part-card.notice { border-left-color: #909399; }
-.part-card.warning { border-left-color: #e6a23c; }
-.part-card.expired { border-left-color: #f56c6c; }
-.card-header { display: flex; align-items: center; margin-bottom: 12px; }
-.part-icon { width: 40px; height: 40px; background: #ecf5ff; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #409eff; margin-right: 12px; }
-.part-info { flex: 1; }
-.part-name { font-size: 15px; font-weight: bold; color: #303133; margin-bottom: 2px; }
-.part-code { font-size: 12px; color: #909399; }
-.life-info { display: flex; justify-content: space-between; margin-bottom: 12px; }
-.life-item { text-align: center; }
-.life-label { display: block; font-size: 12px; color: #909399; margin-bottom: 4px; }
-.life-value { font-size: 18px; font-weight: bold; color: #303133; }
-.life-unit { font-size: 12px; color: #909399; margin-left: 2px; font-weight: normal; }
-.text-success { color: #67c23a; }
-.text-warning { color: #e6a23c; }
-.text-danger { color: #f56c6c; }
-.life-progress { margin-bottom: 12px; }
-.progress-bar { height: 8px; background: #f0f2f5; border-radius: 4px; overflow: hidden; margin-bottom: 4px; }
-.progress-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
-.progress-fill.normal { background: linear-gradient(90deg, #67c23a, #85ce61); }
-.progress-fill.notice { background: linear-gradient(90deg, #909399, #a6a9ad); }
-.progress-fill.warning { background: linear-gradient(90deg, #e6a23c, #ebb563); }
-.progress-fill.expired { background: linear-gradient(90deg, #f56c6c, #f78989); }
-.progress-text { text-align: right; font-size: 12px; color: #909399; }
-.card-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 8px; border-top: 1px solid #f0f2f5; }
-.install-date { font-size: 12px; color: #909399; }
-.card-actions { display: flex; gap: 4px; }
-.detail-row { margin-top: 16px; }
-.panel { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); overflow: hidden; }
-.panel-header { padding: 12px 16px; border-bottom: 1px solid #f0f2f5; display: flex; justify-content: space-between; align-items: center; }
-.panel-title { font-size: 14px; font-weight: bold; color: #303133; display: inline-flex; align-items: center; gap: 6px; }
-.panel-body { padding: 16px; }
-.table-progress { display: flex; align-items: center; gap: 8px; }
-.tp-bar { flex: 1; height: 6px; background: #f0f2f5; border-radius: 3px; overflow: hidden; }
-.tp-fill { height: 100%; border-radius: 3px; }
-.tp-fill.normal { background: #67c23a; }
-.tp-fill.notice { background: #909399; }
-.tp-fill.warning { background: #e6a23c; }
-.tp-fill.expired { background: #f56c6c; }
-.tp-text { font-size: 12px; color: #606266; white-space: nowrap; }
-.timeline { position: relative; padding-left: 20px; }
-.timeline-item { position: relative; padding-bottom: 20px; }
-.timeline-dot { position: absolute; left: -20px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: #67c23a; }
-.timeline-dot.success { background: #67c23a; }
-.timeline-dot.failed, .timeline-dot.fail { background: #f56c6c; }
-.timeline-line { position: absolute; left: -15px; top: 20px; width: 2px; height: calc(100% - 16px); background: #e4e7ed; }
-.timeline-content { background: #f8f9fa; border-radius: 6px; padding: 10px 12px; }
-.tl-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-.tl-part { font-size: 13px; font-weight: bold; color: #303133; }
-.tl-detail { display: flex; flex-direction: column; gap: 2px; font-size: 12px; color: #606266; margin-bottom: 6px; }
-.tl-footer { display: flex; justify-content: space-between; font-size: 11px; color: #909399; }
-.empty-tip { text-align: center; padding: 60px 20px; color: #909399; }
-.empty-tip :deep(.el-icon) { margin-bottom: 12px; display: block; }
-.empty-tip-small { text-align: center; padding: 30px 20px; color: #909399; font-size: 13px; }
+.part-dialog-form :deep(.el-form-item__content) .el-date-editor {
+  width: 280px !important;
+}
+.rated-life-input {
+  display: flex;
+  align-items: center;
+  width: 280px !important;
+  gap: 10px;
+}
+.rated-life-input .el-input-number {
+  flex: 1;
+  min-width: 0;
+}
+.rated-life-unit {
+  color: #909399;
+  font-size: 14px;
+  white-space: nowrap;
+  margin-right: -40px;
+  width: 32px;
+  text-align: left;
+}
+.page-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.toolbar-left,
+.toolbar-right {
+  display: flex;
+  gap: 8px;
+}
+.overview-row {
+  margin-bottom: 16px;
+}
+.part-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid #67c23a;
+  transition: all 0.3s;
+}
+.part-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+.part-card.normal {
+  border-left-color: #67c23a;
+}
+.part-card.notice {
+  border-left-color: #909399;
+}
+.part-card.warning {
+  border-left-color: #e6a23c;
+}
+.part-card.expired {
+  border-left-color: #f56c6c;
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.part-icon {
+  width: 40px;
+  height: 40px;
+  background: #ecf5ff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #409eff;
+  margin-right: 12px;
+}
+.part-info {
+  flex: 1;
+}
+.part-name {
+  font-size: 15px;
+  font-weight: bold;
+  color: #303133;
+  margin-bottom: 2px;
+}
+.part-code {
+  font-size: 12px;
+  color: #909399;
+}
+.life-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.life-item {
+  text-align: center;
+}
+.life-label {
+  display: block;
+  font-size: 12px;
+  color: #909399;
+  margin-bottom: 4px;
+}
+.life-value {
+  font-size: 18px;
+  font-weight: bold;
+  color: #303133;
+}
+.life-unit {
+  font-size: 12px;
+  color: #909399;
+  margin-left: 2px;
+  font-weight: normal;
+}
+.text-success {
+  color: #67c23a;
+}
+.text-warning {
+  color: #e6a23c;
+}
+.text-danger {
+  color: #f56c6c;
+}
+.life-progress {
+  margin-bottom: 12px;
+}
+.progress-bar {
+  height: 8px;
+  background: #f0f2f5;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s;
+}
+.progress-fill.normal {
+  background: linear-gradient(90deg, #67c23a, #85ce61);
+}
+.progress-fill.notice {
+  background: linear-gradient(90deg, #909399, #a6a9ad);
+}
+.progress-fill.warning {
+  background: linear-gradient(90deg, #e6a23c, #ebb563);
+}
+.progress-fill.expired {
+  background: linear-gradient(90deg, #f56c6c, #f78989);
+}
+.progress-text {
+  text-align: right;
+  font-size: 12px;
+  color: #909399;
+}
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px solid #f0f2f5;
+}
+.install-date {
+  font-size: 12px;
+  color: #909399;
+}
+.card-actions {
+  display: flex;
+  gap: 4px;
+}
+.detail-row {
+  margin-top: 16px;
+}
+.panel {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+.panel-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f2f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.panel-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #303133;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.panel-body {
+  padding: 16px;
+}
+.table-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tp-bar {
+  flex: 1;
+  height: 6px;
+  background: #f0f2f5;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.tp-fill {
+  height: 100%;
+  border-radius: 3px;
+}
+.tp-fill.normal {
+  background: #67c23a;
+}
+.tp-fill.notice {
+  background: #909399;
+}
+.tp-fill.warning {
+  background: #e6a23c;
+}
+.tp-fill.expired {
+  background: #f56c6c;
+}
+.tp-text {
+  font-size: 12px;
+  color: #606266;
+  white-space: nowrap;
+}
+.timeline {
+  position: relative;
+  padding-left: 20px;
+}
+.timeline-item {
+  position: relative;
+  padding-bottom: 20px;
+}
+.timeline-dot {
+  position: absolute;
+  left: -20px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #67c23a;
+}
+.timeline-dot.success {
+  background: #67c23a;
+}
+.timeline-dot.failed,
+.timeline-dot.fail {
+  background: #f56c6c;
+}
+.timeline-line {
+  position: absolute;
+  left: -15px;
+  top: 20px;
+  width: 2px;
+  height: calc(100% - 16px);
+  background: #e4e7ed;
+}
+.timeline-content {
+  background: #f8f9fa;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+.tl-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.tl-part {
+  font-size: 13px;
+  font-weight: bold;
+  color: #303133;
+}
+.tl-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12px;
+  color: #606266;
+  margin-bottom: 6px;
+}
+.tl-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #909399;
+}
+.empty-tip {
+  text-align: center;
+  padding: 60px 20px;
+  color: #909399;
+}
+.empty-tip :deep(.el-icon) {
+  margin-bottom: 12px;
+  display: block;
+}
+.empty-tip-small {
+  text-align: center;
+  padding: 30px 20px;
+  color: #909399;
+  font-size: 13px;
+}
 </style>

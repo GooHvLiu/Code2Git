@@ -69,9 +69,24 @@
     >
       <el-table-column type="selection" width="50" align="center" />
       <el-table-column prop="id" label="ID" width="70" align="center" />
-      <el-table-column prop="config_name" :label="t('system.config.emailLog.configName')" min-width="130" show-overflow-tooltip />
-      <el-table-column prop="to_email" :label="t('system.config.emailLog.recipient')" min-width="180" show-overflow-tooltip />
-      <el-table-column prop="subject" :label="t('system.config.emailLog.subject')" min-width="200" show-overflow-tooltip />
+      <el-table-column
+        prop="config_name"
+        :label="t('system.config.emailLog.configName')"
+        min-width="130"
+        show-overflow-tooltip
+      />
+      <el-table-column
+        prop="to_email"
+        :label="t('system.config.emailLog.recipient')"
+        min-width="180"
+        show-overflow-tooltip
+      />
+      <el-table-column
+        prop="subject"
+        :label="t('system.config.emailLog.subject')"
+        min-width="200"
+        show-overflow-tooltip
+      />
       <el-table-column prop="template" :label="t('system.config.emailLog.template')" width="110" align="center">
         <template #default="scope">
           <el-tag v-if="scope.row.template" size="small" type="info">{{ scope.row.template }}</el-tag>
@@ -103,7 +118,12 @@
       <el-table-column prop="send_duration" :label="t('system.config.emailLog.duration')" width="90" align="center">
         <template #default="scope">{{ scope.row.send_duration }}ms</template>
       </el-table-column>
-      <el-table-column prop="error_msg" :label="t('system.config.emailLog.errorMsg')" min-width="180" show-overflow-tooltip>
+      <el-table-column
+        prop="error_msg"
+        :label="t('system.config.emailLog.errorMsg')"
+        min-width="180"
+        show-overflow-tooltip
+      >
         <template #default="scope">
           <span v-if="scope.row.error_msg" style="color: #f56c6c">{{ scope.row.error_msg }}</span>
           <span v-else style="color: #c0c4cc">-</span>
@@ -117,7 +137,13 @@
           <el-button text size="small" :icon="View" @click="handleViewDetail(scope.row as EmailLogRow)">
             {{ t('system.config.emailLog.viewDetail') }}
           </el-button>
-          <el-button text size="small" :icon="Delete" style="color: #f56c6c" @click="handleDelete(scope.row as EmailLogRow)">
+          <el-button
+            text
+            size="small"
+            :icon="Delete"
+            style="color: #f56c6c"
+            @click="handleDelete(scope.row as EmailLogRow)"
+          >
             {{ t('system.config.emailLog.delete') }}
           </el-button>
         </template>
@@ -157,14 +183,30 @@
             </el-tag>
             <el-tag v-else type="warning" size="small">{{ t('system.config.emailLog.statusSending') }}</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item :label="t('system.config.emailLog.configName')">{{ currentLog.config_name }}</el-descriptions-item>
-          <el-descriptions-item :label="t('system.config.emailLog.recipient')">{{ currentLog.to_email }}</el-descriptions-item>
-          <el-descriptions-item v-if="currentLog.cc_email" :label="t('system.config.emailLog.cc')">{{ currentLog.cc_email }}</el-descriptions-item>
-          <el-descriptions-item :label="t('system.config.emailLog.subject')">{{ currentLog.subject }}</el-descriptions-item>
-          <el-descriptions-item :label="t('system.config.emailLog.template')">{{ currentLog.template || '-' }}</el-descriptions-item>
-          <el-descriptions-item :label="t('system.config.emailLog.retryCount')">{{ currentLog.retry_count }}</el-descriptions-item>
-          <el-descriptions-item :label="t('system.config.emailLog.duration')">{{ currentLog.send_duration }}ms</el-descriptions-item>
-          <el-descriptions-item :label="t('system.config.emailLog.ip')">{{ currentLog.ip || '-' }}</el-descriptions-item>
+          <el-descriptions-item :label="t('system.config.emailLog.configName')">{{
+            currentLog.config_name
+          }}</el-descriptions-item>
+          <el-descriptions-item :label="t('system.config.emailLog.recipient')">{{
+            currentLog.to_email
+          }}</el-descriptions-item>
+          <el-descriptions-item v-if="currentLog.cc_email" :label="t('system.config.emailLog.cc')">{{
+            currentLog.cc_email
+          }}</el-descriptions-item>
+          <el-descriptions-item :label="t('system.config.emailLog.subject')">{{
+            currentLog.subject
+          }}</el-descriptions-item>
+          <el-descriptions-item :label="t('system.config.emailLog.template')">{{
+            currentLog.template || '-'
+          }}</el-descriptions-item>
+          <el-descriptions-item :label="t('system.config.emailLog.retryCount')">{{
+            currentLog.retry_count
+          }}</el-descriptions-item>
+          <el-descriptions-item :label="t('system.config.emailLog.duration')"
+            >{{ currentLog.send_duration }}ms</el-descriptions-item
+          >
+          <el-descriptions-item :label="t('system.config.emailLog.ip')">{{
+            currentLog.ip || '-'
+          }}</el-descriptions-item>
           <el-descriptions-item :label="t('system.config.emailLog.sendTime')">
             {{ formatTime(currentLog.send_time || currentLog.create_time) }}
           </el-descriptions-item>
@@ -183,9 +225,8 @@
             <el-icon style="color: #409eff; margin-right: 5px"><Document /></el-icon>
             {{ t('system.config.emailLog.emailContent') }}
           </div>
-          <!-- 后端返回的邮件正文为可信 HTML，渲染用于查看 -->
-          <!-- eslint-disable-next-line vue/no-v-html -->
-          <div class="content-html" v-html="currentLog.content"></div>
+          <!-- 后端返回的邮件正文为 HTML，经 v-safe-html（DOMPurify 白名单消毒）后渲染 -->
+          <div class="content-html" v-safe-html="currentLog.content"></div>
         </div>
       </div>
 
@@ -199,10 +240,21 @@
 <script setup lang="ts">
 /**
  * 邮件发送日志列表（查询/筛选/详情/删除）
+ * 作者：GooHv
+ * 创建日期：2026-09-24
  */
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { Search, Refresh, Delete, View, Document, CircleCheckFilled, CircleCloseFilled, Loading } from '@element-plus/icons-vue'
+import {
+  Search,
+  Refresh,
+  Delete,
+  View,
+  Document,
+  CircleCheckFilled,
+  CircleCloseFilled,
+  Loading
+} from '@element-plus/icons-vue'
 import {
   requestGetEmailLogListApi,
   requestGetEmailLogDetailApi,
@@ -342,11 +394,11 @@ async function handleViewDetail(row: EmailLogRow): Promise<void> {
 
 async function handleDelete(row: EmailLogRow): Promise<void> {
   try {
-    await confirmAction(
-      t('system.config.emailLog.deleteConfirm'),
-      t('system.config.emailLog.deleteTitle'),
-      { type: 'warning', confirmButtonText: t('common.confirm'), cancelButtonText: t('common.cancel') }
-    )
+    await confirmAction(t('system.config.emailLog.deleteConfirm'), t('system.config.emailLog.deleteTitle'), {
+      type: 'warning',
+      confirmButtonText: t('common.confirm'),
+      cancelButtonText: t('common.cancel')
+    })
     await requestDeleteEmailLogApi(String(row.id))
     showMessage(t('system.config.emailLog.deleteSuccess'), 'success')
     loadList()
@@ -387,7 +439,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.email-log-panel { padding: 0; }
+.email-log-panel {
+  padding: 0;
+}
 
 .email-toolbar {
   display: flex;
@@ -462,7 +516,9 @@ onMounted(() => {
   line-height: 1.6;
 }
 
-.content-html :deep(img) { max-width: 100%; }
+.content-html :deep(img) {
+  max-width: 100%;
+}
 
 .content-html :deep(table) {
   border-collapse: collapse;
