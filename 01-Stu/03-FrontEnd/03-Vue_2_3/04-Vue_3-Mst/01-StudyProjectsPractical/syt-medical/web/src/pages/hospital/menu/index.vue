@@ -67,7 +67,10 @@ const handleSelect = (key: string) => {
   // console.log(key, keyPath);
   // 使用 router 进行跳转
   router.push({
-    path: key
+    path: key,
+    query: {
+      hoscode: route.query.hoscode
+    }
   });
 };
 </script>
@@ -75,6 +78,7 @@ const handleSelect = (key: string) => {
 <style scoped lang="less">
 .page-wrap {
   .menu-topTitle {
+    margin-bottom: 10px;
   }
   .el-menu {
     min-width: 150px;

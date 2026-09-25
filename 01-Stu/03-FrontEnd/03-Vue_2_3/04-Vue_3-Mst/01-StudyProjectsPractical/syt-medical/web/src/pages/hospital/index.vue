@@ -53,10 +53,5 @@ onMounted(() => {
 .page-wrap {
   display: grid;
   grid-template-columns: 1.5fr 8.5fr;
-  .left-menu {
-  }
-  .right-content {
-    background-color: orange;
-  }
 }
 </style>
