@@ -2673,13 +2673,9 @@ app.use(createPinia());
 
 ```ts
 // 聚合导出文件，每个模块统一导出
-// 医院详情 下的聚合导出
-export * from "./modules/hospitalDetail";		
+// 医院详情 医院部门 下的聚合导出
+export * from "./modules/hospital";
 ```
-
-> 当前仅针对医院详情的方法导出
-
-### 目录架构
 
 #### 初始架构
 
@@ -2693,9 +2689,9 @@ export * from "./modules/hospitalDetail";
 
 > 当前路径仅应用于初始结构搭建
 
-#### 医院详情
+### 医院详情
 
-`src/modules/hospitalDetail.ts`的详细实现方式如下：
+`src/modules/hospital.ts`中关于 医院详情  ` hospitalDetail`详细实现方式如下：
 
 ```ts
 // 本文件是 医院详情 / hospitalDetail 用于状态管理的文件
@@ -2729,6 +2725,44 @@ export const useHospitalDetailStore = defineStore("HospitalDetail", () => {
   return { hospitalDetailInfo, getHospitalDetailInfo };
 });
 
+```
+
+### 医院部门
+
+`src/modules/hospital.ts`中关于 医院部门  ` hospitalDepartment`详细实现方式如下：
+
+```ts
+// 本文件是 医院详情 / hospitalDetail ，医院部门 / hospitalDepartment 用于状态管理的文件
+import { defineStore } from "pinia";
+import { ref } from "vue";
+// 引入 类型定义
+import type { ResponseData } from "@/types/api";
+import type { HospitalDetailItem, HospitalDepartmentPageResponse } from "@/types/index";
+// 引入网络请求标准API
+import { reqHospitalDetailInfo, reqHospitalDepartmentInfo } from "@/api/hospital/index";
+......
+
+// 创建 医院部门 的状态存储
+export const useHospitalDepartmentStore = defineStore("HospitalDepartment", () => {
+  // =============== State
+  let hospitalDepartment = ref<HospitalDepartmentPageResponse | null>(null);
+
+  // =============== Actions
+  // 通过网络请求获取医院部门数据的 Actions 方法 getHospitalDepartment
+  const getHospitalDepartment = async (hscode: string) => {
+    // 将获取的结果保存
+    const result = (await reqHospitalDepartmentInfo(hscode)) as ResponseData<HospitalDepartmentPageResponse>;
+    // 获取的结果数据 code 代码 ==200时再处理
+    if (result.code == 200) {
+      // 将实际获取数据保存到 State 变量中
+      hospitalDepartment.value = result.data;
+      console.log("Pinia获取到的 医院部门 数据：", hospitalDepartment.value);
+    }
+  };
+
+  // =============== Getters
+  return { hospitalDepartment, getHospitalDepartment };
+});
 ```
 
 ## 网络请求
@@ -2882,7 +2916,38 @@ export const reqHospitalDetailInfo = async (hoscode: string) => {
 };
 ```
 
+##### 医院部门
 
+`src/api/hospital/index.ts`文件封装了关于`hospitalDepartment`组件的部门相关的数据请求：
+
+```ts
+// 引入网络请求接口
+import request from "@/utils/request";
+
+// 通过 type 引入类型接口定义
+import type { ResponseData } from "@/types/api";
+import type { HospitalDetailItem, HospitalDepartmentItem } from "@/types/index";
+
+// 通过枚举管理医院详情 HospitalDetail 模块的接口地址
+enum API {
+  // 获取 医院详情 的接口地址
+  HOSPITAL_DETAIL_URL = "hosp/hospital/findHospitalDetail/",
+  // 获取 医院部门 的接口地址
+  HOSPITAL_DEPARTMENT_URL = "hosp/hospital/department/"
+}
+
+// 医院详情 网络请求函数
+export const reqHospitalDetailInfo = async (hoscode: string) => {
+  const result = await request.get(API.HOSPITAL_DETAIL_URL + hoscode);
+  return result.data as ResponseData<HospitalDetailItem>;
+};
+
+// 医院部门 网络请求函数
+export const reqHospitalDepartmentInfo = async (hoscode: string) => {
+  const result = await request.get(API.HOSPITAL_DEPARTMENT_URL + hoscode);
+  return result.data as ResponseData<HospitalDepartmentItem>;
+};
+```
 
 ## 类型推导
 
@@ -2895,8 +2960,14 @@ export const reqHospitalDetailInfo = async (hoscode: string) => {
 `src/types/index.ts`文件中通过聚合导出所需的类型，实现对类型的统一管理：
 
 ```ts
-export * from "./hospital";
-// 以后新增其他类型直接在这里导出，比如字典、登录用户
+// 后端基础响应数据类型，T 泛型
+export * from "./api";
+// 后端 Home / 关于医院清单获取中相关的类型
+export * from "./hospitalList/index";
+// 后端 Hospital / 关于医院详情 HospitalDetail 获取中相关的类型
+export * from "./hospitalDetail/index";
+// 后端 Hospital / 医院科室 HospitalDepartment 获取中相关的类型
+export * from "./hospitalDepartment/index";
 ```
 
 ### 基本类型
@@ -3047,6 +3118,25 @@ export interface HospitalDetailItem {
   districtString: string;
 }
 
+```
+
+#### 医院部门
+
+从后端获取的医院部门`src/types/hospitalDepartment/index.ts`，实际需要的部分进行类型定义：
+
+```ts
+// 单条 医院部门 的数据类型
+export interface HospitalDepartmentItem {
+  id: string;
+  hoscode: string;
+  depcode: string;
+  depname: string;
+  title: string;
+  children: HospitalDepartmentItem[];
+}
+
+// 多条 医院部门 的数据类型
+export type HospitalDepartmentPageResponse = HospitalDepartmentItem[];
 ```
 
 ## 动态组件
@@ -4179,6 +4269,181 @@ const handleSelect = () => {
   router.push({ path: HOME_PATH });
 };
 </script>
+```
+
+### 医院组件
+
+在医院组件中，实际内部渲染的数据是通过`hoscode`传入的`query`，将后端获取的数据存储到`Pinia/Store`存储，供医院组件使用，医院相关的数据展示罗列到静态组件中，再次不多赘述。
+
+#### 内容组件
+
+##### 预约主页
+
+在内容组件的预约挂号页面`src/pages/hospital/content/appointment`的`index.vue`实现如下：
+
+```vue
+<template>
+  <!-- 医院预约前，对医院的详细介绍 -->
+  <div class="description">
+    <!-- 医院名称及等级 -->
+    <div class="top">
+      <div class="left">{{ useStore.hospitalDetailInfo?.hosname }}</div>
+      <div class="right">
+        <el-icon color="orange"><Opportunity /></el-icon>
+        <span>{{ useStore.hospitalDetailInfo?.hostypeString }}</span>
+      </div>
+    </div>
+    <!-- 医院 Logo + 相关详细路线指南和预约规则 -->
+    <div class="bottom">
+      <div class="left">
+        <img :src="useStore.hospitalDetailInfo?.logoData" alt="医院图标" />
+      </div>
+      <div class="right">
+        <span class="title">挂号规则</span>
+        <span class="content"
+          >预约周期：{{ useStore.hospitalDetailInfo?.bookingRule.cycle }}天 放号时间：{{
+            useStore.hospitalDetailInfo?.bookingRule.releaseTime
+          }}
+          停挂时间：{{ useStore.hospitalDetailInfo?.bookingRule.stopTime }}</span
+        >
+        <span class="content">具体地址：{{ useStore.hospitalDetailInfo?.address }}</span>
+        <span class="content">规划路线：{{ useStore.hospitalDetailInfo?.route }}</span>
+        <span class="content"
+          >退号时间：就诊前一工作日{{ useStore.hospitalDetailInfo?.bookingRule.quitTime }}前取消</span
+        >
+        <span class="title">预约规则</span>
+        <ul>
+          <li v-for="(value, index) in useStore.hospitalDetailInfo?.bookingRule.rule" :key="index">{{ value }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- 医院科室 组件 -->
+  <Department />
+</template>
+......
+```
+
+##### 科室挂号
+
+医院预约挂号的实现是通过类型定义、网络请求，数据展示实现的，在`src/pages/hospital/content/appointment/department`创建`index.vue`，核心实现如下：
+
+```vue
+<template>
+  <div class="page-wrap">
+    <el-row>
+      <!-- 左侧部分 class='el-col-3' -->
+      <el-col :span="3">
+        <!-- 左侧的一级科室菜单 -->
+        <el-menu text-color="#717171" :default-active="activeDepCode" active-text-color="black" @select="handleSelect">
+          <!-- 子菜单科室名称 -->
+          <el-menu-item v-for="deptArr in useStore_HosDepartment.hospitalDepartment" :index="deptArr.depcode">
+            <span>{{ deptArr.depname }}</span>
+          </el-menu-item>
+        </el-menu>
+      </el-col>
+      <!-- 右侧部分 class='el-col-21' -->
+      <el-col :span="21">
+        <!-- 右侧的具体科室是通过当前是否有活跃一级科室决定的 -->
+        <div v-if="activeDepCode" :key="activeDepCode">
+          <!-- 展示当前选中的一级科室的名字 -->
+          <h3 class="dept-title">{{ currentDept?.depname }}</h3>
+          <!-- 渲染实际的子科室的名称 -->
+          <div class="dept-child-list">
+            <div class="dept-item" v-for="child in currentDept?.children" :key="child.depcode">
+              {{ child.depname }}
+            </div>
+          </div>
+        </div>
+      </el-col>
+    </el-row>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Department" });
+// 导入 医院部门的 Store
+import { useHospitalDepartmentStore } from "@/stores";
+const useStore_HosDepartment = useHospitalDepartmentStore();
+
+// import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { computed, ref } from "vue";
+
+// import { useRouter } from 'vue-router'
+
+// Props定义示例
+// const props = defineProps<{}>()
+// const emit = defineEmits<{}>()
+
+// 响应式数据
+// const count = ref(0)
+// const state = reactive({})
+// 创建菜单中子菜单活跃挂载的类变量
+let activeDepCode = ref<string>("");
+
+// 计算属性
+// const computedVal = computed(() => {})
+// 通过 activeDepCode 是否有值计算当前被选中的一级科室 currentDept
+const currentDept = computed(() => {
+  return useStore_HosDepartment.hospitalDepartment?.find((item) => {
+    return item.depcode === activeDepCode.value;
+  });
+});
+
+// 监听
+// watch(count, (newVal) => {})
+
+// 生命周期
+// onMounted(() => {})
+// 当菜单被选中
+const handleSelect = (key: string) => {
+  // 用于菜单识别当前活跃子菜单标识
+  activeDepCode.value = key;
+};
+</script>
+
+<style scoped lang="less">
+.page-wrap {
+  margin: 20px 0;
+  color: #717171;
+  .el-row {
+    .el-col-3 {
+      .el-menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .el-menu-item {
+          padding: 0 30px;
+          &:hover {
+            color: black;
+          }
+        }
+      }
+    }
+    .el-col-21 {
+      padding-left: 15px;
+      h3 {
+        background-color: #f8f8f8;
+        line-height: 2.5rem;
+        font-weight: 800;
+      }
+      .dept-child-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        line-height: 2rem;
+        div {
+          margin: 10px 0;
+          &:hover {
+            color: orange;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+</style>
 ```
 
 

@@ -4,3 +4,5 @@ export * from "./api";
 export * from "./hospitalList/index";
 // 后端 Hospital / 关于医院详情 HospitalDetail 获取中相关的类型
 export * from "./hospitalDetail/index";
+// 后端 Hospital / 医院科室 HospitalDepartment 获取中相关的类型
+export * from "./hospitalDepartment/index";

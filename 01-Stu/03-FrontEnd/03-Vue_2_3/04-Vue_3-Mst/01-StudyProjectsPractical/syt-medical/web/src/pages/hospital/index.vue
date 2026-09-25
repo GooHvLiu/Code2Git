@@ -23,8 +23,11 @@ const route = useRoute();
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
 import { onMounted } from "vue";
 // 引入 Pinia Store
-import { useHospitalDetailStore } from "@/stores/index.ts";
-const useStore = useHospitalDetailStore();
+import { useHospitalDetailStore, useHospitalDepartmentStore } from "@/stores/index.ts";
+// 获取医院详情的 Store
+const useStore_HosDetail = useHospitalDetailStore();
+// 获取医院部门的 Store
+const useStore_HosDepartment = useHospitalDepartmentStore();
 
 // Props定义示例
 // const props = defineProps<{}>()
@@ -44,8 +47,10 @@ const useStore = useHospitalDetailStore();
 onMounted(() => {
   // 获取当前网址中的 query 中的  hoscode 参数
   const hoscode = route.query.hoscode as string;
-  // 页面挂载后即可获取 Store 数据
-  useStore.getHospitalDetailInfo(hoscode);
+  // 页面挂载后即可获取 医院详情 Store 数据
+  useStore_HosDetail.getHospitalDetailInfo(hoscode);
+  // 页面挂载后即可获取 医院部门 Store 数据
+  useStore_HosDepartment.getHospitalDepartment(hoscode);
 });
 </script>
 
