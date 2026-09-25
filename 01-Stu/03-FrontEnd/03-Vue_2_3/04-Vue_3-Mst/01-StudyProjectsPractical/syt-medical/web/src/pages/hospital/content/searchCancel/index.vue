@@ -1,10 +1,22 @@
 <template>
-  <div class="page-wrap">查询与取消</div>
+  <div class="page-wrap">
+    <!-- 查询取消的标题 -->
+    <div class="title">
+      <div>{{ useStore.hospitalDetailInfo?.hosname }}查询取消信息</div>
+    </div>
+    <!-- 查询取消的内容 -->
+    <div class="content">
+      <el-empty description="暂无信息" />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
 // 定义组件名字
 defineOptions({ name: "SearchCancel" });
+// 引入 Pinia Store
+import { useHospitalDetailStore } from "@/stores/index";
+const useStore = useHospitalDetailStore();
 
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
 
@@ -28,4 +40,18 @@ defineOptions({ name: "SearchCancel" });
 // onMounted(() => {})
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.page-wrap {
+  color: #717171;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  .title {
+    display: flex;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.35rem;
+    margin-right: 5px;
+  }
+}
+</style>
