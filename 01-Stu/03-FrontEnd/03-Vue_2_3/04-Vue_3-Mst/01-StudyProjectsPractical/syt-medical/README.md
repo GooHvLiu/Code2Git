@@ -2634,6 +2634,325 @@ const useStore = useHospitalDetailStore();
 
 ```
 
+#### 登录组件
+
+##### 组件路径
+
+在`src/components`下创建`Login`文件夹，用于保管登录相关组件的文件。
+
+##### 组件创建
+
+经过分析，创建`FollowApp`组件、`InputDialog`组件、`ScanDialog`组件和聚合主组件`index.vue`。
+
+###### 聚合组件
+
+`index.vue`组件的核心代码如下：
+
+```vue
+<template>
+  <div class="page-wrap">
+    <!-- 登录界面主窗口 -->
+    <el-dialog
+      v-model="userStore_Login.userLoginVisible"
+      title="用户登录 - 尚医通"
+      width="700"
+      transition="dialog-slide"
+    >
+      <!-- 内容组件 -->
+      <div class="content">
+        <!-- 内容组件中 左侧部分 -->
+        <div class="left">
+          <!-- 左侧部分的 输入手机号登录 组件 -->
+          <div v-show="userStore_Login.userLoginMethods_Input" class="input">
+            <InputDialog />
+          </div>
+          <!-- 左侧部分的 扫码登录 组件 -->
+          <div v-show="!userStore_Login.userLoginMethods_Input" class="scan">
+            <ScanDialog />
+          </div>
+        </div>
+        <!-- 内容组件中 右侧部分 -->
+        <div class="right">
+          <FollowApp />
+        </div>
+      </div>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="userStore_Login.userLoginVisible = false">关闭</el-button>
+        </div>
+      </template>
+    </el-dialog>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Login" });
+// 引入登录窗口小组件
+import FollowApp from "./FollowApp/index.vue";
+import InputDialog from "./InputDialog/index.vue";
+import ScanDialog from "./ScanDialog/index.vue";
+
+// import { ref, reactive, computed, watch, onMounted } from 'vue'
+
+// import { useRouter } from 'vue-router'
+
+// Props定义示例
+// const props = defineProps<{}>()
+// const emit = defineEmits<{}>()
+// 引入 Pinia Store 存储 定义对应变量名称
+import { useUserStore } from "@/stores/index";
+// 登录界面显示 / 隐藏的相关变量控制
+const userStore_Login = useUserStore();
+
+// 响应式数据
+// const count = ref(0)
+// const state = reactive({})
+
+// 计算属性
+// const computedVal = computed(() => {})
+
+// 监听
+// watch(count, (newVal) => {})
+
+// 生命周期
+// onMounted(() => {})
+</script>
+
+<style scoped lang="less">
+.page-wrap {
+  .content {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    .left {
+      border: 1px solid #f1f1f1;
+    }
+  }
+}
+
+// 弹窗出现动画
+/* Slide Animation */
+.dialog-slide-enter-active,
+.dialog-slide-leave-active,
+.dialog-slide-enter-active .el-dialog,
+.dialog-slide-leave-active .el-dialog {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.dialog-slide-enter-from,
+.dialog-slide-leave-to {
+  opacity: 0;
+}
+.dialog-slide-enter-from .el-dialog,
+.dialog-slide-leave-to .el-dialog {
+  transform: translateY(-100px);
+  opacity: 0;
+}
+</style>
+
+```
+
+###### 输入组件
+
+在`src/components/Login/InputDialog`下创建`index.vue`:
+
+```vue
+<template>
+  <div class="page-wrap">
+    <div class="input">
+      <el-input v-model="InputPhoneNumber" style="width: 280px" prefix-icon="User" placeholder="请输入手机号码" />
+      <el-input v-model="InputVerifyCode" style="width: 280px" prefix-icon="Lock" placeholder="请输入手机验证码" />
+      <el-button>获取验证码</el-button>
+      <div class="user-login-button">
+        <el-button type="primary" target="_blank" style="width: 280px"> 用户登录 </el-button>
+      </div>
+    </div>
+    <div class="scan">
+      <p>微信扫码登录</p>
+      <el-button type="danger" :icon="ChatDotRound" circle @click="handleChatClick" />
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "InputDialog" });
+// 引入 Pinia Store 存储 定义对应变量名称
+import { useUserStore } from "@/stores/index";
+// 登录界面显示 / 隐藏的相关变量控制
+const userStore_Login = useUserStore();
+// 引入 Element-Plus 图标元素
+import { ChatDotRound } from "@element-plus/icons-vue";
+
+// import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { ref } from "vue";
+
+// 用户输入 手机号码 的变量存储
+let InputPhoneNumber = ref<string>("");
+// 用户输入 验证码 的变量存储
+let InputVerifyCode = ref<string>("");
+// 用户点击微信扫码登录 按钮
+const handleChatClick = () => {
+  userStore_Login.userLoginMethods_Input = false;
+};
+</script>
+
+<style scoped lang="less">
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .input {
+    .el-input,
+    .el-button {
+      margin-left: 20px;
+      margin-top: 20px;
+      :deep(.el-input__inner) {
+        padding-top: 3px;
+      }
+    }
+  }
+  .scan {
+    p {
+      margin-top: 15px;
+    }
+    .el-button {
+      margin-top: 10px;
+    }
+  }
+}
+</style>
+```
+
+###### 扫码组件
+
+在`src/components/Login/ScanDialog`下创建`index.vue`:
+
+```vue
+<template>
+  <div class="page-wrap">
+    <div class="scan">
+      <img src="../../../assets/login/followPic.png" alt="扫码登录" />
+    </div>
+    <div class="input">
+      <p>输入手机号码登录</p>
+      <el-button type="info" :icon="EditPen" circle @click="handleChatClick" />
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "ScanDialog" });
+// 引入 Pinia Store 存储 定义对应变量名称
+import { useUserStore } from "@/stores/index";
+// 登录界面显示 / 隐藏的相关变量控制
+const userStore_Login = useUserStore();
+// 引入 Element-Plus 图标元素
+import { EditPen } from "@element-plus/icons-vue";
+// 用户点击微信扫码登录 按钮
+const handleChatClick = () => {
+  userStore_Login.userLoginMethods_Input = true;
+};
+</script>
+
+<style scoped lang="less">
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .scan {
+    margin-top: 45px;
+  }
+  .input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    p {
+      margin-top: 15px;
+    }
+    .el-button {
+      margin-top: 10px;
+    }
+  }
+}
+</style>
+```
+
+###### 提示组件
+
+提示组件实际为`App`下载或微信关注二维码提示组件，在`src/components/Login/FollowApp`下创建`index.vue`:
+
+```vue
+<template>
+  <div class="page-wrap">
+    <div class="content">
+      <div class="top">
+        <div class="left">
+          <img src="../../../assets/login/followPic.png" alt="微信扫一扫关注" />
+          <div class="tips">
+            <el-icon><ChatDotRound /></el-icon>
+            <P>微信扫一扫关注</P>
+            <P>“快速预约挂号”</P>
+          </div>
+        </div>
+        <div class="right">
+          <img src="../../../assets/login/appDown.png" alt="扫一扫下载" />
+          <div class="tips">
+            <el-icon><Iphone /></el-icon>
+            <P>扫一扫下载</P>
+            <P>“预约挂号”APP</P>
+          </div>
+        </div>
+      </div>
+      <div class="bottom">
+        <p>尚医通 官方指定平台</p>
+        <p>快速挂号 安全放心</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "FollowApp" });
+</script>
+<style scoped lang="less">
+.page-wrap {
+  color: #717171;
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .top {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 30px;
+      .left,
+      .left > .tips,
+      .right,
+      .right > .tips {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+    }
+    .bottom {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      p {
+        font-size: 1.5rem;
+        margin: 10px 0;
+      }
+    }
+  }
+}
+</style>
+```
+
 ## 状态管理
 
 本案例状态管理采用`pinia`状态管理工具，搭配`Vue3.x`使用。
@@ -2675,6 +2994,9 @@ app.use(createPinia());
 // 聚合导出文件，每个模块统一导出
 // 医院详情 医院部门 下的聚合导出
 export * from "./modules/hospital";
+
+// 用户 下的聚合导出
+export * from "./modules/user";
 ```
 
 #### 初始架构
@@ -2762,6 +3084,37 @@ export const useHospitalDepartmentStore = defineStore("HospitalDepartment", () =
 
   // =============== Getters
   return { hospitalDepartment, getHospitalDepartment };
+});
+```
+
+### 用户相关
+
+`src/modules/user.ts`中关于用户相关的状态管理。
+
+#### 登录状态
+
+`src/modules/user.ts`中关于登录相关的状态：
+
+```ts
+// 本文件是 用户 相关的 Pinia Store 存储相关
+import { defineStore } from "pinia";
+import { ref } from "vue";
+// 引入 类型定义
+
+// 引入网络请求标准API
+
+// 创建 用户 状态存储
+export const useUserStore = defineStore("UserStore", () => {
+  // =============== State
+  // 用于存储用户登录的 State 变量 userLoginVisible
+  let userLoginVisible = ref(false);
+  // 用于存储用户登录中输入手机号或扫码登录的 State 变量 userLoginMethods_Input=true 为输入手机号方式 userLoginMethods_Input=false 为微信扫码登录
+  let userLoginMethods_Input = ref(true);
+  // =============== Actions
+  // 用于存储用户的 State 变量
+
+  // =============== Getters
+  return { userLoginVisible, userLoginMethods_Input };
 });
 ```
 
@@ -4444,6 +4797,50 @@ const handleSelect = (key: string) => {
   }
 }
 </style>
+```
+
+### 登录组件
+
+登录组件是需要多个组件共享的，所以将登录组件注册为全局组件并通过状态管理进行显示或隐藏。
+
+#### 全局注册
+
+在`main.ts`中全局注册，核心代码如下：
+
+```ts
+......
+// 引入根组件App
+import App from "./App.vue";
+// 引入全局组件- HospitalTop / HospitalBottom / Login，用于页面的顶部和底部
+......
+import Login from "@/components/Login/index.vue";
+......
+// 将 HospitalTop / HospitalBottom / Login 注册为全局组件
+......
+app.component("Login", Login);
+```
+
+#### 全局挂载
+
+在`app.vue`中全局挂载，基本代码如下：
+
+```vue
+<template>
+  <div class="container">
+    <!-- 顶部全局组件 -->
+    <HospitalTop />
+    <!-- 中间的内容区域 -->
+    <div class="content">
+      <!-- 以下为通过 router 跳转部分 -->
+      <router-view></router-view>
+    </div>
+    <!-- 底部全局组件 -->
+    <HospitalBottom />
+  </div>
+  <!-- 全局登录组件 -->
+  <Login />
+</template>
+......
 ```
 
 

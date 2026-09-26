@@ -4,9 +4,10 @@ import { createApp } from "vue";
 import "@/style/reset.less";
 // 引入根组件App
 import App from "./App.vue";
-// 引入全局组件- HospitalTop 和 HospitalBottom，用于页面的顶部和底部
+// 引入全局组件- HospitalTop / HospitalBottom / Login，用于页面的顶部和底部
 import HospitalTop from "@/components/HospitalTop/index.vue";
 import HospitalBottom from "@/components/HospitalBottom/index.vue";
+import Login from "@/components/Login/index.vue";
 // 引入路由组件
 import router from "./router/index.ts";
 // 引入 pinia 状态管理工具
@@ -22,9 +23,10 @@ import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 const app = createApp(App);
 // 将创建的 createrPinia 进行挂载
 app.use(createPinia());
-// 将 HospitalTop 和 HospitalBottom 注册为全局组件
+// 将 HospitalTop / HospitalBottom / Login 注册为全局组件
 app.component("HospitalTop", HospitalTop);
 app.component("HospitalBottom", HospitalBottom);
+app.component("Login", Login);
 // 使用 router 插件，全局注册相关方法
 app.use(router);
 // 使用 element-plus 插件，全局注册相关方法 + 国际化全局配置

@@ -1,5 +1,5 @@
 <template>
-  <div class="page-wrap">
+  <div class="page-wrap-detail">
     <!-- 医院名称及等级 -->
     <div class="top">
       <div class="left">{{ useStore.hospitalDetailInfo?.hosname }}</div>
@@ -56,10 +56,11 @@ const useStore = useHospitalDetailStore();
 </script>
 
 <style scoped lang="less">
-.page-wrap {
+.page-wrap-detail {
   color: #717171;
   display: flex;
   flex-direction: column;
+
   .top {
     display: flex;
     flex-direction: row;

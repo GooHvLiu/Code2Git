@@ -7,7 +7,7 @@
       </div>
       <div class="right">
         <p>帮助中心</p>
-        <p>注册/登录</p>
+        <p><span @click="userRegister">注册</span> / <span @click="userLogin">登录</span></p>
       </div>
     </div>
   </div>
@@ -20,6 +20,9 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 // 导入路由常量管理文件
 import { HOME_PATH } from "@/const/index";
+// 引入Pinia Store 用户
+import { useUserStore } from "@/stores/index";
+const userStore_Login = useUserStore();
 
 // Props定义示例
 // const props = defineProps<{}>()
@@ -42,6 +45,15 @@ import { HOME_PATH } from "@/const/index";
 const handleSelect = () => {
   // 通过路由跳转到主页
   router.push({ path: HOME_PATH });
+};
+// 用户点击 注册 时
+const userRegister = () => {
+  console.log("用户点击了注册");
+};
+// 用户点击 登录 时
+const userLogin = () => {
+  // 点击登录时，将存储在 Store 中的用户登录变量结果进行更改显示
+  userStore_Login.userLoginVisible = true;
 };
 </script>
 
@@ -84,6 +96,9 @@ const handleSelect = () => {
         font-size: 1rem;
         color: #9e9e9e;
         cursor: pointer;
+        span:hover {
+          color: orange;
+        }
       }
     }
   }
