@@ -6,16 +6,16 @@
           <img src="../../../assets/login/followPic.png" alt="微信扫一扫关注" />
           <div class="tips">
             <el-icon><ChatDotRound /></el-icon>
-            <P>微信扫一扫关注</P>
-            <P>“快速预约挂号”</P>
+            <p>微信扫一扫关注</P>
+            <p>“快速预约挂号”</P>
           </div>
         </div>
         <div class="right">
           <img src="../../../assets/login/appDown.png" alt="扫一扫下载" />
           <div class="tips">
             <el-icon><Iphone /></el-icon>
-            <P>扫一扫下载</P>
-            <P>“预约挂号”APP</P>
+            <p>扫一扫下载</P>
+            <p>“预约挂号”APP</P>
           </div>
         </div>
       </div>

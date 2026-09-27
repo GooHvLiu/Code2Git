@@ -517,7 +517,7 @@ added 29 packages in 7s
   run `npm fund` for details
 ```
 
-#### 简易封装
+#### 二次封装
 
 ##### 封装目的
 
@@ -643,6 +643,89 @@ service.interceptors.response.use(
   }
 );
 ```
+
+##### 优化01段
+
+后端返回数据统一格式为：
+
+| 场景     | 返回                                                         |
+| -------- | ------------------------------------------------------------ |
+| 成功     | `{"code":200,"message":"...","ok":true,"data":{...}}`        |
+| 业务失败 | `{"code":201,"message":"手机号不能为空","ok":false,"data":null}` |
+| 未登录   | `{"code":208,"message":"未登录","ok":false,"data":null}`     |
+| 404      | `{"code":404,"message":"...","ok":false,"data":null}`        |
+
+前端请求响应拦截器，将`code===200`和`code!=200`的返回数据格式做统一处理，`src/utils/request/index.ts:`：
+
+```ts
+/**
+ * ==========================================
+ * Axios 请求统一封装 TS版
+ * ==========================================
+ * 请求拦截器：Token注入、白名单放行
+ * 响应拦截器：业务码判断、错误提示、Token过期跳转
+ */
+import axios from "axios";
+import type { AxiosInstance, InternalAxiosRequestConfig, AxiosError } from "axios";
+/**
+ * 创建 axios 实例
+ */
+const service: AxiosInstance = axios.create({
+  // 环境变量中的对应字段： VITE_APP_BASE_API = /api
+  baseURL: import.meta.env.VITE_APP_BASE_API as string,
+  // 环境变量中的对应字段： VITE_APP_TIME_OUT = 1000
+  timeout: Number(import.meta.env.VITE_APP_TIME_OUT)
+});
+
+/**
+ * 请求拦截器
+ */
+service.interceptors.request.use(
+  (requestConfig: InternalAxiosRequestConfig) => {
+    console.log("恭喜，这只是提示您：请求拦截器已生效~");
+
+    return requestConfig;
+  },
+  (error) => {
+    // 请求发送失败 返回错误信息
+    console.log("糟糕，请求拦截器发送失败~");
+
+    return Promise.reject(error);
+  }
+);
+
+/**
+ * 响应拦截器
+ * 统一处理业务码和错误
+ */
+service.interceptors.response.use(
+  (response) => {
+    console.log("后端返回的数据@@:", response);
+    const res = response.data;
+    // 业务成功
+    if (res.code === 200) {
+      // console.log("恭喜，响应拦截器已生效，响应码:200");
+      return response;
+    } else {
+      // console.log(res.data.message || "业务失败");
+      return Promise.reject(res);
+    }
+  },
+  (error: AxiosError) => {
+    // 容错：没有response的情况（断网、跨域、超时）
+    if (!error.response) {
+      // console.log("网络异常，请检查网络连接~");
+      return Promise.reject({ code: 500, message: "网络异常，请检查网络连接", ok: false, data: null });
+    }
+    // 处理 HTTP 错误：也统一 reject 业务数据
+    return Promise.reject(error.response.data);
+  }
+);
+
+export default service;
+```
+
+> 将网络请求失败和`code!=200`的返回数据进行格式化处理，统一返回数据格式
 
 ### 解决跨域
 
@@ -2634,17 +2717,17 @@ const useStore = useHospitalDetailStore();
 
 ```
 
-#### 登录组件
+### 登录组件
 
-##### 组件路径
+#### 组件路径
 
 在`src/components`下创建`Login`文件夹，用于保管登录相关组件的文件。
 
-##### 组件创建
+#### 组件创建
 
 经过分析，创建`FollowApp`组件、`InputDialog`组件、`ScanDialog`组件和聚合主组件`index.vue`。
 
-###### 聚合组件
+##### 聚合组件
 
 `index.vue`组件的核心代码如下：
 
@@ -2751,7 +2834,7 @@ const userStore_Login = useUserStore();
 
 ```
 
-###### 输入组件
+##### 输入组件
 
 在`src/components/Login/InputDialog`下创建`index.vue`:
 
@@ -2823,7 +2906,7 @@ const handleChatClick = () => {
 </style>
 ```
 
-###### 扫码组件
+##### 扫码组件
 
 在`src/components/Login/ScanDialog`下创建`index.vue`:
 
@@ -2878,7 +2961,7 @@ const handleChatClick = () => {
 </style>
 ```
 
-###### 提示组件
+##### 提示组件
 
 提示组件实际为`App`下载或微信关注二维码提示组件，在`src/components/Login/FollowApp`下创建`index.vue`:
 
@@ -2891,16 +2974,16 @@ const handleChatClick = () => {
           <img src="../../../assets/login/followPic.png" alt="微信扫一扫关注" />
           <div class="tips">
             <el-icon><ChatDotRound /></el-icon>
-            <P>微信扫一扫关注</P>
-            <P>“快速预约挂号”</P>
+            <p>微信扫一扫关注</P>
+            <p>“快速预约挂号”</P>
           </div>
         </div>
         <div class="right">
           <img src="../../../assets/login/appDown.png" alt="扫一扫下载" />
           <div class="tips">
             <el-icon><Iphone /></el-icon>
-            <P>扫一扫下载</P>
-            <P>“预约挂号”APP</P>
+            <p>扫一扫下载</P>
+            <p>“预约挂号”APP</P>
           </div>
         </div>
       </div>
@@ -2915,7 +2998,29 @@ const handleChatClick = () => {
 <script setup lang="ts">
 // 定义组件名字
 defineOptions({ name: "FollowApp" });
+
+// import { ref, reactive, computed, watch, onMounted } from 'vue'
+
+// import { useRouter } from 'vue-router'
+
+// Props定义示例
+// const props = defineProps<{}>()
+// const emit = defineEmits<{}>()
+
+// 响应式数据
+// const count = ref(0)
+// const state = reactive({})
+
+// 计算属性
+// const computedVal = computed(() => {})
+
+// 监听
+// watch(count, (newVal) => {})
+
+// 生命周期
+// onMounted(() => {})
 </script>
+
 <style scoped lang="less">
 .page-wrap {
   color: #717171;
@@ -2951,6 +3056,7 @@ defineOptions({ name: "FollowApp" });
   }
 }
 </style>
+
 ```
 
 ## 状态管理
@@ -3302,6 +3408,38 @@ export const reqHospitalDepartmentInfo = async (hoscode: string) => {
 };
 ```
 
+#### 用户组件
+
+##### 登录组件
+
+在登录界面中，需要请求后端数据，涉及相关有：验证码获取，登录验证，注册验证，等等。在`src/api/user`下创建`index.ts`用于管理与用户相关的请求路径。
+
+###### 验证码获取
+
+在`src/api/user/index.ts`下与验证码获取相关的代码如下：
+
+```ts
+// 引入网络请求接口
+import request from "@/utils/request";
+// 引入 用户/登录/验证码 数据类型
+import type { ResponseData } from "@/types/api";
+import type { CaptchaItem } from "@/types/userLogin/index";
+
+// 通过枚举管理 用户 相关功能的后端获取地址
+enum API {
+  // Login 模块的验证码 后端获取地址
+  CAPTCHA_URL = "/user/msm/send"
+}
+
+// 用户 登录 验证码获取
+export const reqLoginCapcha = async (phoneNumber: string) => {
+  const result = await request.post(API.CAPTCHA_URL, {
+    phone: phoneNumber
+  });
+  return result.data as ResponseData<CaptchaItem>;
+};
+```
+
 ## 类型推导
 
 ### 基本定义
@@ -3490,6 +3628,24 @@ export interface HospitalDepartmentItem {
 
 // 多条 医院部门 的数据类型
 export type HospitalDepartmentPageResponse = HospitalDepartmentItem[];
+```
+
+### 用户组件
+
+#### 登录组件
+
+在`src/types`下创建`userLogin/index.ts`文件用于管理和维护关于登录相关数据的格式数据。
+
+##### 验证码获取
+
+有关验证码获取相关代码如下：
+
+```ts
+// 登录窗口 验证码 数据类型
+export interface CaptchaItem {
+  phone: string;
+  code: string;
+}
 ```
 
 ## 动态组件
@@ -4843,7 +4999,79 @@ app.component("Login", Login);
 ......
 ```
 
+#### 登录验证
 
+在`src/componrnts/InputDialog/index.vue`中关于验证码获取与填写的核心代码如下：
+
+```vue
+<template>
+  <div class="page-wrap">
+    <div class="input">
+      <el-input v-model="InputPhoneNumber" style="width: 280px" prefix-icon="User" placeholder="请输入手机号码" />
+      <el-input v-model="InputVerifyCode" style="width: 280px" prefix-icon="Lock" placeholder="请输入手机验证码" />
+      <el-button @click="handleGetCaptcha">获取验证码</el-button>
+      <div class="user-login-button">
+        <el-button type="primary" target="_blank" style="width: 280px" @click="handleUserLoginBtn">
+          用户登录
+        </el-button>
+      </div>
+    </div>
+    <div class="scan">
+      <p>微信扫码登录</p>
+      <el-button type="danger" :icon="ChatDotRound" circle @click="handleChatClick" />
+    </div>
+  </div>
+</template>
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "InputDialog" });
+import { ElMessage } from "element-plus";
+// 引入 用户/登录/验证码 数据类型
+import type { ResponseData } from "@/types/api";
+import type { CaptchaItem } from "@/types/userLogin/index";
+// 引入 Pinia Store 存储 定义对应变量名称
+import { useUserStore } from "@/stores/index";
+// 登录界面显示 / 隐藏的相关变量控制
+const userStore_Login = useUserStore();
+// 引入网络请求 验证码获取 API
+import { reqLoginCapcha } from "@/api/user/index";
+// 引入 Element-Plus 图标元素
+import { ChatDotRound } from "@element-plus/icons-vue";
+
+// import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { ref } from "vue";
+
+let InputPhoneNumber = ref<string>("");
+// 用户输入 验证码 的变量存储
+let InputVerifyCode = ref<string>("");
+
+// 用户点击微信扫码登录 按钮
+const handleChatClick = () => {
+  userStore_Login.userLoginMethods_Input = false;
+};
+// 获取 验证码
+const handleGetCaptcha = async () => {
+  try {
+    const result = (await reqLoginCapcha(InputPhoneNumber.value)) as ResponseData<CaptchaItem>;
+    if (result.code == 200) {
+      // 将获取到的 验证码 数据给到 InputVerifyCode
+      InputVerifyCode.value = result.data.code;
+      ElMessage.success("验证码发送成功");
+    } else {
+      ElMessage.success(result.message);
+    }
+  } catch (error: any) {
+    // 响应拦截器 reject 后走到这里
+    ElMessage.error(error.message || "获取验证码失败");
+  }
+};
+// 用户点击 登录按钮
+const handleUserLoginBtn = async () => {};
+</script>
+......
+```
+
+> 暂未涉及前端的数据验证，此时后端具备验证功能，手机验证码采用后端返回的测试模式，非正常手机接收模式
 
 
 

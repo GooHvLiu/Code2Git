@@ -41,46 +41,24 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response) => {
     console.log("后端返回的数据@@:", response);
-    const res = response;
+    const res = response.data;
     // 业务成功
-    if (res.data.code === 200) {
-      console.log("恭喜，响应拦截器已生效，响应码:200");
-
-      return res;
+    if (res.code === 200) {
+      // console.log("恭喜，响应拦截器已生效，响应码:200");
+      return response;
     } else {
-      console.log(res.data.message || "业务失败");
+      // console.log(res.data.message || "业务失败");
       return Promise.reject(res);
     }
   },
   (error: AxiosError) => {
     // 容错：没有response的情况（断网、跨域、超时）
     if (!error.response) {
-      console.log("网络异常，请检查网络连接~");
-      return Promise.reject(error);
+      // console.log("网络异常，请检查网络连接~");
+      return Promise.reject({ code: 500, message: "网络异常，请检查网络连接", ok: false, data: null });
     }
-    // 处理 http 网络错误
-    const status = error.response.status;
-    let msg = "";
-    switch (status) {
-      case 401:
-        msg = "请求参数有误~";
-        break;
-      case 404:
-        msg = "请求失败：接口路径不存在";
-        break;
-      case 500:
-      case 501:
-      case 502:
-      case 503:
-      case 504:
-      case 505:
-        msg = "服务器挂掉了~";
-        break;
-      default:
-        msg = `HTTP错误：${status}`;
-    }
-    console.log(msg);
-    return Promise.reject(error);
+    // 处理 HTTP 错误：也统一 reject 业务数据
+    return Promise.reject(error.response.data);
   }
 );
 

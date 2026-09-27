@@ -7,8 +7,9 @@
     summary: 手机号验证码登录
     description: |
       使用手机号 + 短信验证码登录。
-      - 测试验证码：`111111`（任意手机号均可通过）
+      - 测试验证码：`111111`（任意手机号均可通过，不受过期限制）
       - 新手机号自动注册
+      - 验证码 5 分钟内有效，一次性使用
       - 登录成功返回 token，后续需认证接口在请求头携带 `token` 字段
     operationId: login
     requestBody:
@@ -44,16 +45,34 @@
                     token: "mock_token_1_1726000000000_abc123"
                     name: "测试用户"
       "201":
-        description: 登录失败（验证码错误/账号禁用）
+        description: 登录失败（参数缺失/验证码错误/验证码过期/账号禁用）
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ErrorResponse"
             examples:
+              参数缺失:
+                value:
+                  code: 201
+                  message: "手机号和验证码不能为空"
+                  ok: false
+                  data: null
               验证码错误:
                 value:
                   code: 201
                   message: "验证码错误"
+                  ok: false
+                  data: null
+              验证码不存在:
+                value:
+                  code: 201
+                  message: "验证码不存在或已失效，请重新获取"
+                  ok: false
+                  data: null
+              验证码已过期:
+                value:
+                  code: 201
+                  message: "验证码已过期，请重新获取"
                   ok: false
                   data: null
               账号禁用:

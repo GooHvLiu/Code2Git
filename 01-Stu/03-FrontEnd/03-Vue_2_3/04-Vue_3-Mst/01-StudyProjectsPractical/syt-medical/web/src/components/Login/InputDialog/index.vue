@@ -3,9 +3,11 @@
     <div class="input">
       <el-input v-model="InputPhoneNumber" style="width: 280px" prefix-icon="User" placeholder="请输入手机号码" />
       <el-input v-model="InputVerifyCode" style="width: 280px" prefix-icon="Lock" placeholder="请输入手机验证码" />
-      <el-button>获取验证码</el-button>
+      <el-button @click="handleGetCaptcha">获取验证码</el-button>
       <div class="user-login-button">
-        <el-button type="primary" target="_blank" style="width: 280px"> 用户登录 </el-button>
+        <el-button type="primary" target="_blank" style="width: 280px" @click="handleUserLoginBtn">
+          用户登录
+        </el-button>
       </div>
     </div>
     <div class="scan">
@@ -18,10 +20,16 @@
 <script setup lang="ts">
 // 定义组件名字
 defineOptions({ name: "InputDialog" });
+import { ElMessage } from "element-plus";
+// 引入 用户/登录/验证码 数据类型
+import type { ResponseData } from "@/types/api";
+import type { CaptchaItem } from "@/types/userLogin/index";
 // 引入 Pinia Store 存储 定义对应变量名称
 import { useUserStore } from "@/stores/index";
 // 登录界面显示 / 隐藏的相关变量控制
 const userStore_Login = useUserStore();
+// 引入网络请求 验证码获取 API
+import { reqLoginCapcha } from "@/api/user/index";
 // 引入 Element-Plus 图标元素
 import { ChatDotRound } from "@element-plus/icons-vue";
 
@@ -54,6 +62,24 @@ let InputVerifyCode = ref<string>("");
 const handleChatClick = () => {
   userStore_Login.userLoginMethods_Input = false;
 };
+// 获取 验证码
+const handleGetCaptcha = async () => {
+  try {
+    const result = (await reqLoginCapcha(InputPhoneNumber.value)) as ResponseData<CaptchaItem>;
+    if (result.code == 200) {
+      // 将获取到的 验证码 数据给到 InputVerifyCode
+      InputVerifyCode.value = result.data.code;
+      ElMessage.success("验证码发送成功");
+    } else {
+      ElMessage.success(result.message);
+    }
+  } catch (error: any) {
+    // 响应拦截器 reject 后走到这里
+    ElMessage.error(error.message || "获取验证码失败");
+  }
+};
+// 用户点击 登录按钮
+const handleUserLoginBtn = async () => {};
 </script>
 
 <style scoped lang="less">

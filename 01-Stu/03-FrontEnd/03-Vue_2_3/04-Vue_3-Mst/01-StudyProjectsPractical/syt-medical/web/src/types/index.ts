@@ -6,3 +6,5 @@ export * from "./hospitalList/index";
 export * from "./hospitalDetail/index";
 // 后端 Hospital / 医院科室 HospitalDepartment 获取中相关的类型
 export * from "./hospitalDepartment/index";
+// 后端 User / Login / CAPTCHA 获取中相关的类型
+export * from "./userLogin/index";

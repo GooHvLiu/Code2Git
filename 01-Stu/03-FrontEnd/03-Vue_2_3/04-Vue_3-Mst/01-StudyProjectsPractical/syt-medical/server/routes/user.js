@@ -29,13 +29,26 @@ router.post("/userInfo/login", (req, res) => {
     return fail(res, "手机号和验证码不能为空");
   }
 
-  // Mock：验证码 111111 直接通过；其他验证码检查 msmCodes
+  // Mock：固定验证码 111111 直接通过（测试用）；其他验证码检查 msmCodes
   let codeValid = (code === "111111");
   if (!codeValid) {
     const saved = msmCodes.get(phone);
-    if (saved && saved === code) {
-      codeValid = true;
+    if (!saved) {
+      return fail(res, "验证码不存在或已失效，请重新获取");
+    }
+    // 兼容新旧结构：新结构 { code, expireAt }，旧结构 string
+    const savedCode = typeof saved === "string" ? saved : saved.code;
+    const expireAt = typeof saved === "string" ? Infinity : saved.expireAt;
+
+    // 检查过期
+    if (Date.now() > expireAt) {
       msmCodes.delete(phone);
+      return fail(res, "验证码已过期，请重新获取");
+    }
+    // 校验匹配
+    if (savedCode === code) {
+      codeValid = true;
+      msmCodes.delete(phone); // 一次性使用
     }
   }
   if (!codeValid) {
