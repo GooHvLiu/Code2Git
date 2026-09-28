@@ -10,7 +10,7 @@ import type { AxiosInstance, InternalAxiosRequestConfig, AxiosError } from "axio
 /**
  * 创建 axios 实例
  */
-const service: AxiosInstance = axios.create({
+export const request: AxiosInstance = axios.create({
   // 环境变量中的对应字段： VITE_APP_BASE_API = /api
   baseURL: import.meta.env.VITE_APP_BASE_API as string,
   // 环境变量中的对应字段： VITE_APP_TIME_OUT = 1000
@@ -20,7 +20,7 @@ const service: AxiosInstance = axios.create({
 /**
  * 请求拦截器
  */
-service.interceptors.request.use(
+request.interceptors.request.use(
   (requestConfig: InternalAxiosRequestConfig) => {
     console.log("恭喜，这只是提示您：请求拦截器已生效~");
 
@@ -38,7 +38,7 @@ service.interceptors.request.use(
  * 响应拦截器
  * 统一处理业务码和错误
  */
-service.interceptors.response.use(
+request.interceptors.response.use(
   (response) => {
     console.log("后端返回的数据@@:", response);
     const res = response.data;
@@ -57,9 +57,7 @@ service.interceptors.response.use(
       // console.log("网络异常，请检查网络连接~");
       return Promise.reject({ code: 500, message: "网络异常，请检查网络连接", ok: false, data: null });
     }
-    // 处理 HTTP 错误：也统一 reject 业务数据
+    // 处理  HTTP 错误：也统一 reject 业务数据
     return Promise.reject(error.response.data);
   }
 );
-
-export default service;

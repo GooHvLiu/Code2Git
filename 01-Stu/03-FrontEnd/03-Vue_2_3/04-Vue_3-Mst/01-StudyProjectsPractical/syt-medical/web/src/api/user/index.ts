@@ -1,5 +1,6 @@
 // 引入网络请求接口
-import request from "@/utils/request";
+import { request } from "@/utils";
+
 // 引入 用户/登录/验证码 数据类型
 import type { ResponseData } from "@/types/api";
 import type { CaptchaItem } from "@/types/userLogin/index";

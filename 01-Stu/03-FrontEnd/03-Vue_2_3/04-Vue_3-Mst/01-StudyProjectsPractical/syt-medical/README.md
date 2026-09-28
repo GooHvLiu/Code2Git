@@ -500,11 +500,25 @@ added 23 packages in 2s
 PS F:\CodingMan\Code2Git\01-Stu\03-FrontEnd\03-Vue_2_3\04-Vue_3-Mst\01-StudyProjectsPractical\syt-medical\web> 
 ```
 
-### 网络请求
+### 工具封装
+
+#### 聚合导出
+
+根目录创建聚合文件`index.ts`:
+
+```ts
+// Axios 网络请求聚合导出
+export * from "./request/index";
+
+// 导出验证工具所有方法
+export * from "./verify";
+```
+
+#### 网络请求
 
 本案例使用`axios`实现网络请求功能，工具封装在`src/utils/request/index.ts`中。
 
-#### 安装依赖
+##### 安装依赖
 
 通过如下方式安装`axios`依赖：
 
@@ -516,8 +530,6 @@ added 29 packages in 7s
 34 packages are looking for funding
   run `npm fund` for details
 ```
-
-#### 二次封装
 
 ##### 封装目的
 
@@ -542,7 +554,7 @@ import type { AxiosInstance, InternalAxiosRequestConfig, AxiosError } from "axio
 /**
  * 创建 axios 实例
  */
-const service: AxiosInstance = axios.create({
+export const request: AxiosInstance = axios.create({
   // 环境变量中的对应字段： VITE_APP_BASE_API = /api
   baseURL: import.meta.env.VITE_APP_BASE_API as string,
   // 环境变量中的对应字段： VITE_APP_TIME_OUT = 1000
@@ -558,9 +570,7 @@ service.interceptors.request.use( ... );
  * 响应拦截器
  * 统一处理业务码和错误
  */
-service.interceptors.response.use( ... );
-
-export default service;
+request.interceptors.response.use( ... );
 ```
 
 > 最简易的封装，请求拦截和响应拦截参考如下
@@ -573,7 +583,7 @@ export default service;
 /**
  * 请求拦截器
  */
-service.interceptors.request.use(
+request.interceptors.request.use(
   (requestConfig: InternalAxiosRequestConfig) => {
     console.log("恭喜，这只是提示您：请求拦截器已生效~");
 
@@ -597,7 +607,7 @@ service.interceptors.request.use(
  * 响应拦截器
  * 统一处理业务码和错误
  */
-service.interceptors.response.use(
+request.interceptors.response.use(
   (response) => {
     console.log("后端返回的数据@@:", response);
     const res = response;
@@ -670,7 +680,7 @@ import type { AxiosInstance, InternalAxiosRequestConfig, AxiosError } from "axio
 /**
  * 创建 axios 实例
  */
-const service: AxiosInstance = axios.create({
+export const request: AxiosInstance = axios.create({
   // 环境变量中的对应字段： VITE_APP_BASE_API = /api
   baseURL: import.meta.env.VITE_APP_BASE_API as string,
   // 环境变量中的对应字段： VITE_APP_TIME_OUT = 1000
@@ -680,7 +690,7 @@ const service: AxiosInstance = axios.create({
 /**
  * 请求拦截器
  */
-service.interceptors.request.use(
+request.interceptors.request.use(
   (requestConfig: InternalAxiosRequestConfig) => {
     console.log("恭喜，这只是提示您：请求拦截器已生效~");
 
@@ -698,7 +708,7 @@ service.interceptors.request.use(
  * 响应拦截器
  * 统一处理业务码和错误
  */
-service.interceptors.response.use(
+request.interceptors.response.use(
   (response) => {
     console.log("后端返回的数据@@:", response);
     const res = response.data;
@@ -717,15 +727,38 @@ service.interceptors.response.use(
       // console.log("网络异常，请检查网络连接~");
       return Promise.reject({ code: 500, message: "网络异常，请检查网络连接", ok: false, data: null });
     }
-    // 处理 HTTP 错误：也统一 reject 业务数据
+    // 处理  HTTP 错误：也统一 reject 业务数据
     return Promise.reject(error.response.data);
   }
 );
-
-export default service;
 ```
 
 > 将网络请求失败和`code!=200`的返回数据进行格式化处理，统一返回数据格式
+
+#### 验证封装
+
+该模块封装常用的字段验证的相关工具。
+
+##### 登录账号
+
+校验登录模块的输入手机号输入框，验证其是否有输入，是否满足手机号码字段定义，`src/utils/verify.ts`核心代码如下:
+
+```ts
+/**
+ * ==========================================
+ * 校验工具 TS版
+ * ==========================================
+ * 登录输入：校验手机号格式是否正确
+ */
+// 校验手机号码的正则表达式
+const regularPhoneNumber = /^1[3-9]\d{9}$/;
+// 导出 手机号码 验证结果
+export const verifyPhoneNumber = (phoneNumber: string): boolean => {
+  // 验证手机号是否合法的结果
+  if (!phoneNumber) return false;
+  return regularPhoneNumber.test(phoneNumber.trim());
+};
+```
 
 ### 解决跨域
 
@@ -3262,7 +3295,8 @@ onMounted(() => {
 
 ```ts
 // 引入网络请求接口
-import request from "@/utils/request";
+import { request } from "@/utils";
+
 // 通过 type 引入类型接口
 import type {
   ResponseData,
@@ -3304,7 +3338,8 @@ export const reqHospitalRegionList = async (dictCode: number) => {
 
 ```ts
 // 引入网络请求接口
-import request from "@/utils/request";
+import { request } from "@/utils";
+
 // 通过 type 引入类型接口
 import type {
   ResponseData,
@@ -3356,7 +3391,7 @@ export const reqHospitalRegionList = async (dictCode: number) => {
 
 ```ts
 // 引入网络请求接口
-import request from "@/utils/request";
+import { request } from "@/utils";
 
 // 通过 type 引入类型接口定义
 import type { ResponseData } from "@/types/api";
@@ -3381,7 +3416,7 @@ export const reqHospitalDetailInfo = async (hoscode: string) => {
 
 ```ts
 // 引入网络请求接口
-import request from "@/utils/request";
+import { request } from "@/utils";
 
 // 通过 type 引入类型接口定义
 import type { ResponseData } from "@/types/api";
@@ -3420,7 +3455,8 @@ export const reqHospitalDepartmentInfo = async (hoscode: string) => {
 
 ```ts
 // 引入网络请求接口
-import request from "@/utils/request";
+import { request } from "@/utils";
+
 // 引入 用户/登录/验证码 数据类型
 import type { ResponseData } from "@/types/api";
 import type { CaptchaItem } from "@/types/userLogin/index";
@@ -5039,30 +5075,69 @@ import { reqLoginCapcha } from "@/api/user/index";
 import { ChatDotRound } from "@element-plus/icons-vue";
 
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
-import { ref } from "vue";
+import { ref,reactive } from "vue";
 
-let InputPhoneNumber = ref<string>("");
-// 用户输入 验证码 的变量存储
-let InputVerifyCode = ref<string>("");
-
-// 用户点击微信扫码登录 按钮
-const handleChatClick = () => {
-  userStore_Login.userLoginMethods_Input = false;
-};
-// 获取 验证码
+let disabled = ref<boolean>(false);
+// 获取验证码按钮不可用倒计时
+let captchaTimer = ref<number>(5);
+// 表单内的数据变量
+const ruleForm = reactive({
+  phoneNumber: "",
+  captchaCode: ""
+});
+// 点击 获取验证码 按钮
 const handleGetCaptcha = async () => {
-  try {
-    const result = (await reqLoginCapcha(InputPhoneNumber.value)) as ResponseData<CaptchaItem>;
-    if (result.code == 200) {
-      // 将获取到的 验证码 数据给到 InputVerifyCode
-      InputVerifyCode.value = result.data.code;
-      ElMessage.success("验证码发送成功");
-    } else {
-      ElMessage.success(result.message);
+  if (verifyPhoneNumber(ruleForm.phoneNumber)) {
+    try {
+      const result = (await reqLoginCapcha(ruleForm.phoneNumber)) as ResponseData<CaptchaItem>;
+
+      if (result.code == 200) {
+        // 将获取到的 验证码 数据给到 InputVerifyCode
+        ruleForm.captchaCode = result.data.code;
+        ElMessage.success({
+          message: "验证码发送成功",
+          placement: "top",
+          offset: 100
+        });
+        // 倒计时 5 秒 获取验证码按钮无法使用
+        // 重置一下倒计时数值
+        captchaTimer.value = 5;
+        // 将获取 验证码 按钮的变量变为 true
+        disabled.value = true;
+        const timer = setInterval(() => {
+          // 倒计时减一，直到为0时
+          captchaTimer.value--;
+          if (captchaTimer.value <= 0) {
+            // 完成循环后清除定时器
+            clearInterval(timer);
+            // 重置一下倒计时数值
+            captchaTimer.value = 5;
+            // 将获取 验证码 按钮的变量变为 true
+            disabled.value = false;
+          }
+        }, 1000);
+      } else {
+        ElMessage.success({
+          message: result.message,
+          placement: "top",
+          offset: 100
+        });
+      }
+    } catch (error: any) {
+      // 响应拦截器 reject 后走到这里
+      ElMessage.error({
+        message: error.message || "获取验证码失败",
+        placement: "top",
+        offset: 100
+      });
     }
-  } catch (error: any) {
-    // 响应拦截器 reject 后走到这里
-    ElMessage.error(error.message || "获取验证码失败");
+  } else {
+    ElMessage({
+      message: "输入的手机号码格式不正确，请重新输入",
+      placement: "top",
+      offset: 100
+    });
+    ruleForm.phoneNumber = "";
   }
 };
 // 用户点击 登录按钮
@@ -5072,6 +5147,72 @@ const handleUserLoginBtn = async () => {};
 ```
 
 > 暂未涉及前端的数据验证，此时后端具备验证功能，手机验证码采用后端返回的测试模式，非正常手机接收模式
+
+#### 数据校验
+
+当用户输入手机号码之后，虽然后端有数据校验，但是其前端任然需要进行校验，`src/components/Login/InputDialog` 内的`index.vue`校验相关代码如下：
+
+```vue
+<script setup lang="ts">
+......
+// 点击 获取验证码 按钮
+const handleGetCaptcha = async () => {
+  if (verifyPhoneNumber(ruleForm.phoneNumber)) {
+    try {
+      const result = (await reqLoginCapcha(ruleForm.phoneNumber)) as ResponseData<CaptchaItem>;
+
+      if (result.code == 200) {
+        // 将获取到的 验证码 数据给到 InputVerifyCode
+        ruleForm.captchaCode = result.data.code;
+        ElMessage.success({
+          message: "验证码发送成功",
+          placement: "top",
+          offset: 100
+        });
+        // 倒计时 5 秒 获取验证码按钮无法使用
+        // 重置一下倒计时数值
+        captchaTimer.value = 5;
+        // 将获取 验证码 按钮的变量变为 true
+        disabled.value = true;
+        const timer = setInterval(() => {
+          // 倒计时减一，直到为0时
+          captchaTimer.value--;
+          if (captchaTimer.value <= 0) {
+            // 完成循环后清除定时器
+            clearInterval(timer);
+            // 重置一下倒计时数值
+            captchaTimer.value = 5;
+            // 将获取 验证码 按钮的变量变为 true
+            disabled.value = false;
+          }
+        }, 1000);
+      } else {
+        ElMessage.success({
+          message: result.message,
+          placement: "top",
+          offset: 100
+        });
+      }
+    } catch (error: any) {
+      // 响应拦截器 reject 后走到这里
+      ElMessage.error({
+        message: error.message || "获取验证码失败",
+        placement: "top",
+        offset: 100
+      });
+    }
+  } else {
+    ElMessage({
+      message: "输入的手机号码格式不正确，请重新输入",
+      placement: "top",
+      offset: 100
+    });
+    ruleForm.phoneNumber = "";
+  }
+};
+</script>
+......
+```
 
 
 

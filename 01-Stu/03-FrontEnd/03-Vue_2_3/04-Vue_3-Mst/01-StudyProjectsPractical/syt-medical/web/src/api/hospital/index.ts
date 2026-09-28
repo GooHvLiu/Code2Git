@@ -1,5 +1,5 @@
 // 引入网络请求接口
-import request from "@/utils/request";
+import { request } from "@/utils";
 
 // 通过 type 引入类型接口定义
 import type { ResponseData } from "@/types/api";
