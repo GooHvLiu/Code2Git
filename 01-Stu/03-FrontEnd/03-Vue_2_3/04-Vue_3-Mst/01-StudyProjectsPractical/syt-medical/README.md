@@ -741,7 +741,7 @@ request.interceptors.response.use(
 
 ##### 登录账号
 
-校验登录模块的输入手机号输入框，验证其是否有输入，是否满足手机号码字段定义，`src/utils/verify.ts`核心代码如下:
+校验登录模块的输入手机号输入框，验证其是否有输入，是否满足手机号码字段定义，以及验证码是否正确，`src/utils/verify.ts`核心代码如下:
 
 ```ts
 /**
@@ -750,13 +750,25 @@ request.interceptors.response.use(
  * ==========================================
  * 登录输入：校验手机号格式是否正确
  */
-// 校验手机号码的正则表达式
+// 校验 手机号码 的正则表达式
 const regularPhoneNumber = /^1[3-9]\d{9}$/;
+// 校验 六位纯数字验证码 的正则表达式
+const regularCaptchaCode = /^\d{6}$/;
 // 导出 手机号码 验证结果
-export const verifyPhoneNumber = (phoneNumber: string): boolean => {
+export const verifyPhoneNumber = (phoneNumber: string | null | undefined): boolean => {
+  // 先转字符串，防止不是字符串调用trim报错
+  const str = String(phoneNumber ?? "").trim();
   // 验证手机号是否合法的结果
-  if (!phoneNumber) return false;
-  return regularPhoneNumber.test(phoneNumber.trim());
+  if (!str) return false;
+  return regularPhoneNumber.test(str);
+};
+// 导出 验证码 的验证结果
+export const verifyCaptchCode = (captchCode: string | null | undefined): boolean => {
+  // 先转字符串，防止不是字符串调用trim报错
+  const str = String(captchCode ?? "").trim();
+  // 验证 验证码 是否合法的结果
+  if (!str) return false;
+  return regularCaptchaCode.test(str);
 };
 ```
 
@@ -5150,11 +5162,61 @@ const handleUserLoginBtn = async () => {};
 
 #### 数据校验
 
-当用户输入手机号码之后，虽然后端有数据校验，但是其前端任然需要进行校验，`src/components/Login/InputDialog` 内的`index.vue`校验相关代码如下：
+当用户输入手机号码之后，虽然后端有数据校验，但是其前端任然需要进行校验，同时对验证码的录入也进行校验，`src/components/Login/InputDialog` 内的`index.vue`校验相关代码如下：
 
 ```vue
 <script setup lang="ts">
 ......
+let disabled = ref<boolean>(false);
+// 获取验证码按钮不可用倒计时
+let captchaTimer = ref<number>(5);
+// 表单内的数据变量
+const ruleForm = reactive({
+  phoneNumber: "",
+  captchaCode: ""
+});
+
+// 需要校验的表格别名
+const ruleFormRef = ref<any>();
+// 表单验证规则
+const rules = {
+  phoneNumber: [
+    {
+      trigger: "blur",
+      validator: (rule: any, value: string, callback: any) => {
+        if (!verifyPhoneNumber(value)) {
+          return callback(new Error("手机号格式不正确"));
+        }
+        callback();
+      }
+    }
+  ],
+  captchaCode: [
+    {
+      trigger: "blur",
+      validator: (rule: any, value: string, callback: any) => {
+        // 使用引入的验证工具验证
+        if (!verifyCaptchCode(value)) {
+          return callback(new Error("验证码必须是6位数字"));
+        }
+        callback();
+      }
+    }
+  ]
+};
+
+// 计算属性
+// const computedVal = computed(() => {})
+
+// 监听
+// watch(count, (newVal) => {})
+
+// 生命周期
+// onMounted(() => {})
+// 用户点击微信扫码登录 按钮
+const handleChatClick = () => {
+  userStore_Login.userLoginMethods_Input = false;
+};
 // 点击 获取验证码 按钮
 const handleGetCaptcha = async () => {
   if (verifyPhoneNumber(ruleForm.phoneNumber)) {
@@ -5210,11 +5272,94 @@ const handleGetCaptcha = async () => {
     ruleForm.phoneNumber = "";
   }
 };
+// 用户点击 登录按钮
+const handleUserLoginBtn = async () => {
+  // 如果需要验证的值有空的 则返回
+  if (!ruleFormRef.value) return;
+  try {
+    // 输入验证全部通过后再执行
+    await ruleFormRef.value.validate();
+    // 只有全部校验成功，才走到这里
+    console.log("书写网络请求的地方");
+  } catch (error) {
+    // 校验失败会进这里，不会执行上面的log
+    ElMessage({
+      message: "表单校验不通过:" + error,
+      placement: "top",
+      offset: 100
+    });
+  }
+};
+// 触发校验重置和输入框内容清空
+const resetVerify = () => {
+  // 清空校验提示内容和输入框内容
+  ruleFormRef.value.resetFields();
+};
+// 把方法暴露给父组件
+defineExpose({
+  resetVerify
+});
 </script>
 ......
 ```
 
+#### 数据重置
 
+因为数据输入组件是在`Login/InputDialog/index.vue`内，窗口关闭是在`Login/index.vue`组件内，数据和方法不在同一个组件内，需要实现父亲组件按钮控制子组件方法，此处采用`defineExpose`方法实现，即在子组件中暴露组件方法，父组件执行此方法。
+
+##### 组件定义
+
+在子组件中通过如下方式进行方法定义与方法暴露：
+
+```vue
+// 触发校验重置和输入框内容清空
+const resetVerify = () => {
+  // 清空校验提示内容和输入框内容
+  ruleFormRef.value.resetFields();
+};
+// 把方法暴露给父组件
+defineExpose({
+  resetVerify
+});
+```
+
+##### 组件执行
+
+在父组件中通过按钮绑定事件、`ref`定义组件别名、事件执行等流程方式实现父组件执行子组件方法：
+
+```vue
+<template>
+......
+<el-dialog
+      v-model="userStore_Login.userLoginVisible"
+      title="用户登录 - 尚医通"
+      width="700"
+      transition="dialog-slide"
+      :before-close="handleClose"
+    >
+......
+<div class="dialog-footer">
+          <el-button @click="handleClose">关闭</el-button>
+        </div>
+......
+< /template>
+<script setup lang="ts">
+import { ref } from "vue";
+// 定义 inputDialoy ref 名称
+const inputDialogRef = ref<InstanceType<typeof InputDialog>>();
+// 用户点击关闭按钮时触发
+const handleClose = () => {
+  // 将 Pinia Store 中的变量值修改为 fasle ，即 不可见
+  userStore_Login.userLoginVisible = false;
+  // 通过子组件方法暴露的方式实现对子组件方法的控制执行
+  if (inputDialogRef.value) {
+    // 调用输入框组件的数据校验重置方法
+    inputDialogRef.value.resetVerify();
+  }
+};
+```
+
+> 此方法实际上，就是通过将组件`ref`绑定一个别名， 探后通过`ref.value.xxx`访问到子组件对应的`xxx`方法
 
 
 

@@ -1,7 +1,7 @@
 <template>
   <div class="page-wrap">
     <div class="input">
-      <el-form :model="ruleForm" status-icon>
+      <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleFormRef">
         <el-form-item prop="phoneNumber">
           <el-input
             v-model="ruleForm.phoneNumber"
@@ -20,8 +20,9 @@
         </el-form-item>
       </el-form>
       <div class="get-captcha">
-        <el-button :disabled="disabled" @click="handleGetCaptcha">获取验证码</el-button>
-        <span v-show="disabled">0{{ captchaTimer }}</span>
+        <el-button :disabled="disabled" @click="handleGetCaptcha"
+          >获取验证码<span v-show="disabled">(0{{ captchaTimer }})</span></el-button
+        >
       </div>
       <div class="user-login-button">
         <el-button type="primary" target="_blank" style="width: 280px" @click="handleUserLoginBtn">
@@ -53,7 +54,7 @@ import { reqLoginCapcha } from "@/api/user/index";
 // 引入 Element-Plus 图标元素
 import { ChatDotRound } from "@element-plus/icons-vue";
 // 引入 手机号码 验证工具
-import { verifyPhoneNumber } from "@/utils";
+import { verifyPhoneNumber, verifyCaptchCode } from "@/utils";
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
 import { ref, reactive } from "vue";
 
@@ -76,6 +77,35 @@ const ruleForm = reactive({
   phoneNumber: "",
   captchaCode: ""
 });
+
+// 需要校验的表格别名
+const ruleFormRef = ref<any>();
+// 表单验证规则
+const rules = {
+  phoneNumber: [
+    {
+      trigger: "blur",
+      validator: (rule: any, value: string, callback: any) => {
+        if (!verifyPhoneNumber(value)) {
+          return callback(new Error("手机号格式不正确"));
+        }
+        callback();
+      }
+    }
+  ],
+  captchaCode: [
+    {
+      trigger: "blur",
+      validator: (rule: any, value: string, callback: any) => {
+        // 使用引入的验证工具验证
+        if (!verifyCaptchCode(value)) {
+          return callback(new Error("验证码必须是6位数字"));
+        }
+        callback();
+      }
+    }
+  ]
+};
 
 // 计算属性
 // const computedVal = computed(() => {})
@@ -145,7 +175,32 @@ const handleGetCaptcha = async () => {
   }
 };
 // 用户点击 登录按钮
-const handleUserLoginBtn = async () => {};
+const handleUserLoginBtn = async () => {
+  // 如果需要验证的值有空的 则返回
+  if (!ruleFormRef.value) return;
+  try {
+    // 输入验证全部通过后再执行
+    await ruleFormRef.value.validate();
+    // 只有全部校验成功，才走到这里
+    console.log("书写网络请求的地方");
+  } catch (error) {
+    // 校验失败会进这里，不会执行上面的log
+    ElMessage({
+      message: "表单校验不通过:" + error,
+      placement: "top",
+      offset: 100
+    });
+  }
+};
+// 触发校验重置和输入框内容清空
+const resetVerify = () => {
+  // 清空校验提示内容和输入框内容
+  ruleFormRef.value.resetFields();
+};
+// 把方法暴露给父组件
+defineExpose({
+  resetVerify
+});
 </script>
 
 <style scoped lang="less">
@@ -159,6 +214,8 @@ const handleUserLoginBtn = async () => {};
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 5px;
+      margin-bottom: 5px;
     }
     .get-captcha {
       margin-bottom: 10px;

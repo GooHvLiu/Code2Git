@@ -6,6 +6,7 @@
       title="用户登录 - 尚医通"
       width="700"
       transition="dialog-slide"
+      :before-close="handleClose"
     >
       <!-- 内容组件 -->
       <div class="content">
@@ -13,7 +14,7 @@
         <div class="left">
           <!-- 左侧部分的 输入手机号登录 组件 -->
           <div v-show="userStore_Login.userLoginMethods_Input" class="input">
-            <InputDialog />
+            <InputDialog ref="inputDialogRef" />
           </div>
           <!-- 左侧部分的 扫码登录 组件 -->
           <div v-show="!userStore_Login.userLoginMethods_Input" class="scan">
@@ -27,7 +28,7 @@
       </div>
       <template #footer>
         <div class="dialog-footer">
-          <el-button @click="userStore_Login.userLoginVisible = false">关闭</el-button>
+          <el-button @click="handleClose">关闭</el-button>
         </div>
       </template>
     </el-dialog>
@@ -43,6 +44,7 @@ import InputDialog from "./InputDialog/index.vue";
 import ScanDialog from "./ScanDialog/index.vue";
 
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { ref } from "vue";
 
 // import { useRouter } from 'vue-router'
 
@@ -53,6 +55,8 @@ import ScanDialog from "./ScanDialog/index.vue";
 import { useUserStore } from "@/stores/index";
 // 登录界面显示 / 隐藏的相关变量控制
 const userStore_Login = useUserStore();
+// 定义 inputDialoy ref 名称
+const inputDialogRef = ref<InstanceType<typeof InputDialog>>();
 
 // 响应式数据
 // const count = ref(0)
@@ -66,6 +70,17 @@ const userStore_Login = useUserStore();
 
 // 生命周期
 // onMounted(() => {})
+
+// 用户点击关闭按钮时触发
+const handleClose = () => {
+  // 将 Pinia Store 中的变量值修改为 fasle ，即 不可见
+  userStore_Login.userLoginVisible = false;
+  // 通过子组件方法暴露的方式实现对子组件方法的控制执行
+  if (inputDialogRef.value) {
+    // 调用输入框组件的数据校验重置方法
+    inputDialogRef.value.resetVerify();
+  }
+};
 </script>
 
 <style scoped lang="less">
