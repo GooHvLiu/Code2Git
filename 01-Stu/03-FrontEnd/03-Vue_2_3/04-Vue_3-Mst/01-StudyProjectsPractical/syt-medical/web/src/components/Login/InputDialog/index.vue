@@ -155,8 +155,7 @@ const handleUserLoginBtn = async () => {};
   align-items: center;
   .input {
     .el-form {
-      margin-top: 15px;
-      gap: 15px;
+      margin-top: 25px;
       display: flex;
       flex-direction: column;
       align-items: center;
