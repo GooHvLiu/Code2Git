@@ -6,8 +6,42 @@
         <p @click="handleSelect">尚医通 - 预约挂号统一平台</p>
       </div>
       <div class="right">
-        <p>帮助中心</p>
-        <p><span @click="userRegister">注册</span> / <span @click="userLogin">登录</span></p>
+        <p class="help-tips"><span>帮助中心</span></p>
+        <p class="login-register" v-if="!userStore_Login.isLogin">
+          <span @click="userRegister">注册</span> / <span @click="userLogin">登录</span>
+        </p>
+        <p class="user-info" v-if="userStore_Login.isLogin">
+          <el-icon><User /></el-icon>
+          <el-dropdown
+            placement="bottom-end"
+            @command="handleCommand"
+            :popper-options="{
+              modifiers: [
+                {
+                  name: 'offset',
+                  options: {
+                    offset: [0, 25] // [水平偏移, 垂直偏移]，12px 向下偏移
+                  }
+                }
+              ]
+            }"
+          >
+            <span class="el-dropdown-link">
+              <span>{{ userStore_Login.userInfo?.name }}</span>
+              <el-icon class="el-icon--right">
+                <arrow-down />
+              </el-icon>
+            </span>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item>实名认证</el-dropdown-item>
+                <el-dropdown-item>挂号订单</el-dropdown-item>
+                <el-dropdown-item>就诊管理</el-dropdown-item>
+                <el-dropdown-item command="logout" divided>退出登录</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </p>
       </div>
     </div>
   </div>
@@ -23,7 +57,8 @@ import { HOME_PATH } from "@/const/index";
 // 引入Pinia Store 用户
 import { useUserStore } from "@/stores/index";
 const userStore_Login = useUserStore();
-
+// 引入 utils 工具箱
+import { userInfoMethods } from "@/utils/localStorage";
 // Props定义示例
 // const props = defineProps<{}>()
 // const emit = defineEmits<{}>()
@@ -54,6 +89,21 @@ const userRegister = () => {
 const userLogin = () => {
   // 点击登录时，将存储在 Store 中的用户登录变量结果进行更改显示
   userStore_Login.userLoginVisible = true;
+};
+// 点击用户下拉菜单时的方法
+const handleCommand = (command: string | number | object) => {
+  // 当用户点击的是退出登录按钮时
+  if (command == "logout") {
+    // 清空本地持久化存储
+    userInfoMethods.clearLocalStorage();
+    // 清除 Pinia Store 存储的 用户数据 信息
+    userStore_Login.userInfo = {
+      name: "",
+      token: ""
+    };
+    // 跳转到主页 类似于刷新页面
+    router.push(HOME_PATH);
+  }
 };
 </script>
 
@@ -95,9 +145,33 @@ const userLogin = () => {
       p {
         font-size: 1rem;
         color: #9e9e9e;
+      }
+      .help-tips:hover {
+        color: orange;
         cursor: pointer;
+      }
+      .login-register {
+        p {
+          font-size: 1rem;
+          color: #9e9e9e;
+        }
         span:hover {
           color: orange;
+          cursor: pointer;
+        }
+      }
+      .user-info {
+        .el-icon {
+          color: orange;
+        }
+        .el-icon:last-child:hover {
+          cursor: pointer;
+        }
+        span {
+          margin: 0 5px;
+        }
+        :deep(.el-dropdown-menu) {
+          margin-top: 40px;
         }
       }
     }

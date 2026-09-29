@@ -5528,6 +5528,8 @@ const handleClose = () => {
 
 #### 用户登录
 
+##### 登录组件
+
 在`src/components/Login/InutDialog/index.vue`文件中实现用户的登录操作，并将数据进行`Pinia Store`和`localStorage`：
 
 ```ts
@@ -5566,7 +5568,94 @@ const handleUserLoginBtn = async () => {
 ......
 ```
 
+##### 页眉组件
 
+在`src/components/HospitalTop/index.vue`下的注册/ 登录相关功能部件区，实现用户登录后，显示用户数据及子菜单功能：
+
+```vue
+<template>
+......
+      <div class="right">
+        <p class="help-tips"><span>帮助中心</span></p>
+        <p class="login-register" v-if="!userStore_Login.isLogin">
+          <span @click="userRegister">注册</span> / <span @click="userLogin">登录</span>
+        </p>
+        <p class="user-info" v-if="userStore_Login.isLogin">
+          <el-icon><User /></el-icon>
+          <el-dropdown
+            placement="bottom-end"
+            @command="handleCommand"
+            :popper-options="{
+              modifiers: [
+                {
+                  name: 'offset',
+                  options: {
+                    offset: [0, 25] // [水平偏移, 垂直偏移]，12px 向下偏移
+                  }
+                }
+              ]
+            }"
+          >
+            <span class="el-dropdown-link">
+              <span>{{ userStore_Login.userInfo?.name }}</span>
+              <el-icon class="el-icon--right">
+                <arrow-down />
+              </el-icon>
+            </span>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item>实名认证</el-dropdown-item>
+                <el-dropdown-item>挂号订单</el-dropdown-item>
+                <el-dropdown-item>就诊管理</el-dropdown-item>
+                <el-dropdown-item command="logout" divided>退出登录</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </p>
+      </div>
+    </div>
+  </div>
+</template>
+......
+```
+
+> 主要是根据用户是否登录显示不同的效果，自动切换
+
+#### 用户退出
+
+在用户已登录状态下，用户资料有下拉菜单，可以执行用户退出功能，具体实现如下：
+
+```js
+<script setup lang="ts">
+// import { ref, reactive, computed, watch, onMounted } from 'vue'
+// 导入路由并创建路由
+import { useRouter } from "vue-router";
+const router = useRouter();
+// 导入路由常量管理文件
+import { HOME_PATH } from "@/const/index";
+// 引入Pinia Store 用户
+import { useUserStore } from "@/stores/index";
+const userStore_Login = useUserStore();
+// 引入 utils 工具箱
+import { userInfoMethods } from "@/utils/localStorage";
+......
+// 点击用户下拉菜单时的方法
+const handleCommand = (command: string | number | object) => {
+  // 当用户点击的是退出登录按钮时
+  if (command == "logout") {
+    // 清空本地持久化存储
+    userInfoMethods.clearLocalStorage();
+    // 清除 Pinia Store 存储的 用户数据 信息
+    userStore_Login.userInfo = {
+      name: "",
+      token: ""
+    };
+    // 跳转到主页 类似于刷新页面
+    router.push(HOME_PATH);
+  }
+};
+</script>
+```
 
 
 
