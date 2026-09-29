@@ -44,13 +44,13 @@ defineOptions({ name: "InputDialog" });
 import { ElMessage } from "element-plus";
 // 引入 用户/登录/验证码 数据类型
 import type { ResponseData } from "@/types/api";
-import type { CaptchaItem } from "@/types/userLogin/index";
+import type { CaptchaItem, ResLoginItem } from "@/types/userLogin/index";
 // 引入 Pinia Store 存储 定义对应变量名称
 import { useUserStore } from "@/stores/index";
 // 登录界面显示 / 隐藏的相关变量控制
 const userStore_Login = useUserStore();
-// 引入网络请求 验证码获取 API
-import { reqLoginCapcha } from "@/api/user/index";
+// 引入网络请求 验证码获取 / 用户登录 API
+import { reqLoginCapcha, reqLogin } from "@/api/user/index";
 // 引入 Element-Plus 图标元素
 import { ChatDotRound } from "@element-plus/icons-vue";
 // 引入 手机号码 验证工具
@@ -86,6 +86,8 @@ const rules = {
     {
       trigger: "blur",
       validator: (rule: any, value: string, callback: any) => {
+        // 如果为空，不报错，直接放行
+        if (!value) return callback();
         if (!verifyPhoneNumber(value)) {
           return callback(new Error("手机号格式不正确"));
         }
@@ -97,7 +99,8 @@ const rules = {
     {
       trigger: "blur",
       validator: (rule: any, value: string, callback: any) => {
-        // 使用引入的验证工具验证
+        // 如果为空，不报错，直接放行
+        if (!value) return callback();
         if (!verifyCaptchCode(value)) {
           return callback(new Error("验证码必须是6位数字"));
         }
@@ -115,6 +118,7 @@ const rules = {
 
 // 生命周期
 // onMounted(() => {})
+
 // 用户点击微信扫码登录 按钮
 const handleChatClick = () => {
   userStore_Login.userLoginMethods_Input = false;
@@ -182,7 +186,20 @@ const handleUserLoginBtn = async () => {
     // 输入验证全部通过后再执行
     await ruleFormRef.value.validate();
     // 只有全部校验成功，才走到这里
-    console.log("书写网络请求的地方");
+    const result = (await reqLogin({
+      phone: ruleForm.phoneNumber,
+      code: ruleForm.captchaCode
+    })) as ResponseData<ResLoginItem>;
+    // 当返回的 code=200
+    if (result.code === 200) {
+      // console.log("用户信息：", result.data);
+      // 将用户信息存储到 Pinia Store 变量内
+      userStore_Login.setUserInfo(result.data);
+      // 修改登录窗口显示与否变量，将窗口关闭
+      userStore_Login.userLoginVisible = false;
+      // 登录后即可清空相关数据
+      resetVerify();
+    }
   } catch (error) {
     // 校验失败会进这里，不会执行上面的log
     ElMessage({

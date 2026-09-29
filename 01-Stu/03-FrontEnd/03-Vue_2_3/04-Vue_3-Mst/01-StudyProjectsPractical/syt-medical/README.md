@@ -512,6 +512,9 @@ export * from "./request/index";
 
 // 导出验证工具所有方法
 export * from "./verify";
+
+// 导出所有本地存储 的方法
+export * from "./localStorage";
 ```
 
 #### 网络请求
@@ -772,6 +775,63 @@ export const verifyCaptchCode = (captchCode: string | null | undefined): boolean
 };
 ```
 
+#### 本地持久
+
+将本地持久化存储封装为`src/utils/localStorage.ts`，用于本地的存储，读取，清楚等相关操作:
+
+```ts
+/**
+ * ==========================================
+ * 持久化存储、读取与清除工具 TS版
+ * ==========================================
+ */
+// 引入用户数据
+import type { ResLoginItem } from "@/types/userLogin/index";
+// 引入本地存储用户数据 常量
+import { USERINFO_LOCALSTORAGE } from "@/const/index";
+
+// 用户信息的类
+class UserInfoClass {
+  /**
+   * 本地化 存储用户信息
+   * @param userInfo 登录返回的用户对象
+   */
+  setLocalStorage = (userInfo: ResLoginItem) => {
+    // 将用户信息做本地持久化
+    localStorage.setItem(USERINFO_LOCALSTORAGE, JSON.stringify(userInfo));
+  };
+
+  /**
+   * 本地化 读取用户信息
+   * @returns 存在则返回用户对象，不存在/解析失败返回 null
+   */
+  getLocalStorage = (): ResLoginItem | null => {
+    const storageStr = localStorage.getItem(USERINFO_LOCALSTORAGE);
+    // 没有数据直接返回 null
+    if (!storageStr) return null;
+    try {
+      return JSON.parse(storageStr) as ResLoginItem;
+    } catch (err) {
+      // JSON损坏，清除脏数据，返回null，防止页面崩溃
+      this.clearLocalStorage();
+      return null;
+    }
+  };
+
+  /**
+   * 本地化 清除用户信息
+   */
+  clearLocalStorage = () => {
+    // 将用户信息做本地持久化
+    localStorage.removeItem(USERINFO_LOCALSTORAGE);
+  };
+}
+export const userInfoMethods = new UserInfoClass();
+
+```
+
+
+
 ### 解决跨域
 
 `Vue3`官方推荐通过`proxy`的方式解决跨域问题，通过配置`vite.config.ts`文件解决跨域：
@@ -917,6 +977,15 @@ export const HOME_PATH = "/home";
 
 // HOSPITAL path 统一放在这里保存和管理
 export const HOSPITAL_PATH = "/hospital";
+```
+
+### 存储常量
+
+将本地化持久存储的常量字段存储到`src/const/localStorage/index.ts`文件中：
+
+```ts
+// 用户信息本地化存储
+export const USERINFO_LOCALSTORAGE = "USERINFO";
 ```
 
 ## 标准框架
@@ -3242,7 +3311,7 @@ export const useHospitalDepartmentStore = defineStore("HospitalDepartment", () =
 
 `src/modules/user.ts`中关于用户相关的状态管理。
 
-#### 登录状态
+#### 窗口状态
 
 `src/modules/user.ts`中关于登录相关的状态：
 
@@ -3266,6 +3335,61 @@ export const useUserStore = defineStore("UserStore", () => {
 
   // =============== Getters
   return { userLoginVisible, userLoginMethods_Input };
+});
+```
+
+#### 用户信息
+
+如用户的相关登录信息通过`src/stores/modules/user.ts`进行存储和本地持久化存储：
+
+```ts
+// 本文件是 用户 相关的 Pinia Store 存储相关
+import { defineStore } from "pinia";
+import { ref, computed } from "vue";
+// 引入用户数据 类型
+import type { ResLoginItem } from "@/types/userLogin/index";
+
+// 引入网络请求标准API
+
+// 引入本地持久化存储工具
+import { userInfoMethods } from "@/utils/index";
+
+// 创建 用户 状态存储
+export const useUserStore = defineStore("UserStore", () => {
+  // =============== State
+  // 用于存储用户登录的 State 变量 userLoginVisible
+  const userLoginVisible = ref(false);
+  // 用于存储用户登录中输入手机号或扫码登录的 State 变量 userLoginMethods_Input=true 为输入手机号方式 userLoginMethods_Input=false 为微信扫码登录
+  const userLoginMethods_Input = ref(true);
+  // 用于存储 用户信息 的 State 变量
+  const userInfo = ref<ResLoginItem | null>(userInfoMethods.getLocalStorage());
+
+  // =============== Actions
+  /**
+   * 设置用户信息：存入pinia + 持久化到localStorage
+   * @param info 登录接口返回用户信息对象
+   */
+  const setUserInfo = (info: ResLoginItem) => {
+    // 将传入的用户信息保存在 Pinia Store 变量内
+    userInfo.value = info;
+    // 将用户信息做本地化存储
+    userInfoMethods.setLocalStorage(info);
+    // 测试使用
+    // console.log("当前 Pinia 存储的userInfo:", userInfo.value);
+    // 返回code =200代码用于前端确认用户信息是否保存成功
+  };
+  /**
+   * 清空用户信息（退出登录使用）
+   */
+  const clearUserInfo = () => {
+    userInfo.value = null;
+    userInfoMethods.clearLocalStorage();
+  };
+
+  // =============== Getters
+  /** 是否登录，判断token是否存在 */
+  const isLogin = computed(() => userInfo.value?.token);
+  return { userLoginVisible, userLoginMethods_Input, userInfo, setUserInfo, clearUserInfo, isLogin };
 });
 ```
 
@@ -3488,6 +3612,30 @@ export const reqLoginCapcha = async (phoneNumber: string) => {
 };
 ```
 
+###### 用户登录
+
+在`src/api/user/index.ts`下与登录后用户信息相关的数据获取代码如下：
+
+```ts
+......
+// 引入 用户/登录/验证码 数据类型
+import type { ResponseData } from "@/types/api";
+import type { CaptchaItem, ReqLoginItem, ResLoginItem } from "@/types/userLogin/index";
+
+// 通过枚举管理 用户 相关功能的后端获取地址
+enum API {
+  // Login 模块的验证码 后端获取地址
+  CAPTCHA_URL = "/user/msm/send",
+  LOGIN_URL = "/user/userInfo/login"
+}
+......
+// 用户 登录 用户信息获取
+export const reqLogin = async (reqObject: ReqLoginItem) => {
+  const result = await request.post(API.LOGIN_URL, reqObject);
+  return result.data as ResponseData<ResLoginItem>;
+};
+```
+
 ## 类型推导
 
 ### 基本定义
@@ -3684,15 +3832,32 @@ export type HospitalDepartmentPageResponse = HospitalDepartmentItem[];
 
 在`src/types`下创建`userLogin/index.ts`文件用于管理和维护关于登录相关数据的格式数据。
 
-##### 验证码获取
+##### 验证数据
 
-有关验证码获取相关代码如下：
+有关验证码获取相关代码，具体定义`src/types/userLogin/index.ts`如下：
 
 ```ts
 // 登录窗口 验证码 数据类型
 export interface CaptchaItem {
   phone: string;
   code: string;
+}
+```
+
+##### 登录数据
+
+分请求数据类型和响应数据类型，具体定义`src/types/userLogin/index.ts`如下：
+
+```ts
+// 登录 请求数据类型
+export interface ReqLoginItem {
+  phone: string;
+  code: string;
+}
+// 登录 响应数据类型
+export interface ResLoginItem {
+  token: string;
+  name: string;
 }
 ```
 
@@ -5360,6 +5525,46 @@ const handleClose = () => {
 ```
 
 > 此方法实际上，就是通过将组件`ref`绑定一个别名， 探后通过`ref.value.xxx`访问到子组件对应的`xxx`方法
+
+#### 用户登录
+
+在`src/components/Login/InutDialog/index.vue`文件中实现用户的登录操作，并将数据进行`Pinia Store`和`localStorage`：
+
+```ts
+......
+// 用户点击 登录按钮
+const handleUserLoginBtn = async () => {
+  // 如果需要验证的值有空的 则返回
+  if (!ruleFormRef.value) return;
+  try {
+    // 输入验证全部通过后再执行
+    await ruleFormRef.value.validate();
+    // 只有全部校验成功，才走到这里
+    const result = (await reqLogin({
+      phone: ruleForm.phoneNumber,
+      code: ruleForm.captchaCode
+    })) as ResponseData<ResLoginItem>;
+    // 当返回的 code=200
+    if (result.code === 200) {
+      // console.log("用户信息：", result.data);
+      // 将用户信息存储到 Pinia Store 变量内
+      userStore_Login.setUserInfo(result.data);
+      // 修改登录窗口显示与否变量，将窗口关闭
+      userStore_Login.userLoginVisible = false;
+      // 登录后即可清空相关数据
+      resetVerify();
+    }
+  } catch (error) {
+    // 校验失败会进这里，不会执行上面的log
+    ElMessage({
+      message: "表单校验不通过:" + error,
+      placement: "top",
+      offset: 100
+    });
+  }
+};
+......
+```
 
 
 
