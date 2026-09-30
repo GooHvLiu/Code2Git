@@ -5,6 +5,20 @@
   justify-content: center;
   min-height: 100vh;
 }
+.info-box{
+display: flex;
+flex-direction: column;
+align-items: left;
+gap: 25rpx;
+}
+.nickname-input {
+  width: 260rpx;
+  height: 60rpx;
+  border: 1px solid #ddd;
+  border-radius: 15rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+}
 .msg { font-size: 32rpx; color: #666; }
 .ok { font-size: 40rpx; color: #67c23a; font-weight: bold; }
 .sub { font-size: 28rpx; color: #999; margin-top: 20rpx; }

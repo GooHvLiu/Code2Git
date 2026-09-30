@@ -11,6 +11,17 @@
  */
 
 const express = require("express");
+/* // ========== 扫码成功，返回用户信息（内存存储） 开始 ==========
+// 无需全局加载
+// ========== 扫码成功，返回用户信息（内存存储） 结束 ========== */
+
+/* // ========== 引入数据库（MySQL 存储） 开始 ==========
+require("./config/db");
+// ========== 引入数据库（MySQL 存储） 结束 ========== */
+
+// ========== 引入数据库（SQLite 存储） 开始 ==========
+require("./config/db-sqlite");
+// ========== 引入数据库（SQLite 存储） 结束 ==========
 
 // 引入 OpenAPI 文档（swagger-helper 可复用模块）
 const swaggerHelper = require("./openAPI/swagger-helper");

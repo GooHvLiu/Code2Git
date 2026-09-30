@@ -7,7 +7,7 @@
   <!-- 输入昵称 -->
   <block wx:elif="{{status === 'needNickname'}}">
     <view class="info-box">
-      <text class="title">欢迎使用尚医通</text>
+      <text class="title">登录 尚医通</text>
       <input type="nickname" class="nickname-input" placeholder="请输入你的昵称" bind:change="onNicknameChange" />
       <button type="primary" bindtap="submitLogin">确认登录</button>
     </view>

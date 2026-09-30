@@ -1412,6 +1412,662 @@ import "element-plus/dist/index.css";
 app.use(ElementPlus);
 ```
 
+## 微信扫码
+
+### 后端开发
+
+#### 依赖安装
+
+```bash
+npm install axios uuid
+```
+
+> 仅包含必要依赖，架构依赖不包含
+
+#### 业务流程
+
+```
+┌──────────┐   ①请求二维码    ┌──────────┐   ②生成uuid会话+小程序码    ┌──────────┐
+│  Web前端  │ ───────────────▶ │  后端服务  │ ──────────────────────────▶ │ 微信服务器 │
+│ (浏览器)  │ ◀─────────────── │          │ ◀────────────────────────── │          │
+└──────────┘  ③返回小程序码   └──────────┘      返回小程序码(scene=uuid) └──────────┘
+      │                                                    ▲
+      │ ④展示小程序码，开始轮询                               │ ⑥扫码打开
+      ▼                                                    │
+┌──────────┐   ⑤wx.login获取code    ┌──────────┐           │
+│ 用户微信  │ ─────────────────────▶ │  小程序   │ ◀─────────┘
+└──────────┘                        └──────────┘
+                                        │ ⑦上报 code+uuid
+                                        ▼
+┌──────────┐   ⑧code换openid    ┌──────────┐
+│ 后端服务  │ ──────────────────▶ │ 微信服务器 │  返回 openid
+└──────────┘ ◀────────────────── └──────────┘
+      │ ⑨把openid绑定到uuid会话(status=done)
+      ▼
+┌──────────┐   ⑩轮询到done    ┌──────────┐
+│  Web前端  │ ◀─────────────── │ 后端服务  │  返回 token + 用户信息
+└──────────┘  ⑪存token跳转     └──────────┘
+```
+
+> 1. Web 前端请求 `GET /api/qrcode` 获取登录二维码。
+> 2. 后端生成唯一 `uuid` 登录会话（status=`pending`），调微信 `wxacode.getUnlimited` 生成**小程序码**（scene=uuid），返回 base64 图片。
+> 3. Web 页面展示小程序码，开始轮询 `GET /api/scan/status?uuid=xxx`。
+> 4. 用户用微信扫小程序码 → 打开小程序落地页，`scene` 参数带出 uuid。
+> 5. 小程序执行 `wx.login()` 拿到临时 `code`。
+> 6. 小程序把 `code + uuid` POST 给后端 `/api/wx/login`。
+> 7. 后端调微信 `jscode2session` 接口，用 code 换取用户 `openid`。
+> 8. 后端把 openid 绑定到该 uuid 会话，状态改为 `done`。
+> 9. 后端建立/查找该用户，签发登录 token。
+> 10. Web 轮询到 `status=done`，拿到 token 与用户信息。
+> 11. Web 存 token 并跳转，登录完成。
+
+#### 完整代码
+
+##### 微信配置
+
+在`server/config/wxConfig.js`创建如下内容：
+
+```js
+/** 微信小程序登录全局配置文件 */
+module.exports = {
+  WX_APPID: "wxfa5ada500340d816",
+  WX_SECRET: "eda91d1b33fb14967cbd63799f5d272a",
+  // 小程序扫码后打开的落地页路径（你后面在小程序里创建这个页面）
+  QRCODE_PAGE: "pages/auth/login",
+  // 二维码有效时长（秒）
+  SESSION_TTL: 120,
+};
+```
+
+##### 会话管理
+
+在`server/wx/sessionStore.js`创建如下内容：
+
+```js
+/**
+ * 扫码登录会话管理（内存版）
+ * key: uuid
+ * value: { status: pending|done|expired, openid, createdAt }
+ */
+const store = new Map();
+
+/**
+ * 创建扫码会话
+ */
+function createLoginSession(uuid) {
+  const session = {
+    status: "pending",
+    openid: null,
+    createdAt: Date.now(),
+  };
+  store.set(uuid, session);
+  // 5分钟后自动清理
+  setTimeout(() => {
+    const s = store.get(uuid);
+    if (s && s.status === "pending") {
+      s.status = "expired";
+    }
+  }, 5 * 60 * 1000);
+  return session;
+}
+
+/**
+ * 获取会话
+ */
+function getLoginSession(uuid) {
+  return store.get(uuid);
+}
+
+/**
+ * 扫码成功，绑定 openid
+ */
+function bindOpenid(uuid, openid) {
+  const session = store.get(uuid);
+  if (session) {
+    session.status = "done";
+    session.openid = openid;
+  }
+  return session;
+}
+
+module.exports = { createLoginSession, getLoginSession, bindOpenid };
+```
+
+##### 接口封装
+
+在`server/wx/wechat.js`创建如下内容：
+
+```js
+/**
+ * 微信小程序接口封装
+ */
+const axios = require("axios");
+const wxConfig = require("../config/wxConfig");
+
+// access_token 缓存（2小时有效）
+let cachedToken = { value: null, expire: 0 };
+
+/**
+ * 获取 access_token
+ */
+async function getAccessToken() {
+  if (cachedToken.value && Date.now() < cachedToken.expire) {
+    return cachedToken.value;
+  }
+  const url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${wxConfig.WX_APPID}&secret=${wxConfig.WX_SECRET}`;
+  const { data } = await axios.get(url);
+  if (data.errcode) {
+    throw new Error(`获取access_token失败: ${data.errcode} ${data.errmsg}`);
+  }
+  cachedToken.value = data.access_token;
+  cachedToken.expire = Date.now() + (data.expires_in - 60) * 1000;
+  return data.access_token;
+}
+
+/**
+ * code 换 openid（小程序 wx.login 得到的 code）
+ */
+async function code2Session(code) {
+  const url = `https://api.weixin.qq.com/sns/jscode2session?appid=${wxConfig.WX_APPID}&secret=${wxConfig.WX_SECRET}&js_code=${code}&grant_type=authorization_code`;
+  const { data } = await axios.get(url);
+  if (data.errcode) {
+    throw new Error(`code2Session失败: ${data.errcode} ${data.errmsg}`);
+  }
+  return data; // { openid, session_key, unionid? }
+}
+
+/**
+ * 生成不限制数量的小程序码（带 scene 参数）
+ */
+async function getWxACode(scene) {
+  const token = await getAccessToken();
+  const url = `https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${token}`;
+  const resp = await axios.post(
+    url,
+    {
+      scene: scene, // 必填，≤32字符
+      page: wxConfig.QRCODE_PAGE,
+      width: 430,
+      check_path: false,
+      env_version: "release", // 开发阶段先写 "develop"
+    },
+    { responseType: "arraybuffer" }
+  );
+  // 出错时微信返回 JSON
+  const ct = resp.headers["content-type"] || "";
+  if (ct.includes("json")) {
+    const err = JSON.parse(Buffer.from(resp.data).toString());
+    throw new Error(`getWxACode失败: ${err.errcode} ${err.errmsg}`);
+  }
+  return Buffer.from(resp.data);
+}
+
+module.exports = { getAccessToken, code2Session, getWxACode };
+
+```
+
+> `env_version: "release", // 开发阶段先写 "develop"`
+>
+> 因为小程序还没正式发布，用 `release` 会报错。`develop` 表示开发版，可以在微信开发者工具中测试
+>
+> 目前微信用户使用的是 内存 Map 存微信用户 
+
+##### 路由接口
+
+存储方案选择`sqlite方式`，在`server/routes/wxLogin.js`创建如下内容：
+
+```js
+/**
+ * 微信扫码登录路由
+ * 前缀：/api/wx
+ */
+const express = require("express");
+const router = express.Router();
+const { v4: uuidv4 } = require("uuid");
+const wechat = require("../wx/wechat");
+const {
+  createLoginSession,
+  getLoginSession,
+  bindOpenid,
+} = require("../wx/sessionStore");
+const { success, fail } = require("../utils/response");
+const { generateToken } = require("../middlewares/auth");
+
+// ========== 微信用户数据（SQLite存储） 开始 ==========
+const db = require("../config/db-sqlite");
+// ========== 微信用户数据（SQLite存储） 结束 ==========
+
+/**
+ * GET /api/wx/qrcode
+ * Web端请求：获取扫码登录二维码
+ */
+router.get("/qrcode", async (req, res) => {
+  try {
+    // 去掉横杠，变成32位 否则会报错：40169
+    const uuid = uuidv4().replace(/-/g, "");
+    createLoginSession(uuid);
+    const png = await wechat.getWxACode(uuid);
+    return success(res, {
+      uuid,
+      qrDataUrl: `data:image/png;base64,${png.toString("base64")}`,
+    });
+  } catch (e) {
+    return fail(res, "获取二维码失败: " + e.message);
+  }
+});
+
+/**
+ * POST /api/wx/login
+ * 小程序端上报：wx.login 拿到的 code + 扫码带过来的 uuid
+ * body: { code, uuid }
+ */
+router.post("/login", async (req, res) => {
+  const { code, uuid, nickname } = req.body;
+  if (!code || !uuid) {
+    return fail(res, "参数缺失：code 和 uuid 不能为空");
+  }
+
+  const session = getLoginSession(uuid);
+  if (!session) {
+    return fail(res, "二维码已过期，请刷新页面");
+  }
+
+  try {
+    // code 换 openid
+    const { openid } = await wechat.code2Session(code);
+
+    // 绑定 openid 到会话
+    bindOpenid(uuid, openid);
+    // ========== 查找或创建微信用户（SQLite存储） 开始 ==========
+    let user = db.prepare("SELECT * FROM wx_user WHERE openid = ?").get(openid);;
+
+    if (!user) {
+      const result = db.prepare(
+        "INSERT INTO wx_user (openid, nickname) VALUES (?, ?)"
+      ).run(openid, nickname || "微信用户");
+      user = {
+        id: result.lastInsertRowid,
+        openid,
+        nickname: nickname || "微信用户",
+      };
+    } else if (nickname && !user.nickname) {
+      db.prepare("UPDATE wx_user SET nickname = ? WHERE openid = ?").run(
+        nickname,
+        openid
+      );
+      user.nickname = nickname;
+    }
+    // ========== 查找或创建微信用户（SQLite存储） 结束 ==========
+
+    return success(res, { userId: user.id }, "扫码确认成功");
+  } catch (e) {
+    return fail(res, "微信登录失败: " + e.message);
+  }
+});
+
+/**
+ * GET /api/wx/scan/status?uuid=xxx
+ * Web端轮询：检查扫码状态
+ */
+router.get("/scan/status", async (req, res) => {
+  const { uuid } = req.query;
+  if (!uuid) {
+    return fail(res, "uuid 不能为空");
+  }
+
+  const session = getLoginSession(uuid);
+  if (!session || session.status === "expired") {
+    return success(res, { status: "expired" });
+  }
+
+  if (session.status !== "done") {
+    return success(res, { status: "pending" });
+  }
+  // ========== 扫码成功，返回用户信息（SQLite 存储） 开始 ==========
+  const user = db
+    .prepare("SELECT * FROM wx_user WHERE openid = ?")
+    .get(session.openid);
+  const token = generateToken(user.id);
+  // ========== 扫码成功，返回用户信息（SQLite 存储） 结束 ==========
+
+  return success(res, {
+    status: "done",
+    token,
+    user: {
+      id: user.id,
+      nickname: user.nickname,
+      avatar: user.avatar,
+      openid: user.openid,
+    },
+  });
+
+});
+
+module.exports = router;
+```
+
+> 已包含`MySQL`、内存`Map`方案，已注释
+
+##### 挂载路由
+
+打开 `server/app.js`，在路由挂载部分加上这一行（放在其他路由旁边）：
+
+```js
+// 微信扫码登录模块
+app.use("/api/wx", require("./routes/wxLogin"));
+```
+
+#### 测试接口
+
+在浏览器或 Postman 中访问：
+
+```bash
+http://localhost:8201/api/wx/qrcode
+```
+
+> 成功后返回内容如下：
+>
+> ```json
+> // 把 `qrDataUrl` 的值复制到浏览器地址栏（直接粘贴），应该能看到一张**小程序码图片**
+> {
+>   "code": 200,
+>   "message": "成功",
+>   "ok": true,
+>   "data": {
+>     "uuid": "xxxx-xxxx-xxxx",
+>     "qrDataUrl": "data:image/png;base64,iVBORw0KGgo..."
+>   }
+> }
+> ```
+
+### 数据存储
+
+#### SQLite存储
+
+##### 安装依赖
+
+```bash
+PS F:\CodingMan\Code2Git\01-Stu\03-FrontEnd\03-Vue_2_3\04-Vue_3-Mst\01-StudyProjectsPractical\syt-medical\server> npm install better-sqlite3
+
+added 2 packages in 2s
+
+34 packages are looking for funding
+  run `npm fund` for details
+```
+
+##### 创建配置
+
+新建 `server/config/db-sqlite.js`：
+
+```js
+const Database = require("better-sqlite3");
+const path = require("path");
+
+// 打开数据库文件（不存在会自动创建）
+const db = new Database(path.join(__dirname, "../data/syt.db"));
+
+// 建表
+db.exec(`
+  CREATE TABLE IF NOT EXISTS wx_user (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    openid TEXT UNIQUE NOT NULL,
+    nickname TEXT DEFAULT '',
+    avatar TEXT DEFAULT '',
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+  )
+`);
+
+console.log("✅ SQLite 数据库连接成功");
+
+module.exports = db;
+```
+
+##### 引入数据
+
+打开 `server/app.js`，在顶部加一行：
+
+```js
+require("./config/db-sqlite");
+```
+
+> 剩下的都是挂载路由文件`routes/wzLogin.js`的变更
+
+### 微信程序
+
+#### 创建项目
+
+1. 下载并安装微信开发者工具`https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html`
+2. 打开微信开发者工具
+3. 新建项目，AppID 填你注册的：`wxfa5ada500340d816`
+4. 后端服务选择 `不使用云服务`，开发模式选择 `小程序` 初始化选择 `模板`
+5. 模板选择选择 `不适用模板`
+
+#### 落地页面
+
+在项目中创建文件 `pages/auth/login.js`：
+
+```json
+// pages/auth/login.js
+Page({
+  data: {
+    scene: "",
+    status: "loading", // loading | needNickname | ok | err
+    nickname: "",
+    loginCode: "",
+  },
+
+  onLoad(options) {
+    const scene = decodeURIComponent(options.scene || "");
+    console.log("扫码带入的scene(uuid):", scene);
+    this.setData({ scene });
+
+    if (scene) {
+      this.doLogin();
+    } else {
+      this.setData({ status: "err" });
+    }
+  },
+
+  // 第一步：wx.login 拿 code
+  doLogin() {
+    wx.login({
+      success: (loginRes) => {
+        if (!loginRes.code) {
+          this.setData({ status: "err" });
+          return;
+        }
+        // 先存 code，等用户输入昵称后一起上报
+        this.setData({
+          loginCode: loginRes.code,
+          status: "needNickname",
+        });
+      },
+      fail: () => {
+        this.setData({ status: "err" });
+      },
+    });
+  },
+
+  // 监听昵称输入
+  onNicknameChange(e) {
+    this.setData({ nickname: e.detail.value });
+  },
+
+  // 第二步：上报 code + uuid + nickname
+  submitLogin() {
+    if (!this.data.nickname) {
+      wx.showToast({ title: "请输入昵称", icon: "none" });
+      return;
+    }
+
+    wx.request({
+      url: "https://4d4ef6d6.r27.cpolar.top/api/wx/login",
+      method: "POST",
+      data: {
+        code: this.data.loginCode,
+        uuid: this.data.scene,
+        nickname: this.data.nickname,
+      },
+      success: (res) => {
+        if (res.data && res.data.ok) {
+          this.setData({ status: "ok" });
+        } else {
+          wx.showToast({
+            title: (res.data && res.data.message) || "登录失败",
+            icon: "none",
+          });
+          this.setData({ status: "err" });
+        }
+      },
+      fail: (err) => {
+        wx.showModal({
+          title: "请求失败",
+          content: "errMsg: " + err.errMsg,
+          showCancel: false,
+        });
+      },
+    });
+  },
+});
+
+```
+
+> `https://4d4ef6d6.r27.cpolar.top/api/wx/login`实际为`cpolar`内网穿透的公网IP地址映射IP
+
+#### 创建页面
+
+在 `pages/auth/login.wxml`：
+
+```xml
+<view class="wrap">
+  <!-- 加载中 -->
+  <block wx:if="{{status === 'loading'}}">
+    <text class="msg">正在确认微信身份…</text>
+  </block>
+
+  <!-- 输入昵称 -->
+  <block wx:elif="{{status === 'needNickname'}}">
+    <view class="info-box">
+      <text class="title">欢迎使用尚医通</text>
+      <input type="nickname" class="nickname-input" placeholder="请输入你的昵称" bind:change="onNicknameChange" />
+      <button type="primary" bindtap="submitLogin">确认登录</button>
+    </view>
+  </block>
+
+  <!-- 成功 -->
+  <block wx:elif="{{status === 'ok'}}">
+    <text class="ok">✓ 授权成功</text>
+    <text class="sub">请返回电脑网页继续操作</text>
+  </block>
+
+  <!-- 失败 -->
+  <block wx:else>
+    <text class="err">登录失败或二维码已过期</text>
+  </block>
+</view>
+```
+
+#### 页面样式
+
+在 `pages/auth/login.wxss`：
+
+```wxss
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.msg { font-size: 32rpx; color: #666; }
+.ok { font-size: 40rpx; color: #67c23a; font-weight: bold; }
+.sub { font-size: 28rpx; color: #999; margin-top: 20rpx; }
+.err { font-size: 32rpx; color: #f56c6c; }
+
+```
+
+#### 注册页面
+
+打开 `app.json`，在 `pages` 数组中加上 `pages/auth/login`：
+
+```json
+{
+  "pages": [
+    "pages/auth/login",
+    "pages/index/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "扫码登录确认"
+  }
+}
+
+```
+
+#### 域名校验
+
+关闭：微信开发者工具 → 项目设置 → 本地设置 → 勾选**「不校验合法域名、web-view（业务域名）、TLS 版本以及 HTTPS 证书」**
+
+> 因为我们用的是 `http://localhost:8201`，不是 HTTPS，必须勾选这个才能调通
+
+#### 上传程序
+
+##### 上传代码
+
+在微信开发者工具顶部工具栏，点击 **「工具-上传」** 按钮：
+
+- 版本号：填 `1.0.0`
+- 项目备注：随便填，比如 "首次上传"
+- 点击确定
+
+##### 确定成功
+
+上传后，登录 [微信公众平台 mp.weixin.qq.com](https://mp.weixin.qq.com)：
+
+- 管理 → 版本管理 → 开发版本
+- 应该能看到你刚上传的 `1.0.0` 版本
+
+### 内网穿透
+
+#### 软件安装
+
+`https://www.cpolar.com/download`安装`cpolar`，并通过邮箱进行注册登录账户。
+
+#### 启动隧道
+
+##### 启动命令
+
+打开cpolar 默认安装目录，在 `cpolar.exe` 所在文件夹的地址栏输入 `cmd` 回车，打开命令行。
+
+##### 配置Token
+
+去 [cpolar 官网](https://dashboard.cpolar.com/auth) 复制 `authtoken`，并执行如下命令：
+
+```bash
+cpolar authtoken 你的authtoken
+```
+
+> 我的`token`为：`NDUyYjk1OGEtNTQwMS00OWQzLThlNjEtOTViYWIyOTU2MWNm`
+
+##### 启动隧道
+
+```bash
+cpolar http 8201
+```
+
+> 启动成功后会显示类似这样的信息：`Forwarding   https://xxxx.cpolar.cn -> http://localhost:8201`
+>
+> 其中的`https://xxxx.cpolar.cn`就是内网穿透后的公网IP
+
+#### 请求地址
+
+把 `pages/auth/login.js` 里的请求地址改成 cpolar 给的公网地址：
+
+```js
+url: "https://4d4ef6d6.r27.cpolar.top/api/wx/login",
+```
+
+> cpolar 是 HTTPS 的，微信小程序直接能用，不需要勾选 "不校验合法域名"。
+
 ## 静态组件
 
 ### 主页组件
@@ -3585,7 +4241,7 @@ export const reqHospitalDepartmentInfo = async (hoscode: string) => {
 
 在登录界面中，需要请求后端数据，涉及相关有：验证码获取，登录验证，注册验证，等等。在`src/api/user`下创建`index.ts`用于管理与用户相关的请求路径。
 
-###### 验证码获取
+###### 验证获取
 
 在`src/api/user/index.ts`下与验证码获取相关的代码如下：
 
@@ -3612,7 +4268,7 @@ export const reqLoginCapcha = async (phoneNumber: string) => {
 };
 ```
 
-###### 用户登录
+###### 输入登录
 
 在`src/api/user/index.ts`下与登录后用户信息相关的数据获取代码如下：
 
@@ -3634,6 +4290,44 @@ export const reqLogin = async (reqObject: ReqLoginItem) => {
   const result = await request.post(API.LOGIN_URL, reqObject);
   return result.data as ResponseData<ResLoginItem>;
 };
+```
+
+###### 微信登录
+
+在`web/src/api/user/index.ts`，在文件末尾加上：
+
+```ts
+// 引入网络请求接口
+import { request } from "@/utils";
+
+// 引入 用户/登录/验证码 数据类型
+import type { ResponseData } from "@/types/api";
+import type { WxQrcodeItem, WxScanStatusItem } from "@/types/userLogin";
+
+// 通过枚举管理 用户 相关功能的后端获取地址
+enum API {
+......
+  // 获取微信小程序二维码
+  WX_QRCODE_URL = "/wx/qrcode",
+  // 轮询扫码状态
+  WX_SCANSTATUS_URL = "/wx/scan/status"
+}
+......
+
+// 获取小程序码
+export const reqWxQrcode = async () => {
+  const result = await request.get(API.WX_QRCODE_URL);
+  return result.data as ResponseData<WxQrcodeItem>;
+};
+
+// 轮询扫码状态
+export const reqWxScanStatus = async (uuid: string) => {
+  const result = await request.get(API.WX_SCANSTATUS_URL, {
+    params: { uuid }
+  });
+  return result.data as ResponseData<WxScanStatusItem>;
+};
+
 ```
 
 ## 类型推导
@@ -3860,6 +4554,35 @@ export interface ResLoginItem {
   name: string;
 }
 ```
+
+##### 微信扫码
+
+在 `web/src/types/userLogin/index.ts` 末尾加上：
+
+```ts
+// 获取小程序码 响应数据类型
+export interface WxQrcodeItem {
+  uuid: string;
+  qrDataUrl: string; // base 32/64 图片
+}
+
+// 扫码用户信息
+export interface WxUserItem {
+  id: number;
+  nickname: string;
+  avatar: string;
+  openid: string;
+}
+
+// 扫码状态轮询 响应数据类型
+export interface WxScanStatusItem {
+  status: "pending" | "done" | "expired";
+  token?: string;
+  user?: WxUserItem;
+}
+```
+
+> 添加了`token`字段
 
 ## 动态组件
 
@@ -5658,4 +6381,259 @@ const handleCommand = (command: string | number | object) => {
 ```
 
 ### 扫码登录
+
+#### 登录界面
+
+需要将`src/components/Login/index.vue`中关于登录界面的挂载增加【关闭销毁】和将【v-show】更改为【v-if】：
+
+```vue
+<template>
+  <div class="page-wrap">
+    <!-- 登录界面主窗口 -->
+    <el-dialog
+      v-model="userStore_Login.userLoginVisible"
+      title="用户登录 - 尚医通"
+      width="700"
+      transition="dialog-slide"
+      :before-close="handleClose"
+      destroy-on-close
+    >
+      <!-- 内容组件 -->
+      <div class="content">
+        <!-- 内容组件中 左侧部分 -->
+        <div class="left">
+          <!-- 左侧部分的 输入手机号登录 组件 -->
+          <div v-show="userStore_Login.userLoginMethods_Input" class="input">
+            <InputDialog ref="inputDialogRef" />
+          </div>
+          <!-- 左侧部分的 扫码登录 组件 -->
+          <div v-if="!userStore_Login.userLoginMethods_Input" class="scan">
+            <ScanDialog />
+          </div>
+        </div>
+        <!-- 内容组件中 右侧部分 -->
+        <div class="right">
+          <FollowApp />
+        </div>
+      </div>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="handleClose">关闭</el-button>
+        </div>
+      </template>
+    </el-dialog>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Login" });
+// 引入登录窗口小组件
+import FollowApp from "./FollowApp/index.vue";
+import InputDialog from "./InputDialog/index.vue";
+import ScanDialog from "./ScanDialog/index.vue";
+
+// import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { ref } from "vue";
+
+// import { useRouter } from 'vue-router'
+
+// Props定义示例
+// const props = defineProps<{}>()
+// const emit = defineEmits<{}>()
+// 引入 Pinia Store 存储 定义对应变量名称
+import { useUserStore } from "@/stores/index";
+// 登录界面显示 / 隐藏的相关变量控制
+const userStore_Login = useUserStore();
+// 定义 inputDialoy ref 名称
+const inputDialogRef = ref<InstanceType<typeof InputDialog>>();
+
+// 响应式数据
+// const count = ref(0)
+// const state = reactive({})
+
+// 计算属性
+// const computedVal = computed(() => {})
+
+// 监听
+// watch(count, (newVal) => {})
+
+// 生命周期
+// onMounted(() => {})
+
+// 用户点击关闭按钮时触发
+const handleClose = () => {
+  // 将 Pinia Store 中的变量值修改为 fasle ，即 不可见
+  userStore_Login.userLoginVisible = false;
+  // 通过子组件方法暴露的方式实现对子组件方法的控制执行
+  if (inputDialogRef.value) {
+    // 调用输入框组件的数据校验重置方法
+    inputDialogRef.value.resetVerify();
+  }
+};
+</script>
+
+<style scoped lang="less">
+.page-wrap {
+  .content {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    .left {
+      border: 1px solid #f1f1f1;
+    }
+  }
+}
+
+// 弹窗出现动画
+/* Slide Animation */
+.dialog-slide-enter-active,
+.dialog-slide-leave-active,
+.dialog-slide-enter-active .el-dialog,
+.dialog-slide-leave-active .el-dialog {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.dialog-slide-enter-from,
+.dialog-slide-leave-to {
+  opacity: 0;
+}
+.dialog-slide-enter-from .el-dialog,
+.dialog-slide-leave-to .el-dialog {
+  transform: translateY(-100px);
+  opacity: 0;
+}
+</style>
+```
+
+#### 扫码界面
+
+需要将`src/components/Login/ScanDialog/index.vue`中增加方法：
+
+```vue
+<template>
+  <div class="page-wrap">
+    <div class="scan">
+      <img v-if="qrDataUrl" :src="qrDataUrl" alt="扫码登录" style="width: 200px; height: 200px" />
+      <p class="tip">{{ tipText }}</p>
+    </div>
+    <div class="input">
+      <p>输入手机号码登录</p>
+      <el-button type="info" :icon="EditPen" circle @click="handleChatClick" />
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "ScanDialog" });
+// 引入路由
+import { useRouter } from "vue-router";
+const router = useRouter();
+// 引入 Pinia Store 存储 定义对应变量名称
+import { useUserStore } from "@/stores/index";
+// 登录界面显示 / 隐藏的相关变量控制
+const userStore_Login = useUserStore();
+// 引入 Element-Plus 图标元素
+import { EditPen } from "@element-plus/icons-vue";
+// 引入 网络请求
+import { reqWxQrcode, reqWxScanStatus } from "@/api/user";
+
+// import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from "vue";
+// 响应式数据
+const qrDataUrl = ref("");
+const tipText = ref("请用微信扫描二维码");
+let pollTimer: ReturnType<typeof setInterval> | null = null;
+// 用户点击微信扫码登录 按钮
+const handleChatClick = () => {
+  userStore_Login.userLoginMethods_Input = true;
+};
+// 获取二维码
+async function getQrcode() {
+  try {
+    const res = await reqWxQrcode();
+    if (res.code === 200) {
+      qrDataUrl.value = res.data.qrDataUrl;
+      startPolling(res.data.uuid);
+    }
+  } catch (e) {
+    console.error("获取二维码失败", e);
+  }
+}
+
+// 轮询扫码状态
+function startPolling(uuid: string) {
+  stopPolling();
+  pollTimer = setInterval(async () => {
+    try {
+      const res = await reqWxScanStatus(uuid);
+      if (res.data.status === "done" && res.data.user) {
+        stopPolling();
+        tipText.value = "扫码成功，正在跳转...";
+        // 存用户信息到 Pinia + localStorage
+        userStore_Login.setUserInfo({
+          token: res.data.token!,
+          name: res.data.user.nickname
+        });
+        // 登录成功后 显示几秒钟之后再退出
+        setTimeout(() => {
+          // 关闭登录弹窗
+          userStore_Login.userLoginVisible = false;
+          // 跳转主页
+          router.push("/");
+        }, 100);
+      } else if (res.data.status === "expired") {
+        stopPolling();
+        tipText.value = "二维码已过期，请刷新";
+      }
+    } catch (e) {
+      console.error("轮询失败", e);
+    }
+  }, 2500);
+}
+
+function stopPolling() {
+  if (pollTimer) {
+    clearInterval(pollTimer);
+    pollTimer = null;
+  }
+}
+onMounted(() => {
+  getQrcode();
+});
+
+onUnmounted(() => {
+  stopPolling();
+});
+</script>
+
+<style scoped lang="less">
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .scan {
+    margin-top: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    P {
+      margin-top: 10px;
+    }
+  }
+  .input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    p {
+      margin-top: 15px;
+    }
+    .el-button {
+      margin-top: 10px;
+    }
+  }
+}
+</style>
+```
+
+
 

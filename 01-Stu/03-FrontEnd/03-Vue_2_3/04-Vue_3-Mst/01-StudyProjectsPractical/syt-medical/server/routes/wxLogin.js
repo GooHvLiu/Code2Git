@@ -15,10 +15,18 @@ const { success, fail } = require("../utils/response");
 const { generateToken } = require("../middlewares/auth");
 
 
-// ========== 微信用户数据（先用内存，后面对接MySQL） ==========
-// key: openid, value: { id, openid, nickname, avatar, createTime }
+/* // ========== 微信用户数据（内存存储） 开始 ==========
 let wxUserIdSeq = 1;
 const wxUsers = new Map();
+// ========== 微信用户数据（内存存储） 结束 ========== */
+
+/* // ========== 微信用户数据（Mysql存储） 开始 ==========
+const pool = require("../config/db");
+// ========== 微信用户数据（Mysql存储） 结束 ========== */
+
+// ========== 微信用户数据（SQLite存储） 开始 ==========
+const db = require("../config/db-sqlite");
+// ========== 微信用户数据（SQLite存储） 结束 ==========
 
 /**
  * GET /api/wx/qrcode
@@ -62,7 +70,7 @@ router.post("/login", async (req, res) => {
     // 绑定 openid 到会话
     bindOpenid(uuid, openid);
 
-    // 查找或创建微信用户
+    /* // ========== 查找或创建微信用户（内存存储） 开始 ==========
     let user = wxUsers.get(openid);
     if (!user) {
       user = {
@@ -77,6 +85,57 @@ router.post("/login", async (req, res) => {
       // 老用户更新昵称
       user.nickname = nickname;
     }
+    // ========== 查找或创建微信用户（内存存储） 结束 ==========
+ */
+
+    /*     // ========== 查找或创建微信用户（MySQL存储） 开始 ==========
+        let [rows] = await pool.execute(
+          "SELECT * FROM wx_user WHERE openid = ?",
+          [openid]
+        );
+        let user = rows[0];
+    
+        if (!user) {
+          // 新用户，插入数据库
+          const [result] = await pool.execute(
+            "INSERT INTO wx_user (openid, nickname) VALUES (?, ?)",
+            [openid, nickname || "微信用户"]
+          );
+          user = {
+            id: result.insertId,
+            openid,
+            nickname: nickname || "微信用户",
+          };
+        } else if (nickname && !user.nickname) {
+          // 老用户更新昵称
+          await pool.execute(
+            "UPDATE wx_user SET nickname = ? WHERE openid = ?",
+            [nickname, openid]
+          );
+          user.nickname = nickname;
+        }
+        // ========== 查找或创建微信用户（MySQL存储） 结束 ========== */
+
+    // ========== 查找或创建微信用户（SQLite存储） 开始 ==========
+    let user = db.prepare("SELECT * FROM wx_user WHERE openid = ?").get(openid);;
+
+    if (!user) {
+      const result = db.prepare(
+        "INSERT INTO wx_user (openid, nickname) VALUES (?, ?)"
+      ).run(openid, nickname || "微信用户");
+      user = {
+        id: result.lastInsertRowid,
+        openid,
+        nickname: nickname || "微信用户",
+      };
+    } else if (nickname && !user.nickname) {
+      db.prepare("UPDATE wx_user SET nickname = ? WHERE openid = ?").run(
+        nickname,
+        openid
+      );
+      user.nickname = nickname;
+    }
+    // ========== 查找或创建微信用户（SQLite存储） 结束 ==========
 
     return success(res, { userId: user.id }, "扫码确认成功");
   } catch (e) {
@@ -88,7 +147,7 @@ router.post("/login", async (req, res) => {
  * GET /api/wx/scan/status?uuid=xxx
  * Web端轮询：检查扫码状态
  */
-router.get("/scan/status", (req, res) => {
+router.get("/scan/status", async (req, res) => {
   const { uuid } = req.query;
   if (!uuid) {
     return fail(res, "uuid 不能为空");
@@ -103,9 +162,27 @@ router.get("/scan/status", (req, res) => {
     return success(res, { status: "pending" });
   }
 
-  // 扫码成功，返回用户信息
-  const user = wxUsers.get(session.openid);
+  /*   // ========== 扫码成功，返回用户信息（内存存储） 开始 ==========
+    const user = wxUsers.get(session.openid);
+    const token = generateToken(user.id);
+    // ========== 扫码成功，返回用户信息（内存存储） 结束 ========== */
+
+  /*   // ========== 扫码成功，返回用户信息（MySQL 存储） 开始 ==========
+    const [rows] = await pool.execute(
+      "SELECT * FROM wx_user WHERE openid = ?",
+      [session.openid]
+    );
+    const user = rows[0];
+    const token = generateToken(user.id);
+    // ========== 扫码成功，返回用户信息（MySQL 存储） 结束 ========== */
+
+  // ========== 扫码成功，返回用户信息（SQLite 存储） 开始 ==========
+  const user = db
+    .prepare("SELECT * FROM wx_user WHERE openid = ?")
+    .get(session.openid);
   const token = generateToken(user.id);
+  // ========== 扫码成功，返回用户信息（SQLite 存储） 结束 ==========
+
   return success(res, {
     status: "done",
     token,
