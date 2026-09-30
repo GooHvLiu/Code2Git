@@ -1,0 +1,27 @@
+{
+  "libVersion": "3.17.3",
+  "projectname": "testProject00",
+  "setting": {
+    "urlCheck": false,
+    "coverView": true,
+    "lazyloadPlaceholderEnable": false,
+    "skylineRenderEnable": true,
+    "preloadBackgroundData": false,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "compileHotReLoad": true
+  },
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "扫码登录测试",
+          "pathName": "pages/auth/login",
+          "query": "scene=887255bd11574faa9b8d4f4031403a9a",
+          "scene": null,
+          "launchMode": "default"
+        }
+      ]
+    }
+  }
+}

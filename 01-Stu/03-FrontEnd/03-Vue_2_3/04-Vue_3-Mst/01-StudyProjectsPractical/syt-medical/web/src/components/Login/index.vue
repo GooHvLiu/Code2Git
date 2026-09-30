@@ -7,6 +7,7 @@
       width="700"
       transition="dialog-slide"
       :before-close="handleClose"
+      destroy-on-close
     >
       <!-- 内容组件 -->
       <div class="content">
@@ -17,7 +18,7 @@
             <InputDialog ref="inputDialogRef" />
           </div>
           <!-- 左侧部分的 扫码登录 组件 -->
-          <div v-show="!userStore_Login.userLoginMethods_Input" class="scan">
+          <div v-if="!userStore_Login.userLoginMethods_Input" class="scan">
             <ScanDialog />
           </div>
         </div>

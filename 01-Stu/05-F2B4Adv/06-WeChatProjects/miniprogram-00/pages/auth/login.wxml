@@ -1,0 +1,26 @@
+<view class="wrap">
+  <!-- 加载中 -->
+  <block wx:if="{{status === 'loading'}}">
+    <text class="msg">正在确认微信身份…</text>
+  </block>
+
+  <!-- 输入昵称 -->
+  <block wx:elif="{{status === 'needNickname'}}">
+    <view class="info-box">
+      <text class="title">欢迎使用尚医通</text>
+      <input type="nickname" class="nickname-input" placeholder="请输入你的昵称" bind:change="onNicknameChange" />
+      <button type="primary" bindtap="submitLogin">确认登录</button>
+    </view>
+  </block>
+
+  <!-- 成功 -->
+  <block wx:elif="{{status === 'ok'}}">
+    <text class="ok">✓ 授权成功</text>
+    <text class="sub">请返回电脑网页继续操作</text>
+  </block>
+
+  <!-- 失败 -->
+  <block wx:else>
+    <text class="err">登录失败或二维码已过期</text>
+  </block>
+</view>

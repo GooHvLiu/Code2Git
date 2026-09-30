@@ -5168,7 +5168,7 @@ const handleSelect = (key: string) => {
 </style>
 ```
 
-### 登录组件
+### 输入登录
 
 登录组件是需要多个组件共享的，所以将登录组件注册为全局组件并通过状态管理进行显示或隐藏。
 
@@ -5657,5 +5657,5 @@ const handleCommand = (command: string | number | object) => {
 </script>
 ```
 
-
+### 扫码登录
 

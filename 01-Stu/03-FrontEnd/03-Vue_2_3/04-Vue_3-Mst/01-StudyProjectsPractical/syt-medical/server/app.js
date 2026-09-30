@@ -49,6 +49,9 @@ app.use("/api/user/msm", require("./routes/msm"));
 app.use("/api/order/orderInfo", require("./routes/order"));
 // 字典模块
 app.use("/api/cmn/dict", require("./routes/cmn"));
+// 微信扫码登录模块
+app.use("/api/wx", require("./routes/wxLogin"));
+
 
 // ===== 根路由 =====
 app.get("/", (req, res) => {

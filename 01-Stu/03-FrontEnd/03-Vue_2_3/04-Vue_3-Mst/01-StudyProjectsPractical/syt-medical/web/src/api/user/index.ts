@@ -4,12 +4,17 @@ import { request } from "@/utils";
 // 引入 用户/登录/验证码 数据类型
 import type { ResponseData } from "@/types/api";
 import type { CaptchaItem, ReqLoginItem, ResLoginItem } from "@/types/userLogin/index";
+import type { WxQrcodeItem, WxScanStatusItem } from "@/types/userLogin";
 
 // 通过枚举管理 用户 相关功能的后端获取地址
 enum API {
   // Login 模块的验证码 后端获取地址
   CAPTCHA_URL = "/user/msm/send",
-  LOGIN_URL = "/user/userInfo/login"
+  LOGIN_URL = "/user/userInfo/login",
+  // 获取微信小程序二维码
+  WX_QRCODE_URL = "/wx/qrcode",
+  // 轮询扫码状态
+  WX_SCANSTATUS_URL = "/wx/scan/status"
 }
 
 // 用户 登录前 验证码获取
@@ -24,4 +29,18 @@ export const reqLoginCapcha = async (phoneNumber: string) => {
 export const reqLogin = async (reqObject: ReqLoginItem) => {
   const result = await request.post(API.LOGIN_URL, reqObject);
   return result.data as ResponseData<ResLoginItem>;
+};
+
+// 获取小程序码
+export const reqWxQrcode = async () => {
+  const result = await request.get(API.WX_QRCODE_URL);
+  return result.data as ResponseData<WxQrcodeItem>;
+};
+
+// 轮询扫码状态
+export const reqWxScanStatus = async (uuid: string) => {
+  const result = await request.get(API.WX_SCANSTATUS_URL, {
+    params: { uuid }
+  });
+  return result.data as ResponseData<WxScanStatusItem>;
 };
