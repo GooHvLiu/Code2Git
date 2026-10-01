@@ -53,7 +53,7 @@
 import { useRouter } from "vue-router";
 const router = useRouter();
 // 导入路由常量管理文件
-import { HOME_PATH } from "@/const/index";
+import { HOME } from "@/const/index";
 // 引入Pinia Store 用户
 import { useUserStore } from "@/stores/index";
 const userStore_Login = useUserStore();
@@ -79,7 +79,7 @@ import { userInfoMethods } from "@/utils/localStorage";
 // 当用户点击时被触发
 const handleSelect = () => {
   // 通过路由跳转到主页
-  router.push({ path: HOME_PATH });
+  router.push({ path: HOME.path });
 };
 // 用户点击 注册 时
 const userRegister = () => {
@@ -102,7 +102,7 @@ const handleCommand = (command: string | number | object) => {
       token: ""
     };
     // 跳转到主页 类似于刷新页面
-    router.push(HOME_PATH);
+    router.push(HOME.path);
   }
 };
 </script>

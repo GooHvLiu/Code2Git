@@ -7,23 +7,23 @@
         <span>医院信息</span>
       </div>
       <!-- 索引使用完整的路由路径，这样最方便，不用拼串，也可以直接跳转 -->
-      <el-menu-item :index="HOSPITAL.PATH + '/' + HOSPITAL.CHILDREN.APPOINTMENT_PATH">
+      <el-menu-item :index="HOSPITAL.path + '/' + HOSPITAL.CHILDREN.APPOINTMENT.path">
         <el-icon><Service /></el-icon>
         <span>预约挂号</span>
       </el-menu-item>
-      <el-menu-item :index="HOSPITAL.PATH + '/' + HOSPITAL.CHILDREN.DETAL_PATH">
+      <el-menu-item :index="HOSPITAL.path + '/' + HOSPITAL.CHILDREN.DETAL.path">
         <el-icon><Finished /></el-icon>
         <span>医院详情</span>
       </el-menu-item>
-      <el-menu-item :index="HOSPITAL.PATH + '/' + HOSPITAL.CHILDREN.NOTICE_PATH">
+      <el-menu-item :index="HOSPITAL.path + '/' + HOSPITAL.CHILDREN.NOTICE.path">
         <el-icon><Bell /></el-icon>
         <span>预约须知</span>
       </el-menu-item>
-      <el-menu-item :index="HOSPITAL.PATH + '/' + HOSPITAL.CHILDREN.STOP_SERVICE_PATH">
+      <el-menu-item :index="HOSPITAL.path + '/' + HOSPITAL.CHILDREN.STOP_SERVICE.path">
         <el-icon><Timer /></el-icon>
         <span>停诊信息</span>
       </el-menu-item>
-      <el-menu-item :index="HOSPITAL.PATH + '/' + HOSPITAL.CHILDREN.SEARCH_CANCEL_PATH">
+      <el-menu-item :index="HOSPITAL.path + '/' + HOSPITAL.CHILDREN.SEARCH_CANCEL.path">
         <el-icon><Switch /></el-icon>
         <span>查询取消</span>
       </el-menu-item>
