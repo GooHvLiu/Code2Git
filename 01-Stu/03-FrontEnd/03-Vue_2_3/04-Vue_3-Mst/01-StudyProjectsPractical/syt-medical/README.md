@@ -2058,7 +2058,9 @@ cpolar http 8201
 >
 > 其中的`https://xxxx.cpolar.cn`就是内网穿透后的公网IP
 
-#### 请求地址
+#### 常规踩坑
+
+##### 请求地址
 
 把 `pages/auth/login.js` 里的请求地址改成 cpolar 给的公网地址：
 
@@ -2067,6 +2069,12 @@ url: "https://4d4ef6d6.r27.cpolar.top/api/wx/login",
 ```
 
 > cpolar 是 HTTPS 的，微信小程序直接能用，不需要勾选 "不校验合法域名"。
+
+##### 服务域名
+
+地址：`https://mp.weixin.qq.com/wxamp/home/guide?lang=zh_CN&token=915663012`
+
+处理：管理/开发管理/服务器域名/`request`合法域名备案
 
 ## 静态组件
 

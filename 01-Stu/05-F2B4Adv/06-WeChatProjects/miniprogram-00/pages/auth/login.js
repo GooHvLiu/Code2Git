@@ -52,7 +52,7 @@ Page({
     }
 
     wx.request({
-      url: "https://4d4ef6d6.r27.cpolar.top/api/wx/login",
+      url: "https://6d02f14d.r27.cpolar.top/api/wx/login",
       method: "POST",
       data: {
         code: this.data.loginCode,
