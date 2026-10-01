@@ -94,7 +94,7 @@ defineOptions({ name: "QuickLink" });
 <style scoped lang="less">
 .right-adv {
   margin-left: 10px;
-  color: #a1a1a1;
+  color: @color-text-secondary;
   .common-department {
     .top {
       display: flex;
@@ -114,7 +114,7 @@ defineOptions({ name: "QuickLink" });
       }
       .right:hover,
       .left:hover {
-        color: orange;
+        color: @color-text-hoverMainColor;
         cursor: pointer;
       }
     }
@@ -124,7 +124,7 @@ defineOptions({ name: "QuickLink" });
         grid-template-columns: 1fr 1fr;
         gap: 10px;
         li:hover {
-          color: orange;
+          color: @color-text-hoverMainColor;
           cursor: pointer;
         }
       }

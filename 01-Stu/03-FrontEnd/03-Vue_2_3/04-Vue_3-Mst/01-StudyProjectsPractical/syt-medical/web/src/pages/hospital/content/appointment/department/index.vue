@@ -75,7 +75,7 @@ const handleSelect = (key: string) => {
 <style scoped lang="less">
 .page-wrap {
   margin: 20px 0;
-  color: #717171;
+  color: @color-text-regular;
   .el-row {
     .el-col-3 {
       .el-menu {
@@ -85,7 +85,7 @@ const handleSelect = (key: string) => {
         .el-menu-item {
           padding: 0 30px;
           &:hover {
-            color: black;
+            color: @color-text-primary;
           }
         }
       }
@@ -93,7 +93,7 @@ const handleSelect = (key: string) => {
     .el-col-21 {
       padding-left: 15px;
       h3 {
-        background-color: #f8f8f8;
+        @color-bg-page: #f8f8f8;
         line-height: 2.5rem;
         font-weight: 800;
       }
@@ -104,7 +104,7 @@ const handleSelect = (key: string) => {
         div {
           margin: 10px 0;
           &:hover {
-            color: orange;
+            color: @color-text-hoverMainColor;
             cursor: pointer;
           }
         }

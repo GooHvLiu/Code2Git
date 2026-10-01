@@ -42,7 +42,7 @@ const useStore = useHospitalDetailStore();
 
 <style scoped lang="less">
 .page-wrap {
-  color: #717171;
+  color: @color-text-regular;
   display: flex;
   flex-direction: column;
   gap: 15px;

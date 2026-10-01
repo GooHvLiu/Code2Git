@@ -108,7 +108,7 @@ const handleSelect = (hoscode: string) => {
     cursor: pointer;
   }
   .content {
-    color: #a9a9a9;
+    color: @color-text-secondary;
     display: flex;
     justify-content: space-between;
     align-items: center;

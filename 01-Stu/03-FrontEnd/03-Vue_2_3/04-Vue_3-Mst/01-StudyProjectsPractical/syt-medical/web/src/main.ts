@@ -1,7 +1,7 @@
 // Vue3 框架提供的方法 createApp 方法，可以用来创建应用实例方法
 import { createApp } from "vue";
 // 引入样式重置文件 reset.css
-import "@/style/reset.less";
+import "@/assets/styles/reset/reset.less";
 // 引入根组件App
 import App from "./App.vue";
 // 引入全局组件- HospitalTop / HospitalBottom / Login，用于页面的顶部和底部
@@ -19,6 +19,8 @@ import "element-plus/dist/index.css";
 import zhCn from "element-plus/es/locale/lang/zh-cn";
 // 引入 element-plus Icon图标库
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
+// 引入 颜色唯一定义源
+import "@/assets/styles/color-sources/variables.css";
 // 利用 createApp 方法创建应用实例
 const app = createApp(App);
 // 将创建的 createrPinia 进行挂载

@@ -90,7 +90,7 @@ const handleClose = () => {
     display: grid;
     grid-template-columns: 50% 50%;
     .left {
-      border: 1px solid #f1f1f1;
+      border: 1px solid @color-border;
     }
   }
 }

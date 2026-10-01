@@ -42,11 +42,11 @@
   .content {
     width: 1200px;
     height: 100%;
-    background-color: #f0f0f0;
+    background-color: @color-bg-page;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #bfbcbf;
+    color: @color-text-secondary;
     .left {
       margin: 8px;
     }
@@ -56,7 +56,7 @@
       }
       :hover {
         cursor: pointer;
-        color: orange;
+        color: @color-text-hoverMainColor;
       }
     }
   }

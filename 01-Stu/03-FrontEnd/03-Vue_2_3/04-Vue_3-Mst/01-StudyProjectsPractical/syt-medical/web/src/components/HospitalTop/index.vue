@@ -113,7 +113,7 @@ const handleCommand = (command: string | number | object) => {
   height: 70px;
   position: fixed;
   z-index: 9999;
-  background-color: #fff;
+  background-color: @color-bg-white;
   display: flex;
   justify-content: center;
   .content {
@@ -133,7 +133,7 @@ const handleCommand = (command: string | number | object) => {
       }
       p {
         font-size: 1.5rem;
-        color: #5566cc;
+        color: @color-primary-light;
         cursor: pointer;
       }
     }
@@ -144,25 +144,25 @@ const handleCommand = (command: string | number | object) => {
       gap: 10px;
       p {
         font-size: 1rem;
-        color: #9e9e9e;
+        color: @color-text-secondary;
       }
       .help-tips:hover {
-        color: orange;
+        color: @color-text-hoverMainColor;
         cursor: pointer;
       }
       .login-register {
         p {
           font-size: 1rem;
-          color: #9e9e9e;
+          color: @color-text-secondary;
         }
         span:hover {
-          color: orange;
+          color: @color-text-hoverMainColor;
           cursor: pointer;
         }
       }
       .user-info {
         .el-icon {
-          color: orange;
+          color: @color-text-hoverMainColor;
         }
         .el-icon:last-child:hover {
           cursor: pointer;

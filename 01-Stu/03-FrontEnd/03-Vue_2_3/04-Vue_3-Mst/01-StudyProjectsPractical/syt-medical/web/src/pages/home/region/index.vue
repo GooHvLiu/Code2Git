@@ -25,7 +25,7 @@ defineOptions({ name: "Region" });
 import { ref, onMounted } from "vue";
 // 引入类型变量定义
 import type { ResponseData } from "@/types/api";
-import type { HospitalRegionPageResponse } from "@/types/hospital";
+import type { HospitalRegionPageResponse } from "@/types/hospitalList";
 // 引入 网络请求 网址参数
 import { cityCode } from "@/const/index";
 // 引入网络请求函数
@@ -76,7 +76,7 @@ const handleSelected = (selectedItem: string) => {
 
 <style scoped lang="less">
 .page-home-region {
-  color: #a9a9a9;
+  color: @color-text-secondary;
   font-weight: 900;
   .region {
     display: flex;
@@ -92,10 +92,10 @@ const handleSelected = (selectedItem: string) => {
         margin-right: 15px;
         margin-top: 10px;
         &.active {
-          color: #5566cc;
+          color: @color-text-hoverSecondaryColor;
         }
         &:hover {
-          color: #5566cc;
+          color: @color-text-hoverSecondaryColor;
           cursor: pointer;
         }
       }

@@ -55,7 +55,7 @@ defineOptions({ name: "FollowApp" });
 
 <style scoped lang="less">
 .page-wrap {
-  color: #717171;
+  color: @color-text-regular;
   .content {
     display: flex;
     flex-direction: column;

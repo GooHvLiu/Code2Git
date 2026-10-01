@@ -26,6 +26,14 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true
         }
       }
+    },
+    // 配置应用预处理Less
+    css: {
+      preprocessorOptions: {
+        less: {
+          additionalData: `@import "@/assets/styles/color-sources/variables.less";`
+        }
+      }
     }
   };
 });

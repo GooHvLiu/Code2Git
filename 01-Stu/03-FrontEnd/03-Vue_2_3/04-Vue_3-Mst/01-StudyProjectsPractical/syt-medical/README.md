@@ -2,14 +2,18 @@
 
 ## 技术选型
 
-- `Vue3 `+ 组合式`API`
-- `Vite` 构建工具
-- `TypeScript`
-- `vue-router`
-- `Pinia` 状态管理
-- `element-plus`
-- `Axios`网络交互
-- 后端：`node.js + express`+`Open API` + 虚拟数据
+|   分类    |        技术        |
+| :-------: | :----------------: |
+| 前端框架  | Vue3（组合式 API） |
+| 构建工具  |        Vite        |
+| 类型支持  |     TypeScript     |
+|   路由    |     vue-router     |
+| 状态管理  |       Pinia        |
+| UI 组件库 |    element-plus    |
+| 网络请求  |       Axios        |
+|   后端    | Node.js + Express  |
+| 接口文档  |      Open API      |
+| 数据方案  |      虚拟数据      |
 
 ## 前置准备
 
@@ -986,6 +990,105 @@ export const HOSPITAL_PATH = "/hospital";
 ```ts
 // 用户信息本地化存储
 export const USERINFO_LOCALSTORAGE = "USERINFO";
+```
+
+### 颜色常量
+
+#### 定义颜色
+
+创建唯一颜色源 `src/assets/styles/color-sources/variables.less`，把全站颜色统一定义在 `:root` 上，语义化命名：
+
+```css
+/* src/assets/styles/color-sources/variables.less —— 全站唯一颜色源 Color Source */
+/* ===== 品牌主色系（尚医通医疗蓝）===== */
+@color-primary: #5566cc; /* 主品牌蓝 */
+@color-primary-light: #5ba0eb; /* 主色浅 */
+@color-primary-dark: #1f63ad; /* 主色深 */
+
+/* ===== 语义状态色（与 Element Plus 对齐）===== */
+@color-success: #67c23a;
+@color-warning: #e6a23c;
+@color-danger: #f56c6c;
+@color-info: #909399;
+
+/* ===== 文字色 ===== */
+@color-text-primary: #303133; /* 主要文字 */
+@color-text-regular: #606266; /* 常规文字 */
+@color-text-secondary: #909399; /* 次要文字 */
+@color-text-placeholder: #c0c4cc; /* 占位符 */
+
+/* ===== 边框与分割线 ===== */
+@color-border: #dcdfe6;
+@color-border-light: #e4e7ed;
+
+/* ===== 背景色 ===== */
+@color-bg-page: #f0f2f5; /* 页面背景 */
+@color-bg-container: #ffffff; /* 内容区背景 */
+@color-bg-hover: #f5f7fa; /* 悬停背景 */
+
+/* ===== 业务扩展色（尚医通医疗场景）===== */
+@color-medical-emergency: #f56c6c; /* 急诊/危急 */
+@color-medical-reserved: #2b85e4; /* 可预约 */
+@color-medical-full: #909399; /* 已约满 */
+
+```
+
+#### 全局引入
+
+在 `main.ts` 全局引入两个`css`文件供全员项目使用，如下为`main.ts`核心代码：
+
+```ts
+// src/main.ts
+import { createApp } from 'vue'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+
+import '@/assets/styles/color-sources/variables.css'
+
+import App from './App.vue'
+import router from './router'
+import pinia from './stores'
+
+createApp(App)
+  .use(ElementPlus)
+  .use(router)
+  .use(pinia)
+  .mount('#app')
+```
+
+#### 使用变量
+
+##### 配置注入
+
+本案例使用预处理器`Less`（若项目用 Less，变量也已全局注入），在 `vite.config.ts` 中配置全局注入后，所有 `<style lang="less">` 可直接使用 `@color-primary`，在`vite.config.ts`中：
+
+```ts
+// vite.config.ts
+import { defineConfig } from 'vite'
+
+export default defineConfig(({ command, mode, isServing }) => {
+  return {
+    css: {
+      preprocessorOptions: {
+        less: {
+          additionalData: `@import "@/assets/styles/color-sources/variables.less";`
+        }
+      }
+    }
+  }
+})
+```
+
+##### 组件应用
+
+在实际项目中按照如下方式使用：
+
+```vue
+/* 组件内直接使用，无需再 import */
+.appointment-banner {
+  background: linear-gradient(135deg, @color-primary, @color-primary-dark);
+  color: #fff;
+}
 ```
 
 ## 标准框架

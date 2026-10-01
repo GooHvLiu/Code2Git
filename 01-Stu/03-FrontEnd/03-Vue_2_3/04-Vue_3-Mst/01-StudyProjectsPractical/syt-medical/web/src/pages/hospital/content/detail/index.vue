@@ -57,7 +57,7 @@ const useStore = useHospitalDetailStore();
 
 <style scoped lang="less">
 .page-wrap-detail {
-  color: #717171;
+  color: @color-text-regular;
   display: flex;
   flex-direction: column;
 
@@ -66,7 +66,7 @@ const useStore = useHospitalDetailStore();
     flex-direction: row;
     align-items: center;
     .left {
-      color: #333;
+      color: @color-text-primary;
       font-weight: 800;
       font-size: 1.35rem;
       margin-right: 5px;
@@ -94,7 +94,7 @@ const useStore = useHospitalDetailStore();
       flex-direction: column;
       gap: 10px;
       .title {
-        color: #333;
+        color: @color-text-primary;
         font-weight: 800;
       }
       .content {
@@ -115,7 +115,7 @@ const useStore = useHospitalDetailStore();
     flex-direction: column;
     gap: 10px;
     .title {
-      color: #333;
+      color: @color-text-primary;
       font-weight: 800;
     }
     .content {

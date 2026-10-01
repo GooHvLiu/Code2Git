@@ -78,7 +78,7 @@ const handleSelected = (selectedItem: string) => {
 
 <style scoped lang="less">
 .page-home-level {
-  color: #a9a9a9;
+  color: @color-text-secondary;
   font-weight: 900;
   .hospital {
     margin: 10px 0;
@@ -94,10 +94,10 @@ const handleSelected = (selectedItem: string) => {
       li {
         margin-right: 15px;
         &.active {
-          color: #5566cc;
+          color: @color-text-hoverSecondaryColor;
         }
         &:hover {
-          color: #5566cc;
+          color: @color-text-hoverSecondaryColor;
           cursor: pointer;
         }
       }
