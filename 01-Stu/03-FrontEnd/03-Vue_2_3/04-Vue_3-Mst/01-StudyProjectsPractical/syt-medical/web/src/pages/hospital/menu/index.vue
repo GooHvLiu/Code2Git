@@ -46,6 +46,10 @@ const router = useRouter();
 // 读取路由
 const route = useRoute();
 
+//引入 Pinia Store
+import { useHospitalDoctorStore } from "@/stores/index";
+const useDoctorStore = useHospitalDoctorStore();
+
 // Props定义示例
 // const props = defineProps<{}>()
 // const emit = defineEmits<{}>()
@@ -65,6 +69,9 @@ const route = useRoute();
 // 点击菜单触发函数
 const handleSelect = (key: string) => {
   // console.log(key, keyPath);
+  // 控制进入预约挂号界面的初始化开发
+  useDoctorStore.appointmentDoctor.appointmentDepartment = 1;
+  useDoctorStore.appointmentDoctor.doctorDetail = 0;
   // 使用 router 进行跳转
   router.push({
     path: key,

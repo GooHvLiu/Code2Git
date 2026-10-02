@@ -974,13 +974,43 @@ export const provinceCode = 110100;
 
 ```ts
 // INDEX path 统一放在这里保存和管理
-export const INDEX_PATH = "/";
+export const INDEX = {
+  path: "/"
+};
 
 // HOME path 统一放在这里保存和管理
-export const HOME_PATH = "/home";
+export const HOME = {
+  path: "/home"
+};
 
 // HOSPITAL path 统一放在这里保存和管理
-export const HOSPITAL_PATH = "/hospital";
+export const HOSPITAL = {
+  // 首页路径
+  path: "/hospital",
+  // 菜单对应子路由路径
+  CHILDREN: {
+    // 预约挂号 子路由路径
+    APPOINTMENT: {
+      path: "appointment"
+    },
+    // 医院详情 子路由路径
+    DETAL: {
+      path: "detail"
+    },
+    // 预约须知 子路由路径
+    NOTICE: {
+      path: "notice"
+    },
+    // 停诊信息 子路由路径
+    STOP_SERVICE: {
+      path: "stopService"
+    },
+    // 查询与取消 子路由路径
+    SEARCH_CANCEL: {
+      path: "searchCancel"
+    }
+  }
+};
 ```
 
 ### 存储常量
@@ -1344,113 +1374,6 @@ app.mount("#app");
 }
 </style>
 ```
-
-#### 项目路由
-
-该项目使用`vue-router`的路由方案。
-
-##### 依赖安装
-
-```bash
-PS F:\CodingMan\Code2Git\01-Stu\03-FrontEnd\03-Vue_2_3\04-Vue_3-Mst\01-StudyProjectsPractical\syt-medical\web> npm i vue-router
-
-added 34 packages in 12s
-
-24 packages are looking for funding
-  run `npm fund` for details
-```
-
-##### 创建路由
-
-在`src/router`下创建`index.ts`文件，并创建2组路由：
-
-```ts
-import { createRouter, createWebHistory } from "vue-router";
-// 导入路由常量管理文件
-import { INDEX_PATH, HOME_PATH, HOSPITAL_PATH } from "@/const/index";
-
-// createRouter方法，用于创建路由器实例，可以管理多个路由
-export default createRouter({
-  // 路由模式设置
-  history: createWebHistory(),
-  // 管理路由
-  routes: [
-    {
-      path: HOME_PATH,
-      component: () => import("@/pages/home/index.vue")
-    },
-    {
-      path: HOSPITAL_PATH,
-      component: () => import("@/pages/hospital/index.vue")
-    },
-    {
-      path: INDEX_PATH,
-      redirect: HOME_PATH
-    }
-  ],
-  // 管理滚动行为 保证每次跳转，滚动条都回到最初的上面位置
-  scrollBehavior() {
-    return {
-      left: 0,
-      top: 0
-    };
-  }
-});
-```
-
-> 1. 为了保证每次都会跳会最上部，增加了滚动跳行为，确保每次都能回到最初的上面的位置
-
-##### 全局注册
-
-在`naim.ts`文件中使用`router`插件，并全局注册相关方法
-
-```ts
-// Vue3 框架提供的方法 createApp 方法，可以用来创建应用实例方法
-import { createApp } from "vue";
-// 引入样式重置文件 reset.css
-import "@/style/reset.less";
-// 引入根组件App
-import App from "./App.vue";
-// 引入全局组件- HospitalTop 和 HospitalBottom，用于页面的顶部和底部
-import HospitalTop from "@/components/HospitalTop/index.vue";
-import HospitalBottom from "@/components/HospitalBottom/index.vue";
-// 引入路由组件
-import router from "./router/index.ts";
-// 利用 createApp 方法创建应用实例
-const app = createApp(App);
-// 将 HospitalTop 和 HospitalBottom 注册为全局组件
-app.component("HospitalTop", HospitalTop);
-app.component("HospitalBottom", HospitalBottom);
-// 使用 router 插件，全局注册相关方法
-app.use(router);
-// 将应用实例挂载到挂载点上
-app.mount("#app");
-```
-
-##### 首页使用
-
-在`app.vue`文件中，在中间部位，使用使用路由显示页面：
-
-```vue
-<template>
-  <div class="container">
-    <!-- 顶部全局组件 -->
-    <HospitalTop />
-    <!-- 中间的内容区域 -->
-    <div class="content">
-      <!-- 以下为通过 router 跳转部分 -->
-      <router-view></router-view>
-    </div>
-    <!-- 底部区域 -->
-    <div class="bottom">我是底部</div>
-
-    <!-- 底部全局组件 -->
-    <HospitalBottom />
-  </div>
-</template>
-```
-
-> 只显示了结构部分的代码，其他部分不再展示
 
 ### Icon 图标
 
@@ -2179,6 +2102,144 @@ url: "https://4d4ef6d6.r27.cpolar.top/api/wx/login",
 
 处理：管理/开发管理/服务器域名/`request`合法域名备案
 
+## 前端路由
+
+该项目使用`vue-router`的路由方案。
+
+### 依赖安装
+
+```bash
+PS F:\CodingMan\Code2Git\01-Stu\03-FrontEnd\03-Vue_2_3\04-Vue_3-Mst\01-StudyProjectsPractical\syt-medical\web> npm i vue-router
+
+added 34 packages in 12s
+
+24 packages are looking for funding
+  run `npm fund` for details
+```
+
+### 创建路由
+
+在`src/router`下创建`index.ts`文件，并创建2组路由：
+
+```ts
+import { createRouter, createWebHistory } from "vue-router";
+// 导入路由常量管理文件
+import { INDEX, HOME, HOSPITAL } from "@/const/index";
+
+// createRouter方法，用于创建路由器实例，可以管理多个路由
+export default createRouter({
+  // 路由模式设置
+  history: createWebHistory(),
+  // 管理路由
+  routes: [
+    // Home页面路由
+    {
+      path: HOME.path,
+      component: () => import("@/pages/home/index.vue")
+    },
+    // 医院详情 页面路由
+    {
+      path: HOSPITAL.path,
+      component: () => import("@/pages/hospital/index.vue"),
+      // 菜单对应子路由路径
+      children: [
+        // 预约挂号 子路由路径
+        {
+          path: HOSPITAL.CHILDREN.APPOINTMENT.path,
+          component: () => import("@/pages/hospital/content/appointment/index.vue")
+        },
+        // 医院详情 子路由路径
+        {
+          path: HOSPITAL.CHILDREN.DETAL.path,
+          component: () => import("@/pages/hospital/content/detail/index.vue")
+        },
+        // 预约须知 子路由路径
+        {
+          path: HOSPITAL.CHILDREN.NOTICE.path,
+          component: () => import("@/pages/hospital/content/notice/index.vue")
+        },
+        // 停诊信息 子路由路径
+        {
+          path: HOSPITAL.CHILDREN.STOP_SERVICE.path,
+          component: () => import("@/pages/hospital/content/stopService/index.vue")
+        },
+        // 查询与取消 子路由路径
+        {
+          path: HOSPITAL.CHILDREN.SEARCH_CANCEL.path,
+          component: () => import("@/pages/hospital/content/searchCancel/index.vue")
+        }
+      ]
+    },
+    // 重定向 页面路由
+    {
+      path: INDEX.path,
+      redirect: HOME.path
+    }
+  ],
+  // 管理滚动行为 保证每次跳转，滚动条都回到最初的上面位置
+  scrollBehavior() {
+    return {
+      left: 0,
+      top: 0
+    };
+  }
+});
+```
+
+> 1. 为了保证每次都会跳会最上部，增加了滚动跳行为，确保每次都能回到最初的上面的位置
+
+### 全局注册
+
+在`naim.ts`文件中使用`router`插件，并全局注册相关方法
+
+```ts
+// Vue3 框架提供的方法 createApp 方法，可以用来创建应用实例方法
+import { createApp } from "vue";
+// 引入样式重置文件 reset.css
+import "@/style/reset.less";
+// 引入根组件App
+import App from "./App.vue";
+// 引入全局组件- HospitalTop 和 HospitalBottom，用于页面的顶部和底部
+import HospitalTop from "@/components/HospitalTop/index.vue";
+import HospitalBottom from "@/components/HospitalBottom/index.vue";
+// 引入路由组件
+import router from "./router/index.ts";
+// 利用 createApp 方法创建应用实例
+const app = createApp(App);
+// 将 HospitalTop 和 HospitalBottom 注册为全局组件
+app.component("HospitalTop", HospitalTop);
+app.component("HospitalBottom", HospitalBottom);
+// 使用 router 插件，全局注册相关方法
+app.use(router);
+// 将应用实例挂载到挂载点上
+app.mount("#app");
+```
+
+### 首页使用
+
+在`app.vue`文件中，在中间部位，使用使用路由显示页面：
+
+```vue
+<template>
+  <div class="container">
+    <!-- 顶部全局组件 -->
+    <HospitalTop />
+    <!-- 中间的内容区域 -->
+    <div class="content">
+      <!-- 以下为通过 router 跳转部分 -->
+      <router-view></router-view>
+    </div>
+    <!-- 底部区域 -->
+    <div class="bottom">我是底部</div>
+
+    <!-- 底部全局组件 -->
+    <HospitalBottom />
+  </div>
+</template>
+```
+
+> 只显示了结构部分的代码，其他部分不再展示
+
 ## 静态组件
 
 ### 主页组件
@@ -2880,23 +2941,23 @@ defineOptions({ name: "QuickLink" });
         <span>医院信息</span>
       </div>
       <!-- 索引使用完整的路由路径，这样最方便，不用拼串，也可以直接跳转 -->
-      <el-menu-item :index="HOSPITAL.PATH + '/' + HOSPITAL.CHILDREN.APPOINTMENT_PATH">
+      <el-menu-item :index="HOSPITAL.path + '/' + HOSPITAL.CHILDREN.APPOINTMENT.path">
         <el-icon><Service /></el-icon>
         <span>预约挂号</span>
       </el-menu-item>
-      <el-menu-item :index="HOSPITAL.PATH + '/' + HOSPITAL.CHILDREN.DETAL_PATH">
+      <el-menu-item :index="HOSPITAL.paht + '/' + HOSPITAL.CHILDREN.DETAL.path">
         <el-icon><Finished /></el-icon>
         <span>医院详情</span>
       </el-menu-item>
-      <el-menu-item :index="HOSPITAL.PATH + '/' + HOSPITAL.CHILDREN.NOTICE_PATH">
+      <el-menu-item :index="HOSPITAL.path + '/' + HOSPITAL.CHILDREN.NOTICE.path">
         <el-icon><Bell /></el-icon>
         <span>预约须知</span>
       </el-menu-item>
-      <el-menu-item :index="HOSPITAL.PATH + '/' + HOSPITAL.CHILDREN.STOP_SERVICE_PATH">
+      <el-menu-item :index="HOSPITAL.path + '/' + HOSPITAL.CHILDREN.STOP_SERVICE.path">
         <el-icon><Timer /></el-icon>
         <span>停诊信息</span>
       </el-menu-item>
-      <el-menu-item :index="HOSPITAL.PATH + '/' + HOSPITAL.CHILDREN.SEARCH_CANCEL_PATH">
+      <el-menu-item :index="HOSPITAL.path + '/' + HOSPITAL.CHILDREN.SEARCH_CANCEL.path">
         <el-icon><Switch /></el-icon>
         <span>查询取消</span>
       </el-menu-item>
@@ -4036,7 +4097,7 @@ export const useHospitalDetailStore = defineStore("HospitalDetail", () => {
 
 ```
 
-### 医院部门
+### 医院科室
 
 `src/modules/hospital.ts`中关于 医院部门  ` hospitalDepartment`详细实现方式如下：
 
@@ -4071,6 +4132,29 @@ export const useHospitalDepartmentStore = defineStore("HospitalDepartment", () =
 
   // =============== Getters
   return { hospitalDepartment, getHospitalDepartment };
+});
+```
+
+### 科室医生
+
+`src/modules/hospital.ts`中关于 科室医生  ` HospitalDoctor`详细实现方式如下：
+
+```ts
+// 创建 科室医生 的状态存储
+export const useHospitalDoctorStore = defineStore("HospitalDoctor", () => {
+  // =============== State
+  // 用于控制预约挂号展示的是选择科室还是选择具体医生和时间
+  let appointmentDoctor: AppointmentDoctorItem = reactive({
+    // 选择 科室 的开关，1为显示，0为不显示
+    appointmentDepartment: 1,
+    // 选择 医生 的开关，1为显示，0为不显示
+    doctorDetail: 0
+  });
+
+  // =============== Actions
+
+  // =============== Getters
+  return { appointmentDoctor };
 });
 ```
 
@@ -4612,23 +4696,43 @@ export interface HospitalDetailItem {
 
 ```
 
-#### 医院部门
+#### 医院科室
 
 从后端获取的医院部门`src/types/hospitalDepartment/index.ts`，实际需要的部分进行类型定义：
 
 ```ts
 // 单条 医院部门 的数据类型
+export interface HospitalDepartmentChildren {
+  id: string;
+  hoscode: string;
+  depcode: string;
+  depname: string;
+  title: string;
+}
+// 多条 医院部门 的数据类型
 export interface HospitalDepartmentItem {
   id: string;
   hoscode: string;
   depcode: string;
   depname: string;
   title: string;
-  children: HospitalDepartmentItem[];
+  children: HospitalDepartmentChildren[];
 }
 
 // 多条 医院部门 的数据类型
 export type HospitalDepartmentPageResponse = HospitalDepartmentItem[];
+```
+
+#### 科室医生
+
+从后端获取的医院部门`src/types/hospitalDepartment/index.ts`，实际需要的部分进行类型定义：
+
+```ts
+// 科室医生 的数据类型
+export interface AppointmentDoctorItem {
+  appointmentDepartment: number;
+  doctorDetail: number;
+}
 ```
 
 ### 用户组件
@@ -5674,7 +5778,7 @@ const router = useRouter();
 
 ```ts
 // 导入路由常量管理文件
-import { HOSPITAL_PATH } from "@/const/index";
+import { HOSPITAL } from "@/const/index";
 ```
 
 ###### 跳转逻辑
@@ -5683,7 +5787,7 @@ import { HOSPITAL_PATH } from "@/const/index";
 
 ```ts
 // 通过路由跳转到医院详情页面 query: { hoscode }
-  router.push({ path: HOSPITAL_PATH });
+  router.push({ path: HOSPITAL });
 ```
 
 > 本案例采用对象方式实现调整，可实现路径`push`、参数`query`的设定
@@ -5719,12 +5823,12 @@ import { HOSPITAL_PATH } from "@/const/index";
 import { useRouter } from "vue-router";
 const router = useRouter();
 // 导入路由常量管理文件
-import { HOSPITAL_PATH } from "@/const/index";
+import { HOSPITAL } from "@/const/index";
 
 // 当用户选中搜索框下选项内容时被触发
 const handleSelect = (hoscode: string) => {
   // 通过路由跳转到医院详情页面 query: { hoscode }
-  router.push({ path: HOSPITAL_PATH });
+  router.push({ path: HOSPITAL });
 };
 </script>
 ```
@@ -5739,7 +5843,7 @@ const handleSelect = (hoscode: string) => {
 const handleSelect = (item: Record<string, any>) => {
   // 通过路由跳转到医院详情页面 query: { hoscode }
   // console.log("点击的医院代码为：", item);
-  router.push({ path: HOSPITAL.PATH + "/" + HOSPITAL.CHILDREN.DETAL_PATH, query: { hoscode: item.hoscode } });
+  router.push({ path: HOSPITAL.path + "/" + HOSPITAL.CHILDREN.DETAL.path, query: { hoscode: item.hoscode } });
 };
 ......			
 ```
@@ -5767,11 +5871,11 @@ const handleSelect = (item: Record<string, any>) => {
 import { useRouter } from "vue-router";
 const router = useRouter();
 // 导入路由常量管理文件
-import { HOSPITAL_PATH } from "@/const/index";
+import { HOSPITAL } from "@/const/index";
 // 当用户点击时被触发
 const handleSelect = (hoscode: string) => {
   // 通过路由跳转到医院详情页面
-  router.push({ path: HOSPITAL_PATH });
+  router.push({ path: HOSPITAL });
 };
 </script>
 ```
@@ -5785,7 +5889,7 @@ const handleSelect = (hoscode: string) => {
 // 当用户点击时被触发
 const handleSelect = (hoscode: string) => {
   // 通过路由跳转到医院详情页面
-  router.push({ path: HOSPITAL.PATH + "/" + HOSPITAL.CHILDREN.DETAL_PATH, query: { hoscode: hoscode } });
+  router.push({ path: HOSPITAL.path + "/" + HOSPITAL.CHILDREN.DETAL.path, query: { hoscode: hoscode } });
   // console.log("点击的医院代码为：", hoscode);
 };
 ......			
@@ -5818,11 +5922,11 @@ const handleSelect = (hoscode: string) => {
 import { useRouter } from "vue-router";
 const router = useRouter();
 // 导入路由常量管理文件
-import { HOME_PATH } from "@/const/index";
+import { HOME } from "@/const/index";
 // 当用户点击时被触发
 const handleSelect = () => {
   // 通过路由跳转到主页
-  router.push({ path: HOME_PATH });
+  router.push({ path: HOME });
 };
 </script>
 ```
@@ -5831,56 +5935,323 @@ const handleSelect = () => {
 
 在医院组件中，实际内部渲染的数据是通过`hoscode`传入的`query`，将后端获取的数据存储到`Pinia/Store`存储，供医院组件使用，医院相关的数据展示罗列到静态组件中，再次不多赘述。
 
+#### 主页挂载
+
+在主页面中将如下组件进行实际挂载，`src/pages/hospital/index.vue`实现如下：
+
+```vue
+<template>
+  <div class="page-wrap">
+    <!-- 左侧为菜单栏 -->
+    <div class="left-menu">
+      <Menu />
+    </div>
+    <!-- 右侧为内容展示区 -->
+    <div class="right-content">
+      <router-view></router-view>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名称
+defineOptions({ name: "Hospital" });
+// 引入 菜单 子组件
+import Menu from "./menu/index.vue";
+// 引入路由和路由器
+import { useRoute } from "vue-router";
+const route = useRoute();
+
+// import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { onMounted } from "vue";
+// 引入 Pinia Store
+import { useHospitalDetailStore, useHospitalDepartmentStore } from "@/stores/index.ts";
+// 获取医院详情的 Store
+const useStore_HosDetail = useHospitalDetailStore();
+// 获取医院部门的 Store
+const useStore_HosDepartment = useHospitalDepartmentStore();
+// 生命周期
+onMounted(() => {
+  // 获取当前网址中的 query 中的  hoscode 参数
+  const hoscode = route.query.hoscode as string;
+  // 页面挂载后即可获取 医院详情 Store 数据
+  useStore_HosDetail.getHospitalDetailInfo(hoscode);
+  // 页面挂载后即可获取 医院部门 Store 数据
+  useStore_HosDepartment.getHospitalDepartment(hoscode);
+});
+</script>
+
+<style scoped lang="less">
+.page-wrap {
+  display: grid;
+  grid-template-columns: 1.5fr 8.5fr;
+}
+</style>
+```
+
+#### 导航组件
+
+左侧的导航组件用于引导用户进行挂号操作，`src/pages/hospital/menu/index`实现如下：
+
+```vue
+<template>
+  <div class="page-wrap">
+    <el-menu :default-active="route.path" @select="handleSelect">
+      <div class="menu-topTitle">
+        <el-icon color="#58317B"><HomeFilled /></el-icon>
+        <el-icon size="0.9rem"><DArrowRight /></el-icon>
+        <span>医院信息</span>
+      </div>
+      <!-- 索引使用完整的路由路径，这样最方便，不用拼串，也可以直接跳转 -->
+      <el-menu-item :index="HOSPITAL.path + '/' + HOSPITAL.CHILDREN.APPOINTMENT.path">
+        <el-icon><Service /></el-icon>
+        <span>预约挂号</span>
+      </el-menu-item>
+      <el-menu-item :index="HOSPITAL.path + '/' + HOSPITAL.CHILDREN.DETAL.path">
+        <el-icon><Finished /></el-icon>
+        <span>医院详情</span>
+      </el-menu-item>
+      <el-menu-item :index="HOSPITAL.path + '/' + HOSPITAL.CHILDREN.NOTICE.path">
+        <el-icon><Bell /></el-icon>
+        <span>预约须知</span>
+      </el-menu-item>
+      <el-menu-item :index="HOSPITAL.path + '/' + HOSPITAL.CHILDREN.STOP_SERVICE.path">
+        <el-icon><Timer /></el-icon>
+        <span>停诊信息</span>
+      </el-menu-item>
+      <el-menu-item :index="HOSPITAL.path + '/' + HOSPITAL.CHILDREN.SEARCH_CANCEL.path">
+        <el-icon><Switch /></el-icon>
+        <span>查询取消</span>
+      </el-menu-item>
+    </el-menu>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Menu" });
+// 引入路由 path 常量
+import { HOSPITAL } from "@/const/router/index";
+
+// import { ref, reactive, computed, watch, onMounted } from 'vue'
+
+// 导入路由组件
+import { useRouter, useRoute } from "vue-router";
+// 操作路由
+const router = useRouter();
+// 读取路由
+const route = useRoute();
+
+//引入 Pinia Store
+import { useHospitalDoctorStore } from "@/stores/index";
+const useDoctorStore = useHospitalDoctorStore();
+// 点击菜单触发函数
+const handleSelect = (key: string) => {
+  // console.log(key, keyPath);
+  // 控制进入预约挂号界面的初始化开发
+  useDoctorStore.appointmentDoctor.appointmentDepartment = 1;
+  useDoctorStore.appointmentDoctor.doctorDetail = 0;
+  // 使用 router 进行跳转
+  router.push({
+    path: key,
+    query: {
+      hoscode: route.query.hoscode
+    }
+  });
+};
+</script>
+
+<style scoped lang="less">
+.page-wrap {
+  .menu-topTitle {
+    margin-bottom: 10px;
+  }
+  .el-menu {
+    min-width: 150px;
+    .el-menu-item {
+      margin-bottom: 10px;
+    }
+  }
+}
+</style>
+```
+
+> 通过`Pinia Store`实现页面的按需显示
+
 #### 内容组件
 
-##### 预约主页
+##### 预约挂号
 
 在内容组件的预约挂号页面`src/pages/hospital/content/appointment`的`index.vue`实现如下：
 
 ```vue
 <template>
-  <!-- 医院预约前，对医院的详细介绍 -->
-  <div class="description">
-    <!-- 医院名称及等级 -->
-    <div class="top">
-      <div class="left">{{ useStore.hospitalDetailInfo?.hosname }}</div>
-      <div class="right">
-        <el-icon color="orange"><Opportunity /></el-icon>
-        <span>{{ useStore.hospitalDetailInfo?.hostypeString }}</span>
+  <!-- 进入预约挂号的医院详情 和 科室选择界面 -->
+  <div
+    v-if="
+      useDoctorStore.appointmentDoctor.appointmentDepartment == 1 && useDoctorStore.appointmentDoctor.doctorDetail == 0
+    "
+    class="appointment-department"
+  >
+    <!-- 医院预约前，对医院的详细介绍 -->
+    <div class="description">
+      <!-- 医院名称及等级 -->
+      <div class="top">
+        <div class="left">{{ useDetailStore.hospitalDetailInfo?.hosname }}</div>
+        <div class="right">
+          <el-icon color="orange"><Opportunity /></el-icon>
+          <span>{{ useDetailStore.hospitalDetailInfo?.hostypeString }}</span>
+        </div>
+      </div>
+      <!-- 医院 Logo + 相关详细路线指南和预约规则 -->
+      <div class="bottom">
+        <div class="left">
+          <img :src="useDetailStore.hospitalDetailInfo?.logoData" alt="医院图标" />
+        </div>
+        <div class="right">
+          <span class="title">挂号规则</span>
+          <span class="content"
+            >预约周期：{{ useDetailStore.hospitalDetailInfo?.bookingRule.cycle }}天 放号时间：{{
+              useDetailStore.hospitalDetailInfo?.bookingRule.releaseTime
+            }}
+            停挂时间：{{ useDetailStore.hospitalDetailInfo?.bookingRule.stopTime }}</span
+          >
+          <span class="content">具体地址：{{ useDetailStore.hospitalDetailInfo?.address }}</span>
+          <span class="content">规划路线：{{ useDetailStore.hospitalDetailInfo?.route }}</span>
+          <span class="content"
+            >退号时间：就诊前一工作日{{ useDetailStore.hospitalDetailInfo?.bookingRule.quitTime }}前取消</span
+          >
+          <span class="title">预约规则</span>
+          <ul>
+            <li v-for="(value, index) in useDetailStore.hospitalDetailInfo?.bookingRule.rule" :key="index">
+              {{ value }}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-    <!-- 医院 Logo + 相关详细路线指南和预约规则 -->
-    <div class="bottom">
-      <div class="left">
-        <img :src="useStore.hospitalDetailInfo?.logoData" alt="医院图标" />
-      </div>
-      <div class="right">
-        <span class="title">挂号规则</span>
-        <span class="content"
-          >预约周期：{{ useStore.hospitalDetailInfo?.bookingRule.cycle }}天 放号时间：{{
-            useStore.hospitalDetailInfo?.bookingRule.releaseTime
-          }}
-          停挂时间：{{ useStore.hospitalDetailInfo?.bookingRule.stopTime }}</span
-        >
-        <span class="content">具体地址：{{ useStore.hospitalDetailInfo?.address }}</span>
-        <span class="content">规划路线：{{ useStore.hospitalDetailInfo?.route }}</span>
-        <span class="content"
-          >退号时间：就诊前一工作日{{ useStore.hospitalDetailInfo?.bookingRule.quitTime }}前取消</span
-        >
-        <span class="title">预约规则</span>
-        <ul>
-          <li v-for="(value, index) in useStore.hospitalDetailInfo?.bookingRule.rule" :key="index">{{ value }}</li>
-        </ul>
-      </div>
-    </div>
+    <!-- 医院科室 组件 -->
+    <Department @handleSelectDep="handleClickDep" />
   </div>
-  <!-- 医院科室 组件 -->
-  <Department />
+  <!-- 进入预约医生详情界面 -->
+  <div
+    v-if="
+      useDoctorStore.appointmentDoctor.appointmentDepartment == 1 && useDoctorStore.appointmentDoctor.doctorDetail == 1
+    "
+    class="doctorDetail"
+  >
+    <DoctorDetail />
+  </div>
 </template>
-......
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Appointment" });
+
+// 引入 医院科室 组件
+import Department from "./department/index.vue";
+import DoctorDetail from "./doctorDetail/index.vue";
+//引入 Pinia Store
+import { useHospitalDetailStore, useHospitalDoctorStore } from "@/stores/index";
+const useDetailStore = useHospitalDetailStore();
+const useDoctorStore = useHospitalDoctorStore();
+// 导入路由组件
+import { useRoute, useRouter } from "vue-router";
+// 操作路由
+const router = useRouter();
+// 读取路由
+const route = useRoute();
+
+// 引入类型定义
+import type { HospitalDepartmentChildren } from "@/types/hospitalDepartment/index.ts";
+
+// import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { onMounted } from "vue";
+// 生命周期
+onMounted(() => {
+  // 进入此组件，即代表已进入部门页面
+  useDoctorStore.appointmentDoctor.appointmentDepartment = 1;
+});
+// 当用户点击科室内的具体科室触发
+const handleClickDep = (activeDep: any, childDep: HospitalDepartmentChildren) => {
+  // console.log("当前路由：", route.path, "当前常量：", HOSPITAL.CHILDREN.APPOINTMENT.CHILDREN.APPOINTMENT_DETAIL.path); // /hospital/appointment   appointmentDetail
+
+  // 路由跳转到具体科室医生预约网址
+  router.push({
+    path: route.path,
+    query: {
+      hoscode: activeDep.hoscode,
+      depcode: childDep.depcode
+    }
+  });
+  // 控制页面展示
+  useDoctorStore.appointmentDoctor.doctorDetail = 1;
+  // 测试数据
+  // console.log("当前已选大科室：", activeDep, "；当前已选小科室", childDep);
+};
+</script>
+
+<style scoped lang="less">
+.appointment-department {
+  .description {
+    color: @color-text-primary;
+    display: flex;
+    flex-direction: column;
+    .top {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .left {
+        color: @color-text-primary;
+        font-weight: 800;
+        font-size: 1.35rem;
+        margin-right: 5px;
+      }
+      .right {
+        display: flex;
+        align-items: center;
+        span {
+          margin-left: 5px;
+        }
+      }
+    }
+    .bottom {
+      margin-top: 25px;
+      display: grid;
+      grid-template-columns: 10% 90%;
+      .left {
+        img {
+          width: 80px;
+          height: 80px;
+        }
+      }
+      .right {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        .title {
+          color: @color-text-primary;
+          font-weight: 800;
+        }
+        .content {
+          line-height: 1.5rem;
+          margin-left: 10px;
+        }
+        ul {
+          li {
+            margin-top: 10px;
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+</style>
+
 ```
 
-##### 科室挂号
+###### 预约科室
 
 医院预约挂号的实现是通过类型定义、网络请求，数据展示实现的，在`src/pages/hospital/content/appointment/department`创建`index.vue`，核心实现如下：
 
@@ -5891,7 +6262,12 @@ const handleSelect = () => {
       <!-- 左侧部分 class='el-col-3' -->
       <el-col :span="3">
         <!-- 左侧的一级科室菜单 -->
-        <el-menu text-color="#717171" :default-active="activeDepCode" active-text-color="black" @select="handleSelect">
+        <el-menu
+          text-color="#717171"
+          :default-active="activeDepCode"
+          active-text-color="black"
+          @select="handleSelectLeftDepartment"
+        >
           <!-- 子菜单科室名称 -->
           <el-menu-item v-for="deptArr in useStore_HosDepartment.hospitalDepartment" :index="deptArr.depcode">
             <span>{{ deptArr.depname }}</span>
@@ -5906,7 +6282,12 @@ const handleSelect = () => {
           <h3 class="dept-title">{{ currentDept?.depname }}</h3>
           <!-- 渲染实际的子科室的名称 -->
           <div class="dept-child-list">
-            <div class="dept-item" v-for="child in currentDept?.children" :key="child.depcode">
+            <div
+              class="dept-item"
+              v-for="child in currentDept?.children"
+              :key="child.depcode"
+              @click="handleSelectRifhtDepartment(currentDept, child)"
+            >
               {{ child.depname }}
             </div>
           </div>
@@ -5923,6 +6304,8 @@ defineOptions({ name: "Department" });
 import { useHospitalDepartmentStore } from "@/stores";
 const useStore_HosDepartment = useHospitalDepartmentStore();
 
+// 引入 医院科室的类型定义
+import type { HospitalDepartmentChildren } from "@/types/hospitalDepartment/index";
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
 import { computed, ref } from "vue";
 
@@ -5931,6 +6314,9 @@ import { computed, ref } from "vue";
 // Props定义示例
 // const props = defineProps<{}>()
 // const emit = defineEmits<{}>()
+const emit = defineEmits<{
+  handleSelectDep: [activeDep: any, childDep: any];
+}>();
 
 // 响应式数据
 // const count = ref(0)
@@ -5952,17 +6338,24 @@ const currentDept = computed(() => {
 
 // 生命周期
 // onMounted(() => {})
-// 当菜单被选中
-const handleSelect = (key: string) => {
+// 当左侧 大部门大菜单 被选中
+const handleSelectLeftDepartment = (key: string) => {
   // 用于菜单识别当前活跃子菜单标识
   activeDepCode.value = key;
+};
+// 当右侧 小部门菜单 被选中
+const handleSelectRifhtDepartment = (activeDep: any, childDep: HospitalDepartmentChildren) => {
+  // 测试数据
+  // console.log("当前大科室：", activeDep, "；当前小科室", childDep);
+  // 通过 emit 将触发事件传递给父组件
+  emit("handleSelectDep", activeDep, childDep);
 };
 </script>
 
 <style scoped lang="less">
 .page-wrap {
   margin: 20px 0;
-  color: #717171;
+  color: @color-text-regular;
   .el-row {
     .el-col-3 {
       .el-menu {
@@ -5972,7 +6365,7 @@ const handleSelect = (key: string) => {
         .el-menu-item {
           padding: 0 30px;
           &:hover {
-            color: black;
+            color: @color-text-primary;
           }
         }
       }
@@ -5980,7 +6373,7 @@ const handleSelect = (key: string) => {
     .el-col-21 {
       padding-left: 15px;
       h3 {
-        background-color: #f8f8f8;
+        @color-bg-page: #f8f8f8;
         line-height: 2.5rem;
         font-weight: 800;
       }
@@ -5991,12 +6384,308 @@ const handleSelect = (key: string) => {
         div {
           margin: 10px 0;
           &:hover {
-            color: orange;
+            color: @color-text-hoverMainColor;
             cursor: pointer;
           }
         }
       }
     }
+  }
+}
+</style>
+```
+
+###### 预约医生
+
+医院预约医生的实现是通过类型定义、网络请求，数据展示实现的，在`src/pages/hospital/content/appointment/doctorDetail`创建`index.vue`，核心实现如下：
+
+```vue
+<template>
+  <div class="page-wrap">我是预约的实际页面</div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "DoctorDetail" });
+
+</script>
+<style scoped lang="less"></style>
+```
+
+> 功能陆续增加
+
+##### 医院详情
+
+在内容组件的预约挂号页面`src/pages/hospital/content/detail`的`index.vue`实现如下：
+
+```vue
+<template>
+  <div class="page-wrap-detail">
+    <!-- 医院名称及等级 -->
+    <div class="top">
+      <div class="left">{{ useStore.hospitalDetailInfo?.hosname }}</div>
+      <div class="right">
+        <el-icon color="orange"><Opportunity /></el-icon>
+        <span>{{ useStore.hospitalDetailInfo?.hostypeString }}</span>
+      </div>
+    </div>
+    <!-- 医院 Logo + 相关详细路线指南 -->
+    <div class="middle">
+      <div class="left">
+        <img :src="useStore.hospitalDetailInfo?.logoData" alt="医院图标" />
+      </div>
+      <div class="right">
+        <span class="content">具体地址：{{ useStore.hospitalDetailInfo?.address }}</span>
+        <span class="content">规划路线：{{ useStore.hospitalDetailInfo?.route }}</span>
+      </div>
+    </div>
+    <!-- 医院介绍 -->
+    <div class="bottom">
+      <span class="title">医院介绍</span>
+      <span class="content">{{ useStore.hospitalDetailInfo?.intro }}</span>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Detail" });
+// 引入 Pinia Store
+import { useHospitalDetailStore } from "@/stores/index";
+const useStore = useHospitalDetailStore();
+</script>
+
+<style scoped lang="less">
+.page-wrap-detail {
+  color: @color-text-regular;
+  display: flex;
+  flex-direction: column;
+
+  .top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .left {
+      color: @color-text-primary;
+      font-weight: 800;
+      font-size: 1.35rem;
+      margin-right: 5px;
+    }
+    .right {
+      display: flex;
+      align-items: center;
+      span {
+        margin-left: 5px;
+      }
+    }
+  }
+  .middle {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: 10% 90%;
+    .left {
+      img {
+        width: 80px;
+        height: 80px;
+      }
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .title {
+        color: @color-text-primary;
+        font-weight: 800;
+      }
+      .content {
+        line-height: 1.5rem;
+        margin-left: 10px;
+      }
+      ul {
+        li {
+          margin-top: 10px;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+  .bottom {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .title {
+      color: @color-text-primary;
+      font-weight: 800;
+    }
+    .content {
+      line-height: 1.5rem;
+      margin-left: 10px;
+    }
+  }
+}
+</style>
+```
+
+##### 预约须知
+
+在内容组件的预约挂号页面`src/pages/hospital/content/notice`的`index.vue`实现如下：
+
+```vue
+<template>
+  <div class="page-wrap">
+    <!-- 预约须知的标题 -->
+    <div class="title">
+      <div>{{ useStore.hospitalDetailInfo?.hosname }}预约挂号须知</div>
+    </div>
+    <!-- 预约须知的内容 -->
+    <div class="content">
+      <div class="tips-tip">为方便您早日就医康复，请您认真阅读预约挂号须知:</div>
+      <div class="tips-title">一、预约实名制:</div>
+      <div class="tips-content">
+        统一平台电话预约和网上预约挂号均采取实名制注册预约，请您如实提供就诊人员的真实姓名、有效证件号（身份证、护照）、性别、手机号码、社保卡号等基本信息。
+      </div>
+      <div class="tips-title">二、预约挂号:</div>
+      <div class="tips-content">
+        <div class="tips">按照北京市卫健委统一平台要求，预约挂号规则如下:</div>
+        <div class="tips">在同一自然日，同一医院，同一科室，同一就诊单元，同一就诊人，可以预约最多1个号源;</div>
+        <div class="tips">
+          在同一自然周，同一就诊人，可以预约最多8个号源; 在同一自然月，同一就诊人，可以预约最多12个号源;
+        </div>
+        <div class="tips">在同一自然季度，同一就诊人，可以预约最多24个号源。</div>
+      </div>
+      <div class="tips-title">三、取消预约:</div>
+      <div class="tips-content">
+        已完成预约的号源，如需办理退号，至少在就诊前一工作日14:00前通过网站、微信公众号、114电话等平台预约渠道进行取消预约。
+      </div>
+      <div class="tips-title">四、爽约处理:</div>
+      <div class="tips-content">
+        <div class="tips">如预约成功后患者未能按时就诊且不办理取消预约号视为爽约，同一患者在自然年内爽约规则如下:</div>
+        <div class="tips">累计爽约3次，自3次爽约日起，90天内不允许通过114平台进行预约挂号;</div>
+        <div class="tips">累计爽约6次，自6次爽约日起，180天内不允许通过114平台进行预约挂号。</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Notice" });
+// 引入 Pinia Store
+import { useHospitalDetailStore } from "@/stores/index";
+const useStore = useHospitalDetailStore();
+
+</script>
+
+<style scoped lang="less">
+.page-wrap {
+  color: @color-text-regular;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  .title {
+    display: flex;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.35rem;
+    margin-right: 5px;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    .tips-title {
+      font-weight: 800;
+    }
+    .tips-content {
+      line-height: 1.8rem;
+    }
+  }
+}
+</style>
+```
+
+##### 停诊信息
+
+在内容组件的预约挂号页面`src/pages/hospital/content/stopService`的`index.vue`实现如下：
+
+```vue
+<template>
+  <div class="page-wrap">
+    <!-- 停诊信息的标题 -->
+    <div class="title">
+      <div>{{ useStore.hospitalDetailInfo?.hosname }}停诊信息</div>
+    </div>
+    <!-- 停诊信息的内容 -->
+    <div class="content">
+      <el-empty description="暂无信息" />
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "StopService" });
+// 引入 Pinia Store
+import { useHospitalDetailStore } from "@/stores/index";
+const useStore = useHospitalDetailStore();
+</script>
+
+<style scoped lang="less">
+.page-wrap {
+  color: @color-text-regular;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  .title {
+    display: flex;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.35rem;
+    margin-right: 5px;
+  }
+}
+</style>
+```
+
+##### 查询取消
+
+在内容组件的预约挂号页面`src/pages/hospital/content/searchCancel`的`index.vue`实现如下：
+
+```vue
+<template>
+  <div class="page-wrap">
+    <!-- 查询取消的标题 -->
+    <div class="title">
+      <div>{{ useStore.hospitalDetailInfo?.hosname }}查询取消信息</div>
+    </div>
+    <!-- 查询取消的内容 -->
+    <div class="content">
+      <el-empty description="暂无信息" />
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "SearchCancel" });
+// 引入 Pinia Store
+import { useHospitalDetailStore } from "@/stores/index";
+const useStore = useHospitalDetailStore();
+</script>
+
+<style scoped lang="less">
+.page-wrap {
+  color: @color-text-regular;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  .title {
+    display: flex;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.35rem;
+    margin-right: 5px;
   }
 }
 </style>
@@ -6466,7 +7155,7 @@ const handleUserLoginBtn = async () => {
 import { useRouter } from "vue-router";
 const router = useRouter();
 // 导入路由常量管理文件
-import { HOME_PATH } from "@/const/index";
+import { HOME } from "@/const/index";
 // 引入Pinia Store 用户
 import { useUserStore } from "@/stores/index";
 const userStore_Login = useUserStore();
@@ -6485,7 +7174,7 @@ const handleCommand = (command: string | number | object) => {
       token: ""
     };
     // 跳转到主页 类似于刷新页面
-    router.push(HOME_PATH);
+    router.push(HOME.path);
   }
 };
 </script>

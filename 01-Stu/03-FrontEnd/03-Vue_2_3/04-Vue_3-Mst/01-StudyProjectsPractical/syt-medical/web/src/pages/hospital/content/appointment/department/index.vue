@@ -4,7 +4,12 @@
       <!-- 左侧部分 class='el-col-3' -->
       <el-col :span="3">
         <!-- 左侧的一级科室菜单 -->
-        <el-menu text-color="#717171" :default-active="activeDepCode" active-text-color="black" @select="handleSelect">
+        <el-menu
+          text-color="#717171"
+          :default-active="activeDepCode"
+          active-text-color="black"
+          @select="handleSelectLeftDepartment"
+        >
           <!-- 子菜单科室名称 -->
           <el-menu-item v-for="deptArr in useStore_HosDepartment.hospitalDepartment" :index="deptArr.depcode">
             <span>{{ deptArr.depname }}</span>
@@ -19,7 +24,12 @@
           <h3 class="dept-title">{{ currentDept?.depname }}</h3>
           <!-- 渲染实际的子科室的名称 -->
           <div class="dept-child-list">
-            <div class="dept-item" v-for="child in currentDept?.children" :key="child.depcode">
+            <div
+              class="dept-item"
+              v-for="child in currentDept?.children"
+              :key="child.depcode"
+              @click="handleSelectRifhtDepartment(currentDept, child)"
+            >
               {{ child.depname }}
             </div>
           </div>
@@ -36,6 +46,8 @@ defineOptions({ name: "Department" });
 import { useHospitalDepartmentStore } from "@/stores";
 const useStore_HosDepartment = useHospitalDepartmentStore();
 
+// 引入 医院科室的类型定义
+import type { HospitalDepartmentChildren } from "@/types/hospitalDepartment/index";
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
 import { computed, ref } from "vue";
 
@@ -44,6 +56,9 @@ import { computed, ref } from "vue";
 // Props定义示例
 // const props = defineProps<{}>()
 // const emit = defineEmits<{}>()
+const emit = defineEmits<{
+  handleSelectDep: [activeDep: any, childDep: any];
+}>();
 
 // 响应式数据
 // const count = ref(0)
@@ -65,10 +80,17 @@ const currentDept = computed(() => {
 
 // 生命周期
 // onMounted(() => {})
-// 当菜单被选中
-const handleSelect = (key: string) => {
+// 当左侧 大部门大菜单 被选中
+const handleSelectLeftDepartment = (key: string) => {
   // 用于菜单识别当前活跃子菜单标识
   activeDepCode.value = key;
+};
+// 当右侧 小部门菜单 被选中
+const handleSelectRifhtDepartment = (activeDep: any, childDep: HospitalDepartmentChildren) => {
+  // 测试数据
+  // console.log("当前大科室：", activeDep, "；当前小科室", childDep);
+  // 通过 emit 将触发事件传递给父组件
+  emit("handleSelectDep", activeDep, childDep);
 };
 </script>
 

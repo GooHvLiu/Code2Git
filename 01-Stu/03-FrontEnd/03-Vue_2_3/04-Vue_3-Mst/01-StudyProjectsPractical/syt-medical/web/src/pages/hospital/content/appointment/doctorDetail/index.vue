@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 // 定义组件名字
-// defineOptions({ name: '' })
+defineOptions({ name: "DoctorDetail" });
 
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
 

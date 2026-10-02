@@ -16,12 +16,7 @@ export const HOSPITAL = {
   CHILDREN: {
     // 预约挂号 子路由路径
     APPOINTMENT: {
-      path: "appointment",
-      CHILDREN: {
-        APPOINTMENT_DETAIL: {
-          path: "appointmentDetail"
-        }
-      }
+      path: "appointment"
     },
     // 医院详情 子路由路径
     DETAL: {

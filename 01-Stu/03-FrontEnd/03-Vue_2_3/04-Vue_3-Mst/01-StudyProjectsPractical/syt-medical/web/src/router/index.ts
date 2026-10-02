@@ -22,15 +22,7 @@ export default createRouter({
         // 预约挂号 子路由路径
         {
           path: HOSPITAL.CHILDREN.APPOINTMENT.path,
-          component: () => import("@/pages/hospital/content/appointment/index.vue"),
-          // 用户点击对应医院 + 已登录情况下，进入具体科室挂号页面
-          children: [
-            // 具体预约医生上午 / 下午 页面
-            {
-              path: HOSPITAL.CHILDREN.APPOINTMENT.CHILDREN.APPOINTMENT_DETAIL.path,
-              component: () => import("@/pages/hospital/content/appointment/doctorDetail/index.vue")
-            }
-          ]
+          component: () => import("@/pages/hospital/content/appointment/index.vue")
         },
         // 医院详情 子路由路径
         {
