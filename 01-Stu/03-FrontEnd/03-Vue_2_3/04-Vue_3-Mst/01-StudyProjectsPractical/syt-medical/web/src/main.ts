@@ -2,6 +2,8 @@
 import { createApp } from "vue";
 // 引入样式重置文件 reset.css
 import "@/assets/styles/reset/reset.less";
+// 全局引入 animate 动画
+import "animate.css";
 // 引入根组件App
 import App from "./App.vue";
 // 引入全局组件- HospitalTop / HospitalBottom / Login，用于页面的顶部和底部

@@ -3914,6 +3914,9 @@ defineOptions({ name: "DoctorDetail" });
       gap: 15px;
       width: 100%;
       .dataCard {
+        /* 过渡：0.3秒完成变换，缓动曲线 */
+        transition: transform 0.3s ease;
+        transform-origin: center;
         flex: 1;
         border: 1px solid @color-text-placeholder;
         .itemData {
@@ -3921,10 +3924,18 @@ defineOptions({ name: "DoctorDetail" });
           font-weight: 800;
           background-color: @color-text-placeholder;
           padding: 8px;
+          transition: background-color 0.3s ease;
         }
         .itemNote {
           padding: 15px 0;
           text-align: center;
+        }
+        &:hover {
+          /* 放大5%，改成1.1就是放大10% */
+          transform: scale(1.1);
+          .itemData {
+            background: @color-bg-cardhover;
+          }
         }
       }
     }
@@ -3942,6 +3953,7 @@ defineOptions({ name: "DoctorDetail" });
         flex-direction: row;
         align-items: center;
         margin-bottom: 15px;
+        font-weight: 800;
         svg {
           margin-right: 6px;
         }
@@ -3986,6 +3998,7 @@ defineOptions({ name: "DoctorDetail" });
   }
 }
 </style>
+
 ```
 
 ### 登录组件
