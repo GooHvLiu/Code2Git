@@ -212,10 +212,10 @@
 
 <script setup lang="ts">
 // 定义组件名字
-defineOptions({ name: "DoctorDetail" });
+defineOptions({ name: "DoctorSelect" });
 
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
-import { ref, onMounted, reactive, computed } from "vue";
+import { ref, onMounted, reactive, computed, watch } from "vue";
 
 // import { useRouter } from 'vue-router'
 import { useRoute } from "vue-router";
@@ -285,24 +285,35 @@ const pageCardList = computed(() => {
   return scheduleArr.value.slice(startIndex, endIndex);
 });
 
-// 监听
-// watch(count, (newVal) => {})
+// 监听 由于Vue是异步执行，所以，路由参数不能即可生成，所以在初始化时，可能无法一次性执行完，通过 watch 监控进行初始化
+watch(
+  () => [route.query.hoscode, route.query.depcode, route.query.spccode],
+  () => {
+    initData();
+  }
+);
 
 // 生命周期
 onMounted(() => {
-  //打印获取的 hpscode , depcode, spccode
-  // console.log("获取参数：", route.query);
-  // 获取当前路由中的 query 参数
+  // 创建组件后立即执行数据初始化函数
+  initData();
+});
+// 数据初始化 执行函数
+const initData = () => {
   const routeQuery = {
     hoscode: route.query.hoscode as string,
     depcode: route.query.depcode as string,
     spccode: route.query.spccode as string
   };
+  // 没有spccode不请求
+  if (!routeQuery.spccode) return;
+
+  // console.log("hoscode", routeQuery.hoscode, "depcode", routeQuery.depcode, "spccode", routeQuery.spccode);
   // 通过网络请求获取医院 科室 专科相关信息
   getHspDptDocInfo(routeQuery.hoscode, routeQuery.depcode, routeQuery.spccode);
   // 通过网络请求获取对应专科科室医生的排班情况
   getDoctorInfo(routeQuery.hoscode, routeQuery.spccode);
-});
+};
 // 通过路由 query 查询医院相关信息
 const getHspDptDocInfo = async (hoscode: string, depcode: string, spccode: string) => {
   // 通过网络请求获取医院名称

@@ -70,8 +70,7 @@ const useDoctorStore = useHospitalDoctorStore();
 const handleSelect = (key: string) => {
   // console.log(key, keyPath);
   // 控制进入预约挂号界面的初始化开发
-  useDoctorStore.appointmentDoctor.appointmentDepartment = 1;
-  useDoctorStore.appointmentDoctor.doctorDetail = 0;
+  useDoctorStore.appointmentOption = "dct";
   // 使用 router 进行跳转
   router.push({
     path: key,

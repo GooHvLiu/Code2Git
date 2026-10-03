@@ -41,7 +41,7 @@
 
 <script setup lang="ts">
 // 定义组件名字
-defineOptions({ name: "Department" });
+defineOptions({ name: "DepartmentSelect" });
 // 导入 医院部门的 Store
 import { useHospitalDepartmentStore } from "@/stores";
 const useStore_HosDepartment = useHospitalDepartmentStore();

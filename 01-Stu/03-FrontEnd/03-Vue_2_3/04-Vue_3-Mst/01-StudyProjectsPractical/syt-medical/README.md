@@ -6716,8 +6716,7 @@ const useDoctorStore = useHospitalDoctorStore();
 const handleSelect = (key: string) => {
   // console.log(key, keyPath);
   // 控制进入预约挂号界面的初始化开发
-  useDoctorStore.appointmentDoctor.appointmentDepartment = 1;
-  useDoctorStore.appointmentDoctor.doctorDetail = 0;
+  useDoctorStore.appointmentOption = "dct";
   // 使用 router 进行跳转
   router.push({
     path: key,
@@ -6756,51 +6755,13 @@ const handleSelect = (key: string) => {
 
 ```vue
 <template>
-  <!-- 进入预约挂号的医院详情 和 科室选择界面 -->
-  <div v-if="useDoctorStore.appointmentOption == 'dpt'" class="appointment-department">
-    <!-- 医院预约前，对医院的详细介绍 -->
-    <div class="description">
-      <!-- 医院名称及等级 -->
-      <div class="top">
-        <div class="left">{{ useDetailStore.hospitalDetailInfo?.hosname }}</div>
-        <div class="right">
-          <el-icon color="orange"><Opportunity /></el-icon>
-          <span>{{ useDetailStore.hospitalDetailInfo?.hostypeString }}</span>
-        </div>
-      </div>
-      <!-- 医院 Logo + 相关详细路线指南和预约规则 -->
-      <div class="bottom">
-        <div class="left">
-          <img :src="useDetailStore.hospitalDetailInfo?.logoData" alt="医院图标" />
-        </div>
-        <div class="right">
-          <span class="title">挂号规则</span>
-          <span class="content"
-            >预约周期：{{ useDetailStore.hospitalDetailInfo?.bookingRule.cycle }}天 放号时间：{{
-              useDetailStore.hospitalDetailInfo?.bookingRule.releaseTime
-            }}
-            停挂时间：{{ useDetailStore.hospitalDetailInfo?.bookingRule.stopTime }}</span
-          >
-          <span class="content">具体地址：{{ useDetailStore.hospitalDetailInfo?.address }}</span>
-          <span class="content">规划路线：{{ useDetailStore.hospitalDetailInfo?.route }}</span>
-          <span class="content"
-            >退号时间：就诊前一工作日{{ useDetailStore.hospitalDetailInfo?.bookingRule.quitTime }}前取消</span
-          >
-          <span class="title">预约规则</span>
-          <ul>
-            <li v-for="(value, index) in useDetailStore.hospitalDetailInfo?.bookingRule.rule" :key="index">
-              {{ value }}
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <!-- 医院科室 组件 -->
-    <Department @handleSelectDep="handleClickDep" />
+  <!-- 进入预约挂号--部门/科室 选择 -->
+  <div v-if="useDoctorStore.appointmentOption == 'dpt'">
+    <Home />
   </div>
-  <!-- 进入预约医生详情界面 -->
-  <div v-if="useDoctorStore.appointmentOption == 'dct'" class="doctorDetail">
-    <DoctorDetail />
+  <!-- 进入预约挂号--医生 选择 -->
+  <div v-if="useDoctorStore.appointmentOption == 'dct'">
+    <DoctorSelect />
   </div>
 </template>
 
@@ -6809,21 +6770,11 @@ const handleSelect = (key: string) => {
 defineOptions({ name: "Appointment" });
 
 // 引入 医院科室 组件
-import Department from "./department/index.vue";
-import DoctorDetail from "./doctorDetail/index.vue";
+import Home from "./home/index.vue";
+import DoctorSelect from "./dctSelect/index.vue";
 //引入 Pinia Store
-import { useHospitalDetailStore, useHospitalDoctorStore } from "@/stores/index";
-const useDetailStore = useHospitalDetailStore();
+import { useHospitalDoctorStore } from "@/stores/index";
 const useDoctorStore = useHospitalDoctorStore();
-// 导入路由组件
-import { useRoute, useRouter } from "vue-router";
-// 操作路由
-const router = useRouter();
-// 读取路由
-const route = useRoute();
-
-// 引入类型定义
-import type { HospitalDepartmentChildren } from "@/types/hospitalDepartment/index.ts";
 
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
 import { onMounted } from "vue";
@@ -6849,6 +6800,69 @@ onMounted(() => {
   // 进入此组件，即代表已进入部门页面
   useDoctorStore.appointmentOption = "dpt";
 });
+</script>
+
+<style scoped lang="less"></style>
+
+```
+
+###### 预约主页
+
+医院预约挂号的实现是通过类型定义、网络请求，数据展示实现的，在`src/pages/hospital/content/appointment/home`创建`index.vue`，核心实现如下：
+
+```vue
+<template>
+  <div class="page-wrap">
+    <!-- 医院预约前，对医院的详细介绍 -->
+    <HospitalInfoShow />
+    <!-- 医院科室 组件 -->
+    <DepartmentSelect @handleSelectDep="handleClickDep" />
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Home" });
+
+// 引入 医院信息展示 组件
+import HospitalInfoShow from "./hspShow/index.vue";
+// 引入 部门/科室 组件
+import DepartmentSelect from "./dptSelect/index.vue";
+
+// import { ref, reactive, computed, watch, onMounted } from 'vue'
+
+// import { useRouter } from 'vue-router'
+// 导入路由组件
+import { useRoute, useRouter } from "vue-router";
+// 操作路由
+const router = useRouter();
+// 读取路由
+const route = useRoute();
+
+//引入 Pinia Store
+import { useHospitalDoctorStore } from "@/stores/index";
+const useDoctorStore = useHospitalDoctorStore();
+
+// 引入类型定义
+import type { HospitalDepartmentChildren } from "@/types/hospitalDepartment/index.ts";
+
+// Props定义示例
+// const props = defineProps<{}>()
+// const emit = defineEmits<{}>()
+
+// 响应式数据
+// const count = ref(0)
+// const state = reactive({})
+
+// 计算属性
+// const computedVal = computed(() => {})
+
+// 监听
+// watch(count, (newVal) => {})
+
+// 生命周期
+// onMounted(() => {});
+
 // 当用户点击科室内的具体科室触发
 const handleClickDep = (activeDep: any, childDep: HospitalDepartmentChildren) => {
   // console.log("当前路由：", route.path, "当前常量：", HOSPITAL.CHILDREN.APPOINTMENT.CHILDREN.APPOINTMENT_DETAIL.path); // /hospital/appointment   appointmentDetail
@@ -6872,69 +6886,122 @@ const handleClickDep = (activeDep: any, childDep: HospitalDepartmentChildren) =>
 };
 </script>
 
+<style scoped lang="less"></style>
+
+```
+
+###### 医院信息
+
+将预约主页拆分为多个组件，其中如下为医院信息组件`appointment/home/hspShow`创建`index.vue`用于展示医院相关信息：
+
+```vue
+<template>
+  <div class="page-wrap">
+    <!-- 医院名称及等级 -->
+    <div class="top">
+      <div class="left">{{ useDetailStore.hospitalDetailInfo?.hosname }}</div>
+      <div class="right">
+        <el-icon color="orange"><Opportunity /></el-icon>
+        <span>{{ useDetailStore.hospitalDetailInfo?.hostypeString }}</span>
+      </div>
+    </div>
+    <!-- 医院 Logo + 相关详细路线指南和预约规则 -->
+    <div class="bottom">
+      <div class="left">
+        <img :src="useDetailStore.hospitalDetailInfo?.logoData" alt="医院图标" />
+      </div>
+      <div class="right">
+        <span class="title">挂号规则</span>
+        <span class="content"
+          >预约周期：{{ useDetailStore.hospitalDetailInfo?.bookingRule.cycle }}天 放号时间：{{
+            useDetailStore.hospitalDetailInfo?.bookingRule.releaseTime
+          }}
+          停挂时间：{{ useDetailStore.hospitalDetailInfo?.bookingRule.stopTime }}</span
+        >
+        <span class="content">具体地址：{{ useDetailStore.hospitalDetailInfo?.address }}</span>
+        <span class="content">规划路线：{{ useDetailStore.hospitalDetailInfo?.route }}</span>
+        <span class="content"
+          >退号时间：就诊前一工作日{{ useDetailStore.hospitalDetailInfo?.bookingRule.quitTime }}前取消</span
+        >
+        <span class="title">预约规则</span>
+        <ul>
+          <li v-for="(value, index) in useDetailStore.hospitalDetailInfo?.bookingRule.rule" :key="index">
+            {{ value }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "HospitalInfoShow" });
+//引入 Pinia Store
+import { useHospitalDetailStore } from "@/stores/index";
+const useDetailStore = useHospitalDetailStore();
+</script>
+
 <style scoped lang="less">
-.appointment-department {
-  .description {
-    color: @color-text-primary;
+.page-wrap {
+  color: @color-text-primary;
+  display: flex;
+  flex-direction: column;
+  .top {
     display: flex;
-    flex-direction: column;
-    .top {
+    flex-direction: row;
+    align-items: center;
+    .left {
+      color: @color-text-primary;
+      font-weight: 800;
+      font-size: 1.35rem;
+      margin-right: 5px;
+    }
+    .right {
       display: flex;
-      flex-direction: row;
       align-items: center;
-      .left {
-        color: @color-text-primary;
-        font-weight: 800;
-        font-size: 1.35rem;
-        margin-right: 5px;
-      }
-      .right {
-        display: flex;
-        align-items: center;
-        span {
-          margin-left: 5px;
-        }
+      span {
+        margin-left: 5px;
       }
     }
-    .bottom {
-      margin-top: 25px;
-      display: grid;
-      grid-template-columns: 10% 90%;
-      .left {
-        img {
-          width: 80px;
-          height: 80px;
-        }
+  }
+  .bottom {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: 10% 90%;
+    .left {
+      img {
+        width: 80px;
+        height: 80px;
       }
-      .right {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        .title {
-          color: @color-text-primary;
-          font-weight: 800;
-        }
-        .content {
-          line-height: 1.5rem;
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .title {
+        color: @color-text-primary;
+        font-weight: 800;
+      }
+      .content {
+        line-height: 1.5rem;
+        margin-left: 10px;
+      }
+      ul {
+        li {
+          margin-top: 10px;
           margin-left: 10px;
-        }
-        ul {
-          li {
-            margin-top: 10px;
-            margin-left: 10px;
-          }
         }
       }
     }
   }
 }
 </style>
-
 ```
 
-###### 预约科室
+###### 科室选择
 
-医院预约挂号的实现是通过类型定义、网络请求，数据展示实现的，在`src/pages/hospital/content/appointment/department`创建`index.vue`，核心实现如下：
+将预约主页拆分为多个组件，其中如下为医院信息组件`appointment/home/dptSelect`创建`index.vue`用于展示部门选择信息：
 
 ```vue
 <template>
@@ -6980,7 +7047,7 @@ const handleClickDep = (activeDep: any, childDep: HospitalDepartmentChildren) =>
 
 <script setup lang="ts">
 // 定义组件名字
-defineOptions({ name: "Department" });
+defineOptions({ name: "DepartmentSelect" });
 // 导入 医院部门的 Store
 import { useHospitalDepartmentStore } from "@/stores";
 const useStore_HosDepartment = useHospitalDepartmentStore();
@@ -7074,11 +7141,12 @@ const handleSelectRifhtDepartment = (activeDep: any, childDep: HospitalDepartmen
   }
 }
 </style>
+
 ```
 
 ###### 预约医生
 
-医院预约医生的实现是通过类型定义、网络请求，数据展示实现的，在`src/pages/hospital/content/appointment/doctorDetail`创建`index.vue`，核心实现如下：
+医院预约医生的实现是通过类型定义、网络请求，数据展示实现的，在`appointment/dctSelect`创建`index.vue`，核心实现如下：
 
 ```vue
 <template>
@@ -7123,19 +7191,31 @@ const handleSelectRifhtDepartment = (activeDep: any, childDep: HospitalDepartmen
       </div>
     </div>
     <div class="middle-content">
-      <div class="currentDate">2026年10月</div>
+      <div class="currentDate">{{ getCurrentYearMonth() }}</div>
       <div class="card-wrap">
-        <div class="dataCard" v-for="(items, index) in 5" :key="index">
-          <div class="itemData">2026-10-07 周六</div>
-          <div class="itemNote">停止挂号</div>
+        <div
+          class="dataCard"
+          v-for="cardItem in pageCardList"
+          :key="cardItem.workDate"
+          @click="selectCard = cardItem"
+          :class="{ active: selectCard?.workDate === cardItem.workDate }"
+        >
+          <div class="itemData">{{ cardItem.workDate }} {{ cardItem.dayOfWeek }}</div>
+          <div class="itemNote">{{ cardItem.tipText }}</div>
         </div>
       </div>
       <div class="pagination-block">
-        <el-pagination layout="prev, pager, next" :total="50" />
+        <el-pagination
+          layout="prev, pager, next"
+          :current-page="paginationValue.currentPage"
+          :page-sizes="paginationValue.limit"
+          :total="paginationValue.total"
+          @current-change="handleCurrentChange"
+        />
       </div>
     </div>
     <div class="bottom-content">
-      <div class="morning-tickets">
+      <div class="morning-tickets" v-if="selectCard?.scheduleList?.filter((item) => item.workTime === 0).length">
         <div class="time-tickets">
           <svg
             t="1790928595007"
@@ -7156,11 +7236,15 @@ const handleSelectRifhtDepartment = (activeDep: any, childDep: HospitalDepartmen
           <p>上午号源</p>
         </div>
         <div class="tickets-doctors">
-          <div class="tickets-info" v-for="(items, index) in 2" :key="index">
+          <div
+            class="tickets-info"
+            v-for="doctor in selectCard?.scheduleList.filter((item) => item.workTime === 0)"
+            :key="doctor.id"
+          >
             <div class="content">
               <div class="left">
                 <div class="doctor">
-                  <div class="title">副主任医师</div>
+                  <div class="title">{{ doctor.title }}</div>
                   <svg
                     t="1790926337417"
                     class="icon"
@@ -7177,18 +7261,22 @@ const handleSelectRifhtDepartment = (activeDep: any, childDep: HospitalDepartmen
                       fill="#515151"
                     ></path>
                   </svg>
-                  <div class="name">裴育</div>
+                  <div class="name">{{ doctor.docname }}</div>
                 </div>
                 <div class="info">
-                  <p class="price">骨质疏松和骨代谢疾病、糖尿病、甲状腺疾病。</p>
+                  <p class="price">{{ doctor.skill }}</p>
                 </div>
               </div>
               <div class="right">
                 <div class="left">
-                  <p class="price">￥ 100</p>
+                  <p class="price">￥{{ doctor.amount }}</p>
                 </div>
                 <div class="right">
-                  <el-button type="primary">剩余6</el-button>
+                  <el-button
+                    :type="doctor.availableNumber <= 0 ? 'info' : 'primary'"
+                    :disabled="doctor.availableNumber <= 0"
+                    >剩余 {{ doctor.availableNumber }}</el-button
+                  >
                 </div>
               </div>
             </div>
@@ -7198,7 +7286,7 @@ const handleSelectRifhtDepartment = (activeDep: any, childDep: HospitalDepartmen
           </div>
         </div>
       </div>
-      <div class="afternoon-tickets">
+      <div class="afternoon-tickets" v-if="selectCard?.scheduleList?.filter((item) => item.workTime === 1).length">
         <div class="time-tickets">
           <svg
             t="1790928615849"
@@ -7219,11 +7307,15 @@ const handleSelectRifhtDepartment = (activeDep: any, childDep: HospitalDepartmen
           <p>下午号源</p>
         </div>
         <div class="tickets-doctors">
-          <div class="tickets-info" v-for="(items, index) in 2" :key="index">
+          <div
+            class="tickets-info"
+            v-for="doctor in selectCard?.scheduleList.filter((item) => item.workTime === 1)"
+            :key="doctor.id"
+          >
             <div class="content">
               <div class="left">
                 <div class="doctor">
-                  <div class="title">副主任医师</div>
+                  <div class="title">{{ doctor.title }}</div>
                   <svg
                     t="1790926337417"
                     class="icon"
@@ -7240,18 +7332,22 @@ const handleSelectRifhtDepartment = (activeDep: any, childDep: HospitalDepartmen
                       fill="#515151"
                     ></path>
                   </svg>
-                  <div class="name">裴育</div>
+                  <div class="name">{{ doctor.docname }}</div>
                 </div>
                 <div class="info">
-                  <p class="price">骨质疏松和骨代谢疾病、糖尿病、甲状腺疾病。</p>
+                  <p class="price">{{ doctor.skill }}</p>
                 </div>
               </div>
               <div class="right">
                 <div class="left">
-                  <p class="price">￥ 100</p>
+                  <p class="price">￥{{ doctor.amount }}</p>
                 </div>
                 <div class="right">
-                  <el-button type="primary">剩余6</el-button>
+                  <el-button
+                    :type="doctor.availableNumber <= 0 ? 'info' : 'primary'"
+                    :disabled="doctor.availableNumber <= 0"
+                    >剩余 {{ doctor.availableNumber }}</el-button
+                  >
                 </div>
               </div>
             </div>
@@ -7267,10 +7363,10 @@ const handleSelectRifhtDepartment = (activeDep: any, childDep: HospitalDepartmen
 
 <script setup lang="ts">
 // 定义组件名字
-defineOptions({ name: "DoctorDetail" });
+defineOptions({ name: "DoctorSelect" });
 
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
-import { onMounted, reactive } from "vue";
+import { ref, onMounted, reactive, computed, watch } from "vue";
 
 // import { useRouter } from 'vue-router'
 import { useRoute } from "vue-router";
@@ -7278,10 +7374,17 @@ const route = useRoute();
 
 // 引入 网络请求
 import { reqHospitalDetailInfo, reqHospitalDepartmentInfo } from "@/api/hospital/index";
+import { reqDoctorSchedule } from "@/api/doctorSchedule/index";
+
+// 引入医生排班生成工具
+import { doctorsScheduleMethods } from "@/utils/doctorsSchedule";
+// 引入日期处理工具
+import { getCurrentYearMonth } from "@/utils/dateFormatter";
 
 // 引入数据类型定义
 import type { HospitalDetailItem } from "@/types/hospitalDetail/index";
 import type { HospitalDepartmentPageResponse } from "@/types/hospitalDepartment/index";
+import type { DoctorsScheduleItems, ScheduleCard, ScheduleArr } from "@/types/doctorSchedule/index";
 import type { ResponseData } from "@/types/api";
 // Props定义示例
 // const props = defineProps<{}>()
@@ -7290,6 +7393,7 @@ import type { ResponseData } from "@/types/api";
 // 响应式数据
 // const count = ref(0)
 // const state = reactive({})
+
 // 医院，科室，医生相关信息
 let hspDptDctInfo = reactive({
   // 医院名称
@@ -7300,24 +7404,67 @@ let hspDptDctInfo = reactive({
   spcName: ""
 });
 
+// 分页器相关参数
+let paginationValue = reactive({
+  // 当前页面 1
+  currentPage: 1,
+  // 每页展示5个日期卡片
+  pageSize: 5,
+  // 每页条数
+  limit: [5],
+  // 总页数
+  total: 0
+});
+
+// 需要展示的数据数组 核心数据组
+let scheduleArr = ref<ScheduleArr>([]);
+
+// 选中卡片内的数据
+let selectCard = ref<ScheduleCard>();
+
 // 计算属性
 // const computedVal = computed(() => {})
+// slice 切片，取出当前页的 5 条卡片
+const pageCardList = computed(() => {
+  // 当前数组为空，则返回空数组
+  if (!scheduleArr.value) return [];
+  // 计算切片的起始下标
+  const startIndex = (paginationValue.currentPage - 1) * paginationValue.pageSize;
+  // 计算切片的结束下标
+  const endIndex = startIndex + paginationValue.pageSize;
+  // 返回切片数据
+  return scheduleArr.value.slice(startIndex, endIndex);
+});
 
-// 监听
-// watch(count, (newVal) => {})
+// 监听 由于Vue是异步执行，所以，路由参数不能即可生成，所以在初始化时，可能无法一次性执行完，通过 watch 监控进行初始化
+watch(
+  () => [route.query.hoscode, route.query.depcode, route.query.spccode],
+  () => {
+    initData();
+  }
+);
 
 // 生命周期
 onMounted(() => {
-  //打印获取的 hpscode , depcode, spccode
-  // console.log("获取参数：", route.query);
-  // 获取当前路由中的 query 参数
-  const hoscode: string = route.query.hoscode as string;
-  const depcode: string = route.query.depcode as string;
-  const spccode: string = route.query.spccode as string;
-  console.log("请求前的数据：", "hoscode=", hoscode, "depcode=", depcode, "spccode=", spccode);
-  getHspDptDocInfo(hoscode, depcode, spccode);
-  console.log("请求后的数据：", "hoscode=", hoscode, "depcode=", depcode, "spccode=", spccode);
+  // 创建组件后立即执行数据初始化函数
+  initData();
 });
+// 数据初始化 执行函数
+const initData = () => {
+  const routeQuery = {
+    hoscode: route.query.hoscode as string,
+    depcode: route.query.depcode as string,
+    spccode: route.query.spccode as string
+  };
+  // 没有spccode不请求
+  if (!routeQuery.spccode) return;
+
+  // console.log("hoscode", routeQuery.hoscode, "depcode", routeQuery.depcode, "spccode", routeQuery.spccode);
+  // 通过网络请求获取医院 科室 专科相关信息
+  getHspDptDocInfo(routeQuery.hoscode, routeQuery.depcode, routeQuery.spccode);
+  // 通过网络请求获取对应专科科室医生的排班情况
+  getDoctorInfo(routeQuery.hoscode, routeQuery.spccode);
+};
 // 通过路由 query 查询医院相关信息
 const getHspDptDocInfo = async (hoscode: string, depcode: string, spccode: string) => {
   // 通过网络请求获取医院名称
@@ -7334,6 +7481,29 @@ const getHspDptDocInfo = async (hoscode: string, depcode: string, spccode: strin
     hspDptDctInfo.spcName =
       resultDepSec.data.flatMap((item) => item.children).find((child) => child.depcode === spccode)?.depname ?? "";
   }
+};
+// 获取医生的排班情况
+const getDoctorInfo = async (hoscode: string, spccode: string) => {
+  // 通过网络请求获取医生的排版情况
+  const resultDct: ResponseData<DoctorsScheduleItems> = await reqDoctorSchedule(hoscode, spccode, 1, 80);
+  // 如果获取到的数据的code=200
+  if (resultDct.code == 200) {
+    // 打印相关数据进行查看确认
+    // console.log("处理前,排班数据：", resultDct.data);
+    // 通过医生排班的处理工具处理后的数据
+    scheduleArr.value = doctorsScheduleMethods.scheduleByWorkDate(resultDct.data);
+    // console.log("处理后,排班数据：", scheduleArr.value);
+    // 总卡片数量 = 处理完后的日期卡片数组长度
+    paginationValue.total = scheduleArr.value.length;
+    // 每次刷新数据重置页码到第一页
+    paginationValue.currentPage = 1;
+  }
+};
+// 分页器页码被改变
+const handleCurrentChange = (val: number) => {
+  // 将当前页码进行调整
+  paginationValue.currentPage = val;
+  // 通过网络请求获取对应专科科室医生的排班情况
 };
 </script>
 
@@ -7392,6 +7562,11 @@ const getHspDptDocInfo = async (hoscode: string, depcode: string, spccode: strin
           transform: scale(1.1);
           .itemData {
             background: @color-bg-cardhover;
+          }
+        }
+        &.active {
+          .itemData {
+            background-color: @color-bg-cardhover;
           }
         }
       }
@@ -7455,6 +7630,7 @@ const getHspDptDocInfo = async (hoscode: string, depcode: string, spccode: strin
   }
 }
 </style>
+
 ```
 
 ##### 医院详情
@@ -7732,486 +7908,6 @@ const useStore = useHospitalDetailStore();
   }
 }
 </style>
-```
-
-### 排版预约
-
-#### 医生排班
-
-在医院-科室-专科-医生排班的实际实现`src/pages/hospital/content/appointment/doctorDetail/index`:
-
-```vue
-<template>
-  <div class="page-wrap">
-    <div class="top-content">
-      <div class="hspInfo">
-        <p class="hspName">{{ hspDptDctInfo.hopName }}</p>
-        <svg
-          t="1790926337417"
-          class="icon"
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="5986"
-          width="16"
-          height="16"
-        >
-          <path
-            d="M512 85.333c23.573 0 42.667 20.118 42.667 44.907v763.52c0 24.79-19.094 44.907-42.667 44.907s-42.667-20.118-42.667-44.907V130.24c0-24.79 19.094-44.907 42.667-44.907z"
-            p-id="5987"
-            fill="#515151"
-          ></path>
-        </svg>
-        <p class="dptName">{{ hspDptDctInfo.depName }}</p>
-        <svg
-          t="1790926255554"
-          class="icon"
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="4876"
-          width="16"
-          height="16"
-        >
-          <path
-            d="M516.266667 430.933333c-46.634667 0-85.333333 38.698667-85.333334 85.333334 0 46.592 38.698667 85.333333 85.333334 85.333333 46.592 0 85.333333-38.741333 85.333333-85.333333 0-46.634667-38.741333-85.333333-85.333333-85.333334z"
-            p-id="4877"
-            fill="#515151"
-          ></path>
-        </svg>
-        <p class="spcName">{{ hspDptDctInfo.spcName }}</p>
-      </div>
-    </div>
-    <div class="middle-content">
-      <div class="currentDate">{{ getCurrentYearMonth() }}</div>
-      <div class="card-wrap">
-        <div
-          class="dataCard"
-          v-for="cardItem in pageCardList"
-          :key="cardItem.workDate"
-          @click="selectCard = cardItem"
-          :class="{ active: selectCard?.workDate === cardItem.workDate }"
-        >
-          <div class="itemData">{{ cardItem.workDate }} {{ cardItem.dayOfWeek }}</div>
-          <div class="itemNote">{{ cardItem.tipText }}</div>
-        </div>
-      </div>
-      <div class="pagination-block">
-        <el-pagination
-          layout="prev, pager, next"
-          :current-page="paginationValue.currentPage"
-          :page-sizes="paginationValue.limit"
-          :total="paginationValue.total"
-          @current-change="handleCurrentChange"
-        />
-      </div>
-    </div>
-    <div class="bottom-content">
-      <div class="morning-tickets" v-if="selectCard?.scheduleList?.filter((item) => item.workTime === 0).length">
-        <div class="time-tickets">
-          <svg
-            t="1790928595007"
-            class="icon"
-            viewBox="0 0 1024 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            p-id="9613"
-            width="20"
-            height="20"
-          >
-            <path
-              d="M512 423.253333c17.749333 0 32.085333-15.701333 32.085333-34.816V240.981333l-4.096-59.392 29.354667 33.450667 49.834667 49.834667c6.144 5.461333 13.653333 8.874667 21.845333 8.874666 15.701333 0 27.306667-10.922667 27.306667-26.624 0-8.192-2.730667-14.336-9.557334-21.162666L533.845333 112.64c-8.192-7.509333-14.336-10.24-21.845333-10.24-7.509333 0-12.970667 2.730667-21.845333 10.24L365.909333 226.645333c-6.826667 6.144-9.557333 12.288-9.557333 20.48 0 15.701333 10.922667 26.624 27.306667 26.624 7.509333 0 15.701333-3.413333 21.162666-8.874666l53.930667-53.248 25.258667-29.354667-4.778667 58.709333v146.773334c0 19.797333 15.701333 35.498667 32.768 35.498666z m206.165333 107.178667c12.970667 12.288 34.133333 12.288 48.469334-2.048l69.632-68.266667c15.018667-14.336 14.336-34.816 1.365333-47.104a33.655467 33.655467 0 0 0-47.786667 1.365334l-69.632 68.266666c-14.336 15.018667-14.336 36.181333-2.048 47.786667z m-412.330666 0c12.288-12.288 12.288-32.768-2.730667-47.786667l-69.632-68.266666c-15.018667-14.336-35.498667-13.653333-47.786667-1.365334-12.288 12.288-12.288 32.768 2.730667 47.104l69.632 68.266667c14.336 14.336 35.498667 15.018667 47.786667 2.048zM34.816 921.6h954.368c19.114667 0 34.816-14.336 34.816-32.085333 0-17.066667-15.701333-31.402667-34.816-31.402667h-300.373333c27.306667-36.181333 41.642667-79.872 41.642666-124.928 0-118.101333-99.669333-215.722667-218.453333-215.722667-119.466667 0-218.453333 97.621333-218.453333 215.722667 0 47.104 15.018667 89.429333 41.642666 124.928H34.816c-19.114667 0-34.816 14.336-34.816 31.402667 0 17.749333 15.701333 32.085333 34.816 32.085333z m322.901333-187.733333c0-83.285333 69.632-151.552 154.282667-151.552s154.282667 68.266667 154.282667 151.552c0 50.517333-25.941333 96.938667-68.266667 124.928H425.984c-42.325333-28.672-68.266667-75.093333-68.266667-124.928z m-271.018666 21.845333h98.304c20.48 0 36.181333-14.336 36.181333-32.085333-0.682667-17.749333-15.018667-32.085333-36.181333-32.085334H86.698667c-20.48 0-35.498667 14.336-35.498667 32.085334s15.018667 32.085333 35.498667 32.085333z m752.981333 0h98.304c20.48 0 35.498667-14.336 35.498667-32.085333s-15.018667-32.085333-35.498667-32.085334H839.68c-20.48 0-36.181333 14.336-36.181333 32.085334 0.682667 17.749333 15.018667 32.085333 36.181333 32.085333z"
-              fill="#FF7F50"
-              p-id="9614"
-            ></path>
-          </svg>
-          <p>上午号源</p>
-        </div>
-        <div class="tickets-doctors">
-          <div
-            class="tickets-info"
-            v-for="doctor in selectCard?.scheduleList.filter((item) => item.workTime === 0)"
-            :key="doctor.id"
-          >
-            <div class="content">
-              <div class="left">
-                <div class="doctor">
-                  <div class="title">{{ doctor.title }}</div>
-                  <svg
-                    t="1790926337417"
-                    class="icon"
-                    viewBox="0 0 1024 1024"
-                    version="1.1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    p-id="5986"
-                    width="16"
-                    height="16"
-                  >
-                    <path
-                      d="M512 85.333c23.573 0 42.667 20.118 42.667 44.907v763.52c0 24.79-19.094 44.907-42.667 44.907s-42.667-20.118-42.667-44.907V130.24c0-24.79 19.094-44.907 42.667-44.907z"
-                      p-id="5987"
-                      fill="#515151"
-                    ></path>
-                  </svg>
-                  <div class="name">{{ doctor.docname }}</div>
-                </div>
-                <div class="info">
-                  <p class="price">{{ doctor.skill }}</p>
-                </div>
-              </div>
-              <div class="right">
-                <div class="left">
-                  <p class="price">{{ doctor.amount }}</p>
-                </div>
-                <div class="right">
-                  <el-button
-                    :type="doctor.availableNumber <= 0 ? 'info' : 'primary'"
-                    :disabled="doctor.availableNumber <= 0"
-                    >剩余 {{ doctor.availableNumber }}</el-button
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="divider">
-              <el-divider />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="afternoon-tickets" v-if="selectCard?.scheduleList?.filter((item) => item.workTime === 1).length">
-        <div class="time-tickets">
-          <svg
-            t="1790928615849"
-            class="icon"
-            viewBox="0 0 1024 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            p-id="10784"
-            width="20"
-            height="20"
-          >
-            <path
-              d="M981.333333 896a42.666667 42.666667 0 0 1 0 85.333333H42.666667a42.666667 42.666667 0 0 1 0-85.333333h938.666666z m-469.333333-384a256 256 0 0 1 255.829333 246.4L768 768a42.666667 42.666667 0 0 1-85.333333 0 170.112 170.112 0 0 0-50.005334-120.661333A170.112 170.112 0 0 0 512 597.333333a170.112 170.112 0 0 0-120.661333 50.005334 170.112 170.112 0 0 0-49.706667 110.634666L341.333333 768a42.666667 42.666667 0 0 1-85.333333 0 256 256 0 0 1 256-256z m-384 213.333333a42.666667 42.666667 0 0 1 0 85.333334H42.666667a42.666667 42.666667 0 0 1 0-85.333334h85.333333z m853.333333 0a42.666667 42.666667 0 0 1 0 85.333334h-85.333333a42.666667 42.666667 0 0 1 0-85.333334h85.333333zM210.304 405.973333l60.330667 60.330667a42.666667 42.666667 0 0 1-60.330667 60.330667L149.973333 466.346667a42.666667 42.666667 0 1 1 60.330667-60.330667z m663.722667 0a42.666667 42.666667 0 0 1 0 60.330667l-60.330667 60.330667a42.666667 42.666667 0 0 1-60.330667-60.330667l60.330667-60.330667a42.666667 42.666667 0 0 1 60.330667 0zM512 42.666667a42.666667 42.666667 0 0 1 42.666667 42.666666v195.669334l108.202666-108.202667a42.666667 42.666667 0 0 1 60.330667 60.330667l-181.034667 181.034666-3.498666 3.114667-0.256 0.213333a42.624 42.624 0 0 1-1.92 1.450667l-1.621334 1.066667-0.512 0.341333a38.997333 38.997333 0 0 1-8.746666 4.096 42.538667 42.538667 0 0 1-1.152 0.384l-1.365334 0.384-1.194666 0.298667-1.28 0.256a42.752 42.752 0 0 1-1.109334 0.213333l-1.450666 0.256-1.066667 0.128-0.981333 0.128a42.88 42.88 0 0 1-1.493334 0.085333l-1.706666 0.085334h-1.664l-1.664-0.085334-1.493334-0.085333-0.981333-0.128a42.666667 42.666667 0 0 1-1.152-0.128l-1.365333-0.256a70.656 70.656 0 0 1-3.498667-0.768 42.581333 42.581333 0 0 1-2.602667-0.768l-0.768-0.256a40.362667 40.362667 0 0 1-6.4-2.944l-1.024-0.554667a42.368 42.368 0 0 1-0.554666-0.341333l-0.512-0.341333a46.08 46.08 0 0 1-1.962667-1.28l-1.792-1.408-0.042667-0.042667v0.042667l-0.341333-0.298667-0.554667-0.426667-2.602666-2.432L300.8 233.130667A42.666667 42.666667 0 0 1 361.130667 172.8L469.333333 281.002667 469.333333 85.333333a42.666667 42.666667 0 0 1 42.666667-42.666666z"
-              fill="#FF7F50"
-              p-id="10785"
-            ></path>
-          </svg>
-          <p>下午号源</p>
-        </div>
-        <div class="tickets-doctors">
-          <div
-            class="tickets-info"
-            v-for="doctor in selectCard?.scheduleList.filter((item) => item.workTime === 1)"
-            :key="doctor.id"
-          >
-            <div class="content">
-              <div class="left">
-                <div class="doctor">
-                  <div class="title">{{ doctor.title }}</div>
-                  <svg
-                    t="1790926337417"
-                    class="icon"
-                    viewBox="0 0 1024 1024"
-                    version="1.1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    p-id="5986"
-                    width="16"
-                    height="16"
-                  >
-                    <path
-                      d="M512 85.333c23.573 0 42.667 20.118 42.667 44.907v763.52c0 24.79-19.094 44.907-42.667 44.907s-42.667-20.118-42.667-44.907V130.24c0-24.79 19.094-44.907 42.667-44.907z"
-                      p-id="5987"
-                      fill="#515151"
-                    ></path>
-                  </svg>
-                  <div class="name">{{ doctor.docname }}</div>
-                </div>
-                <div class="info">
-                  <p class="price">{{ doctor.skill }}</p>
-                </div>
-              </div>
-              <div class="right">
-                <div class="left">
-                  <p class="price">{{ doctor.amount }}</p>
-                </div>
-                <div class="right">
-                  <el-button
-                    :type="doctor.availableNumber <= 0 ? 'info' : 'primary'"
-                    :disabled="doctor.availableNumber <= 0"
-                    >剩余 {{ doctor.availableNumber }}</el-button
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="divider">
-              <el-divider />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script setup lang="ts">
-// 定义组件名字
-defineOptions({ name: "DoctorDetail" });
-
-// import { ref, reactive, computed, watch, onMounted } from 'vue'
-import { ref, onMounted, reactive, computed } from "vue";
-
-// import { useRouter } from 'vue-router'
-import { useRoute } from "vue-router";
-const route = useRoute();
-
-// 引入 网络请求
-import { reqHospitalDetailInfo, reqHospitalDepartmentInfo } from "@/api/hospital/index";
-import { reqDoctorSchedule } from "@/api/doctorSchedule/index";
-
-// 引入医生排班生成工具
-import { doctorsScheduleMethods } from "@/utils/doctorsSchedule";
-// 引入日期处理工具
-import { getCurrentYearMonth } from "@/utils/dateFormatter";
-
-// 引入数据类型定义
-import type { HospitalDetailItem } from "@/types/hospitalDetail/index";
-import type { HospitalDepartmentPageResponse } from "@/types/hospitalDepartment/index";
-import type { DoctorsScheduleItems, ScheduleCard, ScheduleArr } from "@/types/doctorSchedule/index";
-import type { ResponseData } from "@/types/api";
-// Props定义示例
-// const props = defineProps<{}>()
-// const emit = defineEmits<{}>()
-
-// 响应式数据
-// const count = ref(0)
-// const state = reactive({})
-
-// 医院，科室，医生相关信息
-let hspDptDctInfo = reactive({
-  // 医院名称
-  hopName: "",
-  // 科室名称
-  depName: "",
-  // 专科名称
-  spcName: ""
-});
-
-// 分页器相关参数
-let paginationValue = reactive({
-  // 当前页面 1
-  currentPage: 1,
-  // 每页展示5个日期卡片
-  pageSize: 5,
-  // 每页条数
-  limit: [5],
-  // 总页数
-  total: 0
-});
-
-// 需要展示的数据数组 核心数据组
-let scheduleArr = ref<ScheduleArr>([]);
-
-// 选中卡片内的数据
-let selectCard = ref<ScheduleCard>();
-
-// 计算属性
-// const computedVal = computed(() => {})
-// slice 切片，取出当前页的 5 条卡片
-const pageCardList = computed(() => {
-  // 当前数组为空，则返回空数组
-  if (!scheduleArr.value) return [];
-  // 计算切片的起始下标
-  const startIndex = (paginationValue.currentPage - 1) * paginationValue.pageSize;
-  // 计算切片的结束下标
-  const endIndex = startIndex + paginationValue.pageSize;
-  // 返回切片数据
-  return scheduleArr.value.slice(startIndex, endIndex);
-});
-
-// 监听
-// watch(count, (newVal) => {})
-
-// 生命周期
-onMounted(() => {
-  //打印获取的 hpscode , depcode, spccode
-  // console.log("获取参数：", route.query);
-  // 获取当前路由中的 query 参数
-  const routeQuery = {
-    hoscode: route.query.hoscode as string,
-    depcode: route.query.depcode as string,
-    spccode: route.query.spccode as string
-  };
-  // 通过网络请求获取医院 科室 专科相关信息
-  getHspDptDocInfo(routeQuery.hoscode, routeQuery.depcode, routeQuery.spccode);
-  // 通过网络请求获取对应专科科室医生的排班情况
-  getDoctorInfo(routeQuery.hoscode, routeQuery.spccode);
-});
-// 通过路由 query 查询医院相关信息
-const getHspDptDocInfo = async (hoscode: string, depcode: string, spccode: string) => {
-  // 通过网络请求获取医院名称
-  const resultHsp: ResponseData<HospitalDetailItem> = await reqHospitalDetailInfo(hoscode);
-  // 通过网络请求获取 科室 专科门诊名称
-  const resultDepSec: ResponseData<HospitalDepartmentPageResponse> = await reqHospitalDepartmentInfo(hoscode);
-  // 如果获取到的数据的code=200
-  if (resultHsp.code == 200 && resultDepSec.code == 200) {
-    // 获取医院名称
-    hspDptDctInfo.hopName = resultHsp.data?.hosname;
-    // 获取科室名称
-    hspDptDctInfo.depName = resultDepSec.data.find((item) => item.depcode === depcode)?.depname ?? "";
-    // 获取门诊名称 把所有一级的children合并成一个数组
-    hspDptDctInfo.spcName =
-      resultDepSec.data.flatMap((item) => item.children).find((child) => child.depcode === spccode)?.depname ?? "";
-  }
-};
-// 获取医生的排班情况
-const getDoctorInfo = async (hoscode: string, spccode: string) => {
-  // 通过网络请求获取医生的排版情况
-  const resultDct: ResponseData<DoctorsScheduleItems> = await reqDoctorSchedule(hoscode, spccode, 1, 80);
-  // 如果获取到的数据的code=200
-  if (resultDct.code == 200) {
-    // 打印相关数据进行查看确认
-    // console.log("处理前,排班数据：", resultDct.data);
-    // 通过医生排班的处理工具处理后的数据
-    scheduleArr.value = doctorsScheduleMethods.scheduleByWorkDate(resultDct.data);
-    console.log("处理后,排班数据：", scheduleArr.value);
-    // 总卡片数量 = 处理完后的日期卡片数组长度
-    paginationValue.total = scheduleArr.value.length;
-    // 每次刷新数据重置页码到第一页
-    paginationValue.currentPage = 1;
-  }
-};
-// 分页器页码被改变
-const handleCurrentChange = (val: number) => {
-  // 将当前页码进行调整
-  paginationValue.currentPage = val;
-  // 通过网络请求获取对应专科科室医生的排班情况
-};
-</script>
-
-<style scoped lang="less">
-.page-wrap {
-  color: @color-text-regular;
-  display: flex;
-  flex-direction: column;
-  .top-content {
-    .hspInfo {
-      display: flex;
-      flex-direction: row;
-      margin: 10px 0;
-      svg {
-        margin: 0 5px;
-      }
-      p:hover,
-      svg:hover {
-        cursor: pointer;
-        color: @color-text-hoverMainColor;
-      }
-    }
-  }
-  .middle-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .currentDate {
-      font-weight: 800;
-      margin: 10px 0;
-    }
-    .card-wrap {
-      display: flex;
-      flex-direction: row;
-      gap: 15px;
-      width: 100%;
-      .dataCard {
-        /* 过渡：0.3秒完成变换，缓动曲线 */
-        transition: transform 0.3s ease;
-        transform-origin: center;
-        flex: 1;
-        border: 1px solid @color-text-placeholder;
-        .itemData {
-          text-align: center;
-          font-weight: 800;
-          background-color: @color-text-placeholder;
-          padding: 8px;
-          transition: background-color 0.3s ease;
-        }
-        .itemNote {
-          padding: 15px 0;
-          text-align: center;
-        }
-        &:hover {
-          /* 放大5%，改成1.1就是放大10% */
-          transform: scale(1.1);
-          .itemData {
-            background: @color-bg-cardhover;
-          }
-        }
-        &.active {
-          .itemData {
-            background-color: @color-bg-cardhover;
-          }
-        }
-      }
-    }
-    .pagination-block {
-      margin: 10px 0;
-    }
-  }
-  .bottom-content {
-    .morning-tickets,
-    .afternoon-tickets {
-      display: flex;
-      flex-direction: column;
-      .time-tickets {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin-bottom: 15px;
-        font-weight: 800;
-        svg {
-          margin-right: 6px;
-        }
-      }
-      .tickets-doctors {
-        display: flex;
-        flex-direction: column;
-        .tickets-info {
-          display: flex;
-          flex-direction: column;
-          .content {
-            display: flex;
-            flex-direction: row;
-            .left {
-              flex: 10;
-              display: flex;
-              flex-direction: column;
-              .doctor {
-                flex: 10;
-                display: flex;
-                flex-direction: row;
-                .title {
-                  color: @color-important;
-                  font-weight: 800;
-                  margin-bottom: 10px;
-                }
-                svg {
-                  margin: 0 6px;
-                }
-              }
-            }
-            .right {
-              flex: 2;
-              display: flex;
-              flex-direction: row;
-              align-items: center;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-</style>
-
 ```
 
 ### 输入登录
