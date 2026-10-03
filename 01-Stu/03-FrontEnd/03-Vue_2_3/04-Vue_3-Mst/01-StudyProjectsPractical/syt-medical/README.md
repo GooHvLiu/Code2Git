@@ -6344,6 +6344,7 @@ export const reqSearchHospitalKeyWord = async (hosname: string) => {
         clearable
         class="search-form"
         placeholder="请输入医院名称"
+        @select="handleSelect"
         size="large"
       />
       <el-button type="primary" :icon="Search" size="large">搜索</el-button>
@@ -6352,15 +6353,23 @@ export const reqSearchHospitalKeyWord = async (hosname: string) => {
 </template>
 
 <script setup lang="ts">
-......
+// 定义组件名字
+defineOptions({ name: "Search" });
+import { Search } from "@element-plus/icons-vue";
+// import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { ref } from "vue";
 // 导入类型定义
 import type { ResponseData } from "@/types/api";
 import type { SearchHospitalKeyWordPageResponse } from "@/types/index";
 // 导入网络请求函数
 import { reqSearchHospitalKeyWord } from "@/api/home/index";
+// 导入路由并创建路由
+import { useRouter } from "vue-router";
+const router = useRouter();
+// 导入路由常量管理文件
+import { HOSPITAL } from "@/const/index";
 // 用户输入的关键词
 const searchKeyWord = ref<string>("");
-
 // 用户输入关键字后进行后台数据获取
 const keyWordSearch = async (keyWord: string, cb: any) => {
   // console.log("keyWord", keyWord);
@@ -6378,11 +6387,31 @@ const keyWordSearch = async (keyWord: string, cb: any) => {
     cb(showData);
   }
 };
+// 当用户选中搜索框下选项内容时被触发
+const handleSelect = (item: Record<string, any>) => {
+  // 通过路由跳转到医院详情页面 query: { hoscode }
+  // console.log("点击的医院代码为：", item);
+  router.push({ path: HOSPITAL.path + "/" + HOSPITAL.CHILDREN.DETAL.path, query: { hoscode: item.hoscode } });
+};
 </script>
-```
 
-> 1. `hoscode`用于点击后进行跳转搜索使用的
-> 2. 不含点击路由跳转功能
+<style scoped lang="less">
+.page-home-search {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .search-bar {
+    width: 600px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+}
+</style>
+```
 
 #### 路由跳转
 
@@ -7981,12 +8010,7 @@ let hspDptDctInfo = reactive({
   // 专科名称
   spcName: ""
 });
-// 获取当前路由中的 query 参数
-const routeQuery = {
-  hoscode: route.query.hoscode as string,
-  depcode: route.query.depcode as string,
-  spccode: route.query.spccode as string
-};
+
 // 分页器相关参数
 let paginationValue = reactive({
   // 当前页面 1
@@ -8026,7 +8050,12 @@ const pageCardList = computed(() => {
 onMounted(() => {
   //打印获取的 hpscode , depcode, spccode
   // console.log("获取参数：", route.query);
-
+  // 获取当前路由中的 query 参数
+  const routeQuery = {
+    hoscode: route.query.hoscode as string,
+    depcode: route.query.depcode as string,
+    spccode: route.query.spccode as string
+  };
   // 通过网络请求获取医院 科室 专科相关信息
   getHspDptDocInfo(routeQuery.hoscode, routeQuery.depcode, routeQuery.spccode);
   // 通过网络请求获取对应专科科室医生的排班情况
@@ -8197,6 +8226,7 @@ const handleCurrentChange = (val: number) => {
   }
 }
 </style>
+
 ```
 
 ### 输入登录

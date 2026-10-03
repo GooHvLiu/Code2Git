@@ -252,12 +252,7 @@ let hspDptDctInfo = reactive({
   // 专科名称
   spcName: ""
 });
-// 获取当前路由中的 query 参数
-const routeQuery = {
-  hoscode: route.query.hoscode as string,
-  depcode: route.query.depcode as string,
-  spccode: route.query.spccode as string
-};
+
 // 分页器相关参数
 let paginationValue = reactive({
   // 当前页面 1
@@ -297,7 +292,12 @@ const pageCardList = computed(() => {
 onMounted(() => {
   //打印获取的 hpscode , depcode, spccode
   // console.log("获取参数：", route.query);
-
+  // 获取当前路由中的 query 参数
+  const routeQuery = {
+    hoscode: route.query.hoscode as string,
+    depcode: route.query.depcode as string,
+    spccode: route.query.spccode as string
+  };
   // 通过网络请求获取医院 科室 专科相关信息
   getHspDptDocInfo(routeQuery.hoscode, routeQuery.depcode, routeQuery.spccode);
   // 通过网络请求获取对应专科科室医生的排班情况
