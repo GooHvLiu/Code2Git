@@ -11,8 +11,22 @@ export interface ReqLoginItem {
 }
 // 登录 响应数据类型
 export interface ResLoginItem {
-  token: string;
   name: string;
+  token: string;
+}
+
+// 登录用户 的数据类型
+export interface ResUserInfo {
+  age: string | null;
+  authStatus: number; // 0=未认证 1=审核中 2=已认证;
+  avatar: string;
+  certificatesNo: string | null;
+  certificatesType: string | null;
+  id: number;
+  name: string;
+  nickName: string;
+  phone: string;
+  sex: number | null;
 }
 
 // 获取小程序码 响应数据类型

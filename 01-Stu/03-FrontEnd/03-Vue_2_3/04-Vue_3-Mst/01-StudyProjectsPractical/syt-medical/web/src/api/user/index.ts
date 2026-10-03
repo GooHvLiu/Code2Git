@@ -10,7 +10,10 @@ import type { WxQrcodeItem, WxScanStatusItem } from "@/types/userLogin";
 enum API {
   // Login 模块的验证码 后端获取地址
   CAPTCHA_URL = "/user/msm/send",
+  // 用户登录 后端地址
   LOGIN_URL = "/user/userInfo/login",
+  // 获取用户信息
+  USERINFO_URL = "/user/userInfo/getUserInfo",
   // 获取微信小程序二维码
   WX_QRCODE_URL = "/wx/qrcode",
   // 轮询扫码状态
@@ -29,6 +32,12 @@ export const reqLoginCapcha = async (phoneNumber: string) => {
 export const reqLogin = async (reqObject: ReqLoginItem) => {
   const result = await request.post(API.LOGIN_URL, reqObject);
   return result.data as ResponseData<ResLoginItem>;
+};
+
+// 获取用户详细信息
+export const reqGetUserInfo = async () => {
+  const result = await request.get(API.USERINFO_URL);
+  return result.data;
 };
 
 // 获取小程序码

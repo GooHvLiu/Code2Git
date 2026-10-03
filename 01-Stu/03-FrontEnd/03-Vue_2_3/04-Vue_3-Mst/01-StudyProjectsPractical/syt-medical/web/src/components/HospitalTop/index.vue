@@ -7,10 +7,10 @@
       </div>
       <div class="right">
         <p class="help-tips"><span>帮助中心</span></p>
-        <p class="login-register" v-if="!userStore_Login.isLogin">
+        <p class="login-register" v-if="!userLoginStore.isLogin">
           <span @click="userRegister">注册</span> / <span @click="userLogin">登录</span>
         </p>
-        <p class="user-info" v-if="userStore_Login.isLogin">
+        <p class="user-info" v-if="userLoginStore.isLogin">
           <el-icon><User /></el-icon>
           <el-dropdown
             placement="bottom-end"
@@ -27,7 +27,7 @@
             }"
           >
             <span class="el-dropdown-link">
-              <span>{{ userStore_Login.userInfo?.name }}</span>
+              <span>{{ userLoginStore.userInfo?.nickName }}</span>
               <el-icon class="el-icon--right">
                 <arrow-down />
               </el-icon>
@@ -49,14 +49,20 @@
 
 <script setup lang="ts">
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { watch } from "vue";
 // 导入路由并创建路由
 import { useRouter } from "vue-router";
 const router = useRouter();
 // 导入路由常量管理文件
 import { HOME } from "@/const/index";
+// 通过网络请求获取相关数据
+import { reqGetUserInfo } from "@/api/user/index";
+// 引入数据类型定义
+import type { ResponseData } from "@/types/api";
+import type { ResUserInfo } from "@/types/userLogin/index";
 // 引入Pinia Store 用户
 import { useUserStore } from "@/stores/index";
-const userStore_Login = useUserStore();
+const userLoginStore = useUserStore();
 // 引入 utils 工具箱
 import { userInfoMethods } from "@/utils/localStorage";
 // Props定义示例
@@ -71,7 +77,22 @@ import { userInfoMethods } from "@/utils/localStorage";
 // const computedVal = computed(() => {})
 
 // 监听
-// watch(count, (newVal) => {})
+watch(
+  // 监听用户是否已登录变量的值变化
+  () => userLoginStore.isLogin,
+  async () => {
+    try {
+      const userInfo = (await reqGetUserInfo()) as ResponseData<ResUserInfo>;
+      // console.log("处理前用户数据：", userInfo);
+      if (userInfo.code == 200) {
+        userLoginStore.userInfo = userInfo.data;
+        // console.log("用户数据：", userLoginStore.userInfo);
+      }
+    } catch (error) {
+      console.log("错误：", error);
+    }
+  }
+);
 
 // 生命周期
 // onMounted(() => {})
@@ -88,7 +109,7 @@ const userRegister = () => {
 // 用户点击 登录 时
 const userLogin = () => {
   // 点击登录时，将存储在 Store 中的用户登录变量结果进行更改显示
-  userStore_Login.userLoginVisible = true;
+  userLoginStore.userLoginVisible = true;
 };
 // 点击用户下拉菜单时的方法
 const handleCommand = (command: string | number | object) => {
@@ -97,7 +118,7 @@ const handleCommand = (command: string | number | object) => {
     // 清空本地持久化存储
     userInfoMethods.clearLocalStorage();
     // 清除 Pinia Store 存储的 用户数据 信息
-    userStore_Login.userInfo = {
+    userLoginStore.useTokenInfo = {
       name: "",
       token: ""
     };

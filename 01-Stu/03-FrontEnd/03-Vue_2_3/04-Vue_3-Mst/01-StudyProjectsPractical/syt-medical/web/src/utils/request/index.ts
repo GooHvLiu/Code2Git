@@ -7,6 +7,7 @@
  */
 import axios from "axios";
 import type { AxiosInstance, InternalAxiosRequestConfig, AxiosError } from "axios";
+import { userInfoMethods } from "@/utils/localStorage";
 /**
  * 创建 axios 实例
  */
@@ -22,7 +23,15 @@ export const request: AxiosInstance = axios.create({
  */
 request.interceptors.request.use(
   (requestConfig: InternalAxiosRequestConfig) => {
-    console.log("恭喜，这只是提示您：请求拦截器已生效~");
+    // console.log("恭喜，这只是提示您：请求拦截器已生效~");
+    const userTokenInfo = userInfoMethods.getLocalStorage();
+    // 从本地持久化存储中获取用户 token 数据
+    if (userTokenInfo) {
+      const { token } = userTokenInfo;
+      if (token) {
+        requestConfig.headers.token = token;
+      }
+    }
 
     return requestConfig;
   },
