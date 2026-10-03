@@ -1494,7 +1494,7 @@ app.mount("#app");
 </style>
 ```
 
-###### 完成登录
+###### 登录功能
 
 将页眉页面的布局确定，`src/components/HospitalTop/index.vue`完成登录功能的搭建如下：
 
@@ -1528,7 +1528,7 @@ app.mount("#app");
             }"
           >
             <span class="el-dropdown-link">
-              <span>{{ userLoginStore.userInfo?.nickName }}</span>
+              <span>{{ userLoginStore.useTokenInfo?.name }}</span>
               <el-icon class="el-icon--right">
                 <arrow-down />
               </el-icon>

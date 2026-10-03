@@ -27,7 +27,7 @@
             }"
           >
             <span class="el-dropdown-link">
-              <span>{{ userLoginStore.userInfo?.nickName }}</span>
+              <span>{{ userLoginStore.useTokenInfo?.name }}</span>
               <el-icon class="el-icon--right">
                 <arrow-down />
               </el-icon>
