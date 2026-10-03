@@ -110,8 +110,12 @@ const handleClickDep = (activeDep: any, childDep: HospitalDepartmentChildren) =>
   router.push({
     path: route.path,
     query: {
+      // 医院代号
       hoscode: activeDep.hoscode,
-      depcode: childDep.depcode
+      // 科室代号
+      depcode: activeDep.depcode,
+      // 专科门诊代号
+      spccode: childDep.depcode
     }
   });
   // 控制页面展示

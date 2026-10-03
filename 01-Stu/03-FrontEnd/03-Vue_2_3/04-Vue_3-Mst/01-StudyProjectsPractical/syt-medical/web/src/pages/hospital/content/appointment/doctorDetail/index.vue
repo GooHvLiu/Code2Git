@@ -2,7 +2,7 @@
   <div class="page-wrap">
     <div class="top-content">
       <div class="hspInfo">
-        <p class="hspName">北京人民医院</p>
+        <p class="hspName">{{ hspDptDctInfo.hopName }}</p>
         <svg
           t="1790926337417"
           class="icon"
@@ -19,7 +19,7 @@
             fill="#515151"
           ></path>
         </svg>
-        <p class="dptName">专科</p>
+        <p class="dptName">{{ hspDptDctInfo.depName }}</p>
         <svg
           t="1790926255554"
           class="icon"
@@ -36,23 +36,35 @@
             fill="#515151"
           ></path>
         </svg>
-        <p class="spcName">多发性硬化专科门诊</p>
+        <p class="spcName">{{ hspDptDctInfo.spcName }}</p>
       </div>
     </div>
     <div class="middle-content">
-      <div class="currentDate">2026年10月</div>
+      <div class="currentDate">{{ getCurrentYearMonth() }}</div>
       <div class="card-wrap">
-        <div class="dataCard" v-for="(items, index) in 5" :key="index">
-          <div class="itemData">2026-10-07 周六</div>
-          <div class="itemNote">停止挂号</div>
+        <div
+          class="dataCard"
+          v-for="cardItem in pageCardList"
+          :key="cardItem.workDate"
+          @click="selectCard = cardItem"
+          :class="{ active: selectCard?.workDate === cardItem.workDate }"
+        >
+          <div class="itemData">{{ cardItem.workDate }} {{ cardItem.dayOfWeek }}</div>
+          <div class="itemNote">{{ cardItem.tipText }}</div>
         </div>
       </div>
       <div class="pagination-block">
-        <el-pagination layout="prev, pager, next" :total="50" />
+        <el-pagination
+          layout="prev, pager, next"
+          :current-page="paginationValue.currentPage"
+          :page-sizes="paginationValue.limit"
+          :total="paginationValue.total"
+          @current-change="handleCurrentChange"
+        />
       </div>
     </div>
     <div class="bottom-content">
-      <div class="morning-tickets">
+      <div class="morning-tickets" v-if="selectCard?.scheduleList?.filter((item) => item.workTime === 0).length">
         <div class="time-tickets">
           <svg
             t="1790928595007"
@@ -73,11 +85,15 @@
           <p>上午号源</p>
         </div>
         <div class="tickets-doctors">
-          <div class="tickets-info" v-for="(items, index) in 2" :key="index">
+          <div
+            class="tickets-info"
+            v-for="doctor in selectCard?.scheduleList.filter((item) => item.workTime === 0)"
+            :key="doctor.id"
+          >
             <div class="content">
               <div class="left">
                 <div class="doctor">
-                  <div class="title">副主任医师</div>
+                  <div class="title">{{ doctor.title }}</div>
                   <svg
                     t="1790926337417"
                     class="icon"
@@ -94,18 +110,22 @@
                       fill="#515151"
                     ></path>
                   </svg>
-                  <div class="name">裴育</div>
+                  <div class="name">{{ doctor.docname }}</div>
                 </div>
                 <div class="info">
-                  <p class="price">骨质疏松和骨代谢疾病、糖尿病、甲状腺疾病。</p>
+                  <p class="price">{{ doctor.skill }}</p>
                 </div>
               </div>
               <div class="right">
                 <div class="left">
-                  <p class="price">￥ 100</p>
+                  <p class="price">{{ doctor.amount }}</p>
                 </div>
                 <div class="right">
-                  <el-button type="primary">剩余6</el-button>
+                  <el-button
+                    :type="doctor.availableNumber <= 0 ? 'info' : 'primary'"
+                    :disabled="doctor.availableNumber <= 0"
+                    >剩余 {{ doctor.availableNumber }}</el-button
+                  >
                 </div>
               </div>
             </div>
@@ -115,7 +135,7 @@
           </div>
         </div>
       </div>
-      <div class="afternoon-tickets">
+      <div class="afternoon-tickets" v-if="selectCard?.scheduleList?.filter((item) => item.workTime === 1).length">
         <div class="time-tickets">
           <svg
             t="1790928615849"
@@ -136,11 +156,15 @@
           <p>下午号源</p>
         </div>
         <div class="tickets-doctors">
-          <div class="tickets-info" v-for="(items, index) in 2" :key="index">
+          <div
+            class="tickets-info"
+            v-for="doctor in selectCard?.scheduleList.filter((item) => item.workTime === 1)"
+            :key="doctor.id"
+          >
             <div class="content">
               <div class="left">
                 <div class="doctor">
-                  <div class="title">副主任医师</div>
+                  <div class="title">{{ doctor.title }}</div>
                   <svg
                     t="1790926337417"
                     class="icon"
@@ -157,18 +181,22 @@
                       fill="#515151"
                     ></path>
                   </svg>
-                  <div class="name">裴育</div>
+                  <div class="name">{{ doctor.docname }}</div>
                 </div>
                 <div class="info">
-                  <p class="price">骨质疏松和骨代谢疾病、糖尿病、甲状腺疾病。</p>
+                  <p class="price">{{ doctor.skill }}</p>
                 </div>
               </div>
               <div class="right">
                 <div class="left">
-                  <p class="price">￥ 100</p>
+                  <p class="price">{{ doctor.amount }}</p>
                 </div>
                 <div class="right">
-                  <el-button type="primary">剩余6</el-button>
+                  <el-button
+                    :type="doctor.availableNumber <= 0 ? 'info' : 'primary'"
+                    :disabled="doctor.availableNumber <= 0"
+                    >剩余 {{ doctor.availableNumber }}</el-button
+                  >
                 </div>
               </div>
             </div>
@@ -187,9 +215,26 @@
 defineOptions({ name: "DoctorDetail" });
 
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { ref, onMounted, reactive, computed } from "vue";
 
 // import { useRouter } from 'vue-router'
+import { useRoute } from "vue-router";
+const route = useRoute();
 
+// 引入 网络请求
+import { reqHospitalDetailInfo, reqHospitalDepartmentInfo } from "@/api/hospital/index";
+import { reqDoctorSchedule } from "@/api/doctorSchedule/index";
+
+// 引入医生排班生成工具
+import { doctorsScheduleMethods } from "@/utils/doctorsSchedule";
+// 引入日期处理工具
+import { getCurrentYearMonth } from "@/utils/dateFormatter";
+
+// 引入数据类型定义
+import type { HospitalDetailItem } from "@/types/hospitalDetail/index";
+import type { HospitalDepartmentPageResponse } from "@/types/hospitalDepartment/index";
+import type { DoctorsScheduleItems, ScheduleCard, ScheduleArr } from "@/types/doctorSchedule/index";
+import type { ResponseData } from "@/types/api";
 // Props定义示例
 // const props = defineProps<{}>()
 // const emit = defineEmits<{}>()
@@ -198,14 +243,106 @@ defineOptions({ name: "DoctorDetail" });
 // const count = ref(0)
 // const state = reactive({})
 
+// 医院，科室，医生相关信息
+let hspDptDctInfo = reactive({
+  // 医院名称
+  hopName: "",
+  // 科室名称
+  depName: "",
+  // 专科名称
+  spcName: ""
+});
+// 获取当前路由中的 query 参数
+const routeQuery = {
+  hoscode: route.query.hoscode as string,
+  depcode: route.query.depcode as string,
+  spccode: route.query.spccode as string
+};
+// 分页器相关参数
+let paginationValue = reactive({
+  // 当前页面 1
+  currentPage: 1,
+  // 每页展示5个日期卡片
+  pageSize: 5,
+  // 每页条数
+  limit: [5],
+  // 总页数
+  total: 0
+});
+
+// 需要展示的数据数组 核心数据组
+let scheduleArr = ref<ScheduleArr>([]);
+
+// 选中卡片内的数据
+let selectCard = ref<ScheduleCard>();
+
 // 计算属性
 // const computedVal = computed(() => {})
+// slice 切片，取出当前页的 5 条卡片
+const pageCardList = computed(() => {
+  // 当前数组为空，则返回空数组
+  if (!scheduleArr.value) return [];
+  // 计算切片的起始下标
+  const startIndex = (paginationValue.currentPage - 1) * paginationValue.pageSize;
+  // 计算切片的结束下标
+  const endIndex = startIndex + paginationValue.pageSize;
+  // 返回切片数据
+  return scheduleArr.value.slice(startIndex, endIndex);
+});
 
 // 监听
 // watch(count, (newVal) => {})
 
 // 生命周期
-// onMounted(() => {})
+onMounted(() => {
+  //打印获取的 hpscode , depcode, spccode
+  // console.log("获取参数：", route.query);
+
+  // 通过网络请求获取医院 科室 专科相关信息
+  getHspDptDocInfo(routeQuery.hoscode, routeQuery.depcode, routeQuery.spccode);
+  // 通过网络请求获取对应专科科室医生的排班情况
+  getDoctorInfo(routeQuery.hoscode, routeQuery.spccode);
+});
+// 通过路由 query 查询医院相关信息
+const getHspDptDocInfo = async (hoscode: string, depcode: string, spccode: string) => {
+  // 通过网络请求获取医院名称
+  const resultHsp: ResponseData<HospitalDetailItem> = await reqHospitalDetailInfo(hoscode);
+  // 通过网络请求获取 科室 专科门诊名称
+  const resultDepSec: ResponseData<HospitalDepartmentPageResponse> = await reqHospitalDepartmentInfo(hoscode);
+  // 如果获取到的数据的code=200
+  if (resultHsp.code == 200 && resultDepSec.code == 200) {
+    // 获取医院名称
+    hspDptDctInfo.hopName = resultHsp.data?.hosname;
+    // 获取科室名称
+    hspDptDctInfo.depName = resultDepSec.data.find((item) => item.depcode === depcode)?.depname ?? "";
+    // 获取门诊名称 把所有一级的children合并成一个数组
+    hspDptDctInfo.spcName =
+      resultDepSec.data.flatMap((item) => item.children).find((child) => child.depcode === spccode)?.depname ?? "";
+  }
+};
+// 获取医生的排班情况
+const getDoctorInfo = async (hoscode: string, spccode: string) => {
+  // 通过网络请求获取医生的排版情况
+  const resultDct: ResponseData<DoctorsScheduleItems> = await reqDoctorSchedule(hoscode, spccode, 1, 80);
+  // 如果获取到的数据的code=200
+  if (resultDct.code == 200) {
+    // 打印相关数据进行查看确认
+    // console.log("处理前,排班数据：", resultDct.data);
+    // 通过医生排班的处理工具处理后的数据
+    scheduleArr.value = doctorsScheduleMethods.scheduleByWorkDate(resultDct.data);
+    console.log("处理后,排班数据：", scheduleArr.value);
+    // 总卡片数量 = 处理完后的日期卡片数组长度
+    paginationValue.total = scheduleArr.value.length;
+    // 每次刷新数据重置页码到第一页
+    paginationValue.currentPage = 1;
+  }
+};
+// 分页器页码被改变
+const handleCurrentChange = (val: number) => {
+  // 将当前页码进行调整
+  paginationValue.currentPage = val;
+  // 通过网络请求获取对应专科科室医生的排班情况
+};
 </script>
 
 <style scoped lang="less">
@@ -263,6 +400,11 @@ defineOptions({ name: "DoctorDetail" });
           transform: scale(1.1);
           .itemData {
             background: @color-bg-cardhover;
+          }
+        }
+        &.active {
+          .itemData {
+            background-color: @color-bg-cardhover;
           }
         }
       }

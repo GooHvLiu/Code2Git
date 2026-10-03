@@ -76,7 +76,9 @@ const handleSelect = (key: string) => {
   router.push({
     path: key,
     query: {
-      hoscode: route.query.hoscode
+      hoscode: route.query.hoscode,
+      depcode: route.query.depcode,
+      spccode: route.query.spccode
     }
   });
 };

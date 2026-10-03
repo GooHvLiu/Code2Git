@@ -141,6 +141,9 @@ function buildSchedules() {
               ? 300 + randInt(0, 200)
               : 100 + randInt(0, 100);
 
+          // 随机分配上午(0)或下午(1)
+          const workTime = rand() > 0.5 ? 0 : 1;
+
           schedules.push({
             id: `sch_${scheduleId++}`,
             hoscode: subDept.hoscode,
@@ -150,6 +153,7 @@ function buildSchedules() {
             skill,
             workDate: formatDate(date),
             dayOfWeek: getDayOfWeek(date),
+            workTime,
             reservedNumber,
             availableNumber,
             amount,
