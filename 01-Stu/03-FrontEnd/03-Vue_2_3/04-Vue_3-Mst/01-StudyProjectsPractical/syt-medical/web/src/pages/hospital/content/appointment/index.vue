@@ -1,11 +1,6 @@
 <template>
-  <!-- 进入预约挂号的医院详情 和 科室选择界面 -->
-  <div
-    v-if="
-      useDoctorStore.appointmentDoctor.appointmentDepartment == 1 && useDoctorStore.appointmentDoctor.doctorDetail == 0
-    "
-    class="appointment-department"
-  >
+  <!-- 进入预约挂号--部门/科室 选择 -->
+  <div v-if="useDoctorStore.appointmentOption == 'dpt'" class="appointment-department">
     <!-- 医院预约前，对医院的详细介绍 -->
     <div class="description">
       <!-- 医院名称及等级 -->
@@ -46,13 +41,8 @@
     <!-- 医院科室 组件 -->
     <Department @handleSelectDep="handleClickDep" />
   </div>
-  <!-- 进入预约医生详情界面 -->
-  <div
-    v-if="
-      useDoctorStore.appointmentDoctor.appointmentDepartment == 1 && useDoctorStore.appointmentDoctor.doctorDetail == 1
-    "
-    class="doctorDetail"
-  >
+  <!-- 进入预约挂号--医生 选择 -->
+  <div v-if="useDoctorStore.appointmentOption == 'dct'" class="doctorDetail">
     <DoctorDetail />
   </div>
 </template>
@@ -100,13 +90,13 @@ import { onMounted } from "vue";
 // 生命周期
 onMounted(() => {
   // 进入此组件，即代表已进入部门页面
-  useDoctorStore.appointmentDoctor.appointmentDepartment = 1;
+  useDoctorStore.appointmentOption = "dpt";
 });
 // 当用户点击科室内的具体科室触发
 const handleClickDep = (activeDep: any, childDep: HospitalDepartmentChildren) => {
   // console.log("当前路由：", route.path, "当前常量：", HOSPITAL.CHILDREN.APPOINTMENT.CHILDREN.APPOINTMENT_DETAIL.path); // /hospital/appointment   appointmentDetail
 
-  // 路由跳转到具体科室医生预约网址
+  // 路由跳转到具体 科室医生 预约网址
   router.push({
     path: route.path,
     query: {
@@ -118,8 +108,8 @@ const handleClickDep = (activeDep: any, childDep: HospitalDepartmentChildren) =>
       spccode: childDep.depcode
     }
   });
-  // 控制页面展示
-  useDoctorStore.appointmentDoctor.doctorDetail = 1;
+  // 控制页面展示 选择科室内具体医生页面
+  useDoctorStore.appointmentOption = "dct";
   // 测试数据
   // console.log("当前已选大科室：", activeDep, "；当前已选小科室", childDep);
 };

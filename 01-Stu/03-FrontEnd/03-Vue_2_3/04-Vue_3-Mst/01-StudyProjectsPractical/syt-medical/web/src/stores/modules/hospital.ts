@@ -1,9 +1,9 @@
 // 本文件是 医院详情 / hospitalDetail ，医院部门 / hospitalDepartment 用于状态管理的文件
 import { defineStore } from "pinia";
-import { ref, reactive } from "vue";
+import { ref } from "vue";
 // 引入 类型定义
 import type { ResponseData } from "@/types/api";
-import type { HospitalDetailItem, HospitalDepartmentPageResponse, AppointmentDoctorItem } from "@/types/index";
+import type { HospitalDetailItem, HospitalDepartmentPageResponse } from "@/types/index";
 
 // 引入网络请求标准API
 import { reqHospitalDetailInfo, reqHospitalDepartmentInfo } from "@/api/hospital/index";
@@ -52,19 +52,14 @@ export const useHospitalDepartmentStore = defineStore("HospitalDepartment", () =
   return { hospitalDepartment, getHospitalDepartment };
 });
 
-// 创建 科室医生 的状态存储
+// 创建 科室 / 医生 / 就诊人 的状态存储
 export const useHospitalDoctorStore = defineStore("HospitalDoctor", () => {
   // =============== State
-  // 用于控制预约挂号展示的是选择科室还是选择具体医生和时间
-  let appointmentDoctor: AppointmentDoctorItem = reactive({
-    // 选择 科室 的开关，1为显示，0为不显示
-    appointmentDepartment: 1,
-    // 选择 医生 的开关，1为显示，0为不显示
-    doctorDetail: 0
-  });
+  // 用于控制当前展示的是哪个页面：科室：dpt;医生：dct;就诊人选择：pat
+  let appointmentOption = ref<string>("dpt");
 
   // =============== Actions
 
   // =============== Getters
-  return { appointmentDoctor };
+  return { appointmentOption };
 });

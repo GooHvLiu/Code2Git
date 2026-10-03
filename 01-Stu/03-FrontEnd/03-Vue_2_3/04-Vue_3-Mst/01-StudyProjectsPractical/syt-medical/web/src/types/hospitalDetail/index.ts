@@ -27,8 +27,3 @@ export interface HospitalDetailItem {
   cityString: string;
   districtString: string;
 }
-// 科室医生 的数据类型
-export interface AppointmentDoctorItem {
-  appointmentDepartment: number;
-  doctorDetail: number;
-}
