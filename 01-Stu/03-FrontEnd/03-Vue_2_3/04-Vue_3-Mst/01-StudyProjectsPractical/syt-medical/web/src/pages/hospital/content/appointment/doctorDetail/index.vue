@@ -118,7 +118,7 @@
               </div>
               <div class="right">
                 <div class="left">
-                  <p class="price">{{ doctor.amount }}</p>
+                  <p class="price">￥{{ doctor.amount }}</p>
                 </div>
                 <div class="right">
                   <el-button
@@ -189,7 +189,7 @@
               </div>
               <div class="right">
                 <div class="left">
-                  <p class="price">{{ doctor.amount }}</p>
+                  <p class="price">￥{{ doctor.amount }}</p>
                 </div>
                 <div class="right">
                   <el-button
@@ -330,7 +330,7 @@ const getDoctorInfo = async (hoscode: string, spccode: string) => {
     // console.log("处理前,排班数据：", resultDct.data);
     // 通过医生排班的处理工具处理后的数据
     scheduleArr.value = doctorsScheduleMethods.scheduleByWorkDate(resultDct.data);
-    console.log("处理后,排班数据：", scheduleArr.value);
+    // console.log("处理后,排班数据：", scheduleArr.value);
     // 总卡片数量 = 处理完后的日期卡片数组长度
     paginationValue.total = scheduleArr.value.length;
     // 每次刷新数据重置页码到第一页
