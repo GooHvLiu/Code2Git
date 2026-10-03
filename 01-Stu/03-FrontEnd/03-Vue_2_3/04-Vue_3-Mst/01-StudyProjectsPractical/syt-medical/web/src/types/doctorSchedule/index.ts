@@ -53,3 +53,30 @@ export interface ScheduleCard {
 
 // scheduleArr：日期卡片组成的数组
 export type ScheduleArr = ScheduleCard[];
+
+// 医院 科室 专科 数据类型
+export interface HspDptSpcItem {
+  // 医院名称
+  hopName: string;
+  // 科室名称
+  dptName: string;
+  // 专科名称
+  spcName: string;
+}
+
+// 确定 医生 的数据类型
+export interface SelectedDoctor {
+  amount: number;
+  availableNumber: number;
+  dayOfWeek: string;
+  depcode: string;
+  docname: string;
+  hoscode: string;
+  id: string;
+  reservedNumber: number;
+  skill: string;
+  status: number;
+  title: string;
+  workDate: string;
+  workTime: number;
+}

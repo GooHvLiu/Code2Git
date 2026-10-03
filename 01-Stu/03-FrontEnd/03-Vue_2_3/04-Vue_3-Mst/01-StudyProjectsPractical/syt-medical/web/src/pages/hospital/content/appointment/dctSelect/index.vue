@@ -2,7 +2,7 @@
   <div class="page-wrap">
     <div class="top-content">
       <div class="hspInfo">
-        <p class="hspName">{{ hspDptDctInfo.hopName }}</p>
+        <p class="hspName">{{ useDoctor.hspDptSpcName.hopName }}</p>
         <svg
           t="1790926337417"
           class="icon"
@@ -19,7 +19,7 @@
             fill="#515151"
           ></path>
         </svg>
-        <p class="dptName">{{ hspDptDctInfo.depName }}</p>
+        <p class="dptName">{{ useDoctor.hspDptSpcName.dptName }}</p>
         <svg
           t="1790926255554"
           class="icon"
@@ -36,7 +36,7 @@
             fill="#515151"
           ></path>
         </svg>
-        <p class="spcName">{{ hspDptDctInfo.spcName }}</p>
+        <p class="spcName">{{ useDoctor.hspDptSpcName.spcName }}</p>
       </div>
     </div>
     <div class="middle-content">
@@ -124,6 +124,7 @@
                   <el-button
                     :type="doctor.availableNumber <= 0 ? 'info' : 'primary'"
                     :disabled="doctor.availableNumber <= 0"
+                    @click="handleButton(doctor)"
                     >剩余 {{ doctor.availableNumber }}</el-button
                   >
                 </div>
@@ -195,6 +196,7 @@
                   <el-button
                     :type="doctor.availableNumber <= 0 ? 'info' : 'primary'"
                     :disabled="doctor.availableNumber <= 0"
+                    @click="handleButton(doctor)"
                     >剩余 {{ doctor.availableNumber }}</el-button
                   >
                 </div>
@@ -244,14 +246,10 @@ import type { ResponseData } from "@/types/api";
 // const state = reactive({})
 
 // 医院，科室，医生相关信息
-let hspDptDctInfo = reactive({
-  // 医院名称
-  hopName: "",
-  // 科室名称
-  depName: "",
-  // 专科名称
-  spcName: ""
-});
+
+// 引入 Pinia Store 数据
+import { useHospitalDoctorStore } from "@/stores/index";
+const useDoctor = useHospitalDoctorStore();
 
 // 分页器相关参数
 let paginationValue = reactive({
@@ -323,11 +321,11 @@ const getHspDptDocInfo = async (hoscode: string, depcode: string, spccode: strin
   // 如果获取到的数据的code=200
   if (resultHsp.code == 200 && resultDepSec.code == 200) {
     // 获取医院名称
-    hspDptDctInfo.hopName = resultHsp.data?.hosname;
+    useDoctor.hspDptSpcName.hopName = resultHsp.data?.hosname;
     // 获取科室名称
-    hspDptDctInfo.depName = resultDepSec.data.find((item) => item.depcode === depcode)?.depname ?? "";
+    useDoctor.hspDptSpcName.dptName = resultDepSec.data.find((item) => item.depcode === depcode)?.depname ?? "";
     // 获取门诊名称 把所有一级的children合并成一个数组
-    hspDptDctInfo.spcName =
+    useDoctor.hspDptSpcName.spcName =
       resultDepSec.data.flatMap((item) => item.children).find((child) => child.depcode === spccode)?.depname ?? "";
   }
 };
@@ -353,6 +351,14 @@ const handleCurrentChange = (val: number) => {
   // 将当前页码进行调整
   paginationValue.currentPage = val;
   // 通过网络请求获取对应专科科室医生的排班情况
+};
+// 点击对应的预约按钮
+const handleButton = (doctorInfo: any) => {
+  // console.log("选中医生信息：", doctorInfo);
+  // 将选中的医生信息存储到 Pinia Store 中
+  useDoctor.selectedDoctor = doctorInfo;
+  // 将目前需要显示的组件变量进行修改为 pat
+  useDoctor.appointmentOption = "pat";
 };
 </script>
 

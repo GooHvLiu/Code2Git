@@ -2,26 +2,26 @@
   <div class="page-wrap-detail">
     <!-- 医院名称及等级 -->
     <div class="top">
-      <div class="left">{{ useStore.hospitalDetailInfo?.hosname }}</div>
+      <div class="left">{{ useHospitalStore.hospitalDetailInfo?.hosname }}</div>
       <div class="right">
         <el-icon color="orange"><Opportunity /></el-icon>
-        <span>{{ useStore.hospitalDetailInfo?.hostypeString }}</span>
+        <span>{{ useHospitalStore.hospitalDetailInfo?.hostypeString }}</span>
       </div>
     </div>
     <!-- 医院 Logo + 相关详细路线指南 -->
     <div class="middle">
       <div class="left">
-        <img :src="useStore.hospitalDetailInfo?.logoData" alt="医院图标" />
+        <img :src="useHospitalStore.hospitalDetailInfo?.logoData" alt="医院图标" />
       </div>
       <div class="right">
-        <span class="content">具体地址：{{ useStore.hospitalDetailInfo?.address }}</span>
-        <span class="content">规划路线：{{ useStore.hospitalDetailInfo?.route }}</span>
+        <span class="content">具体地址：{{ useHospitalStore.hospitalDetailInfo?.address }}</span>
+        <span class="content">规划路线：{{ useHospitalStore.hospitalDetailInfo?.route }}</span>
       </div>
     </div>
     <!-- 医院介绍 -->
     <div class="bottom">
       <span class="title">医院介绍</span>
-      <span class="content">{{ useStore.hospitalDetailInfo?.intro }}</span>
+      <span class="content">{{ useHospitalStore.hospitalDetailInfo?.intro }}</span>
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@
 defineOptions({ name: "Detail" });
 // 引入 Pinia Store
 import { useHospitalDetailStore } from "@/stores/index";
-const useStore = useHospitalDetailStore();
+const useHospitalStore = useHospitalDetailStore();
 
 // import { ref, reactive, computed, watch, onMounted } from 'vue'
 

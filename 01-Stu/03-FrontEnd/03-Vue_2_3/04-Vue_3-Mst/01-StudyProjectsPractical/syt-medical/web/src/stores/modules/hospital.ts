@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 // 引入 类型定义
 import type { ResponseData } from "@/types/api";
-import type { HospitalDetailItem, HospitalDepartmentPageResponse } from "@/types/index";
+import type { HospitalDetailItem, HospitalDepartmentPageResponse, HspDptSpcItem, SelectedDoctor } from "@/types/index";
 
 // 引入网络请求标准API
 import { reqHospitalDetailInfo, reqHospitalDepartmentInfo } from "@/api/hospital/index";
@@ -44,7 +44,6 @@ export const useHospitalDepartmentStore = defineStore("HospitalDepartment", () =
     if (result.code == 200) {
       // 将实际获取数据保存到 State 变量中
       hospitalDepartment.value = result.data;
-      console.log("Pinia获取到的 医院部门 数据：", hospitalDepartment.value);
     }
   };
 
@@ -57,9 +56,19 @@ export const useHospitalDoctorStore = defineStore("HospitalDoctor", () => {
   // =============== State
   // 用于控制当前展示的是哪个页面：科室：dpt;医生：dct;就诊人选择：pat
   let appointmentOption = ref<string>("dpt");
-
+  // 医院 科室 专科信息存储
+  let hspDptSpcName = ref<HspDptSpcItem>({
+    // 医院名称
+    hopName: "",
+    // 科室名称
+    dptName: "",
+    // 专科名称
+    spcName: ""
+  });
+  // 用户选中确定科室 确定时间 确定医生之后，存储医生的信息
+  let selectedDoctor = ref<SelectedDoctor>();
   // =============== Actions
 
   // =============== Getters
-  return { appointmentOption };
+  return { appointmentOption, hspDptSpcName, selectedDoctor };
 });

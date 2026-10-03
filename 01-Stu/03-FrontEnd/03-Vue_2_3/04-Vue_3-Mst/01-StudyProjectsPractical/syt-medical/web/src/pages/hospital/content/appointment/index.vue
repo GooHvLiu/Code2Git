@@ -1,11 +1,15 @@
 <template>
-  <!-- 进入预约挂号--部门/科室 选择 -->
+  <!-- 进入预约挂号-- 部门/科室 选择 -->
   <div v-if="useDoctorStore.appointmentOption == 'dpt'">
     <Home />
   </div>
-  <!-- 进入预约挂号--医生 选择 -->
+  <!-- 进入预约挂号-- 医生 选择 -->
   <div v-if="useDoctorStore.appointmentOption == 'dct'">
     <DoctorSelect />
+  </div>
+  <!-- 进入预约挂号 -- 就诊人 选择  -->
+  <div v-if="useDoctorStore.appointmentOption == 'pat'">
+    <Patient />
   </div>
 </template>
 
@@ -16,6 +20,7 @@ defineOptions({ name: "Appointment" });
 // 引入 医院科室 组件
 import Home from "./home/index.vue";
 import DoctorSelect from "./dctSelect/index.vue";
+import Patient from "./patient/index.vue";
 //引入 Pinia Store
 import { useHospitalDoctorStore } from "@/stores/index";
 const useDoctorStore = useHospitalDoctorStore();

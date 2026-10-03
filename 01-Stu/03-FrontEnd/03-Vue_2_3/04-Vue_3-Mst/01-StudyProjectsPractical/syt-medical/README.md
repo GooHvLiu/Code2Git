@@ -1231,21 +1231,28 @@ export const USERINFO_LOCALSTORAGE = "USERINFO";
 @color-warning: #e6a23c;
 @color-danger: #f56c6c;
 @color-info: #909399;
+@color-important: orange; /* 重点强调文字 */
 
 /* ===== 文字色 ===== */
 @color-text-primary: #303133; /* 主要文字 */
 @color-text-regular: #606266; /* 常规文字 */
 @color-text-secondary: #909399; /* 次要文字 */
 @color-text-placeholder: #c0c4cc; /* 占位符 */
+@color-text-hoverMainColor: orange; /* 鼠标悬在文字上的主要颜色 */
+@color-text-hoverSecondaryColor: #5566cc; /* 应用在 等级 地区的文字选择 */
 
 /* ===== 边框与分割线 ===== */
 @color-border: #dcdfe6;
 @color-border-light: #e4e7ed;
 
 /* ===== 背景色 ===== */
+@color-bg-white: #fff; /* 页面纯白背景 */
 @color-bg-page: #f0f2f5; /* 页面背景 */
 @color-bg-container: #ffffff; /* 内容区背景 */
 @color-bg-hover: #f5f7fa; /* 悬停背景 */
+@color-bg-regular: #bebebe; /* 灰色背景 */
+@color-bg-tips: #3c9aff; /* 提示性背景颜色 */
+@color-bg-cardhover: orange; /* 鼠标悬停挂号等卡片上的背景色 */
 
 /* ===== 业务扩展色（尚医通医疗场景）===== */
 @color-medical-emergency: #f56c6c; /* 急诊/危急 */
@@ -4678,11 +4685,21 @@ export const useHospitalDoctorStore = defineStore("HospitalDoctor", () => {
   // =============== State
   // 用于控制当前展示的是哪个页面：科室：dpt;医生：dct;就诊人选择：pat
   let appointmentOption = ref<string>("dpt");
-
+  // 医院 科室 专科信息存储
+  let hspDptSpcName = ref<HspDptSpcItem>({
+    // 医院名称
+    hopName: "",
+    // 科室名称
+    dptName: "",
+    // 专科名称
+    spcName: ""
+  });
+  // 用户选中确定科室 确定时间 确定医生之后，存储医生的信息
+  let selectedDoctor = ref<SelectedDoctor>();
   // =============== Actions
 
   // =============== Getters
-  return { appointmentOption };
+  return { appointmentOption, hspDptSpcName, selectedDoctor };
 });
 ```
 
@@ -5351,10 +5368,44 @@ export interface ScheduleCard {
   tipText: string;
   workDate: string;
 }
-
 // scheduleArr：日期卡片组成的数组
 export type ScheduleArr = ScheduleCard[];
 ```
+
+#### 医生信息
+
+从后端获取的医生排班`src/types/doctorSchedule/index.ts`，实际需要的部分进行类型定义：
+
+```ts
+// 医院 科室 专科 数据类型
+export interface HspDptSpcItem {
+  // 医院名称
+  hopName: string;
+  // 科室名称
+  dptName: string;
+  // 专科名称
+  spcName: string;
+}
+
+// 确定 医生 的数据类型
+export interface SelectedDoctor {
+  amount: number;
+  availableNumber: number;
+  dayOfWeek: string;
+  depcode: string;
+  docname: string;
+  hoscode: string;
+  id: string;
+  reservedNumber: number;
+  skill: string;
+  status: number;
+  title: string;
+  workDate: string;
+  workTime: number;
+}
+```
+
+
 
 ### 用户组件
 
@@ -6747,21 +6798,23 @@ const handleSelect = (key: string) => {
 
 > 通过`Pinia Store`实现页面的按需显示
 
-#### 内容组件
-
-##### 预约挂号
+#### 预约挂号
 
 在内容组件的预约挂号页面`src/pages/hospital/content/appointment`的`index.vue`实现如下：
 
 ```vue
 <template>
-  <!-- 进入预约挂号--部门/科室 选择 -->
+  <!-- 进入预约挂号-- 部门/科室 选择 -->
   <div v-if="useDoctorStore.appointmentOption == 'dpt'">
     <Home />
   </div>
-  <!-- 进入预约挂号--医生 选择 -->
+  <!-- 进入预约挂号-- 医生 选择 -->
   <div v-if="useDoctorStore.appointmentOption == 'dct'">
     <DoctorSelect />
+  </div>
+  <!-- 进入预约挂号 -- 就诊人 选择  -->
+  <div v-if="useDoctorStore.appointmentOption == 'pat'">
+    <Patient />
   </div>
 </template>
 
@@ -6772,6 +6825,7 @@ defineOptions({ name: "Appointment" });
 // 引入 医院科室 组件
 import Home from "./home/index.vue";
 import DoctorSelect from "./dctSelect/index.vue";
+import Patient from "./patient/index.vue";
 //引入 Pinia Store
 import { useHospitalDoctorStore } from "@/stores/index";
 const useDoctorStore = useHospitalDoctorStore();
@@ -6806,7 +6860,7 @@ onMounted(() => {
 
 ```
 
-###### 预约主页
+##### 聚合组件
 
 医院预约挂号的实现是通过类型定义、网络请求，数据展示实现的，在`src/pages/hospital/content/appointment/home`创建`index.vue`，核心实现如下：
 
@@ -6888,6 +6942,71 @@ const handleClickDep = (activeDep: any, childDep: HospitalDepartmentChildren) =>
 
 <style scoped lang="less"></style>
 
+```
+
+##### 首页预览
+
+###### 聚合组件
+
+将子组件通过聚合组件集合到一起展示，`appointment/home/index.vue`：
+
+```vue
+<template>
+  <div class="page-wrap">
+    <!-- 医院预约前，对医院的详细介绍 -->
+    <HospitalInfoShow />
+    <!-- 医院科室 组件 -->
+    <DepartmentSelect @handleSelectDep="handleClickDep" />
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Home" });
+
+// 引入 医院信息展示 组件
+import HospitalInfoShow from "./hspShow/index.vue";
+// 引入 部门/科室 组件
+import DepartmentSelect from "./dptSelect/index.vue";
+
+// import { ref, reactive, computed, watch, onMounted } from 'vue'
+
+// import { useRouter } from 'vue-router'
+// 导入路由组件
+import { useRoute, useRouter } from "vue-router";
+// 操作路由
+const router = useRouter();
+// 读取路由
+const route = useRoute();
+
+//引入 Pinia Store
+import { useHospitalDoctorStore } from "@/stores/index";
+const useDoctorStore = useHospitalDoctorStore();
+
+// 引入类型定义
+import type { HospitalDepartmentChildren } from "@/types/hospitalDepartment/index.ts";
+// 当用户点击科室内的具体科室触发
+const handleClickDep = (activeDep: any, childDep: HospitalDepartmentChildren) => {
+  // 路由跳转到具体 科室医生 预约网址
+  router.push({
+    path: route.path,
+    query: {
+      // 医院代号
+      hoscode: activeDep.hoscode,
+      // 科室代号
+      depcode: activeDep.depcode,
+      // 专科门诊代号
+      spccode: childDep.depcode
+    }
+  });
+  // 控制页面展示 选择科室内具体医生页面
+  useDoctorStore.appointmentOption = "dct";
+  // 测试数据
+  // console.log("当前已选大科室：", activeDep, "；当前已选小科室", childDep);
+};
+</script>
+
+<style scoped lang="less"></style>
 ```
 
 ###### 医院信息
@@ -6999,7 +7118,7 @@ const useDetailStore = useHospitalDetailStore();
 </style>
 ```
 
-###### 科室选择
+###### 部门科室
 
 将预约主页拆分为多个组件，其中如下为医院信息组件`appointment/home/dptSelect`创建`index.vue`用于展示部门选择信息：
 
@@ -7144,7 +7263,7 @@ const handleSelectRifhtDepartment = (activeDep: any, childDep: HospitalDepartmen
 
 ```
 
-###### 预约医生
+##### 预约医生
 
 医院预约医生的实现是通过类型定义、网络请求，数据展示实现的，在`appointment/dctSelect`创建`index.vue`，核心实现如下：
 
@@ -7153,7 +7272,7 @@ const handleSelectRifhtDepartment = (activeDep: any, childDep: HospitalDepartmen
   <div class="page-wrap">
     <div class="top-content">
       <div class="hspInfo">
-        <p class="hspName">{{ hspDptDctInfo.hopName }}</p>
+        <p class="hspName">{{ useDoctor.hspDptSpcName.hopName }}</p>
         <svg
           t="1790926337417"
           class="icon"
@@ -7170,7 +7289,7 @@ const handleSelectRifhtDepartment = (activeDep: any, childDep: HospitalDepartmen
             fill="#515151"
           ></path>
         </svg>
-        <p class="dptName">{{ hspDptDctInfo.depName }}</p>
+        <p class="dptName">{{ useDoctor.hspDptSpcName.dptName }}</p>
         <svg
           t="1790926255554"
           class="icon"
@@ -7187,7 +7306,7 @@ const handleSelectRifhtDepartment = (activeDep: any, childDep: HospitalDepartmen
             fill="#515151"
           ></path>
         </svg>
-        <p class="spcName">{{ hspDptDctInfo.spcName }}</p>
+        <p class="spcName">{{ useDoctor.hspDptSpcName.spcName }}</p>
       </div>
     </div>
     <div class="middle-content">
@@ -7275,6 +7394,7 @@ const handleSelectRifhtDepartment = (activeDep: any, childDep: HospitalDepartmen
                   <el-button
                     :type="doctor.availableNumber <= 0 ? 'info' : 'primary'"
                     :disabled="doctor.availableNumber <= 0"
+                    @click="handleButton(doctor)"
                     >剩余 {{ doctor.availableNumber }}</el-button
                   >
                 </div>
@@ -7346,6 +7466,7 @@ const handleSelectRifhtDepartment = (activeDep: any, childDep: HospitalDepartmen
                   <el-button
                     :type="doctor.availableNumber <= 0 ? 'info' : 'primary'"
                     :disabled="doctor.availableNumber <= 0"
+                    @click="handleButton(doctor)"
                     >剩余 {{ doctor.availableNumber }}</el-button
                   >
                 </div>
@@ -7395,14 +7516,10 @@ import type { ResponseData } from "@/types/api";
 // const state = reactive({})
 
 // 医院，科室，医生相关信息
-let hspDptDctInfo = reactive({
-  // 医院名称
-  hopName: "",
-  // 科室名称
-  depName: "",
-  // 专科名称
-  spcName: ""
-});
+
+// 引入 Pinia Store 数据
+import { useHospitalDoctorStore } from "@/stores/index";
+const useDoctor = useHospitalDoctorStore();
 
 // 分页器相关参数
 let paginationValue = reactive({
@@ -7474,11 +7591,11 @@ const getHspDptDocInfo = async (hoscode: string, depcode: string, spccode: strin
   // 如果获取到的数据的code=200
   if (resultHsp.code == 200 && resultDepSec.code == 200) {
     // 获取医院名称
-    hspDptDctInfo.hopName = resultHsp.data?.hosname;
+    useDoctor.hspDptSpcName.hopName = resultHsp.data?.hosname;
     // 获取科室名称
-    hspDptDctInfo.depName = resultDepSec.data.find((item) => item.depcode === depcode)?.depname ?? "";
+    useDoctor.hspDptSpcName.dptName = resultDepSec.data.find((item) => item.depcode === depcode)?.depname ?? "";
     // 获取门诊名称 把所有一级的children合并成一个数组
-    hspDptDctInfo.spcName =
+    useDoctor.hspDptSpcName.spcName =
       resultDepSec.data.flatMap((item) => item.children).find((child) => child.depcode === spccode)?.depname ?? "";
   }
 };
@@ -7504,6 +7621,14 @@ const handleCurrentChange = (val: number) => {
   // 将当前页码进行调整
   paginationValue.currentPage = val;
   // 通过网络请求获取对应专科科室医生的排班情况
+};
+// 点击对应的预约按钮
+const handleButton = (doctorInfo: any) => {
+  // console.log("选中医生信息：", doctorInfo);
+  // 将选中的医生信息存储到 Pinia Store 中
+  useDoctor.selectedDoctor = doctorInfo;
+  // 将目前需要显示的组件变量进行修改为 pat
+  useDoctor.appointmentOption = "pat";
 };
 </script>
 
@@ -7633,7 +7758,234 @@ const handleCurrentChange = (val: number) => {
 
 ```
 
-##### 医院详情
+##### 就诊人员
+
+就诊人员的选择、添加或删除，其具备子组件。
+
+###### 聚合组件
+
+``appointment/patient`创建`index.vue`，核心实现如下：
+
+```vue
+<template>
+  <div class="page-wrap">
+    <div class="top-tips"><h2>确认挂号信息</h2></div>
+    <div class="middle-patientVistor">
+      <el-card>
+        <div class="tips-conform">
+          <p class="tips">请点击选择就诊人</p>
+          <el-button type="success"
+            ><el-icon><User /></el-icon>
+            <span>添加就诊人</span>
+          </el-button>
+        </div>
+        <div class="line"></div>
+        <div class="patient-card">
+          <div class="cards" v-for="(card, index) in 2" :key="index"><Card /></div>
+        </div>
+      </el-card>
+    </div>
+    <!-- 挂号医院 、日期、医生、科室等信息展示 -->
+    <div class="bottom-doctorInfo">
+      <el-card>
+        <p class="tips">挂号信息</p>
+        <div class="line"></div>
+        <el-descriptions :column="2" border>
+          <el-icon><Minus /></el-icon>
+          <el-descriptions-item label="就诊日期" label-align="center" align="center">
+            {{ useHspDctStore.selectedDoctor?.workDate + " " + useHspDctStore.selectedDoctor?.dayOfWeek + " "
+            }}{{ useHspDctStore.selectedDoctor?.workTime == 0 ? "上午" : "下午" }}
+          </el-descriptions-item>
+          <el-descriptions-item label="就诊医院" label-align="center" align="center">
+            {{ useHspDctStore.hspDptSpcName?.hopName }}
+          </el-descriptions-item>
+          <el-descriptions-item label="就诊科室" label-align="center" align="center">
+            {{ useHspDctStore.hspDptSpcName?.dptName }}
+          </el-descriptions-item>
+          <el-descriptions-item label="医生姓名" label-align="center" align="center">
+            {{ useHspDctStore.selectedDoctor?.docname }}
+          </el-descriptions-item>
+          <el-descriptions-item label="医生职称" label-align="center" align="center">
+            {{ useHspDctStore.selectedDoctor?.title }}
+          </el-descriptions-item>
+          <el-descriptions-item label="医生专长" label-align="center" align="center">
+            {{ useHspDctStore.hspDptSpcName?.spcName }}
+          </el-descriptions-item>
+          <el-descriptions-item label="医事服务费" label-align="left" align="left">
+            ￥ {{ useHspDctStore.selectedDoctor?.amount }} 元
+          </el-descriptions-item>
+        </el-descriptions>
+      </el-card>
+    </div>
+    <!-- 页面最后的确认按钮 -->
+    <div class="footer-btn">
+      <el-button type="primary">确认挂号</el-button>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Patient" });
+// 引入子组件
+import Card from "./card/index.vue";
+// 引入Pinia Store 已挂好医生的相关信息
+import { useHospitalDetailStore, useHospitalDoctorStore } from "@/stores/index.ts";
+const useHospitalStore = useHospitalDetailStore();
+const useHspDctStore = useHospitalDoctorStore();
+
+// import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { onMounted } from "vue";
+onMounted(() => {
+  // 测试获取的数据
+  console.log("医院数据：", useHspDctStore.hspDptSpcName, "医生数据：", useHspDctStore.selectedDoctor);
+});
+</script>
+
+<style scoped lang="less">
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  .top-tips {
+    width: 100%;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  .middle-patientVistor {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    .tips-conform {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      .tips {
+        font-size: 1.1rem;
+      }
+    }
+    .line {
+      width: 100%;
+      height: 3px;
+      background-color: @color-border;
+      margin: 15px 0;
+    }
+    .patient-card {
+      width: 100%;
+      display: grid;
+      /* Grid 列宽：重复：自动排列；排列宽度：单个最小宽度300px,最大占满剩余空间 */
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 15px;
+    }
+  }
+  .bottom-doctorInfo {
+    width: 100%;
+    .tips {
+      font-weight: 800;
+    }
+    .line {
+      width: 100%;
+      height: 3px;
+      background-color: @color-border;
+      margin: 15px 0;
+    }
+  }
+}
+</style>
+```
+
+###### 就诊卡片
+
+就诊人员的相关信息以卡片的方式展示，`appointment/patient/card/index`的核心代码：
+
+```vue
+<template>
+  <div class="page-wrap">
+    <el-card>
+      <div class="title">
+        <div class="left-info">
+          <span class="medical-card">医保</span>
+          <span class="name-info">腾飞翔</span>
+        </div>
+        <div class="right-edit">
+          <el-icon><Edit /></el-icon>
+        </div>
+      </div>
+      <div class="patient-info">
+        <p><span>证件类型：</span>身份证</p>
+        <p><span>证件号码：</span>220687200310254069</p>
+        <p><span>用户性别：</span>男</p>
+        <p><span>出生日期：</span>2003-10-25</p>
+        <p><span>手机号码：</span>18759874525</p>
+        <p><span>婚姻状况：</span>已婚</p>
+        <p><span>当前地址：</span>江苏省苏州市工业园区</p>
+        <p><span>详细地址：</span>唯亭镇镇区203街道158号</p>
+      </div>
+    </el-card>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 定义组件名字
+defineOptions({ name: "Card" });
+// 生命周期
+// onMounted(() => {})
+</script>
+
+<style scoped lang="less">
+.page-wrap {
+  :deep(.el-card__body) {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    border-radius: 5px;
+    .title {
+      background-color: @color-bg-regular;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+      .left-info {
+        .medical-card {
+          background-color: @color-bg-white;
+          padding: 5px;
+          margin: 0 20px;
+          border-radius: 15px;
+        }
+      }
+      .right-edit {
+        background-color: @color-bg-tips;
+        padding: 10px;
+        border-radius: 20px;
+        margin-right: 20px;
+      }
+    }
+    .patient-info {
+      color: @color-text-regular;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 15px;
+      font-size: 0.85rem;
+      p {
+        span {
+          font-weight: 800;
+        }
+      }
+    }
+  }
+}
+</style>
+```
+
+
+
+#### 医院详情
 
 在内容组件的预约挂号页面`src/pages/hospital/content/detail`的`index.vue`实现如下：
 
@@ -7642,26 +7994,26 @@ const handleCurrentChange = (val: number) => {
   <div class="page-wrap-detail">
     <!-- 医院名称及等级 -->
     <div class="top">
-      <div class="left">{{ useStore.hospitalDetailInfo?.hosname }}</div>
+      <div class="left">{{ useHospitalStore.hospitalDetailInfo?.hosname }}</div>
       <div class="right">
         <el-icon color="orange"><Opportunity /></el-icon>
-        <span>{{ useStore.hospitalDetailInfo?.hostypeString }}</span>
+        <span>{{ useHospitalStore.hospitalDetailInfo?.hostypeString }}</span>
       </div>
     </div>
     <!-- 医院 Logo + 相关详细路线指南 -->
     <div class="middle">
       <div class="left">
-        <img :src="useStore.hospitalDetailInfo?.logoData" alt="医院图标" />
+        <img :src="useHospitalStore.hospitalDetailInfo?.logoData" alt="医院图标" />
       </div>
       <div class="right">
-        <span class="content">具体地址：{{ useStore.hospitalDetailInfo?.address }}</span>
-        <span class="content">规划路线：{{ useStore.hospitalDetailInfo?.route }}</span>
+        <span class="content">具体地址：{{ useHospitalStore.hospitalDetailInfo?.address }}</span>
+        <span class="content">规划路线：{{ useHospitalStore.hospitalDetailInfo?.route }}</span>
       </div>
     </div>
     <!-- 医院介绍 -->
     <div class="bottom">
       <span class="title">医院介绍</span>
-      <span class="content">{{ useStore.hospitalDetailInfo?.intro }}</span>
+      <span class="content">{{ useHospitalStore.hospitalDetailInfo?.intro }}</span>
     </div>
   </div>
 </template>
@@ -7671,7 +8023,28 @@ const handleCurrentChange = (val: number) => {
 defineOptions({ name: "Detail" });
 // 引入 Pinia Store
 import { useHospitalDetailStore } from "@/stores/index";
-const useStore = useHospitalDetailStore();
+const useHospitalStore = useHospitalDetailStore();
+
+// import { ref, reactive, computed, watch, onMounted } from 'vue'
+
+// import { useRouter } from 'vue-router'
+
+// Props定义示例
+// const props = defineProps<{}>()
+// const emit = defineEmits<{}>()
+
+// 响应式数据
+// const count = ref(0)
+// const state = reactive({})
+
+// 计算属性
+// const computedVal = computed(() => {})
+
+// 监听
+// watch(count, (newVal) => {})
+
+// 生命周期
+// onMounted(() => {})
 </script>
 
 <style scoped lang="less">
@@ -7744,9 +8117,10 @@ const useStore = useHospitalDetailStore();
   }
 }
 </style>
+
 ```
 
-##### 预约须知
+#### 预约须知
 
 在内容组件的预约挂号页面`src/pages/hospital/content/notice`的`index.vue`实现如下：
 
@@ -7824,7 +8198,7 @@ const useStore = useHospitalDetailStore();
 </style>
 ```
 
-##### 停诊信息
+#### 停诊信息
 
 在内容组件的预约挂号页面`src/pages/hospital/content/stopService`的`index.vue`实现如下：
 
@@ -7867,7 +8241,7 @@ const useStore = useHospitalDetailStore();
 </style>
 ```
 
-##### 查询取消
+#### 查询取消
 
 在内容组件的预约挂号页面`src/pages/hospital/content/searchCancel`的`index.vue`实现如下：
 
